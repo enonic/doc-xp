@@ -1,0 +1,1086 @@
+= Enonic XP Schema reference documentation
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+*Complete overview of schemas in Enonic XP*
+
+
+== Introduction
+
+The low level storage of Enonic XP is entirely schema-less.
+To create both simple and complex schemas, Enonic XP ships with a high-level schema concept that does not require coding.
+
+Below are the essential schema components that can be used to build schemas:
+
+== Forms
+
+The main purpose of the schema concept is to construct forms that can be edited through the admin interface, but also used programmatically, for instance through the content API.
+Forms are basically a list of <<Input types>>, optionally creating nested levels of input types using <<Sets>>.
+
+When a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the form. The property structure can then be persisted directly into :ref:`node-domain-nodes`.
+
+Forms can be defined with both XML and Java, where the first is the most common.
+
+Below is an simple form with two input types:
+
+image::images/app.png["My First app started"]
+
+[source,xml]
+----
+<someForm>
+  <items>
+    <input name="firstname" type="TextLine">
+      <label>First Name</label>
+    </input>
+    <input name="lastname" type="TextLine">
+      <label>Last Name</label>
+    </input>
+  </items>
+</someForm>
+----
+
+There are various instances of forms, each with their specific purpose and custom settings.
+Below are the currently available forms:
+
+
+=== ContentType
+
+<content-type>
+  <display-name>Using mixins</display-name>
+  <super-type>base:structured</super-type>
+  <items>
+    <inline mixin="us-address"/>
+  </items>
+</content-type>
+
+=== Part
+
+TODO
+
+=== Site
+
+ With xdata
+
+<site>
+  <config>
+    <input type="TextLine" name="company">
+      <label>Company</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextArea" name="description">
+      <label>Description</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </config>
+  <x-data name="us-address"/>
+</site>
+
+
+=== X-data
+
+<x-data>
+  <display-name>This x-data will be available only for folders</display-name>
+  <allowContentType>base:folder</allowContentType>
+  <items>
+    <input type="TextLine" name="addressLine">
+      <label>Street address</label>
+      <occurrences minimum="0" maximum="2"/>
+    </input>
+    <input type="TextLine" name="city">
+      <label>City</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="state">
+      <label>State</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="TextLine" name="zipCode">
+      <label>Zip code</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</x-data>
+
+
+<x-data>
+  <display-name>This x-data will be available for any content type except folders</display-name>
+  <allowContentType>((?!base:folder).)*$</allowContentType>
+  <items>
+    <input type="TextLine" name="addressLine">
+      <label>Street address</label>
+      <occurrences minimum="0" maximum="2"/>
+    </input>
+    <input type="TextLine" name="city">
+      <label>City</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="state">
+      <label>State</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="TextLine" name="zipCode">
+      <label>Zip code</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</x-data>
+
+
+
+
+
+== Input types
+
+Input types represent the most important part of any form, as the purpose is to enable editing and storing of a single value (or an array of values).
+Input types have both front-end and back-end components. The front-end represents the visual editing interface used in the XP admin console, where the back-end is solely used for validation purposes.
+An input type will handle a single property, with zero, 1 or many values. I.e. the TextLine input type will return Strings. Normally, an input type will use a fixed propertyType, but this is optional.
+
+The following configuration is common for all input types:
+
+[source,xml]
+----
+<input type="InputTypeName" name="myname" > <!--1-->
+  <label i18n="myname.label">My label</label> <!--2-->
+  <default/> <!--3-->
+  <help-text i18n="myname.help-text">Help text here</help-text>  <!--4-->
+  <occurrences minimum="0" maximum="1"/>  <!--5-->
+  <config/> <!--6-->
+</input>
+----
+
+<1> *input* contains two mandatory attributes: +
+_@name_ is used when storing the data in a property, and must be unique on each level. +
+_@type_ refers to one of the many input types which are listed below.
+
+<2> *label* is another mandatory field that holds the human readable value that will be displayed when listing the input type control in the administrative interface +
+_@i18n_ is an optional attribute holding the key to localization phrase of the form. (See also :ref:`localization_schemas`)
+
+<3> *default* is an optional field that lets you specify default values to be used by the input type
+
+<4> *help-text* is an optional text will be shown next to the input field and can be used for explanation of the field's purpose. +
+_@i18n_ is an optional attribute holding the key to localization phrase of the form. (See also :ref:`localization_schemas`)
+
+<5> *occurrences* is an optional field used to control the number of values stored by a single input. +
+_@minimum_ set to to zero means the input is not mandatory +
+_@maximum_ to zero means there is no upper limit to the number of values. +
+This element is optional, if omitted the default will be `minimum="0"` and `maximum="1"`.
+
+<6> *config* is an optional element designed to hold custom configuration for each input-type.
+
+Some input types are generic, and can be used in any form. Others however are contextual and may only be used in specific forms. An example is imageSelector which will only work in the context of Content Studio.
+
+
+=== AttachmentUploader
+
+This field enables uploading of one or more files that will be stored as attachments to the current node/content.
+This is different from media content where each media is a separate node that can be linked to.
+
+[source,xml]
+----
+<input name="myattachment" type="AttachmentUploader">
+  <label>My AttachmentUploader</label>
+</input>
+----
+
+.Compatibility
+[width=20%]
+|===
+|Any |Content Type |Part
+
+|{y} | {n}| {y}
+|===
+
+=== CheckBox
+
+A checkbox field has a value if it is checked, or no value if it is not checked.  Therefore, the only values for occurrences
+that makes sense is a minimum of zero and a maximum of one, which is default and may be skipped.
+
+[source,xml]
+----
+<input  name="mycheckbox" type="CheckBox">
+  <label>My Checkbox</label>
+  <default>checked</default> <!--1-->
+  <config>
+    <alignment>right</alignment> <!--2-->
+  </config>
+</input>
+----
+<1> *default* - Use `checked` to check it, default is unchecked.
+<2> *alignment* defines placement of checkbox relative to label text. Supported values are: "left", "right", "top", "bottom", default is "left".
+
+
+=== ComboBox
+
+Combobox allows you to select one or more options from a statically defined list
+
+[source,xml]
+----
+<input name="mycombobox" type="ComboBox">
+  <label>My Combobox</label>
+  <occurrences minimum="1" maximum="2"/>
+  <config>
+    <option value="one">Option One</option> <!--1-->
+    <option value="two">Option Two</option>
+  </config>
+  <default>one</default> <!--2-->
+</input>
+----
+<1> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple `option` elements are allowed and ordered.
+<2> *default* is optional, and may be equal to _one_ of the option values.
+
+=== ContentSelector
+
+References to other content are specified by this input type. Use the toggle icon to switch between the list mode (default) and the tree mode.
+
+[source,xml]
+----
+<input name="mycontentselector" type="ContentSelector>
+  <label>My ContentSelector</label>
+  <occurrences minimum="0" maximum="0"/>
+  <config>
+    <allowContentType>citation</allowContentType> <!--1-->
+    <allowContentType>my.other.app:quote</allowContentType>
+    <allowPath>${site}/people/</allowPath> <!--2-->
+    <allowPath>./*</allowPath>
+    <allowPath>/quotes*</allowPath>
+    <treeMode>true</treeMode>  <!--3-->
+    <showStatus>true</showStatus>  <!--4-->
+    <hideToggleIcon>true</hideToggleIcon> <!--5-->
+  </config>
+</input>
+----
+<1> *allowContentType* is used to limit the content types that may be selected using the <<allowContentType Samples>>
+<2> *allowPath* is used to limit the path of the content that may be selected using the <<allowPath Samples>>.
+<3> *treeMode* toggles displaying tree navigation or not. Default value is `true`.
+<4> *showStatus* toggles content status - default is `false`.
+<5> *hideToggleIcon* hides the toggle icon when set to `true`.
+
+==== allowContentType Samples
+
+====
+Content type "citation" within your current application +
+
+  <allowContentType>citation</allowContentType>
+
+Content type "quote" from the application "my.other.app"
+
+  <allowContentType>my.other.app:quote</allowContentType>
+
+Content types "quote" from any application +
+
+  <allowContentType>*:quote</allowContentType>
+
+Any content types from current application +
+
+  <allowContentType>${app}:*</allowContentType>
+
+All content types starting with banana (using regular expressions) +
+
+  <allowContentType>*:^banana*</allowContentType>
+
+All content types except ones containing the string "folder" +
+
+  <allowContentType>((?!folder).)*$</allowContentType>
+====
+
+
+==== allowPath Samples
+
+====
+Only content from the current site (but from any location), e.g +
+* /mySite/fish.jpg +
+* /mySite/articles/new-blog-post +
+* /mySite/someFolder/anotherFolder/rubarb/lettuce +
+
+  <allowPath>${site}/*</allowPath>
+
+
+All children of <site>/people, e.g +
+* /mySite/people/myContent +
+* /mySite/people/myGroup/anotherContent +
+
+  <allowPath>${site}/people/*</allowPath>
+
+
+All content in mySite starting with people, including children, e.g +
+* /mySite/peoples +
+* /mySite/people/myContent +
+* /mySite/peoples/myContent +
+* /mySite/people/myGroup/anotherContent +
+
+  <allowPath>/mySite/people*</allowPath>
+
+
+All children of the current content +
+
+  <allowPath>./*</allowPath>
+
+All children of the current content's parent +
+
+  <allowPath>../*</allowPath>
+====
+
+
+  image::images/content-selector-no-toggle.png
+
+  image::images/content-selector-status.png
+
+  image::images/content-selector-tree.png
+
+===  ContentTypeFilter
+
+A field for selecting a content type.
+
+[source,xml]
+----
+<input name="myctyfilter" type="ContentTypeFilter">
+  <label>My CTYFilter</label>
+  <occurrences minimum="0" maximum="0"/>
+  <config>
+    <context>true</context> <!--1-->
+  </config>
+</input>
+----
+<1> *context* `true` limits the list of content types to the applications configured for the current site. Default is `false`.
+
+
+=== CustomSelector
+
+Selector input type with a customizable data source. Application developers must create a service that returns results according to the
+required JSON format, and then specify the service name in the input config. For information on creating a service see the
+:ref:`services` section.
+
+Below are two sample usages of CustomSelector:
+
+[source,xml]
+----
+
+<!-- Basic Sample -->
+<input name="mycustomselector" type="CustomSelector">
+  <label>My Custom Selector</label>
+  <occurrences minimum="0" maximum="0"/>
+  <config>
+    <service>my-custom-selector</service> <!--1-->
+  </config>
+</input>
+
+<!-- Sample with parameters -->
+<input name="musicTrack" type="CustomSelector">
+  <label>Intro song</label>
+  <config>
+    <service>spotify-music-selector</service>
+    <param value="genre">classic</param>  <!--2-->
+    <param value="sortBy">length</param>
+  </config>
+</input>
+----
+<1> *service* holds the name of a JavaScript service file, located under ``/resources/services/[my-custom-selector]/[my-custom-selector].js``. You can also refer to a service file in another application, for example *com.myapplication.app:myservice*.
+<2> *param* lets you pass parameters to the service. This allows for the service to be used in different contexts. There can be multiple parameters or none. The parameters will be included in the HTTP request to the service as name-value query parameters.
+
+==== Service Request
+
+In addition to the param values, the service will receive the following query parameters in the HTTP request:
+
+*ids* +
+Array of item ids already selected in the CustomSelector. The service is expected to return the items with the specified ids.
+
+*start* +
+Index of the first item expected. Used for pagination of the results.
+
+*count* +
+Maximum number of items expected. Used for pagination of the results.
+
+*query* +
+String with the search text typed by the user in the CustomSelector input field.
+
+
+==== Service Response
+
+The service controller must have a GET handler that returns results in JSON format.
+The JSON object returned must include ``total`` and ``count`` properties as numbers, and ``hits`` containing an array of items.
+Each item in the hits property must have the following fields:
+
+*id* +
+Unique Id of the option
+
+*displayName* +
+Option title
+
+*description (optional)* +
+Detailed description
+
+*iconUrl (optional)* +
+Path to the thumbnail image file
+
+*icon (optional)* +
+Inline image content (for example, SVG)
+
+Sample JSON response from a CustomSelector service:
+
+[source,JSON]
+----
+{
+  "total": 10,
+  "count": 2,
+  "hits": [
+    {
+      "id": "1",
+      "displayName": "Option number 1",
+      "description": "External SVG file is used as icon",
+      "iconUrl": "/some/path/images/number_1.svg"
+    },
+    {
+      "id": "2",
+      "displayName": "Option number 2",
+      "description": "Inline SVG markup is used as icon",
+      "icon": {
+        "data": "<svg xmlns=\"http://www.w3.org/2000/svg\"/>",
+        "type": "image/svg+xml"
+      }
+    }
+  ]
+}
+----
+
+=== Date
+
+A simple field for dates with a calendar pop-up box in the admin console. The default format is ``yyyy-MM-dd``.
+
+[source,xml]
+----
+<input name="mydate" type="Date">
+  <label>My Date</label>
+  <default>2011-09-12</default> <!--1-->
+</input>
+----
+<1> *default* date value to be used. The format for the default date value can be:
+====
+* Date in ISO 8601 format: ``yyyy-MM-dd``  (e.g. "2016-12-31")
+* Relative date expression (e.g. "+1year -12days")
+
+A relative date expression is a sequence of one or more date offsets. +
+An offset consists of: a plus or minus sign, followed by an integer, followed by a date unit string (e.g. "+3 days") +
+
+.Unit strings
+|===
+| Singular | Plural | initial letter
+
+| "year" | "years" | "y"
+| "month"| "months"| "M"
+| "week" | "weeks" | "w"
+| "day"  | "days"  | "d"
+|===
+
+An offset can also be the string ``now``, which means current date.
+====
+
+=== DateTime
+
+A simple field for dates with time.  A pop-up box with a calendar and time selector allows easy editing.
+The format is `yyyy-MM-dd hh:mm` for example, `2015-02-09T09:00`. The date-time could be of type
+`local` (no timezone) or with a timezone. This is done using configuration:
+
+[source,xml]
+----
+<input name="mydatetime" type="DateTime">
+  <label>My DateTime</label>
+  <config>
+    <timezone>true</timezone> <!--1-->
+  </config>
+  <default>2011-09-12</default> <!--2-->
+</input>
+----
+<1> *timezone* set to `true` if timezone information should be used. Default is `false`.
+<2> *default* date value to be used. The format for the default date value can be:
+
+====
+* Combined date and time in ISO 8601 format, with timezone: ``yyyy-MM-ddThh:mm±hh:mm``  (e.g. "2016-12-31T23:59+01:00")
+* Combined date and time in ISO 8601 format, without timezone: ``yyyy-MM-ddThh:mm``  (e.g. "2016-12-31T23:59")
+* Relative datetime expression (e.g. "+1year -12hours")
+
+Note that the ISO8601 format consists of concatenating a complete date expression, the letter ``T`` as a delimiter, and a valid time expression.
+
+The timezone offset is a plus or minus sign, followed by an hour offset, followed by a colon, followed by a minute offset.
+A timezone offset of zero can also be represented as 'Z', meaning UTC or Zulu time. It is equivalent to offset `+00:00`.
+
+A relative date expression is a sequence of one or more datetime offsets.
+An offset consists of: a plus or minus sign, followed by an integer, followed by a date/time unit string (e.g. "+3 days")
+
+.Unit strings
+|===
+| Singular | Plural | initial letter
+
+| "year" | "years" | "y"
+| "month"| "months"| "M"
+| "week" | "weeks" | "w"
+| "day"  | "days"  | "d"
+| "hour" | "hours" | "h"
+| "minute" | "minutes" | "m"
+|===
+
+An offset can also be the string ``now``, which means current date and time.
+====
+
+Examples:
+
+[source,xml]
+----
+<input name="dateTimeDefaultTz" type="DateTime">
+  <label>DateTime (with tz and default value)</label>
+  <config>
+    <timezone>true</timezone>
+  </config>
+  <default>2000-01-01T12:30+01:00</default>
+</input>
+
+<input name="dateTimeDefaultNoTz" type="DateTime">
+  <label>DateTime (without tz and default value)</label>
+  <default>2000-01-01T12:30</default>
+</input>
+
+<input name="dateTimeRelative" type="DateTime">
+  <label>DateTime (relative default value)</label>
+  <default>+1year -12hours</default>
+</input>
+
+<input name="dateTimeNow" type="DateTime">
+  <label>DateTime (current time as default value)</label>
+  <default>now</default>
+</input>
+----
+
+
+=== Double
+
+A simple input type for storing decimal numbers.
+
+[source,xml]
+----
+<input name="mydouble" type="Double">
+  <label>My Double</label>
+  <default>3.89</default> <!--1-->
+</input>
+
+<input name="angle" type="Double">
+  <label>Angle (rad)</label>
+  <config>
+    <min>0</min> <!--2-->
+    <max>3.14159</max> <!--3-->
+  </config>
+</input>
+----
+<1> *default* can be any double-precision floating-point number, with the dot character as decimal separator
+<2> *config/min* optionally specifies the minimum allowed value
+<3> *config/max* optionally specifies the maximum allowed value
+
+
+=== GeoPoint
+
+Stores a GPS coordinate as two comma-separated decimal numbers.
+
+* The first number must be between -90 and 90, where a negative number indicates a location south of equator and a positive is north of the equator.
+* The second number must be between -180 and 180, where a negative number indicates a location in the western hemisphere and a positive number is a location in the eastern hemisphere.
+
+[source,xml]
+----
+<input name="mygeopoint" type="GeoPoint">
+  <label>My GeoPoint</label>
+  <occurrences minimum="0" maximum="1"/>
+  <default>51.5,-0.1</default><!--1-->
+</input>
+----
+<1> *default* specifies a default string value for the GeoPoint, for example ``51.5,-0.1``.
+
+
+=== HtmlArea
+
+A field for entering multi-line text with rich-formatting options.
+
+[source,xml]
+----
+<input name="myhtmlarea" type="HtmlArea">
+  <label>My HtmlArea</label>
+  <default><h3>Enter description here</h3></default><!--1-->
+  <config>
+    <exclude>*</exclude> <!--2-->
+    <include>AlignLeft AlignRight | Bold Italic</include> <!--3-->
+  </config>
+</input>
+----
+
+<1> *default* can contain any valid HTML elements, but tags must be correctly closed since the input type is defined inside an XML.
+<2> *exclude* optionally removes the standard tools from the editor toolbar
+<3> *include* optionally adds more tools to the editor toolbar.
+
+
+TIP: HTML Area is configured with default set of tools but the toolbar can be customized. Using the config setting you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. Complete list of supported tools can be found below.
+
+
+image:images/htmlarea-customized.jpg
+
+
+Below is the default editor tools configuration:
+
+  Styleselect | Bold Italic Underline | Alignleft Aligncenter Alignright Alignjustify | Bullist Numlist Outdent Indent | Charmap Anchor Image Macro Link Unlink | Table
+
+
+Below is the complete list of available editor tools:
+
+|===
+|Name | Description
+
+| Styleselect | Text format menu
+| Bold | Bold text
+| Italic | Italic text
+| Underline | Underline text
+| Alignleft | Left align content
+| Aligncenter | Center content
+| Alignright | Right align content
+| Alignjustify | Justify content
+| Bullist | Insert a bullet list
+| Numlist | Insert a numbered list
+| Outdent | Decrease indent
+| Indent | Increase indent
+| Charmap | Insert a special character
+| Anchor | Insert an anchor
+| Image | Insert/Edit an image
+| Macro | Insert a macro
+| Link | Insert/Edit a link
+| Unlink | Remove link
+| Table | Table format menu
+| Backcolor | Background color
+| Blockquote | Quotation
+| Code | Wrap text with code tag
+| Copy | Copy selected text into buffer
+| CopyFormatting | Copy formatting
+| CreateDiv | Wrap with div
+| Cut | Cut selected text into buffer
+| Font | Font menu
+| FontSize | Font size menu
+| HorizontalRule | Insert a horizontal line
+| Ltr | Text direction left to right
+| NewPage | Clean editor's content
+| Preview | Preview HTML Area contents
+| Redo | Repeat last action
+| RemoveFormat | Remove formatting
+| Rtl | Text direction right to left
+| SelectAll | Select editor's content
+| Strikethrough | Strikethrough over text
+| Styles | Text styles menu
+| Subscript | Subscript text
+| Superscript | Superscript text
+| TextColor | Text color
+| Undo | Undo last action
+| VisualBlocks |Visualize all block-level elements
+|===
+
+
+=== ImageSelector
+
+The ImageSelector is a specialized version of the <<ContentSelector>> that is limited to selecting images (content of type "media:image"), but also upload new images.
+
+[source,xml]
+----
+<input name="myimage" type="ImageSelector">
+  <label>My Image</label>
+  <occurrences minimum="0" maximum="1"/>
+  <config> <!--1-->
+    <allowPath>./*</allowPath>
+    <treeMode>true</treeMode>
+    <showStatus>true</showStatus>
+    <hideToggleIcon>true</hideToggleIcon>
+  </config>
+</input>
+----
+<1> With the exception of <allowContentTypes>, ImageSelector supports the same configuration options as <<ContentSelector>>.
+
+
+=== Long
+
+A simple input for storing integer numbers.
+
+[source,xml]
+----
+<input name="mylong" type="Long">
+  <label>My Long</label>
+  <default>42</default> <!--1-->
+</input>
+
+<input name="degrees" type="Long">
+  <label>Degrees</label>
+  <config>
+    <min>0</min> <!--2-->
+    <max>360</max> <!--3-->
+  </config>
+</input>
+----
+<1> *default* can be any Integer number
+<2> *config/min* optionally specifies the minimum allowed value
+<3> *config/max* optionally specifies the maximum allowed value
+
+
+=== MediaSelector
+
+The MediaSelector is a specialized version of the <<ContentSelector>> that is limited to selecting media only (content of type "media:*"), including also uploading new media (any kind of files).
+
+[source,xml]
+----
+<input name="mymedia" type="MediaSelector">
+  <label>My Media</label>
+  <occurrences minimum="0" maximum="1"/>
+  <config> <!--1-->
+    <allowContentTypes>media:archive</allowContentTypes>
+    <allowPath>./*</allowPath>
+    <treeMode>true</treeMode>
+    <showStatus>true</showStatus>
+    <hideToggleIcon>true</hideToggleIcon>
+  </config>
+</input>
+----
+<1> MediaSelector supports the same configuration options as <<ContentSelector>>, but is limited to using media:* content types in the <allowContentTypes> configuration.
+
+
+=== RadioButton
+
+An input type for selecting _one_ of the available options defined in the `config` element.
+
+[source,xml]
+----
+<input name="myradiobutton" type="RadioButton">
+  <label>My RadioButton</label>
+  <occurrences minimum="1" maximum="1"/> <!--1-->
+  <config>
+    <option value="one">Option One</option> <!--2-->
+    <option value="two">Option Two</option>
+  </config>
+  <default>one</default> <!--3-->
+</input>
+----
+<1> *occurences* only make supports minumum=1 or 0 - maximum will always be 1.
+<2> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple ``option`` elements are allowed and ordered.
+<3> *default* is optional, and may be equal to one of the option values.
+
+
+=== Tag
+
+An simple input for adding free-text tags. Tags will be autocompleted based on tags in other items with the same property name.
+
+[source,xml]
+----
+<input name="mytag" type="Tag">
+  <label>My Tag</label>
+  <occurrences minimum="0" maximum="0"/>
+  <default>one</default> <!--1-->
+</input>
+----
+<1> TODO? Is this in use? *default* ....
+
+
+=== TextArea
+
+A plain text, multi-line input field
+
+[source,xml]
+----
+<input name="mytextarea" type="TextArea">
+  <label>My TextArea</label>
+  <default>Default text goes here</default> <!--1-->
+  <config>
+    <max-length>42</max-length> <!--2-->
+  </config>
+</input>
+----
+<1> *default* specifies the default string for the TextArea
+<2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
+
+=== TextLine
+
+A plain text, single line input with advanced validation options. Stored as string.
+
+[source,xml]
+----
+<!-- Basic sample -->
+<input name="mytextline" type="TextLine">
+  <label>My TextLine</label>
+</input>
+
+<!-- Using regex validation and a default value. -->
+<input name="socialsecuritynumber" type="TextLine">
+  <label>My SSN</label>
+  <occurrences minimum="1" maximum="3"/>
+  <default>000-00-0000</default> <!--1-->
+  <config>
+    <max-length>11</max-length> <!--2-->
+    <regexp>\b\d{3}-\d{2}-\d{4}\b</regexp> <!--3-->
+  </config>
+</input>
+----
+<1> *default* specifies the default string for the TextArea
+<2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
+<3> *regexp* supports validation by defining regular expressions
+
+=== Time
+
+Specify time in the format hh:mm.  A pop-up box with time selector allows easy editing.
+`09:00`.
+
+[source,xml]
+----
+<input name="mytime" type="Time">
+  <label>My Time</label>
+  <config>
+    <timezone>true</timezone> <!--1-->
+  </config>
+  <default>13:22</default> <!--2-->
+</input>
+----
+<1> *timezone* set to `true` if timezone information should be used. Default is `false`.
+<2> *default* date value to be used. The format for the default date value can be:
+
+====
+* Time in 24h format: `hh:mm  (e.g. "23:59")
+* Relative time expression (e.g. "+1hour -12minutes")
+
+A relative time expression is a sequence of one or more time offsets.
+An offset consists of: a plus or minus sign, followed by an integer, followed by a time unit string (e.g. "+3 minutes")
+
+.Unit strings
+|===
+| Singular | Plural | initial letter
+
+| "hour" | "hours" | "h"
+| "minute" | "minutes" | "m"
+|===
+
+An offset can also be the string ``now``, which means current date and time.
+====
+
+Examples:
+
+[source,xml]
+----
+<input name="dateTimeDefaultTz" type="DateTime">
+  <label>DateTime (with tz and default value)</label>
+  <config>
+    <timezone>true</timezone>
+  </config>
+  <default>2000-01-01T12:30+01:00</default>
+</input>
+
+<input name="dateTimeDefaultNoTz" type="DateTime">
+  <label>DateTime (without tz and default value)</label>
+  <default>2000-01-01T12:30</default>
+</input>
+
+<input name="dateTimeRelative" type="DateTime">
+  <label>DateTime (relative default value)</label>
+  <default>+1year -12hours</default>
+</input>
+
+<input name="dateTimeNow" type="DateTime">
+  <label>DateTime (current time as default value)</label>
+  <default>now</default>
+</input>
+----
+
+
+
+== Sets
+In order to build richer forms,
+
+=== FieldSet
+
+A field set may be used to group items visually. The example below will create a form in the admin console with the inputs grouped under the
+label of the field set.
+
+[source,xml]
+----
+<field-set> <!--1-->
+  <label i18n="metadata.label">Metadata</label>
+  <items> <!--2-->
+    <input name="tags" type="Tag">
+      <label>Tags for tag cloud</label>
+      <occurrences minimum="0" maximum="5"/>
+    </input>
+  </items>
+</field-set>
+----
+<1> *field-set* does not need a name since it is only visual, and does not affect the data model
+<2> *items* allow placement of form items to be contained within it
+
+
+=== ItemSet
+
+Item sets provide a special capability that allow you to nest form items hierarchically.
+
+Input types in item sets are grouped into logical units, allowing them to repeat as a complex input type - since item sets support occurrences too.
+Item sets are both visually and semantically grouped as the name of the item set is used in the persisted property structure. An item set actually produces a property set.
+
+Here is an example of an item set with two inputs. The resulting form will allow multiple entries of phone numbers with labels:
+
+[source,xml]
+----
+<item-set name="contact_info">
+  <label i18n="contact_info.label">Contact Info</label>
+  <occurrences minimum="0" maximum="0"/>
+  <items>
+    <input name="label" type="TextLine">
+      <label>Label</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input name="phone_number" type="TextLine">
+      <label>Phone Number</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</item-set>
+----
+<1> *name* defines the mapping to the property name
+<2> *label* TODO
+<3> *occurences* control the minimum and maximum instances of the ItemSet that may be created
+
+TIP: It is also possible to nest item sets inside each other
+
+=== OptionSet
+
+An option set represents a group of options rendered as either radio-buttons or checkboxes.
+Each option may or may not have a form of inputs it consists of. An option can be considered to be a field-set with selectable header.
+
+By default, an option form will only be shown upon selection of the option, but the entire option
+set may be configured to have all of its options expanded by default.
+
+It's also possible to pre-select specific options by default.
+
+Here is an example of a multi-select option set with options expanded by default, empty first option and pre-selected second option:
+
+[source,xml]
+----
+<option-set name="checkOptionSet">
+  <label i18n="checkOptionSet.label">Multi-selection OptionSet</label>
+  <expanded>true</expanded>
+  <occurrences minimum="1" maximum="1"/>
+  <help-text>You can select up to 2 options</help-text>
+  <options minimum="1" maximum="2">
+    <option name="option_1">
+      <label i18n="checkOptionSet.option_1.label">Option 1</label>
+      <help-text i18n="checkOptionSet.option_1.help-text">Help text for Option 1</help-text>
+    </option>
+    <option name="option_2">
+      <label i18n="checkOptionSet.option_2.label">Option 2</label>
+      <default>true</default>
+      <items>
+        <input name="contentSelector" type="ContentSelector">
+          <label>Content selector</label>
+          <occurrences minimum="0" maximum="0"/>
+          <config/>
+        </input>
+      </items>
+    </option>
+    <option name="option_3">
+      <label>Option 3</label>
+      <help-text>Help text for Option 3</help-text>
+      <items>
+        <input name="textarea" type="TextArea">
+          <label>Text Area</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+        <input name="long" type="Long">
+          <label>Long</label>
+          <indexed>true</indexed>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+      </items>
+    </option>
+  </options>
+</option-set>
+----
+
+expanded
+  Optional. Set to ``true`` to expand all of the options by default
+
+occurrences
+  Detailed definition of how many times this option set may be repeated inside one content.
+
+options (required)
+  Container of options.
+
+   @minimum
+      Required. Minimum number of options that must be selected in this option set.
+
+   @maximum
+      Required. Maximum number of options that can be selected in this option set.
+      Setting this attribute to a value greater than 1 will result in rendering of a multi-select option set with
+      options rendered as checkboxes. Setting the attribute value to 1 will render options as radio-buttons (single-select option set).
+      Once the maximum of selected options is reached, the rest of the options will be disabled.
+
+   option (required)
+     Container of the option form.
+
+      @name (required)
+         Option name. Must be unique within the option set.
+
+      label (required)
+         Label of the option's checkbox or radio button.
+
+      label\@i18n
+        The key to look up the label text in the localization bundles. (See also :ref:`localization_schemas`)
+
+
+      help-text
+        Optional. Help text for the option.
+
+      help-text\@i18n
+        The key to look up the help text in the localization bundles. (See also :ref:`localization_schemas`)
+
+
+      default
+         Optional. Set to ``true`` to pre-select the option.
+
+      items
+         Optional. Container of the option form's inputs.
+
+
+
+
+== Mixins
+
+To simplify maintenance of forms, mixins offers a practical way of reusing schema fragments across forms.
+A mixin can be injected into a form simply by referencing it by name.
+The form will render as if everything in the mixin was written directly in the form itself.
+
+[source,xml]
+----
+<mixin>
+  <display-name>U.S. Address format</display-name>
+  <items>
+    <input type="TextLine" name="addressLine">
+      <label>Street address</label>
+      <occurrences minimum="0" maximum="2"/>
+    </input>
+    <input type="TextLine" name="city">
+      <label>City</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="state">
+      <label>State</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="TextLine" name="zipCode">
+      <label>Zip code</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</mixin>
+----
+
+[source,xml]
+----
+<content-type>
+  <display-name>Using mixins</display-name>
+  <super-type>base:structured</super-type>
+  <items>
+    <inline mixin="us-address"/>
+  </items>
+</content-type>
+----
