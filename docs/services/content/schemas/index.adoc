@@ -1,4 +1,5 @@
 = Enonic XP Schema reference documentation
+:imagesdir: ./images
 :toc: right
 :y: icon:check[role="green"]
 :n: icon:times[role="red"]
@@ -234,6 +235,9 @@ This is different from media content where each media is a separate node that ca
 </input>
 ----
 
+[.thumb]
+image::Attachment.png[An empty attachment input box, 459, 87]
+
 .Compatibility
 [width=20%]
 |===
@@ -260,6 +264,8 @@ that makes sense is a minimum of zero and a maximum of one, which is default and
 <1> *default* - Use `checked` to check it, default is unchecked.
 <2> *alignment* defines placement of checkbox relative to label text. Supported values are: "left", "right", "top", "bottom", default is "left".
 
+[.thumb]
+image::Checkbox.png[two checkboxes one is selected the other is not, 147, 80]
 
 === ComboBox
 
@@ -280,13 +286,16 @@ Combobox allows you to select one or more options from a statically defined list
 <1> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple `option` elements are allowed and ordered.
 <2> *default* is optional, and may be equal to _one_ of the option values.
 
+[.thumb]
+image::Combobox.png[two checkboxes one is selected the other is not, 662, 182]
+
 === ContentSelector
 
 References to other content are specified by this input type. Use the toggle icon to switch between the list mode (default) and the tree mode.
 
 [source,xml]
 ----
-<input name="mycontentselector" type="ContentSelector>
+<input name="mycontentselector" type="ContentSelector">
   <label>My ContentSelector</label>
   <occurrences minimum="0" maximum="0"/>
   <config>
@@ -303,9 +312,9 @@ References to other content are specified by this input type. Use the toggle ico
 ----
 <1> *allowContentType* is used to limit the content types that may be selected using the <<allowContentType Samples>>
 <2> *allowPath* is used to limit the path of the content that may be selected using the <<allowPath Samples>>.
-<3> *treeMode* toggles displaying tree navigation or not. Default value is `true`.
+<3> *treeMode* toggles displaying tree navigation or not. Default value is `false`.
 <4> *showStatus* toggles content status - default is `false`.
-<5> *hideToggleIcon* hides the toggle icon when set to `true`.
+<5> *hideToggleIcon* hides the toggle icon when set to `false`.
 
 ==== allowContentType Samples
 
@@ -372,12 +381,21 @@ All children of the current content's parent +
   <allowPath>../*</allowPath>
 ====
 
+Default options:
+[.thumb]
+image::Content-selector-default.png[An input box with a dropdown options below it, 660 ,330]
 
-  image::images/content-selector-no-toggle.png
+TreeMode set to true:
+[.thumb]
+image::Content-selector-tree.png[Input box with a dropdown with a tree structure, 660 ,330]
 
-  image::images/content-selector-status.png
+Showstatus set to true:
+[.thumb]
+image::Content-selector-status.png[Input box with a dropwdown showing status on each option, 660, 330]
 
-  image::images/content-selector-tree.png
+Hide icon set to true:
+[.thumb]
+image::Content-selector-no-icon.png[Input box without an icon, 660, 77]
 
 ===  ContentTypeFilter
 
