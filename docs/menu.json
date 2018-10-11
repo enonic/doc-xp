@@ -2,25 +2,25 @@
     "menuItems": [
         {
             "title": "Admin console",
-            "document": "admin"
+            "document": "services/admin/index.adoc"
         },
         {
             "title": "App engine",
-            "document": "appengine"
+            "document": "services/appengine/index.adoc"
         },
         {
             "title": "CMS",
-            "document": "content",
+            "document": "services/content/index.adoc",
             "menuItems": [
                 {
                     "title": "Schemas",
-                    "document": "schemas"
+                    "document": "services/content/schemas/index.adoc"
                 }
             ]
         },
         {
             "title": "Api referance",
-            "document": "api"
+            "document": "api/index.adoc"
         }
     ]
 }
