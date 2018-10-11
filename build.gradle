@@ -18,12 +18,18 @@ apply plugin: 'org.aim42.htmlSanityCheck'
 
 
 asciidoctor {
-  sourceDir = file('docs')
-  outputDir = file('build/docs')
+    sourceDir = file('docs')
+    outputDir = file('build/docs')
 
-  requires project.file('verbose-mode.rb')
+    requires project.file('verbose-mode.rb')
 
-  attributes 'source-highlighter': 'coderay'
+    attributes 'source-highlighter': 'coderay'
+
+    resources {
+        from(sourceDir) {
+            include '**/images/**'
+        }
+    }
 }
 
 htmlSanityCheck {

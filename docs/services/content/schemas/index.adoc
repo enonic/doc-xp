@@ -1,5 +1,5 @@
 = Enonic XP Schema reference documentation
-:imagesdir: ./images
+:imagesdir: images
 :toc: right
 :y: icon:check[role="green"]
 :n: icon:times[role="red"]
@@ -187,6 +187,8 @@ X-data (short for eXtra data) makes it possible to dynamically extend existing c
 Input types represent the most important part of any form, as the purpose is to enable editing and storing of a single value (or an array of values).
 Input types have both front-end and back-end components. The front-end represents the visual editing interface used in the XP admin console, where the back-end is solely used for validation purposes.
 An input type will handle a single property, with zero, 1 or many values. I.e. the TextLine input type will return Strings. Normally, an input type will use a fixed propertyType, but this is optional.
+
+//TODO image of text (default) input
 
 The following configuration is common for all input types:
 
