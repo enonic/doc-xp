@@ -1,0 +1,26 @@
+{
+    "menuItems": [
+        {
+            "title": "Admin console",
+            "document": "admin"
+        },
+        {
+            "title": "App engine",
+            "document": "appengine"
+        },
+        {
+            "title": "CMS",
+            "document": "content",
+            "menuItems": [
+                {
+                    "title": "Schemas",
+                    "document": "schemas"
+                }
+            ]
+        },
+        {
+            "title": "Api referance",
+            "document": "api"
+        }
+    ]
+}
