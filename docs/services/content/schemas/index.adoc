@@ -295,8 +295,7 @@ image::Combobox.png[two checkboxes one is selected the other is not, 700]
 
 === ContentSelector
 
-References to other content are specified by this input type. 
-A searchShows a set of options displyed in a list. 
+References to other content are specified by this input type. Use the toggle icon to switch between the list mode (default) and the tree mode.
 
 Content Selector:
 [.thumb]
@@ -774,6 +773,8 @@ image::Image-selector.png[Input box with a grid of images to select below it, 50
 
 A simple input for storing integer numbers.
 
+image::Long.png[Number input showing a large number, 700]
+
 [source,xml]
 ----
 <input name="mylong" type="Long">
@@ -818,6 +819,9 @@ The MediaSelector is a specialized version of the <<ContentSelector>> that is li
 === RadioButton
 
 An input type for selecting _one_ of the available options defined in the `config` element.
+
+[.thumb]
+image::Radio-buttons.png[two button where one of them is selected, 200]
 
 [source,xml]
 ----
@@ -898,6 +902,8 @@ A plain text, single line input with advanced validation options. Stored as stri
 
 Specify time in the format hh:mm.  A pop-up box with time selector allows easy editing.
 `09:00`.
+
+image::Time-selector.png[input field with a hour and minute selector above it, 700]
 
 [source,xml]
 ----
