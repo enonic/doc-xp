@@ -1,2 +1,2 @@
-# doc-xp-schemas
-Reference documentation for XP Schemas
+# doc-xp
+Reference documentation for Enonic XP
