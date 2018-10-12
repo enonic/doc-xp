@@ -188,7 +188,8 @@ Input types represent the most important part of any form, as the purpose is to 
 Input types have both front-end and back-end components. The front-end represents the visual editing interface used in the XP admin console, where the back-end is solely used for validation purposes.
 An input type will handle a single property, with zero, 1 or many values. I.e. the TextLine input type will return Strings. Normally, an input type will use a fixed propertyType, but this is optional.
 
-//TODO image of text (default) input
+[.thumb]
+image::Default-input.png[An input box with help-text below it, 700]
 
 The following configuration is common for all input types:
 
@@ -230,15 +231,15 @@ Some input types are generic, and can be used in any form. Others however are co
 This field enables uploading of one or more files that will be stored as attachments to the current node/content.
 This is different from media content where each media is a separate node that can be linked to.
 
+[.thumb]
+image::Attachment.png[An empty attachment input box, 700]
+
 [source,xml]
 ----
 <input name="myattachment" type="AttachmentUploader">
   <label>My AttachmentUploader</label>
 </input>
 ----
-
-[.thumb]
-image::Attachment.png[An empty attachment input box, 459, 87]
 
 .Compatibility
 [width=20%]
@@ -253,6 +254,9 @@ image::Attachment.png[An empty attachment input box, 459, 87]
 A checkbox field has a value if it is checked, or no value if it is not checked.  Therefore, the only values for occurrences
 that makes sense is a minimum of zero and a maximum of one, which is default and may be skipped.
 
+[.thumb]
+image::Checkboxes.png[two checkboxes one is selected the other is not, 200]
+
 [source,xml]
 ----
 <input  name="mycheckbox" type="CheckBox">
@@ -266,12 +270,12 @@ that makes sense is a minimum of zero and a maximum of one, which is default and
 <1> *default* - Use `checked` to check it, default is unchecked.
 <2> *alignment* defines placement of checkbox relative to label text. Supported values are: "left", "right", "top", "bottom", default is "left".
 
-[.thumb]
-image::Checkbox.png[two checkboxes one is selected the other is not, 147, 80]
-
 === ComboBox
 
 Combobox allows you to select one or more options from a statically defined list
+
+[.thumb]
+image::Combobox.png[two checkboxes one is selected the other is not, 700]
 
 [source,xml]
 ----
@@ -288,8 +292,6 @@ Combobox allows you to select one or more options from a statically defined list
 <1> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple `option` elements are allowed and ordered.
 <2> *default* is optional, and may be equal to _one_ of the option values.
 
-[.thumb]
-image::Combobox.png[two checkboxes one is selected the other is not, 662, 182]
 
 === ContentSelector
 
@@ -385,19 +387,19 @@ All children of the current content's parent +
 
 Default options:
 [.thumb]
-image::Content-selector-default.png[An input box with a dropdown options below it, 660 ,330]
+image::Content-selector-default.png[An input box with a dropdown options below it, 700]
 
 TreeMode set to true:
 [.thumb]
-image::Content-selector-tree.png[Input box with a dropdown with a tree structure, 660 ,330]
+image::Content-selector-tree.png[Input box with a dropdown with a tree structure, 700]
 
 Showstatus set to true:
 [.thumb]
-image::Content-selector-status.png[Input box with a dropwdown showing status on each option, 660, 330]
+image::Content-selector-status.png[Input box with a dropwdown showing status on each option, 700]
 
 Hide icon set to true:
 [.thumb]
-image::Content-selector-no-icon.png[Input box without an icon, 660, 77]
+image::Content-selector-no-icon.png[Input box without an icon, 700]
 
 ===  ContentTypeFilter
 
