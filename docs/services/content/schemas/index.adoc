@@ -295,7 +295,12 @@ image::Combobox.png[two checkboxes one is selected the other is not, 700]
 
 === ContentSelector
 
-References to other content are specified by this input type. Use the toggle icon to switch between the list mode (default) and the tree mode.
+References to other content are specified by this input type. 
+A searchShows a set of options displyed in a list. 
+
+Content Selector:
+[.thumb]
+image::Content-selector-default.png[An input box with a dropdown options below it, 700]
 
 [source,xml]
 ----
@@ -316,9 +321,12 @@ References to other content are specified by this input type. Use the toggle ico
 ----
 <1> *allowContentType* is used to limit the content types that may be selected using the <<allowContentType Samples>>
 <2> *allowPath* is used to limit the path of the content that may be selected using the <<allowPath Samples>>.
-<3> *treeMode* toggles displaying tree navigation or not. Default value is `false`.
-<4> *showStatus* toggles content status - default is `false`.
-<5> *hideToggleIcon* hides the toggle icon when set to `false`.
+<3> *treeMode* toggles displaying tree navigation or not. Default value is `false`. +
+image:Content-selector-tree.png[Input box with a dropdown with a tree structure, 350]
+<4> *showStatus* toggles content status - default is `false`. + 
+image:Content-selector-status.png[Input box with a dropwdown showing status on each option, 365]
+<5> *hideToggleIcon* hides the toggle icon when set to `false`. + 
+image:Content-selector-no-icon.png[Input box without an icon, 500]
 
 ==== allowContentType Samples
 
@@ -347,7 +355,6 @@ All content types except ones containing the string "folder" +
 
   <allowContentType>((?!folder).)*$</allowContentType>
 ====
-
 
 ==== allowPath Samples
 
@@ -385,25 +392,9 @@ All children of the current content's parent +
   <allowPath>../*</allowPath>
 ====
 
-Default options:
-[.thumb]
-image::Content-selector-default.png[An input box with a dropdown options below it, 700]
-
-TreeMode set to true:
-[.thumb]
-image::Content-selector-tree.png[Input box with a dropdown with a tree structure, 700]
-
-Showstatus set to true:
-[.thumb]
-image::Content-selector-status.png[Input box with a dropwdown showing status on each option, 700]
-
-Hide icon set to true:
-[.thumb]
-image::Content-selector-no-icon.png[Input box without an icon, 700]
-
 ===  ContentTypeFilter
 
-A field for selecting a content type.
+image:Content-type-default.png[input field with a dropdown of all content, 700]
 
 [source,xml]
 ----
@@ -520,6 +511,8 @@ Sample JSON response from a CustomSelector service:
 
 A simple field for dates with a calendar pop-up box in the admin console. The default format is ``yyyy-MM-dd``.
 
+image::Date-selector.png[Input field with a calander above it and a blue ok button, 500]
+
 [source,xml]
 ----
 <input name="mydate" type="Date">
@@ -553,6 +546,8 @@ An offset can also be the string ``now``, which means current date.
 A simple field for dates with time.  A pop-up box with a calendar and time selector allows easy editing.
 The format is `yyyy-MM-dd hh:mm` for example, `2015-02-09T09:00`. The date-time could be of type
 `local` (no timezone) or with a timezone. This is done using configuration:
+
+image::Datetime-selector.png[Input field with both a calander and time selection above, 500]
 
 [source,xml]
 ----
@@ -628,6 +623,8 @@ Examples:
 
 A simple input type for storing decimal numbers.
 
+image::Double.png[An inpt field with a lot of decimal numbers, 700]
+
 [source,xml]
 ----
 <input name="mydouble" type="Double">
@@ -651,6 +648,8 @@ A simple input type for storing decimal numbers.
 === GeoPoint
 
 Stores a GPS coordinate as two comma-separated decimal numbers.
+
+image::Geo-point.png[text input with a longitude and latitude numbers, 700]
 
 * The first number must be between -90 and 90, where a negative number indicates a location south of equator and a positive is north of the equator.
 * The second number must be between -180 and 180, where a negative number indicates a location in the western hemisphere and a positive number is a location in the eastern hemisphere.
@@ -690,7 +689,7 @@ A field for entering multi-line text with rich-formatting options.
 TIP: HTML Area is configured with default set of tools but the toolbar can be customized. Using the config setting you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. Complete list of supported tools can be found below.
 
 
-image:images/htmlarea-customized.jpg
+image::Html-area-editor.png[Input field with a toolbar at the top. Source and fullscreen buttons on the bottom left, 600]
 
 
 Below is the default editor tools configuration:
@@ -752,6 +751,8 @@ Below is the complete list of available editor tools:
 === ImageSelector
 
 The ImageSelector is a specialized version of the <<ContentSelector>> that is limited to selecting images (content of type "media:image"), but also upload new images.
+
+image::Image-selector.png[Input box with a grid of images to select below it, 500]
 
 [source,xml]
 ----
