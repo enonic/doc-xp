@@ -6,12 +6,9 @@
 
 *Complete overview of schemas in Enonic XP*
 
-
-
 == Introduction
 
-The low level storage of Enonic XP is entirely schema-less.
-To create both simple and complex schemas and their associated forms, Enonic XP ships with a high-level schema concept that does not require coding.
+To facilitate creation of content types for editors, Enonic XP ships with a high-level schema concept that does not require coding.
 
 Below are the essential schema components that can be used to build schemas:
 
@@ -20,7 +17,7 @@ Below are the essential schema components that can be used to build schemas:
 The main use of schemas is to define forms that can be edited through the admin interface. Schemas also have a back-end equivalent that can can be used programmatically through for instance the content API.
 Schemas are essentially compositions of <<Input types>> and optionally <<Sets>> when more complex structures are required.
 
-Once a form is populated with data and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
+Once a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
 The property structure can then be persisted directly into a node in the XP repository.
 
 Forms can be created either with XML or with Java, where the first is the most common.
@@ -76,8 +73,7 @@ TODO: adding to your app
 </content-type>
 ----
 <1> *display-name* is the human readable name of the content type. Optionally specify the i18n attribute to define a mapping to localize the value
-<2> *super-type* refers to basic controller of the form TODO
-<3> *final*
+<2> *super-type* refers to root controller of the form TODO
 
 === Page
 Page forms enable configuration of pages when using Content Studio's page editor
@@ -124,7 +120,8 @@ Site forms lets you configure the current application for a specific site throug
 
 
 === X-data
-X-data (short for eXtra data) makes it possible to dynamically extend existing content types with new fields. When editing content, X-data fields will be displayed as separate steps in the content form.
+X-data (short for eXtra data) makes it possible to dynamically extend existing content types with new fields.
+When editing content, X-data fields will be displayed as separate steps in the content form.
 
 [source,xml]
 ----
@@ -178,9 +175,6 @@ X-data (short for eXtra data) makes it possible to dynamically extend existing c
   </items>
 </x-data>
 ----
-
-.. TIP::  Similar to mixins, x-data can be referenced directly inside content type and site forms
-
 
 == Input types
 
@@ -322,9 +316,9 @@ image::Content-selector-default.png[An input box with a dropdown options below i
 <2> *allowPath* is used to limit the path of the content that may be selected using the <<allowPath Samples>>.
 <3> *treeMode* toggles displaying tree navigation or not. Default value is `false`. +
 image:Content-selector-tree.png[Input box with a dropdown with a tree structure, 350]
-<4> *showStatus* toggles content status - default is `false`. + 
+<4> *showStatus* toggles content status - default is `false`. +
 image:Content-selector-status.png[Input box with a dropwdown showing status on each option, 365]
-<5> *hideToggleIcon* hides the toggle icon when set to `false`. + 
+<5> *hideToggleIcon* hides the toggle icon when set to `false`. +
 image:Content-selector-no-icon.png[Input box without an icon, 500]
 
 ==== allowContentType Samples
@@ -1003,9 +997,9 @@ Here is an example of an item set with two inputs. The resulting form will allow
 
 [source,xml]
 ----
-<item-set name="contact_info">
-  <label i18n="contact_info.label">Contact Info</label>
-  <occurrences minimum="0" maximum="0"/>
+<item-set name="contact_info"> <!--1-->
+  <label i18n="contact_info.label">Contact Info</label> <!--2-->
+  <occurrences minimum="0" maximum="0"/> <!--3-->
   <items>
     <input name="label" type="TextLine">
       <label>Label</label>

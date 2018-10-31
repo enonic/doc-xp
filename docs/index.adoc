@@ -3,19 +3,30 @@ include::variables.adoc[]
 :toc: right
 :imagesdir: images
 
-Enonic XP is an open source web platform and CMS in one. Popular use cases for XP are: Headless CMS, Web Content Management and Progressive Web Apps
+== Open source application platform and CMS
+Enonic XP is designed as an operating system for modern web applications.
+The platform features the essential services required to build and deploy applications, web sites or APIs.
 
-Below is an overview of the core platform services:
+In addition to offer powerful CMS capabilities, Enonic XP is an alternative to proprietary PaaS offerings.
+Enonic XP supports Kubernetes, can be run in any cloud or on premises.
 
-* <<appengine/index#,Javascript/Java app-engine>> with a powerful <<framework/index#, Javascript development framework>>
+If you are new to Enonic XP, we recommend checking out our Getting Started documentation: https://developer.enonic.com/start
+
+*Below is an overview of the core platform services:*
+
+image::platform-services.png[Platform illustration, 612]
+
+== Read more about the core platform services below
+* <<app-engine/index#,Javascript/Java app-engine>> with a powerful <<framework/index#, Javascript development framework>>
 * <<nosql/index#, NoSQL repository>> for storing any kind of data (based on Elasticsearch)
-* Identity providers to control authentication and authorization against any source
-* <<admin/index#, Back-office Admin Console>> that can be extended
-* <<content/index#,Content Management services>> with a powerful authoring interface
+* <<Identity/index#, Identity providers>> for pluggable authentication and authorization
+* <<admin/index#, Admin Console>> that can be extended
+* <<content/index#,Content Management services>> that work hand-in-hand with Content Studio
 
-Enonic XP supports Kubernetes, runs in any cloud, and on premises infrastructure
 
 == Release notes
+
+Read the <<release-notes/index#,Release notes for version {version}>>
 
 == Upgrading
 

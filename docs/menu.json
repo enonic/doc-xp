@@ -1,24 +1,36 @@
 {
     "menuItems": [
         {
-            "title": "Admin console",
-            "document": "services/admin/index"
+            "title": "Data Repository",
+            "document": "nosql/index"
         },
         {
             "title": "App engine",
-            "document": "services/appengine/index"
+            "document": "appengine/index"
         },
         {
-            "title": "Platform services",
+            "title": "Identity Providers",
+            "document": "idprovider/index"
+        },
+        {
+            "title": "Content Management (CMS)",
+            "document": "cms/index"
+        },
+        {
+            "title": "Admin Console",
+            "document": "admin/index"
+        },
+        {
+            "title": "Other",
             "menuItems": [
                 {
-                    "title": "Schemas",
-                    "document": "services/content/schemas/index"
+                    "title": "Subitem",
+                    "document": "something/index"
                 }
             ]
         },
         {
-            "title": "Api referance",
+            "title": "Api reference",
             "document": "api/index"
         }
     ]
