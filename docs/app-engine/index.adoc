@@ -2,13 +2,19 @@
 :toc: right
 :imagesdir: images
 
-As a platform, Enonic XP facilitates development and deployment of custom application code.
+== Build your applications with Javascript or Java
 
-Applications are primarily written in Javascript, but are also capable of running Java - since the App Engine is built on top of the JVM.
+TODO (sample code to execute a javascript)
 
-Below is an overview of the core capabilities:
-* <<app-engine/index#,Todo>> todo here too
+Enonic XP provides a fast and powerful App engine, built on top of the Java Virtual Machine (JVM).
+It also includes a framework for running Javascript controllers, based on commonJS.
+Finally, the framework also enables Javascript developers easily invoke and use existing Java libraries and components, if needed.
 
-== Overview
 
-* <<cli/index#, CLI>>
+== Feature highlights:
+* <<applications/index#,Introduction to XP apps>>
+* <<assets/index#,Serve web assets>> with perfect cache strategies
+* <<building/index#,Highly customizable build system>> based on Gradle
+* <<javascript/index#,Javascript framework>> for serverside Javascript controllers
+* <<java/index#,Java>> TODO
+* <<libraries/index#,Libraries>> TODO

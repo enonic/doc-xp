@@ -1,0 +1,75 @@
+= Enonic Applications
+:toc: right
+:imagesdir: images
+
+Like anything that calls itself an operating system - Enonic XP supports applications.
+An application can be seen as a microservice. Once installed it can run as a single instance, or scaled up if needed.
+
+It is important to note that applications are not limited to "Web Applications”.
+Applications can be used for running background tasks, offer HTTP services, extend the Admin Console, CMS-driven websites and even provide internal API’s to other applications.
+
+Applications also may carry data, for instance, to initialize a repository, or make changes to existing data.
+
+
+== Projects
+
+By projects we commonly mean developer code - typically hosted in a Git repo.
+Enonic offers starter kits that can help you get going with your project.
+https://market.enonic.com/starters
+
+== Build scripts
+Enonic XP provides a standard build system based on Gradle.
+The build system can be used for a wide range of purposes, but the most common are:
+
+* Compiling a project
+* Running tests
+* Building artifacts (typically executable file)
+* Deploying
+
+Gradle may also be setup to run other popular build systems such as Webpack.
+
+
+== Assets
+
+A common requirement for web applications and sites are assets such as javascript files, css, static images and more.
+Enonic XP provides an out-of-the-box solution to serving assets
+
+== Services
+
+TODO
+
+== Libraries
+
+To speed up development and enable a high degree of re-use,
+applications can make use of Libraries in addition to your own code.
+Libraries can be built almost like you create applications.
+Libraries (and applications) are shared through so-called Maven repositories.
+An example is https://repo.enonic.com.
+Anyone may configure and run their own repository - for internal as well as external use.
+
+
+== Binary executable
+
+An application is shipped as a JAR (.jar). This is short for Java Archive.
+Since Enonic XP is built on top of Java and the powerful OSGi framework, developers with special requirements may utilize capabilities such as exposing and consuming services from other applications.
+Enonic XP is also designed to run Serverside JavaScript, and most application projects will not be using any Java at all.
+
+
+== Life Cycle
+
+Applications have the following life-cycle:
+
+* Installed
+* Started
+* Stopped
+* Uninstalled
+
+By default, when installing applications in an XP cluster - the application is uploaded and stored in the system repository.
+When started, by default it is started on all nodes.
+If an application contains an initialization script, this script will only be executed once.
+
+
+
+== Other Resources
+
+TODO

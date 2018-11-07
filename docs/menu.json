@@ -6,7 +6,13 @@
         },
         {
             "title": "App engine",
-            "document": "appengine/index"
+            "document": "app-engine/index",
+            "menuItems": [
+              {
+                "title": "Javascript",
+                "document": "app-engine/javascript/index"
+              }
+            ]
         },
         {
             "title": "Identity Providers",
