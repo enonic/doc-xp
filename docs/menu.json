@@ -5,40 +5,52 @@
           "document": "cli/index"
       },
       {
-          "title": "Application development",
-          "document": "app-engine/index",
+          "title": "Applications",
+          "document": "apps/index",
           "menuItems": [
             {
+              "title": "Runtime",
+              "document": "apps/runtime"
+            },
+            {
               "title": "Projects",
-              "document": "app-engine/projects"
+              "document": "apps/projects"
             },
             {
               "title": "Build System",
-              "document": "app-engine/build-system"
+              "document": "apps/build-system"
             },
             {
               "title": "Javascript Framework",
-              "document": "app-engine/javascript/index"
+              "document": "apps/javascript"
             },
             {
                 "title": "Web Applications",
-                "document": "app-engine/webapp"
+                "document": "apps/webapp"
+            },
+            {
+                "title": "Internationalization",
+                "document": "apps/i18n"
             },
             {
                 "title": "Asset service",
-                "document": "app-engine/assets"
+                "document": "apps/assets"
             },
             {
                 "title": "HTTP services",
-                "document": "app-engine/services"
+                "document": "apps/services"
             },
             {
                 "title": "Tasks",
-                "document": "app-engine/tasks"
+                "document": "apps/tasks"
             },
             {
                 "title": "Libraries",
-                "document": "app-engine/libraries"
+                "document": "apps/libraries"
+            },
+            {
+                "title": "Deployment",
+                "document": "apps/deployment"
             }
 
           ]
@@ -54,6 +66,16 @@
         {
             "title": "CMS",
             "document": "cms/index"
+            "menuItems": [
+              {
+                  "title": "Schemas",
+                  "document": "cms/schemas/index"
+              },
+              {
+                  "title": "Schema Localization",
+                  "document": "cms/schemas/localization"
+              }
+            ]
         },
         {
             "title": "Admin Console",
