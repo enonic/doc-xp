@@ -1,39 +1,59 @@
 {
     "menuItems": [
+      {
+          "title": "CLI",
+          "document": "cli/index"
+      },
+      {
+          "title": "App engine",
+          "document": "app-engine/index",
+          "menuItems": [
+            {
+              "title": "Projects",
+              "document": "projects"
+            },
+            {
+              "title": "Build System",
+              "document": "build-system"
+            },
+            {
+              "title": "Javascript Framework",
+              "document": "app-engine/javascript/index"
+            },
+            {
+                "title": "Web Applications",
+                "document": "webapp"
+            },
+            {
+                "title": "Asset service",
+                "document": "assets"
+            },
+            {
+                "title": "HTTP services",
+                "document": "services"
+            },
+            {
+                "title": "Libraries",
+                "document": "libraries"
+            },
+
+          ]
+      },
         {
-            "title": "Data Repository",
+            "title": "NoSQL Repository",
             "document": "nosql/index"
         },
         {
-            "title": "App engine",
-            "document": "app-engine/index",
-            "menuItems": [
-              {
-                "title": "Javascript",
-                "document": "app-engine/javascript/index"
-              }
-            ]
-        },
-        {
-            "title": "Identity Providers",
+            "title": "ID Providers",
             "document": "idprovider/index"
         },
         {
-            "title": "Content Management (CMS)",
+            "title": "CMS",
             "document": "cms/index"
         },
         {
             "title": "Admin Console",
             "document": "admin/index"
-        },
-        {
-            "title": "Other",
-            "menuItems": [
-                {
-                    "title": "Subitem",
-                    "document": "something/index"
-                }
-            ]
         },
         {
             "title": "Api reference",

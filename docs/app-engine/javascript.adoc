@@ -1,12 +1,12 @@
 = Javascript Framework
-include::../../variables.adoc[]
+include::../variables.adoc[]
 :toc: right
 :imagesdir: images
 
 Enonic XP extensively uses server-side JavaScript for application development.
-Our goal is to enable any developer - PHP, .net, Java, Python, etc to quickly be productive with Enonic XP.
+Our goal is to enable developer of any language - PHP, .net, Java, Python, etc to quickly grasp and be productive with Enonic XP.
 
-Here are some highlights on how it works:
+Here are some highlights:
 
 * *Runs on the JVM* using the Nashorn engine. Future releases of XP will likely use GraalVM
 * *Javascripts are compiled and cached* on first request, for optimal performance
@@ -17,10 +17,10 @@ Here are some highlights on how it works:
 
 == HTTP Controllers
 
-JavaScript controllers make out the core concept of the Enonic XP framework.
+JavaScript controllers are the core concept of the Enonic XP framework.
 Every javascript file is considered a controller, and the controllers are initiated through their exports.
 
-For instance, every application may have a <<Application Controller>> that is invoked based on application life-cycle events.
+For instance, every application may have an <<Application Controller>> that is invoked based on application life-cycle events.
 
 JavaScript http controllers simply export functions matching the desired HTTP Method it implements.
 As such, any controller must explicitly declare one or more "exports" in order to handle requests:
@@ -161,9 +161,9 @@ more about <<Java bridge>>.
 
 == Application Controller
 
-When application lifecycle events like start or stop occurs, it can trigger some code. If you add a ``main.js`` file to the root of your application
-(``/src/main/resources/``) this file is executed when the application starts. Here it's possible to add various initialization code or
-add event listeners to listen for events.
+When application lifecycle events like start or stop occurs, it can trigger a special controller. By adding a ``main.js`` file to the root of your application
+(``/src/main/resources/``) this file is executed when the application starts.
+Use this for instance to add initialization code or event listeners to your application.
 
 Simple example:
 
