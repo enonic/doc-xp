@@ -1,4 +1,4 @@
-= Enonic XP NoSQL Data Repository
+= NoSQL Data Repository
 :toc: right
 :imagesdir: images
 
@@ -6,23 +6,23 @@ Enonic XP ships with a unique and powerful document-oriented data repository whi
 
 == Features
 
-The XP Repository enables you to store, index, query and access your data in many ways.
+The XP Repository enables you to store, index, query and access your data fast and easily.
 Below is a highlight of the capabilities provided:
 
 * Create any number of repositories within a single deployment of XP
-* Store and index documents - also known as <<Nodes>>
-* Supports a vast range of <<value types>>, from strings to geolocation
-* Use single value properties or arrays
-* Efficiently supports storing <<Binary data>> such as files and byte arrays
+* Store and index documents - aka <<Nodes>>
+* Supports a vast range of <<value types>>, from Strings to GeoLocation
+* Store single value properties or arrays
+* Store <<Binary data>> such as files and byte arrays
 * Query your data using the <<Enonic Query Language>>
-* Powerful aggregations enable you to create visualizations or navigation
+* Use aggregations to create visualizations or navigation
 * Node-level versioning to support rollbacks
 * Organize your data in tree structures
-* <<Access Control>> down to a single document (also known as a node)
-* Branches "Git style" enable you to stage your data
-* Schema-less approach to keep domain model in your code
-* Update your data with <<Editors>> (fragments on code that run on each document)
-* <<Snapshot>> feature to rollback entire system or repositories
+* <<Access Control>> down to a single Node
+* Branches "Git style" enable you to stage and promote your data
+* Fully schema-less approach - keep the domain model in your code
+* No more cumbersome update statements, <<Editors>> are fragments of code that are executed on top of your nodes
+* <<Snapshot>> feature to rollback entire system or per repository
 
 == Repositories
 

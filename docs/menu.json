@@ -5,54 +5,33 @@
           "document": "cli/index"
       },
       {
-          "title": "Applications",
-          "document": "apps/index",
+          "title": "App Engine",
+          "document": "app-engine/index",
           "menuItems": [
             {
-              "title": "Runtime",
-              "document": "apps/runtime"
-            },
-            {
-              "title": "Projects",
-              "document": "apps/projects"
-            },
-            {
-              "title": "Build System",
-              "document": "apps/build-system"
-            },
-            {
               "title": "Javascript Framework",
-              "document": "apps/javascript"
+              "document": "app-engine/javascript"
             },
             {
                 "title": "Web Applications",
-                "document": "apps/webapp"
+                "document": "app-engine/webapp"
             },
             {
                 "title": "Internationalization",
-                "document": "apps/i18n"
+                "document": "app-engine/i18n"
             },
             {
                 "title": "Asset service",
-                "document": "apps/assets"
+                "document": "app-engine/assets"
             },
             {
-                "title": "HTTP services",
-                "document": "apps/services"
+                "title": "Services",
+                "document": "app-engine/services"
             },
             {
                 "title": "Tasks",
-                "document": "apps/tasks"
-            },
-            {
-                "title": "Libraries",
-                "document": "apps/libraries"
-            },
-            {
-                "title": "Deployment",
-                "document": "apps/deployment"
+                "document": "app-engine/tasks"
             }
-
           ]
       },
         {
@@ -74,6 +53,18 @@
               {
                   "title": "Schema Localization",
                   "document": "cms/schemas/localization"
+              }
+              {
+                  "title": "Content Types",
+                  "document": "cms/content-types"
+              },
+              {
+                  "title": "Page Components",
+                  "document": "cms/components"
+              },
+              {
+                  "title": "Sites",
+                  "document": "cms/sites"
               }
             ]
         },

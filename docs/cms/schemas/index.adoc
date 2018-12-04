@@ -1,4 +1,4 @@
-= Enonic XP Schema reference documentation
+= Schemas
 :imagesdir: images
 :toc: right
 :y: icon:check[role="green"]
@@ -8,17 +8,15 @@
 
 == Introduction
 
-To facilitate creation of content types for editors, Enonic XP ships with a high-level schema concept that does not require coding.
-
-Below are the essential schema components that can be used to build schemas:
+To facilitate creation of various forms and data types throughout Content Studio, Enonic XP ships with a high-level schema concept that requires no coding.
 
 == Forms
 
-The main use of schemas is to define forms that can be edited through the admin interface. Schemas also have a back-end equivalent that can can be used programmatically through for instance the content API.
-Schemas are essentially compositions of <<Input types>> and optionally <<Sets>> when more complex structures are required.
+The main use of schemas is to define forms that can be edited through the admin interface. In addition to user interface, schemas also have a back-end equivalent that can be used programmatically, for instance through the content API.
+All forms are essentially compositions of <<Input types>> and optionally <<Sets>> when more complex structures are required.
 
 Once a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
-The property structure can then be persisted directly into a node in the XP repository.
+The property structure can then be persisted directly into the XP repository.
 
 Forms can be created either with XML or with Java, where the first is the most common.
 
@@ -39,9 +37,8 @@ image::app.png["My First app started"]
 </someForm>
 ----
 
-There are various instances of forms, each with their specific purpose and custom settings.
-Forms are currently in use by Content Studio and the Content API.
-Each form can have custom configuration fields, and the form implementation will control where and how end result is actually persisted:
+There are many types of forms, each with their specific purpose and options.
+The form implementation will control where and how end result is actually persisted:
 
 Below are the currently available forms implementations used by XP:
 

@@ -1,0 +1,72 @@
+= App engine
+:toc: right
+:imagesdir: images
+
+We like to refer to Enonic XP as a "Cloud Operating System".
+Like every other OS, Enonic XP supports development and deployment of applications.
+
+The XP App engine is the runtime of XP apps.
+
+In addition to the app engine, XP apps also get access the core platform services - such as the NoSQL repository and CMS.
+XP apps are not limited to being "Web Apps”. They can run background tasks, extend the Admin Console, power websites, offer http services, and even expose internal API’s to other applications.
+
+With XP you have the essential tools needed for delivering powerful cloud applications.
+
+NOTE: If you are new to Enonic XP, we recommend visiting the https://developer.enonic.com/start[Getting Started documentation]
+
+== Javascript framework
+Must XP applications are built with the serverside Javascript Framework.
+This framework is based on the CommonJS specification.
+
+Get all the details of our <<javascript#,Javascript Framework>>
+
+== Java
+XP runs on the Java Virtual Machine (JVM), and utilizes the powerful OSGi framework.
+Developers with special requirements may utilize advanced platform capabilities such as exposing and consuming services from other applications.
+
+TODO: LINK?
+
+== Assets
+
+Apps commonly require serving of assets such as javascript files, css and static images.
+The XP App engine provides an out-of-the-box solution to this problem.
+
+Learn more about <<assets#,serving Assets>>
+
+== Services
+
+Exposing endpoints and API's for web applications without dealing with hardcoded url mappings or occupying human readable paths is a common problem.
+Enonic XP offers a standardized approach to providing an accessing endpoints that solve this issue.
+
+Learn more about the services feature in Enonic XP: TODO LINK
+
+== Application Life Cycle
+
+Applications have the following life-cycle:
+
+* Installed
+* Started
+* Stopped
+* Uninstalled
+
+TODO
+
+
+== Deployment
+
+Enonic applications can be deployed in many ways - from installation through the UI, via command line deployment to dedicated instances
+
+
+== Web apps
+
+TODO
+
+<<webapps#,Web applications>>
+
+== Sites
+
+Introduction
+<<../cms/index#,Web applications>>
+
+
+TODO info about deploying XP apps.
