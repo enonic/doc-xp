@@ -1,9 +1,5 @@
 {
   "menuItems": [{
-      "title": "Projects",
-      "document": "project/index"
-    },
-    {
       "title": "App Engine",
       "document": "app-engine/index",
       "menuItems": [{
@@ -27,7 +23,7 @@
           "document": "app-engine/webapp"
         },
         {
-          "title": "Site service",
+          "title": "Sites",
           "document": "app-engine/sites"
         },
         {
@@ -42,20 +38,29 @@
     },
     {
       "title": "Storage",
-      "document": "storage/index"
+      "document": "storage/index",
+      "menuItems": [{
+          "title": "Nodes",
+          "document": "storage/nodes"
+        },
+        {
+          "title": "Branches",
+          "document": "storage/branches"
+        },
+        {
+          "title": "Query Language",
+          "document": "storage/eql"
+        }
+      ]
     },
     {
       "title": "Identity",
-      "document": "idprovider/index"
+      "document": "identity/index"
     },
     {
-      "title": "Content Management",
+      "title": "CMS",
       "document": "cms/index",
       "menuItems": [{
-          "title": "Schemas",
-          "document": "cms/schemas/index"
-        },
-        {
           "title": "Content Types",
           "document": "cms/content-types"
         },
@@ -64,14 +69,22 @@
           "document": "cms/sites"
         },
         {
-          "title": "Page Components",
+          "title": "Components",
           "document": "cms/components"
+        },
+        {
+          "title": "Other?",
+          "document": "cms/other"
         }
       ]
     },
     {
       "title": "Admin Console",
       "document": "admin/index"
+    },
+    {
+      "title": "Projects",
+      "document": "project/index"
     },
     {
       "title": "API reference",
