@@ -1,131 +1,126 @@
 {
-    "menuItems": [
-      {
-          "title": "Projects",
-          "document": "project/index"
-      },
-      {
-          "title": "App Engine",
-          "document": "app-engine/index",
-          "menuItems": [
-            {
-                "title": "Runtime",
-                "document": "app-engine/runtime"
-            },
-            {
-                "title": "Asset service",
-                "document": "app-engine/assets"
-            },
-            {
-                "title": "Custom services",
-                "document": "app-engine/services"
-            },
-            {
-                "title": "Task runner",
-                "document": "app-engine/tasks"
-            },
-            {
-                "title": "Web Apps",
-                "document": "app-engine/webapp"
-            },
-            {
-                "title": "Site service",
-                "document": "app-engine/sites"
-            },
-            {
-                "title": "Identity providers",
-                "document": "app-engine/idproviders"
-            },
-            {
-                "title": "Internationalization",
-                "document": "app-engine/i18n"
-            }
-
-          ]
-      },
-        {
-            "title": "Storage",
-            "document": "storage/index"
+  "menuItems": [{
+      "title": "Projects",
+      "document": "project/index"
+    },
+    {
+      "title": "App Engine",
+      "document": "app-engine/index",
+      "menuItems": [{
+          "title": "Runtime",
+          "document": "app-engine/runtime"
         },
         {
-            "title": "Identity",
-            "document": "idprovider/index"
+          "title": "Asset service",
+          "document": "app-engine/assets"
         },
         {
-            "title": "Content Management",
-            "document": "cms/index",
-            "menuItems": [
-              {
-                  "title": "Schemas",
-                  "document": "cms/schemas/index"
-              },
-              {
-                  "title": "Content Types",
-                  "document": "cms/content-types"
-              },
-              {
-                  "title": "Sites",
-                  "document": "cms/sites"
-              },
-              {
-                  "title": "Page Components",
-                  "document": "cms/components"
-              }
-            ]
+          "title": "Custom services",
+          "document": "app-engine/services"
         },
         {
-            "title": "Admin Console",
-            "document": "admin/index"
+          "title": "Task runner",
+          "document": "app-engine/tasks"
         },
         {
-            "title": "API reference",
-            "document": "api/index",
-            "menuitems": [
-            {
-              "title": "Javascript Framework",
-              "document": "api/javascript"
-            },
-            {
-                "title": "Schemas",
-                "document": "api/schemas"
-            },
-            {
-                "title": "Input Types",
-                "document": "api/input-types"
-            },
-            {
-                "title": "HTTP Controllers",
-                "document": "api/controllers"
-            },
-            {
-                "title": "Tasks - lib-task",
-                "document": "api/lib-task"
-            },
-            {
-                "title": "Storage - lib-node",
-                "document": "api/lib-node"
-            },
-            {
-                "title": "Content - lib-content",
-                "document": "api/lib-content"
-            },
-            {
-                "title": "HTTP API - lib-portal",
-                "document": "api/lib-portal"
-            },
-            {
-                "title": "JavaDoc",
-                "document": "api/javadoc"
-            }
-          ]
+          "title": "Web Apps",
+          "document": "app-engine/webapp"
         },
         {
-            "title": "Release Notes",
-            "document": "release-notes/index"
+          "title": "Site service",
+          "document": "app-engine/sites"
         },
         {
-            "title": "Upgrade Notes",
-            "document": "upgrade/index"
+          "title": "Identity providers",
+          "document": "app-engine/idproviders"
+        },
+        {
+          "title": "Internationalization",
+          "document": "app-engine/i18n"
         }
-    ]
+      ]
+    },
+    {
+      "title": "Storage",
+      "document": "storage/index"
+    },
+    {
+      "title": "Identity",
+      "document": "idprovider/index"
+    },
+    {
+      "title": "Content Management",
+      "document": "cms/index",
+      "menuItems": [{
+          "title": "Schemas",
+          "document": "cms/schemas/index"
+        },
+        {
+          "title": "Content Types",
+          "document": "cms/content-types"
+        },
+        {
+          "title": "Sites",
+          "document": "cms/sites"
+        },
+        {
+          "title": "Page Components",
+          "document": "cms/components"
+        }
+      ]
+    },
+    {
+      "title": "Admin Console",
+      "document": "admin/index"
+    },
+    {
+      "title": "API reference",
+      "document": "api/index",
+      "menuItems": [{
+          "title": "Javascript Framework",
+          "document": "api/javascript"
+        },
+        {
+          "title": "Schemas",
+          "document": "api/schemas"
+        },
+        {
+          "title": "Input Types",
+          "document": "api/input-types"
+        },
+        {
+          "title": "HTTP Controllers",
+          "document": "api/controllers"
+        },
+        {
+          "title": "Tasks - lib-task",
+          "document": "api/lib-task"
+        },
+        {
+          "title": "Storage - lib-node",
+          "document": "api/lib-node"
+        },
+        {
+          "title": "Content - lib-content",
+          "document": "api/lib-content"
+        },
+        {
+          "title": "HTTP API - lib-portal",
+          "document": "api/lib-portal"
+        },
+        {
+          "title": "JavaDoc",
+          "document": "api/javadoc"
+        }
+      ]
+    },
+    {
+      "title": "Release Notes",
+      "document": "release-notes/index"
+    },
+    {
+      "title": "Upgrade Notes",
+      "document": "upgrade/index"
+    }
+  ]
 }
