@@ -1,0 +1,57 @@
+= Branches
+:toc: right
+:imagesdir: images
+
+Inspired by Git, XP repos supports a concept called branches.
+Within a branch, nodes are organized hierarchically with paths that must be unique within the branch.
+This means that the fully qualified location of a node consists of:
+
+* repo
+* branch
+* path
+
+Repositories have a default branch called ``master``.
+Any number of branches could be added to facilitate your data model. Branches are typically ideal for facilitating long running transactions.
+
+As an example, XP's CMS make use of two branches ``draft`` and ``master`` to support the editorial workflow, with previewing and bulk publishing of changes.
+
+=== Pushing
+
+XP provides advanced features such as diffing to see the changes between two branches.
+Additionally, the API provides features for "pushing" changes from one branch to another.
+The push operation automatically handles dependencies and and missing parent items to ensure the result is consistent.
+
+From the CMS API, the push operation is known as "publish".
+
+XP repos currently don't offer conflict resolution or merging functionality.
+As such, conflict resolution must either be handled by the application itself, or the application must write data in a way that avoids creating conflicts.
+
+=== Branch usage
+
+Consider the 'Oslo' and 'Enonic' nodes from earlier sections:
+
+image::nodes.png[]
+
+There will be two *node-versions* in the repository stored in the blobstore:
+
+image::node-versions.png[]
+
+A node-version is a representation of a node's properties. A node-version has no knowledge of name, parent or other meta-data: just the properties of a node.
+At the same time, the targeted branch (named 'draft' in this example) gets two entries:
+
+image::branch_initial.png[]
+
+The node-versions are now a part of a tree-structure, based on the node's name and parent.
+If we *push* the content of branch 'draft' to the default branch 'master', we end up with something like this:
+
+image::branch_push.png[]
+
+At the moment, there are two branches pointing to the same node-versions. This means that a single node version can exist in several branches with different structures.
+Now, consider that the 'oslo' - node is updated and stored to the 'draft'-branch, resulting in a new node-version with the same id and an updated pointer from the branch:
+
+image::branch_diff.png[]
+
+The two branches now point to different node-versions of the 'oslo' node.
+Again, doing a push-operation from 'draft' to 'master' will result in both nodes pointing to the same node-versions:
+
+image::branch_push_2.png[]

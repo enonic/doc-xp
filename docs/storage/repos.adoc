@@ -1,0 +1,49 @@
+= Repositories
+:toc: right
+:imagesdir: images
+
+Repositories are the fundamental concept that enables you to create and store data in silos.
+You may create any number of repositories within a single instance of Enonic XP.
+
+Each repository must have a name.
+Best practice is to name or prefix the repository according to your application. i.e. a good repository name might be: com.company.myapp
+
+Data stored in a repository will typically belong to a common domain. Fetches and searches are typically executed against
+a single repository, so it makes sense to keep data from different domains separated in different repositories.
+
+image::sub-repos.png[]
+
+=== Standard repositories
+
+Out of the box, Enonic XP ships with two built-in repositories:
+
+* ``system-repo``: The core repository. Here, users and groups, references to other repositories, installed application etc are stored.
+* ``cms-repo`` : Content domain data, this is the data managed in the Content Studio app.
+
+
+=== Managing repositories
+
+An API for managing repositories is available, but we also recommend checking out https://market.enonic.com/vendors/glenn-ricaud/data-toolbox.
+When creating or deleting a repository, underlying storage- and search-indexes will be created. Metadata regarding these repositories are stored in the ``system-repo``.
+
+=== Persistence
+The XP repository essentially deals with data and metadata. Data and selected metadata structures are persisted as files. Other metadata and search indexes are stored and distributed with Elasticsearch, which is embedded
+Files are stored in so-called BlobStores. BlobStores are organized per repository, and by type, which makes it easy to identify which files belong to what repository.
+
+For clustered deployments, Enonic XP currently relies on access to a shared file system.
+
+== Nodes
+
+Each entry in a repository is called a Node.
+
+A node essentially consist of:
+* one or more <<Properties>>
+* An optional <<Index Configuration>>
+* Optional <<Access Control>> definition
+
+When nodes are created in a repository, the following happens:
+
+* A unique identifier is created for the node (unless defined through import)
+* A unique version identifier for the node is created
+* The data is stored in a <<Blobstore>> of type node
+* The node and it's specific version is then added to a <<Branch>>.  This entry keeps track of the tree-structure and other metadata for the specific node-version.

@@ -1,0 +1,164 @@
+= Properties
+:toc: right
+:imagesdir: images
+
+Properties represent placement of data in a node following the key-value pattern.
+
+The key must be a unique name within the node, and the value must have a specific <<ValueType>>, such as ``String``, or ``GeoPoint``.
+The valueType is used to index the property correctly, and provide basic validation.
+
+Examples of properties might be:
+
+
+[source,properties]
+----
+mytext = "a string"
+mynumber = 1
+----
+
+Some characters are illegal in a property key. Here's a list of illegal characters:
+
+* ``_`` is system reserved prefix
+* ``.`` is the path separator.
+* ``[`` and ``]`` are array index indicators.
+
+
+Properties may also be nested, making the key a path.
+Elements in the path are separated by ``.`` (dot).
+
+Here's an example of properties with arrays and nested properties.
+
+[source,properties]
+----
+first-name = "Thomas"
+cities = ["Oslo", "San Francisco"]
+city.location = geoPoint('37.785146,-122.39758')
+person.age = 39
+person.birth-date = localDate("1975-17-10")
+----
+
+In the example above, the property person is of the special <<ValueType>> ``Set``.
+
+
+=== ValueTypes
+
+Every property to be stored in a node must have a value type.
+The value type enables the system to interpret and handle each piece of data specially - applying to both validation and indexing.
+
+Below is a complete list of all supported value-types.
+
+[cols="1,1,2"]
+|===
+|Value Type |Example |Comment
+
+|String
+|``My String``
+|String of characters within UTF charset
+
+|BinaryReference
+|``a-binary-reference``
+|Handle for accessing a binary
+
+|Boolean
+|``true``
+|A value representing ``true`` or ``false``
+
+|Double
+|``11.5``
+|Double-precision 64-bit IEEE 754 floating point.
+
+|GeoPoint
+|``59.9090442,10.7423389``
+|Represents a geographical point, given in latitude and longitude.
+
+|Instant
+|``2015-03-16T10:00:02Z``
+|A single point on the time-line.
+
+|LocalTime
+|``10:00:03``
+|A time representation without timezone
+
+|LocalDateTime
+|``2015-03-16T10:00:02``
+|A date-time representation without timezone.
+
+
+|Long
+|``1234``
+|64-bit two's complement integer.
+
+|Reference
+|``0b7f7720-6ab1-4a37-8edc-731b7e4f439e``
+|Holds a reference to other nodes in the same repository.
+
+|Set
+|
+|Holds properties as it's value - sets are not indexed
+
+|XML
+|<some>xml</some>
+|Any valid XML
+|===
+
+
+== System Properties
+
+To reduce complexity, explicit namespaces are not used.
+Thus, in order to separate system properties from user defined properties, we have reserved ``_`` as a starting character for system defined properties.
+
+Below are the system properties explained.
+
+_childOrder::
+Default ordering of children when doing find children if no other order expression is given
+
+_id::
+Holds the id of the node, typically generated automatically in the form of a UUID.
+
+_indexConfig::
+Specification on how to index properties
+
+_manualOrderValue::
+Numeric order value used for the builtin manual ordering
+
+_name::
+Holds the name of the node. The name must be unique within its scope (all nodes with same parent).
+
+_nodeType::
+Used to create collections for nodes in a repository.
+
+_parentPath::
+Reference to parent node path.
+
+_path::
+The path is resolved from the node name and parent path.
+
+_permissions_read::
+The principals that have read access.
+
+_permissions_create::
+The principals that have create access.
+
+_permissions_delete::
+The principals that have delete access.
+
+_permissions_modify::
+The principals that have modify access.
+
+_permissions_publish::
+The principals that have publish access.
+
+_permissions_readpermissions::
+The principals that have access to read the node permissions.
+
+_permissions_writepermissions::
+The principals that have access to change the node permissions.
+
+_state::
+Used for keeping state of a node in a branch.
+
+_timestamp::
+The last time this node was modified
+
+_versionKey::
+For every modification of a node, a unique versionKey is generated

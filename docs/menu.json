@@ -1,47 +1,54 @@
 {
-  "menuItems": [{
-      "title": "App Engine",
-      "document": "app-engine/index",
-      "menuItems": [{
-          "title": "Runtime",
-          "document": "app-engine/runtime"
-        },
-        {
-          "title": "Asset service",
-          "document": "app-engine/assets"
-        },
-        {
-          "title": "Custom services",
-          "document": "app-engine/services"
-        },
-        {
-          "title": "Task runner",
-          "document": "app-engine/tasks"
-        },
+  "menuItems": [
+    {
+      "title": "Runtime",
+      "document": "runtime/index",
+      "menuItems": [
         {
           "title": "Web Apps",
-          "document": "app-engine/webapp"
+          "document": "runtime/webapp"
         },
         {
           "title": "Sites",
-          "document": "app-engine/sites"
+          "document": "runtime/sites"
         },
         {
-          "title": "Identity providers",
-          "document": "app-engine/idproviders"
+          "title": "ID Providers",
+          "document": "runtime/idproviders"
+        },
+        {
+          "title": "Tasks",
+          "document": "runtime/tasks"
+        },
+        {
+          "title": "Asset service",
+          "document": "runtime/assets"
+        },
+        {
+          "title": "Web services",
+          "document": "runtime/services"
         },
         {
           "title": "Internationalization",
-          "document": "app-engine/i18n"
+          "document": "runtime/i18n"
         }
       ]
     },
     {
       "title": "Storage",
       "document": "storage/index",
-      "menuItems": [{
+      "menuItems": [
+        {
+          "title": "Repositories",
+          "document": "storage/repos"
+        },
+        {
           "title": "Nodes",
           "document": "storage/nodes"
+        },
+        {
+          "title": "Properties",
+          "document": "storage/properties"
         },
         {
           "title": "Branches",
@@ -60,7 +67,8 @@
     {
       "title": "CMS",
       "document": "cms/index",
-      "menuItems": [{
+      "menuItems": [
+        {
           "title": "Content Types",
           "document": "cms/content-types"
         },
@@ -73,8 +81,8 @@
           "document": "cms/components"
         },
         {
-          "title": "Other?",
-          "document": "cms/other"
+          "title": "Image service",
+          "document": "cms/assets"
         }
       ]
     },
@@ -87,9 +95,14 @@
       "document": "project/index"
     },
     {
+      "title": "Deployment",
+      "document": "deployment/index"
+    },
+    {
       "title": "API reference",
       "document": "api/index",
-      "menuItems": [{
+      "menuItems": [
+        {
           "title": "Javascript Framework",
           "document": "api/javascript"
         },

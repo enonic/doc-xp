@@ -5,7 +5,7 @@
 We like to refer to Enonic XP as a "Cloud Operating System".
 Like every OS, Enonic XP supports development and deployment of applications.
 
-The XP App engine is the runtime of XP applications.
+The XP Runtime is the foundation of every XP Application.
 
 Once deployed, XP apps instantly get access to other platform services - such as the <<../nosql/index,NoSQL repository>> and <<../cms/index,Content Management System>>.
 XP apps are not limited to being "Web apps”. They can also run background tasks, extend the Admin Console, power websites, offer web endpoints, and even expose internal API’s to other applications.
@@ -15,7 +15,7 @@ With XP you have the essential tools needed for delivering powerful cloud applic
 NOTE: If you are new to Enonic XP, we recommend visiting the https://developer.enonic.com/start[Getting Started documentation]
 
 == Javascript
-Most XP applications are built with our serverside Javascript Framework.
+Most XP applications use the XP Javascript Framework.
 The framework is based on the CommonJS specification, and is easy to use.
 
 Learn more about the <<javascript#,Javascript Framework>>
