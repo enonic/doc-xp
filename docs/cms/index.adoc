@@ -2,21 +2,37 @@
 :toc: right
 :imagesdir: images
 
-Enonic XP ships with an embedded API for Content services. The API builds on top of the repository, app engine and idproviders.
-It is designed to work for both headless deployments and web content management, or both at the same time.
+Enonic XP offers powerful content management capabilities.
+The functionality is fully optional, and made available through three individual, but tightly coupled services:
 
-When combined with Content Studio, you get a powerful, but easy to use CMS.
+* Content API - Included in the XP core, built on top of the NoSQL Storage
+* Site Engine - Included in the XP core, built on top of the Javascript Framework og web app Engine.
+* Content Studio - Authoring interface built on top of the two first. Content Studio can be installed from Enonic Market.
 
-Below is an overview of the content services:
+== Content
 
-* <<content/index#,TODO>> todo
+=== Content Types
 
-== Shortcuts
+=== X-Data
 
-* <<schemas/index#, Schemas>>
+== Schemas
 
-Author cheatsheet:
-<<path/index#, Link to other page>> +
-<<path/index#test, Link to other page + explicit anchor>> +
-<<path/index#_section, Link to other page + section-based ancho>> +
-[[explicit,An explicit Anchor]]
+=== Input Types
+
+=== Mixins
+
+== Page Components
+
+=== Pages
+
+=== Parts
+
+=== Layouts
+
+=== Text
+
+=== Image
+
+=== Fragments
+
+== Sites

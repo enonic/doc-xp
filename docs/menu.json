@@ -1,38 +1,8 @@
 {
   "menuItems": [
     {
-      "title": "Runtime",
-      "document": "runtime/index",
-      "menuItems": [
-        {
-          "title": "Web Apps",
-          "document": "runtime/webapp"
-        },
-        {
-          "title": "Sites",
-          "document": "runtime/sites"
-        },
-        {
-          "title": "ID Providers",
-          "document": "runtime/idproviders"
-        },
-        {
-          "title": "Tasks",
-          "document": "runtime/tasks"
-        },
-        {
-          "title": "Asset service",
-          "document": "runtime/assets"
-        },
-        {
-          "title": "Web services",
-          "document": "runtime/services"
-        },
-        {
-          "title": "Internationalization",
-          "document": "runtime/i18n"
-        }
-      ]
+      "title": "Applications",
+      "document": "apps/index"
     },
     {
       "title": "Storage",
@@ -66,77 +36,73 @@
     },
     {
       "title": "CMS",
-      "document": "cms/index",
-      "menuItems": [
-        {
-          "title": "Content Types",
-          "document": "cms/content-types"
-        },
-        {
-          "title": "Sites",
-          "document": "cms/sites"
-        },
-        {
-          "title": "Components",
-          "document": "cms/components"
-        },
-        {
-          "title": "Image service",
-          "document": "cms/assets"
-        }
-      ]
+      "document": "cms/index"
     },
     {
       "title": "Admin Console",
       "document": "admin/index"
     },
     {
-      "title": "Projects",
-      "document": "project/index"
-    },
-    {
-      "title": "Deployment",
-      "document": "deployment/index"
-    },
-    {
-      "title": "API reference",
-      "document": "api/index",
+      "title": "Hosting",
+      "document": "hosting/index",
       "menuItems": [
         {
+          "title": "Deployment",
+          "document": "hosting/deployment"
+        }
+      ]
+    },
+    {
+      "title": "Reference",
+      "document": "reference/index",
+      "menuItems": [
+        {
+          "title": "Projects",
+          "document": "project/index"
+        },
+        {
           "title": "Javascript Framework",
-          "document": "api/javascript"
+          "document": "reference/javascript"
+        },
+        {
+          "title": "Web Application",
+          "document": "reference/webapps"
+        },
+        {
+          "title": "Asset service",
+          "document": "reference/assets"
         },
         {
           "title": "Schemas",
-          "document": "api/schemas"
+          "document": "reference/schemas"
         },
         {
           "title": "Input Types",
-          "document": "api/input-types"
+          "document": "reference/input-types"
         },
         {
-          "title": "HTTP Controllers",
-          "document": "api/controllers"
+          "title": "Localization",
+          "document": "reference/i18n"
         },
         {
           "title": "Tasks - lib-task",
-          "document": "api/lib-task"
+          "document": "reference/lib-task"
         },
         {
           "title": "Storage - lib-node",
-          "document": "api/lib-node"
+          "document": "reference/lib-node"
         },
         {
           "title": "Content - lib-content",
-          "document": "api/lib-content"
+          "document": "reference/lib-content"
         },
         {
           "title": "HTTP API - lib-portal",
-          "document": "api/lib-portal"
+          "document": "reference/lib-portal"
         },
         {
           "title": "JavaDoc",
-          "document": "api/javadoc"
+          "document": "reference/javadoc"
         }
       ]
     },

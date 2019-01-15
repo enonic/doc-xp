@@ -1,55 +1,44 @@
-= Enonic XP {release} reference documentation
+= Enonic XP {release} documentation
 include::variables.adoc[]
 :toc: right
 :imagesdir: images
 
 == Open source application platform and CMS
 Enonic XP is designed as an operating system for modern web applications.
-The platform features the essential services required to build and deploy applications, web sites or APIs.
+The platform provides the essential services and tools required to build and deploy applications, web sites or APIs.
 
-In addition to offer powerful CMS capabilities, Enonic XP is an alternative to proprietary PaaS offerings.
-Enonic XP supports Kubernetes, can be run in any cloud or on premises.
+Enonic XP supports Kubernetes, can run in any cloud, or on premises.
 
-If you are new to Enonic XP, we recommend checking out our Getting Started documentation: https://developer.enonic.com/start
+== Getting Started
+Visit our https://developer.enonic.com/start[Getting Started documentation] for the fastest way to get going with Enonic XP.
 
-*Below is an overview of the core platform services:*
+== Introduction
+
+Ask people what XP is, and they might say its a:
+
+* Runtime and framework for my applications or websites
+* Database/search engine that let's me run custom applications inside it
+* CMS
+
+All of the above are true. Here is our version:
+
+Inspired by the principles of traditional Operating Systems, we asked ourself:
+
+  "Can we provide the essential tools to build and maintain highly scalable web applications and sites - with a single dependency, and without lock-in to a proprietary cloud?"
+
+Containers and orchestrations systems like Kubernetes help us manage networking and runtime dependencies,
+but does not provide essential application services like databases, search engines and authentication.
+Maintenance complexity is also on the rise, with micro services and apps written in different languages, and using different tools.
+
+Enonic XP offers an holistic approach to the problems by providing the essential services and tools required:
+
+* A distributed high performance <<storage/index#,NoSQL Storage and search engine>>
+* A flexible application <<runtime/index#, Runtime for server Javascript and/or Java development>>
+* A standardized handling of authentication through <<idproviders/index#,Identity Providers>>
+* An extensible <<admin/index#, Admin Console>> for back-office tasks
+* Integrated statistics and monitoring capabilities
+* <<cms/index#,Content Management System>> built on and into the platform
+* Development kit that lets you run the entire platform locally
+* A https://market.enonic.com[Market place] for apps and developer components.
 
 image::platform-services.png[Platform illustration, 612]
-
-== Read more about the core platform services below
-* <<runtime/index#,Javascript/Java Runtime>> with a powerful <<runtime#framework, Javascript development framework>>
-* <<storage/index#, NoSQL repository>> for storing any kind of data (based on Elasticsearch)
-* <<idproviders/index#, Identity providers>> for pluggable authentication and authorization
-* <<admin/index#, Admin Console>> that can be extended
-* <<cms/index#,Content Management services>> that work hand-in-hand with Content Studio
-
-
-== Release notes
-
-Read the <<release-notes/index#,Release notes for version {version}>>
-
-== Upgrading
-
-== Other shortcuts
-
-* <<cli/index#, CLI>>
-* <<apps/index#, Applications>>
-** <<apps/assets#, Assets>>
-** <<apps/builds#, Assets>>
-** <<apps/builds#, Assets>>
-* <<config/index#, Configuration>>
-* <<idproviders/index#, ID Providers>>
-* <<backup/index#, System backup>>
-* <<release/index#, Release Notes>>
-* <<upgrade/index#, Upgrade Notes>>
-* <<nosql/index#, NoSQL>>
-* <<api/index#, API>>
-
-
-
-
-  Author cheatsheet:
-  <<path/index#, Link to other page>> +
-  <<path/index#test, Link to other page + explicit anchor>> +
-  <<path/index#_section, Link to other page + section-based ancho>> +
-  [[explicit,An explicit Anchor]]
