@@ -1,0 +1,303 @@
+= Development Projects
+:toc: right
+:imagesdir: images
+
+This section provides an overview of how to setup, build and deploy new projects for applications and libraries.
+
+== Project Initialization
+
+Developers are recommended to use the CLI (TODO LINK) to create new projects.
+
+The following command will create a basic project structure for you:
+
+``enonic project create TODO ``
+
+We have create a set of project templates known as https://market.enonic.com/starters[Starter Kits on Enonic Market]. To use one of these, run the following CLI command:
+
+``enonic project... starter TODO``
+
+Actually, you may also use any existing project where you have access to the Git project
+
+== Project structure
+
+The XP project structure is based on https://maven.apache.org/[Maven] conventions.
+
+Below is an extensive application project structure - all items that end with a slash are folders:
+
+[source,files]
+----
+my-app/
+  gradle.properties
+  settings.gradle
+  build.gradle
+  src/
+    test/
+      java/
+    main/
+      java/
+      resources/
+        admin/
+          widgets/
+          tools/
+        application.svg
+        application.xml
+        assets/
+        error/
+        lib/
+        i18n/
+        main.js
+        services/
+        tasks/
+        site/
+          content-types/
+          filters/ TODO!
+          layouts/
+          mixins/
+          pages/
+          parts/
+          x-data/
+          site.xml
+        webapp/
+          webapp.js
+----
+
+Every file and folder has a specific function and purpose as described below:
+
+build.gradle:
+  `Gradle <https://gradle.org/>`_ script for building the application or library. This file describes the actual
+  build process.
+
+src/main/java/:
+  Optional folder where you place any java code that might be included in the project - following traditional Maven style development.
+
+src/main/resources/:
+  This is where all non-java code is placed, and thus where you will typically be working with your XP projects.
+  All folders described below are relative to this folder
+
+admin/tools:
+  This is where you place code for admin tools. Tools are administrative user interfaces (apps) running in their own separate browser tab.
+  Create tools if you need a back-office utility to manage your applications or similar.
+
+admin/widgets:
+  Widgets are essentially user interface components that can be embedded within selected tools.
+  I.e. you can create a widget that extends the Content Studio detail panel.
+
+application.svg:
+  Application icon in SVG format.
+
+application.xml:
+  The XML file contains basic information for the application. Currently a description.
+
+  .. literalinclude:: ./code/application.xml
+     :language: xml
+
+assets/:
+  Public folder for external css, javascript and static images etc. etc.
+
+lib/:
+  This is the last place the global ``require`` JavaScript-function looks,
+  so it is a good place to put default JavaScript files here.
+
+main.js:
+  This file may be thought of as an app initializer.  It is executed every time the app is started.  (see :ref:`main_initializer`)
+
+services/:
+  Services are a special type of http controller that will be mounted on a fixed url pattern that looks like this: _/service/<myapp>/<myservice>.
+  You may use services like any other JavaScript controller in the system.
+
+site/site.xml:
+  The ``site.xml`` file contains basic information for a site created with the application.
+  Settings for the application can be defined in the ``config`` element
+  and the values for these settings can be updated using the Content Studio tool.
+
+  .. literalinclude:: ../site/code/site.xml
+     :language: xml
+
+site/content-types/:
+  Content schemas are placed here. Used to create structured content (see :ref:`content_types`).
+
+site/error/:
+  Create custom http error pages by placing an error controller in this directory (see :ref:`errors`).
+
+site/filters/:
+  This is where generic http response filters are placed. Filters can be used for post processing any given request - also across applications added to a site.
+  A common use case is adding script tags to pages - but possibilities are virtually endless.
+
+site/layouts/:
+  Layout controllers should be placed here. Layouts are similar to parts, but in addition have one or more regions.
+  Regions enable placement of other components inside the layout. (see :ref:`layout`).
+
+site/mixins/:
+  Mixin schema-types are placed here. A mixin can be used to add common fields to multiple content-types or other schemas (see :ref:`mixins`).
+
+site/pages/:
+  Page controllers are placed here. They will be used to render pages and page templates (see :ref:`page`).
+
+site/parts/:
+  Part controllers should be placed here. Parts are dynamically configurable components that can
+  be placed on pages (see :ref:`part`).
+
+site/x-data/:
+  Contains eXtra data schemas. TODO + link
+
+i18n/:
+  Contains application localization files (i18n is short for "internationalization").
+  Files placed in this folder must follow Java's standard property file format, one file for each language.
+  Here is an example: https://docs.oracle.com/javase/tutorial/i18n/resbundle/propfile.html
+
+tasks/:
+  Contains tasks to be executed asynchronously (see :ref:`tasks`).
+
+gradle.properties:
+  Your project should contain a ``gradle.properties`` file.  Set ``xpVersion`` to the version of Enonic XP you are working with, and look over the other settings to
+  make sure they are correct.
+
+build.gradle:
+
+The ``build.gradle`` file defines all the dependencies to other libraries.
+
+There are three standard scopes (keywords) used in the dependency list
+
+* Compile (default gradle scope, compiles library and adds it to class path - standard for pure Java libraries)
+* Include (XP custom scope that merges the /src/main/resources folder in the library with your project - any code in your project overwrites the library files)
+* Webjar (Extracts the content of the specified Webjar - http://www.webjars.org/ - placing it into the assets folder, using the version number as root folder)
+
+
+
+
+This library can now be included in any app where you might want redirect functionality, or in other libs that can build more advanced
+functions based on this simple example.
+
+== Building projects
+
+By default, XP projects use Gradle as the main build tool. This is a highly flexible Java-based utility that builds on the popular Maven project tools and code repository structures.
+Enonic provides a Gradle plugin that greatly simplifies the build process. If you used the starter-vanilla project to initialize your project, you will have all the basic tools you need to get going.
+
+If you have not installed Gradle, the fastest way to get going is to execute the gradle wrapper script.
+
+Move into your project root folder and execute the following command:
+
+OSX/Linux:
+
+``./gradlew build``
+
+Windows:
+
+``gradlew.bat build``
+
+
+The gradle wrapper will download all necessary files to run gradle and produce the project artifacts. These will typically be placed in the projects build/libs/ folder.
+
+
+
+=== gradle deploy
+
+To have Gradle automatically deploy new applications to your XP installation, you have to specify an environment variable that tells Gradle where to place the artifact (application file).
+
+OSX/Linux:
+
+.. code-block:: none
+
+   export XP_HOME=/path/to/xp-installation/home
+
+Windows:
+
+.. code-block:: none
+
+  set XP_HOME=c:\path\to\xp-installation\home
+
+
+With $XP_HOME set, run the following command to build and deploy the file
+
+OSX/Linux:
+
+.. code-block:: none
+
+   ./gradlew deploy
+
+Windows:
+
+.. code-block:: none
+
+   gradlew.bat deploy
+
+
+== Project artifacts
+
+TOOD: What is the output files, and what must they contain to be valid XP apps (including MANIFEST etc)
+
+.. _gradle_deploy_app:
+
+== Installing apps
+
+There are several ways to install applications
+
+* Uploading from the "Applications" admin tool
+* Uploading via the system API
+* Copying the application JAR file to the ``$XP_HOME/deploy`` folder
+
+OSX/Linux command line to copy the artifact to the deploy folder:
+
+``cp build/libs/[artifact].jar $XP_HOME/deploy/``
+
+For your convenience - we have simplified this process by adding a ``deploy`` task to your build.
+Instead of manually copying to the deploy folder, you can simply execute ``gradle deploy``:
+
+``./gradlew deploy``
+
+For the deploy command to work, you have to set the ``XP_HOME`` environment variable
+(in your shell) to your actual Enonic XP home directory.
+
+Run the following command to set the XP_HOME variable
+
+OSX/Linux:
+
+``export XP_HOME=/path/to/xp-installation/home``
+
+Windows:
+
+``set XP_HOME=c:\path\to\xp-installation\home``
+
+
+=== Development Mode
+
+TODO
+
+To continuously build and deploy your application on changes, you can use
+`Gradle continuous mode <https://docs.gradle.org/current/userguide/continuous_build.html>`_.
+This will watch for changes and run the specified task when something changes.
+To use this with the ``deploy`` task, you can run the following command:
+
+``./gradlew -t deploy``
+
+This will deploy and reload the application on the server when something changes in your project.
+The continuous deployment mode is most useful when coding Java, or other changes that require a full compile and re-deploy.
+
+For the instant updates of JavaScript code without re-deploying, check out :ref:`gradle_dev_mode`.
+
+===  Debug Mode
+
+TODO
+
+== Libraries
+
+Libraries are structurally like applications, with the difference that a library is not made be installed and run on it's own.
+However, a library can be included in an application (or many) to provide functionality to that app.
+
+The process of setting up and building libraries is similar to applications.
+To build a library we recommend using the library starter (TODO).
+
+=== Artifacts
+
+Once a library has been built, the output will be a .jar file, just like an application.
+However, libraries will have small differences in application metadata TODO MANIFEST etc
+
+
+=== Usage
+
+To add a library in an applications, update the applications ``build.gradle``file
+
+
+* compile (describe merge)
+* include (describe merge)
+* webjar (describe merge)

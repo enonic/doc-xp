@@ -1,0 +1,43 @@
+= Assets
+:toc: right
+
+== Asset Service
+
+Applications commonly make use of static files that will be delivered to the client (typically web browsers). Examples
+are icons, css files, javascript files etc.
+
+Enonic XP provides a standard and optimized approach to serving assets from an application
+
+Files placed in the ``/src/main/resources/assets/`` folder are all available for to be served publicly by the asset service.
+For instance, if a file is placed in ``/src/main/resources/assets/path/to/asset.ext``
+- the same file will always be available on the contextual url: ``mydomain.com/_/asset/<appname>/path/to/myasset.ext``.
+
+To make things more awesome, the asset service is also able to serve the asset using a so-called "perfect cache" approach.
+This is done by using a URL that changes when the asset is changed. When the asset service detects this url, it will automatically add https headers that instruct network and clients (browsers) to cache the assets infinitely.
+This effectively speeds up the user experience and also offloads the XP back-end from serving assets.
+
+A perfect cache url might look something like this: ``mydomain.com/_/asset/<appname>:<uniquevalue>/path/to/myasset.ext``
+
+== assetUrl()
+
+To generate a perfect cache url for an asset, simply use the assetUrl() portal function
+
+
+[source,javascript]
+  assetUrl({path [,application] [,type] [,params]} <!--1--> <!--2--> <!--3--> <!--4-->
+
+<1> *string path* path to the asset i.e. ``path/to/myasset.ext``.
+<2> string application: Optionally specify application where the asset exists. Default is current application.
+<3> string type: Optionally specify URL type. Either server (server-relative URL) or absolute. Default is ``server``.
+<4> object params: Optionally specify name/value parameters to append to the url.
+
+
+TODO SAMPLE?
+
+API
+---
+
+TODO
+The detailed API documentation for be `found here`_.
+
+.. _found here: http://repo.enonic.com/public/com/enonic/xp/docs/${release}/docs-${release}-libdoc.zip!/module-portal.html#.assetUrl .

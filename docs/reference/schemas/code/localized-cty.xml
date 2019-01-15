@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<content-type>
+  <display-name i18n="person.display-name">Person</display-name>
+  <super-type>base:structured</super-type>
+  <form>
+    <input type="TextLine" name="name">
+      <label i18n="person.name.label">Name</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="age">
+      <label i18n="person.age.label">Age</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="imageSelector" name="photo">
+      <label i18n="person.photo.label">Photo</label>
+      <help-text i18n="person.photo.help-text">Passport photo</help-text>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </form>
+</content-type>

@@ -1,0 +1,73 @@
+= Deployment strategies
+:toc: right
+:imagesdir: images
+
+There are many possibilities for rolling out and scaling Enonic XP.
+Regardless of how you start, you can always switch strategy at a later point.
+
+== Operating Systems
+
+Enonic provides distributions of XP for the most popular operating systems: Linux, Mac and Windows.
+Additionally, Enonic offers Docker images, based on the Linux distribution.
+
+All distributions may be found at https://enonic.com/downloads
+
+== Single instance
+
+The minimal deployment of XP is similar to the software development (SDK) setup.
+It only requires you to run a single server XP instance.
+The following are considered minimum requirements for production use.
+
+* Compute power (2vCPU or more)
+* Memory (2GB or more)
+* Disk (10GB or more)
+
+Additionally, it is recommended to use a network proxy for controlling traffic and access logging.
+A basic proxy can be delivered with for instance Nginx or Apache.
+
+== Minimal scalable cluster
+
+A minimal cluster can be configured by deploying two nodes.
+One for back-end (data), and running front-end (applications).
+The benefit of this deployment is that it can be configured to scale by adding (or autoscaling) more front-end nodes when traffic picks up.
+The data node will normally be able to handle many front-end nodes.
+
+The downside of this setup is the lack of redundancy.
+
+== Minimal HA cluster
+
+A minimal high availability setup requires at least three nodes.
+All nodes will be acting as full nodes with both front-end, back-end and master node functionality.
+The benefit of this setup is redundancy, where the cluster can handle failure on a single node.
+The reason why you need three nodes is to avoid the so-called "split brain scenario",
+which is related to the distributed nature of the XP storage.
+
+The downside of this strategy is that this is not ideal for scaling up and down,
+as data needs to be replicated to each node.
+
+== Minimal scalable HA cluster
+
+For high availability and high performance deployments we recommend at least need five nodes.
+Essentially, this is a combination of the setups above, with three back-end nodes, and one front-end node.
+This lets you easily scale the front end node, as it does not contain data. Optionally add a
+
+The weakness of this setup is that the so-called master nodes are running on the same nodes that serve other purposes.
+Master nodes keep control of the cluster, and if they become unresponsive may cause problems for the entire cluster.
+Also, all five nodes must be of the minimal capacity described above.
+
+As such, a better approach is setting up an Enterprise cluster instead.
+
+== Enterprise cluster
+
+This represents the ideal deployment of Enonic XP for high availability, high performance and optimal stability.
+A minimal deployment will require at least 7 nodes,
+where three nodes are dedicated master nodes, two are back-end nodes, and two front end nodes.
+Additionally, we recommend adding at least one dedicated node for the admin console, to isolate them from the other nodes as well.
+This brings the cluster op to a total of 8 nodes, where three are dedicated to being master nodes.
+
+Another benefit of this architecture is that the dedicated master nodes require only minimal capacity:
+* 0,5vCPU
+* 0,5GB Memory
+* 1GB storage
+
+NOTE: You may deploy dedicated nodes to run specific applications or sites, micro service style.

@@ -1,0 +1,106 @@
+= Node Query Language
+:toc: right
+:imagesdir: images
+
+The Node Query Language, or NoQL for short, is inspired by traditional SQL.
+As with other NoSQL solutions, it has special capabilities and limitations.
+
+Selectors, Joins and Update statements are _not_ supported, but NoQL adds support for <<Relevance Sorting>> and <<Aggregations>>.
+
+As selectors are not supported, the result of a query through the Node API currently only returns the identifiers for the matching nodes, with optional aggregation results.
+Developers must then get the desired nodes through a separate API request.
+
+A NoQL statement is essentially composed from three parts: Query, Sorting and Aggregations.
+
+== Queries
+Queries represent an efficient way to accessing data stored in XP. Developers may also access data by Node IDs, path or child items.
+A query normally targets a single repository, but may also query multiple repositories at once.
+
+Queries are built from traditional expressions.
+For instance, the following query would return all nodes in the repo, where the property ``weight`` is greater than 10.
+
+  weight > 10
+
+Expressions may be combined by using traditional logical operators such as AND, and OR.
+For instance, we could limit the result further:
+
+  weight > 10 AND fulltext('article', 'should have these words', 'AND')
+
+In this case we are adding a so-called dynamic expression to the query.
+The fulltext() expression performs a "fulltext" search on the property ``article`` for the specified string.
+
+For both the integer comparison and fulltext expression to work, the weight, and article properties need to be indexed as a number and as text respectively.
+Read more about this below.
+
+=== Index Types
+Each property has a specific Value Types which again has one or more Indexing options.
+In ``weight > 10``, the comparison value is an integer. The query engine will then automatically look for an index that matches this.
+If no such index exists, no matches will be returned.
+
+The same applies to fulltext. If the property is not indexed as Fulltext, the search will not work.
+It is also important to notice that a single property may have multiple indicies. Consider the date Januar 1st 2020.
+When stored, it can be stored both as a date (number representing seconds from 1.1.1970), and as a string i.e. "2020-01-01".
+
+Value Types are automatically indexed according to their type,
+but in some cases developers may want to tune indexing more specifically.
+Read more about <<properties#Indexing, Indexing>> of properties.
+
+== Sorting
+As we know from Google, the best results are returned first.
+As traditional SQL databases, XP lets you sort the result by property in ascending or descending order.
+Additionally, for any query containing a fulltext expression, results may be sorted by ranking.
+Ranking is done through an internal algorithm that scores each individual item based on how it matches with your search.
+
+A basic sort statement is simply defined by property and sorting direction i.e.:
+
+  myproperty DESC
+
+
+== Aggregations
+With Aggregations, developers may extract statistical results from your data blazingly fast.
+Aggregations can be used for anything from data visualization to creating navigational UI's.
+
+A common aggregation might be to determine the number of occurences of a "term" within a specific property.
+For instance, if you have 500 blog posts, that store a tag property where each tag is stored as a separate array entry.
+We might then perform a term aggregation to get the top 10 terms, and how many times they have occured.
+
+We could define this aggregation as follows:
+
+  {
+    "aggregations": {
+      "top-tags": {
+        "terms": {
+          "field": "tag",
+          "order": "_count desc",
+          "size": 10
+        }
+      }
+    }
+  }
+
+And the result might look like this:
+
+{
+  "aggregations": {
+    "top-tags": {
+      "buckets": [
+        {
+          "docCount": 132,
+          "key": "a tag"
+        },
+        {
+          "docCount": 52,
+          "key": "another tag"
+        },
+        {
+          "docCount": 43,
+          "key": "tag along"
+        }
+      ]
+    }
+  }
+}
+
+This may again be used to create a visualization, for instance as a Tag Cloud.
+
+XP supports several different kinds of Aggregations such as Terms, Range, dateRange, dateHistogram, stats and geoDistance.
