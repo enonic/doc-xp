@@ -40,7 +40,7 @@ person.birth-date = localDate("1975-17-10")
 In the example above, the property person is of the special <<ValueType>> ``Set``.
 
 
-=== ValueTypes
+== ValueTypes
 
 Every property to be stored in a node must have a value type.
 The value type enables the system to interpret and handle each piece of data specially - applying to both validation and indexing.

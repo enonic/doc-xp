@@ -1,0 +1,21 @@
+= Enonic XP 7.0 platform upgrade
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+This section describes the steps required to upgrade from Enonic XP 6.x to Enonic XP 7.0
+
+== Requirements
+
+Before you begin the upgrade process, ensure the following requirements are satisfied
+
+* Minimum Enonic XP 6.15.x (if you are running an older version, upgrade to 6.15.x first)
+* QA environment to verify upgrade (recommended)
+* Parallel production environment (only required for zero downtime upgrades)
+* Disk space to facilitate a complete dump of existing data
+* Verify that all (if any) 3rd party applications are available for 7.0
+* Access to, or ability to upgrade all custom developed applications, as described in <<upgrade-apps#,Upgrading Applications>>
+
+
+== TODO

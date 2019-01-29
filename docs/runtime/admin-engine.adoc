@@ -1,0 +1,69 @@
+= Admin Engine
+:toc: right
+:imagesdir: images
+
+The admin engine is a core part of the XP runtime.
+It enables developers to extend the functionality of the XP Admin Console with custom admin apps.
+
+== Introduction
+
+Enonic XP provides a pluggable administrative interface, known as the <<../admin/index#, Admin Console>>.
+The Admin console by default available on ``//<server>:<port>/admin/`` (i.e. "localhost:8080/admin/").
+
+The admin engine handles all requests to admin apps.
+Like the <<web-engine#,Web Engine>> and <<site-engine#,Site Engine>>,
+the admin engine is based directly on the <<../framework/index#, XP Framework>>.
+
+== Admin tools
+
+LOTS OF TODO
+By default, XP ships with two standard admin tools, as described in the <<../admin/index#, Admin Console documentation>>
+
+Each tools has its own icon in the launcher panel.
+Admin tools are launched in their own separate browser tabs, running independently of any other admin components.
+
+Compared to a basic webapp, the following
+
+* A single XP application may contain multiple admin tools
+* Access to an admin app typically requires authentication, and particular role memberships
+* Admin tools are all served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/tool/<tool-name>``
+
+To turn an application into a webapp, simply place a file called ``/src/main/resources/webapp/webapp.js`` into your project.
+
+When the application is deployed, the controller will be accessible from
+
+  ``//<server>:<port>/webapp/<app-name>/`` (i.e. "localhost:8080/webapp/my.webapp/").
+
+``webapp.js`` now acts as a <<framework#,Http controller>> and may expose a function for each HTTP method that should be handled: i.e.
+GET, POST, etc.
+
+Below is an example webapp controller.
+
+[source,javascript]
+----
+include::code/webapp.js[]
+----
+
+== Widgets
+
+TODO
+
+== Rendering pipeline
+
+TODO
+
+This section describes the full pipeline involved in processing an admin http request.
+
+=== Vhost filter
+
+=== Custom Java Filters
+
+=== Web handler
+
+=== Webapp controller
+
+=== ID provider
+
+=== Error handler
+
+=== Custom Java Filters

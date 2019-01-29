@@ -1,44 +1,27 @@
-= Enonic XP {release} documentation
+= Enonic XP {release} core documentation
 include::variables.adoc[]
 :toc: right
 :imagesdir: images
 
 == Open source application platform and CMS
-Enonic XP is designed as an operating system for modern web applications.
-The platform provides the essential services and tools required to build and deploy applications, web sites or APIs.
 
-Enonic XP supports Kubernetes, can run in any cloud, or on premises.
+Inspired by the principles of traditional Operating Systems,
+Enonic XP offers essential services and tools required to build and maintain highly scalable web apps and sites:
 
-== Getting Started
-Visit our https://developer.enonic.com/start[Getting Started documentation] for the fastest way to get going with Enonic XP.
+* Distributed high performance <<storage/index#,NoSQL Storage and search engine>>
+* Flexible application <<runtime/index#, Runtime for server Javascript and/or Java development>>
+* Standard auth handling through <<idproviders/index#,Identity Providers>>
+* Extensible <<admin/index#, Admin Console>> for back-office users
+* Deploy to <<hosting/index#,any infrastructure>>
+* Hybrid <<cms/index#,Content Management System>> included
+* Software Development Kit (SDK) that runs locally
+* https://market.enonic.com[Market place] for apps and developer components.
 
-== Introduction
+image::platform-components.png[Platform illustration]
 
-Ask people what XP is, and they might say its a:
+NOTE: *New to Enonic XP?* Check out our https://developer.enonic.com/start[Getting Started guide] to build your first XP application in 5 minutes.
 
-* Runtime and framework for my applications or websites
-* Database/search engine that let's me run custom applications inside it
-* CMS
 
-All of the above are true. Here is our version:
+== Upgrading
 
-Inspired by the principles of traditional Operating Systems, we asked ourself:
-
-  "Can we provide the essential tools to build and maintain highly scalable web applications and sites - with a single dependency, and without lock-in to a proprietary cloud?"
-
-Containers and orchestrations systems like Kubernetes help us manage networking and runtime dependencies,
-but does not provide essential application services like databases, search engines and authentication.
-Maintenance complexity is also on the rise, with micro services and apps written in different languages, and using different tools.
-
-Enonic XP offers an holistic approach to the problems by providing the essential services and tools required:
-
-* A distributed high performance <<storage/index#,NoSQL Storage and search engine>>
-* A flexible application <<runtime/index#, Runtime for server Javascript and/or Java development>>
-* A standardized handling of authentication through <<idproviders/index#,Identity Providers>>
-* An extensible <<admin/index#, Admin Console>> for back-office tasks
-* Integrated statistics and monitoring capabilities
-* <<cms/index#,Content Management System>> built on and into the platform
-* Development kit that lets you run the entire platform locally
-* A https://market.enonic.com[Market place] for apps and developer components.
-
-image::platform-services.png[Platform illustration, 612]
+TODO

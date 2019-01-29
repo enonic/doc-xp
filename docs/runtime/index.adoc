@@ -1,0 +1,60 @@
+= XP Runtime
+:toc: right
+:imagesdir: images
+
+All applications built on XP are powered by the XP Runtime
+
+== Foundation
+
+The XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components.
+However, thanks to the the embedded JavaScript framework, XP apps are typically written in JavaScript.
+The unique twist is that Java libraries can easily be accessed and used by the JavaScript code.
+
+== Micro Service architecture
+
+Micro service developers typically combine a runtime (JavaVM, NodeJS etc) with application code
+Once started, the micro service will occupy a set of CPU, memory and disk resources through its lifetime.
+
+The XP runtime and apps can be deployed like a traditional micro service, but adds several interesting capabilities:
+
+* Multiple applications can run within a single instance.
+* Start, stop and re-configure applications without restarting the instance
+* Dynamically load applications from a central repository
+
+An example of when these features are useful, is the CMS functionality of XP.
+For sites, multiple applications may be involved in the processing of a single request.
+The applications may be dynamically added to or removed from a site - without any downtime.
+
+The biggest difference between traditional micro services lies in the fact that the XP runtime depends on the XP back-end.
+As such, XP runtimes (also known as XP front-end) always connects to the back-end services when booting up.
+
+This way, both application developers and the runtime itself can rely on access to platform services such as <<../storage/index#, Storage>> and <<../idproviders/index#, ID providers>>.
+
+== Serverless
+
+TODO:
+Similar to serverless architectures, XP application themselves will hardly consume any resources when idle.
+
+This also makes XP a cost effective solution for running batch jobs (called <<Tasks>>)
+in addition to the traditional request based processing.
+
+
+== SDK
+
+Enonic XP ships with a Software Development Kit.
+The SDK is essentially the entire platform with both back-end and front-end offered as a single executable.
+
+TODO
+
+
+
+== Ingredients
+
+The following components are part of the XP runtime:
+
+* Javascript Framework - Based on Nashorn
+* Servlet engine - based on Jetty
+* OSGi Dynamic module system - used to isolate application
+* Cluster - Automatically join XP cluster and backend if available
+
+== Back-end

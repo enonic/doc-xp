@@ -13,37 +13,25 @@ a single repository, so it makes sense to keep data from different domains separ
 
 image::sub-repos.png[]
 
-=== Standard repositories
+== System repository
 
-Out of the box, Enonic XP ships with two built-in repositories:
+Out of the box, Enonic XP ships with a system repository.
+The system repository is used for the following purposes:
 
-* ``system-repo``: The core repository. Here, users and groups, references to other repositories, installed application etc are stored.
-* ``cms-repo`` : Content domain data, this is the data managed in the Content Studio app.
+* Id-provider specific data, such as users, groups and roles.
+* Repositories metadata regarding other repos created within the instance
+* Applications that have been installed through the API
 
-
-=== Managing repositories
+== Managing repositories
 
 An API for managing repositories is available, but we also recommend checking out https://market.enonic.com/vendors/glenn-ricaud/data-toolbox.
-When creating or deleting a repository, underlying storage- and search-indexes will be created. Metadata regarding these repositories are stored in the ``system-repo``.
+When creating or deleting a repository, repository metadata, as well as underlying storage- and search-indexes will be configured.
 
 === Persistence
-The XP repository essentially deals with data and metadata. Data and selected metadata structures are persisted as files. Other metadata and search indexes are stored and distributed with Elasticsearch, which is embedded
-Files are stored in so-called BlobStores. BlobStores are organized per repository, and by type, which makes it easy to identify which files belong to what repository.
+The XP repository essentially deals with data and its metadata.
+
+Data and selected metadata such as permissions and index configurations are persisted as files.
+Metadata regarding hierarchical structures and search indexes are stored and distributed with Elasticsearch, which is embedded in XP.
+The files are stored in so-called BlobStores. BlobStores are organized per repository, and by type, which makes it easy to identify which files belong to what repository.
 
 For clustered deployments, Enonic XP currently relies on access to a shared file system.
-
-== Nodes
-
-Each entry in a repository is called a Node.
-
-A node essentially consist of:
-* one or more <<Properties>>
-* An optional <<Index Configuration>>
-* Optional <<Access Control>> definition
-
-When nodes are created in a repository, the following happens:
-
-* A unique identifier is created for the node (unless defined through import)
-* A unique version identifier for the node is created
-* The data is stored in a <<Blobstore>> of type node
-* The node and it's specific version is then added to a <<Branch>>.  This entry keeps track of the tree-structure and other metadata for the specific node-version.

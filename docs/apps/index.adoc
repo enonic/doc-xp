@@ -2,58 +2,16 @@
 :toc: right
 :imagesdir: images
 
-Like a traditional Operating System, Enonic XP supports development and deployment of applications.
+Similar to an Operating System, Enonic XP supports development and deployment of applications.
+
+== Introduction
 
 == Enonic Market
 
 TODO
 
-== Projects
 
-To create an application you need to setup a project.
-Projects contain all code and configuration required to build the application.
-
-By default, XP projects use the Gradle build system, and with it the Maven package system.
-It is also popular to make use of JavaScript specific build systems such as Webpack.
-
-The output of such a project is an XP executable.
-
-== JavaScript runtime
-
-The XP Runtime is the foundation of every XP Application.
-
-Traditional micro services combine a runtime (JavaVM, NodeJS etc) with application code.
-Once started, each micro service will occupy a set of CPU, memory and disk resources through its lifetime.
-
-The XP runtime however enables you to run multiple applications within a single instance.
-
-This lets you better utilize the available capacity, as well as modularizing your code.
-An example of this is the CMS functionality of XP, where multiple applications may be involved in the processing of a single request.
-
-XP applications are primarily written in Javascript.
-Similar to serverless architectures, most XP application will hardly consume any resources when idle.
-
-This also makes XP a cost effective solution for running batch jobs (called <<Tasks>>)
-in addition to the traditional request based processing.
-
-Serverside Javascript is made possible through our CommonJS inspired <<javascript#,Javascript Framework>> .
-
-== Java runtime
-XP applications can also be created with Java, or even a combination of Java and JavaScript.
-This is due to the fact that XP runs on top of the Java Virtual Machine (JVM),
-and utilizes the OSGi framework for isolating applications at runtime.
-
-Developers with special requirements may take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same instance.
-
-Learn more about <<java#,using Java in XP apps>>
-
-== Life Cycle
-
-XP applications may be installed, started, stopped and uninstalled.
-This is referred to as the life cycle of the application.
-During the various steps, the applications themself may execute code.
-
-=== Installation
+== Installation
 
 There are essentially two ways you can install applications on Enonic XP:
 
@@ -65,36 +23,71 @@ but it can also be applied for specialized deployments scenarios.
 
 Applications installed through the API will be available for all nodes in the XP cluster.
 
-=== Starting
+== Life Cycle
 
-Once installed, applications are automatically started on all nodes.
+Once installed, XP applications may be started, stopped and uninstalled.
+This is referred to as the life cycle of the application.
+During the various steps, the applications themself may execute code.
+
+Starting:: Once installed, applications are automatically started on all nodes.
 During the startup, if it exists, the application's main.js script will be executed.
+At a lower level, Java developers may utilize so-called OSGi lifecycle events for similar purposes.
 
-Java developers may utilize so-called OSGi lifecycle events, as this is the foundation of XP.
-
-=== Stopping
-
-When applications are started, an event is triggered.
-Applications may act on this event before they are shut down.
+Stopping:: Before an application is stopped, a special event is thrown.
+Applications may also react to these events before they are shut down.
 
 == Configuration
 
 Applications can be configured with deployment specific setting per node in the cluster.
-Applications will get this configuration injected when started.
+The configuration will automatically be injected when the applications starts.
 
-Configuration files may be updated, and trigger a restart of the application, without restarting the server nodes.
+Configuration files may be updated, and trigger a restart of the application, without restarting the XP nodes.
+This means that for instance sessions, or open websocket connections will not be recycled, even if an application is restarted.
 
 TODO: Link to info about configuration management
 
-== Web app
+
+== Development
+
+To create an application you need to setup a project.
+Projects contain all code and configuration required to build the application.
+
+For more details, check out the <<../reference/projects/index#,project reference documentation>>.
+
+=== Languages
+
+XP apps are powered by the <<../runtime/index#,XP runtime>>.
+
+Applications are primarily created with JavaScript.
+Serverside Javascript is made possible through our CommonJS based <<javascript#,Javascript Framework>>
+
+XP applications can also make use of Java.
+
+Developers with special requirements may take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same instance.
+Learn more about <<java#,using Java in XP apps>>
+
+
+=== Build system
+
+By default, XP projects use the https://gradle.org[Gradle build system], and with it the Maven package system.
+A range of XP specific libraries are also available on <<Enonic Market>>, in addition to the <<../api/index#,standard libraries>>, included in the release of Enonic XP.
+Front-end developers often make use of JavaScript specific build systems such as Webpack.
+
+
+
+
+== Use cases
+
+=== Web apps
 
 The JavaScript framework offers an easy way to build and is to serve web applications.
-An XP app may contain a single web app.
-The web app is created simply by adding a webapp.js controller file to your project.
+An XP app may only contain a single web app.
 
-Read more about <<../reference/webapp#,Web apps>>
+Web apps are created by adding a <<../reference/controllers/index#,controller file>> to your project.
 
-== Content app
+Read more about <<../reference/web-engine/index#,web apps and the web engine>>
+
+=== Sites
 
 A unique feature of XP is the embedded Content Management capabilities.
 
@@ -109,33 +102,16 @@ The CMS offering essentially consist of three parts:
 
 Learn more about the <<../cms/index#,Content Management System>>
 
-== ID provider
+=== ID providers
 
-An XP app may also act as a so-called ID provider.
-Once installed and configured, an ID provider will act as a part of other applications by providing authentication and authorization when needed.
+XP apps may also act as a so-called ID provider.
+Once installed and configured, an ID provider can join the request pipeline of other sites and applications,
+dynamically providing authentication and authorization when needed.
 There are multiple standard ID providers available on Enonic Market.
-
-To create an ID provider you must add an idprovider.js JavaScript controller to your project.
 
 Learn more about the <<../idprovider/index#,ID providers>>
 
-== Assets
-
-Web application and sites commonly require serving of assets such as javascript files, css and static images.
-The XP App engine provides an out-of-the-box solution to this known as the asset service.
-
-Learn more about <<assets#,serving Assets>>
-
-== Http Services
-
-When building web apps, web sites or even extending the XP admin,
-exposing and consuming contextual endpoints without dealing with hardcoded url mappings is useful.
-Enonic XP offers a practical approach to this called HTTP Services.
-Services are made by adding one or more JavaScript controllers to your project.
-
-Learn more about <<../reference/services#,Http Services>>
-
-== Tasks
+=== Tasks
 
 The XP runtime also supports executing scripts running in the background.
 Unlike sites and web-applications, tasks are not exposed as an end-point.
@@ -144,7 +120,7 @@ Tasks are made by adding one or more JavaScript controllers to your project.
 
 Read more about <<../reference/tasks#,Tasks>>
 
-== Admin apps
+=== Admin apps
 
 XP apps can also contribute to Enonic XP's admin console.
 The platform comes with a standardized approach to extend the admin console with custom interfaces, called admin apps.
@@ -152,16 +128,21 @@ Admin apps are created by adding one or more JavaScript controllers to your proj
 
 Read more about <<../reference/admin-apps#,Admin apps>>
 
-== Admin widgets
 
-It is also possible to extend the admin console with so-called widgets.
-Widgets are small webapps that are designed be "included" in admin apps.
-The only current use case is to extend Content Studio with so called "context panels".
-However more uses cases will be revealed in upcoming releases of Enonic XP.
+== Assets
 
-Like the rest, admin widgets are created by adding one or more JavaScript controllers to your project.
+Web application and sites commonly require serving of assets such as javascript files, css and static images.
+The XP App engine provides an out-of-the-box solution to this known as the <<../reference/assets#,Asset service>>
 
-Read more about <<../reference/admin-widgets#,Admin widgets>>
+== Services
+
+When building web apps, web sites or even extending the XP admin,
+exposing and consuming contextual endpoints without dealing with hardcoded url mappings is useful.
+Enonic XP offers a practical approach to this called HTTP Services.
+Services are made by adding one or more JavaScript controllers to your project.
+
+Learn more about <<../reference/services#,Http Services>>
+
 
 == Localization
 

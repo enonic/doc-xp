@@ -5,6 +5,28 @@
       "document": "apps/index"
     },
     {
+      "title": "Runtime",
+      "document": "runtime/index",
+      "menuItems": [
+        {
+          "title": "Web engine",
+          "document": "runtime/web-engine"
+        },
+        {
+          "title": "Site engine",
+          "document": "runtime/site-engine"
+        },
+        {
+          "title": "Task engine",
+          "document": "runtime/task-engine"
+        },
+        {
+          "title": "Servlet engine",
+          "document": "runtime/servlet-engine"
+        }
+      ]
+    },
+    {
       "title": "Storage",
       "document": "storage/index",
       "menuItems": [
@@ -26,13 +48,17 @@
         },
         {
           "title": "Query Language",
-          "document": "storage/eql"
+          "document": "storage/query"
+        },
+        {
+          "title": "Editors",
+          "document": "storage/editors"
         }
       ]
     },
     {
-      "title": "Identity",
-      "document": "identity/index"
+      "title": "Identity providers",
+      "document": "idproviders/index"
     },
     {
       "title": "CMS",
@@ -43,17 +69,15 @@
       "document": "admin/index"
     },
     {
-      "title": "Hosting",
-      "document": "hosting/index",
-      "menuItems": [
-        {
-          "title": "Deployment",
-          "document": "hosting/deployment"
-        }
-      ]
+      "title": "Development",
+      "document": "dev/index",
     },
     {
-      "title": "Reference",
+      "title": "Hosting",
+      "document": "hosting/index",
+    },
+    {
+      "title": "Developer reference",
       "document": "reference/index",
       "menuItems": [
         {
@@ -61,58 +85,74 @@
           "document": "reference/projects/index"
         },
         {
-          "title": "Javascript Framework",
-          "document": "reference/javascript"
+          "title": "NoQL syntax",
+          "document": "reference/noql"
         },
         {
-          "title": "Web Application",
-          "document": "reference/webapps"
+          "title": "Javascript framework",
+          "document": "reference/framework/index"
         },
         {
-          "title": "Asset service",
-          "document": "reference/assets"
+          "title": "Page components",
+          "document": "reference/components/index"
         },
         {
-          "title": "Schemas",
+          "title": "Schema system",
           "document": "reference/schemas/index"
-        },
-        {
-          "title": "Input Types",
-          "document": "reference/input-types"
         },
         {
           "title": "Localization",
           "document": "reference/i18n"
+        }
+      ]
+    },
+    {
+      "title": "API reference",
+      "document": "api/index",
+      "menuItems": [
+        {
+          "title": "Tasks Library",
+          "document": "api/lib-task"
         },
         {
-          "title": "Tasks - lib-task",
-          "document": "reference/lib-task"
+          "title": "Storage Library",
+          "document": "api/lib-node"
         },
         {
-          "title": "Storage - lib-node",
-          "document": "reference/lib-node"
+          "title": "Content Library",
+          "document": "api/lib-content"
         },
         {
-          "title": "Content - lib-content",
-          "document": "reference/lib-content"
+          "title": "Portal library",
+          "document": "api/lib-portal"
         },
         {
-          "title": "HTTP API - lib-portal",
-          "document": "reference/lib-portal"
+          "title": "Context Library",
+          "document": "api/lib-context"
         },
         {
-          "title": "JavaDoc",
-          "document": "reference/javadoc"
+          "title": "Management API",
+          "document": "api/management"
+        },
+        {
+          "title": "Statistics API",
+          "document": "api/statistics"
         }
       ]
     },
     {
       "title": "Release Notes",
-      "document": "release-notes/index"
-    },
-    {
-      "title": "Upgrade Notes",
-      "document": "upgrade/index"
+      "document" : "release/index",
+      "menuItems" : [
+        {
+          "title": "Upgrading XP",
+          "document": "release/upgrade-xp"
+        },
+        {
+          "title": "Upgrading Apps",
+          "document": "release/upgrade-apps"
+        }
+      ]
     }
   ]
 }

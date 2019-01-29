@@ -1,0 +1,19 @@
+= Portal library
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+
+== assetUrl()
+
+[source,javascript]
+  assetUrl({path [,application] [,type] [,params]} <!--1--> <!--2--> <!--3--> <!--4-->
+
+<1> *string path* path to the asset i.e. ``path/to/myasset.ext``.
+<2> string application: Optionally specify application where the asset exists. Default is current application.
+<3> string type: Optionally specify URL type. Either server (server-relative URL) or absolute. Default is ``server``.
+<4> object params: Optionally specify name/value parameters to append to the url.
+
+
+TODO SAMPLE?

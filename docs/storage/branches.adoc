@@ -15,7 +15,7 @@ Any number of branches could be added to facilitate your data model. Branches ar
 
 As an example, XP's CMS make use of two branches ``draft`` and ``master`` to support the editorial workflow, with previewing and bulk publishing of changes.
 
-=== Pushing
+== Pushing
 
 XP provides advanced features such as diffing to see the changes between two branches.
 Additionally, the API provides features for "pushing" changes from one branch to another.
@@ -26,7 +26,7 @@ From the CMS API, the push operation is known as "publish".
 XP repos currently don't offer conflict resolution or merging functionality.
 As such, conflict resolution must either be handled by the application itself, or the application must write data in a way that avoids creating conflicts.
 
-=== Branch usage
+== Branch usage
 
 Consider the 'Oslo' and 'Enonic' nodes from earlier sections:
 
