@@ -1,72 +1,78 @@
 {
   "menuItems": [
     {
-      "title": "Applications",
-      "document": "apps/index"
-    },
-    {
-      "title": "Runtime",
-      "document": "runtime/index",
+      "title": "Overview",
+      "document": "overview",
       "menuItems": [
         {
-          "title": "Web engine",
-          "document": "runtime/web-engine"
+          "title": "Applications",
+          "document": "apps/index"
         },
         {
-          "title": "Site engine",
-          "document": "runtime/site-engine"
+          "title": "Runtime",
+          "document": "runtime/index",
+          "menuItems": [
+            {
+              "title": "Web engine",
+              "document": "runtime/web-engine"
+            },
+            {
+              "title": "Site engine",
+              "document": "runtime/site-engine"
+            },
+            {
+              "title": "Task engine",
+              "document": "runtime/task-engine"
+            },
+            {
+              "title": "Servlet engine",
+              "document": "runtime/servlet-engine"
+            }
+          ]
         },
         {
-          "title": "Task engine",
-          "document": "runtime/task-engine"
+          "title": "Storage",
+          "document": "storage/index",
+          "menuItems": [
+            {
+              "title": "Repositories",
+              "document": "storage/repos"
+            },
+            {
+              "title": "Nodes",
+              "document": "storage/nodes"
+            },
+            {
+              "title": "Properties",
+              "document": "storage/properties"
+            },
+            {
+              "title": "Branches",
+              "document": "storage/branches"
+            },
+            {
+              "title": "Query Language",
+              "document": "storage/query"
+            },
+            {
+              "title": "Editors",
+              "document": "storage/editors"
+            }
+          ]
         },
         {
-          "title": "Servlet engine",
-          "document": "runtime/servlet-engine"
+          "title": "IAM",
+          "document": "iam/index"
+        },
+        {
+          "title": "CMS",
+          "document": "cms/index"
+        },
+        {
+          "title": "Admin",
+          "document": "admin/index"
         }
       ]
-    },
-    {
-      "title": "Storage",
-      "document": "storage/index",
-      "menuItems": [
-        {
-          "title": "Repositories",
-          "document": "storage/repos"
-        },
-        {
-          "title": "Nodes",
-          "document": "storage/nodes"
-        },
-        {
-          "title": "Properties",
-          "document": "storage/properties"
-        },
-        {
-          "title": "Branches",
-          "document": "storage/branches"
-        },
-        {
-          "title": "Query Language",
-          "document": "storage/query"
-        },
-        {
-          "title": "Editors",
-          "document": "storage/editors"
-        }
-      ]
-    },
-    {
-      "title": "Identity providers",
-      "document": "idproviders/index"
-    },
-    {
-      "title": "CMS",
-      "document": "cms/index"
-    },
-    {
-      "title": "Admin Console",
-      "document": "admin/index"
     },
     {
       "title": "Development",
@@ -77,7 +83,7 @@
       "document": "hosting/index"
     },
     {
-      "title": "Developer reference",
+      "title": "General reference",
       "document": "reference/index",
       "menuItems": [
         {
@@ -107,7 +113,7 @@
       ]
     },
     {
-      "title": "API reference",
+      "title": "API",
       "document": "api/index",
       "menuItems": [
         {
