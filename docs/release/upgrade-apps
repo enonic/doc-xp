@@ -2,11 +2,9 @@
 :toc: right
 :imagesdir: images
 
-== Introduction
-
 This section describes the steps required to upgrade an XP application from 6.x to 7.0
 
-== Step 1: Preparations
+== Preparations
 
 For each application you plan to upgrade, use the following checklist to prepare for an complete the upgrade.
 
@@ -15,4 +13,50 @@ For each application you plan to upgrade, use the following checklist to prepare
 
 More?
 
-== Step 2:
+== Libraries
+
+* Thymeleaf
+* XSLT
+* Mustache
+* http client
+* +++
+
+
+== Userstore renaming
+
+
+
+== Schema changes
+
+=== Consistent root
+
+=== X-data
+
+=== Mixins
+
+=== Display name script
+
+== Image styles
+
+TODO, sample styles.xml file
+
+
+== CustomSelector update
+
+
+== Controller changes
+
+=== Main.js
+
+=== Require resolution
+
+
+== Page components
+
+== Render mode
+
+INLINE TODO
+
+== Admin widgets
+
+TODO

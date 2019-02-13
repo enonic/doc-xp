@@ -2,75 +2,75 @@
   "menuItems": [
     {
       "title": "Overview",
-      "document": "overview",
+      "document": "overview/index",
       "menuItems": [
         {
           "title": "Applications",
-          "document": "apps/index"
+          "document": "overview/apps"
         },
         {
           "title": "Runtime",
-          "document": "runtime/index",
+          "document": "overview/runtime/index",
           "menuItems": [
             {
               "title": "Web engine",
-              "document": "runtime/web-engine"
+              "document": "overview/runtime/web-engine"
             },
             {
               "title": "Site engine",
-              "document": "runtime/site-engine"
+              "document": "overview/runtime/site-engine"
             },
             {
               "title": "Task engine",
-              "document": "runtime/task-engine"
+              "document": "overview/runtime/task-engine"
             },
             {
               "title": "Servlet engine",
-              "document": "runtime/servlet-engine"
+              "document": "overview/runtime/servlet-engine"
             }
           ]
         },
         {
           "title": "Storage",
-          "document": "storage/index",
+          "document": "overview/storage/index",
           "menuItems": [
             {
               "title": "Repositories",
-              "document": "storage/repos"
+              "document": "overview/storage/repos"
             },
             {
               "title": "Nodes",
-              "document": "storage/nodes"
+              "document": "overview/storage/nodes"
             },
             {
               "title": "Properties",
-              "document": "storage/properties"
+              "document": "overview/storage/properties"
             },
             {
               "title": "Branches",
-              "document": "storage/branches"
+              "document": "overview/storage/branches"
             },
             {
               "title": "Query Language",
-              "document": "storage/query"
+              "document": "overview/storage/query"
             },
             {
               "title": "Editors",
-              "document": "storage/editors"
+              "document": "overview/storage/editors"
             }
           ]
         },
         {
           "title": "IAM",
-          "document": "iam/index"
+          "document": "iam"
         },
         {
           "title": "CMS",
-          "document": "cms/index"
+          "document": "cms"
         },
         {
           "title": "Admin",
-          "document": "admin/index"
+          "document": "admin"
         }
       ]
     },
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "title": "API",
+      "title": "API Reference",
       "document": "api/index",
       "menuItems": [
         {

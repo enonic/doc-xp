@@ -2,20 +2,89 @@
 :toc: right
 :imagesdir: images
 
-== Introduction
-
-This section describes the steps required to upgrade from Enonic XP 6.x to Enonic XP 7.0
+This section describes the steps required to upgrade Enonic XP from 6.15 to 7.0
 
 == Requirements
 
 Before you begin the upgrade process, ensure the following requirements are satisfied
 
-* Minimum Enonic XP 6.15.x (if you are running an older version, upgrade to 6.15.x first)
-* QA environment to verify upgrade (recommended)
-* Parallel production environment (only required for zero downtime upgrades)
-* Disk space to facilitate a complete dump of existing data
-* Verify that all (if any) 3rd party applications are available for 7.0
-* Access to, or ability to upgrade all custom developed applications, as described in <<upgrade-apps#,Upgrading Applications>>
+XP Version:: You need to be running at least Enonic XP 6.15.x (if you are running an older version, upgrade to 6.15.x first)
+QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
+Toolbox and CLI:: Ensure you have 6.15 Toolbox available, and XP 7.0 CLI installed
+Disk space:: Make sure you have enough disk space to facilitate a complete dump of all existing data
+Duplicate prod environment:: For zero downtime upgrades, you will need a parallel production environment
+3rd. party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 7.
+Custom apps:: Make sure all custom built applications have been upgraded to support XP 7, as described in <<upgrade-apps#,Upgrading Applications>>
 
 
-== TODO
+This guide focuses on completing the upgrade without downtime.
+For scenarios where downtime cannot be avoided, additional steps will be required.
+
+Carefully follow the below steps to upgrade your instance
+
+NOTE: A test upgrade should first be completed in a QA environment first to verify that the upgrade will work successfully.
+
+
+== Prepare new production environment
+
+We recommend setting up a new parallel environment for running XP 7.
+This will virtually eliminate downtime, and also be a safety net if the upgrade should somehow fail.
+
+Install XP 7:: TODO
+
+Update configuration:: TODO
+
+Start servers:: TODO
+
+
+== Dump data
+
+First step to upgrade is dumping data from the existing 6.15 instance.
+
+Enable readonly mode:: Turn on readonly mode in your 6.15 instance. TODO: ``toolbox bla bla``
+This will ensure a consistent dump, but also prevent new data from being written to XP during the upgrade.
+
+Dump data:: Use 6.15 toolbox to dump the data. TODO ``toolbox bla bla``.
+
+NOTE:: We highly recommend dumping data without versions. This will dramatically speed up the upgrade while also preparing your dataset for the new vacuuming features in XP 7.
+
+
+== Divert traffic
+
+NOTE:: For zero downtime upgrades, you may skip this step. Simply keep traffic flowing to your servers during the migration process.
+
+Divert traffic:: To prevent traffic from hitting your XP instance(s) during the upgrade,
+we recommend setting up a temporary static error page that handles all requests during the migration.
+
+
+
+== Load data
+
+With the new XP 7 environment up and running, we are now ready to migrate the data.
+
+Move dump:: If needed, transfer dump files from previous step to the new server. For clustered environments, any server will do.
+
+Load dump:: Use Enonic CLI to load the dump on your XP server i.e. ``enonic dump load -n <dump-name>``.
+The load command will automatically upgrade data from 6.15 format during the load.
+
+
+== Update apps
+
+We now need to update all installed applications to new versions supported by XP 7.
+
+Market apps:: For market apps, simply go to TODO Introduction
+
+Custom apps:: TODO
+
+
+== Validate
+
+TODO
+* TODO
+
+
+== Go live
+
+With all lights green, you may now redirect all traffic from your old XP 6 servers, to the new XP 7 environment.
+
+Congratulations on upgrading to XP 7!
