@@ -32,45 +32,19 @@
         },
         {
           "title": "Storage",
-          "document": "overview/storage/index",
-          "menuItems": [
-            {
-              "title": "Repositories",
-              "document": "overview/storage/repos"
-            },
-            {
-              "title": "Nodes",
-              "document": "overview/storage/nodes"
-            },
-            {
-              "title": "Properties",
-              "document": "overview/storage/properties"
-            },
-            {
-              "title": "Branches",
-              "document": "overview/storage/branches"
-            },
-            {
-              "title": "Query Language",
-              "document": "overview/storage/query"
-            },
-            {
-              "title": "Editors",
-              "document": "overview/storage/editors"
-            }
-          ]
+          "document": "overview/storage"
         },
         {
           "title": "IAM",
-          "document": "iam"
+          "document": "overview/iam"
         },
         {
           "title": "CMS",
-          "document": "cms"
+          "document": "overview/cms"
         },
         {
           "title": "Admin",
-          "document": "admin"
+          "document": "overview/admin"
         }
       ]
     },
@@ -84,7 +58,7 @@
     },
     {
       "title": "General reference",
-      "document": "reference/index",
+      "document": "reference",
       "menuItems": [
         {
           "title": "Projects",
@@ -114,7 +88,7 @@
     },
     {
       "title": "API Reference",
-      "document": "api/index",
+      "document": "api",
       "menuItems": [
         {
           "title": "Tasks Library",
@@ -148,11 +122,11 @@
     },
     {
       "title": "Release Notes",
-      "document" : "release/index",
+      "document" : "release",
       "menuItems" : [
         {
           "title": "Upgrading XP",
-          "document": "release/upgrade-xp"
+          "document": "release/upgrade"
         },
         {
           "title": "Upgrading Apps",
