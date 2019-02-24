@@ -1,4 +1,4 @@
-= Enonic XP 7.0 application upgrade
+= Enonic XP 7.0 - Application upgrade
 :toc: right
 :imagesdir: images
 
@@ -6,37 +6,100 @@ This section describes the steps required to upgrade an XP application from 6.x 
 
 == Preparations
 
-For each application you plan to upgrade, use the following checklist to prepare for an complete the upgrade.
+Use the following checklist to prepare for an complete the upgrade.
 
-* Verify that you have complete access to the application source code
-* Research what the application does, some steps may not be relevant
+* Checkout the project source code to a local folder i.e. myapp/
+* Make sure you have Enonic CLI installed
 
-More?
+== Create a sandbox
 
-== Libraries
+NOTE: With XP 7 you no longer need to install Java separately as it comes bundled with XP.
+
+We recommend setting up a separate sandbox for each application you upgrade.
+To create the sandbox, go to your project folder and run the following command:
+
+  ``enonic project sandbox``
+
+When the command has completed successfully, the sandbox will be associated with your project.
+This enables us to build, deploy and test the application.
+
+== XP Gradle plugin
+
+With XP 7, a new version of the XP Gradle plugin has also been released.
+
+To make use of the new plugin, update your build files as follows:
+
+build.gradle
+
+TODO
+
+gradle.settings
+
+TODO
+
+== XP Libraries
+
+Over multiple XP 6.x releases, and finally with the release of XP 7,
+several libraries have been moved out of the core, and into separate projects.
+This makes the XP core leaner, and allows us to release new libraries faster.
+
+The following libraries have been take out of the core:
 
 * Thymeleaf
 * XSLT
 * Mustache
 * http client
 * +++
+TODO
+
+For each library your project is using, update your build.gradle file to use the new libraries:
+
+TODO
+
+== Auth library
+
+If your project includes the AUTH? TODO library.
+You may need to make some changes to your code.
+
+XP 6 has had an inconsistent use of userstore and idprovider. With XP 7, this domain is not consistently called IDproviders.
+
+The following needs to be updated in your projects:
+
+TODO
 
 
-== Userstore renaming
+== CMS changes
 
+If your project uses CMS features, the following steps need to be checked
 
+=== Content Types
 
-== Schema changes
-
-=== Consistent root
+TODO
 
 === X-data
 
+TODO
+
 === Mixins
+
+TODO
 
 === Display name script
 
-== Image styles
+TODO
+
+=== Image styles
+
+XP 7 introduces a new feature called image styles.
+With XP 6, editors were allowed to use a dropdown when inserting images in the editor, but this list was hardcoded.
+With XP 7, developers are now able to define their own custom styles, and by default the only styles available by default are:
+
+* None (uncropped, but optimized image, no css styles)
+* Original (uncropped original image file, tagged with TODO style (alan?))
+
+Editors of existing sites are likely to have used one or more of the hardcoded styles.
+To preserve the old style functionality (cropping etc) we simply need to add these stypes
+
 
 .Example of styles.xml file
 [source,xml]
@@ -51,22 +114,110 @@ include::code/styles.css[]
 ----
 
 
-== CustomSelector update
+=== CustomSelector update
+
+If your application implements a CustomSelector, a small change has been made to simplify code.
+
+TODO
+
+
+
+=== Flattened page components
+
+Most applications don't deal with the detailed structure of page components, beyond simply iterating over and rendering components.
+For 7.0, these functions, and the domain objects remain the same, and you do not need to make any changes to your code.
+
+However, the underlying storage model has changed. In rare cases, this might affect your application.
+From persisting the page component tree structure directly as node properties, each component is now stored as a flat structure instead.
+
+The main motivation is to simplify indexing and searching components.
+
+
+TODO: Sample domain objects
+
+TODO: Sample storage
+
+TODO: Sample query for finding a specific part
+
+
+=== Render mode
+
+When rendering pages server side, a so-called render mode is part of the request object.
+Until now, the render modes have been: ``PREVIEW``, ``EDIT`` and ""
+
+TODO: Verify last mode
+
+With XP 7, a new render mode is introduced: ``INLINE``.
+Mode ``INLINE`` is used when a page is rendered in the Content Studio tree view.
+Previously, this rendering would be using mode ``PREVIEW``.
+``PREVIEW``is now solely used in the standalone window, after the user has clicked the "Preview" button.
+
+The motivation for this change is for developers to be able to treat rendering differently when rendered inline vs in the full preview.
+
+If your application has implemented specific behaviour for ``PREVIEW``,
+you must do the same for mode ``INLINE``to keep current functionality.
+
+=== Admin widgets
+
+Enonic XP currently only implements a single widget, the so-called "Detail panel" of Content Studio.
+
+With XP 7, this panel is now available in both Content Studio tree view, and in the content editor,
+and is now called the "Context Panel".
+
+If your application has implemented a detail panel, you will need to upgrade it as follows:
+
+==== Rename implementation
+
+TODO
+
+==== Support no context
+
+TODO
+
+==== Support repository context
+
+TODO
+
 
 
 == Controller changes
 
+Your project is highly likely to implement one or more Javascript controllers.
+
 === Main.js
 
-=== Require resolution
+If you project contains a /main.js file, you might need to update it.
 
+With XP 7, a dedicated web app controller /webapp/webapp.js is introduced.
+If your current project was a webapp, you will find that your /main.js file exports one or more HTTP methods.
 
-== Page components
+If this is the case, you must split your main.js file into two, so all operations related to the web app are moved to webapp.js,
+and only life cycle related code remains in main.js.
 
-== Render mode
+Example of what such a migration might look like
 
-INLINE TODO
-
-== Admin widgets
+.Main.js before upgrade:
 
 TODO
+
+.Main.js after upgrade
+
+TODO
+
+.Webapp.js after upgrade
+
+TODO
+
+=== Require() resolution
+
+Enonic XP has maintained the same require() script resolving patterns since the release of XP 5.0
+Strategies for resolving scripts have since been simplified, and with 7.0 breaking changes have been implemented.
+
+The change specifically affects relative paths, the resolver was automatically looking for files in /site and /lib folders.
+This is now changed, and the resolver will only look for relative files in current directory.
+
+Here are examples of how javascript files are resolved:
+
+TODO
+
+Also, please check out the documentation of the <<../reference/framework/index#Require(),require function>>.

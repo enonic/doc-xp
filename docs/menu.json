@@ -10,7 +10,7 @@
         },
         {
           "title": "Runtime",
-          "document": "overview/runtime/index",
+          "document": "overview/runtime",
           "menuItems": [
             {
               "title": "Web engine",
@@ -50,11 +50,11 @@
     },
     {
       "title": "Development",
-      "document": "dev/index"
+      "document": "dev"
     },
     {
       "title": "Hosting",
-      "document": "hosting/index"
+      "document": "hosting"
     },
     {
       "title": "General reference",
@@ -62,7 +62,53 @@
       "menuItems": [
         {
           "title": "Projects",
-          "document": "reference/projects/index"
+          "document": "reference/projects"
+        },
+        {
+          "title": "Web Engine",
+          "document": "reference/web-engine"
+        },
+        {
+          "title": "CMS",
+          "document": "reference/cms",
+          "menuItems": [
+            {
+              "title": "Schema System",
+              "document": "reference/cms/schemas"
+            },
+            {
+              "title": "Content Types",
+              "document": "reference/cms/content-types"
+            },
+            {
+              "title": "Input Types",
+              "document": "reference/cms/input-types"
+            },
+            {
+              "title": "Sites",
+              "document": "reference/cms/sites"
+            },
+            {
+              "title": "Macros",
+              "document": "reference/cms/macros"
+            },
+            {
+              "title": "Site Engine",
+              "document": "reference/cms/site-engine"
+            },
+            {
+              "title": "Page Components",
+              "document": "reference/cms/components"
+            }
+          ]
+        },
+        {
+          "title": "Identity providers",
+          "document": "reference/idproviders"
+        },
+        {
+          "title": "Admin Engine",
+          "document": "reference/admin-engine"
         },
         {
           "title": "NoQL syntax",
@@ -70,15 +116,7 @@
         },
         {
           "title": "Javascript framework",
-          "document": "reference/framework/index"
-        },
-        {
-          "title": "Page components",
-          "document": "reference/components/index"
-        },
-        {
-          "title": "Schema system",
-          "document": "reference/schemas/index"
+          "document": "reference/framework"
         },
         {
           "title": "Localization",

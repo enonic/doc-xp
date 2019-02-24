@@ -1,0 +1,37 @@
+= Page components
+:toc: right
+:imagesdir: images
+
+This section describes the various page components of the CMS
+
+
+== Site
+
+Site forms lets you configure the current application for a specific site through Content Studio
+
+[source,xml]
+----
+<site>
+  <items>
+    <input type="TextLine" name="company">
+      <label>Company</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextArea" name="description">
+      <label>Description</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </items>
+  <x-data name="us-address"/>
+</site>
+----
+
+
+
+== Page
+
+== Layout
+
+== Part
+
+== Macro

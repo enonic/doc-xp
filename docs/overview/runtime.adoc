@@ -1,6 +1,6 @@
 = XP Runtime
 :toc: right
-:imagesdir: images
+:imagesdir: runtime/images
 
 All applications built on XP are powered by the XP Runtime
 
@@ -9,6 +9,16 @@ All applications built on XP are powered by the XP Runtime
 The XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components.
 However, thanks to the the embedded JavaScript framework, XP apps are typically written in JavaScript.
 The unique twist is that Java libraries can easily be accessed and used by the JavaScript code.
+
+== Ingredients
+
+The following components are part of the XP runtime:
+
+* Javascript Framework - Based on Nashorn
+* Servlet engine - based on Jetty
+* OSGi Dynamic module system - used to isolate application
+* Cluster - Automatically join XP cluster and backend if available
+
 
 == Micro Service architecture
 
@@ -30,9 +40,11 @@ As such, XP runtimes (also known as XP front-end) always connects to the back-en
 
 This way, both application developers and the runtime itself can rely on access to platform services such as <<../storage/index#, Storage>> and <<../idproviders/index#, ID providers>>.
 
+
+
 == Serverless
 
-TODO:
+TODO, drop?:
 Similar to serverless architectures, XP application themselves will hardly consume any resources when idle.
 
 This also makes XP a cost effective solution for running batch jobs (called <<Tasks>>)
@@ -44,17 +56,18 @@ in addition to the traditional request based processing.
 Enonic XP ships with a Software Development Kit.
 The SDK is essentially the entire platform with both back-end and front-end offered as a single executable.
 
+== Webapp Engine
+
 TODO
 
+== Site Engine
 
+TODO
 
-== Ingredients
+== Task Engine
 
-The following components are part of the XP runtime:
+TODO
 
-* Javascript Framework - Based on Nashorn
-* Servlet engine - based on Jetty
-* OSGi Dynamic module system - used to isolate application
-* Cluster - Automatically join XP cluster and backend if available
+== Servlet Engine
 
-== Back-end
+TODO

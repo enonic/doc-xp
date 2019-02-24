@@ -1,7 +1,7 @@
 = Javascript Framework
-include::../../variables.adoc[]
+include::../variables.adoc[]
 :toc: right
-:imagesdir: images
+:imagesdir: framework/images
 
 Enonic XP extensively uses server-side JavaScript for application development.
 Our goal is to enable developer of any language - PHP, .net, Java, Python, etc to quickly grasp and be productive with Enonic XP.
@@ -33,14 +33,14 @@ The appropriate function will automatically be invoked for every request sent to
 Example usage
 [source,javascript]
 ----
-include::code/controller-1.js[]
+include::framework/code/controller-1.js[]
 ----
 
 A handler function receives a parameter with a ``request`` object, and returns a ``response`` object.
 
 [source,javascript]
 ----
-include::code/controller-2.js[]
+include::framework/code/controller-2.js[]
 ----
 
 == Filters
@@ -71,7 +71,7 @@ Examples:
 
 [source,javascript]
 ----
-include::code/app.js[]
+include::framework/code/app.js[]
 ----
 
 
@@ -108,7 +108,7 @@ Examples:
 
 [source,javascript]
 ----
-include::code/log.js[]
+include::framework/code/log.js[]
 ----
 
 
@@ -129,7 +129,7 @@ Examples:
 
 [source,javascript]
 ----
-include::code/resolve.js[]
+include::framework/code/resolve.js[]
 ----
 
 === Require()
@@ -148,12 +148,13 @@ Examples:
 
 [source,javascript]
 ----
-include::code/require.js[]
+include::framework/code/require.js[]
 ----
 
 If the path is relative then it will start looking for the file from the local directory.
-If the file is not found there, it will start scanning in parent directories that have a /lib folder until it reaches the resources/ folder.
 The file extension .js is not required.
+
+TODO Verfiy for 7.0
 
 
 === Exports
@@ -179,14 +180,14 @@ Simple example:
 
 [source,javascript]
 ----
-include::code/main-1.js[]
+include::framework/code/main-1.js[]
 ----
 
 Running code on stop:
 
 [source,javascript]
 ----
-include::code/main-2.js[]
+include::framework/code/main-2.js[]
 ----
 
 
@@ -316,14 +317,14 @@ of the websocket.
 
 [source,javascript]
 ----
-include::code/websockets-1.js[]
+include::framework/code/websockets-1.js[]
 ----
 
 A websocket event handler named ``webSocketEvent`` is required. It will be called for every websocket event from a client. See example below.
 
 [source,javascript]
 ----
-include::code/websockets-2.js[]
+include::framework/code/websockets-2.js[]
 ----
 
 Below is an example of a simple chat. A library called ``lib-websocket`` has functions for sending messages back and adding/removing clients
@@ -331,7 +332,7 @@ in groups. Adding to groups allows for multicast message sending.
 
 [source,javascript]
 ----
-include::code/websockets-3.js[]
+include::framework/code/websockets-3.js[]
 ----
 
 == Java bridge

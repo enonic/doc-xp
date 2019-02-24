@@ -1,0 +1,88 @@
+= Content Types
+:imagesdir: schemas/images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+Content Types are the essential elements of Content Studio and the content API.
+
+== Form definition
+
+[source,xml]
+----
+<content-type>
+  <display-name @i18n="cty.person.displayname">Person</display-name> <!--1-->
+  <super-type>base:structured</super-type> <!--2-->
+  <items>
+    <input name="firstname" type="TextLine">
+      <label>First Name</label>
+    </input>
+    <input name="lastname" type="TextLine">
+      <label>Last Name</label>
+    </input>
+  </items>
+</content-type>
+----
+<1> *display-name* is the human readable name of the content type. Optionally specify the i18n attribute to define a mapping to localize the value
+<2> *super-type* refers to root controller of the form TODO
+
+== Display name expressions
+
+TODO
+
+== X-data
+X-data (short for eXtra data) makes it possible to dynamically extend existing content types with new fields.
+When editing content, X-data fields will be displayed as separate steps in the content form.
+
+[source,xml]
+----
+<x-data>
+  <display-name>This x-data will be available only for folders</display-name>
+  <allowContentType>base:folder</allowContentType>
+  <items>
+    <input type="TextLine" name="addressLine">
+      <label>Street address</label>
+      <occurrences minimum="0" maximum="2"/>
+    </input>
+    <input type="TextLine" name="city">
+      <label>City</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="state">
+      <label>State</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="TextLine" name="zipCode">
+      <label>Zip code</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</x-data>
+----
+
+.X-data that is available for all content types except the ones named "folder"
+[source,xml]
+----
+<x-data>
+  <display-name>This x-data will be available for any content type except folders</display-name>
+  <allowContentType>((?!base:folder).)*$</allowContentType>
+  <items>
+    <input type="TextLine" name="addressLine">
+      <label>Street address</label>
+      <occurrences minimum="0" maximum="2"/>
+    </input>
+    <input type="TextLine" name="city">
+      <label>City</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="state">
+      <label>State</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="TextLine" name="zipCode">
+      <label>Zip code</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</x-data>
+----

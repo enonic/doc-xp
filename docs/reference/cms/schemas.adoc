@@ -1,0 +1,373 @@
+= Schema system
+:imagesdir: schemas/images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+*Complete overview of schemas in Enonic XP*
+
+== Introduction
+
+To facilitate creation of various forms and data types throughout Content Studio, Enonic XP ships with a high-level schema concept that requires no coding.
+
+== Forms
+
+The main use of schemas is to define forms that can be edited through the admin interface. In addition to user interface, schemas also have a back-end equivalent that can be used programmatically, for instance through the content API.
+All forms are essentially compositions of <<Input types>> and optionally <<Sets>> when more complex structures are required.
+
+Once a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
+The property structure can then be persisted directly into the XP repository.
+
+Forms can be created either with XML or with Java, where the first is the most common.
+
+image::app.png["My First app started"]
+
+[source,xml]
+----
+<someform>
+  <formconfig/>
+  <items>
+    <input name="firstname" type="TextLine">
+      <label>First Name</label>
+    </input>
+    <input name="lastname" type="TextLine">
+      <label>Last Name</label>
+    </input>
+  </items>
+</someForm>
+----
+
+There are many types of forms, each with their specific purpose and options.
+The form implementation will control where and how end result is actually persisted:
+
+Below are the currently available forms implementations used by XP:
+
+=== XML Schema Definition (XSD)
+
+An XSD is available to simplify editing of XML-based form files,
+
+TODO: How to add
+
+
+== Input types
+
+Input types represent the most important part of any form, as the purpose is to enable editing and storing of a single value (or an array of values).
+Input types have both front-end and back-end components. The front-end represents the visual editing interface used in the XP admin console, where the back-end is solely used for validation purposes.
+An input type will handle a single property, with zero, 1 or many values. I.e. the TextLine input type will return Strings. Normally, an input type will use a fixed propertyType, but this is optional.
+
+[.thumb]
+image::Default-input.png[An input box with help-text below it, 700]
+
+The following configuration is common for all input types:
+
+[source,xml]
+----
+<input type="InputTypeName" name="myname" > <!--1-->
+  <label i18n="myname.label">My label</label> <!--2-->
+  <default/> <!--3-->
+  <help-text i18n="myname.help-text">Help text here</help-text>  <!--4-->
+  <occurrences minimum="0" maximum="1"/>  <!--5-->
+  <config/> <!--6-->
+</input>
+----
+
+<1> *input* contains two mandatory attributes: +
+_@name_ is used when storing the data in a property, and must be unique on each level. +
+_@type_ refers to one of the many input types which are listed below.
+
+<2> *label* is another mandatory field that holds the human readable value that will be displayed when listing the input type control in the administrative interface +
+_@i18n_ is an optional attribute holding the key to localization phrase of the form. (See also :ref:`localization_schemas`)
+
+<3> *default* is an optional field that lets you specify default values to be used by the input type
+
+<4> *help-text* is an optional text will be shown next to the input field and can be used for explanation of the field's purpose. +
+_@i18n_ is an optional attribute holding the key to localization phrase of the form. (See also :ref:`localization_schemas`)
+
+<5> *occurrences* is an optional field used to control the number of values stored by a single input. +
+_@minimum_ set to to zero means the input is not mandatory +
+_@maximum_ to zero means there is no upper limit to the number of values. +
+This element is optional, if omitted the default will be `minimum="0"` and `maximum="1"`.
+
+<6> *config* is an optional element designed to hold custom configuration for each input-type.
+
+Some input types are generic, and can be used in any form. Others however are contextual and may only be used in specific forms. An example is imageSelector which will only work in the context of Content Studio.
+
+
+== Sets
+In order to build richer forms,
+
+=== FieldSet
+
+A field set may be used to group items visually. The example below will create a form in the admin console with the inputs grouped under the
+label of the field set.
+
+[source,xml]
+----
+<field-set> <!--1-->
+  <label i18n="metadata.label">Metadata</label>
+  <items> <!--2-->
+    <input name="tags" type="Tag">
+      <label>Tags for tag cloud</label>
+      <occurrences minimum="0" maximum="5"/>
+    </input>
+  </items>
+</field-set>
+----
+<1> *field-set* does not need a name since it is only visual, and does not affect the data model
+<2> *items* allow placement of form items to be contained within it
+
+
+=== ItemSet
+
+Item sets provide a special capability that allow you to nest form items hierarchically.
+
+Input types in item sets are grouped into logical units, allowing them to repeat as a complex input type - since item sets support occurrences too.
+Item sets are both visually and semantically grouped as the name of the item set is used in the persisted property structure. An item set actually produces a property set.
+
+Here is an example of an item set with two inputs. The resulting form will allow multiple entries of phone numbers with labels:
+
+[source,xml]
+----
+<item-set name="contact_info"> <!--1-->
+  <label i18n="contact_info.label">Contact Info</label> <!--2-->
+  <occurrences minimum="0" maximum="0"/> <!--3-->
+  <items>
+    <input name="label" type="TextLine">
+      <label>Label</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input name="phone_number" type="TextLine">
+      <label>Phone Number</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</item-set>
+----
+<1> *name* defines the mapping to the property name
+<2> *label* TODO
+<3> *occurences* control the minimum and maximum instances of the ItemSet that may be created
+
+TIP: It is also possible to nest item sets inside each other
+
+=== OptionSet
+
+An option set represents a group of options rendered as either radio-buttons or checkboxes.
+Each option may or may not have a form of inputs it consists of. An option can be considered to be a field-set with selectable header.
+
+By default, an option form will only be shown upon selection of the option, but the entire option
+set may be configured to have all of its options expanded by default.
+
+It's also possible to pre-select specific options by default.
+
+Here is an example of a multi-select option set with options expanded by default, empty first option and pre-selected second option:
+
+[source,xml]
+----
+<option-set name="checkOptionSet">
+  <label i18n="checkOptionSet.label">Multi-selection OptionSet</label>
+  <expanded>true</expanded>
+  <occurrences minimum="1" maximum="1"/>
+  <help-text>You can select up to 2 options</help-text>
+  <options minimum="1" maximum="2">
+    <option name="option_1">
+      <label i18n="checkOptionSet.option_1.label">Option 1</label>
+      <help-text i18n="checkOptionSet.option_1.help-text">Help text for Option 1</help-text>
+    </option>
+    <option name="option_2">
+      <label i18n="checkOptionSet.option_2.label">Option 2</label>
+      <default>true</default>
+      <items>
+        <input name="contentSelector" type="ContentSelector">
+          <label>Content selector</label>
+          <occurrences minimum="0" maximum="0"/>
+          <config/>
+        </input>
+      </items>
+    </option>
+    <option name="option_3">
+      <label>Option 3</label>
+      <help-text>Help text for Option 3</help-text>
+      <items>
+        <input name="textarea" type="TextArea">
+          <label>Text Area</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+        <input name="long" type="Long">
+          <label>Long</label>
+          <indexed>true</indexed>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+      </items>
+    </option>
+  </options>
+</option-set>
+----
+
+expanded
+  Optional. Set to ``true`` to expand all of the options by default
+
+occurrences
+  Detailed definition of how many times this option set may be repeated inside one content.
+
+options (required)
+  Container of options.
+
+   @minimum
+      Required. Minimum number of options that must be selected in this option set.
+
+   @maximum
+      Required. Maximum number of options that can be selected in this option set.
+      Setting this attribute to a value greater than 1 will result in rendering of a multi-select option set with
+      options rendered as checkboxes. Setting the attribute value to 1 will render options as radio-buttons (single-select option set).
+      Once the maximum of selected options is reached, the rest of the options will be disabled.
+
+   option (required)
+     Container of the option form.
+
+      @name (required)
+         Option name. Must be unique within the option set.
+
+      label (required)
+         Label of the option's checkbox or radio button.
+
+      label\@i18n
+        The key to look up the label text in the localization bundles. (See also :ref:`localization_schemas`)
+
+
+      help-text
+        Optional. Help text for the option.
+
+      help-text\@i18n
+        The key to look up the help text in the localization bundles. (See also :ref:`localization_schemas`)
+
+
+      default
+         Optional. Set to ``true`` to pre-select the option.
+
+      items
+         Optional. Container of the option form's inputs.
+
+
+
+
+== Mixins
+
+To simplify maintenance of forms, mixins offers a practical way of reusing schema fragments across forms.
+A mixin can be injected into a form simply by referencing it by name.
+The form referencing the mixin will render as if everything in the mixin was written directly in the form itself.
+
+.us-address mixin
+[source,xml]
+----
+<mixin>
+  <display-name>U.S. Address format</display-name>
+  <items>
+    <input type="TextLine" name="addressLine">
+      <label>Street address</label>
+      <occurrences minimum="0" maximum="2"/>
+    </input>
+    <input type="TextLine" name="city">
+      <label>City</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="state">
+      <label>State</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="TextLine" name="zipCode">
+      <label>Zip code</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</mixin>
+----
+
+.Content Type using the us-address mixin
+[source,xml]
+----
+<content-type>
+  <display-name>Using mixins</display-name>
+  <super-type>base:structured</super-type>
+  <items>
+    <mixin name="us-address"/>
+  </items>
+</content-type>
+----
+
+== Schema Localization
+
+Based on the same pattern as described in <<../../app-engine/i18n#,Application localization>> one may also localize schemas.
+This enables labels and texts in schemas be displayed in the preferred language according to the user's browser settings.
+
+The schema fields that support localization may have an optional ``i18n="key"`` attribute in the XML schema descriptor.
+This `i18n` attribute will contain a key string that refers to the translated texts in the ``i18n/phrases.properties`` bundle files.
+
+The ``i18n`` attributes are always optional. If the ``i18n`` attribute is not specified, the value of the XML element will be used.
+
+.Example of localized Content Type
+[source,xml]
+----
+include::schemas/code/localized-cty.xml[]
+----
+
+NOTE: The localization of schemas applies to the admin tool apps included in XP: `Home`, `Content Studio`, `Applications` and `Users`.
+
+== Supported Fields
+
+The following schemas and fields support the `i18n` attribute for localization:
+
+- **Input type**: ``label``, ``help-text``
+- **Item set**: ``label``, ``help-text``
+- **Field set**: ``label``
+- **Option set**: ``label``, ``help-text``
+- **Content Type**: ``displayName``, ``description``
+- **Mixin**: ``displayName``, ``description``, input types
+- **Page descriptor**: ``displayName``, input types in config
+- **Part descriptor**: ``displayName``, input types in config
+- **Layout descriptor**: ``displayName``, input types in config
+- **Admin Tool descriptor**: ``displayName``, ``description``
+- **Macro**: ``displayName``, ``description``, input types in config
+
+== Translations
+
+The translated texts for each of the i18n keys should be placed in the corresponding `phrases.properties` file, in the same application where the schema is defined.
+
+Steps to add the translations for a schema:
+
+#1 Add or edit one file per language supported:
+
+``src/main/resources/i18n/phrases_<language-code>.properties``
+
+.Example files to support English and Norwegian
+[source,properties]
+----
+src/main/resources/i18n/phrases.properties
+src/main/resources/i18n/phrases_en.properties
+src/main/resources/i18n/phrases_no.properties
+----
+
+#2 Add the i18n keys from the schema in each of the phrases.properties files. Each line should have the key, an equals ``=`` sign, and the text in the specific language.
+
+.phrases_en.properties
+[source,properties]
+----
+person.display-name=Person
+person.name.label=Name
+person.age.label=Age
+person.photo.label=Photo
+person.photo.help-text=Passport photo
+----
+
+.phrases_no.properties
+[source,properties]
+----
+person.display-name=Person
+person.name.label=Navn
+person.age.label=Alder
+person.photo.label=Bilde
+person.photo.help-text=Passbilde
+----
+
+#3 It is also recommended to add a `phrases.properties` file (without language suffix) that will be used as default if a translation for the browser language cannot be found.
+
+#4 Build and deploy the application. The texts in the schema will appear depending on the language configured in the browser.

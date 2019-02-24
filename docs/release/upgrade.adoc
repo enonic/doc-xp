@@ -6,56 +6,51 @@ This section describes the steps required to upgrade Enonic XP from 6.15 to 7.0
 
 == Requirements
 
-Before you begin the upgrade process, ensure the following requirements are satisfied
+Before starting the upgrade process, ensure the following requirements are in place
 
 XP Version:: You need to be running at least Enonic XP 6.15.x (if you are running an older version, upgrade to 6.15.x first)
 QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
-Toolbox and CLI:: Ensure you have 6.15 Toolbox available, and XP 7.0 CLI installed
-Disk space:: Make sure you have enough disk space to facilitate a complete dump of all existing data
-Duplicate prod environment:: For zero downtime upgrades, you will need a parallel production environment
+Toolbox:: Ensure you have 6.15 Toolbox available
+Enonic CLI:: Make sure you have Enonic CLI installed
+Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
 3rd. party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 7.
 Custom apps:: Make sure all custom built applications have been upgraded to support XP 7, as described in <<upgrade-apps#,Upgrading Applications>>
 
+This guide focuses on completing an upgrade with zero downtime, and requires you to setup a parallel production environment
+Carefully follow the below steps to upgrade your instance:
 
-This guide focuses on completing the upgrade without downtime.
-For scenarios where downtime cannot be avoided, additional steps will be required.
-
-Carefully follow the below steps to upgrade your instance
-
-NOTE: A test upgrade should first be completed in a QA environment first to verify that the upgrade will work successfully.
+NOTE: For scenarios where downtime cannot be avoided, additional steps, such as setting up a temporary "we are upgrading page" will be required:
 
 
-== Prepare new production environment
+== New production environment
 
 We recommend setting up a new parallel environment for running XP 7.
 This will virtually eliminate downtime, and also be a safety net if the upgrade should somehow fail.
 
-Install XP 7:: TODO
+Install XP 7:: Follow the XP installation instructions matching your environment
 
-Update configuration:: TODO
+File deployments:: If you have one or more applications deployed as files, replace them with their respective upraded versions
 
-Start servers:: TODO
+Update configuration:: Migrate your your existing configuration files from 6.15, and perform the following changes:
+
+* app configs
+* vhosts
+* ports?
+* system config?
+
+Start servers:: Start your new servers and verify everything is working properly
 
 
 == Dump data
 
-First step to upgrade is dumping data from the existing 6.15 instance.
+We are now ready to dump data from our existing 6.15 instance.
 
-Enable readonly mode:: Turn on readonly mode in your 6.15 instance. TODO: ``toolbox bla bla``
-This will ensure a consistent dump, but also prevent new data from being written to XP during the upgrade.
+Readonly mode:: Turn on readonly mode in your 6.15 instance. TODO: ``toolbox bla bla``
+This will prevent new data from being written to XP during the upgrade, and also ensure a consistent dump.
 
-Dump data:: Use 6.15 toolbox to dump the data. TODO ``toolbox bla bla``.
+Dump data:: Use 6.15 toolbox to dump the data. TODO ``toolbox bla bla -noversions``.
 
 NOTE:: We highly recommend dumping data without versions. This will dramatically speed up the upgrade while also preparing your dataset for the new vacuuming features in XP 7.
-
-
-== Divert traffic
-
-NOTE:: For zero downtime upgrades, you may skip this step. Simply keep traffic flowing to your servers during the migration process.
-
-Divert traffic:: To prevent traffic from hitting your XP instance(s) during the upgrade,
-we recommend setting up a temporary static error page that handles all requests during the migration.
-
 
 
 == Load data
@@ -70,21 +65,20 @@ The load command will automatically upgrade data from 6.15 format during the loa
 
 == Update apps
 
-We now need to update all installed applications to new versions supported by XP 7.
+Next all applications must be upgraded to new versions that support XP 7
 
-Market apps:: For market apps, simply go to TODO Introduction
+Market apps:: For market apps, go to your applications panel, and click upgrade on all applications where available. TODO Verify
 
-Custom apps:: TODO
+Custom apps:: Upgrade all your custom developed applications by installing them, either through UI or the API.
 
 
 == Validate
 
-TODO
-* TODO
+Validate that your new installation is working as expected. We recommend checking logs, and performing live tests on services.
 
 
 == Go live
 
-With all lights green, you may now redirect all traffic from your old XP 6 servers, to the new XP 7 environment.
+With all lights green, simply redirect all traffic from your old XP 6 servers (or upgrade page), to the upgraded XP 7 environment.
 
-Congratulations on upgrading to XP 7!
+Welcome to the XP 7 club!

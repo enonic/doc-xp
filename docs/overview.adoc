@@ -2,18 +2,19 @@
 :toc: right
 :imagesdir: images
 
-== Open source application platform and CMS
+== Fullstack JavaScript application platform and CMS
 
 Inspired by the principles of traditional Operating Systems,
-Enonic XP offers essential services and tools required to build and maintain highly scalable web apps and sites:
+Enonic XP offers the essential services and tools required to build and maintain highly scalable web apps and sites.
+We like to call it a Web Operating System:
 
-* Distributed high performance <<overview/storage/index#,NoSQL Storage and search engine>>
-* Flexible application <<overview/runtime/index#, Runtime for server Javascript and/or Java development>>
-* Standard auth handling through <<overview/idproviders/index#,Identity Providers>>
-* Extensible <<overview/admin/index#, Admin Console>> for back-office users
-* Deploy to <<overview/hosting/index#,any infrastructure>>
-* Hybrid <<overview/cms/index#,Content Management System>> included
-* Software Development Kit (SDK) that runs locally
-* https://market.enonic.com[Market place] for apps and developer components.
+* Support for building and deploying <<overview/apps#,Applications>>
+* Distributed high performance <<overview/storage#,NoSQL Storage and search engine>>
+* Flexible application <<overview/runtime#, Runtime for server Javascript and/or Java development>>
+* Tightly integrated Identity and Access Management - <<overview/iam#,IAM>>
+* Extensible <<overview/admin#, Admin Console>> for back-office users
+* Hybrid <<overview/cms#,Content Management System>> included
+
+Like any modern OS, Enonic also provides a https://market.enonic.com[Market place] for XP apps and developer components.
 
 image::platform-components.png[Platform illustration]

@@ -4,14 +4,121 @@ include::variables.adoc[]
 :imagesdir: release/images
 
 == Introduction
-TODO
+Enonic XP 7 takes a major leap in simplifying application development and making the platform leaner and more flexible.
+The documentation your are reading was also created from ground up for version 7.
 
-== Upgrading
+Highlights for XP 7 are:
 
-Enonic XP {release} contains breaking changes.
-As such, customers planning to migrate from version 6.x must complete two steps rather than one.
+* Enonic CLI - For managing XP development project, also replaces the toolbox shell script
+* Content Studio is moved out of the platform - and is now available as an app
+* Java Virtual Machine is now bundled with XP - and upgraded to version 11
 
-1. <<upgrade-xp#,Upgrading Enonic XP>>
-2. <<upgrade-apps#,Upgrading installed applications>>
+== Upgrading from XP 6
+
+XP 7 contains breaking changes.
+Customers planning to upgrade from version 6.x must complete two steps rather than one.
+
+* <<upgrade-apps#,Upgrading installed applications>>
+* <<upgrade-xp#,Upgrading Enonic XP>>
 
 Follow the instructions carefully to secure a successful upgrade.
+
+== Enonic CLI
+
+TODO
+
+== Content Studio as an app
+
+Content Studio, the CMS editorial interface has been moved out of the XP core.
+It  is now available as a separate application on https://market.enonic.com/vendors/enonic/content-studio[Enonic Market]
+
+Content Studio can now be released more frequently than the XP core.
+You can still expect new versions of Content Studio to be released as new features are made available in the core platform.
+
+== Embedded JVM
+
+TODO
+
+
+== CMS Core
+
+Even it Content Studio can be installed as a separate application,
+Enonic XP still ships with core CMS functionality that applications depend on.
+
+Below are the new features and improvements to the CMS core in XP 7
+
+=== Image styles
+
+XP 7 introduces a new feature in the rich text editor called "Image styles".
+Image styles consist of both client side styling (css), and image service rendering specifications.
+
+The rich text editor was previously limited to pre-defined and hard-coded styles, such as "cinema (21:9) or square(1:1)".
+Now, application developers may define custom styles that control both server side rendering aspect ratio, and specify classes to annotate the specific image.
+
+TODO IMAGE
+
+=== CMS Repos
+
+Customers with many sites have requested better support for isolation of sites, and who can access specific them.
+Our solution to this is storing sites in different "projects", each project using its own repo.
+XP 7 (and Content Studio) does not yet fully implement this features, but prepares the foundation for supporting it.
+
+You will notice this through the following change:
+
+* The default CMS repo is renamed from "cms-repo" to "com.enonic.cms.default".
+* New projects will be using the extension as project name, i.e. project "myproject" will use repo "com.enonic.cms.myproject"
+* The site engine URLs now contain project name - i.e. /site/<project>/<branch>/<content-path>
+
+
+=== Rich text reference handling
+
+References to images or other content in the rich text editor are now stored explicitly in the underlying node API.
+The publishing wizard will now identify and include these dependencies like all other references - no more missed items during publishing.
+
+=== Stemmed content
+
+Content flagged with a language is now automatically stemmed (trimming words to their root form for better hits), using the standard Elasticsearch stemmer.
+This is achieved by adding a language-specific index of the  _allText property, in addition to the standard fulltext index.
+
+Developers may take advantage of this feature by using the new "stemmed" search function.
+
+=== Better page indexing
+
+Pages, and their components are now indexed differently.
+Rather than just looking for text within a page, developers may now search for any configuration property,
+or metadata within a page.
+
+As an example, one may now search the use of a specific part within a site.
+
+TODO: more?
+
+
+== XP Storage
+
+The XP storage has been refactored, and includes both new features and optimizations
+
+=== Blobstore improvements
+
+XP persists all data in so-called blobstore segments, one segment for each type of data to persist.
+XP 7 introduces new segments for indexconfig and permissions, allowing for re-use of data across nodes, and versions.
+
+On average, this reduces use of disk space by 80% (TODO, verify)
+
+Additionally, each repository now has it's own root entry in the blobstore.
+This makes it possible to delete (or restore) all blobs associated with a single repository, fast and efficiently.
+
+=== Version commits
+
+XP automatically creates new versions for each modification of a node.
+Where XP 6 would persist all versions, XP 7 treats all versions as transient.
+This means that all versions that are not currently in a brach, may be "garbage collected" at any time in the future.
+
+To prevent versions from being removed, developers must create a "commit".
+A single commit may include multiple node versions - but never multiple versions of a single node.
+
+For the Content API specifically, publishing an item will automatically create a "commit" including the specific versions of all items published.
+Commits have id, committer, and optionally a commit message as meta data.
+
+NOTE: XP 7 does not yet implement the "garbage collector", this will be part of an upcoming release.
+
+== TODO?

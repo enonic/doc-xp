@@ -1,0 +1,27 @@
+= Sites
+:toc: right
+:imagesdir: images
+
+TODO Sites
+
+
+== Site forms
+
+Site forms lets you configure the current application for a specific site through Content Studio
+
+[source,xml]
+----
+<site>
+  <items>
+    <input type="TextLine" name="company">
+      <label>Company</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextArea" name="description">
+      <label>Description</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </items>
+  <x-data name="us-address"/>
+</site>
+----

@@ -1,17 +1,26 @@
-= Enonic XP {release} core documentation
+= Enonic XP {release} documentation
 include::variables.adoc[]
 :toc: right
 :imagesdir: images
 
-Welcome to the Enonic XP core documentation
+Welcome to the Enonic XP reference documentation
 
-NOTE: *New to Enonic XP?* Check out our https://developer.enonic.com/start[Getting Started guide] to build your first XP application in 5 minutes.
+WARNING: This documentation is currently under construction, and will be completed with the release of XP 7. The http://docs.enonic.com[XP 6 documentation] will not be migrated to the new developer portal.
+
+== Introduction
+
+Visit the <<overview#,overview section>> for an introduction to <<overview/apps#,XP applications>> and the various platform features such as the <<overview/runtime#,XP runtime>>, <<overview/storage#,XP Storage>>, <<overview/iam#,IAM>> or the <<oveerview/cms#,CMS>>
+
+NOTE: *Quick start?* Visit our https://developer.enonic.com/start[Getting Started section] to install Enonic CLI, the XP development kit and build your first XP application in a few minutes.
 
 == Release notes
 
-== Upgrade notes
+Curious about whats new, or how to upgrade from a previous version of XP? Check out the <<release#,release notes>>.
 
-Enonic XP 7 is a breaking release.
-Upgrading from version 6.x will require upgrading both applications and the platform itself.
+== General reference
 
-Please consult the <<release/upgrade#,upgrade instructions>> for more information.
+For best practice, examples and detailed insight, visit the <<reference#,General reference section>>.
+
+== API
+
+For detailed specifications of our various platform APIs, visit the <<api#,API section>>

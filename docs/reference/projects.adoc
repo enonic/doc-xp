@@ -1,6 +1,6 @@
 = Development Projects
 :toc: right
-:imagesdir: images
+:imagesdir: projects/images
 
 This section provides an overview of how to setup, build and deploy new projects for applications and libraries.
 
@@ -88,7 +88,7 @@ application.svg:
 application.xml:
   The XML file contains basic information for the application. Currently a description.
 
-  .. literalinclude:: ./code/application.xml
+  .. literalinclude:: projects/code/application.xml
      :language: xml
 
 assets/:
@@ -110,7 +110,7 @@ site/site.xml:
   Settings for the application can be defined in the ``config`` element
   and the values for these settings can be updated using the Content Studio tool.
 
-  .. literalinclude:: ../site/code/site.xml
+  .. literalinclude:: projects/code/site.xml
      :language: xml
 
 site/content-types/:
