@@ -2,53 +2,65 @@
   "menuItems": [
     {
       "title": "Overview",
-      "document": "overview",
-      "menuItems": [
-        {
-          "title": "Applications",
-          "document": "overview/apps"
-        },
-        {
-          "title": "Runtime",
-          "document": "overview/runtime"
-        },
-        {
-          "title": "Storage",
-          "document": "overview/storage"
-        },
-        {
-          "title": "IAM",
-          "document": "overview/iam"
-        },
-        {
-          "title": "CMS",
-          "document": "overview/cms"
-        },
-        {
-          "title": "Admin",
-          "document": "overview/admin"
-        }
-      ]
+      "document": "overview"
+    },
+    {
+      "title": "Applications",
+      "document": "apps"
     },
     {
       "title": "Development",
-      "document": "dev"
+      "document": "development"
     },
     {
       "title": "Hosting",
       "document": "hosting"
     },
     {
-      "title": "General reference",
+      "title": "Platform reference",
       "document": "reference",
       "menuItems": [
         {
-          "title": "Projects",
-          "document": "reference/projects"
+          "title": "Storage",
+          "document": "reference/storage",
+          "menuItems": [
+            {
+              "title": "NoQL syntax",
+              "document": "reference/storage/noql"
+            }
+          ]
         },
         {
-          "title": "Web Engine",
-          "document": "reference/web-engine"
+          "title": "Runtime",
+          "document": "reference/runtime",
+          "menuItems": [
+            {
+              "title": "Javascript framework",
+              "document": "reference/runtime/framework"
+            },
+            {
+              "title": "Localization",
+              "document": "reference/runtime/i18n"
+            },
+            {
+              "title": "Web Engine",
+              "document": "reference/runtime/web-engine"
+            }
+          ]
+        },
+        {
+          "title": "IAM",
+          "document": "reference/iam"
+        },
+        {
+          "title": "Admin",
+          "document": "reference/admin",
+          "menuItems": [
+            {
+              "title": "Admin Engine",
+              "document": "reference/admin/admin-engine"
+            }
+          ]
         },
         {
           "title": "CMS",
@@ -83,26 +95,6 @@
               "document": "reference/cms/components"
             }
           ]
-        },
-        {
-          "title": "Identity providers",
-          "document": "reference/idproviders"
-        },
-        {
-          "title": "Admin Engine",
-          "document": "reference/admin-engine"
-        },
-        {
-          "title": "NoQL syntax",
-          "document": "reference/noql"
-        },
-        {
-          "title": "Javascript framework",
-          "document": "reference/framework"
-        },
-        {
-          "title": "Localization",
-          "document": "reference/i18n"
         }
       ]
     },

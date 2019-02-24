@@ -1,5 +1,168 @@
-= CMS Reference
+= Content Management System
 :toc: right
-:imagesdir: cms/images
+:imagesdir: images
+
+Unlike most applications platforms, Enonic XP ships with an embedded hybrid CMS.
+
+== Introduction
+
+Use of the CMS capabilities is fully optional.
+The full range of CMS capabilities are made available through three individual, but tightly coupled services:
+
+* Content API - Included in the XP core, built on top of the NoSQL Storage
+* Site Engine - Included in the XP core, built on top of the Javascript Framework og web app Engine.
+* Content Studio - Authoring interface available on Enonic Market.
+
+== Content Types
+
+The Enonic CMS is content centric, rather than "page" centric.
+This means that any content produced will have a specific content type, such as "article", "person" or "product".
+Things like "shortcut", "file", "folder", "site" and even "landing page" are also perfectly valid content types.
+
+Content types essentially define a specific set of fields that define the content.
+For person, this might be "firstname", "lastname" and "birthdate", while a landing page might to fine with just a "name" field.
+
+Actually, all content types share a standard field named "Display Name", which can be considered the items title.
+Additionally, a range of meta data fields are available, such as language, permissions, modifiedBy, createdDate and more.
+
+Content types are defined through the <<Schema system>>, which enables creation of rich and complex forms as required.
+
+
+== Schema system
+A basic concept used throughout the CMS is called schemas.
+Schemas enable developers to easily define various types of forms used throughout the CMS.
+
+The schema system provides a 1:1 mapping between schema fields and corresponding document properties.
+For instance, a text input called "title", is mapped to a property called "title" in the underlying document structure.
+
+The schema system provides a range of standard <<Input Types>>, such as TextLine and ContentSelector.
+It also offers advanced form components such as ItemSets and OptionSets for creating nested sets of data and optional sets of data.
+
+== Pages
+
+Enonic XP is often used as a traditional Web CMS, where editors compose rich landing pages.
+
+Any content item may be configured with a "presentation" - or more precisely, a page.
+
+Pages are composed form a structure of components
+
+* Page - The customizable root component of a page
+* Regions - drop zone(s) within a page where other components may be placed
+* Layouts - customizable components with region(s) of their own
+* Parts - customizable component
+* Text - Standard free text component
+* Image - Standard component for images
+* Fragment - Special re-usable component
+
+Pages, layouts and parts are all fully customizable through custom controllers and corresponding schemas.
+Get all the details in the <<../reference/components/index#,reference section>>
+
+Available components depends on the application that have been added to your <<Sites>>.
+
+
+== Page templates
+
+For some content types, like "article", you might want to re-use the same "presentation" used over and over again.
+For this specific purpose, we have the content type ``Page template``.
+By creating a page template for "article", and setting up its page, this page will automatically be used for presenting all articles within your site.
+
+
+== Fragments
+
+From time to time, you might want to reuse a component you placed on page, for multiple pages.
+Fragments to the rescue!
+By converting a component to a fragment, the fragment is made available as a separate content item, using the content type ``fragment`` ofcourse.
+Fragments can then be placed on other pages (including page templates), just like any other component.
+The fragment may now be edited from a single location, and will instantly be updated in all locations where it is placed.
+
+Fragments also enable creative features like limiting access to view or edit a particular part of the page.
+
+
+== Sites
+
+``Site`` is a system defined standard content type. What makes sites special is the ability to add applications to them.
+Multiple applications may be added to a single site, where each application contains desired functionality.
+
+Typically, sites will have a main application that controls most content types and page components if any.
+Additional applications like Google Analytics, and SEO tools are typically installed to extend the functionality without custom development.
+
+TODO Picture
+
+
+== X-Data
+
+It is often useful to be able to share a set of fields across different content types.
+Xtra data, or X-data for short was designed specifically for this purpose.
+
+By defining x-data schemas, developers may dynamically inject these extra fields to all, or a specified list of content types.
+For instance, the SEO Meta fields application makes use of this, so editors may fine-tune SEO settings across all different content they produce.
+
+In Content Studio, X-data is visualized as a separate step in the publishing form.
+
+
+== Site Engine
+
+The XP Site engine is based on the <<web-engine#,XP Web engine>>.
+As such, it also uses the <<../framework/index#,Javascript Framework>>, but extends the use.
+The site engine is serving requests from:
+
+  //myserver:8080/site/<repo-name>/<branch-name>/<content-path>
+
+
+=== Content driven
+
+When compared to the Web engine, the main difference is that sites are content driven, rather than code driven.
+
+This is best understood by looking at the initial URL pattern.
+The Web engine requires the name of the app that will handle the request, where the site engine specifies a repo, branch and path to content as its entry point.
+
+As such, what happens at a specific url is primarily controlled by the editor, rather than the developer directly.
+Developers can still take control over URLs when required, through the use of <<Filters>> and <<Mappings>>.
+
+=== Site apps
+
+To understand the Site engine, it is crucial to understand the concept of sites.
+The system defined content type ``Site`` has a special purpose in relation to the Site engine.
+This is due to the fact that "site applications" can be added to, and configured specifically for that site.
+
+As a site may contain multiple applications,
+As multiple applications may be involved in the processing of a single request,
+the main purpose of the Site engine is to coordinate when, and how each application is executed.
+
+=== Rendering pipeline
+
+The outer pipeline steps are essentially the same for sites as for Web apps (Vhost,...Error Handler TODO)
+However, where the webapp controller would normally kick in, instead, the site handler takes over the show.
+
+The site rendering pipeline below describes how the site controller works
+
+Site resolver::
+
+Site Filters::
+
+Site Mappings::
+
+Access manager::
+
+Page renderer::
+
+Page controller::
+
+Component? processors::
+Iteratively processing page output and processing component tags, until no tags are left
+
+Page processors?:: Fixing things like "pageContributions"
+
+Site Filters?::
+
+
+== Image Services
 
 TODO
+
+
+== Headless and Hybrid CMS
+API-access to content (Headless CMS) combined with web pages commonly referred to as Hybrid CMS.
+
+The content oriented approach makes XP ideal for serving content via API (so-called Headless CMS).
+It also enables developers to instantly make use of the powerful search capabilities provided by the underlying NoSQL storage.
