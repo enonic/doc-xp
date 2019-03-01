@@ -1,4 +1,4 @@
-= Enonic XP 7.0 platform upgrade
+= Upgrading to XP 7.0
 :toc: right
 :imagesdir: images
 
@@ -62,6 +62,12 @@ Move dump:: If needed, transfer dump files from previous step to the new server.
 Load dump:: Use Enonic CLI to load the dump on your XP server i.e. ``enonic dump load -n <dump-name>``.
 The load command will automatically upgrade data from 6.15 format during the load.
 
+
+== Install Content studio
+
+If you were using Content Studio, you will now have to install it, since it is no longer part of the XP core distribution.
+
+Content Studio is available on https://market.enonic.com[Enonic Market].
 
 == Update apps
 

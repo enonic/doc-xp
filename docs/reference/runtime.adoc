@@ -2,72 +2,71 @@
 :toc: right
 :imagesdir: runtime/images
 
-All applications built on XP are powered by the XP Runtime
+Applications built on XP are powered by the XP runtime
 
-== Foundation
+== Micro Services platform
 
-The XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components.
-However, thanks to the the embedded JavaScript framework, XP apps are typically written in JavaScript.
-The unique twist is that Java libraries can easily be accessed and used by the JavaScript code.
-
-== Ingredients
-
-The following components are part of the XP runtime:
-
-* Javascript Framework - Based on Nashorn
-* Servlet engine - based on Jetty
-* OSGi Dynamic module system - used to isolate application
-* Cluster - Automatically join XP cluster and backend if available
-
-
-== Micro Service architecture
+XP apps are primarily written in JavaScript thanks to the <<runtime/framework#,XP JavaScript framework>>.
+However, the XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components.
+This also means that Java libraries and code can easily be accessed and used by JavaScript developers as well.
 
 Micro service developers typically combine a runtime (JavaVM, NodeJS etc) with application code
 Once started, the micro service will occupy a set of CPU, memory and disk resources through its lifetime.
 
-The XP runtime and apps can be deployed like a traditional micro service, but adds several interesting capabilities:
+Where the XP runtime stands out from traditional runtimes, is the capability of running back-end services (aka state) locally.
+In a clustered deployment, you may configure specific services and apps to run on a per node basis,
+for instance as pure back-end and front-end nodes.
 
-* Multiple applications can run within a single instance.
-* Start, stop and re-configure applications without restarting the instance
-* Dynamically load applications from a central repository
+== Multiple apps per runtime
 
-An example of when these features are useful, is the CMS functionality of XP.
-For sites, multiple applications may be involved in the processing of a single request.
+The XP runtime is also capable of running multiple applications in a single instance.
+Applications are isolated from each other using OSGi, a dynamic module system for the JVM.
+
+This provides a range of possibilities:
+
+* Better utilization of underlying infrastructure
+* Modularization without performance degradations due to network traffic
+* Simplified testing and developer environment
+
+An example of when these features are useful, is the XP CMS.
+For a single site, multiple applications may be involved in the processing of a request.
 The applications may be dynamically added to or removed from a site - without any downtime.
 
-The biggest difference between traditional micro services lies in the fact that the XP runtime depends on the XP back-end.
-As such, XP runtimes (also known as XP front-end) always connects to the back-end services when booting up.
+There is no problem running many applications within a single runtime.
+XP apps are primarily Javascript, and similar to serverless architectures the apps hardly consume any resources when idle.
 
-This way, both application developers and the runtime itself can rely on access to platform services such as <<../storage/index#, Storage>> and <<../idproviders/index#, ID providers>>.
+== Applications API
 
+There are multiple ways of rolling out apps on Enonic XP.
 
+The most dynamic is through the apps API. This actually persists applications in the XP storage.
+Events cause runtime instances to pick up and start the new apps automatically.
 
-== Serverless
+== Scaling
 
-TODO, drop?:
-Similar to serverless architectures, XP application themselves will hardly consume any resources when idle.
+The XP runtime is capable of utilizing multiple underlying multi-core CPUs for vertical scaling.
+This is useful for applications with heavy load, but also important from a development perspective.
+As the XP runtime is multi-threaded, developers may also benefit from a simpler development model.
+Simpler debugging, and the ability to run threaded operations when needed are just some of the benefits.
+The XP task engine for instance runs all tasks as separate threads.
 
-This also makes XP a cost effective solution for running batch jobs (called <<Tasks>>)
-in addition to the traditional request based processing.
+XP can also be scaled horizontally. XP can be deployed as a single instance, and scaled out through a cluster of similar nodes,
+or in a more diverse structure of stateless front-end and stateful back-end nodes.
 
 
 == SDK
 
 Enonic XP ships with a Software Development Kit.
-The SDK is essentially the entire platform with both back-end and front-end offered as a single executable.
+The SDK is essentially the entire platform with both back-end and front-end offered in a single runtime.
+The major difference between the SDK and Server versions of XP is that the SDK builds on the Java Development Kit,
+where the server version is a leaner and more optimized version of the Java VM.
 
-== Webapp Engine
 
-TODO
+== Engines
 
-== Site Engine
+For the purpose of executing applications, the XP runtime includes four main engines that are relevant to a developer:
 
-TODO
-
-== Task Engine
-
-TODO
-
-== Servlet Engine
-
-TODO
+Web engine:: The web engine executes pure play Javascript web apps.
+Site Engine:: The site engine is capable of executing content driven applications based on the Content API.
+Task Engine:: The task engine runs defined Javascripts as threaded background processes.
+Servlet Engine:: XP also embeds Jetty, and can be used for Java specific, or platform level extensions

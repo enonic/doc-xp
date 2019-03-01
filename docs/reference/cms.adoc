@@ -35,7 +35,7 @@ Schemas enable developers to easily define various types of forms used throughou
 The schema system provides a 1:1 mapping between schema fields and corresponding document properties.
 For instance, a text input called "title", is mapped to a property called "title" in the underlying document structure.
 
-The schema system provides a range of standard <<Input Types>>, such as TextLine and ContentSelector.
+The schema system provides a range of standard <<cms/schemas#Input Types>>, such as TextLine and ContentSelector.
 It also offers advanced form components such as ItemSets and OptionSets for creating nested sets of data and optional sets of data.
 
 == Pages
@@ -117,7 +117,7 @@ This is best understood by looking at the initial URL pattern.
 The Web engine requires the name of the app that will handle the request, where the site engine specifies a repo, branch and path to content as its entry point.
 
 As such, what happens at a specific url is primarily controlled by the editor, rather than the developer directly.
-Developers can still take control over URLs when required, through the use of <<Filters>> and <<Mappings>>.
+Developers can still take control over URLs when required, through the use of <<runtime/framework#Filters>> and <<runtime/framework#Mappings>>.
 
 === Site apps
 

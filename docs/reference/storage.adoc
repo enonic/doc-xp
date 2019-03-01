@@ -14,22 +14,23 @@ However, we were unable to find any single solution that was sufficiently simple
 
 The result is the Enonic Data Repository.
 
-== Feature overview
+== Features
 
-The XP Repository enables you to store, index, query and access data of virtually any kind. Fast and efficiently.
+The XP Repository enables you to store, index, query and access data of virtually any kind, fast and efficiently.
 Below is a highlight of the capabilities provided:
 
-* Create any number of <<Repositories>> within a single deployment of XP
+* Create multiple of <<Repositories>> within a single XP deployment
 * Store and index documents aka <<Nodes>>, no schemas required
 * Nodes contain key-value entries called <<Properties>>
 * Nodes can be stored hierarchically
 * Values have specific <<ValueTypes>>, for instance String or GeoPoint
 * Store entire files and byte arrays within a single property
 * Build hierarchical structures of properties within a single node
-* Query your data using the <<Node Query Language>>
+* Query your data using the <<Query language>> aka NoQL
 * Use <<Aggregations>> to get powerful statistics on your data
-* Node-level <<Versioning>> lets you do rollbacks and store important events
-* <<Access Control>> down to a single Node
+* New versions are created for every modification of a node
+* <<Commit>> versions to persist them forever, or they will be vacuumed
+* Supports <<Access Control>> down to a single Node
 * Git inspired <<Branches>> enable you to stage and promote your data
 * Fully <<Schema-less>> approach lets you keep the domain model in your code
 * <<Editors>> eliminate cumbersome statements
@@ -85,10 +86,12 @@ A node essentially consist of:
 
 When nodes are created in a repository, the following happens:
 
-* A unique identifier is created for the node (unless defined through import)
-* A unique version identifier for the node is created
-* The data is stored in a <<Blobstore>> of type node
-* The node and it's specific version is then added to a <<Branch>>.  This entry keeps track of the tree-structure and other metadata for the specific node-version.
+* For new nodes, a unique identifier is created
+* For every modification, a unique version identifier is created
+* The data is stored the underlying <<Blobstore>>
+* The specific version of the node is then added to the specified <<Branch>>.
+
+
 
 == Properties
 
@@ -311,7 +314,7 @@ Again, doing a push-operation from 'draft' to 'master' will result in both nodes
 
 image::branch_push_2.png[]
 
-== Node query language
+== Query language
 
 The Node Query Language, or NoQL for short, is inspired by traditional SQL.
 As with other NoSQL solutions, it has special capabilities and limitations.
@@ -424,4 +427,12 @@ XP supports several different kinds of Aggregations such as Terms, Range, dateRa
 
 == Editors
 
-TODO
+Inspired by modern design patterns like Command Query Responsibility Segregation (CQRS),
+Enonic XP strongly separates accessing and querying data from writing.
+
+Rather than using update statements, or sending pre-defined objects or structures for persisting, Enonic XP uses a concept called "Editors".
+An editor is typically a query, combined with a piece of code.
+
+The query determines which nodes to modify, and the code is then executed for each single node.
+
+TODO Example.

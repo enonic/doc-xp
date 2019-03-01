@@ -2,29 +2,97 @@
 :toc: right
 :imagesdir: images
 
-== What
+== What is Enonic XP?
 
 Enonic XP is a fullstack JavaScript application platform and CMS in one
 
+We like to call it a "Web Operating System".
+
 Inspired by the principles of traditional Operating Systems,
 Enonic XP offers the essential services and tools required to build and maintain highly scalable web apps and sites.
-We like to call it a Web Operating System:
 
-* A concept of <<overview/apps#,Applications>>
-* Development tools, frameworks and
-* TODO Hosting
+Build your own <<apps#,applications>>, or use existing from the https://market.enonic.com[Enonic Market place]
+Applications are built on the flexible <<overview/runtime#,Javascript runtime>>.
 
-== Why
+Applications get access to essential platform services:
 
-
-== When
-
-* Distributed high performance <<overview/storage#,NoSQL Storage and search engine>>
-* Flexible application <<overview/runtime#, Runtime for server Javascript and/or Java development>>
-* Tightly integrated Identity and Access Management - <<overview/iam#,IAM>>
+* <<overview/storage#,NoSQL Storage and search engine>>
+* Identity and Access Management - <<overview/iam#,IAM>>
 * Extensible <<overview/admin#, Admin Console>> for back-office users
-* Hybrid <<overview/cms#,Content Management System>> included
+* Hybrid <<overview/cms#,Content Management System>>  when needed
 
-Like any modern OS, Enonic also provides a https://market.enonic.com[Market place] for XP apps and developer components.
+Enonic also offers a Command Line Interface CLI, and software development kits to support both development and operational tasks.
 
 image::platform-components.png[Platform illustration]
+
+
+== Why should you care?
+
+The goals of Enonic XP are to:
+
+* simplify development and maintenance of complex web apps and sites
+* provide freedom proprietary clouds, and the ability to deploy anywhere
+* bring a smile on your face
+
+
+=== Fast
+
+Enonic XP is seriously fast.
+
+* Installing XP, building and deploying your first application takes less than 5 minutes.
+* Enonic XP has a lightning fast embedded storage, built on top of Elasticsearch.
+* XP is easy to learn, as new developers are typically trained and productive in less than a day
+* Enonic offers application starter kits, so you get a flying start every time
+
+=== Micro service style
+
+The Enonic XP runtime, and the platform services can be seen as a framework for your app.
+This means that application built on Enonic XP are essentially micro services.
+
+You can use XP for a single application, run multiple dedicated applications in a cluster,
+or even run multiple apps within a single runtime - for better resource utilization or modularization.
+
+=== Stack in a box
+
+Enonic XP offers a unique and tightly integrated application stack.
+The runtime, storage/search, IAM (Identity and Access Management) and CMS are all released and versioned together.
+
+This simplifies everything from the SDK, to building, testing and deploying applications, not to mention scaling.
+
+You may also integrate XP and your apps with other platforms or infrastructure services as needed.
+
+=== Javascript on the JVM
+
+The <<reference/runtime/framework#,XP Javascript framework>> is based on the CommonJS specification.
+But unlike most server Javascript platforms, Enonic XP runs on the JVM.
+
+This brings benefits like:
+
+* Multithreading (with ability to utilize multi-core processing)
+* Access to and ability to execute Java in addition to Javascript
+* Performance gains from the highly optimized JVM
+
+If needed, XP can easily be configured to execute and interact with NodeJS containers,
+especially in containerized environments.
+
+=== Embedded CMS
+
+Unlike any other application stack, Enonic XP includes a powerful CMS and API that can optionally be used for your projects.
+Wether you are looking for a traditional, headless or hybrid (combination) CMS, XP got you covered.
+
+The CMS builds directly on the other platform components. It enables you to create multiple sites in one instance,
+and add multiple applications to a single site.
+
+The editorial interface can be installed as an app, and we are confident it will bring a smile on your editors face as well.
+
+=== Freedom
+
+Last, but not least, Enonic XP is fully open sourced, licensed under GPL 3 with a linking exception.
+This means that applications and tools built on XP are not affected by GPL, and can be licensed however you like.
+
+NOTE: *Apache license* Almost all apps, libraries and other utilities on https://market.enonic.com[Enonic Market] are licensed with the permissive Apache license.
+
+As open source software, Enonic XP also leaves you free to run the software wherever you like, on premises or in the cloud.
+
+Should you be using XP for a mission critical deployment,
+it is nice to know that Enonic offers professional cloud services and software support.

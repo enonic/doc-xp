@@ -1,4 +1,4 @@
-= Release notes
+= Release Notes
 include::variables.adoc[]
 :toc: right
 :imagesdir: release/images
@@ -7,25 +7,29 @@ include::variables.adoc[]
 Enonic XP 7 takes a major leap in simplifying application development and making the platform leaner and more flexible.
 The documentation your are reading was also created from ground up for version 7.
 
-Highlights for XP 7 are:
+NOTE: *Breaking change* XP 7 contains breaking changes. This means that upgrades will require an update of applications in addition to XP itself. Follow the <<upgrade#,upgrade instructions>> carefully to secure a successful upgrade.
 
-* Enonic CLI - For managing XP development project, also replaces the toolbox shell script
-* Content Studio is moved out of the platform - and is now available as an app
-* Java Virtual Machine is now bundled with XP - and upgraded to version 11
+XP 7 highlights:
 
-== Upgrading from XP 6
+* <<Enonic CLI>> - For managing XP development project, also replaces the toolbox shell script
+* <<Native distributions>>. The Java Virtual Machine is now bundled with XP
+* <<Content Studio as an app>> - available for download from Enonic Market.
 
-XP 7 contains breaking changes.
-Customers planning to upgrade from version 6.x must complete two steps rather than one.
-
-* <<upgrade-apps#,Upgrading installed applications>>
-* <<upgrade-xp#,Upgrading Enonic XP>>
-
-Follow the instructions carefully to secure a successful upgrade.
 
 == Enonic CLI
 
+The brand new Command Line Interface - "Enonic CLI" is released together with XP 7, but independently versioned.
+The CLI not only replaces the old toolbox script, but introduces new and flexible ways of installing XP and managing development environments.
+
+Installing CLI, Enonic XP, building and deploying your first app can now be done with three simple commands!
+
+The CLI is available for Mac, Linux and Windows
+
+
+== Native distributions
+
 TODO
+
 
 == Content Studio as an app
 
@@ -35,17 +39,13 @@ It  is now available as a separate application on https://market.enonic.com/vend
 Content Studio can now be released more frequently than the XP core.
 You can still expect new versions of Content Studio to be released as new features are made available in the core platform.
 
-== Embedded JVM
-
-TODO
 
 
-== CMS Core
+== CMS news
 
-Even it Content Studio can be installed as a separate application,
-Enonic XP still ships with core CMS functionality that applications depend on.
+Even if Content Studio can be installed as a separate application,
+Enonic XP still ships with core CMS API and rendering engine that applications depend on.
 
-Below are the new features and improvements to the CMS core in XP 7
 
 === Image styles
 
@@ -70,7 +70,7 @@ You will notice this through the following change:
 * The site engine URLs now contain project name - i.e. /site/<project>/<branch>/<content-path>
 
 
-=== Rich text reference handling
+=== Rich text references
 
 References to images or other content in the rich text editor are now stored explicitly in the underlying node API.
 The publishing wizard will now identify and include these dependencies like all other references - no more missed items during publishing.
