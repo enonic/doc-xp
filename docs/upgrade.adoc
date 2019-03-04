@@ -6,49 +6,96 @@ This section describes the steps required to upgrade Enonic XP from 6.15 to 7.0
 
 == Requirements
 
-Before starting the upgrade process, ensure the following requirements are in place
-
-XP Version:: You need to be running at least Enonic XP 6.15.x (if you are running an older version, upgrade to 6.15.x first)
-QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
-Toolbox:: Ensure you have 6.15 Toolbox available
-Enonic CLI:: Make sure you have Enonic CLI installed
-Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
-3rd. party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 7.
-Custom apps:: Make sure all custom built applications have been upgraded to support XP 7, as described in <<upgrade-apps#,Upgrading Applications>>
-
 This guide focuses on completing an upgrade with zero downtime, and requires you to setup a parallel production environment
 Carefully follow the below steps to upgrade your instance:
 
 NOTE: For scenarios where downtime cannot be avoided, additional steps, such as setting up a temporary "we are upgrading page" will be required:
 
+Before starting the upgrade process, ensure the following requirements are in place
 
-== 1. Create new environment
+XP Version:: You need to be running at least Enonic XP 6.15.x (if you are running an older version, upgrade to 6.15.x first)
+QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
+Toolbox:: Ensure you have 6.15 Toolbox available
+Enonic CLI:: Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
+Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
+3rd. party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 7.
+Custom apps:: Make sure all custom built applications have been upgraded to support XP 7, as described in <<upgrade/apps#,Upgrading Applications>>
+
+
+== 1. Install XP 7
 
 We recommend setting up a new production environment for XP 7, running in parallel with your XP 6 environment.
 This will virtually eliminate downtime, and also be a safety net, should the upgrade fail somehow.
 
-Install XP 7:: Follow the XP installation instructions matching your environment
+Follow the <<hosting#,XP installation instructions>> to set up an instance matching your requirements
 
-File deployments:: If you have one or more applications deployed as files, replace them with their respective upraded versions
+=== File deployments
+If you have one or more applications deployed as files, replace them with their respective XP 7 versions
 
-Update configuration:: Migrate your your existing configuration files from 6.15, and perform the following changes:
+=== Vhost config
 
-* app configs
-* vhosts
-* ports?
-* system config?
+Vhost configuration has changed:
 
-Start servers:: Start your new servers and verify everything is working properly
+* `/app` has been renamed to `/webapp`
+* `/portal` has been renamed to `/site`
+* Repository name is added before the branch in site URL, ie `/site/default/draft`
+* `userStore` has been renamed to `idProvider`
+* idProvider config format is new
+
+Update your vhost config file as follows:
+
+.Before
+[source,properties]
+----
+include::upgrade/code/vhost_before.cfg[]
+----
+
+.After
+[source,properties]
+----
+include::upgrade/code/vhost_after.cfg[]
+----
+
+=== Port mappings
+
+In XP 7 `/status` and `/api` have been moved to separate dedicated ports: 2609 and 4848 respectively.
+
+Consider how this affects your monitoring and how to expose management API internally.
+
+In `com.enonic.xp.web.jetty.cfg` `http.port` is replaced with `http.xp.port`, `http.management.port` and `http.monitor.port`.
+
+=== Elastic Search discovery
+
+If specifying `discovery.unicast.sockets` in ES configuration: "ip[port]" is now "ip:port"
+
+.com.enonic.xp.elasticsearch.cfg
+[source,properties]
+----
+include::upgrade/code/com.enonic.xp.elasticsearch.cfg[]
+----
+
+=== Other configuration
+
+Migrate other configuration files from 6.15, including custom configurations (app config etc.).
+
+=== Start servers
+
+Start your new servers and verify everything is working properly
 
 
 == 2. Dump data
 
 We are now ready to dump data from our existing 6.15 instance.
 
-Readonly mode:: Turn on readonly mode in your 6.15 instance. TODO: ``toolbox bla bla``
+Readonly mode:: Turn on readonly mode in your 6.15 instance:
+
+    toolbox.sh set-read-only readOnly -a user:password
+
 This will prevent new data from being written to XP during the upgrade, and also ensure a consistent dump.
 
-Dump data:: Use 6.15 toolbox to dump the data. TODO ``toolbox bla bla -noversions``.
+Dump data:: Use 6.15 toolbox to dump the data:
+
+    toolbox.sh dump -t mydump -a user:password --skip-versions
 
 NOTE:: We highly recommend dumping data without versions. This will dramatically speed up the upgrade while also preparing your dataset for the new vacuuming features in XP 7.
 
@@ -57,6 +104,8 @@ NOTE:: We highly recommend dumping data without versions. This will dramatically
 
 Move dump:: If needed, transfer dump files from previous step to the new server. For clustered environments, any server will do.
 
+NOTE:: Toolbox has been removed from XP 7 and replaced by Enonic CLI.
+
 Load dump:: Use Enonic CLI to load the dump on your XP 7 environment i.e. ``enonic dump load -n <dump-name>``.
 The load command will automatically upgrade data from 6.15 format during the load.
 
@@ -64,15 +113,15 @@ The load command will automatically upgrade data from 6.15 format during the loa
 == 4. Install Content studio
 
 Content Studio is no longer part of the XP core distribution.
-Content Studio is now available as an app on https://market.enonic.com[Enonic Market].
+Content Studio is now available as an https://market.enonic.com/vendor/enonic/content-studio[application on Enonic Market].
 
 == 5. Update apps
 
-Next all your applications must be upgraded to latest version to support XP 7
+All installed applications must be updated to latest versions compatible with XP 7.
 
-Market apps:: For market apps, go to your applications panel, and click upgrade on all applications where available. TODO Verify
+Market apps:: For market apps, go to the Applications tool, click "Install" in the menu and click "Upgrade" button for all applications where upgrade is available.
 
-Custom apps:: Upgrade all your custom developed applications by installing them, either through UI or the API.
+Custom apps:: Install XP 7 compatible versions of your custom applications either through the "Install App" UI or by using CLI.
 
 
 == 6. Validate
@@ -82,6 +131,6 @@ Validate that your new installation is working as expected. We recommend checkin
 
 == 7. Go live
 
-With all lights green, simply redirect all traffic from your old XP 6 servers (or upgrade page), to the upgraded XP 7 environment.
+With all lights green, simply redirect all traffic from your old XP 6 servers to the upgraded XP 7 environment.
 
 Welcome to the XP 7 club!
