@@ -6,218 +6,652 @@ This section describes the steps required to upgrade an XP application from 6.x 
 
 == Preparations
 
-Use the following checklist to prepare for an complete the upgrade.
+Use the following checklist to prepare for the upgrade.
 
-* Checkout the project source code to a local folder i.e. myapp/
 * Make sure you have Enonic CLI installed
+* Checkout the project source code to a local folder i.e. myapp/
 
-== Create a sandbox
+== 1. Create a sandbox
 
-NOTE: With XP 7 you no longer need to install Java separately as it comes bundled with XP.
+NOTE: With XP 7 you no longer need to install Java separately - it comes bundled with XP.
 
-We recommend setting up a separate sandbox for each application you upgrade.
 To create the sandbox, go to your project folder and run the following command:
 
-  ``enonic project sandbox``
+  enonic project sandbox
 
 When the command has completed successfully, the sandbox will be associated with your project.
 This enables us to build, deploy and test the application.
 
-== XP Gradle plugin
+== 2. Build system
 
-With XP 7, a new version of the XP Gradle plugin has also been released.
+The standard build system used for XP projects must be updated.
 
-To make use of the new plugin, update your build files as follows:
+=== Gradle Wrapper
 
-build.gradle
+XP 7 standardizes on the use of Gradle 5.
+We recommend bundling Gradle wrapper, version 5 in your project
 
-TODO
+If you have installed Gradle 5, from your project root, run:
 
-gradle.settings
+  gradle wrapper
 
-TODO
+This will install or update your project with a new Gradle wrapper.
 
-== XP Libraries
+=== XP Gradle plugin
 
-Over multiple XP 6.x releases, and finally with the release of XP 7,
-several libraries have been moved out of the core, and into separate projects.
-This makes the XP core leaner, and allows us to release new libraries faster.
+You will also need to install the 2.0 version of the XP Gradle plugin.
+This supports Gradle 5, Java 11 and building for XP 7.
 
-The following libraries have been take out of the core:
+NOTE: Syntax for adding plugins to Gradle may have changed for your project, we recommend the following updates to your build files:
 
-* Thymeleaf
-* XSLT
-* Mustache
-* http client
-* +++
-TODO
+.build.gradle sample
+[source,groovy]
+----
+plugins {
+    id 'com.enonic.xp.app' version '2.0.0'
+}
 
-For each library your project is using, update your build.gradle file to use the new libraries:
+apply plugin: "com.enonic.xp.app"
 
-TODO
+app {
+    name = "${appName}"
+    displayName = "${appDisplayName}"
+    vendorName = "${vendorName}"
+    vendorUrl = "${vendorUrl}"
+    systemVersion = "${xpVersion}"
+}
 
-== Auth library
+dependencies {
+    compile "com.enonic.xp:core-api:${xpVersion}"
+    compile "com.enonic.xp:portal-api:${xpVersion}"
+    include "com.enonic.xp:lib-content:${xpVersion}"
+    include "com.enonic.xp:lib-portal:${xpVersion}"
+}
 
-If your project includes the AUTH? TODO library.
-You may need to make some changes to your code.
+repositories {
+    mavenLocal()
+    jcenter()
+    xp.enonicRepo()
+}
+----
 
-XP 6 has had an inconsistent use of userstore and idprovider. With XP 7, this domain is not consistently called IDproviders.
+Additionally, this is the recommended format for settings.gradle
 
-The following needs to be updated in your projects:
+.gradle.properties sample
+[source,groovy]
+----
+# Gradle Project settings
+projectName = myproject
+version = 1.0.0-SNAPSHOT
 
-TODO
+# XP App values
+appDisplayName = My Cool App
+appName = com.acme.something.myproject
+vendorName = Acme Inc
+vendorUrl = http://example.com
+xpVersion = 7.0.0
+
+# Settings for publishing to a Maven repo
+group = com.acme.something
+----
+
+NOTE: appName and appDisplayName are only used for application projects.
 
 
-== CMS changes
+=== Dependencies
 
-If your project uses CMS features, the following steps need to be checked
+The following libraries have been take out of XP core, and are now released and versioned separately:
 
-=== Content Types
+* https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf]
+* https://market.enonic.com/vendors/enonic/xslt-lib[XSLT]
+* https://market.enonic.com/vendors/enonic/mustache-lib[Mustache]
+* https://market.enonic.com/vendors/enonic/http-client-lib[HTTP client]
 
-TODO
+If your project used the bundled libraries,
+update you `build.gradle` dependencies to use the new libraries
 
-=== X-data
 
-TODO
+=== Verify
+
+After completing the steps above, you should now be able to test that your build is working, using the Enonic CLI:
+
+  enonic project deploy
+
+This command proxies the gradle wrapper, but also connects with the project sandbox.
+You may also use `enonic project build` to build without deploying
+
+NOTE: Projects containing Java code might get build errors at this point, otherwise the build should complete successfully.
+
+
+=== XP_HOME
+
+XP 6 developers will discover that the XP_HOME variable is no longer required.
+However, you may still specify this variable manually to build with gradle directly.
+
+To achieve this, you must also specify JAVA_HOME to build with the Java embedded in XP 7.
+
+The XP_HOME must essentially reference your Sandbox directory, and JAVA_HOME must reference the correct distribution.
+
+Sandboxes and distributions are located in your users home directory within the .enonic/ folder.
+Also, relationships between a project and a sandbox is stored in the .enonic file in your project root.
+
+If you don't want to do this manually, run this command from your project:
+
+  enonic project shell
+
+_Happy hacking!_
+
+
+== 3. Schema changes
+
+CMS projects make extensive use of schemas.
+If relevant, update your project based on the following changes:
+
+=== Form element
+
+The schema definition syntax has been modified in order to harmonize all schema definitions.
+
+As a consequence, the <form> element replaces <config> in the following schema types:
+
+* site
+* layout
+* page
+* part
+* id-provider
+* task
+
+Example of how to update the site schema
+
+.Old site.xml
+[source,xml]
+----
+<site>
+  <config>schema goes here...</config>
+</site>
+----
+
+.New site.xml
+[source,xml]
+----
+<site>
+  <form>schema goes here...</form>
+</site>
+----
+
+=== FieldSet
+
+Fieldsets used to require a name attribute. The name attribute has no particular use-case, and is now deprecated.
+Update schemas using fieldsets by removing the name
+
+.Old fieldset in schema
+[source,xml]
+----
+<form>
+  <fieldset name="myname">schema goes here...</fieldset>
+</form>
+----
+
+.New fieldset in schema
+[source,xml]
+----
+<form>
+  <fieldset>schema goes here...</fieldset>
+</form>
+----
+
+=== Content scope
+
+For all schemas in XP 6, the input types <<../reference/cms/schemas/input-types#contentSelector,contentSelector>> and <<../reference/cms/schemas/input-types#tag,tag>> defaulted to selecting content across the entire repository.
+The default scope is now reduced to the parent site.
+
+NOTE: mediaSelectors and contentSelector in rich text area still allows selection of content across the entire repository
+
+This change is made to reduce confusion (too much to select), and prevent users from erroneously linking to content outside the site.
+If you are fine with the new default behavior, no changes need to be made. If not, simply customize the allowPath for your input types.
 
 === Mixins
 
-TODO
+As part of the consolidated schema format, the <items> element of mixins has been replaced by <form>.
+Upgrade your mixin definitions to match the new format:
+
+.Old mixin using <items>
+[source,xml]
+----
+<mixin>
+  <items>schema goes here...</items>
+</mixin>
+----
+
+.New mixin using <form>
+[source,xml]
+----
+<mixin>
+  <form>schema goes here...</form>
+</mixin>
+----
+
+=== Inline
+
+With XP 7, the <inline> concept is directly replaced by <mixin>.
+
+Update any schemas using <inline> to match the new format:
+
+.Old schema using inline
+[source,xml]
+----
+<form>
+  <inline mixin="mymixin"/>
+</form>
+----
+
+.New schema using mixin
+[source,xml]
+----
+<form>
+  <mixin name="mymixin"/>
+</form>
+----
 
 === Display name script
 
+The display name script is used to generate the display name from other content type text inputs.
+The old <display-name-script> functionality is deprecated, and replaced by a ES 6 expressions (TODO)
+
 TODO
-
-=== Image styles
-
-XP 7 introduces a new feature called image styles.
-With XP 6, editors were allowed to use a dropdown when inserting images in the editor, but this list was hardcoded.
-With XP 7, developers are now able to define their own custom styles, and by default the only styles available by default are:
-
-* None (uncropped, but optimized image, no css styles)
-* Original (uncropped original image file, tagged with TODO style (alan?))
-
-Editors of existing sites are likely to have used one or more of the hardcoded styles.
-To preserve the old style functionality (cropping etc) we simply need to add these stypes
-
-
-.Example of styles.xml file
-[source,xml]
-----
-include::code/styles.xml[]
-----
-
-.Example of styles.css file
-[source,css]
-----
-include::code/styles.css[]
-----
 
 
 === CustomSelector update
 
 If your application implements a CustomSelector, a small change has been made to simplify code.
 
+The `ids` parameter in the request has changed from JSON string to regular string.
+Update your code to support the new format:
+
+.Old customSelector format
+[source,JavaScript]
+----
+getParams(): Object {
+    return {
+        ids: JSON.stringify(this.ids),
+        query: this.query || null,
+        start: this.start || null,
+        count: this.count || null
+    };
+}
+----
+
+.New customSelector format
+[source,JavaScript]
+----
+getParams(): Object {
+    return {
+        ids: this.ids.toString(),
+        query: this.query || null,
+        start: this.start || null,
+        count: this.count || null
+    };
+}
+----
+
+
+== 4. X-data
+
+In XP 7, X-data no longer refers to mixins, but are rather created as specific x-data definitions instead.
+If your application uses X-data, make the following changes to your project:
+
+=== x-data folder
+
+Identify all mixins referenced by X-data entries in your project (site.xml or content types)
+Move these mixins into a new folder structure, where each x-data entry gets its own folder:
+
+.Old folder structure
+[source,files]
+----
+resources/
+  sites/
+    mixins/
+      address.xml
+      shipping.xml
+      not-used-as-xdata.xml
+----
+
+.New folder structure
+[source,files]
+----
+resources/
+  sites/
+    mixins/
+      not-used-as-xdata.xml
+    x-data/
+      address/
+        address.xml
+      shipping/
+        shipping.xml
+----
+
+NOTE: For mixins used as both <mixin> and <x-data>, a copy of the mixin must remain in the mixins/ folder. Simply reference the mixin from the new x-data definition instead.
+
+
+=== X-data format
+
+The following changes are made to the format:
+
+* <allowContentType> config is moved to site.xml
+* Root element is changed from <mixin> to <x-data>
+* x-data reference attribute is renamed from "mixin" to "name"
+
+Upgrade your X-data references as follows:
+
+.Old mixins/my-sample.xml
+[source,xml]
+----
+<mixin>
+  <allowContentType>*:folder</allowContentType>
+  <items>Schema goes here..</items>
+</mixin>
+----
+
+.Old site.xml
+[source,xml]
+----
+<site>
+  <x-data mixin="my-sample">
+</site>
+----
+
+.New /x-data/my-sample/my-sample.xml
+[source,xml]
+----
+<x-data>
+  <form>Schema goes here..</form>
+</x-data>
+----
+
+.New site.xml
+[source,xml]
+----
+<site>
+  <x-data name="my-sample" allowContentType=".*:folder">
+</site>
+----
+
+
+== 5. Rich text editor
+
+=== Image styles
+
+For projects using the rich text editor,
+XP 7 introduces a new feature called image styles.
+XP 6 provided editors with a dropdown option list for image "styles" when inserting images in the rich text editor.
+However, this list was hardcoded.
+With XP 7, developers are now able to customize this list with their own styles.
+
+By default the only available styles are:
+
+* None (uncropped, but optimized image, no css styles)
+* Original (uncropped original image file, tagged with TODO style (alan?))
+
+Editors of existing sites are likely to have used one or more of the XP 6 hardcoded styles.
+Migrated images will still keep the cropping from XP 6.
+However, to support inserting new images with the same style formats, add this file to your project:
+
+./site/styles.xml
+[source,xml]
+----
+include::code/styles.xml[]
+----
+
+Image styles also introduces the ability to use image service filters, and client side CSS styles that are used by the editor.
+
+Read more about Image styles (TODO, link)
+
+
+=== Inline scripts
+
+XP 6 allows editors to add script tags to the rich text editor source code.
+XP 7 automatically removes such scripts when data are stored.
+This measurement effectively reduces the attack surface of Enonic XP.
+
+Consider using different solutions for advanced functionality in the editor, such as macros.
+
+=== Standard Classes
+
+XP 7 renames the standard editor classes for alignment and images.
+
 TODO
 
+== 6. Site engine
 
+The site rendering engine and content model has been updated and may impact your project.
 
 === Flattened page components
 
-Most applications don't deal with the detailed structure of page components, beyond simply iterating over and rendering components.
-For 7.0, these functions, and the domain objects remain the same, and you do not need to make any changes to your code.
+XP 6 persisted the component tree structure (domain model) on a 1 to 1 basis.
+In XP 7, the page structure is now persisted as a flat structure in the underlying node API.
+The motivation behind this change is to simplify searching for component specific data.
 
-However, the underlying storage model has changed. In rare cases, this might affect your application.
-From persisting the page component tree structure directly as node properties, each component is now stored as a flat structure instead.
+For instance, one may now easily search for items using a specific part, or layout.
 
-The main motivation is to simplify indexing and searching components.
+For most projects, the rendering functionality is fully backward compatible.
+However, if you have implemented specific code that deals with the page domain, you may need to update your code.
 
+The changes to the JSON data model are as follows:
 
-TODO: Sample domain objects
+* Page (root component) now includes the path field also
+* Page controller field is renamed to "descriptor" for consistency
+* Component "name" fields are removed from the structure
+* Fragment, Text and Image components no longer have an empty config field
+* A page referring to a template can no longer include region and other page data
 
-TODO: Sample storage
+=== Response filters
 
-TODO: Sample query for finding a specific part
+XP 7 introduces generic site filters. To avoid confusion, the XP 6 response filters for pages have been renamed to response processors.
+If your project uses response filters, you must perform the following updates of your project:
+
+==== Move files
+
+Update your project structure by renaming the filter folder from `/src/main/resources/site/filters` to ``/src/main/resources/site/processors`
+
+==== Update site.xml
+
+The schema definitions have also changed:
+
+.Old site.xml
+[source,xml]
+----
+<site>
+  ...
+  <filters>
+    <response-filter name="bgcolor" order="10"/>
+    <response-filter name="app-header" order="10"/>
+  </filters>
+  ...
+</site>
+----
+
+.New site.xml
+[source,xml]
+----
+<site>
+  ...
+  <processors>
+    <response-processor name="bgcolor" order="10"/>
+    <response-processor name="app-header" order="10"/>
+  </processors>
+  ...
+</site>
+----
+
+==== Update controllers
+
+Finally, the JS controllers must now export a responseProcessor, rather than a responseFilter
+
+.Old filter.js
+[source,javascript]
+----
+exports.responseFilter = function (req, res) {
+// code goes here...
+}
+----
+
+.New processor.js
+[source,javascript]
+----
+exports.responseProcessor = function (req, res) {
+// code goes here...
+}
+----
 
 
 === Render mode
 
-When rendering pages server side, a so-called render mode is part of the request object.
-Until now, the render modes have been: ``PREVIEW``, ``EDIT`` and ""
-
+When the site engine is rendering pages, a so-called render mode is part of the request object.
+Until now, the render modes have been: ``PREVIEW``, ``EDIT`` and "TODO"
 TODO: Verify last mode
 
-With XP 7, a new render mode is introduced: ``INLINE``.
-Mode ``INLINE`` is used when a page is rendered in the Content Studio tree view.
+With XP 7, the `ÌNLINE` render mode is introduced.
+`INLINE` mode is exclusively used when a preview is rendered in the context of Content Studio browse view.
 Previously, this rendering would be using mode ``PREVIEW``.
-``PREVIEW``is now solely used in the standalone window, after the user has clicked the "Preview" button.
 
-The motivation for this change is for developers to be able to treat rendering differently when rendered inline vs in the full preview.
+``PREVIEW``is now exclusively used in the standalone fullscreen preview summoned by the user clicking btn:[Preview].
 
-If your application has implemented specific behaviour for ``PREVIEW``,
-you must do the same for mode ``INLINE``to keep current functionality.
+This change allows developers to be able to treat rendering differently when rendered inline vs a full preview.
 
-=== Admin widgets
-
-Enonic XP currently only implements a single widget, the so-called "Detail panel" of Content Studio.
-
-With XP 7, this panel is now available in both Content Studio tree view, and in the content editor,
-and is now called the "Context Panel".
-
-If your application has implemented a detail panel, you will need to upgrade it as follows:
-
-==== Rename implementation
-
-TODO
-
-==== Support no context
-
-TODO
-
-==== Support repository context
-
-TODO
+If your application has implemented specific behavior for ``PREVIEW`` mode,
+consider doing the same for ``INLINE`` modes to keep current functionality.
 
 
+== 7. JS Controllers
 
-== Controller changes
+If your project contains Javascript controllers, the following issues must be checked:
 
-Your project is highly likely to implement one or more Javascript controllers.
+=== Userstores and IDproviders
+
+For better consistency, userstores are now called IDproviders.
+If your project makes use of lib-auth, lib-context or lib-portal, or otherwise refers to "userStore" by name, you will need to upate your code:
+
+* For usage of Lib-auth, Lib-context and Lib-portal
+  * search and replace the text "userStore" with "idProvider" in your code.
+
+=== Content Library
+
+The `branch` parameter has also been removed from the content library.
+To connect to a different branch, simply use context library instead
+
+
+=== New CMS repo
+
+With XP 7, the default CMS repo is renamed from `cms-repo` to `com.enonic.cms.default`.
+This is done to prepare for use of multiple repos, where all CMS repos will be prefixed with `com.enonic.cms`
+
+If your project connects directly to a CMS repo, i.e. through the node API, ensure that you are still connecting to the right repository.
+
 
 === Main.js
 
-If you project contains a /main.js file, you might need to update it.
+If you project contains a /src/main/resources/main.js file, you might need to update it.
 
-With XP 7, a dedicated web app controller /webapp/webapp.js is introduced.
-If your current project was a webapp, you will find that your /main.js file exports one or more HTTP methods.
+With XP 7, a dedicated web app controller /src/main/resources/webapp/webapp.js is introduced.
+If your current project was a webapp, you will find that your main.js file exports one or more HTTP methods, like `GET`or `POST`.
 
-If this is the case, you must split your main.js file into two, so all operations related to the web app are moved to webapp.js,
-and only life cycle related code remains in main.js.
+Split your main.js file in two:
 
-Example of what such a migration might look like
+* All HTTP require statements must be moved to the webapp.js
+* Only life cycle related code should remain in main.js.
 
-.Main.js before upgrade:
 
-TODO
+=== Require() resolving
 
-.Main.js after upgrade
-
-TODO
-
-.Webapp.js after upgrade
-
-TODO
-
-=== Require() resolution
-
-Enonic XP has maintained the same require() script resolving patterns since the release of XP 5.0
+Enonic XP has used the same require() script resolving patterns since the release of XP 5.
 Strategies for resolving scripts have since been simplified, and with 7.0 breaking changes have been implemented.
 
-The change specifically affects relative paths, the resolver was automatically looking for files in /site and /lib folders.
+The change specifically affects relative paths, the resolver was automatically scanning for files in /site and /lib folders.
 This is now changed, and the resolver will only look for relative files in current directory.
 
-Here are examples of how javascript files are resolved:
+Verify that that your require statements are referring to absolute paths, or that the specific files are located in the current directory.
+
+Also, please check out the documentation of the <<../reference/runtime/framework#Require(),require function>>.
+
+
+
+== 8. Assets and services
+
+Assets and services must now exclusively be placed on the resources/ level.
+If your projects have assets/ and services/ folders within resources/site/ - their content must be moved/merged into respective folders on the resource/ level.
+
+.Old sample project structure
+[source,files]
+----
+src/
+  main/
+    resources/
+      assets/
+        animation.gif
+      services/
+        coolservice/
+          coolservice.xml
+          coolservice.js
+      site/
+        assets/
+          mystyles.css
+          myscript.js
+        services/
+          myservice/
+            myservice.js
+            myservice.xml
+        other/
+----
+
+.New sample project structure
+[source,files]
+----
+src/
+  main/
+    resources/
+      assets/
+        animation.gif
+        mystyles.css
+        myscript.js
+      services/
+        coolservice/
+          coolservice.xml
+          coolservice.js
+        myservice/
+          myservice.js
+          myservice.xml
+      site/
+        other/
+----
+
+
+== 10. Widgets
+
+The "Detail panel" of XP 6 Content Studio has been refactored, and is now called the "Context panel".
+With XP 7, this panel is now available in both Content Studio tree view, and in the content editor,
+
+If your application implements a detail panel widget (located in src/main/resources/admin/widgets/), you will need to upgrade it as follows:
+
+=== Implements
 
 TODO
 
-Also, please check out the documentation of the <<../reference/framework/index#Require(),require function>>.
+=== No context
+
+TODO
+
+=== Repo context
+
+XP 7 is prepared for using multiple CMS repositories.
+As such, a widget must be able to determine which repository it should connect to.
+
+CMS repos are consistently named as
+
+TODO
+
+
+
+== 11. Java
+
+Where XP 6 depends on Java 8, XP 7 bundles Java 11.
+
+TODO

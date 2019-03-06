@@ -100,14 +100,21 @@ Dump data:: Use 6.15 toolbox to dump the data:
 NOTE:: We highly recommend dumping data without versions. This will dramatically speed up the upgrade while also preparing your dataset for the new vacuuming features in XP 7.
 
 
-== 3. Load data
+== 3. Upgrade and Load
 
-Move dump:: If needed, transfer dump files from previous step to the new server. For clustered environments, any server will do.
+Move dump:: Transfer dump files from previous step to the new instance. For clustered environments, any server will do.
 
 NOTE:: Toolbox has been removed from XP 7 and replaced by Enonic CLI.
 
-Load dump:: Use Enonic CLI to load the dump on your XP 7 environment i.e. ``enonic dump load -n <dump-name>``.
-The load command will automatically upgrade data from 6.15 format during the load.
+Upgrade dump:: Before we can load the dump, we need to upgrade the data to support XP 7:
+
+  enonic dump upgrade
+
+Load dump:: Now, load the dump into your XP 7 environment i.e.
+
+  enonic dump load
+
+NOTE: Don't worry about the command losing connection, this is only related to the system repo (and user) being removed during the operation. Watch the log for progress.
 
 
 == 4. Install Content studio
