@@ -406,13 +406,27 @@ Image styles also introduces the ability to use image service filters, and clien
 Read more about Image styles (TODO, link)
 
 
-=== Inline scripts
+=== Editor XSS
 
-XP 6 allows editors to add script tags to the rich text editor source code.
-XP 7 automatically removes such scripts when data are stored.
+The XP 6 html editor allows users to add <script> and <iframe> tags to the source code.
+
+New version of Content Studio shipped XP 7 automatically removes any <script> and <iframe> tags from the source code.
 This measurement effectively reduces the attack surface of Enonic XP.
+This also removes any scripts from documents migrated from XP 6 on first save.
 
-Consider using different solutions for advanced functionality in the editor, such as macros.
+Iframes can still be added through the use of the iframe macro.
+
+NOTE: Re-enable support for <script> in html fields at own risk by following receipt below:
+
+Add a content studio config file to XP, with the following settings:
+
+.com.enonic.app.contentstudio
+[source,properties]
+----
+htmlinput.allow.scripts = true
+----
+
+
 
 === Standard Classes
 
