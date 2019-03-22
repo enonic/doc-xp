@@ -196,66 +196,122 @@ Below is a complete list of all supported value-types.
 |===
 
 
+=== Index types
+
+TODO: Stemming
+
+When nodes are persisted, property values are instantly indexed.
+A single property can be indexed in multiple ways, also known as index types.
+
+Each index type offers a specific set of capabilities:
+
+string:: The string-representation of a value, the basic index type used for any value.
+
+numeric:: A double-representation of value
+
+datetime:: A date-time representation of a value
+
+ngram:: nGram-indexed fields are available for search by using the nGram-function. An nGram-analyzed field will index all substring values from 2 to 15 characters.
+
+====
+Consider a property of type string, with value `article`.
+ngram indexing will split the string into the following tokens when analyzed::
+
+  'ar', 'art', 'arti', 'artic', 'articl', 'article'
+
+For more information about how the nGram-function works, check out the nGram-function.
+====
+
+analyzed::  Analyzed fields are available for search by using the fulltext-function. An analyzed field will be split into tokens.
+
+====
+Consider a property of type string, with value `This article contains information test-driven development`
+When analyzed, it is split into the following tokens:
+
+  'this', 'article', 'contains', 'information', 'about', 'test', 'driven', 'development'
+
+For more information about how the fulltext-function works, check out the fulltext-function.
+====
+
+paths:: The path-elements (separated by default path-separator '/') are indexed as tokens.
+
+NOTE: A value will only be indexed as the applicable types, e.g only numeric values will be stored with a numeric representation.
+
+Each value type has a default index definition.
+For instance, a Double property will by default be indexed both as `string` and `numeric`.
+
+
+=== Index config
+
+Should you need to specify custom indexing options for one or more properties, you will need to create an index configuration.
+
+By default, values are indexed using the "type" instruction - using the propertyType to automatically determine how it should be indexed.
+Special indexing options may be passed along with the node (e.g in the Node API) - forcing special indexing of one or more properties.
+The different options are described below:
+
+type (default)
+  Indexing is done based on type; e.g numeric values are indexed as both string and numeric.
+
+minimal
+  Value is indexed as a string-value only, no matter what type of data.
+
+none
+  Value is not indexed at all.
+
+fulltext
+  Values are stored as 'ngram', 'analyzed' and also added to the _allText system property
+
+path
+	Values are stored as 'path' type and applicable for the pathMatch-function
+
+
+
+
 === System Properties
 
-To reduce complexity, explicit namespaces are not used.
-Thus, in order to separate system properties from user defined properties, we have reserved ``_`` as a starting character for system defined properties.
+For simplicity, explicit namespaces are not used in the XP storage.
+In order to separate system properties from user defined properties, ``_`` (underscore) has been reserved as a starting character for system standard properties.
 
 Below are the system properties explained.
 
-_childOrder::
-Default ordering of children when doing find children if no other order expression is given
+_childOrder:: Default ordering of children when doing find children if no other order expression is given
 
-_id::
-Holds the id of the node, typically generated automatically in the form of a UUID.
+_id:: Holds the id of the node, typically generated automatically in the form of a UUID.
 
-_indexConfig::
-Specification on how to index properties
+_indexConfig:: Specification on how to index properties
 
-_manualOrderValue::
-Numeric order value used for the builtin manual ordering
+_manualOrderValue:: Numeric order value used for the builtin manual ordering
 
-_name::
-Holds the name of the node. The name must be unique within its scope (all nodes with same parent).
+_name:: Holds the name of the node. The name must be unique within its scope (nodes with same parent).
 
-_nodeType::
-Used to create collections for nodes in a repository.
+_nodeType:: Used to create collections for nodes in a repository.
 
-_parentPath::
-Reference to parent node path.
+_parentPath:: Reference to parent node path.
 
-_path::
-The path is resolved from the node name and parent path.
+_path:: Dynamic property resolved from parent path + node name.
 
-_permissions_read::
-The principals that have read access.
+_permissions_read:: The principals that have read access.
 
-_permissions_create::
-The principals that have create access.
+_permissions_create:: The principals that have create access.
 
-_permissions_delete::
-The principals that have delete access.
+_permissions_delete:: The principals that have delete access.
 
-_permissions_modify::
-The principals that have modify access.
+_permissions_modify:: The principals that have modify access.
 
-_permissions_publish::
-The principals that have publish access.
+_permissions_publish:: The principals that have publish access.
 
-_permissions_readpermissions::
-The principals that have access to read the node permissions.
+_permissions_readpermissions:: The principals that have access to read the node permissions.
 
-_permissions_writepermissions::
-The principals that have access to change the node permissions.
+_permissions_writepermissions:: The principals that have access to change the node permissions.
 
-_state::
-Used for keeping state of a node in a branch.
+_state:: Used for keeping state of a node in a branch.
 
-_timestamp::
-The last time this node was modified
+_timestamp:: The last time this node was modified
 
-_versionKey::
-For every modification of a node, a unique versionKey is generated
+_versionKey:: For every modification of a node, a unique versionKey is generated
+
+_allText:: A dynamic field aggregating text from all string properties in the node
+
 
 
 == Branches

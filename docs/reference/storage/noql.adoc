@@ -1,5 +1,1052 @@
-= NoQL Reference
+= NoQL reference
 :toc: right
 :imagesdir: images
 
+
+== Basics
+
+There are two ways to get access to nodes in XP, by key, or by query.
+This section deals specifically with querying:
+
+In general, the query-API deals with a number of basic parameters:
+<<Start & count>>, <<Query>>, <<Filters>>, <<Sort>>, <<Aggregations>> and <<Explain>>.
+
+
+== Start & count
+
+When searching, the result will contain a number of matching nodes.
+This number if given by the provided ``count`` parameter.
+The result will also contain a value indicating the total number of hits for the search: ``total``.
+The ``start`` parameter indicates from what position in the result set we should start retrieving results.
+
+Lets consider a search matching 1000 documents.
+Usually, one does not retrieve all these results at once,
+but rather a subset of the result - and fetch the next subset of the result if necessary.
+This type of data-retrieving is called paging.
+
+Typically, one will decide the number of wanted results for each iteration, e.g 100:
+
+* start = 0
+* count = 100
+
+Then, for the next iteration, we will start from the first result not retrieved in the first iteration:
+
+* start = 100
+* count = 100
+
+The ``total`` return field can be used to create page-navigation for the search result, by dividing
+the ``total`` hits by the page-size (``count``) to get the needed number of pages.
+
+
+== Query
+
+The query-part of a search is where the constraints are defined.
+If the query parameter is empty, all nodes will be considered matches.
+
+The results matching the query constraint will be assigned a score. This is imperative for fulltext type queries.
+See more details on <<Query functions>> below.
+
+=== Syntax
+
+The query syntax is based on SQL and looks very similar:
+
+==== queryExpr
+
+
+.Grammar
+[source,ebnf]
+----
+queryExpr = [ constraintExpr ];
+----
+
+Empty query:: If no queryExpression is given, all documents will be in the result.
+
+
+==== constraintExpr
+
+.Grammar
+[source,ebnf]
+----
+constraintExpr = compareExpr
+               | logicalExpr
+               | functionExpr
+               | notExpr ;
+----
+
+==== compareExpr
+
+.Grammar
+[source,ebnf]
+----
+compareExpr   = fieldExpr operator valueExpr ;
+fieldExpr     = propertyPath ;
+operator      = '=', '!=', '>', '>', '<', '<=', 'LIKE', 'NOT LIKE', 'IN', 'NOT IN' ;
+valueExpr     = string | number | valueFunc ;
+valueFunc     = geoPoint | instant | time | dateTime, localDateTime ;
+geoPoint      =  '"' lat ',' lon '"' ;
+instant       = 'instant(' string ')' ;
+time          = 'time(' string ')' ;
+dateTime      = 'dateTime(' string ')' ;
+localDateTime = 'localDateTime(' string ')' ;
+----
+
+.Examples
+[source,ebnf]
+----
+user.myCategory = "articles"
+user.myCategory IN ("articles", "documents")
+user.myCategory != "articles"
+user.myCategory LIKE "*tic*"
+myPriority < 10
+myPriority <= 10
+myPriority > 10
+myPriority < 100
+myPriority != 10
+myInstant = instant('2014-02-26T14:52:30.00Z')
+myInstant <= instant('2014-02-26T14:52:30.00Z')
+myInstant <= dateTime('2014-02-26T14:52:30.00+02:00')
+myTime = time('09:00')
+myLocalDateTime = time('2014-02-26T14:52:30.00')
+myLocation = '59.9127300,10.7460900'
+myLocation IN ('59.9127300,10.7460900','59.2181000,10.9298000')
+----
+
+==== logicalExpr
+
+.Grammar
+[source,ebnf]
+----
+logicalExpr = constraintExpr operator constraintExpr ;
+operator    = 'AND' | 'OR' ;
+----
+
+.Examples
+[source,sql]
+----
+myCategory = "articles" AND myPriority > 10
+myCategory IN ("articles", "documents") OR myPriority <= 10
+----
+
+
+==== notExpr
+
+.Grammar
+[source,ebnf]
+----
+notExpr = 'NOT' constraintExpr ;
+----
+
+.Examples
+[source,sql]
+----
+NOT myCategory = 'article'
+----
+
+
+==== functionExpr
+
+.Grammar
+[source,ebnf]
+----
+functionExpr = functionName '(' arguments ')' ;
+----
+
+*Examples*
+
+.Fulltext analyzed property contains 'fish' and 'spot'
+[source,sql]
+----
+fulltext('_allText', 'fish spot', 'AND')
+----
+
+.Sub properties of 'data.' contains 'fish' and 'spot'
+[source,sql]
+----
+fulltext('data.*', 'fish spot', 'AND')
+----
+
+.Property 'myCategory' is either 'article' or 'document' and title starts with 'fish'.
+[source,sql]
+----
+myCategory IN ('article', 'document') AND ngram('title', 'fish', 'AND')
+----
+
+
+
+==== propertyPath
+
+.Grammar
+[source,ebnf]
+----
+propertyPath = pathElement ( '.' pathElement )* ;
+pathElement  = ( [ validJavaIdentifier - '.' ] )* ;
+----
+
+.Examples
+[source,sql]
+----
+myProperty
+data.myProperty
+data.myCategory.myProperty
+----
+
+[NOTE]
+====
+Wildcards in propertyPaths are only supported in `fulltext` and `ngram` functions at the moment.
+When using these functions, expressions like these are valid:
+
+[source,ebnf]
+----
+myProp*
+*Property
+data.*
+*.myProperty
+data.*.myProperty
+----
+====
+
+
+
+=== Query functions
+
+Here's a description of all functions that can be used in a query.
+
+
+==== fulltext()
+
+The fulltext function is searching for words in a field,
+and calculates relevance scores based on a set of rules (e.g number of occurences, field-length, etc).
+
+NOTE: Only analyzed properties are considered when applying the fulltext function.
+
+.Function definition
+[source,sql]
+----
+fulltext(<fields>, <search-string>, <operator>)
+----
+
+fields:: Comma-separated list of <<propertyPath, propertyPaths>> to include in the search.
+
+.Example fields
+[source,javascript]
+----
+'displayName' // Search in single field
+'displayName,data.description,my.title' // Search in multiple fields
+'data.*' // Wildcard usage
+----
+
+You can boost  - thus increasing or decreasing hit-score pr field basis.
+By providing more than one field to the query by appending a weight-factor: ``^N``
+
+.Boosting example
+[source,sql]
+----
+fulltext('displayName^5,data.description', 'my search string', 'AND')
+----
+
+search-string:: The search-string supports a set of operators
+
+* ``+`` signifies AND operation.
+* ``|`` signifies OR operation.
+* ``-`` negates a single token.
+* ``*`` at the end of a term signifies a prefix query.
+* ``(`` and ``)`` signify precedence.
+* ``"`` and ``"`` wraps a number of tokens to signify a phrase for searching
+* ``~N`` after a word signifies edit distance (fuzziness) with a number representing http://en.wikipedia.org/wiki/Levenshtein_distance[Levenshtein distance].
+* ``~N`` after a phrase signifies slop amount (how far apart terms in phrase are allowed)
+
+
+operator:: Allowed operators are:
+
+* `OR` Any of the words in the search-string matches.
+* `AND` All words in search-string matches.
+
+
+*Examples*
+
+
+.Match if "myField" contains any of the given words.
+[source,javascript]
+----
+fulltext("myField", "cheese fish cake onion", "OR")
+----
+
+.Match if any field with path starting with "myData.myProperties" contains any of the given words.
+[source,javascript]
+----
+fulltext("myData.myProperties.*", "cheese fish cake onion", "OR")
+----
+
+.Match if "myField" contains any of the given words and "myCategory" = "soup".
+[source,javascript]
+----
+myCategory = "'soup" AND fulltext("myField", "cheese fish cake onion", "OR")
+----
+
+.Match if "myField" contains all the given words.
+[source,javascript]
+----
+fulltext("myField", "cheese fish cake onion", "AND")
+----
+
+.Match if "myField" contains "Levenshtein" with a fuzziness distance of 2.
+[source,javascript]
+----
+fulltext("myField", "Levenshtein~2", "AND")
+----
+
+.Match if "myField" contains "fish" and not "boat".
+[source,javascript]
+----
+fulltext("myField", "fish -boat", "AND")
+----
+
+.Match if any field under data-set data contains "fish" and not "boat".
+[source,javascript]
+----
+fulltext("data.*", "fish -boat", "AND")
+----
+
+.Match exact phrase.
+[source,javascript]
+----
+fulltext('data.*', '"gone fishing today"', "AND")
+----
+
+.Match phrase where maximum distance between words are 2.
+[source,javascript]
+----
+fulltext('data.*', '"gone fishing today"~2', "AND")
+----
+
+
+==== nGram()
+
+An n-gram is a sequence of n letters from a string.
+The nGram-function is used to search for words or phrases beginning with a given search string.
+Typically, find-as-you-type searches will use this function.
+The max limit of an ngram is 12 character, meaning that search strings over 12 characters will not match any ngrams.
+This means that the ngram should be combined with the fulltext function or other query expressions to both match incomplete words and full phrases.
+
+NOTE: Only fields analyzed as text are considered when applying the ngram-function. This includes, as default, all text-based fields in the content-domain.
+
+.Function definition
+[source,sql]
+----
+ngram(<field>, <search-string>, <operator>)
+----
+
+fields:: Comma-separated list of <<propertyPath, propertyPaths>> to include in the search.
+
+search-string:: TODO
+
+operator:: Allowed operators are:
+
+* `OR` Any of the words in the search-string matches.
+* `AND` All words in search-string matches.
+
+
+*Examples*
+
+.Property "myProp" contains any word beginning with "lev", e.g "Levenshteins Algorithm".
+[source,sql]
+----
+ngram("myProp", "lev", "AND")
+----
+
+.Property "myProp" contains words beginning with "lev" and "alg", e.g "Levenshteins Algorithm".
+[source,sql]
+----
+ngram("myProp", "lev alg", "AND")
+----
+
+.Properties within "myProp" contains words beginning with "fish" or "boat", e.g "fishpond" or "boatman".
+[source,sql]
+----
+ngram("myProp.*", "fish boat", "OR")
+----
+
+==== range()
+
+The range functions test each value in the given property for a given range.
+
+.Function definition
+[source,sql]
+----
+range(<field>, <from>, <to>, [<includeFrom>], [<includeTo>])
+----
+
+The `from` and `to` values must be of the same value type.
+
+`includeFrom` and `includeTo` are optional with default value 'false',
+meaning that the actual values for the `from` and `to` are not included as matches.
+
+Unbounded ranges can be queried by providing an empty string as argument.
+
+
+*Examples*
+
+.Property version in the range, including '6.3.0'
+[source,sql]
+----
+range('version', '6.3.0', '6.4.0', 'true', 'false')
+----
+
+.Property publishFrom is between two points in time
+[source,sql]
+----
+range('publishFrom', instant('2015-08-01T09:00:00Z'), instant('2015-08-01T11:00:00Z') )
+----
+
+.Property myValue between `2.0` and `3.0`, including 2.0
+[source,sql]
+----
+range('myValue', 2.0, 3.0, 'true', 'false' )
+----
+
+.Property publishFrom newer that the given date.
+[source,sql]
+----
+range('publishFrom', instant('2015-08-01T09:00:00Z'), '')
+----
+
+.Property publishTo older that the given date.
+[source,sql]
+----
+range('publishTo', '', instant('2015-08-01T09:00:00Z'))
+----
+
+==== pathMatch()
+
+The path-match matches a path in a same branch, scoring the paths closest to the given query path first.
+Also, a number of minimum matching elements that must match could be set.
+
+.Function definition
+[source,sql]
+----
+pathMatch(<field>, <path>, [<minimum_elements_must_match>])
+----
+
+If not given, the default minimum-must-match value will be 1.
+
+*Example*
+
+.Given the following nodes
+[source,sql]
+----
+/content/mySite
+/content/mySite/fish
+/content/mySite/fish/onion
+/content/mySite/cheese
+/content/mySite/cheese/jam
+/content/myOtherSite
+----
+
+.Property _path matching minimum 2 path elements
+[source,sql]
+----
+pathMatch('_path', '/content/mySite/fish/onion/mayonnaise', 2)
+----
+
+.This will return (orded by `_score`):
+. `/content/mySite/fish/onion`
+. `/content/mySite/fish`
+. `/content/mySite/cheese/jam`
+. `/content/mySite/cheese`
+. `/content/mySite`
+
+
+== Sort
+
+Results can be sorted based on property values.
+The sorting statements can be one or more comma separate expressions:
+
+=== Syntax
+
+==== sortExpr
+
+.Grammar
+[source,ebnf]
+----
+sortExpr = (  | dynamicSortExpr ) ( ',' ( fieldSortExpr | dynamicSortExpr ) )* ;
+----
+
+==== fieldSortExpr
+
+.Grammar
+[source,ebnf]
+----
+fieldSortExpr = propertyPath [ direction ] ;
+direction     = 'ASC' | 'DESC' ;
+----
+
+.Examples
+[source,sql]
+----
+_name ASC
+_timestamp DESC
+title DESC
+data.myProperty
+----
+
+==== dynamicSortExpr
+
+.Grammar
+[source,ebnf]
+----
+dynamicSortExpr = functionExpr [ direction ] ;
+direction        = 'ASC' | 'DESC' ;
+----
+
+.Example sorting by distance from a geoPoint
+[source,sql]
+----
+geoDistance('locationProperty', '59.9127300,10.746090')
+----
+
+=== Sort functions
+
+Here's a description of all functions that can be used in order-by clause.
+
+==== geoDistance()
+
+The geoDistance-function enables you to order the results according to distance
+to a given geo-point.
+
+TIP: Documents with no geo-point property with the given path will be ordered last if matching the query.
+
+.geoDistance syntax
+[source,sql]
+----
+geoDistance(<field>, <location>)
+----
+
+field:: Any geoPoint property
+location:: The location is a geoPoint from which the distance factor should be calculated, formatted as "latitude,longitude".
+
+.geoDistance example
+[source,sql]
+----
+geoDistance("shopLocation", "59.9127300,10.7460900")
+----
+
+
+=== Relevance sorting
+
+All properties with values automatically get a sort index entry.
+This means that any property can be used for sorting, either (default) DESC (descending) or ASC (ascending).
+
+_score:: The dynamic system property *_score* is the default sort property
+
+The score value of a node is dynamically calculated based on a number of factors:
+For instance, number of matching clauses in boolean expressions,
+how often the term appears in the documents when searching for text etc.
+
+For more details, check out the Elasticsearch documentation.
+
+
+
+
+
+== Filters
+
+Filters work differently from queries.
+When searching with a regular query, steps like sorting and scoring are done to produce the result.
+
+These are relatively costly operations.
+A filter does none of these steps.
+A filter _only_ removes nodes from the result - after the query statement has been processed.
+
+As such, filters are the most efficient way of limiting hits when you only need basic comparison statements.
+
+
+=== Syntax
+
+Differently from queries, filters are defined using a DSL (Domain Specific Language) expressed in JSON.
+
+Below is an example of a filter used in the content-API
+
+.Sample filter usage
+[source,javascript]
+----
+include::code/content-api-query.js[]
+----
+
+If specifying several filters on root level, the filters are automatically joined with a boolean "must" clause, meaning all filters much match.
+
+The following filters are supported:
+
+=== exists
+
+The exists filter filter outs any document _not containing_ any values in the given property.
+
+field (string):: The property path
+
+.Sample use of exists filter
+[source,json]
+----
+include::code/exists-filter.json[]
+----
+
+=== notExists
+
+The notExists filter removes nodes _containing_ values in the given property.
+
+field (string):: The property path
+
+.Sample use of notExists filter
+[source,json]
+----
+include::code/notExists-filter.json[]
+----
+
+=== hasValue
+
+The hasValue filter matches if document contain any of the values given in the value list
+
+field (string)
+ The property path
+
+values (object[])
+ Array of values to decide a match
+
+.Sample hasValue filter
+[source,json]
+----
+include::code/hasValue-filter.json[]
+----
+
+=== ids
+
+The ids filter is a shorthand filter to filter on ids
+
+values (string[])
+  Arrays of ids to match
+
+.Sample ids filter
+[source,json]
+----
+include::code/ids-filter.json[]
+----
+
+
+=== boolean
+
+The boolean filter combines functions in logical expressions
+
+must (filter[]):: All functions on the must array must evaluate to true for the filter to match
+
+mustNot (filter[]):: All functions in the mustNot array must evaluate to false for the filter to match
+
+should (filter[]):: One or more of the functions in the should array must evaluate to true for the filter to match
+
+.Sample boolean filter
+[source,json]
+----
+include::code/boolean-filter.json[]
+----
+
+
+
+
+
+
+
+
+== Aggregations
+
+An aggregation is a function that is executed on a collection of search results. The search-results are defined by the query and query-filter
+of the search request.
+
+For instance, consider a query returning all nodes that have a property "price" less than, say, $100. Now, we want to divide the result nodes into ranges, say
+0-$25, $25-$50 and so on. We also would like to know the average price for each category. This could be done by doing multiple separate queries and calculating the
+average manually, but this would be very inefficient and cumbersome. Luckily, aggregations solve these types of problems easily.
+
+In some API functions it is possible to send in an aggregations expression object. This object is either in Java or a JSON like the following:
+
+.Basic aggregation DSL
+[source,json]
+----
+include::code/expr.json[]
+----
+
+There are two different types of aggregations:
+
+Bucket aggregations:: A bucket aggregation places documents matching the query in a collection - a bucket. Each bucket has a key.
+Metrics aggeregations:: A metric aggeregation computes metrics over a set of documents.
+
+Typically, you will divide data into buckets and then use metric aggregations to calculate e.g average values,
+sum, etc for each bucket, if necessary.
+
+
+=== terms
+
+The `terms` aggregation places documents into bucket based on property values. Each unique value of a property will
+get its own bucket. Here's a list of properties:
+
+field (string):: The property path.
+size (int):: The number of bucket to return, ordered by the given orderType and orderDirection. Default to ``10``.
+order (string):: How to order the results, type and direction. Default to ``_term ASC``.
+
+Types:
+
+  * `_term`: Alphabetic ordering of bucket keys.
+  * `_count`: Numeric ordering of number of document in buckets.
+
+.Sample term aggregation
+[source,json]
+----
+include::code/terms-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/terms-result.json[]
+----
+
+
+=== stats
+
+The stats-aggregations calculates the following statistics for the parent-aggregation buckets:
+
+`avg`, `min`, `max`, `count`, and `sum`
+
+Here's a list of properties:
+
+field (string):: The property path.
+
+.Sample stats aggregation
+[source,json]
+----
+include::code/stats-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/stats-result.json[]
+----
+
+
+
+=== range
+
+The range aggregation query defines a set of ranges that represents a bucket.
+Here's a list of properties:
+
+field (string):: The property path.
+ranges (range[]):: The range-buckets to create.
+range (from: number, to: number):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded.
+
+.Sample range aggregation
+[source,json]
+----
+include::code/range-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/range-result.json[]
+----
+
+
+=== geoDistance
+
+The geoDistance aggregation needs a defined range to split the documents into buckets.
+Only documents with properties of type 'GeoPoint' will be considered in the ``geoDistance`` aggregation buckets.
+
+Here's a list of properties:
+
+field (string):: The property path.
+ranges (range[]):: The range-buckets to create.
+range (from: number, to: number):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded.
+unit (string):: The meassurement unit to use for the ranges.  Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet) or nmi (nauticalmiles).
+origin (lat: number, lon: number):: The GeoPoint from which the distance is measured.
+
+
+.Sample geoDistance aggregation
+[source,json]
+----
+include::code/geo-distance-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/geo-distance-result.json[]
+----
+
+[NOTE]
+====
+At the time of writing, there is only one way of find out which result belongs to which bucket:
+By also sorting the result on geoDistance, and matching the order to the number of each bucket.
+In a future version, there will easier ways of doing this.
+====
+
+
+=== dateRange
+
+The dateRange aggregation query defines a set of date-ranges that represents a bucket. Only
+documents with properties of type 'DateTime' will considered in the ``dateRange`` aggregation buckets.
+Here's a list of properties:
+
+field (string):: The property path.
+format (string):: The date-format of which the buckets will be formatted to on return. Defaults to ``yyyy-MM-dd'T'HH:mm:ss.SSSZ``.
+ranges (range[]):: The range-buckets to create.
+range (from: <number>, to: <number>):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded. The from and to follows a special date-math explained below.
+
+
+.Sample dateRange aggregation
+[source,json]
+----
+include::code/date-range-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/date-range-result.json[]
+----
+
+
+
+==== Date-math expression
+
+The range fields accepts a date-math expression to calculate the time-spans.
+
+* Now minus a day: `now-1d`
+* The given date minus 3 days plus one minute: `2014-12-10T10:00:00Z||-3h+1m`
+* Range describing now plus one day and thirty minutes, rounded to minutes: `now+1d+30m/m`
+
+
+=== dateHistogram
+
+The date-histogram aggregation query defines a set of bucket based on a given time-unit. For instance,
+if querying a set of log-events,  a ``dateHistorgram`` aggregations query with interval ``h`` (hour) will divide each log
+event into a bucket for each hour in the time-span of the matching events. Here's a list of properties:
+
+field (string):: The property path.
+interval (string):: The time-unit interval for creating bucket. Supported time-unit notations:
+
+  * ``y`` = Year
+  * ``M`` = Month
+  * ``w`` = Week
+  * ``d`` = Day
+  * ``h`` = Hour
+  * ``m`` = Minute
+  * ``s`` = Second
+
+format (string):: Output format of date string.
+minDocCount (int):: Only include bucket in result if number of hits <= ``minDocCount``.
+
+
+.Sample dateHistogram aggregation
+[source,json]
+----
+include::code/date-histogram-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/date-histogram-result.json[]
+----
+
+
+== Explain
+
 TODO
+
+
+== More examples
+
+=== Querying paths
+
+All nodes have three system-properties concerning the node placement in a branch, all of type ``String``:
+
+* `_name`: The node name without path.
+* `_parentPath`: The parent node path.
+* `_path`: The full path of the node.
+
+See the <<pathMatch()>> query function for advanced path matching
+
+[NOTE]
+====
+When working with the content API, all items are placed a special root node: `/content`.
+While this mostly is explicit when working in the content-domain, this has to be dealt with when using paths in query-expressions and functions since you are actually querying nodes.
+====
+
+*Examples*
+
+.Finds node with path ``/content/mySite/myCategory/myContent``.
+[source,sql]
+----
+_path = '/content/mySite/myCategory/myContent'
+----
+
+
+.Find all nodes with name ``myContent`` in a folder named ``myCategory``
+[source,sql]
+----
+_name = 'myContent' AND _parentPath LIKE '*myCategory'
+----
+
+.Find all nodes under the path ``/content/mySite/myCategory`` including children of children.
+[source,sql]
+----
+_path LIKE '/content/mySite/myCategory/*'
+----
+
+.Find only first level children under the path ``/content/mySite/myCategory``.
+[source,sql]
+----
+_parentPath = '/content/mySite/myCategory'
+----
+
+
+=== Querying missing values
+
+From time to time, it is also interesting to search for nodes with or without a value:
+
+.Sample query where property myValue "exists"
+[source,json]
+----
+myValue LIKE "*"
+----
+
+.Sample query where "publish.first" does NOT exists
+[source,json]
+----
+publish.first NOT LIKE "*"
+----
+
+NOTE: Using <<exists>> and <<notExists>> filters is considered the most efficient way searching for nodes with missing values
+
+
+
+=== Querying references
+
+An aggregation of all outbound references in a node are stored in the system property `_references`.
+This property can then effectively be used also to find incoming references to a node.
+
+.Find all nodes referring to the node with id = 'abc':
+[source,sql]
+----
+_references = 'abc'
+----
+
+
+=== Date and time
+
+Querying against date and time-fields may require some knowledge on how data is stored and indexed.
+
+==== LocalDate
+
+LocalDate represents a date without time-zone in the ISO-8601 calendar, e.g ``2015-03-19``.
+LocalDate-properties are stored as a ISO LocalDate-formatted string in the index, thus all searches are done against string-values.
+
+LocalDate string-format:
+
+	yyyy-MM-dd
+
+Given a node with a property named 'myLocalDate' of type ``localDate`` and value ``2015-03-19``, all of the following queries will match:
+
+ myLocalDate = '2015-03-19'
+ myLocalDate > '2015-03-18'
+ myLocalDate <= '2015-03-19'
+
+
+==== LocalTime
+
+LocalTime represents a time without time-zone in the ISO-8601 calendar, e.g ``11:39:49``.
+LocalTime-properties are stored as a ISO LocalTime-formatted string in the index, thus all searches are done against string-values.
+
+LocalTime string-format:
+
+	HH:mm[:ss[.SSS]]
+
+LocalTime string value examples:
+
+	09:30
+	10:00
+	10:00:30
+	10:00:30.142
+
+Since the queries are matching string-values, the input time in query must either adhere the same string-format restrictions,
+or be wrapped in a function ``time`` which accepts a time-formatted string as input.
+
+Given a node with a property named 'myLocalTime' of type ``localTime`` and value = ``09:36:00``, all the following queries will match:
+
+	myLocalTime > '09:00'
+	myLocalTime = '09:36'
+	myLocalTime = '09:36:00'
+	myLocalTime LIKE '09:*'
+	myLocalTime < '09:36:01'
+	myLocalTime < '09:36:00.1'
+
+This must be wrapped in time-function since its not padded with a leading 0:
+
+	myLocalTime > time('9:00')
+
+If optional fractions of seconds are given, the string format will also contain this even if 0,
+and expression will not match unless wrapped in time-function::
+
+	myLocalTime = time('09:36:00.0')
+
+Even if the string-matching will do the job 99% of the time,
+the safest bet is to always go with the time-function when applicable.
+
+
+==== LocalDateTime
+
+LocalDateTime represents a date-time without time-zone in the ISO-8601 calendar, e.g ``2015-03-19T11:39:49``.
+LocalDateTime-properties are stored as a ISO LocalDateTime-formatted string in the index, thus all searches are done against string-values.
+
+LocalDateTime string-format:
+
+	yyyy-MM-ddTHH:mm[:ss[.SSS]]
+
+Since the queries are matching string-values, the input dateTime in query must either adhere the same string-format restrictions,
+or be wrapped in a function ``dateTime`` which accepts a dateTime-formatted string as input.
+
+Given a node with a property named 'myLocalDateTime' of type ``localDateTime`` and value ``2015-03-19T10:30:00``, all of the following queries will match::
+
+	myLocalDateTime = '2015-03-19T10:30:00'
+	myLocalDateTime = dateTime('2015-03-19T10:30')
+	myLocalDateTime < dateTime('2015-03-19T10:30:00.001')
+
+==== DateTime / Instant
+
+DateTime represents a date-time with time-zone in the ISO-8601 calendar, e.g ``2015-03-19T11:39:49+02:00``.
+Its possible to query properties of with value-type `DateTime` both as an ISO instant and as ISO dateTime, using the provided
+built-in functions ``instant`` and ``dateTime``.
+
+Instant string-format (instant always given in UTC-time):
+
+	yyyy-MM-ddTHH:mm[:ss[.SSS]Z
+
+Instant string value examples:
+
+	2015-03-19T16:30:20Z
+	2015-03-19T16:30:20.123Z
+
+DateTime string-format (`Z` for UTC, else offset in hours and minutes):
+
+	yyyy-MM-ddTHH:mm[:ss[.SSS](Z|+hh:mm|-hh:mm)
+
+DateTime string value examples:
+
+	2015-03-19T16:30:20Z
+	2015-03-19T16:30:20+01:00
+	2015-03-19T16:30:20-01:30
+	2015-03-19T16:30:20.123-01:30
+
+Given a node with a property named 'myDateTime' of type ``dateTime`` and value ``2015-03-19T10:25:00+02:00``,
+all of the following queries will match:
+
+	myDateTime = instant('2015-03-19T08:25:00Z')
+	myDateTime = dateTime('2015-03-19T08:25:00Z')
+	myDateTime = dateTime('2015-03-19T10:25:00+02:00')
+	myDateTime = dateTime('2015-03-19T11:25:00+03:00')

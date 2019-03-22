@@ -1,108 +1,131 @@
-= Application localization
+= Localization
 :toc: right
 :imagesdir: images
 
-== Localization
+Localize your applications and libraries with property bundles
 
-Enonic XP provides a standard approach to code localizations, simply by adding resource bundles to your applications, and actively using the ``localize``
-functions in "controllers" and "views".  Detailed documentation for this function is found here: :ref:`portal-localize`.
+== Localize
+
+Enonic XP provides a standard approach to code localizations.
+This is done by adding so-called resource bundles to your applications, and using the `localize()` function.
+
+Localize function can be used in both JS controllers and selected views.
+Detailed documentation for this function is described in the <<../../../api/lib-portal#localize(),Portal Library docs>>
 
 To see how this is used in a controller, see ``lib-i18n`` in :ref:`js-libraries`.
 
 The labels and texts used in content types, input types and other schemas can also be localized. See how to localize them in :ref:`localization_schemas`.
 
 
-== Resource Bundle
+== Localization files
 
-The resource-bundle consists of a collection of files containing the phrases to be used for localization. The
-resource-bundle should be placed in a folder named ``i18n``.
+The localization files are plain text files, using the properties format (key = value)
+The files must be placed in a the folder ``/src/main/resources/i18n/``.
 
-Each locale to be localized should be represented by a single resource, e.g this could be a structure for an app supporting
+Imagine, making an app that should support the following localizations:
 
-* 'English' (default)
-* 'English US'
-* 'Norwegian'
-* 'Norwegian Nynorsk'
+* 'English' (en)
+* 'English US' (en-US)
+* 'Norwegian' (no)
+* 'Norwegian Nynorsk' (no-NN)
 
-.. code-block:: none
+Each locale now needs to have a matching localization file, in the format:
 
-  i18n/phrases.properties
-  i18n/phrases_en_us.properties
-  i18n/phrases_no.properties
-  i18n/phrases_no_nn.properties
+  phrases[_languagecode][_countrycode][_variant].properties
 
-The filename of a resource determines what locale it represents:: phrases[_languagecode][_countrycode][_variant].properties
+.Sample localization bundle
+[source, properties]
+----
+i18n/phrases.properties
+i18n/phrases_en_us.properties
+i18n/phrases_no.properties
+i18n/phrases_no_nn.properties
+----
 
 CAUTION: The filename should be in lowercase.
 
-The ``languagecode`` is a valid ISO Language Code. These are the two-letter codes as
-defined by ISO-639. You can find a full list of these codes at a number of sites, such as: http://www.loc.gov/standards/iso639-2/php/English_list.php.
 
-The ``countrycode`` is a valid ISO Country Code. These are the two-letter codes as defined by ISO-3166. You can find a full list of
-these codes at a number of sites, such as: http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
+== Sample
 
-A sample phrases.properties file would look like this::
+Given the following localization file:
 
-  user.greeting = Hello, {0}!
-  complex_message = Good to see you. How are you doing?
-  message_url = http://localhost:8080/{0}
-  message_multi_placeholder = My name is {0} and I live in {1}
-  message_placeholder = Hello, my name is {0}.
-  med_\u00e6_\u00f8_\u00e5 = This contains the norwegian characters æ, ø and å
+.phrases.properties
+[source,properties]
+----
+user.greeting = Hello, {0}!
+complex_message = Good to see you. How are you doing?
+message_url = http://localhost:8080/{0}
+message_multi_placeholder = My name is {0} and I live in {1}
+message_placeholder = Hello, my name is {0}.
+med_\u00e6_\u00f8_\u00e5 = This key contains norwegian characters æ, ø and å
+----
 
+A Javascript controller in the same application may now use the localization as follows:
 
-=== Placeholders
+TODO
 
-Placeholders are marked with ``{<number>}``. The given number corresponds with the function argument named ``values`` and
-the placement of the parameter. See above for an example.
+Placeholders are marked with ``{<number>}``.
+The given number corresponds with the function argument named ``values`` and the position of the parameter.
 
+Example of localization with placeholders:
 
-=== Encoding and special characters
-
-The encoding of localization resource bundle files must be ISO-8859-1, also known as Latin-1. All non-Latin-1 characters
-*in property-keys* must be entered using Unicode escape characters, e.g \u00E6 for the Norwegian letter 'æ'. The values may
-also be encoded, but this is not required.
-
-
-== Resolving locale
-
-A locale is composed of language, country and variant. Language is required, country and variant are optional.
-
-The string-representation of a locale is::
-
-  LA[_CO][_VA]
-
-where
-
-* ``LA`` = two letter language-code
-* ``CO`` = two letter country-code
-* ``VA`` = two letter variant-code.
-
-The variant argument is a vendor or browser-specific code. For example; WIN for Windows, MAC for Macintosh, and POSIX
-for POSIX. Where there are two variants, separate them with an underscore, and put the most important one first. For
-example, a Traditional Spanish collation might construct a locale with parameters for language, country and variant as:
-"es", "ES", "Traditional_WIN".
-
-When a localize function is called upon, a locale is resolved to decide which localization to use.
+TODO
 
 The following is considered, in this order:
 
 * Given as argument to function
-* Language specified on site
+* Language specified on a site (for Site Engine)
+
+TODO:
+* Language specified in request context
 
 
-== Finding best match
+== Best match resolving
 
-When localizing a keyword, a best match pattern will be applied to the resource bundle to select the localized phrase.
-If the locale for a request is resolved to "en-US", these files will be considered in given order:
+When localizing, a best match pattern will be applied to select the optimal version.
+If the locale for a request is resolved to "en-US", XP will look for the localization key in the following order:
 
 * ``phrases_en_us.properties``
 * ``phrases_en.properties``
 * ``phrases.properties``
 
-If the locale for a request would have been resolved to ``en``, the ``phrases_en_us.properties`` file would not have been
-considered when localizing a keyword.
+If the locale for a request was ``en``, the ``phrases_en.properties`` file would be used.
 
-If the locale does not match a specific file, the default ``phrases.properties`` will be used.
+If the locale does not match a any specific file, the default ``phrases.properties`` will be used.
 
 If no matching localization key is found in any of the files in a bundle, a default ``NOT_TRANSLATED`` will be displayed.
+
+
+=== Encoding and special characters
+
+Property keys::
+Must be in the ISO-8859-1 range, also known as Latin-1 characters. Non-Latin-1 characters use Unicode escape characters, e.g \u00E6 for the Norwegian letter 'æ'.
+
+Property values:: Supports any unicode characters
+
+We always recommend storing files with UTF charset.
+
+== Locales
+
+Specification of the locale format:
+
+TODO: - or _???
+
+A locale is composed of language, country and variant.
+Language is required, country and variant are optional.
+
+The string-representation of a locale is::
+
+  la[_CO][_VA]
+
+where
+
+* ``la`` = two letter language code as specified by http://www.loc.gov/standards/iso639-2/php/English_list.php[ISO-639]
+* ``CO`` = two letter country code as specified by http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html[ISO-3166]
+* ``VA`` = two letter rarely used variant-code.
+
+A sample locale including vendor specific variant:
+
+  es_ES_Traditional_WIN"..
+
+Variants are rarely used in Enonic XP, and can pretty much be discarded.
