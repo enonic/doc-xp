@@ -1,0 +1,461 @@
+= Index configuration
+:toc: right
+:imagesdir: images
+
+All properties in a node may be indexed.
+Indexing is the process of extracting, processing and storing a search-optimized version of the property value.
+
+== Index types
+
+When nodes are persisted, the property values are instantly indexed.
+A single property can be indexed in multiple ways, also known as index types.
+
+Each index type enables specific query capabilities:
+
+=== text
+
+The basic index type used for any value.
+
+=== number
+
+Effectively handles any numeric value
+
+=== datetime
+
+Handles any date specific value
+
+=== geoPoint
+
+Supports earth based geographical locations
+
+=== ngram
+
+nGram-indexed fields are available for search by using the nGram-function.
+An nGram-analyzed field will index all substring values from 2 to 25 characters.
+
+Consider a property of type string, with value `article`.
+ngram indexing will split the string into the following tokens when analyzed::
+
+  'ar', 'art', 'arti', 'artic', 'articl', 'article'
+
+For more information about how the nGram-function works, check out the nGram-function.
+
+=== analyzed
+
+Splits the string into tokens for effective free text search.
+Used by the <<noql#fulltext(),fulltext()>> query function.
+
+Consider a property of type string, with value `This is test-driven development`
+When analyzed, it is split into the following tokens:
+
+  'this', 'is', 'test', 'driven', 'development'
+
+
+=== stemmed
+
+Language optimized version of the analyzed index type.
+Used by the <<noql#stemmed(),stemmed()>> query function.
+
+Tokens are trimmed based on language specific features such as plurals and gender specific endings.
+Consider the following sentence stemmed for English content: "The monkey loved bananas".
+When indexed, the result will be something like:
+
+  'the', 'monkey', 'love' 'banana'
+
+The same stemming algorithm is added to queries, supporting hits for queries like: "banana love", even if the strings do not match
+
+=== path
+
+The path-elements (separated by default path-separator '/') are indexed as tokens.
+
+=== orderby
+
+Any property that is indexed, automatically gets indexed with the orderby type.
+The "orderby" index type lets us sort text and numbers in a natural way across properties with different <<ValueTypes>>
+
+
+
+== ValueTypes
+
+Every property in a node has a specific value type.
+The value type enables the the data storage to interpret and handle each value specially - applying to both validation and indexing.
+
+Below is the complete list of all supported value-types.
+
+[cols="1,1,1,2"]
+|===
+|Value Type |Example |Default indexing |Comment
+
+|String
+|My String
+|text
+|String of characters within UTF charset
+
+|BinaryReference
+|a-binary-reference
+|text
+|Handle for accessing a binary
+
+|Boolean
+|true
+|text
+|A value representing ``true`` or ``false``
+
+|Double
+|11.5
+|number, text
+|Double-precision 64-bit IEEE 754 floating point.
+
+|GeoPoint
+|59.9090442,10.7423389
+|geoPoint, text
+|Represents a geographical point on earth, given in latitude and longitude.
+
+|Instant
+|2015-03-16T10:00:02Z
+|datetime, string
+|A single point on the time-line.
+
+|LocalTime
+|10:00:03
+|datetime?TODO, text
+|A time representation without timezone
+
+|LocalDateTime
+|2015-03-16T10:00:02
+|datetime, text
+|A date-time representation without timezone.
+
+|Long
+|1234
+|number, text
+|64-bit two's complement integer.
+
+|Reference
+|0b7f7720-6ab1-4a37-8edc-731b7e4f439e
+|text
+|Holds a reference to other nodes in the same repository.
+
+|Set
+|
+|Not indexed
+|Holds sub properties as it's value
+
+|XML
+|<some>xml</some>
+|TODO, text (what about indexvalueprocessors?)
+|Any valid XML
+|===
+
+
+== _allText
+
+Nodes that contain indexed String values, typically gets a generated system property called _allText.
+This property has the valueType `String`, and by default get indexed as `text`, `ngram`, and `analyzed`
+
+The property is commonly used in "search everything" approaches.
+
+NOTE: When defining custom index configurations, you may choose if a property will be included in _allText, or not.
+
+== Index config
+
+By default, properties are indexed based on their specific value type, according to the valueType table above.
+This strategy is known as `decideByType`.
+
+TODO: WHAT HAPPENS IF NO DEFAULT CONFIG IS SPECIFIED IN A NODE?
+
+Every now and then, you may need more detailed control of how your properties are indexed.
+This is where the index config comes in.
+
+The index config allows you to provide detailed instructions on how the properties of a node should be indexed.
+
+The index config itself is stored as a property on the node.
+As such. a basic index config might look something like this:
+
+.Samle index config
+[source,json]
+----
+"_indexConfig": {
+    "default": {
+        "decideByType": false,
+        "enabled": true,
+        "nGram": false,
+        "fulltext": false,
+        "includeInAllText": false,
+        "path": false,
+        "indexValueProcessors": []
+        "languages": []
+    },
+    "configs": [
+        {
+            "path": "myProperty",
+            "config": {
+                "decideByType": false,
+                "enabled": true,
+                "nGram": true,
+                "fulltext": true,
+                "includeInAllText": true,
+                "path": false,
+                "languages": []
+            }
+        }
+    ]
+}
+----
+
+The above configuratino has two entries:
+
+Default:: The default config for all properties (unless otherwise specified)
+Configs:: Override the default config for properties matching specified `path`
+
+=== Path
+
+All config entires, with exception of default must specify a path.
+The path element defines the property scope within the node where this index configuration applies.
+
+Paths follow the <<noql#propertyPath, propertyPath>> format, optionally including wildcard character *.
+
+Examples:
+
+.Applies to "myProperty" and all sub properties
+[source,json]
+----
+myProperty*
+----
+
+.Applies to "myProperty.myName" and all sub properties
+[source,json]
+----
+myProperty.myName
+----
+
+TODO: Verify that * is optional, what happens if it is missing?
+
+
+
+=== Config
+
+A single `config` object may hold the following indexing instructions
+
+decideByType:: If true, indexing is done based on valueType, according to the table above. I.e. numeric values are indexed as both string and numeric.
+enabled:: If false, indexing will be disabled for the specified path
+fulltext:: Values are stored as 'ngram', 'analyzed' and also added to the _allText system property
+ngram:: Values are stored as 'ngram'
+path:: Values are stored as 'path' type and applicable for the pathMatch-function
+includeInAllText:: Affected values will be added to the `_allText` property
+indexValueProcessors:: TODO
+languages:: For each specified language, a stemmed index of the property will be created
+
+====
+Language codes are specified in the `la[-co]`` format, where:
+
+* `la`= two letter language code as specified by https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes[ISO-639]
+* `co` = optional two letter country code as specified by https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes[ISO-3166]
+
+.Supported languages for stemming
+[cols="1,2"]
+|===
+|Code |Language
+
+|ar
+|Arabic
+
+|bg
+|Bulgarian
+
+|bn
+|Bengali
+
+|ca
+|Catalan
+
+|cs
+|Czech
+
+|da
+|Danish
+
+|de
+|German
+
+|en
+|English
+
+|eu
+|Basque
+
+|fa
+|Persian
+
+|fi
+|Finnish
+
+|fr
+|French
+
+|ga
+|Irish
+
+|gl
+|Galician
+
+|hi
+|Hindi
+
+|hu
+|Hungarian
+
+|hy
+|Armenian
+
+|lt
+|Lithuanian
+
+|lv
+|Latvian
+
+|nl
+|Dutch
+
+|no
+|Norwegian
+
+|pt
+|Portuguese
+
+|pt-br
+|Brazilian
+
+|ro
+|Romanian
+
+|ru
+|Russian
+
+|es
+|Spanish
+
+|sv
+|Swedish
+
+|tr
+|Turkish
+
+|th
+|Thai
+
+|===
+
+
+NOTE: If a non-supported language is specified, it is simply ignored TODO VERIFY
+
+====
+
+
+== Templates
+
+For simplicity, index configs may also be defined using a shorthand format.
+Rather than providing a full config object, you may simply specify a template name.
+
+.Sample use of templates
+[source,json]
+----
+"_indexConfig": {
+    "default": "byType",
+    "configs": [
+        {
+            "path": "myProperty",
+            "config": "fulltext"
+        }
+    ]
+}
+----
+
+The following templates are available:
+
+=== none
+
+Turns off indexing completely
+
+.None template output
+[source,json]
+----
+"config": {
+    "enabled": false,
+    "decideByType": false,
+    "nGram": false,
+    "fulltext": false,
+    "includeInAllText": false,
+    "path": false
+}
+----
+
+=== byType
+
+Indexing based on valueType
+
+.Minimal template output
+[source,json]
+----
+"config": {
+    "enabled": true,
+    "decideByType": true,
+    "nGram": false,
+    "fulltext": false,
+    "includeInAllText": false,
+    "path": false
+}
+----
+
+
+=== fulltext
+
+Activates common text indexing options
+
+.Fulltext template output
+[source,json]
+----
+"config": {
+    "enabled": true,
+    "decideByType": false,
+    "nGram": true,
+    "fulltext": true,
+    "includeInAllText": true,
+    "path": false
+}
+----
+
+
+=== path
+
+Turns on path specific indexing
+
+.Path template output
+[source,json]
+----
+"config": {
+    "enabled": true,
+    "decideByType": false,
+    "nGram": false,
+    "fulltext": false,
+    "includeInAllText": false,
+    "path": true
+}
+----
+
+=== minimal
+
+Will only create orderby indexes TODO VERIFY
+
+.Minimal template output
+[source,json]
+----
+"config": {
+    "enabled": true,
+    "decideByType": false,
+    "nGram": false,
+    "fulltext": false,
+    "includeInAllText": false,
+    "path": false
+}
+----

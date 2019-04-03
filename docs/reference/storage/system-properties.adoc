@@ -1,0 +1,156 @@
+= System properties
+:toc: right
+:imagesdir: images
+
+Every node holds a set of standard properties.
+These properties are meta-data, with specific system defined purposes.
+
+System properties may effectively be used in queries, just like one would query custom properties.
+
+== Identifier and structure
+
+[cols="1,1,1,2"]
+|===
+|System Property |Value Type |Indexing |Comment
+
+|_id
+|String
+|string
+|Holds the unique id of the node, typically a UUID
+
+|_name
+|String
+|string
+|Holds the name of the node. Must be unique within its scope (nodes with same parent)
+
+|_parentPath
+|String
+|string
+|Reference to parent node path
+
+|_path
+|String
+|path, string
+|Dynamic property resolved from parent path + node name
+
+|_childOrder
+|String
+|string
+|Default ordering of children when using getChildren(). TODO SUPPORTED VALUES
+
+|_manualOrderValue
+|Long? TODO
+|number, string
+|Numeric order value used for the builtin manual ordering
+
+|_state
+|String
+|string
+|Used for keeping state of a node in a branch
+
+|===
+
+==  General
+
+[cols="1,1,1,2"]
+|===
+|System Property |Value Type |Indexing |Comment
+
+|_ts
+|TODO
+|datetime, string
+|The last time this node was modified
+
+|_versionKey
+|TODO
+|string
+|For every change to a node, a unique versionKey is generated
+
+|===
+
+== Index related
+
+[cols="1,1,1,2"]
+|===
+|System Property |Value Type |Indexing |Comment
+
+|_nodeType
+|string
+|string
+|Used to create collections of nodes in a repository
+
+|_indexConfig
+|string
+|Not indexed
+|Node specific index configuration
+
+|===
+
+
+== Dynamic properties
+
+To simplify queries, the following properties are dynamically created based on the existence of other properties in a node.
+They are useful for performing various types of queries.
+
+[cols="1,1,1,2"]
+|===
+|System Property |Value Type |Indexing |Comment
+
+|_allText
+|String
+|string, analyzed, ngram
+|Aggregates text across other string properties in the node
+
+|_references
+|Reference
+|string
+|Aggregates all reference properties in the node
+
+|===
+
+
+== Access control properties
+
+Permissions set on a node are indexed differently from what the domain object looks like.
+The index structure is is flattened, and enables an effective way to query nodes based on access control.
+
+[cols="1,1,1,2"]
+|===
+|System Property |Value Type |Indexing |Comment
+
+|_permissions_read
+|String
+|TODO
+|Principals with read access
+
+|_permissions_create
+|String
+|TODO
+|Principals with create access (create children of node)
+
+|_permissions_delete
+|String
+|TODO
+|Principals with delete access
+
+|_permissions_modify
+|String
+|TODO
+|Principals with modify access
+
+|_permissions_publish
+|String
+|TODO
+|Principals with publish access
+
+|_permissions_readpermissions
+|String
+|TODO
+|Principals with access to read node permissions
+
+|_permissions_writepermissions
+|String
+|TODO
+|Principals with access to write node permissions
+
+|===

@@ -1,0 +1,205 @@
+= Aggregations
+:toc: right
+:imagesdir: images
+
+
+== Introduction
+
+An aggregation is a function that is executed on a collection of search results. The search-results are defined by the query and query-filter
+of the search request.
+
+For instance, consider a query returning all nodes that have a property "price" less than, say, $100. Now, we want to divide the result nodes into ranges, say
+0-$25, $25-$50 and so on. We also would like to know the average price for each category. This could be done by doing multiple separate queries and calculating the
+average manually, but this would be very inefficient and cumbersome. Luckily, aggregations solve these types of problems easily.
+
+In some API functions it is possible to send in an aggregations expression object. This object is either in Java or a JSON like the following:
+
+.Basic aggregation DSL
+[source,json]
+----
+include::code/expr.json[]
+----
+
+There are two different types of aggregations:
+
+Bucket aggregations:: A bucket aggregation places documents matching the query in a collection - a bucket. Each bucket has a key.
+Metrics aggeregations:: A metric aggeregation computes metrics over a set of documents.
+
+Typically, you will divide data into buckets and then use metric aggregations to calculate e.g average values,
+sum, etc for each bucket, if necessary.
+
+
+=== terms
+
+The `terms` aggregation places documents into bucket based on property values. Each unique value of a property will
+get its own bucket. Here's a list of properties:
+
+field (string):: The property path.
+size (int):: The number of bucket to return, ordered by the given orderType and orderDirection. Default to ``10``.
+order (string):: How to order the results, type and direction. Default to ``_term ASC``.
+
+Types:
+
+  * `_term`: Alphabetic ordering of bucket keys.
+  * `_count`: Numeric ordering of number of document in buckets.
+
+.Sample term aggregation
+[source,json]
+----
+include::code/terms-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/terms-result.json[]
+----
+
+
+=== stats
+
+The stats-aggregations calculates the following statistics for the parent-aggregation buckets:
+
+`avg`, `min`, `max`, `count`, and `sum`
+
+Here's a list of properties:
+
+field (string):: The property path.
+
+.Sample stats aggregation
+[source,json]
+----
+include::code/stats-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/stats-result.json[]
+----
+
+
+
+=== range
+
+The range aggregation query defines a set of ranges that represents a bucket.
+Here's a list of properties:
+
+field (string):: The property path.
+ranges (range[]):: The range-buckets to create.
+range (from: number, to: number):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded.
+
+.Sample range aggregation
+[source,json]
+----
+include::code/range-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/range-result.json[]
+----
+
+
+=== geoDistance
+
+The geoDistance aggregation needs a defined range to split the documents into buckets.
+Only documents with properties of type 'GeoPoint' will be considered in the ``geoDistance`` aggregation buckets.
+
+Here's a list of properties:
+
+field (string):: The property path.
+ranges (range[]):: The range-buckets to create.
+range (from: number, to: number):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded.
+unit (string):: The meassurement unit to use for the ranges.  Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet) or nmi (nauticalmiles).
+origin (lat: number, lon: number):: The GeoPoint from which the distance is measured.
+
+
+.Sample geoDistance aggregation
+[source,json]
+----
+include::code/geo-distance-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/geo-distance-result.json[]
+----
+
+[NOTE]
+====
+At the time of writing, there is only one way of find out which result belongs to which bucket:
+By also sorting the result on geoDistance, and matching the order to the number of each bucket.
+In a future version, there will easier ways of doing this.
+====
+
+
+=== dateRange
+
+The dateRange aggregation query defines a set of date-ranges that represents a bucket. Only
+documents with properties of type 'DateTime' will considered in the ``dateRange`` aggregation buckets.
+Here's a list of properties:
+
+field (string):: The property path.
+format (string):: The date-format of which the buckets will be formatted to on return. Defaults to ``yyyy-MM-dd'T'HH:mm:ss.SSSZ``.
+ranges (range[]):: The range-buckets to create.
+range (from: <number>, to: <number>):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded. The from and to follows a special date-math explained below.
+
+
+.Sample dateRange aggregation
+[source,json]
+----
+include::code/date-range-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/date-range-result.json[]
+----
+
+
+
+==== Date-math expression
+
+The range fields accepts a date-math expression to calculate the time-spans.
+
+* Now minus a day: `now-1d`
+* The given date minus 3 days plus one minute: `2014-12-10T10:00:00Z||-3h+1m`
+* Range describing now plus one day and thirty minutes, rounded to minutes: `now+1d+30m/m`
+
+
+=== dateHistogram
+
+The date-histogram aggregation query defines a set of bucket based on a given time-unit. For instance,
+if querying a set of log-events,  a ``dateHistorgram`` aggregations query with interval ``h`` (hour) will divide each log
+event into a bucket for each hour in the time-span of the matching events. Here's a list of properties:
+
+field (string):: The property path.
+interval (string):: The time-unit interval for creating bucket. Supported time-unit notations:
+
+  * ``y`` = Year
+  * ``M`` = Month
+  * ``w`` = Week
+  * ``d`` = Day
+  * ``h`` = Hour
+  * ``m`` = Minute
+  * ``s`` = Second
+
+format (string):: Output format of date string.
+minDocCount (int):: Only include bucket in result if number of hits <= ``minDocCount``.
+
+
+.Sample dateHistogram aggregation
+[source,json]
+----
+include::code/date-histogram-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/date-histogram-result.json[]
+----

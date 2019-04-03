@@ -109,7 +109,7 @@ We always recommend storing files with UTF charset.
 
 Specification of the locale format:
 
-TODO: - or _???
+TODO: use - or _ ???
 
 A locale is composed of language, country and variant.
 Language is required, country and variant are optional.
@@ -120,8 +120,8 @@ The string-representation of a locale is::
 
 where
 
-* ``la`` = two letter language code as specified by http://www.loc.gov/standards/iso639-2/php/English_list.php[ISO-639]
-* ``CO`` = two letter country code as specified by http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html[ISO-3166]
+* `la`= two letter language code as specified by https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes[ISO-639]
+* `CO` = optional two letter country code as specified by https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes[ISO-3166]
 * ``VA`` = two letter rarely used variant-code.
 
 A sample locale including vendor specific variant:

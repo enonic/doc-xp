@@ -2,77 +2,62 @@
 :toc: right
 :imagesdir: storage/images
 
-Enonic XP ships with a unique and powerful document-oriented data storage, built on top of the popular search engine https://elastic.com[Elasticsearch].
+Enonic XP ships with a unique and powerful document-oriented data storage
+built on the shoulders of popular search engine https://elastic.com[Elasticsearch].
 
 == Background
 
-Years of experience has taught us that transactional storage models (read SQL) rarely fulfill the requirements of modern cloud-based applications.
-A key goal of Enonic XP was to deliver a complete stack - reducing the dependencies for complex infrastructure.
+When designing XP, we carefully evaluated existing and popular technologies from Git, file systems, object storage, SQL, the Java Content Repository, and various search and NoSQL solutions.
+However, we were unable to find any single solution that supported our requirements to functionality, performance, simplicity and technology.
+So, we decided to build our own solution.
 
-We evaluated many different technologies and found inspiration in everything from Git, File systems, Object storage, Java Content Repository, and Elasticsearch.
-However, we were unable to find any single solution that was sufficiently simple and supported our requirements - so we decided to build our own technology.
-
-The result is the Enonic Data Repository.
+The result is now a central part of Enonic XP, called the "Data store".
 
 == Features
 
-The XP Repository enables you to store, index, query and access data of virtually any kind, fast and efficiently.
+The XP Data store enables you to persist, index, query and access data of virtually any kind, fast and efficiently.
 Below is a highlight of the capabilities provided:
 
 * Create multiple of <<Repositories>> within a single XP deployment
-* Store and index documents aka <<Nodes>>, no schemas required
+* Store documents aka <<Nodes>> hierarchically, no schemas required
 * Nodes contain key-value entries called <<Properties>>
-* Nodes can be stored hierarchically
-* Values have specific <<ValueTypes>>, for instance String or GeoPoint
-* Store entire files and byte arrays within a single property
-* Build hierarchical structures of properties within a single node
-* Query your data using the <<Query language>> aka NoQL
+* Query your data using an SQL inspired <<Query language>>
 * Use <<Aggregations>> to get powerful statistics on your data
-* New versions are created for every modification of a node
-* <<Commit>> versions to persist them forever, or they will be vacuumed
-* Supports <<Access Control>> down to a single Node
+* Versions are created for every modification of a node
+* Supports <<Access Control>> down to a single document
 * Git inspired <<Branches>> enable you to stage and promote your data
-* Fully <<Schema-less>> approach lets you keep the domain model in your code
-* <<Editors>> eliminate cumbersome statements
+* <<Editors>> eliminate cumbersome update statements
 * <<Snapshot>> feature to rollback entire system or per repository
 * <<Export and Import>> nodes in a human readable format
-* <<Dump and Load>> your entire system to include all versions and data
+* <<Dump and Load>> your entire system
 
 == Repositories
 
-Repositories are the fundamental concept that enables you to create and store data in silos.
+Repositories are the fundamental concept that enable you to create and store data separately from one another.
 You may create any number of repositories within a single instance of Enonic XP.
 
-Each repository must have a name.
+Each repository must have a unique name.
 Best practice is to name or prefix the repository according to your application. i.e. a good repository name might be: com.company.myapp
 
 Data stored in a repository will typically belong to a common domain. Fetches and searches are typically executed against
-a single repository, so it makes sense to keep data from different domains separated in different repositories.
+a single repository, but may also be done across multiple repositories.
 
-image::sub-repos.png[]
+image::repos.png[]
 
 === System repository
 
-Out of the box, Enonic XP ships with a system repository.
-The system repository is used for the following purposes:
+Enonic XP ships with a system repository.
+The system repo is used for the following data:
 
-* Id-provider specific data, such as users, groups and roles.
-* Repositories metadata regarding other repos created within the instance
-* Applications that have been installed through the API
+* Repo metadata, for other repos created within the instance
+* Id-providers, including users, groups and roles.
+* Application binaries, for apps installed through the API
 
 === Managing repositories
 
-An API for managing repositories is available, but we also recommend checking out https://market.enonic.com/vendors/glenn-ricaud/data-toolbox.
-When creating or deleting a repository, repository metadata, as well as underlying storage- and search-indexes will be configured.
-
-=== Persistence
-An XP repository essentially deals with data and its metadata.
-
-Data and selected metadata such as permissions and index configurations are persisted as files.
-Metadata regarding hierarchical structures and search indexes are stored and distributed with Elasticsearch, which is embedded in XP.
-The files are stored in so-called BlobStores. BlobStores are organized per repository, and by type, which makes it easy to identify which files belong to what repository.
-
-For clustered deployments, Enonic XP currently relies on access to a shared file system.
+An API for managing repositories is available internally, for use by applications.
+Additionally, a remote API is available and can be accessed using the Enonic CLI.
+We also recommend checking out https://market.enonic.com/vendors/glenn-ricaud/data-toolbox.
 
 == Nodes
 
@@ -92,7 +77,6 @@ When nodes are created in a repository, the following happens:
 * The specific version of the node is then added to the specified <<Branch>>.
 
 
-
 == Properties
 
 Properties inside a node hold the actual data values.
@@ -101,14 +85,15 @@ Properties use a key-value format.
 The key must be a unique name within the node, and the value must have a specific <<ValueType>>, such as ``String``, or ``GeoPoint``.
 The valueType is used to index the property correctly, and provide basic validation.
 
-Examples of properties might be:
-
+Examples of what properties might look like:
 
 [source,properties]
 ----
 mytext = "a string"
 mynumber = 1
 ----
+
+Each property has a specific ValueType (i.e. string or boolean) which again is used to determine indexing.
 
 Some characters are illegal in a property key. Here's a list of illegal characters:
 
@@ -131,254 +116,35 @@ person.age = 39
 person.birth-date = localDate("1975-17-10")
 ----
 
-In the example above, the property person is of the special <<ValueType>> ``Set``.
+In the example above, the property `person` is of the ValueType `Set`.
+Sets are special in the way that they don't hold actual values, but rather act as containers for other properties.
 
-
-=== ValueTypes
-
-Every property to be stored in a node must have a value type.
-The value type enables the system to interpret and handle each piece of data specially - applying to both validation and indexing.
-
-Below is a complete list of all supported value-types.
-
-[cols="1,1,2"]
-|===
-|Value Type |Example |Comment
-
-|String
-|``My String``
-|String of characters within UTF charset
-
-|BinaryReference
-|``a-binary-reference``
-|Handle for accessing a binary
-
-|Boolean
-|``true``
-|A value representing ``true`` or ``false``
-
-|Double
-|``11.5``
-|Double-precision 64-bit IEEE 754 floating point.
-
-|GeoPoint
-|``59.9090442,10.7423389``
-|Represents a geographical point, given in latitude and longitude.
-
-|Instant
-|``2015-03-16T10:00:02Z``
-|A single point on the time-line.
-
-|LocalTime
-|``10:00:03``
-|A time representation without timezone
-
-|LocalDateTime
-|``2015-03-16T10:00:02``
-|A date-time representation without timezone.
-
-
-|Long
-|``1234``
-|64-bit two's complement integer.
-
-|Reference
-|``0b7f7720-6ab1-4a37-8edc-731b7e4f439e``
-|Holds a reference to other nodes in the same repository.
-
-|Set
-|
-|Holds properties as it's value - sets are not indexed
-
-|XML
-|<some>xml</some>
-|Any valid XML
-|===
-
-
-=== Index types
-
-TODO: Stemming
-
-When nodes are persisted, property values are instantly indexed.
-A single property can be indexed in multiple ways, also known as index types.
-
-Each index type offers a specific set of capabilities:
-
-string:: The string-representation of a value, the basic index type used for any value.
-
-numeric:: A double-representation of value
-
-datetime:: A date-time representation of a value
-
-ngram:: nGram-indexed fields are available for search by using the nGram-function. An nGram-analyzed field will index all substring values from 2 to 15 characters.
-
-====
-Consider a property of type string, with value `article`.
-ngram indexing will split the string into the following tokens when analyzed::
-
-  'ar', 'art', 'arti', 'artic', 'articl', 'article'
-
-For more information about how the nGram-function works, check out the nGram-function.
-====
-
-analyzed::  Analyzed fields are available for search by using the fulltext-function. An analyzed field will be split into tokens.
-
-====
-Consider a property of type string, with value `This article contains information test-driven development`
-When analyzed, it is split into the following tokens:
-
-  'this', 'article', 'contains', 'information', 'about', 'test', 'driven', 'development'
-
-For more information about how the fulltext-function works, check out the fulltext-function.
-====
-
-paths:: The path-elements (separated by default path-separator '/') are indexed as tokens.
-
-NOTE: A value will only be indexed as the applicable types, e.g only numeric values will be stored with a numeric representation.
-
-Each value type has a default index definition.
-For instance, a Double property will by default be indexed both as `string` and `numeric`.
-
-
-=== Index config
-
-Should you need to specify custom indexing options for one or more properties, you will need to create an index configuration.
-
-By default, values are indexed using the "type" instruction - using the propertyType to automatically determine how it should be indexed.
-Special indexing options may be passed along with the node (e.g in the Node API) - forcing special indexing of one or more properties.
-The different options are described below:
-
-type (default)
-  Indexing is done based on type; e.g numeric values are indexed as both string and numeric.
-
-minimal
-  Value is indexed as a string-value only, no matter what type of data.
-
-none
-  Value is not indexed at all.
-
-fulltext
-  Values are stored as 'ngram', 'analyzed' and also added to the _allText system property
-
-path
-	Values are stored as 'path' type and applicable for the pathMatch-function
-
-
+Properties are of a specific <<storage/indexing#ValueType, ValueType>>.
+ValueTypes are used for validation and securing correct <<storage/indexing#, indexing>>.
 
 
 === System Properties
 
-For simplicity, explicit namespaces are not used in the XP storage.
-In order to separate system properties from user defined properties, ``_`` (underscore) has been reserved as a starting character for system standard properties.
+In order to separate system properties from user defined properties,
+`_` (underscore) has been reserved as a starting character for system standard properties.
 
-Below are the system properties explained.
+The repository contains several standard metadata properties such as `_id`, `_name`, and `_timestamp`.
 
-_childOrder:: Default ordering of children when doing find children if no other order expression is given
-
-_id:: Holds the id of the node, typically generated automatically in the form of a UUID.
-
-_indexConfig:: Specification on how to index properties
-
-_manualOrderValue:: Numeric order value used for the builtin manual ordering
-
-_name:: Holds the name of the node. The name must be unique within its scope (nodes with same parent).
-
-_nodeType:: Used to create collections for nodes in a repository.
-
-_parentPath:: Reference to parent node path.
-
-_path:: Dynamic property resolved from parent path + node name.
-
-_permissions_read:: The principals that have read access.
-
-_permissions_create:: The principals that have create access.
-
-_permissions_delete:: The principals that have delete access.
-
-_permissions_modify:: The principals that have modify access.
-
-_permissions_publish:: The principals that have publish access.
-
-_permissions_readpermissions:: The principals that have access to read the node permissions.
-
-_permissions_writepermissions:: The principals that have access to change the node permissions.
-
-_state:: Used for keeping state of a node in a branch.
-
-_timestamp:: The last time this node was modified
-
-_versionKey:: For every modification of a node, a unique versionKey is generated
-
-_allText:: A dynamic field aggregating text from all string properties in the node
+For more details on system properties, please consult the <<storage/system-properties#, system properties>> section.
 
 
 
-== Branches
-
-Inspired by Git, XP repos supports a concept called branches.
-Within a branch, nodes are organized hierarchically with paths that must be unique within the branch.
-This means that the fully qualified location of a node consists of:
-
-* repo
-* branch
-* path
-
-Repositories have a default branch called ``master``.
-Any number of branches could be added to facilitate your data model. Branches are typically ideal for facilitating long running transactions.
-
-As an example, XP's CMS make use of two branches ``draft`` and ``master`` to support the editorial workflow, with previewing and bulk publishing of changes.
-
-== Pushing
-
-XP provides advanced features such as diffing to see the changes between two branches.
-Additionally, the API provides features for "pushing" changes from one branch to another.
-The push operation automatically handles dependencies and and missing parent items to ensure the result is consistent.
-
-From the CMS API, the push operation is known as "publish".
-
-XP repos currently don't offer conflict resolution or merging functionality.
-As such, conflict resolution must either be handled by the application itself, or the application must write data in a way that avoids creating conflicts.
-
-== Branch usage
-
-Consider the 'Oslo' and 'Enonic' nodes from earlier sections:
-
-image::nodes.png[]
-
-There will be two *node-versions* in the repository stored in the blobstore:
-
-image::node-versions.png[]
-
-A node-version is a representation of a node's properties. A node-version has no knowledge of name, parent or other meta-data: just the properties of a node.
-At the same time, the targeted branch (named 'draft' in this example) gets two entries:
-
-image::branch_initial.png[]
-
-The node-versions are now a part of a tree-structure, based on the node's name and parent.
-If we *push* the content of branch 'draft' to the default branch 'master', we end up with something like this:
-
-image::branch_push.png[]
-
-At the moment, there are two branches pointing to the same node-versions. This means that a single node version can exist in several branches with different structures.
-Now, consider that the 'oslo' - node is updated and stored to the 'draft'-branch, resulting in a new node-version with the same id and an updated pointer from the branch:
-
-image::branch_diff.png[]
-
-The two branches now point to different node-versions of the 'oslo' node.
-Again, doing a push-operation from 'draft' to 'master' will result in both nodes pointing to the same node-versions:
-
-image::branch_push_2.png[]
 
 == Query language
 
 The Node Query Language, or NoQL for short, is inspired by traditional SQL.
 As with other NoSQL solutions, it has special capabilities and limitations.
 
-Selectors, Joins and Update statements are _not_ supported, but NoQL adds support for <<Relevance Sorting>> and <<Aggregations>>.
+Selectors, joins and update statements are _not_ supported.
+However, NoQL adds cool features like <<storage/noql#Relevance Sorting, relevance sorting>> and <<storage/aggregations#, aggregations>>.
 
-As selectors are not supported, the result of a query through the Node API currently only returns the identifiers for the matching nodes, with optional aggregation results.
-Developers must then get the desired nodes through a separate API request.
+Selectors are currently not supported, and the only result of a query will only be identifiers for the matching nodes.
+Developers must then get the desired nodes (with their data) through a separate request.
 
 A NoQL statement is essentially composed from three parts: Query, Sorting and Aggregations.
 
@@ -397,36 +163,28 @@ For instance, we could limit the result further:
   weight > 10 AND fulltext('article', 'should have these words', 'AND')
 
 In this case we are adding a so-called dynamic expression to the query.
-The fulltext() expression performs a "fulltext" search on the property ``article`` for the specified string.
+The fulltext() expression performs a free text search on the property `article` for the specified search string.
 
-For both the integer comparison and fulltext expression to work, the weight, and article properties need to be indexed as a number and as text respectively.
-Read more about this below.
+For both the integer comparison and fulltext expression to work, the weight, and article properties need to be indexed properly.
 
-=== Index Types
-Each property has a specific Value Types which again has one or more Indexing options.
-In ``weight > 10``, the comparison value is an integer. The query engine will then automatically look for an index that matches this.
-If no such index exists, no matches will be returned.
-
-The same applies to fulltext. If the property is not indexed as Fulltext, the search will not work.
-It is also important to notice that a single property may have multiple indicies. Consider the date Januar 1st 2020.
-When stored, it can be stored both as a date (number representing seconds from 1.1.1970), and as a string i.e. "2020-01-01".
-
-Value Types are automatically indexed according to their type,
-but in some cases developers may want to tune indexing more specifically.
-Read more about <<properties#Indexing, Indexing>> of properties.
+For more insight check out the detailed <<storage/noql#Query, documentation on queries>>
 
 === Sorting
-As we know from Google, the best results are returned first.
-As traditional SQL databases, XP lets you sort the result by property in ascending or descending order.
-Additionally, for any query containing a fulltext expression, results may be sorted by ranking.
-Ranking is done through an internal algorithm that scores each individual item based on how it matches with your search.
-
+Like traditional SQL databases, XP lets you sort the result by property in ascending or descending order.
 A basic sort statement is simply defined by property and sorting direction i.e.:
 
   myproperty DESC
 
+Additionally, similar to Google, text-based query results may be sorted by ranking.
+Ranking is done through an internal algorithm that scores each individual item based on how it matches with your search.
+To sort by ranking, use the following statement:
 
-=== Aggregations
+  _score DESC
+
+For more insight check out the detailed <<storage/noql#Sorting, documentation on sorting>>
+
+
+== Aggregations
 With Aggregations, developers may extract statistical results from your data blazingly fast.
 Aggregations can be used for anything from data visualization to creating navigational UI's.
 
@@ -478,8 +236,12 @@ And the result might look like this:
 ----
 
 This may again be used to create a visualization, for instance as a Tag Cloud.
+XP supports several different kinds of aggregation types.
 
-XP supports several different kinds of Aggregations such as Terms, Range, dateRange, dateHistogram, stats and geoDistance.
+For more insight check out the detailed <<storage/noql#Aggregations, documentation on aggregations>>
+
+
+
 
 == Editors
 
@@ -492,3 +254,30 @@ An editor is typically a query, combined with a piece of code.
 The query determines which nodes to modify, and the code is then executed for each single node.
 
 TODO Example.
+
+
+== Branches
+
+Inspired by Git, XP repos supports a concept called branches.
+All repos have a default branch called `master`.
+This means that the fully qualified location of a node consists of:
+
+  <repo> + <branch> + <path>
+
+Any number of branches could be added to facilitate your data model.
+Branches are typically ideal for facilitating long running transactions.
+
+As an example, XP's CMS functionality makes use of two branches ``draft`` and ``master`` to support the editorial workflow, with previewing and bulk publishing of changes.
+
+For more details, dive into the <<storage/branches#, branches documentation>>.
+
+
+== Persistence
+
+Enonic XP by default uses a combination of file system and the embedded Elasticsearch for persistence of data.
+Segments of information is chunked into files and stored in so-called BlobStores.
+Files are written using an "append only" technique, meaning files are never locked or updated.
+BlobStores are organized by repository, and type, making it easy to identify which files belong to what repository.
+A small, but important set of metadata uses Elasticsearch as its primary data store.
+
+For clustered deployments, Enonic XP by default relies on access to a shared file system.
