@@ -176,9 +176,9 @@ As such. a basic index config might look something like this:
 [source,json]
 ----
 "_indexConfig": {
-    "default": {
-        "decideByType": false,
+    "default": { <!--1-->
         "enabled": true,
+        "decideByType": false,
         "nGram": false,
         "fulltext": false,
         "includeInAllText": false,
@@ -186,12 +186,12 @@ As such. a basic index config might look something like this:
         "indexValueProcessors": []
         "languages": []
     },
-    "configs": [
+    "configs": [  <!--2-->
         {
-            "path": "myProperty",
-            "config": {
-                "decideByType": false,
+            "path": "myProperty",  <!--3-->
+            "config": {  <!--4-->
                 "enabled": true,
+                "decideByType": false,
                 "nGram": true,
                 "fulltext": true,
                 "includeInAllText": true,
@@ -203,12 +203,12 @@ As such. a basic index config might look something like this:
 }
 ----
 
-The above configuratino has two entries:
+<1> *default* is the default config for all properties (unless overridden)
+<2> *configs* overrides the default config for properties matching specified `path`
+<3> *path* specifies the propertyPath the config applies to
+<4> *config* is the specific overriding config
 
-Default:: The default config for all properties (unless otherwise specified)
-Configs:: Override the default config for properties matching specified `path`
-
-=== Path
+=== Property paths
 
 All config entires, with exception of default must specify a path.
 The path element defines the property scope within the node where this index configuration applies.
@@ -232,21 +232,42 @@ myProperty.myName
 TODO: Verify that * is optional, what happens if it is missing?
 
 
+== Config options
 
-=== Config
+The following options can be added to a configuration entry:
 
-A single `config` object may hold the following indexing instructions
+=== enabled
 
-decideByType:: If true, indexing is done based on valueType, according to the table above. I.e. numeric values are indexed as both string and numeric.
-enabled:: If false, indexing will be disabled for the specified path
-fulltext:: Values are stored as 'ngram', 'analyzed' and also added to the _allText system property
-ngram:: Values are stored as 'ngram'
-path:: Values are stored as 'path' type and applicable for the pathMatch-function
-includeInAllText:: Affected values will be added to the `_allText` property
-indexValueProcessors:: TODO
-languages:: For each specified language, a stemmed index of the property will be created
+If false, indexing will be disabled for the affected properties
 
-====
+=== decideByType
+
+If true, indexing is done based on valueType, according to the table above. I.e. numeric values are indexed as both string and numeric.
+
+=== fulltext
+
+Values are stored as 'ngram', 'analyzed' and also added to the _allText system property
+
+=== ngram
+
+Values are stored as 'ngram'
+
+=== path
+
+Values are stored as 'path' type and applicable for the pathMatch-function
+
+=== includeInAllText
+
+Affected values will be added to the `_allText` property
+
+=== indexValueProcessors
+
+TODO
+
+=== languages
+
+For each specified language, a stemmed index of the property will be created
+
 Language codes are specified in the `la[-co]`` format, where:
 
 * `la`= two letter language code as specified by https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes[ISO-639]
@@ -349,7 +370,6 @@ Language codes are specified in the `la[-co]`` format, where:
 
 NOTE: If a non-supported language is specified, it is simply ignored TODO VERIFY
 
-====
 
 
 == Templates
@@ -361,15 +381,18 @@ Rather than providing a full config object, you may simply specify a template na
 [source,json]
 ----
 "_indexConfig": {
-    "default": "byType",
+    "default": "byType", <!--1-->
     "configs": [
         {
             "path": "myProperty",
-            "config": "fulltext"
+            "config": "fulltext" <!--2-->
         }
     ]
 }
 ----
+
+<1> Referencing the template "byType"
+<2> Referencing the template "fulltext"
 
 The following templates are available:
 
