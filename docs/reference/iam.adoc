@@ -1,12 +1,36 @@
-== Identity and access management
+== Identity and access management (IAM)
 :toc: right
 
-TODO
+Enonic XP ships with a clearly defined and pluggable concept for handling authentication and authorization
 
 == Introduction
 
+Like a regular operating system, Enonic XP ships with a defined system for handling users,
+logins, roles based authorization as well as fine grained access control down to a single item in the NoSQL storage.
+
+== Principals
+
+=== Users
+A central concept in XP are users.
+Users consist of the following properties:
+
+* Username
+* key
+* e-mail
+
+=== Groups
+
+Groups are dynamically defined pri
+
+=== Roles
+
+As opposed to groups, roles are closely related to application specific functionality.
+For instance, a role typically
+
 == Identity providers
 
-== Role system
+TODO
 
-== Access management
+=== Vhost mapping
+
+TODO
