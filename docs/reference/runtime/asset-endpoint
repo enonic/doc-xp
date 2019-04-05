@@ -1,53 +1,11 @@
-= Web Engine
+= Asset serving
 :toc: right
 :imagesdir: images
-
-The web engine is a core part of the XP runtime that enables processing of HTTP requests
-
-== webapp.js
-
-To turn an application into a webapp, simply place a file called ``/src/main/resources/webapp/webapp.js`` into your project.
-
-When the application is deployed, the controller will be accessible from
-
-  ``//<server>:<port>/webapp/<app-name>/`` (i.e. "localhost:8080/webapp/my.webapp/").
-
-``webapp.js`` now acts as a <<framework#,Http controller>> and may expose a function for each HTTP method that should be handled: i.e.
-GET, POST, etc.
-
-Below is an example webapp controller.
-
-[source,javascript]
-----
-include::code/webapp.js[]
-----
-
-
-== Rendering pipeline
-
-This section describes the full pipeline involved in processing a webapp http request.
-
-=== Vhost filter
-
-=== Custom Java Filters
-
-=== Web handler
-
-=== Webapp controller
-
-=== ID provider
-
-=== Error handler
-
-=== Custom Java Filters
-
-
-== Asset Service
 
 Applications commonly make use of static files that will be delivered to the client (typically web browsers). Examples
 are icons, css files, javascript files etc.
 
-Enonic XP provides a standard and cache optimized approach to serving assets from an application
+Enonic XP provides a standard and cache optimized approach to serving static assets from an application through
 
 Files located in an applications ``/src/main/resources/assets/`` folder are all available to be served publicly by the asset service.
 For instance, if a file is placed in ``/src/main/resources/assets/path/to/asset.ext``
@@ -56,7 +14,7 @@ For instance, if a file is placed in ``/src/main/resources/assets/path/to/asset.
 The reasons why <app-name> is included in the url, is that the asset service can also be used in context of sites, or admin apps.
 In these cases, the application context is not deterministic.
 
-=== Cache headers
+== Cache headers
 
 The asset service is also able to serve the asset using a so-called "perfect cache" approach.
 This is done by using a URL that changes when the asset is changed. When the asset service detects this particular url pattern,
@@ -66,9 +24,6 @@ This effectively speeds up the user experience and also offloads the XP back-end
 
 A perfect cache url might look something like this: ``mydomain.com/_/asset/<appname>:<uniquevalue>/path/to/myasset.ext``
 
-=== assetUrl()
+== assetUrl()
 
 To safely generate a perfect cache asset URL, use the assetUrl function that is part of the <<../api/lib-portal#,Portal Library>>
-
-== Web Services
-TODO

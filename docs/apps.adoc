@@ -133,23 +133,3 @@ The platform comes with a standardized approach to extend the admin console with
 Admin apps are created by adding one or more JavaScript controllers to your project.
 
 Read more about <<../reference/admin-apps#,Admin apps>>
-
-
-== Assets
-
-Web application and sites commonly require serving of assets such as javascript files, css and static images.
-The XP App engine provides an out-of-the-box solution to this known as the <<../reference/assets#,Asset service>>
-
-== Services
-
-When building web apps, web sites or even extending the XP admin,
-exposing and consuming contextual endpoints without dealing with hardcoded url mappings is useful.
-Enonic XP offers a practical approach to this called HTTP Services.
-Services are made by adding one or more JavaScript controllers to your project.
-
-Learn more about <<../reference/services#,Http Services>>
-
-
-== Localization
-
-TODO

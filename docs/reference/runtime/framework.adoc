@@ -30,7 +30,7 @@ A controller can also export a special function ``all`` which will handle any HT
 
 The appropriate function will automatically be invoked for every request sent to the controller.
 
-Example usage
+.Example usage
 [source,javascript]
 ----
 include::framework/code/controller-1.js[]

@@ -1,0 +1,30 @@
+= Virtual hosts
+:toc: right
+:imagesdir: images
+
+To secure the XP port (default 8080) and properly route traffic to the right service, the XP offers a concept called vhosts.
+
+== Multi service
+
+Within a single port, XP potentially services multiple different webapps, sites and more.
+By default, XP openly serves all of this within the same url, structure - leaving the job to secure each service up to itself.
+
+A developer visiting a local deployment of XP will for instance be able to try out the following URLs.
+
+* localhost:8080/ (reroutes to /admin by default)
+* localhost:8080/webapp/<app-name>/ (webapp engine)
+* localhost:8080/site/<repo>/<branch>/<path> (site engine)
+* localhost:8080/admin/ (admin engine)
+
+== Vhosts
+
+Vhosts only apply to the XP port. As such, the port number is not relevant to a Vhost.
+By enabling vhosts, access to the XP port will be limited to defined Vhosts, and direct access as specified above will no longer be possible.
+
+To allow access to a particular webapp i.e. `/webapp/my.sample.app/` a Vhost must be configured.
+
+The webapp definition contains three essential Settings
+
+* hostname
+* base url
+* target url

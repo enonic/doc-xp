@@ -1,0 +1,79 @@
+= HTTP Services
+:toc: right
+:imagesdir: images
+
+It can often be useful for web apps to automatically expose contextual endpoints without dealing with hardcoded url mappings and routing strategies.
+HTTP Services are essentially <<framework#HTTP controllers, http controllers>>, safely made available within the applications base url space without worrying about how that happens.
+
+== Use case
+
+Given a web app serving on `localhost:8080/`
+The application specifically handles routing for `/user/<myusername>` and other important url's for deep linking and user friendly URLs.
+The app developer may for instance need to serve a contextual profile image, or allow the user to post a status update.
+
+This is where services come into play.
+By adding the two services `profileimage`, and `statusupdate` to the app,
+the following new endpoints will dynamically be created:
+
+* localhost:8080/user/<myusernam>/_/service/<appname>/profileimage
+* localhost:8080/user/<myusernam>/_/service/<appname>/statusupdate
+
+Similar to assets, services use the reserved `_` path, followed by a deterministic url pattern.
+Since a service is in fact an http controller, the developer may use it to handle any kind of request as desired.
+
+An important detail to notice is that the services can be invoked with different contexts (base urls).
+For instance:
+
+* localhost:8080/_/service/<appname>/profileimage
+* localhost:8080/user/_/service/<appname>/statusupdate
+
+The context is made available to the developer, that may use it to determine handling.
+
+== Controller
+
+To create a service, place an http controller file in the `/src/main/resources/services/` structure of your app.
+Each controller needs to be placed in a folder matching it's name i.e.: `services/<service-name>/<service-name>.js`
+
+.Example service controller
+[source,JavaScript]
+----
+var counter = 0;
+
+exports.get = function(req) {
+
+  counter++;
+
+  return {
+    body: {
+      time: new Date(),
+      counter: counter
+    },
+    contentType: 'application/json'
+  };
+
+};
+----
+
+== Descriptor
+
+Services may by default be invoked by any http client and user.
+It can be useful to disable access to the service, without requiring programmatic checks.
+
+By adding a descriptor file to the service, you may protect it from unauthorized access:
+
+.Sample descriptor, allow access only to defined roles
+[source,xml]
+----
+<service>
+  <allow>
+    <principal>role:system.admin</principal>
+    <principal>role:myapp.myrole</principal>
+  </allow>
+</service>
+----
+
+=== serviceUrl()
+
+To safely generate a service URL, use the serviceUrl function that is part of the <<../api/lib-portal#,Portal Library>>.
+
+NOTE: The function will generate a contextual service url based on the context of the current controller.

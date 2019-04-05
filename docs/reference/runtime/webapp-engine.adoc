@@ -1,0 +1,51 @@
+= Webapp Engine
+:toc: right
+:imagesdir: images
+
+The webapp engine is a core part of the XP runtime that enables serving web applictions
+
+== Webapp endpoint
+
+By default, XP instances uses the port 8080 to serve web requests (aka the "xp port")
+Within this port, the `webapp/`` is reserved for handling web applications.
+
+By adding the application name to this url, you can access the webapp of an application, if available:
+
+I.e. `localhost:8080/webapp/<app-name>/``
+
+== webapp.js
+
+To turn your application into a webapp, simply place an http controller called ``/src/main/resources/webapp/webapp.js`` into your project.
+
+When the application is deployed, the controller will be accessible from
+
+  ``//<server>:<port>/webapp/<app-name>/`` (i.e. "localhost:8080/webapp/my.webapp/").
+
+``webapp.js`` now acts as a <<framework#,Http controller>> and may expose a function for each HTTP method that should be handled: i.e.
+GET, POST, etc.
+
+Below is an example webapp controller.
+
+[source,javascript]
+----
+include::code/webapp.js[]
+----
+
+
+== Rendering pipeline
+
+This section describes the full pipeline involved in processing a webapp http request.
+
+=== Vhost filter
+
+=== Custom Java Filters
+
+=== Web handler
+
+=== Webapp controller
+
+=== ID provider
+
+=== Error handler
+
+=== Custom Java Filters

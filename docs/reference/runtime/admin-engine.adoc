@@ -1,0 +1,32 @@
+= Admin Engine
+:toc: right
+:imagesdir: images
+
+Introduction
+
+
+== Admin endpoint
+
+By default, XP instances uses the port 8080 to serve web requests (aka the "xp port")
+Within this port, the `admin/`` is reserved for handling admin requests.
+
+I.e. `localhost:8080/admin/
+
+
+== Rendering pipeline
+
+This section describes the full pipeline involved in processing a site http request.
+
+=== Vhost filter
+
+=== Java Filters
+
+=== Admin handler
+
+=== Admin controllers
+
+=== ID provider
+
+=== Error handler
+
+=== Custom Java Filters
