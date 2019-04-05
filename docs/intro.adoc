@@ -7,23 +7,28 @@
 Enonic XP is a fullstack JavaScript application platform and CMS in one
 
 We like to call it a "Web Operating System".
+Portable PaaS (Platform As A Service) may also be a fitting description.
 
 Inspired by the principles of traditional Operating Systems,
 Enonic XP offers the essential services and tools required to build and maintain highly scalable web apps and sites.
 
-Build your own <<apps#,applications>>, or use existing from the https://market.enonic.com[Enonic Market place]
-Applications are built on the flexible <<overview/runtime#,Javascript runtime>>.
+Build your own <<apps#,applications>>, or use existing from the https://market.enonic.com[Enonic Market place].
 
-Applications get access to essential platform services:
+Applications are primarily written in JavaScript, but can also include Java, since the platform runs on top of the Java Virtual Machine.
 
+=== Platform components
+These are the essential platform components and tools:
+
+* Javascript/Java <<overview/runtime#,application runtime>>.
 * <<reference/storage#,NoSQL Storage and search engine>>
 * Identity and Access Management - <<reference/iam#,IAM>>
 * Extensible <<reference/admin#, Admin Console>> for back-office users
 * Hybrid <<reference/cms#,Content Management System>>  when needed
+* Remote management API
+* Standard metrics API for monitoring
+* CLI and software development kits for efficient .
 
-Enonic also offers a Command Line Interface CLI, and software development kits to support both development and operational tasks.
-
-image::platform-components.png[Platform illustration]
+image::platform-components.png[Platform illustration,768]
 
 
 == Why should you care?
@@ -96,3 +101,5 @@ As open source software, Enonic XP also leaves you free to run the software wher
 
 Should you be using XP for a mission critical deployment,
 it is nice to know that Enonic offers professional cloud services and software support.
+
+More information on https://enonic.com
