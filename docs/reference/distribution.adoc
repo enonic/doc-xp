@@ -1,0 +1,61 @@
+= XP distributions
+:toc: right
+:imagesdir: config
+
+This chapter investigates the anatomy of the XP distribution files (aka the XP runtime)
+
+== XP_INSTALL
+
+When downloading and unzipping an XP distribution, you will find the following root structure inside:
+
+.XP distribution folder structure
+[source,folders]
+----
+enonic-xp-<OS>-<type>-<version> <!--1-->
+ |- bin/ <!--2-->
+ |- home/  <!--3-->
+ |- java/ <!--4-->
+ |- lib/ <!--5-->
+ |- service/ <!--6-->
+ |- system/ <!--7-->
+----
+
+<1> The root folder is simply referred to as XP_INSTALL.
+<2> `bin/*` contains the scripts for starting and stopping Enonic XP and setting environment variables.
+<3> `home/` also known as <<XP_HOME>>
+<4> `java/` contains the embedded Java distro, contents vary with distro
+<5> `lib/` contains the bootstrap code used to launch Enonic XP.
+<6> `service/` contains install script for Linux to make Enonic XP run as a service
+<7> `system/` Default OSGi bundles are placed here.
+
+
+== XP_HOME
+
+By default, this folder structure exists inside the XP_INSTALL.
+It is commonly moved out or treated specially from the rest of the files and folders in XP_INSTALL, as it contains stateful data.
+An example of this is when using Enonic CLI. Each "sandbox" created is basically a copy of the XP_HOME structure.
+
+TODO You may specify a different location for XP_HOME by passing a parameter when starting XP, or specifying XP_HOME as an environment variable.
+
+NOTE: Folders marked with * will not appear until XP is started the first time)
+
+.XP distribution folder structure
+[source,folders]
+----
+XP_HOME/
+|- config/ <!--1-->
+|- data/ * <!--2-->
+|- deploy/ <!--3-->
+|- logs/ <!--4-->
+|- repo/ * <!--5-->
+|- snapshots/* <!--6-->
+|- work/ * <!--7-->
+----
+
+<1> `config/` holds all configuration files, including vhost.cfg and system.properties.
+<2> `data/` holds additional data like exports and dumps. This folder will not appear until certain operations are run.
+<3> `deploy/` is the hot deploy directory. Apps placed here are automatically installed and started.
+<4> `logs/` default output location for all logs.
+<5> `repo/` holds the live XP NoSQL storage data (blobs and indexes).
+<6> `snapshots/`` Location where snapshots are stored when using the snapshot-operation.
+<7> `work/` Cache and generated bundles are stored here.

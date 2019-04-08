@@ -28,8 +28,8 @@ Below is a highlight of the capabilities provided:
 * Git inspired <<Branches>> enable you to stage and promote your data
 * <<Editors>> eliminate cumbersome update statements
 * <<Snapshot>> feature to rollback entire system or per repository
-* <<Export and Import>> nodes in a human readable format
-* <<Dump and Load>> your entire system
+* <<Export and import>> nodes and tree structures in a human readable format
+* <<Dump and load>> your entire system
 
 == Repositories
 
@@ -65,16 +65,16 @@ Each entry in a repository is called a Node.
 
 A node essentially consist of:
 
-* one or more <<Properties>>
-* An optional <<Index Configuration>>
-* Optional <<Access Control>> definition
+* One or more <<Properties>>
+* An optional <<storage/indexing#,index configuration>>
+* <<Access Control>> definitions
 
 When nodes are created in a repository, the following happens:
 
 * For new nodes, a unique identifier is created
 * For every modification, a unique version identifier is created
-* The data is stored the underlying <<Blobstore>>
-* The specific version of the node is then added to the specified <<Branch>>.
+* The data are stored the underlying <<Blobstore>>
+* The specific version of the node is then added to the specified <<Branches, Branch>>.
 
 
 == Properties
@@ -82,7 +82,7 @@ When nodes are created in a repository, the following happens:
 Properties inside a node hold the actual data values.
 Properties use a key-value format.
 
-The key must be a unique name within the node, and the value must have a specific <<ValueType>>, such as ``String``, or ``GeoPoint``.
+The key must be a unique name within the node, and the value must have a specific <<storage/indexing#ValueTypes, valueType>>, such as ``String``, or ``GeoPoint``.
 The valueType is used to index the property correctly, and provide basic validation.
 
 Examples of what properties might look like:
@@ -131,7 +131,6 @@ In order to separate system properties from user defined properties,
 The repository contains several standard metadata properties such as `_id`, `_name`, and `_timestamp`.
 
 For more details on system properties, please consult the <<storage/system-properties#, system properties>> section.
-
 
 
 
@@ -241,21 +240,6 @@ XP supports several different kinds of aggregation types.
 For more insight check out the detailed <<storage/noql#Aggregations, documentation on aggregations>>
 
 
-
-
-== Editors
-
-Inspired by modern design patterns like Command Query Responsibility Segregation (CQRS),
-Enonic XP strongly separates accessing and querying data from writing.
-
-Rather than using update statements, or sending pre-defined objects or structures for persisting, Enonic XP uses a concept called "Editors".
-An editor is typically a query, combined with a piece of code.
-
-The query determines which nodes to modify, and the code is then executed for each single node.
-
-TODO Example.
-
-
 == Branches
 
 Inspired by Git, XP repos supports a concept called branches.
@@ -271,13 +255,44 @@ As an example, XP's CMS functionality makes use of two branches ``draft`` and ``
 
 For more details, dive into the <<storage/branches#, branches documentation>>.
 
+== Access Control
 
-== Persistence
+TODO
 
-Enonic XP by default uses a combination of file system and the embedded Elasticsearch for persistence of data.
+
+== Editors
+
+Inspired by modern design patterns like Command Query Responsibility Segregation (CQRS),
+Enonic XP strongly separates accessing and querying data from writing.
+
+Rather than using update statements, or sending pre-defined objects or structures for persisting, Enonic XP uses a concept called "Editors".
+An editor is typically a query, combined with a piece of code.
+
+The query determines which nodes to modify, and the code is then executed for each single node.
+
+TODO Example.
+
+== Snapshot
+
+TODO
+
+== Export and import
+
+TODO
+
+== Dump and load
+
+TODO
+
+
+== Blobstore
+
+Enonic XP currently uses a combination of file system and the embedded Elasticsearch for persistence of data.
 Segments of information is chunked into files and stored in so-called BlobStores.
 Files are written using an "append only" technique, meaning files are never locked or updated.
 BlobStores are organized by repository, and type, making it easy to identify which files belong to what repository.
 A small, but important set of metadata uses Elasticsearch as its primary data store.
 
 For clustered deployments, Enonic XP by default relies on access to a shared file system.
+
+You may tune configuration of both blobstore and Elasticsearch through <<reference/config#,the configuration files>>.

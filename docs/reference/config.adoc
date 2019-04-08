@@ -1,0 +1,525 @@
+= Configuration files
+:toc: right
+:imagesdir: config
+
+This section describes how to configure Enonic XP and installed 3rd party applications.
+
+== XP_HOME/config
+
+The <<distribution#XP_HOME, XP_HOME/config/>> folder contains all instance specific configuration.
+
+== Format
+
+All configuration files (both .cfg and .properties) use the https://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29[Java properties] format.
+This is a simple key = value format.
+
+.Sample config file
+[source,properties]
+----
+mySetting = true
+another.setting = Not so sure
+multiline.value = another \
+                  line
+----
+
+== Variables
+
+XP also offers support for value variables, as this is often useful to handle dynamic settings.
+
+.Sample config with variable
+[source,properties]
+----
+another.setting = ${myvaraible}
+somePath = ${xp.home}/myfolder
+----
+
+TODO: how to inject variables
+
+== .properties vs .cfg
+
+When changing files ending with .cfg, it’s respective application will automatically restart with the new configuration.
+Files ending with .properties require a full restart of the XP instance to be applied.
+
+In a clustered environment, configuration files must be distributed to all nodes where it is relevant.
+
+
+== Application config
+
+To provide file based configuration to custom applications,
+simply place a file with the name `<app-name>.cfg` i.e. `my.custom.app.cfg`. in the config/ folder, and it will instantly be available for the application.
+
+Changing these files while running will restart application within XP, injecting the new configuration file when the app starts again.
+
+TODO: Link to details on how to use configuration files in apps.
+
+== XP config files
+
+The following config files are standard in Enonic XP, and by default placed in the `XP_HOME/config/` folder.
+
+=== System Properties
+
+`XP_HOME/config/system.properties`
+
+Changes to this file requires a full restart of the XP instance in order to take effect.
+
+.Default version of system.properties
+[source,properties]
+----
+# Installation settings
+# xp.name = demo
+
+# Global security settings
+# xp.suPassword = password
+# xp.suPassword = {sha1}5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8
+
+# Initialization settings
+# xp.init.adminUserCreation = true
+
+# Configuration FileMonitor properties
+# felix.fileinstall.poll = 1000
+# felix.fileinstall.noInitialDelay = true
+
+# Config loading properties
+# xp.config.paths = ${xp.home}/appconfig,/usr/local/xp/${node.role},/etc/xp/config
+----
+
+xp.name:: sets the name displayed to users from the admin console main menu, use to clarify what environment the user is working in
+xp.suPassword:: override su user's password in database, if any. Can also be used with hashing, the following are supported: `sha1`, `sha256`, `sha512` and `md5`.
+xp.init.adminUserCreation:: TODO
+felix.fileinstall.poll:: Frequency in ms for how often the configuration folders are scanned for changes
+felix.fileinstall.noInitialDelay:: TODO
+xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
+
+
+=== Vhost config
+
+`XP_HOME/config/com.enonic.xp.web.vhost.cfg`
+
+The standard XP port (default: 8080) provides access to `webapps/`, `site/` and `admin/` endpoints.
+Vhosts enable you to define controlled and secured access to a single webapp, site or even the admin console.
+
+Virtual hosts are instantly updated automatically updated upon changes.
+
+.Sample vhost config file with a one entry
+[source,properties]
+----
+enabled = true
+
+mapping.myapp.host = company.com
+mapping.myapplication.source = /app
+mapping.myapp.target = /webapp/name.of.my.app
+mapping.myapp.idProvider.myldap = default
+----
+
+enabled:: turns on or of vhosts, enabled = false should only be used for development purposes
+host:: specifies the hostname (aka domain) the vhost will handle
+source:: refers to basepath used in request, sample above handles company.com/app
+target:: is the internal route in XP to the specific endpoint/service
+idProvider:: optionally adds one or more idProviders to the vhost. `idProvider` must be followed by the name of an existing idProvider. The example above refers to the idProvider called `myldap`. Supported values are `default` or `enabled`. Only one entry may use `default`.
+
+NOTE: Each mapping must define a unique name to separate the mappings when multiple mappings in the same file. In the example above `myapp` is used.
+
+.Sample vhost config file with both site and admin entries
+[source,properties]
+----
+mapping.website.host = example.com
+mapping.website.source = /
+mapping.website.target = /site/default/master/website
+mapping.website.idProvider.adfs = default
+mapping.website.idProvider.system = enabled
+
+mapping.admin.host = example.com
+mapping.admin.source = /admin
+mapping.admin.target = /admin
+mapping.admin.idProvider.system = default
+----
+
+=== Mail config
+
+`XP_HOME/config/com.enonic.xp.mail.cfg`
+
+Use this file to configure global mail server settings for XP.
+
+.Sample mail configuration with authentication and TLS enabled
+[source,properties]
+----
+smtpHost=mail.server.com
+smtpPort=25
+smtpAuth=true
+smtpUser=user
+smtpPassword=secret
+smtpTLS=true
+----
+
+smtpHost:: Host name of the SMTP server. Default: `localhost`.
+smtpPort:: TCP port of the SMTP server. Default: `25`.
+smtpAuth:: Enable authentication with SMTP server. Default: `false`
+smtpUser:: User to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
+smtpPassword:: Password to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
+smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required. Default: `false`.
+
+=== Repo config
+
+`XP_HOME/config/com.enonic.xp.repo.cfg`
+
+Configure default snapshots folder.
+
+.Example below uses default settings
+[source,properties]
+----
+snapshots.dir = ${xp.home}/snapshots
+----
+
+=== Blobstore config
+
+`XP_HOME/config/com.enonic.xp.blobstore.cfg`
+
+Control settings for the blobstore persistance layer.
+
+.Sample showing default settings
+[source,properties]
+----
+provider = file
+cache = true
+cache.sizeThreshold = 1mb
+cache.memoryCapacity = 100mb
+----
+
+provider:: is the blobstore provider to use. Default value is `file`. Other providers will be made available in future releases. Each provider will have a separate configuration file named `com.enonic.xp.blobstore.<providername>.cfg`
+cache:: enables or disables memory caching of blobs fetched from the blobstore. Default: true
+cache.sizeThreshold:: specifies the maximum size for objects to be cached. Default: 1mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
+cache.memoryCapacity:: is the maximum memory footprint of the blob cache. Default: 100mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
+
+=== File blobstore config
+
+`XP_HOME/config/com.enonic.xp.blobstore.file.cfg`
+
+Control settings for the file-based blobstore implementation
+
+.Sample showing default settings
+[source,properties]
+----
+baseDir = ${xp.home}/repo/blob
+readThrough.provider = none
+readThrough.enabled = false
+readThrough.sizeThreshold = 100mb
+----
+
+baseDir:: specifies root location of blobs. Default: ``${xp.home}/repo/blob`.
+readThrough.provider:: TODO TODO is a file-based cache. Used to cache files on local disk to boost performance of the underlying blobstore filesystem
+readThrough.enabled:: enables or disables readthough provider. Default: `false`.
+readThrough.sizeThreshold:: specifies he maximum size of objects to be cache in readthrough provider. Default: 100mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
+
+TODO: Verify existence of readThrough provider and actual values!
+
+
+=== Cluster config
+
+`XP_HOME/config/com.enonic.xp.cluster.cfg`
+
+Basic cluster settings
+
+.Sample cluster configuration
+[source,properties]
+----
+cluster.enabled = false
+node.name = Anode
+
+discovery.unicast.hosts = 127.0.0.1
+network.host = 127.0.0.1
+network.publish.host = 127.0.0.1
+
+session.replication.enabled = false
+----
+
+cluster.enabled:: When `true` node wil try to join a cluster. Default: `false`.
+node.name:: should normally not be set. Default: auto generated value
+discovery.unicast.hosts:: is an explicit list of nodes that can join the cluster. Default: `127.0.0.1`.
+network.host:: sets the bind address. Default: `127.0.0.1`. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases
+network.publish.host:: sets the address other nodes will use to communicate with this node. Default `127.0.0.1`
+session.replication.enabled:: is a highly experimental feature. Requires that the Ignite component is enabled and started. Default: `false`
+
+Network host aliases:
+
+* `local` : Will be resolved to the local ip address.
+* `non_loopback` : The first non loopback address.
+* `non_loopback:ipv4` : The first non loopback IPv4 address.
+* `non_loopback:ipv6` : The first non loopback IPv6 address.
+* `<networkInterface>` : Resolves to the ip address of the provided network interface. For example `en0`
+* `<networkInterface>:ipv4` : Resolves to the ipv4 address of the provided network interface. For example `en0:ipv4`
+* `<networkInterface>:ipv6` : Resolves to the ipv6 address of the provided network interface. For example `en0:ipv6`
+
+
+=== Elasticsearch config
+
+`XP_HOME/config/com.enonic.xp.elasticsearch.cfg`
+
+Tuning of all relevant settings for the embedded Elasticsearch component
+
+.Sample ES configuration
+[source,properties]
+----
+node.client = false
+node.data = true
+node.master = true
+
+path = ${xp.home}/repo/index
+path.data = ${path}/data
+path.work = ${path}/work
+path.conf = ${path}/conf
+path.logs = ${path}/logs
+path.plugins = ${path}/plugins
+
+cluster.name = mycluster
+cluster.routing.allocation.disk.threshold_enabled = false
+
+http.enabled = false
+transport.tcp.port = 9300-9400
+
+gateway.expected_nodes = 1
+gateway.recover_after_time = 5m
+gateway.recover_after_nodes = 1
+discovery.zen.minimum_master_nodes = 1
+discovery.unicast.port = 9300
+index.recovery.initial_shards = 1
+----
+
+node.data::  Allow data to be distributed to this node. Default: `true`.
+node.master:: Allow this node to be eligible as a master node. Default: `true`.
+path:: Path to directory where elasticsearch stores files. Default: `${xp.home}/repo/index`. Should be on a local file-system, not sharded.
+path.data:: Path to directory where to store index data allocated for this node. Default: `$path/data`.
+path.work:: Path to temporary files. Default: `${xp.home}/repo/index/work`.
+path.conf:: Path to directory containing configuration. Default: `$path/conf`.
+path.logs:: Path to log files. Default: `${xp.home}/repo/index/logs`.
+path.plugins:: Path to where plugins are installed. Default: `$path/plugins`.
+cluster.name:: Elasticsearch cluster name. Default: `mycluster`.
+cluster.routing.allocation.disk.threshold_enabled:: Prevent shard allocation on nodes depending on disk usage. Default: `false`.
+http.enabled:: Enable the HTTP module. Default false.
+transport.tcp.port:: Custom port for the node to node communication. Default: `9300-9400`.
+gateway.expected_nodes:: Number of nodes expected to be in the cluster to start the recovery immediately. Default: `1`.
+gateway.recover_after_time:: Time to wait until recovery happens once the nodes are met. Default: `5m`.
+gateway.recover_after_nodes:: Number of nodes expected to be in the cluster to start the recovery after gateway.recover_after_time. Default: `1`.
+discovery.unicast.port:: List of ports to perform discovery when new nodes are started. Default: `9300`.
+index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
+
+=== Ignite config
+
+`XP_HOME/config/com.enonic.xp.ignite.cfg`
+
+NOTE: Ignite is an experimental grid memory feature, not yet ready for production use.
+
+To use this feature, the Ignite OSGi bundle must also first be activated
+
+.Sample Ignite configuration
+[source,properties]
+----
+discovery.tcp.port = 47500
+discovery.tcp.port.range = 0
+discovery.tcp.reconnect = 10
+discovery.tcp.network.timeout = 5000
+discovery.tcp.socket.timeout = 2000
+discovery.tcp.ack.timeout = 2000
+discovery.tcp.join.timeout = 0
+discovery.tcp.stat.printfreq = 0
+
+communication.message.queue.limit = 1024
+----
+
+discovery.tcp.port:: Local port to listen to. Default: `47500`.
+discovery.tcp.port.range:: Range for local ports. Local node will try to bind on first available port starting from `discovery.tcp.port` up until `discovery.tcp.port` + `discovery.tcp.port.range`. Default: `0`.
+discovery.tcp.reconnect:: Number of times the node tries to (re)establish connection to another node. Default: `10`.
+discovery.tcp.network.timeout:: Maximum network timeout to use for network operations (in ms). Default: `5000`.
+discovery.tcp.socket.timeout:: Socket operations timeout (in ms). Default: `5000`.
+discovery.tcp.ack.timeout:: Timeout for receiving acknowledgement for sent message (in ms). Default: `5000`.
+discovery.tcp.join.timeout:: Join timeout (in ms). Default: `0`.
+discovery.tcp.stat.printfreq:: Statistics print frequency. Default: `0`.
+communication.message.queue.limit:: Message queue limit for incoming and outgoing messages. Default: `1024`.
+
+=== Admin config
+
+`XP_HOME/config/com.enonic.xp.app.main.cfg`
+
+Basic settings for the XP admin console
+
+.Sample configuration
+[source,properties]
+----
+# Disable the "Welcome tour" from the XP Home Screen. Default enabled.
+tourDisabled = true
+----
+
+=== Jetty HTTP config
+
+`XP_HOME/config/com.enonic.xp.web.jetty.cfg`
+
+Selected options to configure the embedded servlet engine Jetty
+
+.Sample Jetty configuration
+[source,properties]
+----
+host =
+sendServerHeader = false
+
+# Connection
+timeout = 60000
+
+# HTTP settings
+http.enabled = true
+http.port = 8080
+http.requestHeaderSize = 32768
+http.responseHeaderSize = 32768
+
+# Session
+session.timeout = 60
+session.cookieName = JSESSIONID
+
+# Compression
+gzip.enabled = true
+gzip.minSize = 16
+
+# Logging
+log.enabled = false
+log.file = ${xp.home}/logs/jetty-yyyy_mm_dd.request.log
+log.append = true
+log.extended = true
+log.timeZone = GMT
+log.retainDays = 31
+----
+
+host:: should only be set this if host name (or ip) needs to be fixed.
+sendServerHeader:: True to send server name in header. Default: `false`.
+timeout:: specifies socket timeout for connections in ms.
+http.enabled:: true enables HTTP connections. Default: `true`.
+http.port:: specifies http port number to use. Default: `8080`.
+http.requestHeaderSize:: Maximum request header size. Default: 32K.
+http.requestHeaderSize:: Maximum response header size. Default: 32K.
+session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
+session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
+gzip.enabled:: Enables GZIP compression for responses. Default: `true`.
+gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `16`.
+log.enabled:: Turns on request logging. Default: `false`.
+log.file:: Request log file location. Default: `${xp.home}/logs/jetty-yyyy_mm_dd.request.log`.
+log.append:: append to existing file, or create new one when started. Default: `true`.
+log.extended:: turns on extended logging format. Default: `true`.
+log.timeZone:: Timezone to display timestamp in. Default: `GMT`.
+log.retainDays:: Number of days to retain the logs. Default: `31`.
+
+
+=== Media config
+
+`XP_HOME/config/com.enonic.xp.media.cfg`
+
+Specify additional mime types if you are missing something.
+TODO: Specify where this is this used?
+
+.Sample additional mime types
+[source,properties]
+----
+# Media type mappings
+ext.mp3 = audio/mpeg3
+ext.p = text/x-pascal
+----
+
+ext.<file-extension>:: value must match a defined mime type
+
+=== OSGi shell config
+
+`XP_HOME/config/com.enonic.xp.server.shell.cfg`
+
+Optionally activate shell to manage OSGi bundles remotely
+
+.Sample config to activate shell
+[source,properties]
+----
+enabled = true
+telnet.ip = 127.0.0.1
+telnet.port = 5555
+telnet.maxConnect = 2
+telnet.socketTimeout = 0
+----
+
+enabled:: turns on shell service. Default: `false`.
+telnet.ip:: TODO. Default: `127.0.0.1`
+telnet.port:: Port to use for service. Default: `5555`.
+telnet.maxConnect:: Maximum number of concurrent connections. Default: `2`.
+telnet.socketTimeout:: Default: `0`
+
+=== DoS filter config
+
+`XP_HOME/config/com.enonic.xp.web.dos.cfg`
+
+Activate and configure the DoS (Denial Of Service) feature.
+
+.Sample config to activate shell
+[source,properties]
+----
+enabled = true
+
+maxRequestsPerSec = 25
+delayMs = 100
+maxWaitMs = 50
+throttledRequests = 5
+throttleMs = 30000
+maxRequestMs = 30000
+maxIdleTrackerMs = 30000
+insertHeaders = true
+trackSessions = true
+remotePort = false
+ipWhitelist =
+----
+
+enabled:: enables the DOS filter. Default: `false`.
+maxRequestsPerSec:: Maximum number of requests from a connection per second. Requests in excess of this are first delayed, then throttled. Default: `25`.
+delayMs:: Delay imposed on all requests over the rate limit. -1 = reject request, 0 delay. Default: `100`.
+maxWaitMs:: Duration in ms to blocking wait for the throttle semaphore. Default: `50`.
+throttledRequests:: Number of requests over the rate limit to be considered at once. Default: `5`.
+throttleMs:: Duration in ms to async wait for semaphore. Default: `30000`.
+maxRequestMs:: Duration in ms to allow the request to run. Default: `30000`.
+maxIdleTrackersMs:: Duration in ms to keep track of request rates for a connection, before deciding that the user has gone away, and discarding it. Default: `30000`.
+insertHeaders:: If true, insert the DoSFilter headers into the response. Default: `true`.
+trackSessions:: If true, usage rate is tracked by session if a session exists. Default: `true`.
+remotePort:: If true and session tracking is not used, then rate is tracked by IP+port (effectively connection). Default: `false`.
+ipWhitelist:: A comma-separated list of IP addresses that will not be rate limited.
+
+
+=== Market config
+
+`XP_HOME/config/com.enonic.xp.market.cfg`
+
+Enonic Market configuration options:
+
+.Default config file settings
+[source,properties]
+----
+marketUrl = https://market.enonic.com/applications
+----
+
+
+=== UDC config
+
+`XP_HOME/config/com.enonic.xp.server.udc.cfg`
+
+UDC (Usage Data Collector) is passing anonymous usage data 10 minutes after startup and then every 24 hours.
+This is only used to see what platforms are used and improve platform stability.
+
+.Sample UDC config file - default true
+[source,properties]
+----
+enabled = true
+----
+
+
+=== Standard IDprovider config
+
+`XP_HOME/config/com.enonic.xp.app.standardidprovider.cfg`
+
+The Standard ID Provider, in charge of the login for admin by default, has a “Create Admin User” mode for new installations.
+When enabled, you may postpone creation of the admin user. You may turn off this feature.
+
+.Sample idprovider config file
+[source,properties]
+----
+loginWithoutUser = true
+----
+
+loginWithoutUser:: Set to false to force creation of user before logging in. Default: `true`.
