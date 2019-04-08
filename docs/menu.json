@@ -5,21 +5,27 @@
       "document": "overview"
     },
     {
-      "title": "Applications",
-      "document": "apps"
-    },
-    {
       "title": "Development",
       "document": "development"
     },
     {
       "title": "Hosting",
-      "document": "hosting"
+      "document": "hosting",
+      "menuItems": [
+        {
+          "title": "Distributions",
+          "document": "reference/distro"
+        }
+      ]
     },
     {
       "title": "Platform reference",
       "document": "reference",
       "menuItems": [
+        {
+          "title": "Applications",
+          "document": "reference/apps"
+        },
         {
           "title": "Storage",
           "document": "reference/storage",
@@ -131,6 +137,10 @@
               "document": "reference/cms/components"
             }
           ]
+        },
+        {
+          "title": "Configuration",
+          "document": "reference/config"
         }
       ]
     },
