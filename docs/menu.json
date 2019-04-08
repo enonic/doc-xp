@@ -9,12 +9,12 @@
       "document": "development"
     },
     {
-      "title": "Hosting",
-      "document": "hosting",
+      "title": "Deployment",
+      "document": "deployment",
       "menuItems": [
         {
           "title": "Distributions",
-          "document": "reference/distro"
+          "document": "deployment/distro"
         }
       ]
     },
@@ -25,36 +25,6 @@
         {
           "title": "Applications",
           "document": "reference/apps"
-        },
-        {
-          "title": "Storage",
-          "document": "reference/storage",
-          "menuItems": [
-            {
-              "title": "NoQL syntax",
-              "document": "reference/storage/noql"
-            },
-            {
-              "title": "System properties",
-              "document": "reference/storage/system-properties"
-            },
-            {
-              "title": "Index configuration",
-              "document": "reference/storage/indexing"
-            },
-            {
-              "title": "Aggregations",
-              "document": "reference/storage/aggregations"
-            },
-            {
-              "title": "Branches",
-              "document": "reference/storage/branches"
-            },
-            {
-              "title": "Pagination",
-              "document": "reference/storage/pagination"
-            }
-          ]
         },
         {
           "title": "Runtime",
@@ -91,6 +61,32 @@
           ]
         },
         {
+          "title": "Storage",
+          "document": "reference/storage",
+          "menuItems": [
+            {
+              "title": "NoQL syntax",
+              "document": "reference/storage/noql"
+            },
+            {
+              "title": "System properties",
+              "document": "reference/storage/system-properties"
+            },
+            {
+              "title": "Index configuration",
+              "document": "reference/storage/indexing"
+            },
+            {
+              "title": "Aggregations",
+              "document": "reference/storage/aggregations"
+            },
+            {
+              "title": "Branches",
+              "document": "reference/storage/branches"
+            }
+          ]
+        },
+        {
           "title": "IAM",
           "document": "reference/iam"
         },
@@ -103,6 +99,10 @@
               "document": "reference/admin/admin-engine"
             }
           ]
+        },
+        {
+          "title": "Configuration",
+          "document": "reference/config"
         },
         {
           "title": "CMS",
@@ -137,10 +137,6 @@
               "document": "reference/cms/components"
             }
           ]
-        },
-        {
-          "title": "Configuration",
-          "document": "reference/config"
         }
       ]
     },
