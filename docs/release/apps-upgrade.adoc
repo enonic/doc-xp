@@ -22,6 +22,16 @@ To create the sandbox, go to your project folder and run the following command:
 When the command has completed successfully, the sandbox will be associated with your project.
 This enables us to build, deploy and test the application.
 
+[TIP]
+====
+*Using Git?*
+Enonic CLI adds a `.enonic` file to your project root, consider updating your `.gitignore` file with the following entry:
+
+  ### Enonic ###
+  .enonic
+====
+
+
 == 2. Build system
 
 The standard build system used for XP projects must be updated.
@@ -75,7 +85,7 @@ repositories {
 }
 ----
 
-Additionally, this is the recommended format for settings.gradle
+Additionally, this is the recommended format for gradle.properties
 
 .gradle.properties sample
 [source,groovy]
@@ -371,9 +381,11 @@ Upgrade your X-data references as follows:
 [source,xml]
 ----
 <site>
-  <x-data name="my-sample" allowContentType=".*:folder">
+  <x-data name="my-sample" allowContentTypes=".*:folder">
 </site>
 ----
+
+NOTE: Multiple allow entries can be added, separated by `|`
 
 
 == 5. Rich text editor
@@ -661,8 +673,6 @@ As such, a widget must be able to determine which repository it should connect t
 CMS repos are consistently named as
 
 TODO
-
-
 
 == 11. Java
 
