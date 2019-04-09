@@ -25,10 +25,10 @@ image::platform-components.png[Platform illustration,768]
 These are the essential platform components and tools:
 
 * Javascript/Java <<overview/runtime#,application runtime>>.
-* <<reference/storage#,NoSQL Storage and search engine>>
-* Identity and Access Management - <<reference/iam#,IAM>>
-* Extensible <<reference/admin#, Admin Console>> for back-office users
-* Hybrid <<reference/cms#,Content Management System>>  when needed
+* <<storage#,NoSQL storage>> for your data.
+* Identity and Access Management - <<iam#,IAM>>
+* Extensible <<admin#, Admin Console>> for back-office users
+* Hybrid <<cms#,Content Management System>>  when needed
 * Remote management API
 * Standard metrics API for monitoring
 * CLI and software development kits for efficient .

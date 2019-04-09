@@ -55,7 +55,7 @@ Pages are composed form a structure of components
 * Fragment - Special re-usable component
 
 Pages, layouts and parts are all fully customizable through custom controllers and corresponding schemas.
-Get all the details in the <<../components/index#,reference section>>
+Get all the details in the <<cms/components#,components section>>
 
 Available components depends on the application that have been added to your <<Sites>>.
 
@@ -214,34 +214,8 @@ As a site may contain multiple applications,
 As multiple applications may be involved in the processing of a single request,
 the main purpose of the Site engine is to coordinate when, and how each application is executed.
 
-=== Rendering pipeline
 
-The outer pipeline steps are essentially the same for sites as for Web apps (Vhost,...Error Handler TODO)
-However, where the webapp controller would normally kick in, instead, the site handler takes over the show.
-
-The site rendering pipeline below describes how the site controller works
-
-Site resolver::
-
-Site Filters::
-
-Site Mappings::
-
-Access manager::
-
-Page renderer::
-
-Page controller::
-
-Component? processors::
-Iteratively processing page output and processing component tags, until no tags are left
-
-Page processors?:: Fixing things like "pageContributions"
-
-Site Filters?::
-
-
-== Image Services
+== Image Service
 
 TODO
 

@@ -62,21 +62,21 @@ For more details, check out the <<../projects/index#,project reference documenta
 
 === Languages
 
-XP apps are powered by the <<../runtime/index#,XP runtime>>.
+XP apps are powered by the <<runtime#,XP runtime>>.
 
 Applications are primarily created with JavaScript.
-Serverside Javascript is made possible through our CommonJS based <<javascript#,Javascript Framework>>
+Serverside Javascript is made possible through our CommonJS based <<runtime/framework#,Javascript Framework>>
 
 XP applications can also make use of Java.
 
 Developers with special requirements may take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same instance.
-Learn more about <<java#,using Java in XP apps>>
+Learn more about <<runtime/java#,using Java in XP apps>>
 
 
 === Build system
 
 By default, XP projects use the https://gradle.org[Gradle build system], and with it the Maven package system.
-A range of XP specific libraries are also available on <<Enonic Market>>, in addition to the <<../api/index#,standard libraries>>, included in the release of Enonic XP.
+A range of XP specific libraries are also available on <<Enonic Market>>, in addition to the <<api#,standard libraries>>, included in the release of Enonic XP.
 Front-end developers often make use of JavaScript specific build systems such as Webpack.
 
 
@@ -89,9 +89,7 @@ There are endless use cases for the XP platform, but the typical scenarios are l
 The JavaScript framework offers an easy way to build and is to serve web applications.
 An XP app may only contain a single web app.
 
-Web apps are created by adding a <<../controllers/index#,controller file>> to your project.
-
-Read more about <<../web-engine/index#,web apps and the web engine>>
+Read more about <<runtime/webapps#,webapps and the web engine>>
 
 === Sites
 
@@ -106,7 +104,7 @@ The CMS offering essentially consist of three parts:
 * Content API - Built on top of the NoSQL Storage
 * Site Engine - Built on top of the webapp engine
 
-Learn more about the <<../cms/index#,Content Management System>>
+Learn more about the <<cms#,Content Management System>> and the <<runtime/sites#, site engine>>
 
 === ID providers
 
@@ -115,7 +113,7 @@ Once installed and configured, an ID provider can join the request pipeline of o
 dynamically providing authentication and authorization when needed.
 There are multiple standard ID providers available on Enonic Market.
 
-Learn more about the <<../idprovider/index#,ID providers>>
+Learn more about the <<iam#,identity and access management>>
 
 === Tasks
 
@@ -124,7 +122,7 @@ Unlike sites and web-applications, tasks are not exposed as an end-point.
 Tasks can be started and monitored via the the task API
 Tasks are made by adding one or more JavaScript controllers to your project.
 
-Read more about <<../tasks#,Tasks>>
+Read more about <<runtime/tasks#,Tasks>>
 
 === Admin apps
 
@@ -132,4 +130,4 @@ XP apps can also contribute to Enonic XP's admin console.
 The platform comes with a standardized approach to extend the admin console with custom interfaces, called admin apps.
 Admin apps are created by adding one or more JavaScript controllers to your project.
 
-Read more about <<../admin-apps#,Admin apps>>
+Read more about <<runtime/admin#,Admin apps>>
