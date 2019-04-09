@@ -671,7 +671,7 @@ myValue LIKE "*"
 publish.first NOT LIKE "*"
 ----
 
-NOTE: Using <<exists>> and <<notExists>> filters is considered the most efficient way searching for nodes with missing values
+NOTE: Using `exists` and `notExists` filters is considered the most efficient way searching for nodes with missing values
 
 
 

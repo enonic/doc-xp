@@ -58,7 +58,7 @@ TODO: Link to info about configuration management
 To create an application you need to setup a project.
 Projects contain all code and configuration required to build the application.
 
-For more details, check out the <<../reference/projects/index#,project reference documentation>>.
+For more details, check out the <<../projects/index#,project reference documentation>>.
 
 === Languages
 
@@ -89,9 +89,9 @@ There are endless use cases for the XP platform, but the typical scenarios are l
 The JavaScript framework offers an easy way to build and is to serve web applications.
 An XP app may only contain a single web app.
 
-Web apps are created by adding a <<../reference/controllers/index#,controller file>> to your project.
+Web apps are created by adding a <<../controllers/index#,controller file>> to your project.
 
-Read more about <<../reference/web-engine/index#,web apps and the web engine>>
+Read more about <<../web-engine/index#,web apps and the web engine>>
 
 === Sites
 
@@ -124,7 +124,7 @@ Unlike sites and web-applications, tasks are not exposed as an end-point.
 Tasks can be started and monitored via the the task API
 Tasks are made by adding one or more JavaScript controllers to your project.
 
-Read more about <<../reference/tasks#,Tasks>>
+Read more about <<../tasks#,Tasks>>
 
 === Admin apps
 
@@ -132,4 +132,4 @@ XP apps can also contribute to Enonic XP's admin console.
 The platform comes with a standardized approach to extend the admin console with custom interfaces, called admin apps.
 Admin apps are created by adding one or more JavaScript controllers to your project.
 
-Read more about <<../reference/admin-apps#,Admin apps>>
+Read more about <<../admin-apps#,Admin apps>>

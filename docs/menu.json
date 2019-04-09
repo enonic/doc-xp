@@ -1,8 +1,128 @@
 {
   "menuItems": [
     {
-      "title": "Introduction",
-      "document": "intro"
+      "title": "Manifesto",
+      "document": "manifesto"
+    },
+    {
+      "title": "Applications",
+      "document": "apps",
+      "menuItems": [
+        {
+          "title": "Projects",
+          "document": "apps/projects"
+        }
+      ]
+    },
+    {
+      "title": "Runtime",
+      "document": "runtime",
+      "menuItems": [
+        {
+          "title": "Javascript framework",
+          "document": "runtime/framework"
+        },
+        {
+          "title": "Webapps",
+          "document": "runtime/webapps"
+        },
+        {
+          "title": "Admin",
+          "document": "runtime/admin"
+        },
+        {
+          "title": "Sites",
+          "document": "runtime/sites"
+        },
+        {
+          "title": "Tasks",
+          "document": "runtime/tasks"
+        },
+        {
+          "title": "Assets",
+          "document": "runtime/assets"
+        },
+        {
+          "title": "HTTP services",
+          "document": "runtime/http-services"
+        },
+        {
+          "title": "Localization",
+          "document": "runtime/i18n"
+        }
+      ]
+    },
+    {
+      "title": "Storage",
+      "document": "storage",
+      "menuItems": [
+        {
+          "title": "NoQL syntax",
+          "document": "storage/noql"
+        },
+        {
+          "title": "System properties",
+          "document": "storage/system-properties"
+        },
+        {
+          "title": "Index configuration",
+          "document": "storage/indexing"
+        },
+        {
+          "title": "Aggregations",
+          "document": "storage/aggregations"
+        },
+        {
+          "title": "Branches",
+          "document": "storage/branches"
+        }
+      ]
+    },
+    {
+      "title": "IAM",
+      "document": "iam"
+    },
+    {
+      "title": "Admin",
+      "document": "admin"
+    },
+    {
+      "title": "CMS",
+      "document": "cms",
+      "menuItems": [
+        {
+          "title": "Schema System",
+          "document": "cms/schemas"
+        },
+        {
+          "title": "Content Types",
+          "document": "cms/content-types"
+        },
+        {
+          "title": "Input Types",
+          "document": "cms/input-types"
+        },
+        {
+          "title": "X-data",
+          "document": "cms/x-data"
+        },
+        {
+          "title": "Macros",
+          "document": "cms/macros"
+        },
+        {
+          "title": "Sites",
+          "document": "cms/sites"
+        },
+        {
+          "title": "Page Components",
+          "document": "cms/components"
+        },
+        {
+          "title": "Response Processors",
+          "document": "cms/processors"
+        }
+      ]
     },
     {
       "title": "Deployment",
@@ -15,132 +135,6 @@
         {
           "title": "Configuration",
           "document": "deployment/config"
-        }
-      ]
-    },
-    {
-      "title": "General reference",
-      "document": "reference",
-      "menuItems": [
-        {
-          "title": "Applications",
-          "document": "reference/apps",
-          "menuItems": [
-            {
-              "title": "Projects",
-              "document": "reference/apps/projects"
-            }
-          ]
-        },
-        {
-          "title": "Runtime",
-          "document": "reference/runtime",
-          "menuItems": [
-            {
-              "title": "Javascript framework",
-              "document": "reference/runtime/framework"
-            },
-            {
-              "title": "Webapps",
-              "document": "reference/runtime/webapps"
-            },
-            {
-              "title": "Admin",
-              "document": "reference/runtime/admin"
-            },
-            {
-              "title": "Sites",
-              "document": "reference/runtime/sites"
-            },
-            {
-              "title": "Tasks",
-              "document": "reference/runtime/tasks"
-            },
-            {
-              "title": "Assets",
-              "document": "reference/runtime/assets"
-            },
-            {
-              "title": "HTTP services",
-              "document": "reference/runtime/http-services"
-            },
-            {
-              "title": "Localization",
-              "document": "reference/runtime/i18n"
-            }
-          ]
-        },
-        {
-          "title": "Storage",
-          "document": "reference/storage",
-          "menuItems": [
-            {
-              "title": "NoQL syntax",
-              "document": "reference/storage/noql"
-            },
-            {
-              "title": "System properties",
-              "document": "reference/storage/system-properties"
-            },
-            {
-              "title": "Index configuration",
-              "document": "reference/storage/indexing"
-            },
-            {
-              "title": "Aggregations",
-              "document": "reference/storage/aggregations"
-            },
-            {
-              "title": "Branches",
-              "document": "reference/storage/branches"
-            }
-          ]
-        },
-        {
-          "title": "IAM",
-          "document": "reference/iam"
-        },
-        {
-          "title": "Admin",
-          "document": "reference/admin"
-        },
-        {
-          "title": "CMS",
-          "document": "reference/cms",
-          "menuItems": [
-            {
-              "title": "Schema System",
-              "document": "reference/cms/schemas"
-            },
-            {
-              "title": "Content Types",
-              "document": "reference/cms/content-types"
-            },
-            {
-              "title": "Input Types",
-              "document": "reference/cms/input-types"
-            },
-            {
-              "title": "X-data",
-              "document": "reference/cms/x-data"
-            },
-            {
-              "title": "Macros",
-              "document": "reference/cms/macros"
-            },
-            {
-              "title": "Sites",
-              "document": "reference/cms/sites"
-            },
-            {
-              "title": "Page Components",
-              "document": "reference/cms/components"
-            },
-            {
-              "title": "Response Processors",
-              "document": "reference/cms/processors"
-            }
-          ]
         }
       ]
     },
