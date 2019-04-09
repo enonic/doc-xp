@@ -174,15 +174,15 @@
     },
     {
       "title": "Release Notes",
-      "document" : "release"
-    },
-    {
-      "title": "Upgrade Notes",
-      "document" : "upgrade",
+      "document" : "release",
       "menuItems" : [
         {
+          "title": "Upgrade Notes",
+          "document" : "release/upgrade"
+        },
+        {
           "title": "Upgrading Apps",
-          "document": "upgrade/apps"
+          "document": "release/apps-upgrade"
         }
       ]
     }

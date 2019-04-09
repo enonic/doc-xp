@@ -47,13 +47,13 @@ Update your vhost config file as follows:
 .Before
 [source,properties]
 ----
-include::upgrade/code/vhost_before.cfg[]
+include::code/vhost_before.cfg[]
 ----
 
 .After
 [source,properties]
 ----
-include::upgrade/code/vhost_after.cfg[]
+include::code/vhost_after.cfg[]
 ----
 
 === Port mappings
@@ -71,7 +71,7 @@ If specifying `discovery.unicast.sockets` in ES configuration: "ip[port]" is now
 .com.enonic.xp.elasticsearch.cfg
 [source,properties]
 ----
-include::upgrade/code/com.enonic.xp.elasticsearch.cfg[]
+include::code/com.enonic.xp.elasticsearch.cfg[]
 ----
 
 === Other configuration
