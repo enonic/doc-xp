@@ -1,9 +1,9 @@
 = Release Notes
 include::variables.adoc[]
 :toc: right
-:imagesdir: release
+:imagesdir: release/images
 
-NOTE: *Breaking change* XP 7 contains breaking changes. Follow the <<upgrade#,upgrade instructions>> carefully to secure a successful upgrade.
+NOTE: *Breaking changes* XP 7 contains breaking changes. Follow the <<upgrade#,upgrade instructions>> carefully to secure a successful upgrade.
 
 == Introduction
 Enonic XP 7 takes a major leap in simplifying application development and making the platform leaner and more flexible.
@@ -18,6 +18,8 @@ The biggest highlights of XP 7 is not the core platform, but all the changes aro
 
 == Developer portal
 
+image::developer-portal.png["Screenshot of the new developer portal", 720]
+
 In order for developers to better and more easily navigate the XP ecosystem, we created a dedicated portal.
 The portal contains
 
@@ -25,21 +27,28 @@ XP docs: The XP core platform documentation (which you are reading now)
 Reference docs:: For all XP related apps, starters, libraries and more that are built by Enonic.
 Hands on guides:: Practical how-to guides an tutorials, including the getting started page
 
-The portal is naturally built as an XP app itself.
-The geeky fact is that all docs and most guides are written in Asciidoctor together with the actual product.
-When commit, changes to the docs are automatically checked out compiled and imported to the portal.
+=== Built with XP
+The portal is naturally an XP app itself.
+The geeky fact is that all docs and most guides are written in Asciidoctor together with the actual product code.
+
+When we commit, changes to the docs are automatically checked out, compiled and imported to XP as content.
 This optimizes how developers produce content,
 while taking advantage of everything XP brings offers at the same time.
+
+image::built-with-xp.png["Screenshot of dev portal edited in Content Studio", 720]
 
 We plan to release the core elements of the doc portal on the market in the future.
 
 
 == Enonic CLI
 
-The brand new Enonic Command Line Interface - "Enonic CLI" is released at the same time as XP 7, but is versioned independently.
-The CLI not only replaces the old toolbox script, but introduces new and flexible ways of installing XP and managing development environments.
+The brand new Enonic Command Line Interface - "Enonic CLI" was also released at the same time as XP 7.
+It is versioned independently for more frequent updates.
+The CLI not only replaces the old toolbox script,
+but introduces new and flexible ways of installing XP and managing projects and development environments.
 
-Installing CLI, Enonic XP, building and deploying your first app can now be done with three simple commands as described in the getting started section of the developer portal https://developer.enonic.com/start
+Installing CLI, Enonic XP, building and deploying your first app can now be done with a few simple commands,
+as described in the https://developer.enonic.com/start[getting started section] of the developer portal
 
 The CLI is available for Mac, Linux and Windows
 
@@ -62,18 +71,18 @@ The SDK includes the full Java Development Kit,
 where the server edition uses a slimmed down versjon of the JVM, and can be further optimized for production use.
 
 
-== Content Studio as an app
+== Content Studio is an app
 
 Content Studio, the CMS editorial interface has been moved out of the XP core.
 It is now available as a separate application on https://market.enonic.com/vendors/enonic/content-studio[Enonic Market]
 
 Content Studio can now be released more frequently than the XP core.
-But expect new versions of Content Studio to be released along with new features in the XP core.
+Expect new versions of Content Studio to be released along with new features in the XP core.
 
 For Content Studio release notes, check out the https://developer.enonic.com/docs/content-studio[new documentation].
 
 
-== CMS core
+== CMS
 
 Even if Content Studio can be installed as a separate application,
 The XP core still ships with the <<api/lib-content#,content API>> and <<reference/runtime/site engine#, site engine>> that applications depend on.
@@ -88,7 +97,7 @@ Now, application developers may define custom styles that control both server si
 
 TODO IMAGE
 
-=== Projects are coming
+=== Projects prepared
 
 Customers with many sites have requested better support for isolation of sites, and who can access specific them.
 Our solution to this is creating sites in different "projects", each project will be using its own repo.
@@ -101,7 +110,7 @@ You will notice this through the following change:
 * The site engine URLs now contain project name - i.e. /site/<project>/<branch>/<content-path>
 
 
-=== Rich text references
+=== Editor references
 
 References to images or other content in the rich text editor are now stored explicitly in the underlying node API.
 The publishing wizard will now identify and include these dependencies like all other references - no more missed items during publishing.
@@ -121,11 +130,9 @@ or metadata within a page.
 
 As an example, one may now search the use of a specific part within a site.
 
-TODO: more?
-
 == XP Storage
 
-The XP storage has been refactored for improved performance and disk usage
+The XP storage has been refactored for improved performance and disk usage.
 
 === Blobstore improvements
 
@@ -148,6 +155,4 @@ To prevent versions from being removed, one may also make a "commit".
 For the Content API specifically, publishing an item will automatically create a "commit", effectively placing a stamp on the specific versions being published.
 Commits have id, committer, and optionally a commit message as meta data.
 
-NOTE: XP 7 does not yet implement the "garbage collector" that removes "uncommitted versions", this will be part of an upcoming release.
-
-== TODO?
+NOTE: XP 7 does not yet implement the "garbage collector" that removes uncommitted versions, this will be part of an upcoming release.
