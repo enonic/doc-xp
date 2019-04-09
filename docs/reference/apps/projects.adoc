@@ -1,0 +1,222 @@
+= Development and projects
+:toc: right
+:imagesdir: images
+
+How are applications put together built and delivered
+
+== Project structure
+
+The XP project structure is based on the https://maven.apache.org/[Maven] approach.
+
+Below is is an extensive version of a project structure, listing all standard folders and files that can be used
+
+[source,files]
+----
+sample-project/
+  build.gradle
+  gradle.properties
+  gradlew
+  gradlew.bat
+  settings.gradle
+  src/
+    test/
+      java/
+    main/
+      java/
+      resources/
+        admin/
+          widgets/
+          tools/
+        application.svg
+        application.xml
+        assets/
+        error/
+        i18n/
+        main.js
+        services/
+        tasks/
+        site/
+          content-types/
+          layouts/
+          mixins/
+          pages/
+          parts/
+          processors/
+          x-data/
+          site.xml
+        webapp/
+          webapp.js
+----
+
+Every file and folder has a specific function and purpose as described below:
+
+build.gradle:: main file used by the <<Build system>>.
+
+gradle.properties:: Standard settings for XP apps
+
+gradlew / gradlew.bat:: The Gradle wrapper file. Downloads and runs Gradle without having to install it manually.
+
+settings.gradle:: Mandatory gradle file to boostrap the build process
+
+src/main/java/:: Optional folder where you place java code that might be included directly in the project - Maven style.
+
+src/test/java/:: Optional folder where you place test code - Maven style.
+
+src/main/resources/:: Non-Java files. The majority of XP project code goes here,
+
+admin/tools:: Admin tools are defined here. Tools are administrative apps listed in the admin console menu.
+
+admin/widgets:: Admin widgets are essentially user interface components that can be embedded within other admin tools.
+
+application.svg:: Application icon in SVG format.
+
+application.xml:: The XML file contains basic application settings. Currently a description.
+
+assets/:: Contains publically available resources such as css, javascript, static images etc.
+
+error/error.js:: The application's error handler
+
+main.js:: Main controller is executed every time an app is started.
+
+services/:: Contains <<../runtime/http-services#, Http services controllers>>
+
+i18n/:: Short for internationalization, this folder contains <<../runtime/i18n#,app localization files>>
+
+tasks/:: Contains <<../runtime/tasks#, task controller>> for running asynchronous jobs.
+
+site/site.xml:: Contains <<../cms/sites#Site.xml, site configuration schema>> and declares that the app can be added to sites
+
+site/content-types/::  <<../cms/content-types#,Content type>> definition files.
+
+site/processors/:: For post processing of HTML from pages.
+
+site/layouts/:: <<../cms/components#Layouts, Layout controllers>> are placed here.
+
+site/mixins/:: <<../cms/schemas#Mixin, Reusable schemas>> are placed here.
+
+site/pages/:: <<../cms/components#Pages, Page controllers>> are placed here.
+
+site/parts/:: <<../cms/components#Parts, Part controllers>> are placed here.
+
+site/x-data/:: <<../cms/x-data#, eXtra data schemas.
+
+webapp/webapp.js:: The <<../runtime/webapps#, Webapp>> controller file
+
+
+
+== Build system
+
+XP apps by default uses https://gradle.org/[Gradle] to build apps.
+
+WORK IN PROGRESS
+
+The ``build.gradle`` file defines all the dependencies to other libraries.
+
+There are three standard scopes (keywords) used in the dependency list
+
+* Compile (default gradle scope, compiles library and adds it to class path - standard for pure Java libraries)
+* Include (XP custom scope that merges the /src/main/resources folder in the library with your project - any code in your project overwrites the library files)
+* Webjar (Extracts the content of the specified Webjar - http://www.webjars.org/ - placing it into the assets folder, using the version number as root folder)
+
+
+By default, XP projects use Gradle as the main build tool. This is a highly flexible Java-based utility that builds on the popular Maven project tools and code repository structures.
+Enonic provides a Gradle plugin that greatly simplifies the build process. If you used the starter-vanilla project to initialize your project, you will have all the basic tools you need to get going.
+
+If you have not installed Gradle, the fastest way to get going is to execute the gradle wrapper script.
+
+Move into your project root folder and execute the following command:
+
+OSX/Linux:
+
+  ./gradlew build
+
+Windows:
+
+  gradlew.bat build
+
+
+The gradle wrapper will download all necessary files to run gradle and produce the project artifacts. These will typically be placed in the projects build/libs/ folder.
+
+
+=== gradle deploy
+
+To have Gradle automatically deploy new applications to your XP installation, you have to specify an environment variable that tells Gradle where to place the artifact (application file).
+
+OSX/Linux::
+
+   export XP_HOME=/path/to/xp-installation/home
+
+Windows::
+
+  set XP_HOME=c:\path\to\xp-installation\home
+
+
+With $XP_HOME set, run the following command to build and deploy the file
+
+OSX/Linux::
+
+   ./gradlew deploy
+
+Windows::
+
+   gradlew.bat deploy
+
+
+== Project artifacts
+
+TOOD: What is the output files, and what must they contain to be valid XP apps (including MANIFEST etc)
+
+
+== Deploy
+
+For your convenience - we have simplified this process by adding a ``deploy`` task to your build.
+Instead of manually copying to the deploy folder, you can simply execute ``gradle deploy``:
+
+``./gradlew deploy``
+
+For the deploy command to work, you have to set the ``XP_HOME`` environment variable
+(in your shell) to your actual Enonic XP home directory.
+
+Run the following command to set the XP_HOME variable
+
+OSX/Linux:
+
+``export XP_HOME=/path/to/xp-installation/home``
+
+Windows:
+
+``set XP_HOME=c:\path\to\xp-installation\home``
+
+
+=== Development Mode
+
+TODO
+
+To continuously build and deploy your application on changes, you can use
+`Gradle continuous mode <https://docs.gradle.org/current/userguide/continuous_build.html>`_.
+This will watch for changes and run the specified task when something changes.
+To use this with the ``deploy`` task, you can run the following command:
+
+``./gradlew -t deploy``
+
+This will deploy and reload the application on the server when something changes in your project.
+The continuous deployment mode is most useful when coding Java, or other changes that require a full compile and re-deploy.
+
+For the instant updates of JavaScript code without re-deploying, check out :ref:`gradle_dev_mode`.
+
+===  Debugging
+
+TODO
+
+== Libraries
+
+Libraries are structurally like applications, with the difference that a library is not made be installed and run on it's own.
+However, a library can be included in an application (or many) to provide functionality to that app.
+
+The process of setting up and building libraries is similar to applications.
+To build a library we recommend using the library starter (TODO).
+
+Once a library has been built, the output will be a .jar file, just like an application.
+However, libraries will have small differences in application metadata TODO MANIFEST etc
+
+To add a library in an applications, update the applications ``build.gradle``file

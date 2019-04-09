@@ -5,10 +5,6 @@
       "document": "intro"
     },
     {
-      "title": "Development",
-      "document": "development"
-    },
-    {
       "title": "Deployment",
       "document": "deployment",
       "menuItems": [
@@ -28,7 +24,13 @@
       "menuItems": [
         {
           "title": "Applications",
-          "document": "reference/apps"
+          "document": "reference/apps",
+          "menuItems": [
+            {
+              "title": "Projects",
+              "document": "reference/apps/projects"
+            }
+          ]
         },
         {
           "title": "Runtime",
@@ -39,24 +41,28 @@
               "document": "reference/runtime/framework"
             },
             {
-              "title": "Webapp Engine",
-              "document": "reference/runtime/webapp-engine"
+              "title": "Webapps",
+              "document": "reference/runtime/webapps"
             },
             {
-              "title": "Admin Engine",
-              "document": "reference/runtime/admin-engine"
+              "title": "Admin",
+              "document": "reference/runtime/admin"
             },
             {
-              "title": "Site Engine",
-              "document": "reference/runtime/site-engine"
+              "title": "Sites",
+              "document": "reference/runtime/sites"
             },
             {
-              "title": "Asset serving",
-              "document": "reference/runtime/asset-endpoint"
+              "title": "Tasks",
+              "document": "reference/runtime/tasks"
+            },
+            {
+              "title": "Assets",
+              "document": "reference/runtime/assets"
             },
             {
               "title": "HTTP services",
-              "document": "reference/runtime/service-endpoint"
+              "document": "reference/runtime/http-services"
             },
             {
               "title": "Localization",
@@ -96,13 +102,7 @@
         },
         {
           "title": "Admin",
-          "document": "reference/admin",
-          "menuItems": [
-            {
-              "title": "Admin Engine",
-              "document": "reference/admin/admin-engine"
-            }
-          ]
+          "document": "reference/admin"
         },
         {
           "title": "CMS",
@@ -121,20 +121,24 @@
               "document": "reference/cms/input-types"
             },
             {
-              "title": "Sites",
-              "document": "reference/cms/sites"
+              "title": "X-data",
+              "document": "reference/cms/x-data"
             },
             {
               "title": "Macros",
               "document": "reference/cms/macros"
             },
             {
-              "title": "Site Engine",
-              "document": "reference/cms/site-engine"
+              "title": "Sites",
+              "document": "reference/cms/sites"
             },
             {
               "title": "Page Components",
               "document": "reference/cms/components"
+            },
+            {
+              "title": "Response Processors",
+              "document": "reference/cms/processors"
             }
           ]
         }

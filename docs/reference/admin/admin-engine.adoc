@@ -13,7 +13,7 @@ Enonic XP provides a pluggable administrative interface, known as the <<../admin
 The Admin console by default available on ``//<server>:<port>/admin/`` (i.e. "localhost:8080/admin/").
 
 The admin engine handles all requests to admin apps.
-Like the <<web-engine#,Web Engine>> and <<site-engine#,Site Engine>>,
+Like the <<webapps#,Webapp Engine>> and <<sites#,Site Engine>>,
 the admin engine is based directly on the <<../framework/index#, XP Framework>>.
 
 == Admin tools
