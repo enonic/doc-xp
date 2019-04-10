@@ -1,0 +1,122 @@
+= Context Library {release}
+include::../variables.adoc[]
+
+This library contains functions to access and use the current context.  It comes bundled with the XP runtime, so it should always use the same version as XP.
+
+To start using this library, add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-context:${xpVersion}
+}
+----
+
+== Usage
+
+To use this library in your JavaScript code, it first needs to be required:
+
+[source,js]
+----
+var contextLib = require('/lib/xp/context'); 
+----
+
+
+== API
+
+The following two functions are defined in this library.
+
+=== `get()`
+
+Returns the current context.
+
+*Parameters*
+
+None
+
+*Returns*
+
+The current context as JSON object.
+
+* `*branch*` (_string_) Current branch.
+* `*repository*` (_string_) Current repository.
+* `*authInfo*` (_object_) List of principals for the current user.
+
+== Examples
+
+==== `Getting the current context`
+[source,js]
+----
+var result = contextLib.get();
+log.info('Context as JSON %s', result);
+----
+
+==== `Returned context`
+[source,js]
+----
+var expected = {
+    "branch": "draft",
+    "repository": "com.enonic.cms.default",
+    "authInfo": {
+        "principals": [
+            "user:system:anonymous",
+            "role:system.everyone"
+        ]
+    }
+};
+----
+
+
+=== `run(context, callback)`
+
+Runs a function within a specified context.
+
+*Parameters*
+
+* `*context*` (_object_) A list of optional JSON parameters.
+** `*repository*` (_string_) Repository to execute the callback in. Default is the current repository set in portal.
+** `*branch*` (_string_) Name of the branch to execute the callback in. Default is the current branch set in portal.
+** `*user*` (_object_) User to execute the callback with. Default is the current user.
+*** `*login*` (_string_) *Required* Login of the user.
+*** `*idProvider*` (_string_) Id provider containing the user. By default, all the id providers will be used.
+** `*principals*` (_array_) Additional principals to execute the callback with.
+** `*attributes*` (_object_) Additional Context attributes.
+* `*callback*` (_function_) Function to execute.
+
+*Returns*
+
+The function execution will return a string with the result of the execution.
+
+== Examples
+
+==== `Executing a function in a context:`
+
+[source,js]
+----
+// Define the callback to be executed.
+function callback() {
+    return 'Hello from context';
+}
+
+// Executes a function using different context.
+var result = contextLib.run({
+    repository: 'system-repo',
+    branch: 'master',
+    user: {
+        login: 'su',                     <1>
+        idProvider: 'system'
+    },
+    principals: ["role:system.admin"],
+    attributes: {
+        'ignorePublishTimes': true
+    }
+}, callback);
+
+log.info('Callback says "%s"', result);
+----
+<1> The user must already be authenticated.
+
+
+== Compatibility
+
+This library is built into XP and should be used with matching version numbers.
