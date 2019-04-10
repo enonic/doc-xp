@@ -32,15 +32,18 @@ You are now free to invoke to use the library functionality.
 
 Returns the current context
 
-*Parameters*
+[.lead]
+Parameters
 
 None
 
-*Returns*
+[.lead]
+Returns
 
 <<Context>>
 
-*Example*
+[.lead]
+Example
 
 .Getting the current context
 [source,js]
@@ -70,23 +73,26 @@ const result = contextLib.get();
 Runs a function within a custom context.
 Commonly used when accessing repositories, or to override current users permissions.
 
-*Parameters*
+[.lead]
+Parameters
 
-[cols="1%s,99%a"]
+[%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
-|============================
-|*context*| Define a custom context to be used for the scope of the callback function
-|*callback*|  Function to execute
-|============================
+|===
+| Name | Kind | Details
+| context | object | <<Context>> to be used for the scope of the callback function
+| callback | function | Function to execute
+|===
 
-
-*Returns*
+[.lead]
+Returns
 
 The function execution will return a string with the result of the execution.
 
 
-*Example*
+[.lead]
+Example
 
 .Run a simple function in a different context
 [source,js]
