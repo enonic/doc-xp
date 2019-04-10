@@ -1,9 +1,13 @@
-= Context Library {release}
+= Context Library
 include::../variables.adoc[]
+:toc: right
+:imagesdir: images
 
 This library contains functions to access and use the current context.  It comes bundled with the XP runtime, so it should always use the same version as XP.
 
-To start using this library, add the following into your `build.gradle` file:
+== Usage
+
+Add the following into your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -12,23 +16,21 @@ dependencies {
 }
 ----
 
-== Usage
-
-To use this library in your JavaScript code, it first needs to be required:
+In your JavaScript controller, add a require statement:
 
 [source,js]
 ----
-var contextLib = require('/lib/xp/context'); 
+const contextLib = require('/lib/xp/context');
 ----
 
+You are now free to invoke to use the library functionality.
 
-== API
 
-The following two functions are defined in this library.
+== Functions
 
-=== `get()`
+=== get
 
-Returns the current context.
+Returns the current context
 
 *Parameters*
 
@@ -36,61 +38,57 @@ None
 
 *Returns*
 
-The current context as JSON object.
+<<Context>>
 
-* `*branch*` (_string_) Current branch.
-* `*repository*` (_string_) Current repository.
-* `*authInfo*` (_object_) List of principals for the current user.
+*Example*
 
-== Examples
-
-==== `Getting the current context`
+.Getting the current context
 [source,js]
 ----
-var result = contextLib.get();
-log.info('Context as JSON %s', result);
+const result = contextLib.get();
 ----
 
-==== `Returned context`
+.Sample response
 [source,js]
 ----
-var expected = {
-    "branch": "draft",
-    "repository": "com.enonic.cms.default",
-    "authInfo": {
-        "principals": [
-            "user:system:anonymous",
-            "role:system.everyone"
-        ]
-    }
-};
+{
+  branch: 'draft',
+  repository: 'com.enonic.cms.default',
+  authInfo: {
+      principals: [
+          'user:system:anonymous',
+          'role:system.everyone'
+      ]
+  }
+}
 ----
 
 
-=== `run(context, callback)`
 
-Runs a function within a specified context.
+=== run
+
+Runs a function within a custom context.
+Commonly used when accessing repositories, or to override current users permissions.
 
 *Parameters*
 
-* `*context*` (_object_) A list of optional JSON parameters.
-** `*repository*` (_string_) Repository to execute the callback in. Default is the current repository set in portal.
-** `*branch*` (_string_) Name of the branch to execute the callback in. Default is the current branch set in portal.
-** `*user*` (_object_) User to execute the callback with. Default is the current user.
-*** `*login*` (_string_) *Required* Login of the user.
-*** `*idProvider*` (_string_) Id provider containing the user. By default, all the id providers will be used.
-** `*principals*` (_array_) Additional principals to execute the callback with.
-** `*attributes*` (_object_) Additional Context attributes.
-* `*callback*` (_function_) Function to execute.
+[cols="1%s,99%a"]
+[frame="none"]
+[grid="none"]
+|============================
+|*context*| Define a custom context to be used for the scope of the callback function
+|*callback*|  Function to execute
+|============================
+
 
 *Returns*
 
 The function execution will return a string with the result of the execution.
 
-== Examples
 
-==== `Executing a function in a context:`
+*Example*
 
+.Run a simple function in a different context
 [source,js]
 ----
 // Define the callback to be executed.
@@ -98,25 +96,46 @@ function callback() {
     return 'Hello from context';
 }
 
-// Executes a function using different context.
-var result = contextLib.run({
+// Executes function within a custom context.
+const result = contextLib.run({
     repository: 'system-repo',
     branch: 'master',
     user: {
-        login: 'su',                     <1>
+        login: 'su', <1>
         idProvider: 'system'
     },
     principals: ["role:system.admin"],
     attributes: {
-        'ignorePublishTimes': true
+        ignorePublishTimes: true
     }
 }, callback);
-
-log.info('Callback says "%s"', result);
 ----
-<1> The user must already be authenticated.
 
+== Objects
 
-== Compatibility
+=== Context
 
-This library is built into XP and should be used with matching version numbers.
+The context object is always available within the scope of a request
+
+.Sample context object
+[source,js]
+----
+{
+  repository: 'some.repo.name', <1>
+  branch: 'master', <2>
+  user: { <3>
+      login: 'mylogin',
+      idProvider: 'idprovidername'
+  },
+  principals: ['role:system.admin'], <4>
+  attributes: { <5>
+      optionalAttributes: 'of any kind'
+      }
+}
+----
+
+<1> *repository* (_string_) Repository context.
+<2> *branch* (_string_) Branch context.
+<3> *user* (_object_) Specify a valid user/idprovider combination
+<4> *principals* (_object_) Roles or group principals applicable for current user
+<5> *attributes* (_object_) custom attributes

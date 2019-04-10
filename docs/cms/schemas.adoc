@@ -165,18 +165,18 @@ Here is an example of a multi-select option set with options expanded by default
 ----
 <option-set name="checkOptionSet">
   <label i18n="checkOptionSet.label">Multi-selection OptionSet</label>
-  <expanded>true</expanded>
-  <occurrences minimum="1" maximum="1"/>
+  <expanded>true</expanded> <!--1-->
+  <occurrences minimum="1" maximum="1"/> <!--2-->
   <help-text>You can select up to 2 options</help-text>
-  <options minimum="1" maximum="2">
-    <option name="option_1">
-      <label i18n="checkOptionSet.option_1.label">Option 1</label>
-      <help-text i18n="checkOptionSet.option_1.help-text">Help text for Option 1</help-text>
+  <options minimum="1" maximum="2">  <!--3--> <!--4--> <!--5-->
+    <option name="option_1"> <!--6--> <!--7-->
+      <label i18n="checkOptionSet.option_1.label">Option 1</label> <!--8--> <!--9-->
+      <help-text i18n="checkOptionSet.option_1.help-text">Help text for Option 1</help-text> <!--10--> <!--11-->
     </option>
     <option name="option_2">
       <label i18n="checkOptionSet.option_2.label">Option 2</label>
-      <default>true</default>
-      <items>
+      <default>true</default> <!--12-->
+      <items> <!--13-->
         <input name="contentSelector" type="ContentSelector">
           <label>Content selector</label>
           <occurrences minimum="0" maximum="0"/>
@@ -203,60 +203,28 @@ Here is an example of a multi-select option set with options expanded by default
 </option-set>
 ----
 
-expanded
-  Optional. Set to ``true`` to expand all of the options by default
-
-occurrences
-  Detailed definition of how many times this option set may be repeated inside one content.
-
-options (required)
-  Container of options.
-
-   @minimum
-      Required. Minimum number of options that must be selected in this option set.
-
-   @maximum
-      Required. Maximum number of options that can be selected in this option set.
-      Setting this attribute to a value greater than 1 will result in rendering of a multi-select option set with
-      options rendered as checkboxes. Setting the attribute value to 1 will render options as radio-buttons (single-select option set).
-      Once the maximum of selected options is reached, the rest of the options will be disabled.
-
-   option (required)
-     Container of the option form.
-
-      @name (required)
-         Option name. Must be unique within the option set.
-
-      label (required)
-         Label of the option's checkbox or radio button.
-
-      label\@i18n
-        The key to look up the label text in the localization bundles. (See also :ref:`localization_schemas`)
-
-
-      help-text
-        Optional. Help text for the option.
-
-      help-text\@i18n
-        The key to look up the help text in the localization bundles. (See also :ref:`localization_schemas`)
-
-
-      default
-         Optional. Set to ``true`` to pre-select the option.
-
-      items
-         Optional. Container of the option form's inputs.
-
+<1> *expanded* Set to ``true`` to expand all of the options by default
+<2> *occurrences* Detailed definition of how many instances of the option set may be created
+<3> *options* (required) Container of options.
+<4> *options/@minimum* (required) Minimum number of options that must be selected in this option set.
+<5> *options/@maximum* (required) Maximum number of options to create. > 1 provides multi-select mode. 1 provides single-select mode.
+<6> *option* (required) Container of the option form.
+<7> *option/@name* (required) Must be unique within the option set.
+<8> *label* (required) Label of the option's checkbox or radio button.
+<9> *label/@i18n* localization bundles.
+<10> *help-text* Help text for the option.
+<11> *help-text/@i18n* localization bundle key.
+<12> *default* Set to `true` to pre-select one of the options.
+<13> *items* Container of the option form's inputs.
 
 
 
 == Mixins
 
-To simplify maintenance of forms, mixins offers a practical way of reusing schema fragments across forms.
+To simplify maintenance of forms, mixins offers a simple templating approach to reuse the same definition across various forms.
 A mixin can be injected into a form simply by referencing it by name.
-The form referencing the mixin will render as if everything in the mixin was written directly in the form itself.
 
-.us-address mixin
+.Sample mixin "us-address"
 [source,xml]
 ----
 <mixin>
@@ -282,17 +250,22 @@ The form referencing the mixin will render as if everything in the mixin was wri
 </mixin>
 ----
 
-.Content Type using the us-address mixin
+.Content Type using the "us-address" mixin
 [source,xml]
 ----
 <content-type>
   <display-name>Using mixins</display-name>
   <super-type>base:structured</super-type>
   <items>
-    <mixin name="us-address"/>
+    <mixin name="us-address"/> <!--1-->
   </items>
 </content-type>
 ----
+
+<1> The mixin element will be replaced by the contents of the <mixin> element.
+
+Similar functionality can also be solved by compile-time build scripts if desired.
+
 
 == Schema Localization
 
@@ -316,17 +289,17 @@ NOTE: The localization of schemas applies to the admin tool apps included in XP:
 
 The following schemas and fields support the `i18n` attribute for localization:
 
-- **Input type**: ``label``, ``help-text``
-- **Item set**: ``label``, ``help-text``
-- **Field set**: ``label``
-- **Option set**: ``label``, ``help-text``
-- **Content Type**: ``displayName``, ``description``
-- **Mixin**: ``displayName``, ``description``, input types
-- **Page descriptor**: ``displayName``, input types in config
-- **Part descriptor**: ``displayName``, input types in config
-- **Layout descriptor**: ``displayName``, input types in config
-- **Admin Tool descriptor**: ``displayName``, ``description``
-- **Macro**: ``displayName``, ``description``, input types in config
+- Input type: ``label``, ``help-text``
+- Item set: ``label``, ``help-text``
+- Field set: ``label``
+- Option set: ``label``, ``help-text``
+- Content Type: ``displayName``, ``description``
+- Mixin: ``displayName``, ``description``, input types
+- Page descriptor: ``displayName``, input types in config
+- Part descriptor: ``displayName``, input types in config
+- Layout descriptor: ``displayName``, input types in config
+- Admin Tool descriptor: ``displayName``, ``description``
+- Macro: ``displayName``, ``description``, input types in config
 
 == Translations
 
@@ -334,7 +307,7 @@ The translated texts for each of the i18n keys should be placed in the correspon
 
 Steps to add the translations for a schema:
 
-#1 Add or edit one file per language supported:
+*1. Add or edit one file per language supported:*
 
 ``src/main/resources/i18n/phrases_<language-code>.properties``
 
@@ -346,7 +319,9 @@ src/main/resources/i18n/phrases_en.properties
 src/main/resources/i18n/phrases_no.properties
 ----
 
-#2 Add the i18n keys from the schema in each of the phrases.properties files. Each line should have the key, an equals ``=`` sign, and the text in the specific language.
+*2. Add the i18n keys from the schema in each of the phrases.properties files.*
+
+Each line should have the key, an equals ``=`` sign, and the text in the specific language.
 
 .phrases_en.properties
 [source,properties]
@@ -368,6 +343,12 @@ person.photo.label=Bilde
 person.photo.help-text=Passbilde
 ----
 
-#3 It is also recommended to add a `phrases.properties` file (without language suffix) that will be used as default if a translation for the browser language cannot be found.
+*3. fallback file `phrases.properties` file*
 
-#4 Build and deploy the application. The texts in the schema will appear depending on the language configured in the browser.
+It is recommended to have default phrases file. This will be used if the translation for the browser language cannot be found.
+
+*4. Build and deploy the application.*
+
+The texts in the schema will appear depending on the language configured in the browser.
+
+For more details, check out the <<../runtime/18n#,runtime localization docs>>
