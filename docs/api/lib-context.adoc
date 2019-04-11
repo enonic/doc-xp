@@ -47,7 +47,7 @@ Example
 .Getting the current context
 [source,js]
 ----
-const result = contextLib.get();
+const context = contextLib.get();
 ----
 
 .Sample response
@@ -57,19 +57,31 @@ const result = contextLib.get();
   branch: 'draft',
   repository: 'com.enonic.cms.default',
   authInfo: {
+      user: {                            <1>
+          type: 'user',
+          key: 'user.system.abc',
+          displayName: 'A.B.C.',
+          disabled: false,
+          email: 'abc@enonic.com',
+          login: 'abc',
+          idProvider: 'system'
+      }
       principals: [
-          'user:system:anonymous',
+          'user:system:abc',
+          'role:system.admin',
+          'role:system.admin.login',
+          'role:system.authenticated',
           'role:system.everyone'
       ]
   }
 }
 ----
 
-
+<1> The user node will not be returned unless there is a logged in user.
 
 === run
 
-Runs a function within a custom context.
+Runs a function within a custom context, for instance the one returned by the `get()` function call.
 Commonly used when accessing repositories, or to override current users permissions.
 
 [.lead]
@@ -102,18 +114,13 @@ function callback() {
 }
 
 // Executes function within a custom context.
-const result = contextLib.run({
-    repository: 'system-repo',
-    branch: 'master',
-    user: {
-        login: 'su', <1>
-        idProvider: 'system'
-    },
-    principals: ["role:system.admin"],
-    attributes: {
-        ignorePublishTimes: true
-    }
-}, callback);
+const result = contextLib.run(context, callback);
+----
+
+.Sample response
+[source,js]
+----
+Hello from context
 ----
 
 == Objects
