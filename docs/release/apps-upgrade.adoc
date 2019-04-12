@@ -653,29 +653,190 @@ src/
 == 10. Widgets
 
 The "Detail panel" of XP 6 Content Studio has been refactored, and is now called the "Context panel".
-With XP 7, this panel is now available in both Content Studio tree view, and in the content editor,
+With XP 7, this panel is now available in both Content Studio tree view, and in the content editor.
 
 If your application implements a detail panel widget (located in src/main/resources/admin/widgets/), you will need to upgrade it as follows:
 
+=== Widget HTML
+
+Root element of widget HTML template has changed from `<body>` to `<widget>`. Make sure that `<link>` element injecting widget's stylesheets is inside the `<widget></widget>` element.
+
+.Old widget.html
+[source,html]
+----
+<link rel="stylesheet" th:href="${widgetCssUrl}" type="text/css"/>
+<body>
+    <p>Hello World!</p>
+</body>
+----
+
+.New widget.html
+[source,html]
+----
+<widget>
+    <link rel="stylesheet" th:href="${widgetCssUrl}" type="text/css"/>
+    <p>Hello World!</p>
+</widget>
+----
+
 === Implements
 
-TODO
+Widget interface (in the widget's XML schema) is to be renamed from `com.enonic.xp.content-manager.context-widget` (old version) or `contentstudio.detailpanel` (XP 6.x version)
+to `contentstudio.contextpanel`.
+
+.mywidget.xml
+[source,xml]
+----
+<widget>
+  <display-name>My Widget</display-name>
+  <description>Awesome widget that does nothing</description>
+  <interfaces>
+    <interface>contentstudio.contextpanel</interface>
+  </interfaces>
+</widget>
+----
+
+=== Widget icon and description
+
+XP 7 supports widget icon and description that will be shown inside the widget selector inside Content Studio.
+To enable a description, add `<description></description>` field to the widget schema as shown in the example above.
+To enable an icon place the image file (SVG or PNG) called by the same name as the widget inside the widget's folder.
+
+[source,files]
+----
+src/
+  main/
+    resources/
+      admin/
+        widgets/
+            mywidget/
+                mywidget.html
+                mywidget.js
+                mywidget.svg
+                mywidget.xml
+----
 
 === No context
 
-TODO
+Starting from XP 7, contents of the selected widget will be displayed in the Content Studio's context panel even when no content is selected in the content tree.
+Developer of the widget must take care of that and implement necessary validation/feedback if the widget requires contentId (by checking value in `params.contentId`
+in the `request` object).
+
+.mywidget.js
+[source,JavaScript]
+----
+function handleGet(req) {
+
+    var contentId = req.params.contentId;
+
+    if (!contentId && portalLib.getContent()) {
+        contentId = portalLib.getContent()._id;
+    }
+
+    if (!contentId) {
+        return {
+            contentType: 'text/html',
+            body: '<widget class="error">No content selected</widget>'
+        };
+    }
+
+    // Further processing
+    ...
+}
+----
+
+=== Widget in the DOM
+
+Parameter `uuid` will no longer be sent to the widget from Content Studio. Before XP 7 several instances of the same widget element could technically be present in the DOM
+and `uuid` could be used to locate the correct element. Consider the following way to locate widget element in the DOM:
+
+.mywidget.html
+[source,HTML]
+----
+    <widget data-th-id="${'widget-' + widgetId}">
+      ... widget body...
+    </widget>
+
+    <script data-th-inline="javascript">
+        /*<![CDATA[*/
+        var CONFIG = {
+            widgetId: [[${widgetId}]]
+        };
+
+        /*]]>*/
+    </script>
+----
+
+.mywidget.js
+[source,JavaScript]
+----
+    var view = resolve('mywidget.html');
+    var params = {
+        widgetId: app.name
+    };
+
+    return {
+        contentType: 'text/html',
+        body: thymeleaf.render(view, params)
+    };
+}
+----
+
+.asset.js
+[source,JavaScript]
+----
+    window['HTMLImports'].whenReady(function() {
+        const widgetId = CONFIG.widgetId;
+        const widgetContainer = document.getElementById(`widget-${widgetId}`);
+
+        if (widgetContainer) {
+            ...
+        }
+    });
+----
 
 === Repo context
 
 XP 7 is prepared for using multiple CMS repositories.
-As such, a widget must be able to determine which repository it should connect to.
+As such, a widget must be able to determine which repository it should connect to and which branch (master or draft) the content is in.
+This info is now available in the `request` parameter.
 
-CMS repos are consistently named as
+.mywidget.js
+[source,JavaScript]
+----
+function handleGet(req) {
 
-TODO
+    var contentId = req.params.contentId;
+
+    if (!contentId && portalLib.getContent()) {
+        contentId = portalLib.getContent()._id;
+    }
+
+    if (!contentId) {
+        return {
+            contentType: 'text/html',
+            body: '<widget class="error">No content selected</widget>'
+        };
+    }
+
+    var repo = req.params.repository;
+    var branch = req.params.branch;
+
+    var nodeLib = require('/lib/xp/node');
+
+    // Connect to repo
+    var repo = nodeLib.connect({
+        repoId: repo,
+        branch: branch
+    });
+
+    // Work with the repo
+    ...
+}
+----
 
 == 11. Java
 
-Where XP 6 depends on Java 8, XP 7 bundles Java 11.
+Where XP 6.x depends on Java 8, XP 7 bundles Java 11.
 
 TODO
