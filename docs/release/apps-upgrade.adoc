@@ -188,6 +188,28 @@ Example of how to update the site schema
 </site>
 ----
 
+=== Descriptions
+
+You can now declare description in the `<description>` field of the following schema types:
+
+* content-type
+* page
+* layout
+* part
+
+Description of a content type will be shown in the "New Content" dialog, while for pages, layouts or parts it will be shown inside the "Page Components" tree in the Content editor.
+
+content-type.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<content-type>
+  <display-name>Article</display-name>
+  <description>Content type for articles, blogs etc.</description>
+  ...
+</content-type>
+----
+
 === FieldSet
 
 Fieldsets used to require a name attribute. The name attribute has no particular use-case, and is now deprecated.
@@ -221,7 +243,7 @@ If you are fine with the new default behavior, no changes need to be made. If no
 
 === Mixins
 
-As part of the consolidated schema format, the <items> element of mixins has been replaced by <form>.
+As part of the consolidated schema format, the `<items>` element of mixins has been replaced by `<form>`.
 Upgrade your mixin definitions to match the new format:
 
 .Old mixin using <items>
@@ -242,9 +264,9 @@ Upgrade your mixin definitions to match the new format:
 
 === Inline
 
-With XP 7, the <inline> concept is directly replaced by <mixin>.
+With XP 7, the `<inline>` concept is directly replaced by `<mixin>`.
 
-Update any schemas using <inline> to match the new format:
+Update any schemas using `<inline>` to match the new format:
 
 .Old schema using inline
 [source,xml]
@@ -265,10 +287,20 @@ Update any schemas using <inline> to match the new format:
 === Display name script
 
 The display name script is used to generate the display name from other content type text inputs.
-The old <display-name-script> functionality is deprecated, and replaced by a ES 6 expressions (TODO)
+The old `<content-display-name-script>` field is deprecated, and replaced by a new field `<display-name-expression>` that supports ES 6 template literals
+which means that you can now combine field values with static text.
 
-TODO
+.Old contenttype.xml
+[source,JavaScript]
+----
+  <content-display-name-script>$('firstName', 'middleName', 'lastName')</content-display-name-script>
+----
 
+.New contenttype.xml
+[source,JavaScript]
+----
+  <display-name-expression>>My name is ${firstName} ${middleName} ${lastName}</display-name-expression>>
+----
 
 === CustomSelector update
 
@@ -420,22 +452,22 @@ Read more about Image styles (TODO, link)
 
 === Editor XSS
 
-The XP 6 html editor allows users to add <script> and <iframe> tags to the source code.
+The XP 6 html editor allows users to add `<script>` and `<iframe>` tags to the source code.
 
-New version of Content Studio shipped XP 7 automatically removes any <script> and <iframe> tags from the source code.
+New version of Content Studio shipped XP 7 automatically removes any `<script>` and `<iframe>` tags from the source code.
 This measurement effectively reduces the attack surface of Enonic XP.
 This also removes any scripts from documents migrated from XP 6 on first save.
 
 Iframes can still be added through the use of the iframe macro.
 
-NOTE: Re-enable support for <script> in html fields at own risk by following receipt below:
+NOTE: Re-enable support for `<script>` in html fields at own risk by following receipt below:
 
-Add a content studio config file to XP, with the following settings:
+Add a content studio config file (_com.enonic.app.contentstudio.cfg_) to _XP_HOME/config_ folder , with the following settings:
 
-.com.enonic.app.contentstudio
+.com.enonic.app.contentstudio.cfg
 [source,properties]
 ----
-htmlinput.allow.scripts = true
+htmlinput.allowScripts = true
 ----
 
 
@@ -476,7 +508,7 @@ If your project uses response filters, you must perform the following updates of
 
 ==== Move files
 
-Update your project structure by renaming the filter folder from `/src/main/resources/site/filters` to ``/src/main/resources/site/processors`
+Update your project structure by renaming the _filters_ folder from `/src/main/resources/site/filters` to ``/src/main/resources/site/processors`
 
 ==== Update site.xml
 
@@ -532,10 +564,9 @@ exports.responseProcessor = function (req, res) {
 === Render mode
 
 When the site engine is rendering pages, a so-called render mode is part of the request object.
-Until now, the render modes have been: ``PREVIEW``, ``EDIT`` and "TODO"
-TODO: Verify last mode
+Until now, the render modes have been: ``PREVIEW``, ``EDIT`` and ``LIVE``
 
-With XP 7, the `ÌNLINE` render mode is introduced.
+With XP 7, the `INLINE` render mode is introduced.
 `INLINE` mode is exclusively used when a preview is rendered in the context of Content Studio browse view.
 Previously, this rendering would be using mode ``PREVIEW``.
 
@@ -575,12 +606,12 @@ If your project connects directly to a CMS repo, i.e. through the node API, ensu
 
 === Main.js
 
-If you project contains a /src/main/resources/main.js file, you might need to update it.
+If you project contains a _/src/main/resources/main.js_ file, you might need to update it.
 
-With XP 7, a dedicated web app controller /src/main/resources/webapp/webapp.js is introduced.
+With XP 7, a dedicated web app controller _/src/main/resources/webapp/webapp.js_ is introduced.
 If your current project was a webapp, you will find that your main.js file exports one or more HTTP methods, like `GET`or `POST`.
 
-Split your main.js file in two:
+Split your _main.js_ file in two:
 
 * All HTTP require statements must be moved to the webapp.js
 * Only life cycle related code should remain in main.js.
