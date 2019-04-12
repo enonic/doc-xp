@@ -1,0 +1,167 @@
+= I18N Library
+:toc: right
+:imagesdir: images
+
+This library contains functions for internationalization of phrases.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include "com.enonic.xp:lib-i18n:${xpVersion}"
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const contextLib = require('/lib/xp/i18n');
+----
+
+Then, you need to create files with original phrases and their translations.  These files should be placed in your app,
+in the `src/main/resources/site/i18n` folder.  There must be a file named `phrases.properties` that contain all the phrases
+and the default text.  Additonal files with translations, named `phrases_<locale>.properties` should contain the same phrases
+with the translated text.  If a phrase is missing from the translation file, the defult will be used.  This is what a couple
+of such files could look like:
+
+.phrases.properties
+[source,properties]
+----
+action.preview=Preview
+notify.process.failed=Processing failed: {0}.
+----
+
+.phrases_es.properties
+[source,properties]
+----
+action.preview=Vista Previa
+notify.process.failed=Error al procesar: {0}.
+----
+
+With these basics in place, you are free to invoke to use the library functionality.
+
+
+== Functions
+
+=== getPhrases
+
+Returns an object of key/value-pairs for all phrases with the given locales in the specified bundles.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| locale | string \| Array.<string> | A string-representation of a locale, or an array of locales in preferred order.  Pass in an empty array for default locale.
+| bundles | Array.<string> | Required list of bundle names. Bundle names are specified as paths, relative to the `src/main/resources` folder.
+|===
+
+[.lead]
+Returns
+
+An object with all phrases
+
+[.lead]
+Example
+
+.Getting the current context
+[source,js]
+----
+const phrasesEs = i18n.getPhrases('es', ['site/i18n/phrases'])
+----
+
+.Sample response
+[source,js]
+----
+{
+  "action.preview":"Vista Previa",
+  "notify.process.failed":"Error al procesar: {0}."
+}
+----
+
+=== getSupportedLocales
+
+Returns the list of supported locale codes for the specified bundles.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| bundles | Array.<string> | Required list of bundle names. Bundle names are specified as paths, relative to the `src/main/resources` folder.
+|===
+
+[.lead]
+Returns
+
+An array with all locales
+
+[.lead]
+Example
+
+.Getting the current context
+[source,js]
+----
+const locales = i18n.getSupportedLocales(['site/i18n/phrases'])
+----
+
+.Sample response
+[source,js]
+----
+["es"]
+----
+
+=== localize
+
+Localizes a phrase searching through the list of passed in locales in the given order, to find a translation for the phrase-key.
+If no translation is found, the default phrase will be used.  Some phrases will have placeholders for values that may be inserted
+into the phrase.  These must be provided in the function call for those phrases.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | The phrase key
+| locale | string \| Array.<string> | A string-representation of a locale, or an array of locales in preferred order. If the locale is not set, the site language is used.
+| values | Array.<string> | Optional placeholder values
+| bundles | Array.<string> | Optional list of bundle names
+| application | string | Application key where to find resource bundles. Defaults to current application
+|===
+
+[.lead]
+Returns
+
+The localized string
+
+[.lead]
+Example
+
+.Localize a message with a placeholder.
+[source,js]
+----
+var message2 = i18nLib.localize({
+    key: 'notify.process.failed',
+    locale: 'es',
+    values: ["StaleConnectionException"]
+});
+----
+
+.Sample response
+[source,js]
+----
+Error al procesar: StaleConnectionException.
+----
