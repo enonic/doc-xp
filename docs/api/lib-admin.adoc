@@ -1,0 +1,198 @@
+= Admin Library
+:toc: right
+:imagesdir: images
+
+This library contains admin related functions.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-admin:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const contextLib = require('/lib/xp/admin');
+----
+
+You are now free to use the library functionality.
+
+
+== Functions
+
+=== getAssetsUri
+
+Returns the admin assets uri.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*string* : A URI pointing to the admin assets
+
+=== getBaseUri
+
+Returns the admin base uri.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*string* : The admin base URI
+
+=== getHomeToolUrl
+
+Returns the URL for the Home admin tool.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| params | object | Parameters object
+                    - There is one possible parameter: *type*, that may be set to either _server_ (server-relative URL) or _absolute_.
+|===
+
+[.lead]
+Returns
+
+*string* : The URL pointing to the Home Tool
+
+=== getInstallation
+
+Returns installation name.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*string* : The installation Name
+
+=== getLauncherPath
+
+Returns the URL for launcher javascript.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*string* : The URL for the launcher javascript
+
+=== getLauncherUrl
+
+Returns the URL for the launcher panel.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*string* : The URL for the launcher panel
+
+
+=== getLocale
+
+Returns the preferred locale based on the current HTTP request, or the server default locale if none is specified.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*string* : The preferred locale for this request
+
+=== getLocales
+
+Returns the list of preferred locales based on the current HTTP request, or the server default locale if none is specified.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*Array.<string>* : Current locales in order of preference
+
+=== getPhrases
+
+Returns all i18n phrases.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*object* : JSON object with phrases
+
+=== getToolUrl
+
+Returns the URL for an admin tool of specific application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| application | string | Full application name (f.ex, 'com.enonic.app')
+| tool | string | Name of the tool inside an app (f.ex, 'main')
+|===
+
+[.lead]
+Returns
+
+*string* : The URL to the requested tool.
+
+=== getVersion
+
+Returns version of XP installation.
+
+[.lead]
+Parameters
+
+None
+
+
+[.lead]
+Returns
+
+*string* : The version number of the XP runtime.
