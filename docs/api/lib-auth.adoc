@@ -1,0 +1,151 @@
+= Authentication Library
+:toc: right
+:imagesdir: images
+
+This library contains built-in authentication functions.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-auth:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const authLib = require('/lib/xp/auth');
+----
+
+You are now free to use the library functionality.
+
+
+== Functions
+
+=== addMembers
+
+Adds members to a principal (user or role).
+
+=== changePassword
+
+Changes password for specified user.
+
+=== createGroup
+
+Creates a group.
+
+=== createRole
+
+Creates a role.
+
+=== createUser
+
+Creates a user.
+
+=== deletePrincipal
+
+Deletes the principal with the specified key.
+
+=== findPrincipals
+
+Search for principals matching the specified criteria.
+
+=== findUsers
+
+Search for users matching the specified query.
+
+=== generatePassword
+
+Generates a random secure password that may be suggested to a user.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*string* : A suggestion for a secure password
+
+=== getIdProviderConfig
+
+This function returns the ID provider configuration. It is meant to be called from an ID provider controller.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*object* : A JSON object with all the values in the configuration
+
+=== getMembers
+
+Returns a list of principals that are members of the specified principal.
+
+=== getMemberships
+
+Returns the list of principals which the specified principal is a member of.
+
+=== getPrincipal
+
+Returns the principal with the specified key.
+
+=== getProfile
+
+Returns the profile of a user.
+
+=== getUser
+
+Returns the logged-in user. If not logged-in, this will return _undefined_.
+
+=== hasRole
+
+Checks if the logged-in user has the specified role.
+
+=== login
+
+Login a user with the specified idProvider, userName and password.
+
+=== logout
+
+Logout the currently logged-in user.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*void*
+
+=== modifyGroup
+
+Retrieves the group specified and updates it with the changes applied.
+
+=== modifyProfile
+
+This function retrieves the profile of a user and updates it.
+
+=== modifyRole
+
+Retrieves the role specified and updates it with the changes applied.
+
+=== modifyUser
+
+Retrieves the user specified and updates it with the changes applied.
+
+=== removeMembers
+
+Removes members from a principal (user or role).
+

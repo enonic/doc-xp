@@ -19,7 +19,7 @@ In your JavaScript controller, add a require statement:
 
 [source,js]
 ----
-const contextLib = require('/lib/xp/i18n');
+const i18nLib = require('/lib/xp/i18n');
 ----
 
 Then, you need to create files with original phrases and their translations.  These files should be placed in your app,
@@ -74,7 +74,7 @@ Example
 .Getting the current context
 [source,js]
 ----
-const phrasesEs = i18n.getPhrases('es', ['site/i18n/phrases'])
+const phrasesEs = i18nLib.getPhrases('es', ['site/i18n/phrases'])
 ----
 
 .Sample response
@@ -112,7 +112,7 @@ Example
 .Getting the current context
 [source,js]
 ----
-const locales = i18n.getSupportedLocales(['site/i18n/phrases'])
+const locales = i18nLib.getSupportedLocales(['site/i18n/phrases'])
 ----
 
 .Sample response

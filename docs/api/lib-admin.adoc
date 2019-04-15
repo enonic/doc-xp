@@ -19,7 +19,7 @@ In your JavaScript controller, add a require statement:
 
 [source,js]
 ----
-const contextLib = require('/lib/xp/admin');
+const adminLib = require('/lib/xp/admin');
 ----
 
 You are now free to use the library functionality.
