@@ -31,25 +31,232 @@ You are now free to use the library functionality.
 
 Adds members to a principal (user or role).
 
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| principalKey | string | Key of the principal to add members to
+| members | Array.<string> | A list of the new memebers that should be added to the principal
+|===
+
+[.lead]
+Returns
+
+*void*
+
+
 === changePassword
 
 Changes password for specified user.
+
+[.lead]
+Parameters
+
+Pass inn a `params` JSON object with the following keys and their value:
+
+[%header,cols="1%,99%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Description
+| userKey | The key of the user to change password for
+| password | The new password
+|===
+
+[.lead]
+Returns
+
+*void*
 
 === createGroup
 
 Creates a group.
 
+[.lead]
+Parameters
+
+Pass inn a `params` JSON object with the following keys and their value:
+
+[%header,cols="1%,99%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Description
+| idProvider | Key for id provider where the group will be created
+| name | Group name
+| displayName | Group display name
+| description | A description of the principal
+|===
+
+[.lead]
+Returns
+
+*object* : The created group.
+
+[.lead]
+Example
+
+.Run a simple function in a different context
+[source,js]
+----
+// Creating a group
+var group = authLib.createGroup({
+    idProvider: 'myIdProvider',
+    name: 'groupName',
+    displayName: 'Group display name',
+    description: "description"
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "type": "group",
+    "key": "group:system:group-a",
+    "displayName": "Group A",
+    "modifiedTime": "1970-01-01T00:00:00Z",
+    "description": "description"
+};
+----
+
 === createRole
 
 Creates a role.
+
+[.lead]
+Parameters
+
+Pass inn a `params` JSON object with the following keys and their value:
+
+[%header,cols="1%,99%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Description
+| name | Group name
+| displayName | Group display name
+| description | A description of the principal
+|===
+
+[.lead]
+Returns
+
+*object* : The created group.
+
+[.lead]
+Example
+
+.Run a simple function in a different context
+[source,js]
+----
+// Creating a role
+var role = authLib.createRole({
+    name: 'aRole',
+    displayName: 'Role Display Name',
+    description: 'description'
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    'type': 'role',
+    'key': 'role:aRole',
+    'displayName': 'Role Display Name',
+    'modifiedTime': '1970-01-01T00:00:00Z',
+    'description': 'description'
+};
+----
 
 === createUser
 
 Creates a user.
 
+[.lead]
+Parameters
+
+Pass inn a `params` JSON object with the following keys and their value:
+
+[%header,cols="1%,99%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Description
+| idProvider | Key for id provider where the user will be created
+| name | User login name
+| displayName | User display name
+| email | Optional user e-mail
+|===
+
+[.lead]
+Returns
+
+*object* : The created group.
+
+[.lead]
+Example
+
+.Run a simple function in a different context
+[source,js]
+----
+// Creating a user
+var user = authLib.createUser({
+    idProvider: 'myIdProvider',
+    name: 'userName',
+    displayName: 'User display name',
+    email: 'userName@enonic.com'
+});
+----
+
+.Sample response
+[source,js]
+----
+var expected = {
+    "type": "user",
+    "key": "user:enonic:user1",
+    "displayName": "User 1",
+    "modifiedTime": "1970-01-01T00:00:00Z",
+    "disabled": false,
+    "email": "user1@enonic.com",
+    "login": "user1",
+    "idProvider": "enonic"
+};
+----
+
 === deletePrincipal
 
 Deletes the principal with the specified key.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| principalKey | string | Key of the principal to delete
+|===
+
+[.lead]
+Returns
+
+*boolean* : `True` if the principal was deleted, `false` otherwise
+
+[.lead]
+Example
+
+.Run a simple function in a different context
+[source,js]
+----
+var deleted = authLib.deletePrincipal('user:myIdProvider:userId');
+----
 
 === findPrincipals
 
@@ -149,3 +356,75 @@ Retrieves the user specified and updates it with the changes applied.
 
 Removes members from a principal (user or role).
 
+=== run
+
+Runs a function within a custom context, for instance the one returned by the `get()` function call.
+Commonly used when accessing repositories, or to override current users permissions.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| context | object | <<Context>> to be used for the scope of the callback function
+| callback | function | Function to execute
+|===
+
+[.lead]
+Returns
+
+*string* : The result of the execution.
+
+
+[.lead]
+Example
+
+.Run a simple function in a different context
+[source,js]
+----
+// Define the callback to be executed.
+function callback() {
+    return 'Hello from context';
+}
+
+// Executes function within a custom context.
+const result = contextLib.run(context, callback);
+----
+
+.Sample response
+[source,js]
+----
+Hello from context
+----
+
+== Objects
+
+=== Context
+
+The context object is always available within the scope of a request
+
+.Sample context object
+[source,js]
+----
+{
+  repository: 'some.repo.name', <1>
+  branch: 'master', <2>
+  user: { <3>
+      login: 'mylogin',
+      idProvider: 'idprovidername'
+  },
+  principals: ['role:system.admin'], <4>
+  attributes: { <5>
+      optionalAttributes: 'of any kind'
+      }
+}
+----
+
+<1> *repository* (_string_) Repository context.
+<2> *branch* (_string_) Branch context.
+<3> *user* (_object_) Specify a valid user/idprovider combination
+<4> *principals* (_object_) Roles or group principals applicable for current user
+<5> *attributes* (_object_) custom attributes
