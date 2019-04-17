@@ -56,7 +56,7 @@ Changes password for specified user.
 [.lead]
 Parameters
 
-Pass inn a `params` JSON object with the following keys and their value:
+A JSON object with the following keys and their value:
 
 [%header,cols="1%,99%a"]
 [frame="none"]
@@ -79,17 +79,17 @@ Creates a group.
 [.lead]
 Parameters
 
-Pass inn a `params` JSON object with the following keys and their value:
+A JSON object with the following keys and their value:
 
-[%header,cols="1%,99%a"]
+[%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Description
-| idProvider | Key for id provider where the group will be created
-| name | Group name
-| displayName | Group display name
-| description | A description of the principal
+| Name | Kind | Description
+| idProvider | string | Key for id provider where the group will be created
+| name | string | Group name
+| displayName | string | Group display name
+| description | string | A description of the principal
 |===
 
 [.lead]
@@ -100,14 +100,13 @@ Returns
 [.lead]
 Example
 
-.Run a simple function in a different context
+.Creating a group named "group-a"
 [source,js]
 ----
-// Creating a group
 var group = authLib.createGroup({
     idProvider: 'myIdProvider',
-    name: 'groupName',
-    displayName: 'Group display name',
+    name: 'group-a',
+    displayName: 'Group A',
     description: "description"
 });
 ----
@@ -121,7 +120,7 @@ var group = authLib.createGroup({
     "displayName": "Group A",
     "modifiedTime": "1970-01-01T00:00:00Z",
     "description": "description"
-};
+}
 ----
 
 === createRole
@@ -131,16 +130,16 @@ Creates a role.
 [.lead]
 Parameters
 
-Pass inn a `params` JSON object with the following keys and their value:
+A JSON object with the following keys and their value:
 
-[%header,cols="1%,99%a"]
+[%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Description
-| name | Group name
-| displayName | Group display name
-| description | A description of the principal
+| Name | Kind | Description
+| name | string | Role name
+| displayName | string | Role display name
+| description | string | A description of the role
 |===
 
 [.lead]
@@ -151,10 +150,9 @@ Returns
 [.lead]
 Example
 
-.Run a simple function in a different context
+.Creating a role named "aRole"
 [source,js]
 ----
-// Creating a role
 var role = authLib.createRole({
     name: 'aRole',
     displayName: 'Role Display Name',
@@ -171,7 +169,7 @@ var role = authLib.createRole({
     'displayName': 'Role Display Name',
     'modifiedTime': '1970-01-01T00:00:00Z',
     'description': 'description'
-};
+}
 ----
 
 === createUser
@@ -181,17 +179,17 @@ Creates a user.
 [.lead]
 Parameters
 
-Pass inn a `params` JSON object with the following keys and their value:
+A JSON object with the following keys and their value:
 
-[%header,cols="1%,99%a"]
+[%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Description
-| idProvider | Key for id provider where the user will be created
-| name | User login name
-| displayName | User display name
-| email | Optional user e-mail
+| Name | Kind | Description
+| idProvider | string | Key for id provider where the user will be created
+| name | string | User login name
+| displayName | string | User display name
+| email | string | Optional user e-mail
 |===
 
 [.lead]
@@ -202,31 +200,30 @@ Returns
 [.lead]
 Example
 
-.Run a simple function in a different context
+.Creating a user named "userName"
 [source,js]
 ----
-// Creating a user
 var user = authLib.createUser({
     idProvider: 'myIdProvider',
-    name: 'userName',
-    displayName: 'User display name',
-    email: 'userName@enonic.com'
+    name: 'user1',
+    displayName: 'The One And Only',
+    email: 'user1@enonic.com'
 });
 ----
 
 .Sample response
 [source,js]
 ----
-var expected = {
+{
     "type": "user",
     "key": "user:enonic:user1",
-    "displayName": "User 1",
+    "displayName": "The One And Only",
     "modifiedTime": "1970-01-01T00:00:00Z",
     "disabled": false,
     "email": "user1@enonic.com",
     "login": "user1",
-    "idProvider": "enonic"
-};
+    "idProvider": "myIdProvider"
+}
 ----
 
 === deletePrincipal
@@ -247,12 +244,12 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : `True` if the principal was deleted, `false` otherwise
+*boolean* : `true` if the principal was deleted, `false` otherwise
 
 [.lead]
 Example
 
-.Run a simple function in a different context
+.Deleting a user
 [source,js]
 ----
 var deleted = authLib.deletePrincipal('user:myIdProvider:userId');
@@ -262,9 +259,111 @@ var deleted = authLib.deletePrincipal('user:myIdProvider:userId');
 
 Search for principals matching the specified criteria.
 
+A JSON object with the following keys and their value.  All parameters are optional:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Description
+| type | string | Principal type to look for, one of: 'user', 'group' or 'role'. If not specified all principal types will be included.
+| idProvider | string | Key of the id provider to look for. If not specified all id providers will be included.
+| start | string | First principal to return from the search results. It can be used for pagination.
+| count | string | A limit on the number of principals to be returned
+| name | string | Name of the principal to look for
+| searchText | string | Text to look for in any principal field.
+|===
+
+[.lead]
+Returns
+
+*object* : The "total" number of principals matching the search, the "count" of principals included, and an array of "hits" containing the principals.
+
+[.lead]
+Example
+
+.Searching for principals for 'user1'
+[source,js]
+----
+var result = authLib.findPrincipals({
+    idProvider: 'user-store',
+    start: 0,
+    count: 10,
+    searchText: 'user1'
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "type": "user",
+    "key": "user:enonic:user1",
+    "displayName": "The One And Only",
+    "modifiedTime": "1970-01-01T00:00:00Z",
+    "disabled": false,
+    "email": "user1@enonic.com",
+    "login": "user1",
+    "idProvider": "myIdProvider"
+}
+----
+
+
 === findUsers
 
 Search for users matching the specified query.
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Description
+| query | string | Query expression
+| start | number | Optional start index for paging
+| count | number | Optional number of users to fetch at a time
+| sort | string | Optional sorting expression
+| includeProfile | boolean | If set to `true`, a full profile of each user will be included in the result
+|===
+
+[.lead]
+Returns
+
+*object* : An object containg the total number of hits, the number returned and an array of the hits.
+
+[.lead]
+Example
+
+.Searching for the first person in the `Juve` family.
+[source,js]
+----
+var findUsersResult = auth.findUsers({
+    count: 1,
+    query: "displayName LIKE '*Juve'"
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "total": 2,
+    "count": 1,
+    "hits": [
+        {
+            "type": "user",
+            "key": "user:system:jorgen-juve",
+            "displayName": "Jørgen Juve",
+            "disabled": false,
+            "email": "jju@enonic.com",
+            "login": "jorgen-juve",
+            "idProvider": "system"
+        }
+    ]
+}
+----
+
 
 === generatePassword
 
@@ -302,6 +401,58 @@ Returns a list of principals that are members of the specified principal.
 
 Returns the list of principals which the specified principal is a member of.
 
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| principalKey | string | Principal key to retrieve memberships for
+| transitive | boolean | Retrieve transitive memberships.  Considered `false` if not specified
+|===
+
+[.lead]
+Returns
+
+*Array.<string>* : A list of the principals that the specified principal is a member of
+
+[.lead]
+Example
+
+.Searching for direct memberships of 'user1'
+[source,js]
+----
+var result = authLib.getMemberships('user:enonic:user1');
+----
+
+.Sample response
+[source,js]
+----
+[
+    "role:system.admin.login",
+    "group:system:content-managers"
+]
+----
+
+.Searching for transitive memberships of 'user1'
+[source,js]
+----
+var result = authLib.getMemberships('user:enonic:user1', true);
+----
+
+.Sample response
+[source,js]
+----
+[
+    "role:system.admin.login",
+    "group:system:content-managers",
+    "role:cms.expert",
+    "role:cms.cm.app"
+]
+----
+
 === getPrincipal
 
 Returns the principal with the specified key.
@@ -318,9 +469,87 @@ Returns the logged-in user. If not logged-in, this will return _undefined_.
 
 Checks if the logged-in user has the specified role.
 
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| role | string | The role to check for
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if the current user has the role, `false` otherwise
+
+[.lead]
+Example
+
+.Checking a role
+[source,js]
+----
+var hasRole = auth.hasRole('system.admin');
+----
+
 === login
 
-Login a user with the specified idProvider, userName and password.
+Login a user through the specified idProvider, with userName and password.
+
+[.lead]
+Parameters
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| user | string | Mandatory name of the user to log in
+| password | string | Password for the user. Ignored if skipAuth is set to true, mandatory otherwise.
+| idProvider | string | Name of id provider where the user is stored. If not specified it will try all available id providers, in alphabetical order.
+| skipAuth | boolean | Skip authentication.  Default is `false` if not specified.
+| sessionTimeout | number | Session timeout (in seconds). By default, the value of session.timeout from `com.enonic.xp.web.jetty.cfg`
+|===
+
+[.lead]
+Returns
+
+*object* : The logged in user
+
+[.lead]
+Example
+
+.Logging in a user
+[source,js]
+----
+    var loginResult = auth.login({
+        user: 'user1',
+        password: 'myPwd1',
+        idProvider: 'myIdProvider'
+    });
+----
+
+.Sample response
+[source,js]
+----
+{
+    "authenticated":true,
+    "user":{
+        "type":"user",
+        "key":"user:system:jsi",
+        "displayName":"The One And Only",
+        "disabled":false,
+        "email":"user1@enonic.com",
+        "login":"user1",
+        "idProvider":"myIdProvider"
+    }
+}
+----
+
 
 === logout
 
