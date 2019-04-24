@@ -379,6 +379,15 @@ Returns
 
 *string* : A suggestion for a secure password
 
+[.lead]
+Example
+
+.Generate a password and return the password string
+[source,js]
+----
+var pwd = authLib.generatePassword();
+----
+
 === getIdProviderConfig
 
 This function returns the ID provider configuration. It is meant to be called from an ID provider controller.
@@ -396,6 +405,39 @@ Returns
 === getMembers
 
 Returns a list of principals that are members of the specified principal.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| principalKey | string | Principal key to retrieve the members of.
+|===
+
+[.lead]
+Returns
+
+*Array.<object>* : A list of JSON objects for each member of the principal or empty array if none.
+
+[.lead]
+Example
+
+.Searching for members of the Content Manager group
+[source,js]
+----
+var result = authLib.getMembers('group:system:content-managers');
+----
+
+.Sample response
+[source,js]
+----
+[{"type":"user","key":"user:system:user1","displayName":"User 1","disabled":false,"email":"user1@enonic.com","login":"user1","idProvider":"system"},
+ {"type":"user","key":"user:system:user2","displayName":"User 2","disabled":false,"email":"user2@enonic.com","login":"user2","idProvider":"system"
+ }]
+----
 
 === getMemberships
 
@@ -457,13 +499,117 @@ var result = authLib.getMemberships('user:enonic:user1', true);
 
 Returns the principal with the specified key.
 
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| principalKey | string | Principal key to retrieve memberships for
+|===
+
+[.lead]
+Returns
+
+*object* : The principal as a JSON object
+
+.Retrieving the full principal for 'user1'
+[source,js]
+----
+var result = authLib.getPrincipal('user:enonic:user1');
+----
+
+.Sample response
+[source,js]
+----
+{
+    "type": "user",
+    "key": "user:enonic:user1",
+    "displayName": "User 1",
+    "disabled": false,
+    "email": "user1@enonic.com",
+    "login": "user1",
+    "idProvider": "system"
+}
+----
+
 === getProfile
 
 Returns the profile of a user.
 
+[.lead]
+Parameters
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| principalKey | string | Principal key to retrieve profile for
+| scope | string | Scope of the data to retrieve.
+|===
+
+[.lead]
+Returns
+
+*object* : Profile data as JSON
+
+//[.lead]
+//Example
+//
+//.Retrieving the profile of 'user1'
+//[source,js]
+//----
+//var result = authLib.getProfile('user:enonic:user1');
+//----
+//
+//.Sample response
+//[source,js]
+//----
+//    null
+//----
+
+
 === getUser
 
-Returns the logged-in user. If not logged-in, this will return _undefined_.
+Returns the logged-in user. If not logged-in, this will return _undefined_ or _null_.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*object* : User data in JSON object
+
+[.lead]
+Example
+
+.Retrieving the profile of 'user1'
+[source,js]
+----
+var result = authLib.getUser();
+----
+
+.Sample response
+[source,js]
+----
+{
+    "type": "user",
+    "key": "user:enonic:user1",
+    "displayName": "User 1",
+    "disabled": false,
+    "email": "user1@enonic.com",
+    "login": "user1",
+    "idProvider": "system"
+}
+----
 
 === hasRole
 
