@@ -216,7 +216,7 @@ var user = authLib.createUser({
 ----
 {
     "type": "user",
-    "key": "user:enonic:user1",
+    "key": "user:system:user1",
     "displayName": "The One And Only",
     "modifiedTime": "1970-01-01T00:00:00Z",
     "disabled": false,
@@ -298,7 +298,7 @@ var result = authLib.findPrincipals({
 ----
 {
     "type": "user",
-    "key": "user:enonic:user1",
+    "key": "user:system:user1",
     "displayName": "The One And Only",
     "modifiedTime": "1970-01-01T00:00:00Z",
     "disabled": false,
@@ -466,7 +466,7 @@ Example
 .Searching for direct memberships of 'user1'
 [source,js]
 ----
-var result = authLib.getMemberships('user:enonic:user1');
+var result = authLib.getMemberships('user:system:user1');
 ----
 
 .Sample response
@@ -481,7 +481,7 @@ var result = authLib.getMemberships('user:enonic:user1');
 .Searching for transitive memberships of 'user1'
 [source,js]
 ----
-var result = authLib.getMemberships('user:enonic:user1', true);
+var result = authLib.getMemberships('user:system:user1', true);
 ----
 
 .Sample response
@@ -518,7 +518,7 @@ Returns
 .Retrieving the full principal for 'user1'
 [source,js]
 ----
-var result = authLib.getPrincipal('user:enonic:user1');
+var result = authLib.getPrincipal('user:system:user1');
 ----
 
 .Sample response
@@ -526,7 +526,7 @@ var result = authLib.getPrincipal('user:enonic:user1');
 ----
 {
     "type": "user",
-    "key": "user:enonic:user1",
+    "key": "user:system:user1",
     "displayName": "User 1",
     "disabled": false,
     "email": "user1@enonic.com",
@@ -558,20 +558,22 @@ Returns
 
 *object* : Profile data as JSON
 
-//[.lead]
-//Example
-//
-//.Retrieving the profile of 'user1'
-//[source,js]
-//----
-//var result = authLib.getProfile('user:enonic:user1');
-//----
-//
-//.Sample response
-//[source,js]
-//----
-//    null
-//----
+[.lead]
+Example
+
+.Retrieving the profile of 'user1'
+[source,js]
+----
+var result = authLib.getProfile('user:system:user1');
+----
+
+.Sample response
+[source,js]
+----
+{
+    "nickName": "User Nick"
+}
+----
 
 
 === getUser
@@ -602,7 +604,7 @@ var result = authLib.getUser();
 ----
 {
     "type": "user",
-    "key": "user:enonic:user1",
+    "key": "user:system:user1",
     "displayName": "User 1",
     "disabled": false,
     "email": "user1@enonic.com",
@@ -672,7 +674,7 @@ Example
 .Logging in a user
 [source,js]
 ----
-    var loginResult = auth.login({
+    var loginResult = authLib.login({
         user: 'user1',
         password: 'myPwd1',
         idProvider: 'myIdProvider'
@@ -696,7 +698,6 @@ Example
 }
 ----
 
-
 === logout
 
 Logout the currently logged-in user.
@@ -715,9 +716,107 @@ Returns
 
 Retrieves the group specified and updates it with the changes applied.
 
+[.lead]
+Parameters
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | Principal key of the group to modify
+| editor | function | Group editor function to apply to group
+|===
+
+[.lead]
+Returns
+
+*object* : The updated group
+
+[.lead]
+Example
+
+.Changing a group
+[source,js]
+----
+// Callback to edit the group.
+function editor(c) {
+    c.displayName = 'Modified display name';
+    c.description = 'descriptionX';
+    return c;
+}
+
+// Modify group with specified key.
+var group = authLib.modifyGroup({
+    key: 'group:system:group-a',
+    editor: editor
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "type": "group",
+    "key": "group:system:group-a",
+    "displayName": "Modified display name",
+    "modifiedTime": "1970-01-01T00:00:00Z",
+    "description": "descriptionX"
+}
+----
+
 === modifyProfile
 
 This function retrieves the profile of a user and updates it.
+
+[.lead]
+Parameters
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | Principal key of the user
+| scope | string | Optional scope setting
+| editor | function | Group editor function to apply to group
+|===
+
+[.lead]
+Returns
+
+*object* : The updated profile
+
+.Changing a profile
+[source,js]
+----
+// Callback to edit the profile.
+function profileEditor(c) {
+    if (!c) {
+        c = {};
+    }
+    c.nickName = "User Nick";
+    return c;
+}
+
+// Modify group with specified key.
+var profileModified = authLib.modifyProfile({
+    key: 'user:system:user1',
+    editor: profileEditor
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "nickName": "User Nick"
+}
+----
 
 === modifyRole
 
