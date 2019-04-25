@@ -118,7 +118,6 @@ var group = authLib.createGroup({
     "type": "group",
     "key": "group:system:group-a",
     "displayName": "Group A",
-    "modifiedTime": "1970-01-01T00:00:00Z",
     "description": "description"
 }
 ----
@@ -137,7 +136,7 @@ A JSON object with the following keys and their value:
 [grid="none"]
 |===
 | Name | Kind | Description
-| name | string | Role name
+| name | string | The name of the role.  The key of the role will be 'role.<name>'.
 | displayName | string | Role display name
 | description | string | A description of the role
 |===
@@ -157,7 +156,7 @@ var role = authLib.createRole({
     name: 'aRole',
     displayName: 'Role Display Name',
     description: 'description'
-});
+});1
 ----
 
 .Sample response
@@ -167,7 +166,6 @@ var role = authLib.createRole({
     'type': 'role',
     'key': 'role:aRole',
     'displayName': 'Role Display Name',
-    'modifiedTime': '1970-01-01T00:00:00Z',
     'description': 'description'
 }
 ----
@@ -218,7 +216,6 @@ var user = authLib.createUser({
     "type": "user",
     "key": "user:system:user1",
     "displayName": "The One And Only",
-    "modifiedTime": "1970-01-01T00:00:00Z",
     "disabled": false,
     "email": "user1@enonic.com",
     "login": "user1",
@@ -300,7 +297,6 @@ var result = authLib.findPrincipals({
     "type": "user",
     "key": "user:system:user1",
     "displayName": "The One And Only",
-    "modifiedTime": "1970-01-01T00:00:00Z",
     "disabled": false,
     "email": "user1@enonic.com",
     "login": "user1",
@@ -550,7 +546,7 @@ A JSON object with the following keys and their value:
 |===
 | Name | Kind | Details
 | principalKey | string | Principal key to retrieve profile for
-| scope | string | Scope of the data to retrieve.
+| scope | string | Optional scope setting
 |===
 
 [.lead]
@@ -688,7 +684,7 @@ Example
     "authenticated":true,
     "user":{
         "type":"user",
-        "key":"user:system:jsi",
+        "key":"user:system:user1",
         "displayName":"The One And Only",
         "disabled":false,
         "email":"user1@enonic.com",
@@ -727,7 +723,7 @@ A JSON object with the following keys and their value:
 |===
 | Name | Kind | Details
 | key | string | Principal key of the group to modify
-| editor | function | Group editor function to apply to group
+| editor | function | Group editor function
 |===
 
 [.lead]
@@ -742,7 +738,7 @@ Example
 [source,js]
 ----
 // Callback to edit the group.
-function editor(c) {
+function groupEditor(c) {
     c.displayName = 'Modified display name';
     c.description = 'descriptionX';
     return c;
@@ -751,7 +747,7 @@ function editor(c) {
 // Modify group with specified key.
 var group = authLib.modifyGroup({
     key: 'group:system:group-a',
-    editor: editor
+    editor: groupEditor
 });
 ----
 
@@ -762,7 +758,6 @@ var group = authLib.modifyGroup({
     "type": "group",
     "key": "group:system:group-a",
     "displayName": "Modified display name",
-    "modifiedTime": "1970-01-01T00:00:00Z",
     "description": "descriptionX"
 }
 ----
@@ -783,7 +778,7 @@ A JSON object with the following keys and their value:
 | Name | Kind | Details
 | key | string | Principal key of the user
 | scope | string | Optional scope setting
-| editor | function | Group editor function to apply to group
+| editor | function | Profile editor function
 |===
 
 [.lead]
@@ -803,7 +798,7 @@ function profileEditor(c) {
     return c;
 }
 
-// Modify group with specified key.
+// Modify profile with specified key.
 var profileModified = authLib.modifyProfile({
     key: 'user:system:user1',
     editor: profileEditor
@@ -820,12 +815,133 @@ var profileModified = authLib.modifyProfile({
 
 === modifyRole
 
-Retrieves the role specified and updates it with the changes applied.
+Retrieves the role specified and updates it with the changes applied through an editor.
+
+[.lead]
+Parameters
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | The role key
+| editor | function | Role editor function
+|===
+
+[.lead]
+Returns
+
+*object* : The updated role
+
+.Changing a role
+[source,js]
+----
+// Callback to edit the profile.
+function roleEditor(c) {
+    c.displayName = 'Nothing Role';
+    c.description = 'This role does not give access to anything!';
+    return c;
+}
+
+// Modify role with specified key.
+var theRole = authLib.modifyRole({
+    key: 'role:aRole',
+    editor: roleEditor
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "type": "role",
+    "key": "role:aRole",
+    "displayName": "Nothing Role",
+    "description": "This role does not give access to anything!"
+}
+----
 
 === modifyUser
 
-Retrieves the user specified and updates it with the changes applied.
+Retrieves the user specified and updates it with the changes applied through the editor.
+
+[.lead]
+Parameters
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | The user key
+| editor | function | User editor function
+|===
+
+[.lead]
+Returns
+
+*object* : The updated user
+
+.Changing a user
+[source,js]
+----
+// Callback to edit the profile.
+function userEditor(c) {
+    c.displayName = 'User 1-A';
+    c.email = 'user1a@enonic.com';
+    return c;
+}
+
+// Modify user with specified key.
+var theUser = authLib.modifyUser({
+    key: 'user:system:user1',
+    editor: userEditor
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "type": "user",
+    "key": "user:system:user1",
+    "displayName": "User 1-A",
+    "disabled": false,
+    "email": "user1a@enonic.com",
+    "login": "user1",
+    "idProvider": "myIdProvider"
+}
+----
 
 === removeMembers
 
-Removes members from a principal (user or role).
+Removes members from a principal (group or role).
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| principalKey | string | The principal key of a group or a role to remove members from
+| members | Array.<string> | Principal keys to remove as members
+|===
+
+[.lead]
+Returns
+
+*void*
+
+.Remove members from specified principal.
+[source,js]
+----
+authLib.removeMembers('role:roleId', ['user:system:user1', 'group:system:group-a']);
+----
+
