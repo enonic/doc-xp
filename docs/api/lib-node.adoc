@@ -1,5 +1,157 @@
-= Node Storage library
+= Context Library
 :toc: right
 :imagesdir: images
 
-TODO
+This library contains functions to get, query and manipulate nodes.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-node:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const contextLib = require('/lib/xp/node');
+----
+
+You are now free to use the library functionality.
+
+
+== Functions
+
+=== connect
+
+=== multiRepoConnect
+
+//Returns the current context
+//
+//[.lead]
+//Parameters
+//
+//None
+//
+//[.lead]
+//Returns
+//
+//<<Context>>
+//
+//[.lead]
+//Example
+//
+//.Getting the current context
+//[source,js]
+//----
+//const context = contextLib.get();
+//----
+//
+//.Sample response
+//[source,js]
+//----
+//{
+//  branch: 'draft',
+//  repository: 'com.enonic.cms.default',
+//  authInfo: {
+//      user: {                            <1>
+//          type: 'user',
+//          key: 'user.system.abc',
+//          displayName: 'A.B.C.',
+//          disabled: false,
+//          email: 'abc@enonic.com',
+//          login: 'abc',
+//          idProvider: 'system'
+//      }
+//      principals: [
+//          'user:system:abc',
+//          'role:system.admin',
+//          'role:system.admin.login',
+//          'role:system.authenticated',
+//          'role:system.everyone'
+//      ]
+//  }
+//}
+//----
+//
+//<1> The user node will not be returned unless there is a logged in user.
+//
+//=== run
+//
+//Runs a function within a custom context, for instance the one returned by the `get()` function call.
+//Commonly used when accessing repositories, or to override current users permissions.
+//
+//[.lead]
+//Parameters
+//
+//[%header,cols="1%,1%,98%a"]
+//[frame="none"]
+//[grid="none"]
+//|===
+//| Name | Kind | Details
+//| context | object | <<Context>> to be used for the scope of the callback function
+//| callback | function | Function to execute
+//|===
+//
+//[.lead]
+//Returns
+//
+//*string* : The result of the execution.
+//
+//
+//[.lead]
+//Example
+//
+//.Run a simple function in a different context
+//[source,js]
+//----
+//// Define the callback to be executed.
+//function callback() {
+//    return 'Hello from context';
+//}
+//
+//// Executes function within a custom context.
+//const result = contextLib.run(context, callback);
+//----
+//
+//.Sample response
+//[source,js]
+//----
+//Hello from context
+//----
+
+== Objects
+
+=== MultiRepoConnection
+
+=== RepoConnection
+
+//The context object is always available within the scope of a request
+//
+//.Sample context object
+//[source,js]
+//----
+//{
+//  repository: 'some.repo.name', <1>
+//  branch: 'master', <2>
+//  user: { <3>
+//      login: 'mylogin',
+//      idProvider: 'idprovidername'
+//  },
+//  principals: ['role:system.admin'], <4>
+//  attributes: { <5>
+//      optionalAttributes: 'of any kind'
+//      }
+//}
+//----
+//
+//<1> *repository* (_string_) Repository context.
+//<2> *branch* (_string_) Branch context.
+//<3> *user* (_object_) Specify a valid user/idprovider combination
+//<4> *principals* (_object_) Roles or group principals applicable for current user
+//<5> *attributes* (_object_) custom attributes
