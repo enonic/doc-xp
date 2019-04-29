@@ -29,129 +29,363 @@ You are now free to use the library functionality.
 
 === connect
 
+Creates a connection to a repository with a given branch and authentication info.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| params | <<Source>> | JSON object with paramters
+|===
+
+[.lead]
+Returns
+
+<<RepoConnection>> : A new connection to the repository
+
+[.lead]
+Example
+
+.A sample function that will return a RepoConnection:
+[source,js]
+----
+var connect = function () {
+    return nodeLib.connect({
+        repoId: testRepoId,
+        branch: 'master'
+    });
+};
+----
+
 === multiRepoConnect
 
-//Returns the current context
-//
-//[.lead]
-//Parameters
-//
-//None
-//
-//[.lead]
-//Returns
-//
-//<<Context>>
-//
-//[.lead]
-//Example
-//
-//.Getting the current context
-//[source,js]
-//----
-//const context = contextLib.get();
-//----
-//
-//.Sample response
-//[source,js]
-//----
-//{
-//  branch: 'draft',
-//  repository: 'com.enonic.cms.default',
-//  authInfo: {
-//      user: {                            <1>
-//          type: 'user',
-//          key: 'user.system.abc',
-//          displayName: 'A.B.C.',
-//          disabled: false,
-//          email: 'abc@enonic.com',
-//          login: 'abc',
-//          idProvider: 'system'
-//      }
-//      principals: [
-//          'user:system:abc',
-//          'role:system.admin',
-//          'role:system.admin.login',
-//          'role:system.authenticated',
-//          'role:system.everyone'
-//      ]
-//  }
-//}
-//----
-//
-//<1> The user node will not be returned unless there is a logged in user.
-//
-//=== run
-//
-//Runs a function within a custom context, for instance the one returned by the `get()` function call.
-//Commonly used when accessing repositories, or to override current users permissions.
-//
-//[.lead]
-//Parameters
-//
-//[%header,cols="1%,1%,98%a"]
-//[frame="none"]
-//[grid="none"]
-//|===
-//| Name | Kind | Details
-//| context | object | <<Context>> to be used for the scope of the callback function
-//| callback | function | Function to execute
-//|===
-//
-//[.lead]
-//Returns
-//
-//*string* : The result of the execution.
-//
-//
-//[.lead]
-//Example
-//
-//.Run a simple function in a different context
-//[source,js]
-//----
-//// Define the callback to be executed.
-//function callback() {
-//    return 'Hello from context';
-//}
-//
-//// Executes function within a custom context.
-//const result = contextLib.run(context, callback);
-//----
-//
-//.Sample response
-//[source,js]
-//----
-//Hello from context
-//----
+Creates a connection to several repositories with a given branch and authentication info.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| sources | Array.<<Source>> | JSON array of repository source objects
+|===
+
+[.lead]
+Returns
+
+<<MultiRepoConnection>> : A new connection object for all connected repositories.
+
+[.lead]
+Example
+
+.Connect to repo 'myRepo', branch 'master'.
+[source,js]
+----
+var searchConnection = nodeLib.multiRepoConnect({
+    sources: [
+        {
+            repoId: 'my-repo',
+            branch: 'myBranch',
+            principals: ["role:system.admin"]
+        },
+        {
+            repoId: 'my-other-repo',
+            branch: 'master',
+            principals: ["role:system.admin"]
+        }
+    ]
+});
+----
 
 == Objects
 
+
 === MultiRepoConnection
+
+A MultiRepoConnection makes it possible to search across multiple repositories.  The object has only one method: query.
+
+==== query
+
+This command queries nodes in a multi-repo connection.
+
+[.lead]
+Parameters
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| start | number | Optional start index used for paging - default: 0
+| count | number | Optional number of content to fetch, used for paging - default: 10
+| query | string | Query expression
+| filters | object | Optional query filters
+| sort | string | Optional sorting expression - default: '_score DESC'
+| aggregations | string | Optional aggregations expression
+| explain | boolean | If set to `true`, score calculation explanation will be included in result.
+|===
+
+[.lead]
+Returns
+
+object : Result of query
+
+[.lead]
+Example
+
+.Query multi-repo connection
+[source,js]
+----
+var result = multiRepoConnection.query({
+    start: 0,
+    count: 2,
+    query: "startTime > instant('2016-10-11T14:38:54.454Z')",
+    filters: {
+        boolean: {
+            must: {
+                exists: {
+                    field: "modifiedTime"
+                }
+            },
+            mustNot: {
+                hasValue: {
+                    field: "myField",
+                    values: [
+                        "cheese",
+                        "fish",
+                        "onion"
+                    ]
+                }
+            }
+        },
+        notExists: {
+            field: "unwantedField"
+        },
+        ids: {
+            values: ["id1", "id2"]
+        }
+    }
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "total": 12902,
+    "count": 2,
+    "hits": [
+        {
+            "id": "b186d24f-ac38-42ca-a6db-1c1bda6c6c26",
+            "score": 1.2300000190734863,
+            "repoId": "my-repo",
+            "branch": "master"
+        },
+        {
+            "id": "350ba4a6-589c-498b-8af0-f183850e1120",
+            "score": 1.399999976158142,
+            "repoId": "com.enonic.cms.default",
+            "branch": "draft"
+        }
+    ]
+}
+----
+
 
 === RepoConnection
 
-//The context object is always available within the scope of a request
-//
-//.Sample context object
-//[source,js]
-//----
-//{
-//  repository: 'some.repo.name', <1>
-//  branch: 'master', <2>
-//  user: { <3>
-//      login: 'mylogin',
-//      idProvider: 'idprovidername'
-//  },
-//  principals: ['role:system.admin'], <4>
-//  attributes: { <5>
-//      optionalAttributes: 'of any kind'
-//      }
-//}
-//----
-//
-//<1> *repository* (_string_) Repository context.
-//<2> *branch* (_string_) Branch context.
-//<3> *user* (_object_) Specify a valid user/idprovider combination
-//<4> *principals* (_object_) Roles or group principals applicable for current user
-//<5> *attributes* (_object_) custom attributes
+A single repo connections with lots of methods to work on the repo:
+
+==== commit
+
+Commits the active version of nodes.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| keys | string | Array.<string> | Node keys to commit. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
+| message | string | Optional commit message
+|===
+
+[.lead]
+Returns
+
+object : Commit object(s)
+
+[.lead]
+Example
+
+.Committing a node.
+[source,js]
+----
+var result1 = repo.commit({keys: 'nodeId'});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
+    "message": "",
+    "committer": "user:system:anonymous",
+    "timestamp": "2019-01-24T15:16:36.260799Z"
+}
+----
+
+.Committing nodes.
+[source,js]
+----
+var result2 = repo.commit({
+    keys: ['nodeId', 'nodeId2'],
+    message: 'Commit message'
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    {
+        "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
+        "message": "Commit message",
+        "committer": "user:system:anonymous",
+        "timestamp": "2019-01-24T15:19:30.818029Z"
+    },
+    {
+        "id": "5c15b187-e3ab-4d87-88b2-ffb84bd1c7bb",
+        "message": "Commit message",
+        "committer": "user:system:anonymous",
+        "timestamp": "2019-01-24T15:19:30.818029Z"
+    }
+}
+----
+
+==== create
+
+Creating a node.  To create a content where the name is not important and there could be multiple instances under the same parent content,
+skip the name parameter and specify a displayName.
+
+[.lead]
+Parameters
+
+A JSON object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes | Details
+| _name | string | <optional> | Name of content.
+| _parentPath | string | <optional> | Path to place content under.
+| _indexConfig | object | <optional> | How the document should be indexed. A default value "byType" will be set if no value specified.
+| _permissions | object | <optional> | The access control list for the node. By default the creator will have full access
+| _inheritsPermissions | boolean | <optional> | true if the permissions should be inherited from the node parent. Default is false.
+| _manualOrderValue | number | <optional> | Value used to order document when ordering by parent and child-order is set to manual
+| _childOrder | string | <optional> | Default ordering of children when doing getChildren if no order is given in query
+|===
+
+[.lead]
+Returns
+
+object : Created object
+
+[.lead]
+Example
+
+.Create a node on a `repo` connection:
+[source,js]
+----
+var result1 = repo.create({
+    likes: "plywood",
+    numberOfUselessGadgets: 123
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "_id": "a-random-node-id",
+    "_childOrder": "_ts DESC",
+    "_indexConfig": {
+        "default": {
+            "decideByType": true,
+            "enabled": true,
+            "nGram": false,
+            "fulltext": false,
+            "includeInAllText": false,
+            "path": false,
+            "indexValueProcessors": [],
+            "languages": []
+        },
+        "configs": []
+    },
+    "_inheritsPermissions": false,
+    "_permissions": [
+        {
+            "principal": "role:system.admin",
+            "allow": [
+                "READ",
+                "CREATE",
+                "MODIFY",
+                "DELETE",
+                "PUBLISH",
+                "READ_PERMISSIONS",
+                "WRITE_PERMISSIONS"
+            ],
+            "deny": []
+        }
+    ],
+    "_state": "DEFAULT",
+    "_nodeType": "default",
+    "likes": "plywood",
+    "numberOfUselessGadgets": 123
+}
+----
+
+=== Source
+
+A source definition of repositories:
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| repoId | object | Repository ID
+| branch | object | Branch ID
+| user | <<User>> | Optional user to execute the callback with - Default is the default user
+| principals | Array.<string> | Additional principals to execute the callback with
+|===
+
+=== User
+
+User object to use for connections:
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| login | string | user ID of the user
+| idProvider | string | Optional ID provider containing the user. By default, all the id providers will be used.
+|===
