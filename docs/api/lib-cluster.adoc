@@ -1,0 +1,53 @@
+= Cluster Library
+:toc: right
+:imagesdir: images
+
+This library contains cluster related functions.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-cluster:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const clusterLib = require('/lib/xp/cluster');
+----
+
+You are now free to use the library functionality.
+
+
+== Functions
+
+=== isMaster
+
+Tests whether the current node is the master node in the cluster.
+
+[.lead]
+Parameters
+
+None
+
+[.lead]
+Returns
+
+*boolean* : true if the current node is master; false otherwise.
+
+[.lead]
+Example
+
+.Initialize data only on the master node
+[source,js]
+----
+if (clusterLib.isMaster()) {
+    initializeRepo();
+}
+----
