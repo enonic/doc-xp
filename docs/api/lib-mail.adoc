@@ -1,0 +1,134 @@
+= Mail Library
+:toc: right
+:imagesdir: images
+
+This library contains one function to send an e-mail.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-mail:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const mailLib = require('/lib/xp/mail');
+----
+
+You are now free to use the library functionality.
+
+
+== Functions
+
+=== send
+
+This function sends an email message using the mail server configured.
+
+The address values can be either a simple email address (e.g. ‘name@domain.org’ ) or an address with a display name. In the latter case the
+email will be enclosed with angle brackets (e.g. ‘Some Name <name@domain.org>’ ).
+
+The parameters `to`, `cc` and `bcc` can be passed as a single string or as an array of strings, if there are multiple addresses to specify.
+
+The content-type of the email can be specified by using the `contentType` parameter. See example below for sending a message with an HTML body.
+
+[.lead]
+Parameters
+
+A JSON object with the following parameters:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| from | string | E-mail address and optionally name of message sender
+| to | string \| Array.<string> | E-mail address(es) and optionally name(s) of the message’s recipient(s)
+| cc | string \| Array.<string> | Optional list of carbon copy e-mail address(es)
+| bcc | string \| Array.<string> | Optional list of blind carbon copy e-mail address(es)
+| replyTo | string | Optional alternative e-mail address for replies
+| subject | string | Subject line of the message
+| body | string | Text content of the message
+| contentType | string | Optional content type of the message body
+| headers | string | Optional custom headers in the form of name-value pairs
+| attachments | Array.<<attachments>> | Optional attahcments to include in the e-mail
+|===
+
+[.lead]
+Returns
+
+*boolean* : True if message was successfully sent, false otherwise.
+
+[.lead]
+Example
+
+.Send a simple HTML e-mail
+[source,js]
+----
+var flag1 = mailLib.send({
+    from: 'me@enonic.com',
+    to: 'user@somewhere.org',
+    subject: 'HTML email test',
+    body: '<h1>HTML Email!</h1><p>You can use the contentType parameter for HTML messages.</p>',
+    contentType: 'text/html; charset="UTF-8"'
+});
+----
+
+.Send an e-mail with attachments
+[source,js]
+----
+var flag2 = mailLib.send({
+    from: 'Sales Department <sales@enonic.com>',
+    to: 'user@somewhere.org',
+    subject: 'Email Test from Enonic XP',
+    cc: 'other@example.org',
+    bcc: ['support@enonic.com', 'other@enonic.com'],
+    replyTo: 'support@enonic.com',
+    body: 'Welcome to Enonic XP!' + '\r\n\r\n' + '- The Dev Team',
+    headers: {
+        'Disposition-Notification-To': 'me@enonic.com'
+    },
+    attachments: [
+        {
+            fileName: 'logo.png',
+            mimeType: 'image/png',
+            data: stream1,
+            headers: {
+                'Content-ID': 'logo-img'
+            }
+        },
+        {
+            fileName: 'text.txt',
+            data: stream2
+        }
+    ]
+});
+----
+
+== Objects
+
+=== attachments
+
+Array of attachments to include in an e-mail
+
+[.lead]
+Properties of each element in the array
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| fileName | string | Attachment file name
+| data | * | Attachment stream
+| mimeType | string | Optional specification of attachment content type.  If not specified, it will be inferred from the filename.
+| headers | object | Optional attachment headers in the form of name-value pairs.
+|===
+
+
