@@ -1,0 +1,75 @@
+= Common Library
+:toc: right
+:imagesdir: images
+
+This library contains common functions.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-common:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const commonLib = require('/lib/xp/common');
+----
+
+You are now free to use the library functionality.
+
+
+== Functions
+
+=== santize
+
+Transform a text string so that it can be safely used in cases where the range of accepted characters is restricted.
+
+Some usage examples are: as an XP content or node name, as a principal name, in a URL or in a filesystem path.
+
+The following changes will be applied to the input text:
+
+ * Convert characters to lowercase (according to the rules of the default locale)
+ * Replace punctuation symbols and blank spaces with the hyphen character ('-')
+ * Remove some unsafe and invisible Unicode characters
+ * Strip duplicated hyphen characters
+ * Remove diacritic characters
+ * Map letters to the English alphabet (ASCII encoding)
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| text | string | The text to santize
+|===
+
+
+[.lead]
+Returns
+
+*string* : The sanitized text
+
+[.lead]
+Example
+
+.Sanitze string
+[source,js]
+----
+var sanitizedText = commonLib.sanitize("Piña CØLADÆ <script>alert('hi!');</script>");
+----
+
+.Sample response
+[source,js]
+----
+'pina-coladae-script-alerthi-script'
+----
