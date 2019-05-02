@@ -39,13 +39,13 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| params | <<Source>> | JSON object with paramters
+| params | <<Source>> | object with paramters
 |===
 
 [.lead]
 Returns
 
-<<RepoConnection>> : A new connection to the repository
+*<<RepoConnection>>* : A new connection to the repository
 
 [.lead]
 Example
@@ -73,13 +73,13 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| sources | Array.<<Source>> | JSON array of repository source objects
+| sources | Array.<<Source>> | array of repository source objects
 |===
 
 [.lead]
 Returns
 
-<<MultiRepoConnection>> : A new connection object for all connected repositories.
+*<<MultiRepoConnection>>* : A new connection object for all connected repositories.
 
 [.lead]
 Example
@@ -117,7 +117,7 @@ This command queries nodes in a multi-repo connection.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -136,7 +136,7 @@ A JSON object with the following keys and their value:
 [.lead]
 Returns
 
-object : Result of query
+*object* : Result of query
 
 [.lead]
 Example
@@ -180,20 +180,20 @@ var result = multiRepoConnection.query({
 [source,js]
 ----
 {
-    "total": 12902,
-    "count": 2,
-    "hits": [
+    total: 12902,
+    count: 2,
+    hits: [
         {
-            "id": "b186d24f-ac38-42ca-a6db-1c1bda6c6c26",
-            "score": 1.2300000190734863,
-            "repoId": "my-repo",
-            "branch": "master"
+            id: "b186d24f-ac38-42ca-a6db-1c1bda6c6c26",
+            score: 1.2300000190734863,
+            repoId: "my-repo",
+            branch: "master"
         },
         {
-            "id": "350ba4a6-589c-498b-8af0-f183850e1120",
-            "score": 1.399999976158142,
-            "repoId": "com.enonic.cms.default",
-            "branch": "draft"
+            id: "350ba4a6-589c-498b-8af0-f183850e1120",
+            score: 1.399999976158142,
+            repoId: "com.enonic.cms.default",
+            branch: "draft"
         }
     ]
 }
@@ -216,14 +216,14 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| keys | string | Array.<string> | Node keys to commit. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
+| keys | string \| Array.<string> | Node keys to commit. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
 | message | string | Optional commit message
 |===
 
 [.lead]
 Returns
 
-object : Commit object(s)
+*object* : Commit object(s)
 
 [.lead]
 Example
@@ -259,16 +259,16 @@ var result2 = repo.commit({
 ----
 {
     {
-        "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
-        "message": "Commit message",
-        "committer": "user:system:anonymous",
-        "timestamp": "2019-01-24T15:19:30.818029Z"
+        id: "aa1f76bf-4bb9-41be-b166-03561c1555b2",
+        message: "Commit message",
+        committer: "user:system:anonymous",
+        timestamp: "2019-01-24T15:19:30.818029Z"
     },
     {
-        "id": "5c15b187-e3ab-4d87-88b2-ffb84bd1c7bb",
-        "message": "Commit message",
-        "committer": "user:system:anonymous",
-        "timestamp": "2019-01-24T15:19:30.818029Z"
+        id: "5c15b187-e3ab-4d87-88b2-ffb84bd1c7bb",
+        message: "Commit message",
+        committer: "user:system:anonymous",
+        timestamp: "2019-01-24T15:19:30.818029Z"
     }
 }
 ----
@@ -281,7 +281,7 @@ skip the name parameter and specify a displayName.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
@@ -300,7 +300,7 @@ A JSON object with the following keys and their value:
 [.lead]
 Returns
 
-object : Created object
+*object* : Created object
 
 [.lead]
 Example
@@ -309,7 +309,9 @@ Example
 [source,js]
 ----
 var result1 = repo.create({
-    likes: "plywood",
+    _name: "nerd",
+    displayName: "Carpenter and IT expert",
+    likes: "Plywood",
     numberOfUselessGadgets: 123
 });
 ----
@@ -318,26 +320,49 @@ var result1 = repo.create({
 [source,js]
 ----
 {
-    "_id": "a-random-node-id",
-    "_childOrder": "_ts DESC",
-    "_indexConfig": {
-        "default": {
-            "decideByType": true,
-            "enabled": true,
-            "nGram": false,
-            "fulltext": false,
-            "includeInAllText": false,
-            "path": false,
-            "indexValueProcessors": [],
-            "languages": []
+    _id: "3eb6b282-94d1-4587-b85d-92e41cc1eee5",
+    _name: "nerd",
+    _path: "/nerd",
+    _childOrder: "_ts DESC",
+    _indexConfig: {
+        default: {
+            decideByType: false,
+            enabled: true,
+            nGram: false,
+            fulltext: false,
+            includeInAllText: false,
+            path: false,
+            indexValueProcessors: [],
+            languages: []
         },
-        "configs": []
+        configs: [
+            {
+                path: "displayName",
+                config: {
+                    decideByType: false,
+                    enabled: true,
+                    nGram: true,
+                    fulltext: true,
+                    includeInAllText: true,
+                    path: false,
+                    indexValueProcessors: [],
+                    languages: []
+                }
+            }
+        ]
     },
-    "_inheritsPermissions": false,
-    "_permissions": [
+    _inheritsPermissions: false,
+    _permissions: [
         {
-            "principal": "role:system.admin",
-            "allow": [
+            principal: "user:system:anonymous",
+            allow: [
+                "READ"
+            ],
+            deny: []
+        },
+        {
+            principal: "role:admin",
+            allow: [
                 "READ",
                 "CREATE",
                 "MODIFY",
@@ -346,15 +371,82 @@ var result1 = repo.create({
                 "READ_PERMISSIONS",
                 "WRITE_PERMISSIONS"
             ],
-            "deny": []
+            deny: []
         }
     ],
-    "_state": "DEFAULT",
-    "_nodeType": "default",
-    "likes": "plywood",
-    "numberOfUselessGadgets": 123
+    _state: "DEFAULT",
+    _nodeType: "default",
+    _versionKey: "30070ec1-0426-4153-b3a7-f78574c6978a",
+    _ts: "2019-04-30T11:40:45.371Z",
+    displayName: "Carpenter and IT expert",
+    likes: "Plywood",
+    numberOfUselessGadgets: 123
+    }
 }
 ----
+
+==== delete
+
+Deleting a node or nodes.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| keys | string \| Array.<string> | Node keys to commit. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
+|===
+
+[.lead]
+Returns
+
+*Array.<string>* : The list of keys that were actually deleted.
+
+[.lead]
+Example
+
+.Deleting nodes
+[source,js]
+----
+var result = repo.delete('nodeId', '/node2-path', 'missingNodeId');
+----
+
+.Sample response
+[source,js]
+----
+[
+    "7b175b63-b012-4f20-b31d-b8f78420d7f1",
+    "69f225a1-e775-4845-89f0-29b808a9a659"
+]
+----
+
+==== diff
+
+Resolves the differences for a node between current and given branch
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes | Details
+| key | string | | Path or id to resolve diff for
+| target | string | | Branch to differentiate with
+| includeChildren | boolean | optional | If set to `true`, differences are also resolved for children.
+|===
+
+[.lead]
+Returns
+
+*object* :
+
 
 === Source
 
