@@ -56,7 +56,7 @@ Changes password for specified user.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,99%a"]
 [frame="none"]
@@ -79,7 +79,7 @@ Creates a group.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -115,10 +115,10 @@ var group = authLib.createGroup({
 [source,js]
 ----
 {
-    "type": "group",
-    "key": "group:system:group-a",
-    "displayName": "Group A",
-    "description": "description"
+    type: "group",
+    key: "group:system:group-a",
+    displayName: "Group A",
+    description: "description"
 }
 ----
 
@@ -129,7 +129,7 @@ Creates a role.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -163,10 +163,10 @@ var role = authLib.createRole({
 [source,js]
 ----
 {
-    'type': 'role',
-    'key': 'role:aRole',
-    'displayName': 'Role Display Name',
-    'description': 'description'
+    type: "role",
+    key: "role:aRole",
+    displayName: "Role Display Name",
+    description: "description"
 }
 ----
 
@@ -177,7 +177,7 @@ Creates a user.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -213,13 +213,13 @@ var user = authLib.createUser({
 [source,js]
 ----
 {
-    "type": "user",
-    "key": "user:system:user1",
-    "displayName": "The One And Only",
-    "disabled": false,
-    "email": "user1@enonic.com",
-    "login": "user1",
-    "idProvider": "myIdProvider"
+    type: "user",
+    key: "user:system:user1",
+    displayName: "The One And Only",
+    disabled: false,
+    email: "user1@enonic.com",
+    login: "user1",
+    idProvider: "myIdProvider"
 }
 ----
 
@@ -256,7 +256,7 @@ var deleted = authLib.deletePrincipal('user:myIdProvider:userId');
 
 Search for principals matching the specified criteria.
 
-A JSON object with the following keys and their value.  All parameters are optional:
+An object with the following keys and their value.  All parameters are optional:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -283,10 +283,10 @@ Example
 [source,js]
 ----
 var result = authLib.findPrincipals({
-    idProvider: 'user-store',
+    idProvider: "user-store",
     start: 0,
     count: 10,
-    searchText: 'user1'
+    searchText: "user1"
 });
 ----
 
@@ -294,13 +294,13 @@ var result = authLib.findPrincipals({
 [source,js]
 ----
 {
-    "type": "user",
-    "key": "user:system:user1",
-    "displayName": "The One And Only",
-    "disabled": false,
-    "email": "user1@enonic.com",
-    "login": "user1",
-    "idProvider": "myIdProvider"
+    type: "user",
+    key: "user:system:user1",
+    displayName: "The One And Only",
+    disabled: false,
+    email: "user1@enonic.com",
+    login: "user1",
+    idProvider: "myIdProvider"
 }
 ----
 
@@ -309,7 +309,7 @@ var result = authLib.findPrincipals({
 
 Search for users matching the specified query.
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -344,17 +344,17 @@ var findUsersResult = auth.findUsers({
 [source,js]
 ----
 {
-    "total": 2,
-    "count": 1,
-    "hits": [
+    total: 2,
+    count: 1,
+    hits: [
         {
-            "type": "user",
-            "key": "user:system:jorgen-juve",
-            "displayName": "Jørgen Juve",
-            "disabled": false,
-            "email": "jju@enonic.com",
-            "login": "jorgen-juve",
-            "idProvider": "system"
+            type: "user",
+            key: "user:system:jorgen-juve",
+            displayName: "Jørgen Juve",
+            disabled: false,
+            email: "jju@enonic.com",
+            login: "jorgen-juve",
+            idProvider: "system"
         }
     ]
 }
@@ -396,7 +396,7 @@ None
 [.lead]
 Returns
 
-*object* : A JSON object with all the values in the configuration
+*object* : An object with all the values in the configuration
 
 === getMembers
 
@@ -416,7 +416,7 @@ Parameters
 [.lead]
 Returns
 
-*Array.<object>* : A list of JSON objects for each member of the principal or empty array if none.
+*Array.<object>* : A list of objects for each member of the principal or empty array if none.
 
 [.lead]
 Example
@@ -430,8 +430,8 @@ var result = authLib.getMembers('group:system:content-managers');
 .Sample response
 [source,js]
 ----
-[{"type":"user","key":"user:system:user1","displayName":"User 1","disabled":false,"email":"user1@enonic.com","login":"user1","idProvider":"system"},
- {"type":"user","key":"user:system:user2","displayName":"User 2","disabled":false,"email":"user2@enonic.com","login":"user2","idProvider":"system"
+[{type:"user",key:"user:system:user1",displayName:"User 1",disabled:false,email:"user1@enonic.com",login:"user1",idProvider:"system"},
+ {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system"
  }]
 ----
 
@@ -509,7 +509,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : The principal as a JSON object
+*object* : The principal as an object
 
 .Retrieving the full principal for 'user1'
 [source,js]
@@ -521,13 +521,13 @@ var result = authLib.getPrincipal('user:system:user1');
 [source,js]
 ----
 {
-    "type": "user",
-    "key": "user:system:user1",
-    "displayName": "User 1",
-    "disabled": false,
-    "email": "user1@enonic.com",
-    "login": "user1",
-    "idProvider": "system"
+    type: "user",
+    key: "user:system:user1",
+    displayName: "User 1",
+    disabled: false,
+    email: "user1@enonic.com",
+    login: "user1",
+    idProvider: "system"
 }
 ----
 
@@ -538,7 +538,7 @@ Returns the profile of a user.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -552,7 +552,7 @@ A JSON object with the following keys and their value:
 [.lead]
 Returns
 
-*object* : Profile data as JSON
+*object* : Profile data
 
 [.lead]
 Example
@@ -567,7 +567,7 @@ var result = authLib.getProfile('user:system:user1');
 [source,js]
 ----
 {
-    "nickName": "User Nick"
+    nickName: "User Nick"
 }
 ----
 
@@ -584,7 +584,7 @@ None
 [.lead]
 Returns
 
-*object* : User data in JSON object
+*object* : User data
 
 [.lead]
 Example
@@ -599,13 +599,13 @@ var result = authLib.getUser();
 [source,js]
 ----
 {
-    "type": "user",
-    "key": "user:system:user1",
-    "displayName": "User 1",
-    "disabled": false,
-    "email": "user1@enonic.com",
-    "login": "user1",
-    "idProvider": "system"
+    type: "user",
+    key: "user:system:user1",
+    displayName: "User 1",
+    disabled: false,
+    email: "user1@enonic.com",
+    login: "user1",
+    idProvider: "system"
 }
 ----
 
@@ -645,7 +645,7 @@ Login a user through the specified idProvider, with userName and password.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -681,15 +681,15 @@ Example
 [source,js]
 ----
 {
-    "authenticated":true,
-    "user":{
-        "type":"user",
-        "key":"user:system:user1",
-        "displayName":"The One And Only",
-        "disabled":false,
-        "email":"user1@enonic.com",
-        "login":"user1",
-        "idProvider":"myIdProvider"
+    authenticated:true,
+    user:{
+        type:"user",
+        key:"user:system:user1",
+        displayName:"The One And Only",
+        disabled:false,
+        email:"user1@enonic.com",
+        login:"user1",
+        idProvider:"myIdProvider"
     }
 }
 ----
@@ -715,7 +715,7 @@ Retrieves the group specified and updates it with the changes applied.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -755,10 +755,10 @@ var group = authLib.modifyGroup({
 [source,js]
 ----
 {
-    "type": "group",
-    "key": "group:system:group-a",
-    "displayName": "Modified display name",
-    "description": "descriptionX"
+    type: "group",
+    key: "group:system:group-a",
+    displayName: "Modified display name",
+    description: "descriptionX"
 }
 ----
 
@@ -769,7 +769,7 @@ This function retrieves the profile of a user and updates it.
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -809,7 +809,7 @@ var profileModified = authLib.modifyProfile({
 [source,js]
 ----
 {
-    "nickName": "User Nick"
+    nickName: "User Nick"
 }
 ----
 
@@ -820,7 +820,7 @@ Retrieves the role specified and updates it with the changes applied through an 
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -857,10 +857,10 @@ var theRole = authLib.modifyRole({
 [source,js]
 ----
 {
-    "type": "role",
-    "key": "role:aRole",
-    "displayName": "Nothing Role",
-    "description": "This role does not give access to anything!"
+    type: "role",
+    key: "role:aRole",
+    displayName: "Nothing Role",
+    description: "This role does not give access to anything!"
 }
 ----
 
@@ -871,7 +871,7 @@ Retrieves the user specified and updates it with the changes applied through the
 [.lead]
 Parameters
 
-A JSON object with the following keys and their value:
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -908,13 +908,13 @@ var theUser = authLib.modifyUser({
 [source,js]
 ----
 {
-    "type": "user",
-    "key": "user:system:user1",
-    "displayName": "User 1-A",
-    "disabled": false,
-    "email": "user1a@enonic.com",
-    "login": "user1",
-    "idProvider": "myIdProvider"
+    type: "user",
+    key: "user:system:user1",
+    displayName: "User 1-A",
+    disabled: false,
+    email: "user1a@enonic.com",
+    login: "user1",
+    idProvider: "myIdProvider"
 }
 ----
 

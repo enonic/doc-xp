@@ -62,13 +62,15 @@ Returns the URL for the Home admin tool.
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
 | Name | Kind | Details
-| params | object | Parameters object
-                    - There is one possible parameter: *type*, that may be set to either _server_ (server-relative URL) or _absolute_.
+| path | string | Optional Admin Tool URI prefix
+| type | string | Either `server` (server-relative URL) or `absolute`
 |===
 
 [.lead]

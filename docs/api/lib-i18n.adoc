@@ -81,8 +81,8 @@ const phrasesEs = i18nLib.getPhrases('es', ['site/i18n/phrases'])
 [source,js]
 ----
 {
-  "action.preview":"Vista Previa",
-  "notify.process.failed":"Error al procesar: {0}."
+  action.preview:"Vista Previa",
+  notify.process.failed:"Error al procesar: {0}."
 }
 ----
 
@@ -163,5 +163,5 @@ var message2 = i18nLib.localize({
 .Sample response
 [source,js]
 ----
-Error al procesar: StaleConnectionException.
+Error al procesar: "StaleConnectionException".
 ----

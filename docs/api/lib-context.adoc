@@ -54,24 +54,24 @@ const context = contextLib.get();
 [source,js]
 ----
 {
-  branch: 'draft',
-  repository: 'com.enonic.cms.default',
+  branch: "draft",
+  repository: "com.enonic.cms.default",
   authInfo: {
       user: {                            <1>
-          type: 'user',
-          key: 'user.system.abc',
-          displayName: 'A.B.C.',
+          type: "user",
+          key: "user.system.abc",
+          displayName: "A.B.C.",
           disabled: false,
-          email: 'abc@enonic.com',
-          login: 'abc',
-          idProvider: 'system'
+          email: "abc@enonic.com",
+          login: "abc",
+          idProvider: "system"
       }
       principals: [
-          'user:system:abc',
-          'role:system.admin',
-          'role:system.admin.login',
-          'role:system.authenticated',
-          'role:system.everyone'
+          "user:system:abc",
+          "role:system.admin",
+          "role:system.admin.login",
+          "role:system.authenticated",
+          "role:system.everyone"
       ]
   }
 }
@@ -120,7 +120,7 @@ const result = contextLib.run(context, callback);
 .Sample response
 [source,js]
 ----
-Hello from context
+"Hello from context"
 ----
 
 == Objects
@@ -133,15 +133,15 @@ The context object is always available within the scope of a request
 [source,js]
 ----
 {
-  repository: 'some.repo.name', <1>
-  branch: 'master', <2>
+  repository: "some.repo.name", <1>
+  branch: "master", <2>
   user: { <3>
-      login: 'mylogin',
-      idProvider: 'idprovidername'
+      login: "mylogin",
+      idProvider: "idprovidername"
   },
-  principals: ['role:system.admin'], <4>
+  principals: ["role:system.admin"], <4>
   attributes: { <5>
-      optionalAttributes: 'of any kind'
+      optionalAttributes: "of any kind"
       }
 }
 ----
