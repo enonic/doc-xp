@@ -91,7 +91,7 @@ felix.fileinstall.noInitialDelay:: TODO
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
 
 
-=== Vhost config
+=== Vhost
 
 `XP_HOME/config/com.enonic.xp.web.vhost.cfg`
 
@@ -134,7 +134,7 @@ mapping.admin.target = /admin
 mapping.admin.idProvider.system = default
 ----
 
-=== Mail config
+=== Mail
 
 `XP_HOME/config/com.enonic.xp.mail.cfg`
 
@@ -158,7 +158,7 @@ smtpUser:: User to be used during authentication with the SMTP server, if ‘smt
 smtpPassword:: Password to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
 smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required. Default: `false`.
 
-=== Repo config
+=== Repo
 
 `XP_HOME/config/com.enonic.xp.repo.cfg`
 
@@ -170,7 +170,7 @@ Configure default snapshots folder.
 snapshots.dir = ${xp.home}/snapshots
 ----
 
-=== Blobstore config
+=== Blobstore
 
 `XP_HOME/config/com.enonic.xp.blobstore.cfg`
 
@@ -190,7 +190,7 @@ cache:: enables or disables memory caching of blobs fetched from the blobstore. 
 cache.sizeThreshold:: specifies the maximum size for objects to be cached. Default: 1mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
 cache.memoryCapacity:: is the maximum memory footprint of the blob cache. Default: 100mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
 
-=== File blobstore config
+=== File blobstore
 
 `XP_HOME/config/com.enonic.xp.blobstore.file.cfg`
 
@@ -213,7 +213,7 @@ readThrough.sizeThreshold:: specifies he maximum size of objects to be cache in 
 TODO: Verify existence of readThrough provider and actual values!
 
 
-=== Cluster config
+=== Cluster
 
 `XP_HOME/config/com.enonic.xp.cluster.cfg`
 
@@ -250,7 +250,7 @@ Network host aliases:
 * `<networkInterface>:ipv6` : Resolves to the ipv6 address of the provided network interface. For example `en0:ipv6`
 
 
-=== Elasticsearch config
+=== Elasticsearch
 
 `XP_HOME/config/com.enonic.xp.elasticsearch.cfg`
 
@@ -302,7 +302,7 @@ gateway.recover_after_nodes:: Number of nodes expected to be in the cluster to s
 discovery.unicast.port:: List of ports to perform discovery when new nodes are started. Default: `9300`.
 index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
 
-=== Ignite config
+=== Ignite
 
 `XP_HOME/config/com.enonic.xp.ignite.cfg`
 
@@ -335,7 +335,7 @@ discovery.tcp.join.timeout:: Join timeout (in ms). Default: `0`.
 discovery.tcp.stat.printfreq:: Statistics print frequency. Default: `0`.
 communication.message.queue.limit:: Message queue limit for incoming and outgoing messages. Default: `1024`.
 
-=== Admin config
+=== Admin
 
 `XP_HOME/config/com.enonic.xp.app.main.cfg`
 
@@ -348,7 +348,7 @@ Basic settings for the XP admin console
 tourDisabled = true
 ----
 
-=== Jetty HTTP config
+=== Jetty
 
 `XP_HOME/config/com.enonic.xp.web.jetty.cfg`
 
@@ -405,7 +405,7 @@ log.timeZone:: Timezone to display timestamp in. Default: `GMT`.
 log.retainDays:: Number of days to retain the logs. Default: `31`.
 
 
-=== Media config
+=== Media
 
 `XP_HOME/config/com.enonic.xp.media.cfg`
 
@@ -422,7 +422,7 @@ ext.p = text/x-pascal
 
 ext.<file-extension>:: value must match a defined mime type
 
-=== OSGi shell config
+=== OSGi shell
 
 `XP_HOME/config/com.enonic.xp.server.shell.cfg`
 
@@ -444,7 +444,7 @@ telnet.port:: Port to use for service. Default: `5555`.
 telnet.maxConnect:: Maximum number of concurrent connections. Default: `2`.
 telnet.socketTimeout:: Default: `0`
 
-=== DoS filter config
+=== DoS filter
 
 `XP_HOME/config/com.enonic.xp.web.dos.cfg`
 
@@ -482,7 +482,7 @@ remotePort:: If true and session tracking is not used, then rate is tracked by I
 ipWhitelist:: A comma-separated list of IP addresses that will not be rate limited.
 
 
-=== Market config
+=== Market
 
 `XP_HOME/config/com.enonic.xp.market.cfg`
 
@@ -495,7 +495,7 @@ marketUrl = https://market.enonic.com/applications
 ----
 
 
-=== UDC config
+=== UDC
 
 `XP_HOME/config/com.enonic.xp.server.udc.cfg`
 
@@ -509,7 +509,7 @@ enabled = true
 ----
 
 
-=== Standard IDprovider config
+=== Standard IDprovider
 
 `XP_HOME/config/com.enonic.xp.app.standardidprovider.cfg`
 
