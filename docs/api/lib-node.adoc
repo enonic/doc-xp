@@ -425,7 +425,7 @@ var result = repo.delete('nodeId', '/node2-path', 'missingNodeId');
 
 ==== diff
 
-Resolves the differences for a node between current and given branch
+Resolves the differences for a node between current and given branch.
 
 [.lead]
 Parameters
@@ -439,13 +439,40 @@ An object with the following keys and their value:
 | Name | Type | Attributes | Details
 | key | string | | Path or id to resolve diff for
 | target | string | | Branch to differentiate with
-| includeChildren | boolean | optional | If set to `true`, differences are also resolved for children.
+| includeChildren | boolean | optional | If set to `true`, differences are resolved for all children.
 |===
 
 [.lead]
 Returns
 
-*object* :
+*object* : An array with differences in the status for each node in the tree that has differences between the branches.
+
+[.lead]
+Example
+
+.Comparing draft and master branch
+[source,js]
+----
+var result = repo.diff({
+                     key: '/my-name',
+                     target: 'draft',
+                     includeChildren: true
+                 });
+----
+
+.Sample response
+[source,js]
+----
+{
+    diff: [
+        {
+            id: "585b9da0-72b3-45bf-86f5-7e24df54db90", <1>
+            status: "NEWER"
+        }
+    ]
+}
+----
+<1> There are 3 children, but only one has been changed
 
 
 === Source
