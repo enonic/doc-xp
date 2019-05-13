@@ -466,13 +466,127 @@ var result = repo.diff({
 {
     diff: [
         {
-            id: "585b9da0-72b3-45bf-86f5-7e24df54db90", <1>
+            id: "c8121875-a9b7-42e4-acf2-75cb52687ddb", <1>
             status: "NEWER"
         }
     ]
 }
 ----
-<1> There are 3 children, but only one has been changed
+<1> There are 2 children, but only one has been changed
+
+==== findChildren
+
+Get children for a node.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes | Details
+| parentKey | string | | Path or ID of parent to get children of
+| start | number | optional | start index used for paging - default: 0
+| count | number | optional | number of content to fetch, used for paging - default: 10
+| childOrder | string | optional | How to order the children - default is value stored on parent
+| countOnly | boolean | optional | Optimize for count children only - default is false
+| recursive | boolean | optional | Do recursive fetching of all children of children - default is false
+|===
+
+[.lead]
+Returns
+
+*object* : An object with stats about the result and an array with all IDs of the children.
+
+[.lead]
+Example
+
+.Comparing draft and master branch
+[source,js]
+----
+var result = repo.findChildren({
+                     parentKey: "/my-name"
+                 });
+----
+
+.Sample response
+[source,js]
+----
+{
+    "total": 2,
+    "count": 10,
+    "hits": [
+        {
+            "id": "c8121875-a9b7-42e4-acf2-75cb52687ddb"
+        },
+        {
+            "id": "636a616b-c8e4-480c-afa9-be88a737cf52"
+        }
+    ]
+}
+----
+
+==== findVersions
+
+Get the versions of a node.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes | Details
+| parentKey | string | | Path or ID of parent to get children of
+| start | number | optional | start index used for paging - default: 0
+| count | number | optional | number of content to fetch, used for paging - default: 10
+|===
+
+[.lead]
+Returns
+
+*object* : An object with stats about the result and an array listing the versions
+
+[.lead]
+Example
+
+.Comparing draft and master branch
+[source,js]
+----
+var result = repo.findVersions({
+                    key: '/my-name'
+                });
+
+----
+
+.Sample response
+[source,js]
+----
+{
+    "total": 2,
+    "count": 2,
+    "hits": [
+        {
+            "versionId": "72dcd8c1-9d70-444d-ad7a-508d8c1865a0",
+            "nodeId": "ddd1c933-0725-45e8-9a54-a3dd87193f60",
+            "nodePath": "/my-name",
+            "timestamp": "2019-05-13T15:56:17.018Z"
+        },
+        {
+            "versionId": "04c6b8d7-3c56-458f-80c9-c6ee551fc21d",
+            "nodeId": "ddd1c933-0725-45e8-9a54-a3dd87193f60",
+            "nodePath": "/my-name",
+            "timestamp": "2019-05-13T15:56:16.995Z"
+        }
+    ]
+}
+----
 
 
 === Source
