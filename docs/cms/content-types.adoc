@@ -11,7 +11,7 @@ Content Types are the essential elements of Content Studio and the content API.
 [source,xml]
 ----
 <content-type>
-  <display-name @i18n="cty.person.displayname">Person</display-name> <!--1-->
+  <display-name i18n="cty.person.displayname">Person</display-name> <!--1-->
   <super-type>base:structured</super-type> <!--2-->
   <form>
     <input name="firstname" type="TextLine">
@@ -23,12 +23,30 @@ Content Types are the essential elements of Content Studio and the content API.
   </form>
 </content-type>
 ----
-<1> *display-name* is the human readable name of the content type. Optionally specify the i18n attribute to define a mapping to localize the value
+<1> *display-name* is the human readable name of the content type. Optionally specify the `i18n` attribute to define a mapping to localize the value. The localisation
+key must be then declared and localised in the resource bundle.
 <2> *super-type* refers to root controller of the form TODO
 
 == Display name expressions
 
-TODO
+It's possible to auto-generate display name based on values from form fields by using ES6 template literals. In the example below, display name will be combination of values from
+`firstName` and `lastName` fields.
+
+[source,JavaScript]
+----
+<content-type>
+  <display-name>Person</display-name> <!--1-->
+  <display-name-expression>>${firstName} ${lastName}</display-name-expression>>
+  <form>
+    <input name="firstname" type="TextLine">
+      <label>First Name</label>
+    </input>
+    <input name="lastname" type="TextLine">
+      <label>Last Name</label>
+    </input>
+  </form>
+</content-type>
+----
 
 == X-data
 

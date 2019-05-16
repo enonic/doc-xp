@@ -2,14 +2,19 @@
 :toc: right
 :imagesdir: images
 
-X-data (short for eXtra data) makes it possible to dynamically extend existing content types with new fields.
-When editing content, X-data fields will be displayed inside a separate step in the content wizard form.
+X-data (short for _eXtra data_) makes it possible to dynamically extend existing content types with a new form.
+When editing content, X-data fields will be displayed inside a separate step in the content form.
+
+TIP: If you want to inject fields inside content type's form rather than appending a form, consider using <<mixin.adoc#,a mixin>>
+
+=== Definition
+
+The file with X-data schema must be placed in the folder `site/x-data/[name]` and called `[name].xml`. For example, _site/x-data/address/address.xml_.
 
 [source,xml]
 ----
 <x-data>
-  <display-name>This x-data will be available for content of all types</display-name>
-  <allowContentType>base:folder</allowContentType>
+  <display-name>Full address</display-name>
   <form>
     <input type="TextLine" name="addressLine">
       <label>Street address</label>
@@ -19,27 +24,70 @@ When editing content, X-data fields will be displayed inside a separate step in 
       <label>City</label>
       <occurrences minimum="1" maximum="1"/>
     </input>
-    <input type="TextLine" name="state">
-      <label>State</label>
-      <occurrences minimum="0" maximum="1"/>
-    </input>
     <input type="TextLine" name="zipCode">
       <label>Zip code</label>
-      <occurrences minimum="0" maximum="1"/>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="country">
+      <label>Country</label>
+      <occurrences minimum="1" maximum="1"/>
     </input>
   </form>
 </x-data>
 ----
 
-.X-data that is available for all content types except the ones named "folder"
+=== Usage
+
+Below is an example of `site.xml` which injects X-data inside all content types.
+
 [source,xml]
 ----
-<x-data>
-  <display-name>This x-data will be available for any content type except folders</display-name>
-  <allowContentType>((?!base:folder).)*$</allowContentType>
+<site>
   <form>
-    ...
+    <input type="TextLine" name="company">
+      <label>Company</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextArea" name="description">
+      <label>Description</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
   </form>
-</x-data>
+  <x-data name="address"/>
+</site>
 ----
 
+=== Configuration
+
+It's possible to restrict X-data for specific content types using regular expressions. This is especially convenient when you apply X-data
+to all content types via `site.xml` but want to exclude some content types.
+
+Use regular expressions in the `allowContentTypes` attribute of the `<x-data/>` field inside `site.xml` to enable or disable it for specific content type(s).
+By default x-data will be added to content items of all types with no option to remove it but you can make it optional by setting `optional` attribute to _true_. Optional x-data has to be manually enabled inside Content Wizard to be added to the content data.
+
+If `allowContentTypes` and `optional` attributes are not set, the x-data is assumed to be mandatory and available for all content types.
+
+[source,xml]
+----
+<site>
+  <form>
+    <input type="TextLine" name="company">
+      <label>Company</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextArea" name="description">
+      <label>Description</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+  <x-data name="my-x-data-1" />
+  <x-data name="my-x-data-2" allowContentTypes="^(?!base:folder$).*" />
+  <x-data name="my-x-data-3" allowContentTypes="base:folder" optional="true" />
+</site>
+----
+
+In the example above _my-x-data-1_ will be enabled for all content types, with no option to disable it in the Content Wizard.
+
+_my-x-data-2_ will be added for all content types with no option to remove it in the Content Wizard, except for content type base:folder for which it will not be shown at all.
+
+_my-x-data-3_ will be enabled only for content type _base:folder_ and will be optional, meaning user has to manually turn it on in the Content Wizard.

@@ -44,9 +44,7 @@ Below are the currently available forms implementations used by XP:
 
 === XML Schema Definition (XSD)
 
-An XSD is available to simplify editing of XML-based form files,
-
-TODO: How to add
+An XSD is available to simplify editing of XML-based form files.
 
 
 == Input types
@@ -76,12 +74,12 @@ _@name_ is used when storing the data in a property, and must be unique on each 
 _@type_ refers to one of the many input types which are listed below.
 
 <2> *label* is another mandatory field that holds the human readable value that will be displayed when listing the input type control in the administrative interface +
-_@i18n_ is an optional attribute holding the key to localization phrase of the form. (See also :ref:`localization_schemas`)
+_@i18n_ is an optional attribute holding the key to localization phrase of the form (see <<schemas#translations,a mixin>>)
 
 <3> *default* is an optional field that lets you specify default values to be used by the input type
 
 <4> *help-text* is an optional text will be shown next to the input field and can be used for explanation of the field's purpose. +
-_@i18n_ is an optional attribute holding the key to localization phrase of the form. (See also :ref:`localization_schemas`)
+_@i18n_ is an optional attribute holding the key to localization phrase of the form (see <<schemas#translations,a mixin>>)
 
 <5> *occurrences* is an optional field used to control the number of values stored by a single input. +
 _@minimum_ set to to zero means the input is not mandatory +
@@ -219,17 +217,17 @@ Here is an example of a multi-select option set with options expanded by default
 
 
 
-== Mixins
+== Mixins and X-data
 
 To simplify maintenance of forms, mixins offers a simple templating approach to reuse the same definition across various forms.
-A mixin can be injected into a form simply by referencing it by name.
+A mixin or x-data can be injected into a form simply by referencing it by name.
 
 .Sample mixin "us-address"
 [source,xml]
 ----
 <mixin>
   <display-name>U.S. Address format</display-name>
-  <items>
+  <form>
     <input type="TextLine" name="addressLine">
       <label>Street address</label>
       <occurrences minimum="0" maximum="2"/>
@@ -246,7 +244,7 @@ A mixin can be injected into a form simply by referencing it by name.
       <label>Zip code</label>
       <occurrences minimum="0" maximum="1"/>
     </input>
-  </items>
+  </form>
 </mixin>
 ----
 
@@ -256,13 +254,29 @@ A mixin can be injected into a form simply by referencing it by name.
 <content-type>
   <display-name>Using mixins</display-name>
   <super-type>base:structured</super-type>
-  <items>
+  <form>
+    ... fields specific for this content type ...
     <mixin name="us-address"/> <!--1-->
-  </items>
+  </form>
 </content-type>
 ----
 
-<1> The mixin element will be replaced by the contents of the <mixin> element.
+<1> The `<mixin>` element will be replaced by the contents of the `<form>` element from the mixin schema.
+
+.Content Type using the "us-address" X-data
+[source,xml]
+----
+<content-type>
+  <display-name>Using mixins</display-name>
+  <super-type>base:structured</super-type>
+  <form>
+    ... fields specific for this content type ...
+  </form>
+  <x-data name="us-address"/> <!--1-->
+</content-type>
+----
+
+<1> The `<x-data>` element will be replaced by the `<form>` element from the x-data schema.
 
 Similar functionality can also be solved by compile-time build scripts if desired.
 
@@ -285,7 +299,7 @@ include::schemas/code/localized-cty.xml[]
 
 NOTE: The localization of schemas applies to the admin tool apps included in XP: `Home`, `Content Studio`, `Applications` and `Users`.
 
-== Supported Fields
+=== Supported Fields
 
 The following schemas and fields support the `i18n` attribute for localization:
 
@@ -301,7 +315,7 @@ The following schemas and fields support the `i18n` attribute for localization:
 - Admin Tool descriptor: ``displayName``, ``description``
 - Macro: ``displayName``, ``description``, input types in config
 
-== Translations
+=== Translations
 
 The translated texts for each of the i18n keys should be placed in the corresponding `phrases.properties` file, in the same application where the schema is defined.
 
