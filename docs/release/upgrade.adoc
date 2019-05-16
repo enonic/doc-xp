@@ -6,10 +6,10 @@ This section describes the steps required to upgrade Enonic XP from 6.15 to 7.0
 
 == Requirements
 
-This guide focuses on completing an upgrade with zero downtime, and requires you to setup a parallel production environment
+This guide focuses on completing an upgrade with zero downtime, and requires you to set up production environment on XP7 in parallel with existing 6.15 environment.
 Carefully follow the below steps to upgrade your instance:
 
-NOTE: For scenarios where downtime cannot be avoided, additional steps, such as setting up a temporary "we are upgrading page" will be required:
+NOTE: For scenarios where downtime cannot be avoided, additional steps, such as setting up a temporary "we are upgrading page", will be required:
 
 Before starting the upgrade process, ensure the following requirements are in place
 
@@ -18,7 +18,7 @@ QA environment:: Ensure you have a QA environment where you can perform a test u
 Toolbox:: Ensure you have 6.15 Toolbox available
 Enonic CLI:: Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
 Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
-3rd. party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 7.
+3rd party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 7.
 Custom apps:: Make sure all custom built applications have been upgraded to support XP 7, as described in <<apps-upgrade#,Upgrading Applications>>
 
 
@@ -120,7 +120,7 @@ NOTE: Don't worry about the command losing connection, this is only related to t
 == 4. Install Content studio
 
 Content Studio is no longer part of the XP core distribution.
-Content Studio is now available as an https://market.enonic.com/vendor/enonic/content-studio[application on Enonic Market].
+Content Studio is now available as an https://market.enonic.com/vendors/enonic/content-studio[application on Enonic Market].
 
 == 5. Update apps
 

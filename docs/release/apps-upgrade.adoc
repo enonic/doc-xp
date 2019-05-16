@@ -6,10 +6,10 @@ This section describes the steps required to upgrade an XP application from 6.x 
 
 == Preparations
 
-Use the following checklist to prepare for the upgrade.
+Before you start the upgrade procedure:
 
-* Make sure you have Enonic CLI installed
-* Checkout the project source code to a local folder i.e. myapp/
+* Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
+* Check out the project source code to a local folder i.e. myapp/
 
 == 1. Create a sandbox
 
@@ -39,7 +39,7 @@ The standard build system used for XP projects must be updated.
 === Gradle Wrapper
 
 XP 7 standardizes on the use of Gradle 5.
-We recommend bundling Gradle wrapper, version 5 in your project
+We recommend bundling Gradle wrapper of version 5.0 or later in your project
 
 If you have installed Gradle 5, from your project root, run:
 
@@ -105,7 +105,7 @@ xpVersion = 7.0.0
 group = com.acme.something
 ----
 
-NOTE: appName and appDisplayName are only used for application projects.
+NOTE: `appName` and `appDisplayName` are only used for application projects, as well as `app` config in `build.gradle`
 
 
 === Dependencies
@@ -135,15 +135,15 @@ NOTE: Projects containing Java code might get build errors at this point, otherw
 
 === XP_HOME
 
-XP 6 developers will discover that the XP_HOME variable is no longer required.
+XP 6 developers will discover that the `XP_HOME` variable is no longer required.
 However, you may still specify this variable manually to build with gradle directly.
 
-To achieve this, you must also specify JAVA_HOME to build with the Java embedded in XP 7.
+To achieve this, you must also specify `JAVA_HOME` to build with the Java embedded in XP 7.
 
-The XP_HOME must essentially reference your Sandbox directory, and JAVA_HOME must reference the correct distribution.
+The `XP_HOME` must essentially reference your Sandbox directory, and `JAVA_HOME` must reference the correct distribution.
 
-Sandboxes and distributions are located in your users home directory within the .enonic/ folder.
-Also, relationships between a project and a sandbox is stored in the .enonic file in your project root.
+Sandboxes and distributions are located in your users home directory within the `.enonic/` folder.
+Also, relationships between a project and a sandbox is stored in the `.enonic` file in your project root.
 
 If you don't want to do this manually, run this command from your project:
 
@@ -169,6 +169,8 @@ As a consequence, the <form> element replaces <config> in the following schema t
 * part
 * id-provider
 * task
+* mixin
+* x-data
 
 Example of how to update the site schema
 
@@ -378,9 +380,9 @@ NOTE: For mixins used as both <mixin> and <x-data>, a copy of the mixin must rem
 
 The following changes are made to the format:
 
-* <allowContentType> config is moved to site.xml
-* Root element is changed from <mixin> to <x-data>
-* x-data reference attribute is renamed from "mixin" to "name"
+* `<allowContentType>` config is moved to site.xml
+* Root element is changed from `<mixin>` to `<x-data>`
+* x-data reference attribute is renamed from "_mixin_" to "_name_"
 
 Upgrade your X-data references as follows:
 

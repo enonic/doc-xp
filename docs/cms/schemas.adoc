@@ -18,7 +18,7 @@ All forms are essentially compositions of <<Input types>> and optionally <<Sets>
 Once a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
 The property structure can then be persisted directly into the XP repository.
 
-Forms can be created either with XML or with Java, where the first is the most common.
+Forms can be created either with XML or with Java, where the former is the most common.
 
 image::app.png["My First app started"]
 
@@ -26,14 +26,14 @@ image::app.png["My First app started"]
 ----
 <someform>
   <formconfig/>
-  <items>
+  <form>
     <input name="firstname" type="TextLine">
       <label>First Name</label>
     </input>
     <input name="lastname" type="TextLine">
       <label>Last Name</label>
     </input>
-  </items>
+  </form>
 </someForm>
 ----
 
@@ -94,7 +94,7 @@ Some input types are generic, and can be used in any form. Others however are co
 
 
 == Sets
-In order to build richer forms,
+In order to build richer forms that support grouping and nesting, Enonic XP supports the following input types:
 
 === FieldSet
 

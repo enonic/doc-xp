@@ -2,6 +2,44 @@
 :toc: right
 :imagesdir: images
 
-Use X-data schemas to to dynamically inject new forms fields across multiple existing content types
+X-data (short for eXtra data) makes it possible to dynamically extend existing content types with new fields.
+When editing content, X-data fields will be displayed inside a separate step in the content wizard form.
 
-WORK IN PROGRESS
+[source,xml]
+----
+<x-data>
+  <display-name>This x-data will be available for content of all types</display-name>
+  <allowContentType>base:folder</allowContentType>
+  <form>
+    <input type="TextLine" name="addressLine">
+      <label>Street address</label>
+      <occurrences minimum="0" maximum="2"/>
+    </input>
+    <input type="TextLine" name="city">
+      <label>City</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="state">
+      <label>State</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="TextLine" name="zipCode">
+      <label>Zip code</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </form>
+</x-data>
+----
+
+.X-data that is available for all content types except the ones named "folder"
+[source,xml]
+----
+<x-data>
+  <display-name>This x-data will be available for any content type except folders</display-name>
+  <allowContentType>((?!base:folder).)*$</allowContentType>
+  <form>
+    ...
+  </form>
+</x-data>
+----
+
