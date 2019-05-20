@@ -473,12 +473,35 @@ htmlinput.allowScripts = true
 ----
 
 
-
 === Standard Classes
 
 XP 7 renames the standard editor classes for alignment and images.
 
-TODO
+Changing some properties of an image might result in applying specific built-in CSS styles to the `<figure>` element:
+
+.Built-in editor CSS styles
+|===
+|Property |Style
+
+|"Justify" alignment
+|_.editor-align-justify_
+
+|"Left" alignment
+|_.editor-align-left_
+
+|"Center" alignment
+|_.editor-align-center_
+
+|"Right" alignment
+|_.editor-align-right_
+
+|Custom width
+|_.editor-width-custom_
+
+|"Original" image style
+|_.editor-style-original_
+|===
+
 
 == 6. Site engine
 
@@ -870,6 +893,7 @@ function handleGet(req) {
 
 == 11. Java
 
-Where XP 6.x depends on Java 8, XP 7 bundles Java 11.
+Where XP 6.x depends on Java 8 to be installed, XP 7 bundles Java 11 in the distro package.
 
-TODO
+The first time you use Enonic CLI to create a new XP project you will be asked to create a sandbox for a specific version of XP.
+The new sandbox will have Java 11 bundled inside the package and you don't have to worry about whether you have Java installed or not.
