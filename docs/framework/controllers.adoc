@@ -1,0 +1,34 @@
+= Controllers
+:toc: right
+:imagesdir: framework/images
+
+JavaScript controllers represent the core concept of the Enonic XP framework.
+
+== Basic
+
+Every javascript file is considered a controller, and the controllers are initiated through their exports.
+The controllers are typically invoked by the various <<../runtime#,runtime engines>>, or by other controllers through the require system.
+
+== Application controller
+
+Only one controller is commonly used across all XP apps.
+This is known as the app controller, or just "main.js".
+
+To add an app controller to your project, simply create the following file in your project: `src/main/resources/main.js`
+
+The app controller is invoked for application lifecycle events like start or stop occurs.
+A common use of this controller is initialization and registration of event listeners.
+
+Simple example:
+
+[source,javascript]
+----
+include::code/main-1.js[]
+----
+
+Running code on stop:
+
+[source,javascript]
+----
+include::code/main-2.js[]
+----

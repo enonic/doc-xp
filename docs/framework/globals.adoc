@@ -1,0 +1,117 @@
+= Global objects and functions
+:toc: right
+:imagesdir: framework/images
+
+The following global functions and objects are available in the Enonic XP framework.
+
+== App
+
+The globally available ``app`` object holds information about the contextual app. It has the following properties:
+
+app.name:: The name of the application.
+
+app.version:: Version of the application.
+
+app.config:: Values from the application's configuration file. This can be set using ``$XP_HOME/config/<app.name>.cfg``. Every time the configuration is changed the app is restarted.
+
+Examples:
+
+[source,javascript]
+----
+include::code/app.js[]
+----
+
+
+== Log
+
+This globally available ``log`` object holds the logging methods. It's one method for each log
+level and takes the same number of parameters.
+
+[source,javascript]
+  log.debug(message, [args]) <!--1--> <!--2-->
+
+<1> *string message* Message to log as a debug-level message.
+<2> *array args* Optional arguments used in message format.
+
+[source,javascript]
+  log.info(message, [args]) <!--1--> <!--2-->
+
+<1> *string message* Message to log as a info-level message.
+<2> *array args* Optional arguments used in message format.
+
+[source,javascript]
+  log.warning(message, [args]) <!--1--> <!--2-->
+
+<1> *string message* Message to log as a warning-level message.
+<2> *array args* Optional arguments used in message format.
+
+[source,javascript]
+  log.error(message, [args]) <!--1--> <!--2-->
+
+<1> *string message* Message to log as a error-level message.
+<2> *array args* Optional arguments used in message format.
+
+Examples:
+
+[source,javascript]
+----
+include::code/log.js[]
+----
+
+
+== Resolve()
+
+This globally available function resolves a fully qualified path to a local resource based
+on the current location. It does not check if a resource exists at the specified path.
+This function supports both relative (with dot-references) and absolute paths.
+
+[source,javascript]
+  resolve(path) <!--1--> <!--2-->
+
+<1> *string path* Path to resolve using current location.
+<2> *returns* the fully qualified resource path of the location.
+
+
+Examples:
+
+[source,javascript]
+----
+include::code/resolve.js[]
+----
+
+== Require()
+
+This globally available function will load a JavaScript file and return the exports as objects.
+The function implements parts of the `CommonJS Modules Specification`_.
+
+[source,javascript]
+  require(path) <!--1--> <!--2-->
+
+<1> *string path* Path to the JavaScript to load.
+<2> *returns* The loaded JavaScript object exports.
+
+
+Examples:
+
+[source,javascript]
+----
+include::code/require.js[]
+----
+
+If the path is relative then it will start looking for the file from the local directory.
+The file extension .js is not required.
+
+TODO more examples of relative resolutions
+
+
+== Exports
+
+The globally available ``exports`` keyword is used to expose functionality from a given JavaScript file (controllers, libraries etc).
+This is part of the require.js spec.
+
+Simply use the ``exports`` keyword to expose functionality from any JavaScript file.
+
+== Double underscore __
+
+The double underscore is available in any server-side JavaScript code and is used for wrapping Java objects in a JavaScript object. Read
+more about the <<java-bridge#,Java bridge>>.
