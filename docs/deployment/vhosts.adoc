@@ -1,0 +1,81 @@
+= Virtual hosts
+:toc: right
+:imagesdir: images
+
+Use vhosts to safely expose services (sites/webapps etc) through public domains.
+
+== Service mapping
+
+Vhosts essentially serve two purposes, traffic routing and mapping to ID providers.
+
+A single XP runtime instance may offer multiple services.
+By default, XP provides the following endpoints:
+
+* localhost:8080/webapp/<app-name>/ (webapp engine)
+* localhost:8080/site/<repo>/<branch>/<path> (site engine)
+* localhost:8080/admin/ (admin engine)
+
+By using vhosts, traffic for specific domains and url patterns may be routed directly to defined service paths in XP.
+
+  I.e. example.com -> 8080/site/default/master/homepage
+
+With vhosts enabled, unexposed services are no longer accessible.
+
+Vhosts may also define the relationship to one or more ID providers.
+This enables pluggable authentication on a per vhost basis.
+
+NOTE: Vhosts only apply to XP service port (defaults to 8080), not the monitoring and management ports.
+
+
+== Examples
+
+"Example Inc", yhe owner of "example.com" just finished building their new site.
+The published site is available on `<host>:8080/site/default/master/homepage`.
+
+In this case, a <<config#Vhosts,vhost configuration>> looking like this will get the job done:
+
+.Sample vhost config file
+[source,properties]
+----
+enabled = true
+
+mapping.example.host = example.com
+mapping.example.source = /
+mapping.example.target = /site/default/master/homepage
+----
+
+After saving the vhost config file, you should see the following line the XP log:
+
+  2019-05-10 11:34:17,234 INFO  c.e.x.w.v.i.c.VirtualHostConfigImpl - Virtual host is enabled and mappings updated.
+
+NOTE: Each mapping must have a unique mapping identifier, in this case we used `example`.
+
+Also, "Example Inc" wants the admin console deployed on `example.com/admin`.
+To solve this, we will simply add another mapping to the config:
+
+[source,properties]
+----
+mapping.adm.host = example.com
+mapping.adm.source = /admin
+mapping.adm.target = /admin
+mapping.adm.idProvider.system = default
+----
+
+[NOTE]
+====
+This time we also added an ID provider to the mapping.
+This effectively activates `system` the default (and only) ID provider for this vhost.
+====
+
+== Testing vhosts
+
+To verify that your vhost config is working without setting up proxies or modifying your DNS:
+Simply add the following line to your *hosts* file.
+
+  <host-ip-address>     example.com
+
+NOTE: Location of hosts file on Mac/Linux_: `/etc/hosts`, on Windows: `c:\Windows\System32\Drivers\etc\hosts`
+
+Pointing your browser to http://example.com:8080 will reveal the glorious result.
+
+Visit the <<config#Vhosts,vhost configuration>> section for more details.

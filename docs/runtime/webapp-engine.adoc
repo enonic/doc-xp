@@ -1,17 +1,8 @@
-= Webapp Engine
+= Web app engine
 :toc: right
 :imagesdir: images
 
-The webapp engine is a core part of the XP runtime that enables serving web applictions
-
-== Webapp endpoint
-
-By default, XP instances uses the port 8080 to serve web requests (aka the "xp port")
-Within this port, the `webapp/`` is reserved for handling web applications.
-
-By adding the application name to this url, you can access the webapp of an application, if available:
-
-I.e. `localhost:8080/webapp/<app-name>/``
+Site engine is responsible for processing of site requests on the endpoint `:8080/webapp/<app-name>/*`
 
 == webapp.js
 
@@ -36,16 +27,6 @@ include::code/webapp.js[]
 
 This section describes the full pipeline involved in processing a webapp http request.
 
-=== Vhost filter
+Web app controller:: Invokes the webapp controller of the contextual application
 
-=== Custom Java Filters
-
-=== Web handler
-
-=== Webapp controller
-
-=== ID provider
-
-=== Error handler
-
-=== Custom Java Filters
+NOTE: To make use of JavaScript filters in web apps, the implementer must use a https://market.enonic.com/vendors/enonic/router-lib[router].

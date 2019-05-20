@@ -2,71 +2,44 @@
 :toc: right
 :imagesdir: runtime/images
 
-Applications built on XP are powered by the XP application runtime
+Applications built on the <<framework#,XP framework>> are powered by the XP runtime.
+The XP runtime essentially provides the following capabilities:
 
-== Micro Services platform
+== HTTP engine
 
-XP apps are primarily written in JavaScript thanks to the <<runtime/framework#,XP JavaScript framework>>.
-However, the XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components.
-This also means that Java libraries and code can easily be accessed and used by JavaScript developers as well.
+The HTTP engine is responsible for handling any web-based request to the runtime.
+By default, the XP runtime serves HTTP requests from port 8080 (customizable).
 
-Micro service developers typically combine a runtime (JavaVM, NodeJS etc) with application code
-Once started, the micro service will occupy a set of CPU, memory and disk resources through its lifetime.
+Vhost filter:: Request routing based on <<deployment/vhosts#,virtual hosts>>
 
-Where the XP runtime stands out from traditional runtimes, is the capability of running back-end services (aka state) locally.
-In a clustered deployment, you may configure specific services and apps to run on a per node basis,
-for instance as pure back-end and front-end nodes.
+Java filters:: Optional Java request filters
 
-== Multiple apps per runtime
+Asset handler:: Serves <<runtime/assets#,static assets>> for /_/asset/* request patterns
 
-The XP runtime is also capable of running multiple applications in a single instance.
-Applications are isolated from each other using OSGi, a dynamic module system for the JVM.
+Service handler:: Executes <<runtime/http-services#,HTTP services>> for /_/service/* request patterns
 
-This provides a range of possibilities:
+Engine pipeline:: Engine specific processing based on request pattern:
 
-* Better utilization of underlying infrastructure
-* Modularization without performance degradations due to network traffic
-* Simplified testing and developer environment
+====
+There are three specialized implementations of the HTTP engine available.
 
-An example of when these features are useful, is the XP CMS.
-For a single site, multiple applications may be involved in the processing of a request.
-The applications may be dynamically added to or removed from a site - without any downtime.
+* <<webapp-engine#,Web app engine>> :8080/webapp/<name-of-webapp>/*
+* <<site-engine#,Site engine>> :8080/site/<repo>/<branch>/*
+* <<admin-engine#,Admin engine>> :8080/admin/*
 
-There is no problem running many applications within a single runtime.
-XP apps are primarily Javascript, and similar to serverless architectures the apps hardly consume any resources when idle.
+All engines share a common request processing pipeline that runs before the specialized handling begins.
+====
 
-== Applications API
+ID provider::  If the pipeline returns a "401: Unauthorized" error code, the default virtual host defined ID provider will be invoked, and may handle the request
 
-There are multiple ways of rolling out apps on Enonic XP.
+Error handler:: If the pipeline returns an error (everything but "200: Ok") that was not handled by an ID provider, an available error handler will kick in.
 
-The most dynamic is through the apps API. This actually persists applications in the XP storage.
-Events cause runtime instances to pick up and start the new apps automatically.
+Custom Java Filters:: Optional Java response filters
 
-== Scaling
-
-The XP runtime is capable of utilizing multiple underlying multi-core CPUs for vertical scaling.
-This is useful for applications with heavy load, but also important from a development perspective.
-As the XP runtime is multi-threaded, developers may also benefit from a simpler development model.
-Simpler debugging, and the ability to run threaded operations when needed are just some of the benefits.
-The XP task engine for instance runs all tasks as separate threads.
-
-XP can also be scaled horizontally. XP can be deployed as a single instance, and scaled out through a cluster of similar nodes,
-or in a more diverse structure of stateless front-end and stateful back-end nodes.
+Default error handler:: Finally, if the request fails with an error that is still unhandled, the default error handler will kick in
 
 
-== SDK
 
-Enonic XP ships with a Software Development Kit.
-The SDK is essentially the entire platform with both back-end and front-end offered in a single runtime.
-The major difference between the SDK and Server versions of XP is that the SDK builds on the Java Development Kit,
-where the server version is a leaner and more optimized version of the Java VM.
+== Task Engine
 
-
-== Engines
-
-For the purpose of executing applications, the XP runtime includes four main engines that are relevant to a developer:
-
-Web engine:: The web engine executes pure play Javascript web apps.
-Site Engine:: The site engine is capable of executing content driven applications based on the Content API.
-Task Engine:: The task engine runs defined Javascripts as threaded background processes.
-Servlet Engine:: XP also embeds Jetty, and can be used for Java specific, or platform level extensions
+The <<tasks#,task engine>> enables developers to run Javascripts as threaded background tasks.

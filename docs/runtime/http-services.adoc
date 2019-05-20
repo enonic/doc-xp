@@ -13,7 +13,7 @@ Each controller needs to be placed in a folder matching it's name i.e.: `src/mai
 
 Example service controller
 
-.services/<service-name>/<service-name>.js
+.src/main/resources/services/<service-name>/<service-name>.js
 [source,JavaScript]
 ----
 var counter = 0;

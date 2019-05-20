@@ -57,7 +57,7 @@ An object with the following parameters:
 | body | string | Text content of the message
 | contentType | string | Optional content type of the message body
 | headers | string | Optional custom headers in the form of name-value pairs
-| attachments | Array.<<attachments>> | Optional attahcments to include in the e-mail
+| attachments | Array.<<attachments>> | Optional attachments to include in the e-mail
 |===
 
 [.lead]
@@ -130,5 +130,3 @@ Properties of each element in the array
 | mimeType | string | Optional specification of attachment content type.  If not specified, it will be inferred from the filename.
 | headers | object | Optional attachment headers in the form of name-value pairs.
 |===
-
-

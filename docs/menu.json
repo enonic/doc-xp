@@ -15,40 +15,46 @@
       ]
     },
     {
+      "title": "Framework",
+      "document": "framework",
+      "menuItems": [
+        {
+          "title": "Localization",
+          "document": "apps/i18n"
+        }
+      ]
+    },
+    {
       "title": "Runtime",
       "document": "runtime",
       "menuItems": [
         {
-          "title": "Javascript framework",
-          "document": "runtime/framework"
+          "title": "Architecture",
+          "document": "runtime/architecture"
         },
         {
-          "title": "Webapps",
-          "document": "runtime/webapps"
+          "title": "Web app engine",
+          "document": "runtime/webapp-engine"
         },
         {
-          "title": "Admin",
-          "document": "runtime/admin"
+          "title": "Site engine",
+          "document": "runtime/site-engine"
         },
         {
-          "title": "Sites",
-          "document": "runtime/sites"
+          "title": "Admin engine",
+          "document": "runtime/admin-engine"
         },
         {
-          "title": "Tasks",
-          "document": "runtime/tasks"
-        },
-        {
-          "title": "Assets",
-          "document": "runtime/assets"
+          "title": "Asset service",
+          "document": "runtime/asset-service"
         },
         {
           "title": "HTTP services",
           "document": "runtime/http-services"
         },
         {
-          "title": "Localization",
-          "document": "runtime/i18n"
+          "title": "Task engine",
+          "document": "runtime/task-engine"
         }
       ]
     },
@@ -135,6 +141,10 @@
         {
           "title": "Distributions",
           "document": "deployment/distro"
+        },
+        {
+          "title": "Vhosts",
+          "document": "deployment/vhosts"
         },
         {
           "title": "Configuration",

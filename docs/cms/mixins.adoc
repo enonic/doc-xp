@@ -7,7 +7,7 @@ After that you can add a reference to the mixin inside forms of required content
 
 TIP: If you want to append a separate form of fields rather than injecting fields inside content type's form, consider using <<x-data.adoc#,X-data>>
 
-=== Definition
+== Definition
 
 The file with mixin schema must be placed in the folder `site/mixins/[name]` and called `[name].xml`. For example, _site/mixins/address/address.xml_.
 
@@ -36,7 +36,7 @@ The file with mixin schema must be placed in the folder `site/mixins/[name]` and
 </mixin>
 ----
 
-=== Usage
+== Usage
 
 Below is an example of a simple content type that uses the abovementioned address mixin.
 In this case fields defined in the mixin will be injected after the form fields of the content type schema,

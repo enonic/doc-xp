@@ -42,15 +42,6 @@ A handler function receives a parameter with a ``request`` object, and returns a
 include::framework/code/controller-2.js[]
 ----
 
-== Filters
-
-JavaScript filters are essentially scripts that can be added to execution pipeline.
-Like controllers, filters are triggered based on their exports.
-
-For instance, expose two different methods,
-
-TODO
-
 
 == Global objects and functions
 
@@ -334,6 +325,24 @@ in groups. Adding to groups allows for multicast message sending.
 include::framework/code/websockets-3.js[]
 ----
 
+== Error handler
+
+TODO: Work in progress
+
+== Filters
+
+TODO: Work in progress
+
+JavaScript filters are only available for the site engine.
+Webapp developers may simply use a https://market.enonic.com/vendors/enonic/router-lib[router] to achieve similar functionality.
+
+Filters are essentially controllers added to the rendering pipeline before and/or after the normal request proccessing.
+
+Like controllers, filters are triggered based on their exports.
+
+For instance, expose two different methods,
+
+
 == Java bridge
 
 In Enonic XP, there is a standard object named ``__`` (double underscore), accessible from any serverside JavaScript code, which provides
@@ -369,4 +378,5 @@ exports.readLines = function (stream) {
 
 This results in a global JavaScript function ``readLines``. This example also shows the use of the ``toNativeObject`` method, which in
 this case, converts a Java String array to a JSON object.
-TODO: LINKFIX: Also check out the http://repo.enonic.com/public/com/enonic/xp/docs/{release}/docs-{release}-libdoc.zip!/\_\_.html[reference documentation for the ``__`` object].
+
+TODO: Also check out the http://repo.enonic.com/public/com/enonic/xp/docs/{release}/docs-{release}-libdoc.zip!/\_\_.html[reference documentation for the ``__`` object].

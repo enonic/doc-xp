@@ -7,7 +7,7 @@ When editing content, X-data fields will be displayed inside a separate step in 
 
 TIP: If you want to inject fields inside content type's form rather than appending a form, consider using <<mixins.adoc#,a mixin>>
 
-=== Definition
+== Definition
 
 The file with X-data schema must be placed in the folder `site/x-data/[name]` and called `[name].xml`. For example, _site/x-data/address/address.xml_.
 
@@ -57,7 +57,7 @@ Below is an example of `site.xml` which injects X-data inside all content types.
 </site>
 ----
 
-=== Configuration
+== Configuration
 
 It's possible to restrict X-data for specific content types using regular expressions. This is especially convenient when you apply X-data
 to all content types via `site.xml` but want to exclude some content types.

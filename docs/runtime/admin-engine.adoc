@@ -1,0 +1,23 @@
+= Admin app engine
+:toc: right
+:imagesdir: images
+
+Site engine is responsible for processing of site requests on the endpoint `:8080/admin/*`
+
+== Tools handler
+
+Tools are admin apps that extend the launcher menu.
+
+The tools endpoint is `:8080/admin/tool/<app-name>/<tool-name>`.
+The respective widget controller must be located in your project as: `src/main/resources/admin/tools/<tool-name>/<tool-name>.js`.
+
+TODO: Example?
+
+== Widget handler
+
+Widgets are admin extensions used by admin tools.
+
+The widget endpoint is `:8080/admin/widget/<app-name>/<widget-name>`.
+The respective widget controller must be located in your project as: `src/main/resources/admin/widgets/<widget-name>/<widget-name>.js`.
+
+TODO: Example?
