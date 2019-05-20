@@ -380,7 +380,7 @@ NOTE: For mixins used as both <mixin> and <x-data>, a copy of the mixin must rem
 
 The following changes are made to the format:
 
-* `<allowContentType>` config is moved to site.xml
+* `<allowContentType>` config has been replaced by attribute of the same name on x-data reference in `site.xml`
 * Root element is changed from `<mixin>` to `<x-data>`
 * x-data reference attribute is renamed from "_mixin_" to "_name_"
 
@@ -415,7 +415,7 @@ Upgrade your X-data references as follows:
 [source,xml]
 ----
 <site>
-  <x-data name="my-sample" allowContentTypes=".*:folder">
+  <x-data name="my-sample" allowContentTypes=".*:folder" optional="true">
 </site>
 ----
 
@@ -449,7 +449,7 @@ include::code/styles.xml[]
 
 Image styles also introduce the ability to use image service filters, and client side CSS styles that are used by the editor.
 
-Read more about Image styles <<https://developer.enonic.com/docs/content-studio/master/editor/rich-text-editor,here>>
+Read more about Image styles https://developer.enonic.com/docs/content-studio/master/editor/rich-text-editor[here]
 
 
 === Editor XSS
