@@ -10,6 +10,10 @@ The XP runtime essentially provides the following capabilities:
 The HTTP engine is responsible for handling any web-based request to the runtime.
 By default, the XP runtime serves HTTP requests from port 8080 (customizable).
 
+=== Request pipeline
+
+All HTTP requests are processed through a common pipeline as specified below:
+
 Vhost filter:: Request routing based on <<deployment/vhosts#,virtual hosts>>
 
 Java filters:: Optional Java request filters
@@ -19,7 +23,7 @@ Asset handler:: Serves <<runtime/assets#,static assets>> for /_/asset/* request 
 Service handler:: Executes <<runtime/http-services#,HTTP services>> for /_/service/* request patterns
 
 Engine pipeline:: Engine specific processing based on request pattern:
-
++
 ====
 There are three specialized implementations of the HTTP engine available.
 
