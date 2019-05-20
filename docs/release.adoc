@@ -23,17 +23,17 @@ image::developer-portal.png["Screenshot of the new developer portal", 720]
 In order for developers to better and more easily navigate the XP ecosystem, we created a dedicated portal.
 The portal contains
 
-XP docs: The XP core platform documentation (which you are reading now)
-Reference docs:: For all XP related apps, starters, libraries and more that are built by Enonic.
-Hands on guides:: Practical how-to guides an tutorials, including the getting started page
+* *XP docs:* The XP core platform documentation (which you are reading now)
+* *Reference docs:* For all XP related apps, starters, libraries and more that are built by Enonic.
+* *Hands on guides:* Practical how-to guides an tutorials, including the getting started page
 
 === Built with XP
 The portal is naturally an XP app itself.
 The geeky fact is that all docs and most guides are written in Asciidoctor together with the actual product code.
 
 When we commit, changes to the docs are automatically checked out, compiled and imported to XP as content.
-This optimizes how developers produce content,
-while taking advantage of everything XP brings offers at the same time.
+This optimize how developers produce content,
+while taking advantage of everything XP offers at the same time.
 
 image::built-with-xp.png["Screenshot of dev portal edited in Content Studio", 720]
 
@@ -45,7 +45,7 @@ We plan to release the core elements of the doc portal on the market in the futu
 The brand new Enonic Command Line Interface - "Enonic CLI" was also released at the same time as XP 7.
 It is versioned independently for more frequent updates.
 The CLI not only replaces the old toolbox script,
-but introduces new and flexible ways of installing XP and managing projects and development environments.
+it also introduces new and flexible ways of installing XP and managing projects and development environments.
 
 Installing CLI, Enonic XP, building and deploying your first app can now be done with a few simple commands,
 as described in the https://developer.enonic.com/start[getting started section] of the developer portal
@@ -64,11 +64,11 @@ There are several reasons for this move:
 
 * Developers no longer need to install or juggle with different versions of the JVM
 * Installation of XP is faster and sleeker than ever
-* We can take advantage of native/non Java functionality when required
+* We can take advantage of native/non-Java functionality when required
 
 With this change, XP is now available in SDK and Server version.
 The SDK includes the full Java Development Kit,
-where the server edition uses a slimmed down versjon of the JVM, and can be further optimized for production use.
+whereas the server edition uses a slimmed down version of the JVM, and may be further optimized for production use.
 
 
 == Content Studio is an app
@@ -95,12 +95,12 @@ Image styles consist of both client side styling (css), and image service render
 The rich text editor was previously limited to pre-defined and hard-coded styles, such as "cinema (21:9) or square(1:1)".
 Now, application developers may define custom styles that control both server side rendering aspect ratio, and specify classes to annotate the specific image.
 
-TODO IMAGE
+image::old-photo-style.png["Here we see an image using a style called old-photo, which adds the sephia effect to the image.", 720]
 
 === Projects prepared
 
-Customers with many sites have requested better support for isolation of sites, and who can access specific them.
-Our solution to this is creating sites in different "projects", each project will be using its own repo.
+Customers with many sites have requested better support for isolation of sites, and specific access rights to each.
+Our solution to create sites in different "projects", each project will be using its own repo.
 XP 7 (and Content Studio) does not yet fully implement this features, but prepares the foundation for supporting it.
 
 You will notice this through the following change:
@@ -139,7 +139,7 @@ The XP storage has been refactored for improved performance and disk usage.
 XP persists all data in so-called blobstore segments, one segment for each type of data to persist.
 XP 7 introduces new segments for indexconfig and permissions, enabling re-use of these across nodes, and node versions.
 
-On average, this reduces use of disk space between 40 to 80 percent (TODO, verify)
+This reduces the use of disk space, 40 to 80 percent (TODO, verify)
 
 Additionally, each repository now has it's own root entry in the blobstore.
 This makes it possible to directly manage blobs associated with a single repository.
