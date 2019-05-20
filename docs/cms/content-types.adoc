@@ -48,6 +48,6 @@ It's possible to auto-generate display name based on values from form fields by 
 </content-type>
 ----
 
-== X-data
+== Expanding content types
 
-You can use <<x-data.adoc#,X-data schemas>> to dynamically inject additional form fields inside existing content types.
+You can use <<mixins.adoc#,a mixin>> or <<x-data.adoc#,X-data>> to dynamically inject additional form fields inside existing content types.

@@ -74,12 +74,12 @@ _@name_ is used when storing the data in a property, and must be unique on each 
 _@type_ refers to one of the many input types which are listed below.
 
 <2> *label* is another mandatory field that holds the human readable value that will be displayed when listing the input type control in the administrative interface +
-_@i18n_ is an optional attribute holding the key to localization phrase of the form (see <<schemas#translations,a mixin>>)
+_@i18n_ is an optional attribute holding the key to localization phrase of the form (see <<schemas#schema_localization,localisation>>)
 
 <3> *default* is an optional field that lets you specify default values to be used by the input type
 
 <4> *help-text* is an optional text will be shown next to the input field and can be used for explanation of the field's purpose. +
-_@i18n_ is an optional attribute holding the key to localization phrase of the form (see <<schemas#translations,a mixin>>)
+_@i18n_ is an optional attribute holding the key to localization phrase of the form (see <<schemas#schema_localization,localisation>>)
 
 <5> *occurrences* is an optional field used to control the number of values stored by a single input. +
 _@minimum_ set to to zero means the input is not mandatory +
@@ -219,8 +219,8 @@ Here is an example of a multi-select option set with options expanded by default
 
 == Mixins and X-data
 
-To simplify maintenance of forms, mixins offers a simple templating approach to reuse the same definition across various forms.
-A mixin or x-data can be injected into a form simply by referencing it by name.
+To simplify maintenance of forms, mixins and x-data offer a simple templating approach to reuse the same definition across various forms.
+They can be injected into a form by simple name reference.
 
 .Sample mixin "us-address"
 [source,xml]

@@ -427,15 +427,15 @@ NOTE: Multiple allow entries can be added, separated by `|`
 === Image styles
 
 For projects using the rich text editor,
-XP 7 introduces a new feature called image styles.
+XP 7 introduces a new feature called _Image styles_.
 XP 6 provided editors with a dropdown option list for image "styles" when inserting images in the rich text editor.
 However, this list was hardcoded.
 With XP 7, developers are now able to customize this list with their own styles.
 
 By default the only available styles are:
 
-* None (uncropped, but optimized image, no css styles)
-* Original (uncropped original image file, tagged with TODO style (alan?))
+* None (uncropped, but optimized image, no client-side processing)
+* Original (unprocessed original image file, CSS style _.editor-style-original_)
 
 Editors of existing sites are likely to have used one or more of the XP 6 hardcoded styles.
 Migrated images will still keep the cropping from XP 6.
@@ -447,9 +447,9 @@ However, to support inserting new images with the same style formats, add this f
 include::code/styles.xml[]
 ----
 
-Image styles also introduces the ability to use image service filters, and client side CSS styles that are used by the editor.
+Image styles also introduce the ability to use image service filters, and client side CSS styles that are used by the editor.
 
-Read more about Image styles (TODO, link)
+Read more about Image styles <<https://developer.enonic.com/docs/content-studio/master/editor/rich-text-editor,here>>
 
 
 === Editor XSS
