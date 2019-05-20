@@ -38,7 +38,17 @@
         },
         {
           "title": "Site engine",
-          "document": "runtime/site-engine"
+          "document": "runtime/site-engine",
+          "menuItems": [
+            {
+              "title": "Image service",
+              "document": "runtime/site-engine/image-service"
+            },
+            {
+              "title": "Component service",
+              "document": "runtime/site-engine/component-service"
+            }
+          ]
         },
         {
           "title": "Admin engine",
@@ -157,47 +167,47 @@
       "document": "api",
       "menuItems": [
         {
-          "title": "Admin Library",
+          "title": "Admin API",
           "document": "api/lib-admin"
         },
         {
-          "title": "Authentication Library",
+          "title": "Authentication API",
           "document": "api/lib-auth"
         },
         {
-          "title": "Cluster Library",
+          "title": "Cluster API",
           "document": "api/lib-cluster"
         },
         {
-          "title": "Common Library",
+          "title": "Common API",
           "document": "api/lib-common"
         },
         {
-          "title": "Content Library",
+          "title": "Content API",
           "document": "api/lib-content"
         },
         {
-          "title": "Context Library",
+          "title": "Context API",
           "document": "api/lib-context"
         },
         {
-          "title": "I18N Library",
+          "title": "I18N API",
           "document": "api/lib-i18n"
         },
         {
-          "title": "Mail Library",
+          "title": "Mail API",
           "document": "api/lib-mail"
         },
         {
-          "title": "Node Library",
+          "title": "Node API",
           "document": "api/lib-node"
         },
         {
-          "title": "Portal library",
+          "title": "Portal API",
           "document": "api/lib-portal"
         },
         {
-          "title": "Tasks Library",
+          "title": "Tasks API",
           "document": "api/lib-task"
         },
         {

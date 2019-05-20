@@ -1,0 +1,22 @@
+= Component service
+:toc: right
+:imagesdir: images
+
+The component service enables rendering of contextual page components directly `:8080/site/<repo>/<branch>/<path-to-page>/_/component/<component-path>`
+
+== Component rendering pipeline
+
+Page components may also be directly accessed.
+For instance, one may render only the first part within in a page's main region.
+
+The url pattern for direct rendering is: `:8080/site/<repo>/<branch>/<path-to-page>/_/component/<region>/#`. i.e. :8080/site/default/master/mysite/_/component/main/0`.
+
+Component rendering::  In this mode, only the *component rendering* step (as described above) will be executed.
+
+[NOTE]
+====
+By implementing `exports.post()` or any other HTTP methods in the component controller, it may also be used to act as the backend for your component.
+
+Developers may also check if a component is rendered inline, or directly by using the request context.
+This may for instance be used to produce JSON in direct rendering mode rather than HTML, which is mandatory for inline mode.
+====

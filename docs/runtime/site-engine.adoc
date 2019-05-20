@@ -11,7 +11,13 @@ In a site however, the URLs are editorially controlled.
 In XP this boils down to a mapping between content (page) and a controller.
 XP sites also enable developers to take control over URL patterns when needed, through filters and mappings (as described below).
 
-== Inline rendering pipeline
+
+== Site services
+
+In addition to the <<page rendering pipeline>>, site developers can also take advantage of the real-time <<site-engine/image-service#,image processing service>>,
+and the <<site-engine/component-service#,component service>> that enables direct URL-based access to page components.
+
+== Page rendering pipeline
 
 This section describes the standard pipeline involved in processing a page request i.e. ``:8080/site/<repo>/<branch>/<path-to-page>.
 
@@ -26,21 +32,3 @@ Components rendering:: If the page response type is HTML, any placeholders in th
 Processors:: If the page response type is HTML, processors defined in the site descriptor will be executed. Processors typically manipulate the HTML by adding script tags from inlined components in the previous step.
 
 Site response filters:: Available filters may also perform last minute tasks before the final response is delivered.
-
-
-== Component rendering pipeline
-
-Page components may also be directly accessed.
-For instance, one may render only the first part within in a page's main region.
-
-The url pattern for direct rendering is: `:8080/site/<repo>/<branch>/<path-to-page>/_/component/<region>/#`. i.e. :8080/site/default/master/mysite/_/component/main/0`.
-
-Component rendering::  In this mode, only the *component rendering* step (as described above) will be executed.
-
-[NOTE]
-====
-By implementing `exports.post()` or any other HTTP methods in the component controller, it may also be used to act as the backend for your component.
-
-Developers may also check if a component is rendered inline, or directly by using the request context.
-This may for instance be used to produce JSON in direct rendering mode rather than HTML, which is mandatory for inline mode.
-====
