@@ -1,6 +1,6 @@
 = XP Runtime
 :toc: right
-:imagesdir: runtime/images
+:imagesdir: runtime/media
 
 Applications built on the <<framework#,XP framework>> are powered by the XP runtime.
 The XP runtime essentially provides the following capabilities:
@@ -14,9 +14,11 @@ By default, the XP runtime serves HTTP requests from port 8080 (customizable).
 
 All HTTP requests are processed through a common pipeline as specified below:
 
-Vhost filter:: Request routing based on <<deployment/vhosts#,virtual hosts>>
+image::http-request-pipeline.svg[HTTP request pipeline,1024]
 
-Java filters:: Optional Java request filters
+Vhost filters:: Request routing based on <<deployment/vhosts#,virtual hosts>>
+
+Java request filters:: Optional Java request filters
 
 Asset handler:: Serves <<runtime/assets#,static assets>> for /_/asset/* request patterns
 
@@ -30,17 +32,15 @@ There are three specialized implementations of the HTTP engine available.
 * <<webapp-engine#,Web app engine>> :8080/webapp/<name-of-webapp>/*
 * <<site-engine#,Site engine>> :8080/site/<repo>/<branch>/*
 * <<admin-engine#,Admin engine>> :8080/admin/*
-
-All engines share a common request processing pipeline that runs before the specialized handling begins.
 ====
 
-ID provider::  If the pipeline returns a "401: Unauthorized" error code, the default virtual host defined ID provider will be invoked, and may handle the request
+ID provider::  If the pipeline returns a "401: Unauthorized" error code, the default <<deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
 
 Error handler:: If the pipeline returns an error (everything but "200: Ok") that was not handled by an ID provider, an available error handler will kick in.
 
-Custom Java Filters:: Optional Java response filters
+Java response filters:: Optional Java response filters
 
-Default error handler:: Finally, if the request fails with an error that is still unhandled, the default error handler will kick in
+Standard error handler:: Finally, if the request fails with an error that is still unhandled, the standard error handler will kick in
 
 
 

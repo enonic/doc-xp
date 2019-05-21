@@ -19,7 +19,7 @@ and the <<site-engine/component-service#,component service>> that enables direct
 
 == Page rendering pipeline
 
-This section describes the standard pipeline involved in processing a page request i.e. ``:8080/site/<repo>/<branch>/<path-to-page>.
+This section describes the standard pipeline involved in processing a page request i.e. `:8080/site/<repo>/<branch>/<path-to-page>`.
 
 Request filters:: Request Javascript filters that must be defined in the site descriptor. Filters may choose to abort any further processing of the request.
 
@@ -31,4 +31,4 @@ Components rendering:: If the page response type is HTML, any placeholders in th
 
 Processors:: If the page response type is HTML, processors defined in the site descriptor will be executed. Processors typically manipulate the HTML by adding script tags from inlined components in the previous step.
 
-Site response filters:: Available filters may also perform last minute tasks before the final response is delivered.
+Response filters:: Available filters may also perform last minute tasks before the final response is delivered.

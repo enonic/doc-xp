@@ -28,6 +28,7 @@ asciidoctor {
     resources {
         from(sourceDir) {
             include '**/images/**'
+            include '**/media/**'
         }
     }
 }
