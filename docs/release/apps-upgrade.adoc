@@ -110,7 +110,7 @@ NOTE: `appName` and `appDisplayName` are only used for application projects, as 
 ==== Library upgrade
 
 If you are upgrading *a library*, you don't need to use _com.enonic.xp.app_ plugin or have `app {}` section in _build.gradle_.
-Below is a sample content of `build.gradle` and `gradle.properties` files for a library:
+Below is a sample content of _build.gradle_ and _gradle.properties_ files for a library:
 
 .build.gradle sample
 [source,groovy]
@@ -131,7 +131,7 @@ repositories {
 
 ----
 
-NOTE: You only need to use `com.enonic.xp.base` plugin if you are using XP dependencies and need to shortlink to Enonic repo
+NOTE: You only need to use _com.enonic.xp.base_ plugin if you are using XP dependencies and need to shortlink to Enonic repo
 via _xp.enonicRepo()_ shortcut
 
 
