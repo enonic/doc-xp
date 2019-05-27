@@ -47,10 +47,13 @@ If you have installed Gradle 5, from your project root, run:
 
 This will install or update your project with a new Gradle wrapper.
 
-=== XP Gradle plugin
+=== XP Gradle plugins
 
-You will also need to install the 2.0 version of the XP Gradle plugin.
-This supports Gradle 5, Java 11 and building for XP 7.
+==== Application upgrade
+
+If you are upgrading *an application*, you need to use version '2.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
+It supports Gradle 5, Java 11 and building for XP 7. This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
+and enables quick reference to the Enonic repo via _xp.enonicRepo()_ shortcut
 
 NOTE: Syntax for adding plugins to Gradle may have changed for your project, we recommend the following updates to your build files:
 
@@ -61,8 +64,6 @@ plugins {
     id 'com.enonic.xp.app' version '2.0.0'
 }
 
-apply plugin: "com.enonic.xp.app"
-
 app {
     name = "${appName}"
     displayName = "${appDisplayName}"
@@ -72,8 +73,7 @@ app {
 }
 
 dependencies {
-    compile "com.enonic.xp:core-api:${xpVersion}"
-    compile "com.enonic.xp:portal-api:${xpVersion}"
+    compile "com.enonic.xp:script-api:${xpVersion}"
     include "com.enonic.xp:lib-content:${xpVersion}"
     include "com.enonic.xp:lib-portal:${xpVersion}"
 }
@@ -106,6 +106,43 @@ group = com.acme.something
 ----
 
 NOTE: `appName` and `appDisplayName` are only used for application projects, as well as `app` config in `build.gradle`
+
+==== Library upgrade
+
+If you are upgrading *a library*, you don't need to use _com.enonic.xp.app_ plugin or have `app {}` section in _build.gradle_.
+Below is a sample content of `build.gradle` and `gradle.properties` files for a library:
+
+.build.gradle sample
+[source,groovy]
+----
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.enonic.xp.base' version '2.0.0'
+    id 'com.enonic.defaults' version '2.0.1'
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    xp.enonicRepo()
+}
+
+
+----
+
+NOTE: You only need to use `com.enonic.xp.base` plugin if you are using XP dependencies and need to shortlink to Enonic repo
+via _xp.enonicRepo()_ shortcut
+
+
+.gradle.properties sample
+[source,groovy]
+----
+group=com.mycompany.lib
+projectName=mylib
+xpVersion=7.0.0
+version=1.0.0-SNAPSHOT
+----
 
 
 === Dependencies
