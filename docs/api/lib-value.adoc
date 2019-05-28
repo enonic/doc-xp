@@ -1,0 +1,188 @@
+= Value Library
+:toc: right
+:imagesdir: images
+
+Functions to pass java-types in JSON, typically usage is to type e.g a Geo-point value when creating nodes in node-lib.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-value:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+```js
+var valueLib = require('/lib/xp/value');
+```
+
+You are now free to use the library functionality.
+
+== Functions
+
+=== binary
+
+Creates a BinaryAttachment java-type.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| name   | string | The binary name
+| stream |        | The binary stream
+|===
+
+[.lead]
+Returns
+
+*object* : BinaryAttachment java-type
+
+=== geoPoint
+
+Creates a GeoPoint java-type.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type   | Description
+| lat  | number | Latitude
+| lon  | number | Longitude
+|===
+
+[.lead]
+Returns
+
+*object* : GeoPoint java-type
+
+=== geoPointString
+
+Creates a GeoPoint java-type.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| value | string | Comma-separated latitude and longitude
+|===
+
+[.lead]
+Returns
+
+*object* : GeoPoint java-type
+
+=== instant
+
+Creates a Instant java-type.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type           | Description
+| value | string \| Date | An ISO-8601-formatted instant (e.g '2011-12-03T10:15:30Z') or a Date object
+|===
+
+[.lead]
+Returns
+
+*object* : Instant java-type
+
+=== localDate
+
+Creates a LocalDate java-type.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type           | Description
+| value | string \| Date | A ISO local date-time string (e.g '2011-12-03') or a Date object
+|===
+
+[.lead]
+Returns
+
+*object* : LocalDate java-type
+
+=== localDateTime
+
+Creates a LocalDateTime java-type.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type           | Description
+| value | string \| Date | A local date-time string (e.g '2007-12-03T10:15:30') or a Date object
+|===
+
+[.lead]
+Returns
+
+*object* : LocalDateTime java-type
+
+=== localTime
+
+Creates a LocalTime java-type.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type           | Description
+| value | string \| Date | A ISO local date-time string (e.g '10:15:30') or a Date object
+|===
+
+[.lead]
+Returns
+
+*object* : LocalTime java-type
+
+=== reference
+
+Creates a Reference java-type.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| value | string | A nodeId as string (e.g '1234-5678-91011')
+|===
+
+[.lead]
+Returns
+
+*object* : Reference java-type
