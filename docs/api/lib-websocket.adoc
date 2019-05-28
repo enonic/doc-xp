@@ -1,0 +1,138 @@
+= Websocket Library
+:toc: right
+:imagesdir: images
+
+Websocket functions.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-websocket:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+```js
+var webSocketLib = require('/lib/xp/websocket');
+```
+
+You are now free to use the library functionality.
+
+== Functions
+
+=== addToGroup
+
+Add an id to a socket group.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| group | string | Group name
+| id    | string | Socket id
+|===
+
+[.lead]
+Returns
+
+*void*
+
+[.lead]
+Example
+
+```js
+webSocketLib.addToGroup('people', session.id);
+```
+
+=== removeFromGroup
+
+Remove an id from a socket group.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| group | string | Group name
+| id    | string | Socket id
+|===
+
+[.lead]
+Returns
+
+*void*
+
+[.lead]
+Example
+
+```js
+webSocketLib.removeFromGroup('people', session.id);
+```
+
+=== send
+
+Send message directly to a socket id.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name    | Type   | Description
+| id      | string | Socket id
+| message | string | Text message
+|===
+
+[.lead]
+Returns
+
+*void*
+
+[.lead]
+Example
+
+```js
+webSocketLib.send(session.id, 'You said - ' + message);
+```
+
+=== sendToGroup
+
+Send message to all sockets in group.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name    | Type   | Description
+| group   | string | Group name
+| message | string | Text message
+|===
+
+[.lead]
+Returns
+
+*void*
+
+[.lead]
+Example
+
+```js
+webSocketLib.sendToGroup('people', 'Notice this message!');
+```
