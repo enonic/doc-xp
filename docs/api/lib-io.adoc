@@ -1,0 +1,237 @@
+= IO Library
+:toc: right
+:imagesdir: images
+
+IO related functions.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-io:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+```js
+var ioLib = require('/lib/xp/io');
+```
+
+You are now free to use the library functionality.
+
+== Functions
+
+=== getMimeType
+
+Returns the mime-type from a name or extension.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| name | string | Name of file or extension
+|===
+
+[.lead]
+Returns
+
+*string* : mime-type from a name or extension.
+
+[.lead]
+Example
+
+```js
+// Returns mime-type for a file name.
+var type = ioLib.getMimeType('myfile.txt');
+log.info('Mime type is %s', type);
+```
+
+=== getResource
+
+Looks up a resource.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| key | string | Resource key to look up
+|===
+
+[.lead]
+Returns
+
+*Resource* : Resource reference.
+
+[.lead]
+Examples
+
+```js
+// Returns a file by name.
+var res1 = ioLib.getResource('/lib/xp/examples/io/sample.txt');
+var exists = res1.exists();
+var size = res1.getSize();
+var stream = res1.getStream();
+```
+```js
+// Returns a file by reference.
+var res2 = ioLib.getResource(resolve('./sample.txt'));
+if (res2.exists()) {
+    log.info('Resource exists');
+}
+```
+
+=== getSize
+
+Returns the size of a stream.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name    | Type   | Description
+| stream      |  | Stream to get size of
+|===
+
+[.lead]
+Returns
+
+*number* : Returns the size of a stream.
+
+[.lead]
+Example
+
+```js
+// Returns the size of a stream.
+var size = ioLib.getSize(stream);
+log.info('Stream size is %s bytes', size);
+```
+
+=== newStream
+
+Returns a new stream from a string.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name    | Type   | Description
+| text   | string | String to create a stream of
+|===
+
+[.lead]
+Returns
+
+* : A new stream.
+
+[.lead]
+Example
+
+```js
+// Creates a new stream from a string.
+var stream = ioLib.newStream('Hello World');
+```
+
+=== processLines
+
+Process lines from a stream.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name    | Type   | Description
+| stream   |  | Stream to read lines from
+| func   | function | Callback function to be called for each line
+|===
+
+[.lead]
+Example
+
+```js
+var num = 0;
+
+// Process lines from stream.
+ioLib.processLines(stream, function (line) {
+    num++;
+    log.info('Line %s: %s', num, line);
+});
+```
+
+=== readLines
+
+Read lines from a stream.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name    | Type   | Description
+| stream   |  | Stream to read lines from
+|===
+
+[.lead]
+Returns
+
+*Array.<string>* : Lines as an array.
+
+[.lead]
+Example
+
+```js
+// Reads lines from stream.
+var lines = ioLib.readLines(stream);
+log.info('Num lines: %s', lines.length);
+```
+
+=== readText
+
+Read text from a stream.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name    | Type   | Description
+| stream   |  | Stream to read text from
+|===
+
+[.lead]
+Returns
+
+*string* : The text read from stream or string.
+
+[.lead]
+Example
+
+```js
+// Reads text from stream.
+var text = ioLib.readText(stream);
+log.info('Text: %s', text);
+```
