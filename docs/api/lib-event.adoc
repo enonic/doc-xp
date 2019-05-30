@@ -27,127 +27,81 @@ You are now free to use the library functionality.
 
 == Functions
 
-=== get
+=== listener
 
-Returns the current context
-
-[.lead]
-Parameters
-
-None
-
-[.lead]
-Returns
-
-<<Context>>
-
-[.lead]
-Example
-
-.Getting the current context
-[source,js]
-----
-const context = contextLib.get();
-----
-
-.Sample response
-[source,js]
-----
-{
-  branch: "draft",
-  repository: "com.enonic.cms.default",
-  authInfo: {
-      user: {                            <1>
-          type: "user",
-          key: "user.system.abc",
-          displayName: "A.B.C.",
-          disabled: false,
-          email: "abc@enonic.com",
-          login: "abc",
-          idProvider: "system"
-      }
-      principals: [
-          "user:system:abc",
-          "role:system.admin",
-          "role:system.admin.login",
-          "role:system.authenticated",
-          "role:system.everyone"
-      ]
-  }
-}
-----
-
-<1> The user node will not be returned unless there is a logged in user.
-
-=== run
-
-Runs a function within a custom context, for instance the one returned by the `get()` function call.
-Commonly used when accessing repositories, or to override current users permissions.
+Adds an event listener to the system
 
 [.lead]
 Parameters
+
+An object with the following keys and their value:
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
 | Name | Kind | Details
-| context | object | <<Context>> to be used for the scope of the callback function
-| callback | function | Function to execute
+| type | string | Event type pattern
+| callback | function | Callback event listener
+| localOnly | boolean | Local events only (default to false)
 |===
 
 [.lead]
 Returns
 
-*string* : The result of the execution.
-
+`null`
 
 [.lead]
 Example
 
-.Run a simple function in a different context
+.Adding a listener that logs the event
 [source,js]
 ----
-// Define the callback to be executed.
-function callback() {
-    return 'Hello from context';
-}
-
-// Executes function within a custom context.
-const result = contextLib.run(context, callback);
+eventLib.listener({
+    type: 'node.*',
+    localOnly: false,
+    callback: function (event) {
+        log.info(JSON.stringify(event));
+    }
+});
 ----
 
-.Sample response
+=== send
+
+Sends a custom event.  All custom events are prefixed with "custom.".
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| type | string | Event type
+| distributed | boolean | `True` if it should be distributed in cluster
+| data| object | Additional data for event.
+|===
+
+[.lead]
+Returns
+
+`null`
+
+[.lead]
+Example
+
+.Send a custom event into the system
 [source,js]
 ----
-"Hello from context"
+eventLib.send({
+    type: 'myEvent',
+    distributed: false,
+    data: {
+        a: 1,
+        b: 2
+    }
+});
 ----
-
-== Objects
-
-=== Context
-
-The context object is always available within the scope of a request
-
-.Sample context object
-[source,js]
-----
-{
-  repository: "some.repo.name", <1>
-  branch: "master", <2>
-  user: { <3>
-      login: "mylogin",
-      idProvider: "idprovidername"
-  },
-  principals: ["role:system.admin"], <4>
-  attributes: { <5>
-      optionalAttributes: "of any kind"
-      }
-}
-----
-
-<1> *repository* (_string_) Repository context.
-<2> *branch* (_string_) Branch context.
-<3> *user* (_object_) Specify a valid user/idprovider combination
-<4> *principals* (_object_) Roles or group principals applicable for current user
-<5> *attributes* (_object_) custom attributes
