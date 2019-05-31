@@ -626,7 +626,7 @@ Example
 .Fetching nodes
 [source,js]
 ----
-    var allFamily = repo.get(family._id, [child1._id, child2._id]);
+var allFamily = repo.get(family._id, [child1._id, child2._id]);
 ----
 
 .Sample response
@@ -838,6 +838,119 @@ var moved = repo.move({
                 source: '/my-name',
                 target: '/new-parent/'
             });
+----
+
+.Move and rename a node in the same operation.
+[source,js]
+----
+var moved = repo.move({
+                source: '/my-name',
+                target: '/content/my-site/folder/new-name'
+            });
+----
+
+==== push
+
+Pushes a node to a given branch.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | Id or path to the nodes
+| keys | Array.<string> | Array of ids or paths to the nodes
+| target | string | Branch to push to
+| includeChildren | boolean | Also push children of given nodes.  Default is `false`.
+| resolve | boolean | Resolve dependencies before pushing, meaning that references will also be pushed.  Default is `true`.
+| exclude | Array.<string> | Optional array of ids or paths to nodes not to be pushed.  If using this, be aware that nodes need to maintain data integrity (e.g parents must be present in target).  If data integrity is not maintained with excluded nodes, they will be pushed anyway.
+|===
+
+[.lead]
+Returns
+
+*object* : PushNodeResult
+
+.Pushing nodes from current branch.
+[source,js]
+----
+var result = repo.push({
+    keys: ['a'],
+    target: 'otherBranch',
+    resolve: false
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "success": [
+        "a"
+    ],
+    "failed": [],
+    "deleted": []
+}
+----
+
+.Pushing content with children where not all children are allowed.
+[source,js]
+----
+var result = repo.push({
+    keys: ['a'],
+    target: 'otherBranch',
+    resolve: true,
+    includeChildren: true
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "success": [
+        "a",
+        "b",
+        "c"
+    ],
+    "failed": [
+        {
+            "id": "d",
+            "reason": "ACCESS_DENIED"
+        }
+    ],
+    "deleted": []
+}
+----
+
+.Pushing node with children, but excluding some of them.
+[source,js]
+----
+var result = repo.push({
+    keys: ['/a'],
+    target: 'otherBranch',
+    resolve: true,
+    includeChildren: true,
+    exclude: ['/a/b', '/a/c']
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "success": [
+        "a",
+        "d"
+    ],
+    "failed": [],
+    "deleted": []
+}
 ----
 
 === Source
