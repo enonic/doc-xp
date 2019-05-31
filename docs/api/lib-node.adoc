@@ -204,6 +204,18 @@ var result = multiRepoConnection.query({
 
 A single repo connections with lots of methods to work on the repo:
 
+All the examples below are using a repo connection to execute the functions.
+The repo connection can be created like this:
+
+.Connecting to a repo.
+[source,js]
+----
+var repo = nodeLib.connect({
+    repoId: "com.enonic.cms.default",
+    branch: "master"
+});
+----
+
 ==== commit
 
 Commits the active version of nodes.
@@ -611,7 +623,7 @@ Returns
 [.lead]
 Example
 
-.Deleting nodes
+.Fetching nodes
 [source,js]
 ----
     var allFamily = repo.get(family._id, [child1._id, child2._id]);
@@ -688,6 +700,101 @@ Example
 ]
 ----
 <1> With 3 input IDs, 3 nodes like this one was in the returned array.
+
+==== getActiveVersion
+
+Fetches specific nodes by path or ID.
+
+[.lead]
+Parameters
+
+An object with the following key and value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | Path or ID of the node
+|===
+
+[.lead]
+Returns
+
+object : Active content versions per branch
+
+==== getBinary
+
+Returns a binary stream.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | Path or ID of the node
+| binaryReference | string | to the binary
+|===
+
+[.lead]
+Returns
+
+* : Stream of the binary
+
+[.lead]
+Example
+
+.Fetching the binary of a node.
+[source,js]
+----
+var binaryStream = repo.getBinary({
+    key: "/myNode",
+    binaryReference: "myBinaryReference"
+});
+----
+
+==== modify
+
+Modifies a node.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | Path or ID of the node
+| editor | function | Editor callback function
+|===
+
+[.lead]
+Returns
+
+object : The modified node
+
+[.lead]
+Example
+
+.Modifying a node.
+[source,js]
+----
+var result = repo.modify({
+    key: key,
+    editor: function (node) {
+        node.someData.cars.push('peugeot');
+        return node;
+    }
+});
+----
 
 === Source
 
