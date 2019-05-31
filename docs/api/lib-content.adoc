@@ -2,4 +2,1523 @@
 :toc: right
 :imagesdir: images
 
-TODO
+Functions to find and manipulate content.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-content:${xpVersion}
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+var contentLib = require('/lib/xp/content');
+----
+
+You are now free to use the library functionality.
+
+== Functions
+
+=== addAttachment
+
+Adds an attachment to an existing content.
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| key | string | | Path or id to the content
+| name | string | | Attachment name
+| mimeType | string | | Attachment content type
+| label | string | <optional> | Attachment label
+| data | object | <optional> | Stream with the binary data for the attachment
+|===
+
+[.lead]
+Examples
+
+```js
+// Adds an attachment.
+contentLib.addAttachment({
+    key: '/mySite/mycontent',
+    name: 'image',
+    mimeType: 'image/png',
+    label: 'photo',
+    data: dataStream
+});
+```
+
+=== create
+
+This function creates a content.
+
+The parameter name is optional, but if it is not set then displayName must be specified. When name is not set, the system will auto-generate a name based on the displayName, by lower-casing and replacing certain characters. If there is already a content with the auto-generated name, a suffix will be added to the name in order to make it unique.
+
+To create a content where the name is not important and there could be multiple instances under the same parent content, skip the name parameter and specify a displayName
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| name | string | <optional> | | Name of content
+| parentPath | string | | | Path to place content under
+| displayName | string | <optional> | | Display name. Default is same as name
+| requireValid | boolean | <optional> | true | The content has to be valid, according to the content type, to be created. If requireValid=true and the content is not strictly valid, an error will be thrown
+| refresh | boolean | <optional> | true | If refresh is true, the created content will to be searchable through queries immediately, else within 1 second. Since there is a performance penalty doing this refresh, refresh should be set to false for bulk operations
+| contentType | string | | | Content type to use
+| language | string | <optional> | | The language tag representing the content’s locale
+| childOrder | string | <optional> | | Default ordering of children when doing getChildren if no order is given in query
+| data | object | | | Actual content data
+| x | object | <optional> | | eXtra data to use
+|===
+
+[.lead]
+Returns
+
+*object* : Content created as JSON
+
+[.lead]
+Examples
+
+```js
+// Creates a content.
+var result1 = contentLib.create({
+    name: 'mycontent',
+    parentPath: '/a/b',
+    displayName: 'My Content',
+    contentType: 'test:myContentType',
+    language: 'es',
+    data: {
+        a: 1,
+        b: 2,
+        c: ['1', '2'],
+        d: {
+            e: {
+                f: 3.6,
+                g: true
+            }
+        }
+    },
+    x: {
+        "com-enonic-myapplication": {
+            myschema: {
+                a: 1
+            }
+        }
+    },
+    "attachments": {},
+    "publish": {}
+});
+
+log.info('Content created with id ' + result1._id);
+```
+```js
+// Check if content already exists.
+try {
+    var result2 = contentLib.create({
+        name: 'mycontent',
+        parentPath: '/a/b',
+        displayName: 'My Content',
+        contentType: 'test:myContentType',
+        data: {}
+    });
+
+    log.info('Content created with id ' + result2._id);
+
+} catch (e) {
+    if (e.code == 'contentAlreadyExists') {
+        log.error('There is already a content with that name');
+    } else {
+        log.error('Unexpected error: ' + e.message);
+    }
+}
+```
+```js
+// Content created.
+var expected = {
+    "_id": "123456",
+    "_name": "mycontent",
+    "_path": "/a/b/mycontent",
+    "creator": "user:system:anonymous",
+    "createdTime": "1975-01-08T00:00:00Z",
+    "type": "test:myContentType",
+    "displayName": "My Content",
+    "hasChildren": false,
+    "language": "es",
+    "valid": false,
+    "data": {
+        "a": 1,
+        "b": 2,
+        "c": [
+            "1",
+            "2"
+        ],
+        "d": {
+            "e": {
+                "f": 3.6,
+                "g": true
+            }
+        }
+    },
+    "x": {
+        "com-enonic-myapplication": {
+            "myschema": {
+                "a": 1
+            }
+        }
+    },
+    "page": {},
+    "attachments": {},
+    "publish": {}
+};
+```
+
+=== createMedia
+
+Creates a media content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| name | string | <optional> | | Name of content
+| parentPath | string | <optional> | / | Path to place content under
+| mimeType | string | <optional> | | Mime-type of the data
+| focalX | number | <optional> | | Focal point for X axis (if it's an image)
+| focalY | number | <optional> | | Focal point for Y axis (if it's an image)
+| data | | | | Data (as stream) to use
+|===
+
+[.lead]
+Returns
+
+*object* : Returns the created media content
+
+[.lead]
+Examples
+
+```js
+// Creates a media.
+var result = contentLib.createMedia({
+    name: 'mycontent',
+    parentPath: '/a/b',
+    mimeType: 'text/plain',
+    data: stream
+});
+```
+```js
+// Media created.
+var expected = {
+    "_id": "123456",
+    "_name": "mycontent",
+    "_path": "/a/b/mycontent",
+    "creator": "user:system:anonymous",
+    "createdTime": "1975-01-08T00:00:00Z",
+    "type": "base:unstructured",
+    "hasChildren": false,
+    "valid": false,
+    "data": {},
+    "x": {},
+    "page": {},
+    "attachments": {},
+    "publish": {}
+};
+```
+
+=== delete
+
+This function deletes a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+|===
+
+[.lead]
+Returns
+
+*boolean* : True if deleted, false otherwise
+
+[.lead]
+Examples
+
+```js
+// Deletes a content by path.
+var result = contentLib.delete({
+    key: '/features/js-libraries/mycontent'
+});
+
+if (result) {
+    log.info('Content deleted');
+} else {
+    log.info('Content was not found');
+}
+```
+
+=== get
+
+This function fetches a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+|===
+
+[.lead]
+Returns
+
+*object* : The content (as JSON) fetched from the repository
+
+[.lead]
+Examples
+
+```js
+// Gets a single content by path.
+var result = contentLib.get({
+    key: '/path/to/mycontent'
+});
+
+if (result) {
+    log.info('Display Name = ' + result.displayName);
+} else {
+    log.info('Content was not found');
+}
+```
+```js
+// Content as it is returned.
+var expected = {
+    "_id": "123456",
+    "_name": "mycontent",
+    "_path": "/path/to/mycontent",
+    "creator": "user:system:admin",
+    "modifier": "user:system:admin",
+    "createdTime": "1970-01-01T00:00:00Z",
+    "modifiedTime": "1970-01-01T00:00:00Z",
+    "type": "base:unstructured",
+    "displayName": "My Content",
+    "hasChildren": false,
+    "language": "en",
+    "valid": true,
+    "childOrder": "_ts DESC, _name ASC",
+    "data": {
+        "myfield": "Hello World"
+    },
+    "x": {},
+    "page": {},
+    "attachments": {
+        "logo.png": {
+            "name": "logo.png",
+            "label": "small",
+            "size": 6789,
+            "mimeType": "image/png"
+        },
+        "document.pdf": {
+            "name": "document.pdf",
+            "size": 12345,
+            "mimeType": "application/pdf"
+        }
+    },
+    "publish": {}
+};
+```
+
+=== getAttachments
+
+This function returns a content attachments
+
+[.lead]
+*Parameters:*
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| key | string | Path or id to the content
+|===
+
+[.lead]
+Returns
+
+*object* : An object with all the attachments that belong to the content, where the key is the attachment name. Or null if the content cannot be found
+
+[.lead]
+Examples
+
+```js
+// Attachments returned.
+var expected = {
+    "logo.png": {
+        "name": "logo.png",
+        "label": "small",
+        "size": 6789,
+        "mimeType": "image/png"
+    },
+    "document.pdf": {
+        "name": "document.pdf",
+        "size": 12345,
+        "mimeType": "application/pdf"
+    }
+};
+```
+
+=== getAttachmentStream
+
+This function returns a data-stream for the specified content attachment
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+| name | string | Attachment name
+|===
+
+[.lead]
+Returns
+
+* : Stream of the attachment data
+
+[.lead]
+Examples
+
+```js
+// Get stream for attachment.
+var stream = contentLib.getAttachmentStream({
+    key: '/a/b/mycontent',
+    name: 'document.pdf'
+});
+```
+
+=== getChildren
+
+This function fetches children of a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| key | string | | | Path or id to the parent content
+| start | number | <optional> | 0 | Start index (used for paging)
+| count | number | <optional> | 10 | Number of contents to fetch
+| sort | string | <optional> | | Sorting expression
+|===
+
+[.lead]
+Returns
+
+*object* : Result (of content) fetched from the repository
+
+[.lead]
+Examples
+
+```js
+// Returns the children of specified path.
+var result = contentLib.getChildren({
+    key: '/path/to',
+    start: 0,
+    count: 2,
+    sort: '_modifiedTime ASC'
+});
+
+log.info('Found ' + result.total + ' number of contents');
+
+for (var i = 0; i < result.hits.length; i++) {
+    var content = result.hits[i];
+    log.info('Content ' + content._name + ' loaded');
+}
+```
+```js
+// Result set returned.
+var expected = {
+    "total": 20,
+    "count": 2,
+    "hits": [
+        {
+            "_id": "id1",
+            "_name": "name1",
+            "_path": "/a/b/name1",
+            "creator": "user:system:admin",
+            "modifier": "user:system:admin",
+            "createdTime": "1970-01-01T00:00:00Z",
+            "modifiedTime": "1970-01-01T00:00:00Z",
+            "type": "base:unstructured",
+            "displayName": "My Content 1",
+            "hasChildren": false,
+            "valid": false,
+            "data": {},
+            "x": {},
+            "page": {},
+            "attachments": {},
+            "publish": {}
+        },
+        {
+            "_id": "id2",
+            "_name": "name2",
+            "_path": "/a/b/name2",
+            "creator": "user:system:admin",
+            "modifier": "user:system:admin",
+            "createdTime": "1970-01-01T00:00:00Z",
+            "modifiedTime": "1970-01-01T00:00:00Z",
+            "type": "base:unstructured",
+            "displayName": "My Content 2",
+            "hasChildren": false,
+            "valid": false,
+            "data": {},
+            "x": {},
+            "page": {},
+            "attachments": {},
+            "publish": {}
+        }
+    ]
+};
+```
+
+=== getPermissions
+
+Gets permissions on a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+|===
+
+[.lead]
+Returns
+
+*object* : Content permissions
+
+[.lead]
+Examples
+
+```js
+// Return permissions for content by path.
+var result = contentLib.getPermissions({
+    key: '/features/js-libraries/mycontent'
+});
+
+if (result) {
+    log.info('Content inherits permissions: ' + result.inheritPermissions);
+} else {
+    log.info('Content not found');
+}
+```
+```js
+// Permissions returned.
+var expected = {
+    "inheritsPermissions": false,
+    "permissions": [
+        {
+            "principal": "user:system:anonymous",
+            "allow": [
+                "READ"
+            ],
+            "deny": []
+        }
+    ]
+};
+```
+
+=== getSite
+
+This function returns the parent site of a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+|===
+
+[.lead]
+Returns
+
+*object* : The current site as JSON
+
+[.lead]
+Examples
+
+```js
+// Returns content's parent site
+var result = contentLib.getSite({
+    key: '/path/to/mycontent'
+});
+log.info('Site name = %s', result._name);
+```
+```js
+// Site data returned.
+var expected = {
+    "_id": "100123",
+    "_name": "my-content",
+    "_path": "/my-content",
+    "type": "base:unstructured",
+    "hasChildren": false,
+    "valid": false,
+    "data": {
+        "siteConfig": {
+            "applicationKey": "myapplication",
+            "config": {
+                "Field": 42
+            }
+        }
+    },
+    "x": {},
+    "page": {},
+    "attachments": {},
+    "publish": {}
+};
+```
+
+=== getSiteConfig
+
+This function returns the site configuration for this app in the parent site of a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+| applicationKey | string | Application key
+|===
+
+[.lead]
+Returns
+
+*object* : The site configuration for current application as JSON
+
+[.lead]
+Examples
+
+```js
+// Returns config of the content's parent site
+var result = contentLib.getSiteConfig({
+    key: '/path/to/mycontent',
+    applicationKey: app.name
+});
+log.info('Field value for the site config = %s', result.Field);
+```
+```js
+// Site config returned.
+var expected = {
+    "Field": 42
+};
+```
+
+=== getType
+
+Returns the properties and icon of the specified content type
+
+[.lead]
+*Parameters:*
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| name | string | Name of the content type, as 'app:name' (e.g. 'com.enonic.myapp:article')
+|===
+
+[.lead]
+Returns
+
+*<<ContentType>>* : The content type object if found, or null otherwise. See ContentType type definition below
+
+[.lead]
+Examples
+
+```js
+// Get a content type by name
+var contentType = contentLib.getType('com.enonic.myapp:person');
+```
+```js
+// Content type returned:
+var expected = {
+    "name": "com.enonic.myapp:person",
+    "displayName": "Person",
+    "description": "Person content type",
+    "superType": "base:structured",
+    "abstract": false,
+    "final": true,
+    "allowChildContent": true,
+    "displayNameExpression": "${name}",
+    "icon": {
+        "mimeType": "image/png",
+        "modifiedTime": "2016-01-01T12:00:00Z"
+    },
+    "form": [
+        {
+            "formItemType": "Input",
+            "name": "name",
+            "label": "Full name",
+            "maximize": true,
+            "inputType": "TextLine",
+            "occurrences": {
+                "maximum": 1,
+                "minimum": 1
+            },
+            "config": {}
+        },
+        {
+            "formItemType": "Input",
+            "name": "title",
+            "label": "Photo",
+            "helpText": "Person photo",
+            "maximize": true,
+            "inputType": "ImageSelector",
+            "occurrences": {
+                "maximum": 1,
+                "minimum": 1
+            },
+            "config": {}
+        },
+        {
+            "formItemType": "Input",
+            "name": "bio",
+            "label": "Bio",
+            "maximize": true,
+            "inputType": "HtmlArea",
+            "occurrences": {
+                "maximum": 1,
+                "minimum": 1
+            },
+            "config": {}
+        },
+        {
+            "formItemType": "Input",
+            "name": "birthdate",
+            "label": "Birth date",
+            "maximize": true,
+            "inputType": "Date",
+            "occurrences": {
+                "maximum": 1,
+                "minimum": 0
+            },
+            "config": {}
+        },
+        {
+            "formItemType": "Input",
+            "name": "email",
+            "label": "Email",
+            "helpText": "Email address",
+            "maximize": true,
+            "inputType": "TextLine",
+            "occurrences": {
+                "maximum": 1,
+                "minimum": 1
+            },
+            "config": {
+                "regexp": [
+                    {
+                        "value": "^[^@]+@[^@]+\\.[^@]+$"
+                    }
+                ]
+            }
+        },
+        {
+            "formItemType": "Input",
+            "name": "nationality",
+            "label": "Nationality",
+            "maximize": true,
+            "inputType": "ContentSelector",
+            "occurrences": {
+                "maximum": 1,
+                "minimum": 0
+            },
+            "config": {
+                "allowedContentType": [
+                    {
+                        "value": "com.enonic.myapp:country"
+                    }
+                ]
+            }
+        }
+    ]
+};
+```
+```js
+// Get a content type icon
+var ct = contentLib.getType('com.enonic.myapp:person');
+var icon = ct.icon;
+return {
+    body: icon.data,
+    contentType: icon.mimeType
+};
+```
+
+=== getTypes
+
+Returns the list of all the content types currently registered in the system
+
+[.lead]
+Returns
+
+*Array.<<<ContentType>>>* : Array with all the content types found. See ContentType type definition below
+
+[.lead]
+Examples
+
+```js
+// Gets the list of all content types in the system
+var contentTypes = contentLib.getTypes();
+
+log.info(contentTypes.length + ' content types found:');
+contentTypes.forEach(function (ct) {
+    if (ct.superType === 'base:structured') {
+        log.info(ct.name + ' - ' + ct.displayName);
+    }
+});
+```
+
+=== modify
+
+This function modifies a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| key | string | | | Path or id to the content
+| editor | function | | | Editor callback function
+| requireValid | boolean | <optional> | true | The content has to be valid, according to the content type, to be updated. If requireValid=true and the content is not strictly valid, an error will be thrown
+|===
+
+[.lead]
+Returns
+
+*object* : Modified content as JSON
+
+[.lead]
+Examples
+
+```js
+// Editor to call for content.
+function editor(c) {
+    c.displayName = 'Modified';
+    c.language = 'en';
+    c.data.myCheckbox = false;
+    c.data["myTime"] = "11:00";
+    c.publish.from = "2016-11-03T10:01:34Z";
+    return c;
+}
+
+// Modify content by path
+var result = contentLib.modify({
+    key: '/a/b/mycontent',
+    editor: editor
+});
+
+if (result) {
+    log.info('Content modified. New title is ' + result.displayName);
+} else {
+    log.info('Content not found');
+}
+```
+```js
+// Content modified.
+var expected = {
+    "_id": "123456",
+    "_name": "mycontent",
+    "_path": "/path/to/mycontent",
+    "creator": "user:system:admin",
+    "modifier": "user:system:admin",
+    "createdTime": "1970-01-01T00:00:00Z",
+    "modifiedTime": "1970-01-01T00:00:00Z",
+    "type": "base:unstructured",
+    "displayName": "Modified",
+    "hasChildren": false,
+    "language": "en",
+    "valid": true,
+    "childOrder": "_ts DESC, _name ASC",
+    "data": {
+        "myfield": "Hello World",
+        "myCheckbox": "false",
+        "myTime": "11:00"
+    },
+    "x": {},
+    "page": {},
+    "attachments": {
+        "logo.png": {
+            "name": "logo.png",
+            "label": "small",
+            "size": 6789,
+            "mimeType": "image/png"
+        },
+        "document.pdf": {
+            "name": "document.pdf",
+            "size": 12345,
+            "mimeType": "application/pdf"
+        }
+    },
+    "publish": {
+        "from": "2016-11-03T10:01:34Z"
+    }
+};
+```
+
+=== move
+
+Rename a content or move it to a new path
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| source | string | Path or id of the content to be moved or renamed
+| target | string | New path or name for the content. If the target ends in slash '/', it specifies the parent path where to be moved. Otherwise it means the new desired path or name for the content
+|===
+
+[.lead]
+Returns
+
+*object* : The content that was moved or renamed
+
+[.lead]
+Examples
+
+```js
+// Rename content by path. Keeps same parent.
+var content1 = contentLib.move({
+    source: '/my-site/my-content-name',
+    target: 'new-name'
+});
+
+log.info('New path: ' + content1._path); // '/my-site/new-name'
+```
+```js
+// Move content by path. New parent path, keeps same name.
+var content2 = contentLib.move({
+    source: '/my-site/my-content-name',
+    target: '/my-site/folder/'
+});
+
+log.info('New path: ' + content2._path); // '/my-site/folder/my-content-name'
+```
+```js
+// Move content by id to new path. New parent path, keeps same name.
+var content3 = contentLib.move({
+    source: '8d933461-ede7-4dd5-80da-cb7de0cd7bba',
+    target: '/my-site/folder/'
+});
+
+log.info('New path: ' + content3._path); // '/my-site/folder/my-content-name'
+```
+```js
+// Move and rename content.
+var content4 = contentLib.move({
+    source: '/my-site/my-content-name',
+    target: '/my-site/folder/new-name'
+});
+
+log.info('New path: ' + content4._path); // '/my-site/folder/new-name'
+```
+```js
+// Handle error if target already exists.
+try {
+    var content5 = contentLib.move({
+        source: '/my-site/my-content-name',
+        target: '/my-site/folder/existing-content'
+    });
+
+} catch (e) {
+    if (e.code == 'contentAlreadyExists') {
+        log.error('There is already a content in the target specified');
+    } else {
+        log.error('Unexpected error: ' + e.message);
+    }
+}
+```
+
+=== publish
+
+This function publishes content to a branch
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| keys | Array.<string> | | | List of all content keys(path or id) that should be published
+| sourceBranch | string | | | The branch where the content to be published is stored
+| targetBranch | string | | | The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master
+| schedule | <<ScheduleParams>> | <optional> | | Schedule the publish
+| excludeChildrenIds | Array.<string> | <optional> | | List of all content keys which children should be excluded from publishing content
+| includeDependencies | boolean | <optional> | true | Whether all related content should be included when publishing content
+|===
+
+==== ScheduleParams
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| from | string | <optional> | Time from which the content is considered published. Defaults to the time of the publish
+| to | string | <optional> | Time until which the content is considered published
+|===
+
+
+[.lead]
+Returns
+
+*object* : Status of the publish operation in JSON
+
+[.lead]
+Examples
+
+```js
+// Publish content by path or key
+var result = contentLib.publish({
+    keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd'],
+    sourceBranch: 'draft',
+    targetBranch: 'master',
+    schedule: {
+        from: new Date().toISOString(),
+        to: '2018-01-01T13:37:00.000Z'
+    },
+    includeDependencies: false
+});
+
+if (result) {
+    log.info('Pushed ' + result.pushedContents.length + " content.");
+    log.info('Deleted ' + result.deletedContents.length + " content.");
+    log.info('Content that failed operation: ' + result.failedContents.length);
+} else {
+    log.info('Operation failed.');
+}
+```
+```js
+// Content published.
+var expected = {
+    "pushedContents": [
+        "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
+        "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
+        "e1f57280-d672-4cd8-b674-98e26e5b69ae"
+    ],
+    "deletedContents": [
+        "45d67001-7f2b-4093-99ae-639be9fdd1f6"
+    ],
+    "failedContents": [
+        "79e21db0-5b43-45ce-b58c-6e1c420b22bd"
+    ]
+};
+```
+
+=== query
+
+This command queries content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| start | number | <optional> | 0 | Start index (used for paging)
+| count | number | <optional> | 10 | Number of contents to fetch
+| query | string | | | Query expression
+| filters | object | <optional> | | Filters to apply to query result
+| sort | string | <optional> | | Sorting expression
+| aggregations | string | <optional> | | Aggregations expression
+| contentTypes | Array.<string> | <optional> | | Content types to filter on
+|===
+
+[.lead]
+Returns
+
+*object* : Result of query
+
+[.lead]
+Examples
+
+```js
+// Query content using aggregations.
+var result = contentLib.query({
+    start: 0,
+    count: 2,
+    sort: "modifiedTime DESC, geoDistance('data.location', '59.91,10.75')",
+    query: "data.city = 'Oslo' AND fulltext('data.description', 'garden', 'AND') ",
+    filters: {
+        boolean: {
+            must: [
+                {
+                    exists: {
+                        field: "modifiedTime"
+                    }
+                },
+                {
+                    exists: {
+                        field: "another"
+                    }
+                }
+            ],
+            mustNot: {
+                hasValue: {
+                    field: "myField",
+                    values: [
+                        "cheese",
+                        "fish",
+                        "onion"
+                    ]
+                }
+            }
+        },
+        notExists: {
+            field: "unwantedField"
+        },
+        ids: {
+            values: ["id1", "id2"]
+        }
+    },
+    contentTypes: [
+        app.name + ":house",
+        app.name + ":apartment"
+    ],
+    aggregations: {
+        floors: {
+            terms: {
+                field: "data.number_floor",
+                order: "_count asc"
+            },
+            aggregations: {
+                prices: {
+                    histogram: {
+                        field: "data.price",
+                        interval: 1000000,
+                        extendedBoundMin: 1000000,
+                        extendedBoundMax: 3000000,
+                        minDocCount: 0,
+                        order: "_key desc"
+                    }
+                }
+            }
+        },
+        by_month: {
+            dateHistogram: {
+                field: "data.publish_date",
+                interval: "1M",
+                minDocCount: 0,
+                format: "MM-yyyy"
+            }
+        },
+        price_ranges: {
+            range: {
+                field: "data.price",
+                ranges: [
+                    {to: 2000000},
+                    {from: 2000000, to: 3000000},
+                    {from: 3000000}
+                ]
+            }
+        },
+        my_date_range: {
+            dateRange: {
+                field: "data.publish_date",
+                format: "MM-yyyy",
+                ranges: [
+                    {to: "now-10M/M"},
+                    {from: "now-10M/M"}
+                ]
+            }
+        },
+        price_stats: {
+            stats: {
+                field: "data.price"
+            }
+        }
+    }
+});
+
+log.info('Found ' + result.total + ' number of contents');
+
+for (var i = 0; i < result.hits.length; i++) {
+    var content = result.hits[i];
+    log.info('Content ' + content._name + ' found');
+}
+```
+```js
+// Result set returned.
+var expected = {
+    "total": 20,
+    "count": 2,
+    "hits": [
+        {
+            "_id": "id1",
+            "_name": "name1",
+            "_path": "/a/b/name1",
+            "creator": "user:system:admin",
+            "modifier": "user:system:admin",
+            "createdTime": "1970-01-01T00:00:00Z",
+            "modifiedTime": "1970-01-01T00:00:00Z",
+            "type": "base:unstructured",
+            "displayName": "My Content 1",
+            "hasChildren": false,
+            "valid": false,
+            "data": {},
+            "x": {},
+            "page": {},
+            "attachments": {},
+            "publish": {}
+        },
+        {
+            "_id": "id2",
+            "_name": "name2",
+            "_path": "/a/b/name2",
+            "creator": "user:system:admin",
+            "modifier": "user:system:admin",
+            "createdTime": "1970-01-01T00:00:00Z",
+            "modifiedTime": "1970-01-01T00:00:00Z",
+            "type": "base:unstructured",
+            "displayName": "My Content 2",
+            "hasChildren": false,
+            "valid": false,
+            "data": {},
+            "x": {},
+            "page": {},
+            "attachments": {},
+            "publish": {}
+        }
+    ],
+    "aggregations": {
+        "genders": {
+            "buckets": [
+                {
+                    "key": "male",
+                    "docCount": 10
+                },
+                {
+                    "key": "female",
+                    "docCount": 12
+                }
+            ]
+        },
+        "by_month": {
+            "buckets": [
+                {
+                    "key": "2014-01",
+                    "docCount": 8
+                },
+                {
+                    "key": "2014-02",
+                    "docCount": 10
+                },
+                {
+                    "key": "2014-03",
+                    "docCount": 12
+                }
+            ]
+        },
+        "price_ranges": {
+            "buckets": [
+                {
+                    "key": "a",
+                    "docCount": 2,
+                    "to": 50
+                },
+                {
+                    "key": "b",
+                    "docCount": 4,
+                    "from": 50,
+                    "to": 100
+                },
+                {
+                    "key": "c",
+                    "docCount": 4,
+                    "from": 100
+                }
+            ]
+        },
+        "my_date_range": {
+            "buckets": [
+                {
+                    "key": "date range bucket key",
+                    "docCount": 2,
+                    "from": "2014-09-01T00:00:00Z"
+                },
+                {
+                    "docCount": 5,
+                    "from": "2014-10-01T00:00:00Z",
+                    "to": "2014-09-01T00:00:00Z"
+                },
+                {
+                    "docCount": 7,
+                    "to": "2014-11-01T00:00:00Z"
+                }
+            ]
+        },
+        "item_count": {
+            "count": 5,
+            "min": 1,
+            "max": 5,
+            "avg": 3,
+            "sum": 15
+        }
+    }
+};
+```
+
+=== removeAttachment
+
+Removes an attachment from an existing content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+| name | string \| Array.<string> | Attachment name, or array of names
+|===
+
+[.lead]
+Examples
+
+```js
+// Removes an attachment, by content path.
+contentLib.removeAttachment({key: '/mySite/mycontent', name: 'document'});
+```
+```js
+// Removes multiple attachments, by content id.
+contentLib.removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document', 'image']});
+```
+
+=== setPermissions
+
+Sets permissions on a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| key | string | | Path or id of the content
+| inheritPermissions | boolean | <optional> | Set to true if the content must inherit permissions. Default to false
+| overwriteChildPermissions | boolean | <optional> | Set to true to overwrite child permissions. Default to false
+| permissions | Array.<<PermissionsParams>> | <optional> | Array of permissions
+|===
+
+==== PermissionsParams
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| principal | string | Principal key
+| allow | Array.<string> | Allowed permissions
+| deny | Array.<string> | Denied permissions
+|===
+
+
+[.lead]
+Returns
+
+*boolean* : True if successful, false otherwise
+
+[.lead]
+Examples
+
+```js
+// Set permissions for content by path.
+var flag = contentLib.setPermissions({
+    key: '/features/js-libraries/mycontent',
+    inheritPermissions: false,
+    overwriteChildPermissions: true,
+    permissions: [{
+        principal: 'user:system:anonymous',
+        allow: ['READ'],
+        deny: ['DELETE']
+    }]
+});
+
+if (flag) {
+    log.info('Permissions set');
+} else {
+    log.info('Content not found');
+}
+```
+
+=== unpublish
+
+This function unpublishes content that had been published to the master branch
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| keys | Array.<string> | List of all content keys(path or id) that should be unpublished
+|===
+
+[.lead]
+Returns
+
+*Array.<string>* : List with ids of the content that were unpublished
+
+[.lead]
+Examples
+
+```js
+// Unpublish content by path or key
+var result = contentLib.unpublish({
+    keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd']
+});
+
+log.info('Unpublished content ids: ' + result.join(','));
+```
+```js
+// Content unpublished.
+var expected = [
+    "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
+    "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
+    "e1f57280-d672-4cd8-b674-98e26e5b69ae"
+];
+```
+
+== Objects
+
+=== ContentType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| name | string | | Name of the content type
+| displayName | string | | Display name of the content type
+| description | string | | Description of the content type
+| superType | string | | Name of the super type, or null if it has no super type
+| abstract | boolean | | Whether or not content of this type may be instantiated
+| final | boolean | | Whether or not it may be used as super type of other content types
+| allowChildContent | boolean | | Whether or not allow creating child items on content of this type
+| displayNameExpression | string | | ES6 string template for generating the content name based on values in the content form
+| icon | <<IconType>> | <optional> | Icon of the content type
+| form | Array.<object> | | Form schema represented as an array of form items: Input, ItemSet, Layout, OptionSet
+|===
+
+=== IconType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| data | object | <optional> | Stream with the binary data for the icon
+| mimeType | string | <optional> | Mime type of the icon image
+| modifiedTime | string | <optional> | Modified time of the icon. May be used for caching
+|===
