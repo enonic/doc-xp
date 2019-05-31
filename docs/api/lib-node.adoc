@@ -304,7 +304,7 @@ An object with the following keys and their value:
 | _parentPath | string | <optional> | Path to place content under.
 | _indexConfig | object | <optional> | How the document should be indexed. A default value "byType" will be set if no value specified.
 | _permissions | object | <optional> | The access control list for the node. By default the creator will have full access
-| _inheritsPermissions | boolean | <optional> | true if the permissions should be inherited from the node parent. Default is false.
+| _inheritsPermissions | boolean | <optional> | `true` if the permissions should be inherited from the node parent. Default is `false`.
 | _manualOrderValue | number | <optional> | Value used to order document when ordering by parent and child-order is set to manual
 | _childOrder | string | <optional> | Default ordering of children when doing getChildren if no order is given in query
 |===
@@ -504,8 +504,8 @@ An object with the following keys and their value:
 | start | number | optional | start index used for paging - default: 0
 | count | number | optional | number of content to fetch, used for paging - default: 10
 | childOrder | string | optional | How to order the children - default is value stored on parent
-| countOnly | boolean | optional | Optimize for count children only - default is false
-| recursive | boolean | optional | Do recursive fetching of all children of children - default is false
+| countOnly | boolean | optional | Optimize for count children only - default is `false`
+| recursive | boolean | optional | Do recursive fetching of all children of children - default is `false`
 |===
 
 [.lead]
@@ -721,7 +721,7 @@ An object with the following key and value:
 [.lead]
 Returns
 
-object : Active content versions per branch
+*object* : Active content versions per branch
 
 ==== getBinary
 
@@ -744,7 +744,7 @@ An object with the following keys and their value:
 [.lead]
 Returns
 
-* : Stream of the binary
+*\** : Stream of the binary
 
 [.lead]
 Example
@@ -779,7 +779,7 @@ An object with the following keys and their value:
 [.lead]
 Returns
 
-object : The modified node
+*object* : The modified node
 
 [.lead]
 Example
@@ -794,6 +794,50 @@ var result = repo.modify({
         return node;
     }
 });
+----
+
+==== move
+
+Rename a node or move it do a new path.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| source | string | Path or id of the node to be moved or renamed
+| target | string | New path or name for the node. If the target ends in slash '/', it specifies the parent path where to be moved. Otherwise it means the new desired path or name for the node.
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if the node was successfully moved or renamed, `false` otherwise.
+
+[.lead]
+Examples
+
+.Changing the name of a node.
+[source,js]
+----
+var moved = repo.move({
+                source: '/my-name',
+                target: 'new-name'
+            });
+----
+
+.Moving a node to a new location.
+[source,js]
+----
+var moved = repo.move({
+                source: '/my-name',
+                target: '/new-parent/'
+            });
 ----
 
 === Source
