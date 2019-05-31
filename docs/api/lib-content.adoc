@@ -31,7 +31,7 @@ You are now free to use the library functionality.
 Adds an attachment to an existing content.
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -70,7 +70,7 @@ The parameter name is optional, but if it is not set then displayName must be sp
 To create a content where the name is not important and there could be multiple instances under the same parent content, skip the name parameter and specify a displayName
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -197,7 +197,7 @@ var expected = {
 Creates a media content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -255,7 +255,7 @@ var expected = {
 This function deletes a content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -293,7 +293,7 @@ if (result) {
 This function fetches a content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -368,7 +368,7 @@ var expected = {
 This function returns a content attachments
 
 [.lead]
-Parameters
+*Parameters:*
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -408,7 +408,7 @@ var expected = {
 This function returns a data-stream for the specified content attachment
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -442,7 +442,7 @@ var stream = contentLib.getAttachmentStream({
 This function fetches children of a content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -532,7 +532,7 @@ var expected = {
 Gets permissions on a content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -585,7 +585,7 @@ var expected = {
 This function returns the parent site of a content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -641,7 +641,7 @@ var expected = {
 This function returns the site configuration for this app in the parent site of a content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -682,7 +682,7 @@ var expected = {
 Returns the properties and icon of the specified content type
 
 [.lead]
-Parameters
+*Parameters:*
 
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
@@ -848,7 +848,7 @@ contentTypes.forEach(function (ct) {
 This function modifies a content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -940,7 +940,7 @@ var expected = {
 Rename a content or move it to a new path
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -1019,7 +1019,7 @@ try {
 This function publishes content to a branch
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -1099,7 +1099,7 @@ var expected = {
 This command queries content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -1356,7 +1356,7 @@ var expected = {
 Removes an attachment from an existing content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -1386,7 +1386,7 @@ contentLib.removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: 
 Sets permissions on a content
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
@@ -1447,7 +1447,7 @@ if (flag) {
 This function unpublishes content that had been published to the master branch
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their value:
 
