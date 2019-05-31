@@ -33,12 +33,18 @@ Adds an attachment to an existing content.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<AddAttachmentParams>> | JSON with the parameters
+| Name | Type | Attributes| Description
+| key | string | | Path or id to the content
+| name | string | | Attachment name
+| mimeType | string | | Attachment content type
+| label | string | <optional> | Attachment label
+| data | object | <optional> | Stream with the binary data for the attachment
 |===
 
 [.lead]
@@ -66,12 +72,23 @@ To create a content where the name is not important and there could be multiple 
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<CreateParams>> | JSON with the parameters
+| Name | Type | Attributes| Default| Description
+| name | string | <optional> | | Name of content
+| parentPath | string | | | Path to place content under
+| displayName | string | <optional> | | Display name. Default is same as name
+| requireValid | boolean | <optional> | true | The content has to be valid, according to the content type, to be created. If requireValid=true and the content is not strictly valid, an error will be thrown
+| refresh | boolean | <optional> | true | If refresh is true, the created content will to be searchable through queries immediately, else within 1 second. Since there is a performance penalty doing this refresh, refresh should be set to false for bulk operations
+| contentType | string | | | Content type to use
+| language | string | <optional> | | The language tag representing the content’s locale
+| childOrder | string | <optional> | | Default ordering of children when doing getChildren if no order is given in query
+| data | object | | | Actual content data
+| x | object | <optional> | | eXtra data to use
 |===
 
 [.lead]
@@ -182,12 +199,19 @@ Creates a media content
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<CreateMediaParams>> | JSON with the parameters
+| Name | Type | Attributes| Default| Description
+| name | string | <optional> | | Name of content
+| parentPath | string | <optional> | / | Path to place content under
+| mimeType | string | <optional> | | Mime-type of the data
+| focalX | number | <optional> | | Focal point for X axis (if it's an image)
+| focalY | number | <optional> | | Focal point for Y axis (if it's an image)
+| data | | | | Data (as stream) to use
 |===
 
 [.lead]
@@ -233,12 +257,14 @@ This function deletes a content
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<DeleteParams>> | JSON with the parameters
+| Name | Type | Description
+| key | string | Path or id to the content
 |===
 
 [.lead]
@@ -269,12 +295,14 @@ This function fetches a content
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<GetParams>> | JSON with the parameters
+| Name | Type | Description
+| key | string | Path or id to the content
 |===
 
 [.lead]
@@ -382,12 +410,15 @@ This function returns a data-stream for the specified content attachment
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<GetAttachmentStreamParams>> | JSON with the parameters
+| Name | Type | Description
+| key | string | Path or id to the content
+| name | string | Attachment name
 |===
 
 [.lead]
@@ -413,12 +444,17 @@ This function fetches children of a content
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<GetChildrenParams>> | JSON with the parameters
+| Name | Type | Attributes| Default| Description
+| key | string | | | Path or id to the parent content
+| start | number | <optional> | 0 | Start index (used for paging)
+| count | number | <optional> | 10 | Number of contents to fetch
+| sort | string | <optional> | | Sorting expression
 |===
 
 [.lead]
@@ -498,12 +534,14 @@ Gets permissions on a content
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<GetPermissionsParams>> | JSON with the parameters
+| Name | Type | Description
+| key | string | Path or id to the content
 |===
 
 [.lead]
@@ -549,12 +587,14 @@ This function returns the parent site of a content
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<GetSiteParams>> | JSON with the parameters
+| Name | Type | Description
+| key | string | Path or id to the content
 |===
 
 [.lead]
@@ -603,12 +643,15 @@ This function returns the site configuration for this app in the parent site of 
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<GetSiteConfigParams>> | JSON with the parameters
+| Name | Type | Description
+| key | string | Path or id to the content
+| applicationKey | string | Application key
 |===
 
 [.lead]
@@ -807,12 +850,16 @@ This function modifies a content
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<ModifyParams>> | JSON with the parameters
+| Name | Type | Attributes| Default| Description
+| key | string | | | Path or id to the content
+| editor | function | | | Editor callback function
+| requireValid | boolean | <optional> | true | The content has to be valid, according to the content type, to be updated. If requireValid=true and the content is not strictly valid, an error will be thrown
 |===
 
 [.lead]
@@ -895,12 +942,15 @@ Rename a content or move it to a new path
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<MoveParams>> | JSON with the parameters
+| Name | Type | Description
+| source | string | Path or id of the content to be moved or renamed
+| target | string | New path or name for the content. If the target ends in slash '/', it specifies the parent path where to be moved. Otherwise it means the new desired path or name for the content
 |===
 
 [.lead]
@@ -971,13 +1021,32 @@ This function publishes content to a branch
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<PublishParams>> | JSON with the parameters
+| Name | Type | Attributes| Default| Description
+| keys | Array.<string> | | | List of all content keys(path or id) that should be published
+| sourceBranch | string | | | The branch where the content to be published is stored
+| targetBranch | string | | | The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master
+| schedule | <<ScheduleParams>> | <optional> | | Schedule the publish
+| excludeChildrenIds | Array.<string> | <optional> | | List of all content keys which children should be excluded from publishing content
+| includeDependencies | boolean | <optional> | true | Whether all related content should be included when publishing content
 |===
+
+==== ScheduleParams
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| from | string | <optional> | Time from which the content is considered published. Defaults to the time of the publish
+| to | string | <optional> | Time until which the content is considered published
+|===
+
 
 [.lead]
 Returns
@@ -1032,12 +1101,20 @@ This command queries content
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<QueryParams>> | JSON with the parameters
+| Name | Type | Attributes| Default| Description
+| start | number | <optional> | 0 | Start index (used for paging)
+| count | number | <optional> | 10 | Number of contents to fetch
+| query | string | | | Query expression
+| filters | object | <optional> | | Filters to apply to query result
+| sort | string | <optional> | | Sorting expression
+| aggregations | string | <optional> | | Aggregations expression
+| contentTypes | Array.<string> | <optional> | | Content types to filter on
 |===
 
 [.lead]
@@ -1281,12 +1358,15 @@ Removes an attachment from an existing content
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<RemoveAttachmentParams>> | JSON with the parameters
+| Name | Type | Description
+| key | string | Path or id to the content
+| name | string \| Array.<string> | Attachment name, or array of names
 |===
 
 [.lead]
@@ -1308,13 +1388,31 @@ Sets permissions on a content
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| key | string | | Path or id of the content
+| inheritPermissions | boolean | <optional> | Set to true if the content must inherit permissions. Default to false
+| overwriteChildPermissions | boolean | <optional> | Set to true to overwrite child permissions. Default to false
+| permissions | Array.<<PermissionsParams>> | <optional> | Array of permissions
+|===
+
+==== PermissionsParams
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<SetPermissionsParams>> | JSON with the parameters
+| Name | Type | Description
+| principal | string | Principal key
+| allow | Array.<string> | Allowed permissions
+| deny | Array.<string> | Denied permissions
 |===
+
 
 [.lead]
 Returns
@@ -1351,12 +1449,14 @@ This function unpublishes content that had been published to the master branch
 [.lead]
 Parameters
 
+An object with the following keys and their value:
+
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name  | Type   | Description
-| params | <<UnpublishParams>> | JSON with the parameters
+| Name | Type | Description
+| keys | Array.<string> | List of all content keys(path or id) that should be unpublished
 |===
 
 [.lead]
@@ -1385,179 +1485,6 @@ var expected = [
 ```
 
 == Objects
-
-=== AddAttachmentParams
-
-Parameters object to pass to a <<addAttachment>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Description
-| key | string | | Path or id to the content
-| name | string | | Attachment name
-| mimeType | string | | Attachment content type
-| label | string | <optional> | Attachment label
-| data | object | <optional> | Stream with the binary data for the attachment
-|===
-
-=== CreateParams
-
-Parameters object to pass to a <<create>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Default| Description
-| name | string | <optional> | | Name of content
-| parentPath | string | | | Path to place content under
-| displayName | string | <optional> | | Display name. Default is same as name
-| requireValid | boolean | <optional> | true | The content has to be valid, according to the content type, to be created. If requireValid=true and the content is not strictly valid, an error will be thrown
-| refresh | boolean | <optional> | true | If refresh is true, the created content will to be searchable through queries immediately, else within 1 second. Since there is a performance penalty doing this refresh, refresh should be set to false for bulk operations
-| contentType | string | | | Content type to use
-| language | string | <optional> | | The language tag representing the content’s locale
-| childOrder | string | <optional> | | Default ordering of children when doing getChildren if no order is given in query
-| data | object | | | Actual content data
-| x | object | <optional> | | eXtra data to use
-|===
-
-=== CreateMediaParams
-
-Parameters object to pass to a <<createMedia>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Default| Description
-| name | string | <optional> | | Name of content
-| parentPath | string | <optional> | / | Path to place content under
-| mimeType | string | <optional> | | Mime-type of the data
-| focalX | number | <optional> | | Focal point for X axis (if it's an image)
-| focalY | number | <optional> | | Focal point for Y axis (if it's an image)
-| data | | | | Data (as stream) to use
-|===
-
-=== DeleteParams
-
-Parameters object to pass to a <<delete>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| key | string | Path or id to the content
-|===
-
-=== GetParams
-
-Parameters object to pass to a <<get>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| key | string | Path or id to the content
-|===
-
-=== GetAttachmentStreamParams
-
-Parameters object to pass to a <<getAttachmentStream>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| key | string | Path or id to the content
-| name | string | Attachment name
-|===
-
-=== GetChildrenParams
-
-Parameters object to pass to a <<getChildren>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Default| Description
-| key | string | | | Path or id to the parent content
-| start | number | <optional> | 0 | Start index (used for paging)
-| count | number | <optional> | 10 | Number of contents to fetch
-| sort | string | <optional> | | Sorting expression
-|===
-
-=== GetPermissionsParams
-
-Parameters object to pass to a <<getPermissions>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| key | string | Path or id to the content
-|===
-
-=== GetSiteParams
-
-Parameters object to pass to a <<getSite>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| key | string | Path or id to the content
-|===
-
-=== GetSiteConfigParams
-
-Parameters object to pass to a <<getSiteConfig>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| key | string | Path or id to the content
-| applicationKey | string | Application key
-|===
 
 === ContentType
 
@@ -1594,160 +1521,4 @@ Fields
 | data | object | <optional> | Stream with the binary data for the icon
 | mimeType | string | <optional> | Mime type of the icon image
 | modifiedTime | string | <optional> | Modified time of the icon. May be used for caching
-|===
-
-=== ModifyParams
-
-Parameters object to pass to a <<modify>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Default| Description
-| key | string | | | Path or id to the content
-| editor | function | | | Editor callback function
-| requireValid | boolean | <optional> | true | The content has to be valid, according to the content type, to be updated. If requireValid=true and the content is not strictly valid, an error will be thrown
-|===
-
-=== MoveParams
-
-Parameters object to pass to a <<move>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| source | string | Path or id of the content to be moved or renamed
-| target | string | New path or name for the content. If the target ends in slash '/', it specifies the parent path where to be moved. Otherwise it means the new desired path or name for the content
-|===
-
-=== PublishParams
-
-Parameters object to pass to a <<publish>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Default| Description
-| keys | Array.<string> | | | List of all content keys(path or id) that should be published
-| sourceBranch | string | | | The branch where the content to be published is stored
-| targetBranch | string | | | The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master
-| schedule | <<ScheduleParams>> | <optional> | | Schedule the publish
-| excludeChildrenIds | Array.<string> | <optional> | | List of all content keys which children should be excluded from publishing content
-| includeDependencies | boolean | <optional> | true | Whether all related content should be included when publishing content
-|===
-
-=== ScheduleParams
-
-Parameters object used in <<PublishParams>>
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Description
-| from | string | <optional> | Time from which the content is considered published. Defaults to the time of the publish
-| to | string | <optional> | Time until which the content is considered published
-|===
-
-=== QueryParams
-
-Parameters object to pass to a <<query>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Default| Description
-| start | number | <optional> | 0 | Start index (used for paging)
-| count | number | <optional> | 10 | Number of contents to fetch
-| query | string | | | Query expression
-| filters | object | <optional> | | Filters to apply to query result
-| sort | string | <optional> | | Sorting expression
-| aggregations | string | <optional> | | Aggregations expression
-| contentTypes | Array.<string> | <optional> | | Content types to filter on
-|===
-
-=== RemoveAttachmentParams
-
-Parameters object to pass to a <<removeAttachment>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| key | string | Path or id to the content
-| name | string \| Array.<string> | Attachment name, or array of names
-|===
-
-=== SetPermissionsParams
-
-Parameters object to pass to a <<setPermissions>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Description
-| key | string | | Path or id of the content
-| inheritPermissions | boolean | <optional> | Set to true if the content must inherit permissions. Default to false
-| overwriteChildPermissions | boolean | <optional> | Set to true to overwrite child permissions. Default to false
-| permissions | Array.<<PermissionsParams>> | <optional> | Array of permissions
-|===
-
-=== PermissionsParams
-
-Parameters object used in <<SetPermissionsParams>>
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| principal | string | Principal key
-| allow | Array.<string> | Allowed permissions
-| deny | Array.<string> | Denied permissions
-|===
-
-=== UnpublishParams
-
-Parameters object to pass to a <<unpublish>> function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| keys | Array.<string> | List of all content keys(path or id) that should be unpublished
 |===
