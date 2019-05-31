@@ -1,0 +1,431 @@
+= Repo Library
+:toc: right
+:imagesdir: images
+
+Node repository related functions.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-repo:${xpVersion}'
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+```js
+var repoLib  = require('/lib/xp/repo');
+```
+
+You are now free to use the library functionality.
+
+== Functions
+
+=== create
+
+Creates a repository.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| params | <<CreateRepoParams>> | JSON with the parameters
+|===
+
+[.lead]
+Returns
+
+*object* : Repository created as JSON
+
+[.lead]
+Examples
+
+```js
+// Creates a repository with default configuration
+var result1 = repoLib.create({
+    id: 'test-repo'
+});
+
+log.info('Repository created with id ' + result1.id);
+```
+```js
+// Creates a repository with specific settings
+var result2 = repoLib.create({
+    id: 'test-repo2',
+    rootPermissions: [
+        {
+            "principal": "role:admin",
+            "allow": [
+                "READ",
+                "CREATE",
+                "MODIFY",
+                "DELETE",
+                "PUBLISH",
+                "READ_PERMISSIONS",
+                "WRITE_PERMISSIONS"
+            ],
+            "deny": []
+        }
+    ],
+    rootChildOrder: "_ts DESC"
+});
+
+log.info('Repository created with id ' + result2.id);
+```
+```js
+// First repository created.
+var expected1 = {
+    "id": "test-repo",
+    "branches": [
+        "master"
+    ],
+    settings: {}
+};
+```
+
+=== createBranch
+
+Creates a branch
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| params | <<CreateBranchParams>> | JSON with the parameters
+|===
+
+[.lead]
+Returns
+
+*object* : The branch (as JSON)
+
+[.lead]
+Examples
+
+```js
+// Creates a branch
+try {
+    var result = repoLib.createBranch({
+        branchId: 'test-branch',
+        repoId: 'my-repo'
+    });
+    log.info('Branch [' + result.id + '] created');
+} catch (e) {
+    if (e.code == 'branchAlreadyExists') {
+        log.error('Branch [features-branch] already exist');
+    } else {
+        log.error('Unexpected error: ' + e.message);
+    }
+}
+```
+
+=== delete
+
+Deletes a repository
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| id | string | Repository ID
+|===
+
+[.lead]
+Returns
+
+*boolean* : true if deleted, false otherwise
+
+[.lead]
+Examples
+
+```js
+// Deletes a repository
+var result = repoLib.delete('test-repo');
+
+if (result) {
+    log.info('Repository deleted');
+} else {
+    log.info('Repository was not found');
+}
+```
+
+=== deleteBranch
+
+Deletes a branch
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| params | <<DeleteBranchParams>> | JSON with the parameters
+|===
+
+[.lead]
+Returns
+
+*object* : The branch (as JSON)
+
+[.lead]
+Examples
+
+```js
+// Deletes a branch
+try {
+    var result = repoLib.deleteBranch({
+        branchId: 'test-branch',
+        repoId: 'my-repo'
+    });
+    log.info('Branch [' + result.id + '] deleted');
+} catch (e) {
+    if (e.code == 'branchNotFound') {
+        log.error('Branch [test-branch] does not exist');
+    } else {
+        log.error('Unexpected error: ' + e.message);
+    }
+}
+```
+
+=== get
+
+Retrieves a repository
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Type   | Description
+| id | string | Repository ID
+|===
+
+[.lead]
+Returns
+
+*object* : The repository (as JSON)
+
+[.lead]
+Examples
+
+```js
+// Retrieves a repository
+var result = repoLib.get('test-repo');
+
+if (result) {
+    log.info('Repository found');
+} else {
+    log.info('Repository was not found');
+}
+```
+```js
+// Repository retrieved.
+var expected = {
+    "id": "test-repo",
+    "branches": [
+        "master"
+    ],
+    settings: {}
+};
+```
+
+=== list
+
+Retrieves the list of repositories
+
+[.lead]
+Returns
+
+*object* : The repositories (as JSON array)
+
+[.lead]
+Examples
+
+```js
+// Retrieves the list of repositories
+var result = repoLib.list();
+log.info(result.length + ' repositories found');
+```
+```js
+// Repositories retrieved.
+var expected = [{
+    "id": "test-repo",
+    "branches": [
+        "master"
+    ],
+    settings: {}
+}, {
+    "id": "another-repo",
+    "branches": [
+        "master"
+    ],
+    settings: {}
+}];
+```
+=== refresh
+
+Refresh the data for the given index-type in the current repository
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| params | <<RefreshParams>> | <nullable> | JSON with the parameters
+|===
+
+[.lead]
+Examples
+
+```js
+// Refresh all for default repository
+repoLib.refresh();
+```
+```js
+// Refresh storage for default repository
+repoLib.refresh({mode: 'storage'});
+```
+```js
+// Refresh search for 'system-repo' repository
+repoLib.refresh({
+    mode: 'search',
+    repo: 'system-repo'
+});
+```
+
+== Objects
+
+=== CreateRepoParams
+
+Object to pass to a create repo function.
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Details
+| id | string | | Repository ID
+| rootPermissions | array | <optional> |Array of root permissions. By default, all permissions to 'system.admin' and read permission to 'system.authenticated'
+| settings | <<RepoSettings>> | <optional> | Repository settings
+|===
+
+=== RepoSettings
+
+Repository settings json to optionally pass to a create function
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Details
+| definitions | <<IndexDefinitions>> | <optional> | Index definitions
+|===
+
+=== IndexDefinitions
+
+Index definitions used in <<RepoSettings>> parameter
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Details
+| search | <<IndexDefinition>> | <optional> | Search index definition
+| version | <<IndexDefinition>> | <optional> | Version index definition
+| branch | <<IndexDefinition>> | <optional> | Branch indexes definition
+|===
+
+=== IndexDefinition
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| settings | object | <optional> | Index definition settings
+| mapping | object | <optional> | Index definition settings
+|===
+
+=== CreateBranchParams
+
+Create branch parameters JSON
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| branchId | string  | Branch ID
+| repoId | string | Repository where the branch should be created
+|===
+
+=== DeleteBranchParams
+
+Delete branch parameters JSON
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| branchId | string  | Branch ID
+| repoId | string | Repository where the branch should be deleted
+|===
+
+=== RefreshParams
+
+Refresh parameters JSON
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default | Description
+| mode | string | <optional> | 'all' | Index definition settings
+| repo | string | <optional> | 'com.enonic.cms.default' | Repository id: 'com.enonic.cms.default' \| 'system-repo'. Default is the current repository set in portal
+| branch | string | <optional> | 'branch'=master | Branch
+|===
