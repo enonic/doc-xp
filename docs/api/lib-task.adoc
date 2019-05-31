@@ -2,4 +2,462 @@
 :toc: right
 :imagesdir: images
 
-TODO
+Functions for execution of asynchronous tasks.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.xp:lib-task:${xpVersion}
+}
+----
+
+ In your JavaScript controller, add a require statement:
+
+```js
+var taskLib = require('/lib/xp/task');
+```
+
+ You are now free to use the library functionality.
+
+== Functions
+
+=== get
+
+Returns the current state and progress details for the specified task.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| taskId | string | Id of the task
+|===
+
+[.lead]
+Returns
+
+*object* : (<<taskinfo,`TaskInfo`>>) Detail information for the task. Or null if the task could not be found.
+
+[.lead]
+Example
+
+.Obtains details for an active task:
+```js
+var taskInfo = taskLib.get('7ca603c1-3b88-4009-8f30-46ddbcc4bb19');
+
+if (taskInfo) {
+  log.info('Current task state = %s', taskInfo.state);
+} else {
+  log.info('Task not found');
+}
+```
+.Return value:
+```js
+var expected = {
+  "description": "Long running task",
+  "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+  "name": "task-7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+  "state": "RUNNING",
+  "application": "com.enonic.myapp",
+  "user": "user:store:me",
+  "startTime": "2017-10-01T09:00:00Z",
+  "progress": {
+    "info": "Processing item 33",
+    "current": 33,
+    "total": 42
+  }
+};
+```
+
+=== isRunning
+
+Checks if any task with the given name or id is currently running.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type   | Description
+| task | string | Name or id of the task.
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if there is a task with the specified name or id, and state 'RUNNING'; `false` otherwise.
+
+[.lead]
+Example
+
+.Check if a task is currently running:
+```js
+var isRunning = taskLib.isRunning('com.enonic.myapp:clean-up-task');
+
+if (!isRunning) {
+  log.info('Start task...');
+} else {
+  log.info('Task already running');
+}
+```
+
+=== list
+
+Returns the list of active tasks with their current state and progress details.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Attributes | Description
+| params | object | <optional> | JSON with optional parameters
+
+[%header,cols="1%,1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name  ! Type   ! Attributes ! Description
+! name  ! string ! <optional> ! Filter by name
+! state ! object ! <optional> ! Filter by task state (`WAITING` \| `RUNNING` \| `FINISHED` \| `FAILED`).
+!===
+
+|===
+
+[.lead]
+Returns
+
+*Array* : (<<taskinfo,`TaskInfo[]`>>) List with task information for every task.
+
+[.lead]
+Example
+
+.1. Obtains list of active tasks:
+```js
+var tasks = taskLib.list();
+```
+
+.Return value:
+```js
+var expected = [
+  {
+    "description": "Long running task",
+    "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+    "name": "task-7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+    "state": "RUNNING",
+    "application": "com.enonic.app1",
+    "user": "user:store:user1",
+    "startTime": "2017-10-01T09:00:00Z",
+    "progress": {
+      "info": "Processing item 33",
+      "current": 33,
+      "total": 42
+    }
+  },
+  {
+    "description": "Update statistics",
+    "id": "b6173bcb-bf54-409b-aa6b-96ae6fcec263",
+    "name": "task-b6173bcb-bf54-409b-aa6b-96ae6fcec263",
+    "state": "FINISHED",
+    "application": "com.enonic.app2",
+    "user": "user:store:user2",
+    "startTime": "2017-10-02T09:00:00Z",
+    "progress": {
+      "info": "Work completed",
+      "current": 0,
+      "total": 0
+    }
+  },
+  {
+    "description": "Import remote data",
+    "id": "e1f57280-d672-4cd8-b674-98e26e5b69ae",
+    "name": "task-e1f57280-d672-4cd8-b674-98e26e5b69ae",
+    "state": "FAILED",
+    "application": "com.enonic.app3",
+    "user": "user:store:user3",
+    "startTime": "2017-10-03T09:00:00Z",
+    "progress": {
+      "info": "Fetching data",
+      "current": 33,
+      "total": 100
+    }
+  }
+];
+```
+
+.2. Obtains list of active tasks with a given name and state:
+```js
+var tasks = taskLib.list({
+  name: "com.enonic.myapp:clean-up",
+  state: "RUNNING"
+});
+```
+
+.Return value:
+```js
+var expected = [
+  {
+    "description": "Long running task",
+    "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+    "name": "com.enonic.myapp:clean-up",
+    "state": "RUNNING",
+    "application": "com.enonic.myapp",
+    "user": "user:store:user",
+    "startTime": "2017-10-01T09:00:00Z",
+    "progress": {
+      "info": "Processing item 33",
+      "current": 33,
+      "total": 42
+    }
+  }
+];
+```
+
+=== progress
+
+Reports progress information from an executing task. This function may only be called within the context of a task function, otherwise it will fail and throw an exception.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with progress details
+
+[%header,cols="1%,1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name    ! Type   ! Attributes ! Description
+! current ! number ! <optional> ! Integer value representing the number of items that have been processed in the task
+! total   ! number ! <optional> ! Integer value representing the total number of items to process in the task
+! info    ! string ! <optional> ! Text describing the current progress for the task
+!===
+
+|===
+
+[.lead]
+Returns
+
+*void*
+
+[.lead]
+Example
+
+.Execute task and keep taskId for polling status:
+```js
+var taskId = taskLib.submit({
+  description: 'Background task',
+  task: function () {
+
+    taskLib.progress({info: 'Initializing task'});
+
+    for (var i = 0; i < 10; i++) {
+      taskLib.progress({
+        info: 'Processing item ' + (i + 1),
+        current: i,
+        total: 10
+      });
+
+      processItem(i);
+    }
+
+    taskLib.progress({info: 'Task completed'});
+  }
+});
+```
+
+=== sleep
+
+Causes the current execution thread to sleep (temporarily cease execution) for the specified number of milliseconds.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name       | Type   | Description
+| timeMillis | number | The length of time to sleep in milliseconds
+|===
+
+[.lead]
+Returns
+
+*void*
+
+[.lead]
+Example
+
+.Execute task and keep taskId for polling status:
+```js
+var retries = 3;
+var result = fetchRemoteData();
+
+while (!result && retries > 0) {
+  // wait half a second before retrying
+  taskLib.sleep(500);
+  retries -= 1;
+  result = fetchRemoteData();
+}
+```
+
+=== submit
+
+Submits a task to be executed in the background and returns an id representing the task.
+
+This function returns immediately. The callback function will be executed asynchronously.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with the parameters
+
+[%header,cols="1%,1%,98%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name        ! Type     ! Description
+! description ! string   ! Text describing the task to be executed
+! task        ! function ! Callback function to be executed asynchronously
+!===
+
+|===
+
+[.lead]
+Returns
+
+*string* : Id of the task that will be executed.
+
+[.lead]
+Example
+
+.Execute task and keep taskId for polling status:
+```js
+var taskId = taskLib.submit({
+  description: 'Background task',
+  task: function () {
+    longRunningTask();
+  }
+});
+```
+
+=== submitNamed
+
+Submits a named task to be executed in the background and returns an id representing the task.
+
+This function returns immediately. The callback function will be executed asynchronously.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with the parameters
+
+[%header,cols="1%,1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name   ! Type   ! Attributes ! Description
+! name   ! string !            ! Name of the task to execute
+! config ! object ! <optional> ! Configuration parameters to pass to the task to be executed. The object must be valid according to the schema defined in the form of the task descriptor XML.
+!===
+
+|===
+
+[.lead]
+Returns
+
+*string* : Id of the task that will be executed.
+
+[.lead]
+Example
+
+.Execute task, located in the current app, by name:
+```js
+var taskId = taskLib.submitNamed({
+  name: 'job42',
+  config: {
+    count: 123
+  }
+});
+```
+
+.Execute a task located in a different app:
+```js
+var taskId = taskLib.submitNamed({
+  name: 'com.enonic.app.myapp:work',
+  config: {}
+});
+```
+
+== Type Definitions
+
+=== TaskInfo
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name        | Type   | Description
+| id          | string | Task Id
+| name        | string | Task name
+| description | string | Task description
+| state       | string | Task state (`WAITING` \| `RUNNING` \| `FINISHED` \| `FAILED`)
+| application | string | Application containing the callback function to run
+| user        | string | Key of the user that submitted the task
+| startTime   | string | Time when the task was submitted (in ISO-8601 format)
+| progress    | object | Progress information provided by the running task
+
+[%header,cols="1%,1%,98%a", options="header"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name    ! Type   ! Description
+! current ! number ! Integer value representing the number of items that have been processed in the task
+! total   ! number ! Integer value representing the total number of items to process in the task
+! info    ! string ! Text describing the current progress for the task
+!===
+
+|===
