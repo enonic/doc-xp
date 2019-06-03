@@ -934,3 +934,27 @@ Where XP 6.x depends on Java 8 to be installed, XP 7 bundles Java 11 in the dist
 
 The first time you use Enonic CLI to create a new XP project you will be asked to create a sandbox for a specific version of XP.
 The new sandbox will have Java 11 bundled inside the package and you don't have to worry about whether you have Java installed or not.
+
+== 12. Testing API
+
+If you are using Enonic testing API (`com.enonic.xp:testing`), you need to change imports.
+
+.In Javascript test class:
+[source,JavaScript]
+----
+var assert = require('/lib/xp/assert');
+----
+to
+----
+var assert = require('/lib/xp/testing');
+----
+
+.In Java test class:
+[source,Java]
+----
+import com.enonic.xp.testing.script.ScriptRunnerSupport;
+----
+to
+----
+import com.enonic.xp.testing.ScriptRunnerSupport;
+----
