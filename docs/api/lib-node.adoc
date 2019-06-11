@@ -876,6 +876,9 @@ Returns
 
 *object* : PushNodeResult
 
+[.lead]
+Examples
+
 .Pushing nodes from current branch.
 [source,js]
 ----
@@ -951,6 +954,365 @@ var result = repo.push({
     "failed": [],
     "deleted": []
 }
+----
+
+==== query
+
+Queries nodes
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| start | number | Start index, used for paging.  The default is `0`.
+| count | number | Number of conents to fetch
+| query | string | Query expression
+| filters | object | Query filters
+| sort | string | Sorting expression
+| aggregations | string | Aggregations expression
+| explain | boolean | If `true`, return score calculation explanation.  The default is `false`.
+|===
+
+[.lead]
+Returns
+
+*object* : stats, hits and if requested, aggregations
+
+[.lead]
+Examples
+
+.A simple query using a the fulltext function
+[source,js]
+----
+var result = repo.query({
+        query: "fulltext('_name', '_name')"
+    });
+----
+
+.Sample response
+[source,js]
+----
+{
+    "total": 4,
+    "count": 4,
+    "hits": [
+        {
+            "id": "5be12847-cbad-4e61-a36c-e94ffb597afb",
+            "score": 0.7071067690849304
+        },
+        {
+            "id": "3928476f-915d-4a6a-97cc-f1c8a905f71a",
+            "score": 0.625
+        },
+        {
+            "id": "a2e38aab-6efb-4f20-862c-e23ef24b3fc3",
+            "score": 0.5
+        },
+        {
+            "id": "3a842eff-ef49-4781-8c1a-dcfcf515db51",
+            "score": 0.5
+        }
+    ],
+    "aggregations": {}
+}
+----
+
+.Query content using aggregations.
+[source,js]
+----
+var result = repo.query({
+    start: 0,
+    count: 2,
+    query: "startTime > instant('2016-10-11T14:38:54.454Z')",
+    filters: {
+        boolean: {
+            must: [
+                {
+                    exists: {
+                        field: "modifiedTime"
+                    }
+                },
+                {
+                    exists: {
+                        field: "other"
+                    }
+                }
+            ],
+            mustNot: {
+                hasValue: {
+                    field: "myField",
+                    values: [
+                        "cheese",
+                        "fish",
+                        "onion"
+                    ]
+                }
+            }
+        },
+        notExists: {
+            field: "unwantedField"
+        },
+        ids: {
+            values: ["id1", "id2"]
+        }
+    },
+    sort: "duration DESC",
+    aggregations: {
+        urls: {
+            terms: {
+                field: "url",
+                order: "_count desc",
+                size: 2
+            },
+            aggregations: {
+                duration: {
+                    histogram: {
+                        field: "duration",
+                        interval: 100,
+                        minDocCount: 1,
+                        extendedBoundMin: 0,
+                        extendedBoundMax: 10000,
+                        order: "_key desc"
+                    }
+                },
+                durationStats: {
+                    stats: {
+                        field: "duration"
+                    }
+                }
+            }
+        }
+    }
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "total": 12902,
+    "count": 2,
+    "hits": [
+        {
+            "id": "b186d24f-ac38-42ca-a6db-1c1bda6c6c26",
+            "score": 1.2300000190734863
+        },
+        {
+            "id": "350ba4a6-589c-498b-8af0-f183850e1120",
+            "score": 1.399999976158142
+        }
+    ],
+    "aggregations": {
+        "urls": {
+            "buckets": [
+                {
+                    "key": "/site/draft/superhero/search",
+                    "docCount": 6762,
+                    "duration": {
+                        "buckets": [
+                            {
+                                "key": "1600",
+                                "docCount": 2
+                            },
+                            {
+                                "key": "1400",
+                                "docCount": 1
+                            },
+                            {
+                                "key": "1300",
+                                "docCount": 5
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "/site/draft/superhero",
+                    "docCount": 1245,
+                    "duration": {
+                        "buckets": [
+                            {
+                                "key": "1600",
+                                "docCount": 2
+                            },
+                            {
+                                "key": "1400",
+                                "docCount": 1
+                            },
+                            {
+                                "key": "1300",
+                                "docCount": 5
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}
+----
+
+==== refresh
+
+Refresh the index for the current repoConnection.  The index has two parts, search and storage.  It is possible to index both or just one of them.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| mode | string | ALL for both indexes, SEARCH for search-index or STORAGE for storage-index.  Default is ALL.
+|===
+
+[.lead]
+Returns
+
+*NULL*
+
+[.lead]
+Examples
+
+.Refreshing the full index
+[source,js]
+----
+repo.refresh();
+----
+
+.Refreshing the serach index
+[source,js]
+----
+repo.refresh('SEARCH');
+----
+
+==== setActiveVersion
+
+Set the active version of a node.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | Path or ID of the node
+| versionID | string | Version to set as active
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if deleted, `false` otherwise
+
+[.lead]
+Example
+
+.Setting the previous version active
+[source,js]
+----
+var findVersions = repo.findVersions({
+    key: node._id
+});
+
+var result = repo.setActiveVersion({
+    key: node._id,
+    versionId: findVersions.hits[1].versionId
+});
+----
+
+==== setChildOrder
+
+Set the order of the node's children.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| key | string | Path or ID of the node
+| childOrder | string | children order
+|===
+
+[.lead]
+Returns
+
+*object* : The updated node
+
+[.lead]
+Example
+
+.Setting the children to be ordered in reverse alphabetical order by name
+[source,js]
+----
+repo.setChildOrder({
+    key: '/name-list',
+    childOrder: 'name DESC'
+});
+----
+
+==== setRootPermission
+
+Set the root node permissions and inheritance.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| _permissions | object | The permissions
+| _inheritPermissions | boolean | `true` if the permissions should be inherited to children
+|===
+
+[.lead]
+Returns
+
+*object* : The updated root-node
+
+[.lead]
+Example
+
+.Setting example permissions
+[source,js]
+----
+var result = repo.setRootPermissions({
+    _permissions: [
+        {
+            "principal": "role:system.admin",
+            "allow": [
+                "READ",
+                "CREATE",
+                "MODIFY",
+                "DELETE",
+                "PUBLISH",
+                "READ_PERMISSIONS",
+                "WRITE_PERMISSIONS"
+            ],
+            "deny": []
+        }
+    ],
+    _inheritsPermissions: true
+});
 ----
 
 === Source
