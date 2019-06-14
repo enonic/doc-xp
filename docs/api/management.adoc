@@ -654,7 +654,7 @@ Reindex the content in the search indices for the given repository and branches.
 }
 ----
 
-=== Update Settings
+=== Settings
 
 Update settings for a specified repository.
 
@@ -729,5 +729,53 @@ List available repositories.
             "Id": "system-repo"
         }
     ]
+}
+----
+
+== Vacuum
+
+Deletes unused blobs and binaries from blobstore.
+
+WARNING: Make sure you have a backup of the installation available before doing a vacuum.
+
+.Url
+ POST system/vacuum
+
+.Response
+[source,json]
+----
+{
+{
+    "TaskResults": [
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 7,
+            "Processed": 7,
+            "TaskName": "UnusedSegmentsCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 39,
+            "Processed": 39,
+            "TaskName": "UnusedVersionFilesCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 2,
+            "Processed": 2,
+            "TaskName": "UnusedBinaryFilesCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 123,
+            "Processed": 123,
+            "TaskName": "UnusedVersionTableEntryCleaner"
+        }
+    ]
+}
 }
 ----
