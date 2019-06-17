@@ -70,6 +70,261 @@ The page controller is essentially
 
 == Layout
 
+Layouts are used in conjunction with regions to organize the structure of the various component parts that will be placed on the page via Page Editor drag and drop. Layouts can be dropped into the page regions and then parts can be dragged into the layout. This allows multiple layouts (two-column, three-column, etc.) on the same page and web editors can change things around without touching any code. Making a layout is similar to making pages and part components. Layouts cannot be nested.
+
+Layout contains - like pages and parts - a descriptor, a controller and a view, and should be placed in the folder site/layouts/[layout-name]
+
+
+=== Descriptor
+
+The layout descriptor defines regions within the layout where parts can be placed with the Page Editor. The file must be named [layout-name].xml.
+
+---
+<layout>
+  <display-name>70/30</display-name>
+  <config/>
+  <regions>
+    <region name="left"/>
+    <region name="right"/>
+  </regions>
+</layout>
+---
+
+
+
+== Part
+
+== Text
+
+== Image
+
+== Fragment
+= Page components
+:toc: right
+:imagesdir: images
+
+Pages are composed from a set of editorially manageable components.
+
+== Regions
+Regions are not strictly components themselves, but enable placement of components, kind of like a folder.
+Regions have a fixed name, that is known to the component the region belongs to.
+
+In Content Studio, regions are visually displayed as "dropzones" for components.
+
+To exist, regions must actually be defined within another component. This definition is placed within the application code.
+Only page and layout components support regions.
+
+== Page
+
+The page component is always the root entry of any component structure.
+A page component may define zero, one, or multiple regions. Each region must have a unique name.
+
+Conventionally, pages define a single region called "main".
+
+To create a page component you must create the following files and folders in your project structure:
+
+.page component project structure
+[source,js]
+----
+/src/
+  main/
+    resources/
+      site/
+        pages/
+          <component-name>/
+            <component-name>.js
+            <component-name>.xml
+----
+Replace <component-name> with your preferred name.
+
+NOTE: The name you choose for a component will be used in the underlying data of the stored page. So choose your name wisely.
+
+=== Page descriptor
+
+The xml file placed in the component structure serves several purposes.
+
+.Example page descriptor
+[source,xml]
+----
+<page>
+  <display-name i18n="component.page.name">My first page</display-name> <!--1--> <!--2-->
+  <form/> <!--3-->
+  <regions>
+    <region name="main"/> <!--4-->
+  </regions>
+</page>
+----
+
+<1> *display-name* provides a display name used by the editorial interface
+<2> *display-name/i18n* optionally specify localization key
+<3> *form* allows the definition of a configuration form based on the <<schemas#,schema system>>
+<4> *region* optionally specify regions for the page
+
+=== Page controller
+
+The page controller is essentially
+
+
+=== Controller
+
+
+
+== Layout
+
+Layouts are used in conjunction with regions to organize the structure of the various component parts that will be placed on the page via Page Editor drag and drop. Layouts can be dropped into the page regions and then parts can be dragged into the layout. This allows multiple layouts (two-column, three-column, etc.) on the same page and web editors can change things around without touching any code. Making a layout is similar to making pages and part components. Layouts cannot be nested.
+
+Layout contains - like pages and parts - a descriptor, a controller and a view, and should be placed in the folder site/layouts/[layout-name]
+
+
+=== Descriptor
+
+The layout descriptor defines regions within the layout where parts can be placed with the Page Editor. The file must be named [layout-name].xml.
+
+----
+<layout>
+  <display-name>70/30</display-name>
+  <config/>
+  <regions>
+    <region name="left"/>
+    <region name="right"/>
+  </regions>
+</layout>
+----
+
+=== View
+
+A layout view defines the markup for the layout component. The sample view below is created in Thymeleaf, but it could be created in any view engine that is supported.
+
+----
+<div class="row">
+  <div data-portal-region="left" class="col-sm-8">
+    <div data-th-each="component : ${leftRegion.components}" data-th-remove="tag">
+      <div data-portal-component="${component.path}" data-th-remove="tag" />
+    </div>
+  </div>
+
+  <div data-portal-region="right" class="col-sm-4" >
+    <div data-th-each="component : ${rightRegion.components}" data-th-remove="tag">
+      <div data-portal-component="${component.path}" data-th-remove="tag" />
+    </div>
+  </div>
+</div>
+----
+
+IMPORTANT: The HTML generated for the layout view must have a single root element.
+Styling
+
+For a layout to have any meaning, some styling must be applied to the view. The desired CSS should be placed in the /assets folder of the application, and included in the page where the layout should be supported. For example, the view my-first-page.html supports Bootstrap layouts:
+
+----
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link data-th-href="${portal.assetUrl({'_path=css/bootstrap.min.css'})}" href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+----
+
+== Part
+
+
+
+== Text
+
+== Image
+
+== Fragment
+= Page components
+:toc: right
+:imagesdir: images
+
+Pages are composed from a set of editorially manageable components.
+
+== Regions
+Regions are not strictly components themselves, but enable placement of components, kind of like a folder.
+Regions have a fixed name, that is known to the component the region belongs to.
+
+In Content Studio, regions are visually displayed as "dropzones" for components.
+
+To exist, regions must actually be defined within another component. This definition is placed within the application code.
+Only page and layout components support regions.
+
+== Page
+
+The page component is always the root entry of any component structure.
+A page component may define zero, one, or multiple regions. Each region must have a unique name.
+
+Conventionally, pages define a single region called "main".
+
+To create a page component you must create the following files and folders in your project structure:
+
+.page component project structure
+[source,js]
+----
+/src/
+  main/
+    resources/
+      site/
+        pages/
+          <component-name>/
+            <component-name>.js
+            <component-name>.xml
+----
+Replace <component-name> with your preferred name.
+
+NOTE: The name you choose for a component will be used in the underlying data of the stored page. So choose your name wisely.
+
+=== Page descriptor
+
+The xml file placed in the component structure serves several purposes.
+
+.Example page descriptor
+[source,xml]
+----
+<page>
+  <display-name i18n="component.page.name">My first page</display-name> <!--1--> <!--2-->
+  <form/> <!--3-->
+  <regions>
+    <region name="main"/> <!--4-->
+  </regions>
+</page>
+----
+
+<1> *display-name* provides a display name used by the editorial interface
+<2> *display-name/i18n* optionally specify localization key
+<3> *form* allows the definition of a configuration form based on the <<schemas#,schema system>>
+<4> *region* optionally specify regions for the page
+
+=== Page controller
+
+The page controller is essentially
+
+
+=== Controller
+
+
+
+== Layout
+
+Layouts are used in conjunction with regions to organize the structure of the various component parts that will be placed on the page via Page Editor drag and drop. Layouts can be dropped into the page regions and then parts can be dragged into the layout. This allows multiple layouts (two-column, three-column, etc.) on the same page and web editors can change things around without touching any code. Making a layout is similar to making pages and part components. Layouts cannot be nested.
+
+Layout contains - like pages and parts - a descriptor, a controller and a view, and should be placed in the folder site/layouts/[layout-name]
+
+
+=== Descriptor
+
+The layout descriptor defines regions within the layout where parts can be placed with the Page Editor. The file must be named [layout-name].xml.
+
+---
+<layout>
+  <display-name>70/30</display-name>
+  <config/>
+  <regions>
+    <region name="left"/>
+    <region name="right"/>
+  </regions>
+</layout>
+---
+
 == Part
 
 == Text
