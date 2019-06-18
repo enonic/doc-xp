@@ -1,4 +1,777 @@
 = Management API
 :toc: right
 
+////
+        Snapshot tasks
+////
+
 Management commands are available at port `4848`, i.e. `localhost:4848` if you're running XP locally
+
+== Snapshots
+
+Commands for manipulating repository snapshots
+
+=== Create
+
+Create a snapshot of all or a single repository while running. The snapshots will be stored in the directory given in `snapshots.dir` option in the https://xp.readthedocs.io/en/stable/operations/configuration.html#repo-configuration[Repo Configuration] (default $xp_home/snapshots). Note that the first snapshot only stores markers in the repository for the current state. Subsequent snapshots stores the changes since the last snapshot. See https://xp.readthedocs.io/en/stable/operations/backup.html#backup[Backup and Restore] for more information on snapshots.
+
+WARNING: For a clustered installation, the snapshot-location must be on a shared file-system.
+
+.Url
+ POST repo/snapshot
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`repositoryId`
+|String
+|the name of the repository to snapshot.
+|===
+
+.Response
+[source,json]
+----
+{
+    "Name": "2019-06-13t13-10-51.973z",
+    "Reason": "",
+    "State": "SUCCESS",
+    "Timestamp": "2019-06-13T13:10:52.575Z",
+    "Indices": [
+        "search-com.enonic.cms.default",
+        "storage-com.enonic.cms.default",
+        "search-system-repo",
+        "storage-system-repo"
+    ]
+}
+----
+
+=== List
+
+List all the snapshots for the installation. See https://xp.readthedocs.io/en/stable/operations/backup.html#backup[Backup and Restore] for more information on snapshots.
+
+.Url
+ GET repo/snapshot/list
+
+.Response
+[source,json]
+----
+{
+    "Results": [
+        {
+            "Name": "2019-06-13t13-10-51.973z",
+            "Reason": "",
+            "State": "SUCCESS",
+            "Timestamp": "2019-06-13T13:10:52.575Z",
+            "Indices": [
+                "search-com.enonic.cms.default",
+                "storage-com.enonic.cms.default",
+                "search-system-repo",
+                "storage-system-repo"
+            ]
+        },
+        {
+            "Name": "2019-06-13t13-36-35.407z",
+            "Reason": "",
+            "State": "SUCCESS",
+            "Timestamp": "2019-06-13T13:36:35.488Z",
+            "Indices": [
+                "search-com.enonic.cms.default",
+                "storage-com.enonic.cms.default",
+                "search-system-repo",
+                "storage-system-repo"
+            ]
+        }
+    ]
+}
+----
+
+=== Restore
+
+Restore a named snapshot. See https://xp.readthedocs.io/en/stable/operations/backup.html#backup[Backup and Restore] for more information on snapshots.
+
+.Url
+ POST repo/snapshot/restore
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`snapshotName`
+|String
+|snapshot name to restore
+
+|`repository`
+|String
+|the name of the repository to restore
+|===
+
+.Response
+[source,json]
+----
+{
+    "Message": "Restore successfull, 4 shards restored",
+    "Name": "2019-06-13t13-10-51.973z",
+    "Failed": false,
+    "Indices": [
+        "search-com.enonic.cms.default",
+        "storage-com.enonic.cms.default",
+        "search-system-repo",
+        "storage-system-repo"
+    ]
+}
+----
+
+=== Delete
+
+Deletes a snapshot by name or date:
+
+.Url
+ POST repo/snapshot/delete
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`before`
+|Date
+|date to delete snapshots up to
+
+|`snapshotNames`
+|String[]
+|List of snapshot names to delete
+|===
+
+.Response
+[source,json]
+----
+{
+    "DeletedSnapshots": [
+        "2019-06-13t13-36-35.407z"
+    ]
+}
+----
+
+////
+        Dump tasks
+////
+
+== Dumps
+
+List of command for manipulating all repositories
+
+=== Create
+
+Export data from every repository. The result will be stored in the `$XP_HOME/data/dump` directory.
+
+.Url
+ POST system/dump
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`name`
+|String
+|dump name
+
+|`includeVersions`
+|Boolean
+|dump version-history along with current versions
+
+|`maxAge`
+|Number
+|max age of versions to include, in days, in addition to current version
+
+|`maxVersions`
+|Number
+|max number of versions to dump in addition to current version
+
+|===
+
+.Response
+[source,json]
+----
+{
+    "Repositories": [
+        {
+            "RepositoryId": "com.enonic.cms.default",
+            "Versions": 0,
+            "Branches": [
+                {
+                    "Branch": "master",
+                    "Successful": 3,
+                    "Errors": []
+                },
+                {
+                    "Branch": "draft",
+                    "Successful": 3,
+                    "Errors": []
+                }
+            ]
+        },
+        {
+            "RepositoryId": "system-repo",
+            "Versions": 0,
+            "Branches": [
+                {
+                    "Branch": "master",
+                    "Successful": 22,
+                    "Errors": []
+                }
+            ]
+        }
+    ]
+}
+----
+
+=== Upgrade
+
+Upgrade a data dump from a previous version to the current version. The output of the upgrade will be placed alongside the dump that is being upgraded and will have the name `<dump-name>_upgraded_<new-version>`.
+
+NOTE: The current version XP installation must be running with the upgraded app deployed.
+
+.Url
+ POST system/upgrade
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`name`
+|String
+|dump name
+|===
+
+.Response
+[source,json]
+----
+{
+    "InitialVersion": "8.0.0",
+    "UpgradedVersion": "8.0.0"
+}
+----
+
+=== Load
+
+Load data from a named system dump into Enonic XP. The dump read has to be stored in the `$XP_HOME/data/dump` directory. See https://xp.readthedocs.io/en/stable/operations/export.html#operations-export[Export and Import] for more information on system dump/load.
+
+WARNING: A load will delete all existing repositories before loading the repositories present in the system-dump
+
+.Url
+ POST system/load
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`name`
+|String
+|dump name to load
+
+|`upgrade`
+|Boolean
+|upgrade the dump if necessary (default is false)
+|===
+
+.Response
+----
+{
+    "Repositories": [
+        {
+            "Repository": "system-repo",
+            "Versions": {
+                "Errors": [],
+                "Successful": 0
+            },
+            "Branches": [
+                {
+                    "Branch": "master",
+                    "Successful": 22,
+                    "Errors": []
+                }
+            ]
+        },
+        {
+            "Repository": "com.enonic.cms.default",
+            "Versions": {
+                "Errors": [],
+                "Successful": 0
+            },
+            "Branches": [
+                {
+                    "Branch": "draft",
+                    "Successful": 3,
+                    "Errors": []
+                },
+                {
+                    "Branch": "master",
+                    "Successful": 3,
+                    "Errors": []
+                }
+            ]
+        }
+    ]
+}
+----
+
+////
+        Export tasks
+////
+
+== Export
+
+Export and import data from a given repository, branch and content path.
+
+=== Create
+
+Extract data from a given repository, branch and content path. The result will be stored in the `$XP_HOME/data/export` directory. This is useful to move a part of a site from one installation to another. See https://xp.readthedocs.io/en/stable/operations/export.html#operations-export[Export and Import] for more information on content export/import.
+
+WARNING: Exporting content will not include the version history of the content, just the current version.
+
+.Url
+ POST repo/export
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`exportName`
+|String
+|target name to save export
+
+|`sourceRepoPath`
+|String
+|path of data to export. Format: `<repo-name>:<branch-name>:<node-path>` e.g. `cms-repo:draft:/some-content`
+
+|`exportWithIds`
+|Boolean
+|Flag to include or skip ids in data when exporting.
+
+|`includeVersions`
+|Boolean
+|Flag to include or skip versions in data when exporting.
+
+|`dryRun`
+|Boolean
+|Show the result without making actual changes.
+|===
+
+.Response
+[source,json]
+----
+{
+    "DryRun": false,
+    "ExportedBinaries": [],
+    "ExportedNodes": [
+        "/",
+        "/content",
+        "/issues"
+    ],
+    "Errors": null
+}
+----
+
+=== Import
+
+Import data from a named export into Enonic XP at the desired content path. The export read has to be stored in the `$XP_HOME/data/export` directory. See https://xp.readthedocs.io/en/stable/operations/export.html#operations-export[Export and Import] for more information on content export/import.
+
+.Url
+ POST repo/import
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`exportName`
+|String
+|a named export to import
+
+|`targetRepoPath`
+|String
+|target path for import. Format: `<repo-name>:<branch-name>:<node-path>` e.g. `cms-repo:draft:/some-content`
+
+|`xslSource`
+|String
+|path to xsl file (relative to `<XP_HOME>/data/export`) for applying transformations to node.xml before importing
+
+|`xslParams`
+|JSON
+|parameters to pass to the XSL transformations before importing nodes. Format: `{"applicationId": "com.enonic.myapp"}`
+
+|`importWithIds`
+|Boolean
+|flag to include or skip ids when importing
+
+|`importWithPermissions`
+|Boolean
+|flag to include or skip permissions when importing
+
+|`dry`
+|Boolean
+|show the result without making actual changes.
+|===
+
+.Response
+[source,json]
+----
+{
+    "AddedNodes": [],
+    "UpdateNodes": [
+        "/",
+        "/content",
+        "/issues"
+    ],
+    "ImportedBinaries": [],
+    "ImportErrors": [],
+    "DryRun": false
+}
+----
+
+[TIP]
+====
+An XSL file and a set of name=value parameters can be optionally passed for applying transformations to each node.xml file, before importing it.
+
+This option could for example be used for renaming types or fields. The .xsl file must be located in the `$XP_HOME/data/export` directory.
+====
+
+////
+        Application tasks
+////
+
+== Applications
+
+Commands to install applications to the running enonic XP instance.
+
+=== Install from file
+
+Installs an application from file on all nodes.
+
+.Url
+ POST app/install
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`file`
+|File
+|File of the application
+|===
+
+.Response
+[source,json]
+----
+{
+    "ApplicationInstalledJson": {
+        "Application": {
+            "DisplayName": "Content Studio",
+            "Key": "com.enonic.app.contentstudio",
+            "Deletable": false,
+            "Editable": false,
+            "Local": false,
+            "MaxSystemVersion": "8.0.0",
+            "MinSystemVersion": "7.0.0",
+            "ModifiedTime": "2019-06-13T14:48:30.314Z",
+            "State": "started",
+            "Url": "",
+            "VendorName": "Enonic AS",
+            "VendorUrl": "http://enonic.com",
+            "Version": "1.0.0.SNAPSHOT"
+        }
+    },
+    "Failure": ""
+}
+----
+
+=== Install from URL
+
+Installs an application from url on all nodes.
+
+.Url
+ POST app/installUrl
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`URL`
+|String
+|application URL
+|===
+
+.Response
+[source,json]
+----
+{
+    "ApplicationInstalledJson": {
+        "Application": {
+            "DisplayName": "Content Studio",
+            "Key": "com.enonic.app.contentstudio",
+            "Deletable": false,
+            "Editable": false,
+            "Local": false,
+            "MaxSystemVersion": "8.0.0",
+            "MinSystemVersion": "7.0.0",
+            "ModifiedTime": "2019-06-13T14:50:53.917Z",
+            "State": "started",
+            "Url": "",
+            "VendorName": "Enonic AS",
+            "VendorUrl": "http://enonic.com",
+            "Version": "2.0.0"
+        }
+    },
+    "Failure": ""
+}
+----
+
+////
+        CMS tasks
+////
+
+== CMS
+
+Content metadata commands. Currently only one command present here:
+
+=== Reprocess
+
+Reprocesses content in the repository and *regenerates metadata for the media attachments*. Only content of a media type (super-type = _base:media_) are processed.
+
+Unless the `skipChildren` flag is specified, it processes all descendants of the specified content path.
+
+NOTE: This command should be used after migrating content from Enonic CMS using the cms2xp tool.
+
+.Url
+ POST content/reprocess
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`sourceBranchPath`
+|String
+|target content path to be reprocessed. Format: `<branch-name>:<content-path>`. e.g `draft:/`
+
+|`skipChildren`
+|Boolean
+|flag to skip processing of content children
+|===
+
+.Response
+[source,json]
+----
+{
+    "Errors": [],
+    "UpdatedContent": []
+}
+----
+
+////
+        Repository tasks
+////
+
+== Repository
+
+Commands for configuring and managing repositories.
+
+=== Reindex
+
+Reindex the content in the search indices for the given repository and branches. This is usually required after upgrades, and may be useful in many other situation.
+
+.Url
+ POST repo/index/reindex
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`branches`
+|String
+|a comma-separated list of branches to be reindexed
+
+|`repository`
+|String
+|the name of the repository to reindex
+
+|`initialize`
+|Boolean
+|if true, the indices will be deleted before recreated
+|===
+
+.Response
+[source,json]
+----
+{
+    "RepositoryId": "com.enonic.cms.default",
+    "Branches": [
+        "draft",
+        "master"
+    ],
+    "NumberReindexed": 3,
+    "StartTime": "2019-06-14T07:58:38.663Z",
+    "EndTime": "2019-06-14T07:58:38.719Z",
+    "Duration": "PT-0.056S"
+}
+----
+
+=== Settings
+
+Update settings for a specified repository.
+
+.Url
+ POST repo/index/updateSettings
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`repositoryId`
+|String
+|single repository to toggle read-only mode for
+
+|`settings`
+|JSON
+|settings object, see below
+|===
+
+.Available settings options
+[source,json]
+----
+{
+    "index": {
+        "blocks.write": true, // <1>
+        "number_of_replicas": 3 // <2>
+    }
+}
+----
+<1> Toggle read-only mode.
+<2> Set the number of replicas in the cluster.
+
+.Response
+[source,json]
+----
+{
+    "UpdatedIndexes": [
+        "search-com.enonic.cms.default",
+        "storage-com.enonic.cms.default",
+        "search-system-repo",
+        "storage-system-repo"
+    ]
+}
+----
+
+=== List
+
+List available repositories.
+
+.Url
+ GET repo/list
+
+.Response
+[source,json]
+----
+{
+    "Repositories": [
+        {
+            "Branches": [
+                "master",
+                "draft"
+            ],
+            "Id": "com.enonic.cms.default"
+        },
+        {
+            "Branches": [
+                "master"
+            ],
+            "Id": "system-repo"
+        }
+    ]
+}
+----
+
+== Vacuum
+
+Deletes unused blobs and binaries from blobstore.
+
+WARNING: Make sure you have a backup of the installation available before doing a vacuum.
+
+.Url
+ POST system/vacuum
+
+.Response
+[source,json]
+----
+{
+{
+    "TaskResults": [
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 7,
+            "Processed": 7,
+            "TaskName": "UnusedSegmentsCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 39,
+            "Processed": 39,
+            "TaskName": "UnusedVersionFilesCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 2,
+            "Processed": 2,
+            "TaskName": "UnusedBinaryFilesCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 123,
+            "Processed": 123,
+            "TaskName": "UnusedVersionTableEntryCleaner"
+        }
+    ]
+}
+}
+----
