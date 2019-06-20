@@ -4,13 +4,14 @@
 
 The XP framework lets developer build web based applications based on the following capabilities:
 
-== HTTP Controllers
+[#http-controller]
+== HTTP Controller
 
 JavaScript http controllers simply export functions matching the desired HTTP Method it implements.
 As such, any controller must explicitly declare one or more "exports" in order to handle requests:
-``get``, ``post``, ``delete`` are examples of such methods.
+`get`, `post`, `delete` are examples of such methods.
 
-A controller can also export a special function ``all`` which will handle any HTTP method, unless there is a more specific handler available.
+A controller can also export a special function `all` which will handle any HTTP method, unless there is a more specific handler available.
 
 The appropriate function will automatically be invoked for every request sent to the controller.
 
@@ -20,14 +21,69 @@ The appropriate function will automatically be invoked for every request sent to
 include::code/controller-1.js[]
 ----
 
-A handler function receives a parameter with a ``request`` object, and returns a ``response`` object.
+A handler function receives a parameter with an <<HTTP Request>> object, and returns an <<HTTP Response>> object.
 
 [source,javascript]
 ----
 include::code/controller-2.js[]
 ----
 
+[#http-filter]
+== HTTP Filter
 
+Filters enable you to step into the request pipeline, and execute code at at both request and response of the execution pipeline, possibly intercepting the request directly.
+Similar to an <<HTTP Controller>>, standalone filters are triggered based on an export.
+
+As such, JavaScript filters must be exported as `filter`.
+
+.Minimal filter timing the subsequent request
+[source,js]
+----
+exports.filter = function (req, next) {
+    var before = new Date().getTime();
+    var response = next(req);  // next(req) hands over the request to the engine pipeline and returns the response
+    var after = new Date().getTime();
+    log.info((after - before) + 'ms');
+    return response;
+};
+----
+
+.Filter manipulating the request
+[source,js]
+----
+exports.filter = function (req, next) {
+  req.requestLogging = true; // Manipulate request
+  log.info("Request:" + JSON.stringify(req, null, 2));
+  var response = next(req); // Continue request pipeline
+  response.responseLogging = true; // Manipulate response
+  log.info("Response:" + JSON.stringify(response, null, 2));
+  return response;
+};
+----
+
+.Filter intercepting the request
+[source,js]
+----
+exports.filter = function (req, next) {
+
+    if (req.headers['X-Auth-Token'] !== 'letMeIn') {
+        // intercept request pipeline
+        return {
+            status: 403
+        }
+    }
+
+    req.headers['Authenticated'] = true;
+    return next(req);
+};
+----
+
+Filters may currently be wired into the execution pipeline in the following ways:
+
+* Using a https://market.enonic.com/vendors/enonic/router-lib[router]
+* Using <<../cms/mappings#, site mappings>>
+
+[#http-request]
 == HTTP Request
 
 The following object is passed along with every HTTP request. The object is similar to many traditional request objects, except for two special properties:
@@ -77,6 +133,7 @@ controller.
 <12> Name/value pairs of the HTTP request headers.
 <13> Name/value pairs of the HTTP request cookies.
 
+[#http-response]
 == HTTP Response
 
 The ``response`` object is the value returned by an HTTP controller - as a response to an :ref:`http_request`.
@@ -92,8 +149,8 @@ The ``response`` object is the value returned by an HTTP controller - as a respo
   },
   "cookies": {},  <!--5-->
   "redirect": "/another/page",  <!--6-->
-  "pageContributions": {},  <!--7-->
-  "postProcess": true,  <!--8-->
+  "postProcess": true,  <!--7-->
+  "pageContributions": {},  <!--8-->
   "applyFilters": true  <!--9-->
 }
 ----
@@ -104,10 +161,11 @@ The ``response`` object is the value returned by an HTTP controller - as a respo
 <4> Name/value pairs with the HTTP headers to be added to the response.
 <5> HTTP cookies to be added to the response. Will be described in a later section.
 <6> URI to redirect to. If specified, the value will be set in the "Location" header and the status will be set to 303.
-<7> A special filter available for sites and page components allowing page components to contribute html to the main page markup. See :ref:`page_contributions`
-<8> Post-processing is a special filter for sites and pages, if enabled it will reprosess a page looking for page contributions and rendering components in a page. (See also :ref:`page_contributions`) (default is ``true``). Set to false if you want to speed up page rendering in cases where there are no regions or page components.
-<9> Whether or not to execute the filters after rendering. Set to ``false`` to skip execution of filters. (See also :ref:`response_filters`) (default is ``true``).
+<7> Site engine only: If enabled the response body from a page render is processed to find and render any component tags found. (default is ``true``). Set to false to skip post processing of tags.
+<8> Site engine only: Use to contribute html to the resulting response markup. See <<../cms/contributions#, page contributions>> for more information.
+<9> Site engine only: If enabled, any defined <<response-processors#, response processors>> in the pipeline will be executed.
 
+[#http-cookies]
 == HTTP Cookies
 
 There are two ways that Http Cookie values can be set in responses (see examples).
@@ -144,12 +202,13 @@ return {
 <8> Control if the cookie should only be accepted to be created and read over https and similar secure protocols. Defaults to ``false``
 <9> Control if the cookie is available for scripts or not. If `true`, only the serverside code can read the cookie. Defaults to ``false`` (Also client-side scripts can read the cookie.)
 
-== Websockets
+[#http-websockets]
+== HTTP Websockets
 
 Websocket support allows a service to act as a websocket channel that
 you can connect to from a web-browser.
 
-A ``get`` method must be implemented to handle initialization
+A `get` method must be implemented to handle initialization
 of the websocket.
 
 [source,javascript]
@@ -157,14 +216,14 @@ of the websocket.
 include::code/websockets-1.js[]
 ----
 
-A websocket event handler named ``webSocketEvent`` is required. It will be called for every websocket event from a client. See example below.
+A websocket event handler named `webSocketEvent` is required. It will be called for every websocket event from a client. See example below.
 
 [source,javascript]
 ----
 include::code/websockets-2.js[]
 ----
 
-Below is an example of a simple chat. A library called ``lib-websocket`` has functions for sending messages back and adding/removing clients
+Below is an example of a simple chat using the <<../api/lib-websocket#, Websocket JS api>> for sending messages back and adding/removing clients
 in groups. Adding to groups allows for multicast message sending.
 
 [source,javascript]
@@ -172,19 +231,7 @@ in groups. Adding to groups allows for multicast message sending.
 include::code/websockets-3.js[]
 ----
 
+
 == Error handler
 
 TODO: Work in progress
-
-== HTTP Filters
-
-TODO: Work in progress
-
-JavaScript filters are only available for the site engine.
-Webapp developers may simply use a https://market.enonic.com/vendors/enonic/router-lib[router] to achieve similar functionality.
-
-Filters are essentially controllers added to the rendering pipeline before and/or after the normal request proccessing.
-
-Like controllers, filters are triggered based on their exports.
-
-For instance, expose two different methods,

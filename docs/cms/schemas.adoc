@@ -12,7 +12,10 @@ To facilitate creation of various forms and data types throughout Content Studio
 
 == Forms
 
-The main use of schemas is to define forms that can be edited through the admin interface. In addition to user interface, schemas also have a back-end equivalent that can be used programmatically, for instance through the content API.
+The main use of schemas is to define forms that can be edited through the admin interface.
+In addition to user interface, schemas also have a back-end equivalent that can be used programmatically,
+for instance through the content API.
+
 All forms are essentially compositions of <<Input types>> and optionally <<Sets>> when more complex structures are required.
 
 Once a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
@@ -49,7 +52,8 @@ An XSD is available to simplify editing of XML-based form files.
 
 == Input types
 
-Input types represent the most important part of any form, as the purpose is to enable editing and storing of a single value (or an array of values).
+Input types represent the most important part of any form.
+Their purpose is to enable editing and persistence of data.
 Input types have both front-end and back-end components. The front-end represents the visual editing interface used in the XP admin console, where the back-end is solely used for validation purposes.
 An input type will handle a single property, with zero, 1 or many values. I.e. the TextLine input type will return Strings. Normally, an input type will use a fixed propertyType, but this is optional.
 
@@ -88,11 +92,10 @@ This element is optional, if omitted the default will be `minimum="0"` and `maxi
 
 <6> *config* is an optional element designed to hold custom configuration for each input-type.
 
-Some input types are generic, and can be used in any form. Others however are contextual and may only be used in specific forms. An example is imageSelector which will only work in the context of Content Studio.
-
+Here is the <<input-types#, the complete list of input types>>
 
 == Sets
-In order to build richer forms that support grouping and nesting, Enonic XP supports the following input types:
+In order to build richer forms, or advanced grouping and nesting, Enonic XP also supports the following schema components:
 
 === FieldSet
 
@@ -214,71 +217,6 @@ Here is an example of a multi-select option set with options expanded by default
 <11> *help-text/@i18n* localization bundle key.
 <12> *default* Set to `true` to pre-select one of the options.
 <13> *items* Container of the option form's inputs.
-
-
-
-== Mixins and X-data
-
-To simplify maintenance of forms, mixins and x-data offer a simple templating approach to reuse the same definition across various forms.
-They can be injected into a form by simple name reference.
-
-.Sample mixin "us-address"
-[source,xml]
-----
-<mixin>
-  <display-name>U.S. Address format</display-name>
-  <form>
-    <input type="TextLine" name="addressLine">
-      <label>Street address</label>
-      <occurrences minimum="0" maximum="2"/>
-    </input>
-    <input type="TextLine" name="city">
-      <label>City</label>
-      <occurrences minimum="1" maximum="1"/>
-    </input>
-    <input type="TextLine" name="state">
-      <label>State</label>
-      <occurrences minimum="0" maximum="1"/>
-    </input>
-    <input type="TextLine" name="zipCode">
-      <label>Zip code</label>
-      <occurrences minimum="0" maximum="1"/>
-    </input>
-  </form>
-</mixin>
-----
-
-.Content Type using the "us-address" mixin
-[source,xml]
-----
-<content-type>
-  <display-name>Using mixins</display-name>
-  <super-type>base:structured</super-type>
-  <form>
-    ... fields specific for this content type ...
-    <mixin name="us-address"/> <!--1-->
-  </form>
-</content-type>
-----
-
-<1> The `<mixin>` element will be replaced by the contents of the `<form>` element from the mixin schema.
-
-.Content Type using the "us-address" X-data
-[source,xml]
-----
-<content-type>
-  <display-name>Using mixins</display-name>
-  <super-type>base:structured</super-type>
-  <form>
-    ... fields specific for this content type ...
-  </form>
-  <x-data name="us-address"/> <!--1-->
-</content-type>
-----
-
-<1> The `<x-data>` element will be replaced by the `<form>` element from the x-data schema.
-
-Similar functionality can also be solved by compile-time build scripts if desired.
 
 
 == Schema Localization

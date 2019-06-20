@@ -2,25 +2,64 @@
 :toc: right
 :imagesdir: images
 
+== Introduction
 
-== Site.xml
+A highly central component of the XP CMS are sites.
+Site is shipped as a standard content type, which means it can easily be created and added by editors.
+However, sites have the unique ability to let you add applications to them.
 
-Site forms lets you configure the current application for a specific site using Content Studio
+Whenever an app is added to a site, all functionality and all content types from the app will be available within the scope of the site.
 
+Only applications that declare support for sites can be added.
+This is done via the descriptor file called site.xml
+
+== site.xml
+
+The site form serves multiple purposes:
+
+* Declares that this app supports sites
+* Lets you to configure the application on a per site basis
+* Defines <<x-data#,X-data>> mappings for the site
+* Defines bindings to Controllers as mappings and filters
+
+The descriptor must be placed in your project as: `src/main/resources/site/site.xml`
+
+.Minimal site.xml example
 [source,xml]
 ----
 <site>
-  <form>
+  <form/>
+</site>
+----
+
+
+.Site.xml with all options enabled
+[source,xml]
+----
+<site>
+  <processors> <!--1-->
+    <response-processor name="tracker" order="10"/> <!--1--> <!--2-->
+  </processors>
+  <mappings> <!--2-->
+     <mapping controller="/site/foobar/api.js" order="10">
+       <pattern>/api/v\d+/.*</pattern>
+     </mapping>
+     <mapping controller="/site/pages/default/default.js">
+       <match>type:'portal:fragment'</match>
+     </mapping>
+   </mappings>
+   <form> <!--3-->
     <input type="TextLine" name="company">
       <label>Company</label>
       <occurrences minimum="1" maximum="1"/>
     </input>
-    <input type="TextArea" name="description">
-      <label>Description</label>
-      <occurrences minimum="1" maximum="1"/>
-    </input>
     <mixin name="address"/>
   </form>
-  <x-data name="additional-data"/>
+  <x-data name="seo-settings"/> <--4-->
 </site>
 ----
+
+<1> Commonly used to add <<contributions#,page contributions>> to the response
+<2> Controller and filter <<mappings#>> definitions
+<3> Define a <<schemas#,form>> for this app. Used to add site specific configuration of the app
+<4> Specify <<x-data#, X-data>> fields to add across content types within the site

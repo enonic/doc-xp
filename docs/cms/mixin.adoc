@@ -5,7 +5,7 @@
 If you need to repeat a group of fields in several different content types, consider extracting them into a mixin.
 After that you can add a reference to the mixin inside forms of required content types.
 
-TIP: If you want to append a separate form of fields rather than injecting fields inside content type's form, consider using <<x-data.adoc#,X-data>>
+TIP: If you want to append a separate form of fields rather than injecting fields inside content type's form, consider using <<x-data#,X-data>>
 
 == Definition
 
@@ -60,4 +60,4 @@ and their values will be saved with content data. Notice that the name of the mi
 </content-type>
 ----
 
-TIP: Mixins can be used in content types, component descriptors and the _site.xml_ file.
+TIP: Mixins can for instance be used in content types, component descriptors and the _site.xml_ file.
