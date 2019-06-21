@@ -1,0 +1,149 @@
+= Build system
+:toc: right
+:imagesdir: images
+
+Detailed insight in the standard XP build system
+
+NOTE: We recommend using https://developer.enonic.com/docs/enonic-cli[Enonic CLI] to control your builds by default.
+
+== Gradle
+By default, XP projects use https://gradle.org/[Gradle] as the main build tool. This is a highly flexible Java-based utility that builds on the popular Maven project tools and code repository structures.
+Enonic provides a Gradle plugin that greatly simplifies the build process. If you used the starter-vanilla project to initialize your project, you will have all the basic tools you need to get going.
+
+The `build.gradle` file located at your project root defines all the dependencies to other libraries.
+
+There are three standard scopes (keywords) used in the dependency list
+
+* Compile (default gradle scope, compiles library and adds it to class path - standard for pure Java libraries)
+* Include (XP custom scope that merges the /src/main/resources folder in the library with your project - any code in your project overwrites the library files)
+* Webjar (Extracts the content of the specified Webjar - http://www.webjars.org/ - placing it into the assets folder, using the version number as root folder)
+
+== Environment variables
+Enonic CLI automatically detects and uses project relative environment variables based on your XP distro and Sandbox.
+
+If you plan to invoke Gradle directly, you will need to setup these variables manually
+
+The following environment variables need to be defined:
+
+XP_HOME:: Defines the location of the home folder (typically the home folder within your sandbox)
+
+JAVA_HOME:: Defines the location of Java to support execution of Gradle (typically the `jdk` folder within your XP distro)
+
+To set these variables use one of the following approaches:
+
+=== Project shell
+
+Enonic CLI supports opening a new shell with environment variables automatically set:
+
+  enonic project shell
+
+
+=== Sourcing from CLI
+
+Use Enonic CLI to load environment variables into your current shell:
+
+Linux/MacOS::
+
+  $(enonic project env)
+
+
+=== Manual setup
+
+Manually set environment variables for your project:
+
+Linux/MacOS::
+
+   export XP_HOME=/path/to/sandbox/home
+   export JAVA_HOME=/path/to/xp-distro/jdk
+
+Windows::
+
+  set XP_HOME=c:\path\to\sandbox\home
+  set JAVA_HOME=c:\path\to\xp-distro\jdk
+
+
+== Gradle Wrapper
+
+The Gradle Wrapper is a file located in your projects root: `gradlew` for Linux/MacOS and `gradle.bat` for Windows.
+
+The wrapper will download all necessary files to run Gradle and execute project specific build commands.
+
+NOTE: The gradle wrapper may also be invoked directly from Enonic CLI using `enonic gradle`. All params following this command will be passed directly to the wrapper.
+
+
+=== Building
+Enonic CLI's `enonic project build` command automatically wraps and invokes the Gradle Wrapper.
+
+With environment variables set, you may use Gradle directly to get the job done:
+
+From your project folder root execute the following command:
+
+OSX/Linux::
+
+  ./gradlew build
+
+Windows::
+
+  gradlew.bat build
+
+
+The build will place any output artifacts in the project's build/libs/ folder.
+
+
+=== Deploying
+
+Enonic CLI's `enonic project deploy` command builds and deploys an app to your sandbox.
+
+You may do the same using Gradle directly:
+
+OSX/Linux::
+
+   ./gradlew deploy
+
+Windows::
+
+   gradlew.bat deploy
+
+The artifact is copied into the following location: `$XP_HOME/deploy`, where XP will automatically pick it up.
+
+NOTE:  XP apps deployed via file (locally) are presented with a small blue icon in the Applications tool in XP Admin.
+
+
+=== Development Mode
+
+Enonic XP supports a so-called Development mode.
+When running in this mode, XP will automatically source JavaScript controllers directly from your project folder.
+
+This may be convenient if you are developing with pure JavaScript and do not depend on build steps in your project.
+
+You may activate dev mode when starting XP as follows:
+
+Enonic CLI::
+
+  enonic sandbox start --dev
+
+Linux/MacOS directly::
+
+  $XP_INSTALL/bin/server.sh dev
+
+Windows directly::
+
+  $XP_INSTALL/bin/server.sh dev
+
+
+=== Continuous building
+
+Gradle also supports a https://docs.gradle.org/current/userguide/command_line_interface.html#sec:continuous_build[continuous build mode].
+This will monitor your project assets for changes and run the specified task when something changes.
+
+To use this with the `deploy` task, simply run the following command:
+
+`./gradlew deploy --continuous`
+
+This will deploy and reload the application on the server when something changes in your project.
+The continuous deployment mode is most useful when coding Java, or other changes that require a full compile and re-deploy.
+
+
+==  Debugging
+
+TODO

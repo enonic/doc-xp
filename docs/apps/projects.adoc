@@ -50,7 +50,7 @@ sample-project/
 
 Every file and folder has a specific function and purpose as described below:
 
-build.gradle:: main file used by the <<Build system>>.
+build.gradle:: main file used by the <<build-system#, Build system>>.
 
 gradle.properties:: Standard settings for XP apps
 
@@ -103,120 +103,16 @@ site/x-data/:: <<../cms/x-data#, eXtra data schemas.
 webapp/webapp.js:: The <<../runtime/webapps#, Webapp>> controller file
 
 
-
-== Build system
-
-XP apps by default uses https://gradle.org/[Gradle] to build apps.
-
-WORK IN PROGRESS
-
-The ``build.gradle`` file defines all the dependencies to other libraries.
-
-There are three standard scopes (keywords) used in the dependency list
-
-* Compile (default gradle scope, compiles library and adds it to class path - standard for pure Java libraries)
-* Include (XP custom scope that merges the /src/main/resources folder in the library with your project - any code in your project overwrites the library files)
-* Webjar (Extracts the content of the specified Webjar - http://www.webjars.org/ - placing it into the assets folder, using the version number as root folder)
-
-
-By default, XP projects use Gradle as the main build tool. This is a highly flexible Java-based utility that builds on the popular Maven project tools and code repository structures.
-Enonic provides a Gradle plugin that greatly simplifies the build process. If you used the starter-vanilla project to initialize your project, you will have all the basic tools you need to get going.
-
-If you have not installed Gradle, the fastest way to get going is to execute the gradle wrapper script.
-
-Move into your project root folder and execute the following command:
-
-OSX/Linux:
-
-  ./gradlew build
-
-Windows:
-
-  gradlew.bat build
-
-
-The gradle wrapper will download all necessary files to run gradle and produce the project artifacts. These will typically be placed in the projects build/libs/ folder.
-
-
-=== gradle deploy
-
-To have Gradle automatically deploy new applications to your XP installation, you have to specify an environment variable that tells Gradle where to place the artifact (application file).
-
-OSX/Linux::
-
-   export XP_HOME=/path/to/xp-installation/home
-
-Windows::
-
-  set XP_HOME=c:\path\to\xp-installation\home
-
-
-With $XP_HOME set, run the following command to build and deploy the file
-
-OSX/Linux::
-
-   ./gradlew deploy
-
-Windows::
-
-   gradlew.bat deploy
-
-
-== Project artifacts
-
-TOOD: What is the output files, and what must they contain to be valid XP apps (including MANIFEST etc)
-
-
-== Deploy
-
-For your convenience - we have simplified this process by adding a ``deploy`` task to your build.
-Instead of manually copying to the deploy folder, you can simply execute ``gradle deploy``:
-
-``./gradlew deploy``
-
-For the deploy command to work, you have to set the ``XP_HOME`` environment variable
-(in your shell) to your actual Enonic XP home directory.
-
-Run the following command to set the XP_HOME variable
-
-OSX/Linux:
-
-``export XP_HOME=/path/to/xp-installation/home``
-
-Windows:
-
-``set XP_HOME=c:\path\to\xp-installation\home``
-
-
-=== Development Mode
-
-TODO
-
-To continuously build and deploy your application on changes, you can use
-`Gradle continuous mode <https://docs.gradle.org/current/userguide/continuous_build.html>`_.
-This will watch for changes and run the specified task when something changes.
-To use this with the ``deploy`` task, you can run the following command:
-
-``./gradlew -t deploy``
-
-This will deploy and reload the application on the server when something changes in your project.
-The continuous deployment mode is most useful when coding Java, or other changes that require a full compile and re-deploy.
-
-For the instant updates of JavaScript code without re-deploying, check out :ref:`gradle_dev_mode`.
-
-===  Debugging
-
-TODO
-
 == Libraries
 
-Libraries are structurally like applications, with the difference that a library is not made be installed and run on it's own.
+Libraries are structurally similar to applications,
+with the difference that a library is designed to be installed and run on it's own.
 However, a library can be included in an application (or many) to provide functionality to that app.
 
 The process of setting up and building libraries is similar to applications.
-To build a library we recommend using the library starter (TODO).
+To build a library we recommend using the https://market.enonic.com/vendors/enonic/library-starter[library project template].
 
 Once a library has been built, the output will be a .jar file, just like an application.
-However, libraries will have small differences in application metadata TODO MANIFEST etc
+However, libraries will have small differences in application metadata.
 
-To add a library in an applications, update the applications ``build.gradle``file
+To add a library in an application, simply update the applications ``build.gradle``file
