@@ -9,11 +9,13 @@
 
 We provide some basic metric tools for monitoring which are easily accessed in a simple JSON format. To access the monitoring JSON feed you can point to the following url:
 
- GET http://localhost:2609/
+ GET http://<host>:2609/
+
+TIP: `<host>` equals `localhost` on the machine with running enonic XP instance
 
 This will give you a list of status-reporters. Each reporter has a name and can be accessed using the following pattern:
 
- GET http://localhost:2609/<name>
+ GET http://<host>:2609/<name>
 
 Here’s a list of all the status pages and what is shows:
 
@@ -21,7 +23,7 @@ cache.com.enonic.xp.webSessionCache::
 Statistics about the web session cache.
 cluster.elasticsearch::
 Information about the ElasticSearch cluster. Local-node and members.
-cluster.ignite:: --
+cluster.ignite::
 Information about the Ignite cluster. Local-node and members.
 cluster.manager::
 Information about the state of the clusters: elasticsearch and ignite
@@ -47,7 +49,7 @@ jvm.memory::
 JVM memory information (heap, non-heap, pools).
 jvm.os::
 Information about OS (name, version, architecture).
-jvm.properties:: --
+jvm.properties::
 Shows all JVM properties.
 jvm.threads::
 JVM thread stats (count, peak, total).
@@ -206,7 +208,7 @@ The `state` property is the most important:
 - *Yellow*: Cluster is operational, but there are replicas that are not distributed to any node
 - *Red*: Cluster is not operational
 
-To see the details about how the replicas are distributed, let’s continue to the Index stats report:
+To see the details about how the replicas are distributed, let’s continue to the `Index stats` report:
 
 === Index stats
 
