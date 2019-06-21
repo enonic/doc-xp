@@ -1,5 +1,291 @@
 = Statistics API
 :toc: right
+:toclevels: 4
+:sectnums:
+:sourcedir: ../javascript
 :imagesdir: images
 
-TODO2
+== Monitoring
+
+We provide some basic metric tools for monitoring which are easily accessed in a simple JSON format. To access the monitoring JSON feed you can point to the following url:
+
+ GET http://localhost:2609/
+
+This will give you a list of status-reporters. Each reporter has a name and can be accessed using the following pattern:
+
+ GET http://localhost:2609/<name>
+
+Here’s a list of all the status pages and what is shows:
+
+cache.com.enonic.xp.webSessionCache::
+Statistics about the web session cache.
+cluster.elasticsearch::
+Information about the ElasticSearch cluster. Local-node and members.
+cluster.ignite:: --
+Information about the Ignite cluster. Local-node and members.
+cluster.manager::
+Information about the state of the clusters: elasticsearch and ignite
+dump.deadlocks::
+This will try to detect thread deadlocks and show them if any.
+dump.threads::
+Dumps all current thread-states.
+http.filter::
+List of servlet filters registered. It shows class, order and the URL patterns to which it applies.
+http.servlet::
+List of HTTP servlets registered. It shows class, order and the URL patterns to which it applies.
+http.threadpool::
+Status of the the Jetty web server thread pool.
+http.webHandler::
+List of WebHandler instances registered.
+index::
+Shows ElasticSearch index status.
+jvm.gc::
+Information about JVM GC status.
+jvm.info::
+General JVM information (version, vendor, uptime).
+jvm.memory::
+JVM memory information (heap, non-heap, pools).
+jvm.os::
+Information about OS (name, version, architecture).
+jvm.properties:: --
+Shows all JVM properties.
+jvm.threads::
+JVM thread stats (count, peak, total).
+mediaTypes::
+List of mappings from file extension to media type.
+metrics::
+Shows metrics. The information can be filtered using ?filter=....
+osgi.bundle::
+Information about all OSGi bundles.
+osgi.component::
+Information about registered SCR OSGi components.
+osgi.service::
+Shows all OSGi services registered.
+server::
+Information about the server (version, build).
+
+== Cluster monitoring
+
+There are multiple tools at your disposal for monitoring the health of the clusters and indices:
+
+=== Cluster health
+
+ GET http://<host>:2609/cluster.manager
+
+To obtain a generic health check of the clusters. It should return you a response similar to:
+[source, json]
+----
+{
+    "state": "OK",
+    "clusters": [
+        {
+            "id": "elasticsearch",
+            "enabled": true,
+            "healthy": true,
+            "numberOfNodesSeen": 3
+        },
+        {
+            "id": "ignite",
+            "enabled": true,
+            "healthy": true,
+            "numberOfNodesSeen": 3
+        }
+    ]
+}
+----
+=== Ignite cluster health
+
+ GET http://<host>:2609/cluster.ignite
+
+Which should return you a response similar to:
+[source, json]
+----
+{
+    "members": [
+        {
+            "id": "b57aa9c3-9d1e-4fab-8e93-664fffea0472",
+            "name": "af5287fc-663d-40bd-9b05-7cca59f96522",
+            "local": true,
+            "isClient": false,
+            "isDeamon": false,
+            "order": 1,
+            "addresses": [
+                "127.0.0.1"
+            ],
+            "hostNames": []
+        },
+        {
+            "id": "f1fa5651-75cc-45a9-9562-9c9e032aeb30",
+            "name": "01bd187e-7cd1-4a8a-ac0a-918d4e09aa64",
+            "local": false,
+            "isClient": false,
+            "isDeamon": false,
+            "order": 2,
+            "addresses": [
+                "127.0.0.1"
+            ],
+            "hostNames": []
+        },
+        {
+            "id": "01c90f5d-052e-442f-b998-9b7ed567a79b",
+            "name": "cf91d280-6111-47f2-8118-7d48664c3530",
+            "local": false,
+            "isClient": false,
+            "isDeamon": false,
+            "order": 3,
+            "addresses": [
+                "127.0.0.1"
+            ],
+            "hostNames": []
+        }
+    ],
+    "localNode": {
+        "id": "b57aa9c3-9d1e-4fab-8e93-664fffea0472",
+        "numberOfNodesSeen": 3
+    }
+}
+----
+This view gives a brief overview of the nodes in the cluster.
+
+=== ElasticSearch cluster health
+
+ GET http://<host>:2609/cluster.elasticsearch
+
+Which should return you a response similar to:
+[source, json]
+----
+{
+    "name": "mycluster",
+    "localNode": {
+        "isMaster": true,
+        "id": "WT_gNgZ8SAu7GCJxvynSOg",
+        "hostName": "griPortable.local",
+        "version": "1.5.2",
+        "numberOfNodesSeen": 3
+    },
+    "members": [
+        {
+            "isMaster": false,
+            "id": "WqknPf3USg2fOnK6xGlWwA",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9301]",
+            "name": "01bd187e-7cd1-4a8a-ac0a-918d4e09aa64",
+            "isDataNode": true,
+            "isClientNode": false
+        },
+        {
+            "isMaster": false,
+            "id": "xDwdxa37SUy6AHPz6hMZMA",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9302]",
+            "name": "cf91d280-6111-47f2-8118-7d48664c3530",
+            "isDataNode": true,
+            "isClientNode": false
+        },
+        {
+            "isMaster": true,
+            "id": "WT_gNgZ8SAu7GCJxvynSOg",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9300]",
+            "name": "af5287fc-663d-40bd-9b05-7cca59f96522",
+            "isDataNode": true,
+            "isClientNode": false
+        }
+    ],
+    "state": "GREEN"
+}
+----
+This view gives a brief overview of the nodes in the cluster. For convenience, the current local node to which the request was made has a separate entry in addition to being in the list of members.
+
+The `state` property is the most important:
+
+- *Green*: Cluster is operational and all configured replicas are distributed to a node
+- *Yellow*: Cluster is operational, but there are replicas that are not distributed to any node
+- *Red*: Cluster is not operational
+
+To see the details about how the replicas are distributed, let’s continue to the Index stats report:
+
+=== Index stats
+
+ GET http://<host>:2609/index
+
+Which should give you a response like this:
+[source, json]
+----
+{
+    "summary": {
+        "total": 8,
+        "started": 8,
+        "unassigned": 0,
+        "relocating": 0,
+        "initializing": 0
+    },
+    "shards": {
+        "started": [
+            {
+                "id": "search-cms-repo(0)",
+                "nodeId": "xDwdxa37SUy6AHPz6hMZMA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "search-cms-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "search-system-repo(0)",
+                "nodeId": "xDwdxa37SUy6AHPz6hMZMA",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "search-system-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "storage-system-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "storage-system-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "storage-cms-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "storage-cms-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            }
+        ],
+        "unassigned": [],
+        "relocating": [],
+        "initializing": []
+    }
+}
+----
+This gives an overview of how the indices are distributed and what state the index parts (*shards*) are currently in. A shard could be either `PRIMARY` or `REPLICA` (copy of a primary shard). These are the possible states:
+
+- *total*: Total number of index parts (e.g two repositories with two indices with one replica for each index)
+- *started*: Shards that are currently assigned to a node
+- *unassigned*: Shards waiting to be distributed to a node. Typically a setup with a number of replicas where one or more nodes are not running
+- *relocating*: Shards that are currently moving from one node to another
+- *initializing*: Shards that are currently being recovered from disk at startup.
+
+The `shards` section gives a more detailed overview on the shard distribution.
