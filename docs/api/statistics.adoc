@@ -1,9 +1,5 @@
 = Statistics API
 :toc: right
-:toclevels: 4
-:sectnums:
-:sourcedir: ../javascript
-:imagesdir: images
 
 == Monitoring
 
@@ -23,8 +19,6 @@ cache.com.enonic.xp.webSessionCache::
 Statistics about the web session cache.
 cluster.elasticsearch::
 Information about the ElasticSearch cluster. Local-node and members.
-cluster.ignite::
-Information about the Ignite cluster. Local-node and members.
 cluster.manager::
 Information about the state of the clusters: elasticsearch and ignite
 dump.deadlocks::
@@ -49,8 +43,6 @@ jvm.memory::
 JVM memory information (heap, non-heap, pools).
 jvm.os::
 Information about OS (name, version, architecture).
-jvm.properties::
-Shows all JVM properties.
 jvm.threads::
 JVM thread stats (count, peak, total).
 mediaTypes::
@@ -95,58 +87,7 @@ To obtain a generic health check of the clusters. It should return you a respons
     ]
 }
 ----
-=== Ignite cluster health
 
- GET http://<host>:2609/cluster.ignite
-
-Which should return you a response similar to:
-[source, json]
-----
-{
-    "members": [
-        {
-            "id": "b57aa9c3-9d1e-4fab-8e93-664fffea0472",
-            "name": "af5287fc-663d-40bd-9b05-7cca59f96522",
-            "local": true,
-            "isClient": false,
-            "isDeamon": false,
-            "order": 1,
-            "addresses": [
-                "127.0.0.1"
-            ],
-            "hostNames": []
-        },
-        {
-            "id": "f1fa5651-75cc-45a9-9562-9c9e032aeb30",
-            "name": "01bd187e-7cd1-4a8a-ac0a-918d4e09aa64",
-            "local": false,
-            "isClient": false,
-            "isDeamon": false,
-            "order": 2,
-            "addresses": [
-                "127.0.0.1"
-            ],
-            "hostNames": []
-        },
-        {
-            "id": "01c90f5d-052e-442f-b998-9b7ed567a79b",
-            "name": "cf91d280-6111-47f2-8118-7d48664c3530",
-            "local": false,
-            "isClient": false,
-            "isDeamon": false,
-            "order": 3,
-            "addresses": [
-                "127.0.0.1"
-            ],
-            "hostNames": []
-        }
-    ],
-    "localNode": {
-        "id": "b57aa9c3-9d1e-4fab-8e93-664fffea0472",
-        "numberOfNodesSeen": 3
-    }
-}
-----
 This view gives a brief overview of the nodes in the cluster.
 
 === ElasticSearch cluster health

@@ -1,17 +1,11 @@
 = Macros
 :toc: right
-:toclevels: 4
-:sectnums:
-:sourcedir: ../javascript
-:imagesdir: images
 
 == Macros
 
-WARNING: Macros are experimental.
-
 Macros are instructions that allow adding extra functionality or include dynamic content in the Html Editor.
 
-The Html Editor is used when editing https://xp.readthedocs.io/en/stable/developer/schema/input-types/htmlarea.html#htmlarea-type[HtmlArea] input fields, or while editing a https://xp.readthedocs.io/en/stable/admin/contentstudio/text-component.html#cs-text-component[Text component] in Page Editor.
+The Html Editor is used when editing https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea] input fields, or while editing a https://developer.enonic.com/docs/xp/stable/cms/components#text[Text component] in Page Editor.
 
 There are two built-in macros included in XP. But its real power comes from macros provided by applications. When an application that contains macros is added to a site, they will be available for any HtmlArea or Text component inside the site.
 
@@ -24,7 +18,7 @@ A macro instruction is similar to an HTML or XML tag but using square brackets i
 
 Macro instructions can be added anywhere in an HTML page, usually inside a content’s HtmlArea field.
 
-During the rendering of the page the macros are resolved and executed. Then the result from executing the macro replaces the instruction text. In addition, a macro can also add styles or scripts to the page, by setting https://xp.readthedocs.io/en/stable/developer/site/contributions.html#page-contributions[Page Contributions] in its response.
+During the rendering of the page the macros are resolved and executed. Then the result from executing the macro replaces the instruction text. In addition, a macro can also add styles or scripts to the page, by setting https://developer.enonic.com/docs/xp/stable/cms/contributions[Page Contributions] in its response.
 
 A user can add macro instructions by typing the square bracket tags, as the examples above. But more frequently it will click on the Insert macro button and select one of the macros available.
 
@@ -35,15 +29,15 @@ A macro descriptor is an xml file that allows assigning a user-friendly name, an
 display-name::
 A simple human readable display name.
 display-name@i18n::
-The key to look up the display-name text in the localization bundles. Optional. (See also https://xp.readthedocs.io/en/stable/developer/i18n/schemas.html#localization-schemas[Localization of Schemas])
+The key to look up the display-name text in the localization bundles. Optional. (See also https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization[Localization of Schemas])
 description::
 A description to show in the Insert macro dialog in Content Studio.
 description@i18n::
-The key to look up the description text in the localization bundles. Optional. (See also https://xp.readthedocs.io/en/stable/developer/i18n/schemas.html#localization-schemas[Localization of Schemas])
+The key to look up the description text in the localization bundles. Optional. (See also https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization[Localization of Schemas])
 config::
 The config element is a form where each input element corresponds to a macro parameter. The macro body is represented with an input named "body".
 
-NOTE: The config form does not support nested elements, so https://xp.readthedocs.io/en/stable/developer/schema/item-sets.html#item-sets[Item Sets] are not allowed in the macro config form. Also the https://xp.readthedocs.io/en/stable/developer/schema/input-types/htmlarea.html#htmlarea-type[HtmlArea] input type is not allowed in the config form, since it may contain macros itself.
+NOTE: The config form does not support nested elements, so https://developer.enonic.com/docs/xp/stable/cms/schemas#itemset[Item Sets] are not allowed in the macro config form. Also the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea] input type is not allowed in the config form, since it may contain macros itself.
 
 Its path follows the pattern `site/macros/<macroName>/<macroName>.xml`
 
@@ -61,7 +55,7 @@ Its path follows the pattern `site/macros/<macroName>/<macroName>.xml`
 </macro>
 ----
 
-TIP: The macro texts (display-name, description, label and help-text from config input types) can be provided in multiple languages. See https://xp.readthedocs.io/en/stable/developer/i18n/schemas.html#localization-schemas[Localization of Schemas] for details.
+TIP: The macro texts (display-name, description, label and help-text from config input types) can be provided in multiple languages. See https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization[Localization of Schemas] for details.
 
 Although not strictly required, it is recommended to create a descriptor, as it provides the required details for adding macros through the UI in Content Studio.
 
@@ -71,7 +65,7 @@ The functionality of a macro is implemented in a JavaScript controller, inside a
 
 Its path follows the pattern `site/macros/<macroName>/<macroName>.js`
 
-A macro controller must export a single `macro` function that takes a `context` parameter and returns a response object (see https://xp.readthedocs.io/en/stable/developer/ssjs/http-response.html#http-response[HTTP Response]).
+A macro controller must export a single `macro` function that takes a `context` parameter and returns a response object (see https://developer.enonic.com/docs/xp/stable/framework/http#http-response[HTTP Response]).
 
 The context parameter is a Javascript object with the following properties:
 
