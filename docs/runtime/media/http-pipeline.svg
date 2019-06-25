@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="768px" height="270px" viewBox="0 0 768 270" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>HTTP pipeline</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="119" y="33" width="85" height="54" rx="8"></rect>
+        <rect id="path-2" x="228" y="33" width="123" height="54" rx="8"></rect>
+        <rect id="path-3" x="376" y="33" width="105" height="54" rx="8"></rect>
+        <rect id="path-4" x="505" y="33" width="105" height="54" rx="8"></rect>
+        <rect id="path-5" x="634" y="33" width="105" height="54" rx="8"></rect>
+        <rect id="path-6" x="48" y="143" width="284" height="54" rx="8"></rect>
+        <rect id="path-7" x="202" y="219" width="24" height="26" rx="8"></rect>
+        <rect id="path-8" x="508" y="219" width="24" height="26" rx="8"></rect>
+        <rect id="path-9" x="349" y="220" width="24" height="26" rx="8"></rect>
+        <rect id="path-10" x="356" y="143" width="123" height="54" rx="8"></rect>
+        <rect id="path-11" x="503" y="143" width="135" height="54" rx="8"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HTTP-pipeline">
+            <path d="M730.349814,61 C730.349814,61 773.073735,56.7184235 746.563002,103.695072 C717.39134,159.306289 58.0668908,80.2997057 31.4357042,126.334865 C12.7007295,163.17982 57.8446768,170.99388 57.8446768,170.99388" id="Path-2" stroke="#979797"></path>
+            <g id="Rectangle">
+                <use fill="#DFFEC0" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#979797" stroke-width="1" x="119.5" y="33.5" width="84" height="53" rx="8"></rect>
+            </g>
+            <text id="HTTP-request" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="41.032" y="28">HTTP</tspan>
+                <tspan x="32.534" y="46">request</tspan>
+            </text>
+            <text id="Vhost-filter" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="146.662" y="55">Vhost</tspan>
+                <tspan x="149.294" y="73">filter</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#FFE6E6" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <rect stroke="#979797" stroke-width="1" x="228.5" y="33.5" width="122" height="53" rx="8"></rect>
+            </g>
+            <text id="Java-request-filters" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="275.235" y="55">Java </tspan>
+                <tspan x="248.005" y="73">request filters</tspan>
+            </text>
+            <path d="M-0.5,60.5 L118.5,60.5" id="Line" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path id="Line-decoration-1" d="M118.5,60.5 L107.7,57.5 L107.7,63.5 L118.5,60.5 Z" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path d="M204.5,60.5 L227.694827,60.5" id="Line" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path id="Line-decoration-1" d="M227.694827,60.5 L216.894827,57.5 L216.894827,63.5 L227.694827,60.5 Z" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <g id="Rectangle">
+                <use fill="#FEE6E6" fill-rule="evenodd" xlink:href="#path-3"></use>
+                <rect stroke="#979797" stroke-width="1" x="376.5" y="33.5" width="104" height="53" rx="8"></rect>
+            </g>
+            <path d="M352.5,60.5 L375.694827,60.5" id="Line" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path id="Line-decoration-1" d="M375.694827,60.5 L364.894827,57.5 L364.894827,63.5 L375.694827,60.5 Z" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-4"></use>
+                <rect stroke="#979797" stroke-width="1" x="505.5" y="33.5" width="104" height="53" rx="8"></rect>
+            </g>
+            <text id="Auth-filter" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="415.361" y="57">Auth</tspan>
+                <tspan x="414.794" y="75">filter</tspan>
+            </text>
+            <path d="M481.5,60.5 L504.694827,60.5" id="Line" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path id="Line-decoration-1" d="M504.694827,60.5 L493.894827,57.5 L493.894827,63.5 L504.694827,60.5 Z" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <g id="Rectangle">
+                <use fill="#C6DDFF" fill-rule="evenodd" xlink:href="#path-5"></use>
+                <rect stroke="#979797" stroke-width="1" x="634.5" y="33.5" width="104" height="53" rx="8"></rect>
+            </g>
+            <text id="HTTP-services" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="674.532" y="55">HTTP</tspan>
+                <tspan x="664.025" y="73">services</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-6"></use>
+                <rect stroke="#979797" stroke-width="1" x="48.5" y="143.5" width="283" height="53" rx="8"></rect>
+            </g>
+            <text id="Webapp-|-Site-|-Admi" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="109.202" y="174">Webapp | Site | Admin engine</tspan>
+            </text>
+            <path d="M610.5,60.5 L633.694827,60.5" id="Line" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path id="Line-decoration-1" d="M633.694827,60.5 L622.894827,57.5 L622.894827,63.5 L633.694827,60.5 Z" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <g id="Rectangle">
+                <use fill="#DFFEC0" fill-rule="evenodd" xlink:href="#path-7"></use>
+                <rect stroke="#979797" stroke-width="1" x="202.5" y="219.5" width="23" height="25" rx="8"></rect>
+            </g>
+            <g id="Rectangle">
+                <use fill="#FFE6E6" fill-rule="evenodd" xlink:href="#path-8"></use>
+                <rect stroke="#979797" stroke-width="1" x="508.5" y="219.5" width="23" height="25" rx="8"></rect>
+            </g>
+            <g id="Rectangle">
+                <use fill="#C6DEFF" fill-rule="evenodd" xlink:href="#path-9"></use>
+                <rect stroke="#979797" stroke-width="1" x="349.5" y="220.5" width="23" height="25" rx="8"></rect>
+            </g>
+            <text id="HTTP-response" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="685.032" y="195">HTTP</tspan>
+                <tspan x="672.341" y="213">response</tspan>
+            </text>
+            <path d="M638.5,169.5 L767.5,169.5" id="Line" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path id="Line-decoration-1" d="M767.5,169.5 L756.7,166.5 L756.7,172.5 L767.5,169.5 Z" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <g id="Rectangle">
+                <use fill="#FFE6E6" fill-rule="evenodd" xlink:href="#path-10"></use>
+                <rect stroke="#979797" stroke-width="1" x="356.5" y="143.5" width="122" height="53" rx="8"></rect>
+            </g>
+            <text id="Java-response-filter" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="404.735" y="165">Java</tspan>
+                <tspan x="373.312" y="183">response filters</tspan>
+            </text>
+            <text id="Configurable" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="237.174" y="237">Configurable</tspan>
+            </text>
+            <text id="Programmable" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="386.176" y="237">Programmable</tspan>
+            </text>
+            <text id="Both" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="545.015" y="237">Both</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#DFFEC0" fill-rule="evenodd" xlink:href="#path-11"></use>
+                <rect stroke="#979797" stroke-width="1" x="503.5" y="143.5" width="134" height="53" rx="8"></rect>
+            </g>
+            <text id="System-error-handler" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="549.136" y="165">System</tspan>
+                <tspan x="533.344" y="183">error handler</tspan>
+            </text>
+            <path d="M479.5,170.5 L502.694827,170.5" id="Line" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path id="Line-decoration-1" d="M502.694827,170.5 L491.894827,167.5 L491.894827,173.5 L502.694827,170.5 Z" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path d="M332.5,169.5 L355.694827,169.5" id="Line" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <path id="Line-decoration-1" d="M355.694827,169.5 L344.894827,166.5 L344.894827,172.5 L355.694827,169.5 Z" stroke="#9B9B9B" fill="#9B9B9B" stroke-linecap="square"></path>
+            <text id="Asset-service" font-family="GTPressura, GT Pressura" font-size="14" font-weight="normal" fill="#000000">
+                <tspan x="542.362" y="55">Asset</tspan>
+                <tspan x="537.238" y="73">service</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

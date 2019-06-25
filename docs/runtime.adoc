@@ -14,27 +14,27 @@ By default, the XP runtime serves HTTP requests from port 8080 (customizable).
 
 All HTTP requests are processed through a common pipeline as specified below:
 
-image::http-request-pipeline.svg[HTTP request pipeline,1024]
+image::http-pipeline.svg[Common HTTP request pipeline, 768px]
 
 Vhost filters:: Request routing based on <<deployment/vhosts#,virtual hosts>>
 
 Java request filters:: Optional Java request filters
 
-Asset handler:: Serves <<runtime/assets#,static assets>> for /_/asset/* request patterns
+Asset service:: Serves <<runtime/asset-service#,static assets>> for the /_/asset/* request patterns
 
-Service handler:: Executes <<runtime/http-services#,HTTP services>> for /_/service/* request patterns
+HTTP Services:: Executes <<runtime/http-services#,HTTP services>> for the /_/service/* request patterns
 
 Engine pipeline:: Engine specific processing based on request pattern:
 +
 ====
 There are three specialized implementations of the HTTP engine available.
 
-* <<webapp-engine#,Web app engine>> :8080/webapp/<name-of-webapp>/*
-* <<site-engine#,Site engine>> :8080/site/<repo>/<branch>/*
-* <<admin-engine#,Admin engine>> :8080/admin/*
+* <<runtime/webapp-engine#,Web app engine>> :8080/webapp/<name-of-webapp>/*
+* <<runtime/site-engine#,Site engine>> :8080/site/<repo>/<branch>/*
+* <<runtime/admin-engine#,Admin engine>> :8080/admin/*
 ====
 
-ID provider::  If the pipeline returns a "401: Unauthorized" error code, the default <<deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
+Auth filter::  If the pipeline returns a "401: Unauthorized" error code, the default <<deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
 
 Error handler:: If the pipeline returns an error (everything but "200: Ok") that was not handled by an ID provider, an available error handler will kick in.
 
@@ -46,4 +46,4 @@ Standard error handler:: Finally, if the request fails with an error that is sti
 
 == Task Engine
 
-The <<tasks#,task engine>> enables developers to run Javascripts as threaded background tasks.
+The <<runtime/task-engine#,task engine>> enables developers to run Javascripts as threaded background tasks.

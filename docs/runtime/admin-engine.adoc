@@ -1,8 +1,11 @@
 = Admin app engine
 :toc: right
-:imagesdir: images
+:imagesdir: media
 
 Site engine is responsible for processing of site requests on the endpoint `:8080/admin/*`
+
+image::admin-pipeline.svg[Site rendering pipeline, 768px]
+
 
 == Tools handler
 

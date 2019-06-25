@@ -1,6 +1,6 @@
 = Asset service
 :toc: right
-:imagesdir: images
+:imagesdir: media
 
 Applications commonly need to serve static files such as icons, css and javascript to their clients.
 XP provides a standard and cache optimized approach to serving assets.
@@ -9,7 +9,7 @@ XP provides a standard and cache optimized approach to serving assets.
 
 The attachment endpoint is located at the root of an application or site's url space as `/_/asset/`.
 
-The asset endpoint consists of three elements: 
+The asset endpoint consists of three elements:
 
 * Mount point `/_/asset/`
 * App identifier with optional _hash_ i.e. `com.company.app` or `com.company.app:235293024/`

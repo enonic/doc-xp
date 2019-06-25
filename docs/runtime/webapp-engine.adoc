@@ -1,8 +1,16 @@
 = Web app engine
 :toc: right
-:imagesdir: images
+:imagesdir: media
 
 Site engine is responsible for processing of site requests on the endpoint `:8080/webapp/<app-name>/*`
+
+== Rendering pipeline
+
+image::webapp-pipeline.svg[Webapp rendering pipeline, 768px]
+
+This section describes the full pipeline involved in processing a webapp http request.
+
+Web app controller:: Invokes the webapp controller of the contextual application
 
 == webapp.js
 
@@ -21,12 +29,5 @@ Below is an example webapp controller.
 ----
 include::code/webapp.js[]
 ----
-
-
-== Rendering pipeline
-
-This section describes the full pipeline involved in processing a webapp http request.
-
-Web app controller:: Invokes the webapp controller of the contextual application
 
 NOTE: To make use of JavaScript filters in web apps, the implementer must use a https://market.enonic.com/vendors/enonic/router-lib[router].
