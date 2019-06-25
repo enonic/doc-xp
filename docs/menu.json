@@ -53,28 +53,6 @@
           "document": "runtime/architecture"
         },
         {
-          "title": "Web app engine",
-          "document": "runtime/webapp-engine"
-        },
-        {
-          "title": "Site engine",
-          "document": "runtime/site-engine",
-          "menuItems": [
-            {
-              "title": "Image service",
-              "document": "runtime/site-engine/image-service"
-            },
-            {
-              "title": "Component service",
-              "document": "runtime/site-engine/component-service"
-            }
-          ]
-        },
-        {
-          "title": "Admin engine",
-          "document": "runtime/admin-engine"
-        },
-        {
           "title": "Asset service",
           "document": "runtime/asset-service"
         },
@@ -83,8 +61,12 @@
           "document": "runtime/http-services"
         },
         {
-          "title": "Task engine",
-          "document": "runtime/task-engine"
+          "title": "Image service",
+          "document": "runtime/image-service"
+        },
+        {
+          "title": "Component service",
+          "document": "runtime/component-service"
         }
       ]
     },
