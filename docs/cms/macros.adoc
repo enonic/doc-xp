@@ -11,9 +11,13 @@ There are two built-in macros included in XP. But its real power comes from macr
 
 === Macro instruction
 
-A macro instruction is similar to an HTML or XML tag but using square brackets instead of angle brackets. It has a name, a set of attributes, and optionally a body.
+A macro instruction is similar to an HTML or XML tag but using square brackets instead of angle brackets.
 
  [macroname attrib1="value1" attrib2="value2"] body [/macroname]
+
+A macro has a name, a set of attributes, and optionally a body (anything that is too long to be
+passed via parameters).
+
  [macroname attrib1="value1" attrib2="value2"/]
 
 Macro instructions can be added anywhere in an HTML page, usually inside a content’s HtmlArea field.
@@ -88,9 +92,10 @@ var portalLib = require('/lib/xp/portal');
 
 exports.macro = function (context) {
     var defaultText = context.params.defaultText;
+    var macroBody = context.body;
 
     var user = authLib.getUser();
-    var body = '<span>' + (user ? user.displayName : defaultText) + '</span>';
+    var body = '<span>' + macroBody || (user ? user.displayName : defaultText) + '</span>';
 
     var doc = context.document; // HTML document containing the current macro
     var lineCount = doc.split(/\r\n|\r|\n/).length;
