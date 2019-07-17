@@ -100,7 +100,7 @@ image::Content-selector-default.png[An input box with a dropdown options below i
 ----
 <1> *allowContentType* is used to limit the content types that may be selected using the <<allowContentType Samples>>
 <2> *allowPath* is used to limit the path of the content that may be selected using the <<allowPath Samples>>.
-<3> *treeMode* toggles displaying tree navigation or not. Default value is `false`. +
+<3> *treeMode* toggles between tree and flat modes. Default value is `false` (flat mode). +
 image:Content-selector-tree.png[Input box with a dropdown with a tree structure, 350]
 <4> *showStatus* toggles content status - default is `false`. +
 image:Content-selector-status.png[Input box with a dropwdown showing status on each option, 365]
