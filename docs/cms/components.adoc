@@ -49,21 +49,195 @@ The xml file placed in the component structure serves several purposes.
 ----
 <page>
   <display-name i18n="component.page.name">My first page</display-name> <!--1--> <!--2-->
-  <form/> <!--3-->
+  <description>Front page of our site</description> <!--3-->
+  <form/> <!--4-->
   <regions>
-    <region name="main"/> <!--4-->
+    <region name="main"/> <!--5-->
   </regions>
 </page>
 ----
 
 <1> *display-name* provides a display name used by the editorial interface
 <2> *display-name/i18n* optionally specify localization key
-<3> *form* allows the definition of a configuration form based on the <<schemas#,schema system>>
-<4> *region* optionally specify regions for the page
+<3> *description* Description field shown when creating a part in content studio
+<4> *form* allows the definition of a configuration form based on the <<schemas#,schema system>>
+<5> *region* optionally specify regions for the page
 
 === Page controller
 
-TODO
+A page controller handles requests to the page. The controller is a required file written in JavaScript and must be
+named ``[page-name].js``. A controller exports a method for each type of HTTP request that should be handled.
+The handle method has the request object as a parameter and returns the response object.
+
+.Example page controller
+[source,javascript]
+----
+// Handles a GET request
+exports.get = function(req) {}
+
+// Handles a POST request
+exports.post = function(req) {}
+----
+
+Here's a simple controller that acts on the ``GET`` request method.
+
+.Example simple get request
+[source, javascript]
+----
+exports.get = function(req) {
+
+  return {
+    body: '<html><head></head><body><h1>My first page</h1></body></html>',
+    contentType: 'text/html'
+  };
+
+};
+----
+
+*Render-view*
+
+If you feel like concatenating strings to create an entire web page is a
+little too much hassle, Enonic XP also supports views. A view is rendered
+using a rendering engine; we currently support XSLT, Mustache and Thymeleaf
+rendering engines. This example will use Thymeleaf.
+
+To make a view, create a file ``my-first-page.html`` in the ``view`` folder.
+
+.Example view file
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>My first page, with a view!</h1>
+  </body>
+</html>
+----
+
+In our ``[page-name].js`` file, we will need to parse the view to a string for
+output. Here is where the Thymeleaf engine comes in. Using the Thymeleaf
+rendering engine is easy; here is how we do it.
+
+.Example controller with thymeleaf
+[source, javascript]
+----
+var thymeleaf = require('/lib/xp/thymeleaf');
+
+exports.get = function(req) {
+
+  // Resolve the view
+  var view = resolve('/site/view/my-first-page.html');
+
+  // Define the model
+  var model = {
+    name: "John Doe"
+  };
+
+  // Render a thymeleaf template
+  var body = thymeleaf.render(view, model);
+
+  // Return the result
+  return {
+    body: body,
+    contentType: 'text/html'
+  };
+
+};
+----
+
+Unlike controllers and descriptors, view files can reside anywhere in your project
+and have any valid file name. This allows for code reuse as
+multiple page components can share the same view. If the view file is in the same
+folder as the page controller then it can be resolved with only the file name
+``resolve('file-name.html')``. Otherwise, the full path should be used, starting
+with a '/' as in the example above.
+
+
+*Dynamic-content*
+
+We can send dynamic content to the view from the controller via the ``model``
+parameter of the ``render`` function. We then need to use the rendering engine
+specific syntax to render it. The controller file above passed a variable
+called ``name`` and here is how to extract its value in the view using
+Thymeleaf syntax.
+
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>My first page, with a view!</h1>
+    <h2>Hello <span data-th-text="${name}">World</span></h2>
+  </body>
+</html>
+----
+
+More on how to use Thymeleaf can be found in link:https://www.thymeleaf.org/documentation.html[the official Thymeleaf documentation]
+
+*Regions*
+
+To be able to add components like images, component parts, or text to our page via the Page Editor drag and drop interface, we need to create at least one region. Regions can be declared in the page descriptor. Each region will be referenced by name.
+
+.Example regions in a [page].xml
+[source, xml]
+----
+<page>
+  <display-name>My first page</display-name>
+  <config />
+  <regions>
+    <region name="main"/>
+  </regions>
+</page>
+----
+
+You will also need to handle regions in the controller.
+
+.Example page controller using regions
+[source, javascript]
+----
+var portal = require('/lib/xp/portal');
+
+// Get the current content. It holds the context of the current execution
+// session, including information about regions in the page.
+var content = portal.getContent();
+
+// Include info about the region of the current content in the parameters
+// list for the rendering.
+var mainRegion = content.page.regions["main"];
+
+// Extend the model from previous example
+var model = {
+    name: "Michael",
+    mainRegion: mainRegion
+};
+----
+
+To make the Page Editor understand that an element is a region, it needs an attribute called data-portal-region with value being name of the region.
+
+.Example view using regions
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>My first page, with a view!</h1>
+    <h2>Hello <span data-th-text="${name}">World</span></h2>
+    <div data-portal-region="main">
+      <div data-th-each="component : ${mainRegion.components}" data-th-remove="tag">
+        <div data-portal-component="${component.path}" data-th-remove="tag" />
+      </div>
+    </div>
+  </body>
+</html>
+----
+
+We can now use the Page Editor drag and drop interface to drag components into our page.
 
 
 == Layout
