@@ -1,0 +1,82 @@
+= Contributing to Translations
+:toc: right
+:imagesdir: images
+
+We would greatly appreciate help with translating our Admin Console to more languages.  Here is a guide on how to contribute:
+
+First, you need to checkout the project from GitHub.  Then, create language files for the specific language you can provide a translation for.
+After the translation is done, a pull request should be sent to Enonic, so we can include the file in the next distribution.
+
+=== Translating files
+
+To provide a translation, please start with the English original phrase files and make a copy of each of them, in the same folder, but extend the main filename with ``_<language-code>``.
+If, for instance, you want to make a translation to Spanish, the copied files should be called ``common_es.properties`` or ``phrases_es.properties``.
+In the copied files, you may now translate all the English text into your preferred language.
+When done, please submit a pull request on the project, with the translations.
+
+=== File locations
+
+XP is split in multiple projects.  One basic runtime, some libs and several apps.  All code is found on GitHub:
+
+==== Admin Home App
+
+[cols="2,5a"]
+|===
+| *GitHub URL* | https://github.com/enonic/app-admin-home
+| *Checkout command* | ``git clone git@github.com:enonic/app-admin-home.git``
+| *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
+|===
+
+==== Admin UI Library
+
+[cols="2,5a"]
+|===
+| *GitHub URL* | https://github.com/enonic/lib-admin-ui
+| *Checkout command* | ``git clone git@github.com:enonic/lib-admin-ui.git``
+| *Original file in English* | ``/src/main/resources/admin/i18n/common.properties``
+|===
+
+==== Applications App
+
+[cols="2,5a"]
+|===
+| *GitHub URL* | https://github.com/enonic/app-applications
+| *Checkout command* | ``git clone git@github.com:enonic/app-applications.git``
+| *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
+|===
+
+==== Content Studio
+
+[cols="2,5a"]
+|===
+| *GitHub URL* | https://github.com/enonic/app-contentstudio
+| *Checkout command* | ``git clone git@github.com:enonic/app-contentstudio.git``
+| *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
+|===
+
+==== Standard ID Provider
+
+[cols="2,5a"]
+|===
+| *GitHub URL* | https://github.com/enonic/app-standardidprovider
+| *Checkout command* | ``git clone git@github.com:enonic/app-standardidprovider.git``
+| *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
+|===
+
+==== Users App
+
+[cols="2,5a"]
+|===
+| *GitHub URL* | https://github.com/enonic/app-users
+| *Checkout command* | ``git clone git@github.com:enonic/app-users.git``
+| *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
+|===
+
+==== XP Runtime
+
+[cols="2,5a"]
+|===
+| *GitHub URL* | https://github.com/enonic/xp
+| *Checkout command* | ``git clone git@github.com:enonic/xp.git``
+| *Original file in English* | ``/modules/app/app-system/src/main/resources/i18n/phrases.properties``
+|===

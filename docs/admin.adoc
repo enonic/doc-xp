@@ -1,5 +1,26 @@
 = Admin Console
 :toc: right
-:imagesdir: images
+:imagesdir: admin/images
 
-== WORK IN PROGRESS
+This documentation describes the various administrative tools that are included in Enonic XP by default.
+
+When visiting the Enonic XP admin interface - you will be required to log in. For new installations and unless configured otherwise, you will first have to create the admin user.
+
+image::AdminStartupPage.png[Admin Startup Page, 768px]
+
+=== Languages
+
+The tools of the admin console have been translated to the following languages:
+
+* English
+* French
+* Norwegian
+* Polish
+* Portuguese
+* Russian
+* Spanish
+* Swedish
+
+The language used by the admin tools, is based on your browser settings.   If your preferred language is one of the above, it will be used. If your preferred language is not in the list, the admin console will default to English.
+
+If you know a language that is not supported, we would greatly appreciate help with translating the admin console to more languages. Please checkout out our guide on Contributing to Translations.

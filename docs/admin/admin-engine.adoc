@@ -2,8 +2,6 @@
 :toc: right
 :imagesdir: images
 
-TODO
-
 The admin engine is a core part of the XP runtime.
 It enables developers to extend the functionality of the XP Admin Console with custom admin apps.
 
@@ -18,14 +16,13 @@ the admin engine is based directly on the <<../framework/index#, XP Framework>>.
 
 == Admin tools
 
-LOTS OF TODO
-By default, XP ships with two standard admin tools, as described in the <<../admin/index#, Admin Console documentation>>
+By default, XP ships with two standard admin tools, as described in the <<../admin, Admin Console documentation>>
 
-Each tools has its own icon in the launcher panel.
+Each tool has its own icon in the launcher panel.
 Admin tools are launched in their own separate browser tabs, running independently of any other admin components.
 
 Compared to a basic webapp, the following
 
 * A single XP application may contain multiple admin tools
-* Access to an admin app typically requires authentication, and particular role memberships
+* Access to an admin tool typically requires authentication, and particular role memberships
 * Admin tools are all served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/tool/<tool-name>``
