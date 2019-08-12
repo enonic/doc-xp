@@ -309,23 +309,54 @@ Part components are reusable, configurable components that can be placed into an
 This allows content editors to build and customize pages without writing any code. There are no built-in part components.
 Each one is custom made in the application code. Parts are typically created to render custom content, lists of content, forms, etc.
 
-The first step in adding a part component to a page is to edit the page content and open the inspection panel’s “Insert” tab.
+The first step in adding a part component to a page is to edit the page content and open the component widget's “Insert” tab.
 Drag the part component placeholder (puzzle piece) to the desired location on the page. The part placeholder will now appear as
-a blue box with a dropdown selector. The same part dropdown selector will appear in the inspect panel. Use one of the selectors
+a blue box with a dropdown selector. The same part dropdown selector will appear in the inspect tab. Use one of the selectors
 to find the desired part component. Once a part component is selected, the placeholder will be replaced with the actual part and
-the Inspect panel will show the part’s configuration options in a form.
+the Inspect tab will show the part’s configuration options in a form.
 
 Some parts won’t have any configuration. Parts with configuration options are independently configured. This means that the same
 part component can be added to multiple pages, or even multiple times in the same page, and each instance can have different
 configuration values.
 
-image::context-panel_insert.png[Component list, 697px]
+image::context-panel_insert.png[Component list, 750px]
 
 == Text
 
+The Text component allows content editors to place and format text into any region on a page without writing any code.
+Images can also be added inside text components.
+Macros allow Twitter tweets, YouTube videos, embedded code, and no-format text to be added as well.
+The formatting and macro options are the same as those for the HtmlArea inputs that can be found in content types and
+other configuration forms in the Content Studio.
+The only difference is that the formatting toolbar is at the top of the page for text components.
 
+In the link:https://developer.enonic.com/docs/content-studio/master/editor/page-editor[Page Editor], drag a Text component from the insert tab to the desired region on the page.
+A cursor will appear inside the text component and editing can begin.
+If another component is selected, the text component will need to be double-clicked to resume editing.
+
+Here is an example.  The blue box is a text component being edited.  Although the pointer does not show in this screenshot,
+it is hovering above the Underline box in the formatting toolbar, in order to underline the highlighted text, "Blog site!" :
+
+image::text-component.png[Component list, 1305px]
 
 == Image
+
+The Image component allows content editors to place an image into any region on a page without writing any code.
+
+In the Page Editor, drag an Image component placeholder from the insert tab to the desired region on the page.
+Once placed, the empty image placeholder contains an image selector that can be used to find and select any previously
+uploaded image content.
+If the name of the image is known, start typing it in the box to filter the list of images.
+If the name is not known, use the down arrow to open a list of image thumbnails to choose from.
+Note that the list will contain all image content items in the XP installation, including images that were created in a
+different site of a multi-site environment.
+
+If the desired image does not already exist as a content, upload it with the button on the right side of the image selector dropdown.
+The new image content will be created as a child of the page being edited, but it could be moved later if needed.
+
+The inspect tab will also show the dropdown image selector.  If the image needs to be changed at a later time, this is the place to do it.
+
+image::image-component.png[Component list, 1305px]
 
 == Fragment
 
