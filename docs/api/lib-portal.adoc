@@ -11,7 +11,7 @@ Add the following into your `build.gradle` file:
 [source,groovy]
 ----
 dependencies {
-  include 'com.enonic.xp:lib-portal:${xpVersion}
+  include "com.enonic.xp:lib-portal:${xpVersion}"
 }
 ----
 
