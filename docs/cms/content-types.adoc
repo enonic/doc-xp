@@ -26,8 +26,8 @@ Content Types are the essential elements of Content Studio and the content API.
 ----
 <1> *display-name* is the human readable name of the content type. Optionally specify the `i18n` attribute to define a mapping to localize the value. The localisation
 key must be then declared and localised in the resource bundle.
-<2> *description* Set a description that is shown when creating the content type.
-<3> *super-type* refers to root controller of the form TODO
+<2> *description* - Set a description that is shown when creating the content type.
+<3> *super-type* refers to the root controller of the form.
 
 == Display name expressions
 

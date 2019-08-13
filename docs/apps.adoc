@@ -51,7 +51,7 @@ The configuration will automatically be injected when the applications starts.
 Configuration files may be updated, and trigger a restart of the application, without restarting the XP nodes.
 This means that for instance sessions, or open websocket connections will not be recycled, even if an application is restarted.
 
-TODO: Link to info about configuration management
+More info can be found under `Application configuration` in <<./deployment/config#,Configuration Files>>.
 
 == Development
 

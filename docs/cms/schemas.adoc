@@ -23,8 +23,6 @@ The property structure can then be persisted directly into the XP repository.
 
 Forms can be created either with XML or with Java, where the former is the most common.
 
-image::app.png["My First app started"]
-
 [source,xml]
 ----
 <someform>
@@ -145,7 +143,7 @@ Here is an example of an item set with two inputs. The resulting form will allow
 </item-set>
 ----
 <1> *name* defines the mapping to the property name
-<2> *label* TODO
+<2> *label* - The displayed identfier of the input.
 <3> *occurences* control the minimum and maximum instances of the ItemSet that may be created
 
 TIP: It is also possible to nest item sets inside each other
