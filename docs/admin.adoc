@@ -2,7 +2,14 @@
 :toc: right
 :imagesdir: admin/images
 
-This documentation describes the various administrative tools that are included in Enonic XP by default.
+This documentation describes the various administrative tools that are included in Enonic XP by default.  They are:
+
+* *Applications* - Add applications from the market or upload your own.  Applications may be everything from complete sites to simple admin widgets.  Read more in <<./apps#,Applications>>.
+* *Users* - Administrate users.  More info in <<./iam#,Identity and Access Managment (IAM)>>.
+
+If you are used to working in the Content Studio, you will miss it in a clean installation, as it has now been pulled out from the core
+and must be installed from the Applications app.  The Content Studio documentation may be found here:
+https://developer.enonic.com/docs/content-studio[Content Studio Doc]
 
 When visiting the Enonic XP admin interface - you will be required to log in. For new installations and unless configured otherwise, you will first have to create the admin user.
 
