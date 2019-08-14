@@ -1,8 +1,23 @@
-= Admin Console
+= XP Admin
 :toc: right
 :imagesdir: admin/images
 
-This documentation describes the various administrative tools that are included in Enonic XP by default.  They are:
+This document describes built-in administration of Enonic XP.
+There are a number of apps that can extend and simplify XP administration.
+Please check out the documentation of each of them for details.
+
+=== Admin console
+
+When visiting the Enonic XP admin interface - you will be required to log in.
+For new installations and unless configured otherwise, you will first have to create the admin user.
+
+After logging in, you will see the main admin console:
+
+image::AdminConsole.png[Admin Startup Page, 768px]
+
+In the top left corner, there are some important links for documentation and interaction with Enonic.
+On the right, there is a menu with all installed applications.
+Two of them are system applications that are installed on all installations:
 
 * *Applications* - Add applications from the market or upload your own.  Applications may be everything from complete sites to simple admin widgets.  Read more in <<./apps#,Applications>>.
 * *Users* - Administrate users.  More info in <<./iam#,Identity and Access Managment (IAM)>>.
@@ -10,10 +25,6 @@ This documentation describes the various administrative tools that are included 
 If you are used to working in the Content Studio, you will miss it in a clean installation, as it has now been pulled out from the core
 and must be installed from the Applications app.  The Content Studio documentation may be found here:
 https://developer.enonic.com/docs/content-studio[Content Studio Doc]
-
-When visiting the Enonic XP admin interface - you will be required to log in. For new installations and unless configured otherwise, you will first have to create the admin user.
-
-image::AdminStartupPage.png[Admin Startup Page, 768px]
 
 === Languages
 
