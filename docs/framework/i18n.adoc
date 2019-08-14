@@ -130,10 +130,9 @@ We always recommend storing files with UTF charset.
 
 Specification of the locale format:
 
-TODO: use - or _ ???
-
-A locale is composed of language, country and variant.
+A locale is composed of two-letter codes for language, country and variant.
 Language is required, country and variant are optional.
+All codes are separated by and underscore (_).
 
 The string-representation of a locale is::
 
