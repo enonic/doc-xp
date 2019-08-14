@@ -62,21 +62,42 @@ med_\u00e6_\u00f8_\u00e5 = This key contains norwegian characters æ, ø and å
 
 A Javascript controller in the same application may now use the localization as follows:
 
-TODO
+lib/i18n.js
+[source,javascript]
+----
+    var i18n = require('/lib/xp/i18n');
+    var complex_message = i18n.localize({
+        key: 'complex_message'
+    });
+    return {
+        complex_message: complex_message,
+    }
+----
+
 
 Placeholders are marked with ``{<number>}``.
 The given number corresponds with the function argument named ``values`` and the position of the parameter.
 
 Example of localization with placeholders:
 
-TODO
+lib/i18n.js
+[source,javascript]
+----
+    var i18n = require('/lib/xp/i18n');
+    var message_multi_placeholder = i18n.localize({
+        key: 'message_multi_placeholder',
+        locale: "no",
+        values: ["John", "London"]
+    });
+    return {
+        message_multi_placeholder: message_multi_placeholder
+    }
+----
 
 The following is considered, in this order:
 
 * Given as argument to function
 * Language specified on a site (for Site Engine)
-
-TODO:
 * Language specified in request context
 
 
