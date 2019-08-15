@@ -183,6 +183,14 @@
       "document": "api",
       "menuItems": [
         {
+          "title": "Management Endpoint",
+          "document": "api/management"
+        },
+        {
+          "title": "Statistics Endpoint",
+          "document": "api/statistics"
+        },
+        {
           "title": "Admin API",
           "document": "api/lib-admin"
         },
@@ -241,14 +249,6 @@
         {
           "title": "Websocket API",
           "document": "api/lib-websocket"
-        },
-        {
-          "title": "Management API",
-          "document": "api/management"
-        },
-        {
-          "title": "Statistics API",
-          "document": "api/statistics"
         }
       ]
     },
