@@ -13,6 +13,7 @@ Whenever an app is added to a site, all functionality and all content types from
 Only applications that declare support for sites can be added.
 This is done via the descriptor file called site.xml
 
+[#site_xml]
 == site.xml
 
 The site form serves multiple purposes:
@@ -55,11 +56,11 @@ The descriptor must be placed in your project as: `src/main/resources/site/site.
     </input>
     <mixin name="address"/>
   </form>
-  <x-data name="seo-settings"/> <--4-->
+  <x-data name="seo-settings"/> <!--4-->
 </site>
 ----
 
 <1> Commonly used to add <<contributions#,page contributions>> to the response
 <2> Controller and filter <<mappings#>> definitions
-<3> Define a <<schemas#,form>> for this app. Used to add site specific configuration of the app
+<3> Define a <<schemas#Forms,form>> for this app. Used to add site specific configuration of the app
 <4> Specify <<x-data#, X-data>> fields to add across content types within the site

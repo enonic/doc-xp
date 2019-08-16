@@ -65,12 +65,12 @@ For more details, check out the <<../projects/index#,project reference documenta
 XP apps are powered by the <<runtime#,XP runtime>>.
 
 Applications are primarily created with JavaScript.
-Serverside Javascript is made possible through our CommonJS based <<runtime/framework#,Javascript Framework>>
+Serverside Javascript is made possible through our CommonJS based <<./framework#,Javascript Framework>>
 
 XP applications can also make use of Java.
 
 Developers with special requirements may take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same instance.
-Learn more about <<runtime/java#,using Java in XP apps>>
+Learn more about <<./framework/java-bridge#,using Java in XP apps>>
 
 
 === Build system
@@ -89,7 +89,7 @@ There are endless use cases for the XP platform, but the typical scenarios are l
 The JavaScript framework offers an easy way to build and is to serve web applications.
 An XP app may only contain a single web app.
 
-Read more about <<runtime/webapps#,webapps and the web engine>>
+Read more about <<runtime#webapp-engine,webapps and the web engine>>
 
 === Sites
 
@@ -104,7 +104,7 @@ The CMS offering essentially consist of three parts:
 * Content API - Built on top of the NoSQL Storage
 * Site Engine - Built on top of the webapp engine
 
-Learn more about the <<cms#,Content Management System>> and the <<runtime/sites#, site engine>>
+Learn more about the <<cms#,Content Management System>> and the <<runtime#site-engine, site engine>>
 
 === ID providers
 
@@ -122,7 +122,7 @@ Unlike sites and web-applications, tasks are not exposed as an end-point.
 Tasks can be started and monitored via the the task API
 Tasks are made by adding one or more JavaScript controllers to your project.
 
-Read more about <<runtime/tasks#,Tasks>>
+Read more about <<runtime#task-engine,Tasks>>
 
 === Admin tools
 

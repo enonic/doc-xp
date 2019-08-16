@@ -47,7 +47,7 @@ Below are the currently available forms implementations used by XP:
 
 An XSD is available to simplify editing of XML-based form files.
 
-
+[#input_types]
 == Input types
 
 Input types represent the most important part of any form.
@@ -219,7 +219,7 @@ Here is an example of a multi-select option set with options expanded by default
 
 == Schema Localization
 
-Based on the same pattern as described in <<../../app-engine/i18n#,Application localization>> one may also localize schemas.
+Based on the same pattern as described in <<../api/lib-i18n#,Application localization>> one may also localize schemas.
 This enables labels and texts in schemas be displayed in the preferred language according to the user's browser settings.
 
 The schema fields that support localization may have an optional ``i18n="key"`` attribute in the XML schema descriptor.
@@ -301,4 +301,4 @@ It is recommended to have default phrases file. This will be used if the transla
 
 The texts in the schema will appear depending on the language configured in the browser.
 
-For more details, check out the <<../runtime/18n#,runtime localization docs>>
+For more details, check out the <<../api/lib-i18n#,runtime localization docs>>

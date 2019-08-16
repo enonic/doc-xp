@@ -10,11 +10,11 @@ Enonic XP provides a standard approach to code localizations.
 This is done by adding so-called resource bundles to your applications, and using the `localize()` function.
 
 Localize function can be used in both JS controllers and selected views.
-Detailed documentation for this function is described in the <<../../../api/lib-portal#localize(),Portal Library docs>>
+Detailed documentation for this function is described in the <<../api/lib-i18n#,Portal Library docs>>
 
-To see how this is used in a controller, see ``lib-i18n`` in :ref:`js-libraries`.
+To see how this is used in a controller, see <<../api/lib-i18n#,lib-i18n>> in <<../api#,js-libraries>>.
 
-The labels and texts used in content types, input types and other schemas can also be localized. See how to localize them in :ref:`localization_schemas`.
+The labels and texts used in content types, input types and other schemas can also be localized. See how to localize them in <<../cms/schemas#Schema_Localization,localization_schemas>>.
 
 
 == Localization files
