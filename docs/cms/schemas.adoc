@@ -10,6 +10,7 @@
 
 To facilitate creation of various forms and data types throughout Content Studio, Enonic XP ships with a high-level schema concept that requires no coding.
 
+[#forms]
 == Forms
 
 The main use of schemas is to define forms that can be edited through the admin interface.
@@ -216,7 +217,7 @@ Here is an example of a multi-select option set with options expanded by default
 <12> *default* Set to `true` to pre-select one of the options.
 <13> *items* Container of the option form's inputs.
 
-
+[#schema_localization]
 == Schema Localization
 
 Based on the same pattern as described in <<../api/lib-i18n#,Application localization>> one may also localize schemas.

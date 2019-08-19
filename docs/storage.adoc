@@ -82,7 +82,7 @@ When nodes are created in a repository, the following happens:
 Properties inside a node hold the actual data values.
 Properties use a key-value format.
 
-The key must be a unique name within the node, and the value must have a specific <<storage/indexing#ValueTypes,valueType>>, such as ``String``, or ``GeoPoint``.
+The key must be a unique name within the node, and the value must have a specific link:./storage/indexing#valuetypes[valueType], such as ``String``, or ``GeoPoint``.
 The valueType is used to index the property correctly, and provide basic validation.
 
 Examples of what properties might look like:
@@ -119,7 +119,7 @@ person.birth-date = localDate("1975-17-10")
 In the example above, the property `person` is of the ValueType `Set`.
 Sets are special in the way that they don't hold actual values, but rather act as containers for other properties.
 
-Properties are of a specific <<storage/indexing#ValueTypes, ValueType>>.
+Properties are of a specific link:./storage/indexing#valuetypes[ValueType].
 ValueTypes are used for validation and securing correct <<storage/indexing#, indexing>>.
 
 
@@ -140,7 +140,7 @@ The Node Query Language, or NoQL for short, is inspired by traditional SQL.
 As with other NoSQL solutions, it has special capabilities and limitations.
 
 Selectors, joins and update statements are _not_ supported.
-However, NoQL adds cool features like <<storage/noql#Relevance_sorting, relevance sorting>> and <<storage/aggregations#, aggregations>>.
+However, NoQL adds cool features like link:./storage/noql#relevance_sorting[relevance sorting] and <<storage/aggregations#, aggregations>>.
 
 Selectors are currently not supported, and the only result of a query will only be identifiers for the matching nodes.
 Developers must then get the desired nodes (with their data) through a separate request.
@@ -166,7 +166,7 @@ The fulltext() expression performs a free text search on the property `article` 
 
 For both the integer comparison and fulltext expression to work, the weight, and article properties need to be indexed properly.
 
-For more insight check out the detailed <<./storage/noql#Query, documentation on queries>>
+For more insight check out the detailed link:./storage/noql#query[documentation on queries]
 
 === Sorting
 Like traditional SQL databases, XP lets you sort the result by property in ascending or descending order.
@@ -180,7 +180,7 @@ To sort by ranking, use the following statement:
 
   _score DESC
 
-For more insight check out the detailed <<storage/noql#Sort, documentation on sorting>>
+For more insight check out the detailed link:./storage/noql#sort[documentation on sorting]
 
 
 == Aggregations

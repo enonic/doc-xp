@@ -6,7 +6,7 @@ This section describes how to configure Enonic XP and installed 3rd party applic
 
 == XP_HOME/config
 
-The <<distro#XP_HOME, XP_HOME/config/>> folder contains all instance specific configuration.
+The link:./distro#XP_HOME[XP_HOME/config/] folder contains all instance specific configuration.
 
 == Format
 
@@ -90,7 +90,7 @@ felix.fileinstall.poll:: Frequency in ms for how often the configuration folders
 felix.fileinstall.noInitialDelay:: TODO
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
 
-
+[#vhost]
 === Vhost
 
 `XP_HOME/config/com.enonic.xp.web.vhost.cfg`
