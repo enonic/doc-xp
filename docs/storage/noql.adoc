@@ -3,7 +3,7 @@
 :imagesdir: images
 
 
-
+[#query]
 == Query
 
 The query-part of a search is where the constraints are defined.
@@ -175,7 +175,7 @@ data.*.myProperty
 
 Here's a description of all functions that can be used in a query.
 
-
+[#fulltext]
 ==== fulltext()
 
 The fulltext function is searching for words in a field,
@@ -419,7 +419,7 @@ pathMatch('_path', '/content/mySite/fish/onion/mayonnaise', 2)
 . `/content/mySite/cheese`
 . `/content/mySite`
 
-
+[#sort]
 == Sort
 
 Results can be sorted based on property values.
@@ -494,7 +494,7 @@ location:: The location is a geoPoint from which the distance factor should be c
 geoDistance("shopLocation", "59.9127300,10.7460900")
 ----
 
-
+[#relevance_sorting]
 === Relevance sorting
 
 All properties with values automatically get a sort index entry.

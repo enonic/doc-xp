@@ -57,6 +57,7 @@ Web app controller:: Invokes the webapp controller of the contextual application
 
 handle401:: If an IDprovider is defined in the contextual vhost, it may take over the response to serve a proper login page if required.
 
+[#webapp_js]
 === webapp.js
 
 To turn your application into a webapp, simply place an http controller called ``/src/main/resources/webapp/webapp.js`` into your project.

@@ -84,7 +84,7 @@ i18n/:: Short for internationalization, this folder contains <<../api/lib-i18n#,
 
 tasks/:: Contains <<../api/lib-task#, task controller>> for running asynchronous jobs.
 
-site/site.xml:: Contains <<../cms/sites#site_xml, site configuration schema>> and declares that the app can be added to sites
+site/site.xml:: Contains link:../cms/sites#site_xml[site configuration schema] and declares that the app can be added to sites
 
 site/content-types/::  <<../cms/content-types#,Content type>> definition files.
 
@@ -96,11 +96,11 @@ site/mixins/:: <<../cms/mixins#, Reusable schemas>> are placed here.
 
 site/pages/:: <<../cms/components#Pages, Page controllers>> are placed here.
 
-site/parts/:: <<../cms/components#Part, Part controllers>> are placed here.
+site/parts/:: link:../cms/components#part[Part controllers] are placed here.
 
 site/x-data/:: <<../cms/x-data#, eXtra>> data schemas.
 
-webapp/webapp.js:: The <<../runtime#webapp.js, Webapp>> controller file
+webapp/webapp.js:: The link:../runtime#webapp_js[Webapp] controller file
 
 
 == Libraries

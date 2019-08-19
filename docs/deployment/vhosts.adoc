@@ -32,7 +32,7 @@ NOTE: Vhosts only apply to XP service port (defaults to 8080), not the monitorin
 "Example Inc", yhe owner of "example.com" just finished building their new site.
 The published site is available on `<host>:8080/site/default/master/homepage`.
 
-In this case, a <<config#Vhost,vhost configuration>> looking like this will get the job done:
+In this case, a link:./config#vhost[vhost configuration] looking like this will get the job done:
 
 .Sample vhost config file
 [source,properties]
@@ -78,4 +78,4 @@ NOTE: Location of hosts file on Mac/Linux_: `/etc/hosts`, on Windows: `c:\Window
 
 Pointing your browser to http://example.com:8080 will reveal the glorious result.
 
-Visit the <<config#Vhost,vhost configuration>> section for more details.
+Visit the link:./config#vhost[vhost configuration] section for more details.

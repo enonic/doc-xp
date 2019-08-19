@@ -72,7 +72,7 @@ image::Combobox.png[two checkboxes one is selected the other is not, 700]
 <1> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple `option` elements are allowed and ordered.
 <2> *default* is optional, and may be equal to _one_ of the option values.
 
-
+[#contentselector]
 == ContentSelector
 
 References to other content are specified by this input type. Use the toggle icon to switch between the list mode (default) and the tree mode.
@@ -621,7 +621,7 @@ image::Radio-buttons.png[two button where one of them is selected, 200]
 <2> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple ``option`` elements are allowed and ordered.
 <3> *default* is optional, and may be equal to one of the option values.
 
-
+[#tag]
 == Tag
 
 A simple input for adding free-text tags. Tags will be autocompleted based on tags in other items with the same property name.
