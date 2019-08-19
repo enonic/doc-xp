@@ -66,7 +66,7 @@ When the application is deployed, the controller will be accessible from
 
   ``//<server>:<port>/webapp/<app-name>/`` (i.e. "localhost:8080/webapp/my.webapp/").
 
-``webapp.js`` now acts as a <<framework/http#http-controller,Http controller>> and may expose a function for each HTTP method that should be handled: i.e.
+``webapp.js`` now acts as a link:./framework/http#http-controller[HTTP controller] and may expose a function for each HTTP method that should be handled: i.e.
 GET, POST, etc.
 
 Below is an example webapp controller.
