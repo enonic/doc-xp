@@ -239,7 +239,7 @@ To make the Page Editor understand that an element is a region, it needs an attr
 
 We can now use the Page Editor drag and drop interface to drag components into our page.
 
-
+[#layout]
 == Layout
 
 Layouts are used in conjunction with regions to organize the structure of the various component parts that will be placed on the page via Page Editor drag and drop. Layouts can be dropped into the page regions and then parts can be dragged into the layout. This allows multiple layouts (two-column, three-column, etc.) on the same page and web editors can change things around without touching any code. Making a layout is similar to making pages and part components. Layouts cannot be nested.
