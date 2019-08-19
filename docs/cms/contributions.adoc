@@ -25,7 +25,7 @@ bodyBegin:: After the `<body>` opening tag.
 bodyEnd:: Before the `</body>` closing tag.
 
 
-To use page contributions, your component needs to return a `pageContributions` property in it's <<../framework/http#HTTP Response, HTTP response object>>.
+To use page contributions, your component needs to return a `pageContributions` property in it's <<../framework/http#http-response, HTTP response object>>.
 The response might look like something like this (as always, the `return` goes at the end of your component's controller):
 
 [source,js]

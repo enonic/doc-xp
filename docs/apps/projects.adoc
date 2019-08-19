@@ -80,27 +80,27 @@ main.js:: Main controller is executed every time an app is started.
 
 services/:: Contains <<../runtime/http-services#, Http services controllers>>
 
-i18n/:: Short for internationalization, this folder contains <<../runtime/i18n#,app localization files>>
+i18n/:: Short for internationalization, this folder contains <<../api/lib-i18n#,app localization files>>
 
-tasks/:: Contains <<../runtime/tasks#, task controller>> for running asynchronous jobs.
+tasks/:: Contains <<../api/lib-task#, task controller>> for running asynchronous jobs.
 
-site/site.xml:: Contains <<../cms/sites#Site.xml, site configuration schema>> and declares that the app can be added to sites
+site/site.xml:: Contains <<../cms/sites#site_xml, site configuration schema>> and declares that the app can be added to sites
 
 site/content-types/::  <<../cms/content-types#,Content type>> definition files.
 
 site/processors/:: For post processing of HTML from pages.
 
-site/layouts/:: <<../cms/components#Layouts, Layout controllers>> are placed here.
+site/layouts/:: <<../cms/components#Layout, Layout controllers>> are placed here.
 
-site/mixins/:: <<../cms/schemas#Mixin, Reusable schemas>> are placed here.
+site/mixins/:: <<../cms/mixins#, Reusable schemas>> are placed here.
 
 site/pages/:: <<../cms/components#Pages, Page controllers>> are placed here.
 
-site/parts/:: <<../cms/components#Parts, Part controllers>> are placed here.
+site/parts/:: <<../cms/components#Part, Part controllers>> are placed here.
 
-site/x-data/:: <<../cms/x-data#, eXtra data schemas.
+site/x-data/:: <<../cms/x-data#, eXtra>> data schemas.
 
-webapp/webapp.js:: The <<../runtime/webapps#, Webapp>> controller file
+webapp/webapp.js:: The <<../runtime#webapp.js, Webapp>> controller file
 
 
 == Libraries
