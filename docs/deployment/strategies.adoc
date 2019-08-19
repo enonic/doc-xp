@@ -1,0 +1,79 @@
+= Deployment strategies
+:toc: right
+:imagesdir: images
+
+Depending on your requirements for scalability, performance and isolation, there are a number of different deployment strategies to consider.
+
+== Single node
+
+The minimal deployment of Enonic XP is limited to a single XP node.
+Similar to the XP SDK, this node will act as both front-end and back-end, running applications as well as handling storage.
+
+In this case, you will simply need a local file system to store your indexes, blobs (raw data) and backups.
+
+image::single-node.png[Single node deployment,276]
+
+
+== Basic cluster
+
+The basic cluster will provide redundancy and scalability.
+This scenario requires a minimum of three nodes.
+As Enonic XP uses a distributed storage model without a dedicated master, the nodes will elect new masters based on a so-called quorum.
+For this reason, there must be at least 3 nodes. With only two nodes, the cluster will not be able to form a quorum if one node falls out.
+
+An XP cluster also has additional infrastructure requirements when compared to a single node:
+
+* A *shared or distributed file system* for storing blobs and for snapshotting/backup purposes
+* A *load balancer* is required to distribute incoming traffic to the various nodes in the cluster.
+
+image::basic-cluster.png[Basic cluster deployment,516]
+
+This strategy has a weakness related to stability, as it mixes the role of master nodes with working nodes.
+Imagine that the current master node is hit with heavy traffic, or gets problems for other reasons.
+In this scenario there will be problems communicating between the master nodes, and eventually the cluster might become unstable.
+
+NOTE: This approach is not recommended for production deployments, check out the <<Dedicated master nodes>> strategy instead.
+
+
+== Dedicated master nodes
+
+In this strategy, a set of exactly three dedicated master nodes should be started, in addition to your working nodes.
+The master nodes will not be acting as back-end (storing data) or front-end (handling traffic).
+This way, you are guaranteed to always have stable set of nodes that monitor your cluster and controls where and how data is distributed.
+As a direct result, you now only need two working nodes, instead of three.
+Technically, you could even just start one node, but that would not be a real cluster would it?
+
+image::dedicated-masters-cluster.png[Cluster with dedicated master nodes,452]
+
+NOTE: Due to the limited stress on these nodes, they can normally be of smaller size than the active ones.
+
+
+== Autoscaling cluster
+
+If you want to quickly scale the number of instances running an application up/down based on sudden changes in traffic/load, you shold consider this option.
+This scenario builds on the dedicated master nodes strategy, but now differentiates between front-end and back-end nodes.
+
+The front-end nodes will act as runtime for the apps/site/admin and handle the incoming traffic.
+The back-end nodes will handle state, indexing and persistence of data.
+
+The back-end nodes will typically be able to serve multiple front-end nodes, as the request processing if often heavier on the front-end nodes.
+Scaling front-end nodes is faster and easier than nodes with data.
+As such, this is an ideal model for autoscaling as well.
+
+image::autoscaling-cluster.png[Cluster suited for autoscaling,481]
+
+NOTE: You may consider if you need different type of CPU/Memory assigned to the different node types.
+Typically, front-end nodes will use less memory than back-end nodes.
+
+== Micro service cluster
+
+For the most demanding projects, the micro service cluster strategy is the way to go.
+It builds on the autoscaling cluster approach, but aims to isolate the various services better.
+For instance, you might have dedicated nodes for the admin console, a specific site or app - all depending on needs.
+
+The benefits of this strategy is a higher degree of control over each service and how it will scale, similar to how cloud native micro service platforms work.
+I.e. editors working in Content Studio will not affect the performance of a site.
+
+image::microservice-cluster.png[Full scale cluster deployment,530]
+
+NOTE: In this scenario, each individual front-end service may be configured with different CPU/Memory and scaling options as required.
