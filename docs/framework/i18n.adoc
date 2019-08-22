@@ -20,29 +20,31 @@ The labels and texts used in content types, input types and other schemas can al
 == Localization files
 
 The localization files are plain text files, using the properties format (key = value)
-The files must be placed in a the folder ``/src/main/resources/i18n/``.
+The files must be placed in a the folder `/src/main/resources/i18n/`.
 
-Imagine, making an app that should support the following localizations:
+Imagine, making an app that should support the following localizations.
+
+NOTE: The content API, country codes use `-` as separator rather than `_`.
 
 * 'English' (en)
 * 'English US' (en-US)
-* 'Norwegian' (no)
-* 'Norwegian Nynorsk' (no-NN)
+* 'New Norwegian' (nn)
+* 'New Norwegian Norway' (nn-NO)
 
 Each locale now needs to have a matching localization file, in the format:
 
-  phrases[_languagecode][_countrycode][_variant].properties
+  phrases[_languagecode][_COUNTRYCODE][_VARIANT].properties
 
 .Sample localization bundle
 [source, properties]
 ----
 i18n/phrases.properties
-i18n/phrases_en_us.properties
-i18n/phrases_no.properties
-i18n/phrases_no_nn.properties
+i18n/phrases_en_US.properties
+i18n/phrases_nn.properties
+i18n/phrases_nn_NO.properties
 ----
 
-CAUTION: The filename should be in lowercase.
+CAUTION: The filenames are case sensitive!
 
 
 == Sample
@@ -106,7 +108,7 @@ The following is considered, in this order:
 When localizing, a best match pattern will be applied to select the optimal version.
 If the locale for a request is resolved to "en-US", XP will look for the localization key in the following order:
 
-* ``phrases_en_us.properties``
+* ``phrases_en_US.properties``
 * ``phrases_en.properties``
 * ``phrases.properties``
 
@@ -132,7 +134,8 @@ Specification of the locale format:
 
 A locale is composed of two-letter codes for language, country and variant.
 Language is required, country and variant are optional.
-All codes are separated by and underscore (_).
+
+For the property files, all codes are case sensitive and separated by and underscore (_).
 
 The string-representation of a locale is::
 
@@ -142,10 +145,10 @@ where
 
 * `la`= two letter language code as specified by https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes[ISO-639]
 * `CO` = optional two letter country code as specified by https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes[ISO-3166]
-* ``VA`` = two letter rarely used variant-code.
+* `VA` = two letter rarely used variant-code.
 
 A sample locale including vendor specific variant:
 
   es_ES_Traditional_WIN"..
 
-Variants are rarely used in Enonic XP, and can pretty much be discarded.
+Variants are rarely used in XP, and can pretty much be discarded.
