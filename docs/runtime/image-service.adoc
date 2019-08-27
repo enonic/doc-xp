@@ -1,9 +1,471 @@
 = Image service
 :toc: right
-:imagesdir: images
+:toclevels: 3
+:imagesdir: media
 
-The image service enables real-time processing and delivery of image media via the `:8080/site/<repo>/<branch>/<path-to-page>/_/image/` endpoint
+The image service enables real-time processing and delivery of rasterized RGB/RGBA image media via the `:8080/site/<repo>/<branch>/<path-to-page>/_/image/` endpoint
 
-== TODO
+== Image URL
 
-Describe the image service in full
+----
+<endpoint>/<content key>:<version key>/<filters>/<name>.<file extension>
+----
+
+* Endpoint
+* Content key
+* Version key
+* Scale and optional style filters
+* File name, based on content name
+* File extension
+
+_Example_
+----
+/_/image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-1024-578-0.5-0/build-business-case-website-project.jpg.jpeg
+----
+
+== Server-side processing
+
+=== Scaling
+
+==== Scale Block
+Scales the image, while keeping the aspect ratio, so it fills the rectangle specified by width and height. Then crops the overflowing axis based on the focal point position. The result of a call to this method will be an image that always has the exact size of the specified input.
+
+Arguments::
+  Both arguments below are required:
+  width:::
+    Width in pixels
+  height:::
+    Height in pixels
+
+Example::
+----
+block(600,200)
+----
+
+==== Scale Block
+Scales the image, while keeping the aspect ratio, so it fills the rectangle specified by width and height. Then crops the overflowing axis based on the focal point position. The result of a call to this method will be an image that always has the exact size of the specified input.
+
+Arguments::
+  Both arguments below are required:
+  . *Width* in pixels
+  . *Height* in pixels
+
+Example::
+----
+block(600,200)
+----
+
+==== Scale Height
+Scales the image proportionally to match the given height.
+
+Arguments::
+
+  height:::
+    Height in pixels
+
+Example::
+----
+height(600)
+----
+
+==== Scale Max
+Scales the image proportionally, so the longest edge has the given number of pixels.
+
+Arguments::
+
+  size:::
+    The length of the longest edge. Required.
+
+Example::
+----
+max(600)
+----
+
+==== Scale Square
+Scales the image proprtionally to match the shortest edge. The longest edge will be cropped based on the focal point position.
+
+Arguments::
+
+  size:::
+    The length of both sides in pixels
+
+Example::
+----
+square(600)
+----
+
+==== Scale Wide
+Scales the image to fit the given width of the picture. If the image is taller than the given height, it is cropped on top and bottom, based on the focal point position.
+
+Arguments::
+
+  width:::
+    Width in pixels
+  height:::
+    maximum height in pixels
+
+Example::
+----
+wide(600,200)
+----
+
+==== Scale Width
+Scales the image proportionally to match the given width.
+
+Arguments::
+
+  width:::
+    Width in pixels
+
+Example::
+----
+width(600)
+----
+
+=== Styling
+
+NOTE: Some (but not all) of the styles below perform under-the-hood calculations measured in pixels,
+which means that images of various dimensions will have the effect applied differently.
+This is especially apparent if the images are forced to fit a specific container size on the client.
+In order to ensure a consistent result, consider upscaling your image to a specific size before applying the style, or downscale if the effect should be larger in relation to the image.
+
+//- Sorted in pseudo-alphabetical order. Grouping by main function, e.g. "RGB Adjust" and "HSB Adjust" are both instances of Adjust
+
+==== RGB Adjust
+
+image::styling-rgbadjust2_0_n2.jpg[RGB Adjust towards orange, 152px]
+
+Adjust the red, green and blue levels in the image.
+Values of 0 result in no adjustment.
+
+Arguments::
+
+  red:::
+    The adjusted red level for the image. Default: 0
+  green:::
+    The adjusted green level for the image. Default: 0
+  blue:::
+    The adjusted blue level for the image. Default: 0
+
+Example::
+----
+rgbadjust(2.0,0.25,-1.75)
+----
+
+==== HSB Adjust
+
+image::styling-hsbadjust.jpg[HSB Adjust to oppsite colors, 152px]
+
+Adjust the hue, saturation and brightness levels in the image.
+
+Arguments::
+
+  hue:::
+    Value from -1 to 1, of how far around the color wheel to move the hue of the image. Default: 0
+  saturation:::
+    Value from -1 to 1 to adjust the intesity of the colors in the image. Default: 0
+  brightness:::
+    Value from -1 to 1 to adjust the brightness of the image. Default: 0
+
+Examples::
+----
+hsbadjust(0.5,-0.1)
+hsbadjust(-0.15,0.2,-0.2)
+----
+
+==== Block
+
+image::styling-block5.jpg[Blocks 5 pixels large, 152px]
+
+Reduces the image down to a mosaic of larger square pixels. Also known as pixelate.
+
+Arguments::
+
+  size:::
+    The size of each square mosaic block, in pixels. Default: 2
+
+Example::
+----
+block(5)
+----
+
+==== Blur
+[[blur]]
+
+image::styling-blur8.jpg[8 pixel blur, 152px]
+
+Applies a Gaussian blur effect, based on the specified pixel radius. The opposite of <<sharpen>>, although it's not possible to reverse a sharpen with a blur.
+
+Arguments::
+
+  radius:::
+    How many pixels of blur to apply. Higher values lead to a more blurry image. Default: 2
+
+Example::
+----
+blur(8)
+----
+
+==== Border
+
+image::styling-border4_0x777777.jpg[Solid gray 4 pixel border, 152px]
+
+Applies a solid, rectangular border around the image.
+
+Arguments::
+
+  width:::
+    The width of the border in pixels. Default: 2
+  color:::
+    The color of the border as a decimal or hexadecimal number. Default: 0 / 0x000000 (black)
+
+Examples::
+----
+border(5)
+border(4, 0x777777)
+----
+
+==== Bump
+[[bump]]
+
+image::styling-bump.jpg[Bump effect, 152px]
+
+Creates a pseudo-3D bevel effect based on edge contours in the image.
+
+Arguments::
+  No arguments
+
+Example::
+----
+bump()
+----
+
+==== Colorize
+
+image::styling-colorize.jpg[Colorize to magenta, 152px]
+
+Makes a grayscale image, then applies a tint based on the color specified with red, green and blue values.
+
+Arguments::
+
+  red:::
+    Red boost value. Default: 1
+  green:::
+    Green boost value. Default: 1
+  blue:::
+    Blue boost value. Default: 1
+
+Example::
+----
+colorize(3,1,1.5)
+----
+
+==== HSB Colorize
+
+image::styling-hsbcolorize.jpg[Colorize to cyan, 152px]
+
+Makes a grayscale image, then applies a tint based on the color specified with hue, saturation, and brightness.
+
+Arguments::
+
+  color:::
+    The tint color as a decimal or hexadecimal number. Default: 0xFFFFFF
+
+Example::
+----
+hsbcolorize(0x00AAAA)
+----
+
+==== Edge
+
+image::styling-edge.jpg[Edge effect, 152px]
+
+Creates an abstract image by brightening every edge contour and darkening every even surface of the image.
+
+Arguments::
+  No arguments
+
+Example::
+----
+edge()
+----
+
+==== Emboss
+
+image::styling-emboss.jpg[Emboss effect, 152px]
+
+Creates a grayscale image with a pseudo-3D bevel effect based on edge contours in the image. Areas with no contours are normalized to a neutral gray.
+If colors need to be kept as they were, consider using <<bump>> instead.
+
+Arguments::
+  No arguments
+
+Example::
+----
+emboss()
+----
+
+==== Flip horizontally
+
+image::styling-fliph.jpg[Flipped horizontally, 152px]
+
+Flips an image horizontally (mirrored left-right).
+
+Arguments::
+  No arguments
+
+Example::
+----
+fliph()
+----
+
+==== Flip vertically
+
+image::styling-flipv.jpg[Flipped vertically, 152px]
+
+Flips an image vertically (mirrored upside down, like a water reflection).
+
+Arguments::
+  No arguments
+
+Example::
+----
+flipv()
+----
+
+==== Grayscale
+
+image::styling-grayscale.jpg[Grayscale effect, 152px]
+
+Creates a grayscale variant of the image.
+
+TIP: Use an adjustment filter in front of the grayscale filter in order to affect how bright or dark different portions of the image will be, e.g. to highlight skin tones.
+
+Arguments::
+  No arguments
+
+Example::
+----
+grayscale()
+----
+
+==== Invert
+
+image::styling-invert.jpg[Inverted colors, 152px]
+
+Inverts the colors and brightness of the image.
+
+NOTE: The human eye does not have a linear response across the whole visible spectrum,
+so inverting the image may have unexpected effects on text contrast in relation to the processed image.
+
+Arguments::
+  No arguments
+
+Example::
+----
+invert()
+----
+
+==== Rotate 90
+
+image::styling-rotate90.jpg[Rotated 90 degrees, 200px]
+
+Rotates an image clockwise 90 degrees. Width and height dimensions get swapped, e.g. a 200x100 pixel image becomes 100x200 pixels.
+
+Arguments::
+  No arguments
+
+Example::
+----
+rotate90()
+----
+
+==== Rotate 180
+
+image::styling-rotate180.jpg[Rotated 180 degrees, 152px]
+
+Rotates an image 180 degrees.
+
+Arguments::
+  No arguments
+
+Example::
+----
+rotate180()
+----
+
+==== Rotate 270
+
+image::styling-rotate270.jpg[Rotated 270 degrees, 200px]
+
+Rotates an image clockwise 270 degrees (i.e. counter-clockwise 90 degrees). Width and height dimensions get swapped, e.g. a 200x100 pixel image becomes 100x200 pixels.
+
+Arguments::
+  No arguments
+
+Example::
+----
+rotate270()
+----
+
+==== Rounded
+
+image::styling-rounded8_4_0x777777.jpg[Rounded corners with added border, 152px]
+
+Rounds the corners of the image, with an option of adding a border around the rounded image which also has rounded corners.
+
+NOTE: The resulting image is still rectangular, so the negative space outside the rounded corners is rendered as white.
+This is usually undesired if the image is shown on a non-white background, in which case it's better to style the image client-side using CSS.
+
+Arguments::
+
+  radius:::
+    The number of pixels from each corner where the rounding starts. Default: 10
+  borderSize:::
+    The width of the border in pixels. Default: 0
+  borderColor:::
+    The color of the border as a decimal or hexadecimal number. Default: 0 / 0x000000 (black)
+
+Examples::
+----
+rounded()
+rounded(15)
+rounded(10,1)
+rounded(8,4,0x777777)
+----
+
+==== Sepia
+
+image::styling-sepia25.jpg[Sepia effect, 152px]
+
+Creates a grayscale image with a yellow-reddish tint to make it look like an old photograph.
+
+Arguments::
+
+  depth:::
+    The brightness of the tint. Default: 20
+
+Examples::
+----
+sepia()
+sepia(25)
+----
+
+==== Sharpen
+[[sharpen]]
+
+image::styling-sharpen.jpg[Sharpen effect, 152px]
+
+Applies a sharpening filter to the image, making edge contours more pronounced. The opposite of <<blur>>, although it's not possible to reverse a blur with a sharpen.
+
+NOTE: If the source image has a lot of compression artifacts or has very low resolution, sharpening the image will make these artifacts stand out even more, which usually is undesired.
+
+Arguments::
+  No arguments
+
+Example::
+----
+sharpen()
+----
+
+== Client-side processing
