@@ -7,20 +7,25 @@ The image service enables real-time processing and delivery of rasterized RGB/RG
 
 == Image URL
 
-----
-<endpoint>/<content key>:<version key>/<filters>/<name>.<file extension>
-----
+An image URL consists of the following components:
 
-* Endpoint
-* Content key
-* Version key
-* Scale and optional style filters
-* File name, based on content name
-* File extension
+. Endpoint, followed by a forward slash. +
+  Format: `:8080/site/<repo>/<branch>/<path-to-page>/_/image/` +
+  On a live site behind virtualhost, everything before the path is typically hidden.
+. Content key, followed by a colon. +
+  Example: `c82262a6-77d6-4276-b0e7-fe82f4eb57b8:`
+. Content version key, followed by a forward slash. +
+  Example: `1feb57ed672f8c3b9fd6d4614878dafd9882298b/`
+. Scale and optional style filters, with prettyfied URL-safe name, followed by a forward slash. +
+  Example: `block-300-100-0.5-0/`
+. File name, based on content name. +
+  Example: `content-name`
+. File extension (if specified), preceded by a period. +
+  Example: `.jpeg`
 
-_Example_
+Example of an image URL on the root of a live site behind virtualhost:
 ----
-/_/image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-1024-578-0.5-0/build-business-case-website-project.jpg.jpeg
+/_/image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100-0.5-0/content-name.jpeg
 ----
 
 == Server-side processing
@@ -28,7 +33,12 @@ _Example_
 === Scaling
 
 ==== Scale Block
-Scales the image, while keeping the aspect ratio, so it fills the rectangle specified by width and height. Then crops the overflowing axis based on the focal point position. The result of a call to this method will be an image that always has the exact size of the specified input.
+[[block]]
+
+image::scaling-block.jpg[Scaled to block, 300px]
+
+Scales the image to fill the given dimensions, then crops off any overflowing content based on the focal point position.
+This is the most common scaling method for web purposes, since the image will always have the exact dimensions as the given input.
 
 Arguments::
   Both arguments below are required:
@@ -39,24 +49,14 @@ Arguments::
 
 Example::
 ----
-block(600,200)
-----
-
-==== Scale Block
-Scales the image, while keeping the aspect ratio, so it fills the rectangle specified by width and height. Then crops the overflowing axis based on the focal point position. The result of a call to this method will be an image that always has the exact size of the specified input.
-
-Arguments::
-  Both arguments below are required:
-  . *Width* in pixels
-  . *Height* in pixels
-
-Example::
-----
-block(600,200)
+block(300,100)
 ----
 
 ==== Scale Height
-Scales the image proportionally to match the given height.
+
+image::scaling-height.jpg[Scaled to height, 228px]
+
+Scales the image proportionally to match the given height. No cropping. Width may vary depending on aspect ratio.
 
 Arguments::
 
@@ -65,11 +65,15 @@ Arguments::
 
 Example::
 ----
-height(600)
+height(300)
 ----
 
 ==== Scale Max
-Scales the image proportionally, so the longest edge has the given number of pixels.
+
+image::scaling-height.jpg[Scaled to max, 228px]
+
+Scales the image proportionally until the longest edge has the given number of pixels.
+Typically used if the image will be displayed inside a square container but must not be cropped (e.g. diagrams or logo images that must fit inside a square table cell)
 
 Arguments::
 
@@ -78,11 +82,14 @@ Arguments::
 
 Example::
 ----
-max(600)
+max(300)
 ----
 
 ==== Scale Square
-Scales the image proprtionally to match the shortest edge. The longest edge will be cropped based on the focal point position.
+
+image::scaling-square.jpg[Scaled to square, 300px]
+
+Scales the image proprtionally to match the shortest edge, resulting in a square image. Any overflowing content will be cropped based on the focal point position.
 
 Arguments::
 
@@ -91,26 +98,33 @@ Arguments::
 
 Example::
 ----
-square(600)
+square(300)
 ----
 
 ==== Scale Wide
-Scales the image to fit the given width of the picture. If the image is taller than the given height, it is cropped on top and bottom, based on the focal point position.
+
+image::scaling-block.jpg[Scaled to wide, 300px]
+
+Similar to scale <<block>>, but will never crop off the left/right sides of the image.
+The resulting image would always be as wide as the given width, but if the image has a wider aspect ratio than given, it would end up being lower than the given height.
 
 Arguments::
 
   width:::
     Width in pixels
   height:::
-    maximum height in pixels
+    Maximum height in pixels
 
 Example::
 ----
-wide(600,200)
+wide(300,100)
 ----
 
 ==== Scale Width
-Scales the image proportionally to match the given width.
+
+image::scaling-width.jpg[Scaled to width, 300px]
+
+Scales the image proportionally to match the given width. No cropping. Height may vary depending on aspect ratio.
 
 Arguments::
 
@@ -119,7 +133,7 @@ Arguments::
 
 Example::
 ----
-width(600)
+width(300)
 ----
 
 === Styling
@@ -194,7 +208,7 @@ block(5)
 
 image::styling-blur8.jpg[8 pixel blur, 152px]
 
-Applies a Gaussian blur effect, based on the specified pixel radius. The opposite of <<sharpen>>, although it's not possible to reverse a sharpen with a blur.
+Applies a Gaussian blur effect, based on the given pixel radius. The opposite of <<sharpen>>, although it's not possible to reverse a sharpen with a blur.
 
 Arguments::
 
@@ -244,7 +258,7 @@ bump()
 
 image::styling-colorize.jpg[Colorize to magenta, 152px]
 
-Makes a grayscale image, then applies a tint based on the color specified with red, green and blue values.
+Makes a grayscale image, then applies a tint based on the color given with red, green and blue values.
 
 Arguments::
 
@@ -264,7 +278,7 @@ colorize(3,1,1.5)
 
 image::styling-hsbcolorize.jpg[Colorize to cyan, 152px]
 
-Makes a grayscale image, then applies a tint based on the color specified with hue, saturation, and brightness.
+Makes a grayscale image, then applies a tint based on the color given with hue, saturation, and brightness.
 
 Arguments::
 
@@ -469,3 +483,5 @@ sharpen()
 ----
 
 == Client-side processing
+
+TODO
