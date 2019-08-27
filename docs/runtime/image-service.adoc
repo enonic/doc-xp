@@ -1,9 +1,9 @@
 = Image service
 :toc: right
-:toclevels: 3
+:toclevels: 2
 :imagesdir: media
 
-The image service enables real-time processing and delivery of rasterized RGB/RGBA image media via the `:8080/site/<repo>/<branch>/<path-to-page>/_/image/` endpoint
+The image service enables real-time processing and delivery of rasterized RGB/RGBa image media via the `:8080/site/<repo>/<branch>/<path-to-page>/_/image/` endpoint
 
 == Image URL
 
@@ -16,23 +16,26 @@ An image URL consists of the following components:
   Example: `c82262a6-77d6-4276-b0e7-fe82f4eb57b8:`
 . Content version key, followed by a forward slash. +
   Example: `1feb57ed672f8c3b9fd6d4614878dafd9882298b/`
-. Scale and optional style filters, with prettyfied URL-safe name, followed by a forward slash. +
-  Example: `block-300-100-0.5-0/`
-. File name, based on content name. +
-  Example: `content-name`
+. Scaling (method followed by arguments, separated by dashes), followed by a forward slash. +
+  Example: `block-300-100/`
+. File name, based on content name, with or without file extension. +
+  Example: `content-name.jpg`
 . File extension (if specified), preceded by a period. +
   Example: `.jpeg`
+. URL parameters, such as background or filter (URI encoded, filter values are semicolon-separated) +
+  Example: `?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29`
+
+NOTE: If a format is not specified when generating the image URL, Enonic XP tries to guess the MIME type based on the image content name (if it contains a file extension).
+Otherwise, the MIME type is derived directy from the content.
 
 Example of an image URL on the root of a live site behind virtualhost:
 ----
-/_/image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100-0.5-0/content-name.jpeg
+/_/image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.jpg.jpeg?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29
 ----
 
-== Server-side processing
+== Scaling methods
 
-=== Scaling
-
-==== Scale Block
+=== Block
 [[block]]
 
 image::scaling-block.jpg[Scaled to block, 300px]
@@ -52,7 +55,7 @@ Example::
 block(300,100)
 ----
 
-==== Scale Height
+=== Height
 
 image::scaling-height.jpg[Scaled to height, 228px]
 
@@ -68,7 +71,7 @@ Example::
 height(300)
 ----
 
-==== Scale Max
+=== Max
 
 image::scaling-height.jpg[Scaled to max, 228px]
 
@@ -78,14 +81,14 @@ Typically used if the image will be displayed inside a square container but must
 Arguments::
 
   size:::
-    The length of the longest edge. Required.
+    The length of the longest edge in pixels. Required.
 
 Example::
 ----
 max(300)
 ----
 
-==== Scale Square
+=== Square
 
 image::scaling-square.jpg[Scaled to square, 300px]
 
@@ -101,7 +104,7 @@ Example::
 square(300)
 ----
 
-==== Scale Wide
+=== Wide
 
 image::scaling-block.jpg[Scaled to wide, 300px]
 
@@ -120,7 +123,7 @@ Example::
 wide(300,100)
 ----
 
-==== Scale Width
+=== Width
 
 image::scaling-width.jpg[Scaled to width, 300px]
 
@@ -136,58 +139,70 @@ Example::
 width(300)
 ----
 
-=== Styling
+== Filters
 
-NOTE: Some (but not all) of the styles below perform under-the-hood calculations measured in pixels,
+NOTE: Some (but not all) of the filters below perform under-the-hood calculations measured in pixels,
 which means that images of various dimensions will have the effect applied differently.
 This is especially apparent if the images are forced to fit a specific container size on the client.
-In order to ensure a consistent result, consider upscaling your image to a specific size before applying the style, or downscale if the effect should be larger in relation to the image.
+In order to ensure a consistent result, consider upscaling your image to a specific size before applying the filter, or downscale if the effect should be larger in relation to the image.
 
 //- Sorted in pseudo-alphabetical order. Grouping by main function, e.g. "RGB Adjust" and "HSB Adjust" are both instances of Adjust
 
-==== RGB Adjust
+=== RGB Adjust
 
 image::styling-rgbadjust2_0_n2.jpg[RGB Adjust towards orange, 152px]
 
 Adjust the red, green and blue levels in the image.
-Values of 0 result in no adjustment.
+
+Values between -1.0 and 0.0 subtract that color channel in the image.
+A value of 0 results in no adjustment for that channel.
+Values between 0 and 255 boosts that color channel in the image. The boost is logarithmic, so small boost values between 0 and 1 are often enough.
 
 Arguments::
 
+//- The arguments below are technically not "required" since they default to 0, but rgbadjust() with anything less than 3 arguments makes no sense.
   red:::
-    The adjusted red level for the image. Default: 0
+    Decimal value with the adjusted red level for the image. Required.
   green:::
-    The adjusted green level for the image. Default: 0
+    Decimal value with the adjusted green level for the image. Required.
   blue:::
-    The adjusted blue level for the image. Default: 0
+    Decimal value with the adjusted blue level for the image. Required.
 
 Example::
 ----
-rgbadjust(2.0,0.25,-1.75)
+rgbadjust(0.0,-1.0,-1.0) <1>
+rgbadjust(0.0,0.0,-1.0) <2>
+rgbadjust(1.0,0.0,-1.0) <3>
 ----
+<1> Red channel only, otherwise black
+<2> No blue channel, otherwise unmodified
+<3> No blue channel, boosted red channel (as seen in the image above)
 
-==== HSB Adjust
+=== HSB Adjust
 
 image::styling-hsbadjust.jpg[HSB Adjust to oppsite colors, 152px]
 
 Adjust the hue, saturation and brightness levels in the image.
 
+NOTE: This effect is a lot more rudimentary than the Hue/Saturation effect in Photoshop.
+For instance, when reducing saturation, all colors below a certain threshold are strictly converted to grayscale instead of being desaturated.
+The use of values outside of +/-0.2 is not recommended.
+
 Arguments::
 
   hue:::
-    Value from -1 to 1, of how far around the color wheel to move the hue of the image. Default: 0
+    Decimal value from -1 to 1, of how far around the color wheel to move the hue of the image. Required. (0 is no change)
   saturation:::
-    Value from -1 to 1 to adjust the intesity of the colors in the image. Default: 0
+    Decimal value from -1 to 1 to adjust the intesity of the colors in the image. Default: 0
   brightness:::
-    Value from -1 to 1 to adjust the brightness of the image. Default: 0
+    Decimal value from -1 to 1 to adjust the brightness of the image. Default: 0
 
 Examples::
 ----
-hsbadjust(0.5,-0.1)
 hsbadjust(-0.15,0.2,-0.2)
 ----
 
-==== Block
+=== Block
 
 image::styling-block5.jpg[Blocks 5 pixels large, 152px]
 
@@ -203,28 +218,28 @@ Example::
 block(5)
 ----
 
-==== Blur
+=== Blur
 [[blur]]
 
 image::styling-blur8.jpg[8 pixel blur, 152px]
 
-Applies a Gaussian blur effect, based on the given pixel radius. The opposite of <<sharpen>>, although it's not possible to reverse a sharpen with a blur.
+Applies a Gaussian blur-like effect, based on the given pixel radius. The opposite of <<sharpen>>, although it's not possible to reverse a sharpen with a blur.
 
 Arguments::
 
   radius:::
-    How many pixels of blur to apply. Higher values lead to a more blurry image. Default: 2
+    How many pixels of blur to apply. Higher values lead to a more blurry image, values below 2 result in no blur. Default: 2
 
 Example::
 ----
 blur(8)
 ----
 
-==== Border
+=== Border
 
 image::styling-border4_0x777777.jpg[Solid gray 4 pixel border, 152px]
 
-Applies a solid, rectangular border around the image.
+Applies a rectangular border with a solid color around the image.
 
 Arguments::
 
@@ -239,7 +254,7 @@ border(5)
 border(4, 0x777777)
 ----
 
-==== Bump
+=== Bump
 [[bump]]
 
 image::styling-bump.jpg[Bump effect, 152px]
@@ -254,7 +269,7 @@ Example::
 bump()
 ----
 
-==== Colorize
+=== Colorize
 
 image::styling-colorize.jpg[Colorize to magenta, 152px]
 
@@ -274,7 +289,7 @@ Example::
 colorize(3,1,1.5)
 ----
 
-==== HSB Colorize
+=== HSB Colorize
 
 image::styling-hsbcolorize.jpg[Colorize to cyan, 152px]
 
@@ -290,7 +305,7 @@ Example::
 hsbcolorize(0x00AAAA)
 ----
 
-==== Edge
+=== Edge
 
 image::styling-edge.jpg[Edge effect, 152px]
 
@@ -304,7 +319,7 @@ Example::
 edge()
 ----
 
-==== Emboss
+=== Emboss
 
 image::styling-emboss.jpg[Emboss effect, 152px]
 
@@ -319,7 +334,7 @@ Example::
 emboss()
 ----
 
-==== Flip horizontally
+=== Flip horizontally
 
 image::styling-fliph.jpg[Flipped horizontally, 152px]
 
@@ -333,7 +348,7 @@ Example::
 fliph()
 ----
 
-==== Flip vertically
+=== Flip vertically
 
 image::styling-flipv.jpg[Flipped vertically, 152px]
 
@@ -347,7 +362,7 @@ Example::
 flipv()
 ----
 
-==== Grayscale
+=== Grayscale
 
 image::styling-grayscale.jpg[Grayscale effect, 152px]
 
@@ -363,7 +378,7 @@ Example::
 grayscale()
 ----
 
-==== Invert
+=== Invert
 
 image::styling-invert.jpg[Inverted colors, 152px]
 
@@ -380,7 +395,7 @@ Example::
 invert()
 ----
 
-==== Rotate 90
+=== Rotate 90
 
 image::styling-rotate90.jpg[Rotated 90 degrees, 200px]
 
@@ -394,7 +409,7 @@ Example::
 rotate90()
 ----
 
-==== Rotate 180
+=== Rotate 180
 
 image::styling-rotate180.jpg[Rotated 180 degrees, 152px]
 
@@ -408,7 +423,7 @@ Example::
 rotate180()
 ----
 
-==== Rotate 270
+=== Rotate 270
 
 image::styling-rotate270.jpg[Rotated 270 degrees, 200px]
 
@@ -422,14 +437,16 @@ Example::
 rotate270()
 ----
 
-==== Rounded
+=== Rounded
 
 image::styling-rounded8_4_0x777777.jpg[Rounded corners with added border, 152px]
 
 Rounds the corners of the image, with an option of adding a border around the rounded image which also has rounded corners.
 
-NOTE: The resulting image is still rectangular, so the negative space outside the rounded corners is rendered as white.
-This is usually undesired if the image is shown on a non-white background, in which case it's better to style the image client-side using CSS.
+TIP: To create a circular image, apply a scale square at a desired number of pixels for the diameter, and then apply rounded with radius set to half that amount of pixels for the radius.
+
+NOTE: If the image format has been set to PNG, the negative space outside the rounded corners is rendered as transparent.
+If the image format has been set to JPG, the negative space outside the rounded corners is rendered as the background color.
 
 Arguments::
 
@@ -448,7 +465,7 @@ rounded(10,1)
 rounded(8,4,0x777777)
 ----
 
-==== Sepia
+=== Sepia
 
 image::styling-sepia25.jpg[Sepia effect, 152px]
 
@@ -465,7 +482,7 @@ sepia()
 sepia(25)
 ----
 
-==== Sharpen
+=== Sharpen
 [[sharpen]]
 
 image::styling-sharpen.jpg[Sharpen effect, 152px]
@@ -481,7 +498,3 @@ Example::
 ----
 sharpen()
 ----
-
-== Client-side processing
-
-TODO
