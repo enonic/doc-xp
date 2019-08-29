@@ -250,12 +250,11 @@ Rather than exporting HTTP methods like controllers and filters, the error handl
 For instance, if the current error is a 404, the framework will first attempt to execute the export `handle404`.
 If not found, it will attempt to execute the fallback export `handleError`.
 
-.Sample error handler
+.Basic error handler example
 [source,javascript]
 ----
 include::code/error.js[]
 ----
-
 
 [WARNING]
 ====
