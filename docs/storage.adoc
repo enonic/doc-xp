@@ -23,6 +23,7 @@ Below is a highlight of the capabilities provided:
 * Nodes contain key-value entries called <<Properties>>
 * Query your data using an SQL inspired <<Query language>>
 * Use <<Aggregations>> to get powerful statistics on your data
+* Get highlighted query results based on scoring with <<Highlighting>>
 * Versions are created for every modification of a node
 * Supports <<Access Control>> down to a single document
 * Git inspired <<Branches>> enable you to stage and promote your data
@@ -239,6 +240,28 @@ XP supports several different kinds of aggregation types.
 
 For more insight check out the detailed <<storage/aggregations#, documentation on aggregations>>
 
+== Highlighting
+Highlighters enable you to get highlighted snippets from one or more fields in your search results so you can show users where the query matches are.
+When you request highlights, the response contains an additional highlight element for each search hit that includes the highlighted fields and the highlighted fragments.
+
+Highlighted query structure:
+[source,json]
+----
+{
+    "query" : {...},
+    "highlight" : {
+        ... global properties ...
+
+        "fields" : {
+            "<fieldName>" : {
+                ... field properties...
+            }
+        }
+    }
+}
+----
+
+For more details check <<storage/highlighting#, highlighting documentation>>
 
 == Branches
 
