@@ -241,8 +241,8 @@ XP supports several different kinds of aggregation types.
 For more insight check out the detailed <<storage/aggregations#, documentation on aggregations>>
 
 == Highlighting
-Highlighters enable you to get highlighted snippets from one or more fields in your search results so you can show users where the query matches are.
-When you request highlights, the response contains an additional highlight element for each search hit that includes the highlighted fields and the highlighted fragments.
+Highlighters enable you to get highlighted snippets from one or more properties in your search results so you can show users where the query matches are.
+When you request highlights, the response contains an additional highlight element for each search hit that includes the highlighted properties and the highlighted fragments.
 
 Highlighted query structure:
 [source,json]
@@ -252,9 +252,9 @@ Highlighted query structure:
     "highlight" : {
         ... global properties ...
 
-        "fields" : {
-            "<fieldName>" : {
-                ... field properties...
+        "properties" : {
+            "<propertyName>" : {
+                ... property settings...
             }
         }
     }

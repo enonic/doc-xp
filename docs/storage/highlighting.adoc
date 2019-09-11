@@ -5,7 +5,7 @@
 
 == Introduction
 
-Allows to highlight search results on one or more fields.The implementation uses the lucene highlighter.
+Allows to highlight search results on one or more properties. The implementation uses the lucene highlighter.
 This is how body of a search request with enabled highlight looks like::
 
 .Query structure
@@ -14,18 +14,18 @@ This is how body of a search request with enabled highlight looks like::
 {
     "query" : {...},
     "highlight" : {
-        ... global properties ...
+        ... global settings ...
 
-        "fields" : {
-            "<fieldName>" : {
-                ... field properties...
+        "properties" : {
+            "<propertyName>" : {
+                ... property settings...
             }
         }
     }
 }
 ----
-In the case above, the content field will be highlighted for query (there will be another element in query result, called `highlight`
-, which includes the highlighted fields and the highlighted fragments).
+In the case above, the content property will be highlighted for query (there will be another element in query result, called `highlight`
+, which includes the highlighted properties and the highlighted fragments).
 
 == Properties
 
@@ -44,10 +44,10 @@ and `fragmentSize` will be ignored.
 Defaults to `5`.
 
 noMatchSize (number)::
-The amount of characters you want to return from the beginning of the field if there are no matching fragments to highlight. Defaults to `0` (nothing is returned).
+The amount of characters you want to return from the beginning of the property if there are no matching fragments to highlight. Defaults to `0` (nothing is returned).
 
 order (string)::
-Sorts highlighted fragments by score when set to `score`. Defaults to `none` - will be displayed in the same order in which fragments appear in the field.
+Sorts highlighted fragments by score when set to `score`. Defaults to `none` - will be displayed in the same order in which fragments appear in the property.
 
 preTag (string)::
 Use in conjunction with `postTag` to define the HTML tags to wrap the highlighted text. `<em>` by default.
@@ -56,12 +56,12 @@ postTag (string)::
 Use in conjunction with `preTag` to define the HTML tags to wrap the highlighted text. `</em>` by default.
 
 requireFieldMatch (boolean)::
-Set to `false` if you want to highlight result in every listed field, regardless it was used in the query or not. Default is `true`.
+Set to `false` if you want to highlight result in every listed property, regardless it was used in the query or not. Default is `true`.
 
 tagsSchema (string)::
 Set to `styled` to use the built-in tag schema.
 
-Highlighting settings can be set on a global level and then overridden on the field level
+Highlighting settings can be set on a global level and then overridden on the property level
 (except `tagsSchema` and `encoder`, these two can be set only on the global layer).
 
 == Highlighting Tags
@@ -78,7 +78,7 @@ Request:
   "highlight": {
     "preTag": "<tag1>",
     "postTag": "</tag1>",
-    "fields": {
+    "properties": {
       "description": {}
     }
   }
@@ -108,7 +108,7 @@ Parameter `encoder` can be used to define how highlighted text will be encoded. 
 
 == Highlighted Fragments
 
-Each highlighted field can control the size of the highlighted fragment in characters, and the maximum number of fragments to return.
+Each highlighted property can control the size of the highlighted fragment in characters, and the maximum number of fragments to return.
 On top of this it is possible to specify that highlighted fragments need to be sorted by score.
 For example:
 
@@ -120,7 +120,7 @@ Request:
 {
   query: "fulltext('description', 'house garden big')",
   highlight: {
-    fields: {
+    properties: {
       "description": {
         fragmentSize: 15,
         numberOfFragments: 2
@@ -148,7 +148,7 @@ Response:
 ----
 
 
-If `number_of_fragments` is set to 0 then no fragments are produced, instead the entire content of the field is returned, and of course it is highlighted.
+If `number_of_fragments` is set to 0 then no fragments are produced, instead the entire content of the property is returned, and of course it is highlighted.
 
 == Fragmenter
 
@@ -164,7 +164,7 @@ Request:
   highlight: {
     fragmentSize : 15,
     fragmenter: "simple",
-    fields: {
+    properties: {
       "description": {}
     }
   }
@@ -197,7 +197,7 @@ Request:
   highlight: {
     fragmentSize : 15,
     fragmenter: "span",
-    fields: {
+    properties: {
       "description": {}
     }
   }
@@ -236,7 +236,7 @@ There are also built in "tag" schemas, currently with one single schema called `
 
 == Require Field Match
 
-`requireFieldMatch` can be set to `false` which will cause any field to be highlighted regardless of whether its value matches the query. The default behaviour is `true`, meaning that only fields that match the query will be highlighted.
+`requireFieldMatch` can be set to `false` which will cause any property to be highlighted regardless of whether its value matches the query. The default behaviour is `true`, meaning that only properties that match the query will be highlighted.
 
 .Sample with disabled `requireFieldMatch` property
 
@@ -244,10 +244,10 @@ Request:
 [source,json]
 ----
 {
-  query: "fulltext('anyOtherField', 'house')",
+  query: "fulltext('anyOtherProperty', 'house')",
   highlight: {
     requireFieldMatch: false,
-    fields: {
+    properties: {
       "description": {}
     }
   }
@@ -272,9 +272,9 @@ Response:
 
 == Global Settings
 
-Highlighting settings can be set on a global level and then overridden on the field level.
+Highlighting settings can be set on a global level and then overridden on the property level.
 
-.Sample global properties overridden for each field
+.Sample global properties overridden for each property
 [source,json]
 ----
 {
@@ -283,7 +283,7 @@ Highlighting settings can be set on a global level and then overridden on the fi
         "numberOfFragments" : 3,
         "fragmentSize" : 150,
         "order": "none",
-        "fields" : {
+        "properties" : {
             "displayName" : { "numberOfFragments" : 0 },
             "description" : { "preTags" : ["<tag1>"], "postTags" : ["</tag1>"] },
             "data.address" : { "numberOfFragments" : 5, "order" : "score" }
