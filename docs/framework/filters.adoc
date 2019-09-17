@@ -1,0 +1,60 @@
+= HTTP filters
+:toc: right
+:imagesdir: framework/images
+
+HTTP filters enable pipelined processing of http requests.
+
+[#http-filter]
+== Filters
+
+Filters enable you to step into the request pipeline, and execute code at at both request and response of the execution pipeline, possibly intercepting the request directly.
+Similar to an <<controllers#,HTTP Controller>>, standalone filters are triggered based on an export.
+
+As such, to make a filter, it must be export a `filter` function:
+
+.Minimal filter timing the subsequent request
+[source,js]
+----
+exports.filter = function (req, next) {
+    var before = new Date().getTime();
+    var response = next(req);  // next(req) hands over the request to the engine pipeline and returns the response
+    var after = new Date().getTime();
+    log.info((after - before) + 'ms');
+    return response;
+};
+----
+
+.Filter manipulating the request
+[source,js]
+----
+exports.filter = function (req, next) {
+  req.requestLogging = true; // Manipulate request
+  log.info("Request:" + JSON.stringify(req, null, 2));
+  var response = next(req); // Continue request pipeline
+  response.responseLogging = true; // Manipulate response
+  log.info("Response:" + JSON.stringify(response, null, 2));
+  return response;
+};
+----
+
+.Filter intercepting the request
+[source,js]
+----
+exports.filter = function (req, next) {
+
+    if (req.headers['X-Auth-Token'] !== 'letMeIn') {
+        // intercept request pipeline
+        return {
+            status: 403
+        }
+    }
+
+    req.headers['Authenticated'] = true;
+    return next(req);
+};
+----
+
+Filters may currently be wired into the execution pipeline in the following ways:
+
+* Using a https://market.enonic.com/vendors/enonic/router-lib[router]
+* Using <<../cms/mappings#, site mappings>>

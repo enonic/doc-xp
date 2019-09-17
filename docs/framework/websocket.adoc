@@ -1,0 +1,34 @@
+= HTTP WebSockets
+:toc: right
+:imagesdir: framework/images
+
+HTTP WebSockets enable two-way communication with HTTP clients
+
+[#http-websockets]
+== Websockets
+
+Websocket support allows a service to act as a websocket channel that
+you can connect to from a web-browser.
+
+A `get` method must be implemented to handle initialization
+of the websocket.
+
+[source,javascript]
+----
+include::code/websockets-1.js[]
+----
+
+A websocket event handler named `webSocketEvent` is required. It will be called for every websocket event from a client. See example below.
+
+[source,javascript]
+----
+include::code/websockets-2.js[]
+----
+
+Below is an example of a simple chat using the <<../api/lib-websocket#, Websocket JS api>> for sending messages back and adding/removing clients
+in groups. Adding to groups allows for multicast message sending.
+
+[source,javascript]
+----
+include::code/websockets-3.js[]
+----

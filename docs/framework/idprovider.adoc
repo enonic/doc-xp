@@ -1,0 +1,64 @@
+= ID Providers
+:toc: right
+:imagesdir: framework/images
+
+The XP framework supports pluggable authentication using a concept called IDproviders
+
+== Introduction
+As part of the XP <<../aim#,AIM>> (Identity and Access management) apps and sites may be loosely associated with an IDprovider.
+This section describes how to implement an ID provider application.
+
+When an IDprovider is active throughout the <<../runtime#, http request pipeline>>, it may intercept or process the request to dynamically provide authentication.
+
+== Descriptor
+An ID provider application requires a descriptor file.
+The descriptor should be placed in your project as `src/main/resources/idprovider/idprovider.xml`.
+
+.Sample idprovider.xml
+[source,javascript]
+----
+<id-provider>
+  <mode>LOCAL</mode> <!--1-->
+  <form> <!--2-->
+    <input name="title" type="TextLine">
+      <label>Title</label>
+      <occurrences minimum="0" maximum="1"/>
+      <default>User Login</default>
+    </input>
+  </form>
+</id-provider>
+----
+
+<1> *mode* specifies how users and groups are process and stored in XP. Allowed values are:
++
+* *LOCAL* - Users and groups are fully managed by the IDprovider (i.e. no integrations or external ID systems).
+* *EXTERNAL* - Users and groups exist in a remote system. The IDprovider acts as a "broker" between XP and the remote Identity system.
+* *MIXED* - Users exist in a remote system, but the groups are created and managed locally in XP.
++
+<2> *form* defines config options that can be defined from the UI when setting up ID providers.
+Forms are based on the <<../cms/schemas#, schema system>>
++
+NOTE: The forms can not use CMS-specific input types such as contentSelector and htmlArea in this form.
+
+== idprovider.js
+To turn an app into an ID provider, you must add a specific idprovier JavaScript file `src/main/resources/idprovider/idprovider.js` to the application.
+An app can only implement a single ID provider.
+
+idprovider.js can export a range of different pre defined functions to implement different functionality:
+* As a <<controller#, controller>> - for instance by rendering a login page, or logging out the user
+* As a <<filters#, filter>> - by processing every request automatically log in users
+* As an <<error#, error handler>> - intercepting 401 (Unauthorised) errors from the request pipeline
+
+The example below demonstrates a typical idprovider script may be implemented
+
+.Sample idprovider.js
+[source,javascript]
+----
+include::code/idprovider.js[]
+----
+
+[NOTE]
+====
+If the "login" or "logout" endpoints all called with a "redirect" parameter, a validation of the origin is performed.
+The result of this validation is then passed to the ID Provider as a request property "validTicket".
+====

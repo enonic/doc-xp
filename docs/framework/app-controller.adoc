@@ -1,0 +1,28 @@
+= Application controller
+:toc: right
+:imagesdir: framework/images
+
+The application controller enables you to handle application lifecycle events
+
+== main.js
+Only one controller is commonly used across all XP apps.
+This is known as the app controller, or just "main.js".
+
+To add an app controller to your project, simply create the following file in your project: `src/main/resources/main.js`
+
+The app controller is invoked for application lifecycle events like start or stop occurs.
+A common use of this controller is initialization and registration of event listeners.
+
+Simple example:
+
+[source,javascript]
+----
+include::code/main-1.js[]
+----
+
+Running code on stop:
+
+[source,javascript]
+----
+include::code/main-2.js[]
+----

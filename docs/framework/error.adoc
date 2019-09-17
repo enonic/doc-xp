@@ -1,0 +1,50 @@
+= HTTP Error handler
+:toc: right
+:imagesdir: framework/images
+
+The framework supports the definition of custom error handlers.
+
+== Introduction
+Enonic XP ships with a default error handler that will produce a stack trace whenever an error occurs.
+Stack traces may not be the best way to greet your users.
+By implementing an error handler this will effectively replace the default error handler.
+
+== error.js
+You may add an error handler to your application by creating the file `src/main/resources/site/error/error.js`.
+
+When an error occurs in the request processing pipeline, the XP framework will look for an error handler to execute.
+For sites specifically, it will (iteratively, in order) go through all applications added to the site,
+and attempt to execute the handler functions until an <<http#http-response, HTTP response>> object is returned.
+This essentially means that developers may choose not to handle particular errors explicitly.
+If the error is not properly handled, it will fallback to the default XP error handler.
+
+NOTE: Should an error occur inside an error handler, the framework will take over and fallback to the default error handler.
+
+Rather than exporting HTTP methods like controllers and filters, the error handler exports "error code handlers".
+
+For instance, if the current error is a 404, the framework will first attempt to execute the export `handle404`.
+If not found, it will attempt to execute the fallback export `handleError`.
+
+.Basic error handler example
+[source,javascript]
+----
+include::code/error.js[]
+----
+
+[WARNING]
+====
+Error handlers should be implemented to execute as fast as possible, and preferably without additional API requests, i.e. fetching content.
+The reason for this is that the error handler itself may then recursively fail. Also, slow error pages may impact the performance of a node negatively if errors occur frequently.
+You can choose different handling based on the type of error. A 404 might for instance be handled differently than other errors.
+====
+
+== The Error object
+
+The input parameter for handler functions is an error JSON object.
+The object contains the status code, error message, Java Exception object, and the original <<http#http-request, HTTP request>> object:
+
+.Sample error object
+[source,javascript]
+----
+include::code/error.json[]
+----

@@ -1,34 +1,30 @@
-= Controllers
+= HTTP controllers
 :toc: right
 :imagesdir: framework/images
 
 JavaScript controllers represent the core concept of the Enonic XP framework.
 
-== Basic
+[#http-controller]
+== Controller
+HTTP controllers are essentially JavaScript files that are invoked by the various <<../runtime#,runtime engines>>, or by other controllers through the require system.
 
-Every javascript file is considered a controller, and the controllers are initiated through their exports.
-The controllers are typically invoked by the various <<../runtime#,runtime engines>>, or by other controllers through the require system.
+Common for all http controllers is that they export functions matching the desired HTTP Method it implements.
+As such, any controller must explicitly declare one or more "exports" in order to handle requests:
+`get`, `post`, `delete` are examples of such methods.
 
-== Application controller
+A controller can also export a special function `all` which will handle any HTTP method, unless there is a more specific handler available.
 
-Only one controller is commonly used across all XP apps.
-This is known as the app controller, or just "main.js".
+The appropriate function will automatically be invoked for every request sent to the controller.
 
-To add an app controller to your project, simply create the following file in your project: `src/main/resources/main.js`
+.Example usage
+[source,javascript]
+----
+include::code/controller-1.js[]
+----
 
-The app controller is invoked for application lifecycle events like start or stop occurs.
-A common use of this controller is initialization and registration of event listeners.
-
-Simple example:
+A handler function receives a parameter with an <<http#http-request, Http Request>> object, and returns an <<http#http-response, HTTP Response>> object.
 
 [source,javascript]
 ----
-include::code/main-1.js[]
-----
-
-Running code on stop:
-
-[source,javascript]
-----
-include::code/main-2.js[]
+include::code/controller-2.js[]
 ----
