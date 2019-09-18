@@ -11,16 +11,3 @@ Here are some highlights:
 * *Javascripts are compiled and cached* on first request, for optimal performance
 * *Multithreaded* request-response approach - simplifying software development and utilization of modern multi-core hardware
 * *Based on the http://wiki.commonjs.org/wiki/Modules/1.1[CommonJS module specification]* like RequireJS
-
-
-Framework reference:
-
-* *<<framework/globals#,Global JavaScript objects and functions>>**
-* *<<framework/controllers#,HTTP Controllers>> for request handling*
-* *<<framework/http#,HTTP request and response objects>>*
-* *<<framework/filters#,HTTP filters>> for pre and post processing of requests*
-* *<<framework/websocket#,HTTP Websockets>> provide two way communication with clients*
-* *<<framework/error#,HTTP error handling>> to handle request pipeline errors*
-* *<<framework/idprovider#,IDproviders>> implements pluggable authentication*
-* *<<framework/i18n#,Localization>>* of code level text phrases
-* *<<framework/java-bridge#,Invoke Java>>* directly from JavaScript
