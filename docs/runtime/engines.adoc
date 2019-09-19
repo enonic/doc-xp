@@ -1,0 +1,146 @@
+= Runtime engines
+:toc: right
+:imagesdir: media
+
+Applications built on the <<../framework#,XP framework>> are powered by the XP runtime.
+The XP runtime essentially provides the following capabilities:
+
+== HTTP engine
+
+The HTTP engine is responsible for handling any web-based request to the runtime.
+By default, the XP runtime serves HTTP requests from port 8080 (customizable).
+
+=== Common pipeline
+
+All HTTP requests are processed through a common pipeline as specified below:
+
+image::http-pipeline.svg[Common HTTP request pipeline, 768px]
+
+Vhost filters:: Request routing based on <<../deployment/vhosts#,virtual hosts>>
+
+Java request filters:: Optional Java request filters
+
+Auth filter::  If the pipeline returns a "401: Unauthorized" error code, the default <<deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
+
+Asset service:: Serves <<asset-service#,static assets>> for the /_/asset/* request patterns
+
+HTTP Services:: Executes <<http-services#,HTTP services>> for the /_/service/* request patterns
+
+Engine pipeline:: Engine specific processing based on request pattern:
++
+====
+There are three specialized implementations of the HTTP engine available.
+
+* <<Web app engine>> :8080/webapp/<name-of-webapp>/*
+* <<Site engine>> :8080/site/<repo>/<branch>/*
+* <<Admin engine>> :8080/admin/*
+====
+
+Error handler:: If the pipeline returns an error (everything but "200: Ok") that was not handled by an ID provider, an available error handler will kick in.
+
+Java response filters:: Optional Java response filters
+
+Standard error handler:: Finally, if the request fails with an error that is still unhandled, the standard error handler will kick in
+
+[#webapp-engine]
+== Web app engine
+
+The Web app engine is responsible for processing of site requests on the endpoint `:8080/webapp/<app-name>/*`
+
+=== Request pipeline
+
+image::webapp-pipeline.svg[Webapp rendering pipeline, 768px]
+
+This section describes the full pipeline involved in processing a webapp http request.
+
+Web app controller:: Invokes the webapp controller of the contextual application
+
+handle401:: If an IDprovider is defined in the contextual vhost, it may take over the response to serve a proper login page if required.
+
+[#webapp_js]
+=== webapp.js
+
+To turn your application into a webapp, simply place an http controller called ``/src/main/resources/webapp/webapp.js`` into your project.
+
+When the application is deployed, the controller will be accessible from
+
+  ``//<server>:<port>/webapp/<app-name>/`` (i.e. "localhost:8080/webapp/my.webapp/").
+
+``webapp.js`` now acts as a link:../framework/http#http-controller[HTTP controller] and may expose a function for each HTTP method that should be handled: i.e.
+GET, POST, etc.
+
+Below is an example webapp controller.
+
+[source,javascript]
+----
+include::code/webapp.js[]
+----
+
+NOTE: To make use of JavaScript filters in web apps, the implementer must use a https://market.enonic.com/vendors/enonic/router-lib[router].
+
+
+
+[#site-engine]
+== Site engine
+
+Site engine is responsible for processing of requests on the endpoint `:8080/site/<repo>/<branch>/*`
+
+The site engine is directly based on XP's <<../framework#,JavaScript framework>>.
+Sites are essentially content driven web apps.
+In a traditional web app, the developers are controlling all URL patterns.
+In a site however, the URLs are editorially controlled.
+In XP this boils down to a mapping between content (page) and a controller.
+XP sites also enable developers to take control over URL patterns when needed, through filters and mappings (as described below).
+
+=== Request pipeline
+
+The site pipeline is executed as a subset of the common pipeline:
+
+image::site-pipeline.svg[Site rendering pipeline, 768px]
+
+This section describes the standard pipeline involved in processing a page request i.e. `:8080/site/<repo>/<branch>/<path-to-page>`.
+
+Mappings:: Executes JavaScript filters and controllers within a site based on path or content driven mapping in the site descriptor
+
+Page renderer:: If the requested url patter matches a page (content with the same url pattern), the page controller is executed - if not, a 404 (or other error is thrown). Pages with regions will typically process all regions and leave component placeholders.
+
+Post processing:: If the page response type is HTML, any placeholders in the markup will be processed and rendered i.e. parts, and layouts. Components with layouts will leave new placeholders, and this step will be repeated until no placeholders remain.
+
+Processors:: If the page response type is HTML, processors defined in the site descriptor will be executed. Processors typically manipulate the HTML by adding script tags from inlined components in the previous step.
+
+Response filters:: Available filters may also perform last minute tasks before the final response is delivered.
+
+handle401::  If the pipeline returns a "401: Unauthorized" error code, the default <<deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
+
+Image service:: Real-time <<image-service#,image service>> for optimized image delivery
+
+Component service:: Get URL-access to contextual page components through the <<component-service#,component service>>.
+
+[#admin-engine]
+== Admin engine
+
+Admin engine is responsible for processing of site requests on the endpoint `:8080/admin/*`
+
+
+=== Request pipeline
+
+The admin pipeline is executed as a subset of the common pipeline:
+
+image::admin-pipeline.svg[Site rendering pipeline, 768px]
+
+Tools handler:: Tools are admin apps that extend the launcher menu. The tools endpoint is `:8080/admin/tool/<app-name>/<tool-name>`. The respective widget controller must be located in your project as: `src/main/resources/admin/tools/<tool-name>/<tool-name>.js`.
+
+Widget handler:: Widgets are admin extensions used by admin tools. The widget endpoint is `:8080/admin/widget/<app-name>/<widget-name>`. The respective widget controller must be located in your project as: `src/main/resources/admin/widgets/<widget-name>/<widget-name>.js`.
+
+handle401:: If an IDprovider is defined in the contextual vhost, it may take over the response to serve a proper login page if required.
+
+[#task-engine]
+== Task Engine
+
+The task engine enables developers to run Javascripts as threaded background tasks.
+
+=== Task runner
+
+image::task-engine.svg[Task execution process, 768px]
+
+Check out the <<../api/lib-task#,task API>> for details on usage.

@@ -27,12 +27,12 @@
           "document": "framework/globals"
         },
         {
-          "title": "Controllers",
-          "document": "framework/controllers"
-        },
-        {
           "title": "HTTP",
           "document": "framework/http"
+        },
+        {
+          "title": "Controllers",
+          "document": "framework/controllers"
         },
         {
           "title": "Filters",
@@ -43,7 +43,7 @@
           "document": "framework/websocket"
         },
         {
-          "title": "Error",
+          "title": "Error handler",
           "document": "framework/error"
         },
         {
@@ -65,11 +65,11 @@
       "document": "runtime",
       "menuItems": [
         {
-          "title": "Architecture",
-          "document": "runtime/architecture"
+          "title": "HTTP engines",
+          "document": "runtime/engines"
         },
         {
-          "title": "Asset service",
+          "title": "HTTP Asset service",
           "document": "runtime/asset-service"
         },
         {
@@ -77,13 +77,21 @@
           "document": "runtime/http-services"
         },
         {
-          "title": "Image service",
+          "title": "HTTP Image service",
           "document": "runtime/image-service"
         },
         {
-          "title": "Component service",
+          "title": "HTTP Component service",
           "document": "runtime/component-service"
-        }
+        },
+        {
+          "title": "Management Endpoint",
+          "document": "runtime/management"
+        },
+        {
+          "title": "Statistics Endpoint",
+          "document": "runtime/statistics"
+        },
       ]
     },
     {
@@ -206,14 +214,6 @@
       "title": "API Reference",
       "document": "api",
       "menuItems": [
-        {
-          "title": "Management Endpoint",
-          "document": "api/management"
-        },
-        {
-          "title": "Statistics Endpoint",
-          "document": "api/statistics"
-        },
         {
           "title": "Admin API",
           "document": "api/lib-admin"

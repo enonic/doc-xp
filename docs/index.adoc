@@ -24,14 +24,15 @@ image::platform-components.png[Platform illustration,768]
 
 These are the essential platform components and tools:
 
-* Javascript/Java <<./runtime#,application runtime>>.
-* <<storage#,NoSQL storage>> for your data.
-* Identity and Access Management - <<iam#,IAM>>
+* <<runtime#, Application runtime>>.
+* <<framework#, Javascript development framework>>
+* <<storage#, NoSQL storage>> for your data.
+* <<iam#, Identity and Access Management - IAM>>
 * Extensible <<admin#, Admin Console>> for back-office users
-* Hybrid <<cms#,Content Management System>>  when needed
-* Remote management API
-* Standard metrics API for monitoring
-* CLI and software development kits for efficient .
+* <<cms#, Hybrid Content Management System>>  when needed
+* <<runtime/management#, Remote management API>>
+* <<runtime/metrics#, Statistics API for metrics and monitoring>>
+* https://developer.enonic.com/start[CLI and software development kit].
 
 
 == API
