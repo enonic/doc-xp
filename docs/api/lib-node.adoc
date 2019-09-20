@@ -1,4 +1,4 @@
-= Context Library
+= Node Library
 :toc: right
 :imagesdir: images
 
@@ -103,14 +103,11 @@ var searchConnection = nodeLib.multiRepoConnect({
 });
 ----
 
-== Objects
-
-
-=== MultiRepoConnection
+== MultiRepoConnection
 
 A MultiRepoConnection makes it possible to search across multiple repositories.  The object has only one method: query.
 
-==== query
+=== query
 
 This command queries nodes in a multi-repo connection.
 
@@ -200,7 +197,7 @@ var result = multiRepoConnection.query({
 ----
 
 
-=== RepoConnection
+== RepoConnection
 
 A single repo connections with lots of methods to work on the repo:
 
@@ -216,7 +213,7 @@ var repo = nodeLib.connect({
 });
 ----
 
-==== commit
+=== commit
 
 Commits the active version of nodes.
 
@@ -285,7 +282,7 @@ var result2 = repo.commit({
 }
 ----
 
-==== create
+=== create
 
 Creating a node.  To create a content where the name is not important and there could be multiple instances under the same parent content,
 skip the name parameter and specify a displayName.
@@ -397,7 +394,7 @@ var result1 = repo.create({
 }
 ----
 
-==== delete
+=== delete
 
 Deleting a node or nodes.
 
@@ -435,7 +432,7 @@ var result = repo.delete('nodeId', '/node2-path', 'missingNodeId');
 ]
 ----
 
-==== diff
+=== diff
 
 Resolves the differences for a node between current and given branch.
 
@@ -486,7 +483,46 @@ var result = repo.diff({
 ----
 <1> There are 2 children, but only one has been changed
 
-==== findChildren
+=== exists
+
+Checking if a node or nodes exist for the current context.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| keys | string \| Array.<string> | Node keys to check. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
+|===
+
+[.lead]
+Returns
+
+*Array.<string>* : The list of keys that exist.
+
+[.lead]
+Example
+
+.Check for existing nodes
+[source,js]
+----
+var result = repo.exists('existingNodeId', '/path/to/existingNode', 'nonExistingNodeId');
+----
+
+.Sample response
+[source,js]
+----
+[
+    "existingNodeId",
+    "nodeId of node at /path/to/existingNode"
+]
+----
+
+
+=== findChildren
 
 Fetch the children of a node.
 
@@ -541,7 +577,7 @@ var result = repo.findChildren({
 }
 ----
 
-==== findVersions
+=== findVersions
 
 Fetch the versions of a node.
 
@@ -600,7 +636,7 @@ var result = repo.findVersions({
 }
 ----
 
-==== get
+=== get
 
 Fetches specific nodes by path or ID.
 
@@ -701,7 +737,7 @@ var allFamily = repo.get(family._id, [child1._id, child2._id]);
 ----
 <1> With 3 input IDs, 3 nodes like this one was in the returned array.
 
-==== getActiveVersion
+=== getActiveVersion
 
 Fetches specific nodes by path or ID.
 
@@ -723,7 +759,7 @@ Returns
 
 *object* : Active content versions per branch
 
-==== getBinary
+=== getBinary
 
 Returns a binary stream.
 
@@ -758,7 +794,7 @@ var binaryStream = repo.getBinary({
 });
 ----
 
-==== modify
+=== modify
 
 Modifies a node.
 
@@ -796,7 +832,7 @@ var result = repo.modify({
 });
 ----
 
-==== move
+=== move
 
 Rename a node or move it do a new path.
 
@@ -849,7 +885,7 @@ var moved = repo.move({
             });
 ----
 
-==== push
+=== push
 
 Pushes a node to a given branch.
 
@@ -956,7 +992,7 @@ var result = repo.push({
 }
 ----
 
-==== query
+=== query
 
 Queries nodes
 
@@ -1157,7 +1193,7 @@ var result = repo.query({
 }
 ----
 
-==== refresh
+=== refresh
 
 Refresh the index for the current repoConnection.  The index has two parts, search and storage.  It is possible to index both or just one of them.
 
@@ -1192,7 +1228,7 @@ repo.refresh();
 repo.refresh('SEARCH');
 ----
 
-==== setActiveVersion
+=== setActiveVersion
 
 Set the active version of a node.
 
@@ -1231,7 +1267,7 @@ var result = repo.setActiveVersion({
 });
 ----
 
-==== setChildOrder
+=== setChildOrder
 
 Set the order of the node's children.
 
@@ -1266,7 +1302,7 @@ repo.setChildOrder({
 });
 ----
 
-==== setRootPermission
+=== setRootPermission
 
 Set the root node permissions and inheritance.
 
@@ -1315,7 +1351,7 @@ var result = repo.setRootPermissions({
 });
 ----
 
-=== Source
+== Source
 
 A source definition of repositories:
 
@@ -1333,7 +1369,7 @@ Fields
 | principals | Array.<string> | Additional principals to execute the callback with
 |===
 
-=== User
+== User
 
 User object to use for connections:
 

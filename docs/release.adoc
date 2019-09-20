@@ -3,9 +3,110 @@ include::variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP7 Update 1
+
+NOTE: v7.1 is fully backward compatible with v7.0 and was released in parallel with https://developer.enonic.com/docs/content-studio/master/release#2_1_0[Content Studio v2.1].
+
+This update introduces new features and improvements as well as 28 bugfixes.
+The https://github.com/enonic/xp-distro/releases/tag/v7.1.0[complete list of changes] is available on Github.
+
+=== Query highlighting
+The storage and CMS API now provide out-of-the-box highlighting functionality.
+
+By submitting a highlighter definition together with your query,
+you will in return get text fragments where relevant search strings are highlighted.
+This is especially useful when presenting search results to end users.
+
+.Sample query with hightlighter
+[source,json]
+----
+{
+  query: "fulltext('description', 'house garden big')",
+  highlight: {
+    properties: {
+      "description": {
+        fragmentSize: 15,
+        numberOfFragments: 2
+      }
+    }
+  }
+}
+----
+
+.Sample result from above query
+[source,json]
+----
+{
+    ...
+  "highlight": {
+    "c4bb11f1-c6e2-4849-a665-28f612213984": {
+      "description": [
+        " <em>house</em> with <em>big</em>",
+        " maintained <em>garden</em>."
+      ]
+    }
+  }
+}
+----
+
+<<storage/highlighting#, Read more about highlighting>>
+
+=== Content Workflow
+The Content API now introduces support for basic workflow capabilities.
+When creating or modifying content, workflow status may be specified.
+Currently the following statuses are available: IN_PROGRESS, READY,
+
+The API will now prevent publishing of content unless it is in the workflow state `READY`.
+
+For backward compatibility, if workflow state is not specified, it is equivalent to `READY`.
+Also, modifying content will keep the item's existing workflow state.
+
+image:workflow-icons.png["Screenshot showing workflow state in Content Studio", 480]
+
+
+Check out the <<api/lib-content#, content api>> for usage details
+
+
+=== Customizable display name label
+
+For an improved editorial experience, developers may now override the default <Display Name> text on a per content type basis.
+This helps make the content form more intuitive.
+
+By adding the following line to your content type definition:
+
+  <display-name-label>Some cool text here</display-name-label>
+
+Editors will see the following in content studio.
+
+image:display-name-label.png["Screenshot showing what this looks like in Content Studio", 768]
+
+Visit the <<cms/content-types#, Content Types documentation>> for more detail
+
+=== Publishing message
+
+The content API's publish function now supports adding a message.
+This message is added to the "commit" entry that was added to the function with the release of XP7.
+
+The publish message is builds on the commit functionality of the Node API.
+
+Content studio enables you to see the publishing message from the version history widget.
+
+image:publish-message.png["Screenshot showing where to write the publish message from Content Studio", 768]
+
+
+=== Selected improvements
+
+Some of the improvements included in this release are:
+
+* New exists() function for both node and content API provides faster existence checks over using get()
+* Assets with .es extension are now served with the javascript MIME type
+* File names are now sanitised during upload to prevent use of illegal characters
+
+
+== XP7
+
 NOTE: *Breaking changes* XP 7 contains breaking changes. Follow the <<release/upgrade#,upgrade instructions>> carefully to secure a successful upgrade.
 
-== Introduction
 Enonic XP 7 takes a major leap in simplifying application development and making the platform leaner and more flexible.
 
 The biggest highlights of XP 7 is not the core platform, but all the changes around it:
@@ -16,7 +117,7 @@ The biggest highlights of XP 7 is not the core platform, but all the changes aro
 * <<Native distributions>>. The Java Virtual Machine is now bundled with XP
 * Content Studio - Is now available as an app to download from https://market.enonic.com/vendors/enonic/content-studio[Enonic Market].
 
-== Developer portal
+=== Developer portal
 
 image::developer-portal.png["Screenshot of the new developer portal", 720]
 
@@ -27,7 +128,7 @@ The portal contains
 * *Reference docs:* For all XP related apps, starters, libraries and more that are built by Enonic.
 * *Hands on guides:* Practical how-to guides an tutorials, including the getting started page
 
-=== Built with XP
+==== Built with XP
 The portal is naturally an XP app itself.
 The geeky fact is that all docs and most guides are written in Asciidoctor together with the actual product code.
 
@@ -40,7 +141,7 @@ image::built-with-xp.png["Screenshot of dev portal edited in Content Studio", 72
 We plan to release the core elements of the doc portal on the market in the future.
 
 
-== Enonic CLI
+=== Enonic CLI
 
 The brand new Enonic Command Line Interface - "Enonic CLI" was also released at the same time as XP 7.
 It is versioned independently for more frequent updates.
@@ -53,7 +154,7 @@ as described in the https://developer.enonic.com/start[getting started section] 
 The CLI is available for Mac, Linux and Windows. For more information, check out the https://developer.enonic.com/docs/enonic-cli/master[full documentation].
 
 
-== Native distributions
+=== Native distributions
 
 The biggest conceptual change to XP is that Java (the JVM) is no longer required in order to run XP.
 XP 7 ships with Java 11 embedded. As such, we now release native distributions of XP for the three major platforms, Mac, Windows and Linux.
@@ -71,7 +172,7 @@ The SDK includes the full Java Development Kit,
 whereas the server edition uses a slimmed down version of the JVM, and may be further optimized for production use.
 
 
-== Content Studio is an app
+=== Content Studio is an app
 
 Content Studio, the CMS editorial interface has been moved out of the XP core.
 It is now available as a separate application on https://market.enonic.com/vendors/enonic/content-studio[Enonic Market]
@@ -82,12 +183,12 @@ Expect new versions of Content Studio to be released along with new features in 
 For Content Studio release notes, check out the https://developer.enonic.com/docs/content-studio[new documentation].
 
 
-== CMS
+=== CMS
 
 Even if Content Studio can be installed as a separate application,
 The XP core still ships with the <<api/lib-content#,content API>> and link:./runtime#site-engine[site engine] that applications depend on.
 
-=== Image styles
+==== Image styles
 
 XP 7 introduces a new feature in the rich text editor called "Image styles".
 Image styles consist of both client side styling (css), and image service rendering specifications.
@@ -97,7 +198,7 @@ Now, application developers may define custom styles that control both server si
 
 image::old-photo-style.png["Here we see an image using a style called old-photo, which adds the sephia effect to the image.", 720]
 
-=== Projects prepared
+==== Projects prepared
 
 Customers with many sites have requested better support for isolation of sites, and specific access rights to each.
 Our solution to create sites in different "projects", each project will be using its own repo.
@@ -110,19 +211,19 @@ You will notice this through the following change:
 * The site engine URLs now contain project name - i.e. ``/site/<project>/<branch>/<content-path>``
 
 
-=== Editor references
+==== Editor references
 
 References to images or other content in the rich text editor are now stored explicitly in the underlying node API.
 The publishing wizard will now identify and include these dependencies like all other references - no more missed items during publishing.
 
 
-=== Stemmed content
+==== Stemmed content
 
 Content flagged with a language is now automatically stemmed during indexing (trimming words to their root form for better hits).
 This is done using the standard Elasticsearch stemmer.
 This is achieved by adding a stemmed version of the  `_allText` property, combined with a new query function.
 
-=== Better page indexing
+==== Better page indexing
 
 Pages, and their components are now indexed differently.
 Rather than just looking for text within a page, developers may now search for any configuration property,
@@ -130,11 +231,11 @@ or metadata within a page.
 
 As an example, one may now search the use of a specific part within a site.
 
-== XP Storage
+=== XP Storage
 
 The XP storage has been refactored for improved performance and disk usage.
 
-=== Blobstore improvements
+==== Blobstore improvements
 
 XP persists all data in so-called blobstore segments, one segment for each type of data to persist.
 XP 7 introduces new segments for indexconfig and permissions, enabling re-use of these across nodes, and node versions.
@@ -144,7 +245,7 @@ This reduces the use of disk space significantly.
 Additionally, each repository now has it's own root entry in the blobstore.
 This makes it possible to directly manage blobs associated with a single repository.
 
-=== Version commits
+==== Version commits
 
 XP automatically creates new versions for each modification of a node.
 Where XP 6 would persist all versions forever, XP 7 by default treats all versions as transient.
