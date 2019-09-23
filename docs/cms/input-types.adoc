@@ -475,7 +475,7 @@ image::Html-area-editor.png[Input field with a toolbar at the top. Source and fu
 
 Below is the default editor tools configuration:
 
-  Styleselect | Bold Italic Underline | Alignleft Aligncenter Alignright Alignjustify | Bullist Numlist Outdent Indent | Charmap Anchor Image Macro Link Unlink | Table
+  Format | Bold Italic Underline | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | SpecialChar Anchor Image Macro Link Unlink | Table
 
 
 Below is the complete list of available editor tools:
@@ -483,19 +483,19 @@ Below is the complete list of available editor tools:
 |===
 |Name | Description
 
-| Styleselect | Text format menu
+| Format | Text format menu
 | Bold | Bold text
 | Italic | Italic text
 | Underline | Underline text
-| Alignleft | Left align content
-| Aligncenter | Center content
-| Alignright | Right align content
-| Alignjustify | Justify content
-| Bullist | Insert a bullet list
-| Numlist | Insert a numbered list
+| JustifyBlock | Justify content
+| JustifyLeft | Left align content
+| JustifyCenter | Center content
+| JustifyRight | Right align content
+| BulletedList | Insert a bullet list
+| NumberedList | Insert a numbered list
 | Outdent | Decrease indent
 | Indent | Increase indent
-| Charmap | Insert a special character
+| SpecialChar | Insert a special character
 | Anchor | Insert an anchor
 | Image | Insert/Edit an image
 | Macro | Insert a macro
@@ -519,7 +519,7 @@ Below is the complete list of available editor tools:
 | RemoveFormat | Remove formatting
 | Rtl | Text direction right to left
 | SelectAll | Select editor's content
-| Strikethrough | Strikethrough over text
+| Strike | Strikethrough over text
 | Styles | Text styles menu
 | Subscript | Subscript text
 | Superscript | Superscript text
