@@ -457,7 +457,7 @@ A field for entering multi-line text with rich-formatting options.
   <default><h3>Enter description here</h3></default><!--1-->
   <config>
     <exclude>*</exclude> <!--2-->
-    <include>AlignLeft AlignRight | Bold Italic</include> <!--3-->
+    <include>JustifyLeft JustifyRight | Bold Italic</include> <!--3-->
   </config>
 </input>
 ----
