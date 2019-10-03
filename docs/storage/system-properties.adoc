@@ -9,6 +9,7 @@ System properties may effectively be used in queries, just like one would query 
 
 == Identifier and structure
 
+// TODO: supported values for _childOrder, Value types for _ts and _versionKey
 [cols="1,1,1,2"]
 |===
 |System Property |Value Type |Indexing |Comment
@@ -36,10 +37,10 @@ System properties may effectively be used in queries, just like one would query 
 |_childOrder
 |String
 |string
-|Default ordering of children when using getChildren(). TODO SUPPORTED VALUES
+|Default ordering of children when using getChildren()
 
 |_manualOrderValue
-|Long? TODO
+|Long
 |number, string
 |Numeric order value used for the builtin manual ordering
 
@@ -57,12 +58,12 @@ System properties may effectively be used in queries, just like one would query 
 |System Property |Value Type |Indexing |Comment
 
 |_ts
-|TODO
+|
 |datetime, string
 |The last time this node was modified
 
 |_versionKey
-|TODO
+|
 |string
 |For every change to a node, a unique versionKey is generated
 
@@ -114,43 +115,44 @@ They are useful for performing various types of queries.
 Permissions set on a node are indexed differently from what the domain object looks like.
 The index structure is is flattened, and enables an effective way to query nodes based on access control.
 
+// TODO: value types
 [cols="1,1,1,2"]
 |===
 |System Property |Value Type |Indexing |Comment
 
 |_permissions_read
 |String
-|TODO
+|
 |Principals with read access
 
 |_permissions_create
 |String
-|TODO
+|
 |Principals with create access (create children of node)
 
 |_permissions_delete
 |String
-|TODO
+|
 |Principals with delete access
 
 |_permissions_modify
 |String
-|TODO
+|
 |Principals with modify access
 
 |_permissions_publish
 |String
-|TODO
+|
 |Principals with publish access
 
 |_permissions_readpermissions
 |String
-|TODO
+|
 |Principals with access to read node permissions
 
 |_permissions_writepermissions
 |String
-|TODO
+|
 |Principals with access to write node permissions
 
 |===

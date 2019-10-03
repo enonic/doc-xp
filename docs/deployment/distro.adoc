@@ -35,7 +35,7 @@ By default, this folder structure exists inside the XP_INSTALL.
 It is commonly moved out or treated specially from the rest of the files and folders in XP_INSTALL, as it contains stateful data.
 An example of this is when using Enonic CLI. Each "sandbox" created is basically a copy of the XP_HOME structure.
 
-TODO You may specify a different location for XP_HOME by passing a parameter when starting XP, or specifying XP_HOME as an environment variable.
+// TODO You may specify a different location for XP_HOME by passing a parameter when starting XP, or specifying XP_HOME as an environment variable.
 
 NOTE: Folders marked with * will not appear until XP is started the first time)
 

@@ -118,7 +118,7 @@ Below is the complete list of all supported value-types.
 
 |LocalTime
 |10:00:03
-|datetime?TODO, text
+|datetime, text
 |A time representation without timezone
 
 |LocalDateTime
@@ -143,7 +143,7 @@ Below is the complete list of all supported value-types.
 
 |XML
 |<some>xml</some>
-|TODO, text (what about indexvalueprocessors?)
+|text
 |Any valid XML
 |===
 
@@ -162,7 +162,7 @@ NOTE: When defining custom index configurations, you may choose if a property wi
 By default, properties are indexed based on their specific value type, according to the valueType table above.
 This strategy is known as `decideByType`.
 
-TODO: WHAT HAPPENS IF NO DEFAULT CONFIG IS SPECIFIED IN A NODE?
+// TODO: WHAT HAPPENS IF NO DEFAULT CONFIG IS SPECIFIED IN A NODE?
 
 Every now and then, you may need more detailed control of how your properties are indexed.
 This is where the index config comes in.
@@ -229,7 +229,7 @@ myProperty*
 myProperty.myName
 ----
 
-TODO: Verify that * is optional, what happens if it is missing?
+// TODO: Verify that * is optional, what happens if it is missing?
 
 
 == Config options
@@ -260,9 +260,9 @@ Values are stored as 'path' type and applicable for the pathMatch-function
 
 Affected values will be added to the `_allText` property
 
-=== indexValueProcessors
+// === indexValueProcessors
 
-TODO
+// TODO
 
 === languages
 
@@ -367,8 +367,8 @@ Language codes are specified in the `la[-co]`` format, where:
 
 |===
 
-
-NOTE: If a non-supported language is specified, it is simply ignored TODO VERIFY
+// TODO: verify
+NOTE: If a non-supported language is specified, it is simply ignored
 
 
 
@@ -468,7 +468,8 @@ Turns on path specific indexing
 
 === minimal
 
-Will only create orderby indexes TODO VERIFY
+// TODO: verify
+Will only create orderby indexes
 
 .Minimal template output
 [source,json]

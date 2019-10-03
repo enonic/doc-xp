@@ -33,7 +33,7 @@ another.setting = ${myvaraible}
 somePath = ${xp.home}/myfolder
 ----
 
-TODO: how to inject variables
+// TODO: how to inject variables
 
 == .properties vs .cfg
 
@@ -50,7 +50,7 @@ simply place a file with the name `<app-name>.cfg` i.e. `my.custom.app.cfg`. in 
 
 Changing these files while running will restart application within XP, injecting the new configuration file when the app starts again.
 
-TODO: Link to details on how to use configuration files in apps.
+// TODO: Link to details on how to use configuration files in apps.
 
 == XP config files
 
@@ -85,9 +85,9 @@ Changes to this file requires a full restart of the XP instance in order to take
 
 xp.name:: sets the name displayed to users from the admin console main menu, use to clarify what environment the user is working in
 xp.suPassword:: override su user's password in database, if any. Can also be used with hashing, the following are supported: `sha1`, `sha256`, `sha512` and `md5`.
-xp.init.adminUserCreation:: TODO
+// xp.init.adminUserCreation:: TODO
 felix.fileinstall.poll:: Frequency in ms for how often the configuration folders are scanned for changes
-felix.fileinstall.noInitialDelay:: TODO
+// felix.fileinstall.noInitialDelay:: TODO
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
 
 [#vhost]
@@ -206,11 +206,11 @@ readThrough.sizeThreshold = 100mb
 ----
 
 baseDir:: specifies root location of blobs. Default: ``${xp.home}/repo/blob`.
-readThrough.provider:: TODO TODO is a file-based cache. Used to cache files on local disk to boost performance of the underlying blobstore filesystem
+// readThrough.provider:: TODO TODO is a file-based cache. Used to cache files on local disk to boost performance of the underlying blobstore filesystem
 readThrough.enabled:: enables or disables readthough provider. Default: `false`.
 readThrough.sizeThreshold:: specifies he maximum size of objects to be cache in readthrough provider. Default: 100mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
 
-TODO: Verify existence of readThrough provider and actual values!
+// TODO: Verify existence of readThrough provider and actual values!
 
 
 === Cluster
@@ -410,7 +410,7 @@ log.retainDays:: Number of days to retain the logs. Default: `31`.
 `XP_HOME/config/com.enonic.xp.media.cfg`
 
 Specify additional mime types if you are missing something.
-TODO: Specify where this is this used?
+// TODO: Specify where this is this used?
 
 .Sample additional mime types
 [source,properties]
@@ -439,7 +439,8 @@ telnet.socketTimeout = 0
 ----
 
 enabled:: turns on shell service. Default: `false`.
-telnet.ip:: TODO. Default: `127.0.0.1`
+// TODO: telnet.ip
+telnet.ip:: Default: `127.0.0.1`
 telnet.port:: Port to use for service. Default: `5555`.
 telnet.maxConnect:: Maximum number of concurrent connections. Default: `2`.
 telnet.socketTimeout:: Default: `0`
