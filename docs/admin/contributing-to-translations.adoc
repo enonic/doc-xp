@@ -7,18 +7,18 @@ We would greatly appreciate help with translating our Admin Console to more lang
 First, you need to checkout the project from GitHub.  Then, create language files for the specific language you can provide a translation for.
 After the translation is done, a pull request should be sent to Enonic, so we can include the file in the next distribution.
 
-=== Translating files
+== Translating files
 
 To provide a translation, please start with the English original phrase files and make a copy of each of them, in the same folder, but extend the main filename with ``_<language-code>``.
 If, for instance, you want to make a translation to Spanish, the copied files should be called ``common_es.properties`` or ``phrases_es.properties``.
 In the copied files, you may now translate all the English text into your preferred language.
 When done, please submit a pull request on the project, with the translations.
 
-=== File locations
+== File locations
 
 XP is split in multiple projects.  One basic runtime, some libs and several apps.  All code is found on GitHub:
 
-==== Admin Home App
+=== Admin Home App
 
 [cols="2,5a"]
 |===
@@ -27,7 +27,7 @@ XP is split in multiple projects.  One basic runtime, some libs and several apps
 | *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
 |===
 
-==== Admin UI Library
+=== Admin UI Library
 
 [cols="2,5a"]
 |===
@@ -36,7 +36,7 @@ XP is split in multiple projects.  One basic runtime, some libs and several apps
 | *Original file in English* | ``/src/main/resources/admin/i18n/common.properties``
 |===
 
-==== Applications App
+=== Applications App
 
 [cols="2,5a"]
 |===
@@ -45,7 +45,7 @@ XP is split in multiple projects.  One basic runtime, some libs and several apps
 | *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
 |===
 
-==== Content Studio
+=== Content Studio
 
 [cols="2,5a"]
 |===
@@ -54,7 +54,7 @@ XP is split in multiple projects.  One basic runtime, some libs and several apps
 | *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
 |===
 
-==== Standard ID Provider
+=== Standard ID Provider
 
 [cols="2,5a"]
 |===
@@ -63,7 +63,7 @@ XP is split in multiple projects.  One basic runtime, some libs and several apps
 | *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
 |===
 
-==== Users App
+=== Users App
 
 [cols="2,5a"]
 |===
@@ -72,7 +72,7 @@ XP is split in multiple projects.  One basic runtime, some libs and several apps
 | *Original file in English* | ``/src/main/resources/i18n/phrases.properties``
 |===
 
-==== XP Runtime
+=== XP Runtime
 
 [cols="2,5a"]
 |===

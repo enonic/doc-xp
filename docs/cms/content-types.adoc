@@ -12,8 +12,9 @@ Content Types are the essential elements of Content Studio and the content API.
 ----
 <content-type>
   <display-name i18n="cty.person.displayname">Person</display-name> <!--1-->
-  <description>Create a new person</description> <!--2-->
-  <super-type>base:structured</super-type> <!--3-->
+  <display-name-label i18n="cty.person.displayname.label">Full Name</display-name-label><!--2-->
+  <description>Create a new person</description> <!--3-->
+  <super-type>base:structured</super-type> <!--4-->
   <form>
     <input name="firstname" type="TextLine">
       <label>First Name</label>
@@ -24,15 +25,22 @@ Content Types are the essential elements of Content Studio and the content API.
   </form>
 </content-type>
 ----
+
+NOTE: *display-name-label* was first introduced in v7.1
+
 <1> *display-name* is the human readable name of the content type. Optionally specify the `i18n` attribute to define a mapping to localize the value. The localisation
 key must be then declared and localised in the resource bundle.
-<2> *description* - Set a description that is shown when creating the content type.
-<3> *super-type* refers to the root controller of the form.
+<2> *display-name-label* enables you to override the default <Display Name> placeholder used in the content form
+<3> *description* - Set a description that is shown when creating the content type.
+<4> *super-type* refers to the root controller of the form.
+
 
 == Display name expressions
 
-It's possible to auto-generate display name based on values from form fields by using ES6 template literals. In the example below, display name will be combination of values from
-`firstName` and `lastName` fields.
+It's possible to auto-generate display name based on values from form fields by using ES6 template literals.
+In the example below, display name will be combination of values from `firstName` and `lastName` fields.
+
+NOTE: Only simple input types may be used as variables, i.e. htmlArea is not supported.
 
 [source,JavaScript]
 ----

@@ -5,8 +5,6 @@ include::variables.adoc[]
 
 Welcome to the Enonic XP reference documentation
 
-WARNING: This documentation is currently under construction, and will be completed with the release of XP 7. The http://docs.enonic.com[XP 6 documentation] will not be migrated to the new developer portal.
-
 NOTE: *Quick start?* Head over to our https://developer.enonic.com/start[Getting Started guide] to install our CLI, SDK and build your first XP app in a few minutes.
 
 == Platform Introduction
@@ -24,14 +22,15 @@ image::platform-components.png[Platform illustration,768]
 
 These are the essential platform components and tools:
 
-* Javascript/Java <<./runtime#,application runtime>>.
-* <<storage#,NoSQL storage>> for your data.
-* Identity and Access Management - <<iam#,IAM>>
+* <<runtime#, Application runtime>>.
+* <<framework#, Javascript development framework>>
+* <<storage#, NoSQL storage>> for your data.
+* <<iam#, Identity and Access Management - IAM>>
 * Extensible <<admin#, Admin Console>> for back-office users
-* Hybrid <<cms#,Content Management System>>  when needed
-* Remote management API
-* Standard metrics API for monitoring
-* CLI and software development kits for efficient .
+* <<cms#, Hybrid Content Management System>>  when needed
+* <<runtime/management#, Remote management API>>
+* <<runtime/metrics#, Statistics API for metrics and monitoring>>
+* https://developer.enonic.com/start[CLI and software development kit].
 
 
 == API

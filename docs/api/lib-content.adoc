@@ -288,6 +288,45 @@ if (result) {
 }
 ```
 
+=== exists
+
+This function checks if a content exists for the current context.
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+|===
+
+[.lead]
+Returns
+
+*boolean* : True if exists, false otherwise
+
+[.lead]
+Examples
+
+```js
+// Checking if a content exists
+var result = contentLib.exists({
+    key: '/path/to/mycontent'
+});
+
+if (result) {
+    log.info('Content exists');
+} else {
+    log.info('Content does not exist');
+}
+```
+
+
 === get
 
 This function fetches a content
