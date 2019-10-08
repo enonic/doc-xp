@@ -201,7 +201,7 @@ This is best understood by looking at the initial URL pattern.
 The Web engine requires the name of the app that will handle the request, where the site engine specifies a repo, branch and path to content as its entry point.
 
 As such, what happens at a specific url is primarily controlled by the editor, rather than the developer directly.
-Developers can still take control over URLs when required, through the use of <<framework/filters, Filters>> and <<cms/mappings#,Mappings>>.
+Developers can still take control over URLs when required, through the use of <<framework/filters#, Filters>> and <<cms/mappings#,Mappings>>.
 
 === Site apps
 
