@@ -272,7 +272,7 @@ Update schemas using fieldsets by removing the name
 
 === Content scope
 
-For all schemas in XP 6, the input types link:../cms/input-types#contentselector[contentSelectors] and link:../cms/input-types#tag[tag] defaulted to selecting content across the entire repository.
+For all schemas in XP 6, the input types <<../cms/input-types#contentselector,contentSelectors>> and <<../cms/input-types#tag,tag>> defaulted to selecting content across the entire repository.
 The default scope is now reduced to the parent site.
 
 NOTE: mediaSelectors and contentSelector in rich text area still allows selection of content across the entire repository
@@ -689,7 +689,7 @@ This is now changed, and the resolver will only look for relative files in curre
 
 Verify that that your require statements are referring to absolute paths, or that the specific files are located in the current directory.
 
-Also, please check out the documentation of the link:../framework/globals#require[require function].
+Also, please check out the documentation of the <<../framework/globals#require,require function>>.
 
 
 

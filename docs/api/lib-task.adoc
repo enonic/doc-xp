@@ -43,7 +43,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<taskinfo,`TaskInfo`>>) Detail information for the task. Or null if the task could not be found.
+*object* : (<<#taskinfo,`TaskInfo`>>) Detail information for the task. Or null if the task could not be found.
 
 [.lead]
 Example
@@ -140,7 +140,7 @@ Parameters
 [.lead]
 Returns
 
-*Array* : (<<taskinfo,`TaskInfo[]`>>) List with task information for every task.
+*Array* : (<<#taskinfo,`TaskInfo[]`>>) List with task information for every task.
 
 [.lead]
 Example
@@ -426,6 +426,7 @@ var taskId = taskLib.submitNamed({
 == Type Definitions
 
 === TaskInfo
+[[taskinfo]]
 
 [.lead]
 Type

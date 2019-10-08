@@ -25,7 +25,8 @@ Below is a highlight of the capabilities provided:
 * Use <<Aggregations>> to get powerful statistics on your data
 * Get highlighted query results based on scoring with <<Highlighting>>
 * Versions are created for every modification of a node
-* Supports <<Access Control>> down to a single document
+// TODO: link * Supports <<Access Control>> down to a single document
+* Supports Access Control down to a single document
 * Git inspired <<Branches>> enable you to stage and promote your data
 * <<Editors>> eliminate cumbersome update statements
 * <<_snapshotting>> feature to rollback entire system or per repository
@@ -68,7 +69,8 @@ A node essentially consist of:
 
 * One or more <<Properties>>
 * An optional <<storage/indexing#,index configuration>>
-* <<Access Control>> definitions
+// TODO: link * <<Access Control>> definitions
+* Access Control definitions
 
 When nodes are created in a repository, the following happens:
 

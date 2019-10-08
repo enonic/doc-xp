@@ -5,7 +5,7 @@
 The XP framework supports pluggable authentication using a concept called IDproviders
 
 == Introduction
-As part of the XP <<../aim#,AIM>> (Identity and Access management) apps and sites may be loosely associated with an IDprovider.
+As part of the XP <<../iam#,IAM>> (Identity and Access management) apps and sites may be loosely associated with an IDprovider.
 This section describes how to implement an ID provider application.
 
 When an IDprovider is active throughout the <<../runtime#, http request pipeline>>, it may intercept or process the request to dynamically provide authentication.
@@ -45,9 +45,9 @@ To turn an app into an ID provider, you must add a specific idprovier JavaScript
 An app can only implement a single ID provider.
 
 idprovider.js can export a range of different pre defined functions to implement different functionality:
-* As a <<controller#, controller>> - for instance by rendering a login page, or logging out the user
-* As a <<filters#, filter>> - by processing every request automatically log in users
-* As an <<error#, error handler>> - intercepting 401 (Unauthorised) errors from the request pipeline
+* As a <<./controllers#, controller>> - for instance by rendering a login page, or logging out the user
+* As a <<./filters#, filter>> - by processing every request automatically log in users
+* As an <<./error#, error handler>> - intercepting 401 (Unauthorised) errors from the request pipeline
 
 The example below demonstrates a typical idprovider script may be implemented
 
