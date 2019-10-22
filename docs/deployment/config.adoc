@@ -241,13 +241,10 @@ session.replication.enabled:: is a highly experimental feature. Requires that th
 
 Network host aliases:
 
-* `local` : Will be resolved to the local ip address.
-* `non_loopback` : The first non loopback address.
-* `non_loopback:ipv4` : The first non loopback IPv4 address.
-* `non_loopback:ipv6` : The first non loopback IPv6 address.
-* `<networkInterface>` : Resolves to the ip address of the provided network interface. For example `en0`
-* `<networkInterface>:ipv4` : Resolves to the ipv4 address of the provided network interface. For example `en0:ipv4`
-* `<networkInterface>:ipv6` : Resolves to the ipv6 address of the provided network interface. For example `en0:ipv6`
+* `\_local_` : Will be resolved to the local ip address.
+* `\_[networkInterface]_` : Resolves to the ip address of the provided network interface. For example `\_en0_`
+* `\_[networkInterface]:ipv4_` : Resolves to the ipv4 address of the provided network interface. For example `\_en0:ipv4_`
+* `\_[networkInterface]:ipv6_` : Resolves to the ipv6 address of the provided network interface. For example `\_en0:ipv6_`
 
 
 === Elasticsearch
