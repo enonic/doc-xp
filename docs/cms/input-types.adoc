@@ -466,7 +466,7 @@ A field for entering multi-line text with rich-formatting options.
 <1> *default* can contain any valid HTML elements, but tags must be correctly closed since the input type is defined inside an XML.
 <2> *exclude* optionally removes the standard tools from the editor toolbar
 <3> *include* optionally adds more tools to the editor toolbar.
-<3> *allowHeadings* space-separated list of allowed heading tags (from `<h1>` to `<h6>`); by default all are allowed
+<4> *allowHeadings* space-separated list of allowed heading tags (from `<h1>` to `<h6>`); by default all are allowed
 
 
 TIP: HTML Area is configured with default set of tools but the toolbar can be customized. Using the config setting you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. Complete list of supported tools can be found below.

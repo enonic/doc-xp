@@ -2,135 +2,53 @@
 :toc: right
 :imagesdir: images
 
-Localize your applications and libraries with property bundles
+Localizing your projects
 
-== Localize
+== Use cases
 
-Enonic XP provides a standard approach to code localizations.
-This is done by adding so-called resource bundles to your applications, and using the `localize()` function.
+NOTE: This section applies to localization on code level, not multi-linguale content and websites.
 
-Localize function can be used in both JS controllers and selected views.
-Detailed documentation for this function is described in the <<../api/lib-i18n#,Portal Library docs>>
+For any project targeting users with different languages, you may want to localized the specific interface.
+You may use the localization framework in the following areas: 
 
-To see how this is used in a controller, see <<../api/lib-i18n#,lib-i18n>> in <<../api#,js-libraries>>.
+Controllers::  Use the <<../api/lib-i18n#,the localization API>> to dynamically localize any text phares in your app
 
-The labels and texts used in content types, input types and other schemas can also be localized. See how to localize them in <<../cms/schemas#schema_localization,localization schemas>>.
+Views:: Similar to controllers, some views will integrate the framework-based localization directly, consult your specific view documentation for more details.
+
+Schemas:: Labels and texts in content types, input types and <<../cms/schemas#schema_localization, schemas in general can also be localized>>.
 
 
 == Localization files
 
-The localization files are plain text files, using the properties format (key = value)
-The files must be placed in a the folder `/src/main/resources/i18n/`.
+The localization files are plain text files, using the `properties` format (key = value). 
+The files must be placed in a specific project folder: `/src/main/resources/i18n/`.
 
 Imagine, making an app that should support the following localizations.
-
-NOTE: The content API, country codes use `-` as separator rather than `_`.
 
 * 'English' (en)
 * 'English US' (en-US)
 * 'New Norwegian' (nn)
 * 'New Norwegian Norway' (nn-NO)
 
-Each locale now needs to have a matching localization file, in the format:
+Each locale then needs to have a matching localization file, in the format:
 
-  phrases[_languagecode][_COUNTRYCODE][_VARIANT].properties
+  phrases[_LOCALE].properties
+
+NOTE: The API's country codes use `-` as separator but the files use `_`.
 
 .Sample localization bundle
 [source, properties]
 ----
 i18n/phrases.properties
 i18n/phrases_en_US.properties
-i18n/phrases_nn.properties
-i18n/phrases_nn_NO.properties
+i18n/phrases_no.properties
 ----
+
+This format and packaging is commonly known as "property bundles".
 
 CAUTION: The filenames are case sensitive!
 
-
-== Sample
-
-Given the following localization file:
-
-.phrases.properties
-[source,properties]
-----
-user.greeting = Hello, {0}!
-complex_message = Good to see you. How are you doing?
-message_url = http://localhost:8080/{0}
-message_multi_placeholder = My name is {0} and I live in {1}
-message_placeholder = Hello, my name is {0}.
-med_\u00e6_\u00f8_\u00e5 = This key contains norwegian characters æ, ø and å
-----
-
-A Javascript controller in the same application may now use the localization as follows:
-
-lib/i18n.js
-[source,javascript]
-----
-    var i18n = require('/lib/xp/i18n');
-    var complex_message = i18n.localize({
-        key: 'complex_message'
-    });
-    return {
-        complex_message: complex_message,
-    }
-----
-
-
-Placeholders are marked with ``{<number>}``.
-The given number corresponds with the function argument named ``values`` and the position of the parameter.
-
-Example of localization with placeholders:
-
-lib/i18n.js
-[source,javascript]
-----
-    var i18n = require('/lib/xp/i18n');
-    var message_multi_placeholder = i18n.localize({
-        key: 'message_multi_placeholder',
-        locale: "no",
-        values: ["John", "London"]
-    });
-    return {
-        message_multi_placeholder: message_multi_placeholder
-    }
-----
-
-The following is considered, in this order:
-
-* Given as argument to function
-* Language specified on a site (for Site Engine)
-* Language specified in request context
-
-
-== Best match resolving
-
-When localizing, a best match pattern will be applied to select the optimal version.
-If the locale for a request is resolved to "en-US", XP will look for the localization key in the following order:
-
-* ``phrases_en_US.properties``
-* ``phrases_en.properties``
-* ``phrases.properties``
-
-If the locale for a request was ``en``, the ``phrases_en.properties`` file would be used.
-
-If the locale does not match a any specific file, the default ``phrases.properties`` will be used.
-
-If no matching localization key is found in any of the files in a bundle, a default ``NOT_TRANSLATED`` will be displayed.
-
-
-=== Encoding and special characters
-
-Property keys::
-Must be in the ISO-8859-1 range, also known as Latin-1 characters. Non-Latin-1 characters use Unicode escape characters, e.g \u00E6 for the Norwegian letter 'æ'.
-
-Property values:: Supports any unicode characters
-
-We always recommend storing files with UTF charset.
-
-== Locales
-
-Specification of the locale format:
+== Locale format
 
 A locale is composed of two-letter codes for language, country and variant.
 Language is required, country and variant are optional.
@@ -151,4 +69,58 @@ A sample locale including vendor specific variant:
 
   es_ES_Traditional_WIN"..
 
-Variants are rarely used in XP, and can pretty much be discarded.
+NOTE: Variants are rarely used in XP, and can pretty much be discarded.
+
+== Best match resolving
+
+When localizing, a best match pattern will be applied to select the optimal version.
+If the locale for a request is resolved to "en-US", XP will look for the localization key in the following order:
+
+* ``phrases_en_US.properties``
+* ``phrases_en.properties``
+* ``phrases.properties``
+
+If the locale for a request was ``en``, the ``phrases_en.properties`` file would be used.
+
+If the locale does not match a any specific file, the default ``phrases.properties`` will be used.
+
+If no matching localization key is found in any of the files in a bundle, a default ``NOT_TRANSLATED`` will be displayed.
+
+
+=== Encoding and special characters
+
+Property keys:: Must be in the ISO-8859-1 range, also known as Latin-1 characters. Non-Latin-1 characters use Unicode escape characters, e.g \u00E6 for the Norwegian letter 'æ'.
+
+Property values:: Supports any unicode characters
+
+NOTE: We always recommend saving property files using the UTF charset.
+
+
+== Sample
+
+Below is an example of what a property file might look like
+
+.phrases.properties
+[source,properties]
+----
+user.greeting = Hello there!
+message = Good to see you. How are you doing?
+with_\u00e6_\u00f8_\u00e5 = This key contains norwegian characters æ, ø and å
+----
+
+== Placeholders
+
+The properties format also supports parameter values that can be merged into the localized strings.
+Below is an example of what this might look like:
+
+.phrases.properties
+[source,properties]
+----
+user.greeting = Hello, {0}!
+message_url = http://localhost:8080/{0}
+message_multi_placeholder = My name is {0} and I live in {1}
+message_placeholder = Hello, my name is {0}.
+----
+
+Placeholders are marked with ``{<number>}``.
+The given number corresponds with the function argument named ``values`` and the position of the parameter.

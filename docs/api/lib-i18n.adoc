@@ -2,9 +2,12 @@
 :toc: right
 :imagesdir: images
 
-This library contains functions for internationalization of phrases.
+This library contains functions for localization of text phrases.
+
 
 == Usage
+
+NOTE: This API uses standard framework functionality. Please consult the <<../framework/i18n#, framework localization docs>> before using this API.
 
 Add the following into your `build.gradle` file:
 
