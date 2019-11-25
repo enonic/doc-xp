@@ -43,7 +43,7 @@ For more information about how the nGram-function works, check out the nGram-fun
 === analyzed
 
 Splits the string into tokens for effective free text search.
-Used by the link:./noql#fulltext[fulltext()] query function.
+Used by the <<./noql#fulltext,fulltext()>> query function.
 
 Consider a property of type string, with value `This is test-driven development`
 When analyzed, it is split into the following tokens:
@@ -74,7 +74,7 @@ Any property that is indexed, automatically gets indexed with the orderby type.
 The "orderby" index type lets us sort text and numbers in a natural way across properties with different <<ValueTypes>>
 
 
-[#valuetypes]
+[#value_types]
 == ValueTypes
 
 Every property in a node has a specific value type.

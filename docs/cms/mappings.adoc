@@ -14,7 +14,7 @@ Use cases:
 * Map a controller to a specifc set of content through content matches, i.e. only apply to the `portal:fragment` content type
 * Map a filter to parts of or the entire site structure
 
-Mapping are defined in the link:./sites#site_xml[site descriptor].
+Mapping are defined in the <<sites#site_xml, site descriptor>>.
 
 [source,xml]
 ----
@@ -34,11 +34,11 @@ Mapping are defined in the link:./sites#site_xml[site descriptor].
 </site>
 ----
 
-<1> *@controller* defines the path to a standard link:../framework/http#http-controller[HTTP controller]
+<1> *@controller* defines the path to a standard <<../framework/controllers#, HTTP controller>>
 <2> *@order* defines the <<Execution order>> across apps
 <3> *<pattern>* specifies a regular expression based site contextual URL <<Patterns>>.
 <4> *<match>* a property condition to evaluate <<Matches>> for the contextual content.
-<5> *@filter* defines the path to the link:../framework/http#http-filter[HTTP filter]
+<5> *@filter* defines the path to the <<../framework/filters#, HTTP filter>>
 
 NOTE: Each mapping may exclusively specify a filter OR a controller, and it must define at least one pattern or match setting
 
@@ -47,7 +47,7 @@ NOTE: Each mapping may exclusively specify a filter OR a controller, and it must
 An application can contain multiple mappings, and multiple applications can be added to a site.
 
 If two different apps within a site has the same mapping path or match expression,
-the mapping with the *lower* `order` value (as defined in the link:./sites#site_xml[site descriptor]) is used.
+the mapping with the *lower* `order` value (as defined in the <<sites#site_xml, site descriptor>>) is used.
 
 In case there are several mappings with the same ``order`` number,
 the position of the applications (as configured on the site) determines the order of execution.

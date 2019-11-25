@@ -1,4 +1,4 @@
-== Identity and access management (IAM)
+= Identity and access management (IAM)
 :toc: right
 :imagesdir: iam/images
 
@@ -31,7 +31,7 @@ An example of this is the XP CMS, where users typically get access to create or 
 ID providers offer pluggable abstraction layer for user authentication.
 As such, in order to authenticate or even create users in XP, you will need to define an ID provider.
 
-IDproviders are linked to your webapp or site through <<../deployment/vhosts#,virtual hosts>>.
+IDproviders are linked to your webapp or site through <<./deployment/vhosts#,virtual hosts>>.
 
 
 === Creating an ID provider
@@ -67,7 +67,7 @@ NOTE: Avoid placing your regular users in the system ID provider, rather create 
 In order for an ID provider to work, it must be associated with an ID provider application that handles the authentication process.
 
 You may install ID providers from Enonic Market,
-or <<../framework/idprovider#, build your own>> for a fully customized experience.
+or <<./framework/idprovider#, build your own>> for a fully customized experience.
 
 === Standard ID provider app
 By default, XP ships with an app app called the "Standard ID provider".

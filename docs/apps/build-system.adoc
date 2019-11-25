@@ -16,7 +16,7 @@ There are three standard scopes (keywords) used in the dependency list
 
 * Compile (default gradle scope, compiles library and adds it to class path - standard for pure Java libraries)
 * Include (XP custom scope that merges the /src/main/resources folder in the library with your project - any code in your project overwrites the library files)
-* Webjar (Extracts the content of the specified Webjar - http://www.webjars.org/ - placing it into the assets folder, using the version number as root folder)
+* Webjar (Extracts the content of the specified Webjar - https://www.webjars.org/ - placing it into the assets folder, using the version number as root folder)
 
 == Environment variables
 Enonic CLI automatically detects and uses project relative environment variables based on your XP distro and Sandbox.

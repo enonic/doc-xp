@@ -46,7 +46,7 @@ controller.
 <4> Port of the server to which the request was sent.
 <5> Path of the request
 <6> URL of the request.
-<7> IP address of the client that sent the request. If the X-Forwarded-For footnote:[http://en.wikipedia.org/wiki/X-Forwarded-For] header is set, its value will override the client IP.
+<7> IP address of the client that sent the request. If the X-Forwarded-For footnote:[https://en.wikipedia.org/wiki/X-Forwarded-For] header is set, its value will override the client IP.
 <8> Rendering mode (used in site context) one of: ``inline``, ``edit``, ``preview``, ``live``.
 <9> Contextual repository branch (used in site context), one of: ``draft``, ``master``.
 <10> Optional string value

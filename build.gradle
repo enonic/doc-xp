@@ -8,7 +8,7 @@ buildscript {
 
     dependencies {
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.7'
-        classpath 'gradle.plugin.org.aim42:htmlSanityCheck:1.0.0-RC-1'
+        classpath 'gradle.plugin.org.aim42:htmlSanityCheck:1.1.3'
     }
 }
 
@@ -33,19 +33,22 @@ asciidoctor {
     }
 }
 
+def htmlOutputPath = "$buildDir/docs/html5"
+
 htmlSanityCheck {
 
     dependsOn asciidoctor
 
-    sourceDir = new File( "$buildDir/docs/html5" )
+    sourceDir = new File( htmlOutputPath )
 
-    // files to check - in Set-notation
-    sourceDocuments = [ "index.html"]
+    // filter files to check - in Set-notation
+    //sourceDocuments = [ "index.html"]
 
     // where to put results of sanityChecks...
     checkingResultsDir = new File( "$buildDir/report/htmlchecks" )
+
     //checkExternalLinks = false
 
     // fail build on errors?
-    failOnErrors = true
+    //failOnErrors = true
 }

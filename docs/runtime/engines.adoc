@@ -20,7 +20,7 @@ Vhost filters:: Request routing based on <<../deployment/vhosts#,virtual hosts>>
 
 Java request filters:: Optional Java request filters
 
-Auth filter::  If the pipeline returns a "401: Unauthorized" error code, the default <<deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
+Auth filter::  If the pipeline returns a "401: Unauthorized" error code, the default <<../deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
 
 Asset service:: Serves <<asset-service#,static assets>> for the /_/asset/* request patterns
 
@@ -66,7 +66,7 @@ When the application is deployed, the controller will be accessible from
 
   ``//<server>:<port>/webapp/<app-name>/`` (i.e. "localhost:8080/webapp/my.webapp/").
 
-``webapp.js`` now acts as a link:../framework/http#http-controller[HTTP controller] and may expose a function for each HTTP method that should be handled: i.e.
+``webapp.js`` now acts as a <<../framework/http#http-controller,HTTP controller>> and may expose a function for each HTTP method that should be handled: i.e.
 GET, POST, etc.
 
 Below is an example webapp controller.
@@ -110,7 +110,7 @@ Processors:: If the page response type is HTML, processors defined in the site d
 
 Response filters:: Available filters may also perform last minute tasks before the final response is delivered.
 
-handle401::  If the pipeline returns a "401: Unauthorized" error code, the default <<deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
+handle401::  If the pipeline returns a "401: Unauthorized" error code, the default <<../deployment/vhosts#,virtual host defined ID provider>> will be invoked, and may handle the request
 
 Image service:: Real-time <<image-service#,image service>> for optimized image delivery
 
