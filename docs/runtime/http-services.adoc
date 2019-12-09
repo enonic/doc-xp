@@ -35,13 +35,13 @@ exports.get = function(req) {
 
 == Endpoint
 
-Services use the following mount pattern: **/_/service/<appname>/<servicename>.
-This means that a service can be invoked in multiple locations, i.e. `domain.com/_/service..` or `domain.com/some/path/_/service..`.
+Services use the following mount pattern: `+**/_/service/<appname>/<servicename>+`.
+This means that a service can be invoked in multiple locations, i.e. `+domain.com/_/service/..+` or `+domain.com/some/path/_/service/..+`.
 The context the service is mounted on can also be used by the controller as context.
 
 ====
 As an example the service 'profileimage' will only work in context of a profile's url.
-I.e. `domain.com/profile/user1/_/service/myapp/profileimage` will service an image, but invoked elsewhere it will not work.
+I.e. `+domain.com/profile/user1/_/service/myapp/profileimage+` will service an image, but invoked elsewhere it will not work.
 ====
 
 == Descriptor
