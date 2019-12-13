@@ -1,0 +1,36 @@
+= Webapp engine
+:toc: right
+:imagesdir: media
+
+The Webapp engine is responsible for processing of requests on the endpoint `:8080/webapp/<app-name>/*`
+
+
+== Request pipeline
+
+The webapp pipeline is executed as a subset of the <<../engines#_common_request_pipeline,common pipeline>>:
+
+image::webapp-pipeline.svg[Webapp rendering pipeline, 768px]
+
+This section describes the full pipeline involved in processing a webapp http request.
+
+Web app controller:: Invokes the webapp controller of the contextual application
+
+== webapp.js
+
+To turn your application into a webapp, simply place an http controller called ``/src/main/resources/webapp/webapp.js`` into your project.
+
+When the application is deployed, the controller will be accessible from
+
+  ``//<server>:<port>/webapp/<app-name>/`` (i.e. "localhost:8080/webapp/my.webapp/").
+
+``webapp.js`` now acts as a <<../../framework/http#http-controller,HTTP controller>> and may expose a function for each HTTP method that should be handled: i.e.
+GET, POST, etc.
+
+Below is an example webapp controller.
+
+[source,javascript]
+----
+include::code/webapp.js[]
+----
+
+NOTE: To handle routing and filters in web apps, the implementer should use the https://market.enonic.com/vendors/enonic/router-lib[router library].

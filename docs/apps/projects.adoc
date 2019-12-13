@@ -72,13 +72,13 @@ application.svg:: Application icon in SVG format.
 
 application.xml:: The XML file contains basic application settings. Currently a description.
 
-assets/:: Contains publically available resources such as css, javascript, static images etc.
+assets/:: Contains publically available static assets such as css and javascript. Assets are served by the <<../runtime/engines/asset-service#, asset service>>.
 
 error/error.js:: The application's error handler
 
 main.js:: Main controller is executed every time an app is started.
 
-services/:: Contains <<../runtime/http-services#, Http services controllers>>
+services/:: Contains <<../runtime/engines/http-service#, Http services controllers>>
 
 i18n/:: Short for internationalization, this folder contains <<../api/lib-i18n#,app localization files>>
 

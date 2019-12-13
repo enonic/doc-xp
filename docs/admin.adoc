@@ -43,3 +43,27 @@ The tools of the admin console have been translated to the following languages:
 The language used by the admin tools, is based on your browser settings.   If your preferred language is one of the above, it will be used. If your preferred language is not in the list, the admin console will default to English.
 
 If you know a language that is not supported, we would greatly appreciate help with translating the admin console to more languages. Please checkout out our guide on <<./admin/contributing-to-translations#, Contributing to Translations>>.
+
+== Admin extensions
+
+XP enables developers to extend the admin console with custom functionality at pre-defined locations.
+
+For more information on how to implement extensions, visit the <<../runtime/engines/admin-engine#,admin engine documentation>>
+
+=== Admin tools
+
+Admin tools represent standalone applications that are integrated with the admin console login and launcher.
+Tools are launched in separate browser tabs, running independently of other admin components.
+
+* A single XP application may contain multiple admin tools
+* Access to an admin tool typically requires authentication, and a particular role memberships
+* Admin tools are all served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/tool/<tool-name>``
+
+=== Admin Widgets
+
+Widgets are designed to extend existing admin interfaces functionality. 
+Widgets are essentially small applications that are loaded into a section of the user interface 
+
+* A single XP application may contain multiple widgets
+* Access to an widget typically requires authentication, and particular role memberships
+* Admin widgets are served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/widget/<widget-name>``

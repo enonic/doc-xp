@@ -1,10 +1,10 @@
-= HTTP Services
+= HTTP Service
 :toc: right
 :imagesdir: media
 
-HTTP Services are <<../framework/http#http-controller,http controllers>> safely made available within an application (or site's) url space.
-Services will never conflict with other application url patterns. Services are in particular useful for sites, where most URLs are editorially created and managed.
-
+HTTP Service enable mouting of <<../../framework/http#http-controller,http controllers>> safely made available within an application (or site's) url space, without the use of routers.
+Due to the URL-pattern created, an http service will never conflict with other application url patterns. 
+Services are in particular useful when used in the <<site-engine#, Site engine>> or webapps where URLs are not predictable.
 
 == Controller
 
@@ -65,6 +65,6 @@ Sample descriptor limiting access to the service:
 
 === serviceUrl()
 
-To safely generate a service URL, use the serviceUrl() function that is part of the <<../api/lib-portal#,Portal Library>>.
+To safely generate a service URL, use the serviceUrl() function that is part of the <<../../api/lib-portal#,Portal Library>>.
 
 NOTE: When invoked, the function will generate a contextual service url based on the context of the current controller.
