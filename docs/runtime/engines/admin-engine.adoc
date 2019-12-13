@@ -11,7 +11,7 @@ Admin engine is responsible for processing of site requests on the endpoint `:80
 
 == Request pipeline
 
-The site pipeline is executed as a subset of the <<../engines#_common_request_pipeline,common pipeline>>:
+The site pipeline is executed as a subset of the <<../engines#common_request_pipeline,common pipeline>>:
 
 image::admin-pipeline.svg[Admin rendering pipeline, 768px]
 

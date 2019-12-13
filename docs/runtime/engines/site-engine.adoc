@@ -24,7 +24,7 @@ The site engine is responsible for processing of requests on the endpoint `:8080
 
 == Request pipeline
 
-The site pipeline is executed as a subset of the <<../engines#_common_request_pipeline,common pipeline>>:
+The site pipeline is executed as a subset of the <<../engines#common_request_pipeline,common pipeline>>:
 
 image::site-pipeline.svg[Site rendering pipeline, 768px]
 

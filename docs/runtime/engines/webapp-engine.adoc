@@ -7,7 +7,7 @@ The Webapp engine is responsible for processing of requests on the endpoint `:80
 
 == Request pipeline
 
-The webapp pipeline is executed as a subset of the <<../engines#_common_request_pipeline,common pipeline>>:
+The webapp pipeline is executed as a subset of the <<../engines#common_request_pipeline,common pipeline>>:
 
 image::webapp-pipeline.svg[Webapp rendering pipeline, 768px]
 
