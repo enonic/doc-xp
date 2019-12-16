@@ -479,6 +479,19 @@ trackSessions:: If true, usage rate is tracked by session if a session exists. D
 remotePort:: If true and session tracking is not used, then rate is tracked by IP+port (effectively connection). Default: `false`.
 ipWhitelist:: A comma-separated list of IP addresses that will not be rate limited.
 
+=== Header Filter
+
+`XP_HOME/config/com.enonic.xp.web.header.cfg`
+
+Configure default HTTP response headers.
+
+.Cross site scripting prevention headers
+[source,properties]
+----
+headerConfig = set X-Frame-Options: SAMEORIGIN,set X-XSS-Protection: 1; mode=block,set X-Content-Type-Options: nosniff
+----
+
+headerConfig:: Customizes default HTTP response headers. Accepts the following format: `[action] [header name]: [header value](,[action] [header name]: [header value])`. Supported header actions are `set`, `add`, `setDate` and `addDate`.
 
 === Market
 
