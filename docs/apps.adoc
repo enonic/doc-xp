@@ -76,6 +76,15 @@ By default, XP projects use the https://gradle.org[Gradle build system].
 A range of XP specific libraries are also available on <<Enonic Market>>, in addition to the <<api#,standard libraries>>, included in the release of Enonic XP.
 Front-end developers often make use of JavaScript specific build systems such as Webpack.
 
+== Libraries
+
+Enonic XP provides the concept of libraries in order to speed up development and re-use of functionality and code.
+Technically, libraries are very similar to applications, but the main difference is that a library cannot be installed and started by itself.
+So, a library may consist of all the same objects you find in applications - such as Assets, Content Types and HTTP Controllers - things you may need in an application.
+
+A number of standard libraries are available with the core XP release, check out: <<api#,Standard Libraries>>. You will also find a wide range of libraries on the https://market.enonic.com/libraries[Enonic Market]
+
+Libraries are added to your application by simply referring to them in your build script. Read more about this on our <<build-system#,Build system>> documentation.
 
 == Use cases
 

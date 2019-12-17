@@ -2,11 +2,11 @@
 :toc: right
 :imagesdir: images
 
-How are applications put together built and delivered
+How are applications and libraries put together built and delivered
 
 == Project structure
 
-The XP project structure is based on the https://maven.apache.org/[Maven] approach.
+The XP project structure is based on the https://maven.apache.org/[Maven] project structure.
 
 Below is is an extensive version of a project structure, listing all standard folders and files that can be used
 
@@ -32,6 +32,7 @@ sample-project/
         assets/
         error/
         i18n/
+        idprovider/
         main.js
         services/
         tasks/
@@ -45,42 +46,43 @@ sample-project/
           x-data/
           site.xml
         webapp/
-          webapp.js
 ----
 
 Every file and folder has a specific function and purpose as described below:
 
-build.gradle:: main file used by the <<build-system#, Build system>>.
+build.gradle:: https://gradle.org/[Gradle] script used by the <<build-system#, Build system>> for building the application or library.
 
-gradle.properties:: Standard settings for XP apps
+gradle.properties:: Build properties
 
-gradlew / gradlew.bat:: The Gradle wrapper file. Downloads and runs Gradle without having to install it manually.
+gradlew | gradlew.bat:: Gradle wrapper file. Downloads and runs Gradle without having to install it manually.
 
 settings.gradle:: Mandatory gradle file to boostrap the build process
 
-src/main/java/:: Optional folder where you place java code that might be included directly in the project - Maven style.
+src/main/java/:: Optional folder where you place Java code that might be included directly in the project.
 
-src/test/java/:: Optional folder where you place test code - Maven style.
+src/test/java/:: Optional folder where you place Java test code.
 
 src/main/resources/:: Non-Java files. The majority of XP project code goes here,
 
-admin/tools:: Admin tools are defined here. Tools are administrative apps listed in the admin console menu.
+admin/tools/:: Admin tools are defined here. Tools are administrative apps listed in the admin console menu.
 
-admin/widgets:: Admin widgets are essentially user interface components that can be embedded within other admin tools.
+admin/widgets/:: Admin widgets are essentially user interface components that can be embedded within other admin tools.
 
 application.svg:: Application icon in SVG format.
 
-application.xml:: The XML file contains basic application settings. Currently a description.
+application.xml:: Application information in XML format.
 
-assets/:: Contains publically available static assets such as css and javascript. Assets are served by the <<../runtime/engines/asset-service#, asset service>>.
+assets/:: Publicly available static assets such as css and javascript. Assets are served by the <<../runtime/engines/asset-service#, asset service>>.
 
 error/error.js:: The application's error handler
 
-main.js:: Main controller is executed every time an app is started.
+main.js:: Main controller executed every time an app is started.
 
 services/:: Contains <<../runtime/engines/http-service#, Http services controllers>>
 
 i18n/:: Short for internationalization, this folder contains <<../api/lib-i18n#,app localization files>>
+
+idprovider/:: <<../framework/idprovider#part,ID Providers>> application files are placed her
 
 tasks/:: Contains <<../api/lib-task#, task controller>> for running asynchronous jobs.
 
@@ -98,21 +100,7 @@ site/pages/:: <<../cms/components#pages, Page controllers>> are placed here.
 
 site/parts/:: <<../cms/components#part,Part controllers>> are placed here.
 
-site/x-data/:: <<../cms/x-data#, eXtra>> data schemas.
+site/x-data/:: <<../cms/x-data#, eXtra data>> schemas.
 
 webapp/webapp.js:: The <<../runtime#webapp_js, Webapp>> controller file
 
-
-== Libraries
-
-Libraries are structurally similar to applications,
-with the difference that a library is designed to be installed and run on it's own.
-However, a library can be included in an application (or many) to provide functionality to that app.
-
-The process of setting up and building libraries is similar to applications.
-To build a library we recommend using the https://market.enonic.com/vendors/enonic/library-starter[library project template].
-
-Once a library has been built, the output will be a .jar file, just like an application.
-However, libraries will have small differences in application metadata.
-
-To add a library in an application, simply update the applications ``build.gradle``file
