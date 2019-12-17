@@ -23,6 +23,34 @@ var repoLib  = require('/lib/xp/repo');
 
 You are now free to use the library functionality.
 
+== Events
+
+Usage of this API produces the following events:
+
+.Distributed events
+|===
+|Event |Occurs when 
+
+|repository.created
+|repository is created
+
+|repository.updated
+|repository is updated
+
+|repository.deleted
+|repository is deleted
+
+|repository.restoreInitialized
+|repository restore begins
+
+|repository.restored
+|repository restore is completed
+|===
+
+For more information on events, check out the <<lib-event#, event API>>
+
+
+
 == Functions
 
 === create

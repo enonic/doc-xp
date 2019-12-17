@@ -23,6 +23,36 @@ var taskLib = require('/lib/xp/task');
 
  You are now free to use the library functionality.
 
+
+== Events
+
+Usage of this API produces the following events:
+
+.Distributed events
+|===
+|Event |Occurs when 
+
+|task.submitted
+|task is submitted
+
+|task.updated
+|task gets updated
+
+|task.removed
+|task is removed
+
+|task.finished
+|task completes
+
+|task.failed
+|task failes
+|===
+
+For more information on events, check out the <<lib-event#, event API>>
+
+
+
+
 == Functions
 
 === get

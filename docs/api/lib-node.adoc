@@ -24,6 +24,45 @@ const contextLib = require('/lib/xp/node');
 
 You are now free to use the library functionality.
 
+== Events
+
+Usage of this API produces the following events:
+
+.Distributed events
+|===
+|Event |Occurs when 
+
+|node.created
+|node is created
+
+|node.deleted
+|node is deleted
+
+|node.pushed
+|node is pushed to a different branch
+
+|node.duplicated
+|node is duplicated
+
+|node.updated
+|node is updated
+
+|node.moved
+|node is moved in the tree structure
+
+|node.renamed
+|node is renamed
+
+|node.sorted
+|node is sorted
+
+|node.stateUpdated
+|node state is updated
+
+|===
+
+For information on events, check out the <<lib-event#, event API>>
+
 
 == Functions
 
