@@ -84,7 +84,7 @@ So, a library may consist of all the same objects you find in applications - suc
 
 A number of standard libraries are available with the core XP release, check out: <<api#,Standard Libraries>>. You will also find a wide range of libraries on the https://market.enonic.com/libraries[Enonic Market]
 
-Libraries are added to your application by simply referring to them in your build script. Read more about this on our <<build-system#,Build system>> documentation.
+Libraries are added to your application by simply referring to them in your build script. Read more about this on our <<apps/build-system#,Build system>> documentation.
 
 == Use cases
 
@@ -135,4 +135,4 @@ XP apps can also contribute to Enonic XP's admin console.
 The platform comes with a standardized approach to extend the admin console with custom interfaces, called admin tools.
 Admin tools are created by adding one or more JavaScript controllers to your project.
 
-Read more about <<admin/admin-engine#,Admin tools>>
+Read more about <<runtime/engines/admin-engine#,Admin tools>>
