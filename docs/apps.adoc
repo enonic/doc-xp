@@ -8,7 +8,7 @@ Similar to an Operating System, Enonic XP supports development and deployment of
 
 Applications are standalone software executables that can be installed and run on top of Enonic XP.
 Applications are powered by the XP runtime, which also supports multiple applications running in the same instance.
-Once installed, applications get access to the platform services, such as the NoSQL storage.
+Once started, applications get access to the platform services, such as the NoSQL storage.
 
 A single application may offer many different capabilities, from web apps and cms specific functionality to low level OSGi services that can be used by other apps.
 
@@ -19,37 +19,35 @@ The marketplace also offers starter kits and software libraries that help you cr
 
 == Installation
 
-There are essentially two ways getting your applications running with Enonic XP:
+There are three ways, by default, to get your applications running on Enonic XP:
 
-Via API:: Applications installed through the API will be available for all nodes in an XP cluster.
+Via Admin Interface:: Applications can be manually installed through the admin tool "Applications", packaged with Enonic XP. The applications will be available for all nodes in an XP cluster.
 
-Via file system:: File system deployment is most commonly used in development phases, but it can also be applied for specialized deployments scenarios.
+Via Management API:: Applications can be installed, in an automated way, through the Management API. The applications will be available for all nodes in an XP cluster.
+
+Via File system:: File system deployment is most commonly used in development phases, but it can also be applied for specialized deployments scenarios. These applications will only be available on the local node and overrides already existing applications
 
 Consider a microservice style highly isolated and controlled deployment,
 you will bundle your app(s) together with the XP runtime and launch it as a separate instance.
 
-
 == Life Cycle
 
-In addition to installing and uninstalling,
-XP applications may be started and stopped.
+In addition to installing and uninstalling, XP applications may be started and stopped.
 This is referred to as the life cycle of the application.
-During the stop and start phases, applications themself may execute custom code.
+During the stop and start phases, applications themselves may execute custom code.
 
 Starting:: Once installed, applications are automatically started on all nodes.
 During the startup, if it exists, the application's main.js script will be executed.
-At a lower level, Java developers may utilize so-called OSGi lifecycle events for similar purposes.
 
-Stopping:: Before an application is stopped, a special event is thrown.
-Applications may also react to these events before they are shut down.
+Stopping:: Before uninstalled, applications are automatically stopped on all nodes.
+During the stopping, if it exists, the disposer of the application's main.js script will be executed.
 
 == Configuration
 
-Applications can be configured with deployment specific setting per node in the cluster.
+Applications can be configured with deployment specific settings per node in the cluster.
 The configuration will automatically be injected when the applications starts.
 
-Configuration files may be updated, and trigger a restart of the application, without restarting the XP nodes.
-This means that for instance sessions, or open websocket connections will not be recycled, even if an application is restarted.
+Configuration files may be updated and will be accessible by the application, without restarting the XP nodes or even the applications.
 
 More info can be found under `Application configuration` in <<deployment/config#,Configuration Files>>.
 
@@ -65,17 +63,16 @@ For more details, check out the <<apps/projects#, project reference documentatio
 XP apps are powered by the <<runtime#,XP runtime>>.
 
 Applications are primarily created with JavaScript.
-Serverside Javascript is made possible through our CommonJS based <<framework#,Javascript Framework>>
+Server-side Javascript is made possible through our CommonJS based <<framework#,Javascript Framework>>
 
 XP applications can also make use of Java.
-
 Developers with special requirements may take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same instance.
 Learn more about <<./framework/java-bridge#,using Java in XP apps>>
 
 
 === Build system
 
-By default, XP projects use the https://gradle.org[Gradle build system], and with it the Maven package system.
+By default, XP projects use the https://gradle.org[Gradle build system].
 A range of XP specific libraries are also available on <<Enonic Market>>, in addition to the <<api#,standard libraries>>, included in the release of Enonic XP.
 Front-end developers often make use of JavaScript specific build systems such as Webpack.
 
@@ -86,8 +83,7 @@ There are endless use cases for the XP platform, but the typical scenarios are l
 
 === Web apps
 
-The JavaScript framework offers an easy way to build and is to serve web applications.
-An XP app may only contain a single web app.
+The JavaScript framework offers an easy way to build and to serve web applications.
 
 Read more about <<runtime#webapp-engine, webapps and the webapp engine>>
 
@@ -102,14 +98,14 @@ The CMS offering essentially consist of three parts:
 
 * Content Studio - Editorial admin interface, available as an app on Enonic Market
 * Content API - Built on top of the NoSQL Storage
-* Site Engine - Built on top of the webapp engine
+* Site Engine - Built on top of the HTTP engine
 
 Learn more about the <<cms#,Content Management System>> and the <<runtime#site-engine, site engine>>.
 
 === ID providers
 
-XP apps may also act as a so-called ID provider.
-Once installed and configured, an ID provider can join the request pipeline of other sites and applications,
+XP apps may also be used by ID providers.
+Once installed and configured, an ID provider application can join the request pipeline of other sites and applications,
 dynamically providing authentication and authorization when needed.
 There are multiple standard ID providers available on Enonic Market.
 
