@@ -536,6 +536,23 @@ loginWithoutUser = true
 loginWithoutUser:: Set to false to force creation of user before logging in. Default: `true`.
 
 
+=== Audit
+
+`XP_HOME/config/com.enonic.xp.audit.cfg`
+
+Configure the audit log feature.
+
+.Sample audit config file
+[source,properties]
+----
+# enabled = true
+# outputLogs = false
+----
+
+enabled:: Set to false to disable the creation of audit log entries. Default: `true`.
+outputLogs:: Set to true to log the stored audit log entries. Default: `false`.
+
+
 === Content
 
 `XP_HOME/config/com.enonic.xp.content.cfg`
