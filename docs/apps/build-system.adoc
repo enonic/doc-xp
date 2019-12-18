@@ -112,7 +112,7 @@ To use this with the `deploy` task, simply run the following command:
 
 Linux/MacOS:: `./gradlew deploy --continuous`
 
-Windows:: `./gradlew deploy --continuous`
+Windows:: `gradlew.bat deploy --continuous`
 
 This will deploy and reload the application on the server when something changes in your project.
 The continuous deployment mode is most useful when coding Java, or other changes that require a full compile and re-deploy.
