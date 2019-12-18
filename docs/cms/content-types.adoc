@@ -46,7 +46,7 @@ NOTE: Only simple input types may be used as variables, i.e. htmlArea is not sup
 ----
 <content-type>
   <display-name>Person</display-name> <!--1-->
-  <display-name-expression>>${firstName} ${lastName}</display-name-expression>>
+  <display-name-expression>${firstName} ${lastName}</display-name-expression>
   <form>
     <input name="firstname" type="TextLine">
       <label>First Name</label>
