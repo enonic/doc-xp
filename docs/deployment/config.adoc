@@ -534,3 +534,18 @@ loginWithoutUser = true
 ----
 
 loginWithoutUser:: Set to false to force creation of user before logging in. Default: `true`.
+
+
+=== Content
+
+`XP_HOME/config/com.enonic.xp.content.cfg`
+
+Configure the content layer behaviour.
+
+.Sample content config file
+[source,properties]
+----
+auditlog.enabled = true
+----
+
+auditlog.enabled:: Set to false to disable the creation of audit log entries on content API operations. Default: `true`.

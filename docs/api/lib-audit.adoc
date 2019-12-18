@@ -1,0 +1,47 @@
+= Audit Library
+include::../variables.adoc[]
+:toc: right
+:imagesdir: images
+
+This library contains audit logging functions.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include "com.enonic.xp:lib-audit:${xpVersion}"
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const authLib = require('/lib/xp/audit');
+----
+
+You are now free to use the library functionality.
+
+
+== Functions
+
+=== find
+
+This function searches for audit logs.
+
+https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/module-audit.html#.find[Documentation]
+
+=== get
+
+This function fetches an audit log.
+
+https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/module-audit.html#.get[Documentation]
+
+=== log
+
+This function creates a single audit log entry.
+
+https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/module-audit.html#.log[Documentation]

@@ -7,6 +7,18 @@ include::variables.adoc[]
 
 NOTE: v7.2 is fully backward compatible with previous v7.x versions.
 
+=== Audit Log
+
+Any application can now store audit logs in a new common repository: "system.auditlog".
+
+A core JS library <<api/lib-audit#,Audit Library>> has been added to help you store and retrieve these audit logs
+
+=== Content API - Audit Log
+
+All successful state-changing operations, through the Content API, will create an audit log entry.
+In other words, all create/edit/publish/... in Content Studio or by using the content library will create an audit log entry
+This feature can be disable by modifying the configuration file <<deployment/config#_content,com.enonic.xp.content.cfg>>.
+
 === Custom part icons
 
 Part component now supports a custom icon which will be used instead of the default one in Content Studio - in the Page Component tree
