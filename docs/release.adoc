@@ -19,6 +19,11 @@ All successful state-changing operations, through the Content API, will create a
 In other words, all create/edit/publish/... in Content Studio or by using the content library will create an audit log entry
 This feature can be disable by modifying the configuration file <<deployment/config#_content,com.enonic.xp.content.cfg>>.
 
+=== Node library - Get node by version
+
+You can now retrieve an old version of a node by using the <<api/lib-node#_get,RepoConnection::get>> method.
+
+
 === Custom part icons
 
 Part component now supports a custom icon which will be used instead of the default one in Content Studio - in the Page Component tree
