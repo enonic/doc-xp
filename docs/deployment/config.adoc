@@ -538,6 +538,8 @@ loginWithoutUser:: Set to false to force creation of user before logging in. Def
 
 === Audit
 
+NOTE: This config file was first introduced in v7.2
+
 `XP_HOME/config/com.enonic.xp.audit.cfg`
 
 Configure the audit log feature.
@@ -554,6 +556,8 @@ outputLogs:: Set to true to log the stored audit log entries. Default: `false`.
 
 
 === Content
+
+NOTE: This config file was first introduced in v7.2
 
 `XP_HOME/config/com.enonic.xp.content.cfg`
 
