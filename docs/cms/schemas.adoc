@@ -10,6 +10,7 @@
 
 To facilitate creation of various forms and data types throughout Content Studio, Enonic XP ships with a high-level schema concept that requires no coding.
 
+
 [#forms]
 == Forms
 
@@ -220,8 +221,9 @@ Here is an example of a multi-select option set with options expanded by default
 [#schema_localization]
 == Schema Localization
 
-Based on the same pattern as described in <<../api/lib-i18n#,Application localization>> one may also localize schemas.
-This enables labels and texts in schemas be displayed in the preferred language according to the user's browser settings.
+NOTE: Schema localization is based on standard framework functionality. Please consult the <<../framework/i18n#, framework localization docs>> for more details.
+
+Labels and texts in schemas be displayed in the preferred language according to the user's browser settings.
 
 The schema fields that support localization may have an optional ``i18n="key"`` attribute in the XML schema descriptor.
 This `i18n` attribute will contain a key string that refers to the translated texts in the ``i18n/phrases.properties`` bundle files.

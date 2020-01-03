@@ -1,0 +1,49 @@
+= Site engine
+:toc: right
+:imagesdir: media
+
+The Site engine enables development and delivery of content driven web apps AKA sites. 
+
+== Sites vs webapps
+
+Sites are essentially content driven webapps.
+This means that URLs and the content within the application can be controlled by non-techinical editors.
+In XP this boils down to a mapping between content (from the Content API) and a controller.
+Unlike webapps, sites do not have a default controller. 
+
+Another important difference from webapps is that sites may be powered by multiple apps.
+The apps may even collaborate on processing and responding to a single request.
+Similar to webapps, sites also enable developers to take control over URL patterns when needed, through filters and mappings (as described below).
+
+For more details on building site specific applications, check out the <<../../cms#, CMS documentation>>.
+
+== Endpoint
+
+The site engine is responsible for processing of requests on the endpoint `:8080/site/<project>/<branch>/*`. 
+<project> and <branch> refer to CMS specific projects and branches, for instance `:8080/site/default/draft`
+
+== Request pipeline
+
+The site pipeline is executed as a subset of the <<../engines#common_request_pipeline,common pipeline>>:
+
+image::site-pipeline.svg[Site rendering pipeline, 768px]
+
+This section describes the standard pipeline involved in processing a page request i.e. `:8080/site/<repo>/<branch>/<path-to-page>`.
+
+Mappings:: Uses path and content based mappings from site descriptor to trigger filters and controllers
+
+Page resolver:: Looks up content in path, and resolves it's controller + config (optionally via page template). If no controller is found, the return code is set to 404.
+
+Page renderer:: Based on the controller in the previous step is executed, producing output - potentially including component placeholders
+
+Component renderer:: For text/html responses, any compontent placeholders in the response body are processed. Each compontent's controller is executed and the output replaces the compontent placeholder in the response body. Layouts compontents may leave new placeholders, as such, this step will be repeated until no placeholders remain to be processed.
+
+Response processors:: For text/html responses, any response processors defined in the site descriptor will be executed. Processors may manipulate the result, for instance by adding pageContributions
+
+Contributions filter::  For text/html responses, any pageContributions in the response object will now be merged into the response body.
+
+Response filters:: Any filters registered through a mapping may now execute their final processing before the response is returned from the pipeline.
+
+Image service:: Requests for the _/image/ url pattern activate the <<site-engine/image-service#,image service>>, which will process and return images on demand
+
+Component service:: Requests for the _/compontent/ url pattern trigger direct access to the <<site-engine/component-service#,component service>>. Enabling direct HTTP request processing on a single compontent. This is effectively a subset of the site engine itself.

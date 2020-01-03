@@ -1,10 +1,10 @@
-= HTTP Services
+= HTTP Service
 :toc: right
 :imagesdir: media
 
-HTTP Services are <<../framework/http#http-controller,http controllers>> safely made available within an application (or site's) url space.
-Services will never conflict with other application url patterns. Services are in particular useful for sites, where most URLs are editorially created and managed.
-
+HTTP Service enable mouting of <<../../framework/http#http-controller,http controllers>> safely made available within an application (or site's) url space, without the use of routers.
+Due to the URL-pattern created, an http service will never conflict with other application url patterns. 
+Services are in particular useful when used in the <<site-engine#, Site engine>> or webapps where URLs are not predictable.
 
 == Controller
 
@@ -35,13 +35,13 @@ exports.get = function(req) {
 
 == Endpoint
 
-Services use the following mount pattern: **/_/service/<appname>/<servicename>.
-This means that a service can be invoked in multiple locations, i.e. `domain.com/_/service..` or `domain.com/some/path/_/service..`.
+Services use the following mount pattern: `+**/_/service/<appname>/<servicename>+`.
+This means that a service can be invoked in multiple locations, i.e. `+domain.com/_/service/..+` or `+domain.com/some/path/_/service/..+`.
 The context the service is mounted on can also be used by the controller as context.
 
 ====
 As an example the service 'profileimage' will only work in context of a profile's url.
-I.e. `domain.com/profile/user1/_/service/myapp/profileimage` will service an image, but invoked elsewhere it will not work.
+I.e. `+domain.com/profile/user1/_/service/myapp/profileimage+` will service an image, but invoked elsewhere it will not work.
 ====
 
 == Descriptor
@@ -65,6 +65,6 @@ Sample descriptor limiting access to the service:
 
 === serviceUrl()
 
-To safely generate a service URL, use the serviceUrl() function that is part of the <<../api/lib-portal#,Portal Library>>.
+To safely generate a service URL, use the serviceUrl() function that is part of the <<../../api/lib-portal#,Portal Library>>.
 
 NOTE: When invoked, the function will generate a contextual service url based on the context of the current controller.

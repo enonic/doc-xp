@@ -2,20 +2,23 @@
 :toc: right
 :imagesdir: framework/images
 
-The XP framework supports pluggable authentication using a concept called IDproviders
+The XP framework offers a solution for pluggable authentication called ID providers
 
 == Introduction
-As part of the XP <<../iam#,IAM>> (Identity and Access management) apps and sites may be loosely associated with an IDprovider.
+As part of the XP <<../iam#,IAM>> (Identity and Access management), apps and sites may be loosely associated with an ID provider.
+The ID provider is responsible for providing  user authentication, independent of the source identity system.
+
+ID providers are wired tightly into the <<../runtime/engines#_common_request_pipeline, common HTTP execution pipeline>>. 
+They participate both in pipeline execution steps, and through the <<../runtime/engines/idprovider-service#, ID provider service endpoint>>
+
 This section describes how to implement an ID provider application.
 
-When an IDprovider is active throughout the <<../runtime#, http request pipeline>>, it may intercept or process the request to dynamically provide authentication.
-
 == Descriptor
-An ID provider application requires a descriptor file.
+An IDprovider application requires a descriptor file.
 The descriptor should be placed in your project as `src/main/resources/idprovider/idprovider.xml`.
 
 .Sample idprovider.xml
-[source,javascript]
+[source,XML]
 ----
 <id-provider>
   <mode>LOCAL</mode> <!--1-->
@@ -38,18 +41,69 @@ The descriptor should be placed in your project as `src/main/resources/idprovide
 <2> *form* defines config options that can be defined from the UI when setting up ID providers.
 Forms are based on the <<../cms/schemas#, schema system>>
 +
-NOTE: The forms can not use CMS-specific input types such as contentSelector and htmlArea in this form.
+NOTE: This forms does not support CMS-specific input types, such as contentSelector and htmlArea.
 
 == idprovider.js
-To turn an app into an ID provider, you must add a specific idprovier JavaScript file `src/main/resources/idprovider/idprovider.js` to the application.
-An app can only implement a single ID provider.
 
-idprovider.js can export a range of different pre defined functions to implement different functionality:
-* As a <<./controllers#, controller>> - for instance by rendering a login page, or logging out the user
-* As a <<./filters#, filter>> - by processing every request automatically log in users
-* As an <<./error#, error handler>> - intercepting 401 (Unauthorised) errors from the request pipeline
+You must add a specific idprovier JavaScript controller `src/main/resources/idprovider/idprovider.js` to the application.
+An application may only implement a single ID provider.
 
-The example below demonstrates a typical idprovider script may be implemented
+To implement your ID provider, export one or more of the following functions: 
+
+=== handle401
+Perhaps the most common use of ID providers is handling 401 errors (Unauthorized).
+When a user attempts to access a resource or service that requires authentication, the pipeline will produce an HTTP 401 response.
+The IDprovider may intercept the response before this is sent to the client (browser) and perform an action that enables the user to authenticate,
+hopefully giving access to the resource.
+
+=== login
+Clients may request a login directly through a pre-defined endpoint, available for all ID providers. 
+This provides a deterministic endpoint for accessing the login page of any ID provider.
+
+The URL to the endpoint can be generated using the <<../api/lib-portal#_loginurl, loginUrl() function in the portal library>>
+
+[NOTE]
+====
+If the "login" endpoint is called with a "redirect" parameter, a validation of the origin is performed.
+The result of this validation is then passed to the ID Provider as a request property "validTicket".
+====
+
+
+=== logout
+Clients may request a logout directly through a pre-defined endpoint, available for all ID providers. 
+This provides a deterministic endpoint for logging out of any ID provider.
+
+The URL for this endpoint can be generated using the <<../api/lib-portal#_logouturl, logoutUrl() function in the portal library>>
+
+[NOTE]
+====
+If the "logout" endpoint is called with a "redirect" parameter, a validation of the origin is performed.
+The result of this validation is then passed to the ID Provider as a request property "validTicket".
+====
+
+
+=== autoLogin
+
+An ID provider may optionally include an AutoLogin filter. 
+The purpose of this filter is to automatically sign in users, before they may access other parts of the execution pipeline.
+This effectively blocks all unauthorised access attempts for the protected service.
+
+If no user already exists in the context, the autoLogin filter is executed early in the HTTP engine's pipeline.
+
+
+=== GET/POST etc
+
+Additinoally, an ID provider may aso act as a regular <<./controllers#, controller>> - supporting any interaction as desired.
+Communication with the controller is handled via the <<../runtime/engines/idprovider-service#,ID provider endpoint>>.
+
+The URL to this endpoint can be generated using the <<../api/lib-portal#_idproviderurl, idProviderUrl() function in the portal library>>
+
+
+
+
+
+== Sample
+The code below demonstrates how an ID provider may be implemented
 
 .Sample idprovider.js
 [source,javascript]
@@ -57,8 +111,3 @@ The example below demonstrates a typical idprovider script may be implemented
 include::code/idprovider.js[]
 ----
 
-[NOTE]
-====
-If the "login" or "logout" endpoints all called with a "redirect" parameter, a validation of the origin is performed.
-The result of this validation is then passed to the ID Provider as a request property "validTicket".
-====

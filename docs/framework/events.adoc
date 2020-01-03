@@ -1,0 +1,24 @@
+= Events
+:toc: right
+:imagesdir: framework/images
+
+Send and listen to local or cluster wide events
+
+[#events]
+== Introduction
+
+The XP framework enable developers to create and/or listen to events.
+Events may be local (within a single server) or cluster wide (distributed to all servers within a cluster).
+In addition to application specific events, XP itself produces a range of standard events.
+
+== Use cases
+
+The use cases for events are limitless, but the most common are:
+
+* Cache invalidation
+* Notifications (i.e. notify clients connected to any server in the cluster via Websocket)
+* Job triggering
+
+== Implementation
+
+For implementation details, please visit the <<../api/lib-event#,event library>> documentation.

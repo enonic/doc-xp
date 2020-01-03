@@ -241,13 +241,10 @@ session.replication.enabled:: is a highly experimental feature. Requires that th
 
 Network host aliases:
 
-* `local` : Will be resolved to the local ip address.
-* `non_loopback` : The first non loopback address.
-* `non_loopback:ipv4` : The first non loopback IPv4 address.
-* `non_loopback:ipv6` : The first non loopback IPv6 address.
-* `<networkInterface>` : Resolves to the ip address of the provided network interface. For example `en0`
-* `<networkInterface>:ipv4` : Resolves to the ipv4 address of the provided network interface. For example `en0:ipv4`
-* `<networkInterface>:ipv6` : Resolves to the ipv6 address of the provided network interface. For example `en0:ipv6`
+* `\_local_` : Will be resolved to the local ip address.
+* `\_[networkInterface]_` : Resolves to the ip address of the provided network interface. For example `\_en0_`
+* `\_[networkInterface]:ipv4_` : Resolves to the ipv4 address of the provided network interface. For example `\_en0:ipv4_`
+* `\_[networkInterface]:ipv6_` : Resolves to the ipv6 address of the provided network interface. For example `\_en0:ipv6_`
 
 
 === Elasticsearch
@@ -482,6 +479,19 @@ trackSessions:: If true, usage rate is tracked by session if a session exists. D
 remotePort:: If true and session tracking is not used, then rate is tracked by IP+port (effectively connection). Default: `false`.
 ipWhitelist:: A comma-separated list of IP addresses that will not be rate limited.
 
+=== Header Filter
+
+`XP_HOME/config/com.enonic.xp.web.header.cfg`
+
+Configure default HTTP response headers.
+
+.Cross site scripting prevention headers
+[source,properties]
+----
+headerConfig = set X-Frame-Options: SAMEORIGIN,set X-XSS-Protection: 1; mode=block,set X-Content-Type-Options: nosniff
+----
+
+headerConfig:: Customizes default HTTP response headers. Accepts the following format: `[action] [header name]: [header value](,[action] [header name]: [header value])`. Supported header actions are `set`, `add`, `setDate` and `addDate`.
 
 === Market
 
@@ -524,3 +534,39 @@ loginWithoutUser = true
 ----
 
 loginWithoutUser:: Set to false to force creation of user before logging in. Default: `true`.
+
+
+=== Audit
+
+NOTE: This config file was first introduced in v7.2
+
+`XP_HOME/config/com.enonic.xp.audit.cfg`
+
+Configure the audit log feature.
+
+.Sample audit config file
+[source,properties]
+----
+# enabled = true
+# outputLogs = false
+----
+
+enabled:: Set to false to disable the creation of audit log entries. Default: `true`.
+outputLogs:: Set to true to log the stored audit log entries. Default: `false`.
+
+
+=== Content
+
+NOTE: This config file was first introduced in v7.2
+
+`XP_HOME/config/com.enonic.xp.content.cfg`
+
+Configure the content layer behaviour.
+
+.Sample content config file
+[source,properties]
+----
+auditlog.enabled = true
+----
+
+auditlog.enabled:: Set to false to disable the creation of audit log entries on content API operations. Default: `true`.

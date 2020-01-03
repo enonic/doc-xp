@@ -1,4 +1,5 @@
 = Node Library
+include::../variables.adoc[]
 :toc: right
 :imagesdir: images
 
@@ -23,6 +24,45 @@ const contextLib = require('/lib/xp/node');
 ----
 
 You are now free to use the library functionality.
+
+== Events
+
+Usage of this API produces the following events:
+
+.Distributed events
+|===
+|Event |Occurs when 
+
+|node.created
+|node is created
+
+|node.deleted
+|node is deleted
+
+|node.pushed
+|node is pushed to a different branch
+
+|node.duplicated
+|node is duplicated
+
+|node.updated
+|node is updated
+
+|node.moved
+|node is moved in the tree structure
+
+|node.renamed
+|node is renamed
+
+|node.sorted
+|node is sorted
+
+|node.stateUpdated
+|node state is updated
+
+|===
+
+For information on events, check out the <<lib-event#, event API>>
 
 
 == Functions
@@ -640,102 +680,7 @@ var result = repo.findVersions({
 
 Fetches specific nodes by path or ID.
 
-[.lead]
-Parameters
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Kind | Details
-| keys | string \| Array.<string> | The keys of the nodes to fetch.  Each argument may be an ID, a key or an array of the two.
-|===
-
-[.lead]
-Returns
-
-*Array.<object>* : The list of nodes
-
-[.lead]
-Example
-
-.Fetching nodes
-[source,js]
-----
-var allFamily = repo.get(family._id, [child1._id, child2._id]);
-----
-
-.Sample response
-[source,js]
-----
-[
-    {
-        "_id": "8e0b652d-dd9a-401e-897d-14c4314009fc",
-        "_name": "family",
-        "_path": "/family",
-        "_childOrder": "_ts DESC",
-        "_indexConfig": {
-            "default": {
-                "decideByType": false,
-                "enabled": true,
-                "nGram": false,
-                "fulltext": false,
-                "includeInAllText": false,
-                "path": false,
-                "indexValueProcessors": [],
-                "languages": []
-            },
-            "configs": [
-                {
-                    "path": "displayName",
-                    "config": {
-                        "decideByType": false,
-                        "enabled": true,
-                        "nGram": true,
-                        "fulltext": true,
-                        "includeInAllText": true,
-                        "path": false,
-                        "indexValueProcessors": [],
-                        "languages": []
-                    }
-                }
-            ]
-        },
-        "_inheritsPermissions": false,
-        "_permissions": [
-            {
-                "principal": "user:system:anonymous",
-                "allow": [
-                    "READ"
-                ],
-                "deny": []
-            },
-            {
-                "principal": "role:admin",
-                "allow": [
-                    "READ",
-                    "CREATE",
-                    "MODIFY",
-                    "DELETE",
-                    "PUBLISH",
-                    "READ_PERMISSIONS",
-                    "WRITE_PERMISSIONS"
-                ],
-                "deny": []
-            }
-        ],
-        "_state": "DEFAULT",
-        "_nodeType": "default",
-        "_versionKey": "73ffd95d-4ec1-40b4-8c54-f2d7a23f6ab8",
-        "_ts": "2019-05-13T16:23:51.856Z",
-        displayName: "Carpenter and IT expert",
-        likes: "Plywood",
-        numberOfUselessGadgets: 123
-    },
-    ... <1>
-]
-----
-<1> With 3 input IDs, 3 nodes like this one was in the returned array.
+https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/module-node-RepoConnection.html#get[Documentation]
 
 === getActiveVersion
 

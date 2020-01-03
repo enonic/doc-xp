@@ -3,11 +3,11 @@ include::../variables.adoc[]
 :toc: right
 :imagesdir: images
 
-Since the XP runtime is built on top of the JVM, JavaScript developers may also directly invoke and use Java-based code.
+JavaScript developers may directly invoke and use Java-based code, since the XP runtime builds on the JVM.
 
 == The `__` object
 
-In Enonic XP, there is a standard object named ``__`` (double underscore), accessible from any serverside JavaScript code, which provides
+In Enonic XP, there is a global object named ``__`` (double underscore), accessible from any serverside JavaScript code, which provides
 a way to wrap Java objects in a JavaScript object.  The ``__`` object has functions that allow JavaScript to communicate with Java
 classes. The ``newBean`` function will wrap the Java object named in the parameter, for instance:
 
@@ -42,6 +42,261 @@ This results in a global JavaScript function ``readLines``. This example also sh
 this case, converts a Java String array to a JSON object.
 
 
+=== Passing parameters to Java
+
+There are 2 ways to pass parameters to a Java method, from JavaScript:
+
+- Passing the parameters in the method call
+- Setting the parameters as properties in the Java object, and then calling the method without parameters
+
+The first one is recommended when there are few parameters (1 or 2) and of simple types.
+The second one is better when there are multiple parameters, or some of them are optional.
+
+[source,javascript]
+----
+exports.doSomething = function (param1, param2) {
+    var bean = __.newBean('com.enonic.lib.mylib.MyClass');
+
+    return bean.execute(param1, param2);
+};
+
+exports.doSomethingElse = function (params) {
+    var bean = __.newBean('com.enonic.lib.mylib.MyClass');
+
+    bean.text = __.nullOrValue(params.text) || '';
+    bean.size = __.nullOrValue(params.size) || 250;
+
+    return bean.execute();
+};
+----
+
+NOTE: When passing values that might be `null` or `undefined` it is recommended to filter them using the `__.nullOrValue` built-in function.
+This function converts any value that is `null` or `undefined` in JavaScript to `null` in Java. Otherwise returns the input value without changes.
+
+To be able to set property values as in the 2nd example above, the Java object must implement a setter method for each field.
+
+The Java class used in the example above looks like this:
+
+[source,java]
+----
+package com.enonic.lib.mylib;
+
+public final class MyClass {
+    private String text;
+    private Long size;
+
+    public String something( String param1, Long param2 ) {
+        return "Parameters: " + param1 + " " + param2;
+    }
+
+    public String somethingElse() {
+        return "Parameters: " + this.text + " " + this.size;
+    }
+
+    public void setText( String text ) {
+        this.text = text;
+    }
+
+    public void setSize( Long size ) {
+        this.size = size;
+    }
+}
+----
 
 
-Check out the https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/-+__+.html[reference documentation for the ``__`` object].
+=== Parameter conversions
+
+There are some type conversions that are made when calling from JavaScript to Java:
+
+- when passing a JavaScript `string`, the Java method should expect a Java `String`
+- when passing a JavaScript `boolean`, the Java method should expect a Java `Boolean`
+- when passing a JavaScript `number`, the Java method should expect a Java `Long`, `Integer` or `Double`
+- when passing a JavaScript `array`, the Java method should expect a Java `List`
+- when passing a JavaScript `object`, the Java method should expect a Java `Map<String, Object>`
+
+
+=== Returning results from Java
+
+When returning simple values from Java to a JavaScript caller, the same type conversions applies.
+
+To return complex object values, you should create a specific Java class to make the mapping. This class should implement the ``MapSerializable`` interface.
+It will implement the ``serialize`` method, which allows generating a JSON object.
+
+.Serialization example
+[source,javascript]
+----
+package com.enonic.lib.mylib;
+
+import java.util.Map;
+
+import com.enonic.xp.script.serializer.MapGenerator;
+import com.enonic.xp.script.serializer.MapSerializable;
+
+public final class ExampleObjectMapper
+    implements MapSerializable
+{
+    private final String text;
+
+    private final Object[] array;
+
+    private final Map<String, Object> object;
+
+    public ExampleObjectMapper( String text, Object[] array, Map<String, Object> object )
+    {
+        this.text = text;
+        this.array = array;
+        this.object = object;
+    }
+
+    @Override
+    public void serialize( MapGenerator gen )
+    {
+        gen.value( "text", text );
+        gen.array( "arrayValues" );
+        for ( Object value : array )
+        {
+            gen.value( value );
+        }
+        gen.end();
+
+        gen.map( "objectValues" );
+        for ( String key : object.keySet() )
+        {
+            gen.value( key, object.get( key ) );
+        }
+        gen.end();
+    }
+}
+----
+
+Finally, for returning values of type binary stream from Java, it should be wrapped on a https://google.github.io/guava/releases/19.0/api/docs/com/google/common/io/ByteSource.html[ByteSource] object.
+This is required by XP to allow returning it from an HTTP request, or add it as a content attachment.
+
+
+== Functions
+
+=== disposer
+
+Add a disposer that is called when the app is stopped.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| func |  | Function to call
+|===
+
+[.lead]
+Returns
+
+*void*
+
+
+=== newBean
+
+Creates a new JavaScript bean that wraps the given Java class and makes it's methods available to be called from JavaScript.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| name |  | Classname for bean to create
+|===
+
+[.lead]
+Returns
+
+*void*
+
+
+=== nullOrValue
+
+Converts a JavaScript variable that is undefined to a Java null object. If the JavaScript variable is defined, it is returned as is.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| value |  | Value to convert
+|===
+
+[.lead]
+Returns
+
+*void*
+
+
+=== registerMock
+
+Registers a mock
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| name |  | Name of mock
+| value |  | Value to register
+|===
+
+[.lead]
+Returns
+
+*void*
+
+
+=== toNativeObject
+
+Converts arrays or complex Java objects to JSON.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| value |  | Value to convert
+|===
+
+[.lead]
+Returns
+
+*void*
+
+
+=== toScriptValue
+
+Converts JSON to a Java Map structure that can be used as parameters to a Java method on a bean created with <<newBean>>.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| value |  | Value to convert
+|===
+
+[.lead]
+Returns
+
+*void*

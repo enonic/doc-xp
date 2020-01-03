@@ -2,11 +2,11 @@
 :toc: right
 :imagesdir: images
 
-This library contains functions to access and use the current context.  It comes bundled with the XP runtime, so it should always use the same version as XP.
+This library contains functions to create and listen to instance local or cluster distributed events.
 
 == Usage
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -24,6 +24,11 @@ const eventLib = require('/lib/xp/event');
 
 You are now free to use the library functionality.
 
+====
+[NOTE]
+Several standard XP APIs already produce and publish events.
+For more details, check out the <<lib-node#events, node API>>, <<lib-repo#events, repository API>>, and <<lib-task#events, task API>>
+====
 
 == Functions
 

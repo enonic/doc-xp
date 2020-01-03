@@ -1,0 +1,20 @@
+= Admin engine
+:toc: right
+:imagesdir: media
+
+XP applications using the <<../../framework#,XP framework>> are essentially powered by the runtime's HTTP engine.
+
+== Endpoint
+
+Admin engine is responsible for processing of site requests on the endpoint `:8080/admin/*`
+
+
+== Request pipeline
+
+The site pipeline is executed as a subset of the <<../engines#common_request_pipeline,common pipeline>>:
+
+image::admin-pipeline.svg[Admin rendering pipeline, 768px]
+
+Tools handler:: Tools are admin apps that extend the launcher menu. The tools endpoint is `:8080/admin/tool/<app-name>/<tool-name>`. The respective widget controller must be located in your project as: `src/main/resources/admin/tools/<tool-name>/<tool-name>.js`.
+
+Widget handler:: Widgets are admin extensions used by admin tools. The widget endpoint is `:8080/admin/widget/<app-name>/<widget-name>`. The respective widget controller must be located in your project as: `src/main/resources/admin/widgets/<widget-name>/<widget-name>.js`.

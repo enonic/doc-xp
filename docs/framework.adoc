@@ -7,7 +7,7 @@ Our goal is to enable developer of any language - PHP, .net, Java, Python, etc t
 
 Here are some highlights:
 
-* *Runs on the JVM* using the Nashorn engine. Future releases of XP are expected to be using Graal.
 * *Javascripts are compiled and cached* on first request, for optimal performance
-* *Multithreaded* request-response approach - simplifying software development and utilization of modern multi-core hardware
-* *Based on the http://wiki.commonjs.org/wiki/Modules/1.1[CommonJS module specification]* like RequireJS
+* *Multithreaded* request-response approach - simplifying software development and utilization of modern multi-core infrastructure
+* *Based on the http://wiki.commonjs.org/wiki/Modules/1.1[CommonJS module specification]*
+* *Powered by the JVM* using the Nashorn scripting engine. Future releases of XP are expected to be using Graal.

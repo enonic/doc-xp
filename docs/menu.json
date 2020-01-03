@@ -39,6 +39,10 @@
           "document": "framework/filters"
         },
         {
+          "title": "Events",
+          "document": "framework/events"
+        },
+        {
           "title": "Websocket",
           "document": "framework/websocket"
         },
@@ -66,23 +70,47 @@
       "menuItems": [
         {
           "title": "HTTP engines",
-          "document": "runtime/engines"
+          "document": "runtime/engines",
+          "menuItems": [
+            {
+              "title": "Webapp Engine",
+              "document": "runtime/engines/webapp-engine"
+            },
+            {
+              "title": "Site Engine",
+              "document": "runtime/engines/site-engine",
+              "menuItems": [
+                {
+                  "title": "Image service",
+                  "document": "runtime/engines/site-engine/image-service"
+                },
+                {
+                  "title": "Component service",
+                  "document": "runtime/engines/site-engine/component-service"
+                }        
+              ]
+            },
+            {
+              "title": "Admin Engine",
+              "document": "runtime/engines/admin-engine"
+            },
+            {
+              "title": "Asset service",
+              "document": "runtime/engines/asset-service"
+            },
+            {
+              "title": "HTTP service",
+              "document": "runtime/engines/http-service"
+            },
+            {
+              "title": "IDprovider service",
+              "document": "runtime/engines/idprovider-service"
+            }  
+          ]
         },
         {
-          "title": "HTTP Asset service",
-          "document": "runtime/asset-service"
-        },
-        {
-          "title": "HTTP services",
-          "document": "runtime/http-services"
-        },
-        {
-          "title": "HTTP Image service",
-          "document": "runtime/image-service"
-        },
-        {
-          "title": "HTTP Component service",
-          "document": "runtime/component-service"
+          "title": "Task engine",
+          "document": "runtime/task-engine"
         },
         {
           "title": "Management Endpoint",
@@ -130,13 +158,7 @@
     },
     {
       "title": "Admin",
-      "document": "admin",
-      "menuItems": [
-        {
-          "title": "Admin Engine",
-          "document": "admin/admin-engine"
-        }
-      ]
+      "document": "admin"
     },
     {
       "title": "CMS",

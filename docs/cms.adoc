@@ -7,11 +7,12 @@ Unlike most applications platforms, Enonic XP ships with an embedded hybrid CMS.
 == Introduction
 
 Use of the CMS capabilities is fully optional.
-The full range of CMS capabilities are made available through three individual, but tightly coupled services:
+The full range of CMS capabilities are made available through individual, but tightly coupled APIs, services and applications:
 
-* Content API - Included in the XP core, built on top of the NoSQL Storage
-* Site Engine - Included in the XP core, built on top of the Javascript Framework og web app Engine.
-* Content Studio - Authoring interface available on Enonic Market.
+* <<api/lib-content#, Content API>> - Included in the XP core, built on top of the NoSQL Storage
+* <<runtime/engines/site-engine#,Site Engine>> - Included in the XP core, built on top of the Javascript Framework og web app Engine.
+* https://developer.enonic.com/docs/content-studio[Content Studio] - Authoring interface available on Enonic Market.
+* https://developer.enonic.com/templates/headless-cms[Headless GraphQL API] - Available as both application and library.
 
 == Content Types
 
@@ -52,7 +53,7 @@ Pages are composed form a structure of components
 * Parts - customizable component
 * Text - Standard free text component
 * Image - Standard component for images
-* Fragment - Special re-usable component
+* Fragment - Special reusable component
 
 Pages, layouts and parts are all fully customizable through custom controllers and corresponding schemas.
 Get all the details in the <<cms/components#,components section>>
@@ -187,7 +188,7 @@ In Content Studio, X-data is visualized as a separate step in the publishing for
 
 == Site Engine
 
-The <<runtime/engines#site-engine, Site engine>> extends the capabilities of the <<./framework#,Javascript Framework>>.
+The <<runtime/engines/site-engine#, Site engine>> extends the capabilities of the <<./framework#,Javascript Framework>>.
 The site engine serves requests from:
 
   //myserver:8080/site/<repo-name>/<branch-name>/<content-path>
@@ -216,7 +217,7 @@ the main purpose of the Site engine is to coordinate when, and how each applicat
 
 == Image Service
 
-Enonic XP contains an <<runtime/image-service#, Image Service>> that can scale, process and deliver rasterized RGB/RGBa image media in real-time.
+Enonic XP contains an <<runtime/engines/site-engine/image-service#, Image Service>> that can scale, process and deliver rasterized RGB/RGBa image media in real-time.
 
 
 == Headless and Hybrid CMS

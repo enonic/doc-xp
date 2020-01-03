@@ -322,6 +322,17 @@ configuration values.
 
 image::context-panel_insert.png[Component list, 750px]
 
+It's possible to configure a custom icon for part which then will be used instead of the default one in the Page Component tree
+and dropdowns with part descriptors. Just place an icon (in either PNG or SVG format) with the same name as the descriptor schema
+into the same folder. For example, if folder/part is called _mypart_ then part descriptor is called _mypart.xml_ and the icon file should be called
+either _mypart.svg_ or _mypart.png_.
+In the screenshots below parts "_HTML Area Example_" and "_Image filters test_" are using custom icons.
+
+image::part-component-1.png[Part descrtiptor list]
+image::part-component-2.png[Page Components tree]
+
+NOTE: Custom part icons require XP 7.2.0 or above
+
 == Text
 
 The Text component allows content editors to place and format text into any region on a page without writing any code.
