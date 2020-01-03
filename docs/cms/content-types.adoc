@@ -108,6 +108,8 @@ publish (propertySet)::
     Contains publish times, e.g publish.from
 type (string)::
     The content schema type.
+workflow (propertySet)::
+    _(Since v7.1)_ A property-set containing properties related to the workflow, e.g. the state being READY for publishing or IN PROGRESS
 x (propertySet)::
     A property-set containing properties from x-data and mixins.
 
