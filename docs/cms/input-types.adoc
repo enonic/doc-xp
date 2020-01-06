@@ -99,7 +99,8 @@ image::Content-selector-default.png[An input box with a dropdown options below i
 </input>
 ----
 <1> *allowContentType* is used to limit the content types that may be selected using the <<allowContentType Samples>>
-<2> *allowPath* is used to limit the path of the content that may be selected using the <<allowPath Samples>>.
+<2> *allowPath* is used to limit the path of the content that may be selected using the <<allowPath Samples>>. By default, Content Selector
+only displays content from the same site.
 <3> *treeMode* toggles between tree and flat modes. Default value is `false` (flat mode). +
 image:Content-selector-tree.png[Input box with a dropdown with a tree structure, 350]
 <4> *showStatus* toggles content status - default is `false`. +
@@ -138,6 +139,11 @@ All content types except ones containing the string "folder" +
 === allowPath Samples
 
 ====
+Allow all content starting from the root +
+
+    <allowContentType>*</allowContentType>
+
+
 Only content from the current site (but from any location), e.g +
 * /mySite/fish.jpg +
 * /mySite/articles/new-blog-post +
@@ -543,15 +549,15 @@ image::Image-selector.png[Input box with a grid of images to select below it, 50
   <label>My Image</label>
   <occurrences minimum="0" maximum="1"/>
   <config> <!--1-->
-    <allowPath>./*</allowPath>
+    <allowPath>${site}/*</allowPath> <!--2-->
     <treeMode>true</treeMode>
     <showStatus>true</showStatus>
     <hideToggleIcon>true</hideToggleIcon>
   </config>
 </input>
 ----
-<1> With the exception of <allowContentTypes>, ImageSelector supports the same configuration options as <<ContentSelector>>.
-
+<1> With the exception of `<allowContentTypes>` (which is not supported here) and `<allowPath>`, ImageSelector supports the same configuration options as <<ContentSelector>>.
+<2> By default, Image Selector displays all images from the root. If you want to limit images to the same site, use `<allowPath>${site}/*</allowPath>`
 
 == Long
 
@@ -590,14 +596,15 @@ The MediaSelector is a specialized version of the <<ContentSelector>> that is li
   <occurrences minimum="0" maximum="1"/>
   <config> <!--1-->
     <allowContentTypes>media:archive</allowContentTypes>
-    <allowPath>./*</allowPath>
+    <allowPath>${site}/*</allowPath> <!--2-->
     <treeMode>true</treeMode>
     <showStatus>true</showStatus>
     <hideToggleIcon>true</hideToggleIcon>
   </config>
 </input>
 ----
-<1> MediaSelector supports the same configuration options as <<ContentSelector>>, but is limited to using media:* content types in the <allowContentTypes> configuration.
+<1> MediaSelector supports the same configuration options as <<ContentSelector>>, but is limited to using `media:*` content types in the `<allowContentTypes>` configuration.
+<2> Just like <<ImageSelector>>, MediaSelector by default displays all media items starting from the content root.
 
 
 == RadioButton
