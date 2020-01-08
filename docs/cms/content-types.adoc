@@ -4,7 +4,20 @@
 :y: icon:check[role="green"]
 :n: icon:times[role="red"]
 
-Content Types are the essential elements of Content Studio and the content API.
+Content types are the essential elements of Content Studio and the content API.
+Structured, indexed and searchable content items are created from Content types.
+Content types build on the <<schemas.adoc#,Schema system>>, so they are very similar to other configurable forms in Enonic XP.
+
+== Name
+All content types are assigned a name by the system. For custom content types, this name is based on:
+
+* The app name
+* A colon `:` separator character
+* The name of the directory where the content type definition XML lies, e.g. `/src/main/resources/site/content-types/my-content-type/my-content-type.xml`
+
+Example content type name: `domain.group.myapp:my-content-type`
+
+The exception to this naming scheme are <<built-in>> content types, since these are not specific to your app.
 
 == Form definition
 
@@ -15,7 +28,11 @@ Content Types are the essential elements of Content Studio and the content API.
   <display-name-label i18n="cty.person.displayname.label">Full Name</display-name-label><!--2-->
   <description>Create a new person</description> <!--3-->
   <super-type>base:structured</super-type> <!--4-->
-  <form>
+  <is-abstract>false</is-abstract> <!--5-->
+  <is-final>true</is-final> <!--6-->
+  <is-built-in>false</is-built-in>  <!--7-->
+  <allow-child-content>true</allow-child-content> <!--8-->
+  <form> <!--9-->
     <input name="firstname" type="TextLine">
       <label>First Name</label>
     </input>
@@ -26,27 +43,31 @@ Content Types are the essential elements of Content Studio and the content API.
 </content-type>
 ----
 
-NOTE: *display-name-label* was first introduced in v7.1
-
-<1> *display-name* is the human readable name of the content type. Optionally specify the `i18n` attribute to define a mapping to localize the value. The localisation
-key must be then declared and localised in the resource bundle.
-<2> *display-name-label* enables you to override the default <Display Name> placeholder used in the content form
+<1> *display-name* The human readable name of the content type.
+Optionally specify the <<../api/lib-i18n.adoc#,i18n>> attribute to define a mapping to localize the value.
+The localisation key must then be declared and localised in the resource bundle.
+<2> *display-name-label* _(Since v7.1)_ Enables you to override the default <Display Name> placeholder used in the content form.
 <3> *description* - Set a description that is shown when creating the content type.
-<4> *super-type* refers to the root controller of the form.
-
+<4> *super-type* Refers to the root controller of the form. For most custom content types this should be set to `base:structured`.
+<5> *is-abstract* (default: false) If true, you cannot create content with this content type.
+<6> *is-final* (default: false) If true, it is not possible to create content types that “extend” this.
+<7> *is-built-in* (default: false) Only used by the built-in content types.
+<8> *allow-child-content* (default: true) If false, it will prevent users from creating child items on content of this type.
+(e.g. prevents creating child items of images)
+<9> *form* The custom <<./schemas.adoc#Forms,Form>> definition that provides the schema for your data.
 
 == Display name expressions
 
 It's possible to auto-generate display name based on values from form fields by using ES6 template literals.
-In the example below, display name will be combination of values from `firstName` and `lastName` fields.
+In the example below, display name will be combination of values from `firstName` and `lastName` fields, separated by a space.
 
-NOTE: Only simple input types may be used as variables, i.e. htmlArea is not supported.
+NOTE: Only simple input types may be used as variables, so input types like HtmlArea or CheckBox are not supported.
 
-[source,JavaScript]
+[source,xml]
 ----
 <content-type>
-  <display-name>Person</display-name> <!--1-->
-  <display-name-expression>${firstName} ${lastName}</display-name-expression>
+  <display-name>Person</display-name>
+  <display-name-expression>${firstName} ${lastName}</display-name-expression> <!--1-->
   <form>
     <input name="firstname" type="TextLine">
       <label>First Name</label>
@@ -58,6 +79,176 @@ NOTE: Only simple input types may be used as variables, i.e. htmlArea is not sup
 </content-type>
 ----
 
+== Standard content properties
+These are the standard content properties that will be added to content no matter which scheme has been defined in the content type. Value type and index options specified in parentheses.
+
+_id (string)::
+    The content id (this is the same as node id)
+_name (string, fulltext, ngram)::
+    The content name (same as node name)
+attachment (propertySet)::
+    If content contains attachments, a list of attachments with respective properties will be listed here.
+creator (string)::
+    The user principal that created the content.
+createdTime (dateTime)::
+    The timestamp when the content was created.
+data (propertySet)::
+    Contains all user defined properties as defined by the contentType.
+displayName (string, fulltext)::
+    Name used for display purposes.
+language (string)::
+    The locale-property of the content.
+modifiedTime (dateTime)::
+    Last time the content was modified.
+owner (string)::
+    The user principal that owns the content.
+page (propertySet)::
+    The page property contains page-specific properties, like template and regions. This will typically be reference to a page-template that supports the content-type.
+publish (propertySet)::
+    Contains publish times, e.g publish.from
+type (string)::
+    The content schema type.
+workflow (propertySet)::
+    _(Since v7.1)_ A property-set containing properties related to the workflow, e.g. the state being READY for publishing or IN PROGRESS
+x (propertySet)::
+    A property-set containing properties from x-data and mixins.
+
+== Built-in content types
+[[built-in]]
+
+Enonic XP comes with a set of built-in content types that can be used no matter what apps are installed. They are grouped into the following prefixes: Base, media, and portal.
+
+=== Base
+A set of basic content types are provided with the installation
+
+* *Media (base:media)*
++
+This content type serves as the abstract supertype for all content types that are considered “files” in their natural habitat.
+These types are listed in the <<media>> section.
++
+is-abstract:: true
+is-final:: false
+allow-child-content:: false
+
+* *Shortcut (base:shortcut)*
++
+This is used for redirecting a visitor to another content item in the structure.
+Optional name-value parameters can be set to be added to the redirect URL.
++
+is-abstract:: false
+is-final:: true
+allow-child-content:: true
+
+* *Structured (base:structured)*
++
+This is likely the most commonly used base type for creating other content types.
+The structured content type is the foundation for basically any other structured content you can come up with, such as the Person content in the previous example.
++
+is-abstract:: true
+is-final:: false
+allow-child-content:: true
+
+* *Unstructured (base:unstructured)*
++
+The unstructured content type is a special content type that permits the creation of any property or structure without actually defining it first.
+This is convenient for storing data where the keys for each stored property are unknown, such as for some types of user generated content.
+However, since the content data is unstructured (basically schemaless), there is no default user interface that facilitates editing unstructured content after it has been stored.
++
+is-abstract:: false
+is-final:: true
+allow-child-content:: true
+
+=== Media
+[[media]]
+The system ships with a set of pre-defined media content types.
+When files are uploaded in the Content Studio interface or through the content API, they will be transformed to one of the following content-types.
+
+Text (media:text)::
+    Plain text files.
+Data (media:data)::
+    Miscellaneous binary file formats.
+Audio (media:audio)::
+    Audio files.
+Video (media:video)::
+    Video files.
+Image (media:image)::
+    Bitmap image files.
+Vector (media:vector)::
+    Vector graphic files like .svg
+Archive (media:archive)::
+    File archives like .zip, .tar and .jar
+Document (media:document)::
+    Text documents with advanced formatting, like .doc, .odt and .pdf
+Spreadsheet (media:spreadsheet)::
+    Spreadsheet files.
+Presentation (media:presentation)::
+    Presentation files like Keynote and Powerpoint.
+Code (media:code)::
+    Files with computer code like .c, .pl or .java
+Executable (media:executable)::
+    Executable application files.
+Unknown (media:unknown)::
+    Everything else.
+
+=== Portal
+In order to build sites in a secure and fashionable manner, Enonic XP also ships with a few special purpose portal content types.
+
+* *Site (portal:site)*
++
+The Site content type allows creating websites. By creating a content of type Site, it will become the root of a website.
+This content type provides a special behavior for the content, allowing to select and configure applications for the website.
+Content types, relationship types, filters and x-data of the applications selected will be available to be used inside the website content tree.
++
+NOTE: The content types of an application (i.e. those that are not built-in) can only be used under a content of type Site which has the application selected.
++
+super-type:: base:structured
+is-abstract:: false
+is-final:: true
+allow-child-content:: true
+
+* *Page Template (portal:page-template)*
++
+Instead of always having to configure the page controller for each content, page templates provide a default setup for how a content type is displayed on a site.
++
+super-type:: base:structured
+is-abstract:: false
+is-final:: true
+allow-child-content:: true
+
+* *Template folder (portal:template-folder)*
++
+This is a special content type. Every site automatically creates a child content of this type named _templates. The templates folder holds all the page templates of that site. It may not hold any other content type, and it may not be created manually in any other location.
++
+super-type:: base:folder
+is-abstract:: false
+is-final:: true
+allow-child-content:: portal:page-template
+
+* *Fragment (portal:fragment)*
++
+The Fragment content type represents a reusable page component. A content of this type contains a page component(Part, Layout, Text, Image) that can be re-used in other pages. But it only needs to be maintained in one place.
++
+super-type:: base:structured
+is-abstract:: false
+is-final:: true
+allow-child-content:: true
+
+To create a content of type `portal:fragment` edit an existing page with Page Editor, select the context menu of an existing component in the page, and then clicking on “Create Fragment”. Once created, the fragment content can be referenced in other pages by inserting a Fragment component in the page.
+
+A Fragment content can be edited with Page Editor and the changes applied to the component will immediately be available in the pages that include the fragment. When a page containing fragment a component is rendered, the components of the portal:fragment content pointed by the fragment component are rendered in the place of the fragment component.
+
+There is a default page for rendering and edit fragments. The default page does not have any styles defined, but it is possible to render it with the application theme and styles by defining a controller <<./mappings.adoc#,mapping>> with `<match>type:'portal:fragment'</match>`
+
+== Custom Content Types
+Custom Content Types can be created using Java or simple xml files - and deployed through applications.
+
+When using xml, each content type must have a separate directory in the application resource structure: `/src/main/resources/site/content-types/my-content-type`
+
+Each directory must then hold a file where the file name matches the parent directory name, and an .xml extension: `my-content-type.xml`.
+
+A content type may optionally have its own specific icon.
+The icon can be assigned to the content type by adding a PNG or SVG file with the same name in the content type directory: `my-content-type.svg`
+
 == Expanding content types
 
-You can use <<mixins.adoc#,a mixin>> or <<x-data.adoc#,X-data>> to dynamically inject additional form fields inside existing content types.
+You can use <<mixins.adoc#,mixins>> or <<x-data.adoc#,X-data>> to dynamically inject additional form fields inside existing content types.
