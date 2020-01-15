@@ -743,7 +743,8 @@ var url = portalLib.pageUrl({
 
 === processHtml
 
-This function replaces abstract internal links contained in an HTML text by generated URLs.
+This function replaces abstract internal links to images and internal content items contained in an HTML text with full URLs.
+It will also render embedded macros.
 
 When outputting processed HTML in Thymeleaf, use attribute `data-th-utext="${processedHtml}"`.
 
