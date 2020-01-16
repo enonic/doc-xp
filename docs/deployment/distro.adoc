@@ -39,23 +39,43 @@ An example of this is when using Enonic CLI. Each "sandbox" created is basically
 
 NOTE: Folders marked with * will not appear until XP is started the first time)
 
-.XP distribution folder structure
+.XP_HOME standard folder structure
 [source,folders]
 ----
 XP_HOME/
 |- config/ <!--1-->
-|- data/ * <!--2-->
+|- data/ <!--2-->
+   |- dump/
+   |- export/
 |- deploy/ <!--3-->
 |- logs/ <!--4-->
-|- repo/ * <!--5-->
-|- snapshots/* <!--6-->
-|- work/ * <!--7-->
+|- repo/
+   |- index/ <!--5-->
+   |- blob/ <!--6-->
+|- snapshots/ <!--7-->
+|- work/ <!--8-->
 ----
 
-<1> `config/` holds all configuration files, including vhost.cfg and system.properties.
-<2> `data/` holds additional data like exports and dumps. This folder will not appear until certain operations are run.
-<3> `deploy/` is the hot deploy directory. Apps placed here are automatically installed and started.
+<1> `config/` holds all configuration files, including vhost.cfg and system.properties. XP supports hot reloading of all files ending with .cfg
+<2> `data/` Contains system dumps and exports. This folder is not created by XP until operations are run.
++
+NOTE: Should be mounted to a dedicated volume as usage may grow quickly, and exceed the size of the live repo data. Clusters should use a shared volume.
++
+<3> `deploy/` Apps placed here are automatically loaded and started on the specific node.
 <4> `logs/` default output location for all logs.
-<5> `repo/` holds the live XP NoSQL storage data (blobs and indexes).
-<6> `snapshots/`` Location where snapshots are stored when using the snapshot-operation.
+<5> `repo/index/` contains repository metadata and indexes
++
+IMPORTANT: Requires a local persisted volume (Preferably using SSD). Must never be mapped to a shared volume. The content is automatically replicated across nodes in the cluster.
++
+<6> `repo/blob/` contains the XP blobstore
++
+NOTE: Requires a persisted volume. For clusters, this must be a shared volume, accessible by all nodes.
++
+<6> `snapshots/` Location where snapshots (of index and metadata) are stored when using the snapshot-operation.
++
+NOTE: We recommend using a persistent volume. For clusters, this must be mounted to a shared volume, accessible by all nodes.
++
 <7> `work/` Cache and generated bundles are stored here.
++
+NOTE: For best performance mount this to a local persisted volume. This way image caches do not need to be re-generated after a restart.
++
