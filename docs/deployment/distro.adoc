@@ -37,9 +37,9 @@ An example of this is when using Enonic CLI. Each "sandbox" created is basically
 
 // TODO You may specify a different location for XP_HOME by passing a parameter when starting XP, or specifying XP_HOME as an environment variable.
 
-NOTE: Folders marked with * will not appear until XP is started the first time)
+NOTE: Folders marked with * will not appear until XP is started the first time
 
-.XP_HOME standard folder structure
+.Standard folder structure
 [source,folders]
 ----
 XP_HOME/
@@ -73,9 +73,9 @@ NOTE: Requires a persisted volume. For clusters, this must be a shared volume, a
 +
 <6> `snapshots/` Location where snapshots (of index and metadata) are stored when using the snapshot-operation.
 +
-NOTE: We recommend using a persistent volume. For clusters, this must be mounted to a shared volume, accessible by all nodes.
+NOTE: For clusters, this must be mounted to a shared volume, accessible by all nodes.
 +
 <7> `work/` Cache and generated bundles (apps etc) are stored here.
 +
-NOTE: For optinal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.
+NOTE: For optimal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.*
 +
