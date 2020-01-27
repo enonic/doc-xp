@@ -566,6 +566,47 @@ var expected = {
 };
 ```
 
+
+
+=== getOutboundDependencies
+
+This function returns the list of content items that are outbound dependencies of specified content.
+
+[.lead]
+*Parameters:*
+
+An object with the following properties:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+|===
+
+[.lead]
+Returns
+
+*Array.<string>* : List with ids of dependent content items
+
+
+[.lead]
+Examples
+
+```js
+// Gets outbound dependencies of content by its Id.
+var result = contentLib.getOutboundDependencies({
+    key: '/features/js-libraries/mycontent'
+});
+
+if (result) {
+    log.info('Outbound dependencies: ' + result);
+} else {
+    log.info('Outbound dependencies were not found');
+}
+```
+
 === getPermissions
 
 Gets permissions on a content
