@@ -537,6 +537,9 @@ Below is the complete list of available editor tools:
 |===
 
 
+TIP: If you are manually outputting contents of an HtmlArea input in your template, you might have to use
+<<../api/lib-portal#processhtml,processHtml()>> function which will process macros and generate correct links inside the HTML content.
+
 == ImageSelector
 
 The ImageSelector is a specialized version of the <<ContentSelector>> that is limited to selecting images (content of type "media:image"), but also upload new images.
