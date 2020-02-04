@@ -475,6 +475,9 @@ A field for entering multi-line text with rich-formatting options.
 <4> *allowHeadings* space-separated list of allowed heading tags (from `<h1>` to `<h6>`); by default all are allowed
 
 
+TIP: If you are manually outputting contents of an HtmlArea input in your template, you might have to use
+<<../api/lib-portal#processhtml,processHtml()>> function which will process macros and generate correct links inside the HTML content.
+
 TIP: HTML Area is configured with default set of tools but the toolbar can be customized. Using the config setting you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. Complete list of supported tools can be found below.
 
 
@@ -536,9 +539,6 @@ Below is the complete list of available editor tools:
 | VisualBlocks |Visualize all block-level elements
 |===
 
-
-TIP: If you are manually outputting contents of an HtmlArea input in your template, you might have to use
-<<../api/lib-portal#processhtml,processHtml()>> function which will process macros and generate correct links inside the HTML content.
 
 == ImageSelector
 
