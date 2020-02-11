@@ -1,4 +1,4 @@
-= Localization
+= Localisation
 :toc: right
 :imagesdir: images
 
@@ -6,17 +6,17 @@ Localizing your projects
 
 == Use cases
 
-NOTE: This section applies to localization on code level, not multi-linguale content and websites.
+NOTE: This section applies to code level localization, not multi-lingual content and websites.
 
-For any project targeting users with different languages, you may want to localized the specific interface.
-You may use the localization framework in the following areas: 
+Any project targeting users with different languages, you may want to localize the interface.
 
-Controllers::  Use the <<../api/lib-i18n#,the localization API>> to dynamically localize any text phares in your app
+The XP framework provides localisation a standard approach to localization for the following use-cases:
 
-Views:: Similar to controllers, some views will integrate the framework-based localization directly, consult your specific view documentation for more details.
+CMS/Sites::  Use the <<../api/lib-i18n#,the localization API>> to dynamically localize any text phares in your app. The framework will attempt to apply the locale specified in the site's language property.
 
-Schemas:: Labels and texts in content types, input types and <<../cms/schemas#schema_localization, schemas in general can also be localized>>.
+Admin Console:: Localise labels and texts in <<../cms/schemas#schema_localization, schemas>> such as content types. The framework will attempt to use the locale derived from the browser's "accept-language" settings.
 
+Webapps and more:: The <<../api/lib-i18n#,the localization API>> may also be used for any other purpose. In tese cases, the developer must control and specify which locale to explicitly.
 
 == Localization files
 
@@ -73,16 +73,17 @@ NOTE: Variants are rarely used in XP, and can pretty much be discarded.
 
 == Best match resolving
 
-When localizing, a best match pattern will be applied to select the optimal version.
-If the locale for a request is resolved to "en-US", XP will look for the localization key in the following order:
+Based on the requested locale to be used, the framework applies a best match pattern to find the optimal localisation file.
+
+If the requested locale is "en-US", the XP framework will look for localization files in the following order:
 
 * ``phrases_en_US.properties``
 * ``phrases_en.properties``
 * ``phrases.properties``
 
-If the locale for a request was ``en``, the ``phrases_en.properties`` file would be used.
+As such, if the locale for a request was ``en``, the ``phrases_en.properties`` file would be used.
 
-If the locale does not match a any specific file, the default ``phrases.properties`` will be used.
+If the locale does not match a any specific file, the default ``phrases.properties`` will be used as fallback.
 
 If no matching localization key is found in any of the files in a bundle, a default ``NOT_TRANSLATED`` will be displayed.
 
