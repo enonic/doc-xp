@@ -1,0 +1,89 @@
+= Tasks
+:toc: right
+:imagesdir: framework/images
+
+The XP framework also supports execution of asynchronous (potentially long running) background tasks.
+
+Tasks may simply be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. `src/main/resources/task/<taskname>` in your project
+
+== Descriptor
+Named tasks requires a descriptor file.
+The descriptor must be placed in task folder as follows: `src/main/resources/task/<taskname>/<taskname>.xml`.
+
+.Sample descriptor
+[source,xml]
+----
+<task>
+  <description>Background job</description>
+  <form>
+    <input type="Long" name="count">
+      <label>Number of items to process</label>
+      <default>42</default>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+</task>
+----
+
+When parameters are passed to the task controller, they will be validated according to the descriptor schema.
+
+The form element in the descriptor XML is optional, and may be left empty if the task does not accept any parameters.
+
+== Controller
+
+Named tasks require a controller that represents the actual code to be executed. The controller must be placed in the task folder as `src/main/resources/task/<taskname>/<taskname>.js`.
+
+A named task controller must export a run function, which will be invoked by the <<../runtime/task-engine#,task engine>>. once a task is executed. 
+
+The run function will receive the task parameters as a JSON object.
+
+.Example task controller
+[source,javascript]
+----
+var taskLib = require('/lib/xp/task');
+
+exports.run = function (params) {
+
+    var count = params.count || 42;
+    taskLib.progress({info: 'Initializing task'});
+
+    for (var i = 0; i < count; i++) {
+        taskLib.progress({
+            info: 'Processing item ' + (i + 1),
+            current: i,
+            total: count
+        });
+        processItem(i);
+    }
+
+    taskLib.progress({info: 'Task completed'});
+};
+----
+
+== Execution
+
+Named tasks may be executed by any controller in the system. Applications may even run tasks in other applications.
+
+Below is an example of how to run a specific task.
+
+.Sample execution of named task
+[source,javascript]
+----
+var taskLib = require('/lib/xp/task');
+
+var taskId = taskLib.submitNamed({
+        name: `mytask`,
+        config: {
+            count: 10
+        }
+    }
+);
+----
+
+== API
+
+Tasks are capable of producing status reports during execution. This is in particular useful for long running tasks where feedback is crucial.
+
+Additionally, tasks produce a range of pre-defined events throughout their life cycle.
+
+For more details on tasks, visit the <<../api/lib-task#, task API documentation>>.

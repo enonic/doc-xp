@@ -15,13 +15,13 @@ dependencies {
 }
 ----
 
- In your JavaScript controller, add a require statement:
+In your JavaScript controller, add a require statement:
 
 ```js
 var taskLib = require('/lib/xp/task');
 ```
 
- You are now free to use the library functionality.
+You are now free to use the library functionality.
 
 
 == Events
@@ -142,7 +142,7 @@ if (!isRunning) {
 
 === list
 
-Returns the list of active tasks with their current state and progress details.
+Returns the list of running tasks with their current state and progress details.
 
 [.lead]
 Parameters
@@ -228,7 +228,7 @@ var expected = [
 ];
 ```
 
-.2. Obtains list of active tasks with a given name and state:
+.2. Obtains list of running tasks with a given name and state:
 ```js
 var tasks = taskLib.list({
   name: "com.enonic.myapp:clean-up",
@@ -353,7 +353,7 @@ while (!result && retries > 0) {
 
 === submit
 
-Submits a task to be executed in the background and returns an id representing the task.
+Submits an inlined task (function) to be executed in the background. Returns an id representing the task.
 
 This function returns immediately. The callback function will be executed asynchronously.
 
@@ -421,7 +421,7 @@ Parameters
 .Properties
 !===
 ! Name   ! Type   ! Attributes ! Description
-! name   ! string !            ! Name of the task to execute
+! name   ! string !            ! Name of the task to execute. Name can be relative to the current application, or a fully qualified task name (<appname>:<taskname>)
 ! config ! object ! <optional> ! Configuration parameters to pass to the task to be executed. The object must be valid according to the schema defined in the form of the task descriptor XML.
 !===
 

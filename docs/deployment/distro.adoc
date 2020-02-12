@@ -71,11 +71,11 @@ IMPORTANT: Requires a local persisted volume (Preferably using SSD). Must never 
 +
 NOTE: Requires a persisted volume. For clusters, this must be a shared volume, accessible by all nodes.
 +
-<6> `snapshots/` Location where snapshots (of index and metadata) are stored when using the snapshot-operation.
+<7> `snapshots/` Location where snapshots (of index and metadata) are stored when using the snapshot-operation.
 +
 NOTE: For clusters, this must be mounted to a shared volume, accessible by all nodes.
 +
-<7> `work/` Cache and generated bundles (apps etc) are stored here.
+<8> `work/` Cache and generated bundles (apps etc) are stored here.
 +
 NOTE: For optimal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.*
 +
