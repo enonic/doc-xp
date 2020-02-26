@@ -2,57 +2,43 @@
 :toc: right
 :imagesdir: runtime/media
 
-The XP runtime is the foundation of XP apps
+The XP runtime powers XP applications
 
-== Micro Service architecture
+== Introduction
 
-XP apps are primarily written in JavaScript, based on the <<framework#,XP JavaScript framework>>.
-The XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components.
-This also means that Java libraries and code can easily be accessed and used by JavaScript developers as well.
+Developers commonly need to choose a particular runtime, programming language, and framework for their project. Enonic XP provides a standard approach to all of this through the XP runtime and the <<framework#,XP JavaScript framework>>. Additionally, the runtime automatically provides access to XP's platform services, such as the <<storage#, NoSQL Storage>> and <<cms#, CMS>> functionality.
 
-Traditional Micro services typically combine a runtime (JavaVM, NodeJS etc) with specific application code
-Once started, the micro service will occupy a set of resources (CPU, memory and disk) through its lifetime.
+== Overview
 
-The XP runtime is capable of running in both stateful (using the embedded NoSQL storage) and stateless mode.
-A single instance deployment will do both, but a clustered deployment may for instance be split into back-end and front-end nodes.
+The XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components. Still, XP apps are primarily developed using JavaScript - thanks to the embedded JavaScript engine and framework. However, due to running on the JVM, XP apps may also run other JVM compatible code and libraries.
 
-The runtime is also capable of running multiple applications within a single instance.
-Applications are isolated from each other using OSGi, a dynamic module system for the JVM.
+The runtime uses the OSGi module system to isolate each module (aka bundles) - and controlling the ability to communicate between them. <<apps#, XP Applications>> essentially work like any other system modules - with their own life cycle and ability to install, start, stop and uninstall.
 
-This provides a range of possibilities:
+image::runtime-architecture.svg[Simplified view of the XP runtime internals, 900]
 
-* Better utilization of underlying infrastructure
-* Modularization without performance degradations due to network traffic
-* Simplified testing and developer environment
+== Multi-threaded
+Unlike popular JavaScript runtimes such as NodeJS, the XP runtime is multi-threaded. This allows for utilisation of multi-core CPUs, true parallell execution, and handling of large loads within a single instance. 
 
-An example of when these features are useful, is the XP CMS.
-For a single site, multiple applications may be involved in the processing of a request.
-The applications may be dynamically added to or removed from a site - without any downtime.
+This is also important from a development perspective. Since the XP runtime is multi-threaded, developers also benefit from a simplified development model, debugging, and the ability to run threaded operations when needed. XP's <<runtime/task-engine#, task engine>> for instance runs all tasks as separate threads.
 
-There is no problem running many applications within a single runtime.
-XP apps are primarily Javascript, and similar to serverless architectures the apps hardly consume any resources when idle.
+== Modular
+The XP runtime also enables you to run multiple applications in a single runtime. Each application may be built, installed, started and stopped independently - and even cooperate on progressing a single request. This can for instance be seen in the <<runtime/engines#, HTTP engines>> and their execution pipeline. This basically means that most XP apps consume very little resources beyond the actual processing, and that a single runtime may potentially contain many applications - similar to a serverless architectures.
 
-== Scaling
+== Optimised
 
-The XP runtime is capable of utilizing multiple underlying multi-core CPUs for vertical scaling.
-This is useful for applications with heavy load, but also important from a development perspective.
-As the XP runtime is multi-threaded, developers may also benefit from a simpler development model.
-Simpler debugging, and the ability to run threaded operations when needed are just some of the benefits.
-The XP task engine for instance runs all tasks as separate threads.
+XP apps can benefit from the highly optimised Java VM, but also optimisations in XP's JavaScript framework. Also, the highly performance NoSQL storage enable access to large datasets with minimal latency.
 
-XP can also be scaled horizontally through a <<deployment/strategies#, cluster of runtime nodes>>.
+== Stateful and stateless
 
-== Apps API
+The XP runtime is capable of running in both stateful (using the embedded NoSQL storage) and stateless mode. A single instance deployment will do both, but a clustered deployment may for instance be split into back-end and front-end nodes.
 
-There are multiple ways of rolling out apps on Enonic XP.
+== Scalable
 
-The most dynamic is through the apps API. This actually persists applications in the XP storage.
-Events cause runtime instances to pick up and start the new apps automatically.
+XP can easily be scaled by setting up a <<deployment/strategies#, cluster of runtime nodes>>.
+It can run in virtually any infrastructure, and also be managed by Kubernetes or similar container orchestration engines for automatic scaling and more.
 
+== Management and metrics API
 
-== SDK
+The runtime provides a <<runtime/management#, management API>>, that amongst others support as installation of apps, dumping and loading data. This is commonly accessed using the Enonic CLI. 
 
-Enonic XP ships with a Software Development Kit.
-The SDK is essentially the entire platform with both back-end and front-end offered in a single runtime.
-The major difference between the SDK and Server versions of XP is that the SDK builds on the Java Development Kit,
-where the server version is a leaner and more optimized version of the Java VM.
+Additionally, the runtime also exposes a <<runtime/statistics#, metrics API>>, providing access to runtime statistics. Like many other parts of XP, the metrics API may easily be extended with XP apps, and provide additional data as needed.
