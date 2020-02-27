@@ -12,6 +12,9 @@ By implementing an error handler this will effectively replace the default error
 == error.js
 You may add an error handler to your application by creating the file `src/main/resources/site/error/error.js`.
 
+NOTE: Starting from v7.2, you may add a generic error handler by creating the file `src/main/resources/error/error.js`.
+This error handled will also handle errors that are not site related (admin tools, widgets, ...).
+
 When an error occurs in the request processing pipeline, the XP framework will look for an error handler to execute.
 For sites specifically, it will (iteratively, in order) go through all applications added to the site,
 and attempt to execute the handler functions until an <<http#http-response, HTTP response>> object is returned.
