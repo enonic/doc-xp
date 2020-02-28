@@ -1,0 +1,80 @@
+= Sites
+:toc: right
+:imagesdir: images
+
+== Widgets
+
+Widgets are user interface components that can be used to extend various Admin Tools.
+Currently, the only available extension point for widgets are detail panels in the Content Studio tool.
+
+
+To create a widget, you must create a new folder in your project structure, i.e.  ``admin/widgets/[widget-name]``.
+Then you must place a descriptor and a controller there.
+
+== Descriptor
+
+The widget ``descriptor`` defines the display name, which roles are required to access the widget and the interfaces it matches.
+
+An interface is simply a unique identifier that is used to create a link between a tool and the widget.
+For example, for your widget to be displayed in the "Content Studio" detail panel, add the interface "contentstudio.detailpanel"
+
+The descriptor file must match the widget name, i.e. `admin/widgets/[widget-name]/[widget-name].xml`.
+
+.Example descriptor file:
+[source,xml]
+----
+<widget>
+  <display-name>My first widget</display-name>
+  <interfaces>
+    <interface>contentstudio.detailpanel</interface>
+  </interfaces>
+  <allow>
+    <principal>role:system.admin</principal>
+    <principal>role:myapp.myrole</principal>
+  </allow>
+</widget>
+----
+
+== Controller
+
+To drive the widget, we will need a ``controller`` (See :ref:`http_controllers`). The controller typically produces the initial widget html.
+Depending on the widget implementation it may also handle sub-requests from the widget.
+
+The controller file must match the widget name, i.e. ``admin/widgets/[widget-name]/[widget-name].js``:
+
+.Example controller file:
+[source, js]
+----
+exports.get = function (req) {
+    return {
+        body: '<html><head></head><body><h1>My first widget</h1></body></html>',
+        contentType: 'text/html'
+    };
+};
+----
+
+== Usage 
+=== Detail panels 
+
+The detail panel will be used to get information about content. The current selected 
+element in content studio will be passed to the widget.
+
+If you are in the `browse view` in content studio the content selected is passed to 
+the widgets controller through request parameter: `contentId`
+
+[source, js]
+----
+exports.get = function (req) {
+    let id = req.params.contentId;
+}
+----
+
+If  `content editor` the portal api can access the current content.
+[source, js]
+----
+const portal = require("/lib/xp/portal");
+
+exports.get = function (req) {
+    let id = portal.getContent();
+}
+----
