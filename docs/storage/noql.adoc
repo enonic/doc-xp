@@ -286,13 +286,13 @@ fulltext('data.*', '"gone fishing today"~2', "AND")
 
 ==== nGram()
 
-An n-gram is a sequence of n letters from a string.
-The nGram-function is used to search for words or phrases beginning with a given search string.
-Typically, find-as-you-type searches will use this function.
-The max limit of an ngram is 12 character, meaning that search strings over 12 characters will not match any ngrams.
-This means that the ngram should be combined with the fulltext function or other query expressions to both match incomplete words and full phrases.
+An n-gram is a sequence of n letters from a term. During ngram indexing, the term "foxy" is also indexed as: "f", "fo", and "fox".
 
-NOTE: Only fields analyzed as text are considered when applying the ngram-function. This includes, as default, all text-based fields in the content-domain.
+When using the nGram search function, we are able get matches, even if the search only contains parts of a term. 
+This is for instance useful when createing autocomplete functionality.
+The max limit of the ngram tokenizer is 25 characters, meaning that search strings over 25 characters will not match. As such, ngram queries may successfully be combined with the fulltext search function or other query expressions, to both match fragments of words as well as full phrases.
+
+NOTE: Only properties analyzed as text are considered when applying the ngram-function. This includes, by default, all text-based fields in the content domain.
 
 .Function definition
 [source,sql]
@@ -306,7 +306,7 @@ fields:: Comma-separated list of <<propertyPath, propertyPaths>> to include in t
 
 operator:: Allowed operators are:
 
-* `OR` Any of the words in the search-string matches.
+* `OR` Any of the words in the search-string matches (default)
 * `AND` All words in search-string matches.
 
 
@@ -315,7 +315,7 @@ operator:: Allowed operators are:
 .Property "myProp" contains any word beginning with "lev", e.g "Levenshteins Algorithm".
 [source,sql]
 ----
-ngram("myProp", "lev", "AND")
+ngram("myProp", "lev")
 ----
 
 .Property "myProp" contains words beginning with "lev" and "alg", e.g "Levenshteins Algorithm".
