@@ -7,10 +7,10 @@ HTTP filters enable pipelined processing of http requests.
 [#http-filter]
 == Filters
 
-Filters enable you to step into the request pipeline, and execute code at at both request and response of the execution pipeline, possibly intercepting the request directly.
+Filters enable you to step into the request pipeline, and execute code at both request and response of the execution pipeline, possibly intercepting the request directly.
 Similar to an <<controllers#,HTTP Controller>>, standalone filters are triggered based on an export.
 
-As such, to make a filter, it must be export a `filter` function:
+As such, to make a filter, it must export a `filter` function:
 
 .Minimal filter timing the subsequent request
 [source,js]
