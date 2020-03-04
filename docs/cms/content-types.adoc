@@ -121,7 +121,7 @@ Enonic XP comes with a set of built-in content types that can be used no matter 
 === Base
 A set of basic content types are provided with the installation
 
-* *Media (base:media)*
+==== Media (base:media)
 +
 This content type serves as the abstract supertype for all content types that are considered “files” in their natural habitat.
 These types are listed in the <<media>> section.
@@ -130,7 +130,7 @@ is-abstract:: true
 is-final:: false
 allow-child-content:: false
 
-* *Shortcut (base:shortcut)*
+==== Shortcut (base:shortcut)
 +
 This is used for redirecting a visitor to another content item in the structure.
 Optional name-value parameters can be set to be added to the redirect URL.
@@ -139,7 +139,7 @@ is-abstract:: false
 is-final:: true
 allow-child-content:: true
 
-* *Structured (base:structured)*
+==== Structured (base:structured)
 +
 This is likely the most commonly used base type for creating other content types.
 The structured content type is the foundation for basically any other structured content you can come up with, such as the Person content in the previous example.
@@ -148,7 +148,7 @@ is-abstract:: true
 is-final:: false
 allow-child-content:: true
 
-* *Unstructured (base:unstructured)*
+==== Unstructured (base:unstructured)
 +
 The unstructured content type is a special content type that permits the creation of any property or structure without actually defining it first.
 This is convenient for storing data where the keys for each stored property are unknown, such as for some types of user generated content.
@@ -156,6 +156,14 @@ However, since the content data is unstructured (basically schemaless), there is
 +
 is-abstract:: false
 is-final:: true
+allow-child-content:: true
+
+==== Folder (base:folder)
++
+Folders are simply containers for child content, with no other properties than their name and Display Name. They are helpful in organizing your content.
++
+is-abstract:: false
+is-final:: false
 allow-child-content:: true
 
 === Media
