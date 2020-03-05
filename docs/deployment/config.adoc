@@ -535,6 +535,78 @@ loginWithoutUser = true
 
 loginWithoutUser:: Set to false to force creation of user before logging in. Default: `true`.
 
+=== Logging
+
+`XP_HOME/config/logback.xml`
+
+Configure all logging inside the system.
+
+.Default logback file
+[source, logback.xml]
+----
+<configuration scan="true" scanPeriod="60 seconds"> <--1-->
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> <--2-->
+    <file>${xp.home}/logs/server.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${xp.home}/logs/server.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxFileSize>100MB</maxFileSize>
+      <maxHistory>7</maxHistory>
+      <totalSizeCap>3GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <withJansi>true</withJansi>
+    <encoder>
+      <pattern>%date{ISO8601} %highlight(%-5level) %cyan(%logger{36}) - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="info"> <--3-->
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
+  </root>
+
+  <logger name="Events.Service" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
+  </logger>
+
+  <logger name="Events.Bundle" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
+  </logger>
+</configuration>
+----
+
+<1> *Configuration* 
++
+*scan*: If true sets the file in scan mode and will reconfigure itself when the configuration file changes. 
++
+*scanPeriod*: Sets the scanning period. Values can be specified in units of miliseconds, seconds, miniutes or hours. Defaults to every minute.
+If no unit of time is specified, milisceonds will be used. 
+
+<2> *Appender* creates a new logging component
++ 
+*class* Points to what java class you want handle your logging
++
+Possible classes:
++ 
+*ConsoleAppender*: "ch.qos.logback.core.ConsoleAppender" link:http://logback.qos.ch/manual/appenders.html#ConsoleAppender[ConsoleAppender] +
+*FileAppender*: "ch.qos.logback.core.FileAppender" link:http://logback.qos.ch/manual/appenders.html#FileAppender[FileAppender] +
+*RollingFileAppender*: "ch.qos.logback.core.rolling.RollingFileAppender" link:http://logback.qos.ch/manual/appenders.html#RollingFileAppender[RollingFileAppender]
+
+<3> *Root* Configuring the root logger. 
++
+*level* Can be set on <logger> and <root> to specify the importance of the message logged.
++ 
+*values*: "DEBUG", "INFO", "WARN", "ERROR", "ALL", "OFF" or "TRACE"
+See: link:http://logback.qos.ch/manual/configuration.html#loggerElement[Logger], link:http://logback.qos.ch/manual/configuration.html#rootElement[Root] for additional iformation
+
+Additional information can be found here: link:http://logback.qos.ch/manual/configuration.html[Logback documentation]
 
 === Audit
 
