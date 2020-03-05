@@ -544,9 +544,8 @@ Configure all logging inside the system.
 .Default logback file
 [source, logback.xml]
 ----
-<?xml version="1.0"?>
-<configuration scan="true" scanPeriod="60 seconds"> <!--1-->
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> <!--2-->
+<configuration scan="true" scanPeriod="60 seconds"> <--1-->
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> <--2-->
     <file>${xp.home}/logs/server.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <fileNamePattern>${xp.home}/logs/server.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
@@ -560,21 +559,26 @@ Configure all logging inside the system.
   </appender>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <withJansi>true</withJansi>
     <encoder>
-      <pattern>%date{ISO8601} %-5level %logger{36} - %msg%n</pattern>
+      <pattern>%date{ISO8601} %highlight(%-5level) %cyan(%logger{36}) - %msg%n</pattern>
     </encoder>
   </appender>
 
-  <logger name="org.apache.ignite" additivity="false"> <--3-->
-    <level value="WARN"/>
+  <root level="info"> <--3-->
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
+  </root>
+
+  <logger name="Events.Service" level="WARN" additivity="false">
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="FILE"/>
   </logger>
 
-  <root level="info"> <--4-->
+  <logger name="Events.Bundle" level="WARN" additivity="false">
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="FILE"/>
-  </root>
+  </logger>
 </configuration>
 ----
 
@@ -595,15 +599,14 @@ Possible classes:
 *FileAppender*: "ch.qos.logback.core.FileAppender" link:http://logback.qos.ch/manual/appenders.html#FileAppender[FileAppender] +
 *RollingFileAppender*: "ch.qos.logback.core.rolling.RollingFileAppender" link:http://logback.qos.ch/manual/appenders.html#RollingFileAppender[RollingFileAppender]
 
-<3> *Logger* Configuring loggers possible.
-<4> *root* Configuring the root logger. 
+<3> *Root* Configuring the root logger. 
 +
-*Level* Can be set on <logger> and <root> to specify the importance of the message logged.
+*level* Can be set on <logger> and <root> to specify the importance of the message logged.
 + 
 *values*: "DEBUG", "INFO", "WARN", "ERROR", "ALL", "OFF" or "TRACE"
 See: link:http://logback.qos.ch/manual/configuration.html#loggerElement[Logger], link:http://logback.qos.ch/manual/configuration.html#rootElement[Root] for additional iformation
 
-Additional information can be found here: link:http://logback.qos.ch/manual/configuration.html[logback]
+Additional information can be found here: link:http://logback.qos.ch/manual/configuration.html[Logback documentation]
 
 === Audit
 
