@@ -5,18 +5,18 @@
 == Widgets
 
 Widgets are user interface components that can be used to extend various Admin Tools.
-Currently, the only available extension point for widgets are detail panels in the Content Studio tool.
+Currently, the only available extension point for widgets is the Content Studio's Context Panel.
 
 
 To create a widget, you must create a new folder in your project structure, i.e.  ``admin/widgets/[widget-name]``.
-Then you must place a descriptor and a controller there.
+Then you must place descriptor (``[widget-name].xml``), controller (``[widget-name].js``) and template (``[widget-name].html``) there.
 
 == Descriptor
 
 The widget ``descriptor`` defines the display name, which roles are required to access the widget and the interfaces it matches.
 
 An interface is simply a unique identifier that is used to create a link between a tool and the widget.
-For example, for your widget to be displayed in the "Content Studio" detail panel, add the interface "contentstudio.detailpanel"
+For example, for your widget to be displayed in the "Content Studio" detail panel, add the interface "_contentstudio.contextpanel_"
 
 The descriptor file must match the widget name, i.e. `admin/widgets/[widget-name]/[widget-name].xml`.
 
@@ -25,8 +25,9 @@ The descriptor file must match the widget name, i.e. `admin/widgets/[widget-name
 ----
 <widget>
   <display-name>My first widget</display-name>
+  <description>Description of my first widget</description>
   <interfaces>
-    <interface>contentstudio.detailpanel</interface>
+    <interface>contentstudio.contextpanel</interface>
   </interfaces>
   <allow>
     <principal>role:system.admin</principal>
@@ -37,7 +38,7 @@ The descriptor file must match the widget name, i.e. `admin/widgets/[widget-name
 
 == Controller
 
-To drive the widget, we will need a ``controller`` (See :ref:`http_controllers`). The controller typically produces the initial widget html.
+To drive the widget, we will need a ``controller`` (See :ref:`http_controllers`). The controller typically renders the  widget's HTML template.
 Depending on the widget implementation it may also handle sub-requests from the widget.
 
 The controller file must match the widget name, i.e. ``admin/widgets/[widget-name]/[widget-name].js``:
@@ -54,16 +55,33 @@ exports.get = function (req) {
 ----
 
 == Usage 
-=== Detail panels 
+=== Context Panel
 
-The detail panel will be used to get information about content. The current selected 
-element in content studio will be passed to the widget.
-
-The content selected in content studio is passed to the widgets controller through request parameter: `contentId`
+Once the application with your widget is deployed, the widget should become available in the Content Studio's Context Panel. Id of currently selected content item and current repository will be passed to the widget via request parameter: `contentId`
 
 [source, js]
 ----
 exports.get = function (req) {
-    let id = req.params.contentId;
+    var id = req.params.contentId;
 }
 ----
+
+If your widget is context-dependent (requires contentId), you must add a proper check/error feedback to the controller:
+
+[source, js]
+----
+var portalLib = require('/lib/xp/portal');
+
+exports.get = function (req) {
+    var contentId = req.params.contentId;
+    if (!contentId && portalLib.getContent()) {
+        contentId = portalLib.getContent()._id;
+    }
+    if (!contentId) {
+
+        return {
+            contentType: 'text/html',
+            body: '<widget class="error">No content selected</widget>'
+        };
+    }
+}
