@@ -1,0 +1,108 @@
+= Widgets
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+Widgets are user interface components that can be used to extend various Admin Tools.
+Currently, the only available extension point for widgets is the Content Studio's Context Panel.
+
+
+To create a widget, you must create a new folder in your project structure, i.e.  ``admin/widgets/[widget-name]``.
+Then you must place descriptor (``[widget-name].xml``), controller (``[widget-name].js``) and template (``[widget-name].html``) there.
+
+== Implementation
+
+=== Descriptor
+
+The widget ``descriptor`` defines the display name, which roles are required to access the widget and the interfaces it matches.
+
+An interface is simply a unique identifier that is used to create a link between a tool and the widget.
+For example, for your widget to be displayed in the "Content Studio" detail panel, add the interface "_contentstudio.contextpanel_"
+
+The descriptor file must match the widget name, i.e. `admin/widgets/[widget-name]/[widget-name].xml`.
+
+.Example descriptor file:
+[source,xml]
+----
+<widget>
+  <display-name>My first widget</display-name>
+  <description>Description of my first widget</description>
+  <interfaces>
+    <interface>contentstudio.contextpanel</interface>
+  </interfaces>
+  <allow>
+    <principal>role:system.admin</principal>
+    <principal>role:myapp.myrole</principal>
+  </allow>
+</widget>
+----
+
+=== Controller
+
+To drive the widget, we will need a ``controller`` (See :ref:`http_controllers`). The controller typically renders the  widget's HTML template.
+Depending on the widget implementation it may also handle sub-requests from the widget.
+
+The controller file must match the widget name, i.e. ``admin/widgets/[widget-name]/[widget-name].js``:
+
+.Example controller file:
+[source, js]
+----
+exports.get = function (req) {
+    return {
+        body: '<html><head></head><body><h1>My first widget</h1></body></html>',
+        contentType: 'text/html'
+    };
+};
+----
+
+=== Template
+
+As with descriptor and controller, the template file must match the widget name, i.e. ``admin/widgets/[widget-name]/[widget-name].html``:
+
+Body of the widget must be enclosed inside the `<widget></widget>` tag.
+
+Here's an example of a simple Thymeleaf template:
+
+[source, html]
+----
+
+<widget data-th-id="${'widget-' + widgetId}">
+    <link rel="stylesheet" data-th-href="${portal.assetUrl({'_path=styles/my-widget.css'})}" type="text/css" media="all"/>
+    <script data-th-src="${portal.assetUrl({'_path=js/my-widget.js'})}"></script>
+    <div class="my-widget-container"></div>
+</widget>
+----
+
+=== Icon
+
+If you want your widget to have its own icon, place either SVG or PNG file into the same widget folder, i.e. ``admin/widgets/[widget-name]/[widget-name].svg``
+
+== Usage 
+
+Once the application with your widget is deployed, the widget should become available in the Content Studio's Context Panel. Id of currently selected content item and current repository will be passed to the widget via request parameter: `contentId`
+
+image::context-panel-widget.png[Widget inside Context Panel]
+
+[source, js]
+----
+exports.get = function (req) {
+    var id = req.params.contentId;
+}
+----
+
+If your widget is context-dependent (requires contentId), you must add a proper check/error feedback to the controller:
+
+[source, js]
+----
+exports.get = function (req) {
+    var contentId = req.params.contentId;
+    if (!contentId) {
+
+        return {
+            contentType: 'text/html',
+            body: '<widget class="error">No content selected</widget>'
+        };
+    }
+}
+----
