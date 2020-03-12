@@ -542,7 +542,7 @@ loginWithoutUser:: Set to false to force creation of user before logging in. Def
 Configure all logging inside the system.
 
 .Default logback file
-[source, logback.xml]
+[source, XML]
 ----
 <configuration scan="true" scanPeriod="60 seconds"> <--1-->
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> <--2-->

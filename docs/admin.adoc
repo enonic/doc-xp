@@ -65,5 +65,7 @@ Widgets are designed to extend existing admin interfaces functionality.
 Widgets are essentially small applications that are loaded into a section of the user interface 
 
 * A single XP application may contain multiple widgets
-* Access to an widget typically requires authentication, and particular role memberships
+* Access to a widget typically requires authentication, and particular role memberships
 * Admin widgets are served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/widget/<widget-name>``
+
+Details on implemeting custom widgets

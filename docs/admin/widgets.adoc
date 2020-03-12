@@ -1,0 +1,94 @@
+= Widgets
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+Widgets are user interface components that dynamically extends Admin interfaces.
+
+NOTE: Currently, the only admin tool that implements widget support is https://developer.enonic.com/docs/content-studio[Content Studio's]. Specifically, through the context panel.
+
+
+== Implementation
+
+Widgets are essentially a specialized web apps. Like all other XP components, they are defined by a controller and a descriptor.
+
+To create a widget, add a new folder in your project structure, i.e.  `src/main/resources/admin/widgets/<widget-name>`.
+The folder must contain both a descriptor (`<widget-name>.xml`), and a controller (`<widget-name>.js`).
+
+=== Descriptor
+
+The widget descriptor defines the display name, which roles are required to access the widget and the interfaces it implements.
+
+An interface is simply a unique identifier that links the widget to its extension point (i.e. Content Studio's context panel)
+
+For example, for your widget to be displayed in the "Content Studio" detail panel, specify the interface `contentstudio.contextpanel`.
+
+The descriptor file must match the widget folder name, i.e. `admin/widgets/<widget-name>/<widget-name>.xml`.
+
+.Sample descriptor file:
+[source,xml]
+----
+<widget>
+  <display-name>My first widget</display-name>
+  <description>Description of my first widget</description>
+  <interfaces>
+    <interface>contentstudio.contextpanel</interface>
+  </interfaces>
+  <allow>
+    <principal>role:system.admin</principal>
+    <principal>role:myapp.myrole</principal>
+  </allow>
+</widget>
+----
+
+=== Controller
+
+To drive the widget, we will need a <<../framework/controllers#, controller>>. The controller typically renders the  widget's initial html.
+Depending on the widget implementation it may also handle any further server requests from the widgets interface.
+
+The controller file must match the widget name, i.e. `admin/widgets/<widget-name>/<widget-name>.js`:
+
+.Example controller file:
+[source, js]
+----
+exports.get = function (req) {
+    return {
+        body: '<html><head></head><body><h1>My first widget</h1></body></html>',
+        contentType: 'text/html'
+    };
+};
+----
+
+NOTE: Depending on the interface the widget is implementing, the controller may be initialised with parameters, for instance providing a specific context.
+
+=== Icon
+
+Widgets may also have icons. Simply place an SVG or PNG file into the widget folder, i.e. `admin/widgets/<widget-name>/<widget-name>.svg``
+
+== Context Panel widgets 
+
+INFO: This section contains specific details on implementing Context panels for Content studio.
+
+Once your widget application is deployed, the widget should become available in the Content Studio's Context Panel. 
+
+The ID of currently selected content item and the contextual repository/branch will be passed to the widget via request parameter: `contentId`
+
+image::context-panel-widget.png[Widget inside Context Panel]
+
+
+Since context panel widgets are context-dependent (requires contentId), remember to add a proper check/error feedback to the controller:
+
+[source, js]
+----
+exports.get = function (req) {
+    var contentId = req.params.contentId;
+    if (!contentId) {
+
+        return {
+            contentType: 'text/html',
+            body: '<widget class="error">No content selected</widget>'
+        };
+    }
+}
+----
