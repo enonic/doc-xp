@@ -225,12 +225,12 @@
       "document": "deployment",
       "menuItems": [
         {
-          "title": "Distributions",
-          "document": "deployment/distro"
-        },
-        {
           "title": "Strategies",
           "document": "deployment/strategies"
+        },
+        {
+          "title": "Distributions",
+          "document": "deployment/distro"
         },
         {
           "title": "Vhosts",
@@ -239,6 +239,10 @@
         {
           "title": "Configuration",
           "document": "deployment/config"
+        },
+        {
+          "title": "Data management",
+          "document": "deployment/data"
         }
       ]
     },

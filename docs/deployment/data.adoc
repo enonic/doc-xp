@@ -1,0 +1,87 @@
+= Data management
+:toc: right
+:imagesdir: images
+
+This section describes how to manage and backup your XP data
+
+== Introduction
+
+XP stores two different types of data, that are crucial for backing up and restoring the system.
+
+=== Blobs
+XP persists most of its data as files - aka blobs.
+Blobs are both text files (data) and binary files.
+
+XP's blobstore implementation uses a so-called append-only approach.
+This simply means that blobs are created once, and used for reading - but they are never updated at a later point. 
+This eliminates traditional file-system problems like locking, and enables aggressive caching.
+The blobstores are effective since as a single blob may be re-used for a vast number of data nodes created in XP.
+
+NOTE: For clustered deployments, the blobs must be stored on a dedicated shared/distributed filesystem.
+
+
+=== Indicies
+In addition to blobs, XP also creates and stores indicies.
+Indicies are automatically replicated across all data nodes if you have a cluster.
+
+There are essentially two types of indexes.
+
+* The search indexes which can be updated or re-created through re-indexing.
+* The metadata indicies contain critical repository, branch and tree structures as well as version history.
+
+The metadata indicies are required in order to fully restore XP data.
+
+NOTE: Indicies MUST be stored on a local filesystem, preferably using fast SSDs.
+
+
+== Tools
+Enonic XP offers both <<../runtime/management#, management endpoints>>, and internal APIs to manage your data.
+
+As an alternative to working with the APIs. Check out the following tools:
+
+* https://developer.enonic.com/docs/enonic-cli[Enonic CLI] - Enonic's command line interface
+* https://market.enonic.com/vendors/glenn-ricaud/data-toolbox[Data toolbox] - Admin app
+* https://market.enonic.com/vendors/enonic/snapshotter[Snapshotter] - Continuously snapshots your systems
+
+== Snapshot and restore
+Enonic XP provides support for snapshotting and restoring your indicies. Restoring indicies will completely reset your system and work fine as long as you have a complete blobstore from when the snapshot was taken. 
+Your blobstore will keep all historical data until you perform a vacuum operation.
+
+NOTE: For clusters, snapshots MUST be stored on a shared filesystem. We recommend using a separate volume from the blobstore.
+
+== Export and import
+
+XP also provides a human readable export/import format that can be used to extracts/import repositories, or parts of a repository. 
+
+Export and import is limited to work with "raw" data. They do not include metadata such as version history, branches or commits.
+
+NOTE: For clusters, exports should be stored on a shared filesystem.  We recommend using a separate volume from the blobstore.
+
+== Dump and load
+
+The dump and load functionality enables you to dump your entire dataset to an open format.
+This is commonly used when migrating between major versions of Enonic XP. 
+Dumps can be performed with or without version history.
+
+For a consistent dump, make sure you enable "read only mode" first.
+
+NOTE: For clusters, dumps should be stored on a shared filesystem. We recommend using a separate volume from the blobstore.
+
+
+== Vacuum
+
+Even if you delete nodes in your storage, the blobs and essential metadata are not actually removed from XP. Deleting the blobs would prevent rolling back to a previous snapshots, but cleaning up the data is also a time consuming operation.
+
+To perform this operation in a controlled fashion, XP offers a function called Vacuuming.
+Vacuuming will remove unused nodes older than a specified age (This can be controlled), and then remove any unused blobs or indicies based on this.
+
+
+== Backup
+
+The fastest and simplest way of backing up XP is by completing the following steps, in the specified order:
+
+. Take a snapshot
+. Backup the files in your snapshots folder
+. Backup the files in your blobstore folder
+
+Given that blobstores only append new files on changes, the blobstore will at any time contain an historical archive of your data. The snapshots will enable you to restore your data to a specified point in time, as long as you have a complete blobstore from that point in time.
