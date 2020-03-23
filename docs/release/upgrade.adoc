@@ -3,39 +3,41 @@
 :imagesdir: images
 
 
-== Minor upgrade proceduce
-
-This procedure applies to feature upgrades, such as 7.1.x, 7.2.x etc.
+== Upgrading minor versions
+This procedure applies to fix and feature upgrades, such as 7.2.x, 7.1.x, 7.1.1 etc.
 
 === Single instance
 To upgrade a single instance deployment:
-1. stop your instance
-2. replace your current 7.x runtime image with the new v7.2 image
-3. restart the instance.
+
+. stop your instance
+. replace your current 7.x runtime image with the new v7.2 image
+. restart the instance.
 
 === Clusters
-Clusters can be upgrade without downtime.
+Clusters can be upgraded without downtime.
 The procedure is essentially the same as for a single instance, but repeated for all cluster nodes.
 We recommend the following procedure:
 
-1. Always update only one node at a time. Wait for a node to start and join the cluster before you move on to the next node.
-2. Always upgrade your master nodes first (We always recommend using dedicated master nodes)
-3. Finally, upgrade all other nodes. If you run a combination of back-end and front-end nodes, we recommend upgrading the back-end nodes before you move on to the front-end nodes.
-====
+. Update only one node at a time. Wait for a node to start and join the cluster before you move on to the next node.
+. Upgrade your master nodes first (We always recommend using dedicated master nodes)
+. Upgrade all other nodes. If you run a combination of back-end and front-end nodes, we recommend upgrading the back-end nodes before you move on to the front-end nodes.
 
-NOTE: Version 2.3.0 of Content Studio also has been released to take advantage of the new features in XP. If your are using Content Studio, we recommend upgrading to the latest version immediately after upgrading XP.
+=== Applications
+When upgrading to new minor versions of Enonic XP, there may also be new versions of standard apps available. 
 
+After upgrading XP, check for new versions of your applications from Enonic market. 
+Update your apps to use the most resent version!
 
-== Version 7.2 notes
+== v7.2 notes
 
 v7.2 is fully backward compatible with v7.1 and v7.0.
 
 NOTE: This version includes new "Audit logger" feature that requires a new repository. The repository will be created automatically during the upgrade process.
 
 
-== Upgrading to v7.1
+== v7.1 notes
 
-TIP: v7.1 is fully backward compatible with v7.0.
+v7.1 is fully backward compatible with v7.0.
 
 
 == Upgrading to v7.0
