@@ -4,7 +4,8 @@
 :y: icon:check[role="green"]
 :n: icon:times[role="red"]
 
-This section lists all available input types available for XP schemas.
+This section lists all available input types available for XP schemas. + 
+This list only shows selector specific configuration. See <<schemas#input_types, schemas>> for configuration used by all input types. 
 
 == AttachmentUploader
 
@@ -559,7 +560,7 @@ image::Image-selector.png[Input box with a grid of images to select below it, 50
   </config>
 </input>
 ----
-<1> With the exception of `<allowContentTypes>` (which is not supported here) and `<allowPath>`, ImageSelector supports the same configuration options as <<ContentSelector>>.
+<1> With the exception of `<allowContentType>` (which is not supported here) and `<allowPath>`, ImageSelector supports the same configuration options as <<ContentSelector>>.
 <2> By default, Image Selector displays all images from the root. If you want to limit images to the same site, use `<allowPath>${site}/*</allowPath>`
 
 == Long
@@ -598,7 +599,7 @@ The MediaSelector is a specialized version of the <<ContentSelector>> that is li
   <label>My Media</label>
   <occurrences minimum="0" maximum="1"/>
   <config> <!--1-->
-    <allowContentTypes>media:archive</allowContentTypes>
+    <allowContentType>media:archive</allowContentType>
     <allowPath>${site}/*</allowPath> <!--2-->
     <treeMode>true</treeMode>
     <showStatus>true</showStatus>
@@ -606,7 +607,7 @@ The MediaSelector is a specialized version of the <<ContentSelector>> that is li
   </config>
 </input>
 ----
-<1> MediaSelector supports the same configuration options as <<ContentSelector>>, but is limited to using `media:*` content types in the `<allowContentTypes>` configuration.
+<1> MediaSelector supports the same configuration options as <<ContentSelector>>, but is limited to using `media:*` content types in the `<allowContentType>` configuration.
 <2> Just like <<ImageSelector>>, MediaSelector by default displays all media items starting from the content root.
 
 

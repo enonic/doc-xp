@@ -7,8 +7,8 @@ JavaScript developers may directly invoke and use Java-based code, since the XP 
 
 == The `__` object
 
-In Enonic XP, there is a global object named ``__`` (double underscore), accessible from any serverside JavaScript code, which provides
-a way to wrap Java objects in a JavaScript object.  The ``__`` object has functions that allow JavaScript to communicate with Java
+In Enonic XP, there is a global object named `+__+` (double underscore), accessible from any serverside JavaScript code, which provides
+a way to wrap Java objects in a JavaScript object.  The `+__+` object has functions that allow JavaScript to communicate with Java
 classes. The ``newBean`` function will wrap the Java object named in the parameter, for instance:
 
 [source,javascript]
