@@ -187,7 +187,7 @@ To be able to add components like images, component parts, or text to our page v
 ----
 <page>
   <display-name>My first page</display-name>
-  <config />
+  <form />
   <regions>
     <region name="main"/>
   </regions>
@@ -256,7 +256,7 @@ The layout descriptor defines regions within the layout where parts can be place
 ----
 <layout>
   <display-name>70/30</display-name>
-  <config/>
+  <form />
   <regions>
     <region name="left"/>
     <region name="right"/>
@@ -306,40 +306,36 @@ For a layout to have any meaning, some styling must be applied to the view. The 
 [#part]
 == Part
 
-Part components are reusable, configurable components that can be placed into any region of a page with the page editor https://developer.enonic.com/docs/content-studio/master/editor/context-panel[Context Panel].
+Part components can be placed into any region of a page using the page editor https://developer.enonic.com/docs/content-studio/master/editor/context-panel[Context Panel].
 This allows content editors to build and customize pages without writing any code. There are no built-in part components.
 Each one is custom made in the application code. Parts are typically created to render custom content, lists of content, forms, etc.
 
 The first step in adding a part component to a page is to edit the page content and open the component widget's “Insert” tab.
-Drag the part component placeholder (puzzle piece) to the desired location on the page. The part placeholder will now appear as
-a blue box with a dropdown selector. The same part dropdown selector will appear in the inspect tab. Use one of the selectors
-to find the desired part component. Once a part component is selected, the placeholder will be replaced with the actual part and
-the Inspect tab will show the part’s configuration options in a form.
+Drag the part component placeholder (puzzle piece) to the desired location on the page. 
+The part placeholder will now appear as a blue box with a dropdown selector. The same part dropdown selector will appear in the inspect tab. 
+Use one of the selectors to find the desired part component. 
+Once a part component is selected, the placeholder will be replaced with the actual part and the Inspect tab will show the part’s form, if available.
 
-Some parts won’t have any configuration. Parts with configuration options are independently configured. This means that the same
-part component can be added to multiple pages, or even multiple times in the same page, and each instance can have different
-configuration values.
+Parts can be added to multiple pages, or even multiple times in the same page, and each instance can have different form values.
 
 image::context-panel_insert.png[Component list, 750px]
 
-It's possible to configure a custom icon for part which then will be used instead of the default one in the Page Component tree
-and dropdowns with part descriptors. Just place an icon (in either PNG or SVG format) with the same name as the descriptor schema
-into the same folder. For example, if folder/part is called _mypart_ then part descriptor is called _mypart.xml_ and the icon file should be called
-either _mypart.svg_ or _mypart.png_.
+It's possible to define a custom icon for part which then will be used instead of the default one in the Page Component tree and dropdowns with part descriptors. 
+Simply place an icon (in either PNG or SVG format) with the same name as the descriptor schema into the same folder. 
+For example, if folder/part is called _mypart_ then part descriptor is called _mypart.xml_ and the icon file should be called either _mypart.svg_ or _mypart.png_.
 In the screenshots below parts "_HTML Area Example_" and "_Image filters test_" are using custom icons.
 
 image::part-component-1.png[Part descrtiptor list]
 image::part-component-2.png[Page Components tree]
 
-NOTE: Custom part icons require XP 7.2.0 or above
+NOTE: Custom part icons was introduced with XP 7.2.0
 
 == Text
 
 The Text component allows content editors to place and format text into any region on a page without writing any code.
 Images can also be added inside text components.
 Macros allow Twitter tweets, YouTube videos, embedded code, and no-format text to be added as well.
-The formatting and macro options are the same as those for the HtmlArea inputs that can be found in content types and
-other configuration forms in the Content Studio.
+The formatting and macro options are the same as those for the HtmlArea inputs that can be found in content types and other configuration forms in the Content Studio.
 The only difference is that the formatting toolbar is at the top of the page for text components.
 
 In the <<https://developer.enonic.com/docs/content-studio/master/editor/page-editor#,Page Editor>>, drag a Text component from the insert tab to the desired region on the page.
@@ -372,10 +368,10 @@ image::image-component.png[Component list, 1305px]
 
 == Fragment
 
-Fragments are created as content from an instance of another component.
-What makes a fragment special is that it uses the same configuration on every page where it’s added.
-When a fragment content is altered, the change is instantly visible on every page that uses it.
-All other components are independently configured.
+Fragments are essentially components stored as individual content.
+When a fragment is altered, the change is instantly visible on every page that uses it.
+This also adds a range of new possibilities when creating pages, such as time based publishing and permission control. 
+
 
 === Creating fragments
 
