@@ -162,13 +162,15 @@ smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required.
 
 `XP_HOME/config/com.enonic.xp.repo.cfg`
 
-Configure default snapshots folder.
+Specifies the root location for where to find and place snapshot files.
 
 .Example below uses default settings
 [source,properties]
 ----
 snapshots.dir = ${xp.home}/snapshots
 ----
+
+NOTE: If you change this value, remember to update value for `path.repo` in `com.enonic.xp.elasticsearch.cfg` as well.
 
 === Blobstore
 
@@ -262,6 +264,7 @@ node.master = true
 
 path = ${xp.home}/repo/index
 path.data = ${path}/data
+path.repo = ${xp.home}/snapshots
 path.work = ${path}/work
 path.conf = ${path}/conf
 path.logs = ${path}/logs
@@ -285,6 +288,7 @@ node.data::  Allow data to be distributed to this node. Default: `true`.
 node.master:: Allow this node to be eligible as a master node. Default: `true`.
 path:: Path to directory where elasticsearch stores files. Default: `${xp.home}/repo/index`. Should be on a local file-system, not sharded.
 path.data:: Path to directory where to store index data allocated for this node. Default: `$path/data`.
+path.repo:: Allowed location for placing snapshots. NB! Use same value as for `snapshots.dir` as specified in `com.enonic.xp.repo.cfg`
 path.work:: Path to temporary files. Default: `${xp.home}/repo/index/work`.
 path.conf:: Path to directory containing configuration. Default: `$path/conf`.
 path.logs:: Path to log files. Default: `${xp.home}/repo/index/logs`.
