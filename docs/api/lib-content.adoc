@@ -336,13 +336,16 @@ This function fetches a content
 
 An object with the following keys and their value:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Type | Description
-| key | string | Path or id to the content
+| Name | Type | Attributes| Default| Description
+| key | string | | | Path or id to the parent content
+| version | string | <optional> | | Content version id
 |===
+
+NOTE: `version` was first introduced in v7.2.0
 
 [.lead]
 Returns
