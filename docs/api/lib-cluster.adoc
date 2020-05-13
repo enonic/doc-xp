@@ -42,7 +42,7 @@ Returns
 *boolean* : true if the current node is master; false otherwise.
 
 [.lead]
-Example
+Examples
 
 .Initialize data only on the master node
 [source,js]
@@ -50,4 +50,35 @@ Example
 if (clusterLib.isMaster()) {
     initializeRepo();
 }
+----
+
+.Run task only on master
+[source,js]
+----
+let tasklib = require('/lib/xp/task');
+
+if (clusterLib.isMaster() {
+    let taskId = taskLib.submit({
+        description: 'Master only task',
+        task: function () {
+          longRunningTask();
+        }
+    });
+})
+----
+
+.catch event and execute something only on master
+[source,js]
+----
+let event = require('/lib/xp/event');
+
+eventLib.listener({
+    type: 'node.pushed',
+    localOnly: false,
+    callback: function (event) {
+        if(clusterLib.isMaster()) {
+            log.info(JSON.stringify(event));
+        }
+    }
+});
 ----
