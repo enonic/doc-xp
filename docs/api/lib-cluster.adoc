@@ -29,7 +29,7 @@ You are now free to use the library functionality.
 
 === isMaster
 
-Tests whether the current node is the master node in the cluster.
+Tests whether the current node is the master node in the cluster. Cluster with multiple master nodes will only return true on the elected node.
 
 [.lead]
 Parameters
@@ -67,10 +67,10 @@ if (clusterLib.isMaster() {
 })
 ----
 
-.catch event and execute something only on master
+.Catch event and execute something only on master
 [source,js]
 ----
-let event = require('/lib/xp/event');
+let eventLib = require('/lib/xp/event');
 
 eventLib.listener({
     type: 'node.pushed',
