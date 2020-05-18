@@ -1,0 +1,314 @@
+= Docker image
+:toc: right
+
+This section describes the official Enonic XP docker image as well how to configure and run it.
+
+NOTE: This applies to docker images for Enonic XP 7.3 and higher. For migration from versions 7.2 and lower read <<migration>> subsection.
+
+== Quick start
+
+If you just want to try out the image, with no data persistence, you can run this command in your terminal.
+
+[source,bash]
+----
+docker run -it --rm -p 8080:8080 enonic/xp:7.3.0-ubuntu
+----
+
+NOTE: Running this command requires you to have docker installed.
+
+== Image description
+
+=== Goals
+
+The goals of this docker image is to:
+
+* allow people to deploy Enonic XP easily
+* be able to run on different container orchestration frameworks
+* include the latest security patches for both the JVM and the container OS
+* be as light as possible
+* help with _day 2 operations_, like backups and JVM debugging
+* follow docker best practices
+
+=== Base image
+
+Every time the Enonic XP image is built it will be based off the latest `adoptopenjdk:11-jre-hotspot` docker image. This ensures the latest updates to the JVM and OS.
+
+=== Enforced best practices
+
+Entrypoint:: The image uses a custom docker entrypoint that is designed to setup file permissions and step down from root user when running Enonic XP.
+
+Builder pattern:: During the build process, all tools used for building the final image are dropped to make the image as light as possible.
+
+File permission:: The image is designed to run on multiple orchestration frameworks and thus supports easly running Enonic XP as an arbitrary user.
+
+=== Preinstalled tools
+
+To help with _day 2 operations_, the image comes with some useful preinstalled tools.
+
+app.sh:: Script to add/remove jars from the Enonic XP deploy folder. An example usage would be `app.sh add <PUBLIC_URL_TO_JAR>`. Description and source https://github.com/enonic/docker-xp7/blob/master/bin/app.sh[here].
+
+backups.sh:: Convenient script for pre backup hooks to check the age of index snapshots created by the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter] app. Description and source available https://github.com/enonic/docker-xp7/blob/master/bin/backup.sh[here].
+
+dump.sh:: Easily create JVM heap and thread dump. Description and source available https://github.com/enonic/docker-xp7/blob/master/bin/dump.sh[here].
+
+jattach:: A tiny tool to enable creating thread and heap dumps without the full JDK in the image. Description and source available https://github.com/apangin/jattach[here].
+
+== Persisting data
+
+There are several directories storing various data that, depening on your deployment, should be persisted when containers are recreated.
+
+=== Important directories
+
+To create a deployment that is stable and easy to back up you should make the following directories persistent.
+
+$XP_HOME/config:: Configuration files for XP.
+
+$XP_HOME/deploy:: Apps deployed locally in this particluar container/node.
+
+$XP_HOME/repo/blob:: XP blobstore.
+
+$XP_HOME/repo/index:: Elasticsearch index.
+
+$XP_HOME/snapshots:: Index snapshots created by the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter] app.
+
+=== Other directories
+
+These are directories that, depending on your application of Enonic XP and deployment policy, should maybe be persistent.
+
+$XP_HOME/data:: Various extra data like thread/heap dumps.
+
+$XP_HOME/logs:: Rotating log files from Enonic XP.
+
+$XP_HOME/work:: Various cached files used by Enonic XP, e.g. resized images.
+
+== Configuration
+
+[#java-heap-memory]
+=== Java heap memory
+
+Since this image uses Java 11 it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:
+
+* set the Java heap size to 50% of the available memory to the container
+* if the XP node is a pure master node, set the Java heap size to 75% of the available memory to the container
+* set minimum and maximum heap size to the same value
+
+Parameters to achive this are described under the <<java-opts>> section.
+
+=== Mounting configuration
+
+The image does contain the standard configuration that comes with all Enonic XP distribution. Depending on how you mount volumes into the container you might override that directory. Consider this command:
+
+[source,bash]
+----
+docker run -it --rm -v $(pwd)/host_config_dir:/enonic-xp/home/config enonic/xp:7.3.0-ubuntu
+----
+
+This will override the standard configuration directory with the host directory that might be empty, hence no configuration will be present for Enonic XP. This is probably not what you want. We recommend if you are mounting your directory to the container that you base it on the standard configuration directory provided. To get a copy of the provided configuration run:
+
+[source,bash]
+----
+docker cp $(docker create enonic/xp:7.3.0-ubuntu):/enonic-xp/home/config host_config_dir
+----
+
+Then the standard configuration will be present in `host_config_dir`.
+
+== Environmental variables
+
+This subsection lists some useful environmental variables to set while deploying this image.
+
+=== Variables specific to this image
+
+TAKE_FILE_OWNERSHIP:: Set this boolean variable to `1` if you want the container to attempt to take file ownership of `$XP_HOME` directory during startup. This should not be used in general but is useful when migrating data from another system. It will only attemt this if the container is run as root. Defaults to `0`.
+
+XP_SNAPSHOT_MAX_AGE:: Maximum age of index snapshots in minutes before the `backup.sh` script starts failing. Defaults to `1440` (24 hours).
+
+[#java-opts]
+=== Useful JAVA_OPTS parameters
+
+In this subection we list some `JAVA_OPTS` parameters that are useful when running Enonic XP in this image.
+
+==== Memory
+
+Like described in the <<java-heap-memory>> section, you should in some cases set the java heap memory limits. If you would like set it to 50% of the available container memory add to `JAVA_OPTS`:
+
+[source,bash]
+----
+-XX:MinRAMPercentage=50 -XX:InitialRAMPercentage=50 -XX:MaxRAMPercentage=50
+----
+
+==== Heap dumps for OOME
+
+It is useful to make the JVM create a heap dump if the JVM throws an Out Of Memory Exception. Do that by adding to `JAVA_OPTS`:
+
+[source,bash]
+----
+-XX:-HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/enonic-xp/home/data/oom.hprof
+----
+
+==== Remote debugging
+
+WARNING: This should never be turned on by default and will make your system vulnerable to attacks.
+
+When tracking down particulary hard bugs, it can be useful to enable remote debugging. Do that by adding to `JAVA_OPTS`:
+
+[source,bash]
+----
+-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+----
+
+==== JVM monitoring
+
+WARNING: This should never be turned on by default and will make your system vulnerable to attacks.
+
+When debugging performance issues, it can be useful to attach a profiler to the JVM. Enable that option by adding to `JAVA_OPTS`:
+
+[source,bash]
+----
+-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=3000 -Dcom.sun.management.jmxremote.rmi.port=3001 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=127.0.0.1
+----
+
+== Full docker-compose example
+
+NOTE: Running commands this section requires you to have docker and docker-compose installed.
+
+=== Setup
+
+First create a directory called `demo`. Lets get our base configuration, so inside the `demo` directory run the command:
+
+[source,bash]
+----
+docker cp $(docker create enonic/xp:7.3.0-ubuntu):/enonic-xp/home/config config
+----
+
+Next create a directory called `deploy` inside the `demo` directory to keep our locally installed apps:
+
+[source,bash]
+----
+mkdir deploy
+----
+
+Lastly create a file called `docker-compose.yaml` inside the `demo` directory and paste the following into that file.
+
+NOTE: If your user id is not 1000 you have to change the docker file accordingly.
+
+[source,yaml]
+----
+version: '3'
+services:
+  xp:
+    image: enonic/xp:7.3.0-ubuntu
+    user: '1000'
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      JAVA_OPTS: '-XX:MinRAMPercentage=50 -XX:InitialRAMPercentage=50 -XX:MaxRAMPercentage=50 -XX:-HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/enonic-xp/home/data/oom.hprof'
+    volumes:
+      - index:/enonic-xp/home/repo/index
+      - blobstore:/enonic-xp/home/repo/blob
+      - snapshots:/enonic-xp/home/snapshots
+      - data:/enonic-xp/home/data
+      - ./deploy:/enonic-xp/home/deploy
+      - ./config:/enonic-xp/home/config
+volumes:
+  index:
+  blobstore:
+  snapshots:
+  data:
+----
+
+=== Running
+
+To start up Enonic XP simply run this command in the `demo` directory:
+
+[source,bash]
+----
+docker-compose up -d
+----
+
+=== Installing the snapshotter app
+
+To enable index snapshotting, install the snapshotter to our local deploy folder:
+
+[source,bash]
+----
+docker-compose exec xp app.sh add https://repo.enonic.com/public/com/enonic/app/snapshotter/2.1.1/snapshotter-2.1.1.jar
+----
+
+You can verify that the app was installed by looking at the logs:
+
+[source,bash]
+----
+docker-compose logs -f
+----
+
+=== Summary
+
+Now you have created a single node deployment that is easy to configure, backup and replicate. Your `demo` folder should contain:
+
+[source,files]
+----
+demo/
+  config/
+    com.enonic.xp.app.main.cfg
+    com.enonic.xp.app.standardidprovider.cfg
+    com.enonic.xp.audit.cfg
+    com.enonic.xp.blobstore.cfg
+    com.enonic.xp.blobstore.file.cfg
+    com.enonic.xp.cluster.cfg
+    com.enonic.xp.content.cfg
+    com.enonic.xp.elasticsearch.cfg
+    com.enonic.xp.extractor.cfg
+    com.enonic.xp.mail.cfg
+    com.enonic.xp.market.cfg
+    com.enonic.xp.media.cfg
+    com.enonic.xp.repo.cfg
+    com.enonic.xp.server.deploy.cfg
+    com.enonic.xp.server.shell.cfg
+    com.enonic.xp.server.trace.cfg
+    com.enonic.xp.server.udc.cfg
+    com.enonic.xp.vacuum.cfg
+    com.enonic.xp.web.dos.cfg
+    com.enonic.xp.web.header.cfg
+    com.enonic.xp.web.jetty.cfg
+    com.enonic.xp.web.vhost.cfg
+    logback.xml
+    README.txt
+    system.properties
+  deploy/
+    snapshotter-2.1.1.jar
+  docker-compose.yaml
+----
+
+You could create a git repository and push the `demo` folder to that repository to version control you deployment. That way if you want to replicate the deployment on another machine, simply checkout the git repository on that machine and run `docker-compose up -d` again.
+
+You might be wondering where the data for Enonic XP will be stored. Since we defined volumes for it, it will be persisted where docker stores its volumes. That will vary depending on your operating system but on linux they are located at `/var/lib/docker/volumes`. After running this example that directory should look like this:
+
+[source,files]
+----
+/var/lib/docker/volumes/
+  demo_blobstore/
+  demo_data/
+  demo_index/
+  demo_snapshots/
+  metadata.db
+----
+
+To do backups you would simply back up `demo_snapshots` and `demo_blobstore`. It is not required to back up the folders `demo_data` and `demo_index`.
+
+[#migration]
+== Migrating from old image
+
+This image should in general not introduce any breaking changes for the regular user. There are some differences that can potentially break build pipelines that are based off the old image.
+
+===== The binary wget is no longer present
+
+The old image contained the `wget` binary. To keep the image size to a minimum and because `curl` is already present in the new image, `wget` is not installed in the new image.
+
+===== Directory $XP_ROOT/home.org no longer present
+
+The directory `$XP_ROOT/home.org` is now simply called `$XP_ROOT/home`. If you are modifying that directory in your build steps you will have make the appropriate changes.
+
+== Image source code
+
+The source code for the `Dockerfile` and all related scripts is open source and can be viewed https://github.com/enonic/docker-xp7[here].
