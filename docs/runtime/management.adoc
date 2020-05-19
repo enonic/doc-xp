@@ -198,6 +198,9 @@ Export data from every repository. The result will be stored in the `$XP_HOME/da
 |Number
 |max number of versions to dump in addition to current version
 
+|`archive`
+|Boolean
+|outputs dump output to an archive (`%name%`.zip) file (default is `false`)
 |===
 
 .Response
@@ -242,6 +245,8 @@ Upgrade a data dump from a previous version to the current version. The output o
 
 NOTE: The current version XP installation must be running with the upgraded app deployed.
 
+NOTE: Upgrade does not work with archived dumps.
+
 .Url
  POST system/upgrade
 
@@ -270,6 +275,8 @@ NOTE: The current version XP installation must be running with the upgraded app 
 
 Load data from a named system dump into Enonic XP. The dump read has to be stored in the `$XP_HOME/data/dump` directory.
 
+NOTE: Upgrade does not work with archived dumps.
+
 WARNING: A load will delete all existing repositories before loading the repositories present in the system-dump
 
 .Url
@@ -288,7 +295,11 @@ WARNING: A load will delete all existing repositories before loading the reposit
 
 |`upgrade`
 |Boolean
-|upgrade the dump if necessary (default is false)
+|upgrade the dump if necessary (default is `false`)
+
+|`archive`
+|Boolean
+|loads dump form an archive (`%name%`.zip) file (default is `false`)
 |===
 
 .Response
