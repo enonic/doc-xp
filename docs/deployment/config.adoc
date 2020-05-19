@@ -376,7 +376,7 @@ session.cookieName = JSESSIONID
 
 # Compression
 gzip.enabled = true
-gzip.minSize = 16
+gzip.minSize = 23
 
 # Logging
 log.enabled = false
@@ -385,6 +385,15 @@ log.append = true
 log.extended = true
 log.timeZone = GMT
 log.retainDays = 31
+
+# Thread Pool
+threadPool.maxThreads = 200
+threadPool.minThreads = 8
+threadPool.idleTimeout = 60000
+
+# Websocket
+websocket.idleTimeout = 300000
+
 ----
 
 host:: should only be set this if host name (or ip) needs to be fixed.
@@ -397,13 +406,17 @@ http.requestHeaderSize:: Maximum response header size. Default: 32K.
 session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
 session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
 gzip.enabled:: Enables GZIP compression for responses. Default: `true`.
-gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `16`.
+gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `23`.
 log.enabled:: Turns on request logging. Default: `false`.
 log.file:: Request log file location. Default: `${xp.home}/logs/jetty-yyyy_mm_dd.request.log`.
 log.append:: append to existing file, or create new one when started. Default: `true`.
 log.extended:: turns on extended logging format. Default: `true`.
 log.timeZone:: Timezone to display timestamp in. Default: `GMT`.
 log.retainDays:: Number of days to retain the logs. Default: `31`.
+threadPool.maxThreads:: Maximum number of threads. Default: `200`.
+threadPool.minThreads:: Minimum number of threads. Default: `8`.
+threadPool.idleTimeout:: Thread idle timeout (in milliseconds). Default: `60000`.
+websocket.idleTimeout:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
 
 
 === Media
