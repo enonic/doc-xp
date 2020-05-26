@@ -30,7 +30,7 @@ A failing master may cause problems for your entire cluster.
 To avoid this scenario, one should always deploy three dedicated master nodes, and move processing to dedicated worker nodes. 
 This should guarantee a stable set of master nodes to control your cluster, including where and how data is distributed.
 
-This meanst that a minimal cluster requires at least five nodes, three master nodes, and two worker nodes. 
+This means that a minimal cluster requires at least five nodes, three master nodes, and two worker nodes.
 In theory, you could just start one worker node, but then again, that would not be a proper cluster.
 
 In addition to running multiple nodes, clusters also have additional infrastructure requirements when compared to a single node:
