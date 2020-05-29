@@ -1,6 +1,6 @@
 = Configuration files
 :toc: right
-:imagesdir: config
+:imagesdir: ../images
 
 This section describes how to configure Enonic XP and installed 3rd party applications.
 
@@ -413,10 +413,10 @@ log.append:: append to existing file, or create new one when started. Default: `
 log.extended:: turns on extended logging format. Default: `true`.
 log.timeZone:: Timezone to display timestamp in. Default: `GMT`.
 log.retainDays:: Number of days to retain the logs. Default: `31`.
-threadPool.maxThreads:: Maximum number of threads. Default: `200`.
-threadPool.minThreads:: Minimum number of threads. Default: `8`.
-threadPool.idleTimeout:: Thread idle timeout (in milliseconds). Default: `60000`.
-websocket.idleTimeout:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
+threadPool.maxThreads  image:xp-730.svg[XP 7.3.0,opts=inline]:: Maximum number of threads. Default: `200`.
+threadPool.minThreads image:xp-730.svg[XP 7.3.0,opts=inline]:: Minimum number of threads. Default: `8`.
+threadPool.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: Thread idle timeout (in milliseconds). Default: `60000`.
+websocket.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
 
 
 === Media
