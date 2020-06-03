@@ -27,7 +27,7 @@ You are now free to use the library functionality.
 
 == Functions
 
-=== santize
+=== sanitize
 
 Transform a text string so that it can be safely used in cases where the range of accepted characters is restricted.
 
@@ -50,7 +50,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| text | string | The text to santize
+| text | string | The text to sanitize
 |===
 
 
@@ -62,7 +62,7 @@ Returns
 [.lead]
 Example
 
-.Sanitze string
+.Sanitize string
 [source,js]
 ----
 var sanitizedText = commonLib.sanitize("Piña CØLADÆ <script>alert('hi!');</script>");
