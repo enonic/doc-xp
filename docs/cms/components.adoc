@@ -316,9 +316,7 @@ The part placeholder will now appear as a blue box with a dropdown selector. The
 Use one of the selectors to find the desired part component. 
 Once a part component is selected, the placeholder will be replaced with the actual part and the Inspect tab will show the part’s form, if available.
 
-Parts can be added to multiple pages, or even multiple times in the same page, and each instance can have different form values.
-
-image::context-panel_insert.png[Component list, 750px]
+Parts can be added to multiple pages, or even multiple times within the same page. Each instance can have different form values.
 
 It's possible to define a custom icon for part which then will be used instead of the default one in the Page Component tree and dropdowns with part descriptors. 
 Simply place an icon (in either PNG or SVG format) with the same name as the descriptor schema into the same folder. 

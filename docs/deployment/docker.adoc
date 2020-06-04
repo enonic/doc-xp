@@ -274,7 +274,7 @@ You can verify that everything is fine by looking at the logs. To do that run:
 docker-compose logs -f
 ----
 
-You can also open up the admin UI at http://localhost:8080/admin/tool[http://localhost:8080/admin/tool].
+You can also open up the admin UI at http://localhost:8080/admin
 
 === Summary
 
@@ -335,11 +335,11 @@ To do backups you would simply back up the directories `demo_snapshots` and `dem
 
 This image should in general not introduce any breaking changes for the regular user. There are some differences that can potentially break build pipelines that are based off the old image.
 
-===== The binary wget is no longer present
+=== The binary wget is no longer present
 
 The old image contained the `wget` binary. To keep the image size to a minimum and because `curl` is already present in the new image, `wget` is not installed in the new image.
 
-===== Directory $XP_ROOT/home.org no longer present
+=== Directory $XP_ROOT/home.org no longer present
 
 The directory `$XP_ROOT/home.org` is now simply called `$XP_ROOT/home`. If you are modifying that directory in your build steps you will have make the appropriate changes.
 

@@ -3,6 +3,53 @@ include::variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP7 Update 3
+
+NOTE: Please read the <<release/upgrade#, upgrade notes>> in relation to backward compatibility.
+
+=== Content projects
+
+XP now supports creating and working with content projects. Each project will create a separate repository, where content is isolated from the other projects. The repositories are named `com.enonic.cms.<projectname>`. Projects also introduce a simplified model in relation to permissions management and other default settings:
+
+* Set a default language for the project
+* Set default access mode (public, private or custom)
+* Give access to project via pre-defined roles (Owner, Editor, Author and Contributor)
+* Default content permissions are set via the pre-defined roles and access model
+* Projects can also be programmatically managed via the new <<api/lib-project#, project API>>.
+
+To take advantage of projects, you must also upgrade to Content Studio v3.
+
+NOTE: For full backward compatibility, the default content repository (Default project) remains unchanged.
+
+=== Compressed dump and load
+
+Dumps can now be streamed directly to a compressed archive to use less disk space, and speed up the process. Loads can similarly load data directly from a compressed archive. We now recommend always using compression when performing dump and load.
+
+NOTE: For backward compatibility, using compression requres a setting a flag when using Enonic CLI.
+
+=== Login without sessions
+
+The updated auth API now supports request scoped logins, without having to manually modify the request context.
+
+This is in particulary useful for handling modern stateful clients (i.e. using Java Web Tokens), meaning that a server session is no longer created when logging in. Getting rid of sessions provide more scalability and reliability from a server side perspective.
+
+Details are available in the <<api/lib-auth#, auth API documentation>>.
+
+=== Selected improvements
+
+The following improvements are also part of this release:
+
+* Color highlighting in console logs
+* Content API - Get content by version ID
+* Page template resolution is now faster - especially relevant for sites with many page templates
+* The default threshold to compress http content changed from 16 to 23 bytes
+* New Jetty <<deployment/config#Jetty, http.threadpool configuration options>> are now available
+* Improved logging now include details that were previously missing  
+* Improved peformance and stability for web sockets
+* Improved handling of StackOverflowError
+
+
+
 == XP7 Update 2
 
 NOTE: v7.2 is fully backward compatible with previous v7.x versions.
