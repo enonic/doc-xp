@@ -303,38 +303,6 @@ gateway.recover_after_nodes:: Number of nodes expected to be in the cluster to s
 discovery.unicast.port:: List of ports to perform discovery when new nodes are started. Default: `9300`.
 index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
 
-=== Ignite
-
-`XP_HOME/config/com.enonic.xp.ignite.cfg`
-
-NOTE: Ignite is an experimental grid memory feature, not yet ready for production use.
-
-To use this feature, the Ignite OSGi bundle must also first be activated
-
-.Sample Ignite configuration
-[source,properties]
-----
-discovery.tcp.port = 47500
-discovery.tcp.port.range = 0
-discovery.tcp.reconnect = 10
-discovery.tcp.network.timeout = 5000
-discovery.tcp.socket.timeout = 2000
-discovery.tcp.ack.timeout = 2000
-discovery.tcp.join.timeout = 0
-discovery.tcp.stat.printfreq = 0
-
-communication.message.queue.limit = 1024
-----
-
-discovery.tcp.port:: Local port to listen to. Default: `47500`.
-discovery.tcp.port.range:: Range for local ports. Local node will try to bind on first available port starting from `discovery.tcp.port` up until `discovery.tcp.port` + `discovery.tcp.port.range`. Default: `0`.
-discovery.tcp.reconnect:: Number of times the node tries to (re)establish connection to another node. Default: `10`.
-discovery.tcp.network.timeout:: Maximum network timeout to use for network operations (in ms). Default: `5000`.
-discovery.tcp.socket.timeout:: Socket operations timeout (in ms). Default: `5000`.
-discovery.tcp.ack.timeout:: Timeout for receiving acknowledgement for sent message (in ms). Default: `5000`.
-discovery.tcp.join.timeout:: Join timeout (in ms). Default: `0`.
-discovery.tcp.stat.printfreq:: Statistics print frequency. Default: `0`.
-communication.message.queue.limit:: Message queue limit for incoming and outgoing messages. Default: `1024`.
 
 === Admin
 
