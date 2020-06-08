@@ -1,0 +1,56 @@
+= Content projects
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+Content projects represet the starting point of XP's CMS. In order to create sites and content, you first need to create a project. Project defines default permissions and other useful settings for your content and editors. 
+
+== Project settings
+
+=== Basics
+* Display name - a human readable name
+* Identifier - a unique id within the installation. Cannot be changed when first created
+* Default language - Specifies the default language for content created in the project
+
+=== Access mode
+
+Project access mode defines default read permissions for it's content.
+The available values are:
+
+* Public (Everyone can read the content)
+* Private (only users with project roles can read the content)
+* Custom (a specific list of principals can be granted access to read the content, i.e. Employees)
+
+To handle private and custom mode, a special "viewer" role is created and given read access to the content items.
+
+=== Roles
+
+To provide access to a project or manage it, users can be granted special roles.
+The following roles are available per project:
+
+* Contributor - Access to project and issues (must be given specific permissions to create or manage any content)
+* Author - Same as contributor, but can additionally create and update content anywhere in the structure
+* Editor - Same as Author, but with full permissions and access to rich-text editor source mode
+* Owner - Same as Editor, but can also manage the project settings
+
+For each project, dedicated principal roles are created. The roles are named as follows:
+`com.enonic.cms.project.<id>.<roletype>`
+
+An example might be com.enonic.cms.myproject.author.
+
+
+== Storage
+
+Another important purpose of projecs is to strictly isolate the content from other projects.
+As such, each project gets a dedicated <<../storage#, repository>>.
+
+This means, that editors of a particular project will not be able to see, use or link to content within other projects.
+
+== Site engine
+
+When accessing your content through the <<../runtime/engines/site-engine#, site engine>>, the project identifier is used to access the specific project. I.e. the internal path `/site/myproject/draft` can be used to access draft items of the project with identifier ´myproject´. 
+
+== API
+
+To programmatically manage projects, use the <<../api/lib-project#, project API>>
