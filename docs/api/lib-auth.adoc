@@ -1,6 +1,6 @@
 = Authentication Library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 This library contains built-in authentication functions.
 
@@ -657,7 +657,7 @@ An object with the following keys and their value:
 | idProvider | string | Name of id provider where the user is stored. If not specified it will try all available id providers, in alphabetical order.
 | skipAuth | boolean | Skip authentication.  Default is `false` if not specified.
 | sessionTimeout | number | Session timeout (in seconds). By default, the value of session.timeout from `com.enonic.xp.web.jetty.cfg`
-| scope | string | Defines the scope of the login. Valid values are `SESSION` and `REQUEST`. When scope is set to `SESSION` the login is persistent. If scope is set to `REQUEST` the login is only valid for the current request. Default is `SESSION` if not specified.
+| scope image:xp-730.svg[XP 7.3.0,opts=inline] | string | Defines the scope of the login. Valid values are `SESSION` and `REQUEST`. When scope is set to `SESSION` the login is persistent. If scope is set to `REQUEST` the login is only valid for the current request. Default is `SESSION` if not specified.
 |===
 
 [.lead]
