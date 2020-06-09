@@ -3,7 +3,12 @@
   "versions": [
     {
       "label": "stable",
-      "checkout": "master"
+      "checkout": "master",
+      "latest": true
+    },
+    {
+      "label": "unstable",
+      "checkout": "5fed322f36865dce97ef6119354b6532b45829ee"
     }
   ]
 }
