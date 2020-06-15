@@ -631,7 +631,7 @@ An object with the following keys and their value:
 [grid="none"]
 |===
 | Name | Type | Attributes | Details
-| parentKey | string | | Path or ID of parent to get children of
+| key | string | | Path or ID of parent to get children of
 | start | number | optional | start index used for paging - default: 0
 | count | number | optional | number of content to fetch, used for paging - default: 10
 |===
