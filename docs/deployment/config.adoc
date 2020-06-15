@@ -1,6 +1,6 @@
 = Configuration files
 :toc: right
-:imagesdir: config
+:imagesdir: ../images
 
 This section describes how to configure Enonic XP and installed 3rd party applications.
 
@@ -303,38 +303,6 @@ gateway.recover_after_nodes:: Number of nodes expected to be in the cluster to s
 discovery.unicast.port:: List of ports to perform discovery when new nodes are started. Default: `9300`.
 index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
 
-=== Ignite
-
-`XP_HOME/config/com.enonic.xp.ignite.cfg`
-
-NOTE: Ignite is an experimental grid memory feature, not yet ready for production use.
-
-To use this feature, the Ignite OSGi bundle must also first be activated
-
-.Sample Ignite configuration
-[source,properties]
-----
-discovery.tcp.port = 47500
-discovery.tcp.port.range = 0
-discovery.tcp.reconnect = 10
-discovery.tcp.network.timeout = 5000
-discovery.tcp.socket.timeout = 2000
-discovery.tcp.ack.timeout = 2000
-discovery.tcp.join.timeout = 0
-discovery.tcp.stat.printfreq = 0
-
-communication.message.queue.limit = 1024
-----
-
-discovery.tcp.port:: Local port to listen to. Default: `47500`.
-discovery.tcp.port.range:: Range for local ports. Local node will try to bind on first available port starting from `discovery.tcp.port` up until `discovery.tcp.port` + `discovery.tcp.port.range`. Default: `0`.
-discovery.tcp.reconnect:: Number of times the node tries to (re)establish connection to another node. Default: `10`.
-discovery.tcp.network.timeout:: Maximum network timeout to use for network operations (in ms). Default: `5000`.
-discovery.tcp.socket.timeout:: Socket operations timeout (in ms). Default: `5000`.
-discovery.tcp.ack.timeout:: Timeout for receiving acknowledgement for sent message (in ms). Default: `5000`.
-discovery.tcp.join.timeout:: Join timeout (in ms). Default: `0`.
-discovery.tcp.stat.printfreq:: Statistics print frequency. Default: `0`.
-communication.message.queue.limit:: Message queue limit for incoming and outgoing messages. Default: `1024`.
 
 === Admin
 
@@ -376,7 +344,7 @@ session.cookieName = JSESSIONID
 
 # Compression
 gzip.enabled = true
-gzip.minSize = 16
+gzip.minSize = 23
 
 # Logging
 log.enabled = false
@@ -385,6 +353,15 @@ log.append = true
 log.extended = true
 log.timeZone = GMT
 log.retainDays = 31
+
+# Thread Pool
+threadPool.maxThreads = 200
+threadPool.minThreads = 8
+threadPool.idleTimeout = 60000
+
+# Websocket
+websocket.idleTimeout = 300000
+
 ----
 
 host:: should only be set this if host name (or ip) needs to be fixed.
@@ -397,13 +374,17 @@ http.requestHeaderSize:: Maximum response header size. Default: 32K.
 session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
 session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
 gzip.enabled:: Enables GZIP compression for responses. Default: `true`.
-gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `16`.
+gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `23`.
 log.enabled:: Turns on request logging. Default: `false`.
 log.file:: Request log file location. Default: `${xp.home}/logs/jetty-yyyy_mm_dd.request.log`.
 log.append:: append to existing file, or create new one when started. Default: `true`.
 log.extended:: turns on extended logging format. Default: `true`.
 log.timeZone:: Timezone to display timestamp in. Default: `GMT`.
 log.retainDays:: Number of days to retain the logs. Default: `31`.
+threadPool.maxThreads  image:xp-730.svg[XP 7.3.0,opts=inline]:: Maximum number of threads. Default: `200`.
+threadPool.minThreads image:xp-730.svg[XP 7.3.0,opts=inline]:: Minimum number of threads. Default: `8`.
+threadPool.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: Thread idle timeout (in milliseconds). Default: `60000`.
+websocket.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
 
 
 === Media

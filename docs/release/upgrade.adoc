@@ -4,7 +4,7 @@
 
 
 == Upgrading minor versions
-This procedure applies to fix and feature upgrades, such as 7.2.x, 7.1.x, 7.1.1 etc.
+This procedure applies to feature (7.1.0, 7.2.0) and fix upgrades (7.2.1, 7.2.2) etc.
 
 === Single instance
 To upgrade a single instance deployment:
@@ -23,10 +23,22 @@ We recommend the following procedure:
 . Upgrade all other nodes. If you run a combination of back-end and front-end nodes, we recommend upgrading the back-end nodes before you move on to the front-end nodes.
 
 === Applications
-When upgrading to new minor versions of Enonic XP, there may also be new versions of standard apps available. 
+When upgrading to new feature versions of Enonic XP, new versions of standard apps may also be available. 
 
-After upgrading XP, check for new versions of your applications from Enonic market. 
-Update your apps to use the most resent version!
+After upgrading XP, check for new versions of your installed applications from Enonic market. 
+We generally always recommend updating your apps to the latest version!
+
+== v7.3 notes
+v7.3 is backward compatible with earlier versions, but includes fixes that may affect your existing deployments.
+
+Changed GIF handling:: The image service has been partly broken when processing GIF files. As of 7.3, GIFs are always returned as original files (unprocessed, similar to how SVGs are handled). This means GIFs will no longer be cropped, and always work as expected if they contain animations/videos. Animated GIFs are the most common usage of GIF files today.
+
+Ignite removed:: Ignite (grid memory component) has been part of the XP core for testing purposes, disabled by default. It has now been removed from the XP core. Unless you have enabled Ignite for testing purposes, this will not affect your deployment. Also, all Ignite configuration files and options can now safely be removed.
+
+Content projects:: XP 7.3 introduces the ability to create isolated content repositories. If you have many sites in your current deployment, consider moving your sites into separate projects.
+
+New docker image:: A new, improved and properly documented version of our <<../deployment/docker#, XP7 Docker image>> is now available. The documentation also describes how to upgrade from the old image. 
+
 
 == v7.2 notes
 

@@ -175,6 +175,10 @@
       "document": "cms",
       "menuItems": [
         {
+          "title": "Content Projects",
+          "document": "cms/projects"
+        },
+        {
           "title": "Schema System",
           "document": "cms/schemas"
         },
@@ -229,8 +233,12 @@
           "document": "deployment/strategies"
         },
         {
-          "title": "Distributions",
+          "title": "Distribution",
           "document": "deployment/distro"
+        },
+        {
+          "title": "Docker image",
+          "document": "deployment/docker"
         },
         {
           "title": "Vhosts",
@@ -297,6 +305,10 @@
         {
           "title": "Portal API",
           "document": "api/lib-portal"
+        },
+        {
+          "title": "Project API",
+          "document": "api/lib-project"
         },
         {
           "title": "Repo API",
