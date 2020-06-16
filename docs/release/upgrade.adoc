@@ -4,13 +4,13 @@
 
 
 == Upgrading minor versions
-This procedure applies to feature (7.1.0, 7.2.0) and fix upgrades (7.2.1, 7.2.2) etc.
+This procedure applies to feature (7.1.0, 7.2.0 & 7.3.0) and fix upgrades (7.2.1, 7.2.2, etc).
 
 === Single instance
 To upgrade a single instance deployment:
 
 . stop your instance
-. replace your current 7.x runtime image with the new v7.2 image
+. replace your current 7.x runtime image with the new v7.(x+1) image
 . restart the instance.
 
 === Clusters
