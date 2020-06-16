@@ -230,8 +230,6 @@ node.name = Anode
 discovery.unicast.hosts = 127.0.0.1
 network.host = 127.0.0.1
 network.publish.host = 127.0.0.1
-
-session.replication.enabled = false
 ----
 
 cluster.enabled:: When `true` node wil try to join a cluster. Default: `false`.
@@ -239,7 +237,6 @@ node.name:: should normally not be set. Default: auto generated value
 discovery.unicast.hosts:: is an explicit list of nodes that can join the cluster. Default: `127.0.0.1`.
 network.host:: sets the bind address. Default: `127.0.0.1`. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases
 network.publish.host:: sets the address other nodes will use to communicate with this node. Default `127.0.0.1`
-session.replication.enabled:: is a highly experimental feature. Requires that the Ignite component is enabled and started. Default: `false`
 
 Network host aliases:
 
@@ -303,6 +300,78 @@ gateway.recover_after_nodes:: Number of nodes expected to be in the cluster to s
 discovery.unicast.port:: List of ports to perform discovery when new nodes are started. Default: `9300`.
 index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
 
+=== Hazelcast image:xp-740.svg[XP 7.4.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.hazelcast.cfg`
+
+Tuning of all relevant settings for the embedded Hazelcast component
+
+.Sample Hazelcast configuration
+[source,properties]
+----
+network.port=5702
+network.join.tcpIp.members=127.0.0.1:5701,127.0.0.1:5702
+system.hazelcast.initial.min.cluster.size=2
+----
+
+.Sample Hazelcast configuration for Kubernetes
+[source,properties]
+----
+clusterConfigDefaults=false
+system.hazelcast.initial.min.cluster.size=2
+network.join.tcpIp.enabled=false
+network.join.kubernetes.enabled=true
+network.join.kubernetes.serviceDns=main.default.svc.cluster.local
+----
+
+clusterConfigDefaults:: If true some properties set based on xp cluster configuration. Default: `true`
+
+lightMember:: Hazelcast Lite member which does not own any partitions. Default: `false`.
+
+network.port:: Custom port for the node to node communication. Default: `5701`.
+
+network.portCount:: How many ports try to bind while searching for available port. Default: `100`.
+network.portAutoIncrement:: Enables available port search. Default: `false`.
+
+network.publicAddress:: Overrides the public address of a member. It should be set in the format "host IP address:port number". Ignored when clusterConfigDefaults is true.
+
+network.join.multicast.enabled:: Enable Multicast discovery. Default: `false`.
+
+network.join.kubernetes.enabled:: Enable Kubernetes discovery. Default: `false`.
+
+network.join.kubernetes.serviceDns:: Service DNS for Kubernetes discovery.
+
+network.join.tcpIp.enabled:: Enable TcpIP discovery. Default: `true`.
+
+network.join.tcpIp.members:: Comma separated list of well-known members. If not provided and clusterDefaults=true then cluster's discovery.unicast.hosts used instead.
+
+network.interfaces.enabled:: Enables specification of which network interfaces that Hazelcast should use. Default: `false`.
+
+network.interfaces:: Comma separated list of ip addresses for binding.
+
+network.restApi.enabled:: Enable Hazelcast REST API. Default: `false`.
+
+network.restApi.restEndpointGroups:: Comma separated list of REST API Endpoint Groups. Default: `HEALTH_CHECK, CLUSTER_READ`.
+
+system.hazelcast.phone.home.enabled:: Enable or disable the sending of phone home data to Hazelcast's phone home server. Default: `true`.
+
+system.hazelcast.socket.bind.any:: Bind both server-socket and client-sockets to any local interface. Default: `true`.
+
+system.hazelcast.initial.min.cluster.size:: Initial expected cluster size to wait before the node to start completely. Default: `0`.
+
+system.hazelcast.prefer.ipv4.stack:: Prefer IPv4 Stack, don't use IPv6. Default: `true`.
+
+system.hazelcast.tcp.join.port.try.count:: The number of incremental ports, starting with the port number defined in the network configuration, that is used to connect to a host. Default: `1`.
+
+system.hazelcast.max.no.heartbeat.seconds:: Maximum timeout of heartbeat in seconds for a member to assume it is dead. Default: `60`.
+
+system.hazelcast.heartbeat.interval.seconds:: Heartbeat send interval in seconds. Default: `5`.
+
+system.hazelcast.mastership.claim.timeout.seconds:: Timeout which defines when master candidate gives up waiting for response to its mastership claim. Default: `120`.
+
+hazelcast.wait.seconds.before.join:: Wait time in seconds before join operation. Default: `5`.
+
+hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before join operation Default: `20`.
 
 === Admin
 
@@ -386,6 +455,27 @@ threadPool.minThreads image:xp-730.svg[XP 7.3.0,opts=inline]:: Minimum number of
 threadPool.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: Thread idle timeout (in milliseconds). Default: `60000`.
 websocket.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
 
+=== SessionStore image:xp-740.svg[XP 7.4.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.web.sessionstore.cfg`
+
+.Sample SessionStore configuration
+[source,properties]
+----
+storeMode = replicated
+saveOnCreate = true
+flushOnResponseCommit = true
+----
+
+storeMode:: Switches between SessionStore mode. Can be `replicated` or `non-persistent`. In Replicated mode sessions distributed over nodes in cluster using Jetty-Hazelcast integration. Default: `non-persistent`.
+
+savePeriodSeconds:: A non-zero value means that session won't be persisted if only the access time changed, and it has been less than savePeriodSeconds since the last time the session was written. Has no effect in non-persistent storeMode. Default: `0`.
+
+gracePeriodSeconds:: Specifies how many seconds to wait for non-session-owner nodes to be checked to verify an expired session is in fact expired throughout the cluster before closing it. Has no effect in non-persistent storeMode. Default: `3600`.
+
+saveOnCreate:: Controls whether a session that is newly created will be immediately (true) or lazily (false) persisted as the last request for the session exits. Has no effect in non-persistent storeMode. Default: `false`.
+
+flushOnResponseCommit:: Controls whether a session that is changed ("dirty") will be persisted as the response is about to commit. If false, a dirty session will only be persisted when the last simultaneous request for it leaves the session. Has no effect in non-persistent storeMode. Default: `false`.
 
 === Media
 
