@@ -258,7 +258,6 @@ Tuning of all relevant settings for the embedded Elasticsearch component
 .Sample ES configuration
 [source,properties]
 ----
-node.client = false
 node.data = true
 node.master = true
 
