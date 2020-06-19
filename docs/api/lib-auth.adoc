@@ -360,8 +360,7 @@ var findUsersResult = auth.findUsers({
 }
 ----
 
-NOTE:
-If you want to find a user by key, you have to use `_id` field in the `query` parameter.
+NOTE: If you want to find a user by key, you have to use `_id` field in the `query` parameter.
 
 .Find a user by key.
 [source,js]
