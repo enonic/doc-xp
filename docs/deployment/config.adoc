@@ -300,7 +300,8 @@ gateway.recover_after_nodes:: Number of nodes expected to be in the cluster to s
 discovery.unicast.port:: List of ports to perform discovery when new nodes are started. Default: `9300`.
 index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
 
-=== Hazelcast image:xp-740.svg[XP 7.4.0,opts=inline]
+=== Hazelcast
+image:xp-740.svg[XP 7.4.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.hazelcast.cfg`
 
