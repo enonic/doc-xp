@@ -456,7 +456,8 @@ threadPool.minThreads image:xp-730.svg[XP 7.3.0,opts=inline]:: Minimum number of
 threadPool.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: Thread idle timeout (in milliseconds). Default: `60000`.
 websocket.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
 
-=== SessionStore image:xp-740.svg[XP 7.4.0,opts=inline]
+=== SessionStore 
+image:xp-740.svg[XP 7.4.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.web.sessionstore.cfg`
 
