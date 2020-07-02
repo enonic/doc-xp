@@ -1217,7 +1217,7 @@ Examples
 var result = contentLib.query({
     start: 0,
     count: 2,
-    sort: "modifiedTime DESC, geoDistance('data.location', '59.91,10.75')",
+    sort: "modifiedTime DESC, geoDistance('data.location', '59.91,10.75', 'km')",
     query: "data.city = 'Oslo' AND fulltext('data.description', 'garden', 'AND') ",
     filters: {
         boolean: {
@@ -1327,6 +1327,7 @@ var expected = {
             "_id": "id1",
             "_name": "name1",
             "_path": "/a/b/name1",
+            "_sort": ["1970-01-01T00:00:00Z", 9279.647306690395],
             "creator": "user:system:admin",
             "modifier": "user:system:admin",
             "createdTime": "1970-01-01T00:00:00Z",
@@ -1345,6 +1346,7 @@ var expected = {
             "_id": "id2",
             "_name": "name2",
             "_path": "/a/b/name2",
+            "_sort": [ "1970-01-01T00:00:00Z", 15964.050071707446],
             "creator": "user:system:admin",
             "modifier": "user:system:admin",
             "createdTime": "1970-01-01T00:00:00Z",
