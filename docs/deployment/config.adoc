@@ -489,6 +489,14 @@ Enonic Market configuration options:
 marketUrl = https://market.enonic.com/applications
 ----
 
+You can also enable `allVersions` to get unfinished versions of apps
+
+.allVersions configuration
+[source,properties]
+----
+marketUrl = https://market.enonic.com/applications?allVersions=true
+----
+Production servers should never have this enabled.
 
 === UDC
 
