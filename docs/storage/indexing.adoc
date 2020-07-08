@@ -54,7 +54,7 @@ When analyzed, it is split into the following tokens:
 === stemmed
 
 Language optimized version of the analyzed index type.
-Used by the <<noql#stemmed(),stemmed()>> query function.
+Used by the <<noql#stemmed,stemmed()>> query function.
 
 Tokens are trimmed based on language specific features such as plurals and gender specific endings.
 Consider the following sentence stemmed for English content: "The monkey loved bananas".
@@ -263,7 +263,7 @@ Affected values will be added to the `_allText` property
 // === indexValueProcessors
 
 // TODO
-
+[#languages]
 === languages
 
 For each specified language, a stemmed index of the property will be created

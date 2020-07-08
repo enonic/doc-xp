@@ -283,6 +283,49 @@ fulltext('data.*', '"gone fishing today"', "AND")
 fulltext('data.*', '"gone fishing today"~2', "AND")
 ----
 
+[#stemmed]
+==== stemmed()
+
+The stemmed function is similar to <<#fulltext,fulltext()>> except that it searches language optimized tokens instead of a source text. E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
+
+NOTE: Stemming is language-dependant so content needs a language to be set for stemming to work !
+
+.Function definition
+[source,sql]
+----
+stemmed(<fields>, <search-string>, <operator>, <language>)
+----
+
+fields:: Comma-separated list of <<propertyPath, propertyPaths>> to include in the search.
+
+NOTE: Only `_alltext` field is currently indexed for stemming
+
+search-string:: The search-string supports a set of operators
+
+* ``+`` signifies AND operation.
+* ``|`` signifies OR operation.
+* ``-`` negates a single token.
+* ``*`` at the end of a term signifies a prefix query.
+* ``(`` and ``)`` signify precedence.
+* ``"`` and ``"`` wraps a number of tokens to signify a phrase for searching
+* ``~N`` after a word signifies edit distance (fuzziness) with a number representing https://en.wikipedia.org/wiki/Levenshtein_distance[Levenshtein distance].
+* ``~N`` after a phrase signifies slop amount (how far apart terms in phrase are allowed)
+
+
+operator:: Allowed operators are:
+
+* `OR` Any of the words in the search-string matches.
+* `AND` All words in search-string matches.
+
+language:: Content language that was used for stemming. List of <<indexing#languages, supported languages>>
+
+*Examples*
+
+.Match if any field contains any of the given words or their derivatives in english ("fishing", "cakes"...)
+[source,javascript]
+----
+stemmed("_alltext", "fish cake", "OR", "en")
+----
 
 ==== nGram()
 
