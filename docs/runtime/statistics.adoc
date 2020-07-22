@@ -20,7 +20,7 @@ Statistics about the web session cache.
 cluster.elasticsearch::
 Information about the ElasticSearch cluster. Local-node and members.
 cluster.manager::
-Information about the state of the clusters: elasticsearch and ignite
+Information about the state of the clusters: elasticsearch
 dump.deadlocks::
 This will try to detect thread deadlocks and show them if any.
 dump.threads::
@@ -74,12 +74,6 @@ To obtain a generic health check of the clusters. It should return you a respons
     "clusters": [
         {
             "id": "elasticsearch",
-            "enabled": true,
-            "healthy": true,
-            "numberOfNodesSeen": 3
-        },
-        {
-            "id": "ignite",
             "enabled": true,
             "healthy": true,
             "numberOfNodesSeen": 3

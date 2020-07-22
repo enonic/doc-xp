@@ -239,7 +239,6 @@ node.name:: should normally not be set. Default: auto generated value
 discovery.unicast.hosts:: is an explicit list of nodes that can join the cluster. Default: `127.0.0.1`.
 network.host:: sets the bind address. Default: `127.0.0.1`. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases
 network.publish.host:: sets the address other nodes will use to communicate with this node. Default `127.0.0.1`
-session.replication.enabled:: is a highly experimental feature. Requires that the Ignite component is enabled and started. Default: `false`
 
 Network host aliases:
 
