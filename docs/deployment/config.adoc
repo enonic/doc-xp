@@ -469,7 +469,7 @@ saveOnCreate = true
 flushOnResponseCommit = true
 ----
 
-storeMode:: Switches between SessionStore mode. Can be `replicated` or `non-persistent`. In Replicated mode sessions distributed over nodes in cluster using Jetty-Hazelcast integration. Default: `non-persistent`.
+storeMode:: Switches between SessionStore mode. Can be `replicated` or `non-persistent`. In Replicated mode sessions are distributed over nodes in the cluster using Jetty-Hazelcast integration. Default: `non-persistent`.
 
 savePeriodSeconds:: A non-zero value means that session won't be persisted if only the access time changed, and it has been less than savePeriodSeconds since the last time the session was written. Has no effect in non-persistent storeMode. Default: `0`.
 
