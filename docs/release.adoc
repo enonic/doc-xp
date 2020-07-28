@@ -6,21 +6,16 @@ include::variables.adoc[]
 
 == XP7 Update 4
 This version of Enonic XP is rather different from most others.  There is no large feature set of noticeable changes, but rather
-a very important architectural change primarily made to make clustered installations more stable.
+a very important architectural change:
+
+We have added Hazelcast to do events, tasks and sessions in the cluster.
+ElasticSearch is still there, but by using Hazelcast for these features, the cluster is more stable, and we now support Distributed Sessions.
 
 NOTE: Please read the <<release/upgrade#, upgrade notes>> in relation to backward compatibility.
 
-=== Hazelcast
-Events, tasks and sessions are done with Hazelcast instead of ElasticSearch.
-This is a big archtectural change that improves the behaviour of clustered installations of XP.
-With Hazelcast, XP also gets the support of distributed sessions.
-
 === Other improvements
 
-The following improvements are also part of this release:
-
-* Calculated distances in geoDistance aggregations are exposed.
-* `AlwaysPreTouch` is enabled to avoid extra GC pauses.
+In addition to the cluster freatures, `AlwaysPreTouch` has been enabled to avoid extra GC pauses on large installations.
 
 
 

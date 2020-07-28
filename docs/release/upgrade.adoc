@@ -34,13 +34,13 @@ nodes to get in touch with each other after the upgrade.  Please do the followin
 
 * Create the configuration file `com.enonic.xp.hazelcast.cfg` and consider the values in it as described in
    <<../deployment/config#hazelcast, com.enonic.xp.hazelcast.cfg>> .
-* Open port 5701 between the nodes in the network.  This port is used for all internal communication in the cluster.
+* Open port 5701 between the nodes in the network.  This port is used by Hazelcast for internal communication in the cluster.
 An alternate port may be chosen by setting `network.port`.  If using Docker, the port needs to be opened both in the network and in
 the `docker-compose.yml` container definition.
-* Evaluate the minimum required number of nodes in a cluster.  `system.hazelcast.initial.min.cluster.size` is by default set to 2,
-but if you have a set-up with dedicated master and data nodes, the minimum should be set to one more than the number of data nodes,
-so that at least one master node is required.  The cluster will neither elect a master node nor start XP message communications
-until the required number of nodes in the cluster has been reached.
+* Evaluate the minimum required number of nodes in a cluster.  `system.hazelcast.initial.min.cluster.size` is by default set to 2.
+During start-up, events, tasks and sessions will not be communicated between nodes in the cluster until the minimum number of nodes have signed in.
+For large clusters, this is an important setting and should be set higher than 2.
+For instance, the value shoud be 4, for a cluster of six nodes.
 
 
 == v7.3 notes
