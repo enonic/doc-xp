@@ -4,7 +4,7 @@
 
 
 == Upgrading minor versions
-This procedure applies to feature (7.1.0, 7.2.0 & 7.3.0) and fix upgrades (7.2.1, 7.2.2, etc).
+This procedure applies to feature (7.x.0) and fix upgrades (7.x.y, etc).
 
 === Single instance
 To upgrade a single instance deployment:
@@ -27,6 +27,20 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 
 After upgrading XP, check for new versions of your installed applications from Enonic market. 
 We generally always recommend updating your apps to the latest version!
+
+== v7.4 notes
+v7.4 is backward compatible with earlier versions, but if you run XP on a cluster, several configurations need to change for the
+nodes to get in touch with each other after the upgrade.  Please do the following:
+
+* Create the configuration files `com.enonic.xp.hazelcast.cfg` and `com.enonic.xp.web.sessionstore.cfg` and consider the values in them as described in
+   <<../deployment/config#hazelcast, Configuration Files / Hazelcast>> and <<../deployment/config#sessionstore, Configuration Files / SessionStore>>.
+* Open port 5701 between the nodes in the network.  This port is used by Hazelcast for internal communication in the cluster.
+An alternate port may be chosen by setting `network.port`.  If using Docker, the port needs to be opened both in the network and in
+the `docker-compose.yml` container definition.
+* Evaluate the minimum required number of nodes in a cluster.  `system.hazelcast.initial.min.cluster.size` is by default set to 2.
+During start-up, events, tasks and sessions will not be communicated between nodes in the cluster until the minimum number of nodes have signed in.
+For large clusters, this is an important setting.  We recommend setting it to nodes/2 + 1, so for instance, in a cluster of six nodes, the value should be 4.
+* Distributed Sessions are off by default.  Enable them by setting `storeMode` to `replicated` in the sessionStore config, if desired.
 
 == v7.3 notes
 v7.3 is backward compatible with earlier versions, but includes fixes that may affect your existing deployments.
