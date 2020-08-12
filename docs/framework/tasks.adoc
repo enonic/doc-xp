@@ -4,11 +4,11 @@
 
 The XP framework also supports execution of asynchronous (potentially long running) background tasks.
 
-Tasks may simply be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. `src/main/resources/task/<taskname>` in your project
+Tasks may simply be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. `src/main/resources/tasks/<taskname>` in your project
 
 == Descriptor
 Named tasks requires a descriptor file.
-The descriptor must be placed in task folder as follows: `src/main/resources/task/<taskname>/<taskname>.xml`.
+The descriptor must be placed in task folder as follows: `src/main/resources/tasks/<taskname>/<taskname>.xml`.
 
 .Sample descriptor
 [source,xml]
@@ -31,7 +31,7 @@ The form element in the descriptor XML is optional, and may be left empty if the
 
 == Controller
 
-Named tasks require a controller that represents the actual code to be executed. The controller must be placed in the task folder as `src/main/resources/task/<taskname>/<taskname>.js`.
+Named tasks require a controller that represents the actual code to be executed. The controller must be placed in the task folder as `src/main/resources/tasks/<taskname>/<taskname>.js`.
 
 A named task controller must export a run function, which will be invoked by the <<../runtime/task-engine#,task engine>>. once a task is executed. 
 
