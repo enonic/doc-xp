@@ -144,7 +144,7 @@ An object with the following keys and their value:
 [.lead]
 Returns
 
-*object* : The created group.
+*object* : The created role.
 
 [.lead]
 Example
@@ -156,7 +156,7 @@ var role = authLib.createRole({
     name: 'aRole',
     displayName: 'Role Display Name',
     description: 'description'
-});1
+});
 ----
 
 .Sample response
