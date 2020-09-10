@@ -1,5 +1,6 @@
 = Statistics Endpoint
 :toc: right
+:imagesdir: ../images
 
 == Monitoring
 
@@ -226,3 +227,35 @@ This gives an overview of how the indices are distributed and what state the ind
 - *initializing*: Shards that are currently being recovered from disk at startup.
 
 The `shards` section gives a more detailed overview on the shard distribution.
+
+=== Hazelcast cluster health
+image:xp-740.svg[XP 7.4.0,opts=inline]
+
+ GET http://<host>:2609/cluster.hazelcast
+
+Which should return you a response similar to:
+[source, json]
+----
+{
+  "clusterState": "ACTIVE",
+  "clusterTime": 1599748536909,
+  "clusterVersion": "3.12",
+  "members": [
+    {
+      "uuid": "d7b9b75e-aacf-444b-bff9-af5c786843c2",
+      "address": "192.168.1.1",
+      "port": 5701,
+      "lightMember": false,
+      "version": "3.12.7"
+    },
+    {
+      "uuid": "899920a2-d9bd-4add-8b1a-133bf27af9a0",
+      "address": "192.168.1.2",
+      "port": 5702,
+      "lightMember": false,
+      "version": "3.12.7"
+    }
+  ]
+}
+----
+This view gives a brief overview of the nodes in the Hazelcast cluster. Check Hazelcast documentation for more details.
