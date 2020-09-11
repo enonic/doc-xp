@@ -106,7 +106,7 @@ Virtual hosts are instantly updated automatically updated upon changes.
 enabled = true
 
 mapping.myapp.host = company.com
-mapping.myapplication.source = /app
+mapping.myapp.source = /app
 mapping.myapp.target = /webapp/name.of.my.app
 mapping.myapp.idProvider.myldap = default
 ----
