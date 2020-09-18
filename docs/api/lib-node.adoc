@@ -166,8 +166,8 @@ An object with the following keys and their value:
 | query | string | | Query expression
 | filters | object | optional | Query filters
 | sort | string | optional | Sorting expression - default: '_score DESC'
-| aggregations | object | optional | <<../storage/aggregations,Aggregations>> config
-| highlight | object | optional | <<../storage/highlighting,Highlighting>> config
+| aggregations | object | optional | <<../storage/aggregations#,Aggregations>> config
+| highlight | object | optional | <<../storage/highlighting#,Highlighting>> config
 | explain | boolean | optional | If set to `true`, score calculation explanation will be included in result.
 |===
 
@@ -947,7 +947,7 @@ Parameters
 
 An object with the following keys and their value:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
