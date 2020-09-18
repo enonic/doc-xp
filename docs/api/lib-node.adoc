@@ -156,18 +156,19 @@ Parameters
 
 An object with the following keys and their value:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| start | number | Optional start index used for paging - default: 0
-| count | number | Optional number of content to fetch, used for paging - default: 10
-| query | string | Query expression
-| filters | object | Optional query filters
-| sort | string | Optional sorting expression - default: '_score DESC'
-| aggregations | string | Optional aggregations expression
-| explain | boolean | If set to `true`, score calculation explanation will be included in result.
+| Name | Type | Attributes | Details
+| start | number | optional | Start index used for paging - default: 0
+| count | number | optional | Number of content to fetch, used for paging - default: 10
+| query | string | | Query expression
+| filters | object | optional | Query filters
+| sort | string | optional | Sorting expression - default: '_score DESC'
+| aggregations | object | optional | <<../storage/aggregations,Aggregations>> config
+| highlight | object | optional | <<../storage/highlighting,Highlighting>> config
+| explain | boolean | optional | If set to `true`, score calculation explanation will be included in result.
 |===
 
 [.lead]
@@ -950,15 +951,18 @@ An object with the following keys and their value:
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| start | number | Start index, used for paging.  The default is `0`.
-| count | number | Number of conents to fetch
-| query | string | Query expression
-| filters | object | Query filters
-| sort | string | Sorting expression
-| aggregations | string | Aggregations expression
-| explain | boolean | If `true`, return score calculation explanation.  The default is `false`.
+| Name | Type | Attributes | Details
+| start | number | optional | Start index used for paging - default: 0
+| count | number | optional | Number of content to fetch, used for paging - default: 10
+| query | string | | Query expression
+| filters | object | optional | Query filters
+| sort | string | optional | Sorting expression - default: '_score DESC'
+| aggregations | object | optional | <<../storage/aggregations,Aggregations>> config
+| highlight | object | optional | <<../storage/highlighting,Highlighting>> config
+| explain | boolean | optional | If set to `true`, score calculation explanation will be included in result.
 |===
+
+
 
 [.lead]
 Returns
