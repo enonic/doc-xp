@@ -1,6 +1,6 @@
 = Content library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Functions to find and manipulate content.
 
@@ -1209,6 +1209,9 @@ Returns
 
 *object* : Result of query
 
+image:xp-750.svg[XP 7.5.0,opts=inline] If sort specified for a query, results will contain a meta system properties `_sort` and `_score: null`, otherwise `_score`
+ will has a relevant value.
+
 [.lead]
 Examples
 
@@ -1328,6 +1331,7 @@ var expected = {
             "_name": "name1",
             "_path": "/a/b/name1",
             "_sort": ["1970-01-01T00:00:00Z", 9279.647306690395],
+            "_score": null,
             "creator": "user:system:admin",
             "modifier": "user:system:admin",
             "createdTime": "1970-01-01T00:00:00Z",
@@ -1347,6 +1351,7 @@ var expected = {
             "_name": "name2",
             "_path": "/a/b/name2",
             "_sort": [ "1970-01-01T00:00:00Z", 15964.050071707446],
+            "_score": null,
             "creator": "user:system:admin",
             "modifier": "user:system:admin",
             "createdTime": "1970-01-01T00:00:00Z",
