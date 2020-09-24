@@ -336,7 +336,7 @@ network.port:: Custom port for the node to node communication. Default: `5701`.
 network.portCount:: How many ports try to bind while searching for available port. Default: `100`.
 network.portAutoIncrement:: Enables available port search. Default: `false`.
 
-network.publicAddress:: Overrides the public address of a member. It should be set in the format "host IP address:port number". Ignored when clusterConfigDefaults is true.
+network.publicAddress:: Overrides the public address of a member. It should be set in the format "host IP address:port number". Ignored when `clusterConfigDefaults` is true.
 
 network.join.multicast.enabled:: Enable Multicast discovery. Default: `false`.
 
