@@ -348,9 +348,9 @@ network.join.tcpIp.enabled:: Enable TcpIP discovery. Default: `true`.
 
 network.join.tcpIp.members:: Comma separated list of well-known members. If not provided and clusterDefaults=true then cluster's discovery.unicast.hosts used instead.
 
-network.interfaces.enabled:: Enables specification of which network interfaces that Hazelcast should use. Default: `false`. Ignored when clusterConfigDefaults is true.
+network.interfaces.enabled:: Enables specification of which network interfaces that Hazelcast should use. Default: `false`. Ignored when `clusterConfigDefaults` is true.
 
-network.interfaces:: Comma separated list of ip addresses for binding. Ignored when clusterConfigDefaults is true.
+network.interfaces:: Comma separated list of ip addresses for binding. Ignored when `clusterConfigDefaults` is true.
 
 network.restApi.enabled:: Enable Hazelcast REST API. Default: `false`.
 
