@@ -236,7 +236,7 @@ cluster.enabled:: When `true` node wil try to join a cluster. Default: `false`.
 node.name:: should normally not be set. Default: auto generated value
 discovery.unicast.hosts:: is an explicit list of nodes that can join the cluster. Default: `127.0.0.1`.
 network.host:: sets the bind address. Default: `127.0.0.1`. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.
-network.publish.host:: sets the address other nodes will use to communicate with this node. Default is not set (before XP 7.5.0 `127.0.0.1`). Cannot be more than one IP-address. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.
+network.publish.host:: sets the address other nodes will use to communicate with this node. Default: not set (`127.0.0.1` before XP 7.5.0). Cannot be more than one IP-address. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.
 
 NOTE: Using host-name values is not recommended because DNS can be spoofed.
 NOTE: Values set as host-name are resolved to a single IP-address of the host-name.
