@@ -1209,7 +1209,7 @@ Returns
 
 *object* : Result of query
 
-image:xp-750.svg[XP 7.5.0,opts=inline] If `sort` was specified, results will contain meta system properties `_sort` and `_score: null`, otherwise `_score`
+image:xp-750.svg[XP 7.5.0,opts=inline] If `sort` was specified, results will contain system meta properties `_sort` and `_score: null`, otherwise `_score`
  will have a relevant value.
 
 [.lead]
