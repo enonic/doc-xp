@@ -1,0 +1,160 @@
+= Clustered deployments
+:toc: right
+:imagesdir: images
+
+This section describes how to create a clustered XP7 deployments.
+
+We will describe how to setup a <<./strategies#basic_cluster,basic bluster>>, but with little more effort you could create any type of cluster. A __basic cluster__ consists of 3 dedicated XP _master_ nodes and 2 XP nodes that are both backend and frontend nodes _combined_.
+
+image::dedicated-masters-cluster.png[Cluster with dedicated master nodes,452]
+
+== Server setup
+
+NOTE: We assume in this guide that you are deploying version 7.4 or higher of XP that includes __hazelcast__.
+
+To deploy a __basic cluster__, we need 5 servers for XP. You need to ensure that those servers can communicate together on the following ports:
+
+* `5701` for __hazelcast__ cluster communication
+* `9300` for __elasticsearch__ cluster communication
+
+You will also need a shared file system for the servers. Read more about that in the <<dirs>> section. If you are using __NFS__ as your shared file system you should also ensure that all XP nodes can communicate to the NFS server on port `2049`. Note that using __NFS__ introduces a single point of failure to the cluster.
+
+Be sure also to setup virtual memory, file descriptors and swap setting correctly for __elasticsearch__. Read more about that in the https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html[elasticsearch documentation].
+
+== XP setup
+
+Setting up XP in a clustered configuration is pretty straight forward, but there are some things to consider.
+
+=== Configuration
+
+There are 3 configuration files that enable cluster setup. Those are:
+
+* `com.enonic.xp.cluster.cfg`
+* `com.enonic.xp.elasticsearch.cfg`
+* `com.enonic.xp.hazelcast.cfg`
+
+We will set the bare minimum for those files. You can read the <<./config#,Configuration>> documentation for more details.
+
+NOTE: We assume that the IP addresses for the nodes are 10.0.0.1, 10.0.0.2, 10.0.0.3, 10.0.0.4 and 10.0.0.5.
+
+.com.enonic.xp.cluster.cfg
+[source,properties]
+----
+# Enable cluster and set node name
+cluster.enabled=true
+node.name=master-1 # This should be different for every node
+
+# Bind to an IP and publish the same IP to other cluster members
+network.host=10.0.0.1         # This should be different for every node
+network.publish.host=10.0.0.1 # This should be different for every node
+
+# Discover nodes on a comma seperated list of node IPs
+discovery.unicast.hosts=10.0.0.1,10.0.0.2,10.0.0.3,10.0.0.4,10.0.0.5
+----
+
+.com.enonic.xp.elasticsearch.cfg
+[source,properties]
+----
+# Set cluster name
+cluster.name=demo_cluster
+
+# Set node type
+node.master=true  # This should only be true on the master nodes
+node.data=false   # This should only be true on the data (combined) nodes
+
+# Set minimum master nodes to ((number of master nodes) / 2) + 1
+discovery.zen.minimum_master_nodes=2
+----
+
+.com.enonic.xp.hazelcast.cfg
+[source,properties]
+----
+# Set minimum hazelcast cluster size to ((number of total nodes) / 2) + 1
+system.hazelcast.initial.min.cluster.size=3
+----
+
+=== Java heap
+
+Since XP is using __elasticsearch__ for storage, we have to consider that __elasticsearch__ uses off heap memory buffers. For that reason we cannot allocate all available memory to heap. In general you should:
+
+* Set heap memory to `75%` of available memory on dedicated master nodes.
+* Set heap memory to `30%` of available memory on other nodes.
+* Never allocat more than `26G` of heap.
+
+You should set the heap memory with the `XP_OPTS` environmental variable. For example, if you want to give XP `512MB` of heap you set `XP_OPTS` to `-Xms512M -Xmx512M`.
+
+=== Java options
+
+You migth want to pass options to the Java virtual machine. Our distributions set the `JAVA_OPTS` variable with defaults for XP to run smoothly. For that reason you should avoid overwriting `JAVA_OPTS` and instead you should use `XP_OPTS` to pass your options.
+
+[#dirs]
+=== Directories
+
+As mentioned above, you need a shared file system to run XP in a cluster. The directories that need to be shared are:
+
+$XP_HOME/repo/blob:: Contains all files managed by XP.
+
+$XP_HOME/snapshots:: Contains __elasticsearch__ index snapshots.
+
+$XP_HOME/data:: Contains other data (e.g. system dumps).
+
+You need to mount those specific directories to the shared file system before you start XP.
+
+WARNING: You should never share `$XP_HOME/repo/index` between nodes.
+
+=== Pre-installed apps
+
+You can pre-install apps in XP by placing the jars of those apps to `$XP_HOME/deploy`. We recommend placing the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter app] there to enable automatic snapshots.
+
+=== Shard replication
+
+Once your cluster has started you will have to set the number of shard replicas you want the data nodes to store. In this case we have 2 data nodes, so we want 2 copies of each shard in the cluster (1 per data node). To do that we should set the number of replicas to 1. Setting that number to 1 means that the cluster will have 1 primary shard, and 1 replica shard, totalling 2 copies. We can do this with the https://developer.enonic.com/docs/enonic-cli/master[Enonic CLI]:
+
+[source,bash]
+----
+$ export ENONIC_CLI_REMOTE_URL=10.0.0.1:4848
+
+$ enonic repo replicas 1 --auth user:password
+Setting replicas number to 1...Done
+{
+    "UpdatedIndexes": [
+        "storage-system.auditlog",
+        "search-com.enonic.cms.default",
+        "storage-com.enonic.cms.default",
+        "search-system.auditlog",
+        "search-system-repo",
+        "storage-system-repo"
+    ]
+}
+----
+
+== Backups
+
+Like described in the <<dirs>> section, we have 3 directories that are shared between all the nodes. Of those three, you need to backup two:
+
+* `$XP_HOME/repo/blob`
+* `$XP_HOME/snapshots`
+
+With those 2 directories backed up, you can restore the files and indexes from your backups in case of a disaster.
+
+== Loadbalancing
+
+When running XP in a cluster, you should use sticky sessions. That is, the same users should hit the same nodes when calling the cluster. Although XP now supports https://developer.enonic.com/docs/xp/stable/deployment/config#sessionstore[session replication] between nodes, the performance will always be better when using sticky sessions in the load balancer.
+
+== Summary
+
+Now you should have a good starting point to create clustered deployments. Just remember these bullet points:
+
+* Do not run nodes on the same physical hardware. That makes the clustered deployment more susceptible to failures.
+* Make sure ports `5701` and `9300` is open between all cluster members.
+* Setup virtual memory, file descriptors and swap setting on servers correctly.
+* Tailor the 3 cluster configuration files to your setup.
+* Set heap memory with the `-Xms` and `-Xmx` parameters using the `XP_OPTS` environmental variable.
+* Avoid overwriting the `JAVA_OPTS` environmental variable, use `XP_OPTS`.
+* Take care of how much memory you allocate to heap. Set it to `30%` of avaliable RAM on all nodes, except if the node is a dedicated master node. Then you can set it to `75%`.
+* Directories `$XP_HOME/repo/blob`, `$XP_HOME/snapshots` and `$XP_HOME/data` should be shared between all nodes.
+* The `$XP_HOME/repo/index` volume should *never* be shared between nodes.
+* Pre-install the snapshotter app for automatic snapshots.
+* Set the correct number of replicas after the cluster starts.
+* Backup `$XP_HOME/repo/blob` and `$XP_HOME/snapshots`
+* Use sticky sessions in your loadbalancer.
