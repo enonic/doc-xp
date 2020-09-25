@@ -4,28 +4,63 @@
 
 This section describes how to create a clustered XP7 deployment.
 
-We will describe how to setup a <<./strategies#basic_cluster,basic cluster>>, but with little more effort you could create any type of cluster. A __basic cluster__ consists of 3 dedicated XP _master_ nodes and 2 XP nodes that are both backend and frontend nodes _combined_.
+== Infrastructure requirements
+
+Enonic XP clusters have basic infrastructure requirements, you will at least need:
+
+* Access to Compute units (VM's or containers)
+* Local storage (Volumes)
+* A Distributed (or shared) filesystem
+* A Load balancer - to make sure traffic is routed to different nodes
+ 
+These components are standard ingredients in most cloud services, or available as software components. An XP cluster can be launched using containers (including Kubernetes), traditional VMs, or even be running on your local computer.
+
+== Basic cluster
+
+In a cluster, each XP node can serve different purposes. In general, these are:
+
+Master node:: Node that helps manage the cluster, and prevent split-brain scenarios
+Back-end node:: Node that stores data, but does not handle incoming traffic
+Front-end node:: Node that handles incoming traffic, but does not store data 
+Combined node:: Node that both stores data, and handles incoming traffic
+
+Throughout this guide, we will describe how to setup a <<./strategies#basic_cluster,basic cluster>>, but with little more effort you could create any type of cluster. A __basic cluster__ consists of 3 dedicated XP _master_ nodes and 2 XP _combined_ nodes.
 
 image::dedicated-masters-cluster.png[Cluster with dedicated master nodes,452]
 
-== Server setup
+For more examples on how to deploy XP, check out the various <<strategies#, deployment strategies>>
 
-NOTE: We assume in this guide that you are deploying version 7.4 or higher of XP that includes __Hazelcast__.
 
-To deploy a __basic cluster__, we need 5 servers for XP. You need to ensure that those servers can communicate together on the following ports:
+== Networking
 
-* `5701` for __hazelcast__ cluster communication
-* `9300` for __elasticsearch__ cluster communication
+NOTE: This guide assumes that you are deploying XP version 7.4 or higher
 
-You will also need a shared file system for the servers. Read more about that in the <<dirs>> section. If you are using __NFS__ as your shared file system you should also ensure that all XP nodes can communicate to the NFS server on port `2049`. Note that using __NFS__ introduces a single point of failure to the cluster.
+To deploy a _basic cluster_, we need a total of 5 nodes for XP. You need to ensure that those servers can communicate on the following ports:
 
-Be sure also to setup virtual memory, file descriptors and swap setting correctly for __elasticsearch__. Read more about that in the https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html[elasticsearch documentation].
+* `5701` for _hazelcast_ cluster communication
+* `9300` for _elasticsearch_ cluster communication
 
-== XP setup
+
+== Storage
+
+You will also need access to a shared file system for the servers. Read more about that in the <<dirs>> section. If you are using _NFS_ as your shared file system you should also ensure that all XP nodes can communicate to the NFS server (typically on port `2049`). 
+
+NOTE: Using _NFS_ introduces a single point of failure to the cluster, but has generally proven highly reliable.
+
+
+== CPU and memory
+
+A combined node running XP should minimum have 4GB of memory and 2vCPU. A general recommendation would be 16GB memory and 4vCPU compute power.
+
+Master nodes can be configured with less memory and capacity as they are generally not processing requests or queries. 
+
+Since Elasticsearch is embedded in XP, be sure also to setup virtual memory, file descriptors and swap setting correctly for __elasticsearch__. Read more about that in the https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html[elasticsearch documentation].
+
+== XP node setup
 
 Setting up XP in a clustered configuration is pretty straight forward, but there are some things to consider.
 
-=== Configuration
+=== Cluster config
 
 There are 3 configuration files that enable cluster setup. Those are:
 
@@ -94,7 +129,7 @@ As mentioned above, you need a shared file system to run XP in a cluster. The di
 
 $XP_HOME/repo/blob:: Contains all files managed by XP.
 
-$XP_HOME/snapshots:: Contains __elasticsearch__ index snapshots.
+$XP_HOME/snapshots:: Contains _elasticsearch_ index snapshots.
 
 $XP_HOME/data:: Contains other data (e.g. system dumps).
 
@@ -105,6 +140,8 @@ WARNING: You should never share `$XP_HOME/repo/index` between nodes.
 === Pre-installed apps
 
 You can pre-install apps in XP by placing the jars of those apps to `$XP_HOME/deploy`. We recommend placing the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter app] there to enable automatic snapshots.
+
+NOTE: The pre-installed apps can be placed on distinct nodes, but for instance in the case of the snapshotter app, it should simply be placed on all nodes.
 
 === Shard replication
 
@@ -128,15 +165,6 @@ Setting replicas number to 1...Done
 }
 ----
 
-== Backups
-
-Like described in the <<dirs>> section, we have 3 directories that are shared between all the nodes. Of those three, you need to backup two:
-
-* `$XP_HOME/repo/blob`
-* `$XP_HOME/snapshots`
-
-With those 2 directories backed up, you can restore the files and indexes from your backups in case of a disaster.
-
 == Load balancing
 
 When running XP in a cluster, we generally recommend using sticky sessions. Sticky sessions ensures requests from the same users is always passed to the same node in the cluster. This is due to the following reasons.
@@ -146,6 +174,19 @@ When running XP in a cluster, we generally recommend using sticky sessions. Stic
 . Performance is generally better and more consistent for users
 
 For session-based logins, XP now supports https://developer.enonic.com/docs/xp/stable/deployment/config#sessionstore[session replication] between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.
+
+
+== Backup and restore
+
+Like described in the <<dirs>> section, we have 3 directories that are shared between all the nodes. Of those three, you need to backup two:
+
+* `$XP_HOME/repo/blob`
+* `$XP_HOME/snapshots`
+
+With those 2 directories backed up, you can restore the files and indexes from your backups in case of a disaster.
+
+For more details, check out the <<data#, Data management section>>. 
+
 
 == Summary
 
