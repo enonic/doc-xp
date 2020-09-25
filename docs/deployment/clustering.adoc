@@ -137,9 +137,15 @@ Like described in the <<dirs>> section, we have 3 directories that are shared be
 
 With those 2 directories backed up, you can restore the files and indexes from your backups in case of a disaster.
 
-== Loadbalancing
+== Load balancing
 
-When running XP in a cluster, we generally recommend using sticky sessions. Sticky sessions send the same users to the same node when calling the cluster. Although XP now supports https://developer.enonic.com/docs/xp/stable/deployment/config#sessionstore[session replication] between nodes, the performance will always be better when using sticky sessions in the load balancer.
+When running XP in a cluster, we generally recommend using sticky sessions. Sticky sessions ensures requests from the same users is always passed to the same node in the cluster. This is due to the following reasons.
+
+. When performing write operations to the NoSQL data store, writing to one node, and then reading from another node immediately afterwards _might_ not provide the result one expects - due to the distributed storage.
+. Any kind of node-local file handling will ONLY work across requests if the request is handled by the same node.
+. Performance is generally better and more consistent for users
+
+For session-based logins, XP now supports https://developer.enonic.com/docs/xp/stable/deployment/config#sessionstore[session replication] between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.
 
 == Summary
 
