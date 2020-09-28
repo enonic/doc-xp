@@ -142,7 +142,7 @@ All content types except ones containing the string "folder" +
 ====
 Allow all content starting from the root +
 
-    <allowContentType>*</allowContentType>
+    <allowPath>*</allowPath>
 
 
 Only content from the current site (but from any location), e.g +
