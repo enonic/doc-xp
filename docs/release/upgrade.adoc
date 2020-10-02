@@ -14,13 +14,15 @@ To upgrade a single instance deployment:
 . restart the instance.
 
 === Clusters
-Clusters can be upgraded without downtime.
 The procedure is essentially the same as for a single instance, but repeated for all cluster nodes.
 We recommend the following procedure:
 
 . Update only one node at a time. Wait for a node to start and join the cluster before you move on to the next node.
 . Upgrade your master nodes first (We always recommend using dedicated master nodes)
 . Upgrade all other nodes. If you run a combination of back-end and front-end nodes, we recommend upgrading the back-end nodes before you move on to the front-end nodes.
+
+If this is done correctly, bugfix upgrades (v7.x.y) can be executed without downtime.
+For feature upgrades (7.x.0), the forming of the cluster is a little bit more complicated, and there may be some requests to the site that are rejected during the upgrade but the process should still be really smooth.
 
 === Applications
 When upgrading to new feature versions of Enonic XP, new versions of standard apps may also be available. 
