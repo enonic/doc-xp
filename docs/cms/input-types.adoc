@@ -665,7 +665,7 @@ A plain text, multi-line input field
 <1> *default* specifies the default string for the TextArea
 <2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
 
-=== TextLine
+== TextLine
 
 A plain text, single line input with advanced validation options. Stored as string.
 
@@ -691,7 +691,7 @@ A plain text, single line input with advanced validation options. Stored as stri
 <2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
 <3> *regexp* supports validation by defining regular expressions
 
-=== Time
+== Time
 
 Specify time in the format hh:mm.  A pop-up box with time selector allows easy editing.
 `09:00`.
