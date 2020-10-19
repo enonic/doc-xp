@@ -151,15 +151,7 @@ Start your new servers and verify everything is working properly
 
 === 2. Dump data
 
-We are now ready to dump data from our existing 6.15 instance.
-
-Readonly mode:: Turn on readonly mode in your 6.15 instance:
-
-    toolbox.sh set-read-only readOnly -a user:password
-
-This will prevent new data from being written to XP during the upgrade, and also ensure a consistent dump.
-
-Dump data:: Use 6.15 toolbox to dump the data:
+We are now ready to dump data from our existing 6.15 instance.  Do with the 6.15 toolbox:
 
     toolbox.sh dump -t mydump -a user:password --skip-versions
 
