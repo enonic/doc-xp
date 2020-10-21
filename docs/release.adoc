@@ -4,6 +4,30 @@ include::variables.adoc[]
 :imagesdir: release/images
 
 
+== XP7 Update 5
+
+=== Snapshot Restore `latest` option
+
+`latest` option simplifies day-to-day snapshot/restore routines.
+
+=== Meta-data in contentLib query results
+
+`_sort` and `_score` calculated meta fields are exposed in contentLib query results. Now it is possible to know how content items were sorted.
+
+=== Calculated distance in geoDistance aggregation
+
+Another use of `_sort` calculated field is a geoDistance value. It calculates distance from provided coordinates to a geoPoint set in the content item.
+
+=== Other improvements
+
+* New simpler default error page in production mode.
+
+* `network.publish.host` configuration value now does not have a strict default value and falls back to Elasticsearch/Hazelcast preference (usually `network.host` value).
+
+* Snapshot-restore and system dump stability improvements.
+
+
+
 == XP7 Update 4
 This version of Enonic XP is rather different from most others.  There is no large feature set of noticeable changes, but rather
 a very important architectural change:
