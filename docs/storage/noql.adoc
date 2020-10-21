@@ -1,6 +1,6 @@
 = NoQL reference
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 
 [#query]
@@ -468,6 +468,9 @@ pathMatch('_path', '/content/mySite/fish/onion/mayonnaise', 2)
 Results can be sorted based on property values.
 The sorting statements can be one or more comma separate expressions:
 
+image:xp-750.svg[XP 7.5.0,opts=inline] If sort specified for a query, results will contain a meta system property `_sort`.
+Its exposes field values used for sorting.
+
 === Syntax
 
 ==== sortExpr
@@ -525,16 +528,26 @@ TIP: Documents with no geo-point property with the given path will be ordered la
 .geoDistance syntax
 [source,sql]
 ----
-geoDistance(<field>, <location>)
+geoDistance(<field>, <location>, [<unit>])
 ----
 
 field:: Any geoPoint property
 location:: The location is a geoPoint from which the distance factor should be calculated, formatted as "latitude,longitude".
+unit image:xp-750.svg[XP 7.5.0,opts=inline]:: The string representation of distance unit to use. Defaults to "m" or "meters", the list of available values below:
+. `"m" or "meters"`
+. `"in" or "inch"`
+. `"yd" or "yards"`
+. `"ft" or "feet"`
+. `"km" or "kilometers"`
+. `"NM" or "nmi" or "nauticalmiles"`
+. `"mm" or "millimeters"`
+. `"cm" or "centimeters"`
+. `"mi" or "miles"`
 
 .geoDistance example
 [source,sql]
 ----
-geoDistance("shopLocation", "59.9127300,10.7460900")
+geoDistance("shopLocation", "59.9127300,10.7460900", "km")
 ----
 
 [#relevance_sorting]

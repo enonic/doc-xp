@@ -110,6 +110,10 @@ List all the snapshots for the installation.
 |`repository`
 |String
 |the name of the repository to restore
+
+|`latest`
+|Boolean
+|if that parameter has value `true` then will be restored latest snapshot, in this case to set the `snapshotName` parameter is not required
 |===
 
 .Response

@@ -30,6 +30,9 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market. 
 We generally always recommend updating your apps to the latest version!
 
+== v7.5 notes
+v7.5 is backward compatible with earlier versions
+
 == v7.4 notes
 v7.4 is backward compatible with earlier versions, but if you run XP on a cluster, several configurations need to change for the
 nodes to get in touch with each other after the upgrade.  Please do the following:
