@@ -132,9 +132,9 @@ All content types starting with banana (using regular expressions) +
 
   <allowContentType>*:^banana*</allowContentType>
 
-All content types except ones containing the string "folder" +
+All content types except folders +
 
-  <allowContentType>((?!folder).)*$</allowContentType>
+  <allowContentType>^(?!base:folder$).*</allowContentType>
 ====
 
 === allowPath Samples
