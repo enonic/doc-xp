@@ -647,6 +647,46 @@ image:xp-760.svg[XP 7.6.0,opts=inline] Stops an application with specific applic
 ----
 No response body
 ----
+
+=== Subscribe to Server-Sent Events
+
+image:xp-760.svg[XP 7.6.0,opts=inline] The client initiates the SSE connection by using the media type text/event-stream in the Accept header. Then it gets updates automatically without requesting the server.
+
+.Url
+ GET app/events
+
+Currently that API supports the following events:
+
+- `list` - returns the details of applications which already installed
+- `installed` - returns the details of just installed an application
+- `state` - returns the details of just started or stopped an application
+- `uninstalled` - returns the `key` of just removed an application
+
+Once a client was subscribed will be sent the first event `list`.
+
+.Response of the `list` event
+[source,plain]
+----
+event: list
+id: b0d64cac-811d-4f6b-9aff-50fd4d4a5ae9
+data: {"applications":[{"displayName":"Content Studio","key":"com.enonic.app.contentstudio","local":false,"maxSystemVersion":"8.0.0","minSystemVersion":"7.6.0","modifiedTime":"2020-11-11T08:22:14.080Z","state":"started","url": "", "vendorName": "Enonic AS", "vendorUrl": "http://enonic.com", "version": "2.0.0"}]}
+----
+
+.Response of the `installed` or `state` events
+[source,plain]
+----
+event: installed | state
+id: f84d11ba-88cd-4cd2-9cb3-39dd181eb7e2
+data: {"displayName":"Content Studio","key":"com.enonic.app.contentstudio","local":false,"maxSystemVersion":"8.0.0","minSystemVersion":"7.6.0","modifiedTime":"2020-11-11T08:22:14.080Z","state":"started","url": "", "vendorName": "Enonic AS", "vendorUrl": "http://enonic.com", "version": "2.0.0"}
+----
+
+.Response of the `uninstalled` event
+[source,plain]
+----
+event: uninstalled
+id: b7a0f608-631f-4a1d-bda0-5459b87a99a6
+data: {"key":"com.enonic.app.contentstudio"}
+----
 ////
         CMS tasks
 ////
