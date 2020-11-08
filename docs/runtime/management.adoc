@@ -483,7 +483,7 @@ This option could for example be used for renaming types or fields. The .xsl fil
 
 == Applications
 
-Commands to manage applications to the running enonic XP instance.
+Commands to manage applications in a running Enonic XP instance.
 
 === Install from file
 
@@ -575,7 +575,7 @@ Installs an application from url on all nodes.
 
 === Uninstall an application
 
-image:xp-760.svg[XP 7.6.0,opts=inline] Uninstalls an application by the specific application key.
+image:xp-760.svg[XP 7.6.0,opts=inline] Uninstalls an application with specific application key.
 
 .Url
  POST app/uninstall
@@ -600,7 +600,7 @@ No response body
 
 === Start an application
 
-image:xp-760.svg[XP 7.6.0,opts=inline] Starts an application by the specific application key.
+image:xp-760.svg[XP 7.6.0,opts=inline] Starts an application with specific application key.
 
 .Url
  POST app/start
@@ -625,7 +625,7 @@ No response body
 
 === Stop an application
 
-image:xp-760.svg[XP 7.6.0,opts=inline] Stops an application by the specific application key.
+image:xp-760.svg[XP 7.6.0,opts=inline] Stops an application with specific application key.
 
 .Url
  POST app/stop
