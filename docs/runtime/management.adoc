@@ -650,19 +650,19 @@ No response body
 
 === Subscribe to Server-Sent Events
 
-image:xp-760.svg[XP 7.6.0,opts=inline] The client initiates the SSE connection by using the media type text/event-stream in the Accept header. Then it gets updates automatically without requesting the server.
+image:xp-760.svg[XP 7.6.0,opts=inline] The client initiates the SSE connection by using the media type `text/event-stream` in the `Accept` header. Then it gets updates automatically without requesting the server.
 
 .Url
  GET app/events
 
 Currently that API supports the following events:
 
-- `list` - returns the details of applications which already installed
-- `installed` - returns the details of just installed an application
-- `state` - returns the details of just started or stopped an application
-- `uninstalled` - returns the `key` of just removed an application
+- `list` - returns the details of applications which are already installed
+- `installed` - returns the details of the last applications that was installed
+- `state` - returns the details of the application that was just started or stopped
+- `uninstalled` - returns the key of the application that was just removed
 
-Once a client was subscribed will be sent the first event `list`.
+Once a client is subscribed it will be sent the first event `list`.
 
 .Response of the `list` event
 [source,plain]
