@@ -9,7 +9,7 @@ The component service enables rendering of contextual page components directly `
 Page components may also be directly accessed.
 For instance, one may render only the first part within in a page's main region.
 
-The url pattern for direct rendering is: `:8080/site/<repo>/<branch>/<path-to-page>/_/component/<region>/#`. i.e. :8080/site/default/master/mysite/_/component/main/0`.
+The url pattern for direct rendering is: `:8080/site/<repo>/<branch>/<path-to-page>/\_/component/<region>/#`. i.e. :8080/site/default/master/mysite/_/component/main/0`.
 
 Component rendering::  In this mode, only the *component rendering* step (as described above) will be executed.
 
