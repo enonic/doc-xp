@@ -205,3 +205,11 @@ Now you should have a good starting point to create clustered deployments. Just 
 * Set the correct number of replicas after the cluster starts.
 * Backup `$XP_HOME/repo/blob` and `$XP_HOME/snapshots`
 * Use sticky sessions in your loadbalancer.
+
+== Q&A
+
+=== What are the `INFO c.h.i.diagnostics.HealthMonitor` messages in the log file?
+
+Enonic XP uses Hazelcast for clustering capabilities.
+Hazelcast HealthMonitor prints metrics logs when certain values (memory usage and system load) exceed 70% threshold.
+It is an indicator of server/cluster capacity problem, if such logs appear often. Occasional HealthMonitor log messages can be safely ignored.
