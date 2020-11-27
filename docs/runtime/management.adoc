@@ -546,6 +546,10 @@ Installs an application from url on all nodes.
 |`URL`
 |String
 |application URL
+
+|`sha512`
+|String
+|image:xp-760.svg[XP 7.6.0,opts=inline] application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.
 |===
 
 .Response
