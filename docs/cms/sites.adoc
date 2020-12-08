@@ -49,18 +49,18 @@ The descriptor must be placed in your project as: `src/main/resources/site/site.
        <match>type:'portal:fragment'</match>
      </mapping>
    </mappings>
-   <form> <!--3-->
+   <x-data name="seo-settings"/> <!--3-->
+   <form> <!--4-->
     <input type="TextLine" name="company">
       <label>Company</label>
       <occurrences minimum="1" maximum="1"/>
     </input>
     <mixin name="address"/>
   </form>
-  <x-data name="seo-settings"/> <!--4-->
 </site>
 ----
 
 <1> Commonly used to add <<contributions#,page contributions>> to the response
 <2> Controller and filter <<mappings#,mappings>> definitions
-<3> Define a <<./schemas#forms,form>> for this app. Used to add site specific configuration of the app
-<4> Specify <<x-data#, X-data>> fields to add across content types within the site
+<3> Specify <<x-data#, X-data>> fields to add across content types within the site
+<4> Define a <<./schemas#forms,form>> for this app. Used to add site specific configuration of the app
