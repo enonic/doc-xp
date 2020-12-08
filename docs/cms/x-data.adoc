@@ -70,6 +70,9 @@ If `allowContentTypes` and `optional` attributes are not set, the x-data will au
 [source,xml]
 ----
 <site>
+  <x-data name="my-x-data-1" />
+  <x-data name="my-x-data-2" allowContentTypes="^(?!base:folder$).*" />
+  <x-data name="my-x-data-3" allowContentTypes="base:folder" optional="true" />
   <form>
     <input type="TextLine" name="company">
       <label>Company</label>
@@ -80,9 +83,6 @@ If `allowContentTypes` and `optional` attributes are not set, the x-data will au
       <occurrences minimum="1" maximum="1"/>
     </input>
   </form>
-  <x-data name="my-x-data-1" />
-  <x-data name="my-x-data-2" allowContentTypes="^(?!base:folder$).*" />
-  <x-data name="my-x-data-3" allowContentTypes="base:folder" optional="true" />
 </site>
 ----
 
