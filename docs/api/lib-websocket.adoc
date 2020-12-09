@@ -1,6 +1,6 @@
 = Websocket Library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Websocket functions.
 
@@ -135,4 +135,34 @@ Example
 
 ```js
 webSocketLib.sendToGroup('people', 'Notice this message!');
+```
+
+=== getGroupSize
+
+image:xp-760.svg[XP 7.6.0,opts=inline] Get number of all sockets in group.
+
+NOTE: Calculating size of a group has a linear cost from total number of sockets.
+Consider using this method only if building a message is a resource consuming operation, otherwise it is better to simply `sendToGroup`.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name    | Type   | Description
+| group   | string | Group name
+|===
+
+[.lead]
+Returns
+
+*number*
+
+[.lead]
+Example
+
+```js
+webSocketLib.getGroupSize('people');
 ```
