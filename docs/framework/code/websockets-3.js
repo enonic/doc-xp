@@ -10,6 +10,8 @@ exports.webSocketEvent = function (event) {
 
     // Add client into a group
     webSocketLib.addToGroup('chat', event.session.id);
+
+    log.info(`New group size ${webSocketLib.getGroupSize('chat')}`);
   }
 
   if (event.type == 'message') {
