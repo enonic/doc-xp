@@ -1,7 +1,7 @@
 // Listen to a websocket event
 exports.webSocketEvent = function (event) {
 
-  if (event.type == 'open') {
+  if (event.type == 'open' && event.data.user == 'test') {
     // Do something on open
   }
 
