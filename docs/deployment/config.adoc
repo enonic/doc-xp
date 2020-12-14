@@ -736,7 +736,7 @@ Configure applications behavior.
 filter = !*
 ----
 
-.Deniy snapshotter app to be installed (still possible to install locally), all other applications allowed.
+.Deny snapshotter app to be installed (still possible to install locally), all other applications allowed.
 [source,properties]
 ----
 filter = !com.enonic.app.snapshotter,*
