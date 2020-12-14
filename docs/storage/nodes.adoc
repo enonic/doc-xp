@@ -5,7 +5,28 @@
 
 == Introduction
 
-Repositories and nodes are the fundamental concepts that enable you to create and store data in XP. Nodes are the smallest possible data object that can be created. Nodes are always stored in a repository. If a repository is compared to a drive, nodes are the files. 
+Repositories and nodes are the fundamental concepts that enable you to create and store data in XP. Nodes are the smallest possible data object that can be created, and they are always stored in a repository. A simple comparison might be: If a repository is a drive, nodes are the files (and folders). 
+
+== Nodes
+
+Each entry in a repository is called a Node.
+
+A node essentially consist of:
+
+* <<properties#, custom properties>>
+* and <<properties#sysprops, system properties>>
+
+When nodes are created in a repository, the following happens:
+
+* For new nodes, a unique identifier is created
+* A node identifier is always be unique within its repository
+* For every modification, a unique version identifier is created
+* The data are persisted the blobstore and instantly indexed.
+* The specific version of the node is then added to the specified <<branches#,branch>>
+
+Nodes can also be stored in a hierarchy, meaning they also have a path - similar to a file system.
+
+NOTE: *The root node* Every repository has root node with the identifier `000-000-000-000`, and the fixed path `/`.
 
 [#repos]
 == Repositories
@@ -25,22 +46,5 @@ The system repo is used for the following data:
 * Repository metadata - for other repos created within the instance
 * Id-providers - including users, groups and roles.
 * Application binaries - for apps installed through the API
-
-== Nodes
-
-Each entry in a repository is called a Node.
-
-A node essentially consist of:
-
-* <<properties#, custom properties>>
-* and <<properties#sysprops, system properties>>
-
-When nodes are created in a repository, the following happens:
-
-* For new nodes, a unique identifier is created
-* A node identifier is always be unique within its repository
-* For every modification, a unique version identifier is created
-* The data are persisted the blobstore and instantly indexed.
-* The specific version of the node is then added to the specified <<branches#,branch>>
 
 
