@@ -730,7 +730,7 @@ image:xp-760.svg[XP 7.6.0,opts=inline]
 
 Configure applications behavior.
 
-.Deny all applicatrions (system and local apps still get installed)
+.Deny all applications (system and local apps will still be installed)
 [source,properties]
 ----
 filter = !*
@@ -750,7 +750,7 @@ filter = my.secure.corp.*
 
 filter:: Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `*` (allow all).
 
-Rule can be prefixed with `!` - that it is a deny rule, otherwise it is allow rule.
+Rule can be prefixed with `!` - that it is a `deny` rule, otherwise it is an `allow` rule.
 Rule can be suffixed with `*` - that is a wildcard rule.
 
 NOTE: Application names that start with `!` or end with `*` or contain `,` or contain `{nbsp}` (space) are not supported.
@@ -761,4 +761,4 @@ System and local applications are not filtered.
 Global application installation is denied (error is thrown), if filter denies it.
 Stored application installation is skipped if filter denies it.
 
-NOTE: Filter rules apply separately on different nodes in cluster. If one cluster node denys an app, another cluster node may still allow it.
+NOTE: Filter rules apply separately on different nodes in cluster. If one cluster node denies an app, another cluster node may still allow it.
