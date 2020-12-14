@@ -2,15 +2,11 @@
 :toc: right
 :imagesdir: images
 
-
 == Introduction
+With Aggregations, developers may extract statistical data from search results.
+Aggregations can be used for anything from data visualization to creating navigational UI's.
 
-An aggregation is a function that is executed on a collection of search results. The search-results are defined by the query and query-filter
-of the search request.
-
-For instance, consider a query returning all nodes that have a property "price" less than, say, $100. Now, we want to divide the result nodes into ranges, say
-0-$25, $25-$50 and so on. We also would like to know the average price for each category. This could be done by doing multiple separate queries and calculating the
-average manually, but this would be very inefficient and cumbersome. Luckily, aggregations solve these types of problems easily.
+Consider a query returning all nodes that have a property "price" less than, say, $100. Now, we want to divide the result nodes into ranges, say 0-$25, $25-$50 and so on. We also would like to know the average price for each category. This could be done by doing multiple separate queries and calculating the average manually, but this would be very inefficient and cumbersome. Luckily, aggregations solve these types of problems easily.
 
 In some API functions it is possible to send in an aggregations expression object. This object is either in Java or a JSON like the following:
 
@@ -29,7 +25,7 @@ Typically, you will divide data into buckets and then use metric aggregations to
 sum, etc for each bucket, if necessary.
 
 
-=== terms
+== Term
 
 The `terms` aggregation places documents into bucket based on property values. Each unique value of a property will
 get its own bucket. Here's a list of properties:
@@ -56,7 +52,7 @@ include::code/terms-result.json[]
 ----
 
 
-=== stats
+== Stats
 
 The stats-aggregations calculates the following statistics for the parent-aggregation buckets:
 
@@ -80,7 +76,7 @@ include::code/stats-result.json[]
 
 
 
-=== range
+== Range
 
 The range aggregation query defines a set of ranges that represents a bucket.
 Here's a list of properties:
@@ -102,7 +98,7 @@ include::code/range-result.json[]
 ----
 
 
-=== geoDistance
+== geoDistance
 
 The geoDistance aggregation needs a defined range to split the documents into buckets.
 Only documents with properties of type 'GeoPoint' will be considered in the ``geoDistance`` aggregation buckets.
@@ -136,7 +132,7 @@ In a future version, there will easier ways of doing this.
 ====
 
 
-=== dateRange
+== dateRange
 
 The dateRange aggregation query defines a set of date-ranges that represents a bucket. Only
 documents with properties of type 'DateTime' will considered in the ``dateRange`` aggregation buckets.
@@ -162,7 +158,7 @@ include::code/date-range-result.json[]
 
 
 
-==== Date-math expression
+=== Date-math expression
 
 The range fields accepts a date-math expression to calculate the time-spans.
 
@@ -171,7 +167,7 @@ The range fields accepts a date-math expression to calculate the time-spans.
 * Range describing now plus one day and thirty minutes, rounded to minutes: `now+1d+30m/m`
 
 
-=== dateHistogram
+== dateHistogram
 
 The date-histogram aggregation query defines a set of bucket based on a given time-unit. For instance,
 if querying a set of log-events,  a ``dateHistorgram`` aggregations query with interval ``h`` (hour) will divide each log

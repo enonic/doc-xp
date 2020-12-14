@@ -1,0 +1,46 @@
+= Nodes and repositories
+:toc: right
+:imagesdir: images
+
+
+== Introduction
+
+Repositories and nodes are the fundamental concepts that enable you to create and store data in XP. Nodes are the smallest possible data object that can be created. Nodes are always stored in a repository. If a repository is compared to a drive, nodes are the files. 
+
+[#repos]
+== Repositories
+
+Repositories are essentially containers of nodes.
+You may create any number of repositories within a single instance of Enonic XP, and even perform queries across them.
+
+Each repository has a unique name, where best practice is to name or prefix the repository according to your application. i.e. a good repository name might be 'com.company.myapp'
+
+image::repos.png[]
+
+== System repository
+
+The storage ships with a repository known as the system repository.
+The system repo is used for the following data:
+
+* Repository metadata - for other repos created within the instance
+* Id-providers - including users, groups and roles.
+* Application binaries - for apps installed through the API
+
+== Nodes
+
+Each entry in a repository is called a Node.
+
+A node essentially consist of:
+
+* <<properties#, custom properties>>
+* and <<properties#sysprops, system properties>>
+
+When nodes are created in a repository, the following happens:
+
+* For new nodes, a unique identifier is created
+* A node identifier is always be unique within its repository
+* For every modification, a unique version identifier is created
+* The data are persisted the blobstore and instantly indexed.
+* The specific version of the node is then added to the specified <<branches#,branch>>
+
+

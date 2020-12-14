@@ -1,0 +1,102 @@
+= Filters
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+Filters work differently from <<queries#, queries>>.
+When searching with a regular query, steps like sorting and scoring are done to produce the result.
+
+These are relatively costly operations.
+A filter does none of these steps.
+A filter _only_ removes nodes from the result - and is executed after the query statement, if it exists.
+
+As such, filters are the most efficient way of limiting hits when you only need basic comparison statements.
+
+
+=== Syntax
+
+Differently from queries, filters are defined using a DSL (Domain Specific Language) expressed in JSON.
+
+Below is an example of a filter used in the content-API
+
+.Sample filter usage
+[source,javascript]
+----
+include::code/content-api-query.js[]
+----
+
+If specifying several filters on root level, the filters are automatically joined with a boolean "must" clause, meaning all filters much match.
+
+The following filters are supported:
+
+=== exists
+
+The exists filter filter outs any document _not containing_ any values in the given property.
+
+field (string):: The property path
+
+.Sample use of exists filter
+[source,json]
+----
+include::code/exists-filter.json[]
+----
+
+=== notExists
+
+The notExists filter removes nodes _containing_ values in the given property.
+
+field (string):: The property path
+
+.Sample use of notExists filter
+[source,json]
+----
+include::code/notExists-filter.json[]
+----
+
+=== hasValue
+
+The hasValue filter matches if document contain any of the values given in the value list
+
+field (string)
+ The property path
+
+values (object[])
+ Array of values to decide a match
+
+.Sample hasValue filter
+[source,json]
+----
+include::code/hasValue-filter.json[]
+----
+
+=== ids
+
+The ids filter is a shorthand filter to filter on ids
+
+values (string[])
+  Arrays of ids to match
+
+.Sample ids filter
+[source,json]
+----
+include::code/ids-filter.json[]
+----
+
+
+=== boolean
+
+The boolean filter combines functions in logical expressions
+
+must (filter[]):: All functions on the must array must evaluate to true for the filter to match
+
+mustNot (filter[]):: All functions in the mustNot array must evaluate to false for the filter to match
+
+should (filter[]):: One or more of the functions in the should array must evaluate to true for the filter to match
+
+.Sample boolean filter
+[source,json]
+----
+include::code/boolean-filter.json[]
+----
+

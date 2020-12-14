@@ -131,16 +131,28 @@
       "document": "storage",
       "menuItems": [
         {
-          "title": "NoQL syntax",
+          "title": "Nodes and repos",
+          "document": "storage/nodes"
+        },
+        {
+          "title": "Properties",
+          "document": "storage/properties"
+        },
+        {
+          "title": "Indexing",
+          "document": "storage/indexing"
+        },
+        {
+          "title": "Branches",
+          "document": "storage/branches"
+        },
+        {
+          "title": "Queries (NoQL)",
           "document": "storage/noql"
         },
         {
-          "title": "System properties",
-          "document": "storage/system-properties"
-        },
-        {
-          "title": "Index configuration",
-          "document": "storage/indexing"
+          "title": "Filters",
+          "document": "storage/filters"
         },
         {
           "title": "Aggregations",
@@ -151,8 +163,8 @@
           "document": "storage/highlighting"
         },
         {
-          "title": "Branches",
-          "document": "storage/branches"
+          "title": "Editors",
+          "document": "storage/editors"
         }
       ]
     },

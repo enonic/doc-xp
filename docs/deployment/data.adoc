@@ -43,31 +43,48 @@ As an alternative to working with the APIs. Check out the following tools:
 * https://market.enonic.com/vendors/glenn-ricaud/data-toolbox[Data toolbox] - Admin app
 * https://market.enonic.com/vendors/enonic/snapshotter[Snapshotter] - Continuously snapshots your systems
 
+[#snapshot-restore]
 == Snapshot and restore
-Enonic XP provides support for snapshotting and restoring your indicies. Restoring indicies will completely reset your system and work fine as long as you have a complete blobstore from when the snapshot was taken. 
-Your blobstore will keep all historical data until you perform a vacuum operation.
 
-NOTE: For clusters, snapshots MUST be stored on a shared filesystem. We recommend using a separate volume from the blobstore.
+You may create snapshots of the storage at any time. Snapshots normally completes within seconds.
+Once you have a snapshot, you may rollback to the snapshot at a later time.
 
+[NOTE]
+====
+Snapshots will only restore the metadata and search index of your system, not the blobs. As such, you must have an intact set of blobs from when the snapshot was taken.
+Deleting blobs normally requires running a vacuum job on the storage.
+====
+
+Snapshotting and restoring can be performed by using Enonic CLI, the API or a management application from Enonic Market.
+
+
+[#export-import]
 == Export and import
 
-XP also provides a human readable export/import format that can be used to extracts/import repositories, or parts of a repository. 
+You may export and import tree structures of nodes, or even single leaf nodes using the Export and Import feature.
+Exporting will produce a human-readable export of the selected repo/branch/node and it's child items.
 
-Export and import is limited to work with "raw" data. They do not include metadata such as version history, branches or commits.
+An export contains metadata and blobs required to re-create the selected nodes in current state.
+You may import any valid export, but pay attention as export/import will keep your existing node identifiers.
 
-NOTE: For clusters, exports should be stored on a shared filesystem.  We recommend using a separate volume from the blobstore.
+Exporting and importing can be performed by using Enonic CLI, the API or a management application from Enonic Market.
 
+NOTE: Export and import is limited to work basic current data. They do not include metadata such as version history, branches or commits.
+
+[#dump-load]
 == Dump and load
 
-The dump and load functionality enables you to dump your entire dataset to an open format.
-This is commonly used when migrating between major versions of Enonic XP. 
-Dumps can be performed with or without version history.
+You may dump and load your entire system.
+Dumping will produce a machine readable file that can be used for loading at a later time.
 
-For a consistent dump, make sure you enable "read only mode" first.
+The dump may also include the version history for your data.
 
-NOTE: For clusters, dumps should be stored on a shared filesystem. We recommend using a separate volume from the blobstore.
+Dumping and loading can be performed by using Enonic CLI, the API or a management application from Enonic Market.
+
+NOTE: Dumping is not a recommended backup solution, rather use snapshots in combination with a backup of up your blobstore
 
 
+[#vacuum]
 == Vacuum
 
 Even if you delete nodes in your storage, the blobs and essential metadata are not actually removed from XP. Deleting the blobs would prevent rolling back to a previous snapshots, but cleaning up the data is also a time consuming operation.
@@ -75,8 +92,8 @@ Even if you delete nodes in your storage, the blobs and essential metadata are n
 To perform this operation in a controlled fashion, XP offers a function called Vacuuming.
 Vacuuming will remove unused nodes older than a specified age (This can be controlled), and then remove any unused blobs or indicies based on this.
 
-
-== Backup
+[#backup]
+== Backup and restore
 
 The fastest and simplest way of backing up XP is by completing the following steps, in the specified order:
 
@@ -84,4 +101,6 @@ The fastest and simplest way of backing up XP is by completing the following ste
 . Backup the files in your snapshots folder
 . Backup the files in your blobstore folder
 
-Given that blobstores only append new files on changes, the blobstore will at any time contain an historical archive of your data. The snapshots will enable you to restore your data to a specified point in time, as long as you have a complete blobstore from that point in time.
+Given that blobstores only append new files on changes, the blobstore will at any time contain an historical archive of your data. 
+
+When restoring, simply use the backup data, and perform a <<#snapshot-restore, Snapshot restore>>.

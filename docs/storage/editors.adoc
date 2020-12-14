@@ -1,0 +1,17 @@
+= Editors
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+Where traditional databases use update statements, XP uses editors. 
+
+Inspired by modern design patterns like Command Query Responsibility Segregation (CQRS), Enonic XP strongly separates accessing and querying data from writing.
+
+Rather than using update statements, or sending pre-defined objects or structures for persisting, Enonic XP uses a concept called "Editors".
+Editors are essentially written as code that manipulates one node at a time.
+
+Editors are typically combined with a query that determines which nodes to modify. 
+
+
+//TODO examples and more

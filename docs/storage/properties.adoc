@@ -1,15 +1,62 @@
-= System properties
+= Properties
 :toc: right
 :imagesdir: images
 
-Every node holds a set of standard properties.
-These properties are meta-data, with specific system defined purposes.
+== Introduction
 
-System properties may effectively be used in queries, just like one would query custom properties.
+Properties contain the actual data inside a <<nodes#, node>>.
+Properties use a key-value format.
 
-== Identifier and structure
+The key must be unique within the node, and the value must have a specific <<indexing#value_types, valueType>>, such as ``String``, or ``GeoPoint``.
+The valueType is used to index the property correctly, and does the basic validation.
+
+
+== Property anatomy
+Examples of what a property might look like:
+
+[source,properties]
+----
+mytext = "a string"
+mynumber = 1
+----
+
+Some characters are illegal in a property key. Here's a list of illegal characters:
+
+* ``_`` is system reserved prefix
+* ``.`` is the path separator.
+* ``[`` and ``]`` are array index indicators.
+
+Properties may also be nested, making the key a path.
+Elements in the path are separated by ``.`` (dot).
+
+Here's an example of properties with arrays and nested properties.
+
+[source,properties]
+----
+first-name = "Thomas"
+cities = ["Oslo", "San Francisco"]
+city.location = geoPoint('37.785146,-122.39758')
+person.age = 39
+person.birth-date = localDate("1975-17-10")
+----
+
+In the example above, the property `person` is of the ValueType `Set`.
+Sets are special in the way that they don't hold actual values, but rather act as containers for other properties.
+
+Properties are of a specific <<indexing#value_types, ValueType>>.
+ValueTypes are used for validation and securing correct <<indexing#, indexing>>.
+
+[#sysprops]
+== System Properties
+
+In order to separate system defined properties from user defined properties, `_` (underscore) has been reserved as a starting character for the system properties.
+
+The repository contains several standard metadata properties such as `_id`, `_name`, and `_timestamp`. The full list of 
+
+=== Core properties
 
 // TODO: supported values for _childOrder, Value types for _ts and _versionKey
+
 [cols="1,1,1,2"]
 |===
 |System Property |Value Type |Indexing |Comment
@@ -43,19 +90,17 @@ System properties may effectively be used in queries, just like one would query 
 |Long
 |number, string
 |Numeric order value used for the builtin manual ordering
+|===
+
+=== Versioning properties
+
+[cols="1,1,1,2"]
+|===
 
 |_state
 |String
 |string
 |Used for keeping state of a node in a branch
-
-|===
-
-==  General
-
-[cols="1,1,1,2"]
-|===
-|System Property |Value Type |Indexing |Comment
 
 |_ts
 |
@@ -69,7 +114,7 @@ System properties may effectively be used in queries, just like one would query 
 
 |===
 
-== Index related
+=== Indexing properties
 
 [cols="1,1,1,2"]
 |===
@@ -85,18 +130,6 @@ System properties may effectively be used in queries, just like one would query 
 |Not indexed
 |Node specific index configuration
 
-|===
-
-
-== Dynamic properties
-
-To simplify queries, the following properties are dynamically created based on the existence of other properties in a node.
-They are useful for performing various types of queries.
-
-[cols="1,1,1,2"]
-|===
-|System Property |Value Type |Indexing |Comment
-
 |_allText
 |String
 |string, analyzed, ngram
@@ -110,12 +143,12 @@ They are useful for performing various types of queries.
 |===
 
 
-== Access control properties
+=== Access control properties
 
 Permissions set on a node are indexed differently from what the domain object looks like.
 The index structure is is flattened, and enables an effective way to query nodes based on access control.
 
-// TODO: value types
+// TODO: verify value types
 [cols="1,1,1,2"]
 |===
 |System Property |Value Type |Indexing |Comment

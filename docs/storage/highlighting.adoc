@@ -2,33 +2,14 @@
 :toc: right
 :imagesdir: images
 
-NOTE: This feature was first introduced in v7.1
+NOTE: Highligting was first introduced in version 7.1
 
 == Introduction
 
-Allows to highlight search results on one or more properties. The implementation uses the lucene highlighter.
-This is how body of a search request with enabled highlight looks like::
+Highlighters enable you to get highlighted snippets from one or more properties in your search results so you can show users where the query matches are.
+When you request highlights, the response contains an additional highlight element for each search hit that includes the highlighted properties and the highlighted fragments.
 
-.Query structure
-[source,json]
-----
-{
-    "query" : {...},
-    "highlight" : {
-        ... global settings ...
-
-        "properties" : {
-            "<propertyName>" : {
-                ... property settings...
-            }
-        }
-    }
-}
-----
-In the case above, the content property will be highlighted for query (there will be another element in query result, called `highlight`
-, which includes the highlighted properties and the highlighted fragments).
-
-== Properties
+== Highlighting options
 
 encoder (string)::
 Indicates if the snippet should be HTML encoded: `default` (no encoding) or `html`.
@@ -100,7 +81,6 @@ Response:
   }
 }
 ----
-
 
 
 == Encoder

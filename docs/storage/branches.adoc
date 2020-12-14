@@ -2,11 +2,17 @@
 :toc: right
 :imagesdir: images
 
-Inspired by Git, repositories support a concept called branches. Branches are useful for many different purposes as illustrated below.
 
-// == Diff
+Inspired by Git, XP repos supports a concept called branches.
+All repos ship with a default branch called `master`.
+This means that the fully qualified location of a node consists of:
 
-// TODO
+  <repo> + <branch> + <node ID | path>
+
+Any number of branches could be added to facilitate your data model.
+Branches are typically ideal for facilitating long running transactions.
+
+As an example, XP's CMS API makes use of two branches `draft` and `master` to support the editorial workflow, with previewing and bulk publishing of changes.
 
 == Pushing
 
