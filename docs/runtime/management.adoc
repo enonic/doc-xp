@@ -698,7 +698,6 @@ data: {"key":"com.enonic.app.contentstudio"}
 == CMS
 
 Content metadata commands.
-Currently only one command present here:
 
 === Reprocess
 
@@ -734,6 +733,13 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
     "UpdatedContent": []
 }
 ----
+
+=== SyncAll
+
+Calls forced content sync for all available projects.
+
+.Url
+ POST content/syncAll
 
 ////
         Repository tasks
