@@ -31,7 +31,7 @@ Usage of this API produces the following events:
 
 .Distributed events
 |===
-|Event |Occurs when 
+|Event |Occurs when
 
 |node.created
 |node is created
@@ -447,7 +447,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| keys | string \| Array.<string> | Node keys to commit. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
+| keys | string \| Array.<string> | Node keys to delete. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
 |===
 
 [.lead]
