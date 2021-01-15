@@ -1,0 +1,46 @@
+= Sets
+:toc: right
+:imagesdir: images
+
+To enable building more complex forms by grouping inputs together into nested structures, Enonic XP supports the following types of sets:
+
+
+=== Field Set
+
+TIP: Schema description of a fieldset can be found <<schemas#fieldset, here>>.
+
+A field set may be used to group items visually under a common label and distinguish this group from the rest of the form.
+
+image::fieldset-1.png[Example of a fieldset, 690]
+
+
+=== Item Set
+
+TIP Schema description of an item set can be found <<schemas#itemset, here>>.
+
+Item sets enable combining inputs (or other sets) into complex, nested structures.
+Item sets are grouped both visually and semantically, as the name of the item set is used in the persisted property structure.
+
+A new or a single occurrence of an item set is by default expanded and can be collapsed by a click anywhere inside the item set header.
+Multiple occurrences of an item set will be collapsed by default to ensure better readability of a form containing several occurrences of complex item sets.
+
+image::itemset-1.png[Example of an expanded item-set]
+
+Label of an item set will dynamically change to value of the first non-empty field inside the set.
+
+image::itemset-2.png[Example of an item-set with a label]
+
+This helps to distinguish between multiple collapsed occurrences of the same item set without having to expand them.
+
+image::itemset-3.png[Example of collapsed item-sets]
+
+Context menu of an item-set occurrence can be used to add a new occurrence of the set above or below the current one, or delete current occurrence.
+Add/delete actions can be disabled based on the item set's occurrence configuration.
+
+image::itemset-4.png[Item-set with context menu]
+
+Item sets can be nested inside each other.
+
+image::itemset-5.png[Nested item-sets]
+
+=== Option Set
