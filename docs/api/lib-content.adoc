@@ -1475,6 +1475,42 @@ contentLib.removeAttachment({key: '/mySite/mycontent', name: 'document'});
 contentLib.removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document', 'image']});
 ```
 
+
+=== resetInheritance image:xp-760.svg[XP 7.6.0,opts=inline]
+
+Resets custom inheritance flags of a content item. For an item that was inherited from a parent content project/layer this action
+will reset specified changes made inside a specified layer.
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| key | string | Path or id to the content
+| projectName | string | A unique id of a Content Layer in which the inherited content item should be reset
+| inherit | Array.<<string>> | Array of inheritance flags (case-sensitive, all upper-case).
+Supported values are: `CONTENT` (resets any customized content data), `PARENT` (resets item moved under a different parent),
+`NAME` (resets renamed item), `SORT` (resets custom sorting).
+
+|===
+
+[.lead]
+Examples
+
+```js
+// Resets all custom changes made to inherited item '/mySite/mycontent' in the layer 'layer-no'
+contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['CONTENT', 'PARENT', 'NAME', 'SORT']});
+```
+```js
+// Resets custom sorting of inherited item '/mySite/mycontent' in the layer 'layer-no', but preserves any other changes
+contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['SORT']});
+```
+
 === setPermissions
 
 Sets permissions on a content
