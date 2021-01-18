@@ -100,6 +100,7 @@ Parameters
 | Name | Type | Attributes | Description
 | id | string | | Unique project id (alpha-numeric characters and hyphens allowed).
 | displayName | string | | Project display name.
+| parent | string | <optional> | Parent project id. If provided, the new project will be a Content Layer that automatically inherits changes from the parent project.
 | description | string | <optional> | Project description.
 | language | string | <optional> | Default project language.
 | permissions | Object.<string, Array.<string>> | <optional> | Project permissions. 1 to 5 properties where key is role id and value is an array of principals.
@@ -108,7 +109,7 @@ Parameters
 ! Name ! Type ! Description
 ! role ! string ! Role id (one of `owner`, `editor`, `author`, `contributor`, `viewer`).
 ! principals ! Array.<string> ! Array of principals.
-
+!===
 | readAccess | Object.<string, boolean> | | Read access settings.
 [stripes=none,cols="1,1,98"]
 !===
