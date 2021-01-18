@@ -7,7 +7,7 @@ To enable building more complex forms by grouping inputs together into nested st
 
 == Field Set
 
-TIP: Schema description of a fieldset can be found <<schemas#fieldset, here>>.
+TIP: Schema description of a fieldset can be found <<schemas#field_set, here>>.
 
 A field set may be used to group items visually under a common label and distinguish this group from the rest of the form.
 
@@ -16,7 +16,7 @@ image::fieldset-1.png[Example of a fieldset, 690]
 
 == Item Set
 
-TIP: Schema description of an item set can be found <<schemas#itemset, here>>.
+TIP: Schema description of an item set can be found <<schemas#item_set, here>>.
 
 Item sets enable combining inputs (or other sets) into complex, nested structures.
 Item sets are grouped both visually and semantically, as the name of the item set is used in the persisted property structure.
@@ -45,7 +45,7 @@ image::itemset-5.png[Nested item-sets]
 
 == Option Set
 
-TIP Schema description of an item set can be found <<schemas#optionset, here>>.
+TIP Schema description of an item set can be found <<schemas#option_set, here>>.
 
 An option set is a group of options presented either as a radio-group (multi-select option set) or as a dropdown (single-select option set).
 Each option may have an optional underlying form for providing additional data.
