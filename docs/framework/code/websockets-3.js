@@ -6,7 +6,7 @@ exports.webSocketEvent = function (event) {
 
   if (event.type == 'open') {
     // Send message back to client
-    webSocketLib.send(event.session.id, 'Welcome to our chat');
+    webSocketLib.send(event.session.id, 'Welcome to our chat ' + event.session.user ? event.session.user.displayName : 'anonymous' );
 
     // Add client into a group
     webSocketLib.addToGroup('chat', event.session.id);

@@ -722,6 +722,47 @@ auditlog.enabled = true
 
 auditlog.enabled:: Set to false to disable the creation of audit log entries on content API operations. Default: `true`.
 
+=== App
+
+image:xp-760.svg[XP 7.6.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.app.cfg`
+
+Configure applications behavior.
+
+.Deny all applications (system and local apps will still be installed)
+[source,properties]
+----
+filter = !*
+----
+
+.Deny snapshotter app to be installed (still possible to install locally), all other applications allowed.
+[source,properties]
+----
+filter = !com.enonic.app.snapshotter,*
+----
+
+.Allow only applications with "my.secure.corp." prefix.
+[source,properties]
+----
+filter = my.secure.corp.*
+----
+
+filter:: Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `*` (allow all).
+
+Rule can be prefixed with `!` - that it is a `deny` rule, otherwise it is an `allow` rule.
+Rule can be suffixed with `*` - that is a wildcard rule.
+
+NOTE: Application names that start with `!` or end with `*` or contain `,` or contain `{nbsp}` (space) are not supported.
+
+Rules applied in order. First matching rule wins. If no matching rule found, application is denied.
+
+System and local applications are not filtered.
+Global application installation is denied (error is thrown), if filter denies it.
+Stored application installation is skipped if filter denies it.
+
+NOTE: Filter rules apply separately on different nodes in cluster. If one cluster node denies an app, another cluster node may still allow it.
+
 === Task
 image:xp-760.svg[XP 7.6.0,opts=inline]
 
