@@ -1,10 +1,10 @@
 = Tasks
 :toc: right
-:imagesdir: framework/images
+:imagesdir: ../images
 
 The XP framework also supports execution of asynchronous (potentially long running) background tasks.
 
-Tasks may simply be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. `src/main/resources/tasks/<taskname>` in your project
+Tasks may simply be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. `src/main/resources/tasks/<taskname>` in your project.
 
 == Descriptor
 Named tasks requires a descriptor file.
@@ -79,6 +79,17 @@ var taskId = taskLib.submitNamed({
     }
 );
 ----
+
+== Distributable
+image:xp-760.svg[XP 7.6.0,opts=inline]
+
+Named tasks may get distributed over other cluster nodes.
+Cluster node can be configured to accept or decline distributable tasks execution.
+If multiple cluster nodes can accept a task, only one cluster node will be selected to execute it.
+If none of the nodes can accept a distributable task, an error will be thrown.
+
+Distributable task gets executed with the same context (user, repository/branch) it was originally submitted.
+
 
 == API
 
