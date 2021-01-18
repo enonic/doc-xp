@@ -152,11 +152,11 @@ TIP: It is also possible to nest item sets inside each other
 
 === Option Set
 
-An option set represents a group of options rendered as either radio-buttons or checkboxes.
-Each option may or may not have a form of inputs it consists of. An option can be considered to be a field-set with selectable header.
+An option set is a group of options presented either as a radio-group (multi-select option set) or a dropdown (single-select option set).
+Each option may have an optional underlying form for providing additional data.
 
-By default, an option form will only be shown upon selection of the option, but the entire option
-set may be configured to have all of its options expanded by default.
+By default, an option form will only be shown upon selection of the option, but a multi-select option set can be configured to have all of
+its options expanded by default.
 
 It's also possible to pre-select specific options by default.
 
@@ -217,6 +217,9 @@ Here is an example of a multi-select option set with options expanded by default
 <11> *help-text/@i18n* localization bundle key.
 <12> *default* Set to `true` to pre-select one of the options.
 <13> *items* Container of the option form's inputs.
+
+TIP: Use `<options minimum="1" maximum="1">` for a single-select option set, or any other number greater
+than "1" in `options.maximum` for a multi-select option set.
 
 [#schema_localization]
 == Schema Localization

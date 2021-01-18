@@ -5,7 +5,7 @@
 To enable building more complex forms by grouping inputs together into nested structures, Enonic XP supports the following types of sets:
 
 
-=== Field Set
+== Field Set
 
 TIP: Schema description of a fieldset can be found <<schemas#fieldset, here>>.
 
@@ -14,9 +14,9 @@ A field set may be used to group items visually under a common label and disting
 image::fieldset-1.png[Example of a fieldset, 690]
 
 
-=== Item Set
+== Item Set
 
-TIP Schema description of an item set can be found <<schemas#itemset, here>>.
+TIP: Schema description of an item set can be found <<schemas#itemset, here>>.
 
 Item sets enable combining inputs (or other sets) into complex, nested structures.
 Item sets are grouped both visually and semantically, as the name of the item set is used in the persisted property structure.
@@ -43,4 +43,29 @@ Item sets can be nested inside each other.
 
 image::itemset-5.png[Nested item-sets]
 
-=== Option Set
+== Option Set
+
+TIP Schema description of an item set can be found <<schemas#optionset, here>>.
+
+An option set is a group of options presented either as a radio-group (multi-select option set) or as a dropdown (single-select option set).
+Each option may have an optional underlying form for providing additional data.
+
+By default, an option's form will only be shown upon selection of the option, but a multi-select option set can be configured to have all of
+its options expanded by default. Forms of unselected options will be disabled until the option is selected.
+
+Default behaviour of an option-set is very similar to an item-set: a single occurrence will by default be expanded, multiple occurrences will
+be collapsed. An occurrence can be expanded/collapsed by a click anywhere inside the header.
+
+image::optionset-single-1.png[Example of a single-select option set]
+
+Form of a selected option can include simple inputs or more complex structures, like for example an item set:
+
+image::optionset-single-2.png[Example of a single-select option set with a selected option]
+
+Title of a multi-select option set occurrence will reflect labels of all selected options:
+
+image::optionset-multi.png[Example of a multi-select option set]
+
+Use "Reset" action in the context menu of a single-select option set to change current selection:
+
+image::optionset-single-3.png[Reset function of a single-select option set]
