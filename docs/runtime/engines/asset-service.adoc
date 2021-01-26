@@ -15,7 +15,7 @@ The asset endpoint consists of three elements:
 * App identifier with optional _hash_ i.e. `com.company.app` or `com.company.app:235293024/`
 * Asset path i.e. `path/to/asset.css`
 
-A complete asset URL pattern: <app-root>/_/asset/<app-name><:build-id>/<asset-path> i.e. `company.com/_/asset/com.company.app:235293024/path/to/asset.css`
+A complete asset URL pattern: `<app-root>/\_/asset/<app-name><:build-id>/<asset-path>` i.e. `company.com/_/asset/com.company.app:235293024/path/to/asset.css`
 
 
 == Asset files
@@ -31,10 +31,10 @@ If a file is placed in your projects `src/main/resources/assets/path/to/asset.ex
 == Cache headers
 
 To optimize the user experience and offload the XP back-end, the asset service supports so-called "perfect caching".
-By adding a unique hash to the asset url, the asset service will automatically set "infinite cache headers" when serving the asset.
+By adding a unique hash to the asset url, the asset service will automatically set "infinite cache headers" (`cache-control: public, max-age=31536000, immutable`) when serving the asset.
 
-If the asset is changed (currently by deploying a new app), a new asset URL can be generated.
-This effectively prevents stale cache issues, and optimizes performance at the same time
+If application assets are changed, a new asset URL can be generated.
+This effectively prevents stale cache issues, and optimizes performance at the same time.
 
 == assetUrl()
 

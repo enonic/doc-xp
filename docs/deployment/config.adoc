@@ -779,3 +779,23 @@ clustered.timeout = PT10S
 
 distributable.acceptInbound:: If true, accept inbound distributable tasks. Default: `true`.
 clustered.timeout:: The time (in ISO-8601 Period format) the node waits for a job (task or task-info job) to be submitted to another cluster node. Default: `PT5S` (5 seconds).
+
+=== Portal
+
+image:xp-770.svg[XP 7.7.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.portal.cfg`
+
+Configure the portal behaviour.
+
+.Sample content config file
+[source,properties]
+----
+asset.cacheControl = public, max-age=31536000, immutable
+media.public.cacheControl = public, max-age=31536000, immutable
+media.private.cacheControl = private, max-age=31536000, immutable
+----
+
+asset.cacheControl:: Defines assets cache-control header when asset is cachable. Default: `public, max-age=31536000, immutable`
+media.public.cacheControl:: = Defines media (images, attachments) cache-control header when media is cachable and accessible by Everyone. Default: `public, max-age=31536000, immutable`
+media.private.cacheControl:: = Defines media (images, attachments) cache-control header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
