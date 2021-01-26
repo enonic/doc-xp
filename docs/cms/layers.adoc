@@ -1,0 +1,88 @@
+= Content layers
+:toc: right
+:imagesdir: images
+
+
+== Introduction
+
+Enriching, translating, localising and reusing content across different channels are among the most complex content management practices to solve. Content layers offer a practical and secure solution to this for both editors and developers. 
+
+NOTE: Content layering support was first introduced in v7.6
+
+== The problem
+Multi-site, multi-region, multi-language and more. Supporting management of content across regions, languages and other channels has been the goal of CMS since its conception. The problems are many and complex:
+
+* How to localise content
+* How to keep content syncronised
+* How to assure timely publishing for each channel
+* Who can manage what content
+* Who can access that content 
+* How to effectively re-use content across channels
+* How to avoid copying content
+* How to collaborate across channels
+* Etc..
+
+== A layered solution
+
+Layers are essentially <<projects#, content projects>> with a twist. Like regular projects, each layer has it's own repository, permissions and default language. Layers introduce the additional setting of parent project. Layers will automatically inherit content from their parent layer. Multiple layers can collectively form a tree structure, where the root layer itself is a regular project.
+
+image::layers-concept.svg[Tree structure of projects, aka layers, 720]
+
+=== Inheritance
+The core concept of layers is that inherited content maintains the same ID across all layers. Inherited items can be published independently within each layer. In addition to inheriting content, one may also create original content in each layer as required. One may also move items around, and organise content differently per layer.
+
+=== Localisation
+Inherited items may be `localised` (edited) within each layer as needed. By localising, the item will stop inheriting the parts of the item that were localised.
+
+An item may be localised in the following ways independently:
+
+* by name (the item's path name)
+* by parent (the placement of the item in the tree structure)
+* by default sorting (default sorting of child items in the structure)
+* by ediorial content (the editorial data of the item)
+
+Once a part of an item is localised, it will stop inheriting that specific part. This for instance means you may move a part around in your structure, and even give it another path name, but keep inheriting the actual content, or visa versa.
+
+== Content actions
+
+Working with content in a layer is essentially the same as working with a regular project. You may create, modify, move and publish items as desired. The layering system will automatically ensure the rules of inheritance are controlled. For instance, your actions will automatically set the relevant flags for what to inherit or not.
+
+For instance, by renaming content, the system will automatically disable inheritance for the name of the item, unless the item is originally created in this layer naturally.
+
+In addition to existing content actions, localisation may also be reset. For instance, if you at some point localised the content of an item, it can be returned it to the inherited state again. Just like any other editing action, this will effectively create a new version of the item.
+
+== Versions
+Like a regular project, only versions created within a specific layer will be available. This also means your data will not be polluted by "noise" from the surrounding layers. You will for instance not see versions created in child items etc.
+
+NOTE: Child layers will inherit all new versions of an item until the item is "marked as ready" in the parent layer. Later, only versions "marked as ready" in the parent layer are propagated to the child layer(s). This effectively reduces "noise" in the child layers, as well as improves performance.
+
+
+== Replication engine
+
+XP features a background event listener that instantly detects changes to content and replicate this across layers. Additionally, a background job continuously runs to verify the consistency of the layers, should any replication fail or be interrupted during it's initial run.
+
+The replication engine uses the following node layer properties to control the inheritance and localisation state of an item:
+
+[source,JSON]
+----
+"inherit": [
+    "PARENT",
+    "SORT",
+    "CONTENT",
+    "NAME"
+  ],
+"originProject": "myproject"
+----
+
+As an example, this is what the the item might look like when inherited across multiple layers:
+
+* *Norwegian layer:* localised name
+* *German layer:* localised content
+* *French layer:* localised name, and content
+
+image::layers-inheritance.svg[Content inherited and localised in layers, 720]
+
+
+== API
+
+To programmatically manage layers, use the <<../api/lib-project#, project API>>.
