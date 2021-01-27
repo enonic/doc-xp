@@ -21,7 +21,7 @@ VHost API is now made public. Enumerate VHosts configured for your XP instances 
 * Management Port got extended to be able to <<runtime/management#start, start>>,
 <<runtime/management#stop, stop>> and <<runtime/management#uninstall, uninstall>> an application.
 
-* The <<runtime/management#sse_events, new SSE endpoint>> allows listing installed applications and listening to application status changes.
+* The <<runtime/management#server_sent_events, new SSE endpoint>> allows listing installed applications and listening to application status changes.
 
 * Application installation can now be verified with <<runtime/management#install_from_url, SHA512 checksum>>.
 
@@ -37,7 +37,7 @@ VHost API is now made public. Enumerate VHosts configured for your XP instances 
 
 === Other improvements
 
-* serviced support
+* Serviced support
 
 * Improved 404 default page
 
