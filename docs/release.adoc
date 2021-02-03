@@ -4,6 +4,47 @@ include::variables.adoc[]
 :imagesdir: release/images
 
 
+== XP7 Update 6
+
+=== Content Layers
+
+<<cms/layers#, Content Layers>> enable automatic replication of content across dependant repositories.
+This feature can be used to implement multi language sites.
+<<api/lib-project#, JavaScript API>> is also available.
+
+=== VHost API
+
+VHost API is now made public. Enumerate VHosts configured for your XP instances to customize URL handling.
+
+=== Management API for applications
+
+* Management Port got extended to be able to <<runtime/management#start, start>>,
+<<runtime/management#stop, stop>> and <<runtime/management#uninstall, uninstall>> an application.
+
+* The <<runtime/management#server_sent_events, new SSE endpoint>> allows listing installed applications and listening to application status changes.
+
+* Application installation can now be verified with <<runtime/management#install_from_url, SHA512 checksum>>.
+
+=== Distributable tasks
+
+* All Named Tasks are now <<deployment/config#task, cluster-aware>> and run on any XP node that can do it, not only where it was submitted.
+* Application <<deployment/config#application, allow/deny>> lists feature helps to fine-tune new High Availability behaviour.
+
+=== Websocket API extensions
+
+* <<framework/websocket#, Websocket API>> is extended to get access to authentication info inside websocket handlers.
+* `<<api/lib-websocket#getgroupsize, getGroupSize>>` method counts number of participants in a specific websocket group.
+
+=== Other improvements
+
+* Serviced support
+
+* Improved 404 default page
+
+* Improved server log messages
+
+* New icon for `media:content`
+
 == XP7 Update 5
 
 === Snapshot Restore `latest` option

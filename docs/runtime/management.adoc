@@ -483,7 +483,7 @@ This option could for example be used for renaming types or fields. The .xsl fil
 
 == Applications
 
-Commands to install applications to the running enonic XP instance.
+Commands to manage applications in a running Enonic XP instance.
 
 === Install from file
 
@@ -546,6 +546,10 @@ Installs an application from url on all nodes.
 |`URL`
 |String
 |application URL
+
+|`sha512`
+|String
+|image:xp-760.svg[XP 7.6.0,opts=inline] application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.
 |===
 
 .Response
@@ -573,6 +577,120 @@ Installs an application from url on all nodes.
 }
 ----
 
+=== Start
+
+image:xp-760.svg[XP 7.6.0,opts=inline] Starts an application with specific application key.
+
+.Url
+ POST app/start
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`key`
+|String
+|Application key, for instance, `com.enonic.app.contentstudio`.
+|===
+
+.Response
+[source,plain]
+----
+No response body
+----
+
+=== Stop
+
+image:xp-760.svg[XP 7.6.0,opts=inline] Stops an application with specific application key.
+
+.Url
+ POST app/stop
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`key`
+|String
+|Application key, for instance, `com.enonic.app.contentstudio`.
+|===
+
+.Response
+[source,plain]
+----
+No response body
+----
+
+=== Uninstall
+
+image:xp-760.svg[XP 7.6.0,opts=inline] Uninstalls an application with specific application key.
+
+.Url
+ POST app/uninstall
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`key`
+|String
+|Application key, for instance, `com.enonic.app.contentstudio`.
+|===
+
+.Response
+[source,plain]
+----
+No response body
+----
+
+=== Server-Sent Events
+
+image:xp-760.svg[XP 7.6.0,opts=inline] The client initiates the SSE connection by using the media type `text/event-stream` in the `Accept` header. Then it gets updates automatically without requesting the server.
+
+.Url
+ GET app/events
+
+This API supports the following events:
+
+- `list` - returns the details of applications which are already installed
+- `installed` - returns the details of the last applications that was installed
+- `state` - returns the details of the application that was just started or stopped
+- `uninstalled` - returns the key of the application that was just removed
+
+Once a client is subscribed, he will receive the first event `list`.
+
+.Response of the `list` event
+[source,plain]
+----
+event: list
+id: b0d64cac-811d-4f6b-9aff-50fd4d4a5ae9
+data: {"applications":[{"displayName":"Content Studio","key":"com.enonic.app.contentstudio","local":false,"maxSystemVersion":"8.0.0","minSystemVersion":"7.6.0","modifiedTime":"2020-11-11T08:22:14.080Z","state":"started","url": "", "vendorName": "Enonic AS", "vendorUrl": "http://enonic.com", "version": "2.0.0"}]}
+----
+
+.Response of the `installed` or `state` events
+[source,plain]
+----
+event: installed | state
+id: f84d11ba-88cd-4cd2-9cb3-39dd181eb7e2
+data: {"displayName":"Content Studio","key":"com.enonic.app.contentstudio","local":false,"maxSystemVersion":"8.0.0","minSystemVersion":"7.6.0","modifiedTime":"2020-11-11T08:22:14.080Z","state":"started","url": "", "vendorName": "Enonic AS", "vendorUrl": "http://enonic.com", "version": "2.0.0"}
+----
+
+.Response of the `uninstalled` event
+[source,plain]
+----
+event: uninstalled
+id: b7a0f608-631f-4a1d-bda0-5459b87a99a6
+data: {"key":"com.enonic.app.contentstudio"}
+----
 ////
         CMS tasks
 ////
@@ -580,7 +698,6 @@ Installs an application from url on all nodes.
 == CMS
 
 Content metadata commands.
-Currently only one command present here:
 
 === Reprocess
 
@@ -616,6 +733,13 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
     "UpdatedContent": []
 }
 ----
+
+=== SyncAll
+
+Calls forced content sync for all available projects.
+
+.Url
+ POST content/syncAll
 
 ////
         Repository tasks

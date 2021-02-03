@@ -1,0 +1,71 @@
+= Sets
+:toc: right
+:imagesdir: images
+
+To enable building more complex forms by grouping inputs together into nested structures, Enonic XP supports the following types of sets:
+
+
+== Field Set
+
+TIP: Schema description of a fieldset can be found <<schemas#field_set, here>>.
+
+A field set may be used to group items visually under a common label and distinguish this group from the rest of the form.
+
+image::fieldset-1.png[Example of a fieldset, 690]
+
+
+== Item Set
+
+TIP: Schema description of an item set can be found <<schemas#item_set, here>>.
+
+Item sets enable combining inputs (or other sets) into complex, nested structures.
+Item sets are grouped both visually and semantically, as the name of the item set is used in the persisted property structure.
+
+A new or a single occurrence of an item set is by default expanded and can be collapsed by a click anywhere inside the item set header.
+Multiple occurrences of an item set will be collapsed by default to ensure better readability of a form containing several occurrences of complex item sets.
+
+image::itemset-1.png[Example of an expanded item-set]
+
+Label of an item set will dynamically change to value of the first non-empty field inside the set.
+
+image::itemset-2.png[Example of an item-set with a label]
+
+This helps to distinguish between multiple collapsed occurrences of the same item set without having to expand them.
+
+image::itemset-3.png[Example of collapsed item-sets]
+
+Context menu of an item-set occurrence can be used to add a new occurrence of the set above or below the current one, or delete current occurrence.
+Add/delete actions can be disabled based on the item set's occurrence configuration.
+
+image::itemset-4.png[Item-set with context menu]
+
+Item sets can be nested inside each other.
+
+image::itemset-5.png[Nested item-sets]
+
+== Option Set
+
+TIP: Schema description of an option set can be found <<schemas#option_set, here>>.
+
+An option set is a group of options presented either as a radio-group (multi-select option set) or as a dropdown (single-select option set).
+Each option may have an optional underlying form for providing additional data.
+
+By default, an option's form will only be shown upon selection of the option, but a multi-select option set can be configured to have all of
+its options expanded by default. Forms of unselected options will be disabled until the option is selected.
+
+Default behaviour of an option-set is very similar to an item-set: a single occurrence will by default be expanded, multiple occurrences will
+be collapsed. An occurrence can be expanded/collapsed by a click anywhere inside the header.
+
+image::optionset-single-1.png[Example of a single-select option set]
+
+Form of a selected option can include simple inputs or more complex structures, like for example an item set:
+
+image::optionset-single-2.png[Example of a single-select option set with a selected option]
+
+Title of a multi-select option set occurrence will reflect labels of all selected options:
+
+image::optionset-multi.png[Example of a multi-select option set]
+
+Use "Reset" action in the context menu of a single-select option set to change current selection:
+
+image::optionset-single-3.png[Reset function of a single-select option set]
