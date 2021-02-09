@@ -122,7 +122,7 @@ label of the field set.
 
 Item sets provide a special capability that allows you to nest form items hierarchically.
 
-Input types in item sets are grouped into logical units, allowing them to repeat as a complex input type - since item sets support occurrences too.
+Input types in item sets are grouped into logical units, allowing them to repeat as a complex input types, as item sets support occurrences too.
 Item sets are both visually and semantically grouped as the name of the item set is used in the persisted property structure. An item set actually produces a property set.
 
 Here is an example of an item set with two inputs. The resulting form will allow multiple entries of phone numbers with labels:
@@ -150,18 +150,79 @@ Here is an example of an item set with two inputs. The resulting form will allow
 
 TIP: It is also possible to nest item sets inside each other
 
+
+
+
+
 === Option Set
 
-An option set is a group of options presented either as a radio-group (multi-select option set) or a dropdown (single-select option set).
-Each option may have an optional underlying form for providing additional data.
+Option sets allow editors to select the content of an instance between pre-defined options.
 
-By default, an option form will only be shown upon selection of the option, but a multi-select option set can be configured to have all of
-its options expanded by default.
+There are essentially two distinct variants of option sets. 
+
+* Single select - Visually represented by dropdowns
+* Multi select - Visually represented by a multi select form
+
+Each option may define zero or more items. Hence, a single option may be represented by the option alone, or provide a new set of inputs and sets - just like an item set.
+
+By default, an option form will only be displayed upon selection of the option, but a multi-select option set can be configured to have all options expanded by default.
 
 It's also possible to pre-select specific options by default.
 
-Here is an example of a multi-select option set with options expanded by default, empty first option and pre-selected second option:
 
+.single-select option set for creating blocks of content
+[source,xml]
+----
+<option-set name="blockOptionSet">
+  <label>Content blocks</label>
+  <occurrences minimum="0" maximum="0"/> <!--1-->
+  <help-text>Create content with optional blocks</help-text>
+  <options minimum="1" maximum="1">  <!--2-->
+    <option name="hr"> <!--3-->
+      <label>Horisontal line</label>
+      <help-text>Adds a separator between blocks</help-text>
+    </option>
+    <option name="text">
+      <label>Text</label>
+      <items>
+        <input name="text" type="TextArea">
+          <label>Text</label>
+          <occurrences minimum="1" maximum="1"/>
+        </input>
+      </items>
+    </option>
+    <option name="gallery">
+      <label>Image gallery</label>
+      <items>
+        <input name="images" type="ImageSelector">
+          <label>Images</label>
+          <occurrences minimum="1" maximum="0"/>
+          <config/>
+        </input>
+      </items>
+    </option>
+    <option name="quote">
+      <label>Quote</label>
+      <items>
+        <input name="quote" type="TextLine">
+          <label>Quote</label>
+          <occurrences minimum="1" maximum="1"/>
+        </input>
+        <input name="quotee" type="TextLine">
+          <label>Quotee</label>
+          <occurrences minimum="1" maximum="1"/>
+        </input>
+      </items>
+    </option>
+  </options>
+</option-set>
+----
+<1> *occurences* Set value to maximum=0 for unlimited block instances
+<2> *options/@maximum* Refers to selectable options per instance. A value of 1 => single-select mode.
+<3> *option* (required) Container of options. Each option may be empty or contain items, just like an item set.
+
+
+.multi-select option set with options expanded by default, empty first option and pre-selected second option:
 [source,xml]
 ----
 <option-set name="checkOptionSet">
@@ -205,7 +266,7 @@ Here is an example of a multi-select option set with options expanded by default
 ----
 
 <1> *expanded* Set to ``true`` to expand all of the options by default
-<2> *occurrences* Detailed definition of how many instances of the option set may be created
+<2> *occurrences* For multi-select option sets, one normally only wants a single instance
 <3> *options* (required) Container of options.
 <4> *options/@minimum* (required) Minimum number of options that must be selected in this option set.
 <5> *options/@maximum* (required) Maximum number of options to create. > 1 provides multi-select mode. 1 provides single-select mode.
