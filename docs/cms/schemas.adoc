@@ -94,9 +94,6 @@ This element is optional, if omitted the default will be `minimum="0"` and `maxi
 
 Here is the <<input-types#, the complete list of input types>>
 
-== Sets
-In order to build richer forms, or advanced grouping and nesting, Enonic XP also supports the following schema components:
-
 === Field Set
 
 A field set may be used to group items visually. The example below will create a form in the admin console with the inputs grouped under the
@@ -118,7 +115,7 @@ label of the field set.
 <2> *items* allow placement of form items to be contained within it
 
 
-=== Item Set
+== Item Set
 
 Item sets provide a special capability that allows you to nest form items hierarchically.
 
@@ -151,26 +148,23 @@ Here is an example of an item set with two inputs. The resulting form will allow
 TIP: It is also possible to nest item sets inside each other
 
 
+== Option Set
 
-
-
-=== Option Set
-
-Option sets allow editors to select the content of an instance between pre-defined options.
+Option sets enable editors to select the content of a set instance between pre-defined options.
 
 There are essentially two distinct variants of option sets. 
 
 * Single select - Visually represented by dropdowns
 * Multi select - Visually represented by a multi select form
 
-Each option may define zero or more items. Hence, a single option may be represented by the option alone, or provide a new set of inputs and sets - just like an item set.
+An option may define zero or more items. Hence, a single option may be represented by the option itself, or contain more form items - just like an item set.
 
-By default, an option form will only be displayed upon selection of the option, but a multi-select option set can be configured to have all options expanded by default.
+By default, the option's form will only be displayed after the option is selected. However, a multi-select option set can also be configured to have the forms expanded by default.
 
-It's also possible to pre-select specific options by default.
+For multi-select options sets, it is also possible to pre-select options by default.
 
 
-.single-select option set for creating blocks of content
+.Sample 1: single-select option set for creating blocks of content
 [source,xml]
 ----
 <option-set name="blockOptionSet">
@@ -222,7 +216,7 @@ It's also possible to pre-select specific options by default.
 <3> *option* (required) Container of options. Each option may be empty or contain items, just like an item set.
 
 
-.multi-select option set with options expanded by default, empty first option and pre-selected second option:
+.Sample 2: multi-select option set with options expanded by default, empty first option and pre-selected second option:
 [source,xml]
 ----
 <option-set name="checkOptionSet">
