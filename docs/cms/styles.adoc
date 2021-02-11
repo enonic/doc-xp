@@ -50,6 +50,6 @@ By default, XP comes with one built-in image style called “_Original (no image
 that the image won't undergo any processing on the server and will be rendered “as is”.
 
 The example above represents two styles - `editor-image-cinema` and `editor-style-image-sepia` - that apply server-side image processing.
-One of them, `editor-style-image-sepia`, will then apply client-side styling to the image processed on the server.
+One of them, `editor-style-image-sepia`, will also apply client-side styling to the image processed on the server.
 
 NOTE: As of now, only `aspect-ratio` and `filter` are supported for server-side image processing.
