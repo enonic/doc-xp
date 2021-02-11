@@ -135,7 +135,7 @@ $XP_HOME/data:: Contains other data (e.g. system dumps).
 
 You need to mount those specific directories to the shared file system before you start XP.
 
-WARNING: You should never share `$XP_HOME/repo/index` between nodes.
+WARNING: You should never share `$XP_HOME/repo/index` and `$XP_HOME/work` between nodes.
 
 === Pre-installed apps
 
