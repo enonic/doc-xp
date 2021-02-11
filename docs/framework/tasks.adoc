@@ -90,6 +90,12 @@ If none of the nodes can accept a distributable task, an error will be thrown.
 
 Distributable task gets executed with the same context (user, repository/branch) it was originally submitted.
 
+WARNING: Make sure your Named task does not require a specific node to run on (i.e. it must not check for `isMaster`).
+If you need such check, use inline function task instead.
+
+NOTE: Nodes that do not accept distributable tasks execution are still capable to submit them.
+
+NOTE: For fine-grained control which nodes should be capable to execute distributable tasks use <<../deployment/config.adoc#_application, Application>> filter config or local apps. Or disable execution of named tasks entirely on some nodes by <<../deployment/config.adoc#_task, Task>> config.
 
 == API
 
