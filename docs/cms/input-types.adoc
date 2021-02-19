@@ -94,7 +94,6 @@ image::Content-selector-default.png[An input box with a dropdown options below i
     <allowPath>./*</allowPath>
     <allowPath>/quotes*</allowPath>
     <treeMode>true</treeMode>  <!--3-->
-    <showStatus>true</showStatus>  <!--4-->
     <hideToggleIcon>true</hideToggleIcon> <!--5-->
   </config>
 </input>
@@ -104,9 +103,7 @@ image::Content-selector-default.png[An input box with a dropdown options below i
 only displays content from the same site.
 <3> *treeMode* toggles between tree and flat modes. Default value is `false` (flat mode). +
 image:Content-selector-tree.png[Input box with a dropdown with a tree structure, 350]
-<4> *showStatus* toggles content status - default is `false`. +
-image:Content-selector-status.png[Input box with a dropwdown showing status on each option, 365]
-<5> *hideToggleIcon* hides the toggle icon when set to `false`. +
+<4> *hideToggleIcon* hides the toggle icon when set to `false`. +
 image:Content-selector-no-icon.png[Input box without an icon, 500]
 
 === allowContentType Samples
@@ -551,7 +548,6 @@ image::Image-selector.png[Input box with a grid of images to select below it, 50
   <config> <!--1-->
     <allowPath>${site}/*</allowPath> <!--2-->
     <treeMode>true</treeMode>
-    <showStatus>true</showStatus>
     <hideToggleIcon>true</hideToggleIcon>
   </config>
 </input>
@@ -598,7 +594,6 @@ The MediaSelector is a specialized version of the <<ContentSelector>> that is li
     <allowContentType>media:archive</allowContentType>
     <allowPath>${site}/*</allowPath> <!--2-->
     <treeMode>true</treeMode>
-    <showStatus>true</showStatus>
     <hideToggleIcon>true</hideToggleIcon>
   </config>
 </input>
