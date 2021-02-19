@@ -444,6 +444,8 @@ http.port:: specifies http port number to use. Default: `8080`.
 http.requestHeaderSize:: Maximum request header size. Default: 32K.
 http.requestHeaderSize:: Maximum response header size. Default: 32K.
 session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
+session.cookieSameSite:: image:xp-730.svg[XP 7.3.0,opts=inline]:: Specifies SameSite flag for session cookie. Can be `Lax`, `None`, `Strict` or unspecified. Default: `Lax`.
+session.cookieAlwaysSecure:: image:xp-730.svg[XP 7.3.0,opts=inline]:: If true, forces session cooke Secure flag even for HTTP connections. Default: `false`.
 session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
 gzip.enabled:: Enables GZIP compression for responses. Default: `true`.
 gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `23`.
@@ -457,6 +459,8 @@ threadPool.maxThreads  image:xp-730.svg[XP 7.3.0,opts=inline]:: Maximum number o
 threadPool.minThreads image:xp-730.svg[XP 7.3.0,opts=inline]:: Minimum number of threads. Default: `8`.
 threadPool.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: Thread idle timeout (in milliseconds). Default: `60000`.
 websocket.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
+
+WARNING: Setting `session.cookieAlwaysSecure` to `true` would make session-involved login on HTTP connections impossible.
 
 === SessionStore
 image:xp-740.svg[XP 7.4.0,opts=inline]
