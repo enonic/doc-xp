@@ -114,13 +114,13 @@ Since XP is using __elasticsearch__ for storage, we have to consider that __elas
 
 * Set heap memory to `75%` of available memory on dedicated master nodes.
 * Set heap memory to `30%` of available memory on other nodes.
-* Never allocat more than `26G` of heap.
+* Never allocate more than `26G` of heap.
 
 You should set the heap memory with the `XP_OPTS` environmental variable. For example, if you want to give XP `512MB` of heap you set `XP_OPTS` to `-Xms512M -Xmx512M`.
 
 === Java options
 
-You migth want to pass options to the Java virtual machine. Our distributions set the `JAVA_OPTS` variable with defaults for XP to run smoothly. For that reason you should avoid overwriting `JAVA_OPTS` and instead you should use `XP_OPTS` to pass your options.
+You might want to pass options to the Java virtual machine. Our distributions set the `JAVA_OPTS` variable with defaults for XP to run smoothly. For that reason you should avoid overwriting `JAVA_OPTS` and instead you should use `XP_OPTS` to pass your options.
 
 [#dirs]
 === Directories
@@ -135,7 +135,10 @@ $XP_HOME/data:: Contains other data (e.g. system dumps).
 
 You need to mount those specific directories to the shared file system before you start XP.
 
-WARNING: You should never share `$XP_HOME/repo/index` between nodes.
+WARNING: You should never share `$XP_HOME/repo/index` and `$XP_HOME/work` between nodes.
+
+
+NOTE: If you decide to change location of `$XP_HOME/snapshots` from default you must change values of both `path.repo` in `com.enonic.xp.elasticsearch.cfg` and `snapshots.dir` in `com.enonic.xp.repo.cfg` parameters.
 
 === Pre-installed apps
 
@@ -198,7 +201,7 @@ Now you should have a good starting point to create clustered deployments. Just 
 * Tailor the 3 cluster configuration files to your setup.
 * Set heap memory with the `-Xms` and `-Xmx` parameters using the `XP_OPTS` environmental variable.
 * Avoid overwriting the `JAVA_OPTS` environmental variable, use `XP_OPTS`.
-* Take care of how much memory you allocate to heap. Set it to `30%` of avaliable RAM on all nodes, except if the node is a dedicated master node. Then you can set it to `75%`.
+* Take care of how much memory you allocate to heap. Set it to `30%` of available RAM on all nodes, except if the node is a dedicated master node. Then you can set it to `75%`.
 * Directories `$XP_HOME/repo/blob`, `$XP_HOME/snapshots` and `$XP_HOME/data` should be shared between all nodes.
 * The `$XP_HOME/repo/index` volume should *never* be shared between nodes.
 * Pre-install the snapshotter app for automatic snapshots.
@@ -213,3 +216,11 @@ Now you should have a good starting point to create clustered deployments. Just 
 Enonic XP uses Hazelcast for clustering capabilities.
 Hazelcast HealthMonitor prints metrics logs when certain values (memory usage and system load) exceed 70% threshold.
 It is an indicator of server/cluster capacity problem, if such logs appear often. Occasional HealthMonitor log messages can be safely ignored.
+
+=== My master nodes throw OutOfMemoryError even when they have 4GB of memory. What do I do?
+
+Master nodes should be freed form heavy operations as they are on duty to keep cluster state healthy.
+Yet often great amount of work is put on them with inlined or named tasks run by applications.
+If heavy tasks must execute on master nodes (i.e. they have `isMaster` check), try to lower allocated heap from 75% to 50% of available RAM and allocate more total RAM for the master servers.
+
+Starting from XP version 7.6.0 it is possible to free master nodes from running named tasks by setting `distributable.acceptInbound = false` in <<../deployment/config.adoc#_task, Task>> config.

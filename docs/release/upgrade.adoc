@@ -30,6 +30,9 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market. 
 We generally always recommend updating your apps to the latest version!
 
+== v7.6 notes
+* Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <<../framework/tasks#_distributable, Tasks / Distributable>> for more information.
+
 == v7.5 notes
 v7.5 is backward compatible with earlier versions
 
