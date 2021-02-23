@@ -18,7 +18,7 @@ The main use of schemas is to define forms that can be edited through the admin 
 In addition to user interface, schemas also have a back-end equivalent that can be used programmatically,
 for instance through the content API.
 
-All forms are essentially compositions of <<Input types>> and optionally <<Sets#>> when more complex structures are required.
+All forms are essentially compositions of <<Input types>> and optionally <<sets#>> when more complex structures are required.
 
 Once a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
 The property structure can then be persisted directly into the XP repository.
