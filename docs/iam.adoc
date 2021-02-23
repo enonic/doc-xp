@@ -72,3 +72,49 @@ or <<./framework/idprovider#, build your own>> for a fully customized experience
 === Standard ID provider app
 By default, XP ships with an app app called the "Standard ID provider".
 This is also the app that is being used by the <<#system-id-provider>>
+
+== Built-in roles
+
+Enonic XP is shipped with several built-in roles (described below) which grant certain permissions when applied to users.
+New roles can be created by users with *Administrators* and *Users Administrator* roles.
+
+NOTE: Permissions for every role can be overridden by *Administrator* or *Content Manager Administrator* on the content level.
+
+*Administrator*
+Users with the *Administrator* role have full access to all content and admin tools through the user interface.
+
+**Administration Console Login**
+Users with this role can log in to the administration console. These users will also require a role for each of the admin tools that the users need access to.
+
+*Content Manager App*
+
+This role allows users to access Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project root.
+
+*Content Manager Expert*
+
+This role is similar to *Content Manager App* but can also access and modify source code inside HTML area and text components on pages.
+
+*Content Manager Administrator*
+
+This role allows full access to Content Studio, as well as being able to change content permissions.
+
+*Users App*
+
+This role allows view-only access to the Users admin tool.
+
+*Users Administrator*
+
+This role allows full access to the Users admin tool, including create/edit/delete for Id providers, users, roles, and groups.
+
+*Authenticated*
+
+Users automatically have this role when they are logged into the system in any way.
+
+*Everyone*
+
+This is a special role that any user/site visitor - authenticated or not - will always have.
+This role is typically used to grant read permissions to publicly available content.
+
+NOTE:
+If you are using <<cms/projects#, Content Projects>>, your project will have a set of <<cms/projects#roles, project-specific roles>> in addition to the built-in ones.
+
