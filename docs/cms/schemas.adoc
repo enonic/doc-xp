@@ -18,7 +18,7 @@ The main use of schemas is to define forms that can be edited through the admin 
 In addition to user interface, schemas also have a back-end equivalent that can be used programmatically,
 for instance through the content API.
 
-All forms are essentially compositions of <<Input types>> and optionally <<Sets>> when more complex structures are required.
+All forms are essentially compositions of <<Input types>> and optionally <<Sets#>> when more complex structures are required.
 
 Once a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
 The property structure can then be persisted directly into the XP repository.
@@ -94,7 +94,7 @@ This element is optional, if omitted the default will be `minimum="0"` and `maxi
 
 Here is the <<input-types#, the complete list of input types>>
 
-=== Field Set
+== Field Set
 
 A field set may be used to group items visually. The example below will create a form in the admin console with the inputs grouped under the
 label of the field set.
