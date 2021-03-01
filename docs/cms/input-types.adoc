@@ -655,11 +655,15 @@ A plain text, multi-line input field
   <default>Default text goes here</default> <!--1-->
   <config>
     <max-length>42</max-length> <!--2-->
+    <showCounter>true</showCounter> <!--3-->
   </config>
 </input>
 ----
 <1> *default* specifies the default string for the TextArea
-<2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
+<2> *max-length* specifies the maximum allowed number of characters (default: unlimited)
+<3> *showCounter* specifies whether text length counter should be shown (default: hidden)
+
+image::TextArea.png[Text Area with various settings, 700]
 
 == TextLine
 
@@ -679,13 +683,17 @@ A plain text, single line input with advanced validation options. Stored as stri
   <default>000-00-0000</default> <!--1-->
   <config>
     <max-length>11</max-length> <!--2-->
-    <regexp>\b\d{3}-\d{2}-\d{4}\b</regexp> <!--3-->
+    <showCounter>true</showCounter> <!--3-->
+    <regexp>\b\d{3}-\d{2}-\d{4}\b</regexp> <!--4-->
   </config>
 </input>
 ----
 <1> *default* specifies the default string for the TextArea
-<2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
-<3> *regexp* supports validation by defining regular expressions
+<2> *max-length* specifies the maximum allowed number of characters (default: unlimited)
+<3> *showCounter* specifies whether text length counter should be shown (default: hidden)
+<4> *regexp* supports validation by defining regular expressions
+
+image::TextLine.png[Text Line with various settings, 700]
 
 == Time
 
