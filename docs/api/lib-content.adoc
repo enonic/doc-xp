@@ -342,7 +342,7 @@ An object with the following keys and their value:
 |===
 | Name | Type | Attributes| Default| Description
 | key | string | | | Path or id to the parent content
-| version | string | <optional> | | Content version id
+| versionId | string | <optional> | | Content version id
 |===
 
 NOTE: `version` was first introduced in v7.2.0
