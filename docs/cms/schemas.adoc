@@ -304,6 +304,7 @@ The following schemas and fields support the `i18n` attribute for localization:
 - Item set: ``label``, ``help-text``
 - Field set: ``label``
 - Option set: ``label``, ``help-text``
+- Radio button: ``config.option``
 - Content Type: ``displayName``, ``description``
 - Mixin: ``displayName``, ``description``, input types
 - Page descriptor: ``displayName``, input types in config

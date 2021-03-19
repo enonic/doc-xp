@@ -621,14 +621,15 @@ image::Radio-buttons.png[two button where one of them is selected, 200]
   <label>My RadioButton</label>
   <occurrences minimum="1" maximum="1"/> <!--1-->
   <config>
-    <option value="one">Option One</option> <!--2-->
-    <option value="two">Option Two</option>
+    <option value="one" i18n="option_one.label">Option One</option> <!--2-->
+    <option value="two" i18n="option_one.label">Option Two</option>
   </config>
   <default>one</default> <!--3-->
 </input>
 ----
 <1> *occurences* only make supports minumum=1 or 0 - maximum will always be 1.
-<2> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple ``option`` elements are allowed and ordered.
+<2> *option* elements and the `@value` attribute defines the actual value to store when the option is selected.
+Multiple ``option`` elements are allowed and ordered. Optional `i18n` attribute can be used to localise the option label.
 <3> *default* is optional, and may be equal to one of the option values.
 
 [#tag]
