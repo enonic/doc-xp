@@ -336,16 +336,14 @@ This function fetches a content
 
 An object with the following keys and their value:
 
-[%header,cols="1%,1%,1%,1%,98%a"]
+[%header,cols="35%,1%,1%,63%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Type | Attributes| Default| Description
-| key | string | | | Path or id to the parent content
-| versionId | string | <optional> | | Content version id
+| Name | Type | Attributes| Description
+| key | string | | Path or id to the parent content
+| versionId image:xp-720.svg[XP 7.2.0,opts=inline] | string | <optional> | Content version id
 |===
-
-NOTE: `version` was first introduced in v7.2.0
 
 [.lead]
 Returns
