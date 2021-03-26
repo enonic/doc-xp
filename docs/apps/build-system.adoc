@@ -105,16 +105,20 @@ Windows:: `$XP_INSTALL/bin/server.sh dev`
 === Continuous building
 
 Gradle also supports a https://docs.gradle.org/current/userguide/command_line_interface.html#sec:continuous_build[continuous build mode].
-This will monitor your project assets for changes and run the specified task when something changes.
+In continuous build mode, Gradle will monitor your project assets for changes and run a task you specify task when something changes.
 
-To use this with the `deploy` task, simply run the following command:
+Continuous builds come in handy when the changes you're working on require a full compile and re-deploy, such as when you're working with Java or need to build/compile client-side assets with an external build tool (such as webpack).
+
+If you don't need a full compile or don't need to run external build tools, you may be better served by using xref:build-system#_development_mode[XP's development mode].
+
+To use continuous builds, specify your task and pass the `--continuous` option. The following examples use the `deploy` task, but you can also use any other defined Gradle tasks:
+
+Enonic CLI:: `enonic project gradle deploy --continuous`
 
 Linux/MacOS:: `./gradlew deploy --continuous`
 
 Windows:: `gradlew.bat deploy --continuous`
 
-This will deploy and reload the application on the server when something changes in your project.
-The continuous deployment mode is most useful when coding Java, or other changes that require a full compile and re-deploy.
 
 
 // ==  Debugging
