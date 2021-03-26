@@ -94,7 +94,14 @@ NOTE:  XP apps deployed via file (locally) are presented with a small blue icon 
 As the name implies, development mode is intended only for development use and should _not_ be used in production. Doing so would cause both security and performance issues.
 ====
 
-Enonic XP can be run in a special mode known as _development mode_. In this mode, XP will detect any changes to your project source files, including JavaScript controllers and XML schemas. It does this by reading these files directly from their source locations instead of from the application `.jar` file.
+Enonic XP can be run in a special mode known as _development mode_. In this mode, XP will detect changes to your project source files, including JavaScript controllers and registered XML schemas. It does this by reading these files directly from their source locations instead of from the application `.jar` file.
+
+[NOTE]
+====
+Because of the way that XP works, some changes are not picked up in dev mode: if you add a _new_ content type, XP will not pick it up automatically. This is because content types are registered with XP when _deploying_ an app. However, changes to existing content types _are_ detected. If you'd like to have new content types picked up automatically, try using xref:build-system#_continuous_building[continuous build mode].
+
+This does not affect JavaScript controllers. You can add new controllers and they will be picked up by XP automatically.
+====
 
 Development mode also disables some of XP's caching mechanisms. To make the development workflow as smooth as possible, XP tries to invalidate caches for your static assets. This is to prevent you from getting stale resources so that what you see in the browser is always as up to date as possible.
 
@@ -113,7 +120,9 @@ Windows:: `$XP_INSTALL/bin/server.sh dev`
 Gradle also supports a https://docs.gradle.org/current/userguide/command_line_interface.html#sec:continuous_build[continuous build mode].
 In continuous build mode, Gradle will monitor your project assets for changes and run a task you specify task when something changes.
 
-Continuous builds come in handy when the changes you're working on require a full compile and re-deploy, such as when you're working with Java or need to build/compile client-side assets with an external build tool (such as webpack).
+Continuous builds come in handy when the changes you're working on require a full compile and redeploy, such as when you're working with Java or need to build/compile client-side assets with an external build tool (such as webpack).
+
+Another use case for continuous builds is if you're adding _new_ content types (or other XML schemas?). Because these are registered when an app is deployed, you need to compile and redeploy your app for XP to become aware of them.
 
 If you don't need a full compile or don't need to run external build tools, you may be better served by using xref:build-system#_development_mode[XP's development mode].
 
