@@ -96,7 +96,7 @@ As the name implies, development mode is intended only for development use and s
 
 Enonic XP can be run in a special mode known as _development mode_. In this mode, XP will detect any changes to your project source files, including JavaScript controllers and XML schemas. It does this by reading these files directly from their source locations instead of from the application `.jar` file.
 
-Development mode also disables some of XP's caching mechanisms. (What mechanisms and why?)
+Development mode also disables some of XP's caching mechanisms. To make the development workflow as smooth as possible, XP tries to invalidate caches for your static assets. This is to prevent you from getting stale resources so that what you see in the browser is always as up to date as possible.
 
 Running XP in development mode may be convenient if your project does not rely on additional build steps such as JavaScript bundling. If you need to run arbitrary build tasks before deploying your project, check out xref:build-system#_continuous_building[the section on continuous builds].
 
