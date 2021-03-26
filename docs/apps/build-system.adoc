@@ -89,12 +89,11 @@ NOTE:  XP apps deployed via file (locally) are presented with a small blue icon 
 
 === Development Mode
 
-Enonic XP supports a so-called Development mode.
-When running in this mode, XP will automatically source JavaScript controllers directly from your project folder.
+Enonic XP can be run in a special mode known as _development mode_. In this mode, XP will detect any changes to your project source files, including JavaScript controllers and XML schemas. When it detects a change, XP will automatically build and redeploy your project for you.
 
-This may be convenient if you are developing with pure JavaScript and do not depend on build steps in your project.
+This may be convenient if your project does not rely on additional build steps such as JavaScript bundling. If you need to run arbitrary build tasks before deploying your project, check out xref:build-system#_continuous_building[the section on continuous builds].
 
-You may activate dev mode when starting XP as follows:
+To activate development mode, use one of the following commands to start your sandbox:
 
 Enonic CLI:: `enonic sandbox start --dev`
 
