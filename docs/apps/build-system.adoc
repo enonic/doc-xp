@@ -94,14 +94,14 @@ NOTE:  XP apps deployed via file (locally) are presented with a small blue icon 
 As the name implies, development mode is intended only for development use and should _not_ be used in production. Doing so would cause both security and performance issues.
 ====
 
-Enonic XP can be run in a special mode known as _development mode_. In this mode, XP will detect changes to your project source files, including JavaScript controllers and registered XML schemas. It does this by reading these files directly from their source locations instead of from the application `.jar` file.
+Enonic XP can be run in a special mode known as _development mode_. In this mode, XP will try to detect changes to your project source files, including JavaScript controllers and registered XML schemas. It does this by reading these files directly from their source locations instead of from the application `.jar` file.
 
-[NOTE]
-====
-Because of the way that XP works, some changes are not picked up in dev mode: if you add a _new_ content type, XP will not pick it up automatically. However, changes to existing content types _are_ detected. If you'd like to have new content types picked up automatically, try using xref:build-system#_continuous_building[continuous build mode].
+Because of the way XP reads source files directly in development mode, it has a few limitations:
 
-This does not affect JavaScript controllers. You can add new controllers and they will be picked up by XP automatically.
-====
+. Files that require any sort of compilation (including transpilation) are not detected. If you use TypeScript or JavaScript features that XP doesn't support, these files won't be picked up. For an overview over what JavaScript features you can use without compilation, see [these docs]
+. XP will not pick up _new_ content types. If you add a new content type after your previous project deploy, XP will not be able to see it. However, changes to _existing_ content types _are_ picked up. XP will pick up new JavaScript controllers as long as it can run them without compilation (per the previous point).
+
+If you need any of the above features, try using xref:build-system#_continuous_building[continuous build mode] instead.
 
 Development mode also disables some of XP's caching mechanisms. To make the development workflow as smooth as possible, XP tries to invalidate caches for your static assets. This is to prevent you from getting stale resources so that what you see in the browser is always as up to date as possible.
 
