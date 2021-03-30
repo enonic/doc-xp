@@ -98,7 +98,7 @@ Enonic XP can be run in a special mode known as _development mode_. In this mode
 
 [NOTE]
 ====
-Because of the way that XP works, some changes are not picked up in dev mode: if you add a _new_ content type, XP will not pick it up automatically. This is because content types are registered with XP when _deploying_ an app. However, changes to existing content types _are_ detected. If you'd like to have new content types picked up automatically, try using xref:build-system#_continuous_building[continuous build mode].
+Because of the way that XP works, some changes are not picked up in dev mode: if you add a _new_ content type, XP will not pick it up automatically. However, changes to existing content types _are_ detected. If you'd like to have new content types picked up automatically, try using xref:build-system#_continuous_building[continuous build mode].
 
 This does not affect JavaScript controllers. You can add new controllers and they will be picked up by XP automatically.
 ====
