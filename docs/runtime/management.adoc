@@ -2,11 +2,37 @@
 :toc: right
 :imagesdir: ../images
 
+Management commands are available at port `4848`, i.e. `localhost:4848` if you're running XP locally
+
+== Authorization [[authorization]]
+
+All endpoints here allow basic authorization.
+Most clients provide an option for authorization, but in case you need to do it manually: basic auth is simply a string of the username and password separated by a colon that is base64 encoded.
+
+Make a source string:
+
+ myusername:mysecretpassword
+
+Encode it to base64:
+
+ bXl1c2VybmFtZTpteXNlY3JldHBhc3N3b3Jk
+
+Add a header to your request:
+
+[cols="1,1", options="header"]
+|===
+|Key
+|Value
+
+|`Authorization`
+|`Basic bXl1c2VybmFtZTpteXNlY3JldHBhc3N3b3Jk`
+|===
+
+NOTE: Read the documentation of the client you use for more info on how to add basic authorization header to your request.
+
 ////
         Snapshot tasks
 ////
-
-Management commands are available at port `4848`, i.e. `localhost:4848` if you're running XP locally
 
 == Snapshots
 
@@ -34,6 +60,8 @@ WARNING: For a clustered installation, the snapshot-location must be on a shared
 |the name of the repository to snapshot.
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -57,6 +85,8 @@ List all the snapshots for the installation.
 
 .Url
  GET repo/snapshot/list
+
+NOTE: Read about authorization <<#authorization, here>>
 
 .Response
 [source,json]
@@ -116,6 +146,8 @@ List all the snapshots for the installation.
 |if that parameter has value `true` then will be restored latest snapshot, in this case to set the `snapshotName` parameter is not required
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -154,6 +186,8 @@ Deletes a snapshot by name or date:
 |String[]
 |List of snapshot names to delete
 |===
+
+NOTE: Read about authorization <<#authorization, here>>
 
 .Response
 [source,json]
@@ -207,6 +241,8 @@ Export data from every repository. The result will be stored in the `$XP_HOME/da
 |Boolean
 |outputs dump output to an archive (`%name%`.zip) file (default is `false`)
 |===
+
+NOTE: Read about authorization <<#authorization, here>>
 
 .Response
 [source,json]
@@ -267,6 +303,8 @@ NOTE: Upgrade does not work with archived dumps.
 |dump name
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -306,6 +344,8 @@ WARNING: A load will delete all existing repositories before loading the reposit
 |Boolean
 |loads dump form an archive (`%name%`.zip) file (default is `false`)
 |===
+
+NOTE: Read about authorization <<#authorization, here>>
 
 .Response
 [source,json]
@@ -395,6 +435,8 @@ WARNING: Exporting content will not include the version history of the content, 
 |Show the result without making actual changes.
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -454,6 +496,8 @@ The export read has to be stored in the `$XP_HOME/data/export` directory.
 |show the result without making actual changes.
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -504,6 +548,8 @@ Installs an application from file on all nodes.
 |File of the application
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -552,6 +598,8 @@ Installs an application from url on all nodes.
 |image:xp-760.svg[XP 7.6.0,opts=inline] application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -596,6 +644,8 @@ image:xp-760.svg[XP 7.6.0,opts=inline] Starts an application with specific appli
 |Application key, for instance, `com.enonic.app.contentstudio`.
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,plain]
 ----
@@ -621,6 +671,8 @@ image:xp-760.svg[XP 7.6.0,opts=inline] Stops an application with specific applic
 |Application key, for instance, `com.enonic.app.contentstudio`.
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,plain]
 ----
@@ -645,6 +697,8 @@ image:xp-760.svg[XP 7.6.0,opts=inline] Uninstalls an application with specific a
 |String
 |Application key, for instance, `com.enonic.app.contentstudio`.
 |===
+
+NOTE: Read about authorization <<#authorization, here>>
 
 .Response
 [source,plain]
@@ -725,6 +779,8 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
 |flag to skip processing of content children
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -740,6 +796,8 @@ Calls forced content sync for all available projects.
 
 .Url
  POST content/syncAll
+
+NOTE: Read about authorization <<#authorization, here>>
 
 ////
         Repository tasks
@@ -775,6 +833,8 @@ Reindex the content in the search indices for the given repository and branches.
 |Boolean
 |if true, the indices will be deleted before recreated
 |===
+
+NOTE: Read about authorization <<#authorization, here>>
 
 .Response
 [source,json]
@@ -815,6 +875,8 @@ Update settings for a specified repository.
 |settings object, see below
 |===
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Available settings options
 [source,json]
 ----
@@ -848,6 +910,8 @@ List available repositories.
 .Url
  GET repo/list
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
@@ -879,10 +943,11 @@ WARNING: Make sure you have a backup of the installation available before doing 
 .Url
  POST system/vacuum
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Response
 [source,json]
 ----
-{
 {
     "TaskResults": [
         {
@@ -914,6 +979,5 @@ WARNING: Make sure you have a backup of the installation available before doing 
             "TaskName": "UnusedVersionTableEntryCleaner"
         }
     ]
-}
 }
 ----
