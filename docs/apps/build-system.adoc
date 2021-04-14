@@ -98,7 +98,7 @@ Enonic XP can be run in a special mode known as _development mode_. In this mode
 
 Because of the way XP reads source files directly in development mode, it has a few limitations:
 
-- Files that require any sort of compilation (including transpilation) are not detected. If you use TypeScript or JavaScript features that XP doesn't support, these files won't be picked up. For an overview over what JavaScript features you can use without compilation, see [these docs]
+- Files that require any sort of compilation (including transpilation) are not detected. If you use TypeScript or JavaScript features that XP doesn't support, these files won't be picked up. XP uses the  Nashorn JavaScript engine for compiling JavaScript. For an overview over what JavaScript features Nashorn supports, see https://kangax.github.io/compat-table/es6/#nashorn1_8[this feature table].
 - XP will not pick up _new_ content types. If you add a new content type after your previous project deploy, XP will not be able to see it. However, changes to _existing_ content types _are_ picked up. XP will pick up new JavaScript controllers as long as it can run them without compilation (as per the previous point).
 
 If you need any of the above features, try using xref:build-system#_continuous_building[continuous build mode] instead.
