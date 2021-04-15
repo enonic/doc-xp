@@ -43,18 +43,18 @@ The exception to this naming scheme are <<built-in>> content types, since these 
 </content-type>
 ----
 
-<1> *display-name* The human readable name of the content type.
+<1> *display-name* (required) The human readable name of the content type.
 Optionally specify the <<../api/lib-i18n.adoc#,i18n>> attribute to define a mapping to localize the value.
 The localisation key must then be declared and localised in the resource bundle.
-<2> *display-name-label* _(Since v7.1)_ Enables you to override the default <Display Name> placeholder used in the content form.
-<3> *description* - Set a description that is shown when creating the content type.
-<4> *super-type* Refers to the root controller of the form. For most custom content types this should be set to `base:structured`.
-<5> *is-abstract* (default: false) If true, you cannot create content with this content type.
-<6> *is-final* (default: false) If true, it is not possible to create content types that “extend” this.
-<7> *is-built-in* (default: false) Only used by the built-in content types.
-<8> *allow-child-content* (default: true) If false, it will prevent users from creating child items on content of this type.
+<2> *display-name-label* (optional; _since v7.1_) Enables you to override the default <Display Name> placeholder used in the content form.
+<3> *description* (optional) Set a description that is shown when creating the content type.
+<4> *super-type* (required) Refers to the root controller of the form. For most custom content types this should be set to `base:structured`.
+<5> *is-abstract* (optional; default: false) If true, you cannot create content with this content type.
+<6> *is-final* (optional; default: false) If true, it is not possible to create content types that “extend” this.
+<7> *is-built-in* (optional; default: false) Only used by the built-in content types.
+<8> *allow-child-content* (optional; default: true) If false, it will prevent users from creating child items on content of this type.
 (e.g. prevents creating child items of images)
-<9> *form* The custom <<./schemas.adoc#Forms,Form>> definition that provides the schema for your data.
+<9> *form* (required) The custom <<./schemas.adoc#Forms,Form>> definition that provides the schema for your data.
 
 == Display name expressions
 
