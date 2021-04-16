@@ -687,7 +687,9 @@ A plain text, single line input with advanced validation options. Stored as stri
 ----
 <1> *default* specifies the default string for the TextArea
 <2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
-<3> *regexp* supports validation by defining regular expressions
+<3> *regexp* supports validation by defining regular expressions.
++
+NOTE: Regex validation is performed by the browser's https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test[regex testing function]. Visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation on regexes] for more information on the supported expressions and character classes.
 
 == Time
 
