@@ -69,10 +69,10 @@ NOTE: Only simple input types may be used as variables, so input types like Html
   <display-name>Person</display-name>
   <display-name-expression>${firstName} ${lastName}</display-name-expression> <!--1-->
   <form>
-    <input name="firstname" type="TextLine">
+    <input name="firstName" type="TextLine">
       <label>First Name</label>
     </input>
-    <input name="lastname" type="TextLine">
+    <input name="lastName" type="TextLine">
       <label>Last Name</label>
     </input>
   </form>
