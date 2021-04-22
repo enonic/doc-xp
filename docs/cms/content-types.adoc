@@ -61,7 +61,7 @@ The localisation key must then be declared and localised in the resource bundle.
 It's possible to auto-generate display name based on values from form fields by using ES6 template literals.
 In the example below, the display name will consist of the values from the `firstName` and `lastName` fields, separated by a space.
 
-NOTE: Only simple input types may be used as variables, so input types like HtmlArea or CheckBox are not supported.
+NOTE: Only simple input types may be used as variables, so input types like HtmlArea or CheckBox are not supported. Additionally, if an input allows multiple occurrences, only the first occurrence will be used in the generated display name.
 
 [source,xml]
 ----
