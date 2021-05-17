@@ -1,6 +1,6 @@
 = Portal Library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Functions to access portal functionality.
 
@@ -767,6 +767,7 @@ Parameters
 ! Name  ! Type   ! Attributes ! Default ! Description
 ! value ! string !            !         ! Html value string to process.
 ! type  ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! image:xp-770.svg[XP 7.7.0,opts=inline] imageWidths  ! Array.<number> ! <optional> ! server  ! List of image widths. Allows to generate image URLs for given image widths and use them in the `srcset` attribute of an `img` tag.
 !===
 
 |===
