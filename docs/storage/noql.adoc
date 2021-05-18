@@ -317,7 +317,7 @@ fulltext('data.*', '"gone fishing today"~2', "AND")
 
 The stemmed function is similar to <<#fulltext,fulltext()>> except that it searches language optimized tokens instead of a source text. E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
 
-NOTE: Stemming is language-dependant so content needs a language to be set for stemming to work !
+NOTE: Stemming is language-dependant so content needs a <<indexing#languages,language>> to be set for stemming to work, or it must set directly to node indices!
 
 .Function definition
 [source,sql]
