@@ -1,7 +1,7 @@
 = Node Library
 include::../variables.adoc[]
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 This library contains functions to get, query and manipulate nodes.
 
@@ -738,6 +738,61 @@ var binaryStream = repo.getBinary({
     key: "/myNode",
     binaryReference: "myBinaryReference"
 });
+----
+
+=== getCommit
+image:xp-770.svg[XP 7.7.0,opts=inline]
+
+Returns a node version commit.
+
+[.lead]
+Parameters
+
+An object with the following keys and their value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| id | string | ID of the commit
+|===
+
+[.lead]
+Returns
+
+*object* : Commit object
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| id | string | Commit ID
+| message | string | Optional commit message
+| committer | string | Principal key of commit creator
+| timestamp | string | Time of creation
+|===
+
+[.lead]
+Example
+
+.Fetching a commit version of a node.
+[source,js]
+----
+var commit = repo.getCommit({
+    id: "aa1f76bf-4bb9-41be-b166-03561c1555b2"
+});
+----
+
+.Sample response
+[source,js]
+----
+{
+    "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
+    "message": "",
+    "committer": "user:system:anonymous",
+    "timestamp": "2019-01-24T15:16:36.260799Z"
+}
 ----
 
 === modify
