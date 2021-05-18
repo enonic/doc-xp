@@ -248,6 +248,16 @@ NOTE: Read about authorization <<#authorization, here>>
 [source,json]
 ----
 {
+"taskId": "f8565e19-3960-4bf0-8daa-f4ca77ef338f"
+}
+----
+
+NOTE: task info can be fetched by <<task, task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
     "Repositories": [
         {
             "RepositoryId": "com.enonic.cms.default",
@@ -309,6 +319,16 @@ NOTE: Read about authorization <<#authorization, here>>
 [source,json]
 ----
 {
+    "taskId": "549c38ac-e20a-4851-8536-3fd2b937e328"
+}
+----
+
+NOTE: task info can be fetched by <<task, task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
     "InitialVersion": "8.0.0",
     "UpgradedVersion": "8.0.0"
 }
@@ -348,6 +368,16 @@ WARNING: A load will delete all existing repositories before loading the reposit
 NOTE: Read about authorization <<#authorization, here>>
 
 .Response
+[source,json]
+----
+{
+    "taskId": "a0b774dd-03f1-48fd-b500-b76a93c6b6fe"
+}
+----
+
+NOTE: task info can be fetched by <<task, task>> request.
+
+.TaskInfo.progress.info value:
 [source,json]
 ----
 {
@@ -441,6 +471,16 @@ NOTE: Read about authorization <<#authorization, here>>
 [source,json]
 ----
 {
+"taskId": "2003993f-cf52-4aa0-aca8-66c3911e6b31"
+}
+----
+
+NOTE: task info can be fetched by <<task, task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
     "DryRun": false,
     "ExportedBinaries": [],
     "ExportedNodes": [
@@ -499,6 +539,16 @@ The export read has to be stored in the `$XP_HOME/data/export` directory.
 NOTE: Read about authorization <<#authorization, here>>
 
 .Response
+[source,json]
+----
+{
+    "taskId": "767dad91-eecd-442b-a9f8-d3a892e1e8c4"
+}
+----
+
+NOTE: task info can be fetched by <<task, task>> request.
+
+.TaskInfo.progress.info value:
 [source,json]
 ----
 {
@@ -753,6 +803,7 @@ data: {"key":"com.enonic.app.contentstudio"}
 
 Content metadata commands.
 
+[#reprocess]
 === Reprocess
 
 Reprocesses content in the repository and *regenerates metadata for the media attachments*. Only content of a media type (super-type = _base:media_) are processed.
@@ -790,7 +841,43 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
+=== Reprocess Task
+
+Calls <<reprocess,reprocess>> endpoint as a task.
+
+NOTE: This command should be used after migrating content from Enonic CMS using the cms2xp tool.
+
+.Url
+ POST content/reprocessTask
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`sourceBranchPath`
+|String
+|target content path to be reprocessed. Format: `<branch-name>:<content-path>`. e.g `draft:/`
+
+|`skipChildren`
+|Boolean
+|flag to skip processing of content children
+|===
+
+.Response
+[source,json]
+----
+{
+    "taskId": "07500a00-8d60-4084-9657-af6725dc587d"
+}
+----
+
+NOTE: task info can be fetched by <<task, task>> request.
+
 === SyncAll
+image:xp-760.svg[XP 7.6.0,opts=inline]
 
 Calls forced content sync for all available projects.
 
@@ -798,6 +885,14 @@ Calls forced content sync for all available projects.
  POST content/syncAll
 
 NOTE: Read about authorization <<#authorization, here>>
+
+.Response
+[source,json]
+----
+{
+    "taskId": "767dad91-eecd-442b-a9f8-d3a892e1e8c4"
+}
+----
 
 ////
         Repository tasks
@@ -807,6 +902,7 @@ NOTE: Read about authorization <<#authorization, here>>
 
 Commands for configuring and managing repositories.
 
+[#reindex]
 === Reindex
 
 Reindex the content in the search indices for the given repository and branches. This is usually required after upgrades, and may be useful in many other situation.
@@ -851,6 +947,44 @@ NOTE: Read about authorization <<#authorization, here>>
     "Duration": "PT-0.056S"
 }
 ----
+
+=== Reindex Task
+
+Calls <<reindex,reindex>> endpoint as a task.
+
+
+.Url
+ POST repo/index/reindex
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`branches`
+|String
+|a comma-separated list of branches to be reindexed
+
+|`repository`
+|String
+|the name of the repository to reindex
+
+|`initialize`
+|Boolean
+|if true, the indices will be deleted before recreated
+|===
+
+.Response
+[source,json]
+----
+{
+    "taskId": "cb1b4e06-22ad-4235-8876-a443c88c290b"
+}
+----
+
+NOTE: task info can be fetched by <<task, task>> request.
 
 === Settings
 
@@ -949,6 +1083,16 @@ NOTE: Read about authorization <<#authorization, here>>
 [source,json]
 ----
 {
+    "taskId": "cb1b4e06-22ad-4235-8876-a443c88c290b"
+}
+----
+
+NOTE: task info can be fetched by <<task, task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
     "TaskResults": [
         {
             "Deleted": 0,
@@ -960,20 +1104,6 @@ NOTE: Read about authorization <<#authorization, here>>
         {
             "Deleted": 0,
             "Failed": 0,
-            "InUse": 39,
-            "Processed": 39,
-            "TaskName": "UnusedVersionFilesCleaner"
-        },
-        {
-            "Deleted": 0,
-            "Failed": 0,
-            "InUse": 2,
-            "Processed": 2,
-            "TaskName": "UnusedBinaryFilesCleaner"
-        },
-        {
-            "Deleted": 0,
-            "Failed": 0,
             "InUse": 123,
             "Processed": 123,
             "TaskName": "UnusedVersionTableEntryCleaner"
@@ -981,3 +1111,26 @@ NOTE: Read about authorization <<#authorization, here>>
     ]
 }
 ----
+
+[#task]
+== Task
+
+Fetches particular task information.
+
+.Url
+ GET task/{taskId}
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`taskId`
+|String
+|particular task id
+|===
+
+.Response
+<<../api/lib-task#taskinfo,`TaskInfo`>> object.
