@@ -323,6 +323,7 @@ var result2 = repo.commit({
 }
 ----
 
+[#create]
 === create
 
 Creating a node.  To create a content where the name is not important and there could be multiple instances under the same parent content,
@@ -340,7 +341,8 @@ An object with the following keys and their value:
 | Name | Type | Attributes | Details
 | _name | string | <optional> | Name of content.
 | _parentPath | string | <optional> | Path to place content under.
-| _indexConfig | object | <optional> | How the document should be indexed. A default value "byType" will be set if no value specified.
+| _indexConfig | object | <optional> | How the document should be <<../storage/indexing#,indexed>>. A default template value
+"<<../storage/indexing#byType,byType>>" will be set if no value specified.
 | _permissions | object | <optional> | The access control list for the node. By default the creator will have full access
 | _inheritsPermissions | boolean | <optional> | `true` if the permissions should be inherited from the node parent. Default is `false`.
 | _manualOrderValue | number | <optional> | Value used to order document when ordering by parent and child-order is set to manual
@@ -359,9 +361,9 @@ Example
 [source,js]
 ----
 var result1 = repo.create({
-    _name: "nerd",
-    displayName: "Carpenter and IT expert",
-    likes: "Plywood",
+    _name: 'nerd',
+    displayName: 'Carpenter and IT expert',
+    likes: 'Plywood',
     numberOfUselessGadgets: 123
 });
 ----
@@ -370,68 +372,53 @@ var result1 = repo.create({
 [source,js]
 ----
 {
-    _id: "3eb6b282-94d1-4587-b85d-92e41cc1eee5",
-    _name: "nerd",
-    _path: "/nerd",
-    _childOrder: "_ts DESC",
-    _indexConfig: {
-        default: {
-            decideByType: false,
-            enabled: true,
-            nGram: false,
-            fulltext: false,
-            includeInAllText: false,
-            path: false,
-            indexValueProcessors: [],
-            languages: []
-        },
-        configs: [
-            {
-                path: "displayName",
-                config: {
-                    decideByType: false,
-                    enabled: true,
-                    nGram: true,
-                    fulltext: true,
-                    includeInAllText: true,
-                    path: false,
-                    indexValueProcessors: [],
-                    languages: []
-                }
-            }
-        ]
+  "_id": "2f0d5c09-39fe-4746-9754-74491d75a185",
+  "_name": "nerd",
+  "_path": "/nerd",
+  "_childOrder": "_ts DESC",
+  "_indexConfig": {
+    "default": {
+      "decideByType": true,
+      "enabled": true,
+      "nGram": false,
+      "fulltext": false,
+      "includeInAllText": false,
+      "path": false,
+      "indexValueProcessors": [],
+      "languages": []
     },
-    _inheritsPermissions: false,
-    _permissions: [
-        {
-            principal: "user:system:anonymous",
-            allow: [
-                "READ"
-            ],
-            deny: []
-        },
-        {
-            principal: "role:admin",
-            allow: [
-                "READ",
-                "CREATE",
-                "MODIFY",
-                "DELETE",
-                "PUBLISH",
-                "READ_PERMISSIONS",
-                "WRITE_PERMISSIONS"
-            ],
-            deny: []
-        }
-    ],
-    _state: "DEFAULT",
-    _nodeType: "default",
-    _versionKey: "30070ec1-0426-4153-b3a7-f78574c6978a",
-    _ts: "2019-04-30T11:40:45.371Z",
-    displayName: "Carpenter and IT expert",
-    likes: "Plywood",
-    numberOfUselessGadgets: 123
+    "configs": []
+  },
+  "_inheritsPermissions": false,
+  "_permissions": [
+    {
+      "principal": "role:system.admin",
+      "allow": [
+        "READ",
+        "CREATE",
+        "MODIFY",
+        "DELETE",
+        "PUBLISH",
+        "READ_PERMISSIONS",
+        "WRITE_PERMISSIONS"
+      ],
+      "deny": []
+    },
+    {
+      "principal": "role:system.everyone",
+      "allow": [
+        "READ"
+      ],
+      "deny": []
     }
+  ],
+  "_state": "DEFAULT",
+  "_nodeType": "default",
+  "_versionKey": "aa95ae7e-b975-4879-a19c-cce3b1fc3742",
+  "_ts": "2021-05-15T08:46:37.227Z",
+  "displayName": "Carpenter and IT expert",
+  "likes": "Plywood",
+  "numberOfUselessGadgets": 123
 }
 ----
 
