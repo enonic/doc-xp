@@ -50,7 +50,7 @@ When analyzed, it is split into the following tokens:
 
   'this', 'is', 'test', 'driven', 'development'
 
-
+[#stemmed]
 === stemmed
 
 Language optimized version of the analyzed index type.
@@ -72,7 +72,6 @@ The path-elements (separated by default path-separator '/') are indexed as token
 
 Any property that is indexed, automatically gets indexed with the orderby type.
 The "orderby" index type lets us sort text and numbers in a natural way across properties with different <<ValueTypes>>
-
 
 [#value_types]
 == ValueTypes
@@ -147,7 +146,7 @@ Below is the complete list of all supported value-types.
 |Any valid XML
 |===
 
-
+[#_allText]
 == _allText
 
 Nodes that contain indexed String values, typically gets a generated system property called _allText.
@@ -162,17 +161,15 @@ NOTE: When defining custom index configurations, you may choose if a property wi
 By default, properties are indexed based on their specific value type, according to the valueType table above.
 This strategy is known as `decideByType`.
 
-// TODO: WHAT HAPPENS IF NO DEFAULT CONFIG IS SPECIFIED IN A NODE?
-
 Every now and then, you may need more detailed control of how your properties are indexed.
 This is where the index config comes in.
 
 The index config allows you to provide detailed instructions on how the properties of a node should be indexed.
 
 The index config itself is stored as a property on the node.
-As such. a basic index config might look something like this:
+A basic index config might look something like this:
 
-.Samle index config
+.Sample index config
 [source,json]
 ----
 "_indexConfig": {
@@ -183,7 +180,7 @@ As such. a basic index config might look something like this:
         "fulltext": false,
         "includeInAllText": false,
         "path": false,
-        "indexValueProcessors": []
+        "indexValueProcessors": [],
         "languages": []
     },
     "configs": [  <!--2-->
@@ -198,6 +195,18 @@ As such. a basic index config might look something like this:
                 "path": false,
                 "languages": []
             }
+        },
+        {
+            "path": "mySet.**",  <!--5-->
+            "config": {
+                "enabled": true,
+                "decideByType": false,
+                "nGram": false,
+                "fulltext": false,
+                "includeInAllText": false,
+                "path": false,
+                "languages": ['en','no'] <!--6-->
+            }
         }
     ]
 }
@@ -207,20 +216,22 @@ As such. a basic index config might look something like this:
 <2> *configs* overrides the default config for properties matching specified `path`
 <3> *path* specifies the propertyPath the config applies to
 <4> *config* is the specific overriding config
+<5> *mySet.*** applies to all sub properties of "mySet"
+<6> *languages* stemmed <<#languages, language>> indices will be generated for all matched properties
 
 === Property paths
 
 All config entires, with exception of default must specify a path.
 The path element defines the property scope within the node where this index configuration applies.
 
-Paths follow the <<noql#propertyPath, propertyPath>> format, optionally including wildcard character *.
+Paths follow the <<noql#propertyPath, propertyPath>> format, optionally including double wildcard character **.
 
 Examples:
 
 .Applies to "myProperty" and all sub properties
 [source,json]
 ----
-myProperty*
+myProperty**
 ----
 
 .Applies to "myProperty.myName" and all sub properties
@@ -242,7 +253,8 @@ If false, indexing will be disabled for the affected properties
 
 === decideByType
 
-If true, indexing is done based on valueType, according to the table above. I.e. numeric values are indexed as both string and numeric.
+If true, indexing is done based on valueType, according to the table above.
+I.e. numeric values are indexed as both string and numeric.
 
 === fulltext
 
@@ -262,7 +274,6 @@ Affected values will be added to the `_allText` property
 
 // === indexValueProcessors
 
-// TODO
 [#languages]
 === languages
 
@@ -299,6 +310,9 @@ Language codes are specified in the `la[-co]`` format, where:
 |de
 |German
 
+|el
+|Greek
+
 |en
 |English
 
@@ -328,6 +342,21 @@ Language codes are specified in the `la[-co]`` format, where:
 
 |hy
 |Armenian
+
+|id
+|Indonesian
+
+|it
+|Italian
+
+|ja
+|Japanese
+
+|ko
+|Korean
+
+|ku
+|Sorani
 
 |lt
 |Lithuanian
@@ -365,12 +394,63 @@ Language codes are specified in the `la[-co]`` format, where:
 |th
 |Thai
 
+|zh
+|Chinese
+
 |===
 
-// TODO: verify
-NOTE: If a non-supported language is specified, it is simply ignored
+Use <<noql#stemmed,stemmed()>> function to query data based on these indices.
 
+NOTE: While setting the language for the content will only index the _allText field, setting the languages ​​in the node config will create stemmed indices for all mapped properties. See node <<../api/lib-node#create,create>> function.
 
+.Sample use of languages for node
+[source,json]
+----
+repo.create({
+    _name: "fruits",
+    displayName: "Fruit basket",
+    description: "language indices usage example",
+    english_set: {
+      fruit_a: "Apple",
+      fruit_set: {
+            fruit_b: "Lemon",
+            fruit_c: "Orange"
+        }
+    },
+    norwegian_set: {
+        fruit_a: "Eple",
+        fruit_set: {
+            fruit_b: "Sitron",
+            fruit_c: "Oransje"
+        }
+    },
+    _indexConfig: {
+        default: {
+            enabled: true,
+            decideByType: true,
+            nGram: false,
+            fulltext: false,
+            includeInAllText: false,
+            path: false,
+            languages: ['en']
+        }, configs: [{
+            path: "norwegian_set.**",
+            config: {
+                enabled: true,
+                decideByType: false,
+                nGram: true,
+                fulltext: true,
+                includeInAllText: true,
+                path: false,
+                languages: ['no']
+            }
+        }]
+    }
+});
+----
+
+Stemmed english indices will be generated for `_name`, `displayName`, `description` and all strings inside `english_set`.
+Norwegian indices will be created for strings inside `norwegian_set` only.
 
 == Templates
 
@@ -413,6 +493,7 @@ Turns off indexing completely
 }
 ----
 
+[#byType]
 === byType
 
 Indexing based on valueType
@@ -430,7 +511,6 @@ Indexing based on valueType
 }
 ----
 
-
 === fulltext
 
 Activates common text indexing options
@@ -447,7 +527,6 @@ Activates common text indexing options
     "path": false
 }
 ----
-
 
 === path
 
