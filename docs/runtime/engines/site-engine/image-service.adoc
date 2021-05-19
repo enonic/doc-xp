@@ -18,19 +18,22 @@ An image URL consists of the following components:
   Example: `1feb57ed672f8c3b9fd6d4614878dafd9882298b/`
 . Scaling (method followed by arguments, separated by dashes), followed by a forward slash. +
   Example: `block-300-100/`
-. File name, based on content name, with or without file extension. +
-  Example: `content-name.jpg`
-. File extension (if specified), preceded by a period. +
-  Example: `.jpeg`
+. File name equal to content name. +
+  Example: `content-name.png`
+. (Optional) Format extension, preceded by a period. +
+  Example: `.jpg`
 . URL parameters, such as background or filter (URI encoded, filter values are semicolon-separated) +
   Example: `?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29`
 
-NOTE: If a format is not specified when generating the image URL, Enonic XP tries to guess the MIME type based on the image content name (if it contains a file extension).
-Otherwise, the MIME type is derived directy from the content.
+NOTE: If format extension is specified, content gets converted to a corresponding format. Otherwise, the MIME type is derived directly from the content.
+
+NOTE: Supported format extensions are `.jpg`, `.png` and `.gif`. Other extensions may still work, but the are unsupported.
+
+WARNING: Content with MIME type `image/gif` and `image/svg+xml` returned as-is without any processing.
 
 Example of an image URL on the root of a live site behind virtualhost:
 ----
-/_/image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.jpg.jpeg?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29
+/_/image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.png.jpg?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29
 ----
 
 == Scaling methods
@@ -52,7 +55,7 @@ Arguments::
 
 Example::
 ----
-block(300,100)
+block-300-100
 ----
 
 === Height
@@ -68,7 +71,7 @@ Arguments::
 
 Example::
 ----
-height(300)
+height-300
 ----
 
 === Max
@@ -85,7 +88,7 @@ Arguments::
 
 Example::
 ----
-max(300)
+max-300
 ----
 
 === Square
@@ -101,7 +104,7 @@ Arguments::
 
 Example::
 ----
-square(300)
+square-300
 ----
 
 === Wide
@@ -120,7 +123,7 @@ Arguments::
 
 Example::
 ----
-wide(300,100)
+wide-300-100
 ----
 
 === Width
@@ -136,7 +139,16 @@ Arguments::
 
 Example::
 ----
-width(300)
+width-300
+----
+
+=== Full
+
+No scaling
+
+Example::
+----
+full
 ----
 
 == Filters
@@ -193,7 +205,7 @@ Arguments::
   hue:::
     Decimal value from -1 to 1, of how far around the color wheel to move the hue of the image. Required. (0 is no change)
   saturation:::
-    Decimal value from -1 to 1 to adjust the intesity of the colors in the image. Default: 0
+    Decimal value from -1 to 1 to adjust the intensity of the colors in the image. Default: 0
   brightness:::
     Decimal value from -1 to 1 to adjust the brightness of the image. Default: 0
 
@@ -246,7 +258,7 @@ Arguments::
   width:::
     The width of the border in pixels. Default: 2
   color:::
-    The color of the border as a decimal or hexadecimal number. Default: 0 / 0x000000 (black)
+    The color of the border as a decimal or hexadecimal number. Default: 0x000000 (black)
 
 Examples::
 ----
