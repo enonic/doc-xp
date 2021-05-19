@@ -411,6 +411,9 @@ hazelcast.wait.seconds.before.join:: Wait time in seconds before join operation.
 
 hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before join operation Default: `20`.
 
+NOTE: In case of using Kubernetes API discovery each node makes a call to Kubernetes Master in order to discover PODs.
+It also requires granting certain permissions. You can find mre information in https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes] documentation.
+
 === Admin
 
 `XP_HOME/config/com.enonic.xp.app.main.cfg`
