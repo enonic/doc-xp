@@ -43,6 +43,7 @@ Below is an example of `site.xml` which injects X-data inside all content types.
 [source,xml]
 ----
 <site>
+  <x-data name="address"/>
   <form>
     <input type="TextLine" name="company">
       <label>Company</label>
@@ -53,7 +54,6 @@ Below is an example of `site.xml` which injects X-data inside all content types.
       <occurrences minimum="1" maximum="1"/>
     </input>
   </form>
-  <x-data name="address"/>
 </site>
 ----
 

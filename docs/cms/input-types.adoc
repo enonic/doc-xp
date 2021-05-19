@@ -22,13 +22,6 @@ image::Attachment.png[An empty attachment input box, 700]
 </input>
 ----
 
-.Compatibility
-[width=20%]
-|===
-|Any |Content Type |Part
-
-|{y} | {n}| {y}
-|===
 
 == CheckBox
 
@@ -94,7 +87,7 @@ image::Content-selector-default.png[An input box with a dropdown options below i
     <allowPath>./*</allowPath>
     <allowPath>/quotes*</allowPath>
     <treeMode>true</treeMode>  <!--3-->
-    <hideToggleIcon>true</hideToggleIcon> <!--5-->
+    <hideToggleIcon>true</hideToggleIcon> <!--4-->
   </config>
 </input>
 ----
@@ -175,7 +168,7 @@ All children of the current content's parent +
   <allowPath>../*</allowPath>
 ====
 
-===  ContentTypeFilter
+==  ContentTypeFilter
 
 A field for selecting a content type.
 
@@ -520,6 +513,7 @@ Below is the complete list of available editor tools:
 | Font | Font menu
 | FontSize | Font size menu
 | HorizontalRule | Insert a horizontal line
+| ListStyle | Change style of BulletedList
 | NewPage | Clean editor's content
 | Preview | Preview HTML Area contents
 | Redo | Repeat last action
@@ -615,14 +609,15 @@ image::Radio-buttons.png[two button where one of them is selected, 200]
   <label>My RadioButton</label>
   <occurrences minimum="1" maximum="1"/> <!--1-->
   <config>
-    <option value="one">Option One</option> <!--2-->
-    <option value="two">Option Two</option>
+    <option value="one" i18n="option_one.label">Option One</option> <!--2-->
+    <option value="two" i18n="option_two.label">Option Two</option>
   </config>
   <default>one</default> <!--3-->
 </input>
 ----
 <1> *occurences* only make supports minumum=1 or 0 - maximum will always be 1.
-<2> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple ``option`` elements are allowed and ordered.
+<2> *option* elements and the `@value` attribute defines the actual value to store when the option is selected.
+Multiple ``option`` elements are allowed and ordered. Optional `i18n` attribute can be used to localise the option label.
 <3> *default* is optional, and may be equal to one of the option values.
 
 [#tag]
@@ -687,6 +682,8 @@ A plain text, single line input with advanced validation options. Stored as stri
 <2> *max-length* specifies the maximum allowed number of characters (default: unlimited)
 <3> *show-counter* specifies whether text length counter should be shown (default: hidden)
 <4> *regexp* supports validation by defining regular expressions
++
+NOTE: Regex validation is performed by the browser's https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test[regex testing function]. Visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation on regexes] for more information on the supported expressions and character classes.
 
 image::TextLine.png[Text Line with various settings, 700]
 

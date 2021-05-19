@@ -43,25 +43,25 @@ The exception to this naming scheme are <<built-in>> content types, since these 
 </content-type>
 ----
 
-<1> *display-name* The human readable name of the content type.
+<1> *display-name* (required) The human readable name of the content type.
 Optionally specify the <<../api/lib-i18n.adoc#,i18n>> attribute to define a mapping to localize the value.
 The localisation key must then be declared and localised in the resource bundle.
-<2> *display-name-label* _(Since v7.1)_ Enables you to override the default <Display Name> placeholder used in the content form.
-<3> *description* - Set a description that is shown when creating the content type.
-<4> *super-type* Refers to the root controller of the form. For most custom content types this should be set to `base:structured`.
-<5> *is-abstract* (default: false) If true, you cannot create content with this content type.
-<6> *is-final* (default: false) If true, it is not possible to create content types that “extend” this.
-<7> *is-built-in* (default: false) Only used by the built-in content types.
-<8> *allow-child-content* (default: true) If false, it will prevent users from creating child items on content of this type.
+<2> *display-name-label* (optional; _since v7.1_) Enables you to override the default <Display Name> placeholder used in the content form.
+<3> *description* (optional) Set a description that is shown when creating the content type.
+<4> *super-type* (required) Refers to the root controller of the form. For most custom content types this should be set to `base:structured`.
+<5> *is-abstract* (optional; default: false) If true, you cannot create content with this content type.
+<6> *is-final* (optional; default: false) If true, it is not possible to create content types that “extend” this.
+<7> *is-built-in* (optional; default: false) Only used by the built-in content types.
+<8> *allow-child-content* (optional; default: true) If false, it will prevent users from creating child items on content of this type.
 (e.g. prevents creating child items of images)
-<9> *form* The custom <<./schemas.adoc#Forms,Form>> definition that provides the schema for your data.
+<9> *form* (required) The custom <<./schemas.adoc#Forms,Form>> definition that provides the schema for your data.
 
 == Display name expressions
 
 It's possible to auto-generate display name based on values from form fields by using ES6 template literals.
-In the example below, display name will be combination of values from `firstName` and `lastName` fields, separated by a space.
+In the example below, the display name will consist of the values from the `firstName` and `lastName` fields, separated by a space.
 
-NOTE: Only simple input types may be used as variables, so input types like HtmlArea or CheckBox are not supported.
+NOTE: Only simple input types may be used as variables, so input types like HtmlArea or CheckBox are not supported. Additionally, if an input allows multiple occurrences, only the first occurrence will be used in the generated display name.
 
 [source,xml]
 ----
@@ -69,10 +69,10 @@ NOTE: Only simple input types may be used as variables, so input types like Html
   <display-name>Person</display-name>
   <display-name-expression>${firstName} ${lastName}</display-name-expression> <!--1-->
   <form>
-    <input name="firstname" type="TextLine">
+    <input name="firstName" type="TextLine">
       <label>First Name</label>
     </input>
-    <input name="lastname" type="TextLine">
+    <input name="lastName" type="TextLine">
       <label>Last Name</label>
     </input>
   </form>
@@ -122,46 +122,46 @@ Enonic XP comes with a set of built-in content types that can be used no matter 
 A set of basic content types are provided with the installation
 
 ==== Media (base:media)
-+
+
 This content type serves as the abstract supertype for all content types that are considered “files” in their natural habitat.
 These types are listed in the <<media>> section.
-+
+
 is-abstract:: true
 is-final:: false
 allow-child-content:: false
 
 ==== Shortcut (base:shortcut)
-+
+
 This is used for redirecting a visitor to another content item in the structure.
 Optional name-value parameters can be set to be added to the redirect URL.
-+
+
 is-abstract:: false
 is-final:: true
 allow-child-content:: true
 
 ==== Structured (base:structured)
-+
+
 This is likely the most commonly used base type for creating other content types.
 The structured content type is the foundation for basically any other structured content you can come up with, such as the Person content in the previous example.
-+
+
 is-abstract:: true
 is-final:: false
 allow-child-content:: true
 
 ==== Unstructured (base:unstructured)
-+
+
 The unstructured content type is a special content type that permits the creation of any property or structure without actually defining it first.
 This is convenient for storing data where the keys for each stored property are unknown, such as for some types of user generated content.
 However, since the content data is unstructured (basically schemaless), there is no default user interface that facilitates editing unstructured content after it has been stored.
-+
+
 is-abstract:: false
 is-final:: true
 allow-child-content:: true
 
 ==== Folder (base:folder)
-+
+
 Folders are simply containers for child content, with no other properties than their name and Display Name. They are helpful in organizing your content.
-+
+
 is-abstract:: false
 is-final:: false
 allow-child-content:: true
@@ -202,13 +202,13 @@ Unknown (media:unknown)::
 In order to build sites in a secure and fashionable manner, Enonic XP also ships with a few special purpose portal content types.
 
 * *Site (portal:site)*
-+
+
 The Site content type allows creating websites. By creating a content of type Site, it will become the root of a website.
 This content type provides a special behavior for the content, allowing to select and configure applications for the website.
 Content types, relationship types, filters and x-data of the applications selected will be available to be used inside the website content tree.
-+
+
 NOTE: The content types of an application (i.e. those that are not built-in) can only be used under a content of type Site which has the application selected.
-+
+
 super-type:: base:structured
 is-abstract:: false
 is-final:: true

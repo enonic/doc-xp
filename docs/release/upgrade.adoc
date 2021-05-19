@@ -36,6 +36,7 @@ You can revert to previous behavior be setting `session.cookieSameSite =` in <<.
 
 == v7.6 notes
 * Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <<../framework/tasks#_distributable, Tasks / Distributable>> for more information.
+* XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to https://market.enonic.com. URL can be changed in <<../deployment/config#_market, Configuration Files / Market>>.
 
 == v7.5 notes
 v7.5 is backward compatible with earlier versions

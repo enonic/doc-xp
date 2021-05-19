@@ -64,11 +64,11 @@ Tools are launched in separate browser tabs, running independently of other admi
 
 === Admin Widgets
 
-Widgets are designed to extend existing admin interfaces functionality. 
-Widgets are essentially small applications that are loaded into a section of the user interface 
+Widgets are designed to extend functionality of existing admin interfaces.
+Widgets are essentially small applications that are displayed in the Context panel of the admin interface.
 
 * A single XP application may contain multiple widgets
 * Access to a widget typically requires authentication, and particular role memberships
-* Admin widgets are served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/widget/<widget-name>``
+* Widgets are not supposed to be used outside the admin console
+* Widget can be context dependent (display data based on a selected content) or independent.
 
-Details on implemeting custom widgets
