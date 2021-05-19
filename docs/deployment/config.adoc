@@ -317,7 +317,7 @@ network.join.tcpIp.members=127.0.0.1:5701,127.0.0.1:5702
 system.hazelcast.initial.min.cluster.size=2
 ----
 
-.Sample Hazelcast configuration for Kubernetes
+.Sample Hazelcast configuration for Kubernetes DNS discovery
 [source,properties]
 ----
 clusterConfigDefaults=false
@@ -325,6 +325,19 @@ system.hazelcast.initial.min.cluster.size=2
 network.join.tcpIp.enabled=false
 network.join.kubernetes.enabled=true
 network.join.kubernetes.serviceDns=main.default.svc.cluster.local
+----
+
+.Sample Hazelcast configuration for Kubernetes API discovery
+[source,properties]
+----
+clusterConfigDefaults=false
+system.hazelcast.initial.min.cluster.size=2
+network.join.tcpIp.enabled=false
+network.join.kubernetes.enabled=true
+network.join.kubernetes.serviceName=cluster-discovery
+network.join.kubernetes.namespace=my-namespace
+network.join.kubernetes.kubernetesApiRetries=10
+network.join.kubernetes.resolveNotReadyAddresses=true
 ----
 
 clusterConfigDefaults:: If true some properties set based on xp cluster configuration. Default: `true`
@@ -342,7 +355,25 @@ network.join.multicast.enabled:: Enable Multicast discovery. Default: `false`.
 
 network.join.kubernetes.enabled:: Enable Kubernetes discovery. Default: `false`.
 
-network.join.kubernetes.serviceDns:: Service DNS for Kubernetes discovery.
+network.join.kubernetes.serviceDns:: image:xp-770.svg[XP 7.7.0,opts=inline] Service DNS for Kubernetes discovery. If not set, discovery over Kubernetes API is used. Default is not set.
+
+network.join.kubernetes.namespace:: image:xp-770.svg[XP 7.7.0,opts=inline] Kubernetes Namespace where Hazelcast is running. Default is not set.
+
+network.join.kubernetes.serviceName:: image:xp-770.svg[XP 7.7.0,opts=inline] Service name used to scan only PODs connected to the given service. Default is not set.
+
+network.join.kubernetes.serviceLabelName:: image:xp-770.svg[XP 7.7.0,opts=inline] Service label used to tag services that should form the Hazelcast cluster together. Default is not set.
+
+network.join.kubernetes.serviceLabelValue:: image:xp-770.svg[XP 7.7.0,opts=inline] Service value used to tag services that should form the Hazelcast cluster together. Default is not set.
+
+network.join.kubernetes.podLabelName:: image:xp-770.svg[XP 7.7.0,opts=inline] POD label used to tag PODs that should form the Hazelcast cluster together. Default is not set.
+
+network.join.kubernetes.podLabelValue:: image:xp-770.svg[XP 7.7.0,opts=inline] POD value used to tag PODs that should form the Hazelcast cluster together. Default is not set.
+
+network.join.kubernetes.resolveNotReadyAddresses:: image:xp-770.svg[XP 7.7.0,opts=inline] If set to `true`, it checks also the addresses of PODs which are not ready. Default: `false`.
+
+network.join.kubernetes.useNodeNameAsExternalAddress:: image:xp-770.svg[XP 7.7.0,opts=inline] If set to `true`, uses the node name to connect to a NodePort service instead of looking up the external IP using the API. Default: `false`.
+
+network.join.kubernetes.kubernetesApiRetries:: image:xp-770.svg[XP 7.7.0,opts=inline] Number of retries in case of issues while connecting to Kubernetes API. Default: `3`.
 
 network.join.tcpIp.enabled:: Enable TcpIP discovery. Default: `true`.
 
@@ -355,6 +386,10 @@ network.interfaces:: Comma separated list of ip addresses for binding.
 network.restApi.enabled:: Enable Hazelcast REST API. Default: `false`.
 
 network.restApi.restEndpointGroups:: Comma separated list of REST API Endpoint Groups. Default: `HEALTH_CHECK, CLUSTER_READ`.
+
+partition.group.enabled:: image:xp-770.svg[XP 7.7.0,opts=inline] Enable partition grouping. Default: `false`.
+
+partition.group.groupType:: image:xp-770.svg[XP 7.7.0,opts=inline] Partition grouping type. Default: `PER_MEMBER`.
 
 system.hazelcast.phone.home.enabled:: Enable or disable the sending of phone home data to Hazelcast's phone home server. Default: `true`.
 
