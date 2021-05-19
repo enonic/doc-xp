@@ -762,7 +762,9 @@ Configure the content layer behaviour.
 auditlog.enabled = true
 ----
 
-auditlog.enabled:: Set to false to disable the creation of audit log entries on content API operations. Default: `true`.
+auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
+
+attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in content attachment file names. Default: `false`.
 
 === Application
 

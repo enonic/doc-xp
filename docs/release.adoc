@@ -151,7 +151,7 @@ A core JS library <<api/lib-audit#,Audit Library>> has been added to help you st
 
 All successful state-changing operations, through the Content API, will create an audit log entry.
 In other words, all create/edit/publish/... in Content Studio or by using the content library will create an audit log entry
-This feature can be disable by modifying the configuration file <<deployment/config#_content,com.enonic.xp.content.cfg>>.
+This feature can be disabled by modifying the configuration file <<deployment/config#_content,com.enonic.xp.content.cfg>>.
 
 === Node library - Get node by version
 

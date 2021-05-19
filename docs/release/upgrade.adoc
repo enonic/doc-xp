@@ -32,7 +32,28 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.7 notes
 * Session cookie specifies `SameSite=Lax` by default. It is similar to modern browsers default value except for "Lax + POST mitigation".
-You can revert to previous behavior be setting `session.cookieSameSite =` in <<../deployment/config#_jetty, Configuration Files / Jetty>>
+You can revert to previous behavior by setting `session.cookieSameSite =` in <<../deployment/config#_jetty, Configuration Files / Jetty>>
+
+* Native Java primitive arrays are now converted to JavaScript arrays. You may have to adapt your application to the new behaviour if your code was using workarounds.
+
+* Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <<../deployment/config#_image, Configuration Files / Image>>
+
+* Image Service has more eager validation of scale, filters, background and quality parameter values.
+Make sure the requests to Image Service use only correct/supported values.
+
+* Built-in Embed Macro now requires body part to be HTML escaped. In general, it should not cause issues because ContentStudio HTML editor always escapes macro body.
+
+* Content attachment file names can no longer contain suspicious characters.
+You can revert to previous behavior by setting `attachments.allowUnsafeNames = true` in <<../deployment/config#_content, Configuration Files / Content>>
+
+* Assets Service URL fingerprint part now uses application's "build time" instead of application's startup time.
+Make sure "build time" always changes for new versions of an application.
+
+* Default Cache-Control headers for Assets Service and Portal Media Attachments have been changed.
+You can change default settings in <<../deployment/config#_portal, Configuration Files / Portal>>
+
+* ResourceService no longer considers directories in jar as existing resources.
+If application code relies on checking directory existence in jar, consider checking existence of a file inside that directory instead.
 
 == v7.6 notes
 * Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <<../framework/tasks#_distributable, Tasks / Distributable>> for more information.

@@ -51,9 +51,11 @@ This will install or update your project with a new Gradle wrapper.
 
 ==== Application upgrade
 
-If you are upgrading *an application*, you need to use version '2.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
+If you are upgrading *an application*, you need to use version greater or equal to '2.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
 It supports Gradle 5, Java 11 and building for XP 7. This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
 and enables quick reference to the Enonic repo via _xp.enonicRepo()_ shortcut
+
+NOTE: It is recommended to use latest version of Gradle 6.x as older Gradle versions may not work properly.
 
 NOTE: Syntax for adding plugins to Gradle may have changed for your project, we recommend the following updates to your build files:
 
@@ -61,7 +63,7 @@ NOTE: Syntax for adding plugins to Gradle may have changed for your project, we 
 [source,groovy]
 ----
 plugins {
-    id 'com.enonic.xp.app' version '2.0.0'
+    id 'com.enonic.xp.app' version '3.0.0'
 }
 
 app {
@@ -79,8 +81,7 @@ dependencies {
 }
 
 repositories {
-    mavenLocal()
-    jcenter()
+    mavenCentral()
     xp.enonicRepo()
 }
 ----
@@ -88,7 +89,7 @@ repositories {
 Additionally, this is the recommended format for gradle.properties
 
 .gradle.properties sample
-[source,groovy]
+[source,properties]
 ----
 # Gradle Project settings
 projectName = myproject
@@ -118,13 +119,12 @@ Below is a sample content of _build.gradle_ and _gradle.properties_ files for a 
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '2.0.0'
+    id 'com.enonic.xp.base' version '3.0.0'
     id 'com.enonic.defaults' version '2.0.1'
 }
 
 repositories {
-    jcenter()
-    mavenLocal()
+    mavenCentral()
     xp.enonicRepo()
 }
 
@@ -136,7 +136,7 @@ via _xp.enonicRepo()_ shortcut
 
 
 .gradle.properties sample
-[source,groovy]
+[source,properties]
 ----
 group=com.mycompany.lib
 projectName=mylib
