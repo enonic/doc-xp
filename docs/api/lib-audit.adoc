@@ -1,10 +1,8 @@
-= Audit Library
+= Audit Library image:xp-720.svg[XP 7.2.0,opts=inline]
 :toc: right
 :imagesdir: ../images
 
-NOTE: This library was first introduced in v7.2
-
-This library contains audit logging functions.
+This library provides functions for audit log management.
 
 == Usage
 
@@ -24,34 +22,61 @@ In your JavaScript controller, add a require statement:
 const authLib = require('/lib/xp/audit');
 ----
 
-You are now free to use the library functionality.
+You are now ready to use the library functionality.
 
 
 == Functions
 
 === find
 
-This function searches for audit logs.
+This function searches for entries in the audit log.
 
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| params | object | <optional> | Input parameters as JSON
+| Name | Type | Attributes | Default | Description
+| start | number | <optional> | 0 | Start index (used for paging)
+| count | number | <optional> | 10 | Number of entries to fetch
+| ids | array | <optional> | | Filter by entry ids
+| from | string | <optional> | | Filter by entries earlier than `from`
+| to | string | <optional> | | Filter by entries later than `to`
+| type | string | <optional> | | Filter by type
+| source | string | <optional> | | Filter by source
+| users | array | <optional> | | Filter by user keys
+| objects | array | <optional> | | Filter by object URIs
 |===
+
+NOTE: All parameters are optional, but you should specify at least one of them. If no parameters are supplied, you will get an empty result.
 
 [.lead]
 Returns
 
-*Object* : Audit log search results.
+*Object* : An array of audit log entries.
+
+[.lead]
+Examples
+
+```js
+// Find first audit log by ids
+var result = auditLib.find({
+    start: 0,
+    count: 1,
+    ids: [
+        '90b976f7-55ab-48ef-acb8-e7c6f0744442',
+        '00c4e51d-ee39-4f0e-9075-5af00b5830c4'
+    ]
+});
+```
 
 === get
 
-This function fetches an audit log.
+This function fetches an audit log entry.
 
 [.lead]
 Parameters
@@ -61,13 +86,23 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| id | string | Id of the audit log.
+| id | string | Id of the audit log entry.
 |===
 
 [.lead]
 Returns
 
-*Object* : Audit log as JSON.
+*Object* : Audit log entry as JSON.
+
+[.lead]
+Examples
+
+```js
+// Gets an audit log by id.
+var log = auditLib.get({
+    id: '90b976f7-55ab-48ef-acb8-e7c6f0744442'
+});
+```
 
 === log
 
@@ -76,20 +111,47 @@ This function creates a single audit log entry.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| type | string | Type of log entry.
-| time | string | Log entry timestamp. Defaults to now.
-| source | string | Log entry source. Defaults to the application ID.
-| user | string | Log entry user. Defaults to the user of current context.
-| objects | array | URIs to objects that relate to this log entry. Defaults to empty array.
-| data | object | Custom extra data for the this log entry. Defaults to empty object.
+| Name | Type | Attributes | Description
+| type | string | | Type of log entry.
+| time | string | <optional> | Log entry timestamp. Defaults to now.
+| source | string | <optional> | Log entry source. Defaults to the application ID.
+| user | string | <optional> | Log entry user. Defaults to the user of current context.
+| objects | array | <optional> | URIs to objects that relate to this log entry. Defaults to empty array.
+| data | object | <optional> | Custom extra data for the this log entry. Defaults to empty object.
 |===
 
 [.lead]
 Returns
 
-*Object* : Audit log as JSON.
+*Object* : Created audit log entry as JSON.
+
+[.lead]
+Examples
+
+```js
+// Creates an audit log.
+var log1 = auditLib.log({
+    type: 'testlog'
+});
+```
+
+```js
+// Creates an audit log with more custom parameters.
+var log2 = auditLib.log({
+    type: 'testlog',
+    time: '2019-08-12T08:44:02.767Z',
+    source: 'unittests',
+    user: 'user:system:anonymous',
+    objects: [
+        'some:resource:uri'
+    ],
+    data: {
+        'custom': 'string',
+        'somevalue': 2.5
+    }
+});
+```
