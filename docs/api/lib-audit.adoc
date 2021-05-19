@@ -1,7 +1,6 @@
 = Audit Library
-include::../variables.adoc[]
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 NOTE: This library was first introduced in v7.2
 
@@ -34,16 +33,63 @@ You are now free to use the library functionality.
 
 This function searches for audit logs.
 
-https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/module-audit.html#.find[Documentation]
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| params | object | <optional> | Input parameters as JSON
+|===
+
+[.lead]
+Returns
+
+*Object* : Audit log search results.
 
 === get
 
 This function fetches an audit log.
 
-https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/module-audit.html#.get[Documentation]
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| id | string | Id of the audit log.
+|===
+
+[.lead]
+Returns
+
+*Object* : Audit log as JSON.
 
 === log
 
 This function creates a single audit log entry.
 
-https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/module-audit.html#.log[Documentation]
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| type | string | Type of log entry.
+| time | string | Log entry timestamp. Defaults to now.
+| source | string | Log entry source. Defaults to the application ID.
+| user | string | Log entry user. Defaults to the user of current context.
+| objects | array | URIs to objects that relate to this log entry. Defaults to empty array.
+| data | object | Custom extra data for the this log entry. Defaults to empty object.
+|===
+
+[.lead]
+Returns
+
+*Object* : Audit log as JSON.

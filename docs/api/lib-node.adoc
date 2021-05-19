@@ -668,11 +668,27 @@ var result = repo.findVersions({
 
 Fetches specific nodes by path or ID.
 
-https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-libdoc.zip!/module-node-RepoConnection.html#get[Documentation]
+[.lead]
+Parameters
+
+An object with the following key and value:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| keys | Array.<string> | Array of ids or paths to the nodes
+|===
+
+[.lead]
+Returns
+
+*object* : The node or node array (as JSON) fetched from the repository.
 
 === getActiveVersion
 
-Fetches specific nodes by path or ID.
+Fetches the active version of a node.
 
 [.lead]
 Parameters
