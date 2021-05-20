@@ -1,5 +1,5 @@
 = Content Types
-:imagesdir: schemas/images
+:imagesdir: ../images
 :toc: right
 :y: icon:check[role="green"]
 :n: icon:times[role="red"]
@@ -32,7 +32,9 @@ The exception to this naming scheme are <<built-in>> content types, since these 
   <is-final>true</is-final> <!--6-->
   <is-built-in>false</is-built-in>  <!--7-->
   <allow-child-content>true</allow-child-content> <!--8-->
-  <form> <!--9-->
+  <allow-child-content-type>base:folder</allow-child-content-type> <!--9-->
+  <allow-child-content-type>${app}:article-*</allow-child-content-type>
+  <form> <!--10-->
     <input name="firstname" type="TextLine">
       <label>First Name</label>
     </input>
@@ -52,32 +54,13 @@ The localisation key must then be declared and localised in the resource bundle.
 <5> *is-abstract* (optional; default: false) If true, you cannot create content with this content type.
 <6> *is-final* (optional; default: false) If true, it is not possible to create content types that “extend” this.
 <7> *is-built-in* (optional; default: false) Only used by the built-in content types.
-<8> *allow-child-content* (optional; default: true) If false, it will prevent users from creating child items on content of this type.
-(e.g. prevents creating child items of images)
-<9> *form* (required) The custom <<./schemas.adoc#Forms,Form>> definition that provides the schema for your data.
+<8> *allow-child-content* (optional; default: true) If false, no content will be allowed to be created or moved under content of this content type
+(e.g. prevents child content under media)
+<9> *allow-child-content-type* (optional) If specified, only content of content types matching specified criteria will be allowed
+to be created or moved under content of this content type  image:xp-770.svg[XP 7.7.0,opts=inline]
+<10> *form* (required) The custom <<./schemas.adoc#Forms,Form>> definition that provides the schema for your data.
 
-== Display name expressions
-
-It's possible to auto-generate display name based on values from form fields by using ES6 template literals.
-In the example below, the display name will consist of the values from the `firstName` and `lastName` fields, separated by a space.
-
-NOTE: Only simple input types may be used as variables, so input types like HtmlArea or CheckBox are not supported. Additionally, if an input allows multiple occurrences, only the first occurrence will be used in the generated display name.
-
-[source,xml]
-----
-<content-type>
-  <display-name>Person</display-name>
-  <display-name-expression>${firstName} ${lastName}</display-name-expression> <!--1-->
-  <form>
-    <input name="firstName" type="TextLine">
-      <label>First Name</label>
-    </input>
-    <input name="lastName" type="TextLine">
-      <label>Last Name</label>
-    </input>
-  </form>
-</content-type>
-----
+NOTE: `allow-child-content-type` will not have effect if `allow-child-content` is set to `false`
 
 == Standard content properties
 These are the standard content properties that will be added to content no matter which scheme has been defined in the content type. Value type and index options specified in parentheses.
