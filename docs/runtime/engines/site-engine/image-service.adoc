@@ -27,7 +27,7 @@ An image URL consists of the following components:
 
 NOTE: If format extension is specified, content gets converted to a corresponding format. Otherwise, the MIME type is derived directly from the content.
 
-NOTE: Supported format extensions are `.jpg`, `.png` and `.gif`. Other extensions may still work, but the are unsupported.
+NOTE: Supported format extensions are `.jpg`, `.png` and `.gif`. Other extensions may still work but are not supported.
 
 WARNING: Content with MIME type `image/gif` and `image/svg+xml` returned as-is without any processing.
 
