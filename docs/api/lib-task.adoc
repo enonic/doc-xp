@@ -45,7 +45,7 @@ Usage of this API produces the following events:
 |task completes
 
 |task.failed
-|task failes
+|task failed
 |===
 
 For more information on events, check out the <<lib-event#, event API>>
@@ -352,9 +352,9 @@ while (!result && retries > 0) {
 }
 ```
 
-=== submit
+=== executeFunction
 
-Submits an inlined task (function) to be executed in the background. Returns an id representing the task.
+Executes a function in the background. Returns an id representing the task of execution.
 
 This function returns immediately. The callback function will be executed asynchronously.
 
@@ -376,7 +376,7 @@ Parameters
 !===
 ! Name        ! Type     ! Description
 ! description ! string   ! Text describing the task to be executed
-! task        ! function ! Callback function to be executed asynchronously
+! func        ! function ! Callback function to be executed asynchronously
 !===
 
 |===
@@ -384,22 +384,22 @@ Parameters
 [.lead]
 Returns
 
-*string* : Id of the task that will be executed.
+*string* : Id of the task function that will be executed.
 
 [.lead]
 Example
 
-.Execute task and keep taskId for polling status:
+.Execute task function and keep taskId for polling status:
 ```js
-var taskId = taskLib.submit({
-  description: 'Background task',
-  task: function () {
-    longRunningTask();
+var taskId = taskLib.executeFunction({
+  description: 'Background function',
+  func: function () {
+    longRunningFunction();
   }
 });
 ```
 
-=== submitNamed
+=== submitTask
 
 Submits a named task to be executed in the background and returns an id representing the task.
 
@@ -425,7 +425,7 @@ Parameters
 .Properties
 !===
 ! Name   ! Type   ! Attributes ! Description
-! name   ! string !            ! Name of the task to execute. Name can be relative to the current application, or a fully qualified task name (<appname>:<taskname>)
+! descriptor   ! string !            ! Descriptor of the task to execute. Descriptor can be relative to the current application, or a fully qualified task name (<appname>:<taskname>)
 ! config ! object ! <optional> ! Configuration parameters to pass to the task to be executed. The object must be valid according to the schema defined in the form of the task descriptor XML.
 !===
 
@@ -441,8 +441,8 @@ Example
 
 .Execute task, located in the current app, by name:
 ```js
-var taskId = taskLib.submitNamed({
-  name: 'job42',
+var taskId = taskLib.submitTask({
+  descriptor: 'job42',
   config: {
     count: 123
   }
@@ -451,8 +451,8 @@ var taskId = taskLib.submitNamed({
 
 .Execute a task located in a different app:
 ```js
-var taskId = taskLib.submitNamed({
-  name: 'com.enonic.app.myapp:work',
+var taskId = taskLib.submitTask({
+  descriptor: 'com.enonic.app.myapp:work',
   config: {}
 });
 ```
