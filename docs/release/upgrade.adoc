@@ -55,6 +55,10 @@ You can change default settings in <<../deployment/config#_portal, Configuration
 * ResourceService no longer considers directories in jar as existing resources.
 If application code relies on checking directory existence in jar, consider checking existence of a file inside that directory instead.
 
+* Content integrity is verified on move as it was done on create for `page-template`, `template-folder` and `site` built-in content types.
+
+* `page-template` content now accepts child content, but only `fragment` and `media:*`. Attachments are no longer redirected to the nearest template's site.
+
 == v7.6 notes
 * Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <<../framework/tasks#_distributable, Tasks / Distributable>> for more information.
 * XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to https://market.enonic.com. URL can be changed in <<../deployment/config#_market, Configuration Files / Market>>.
