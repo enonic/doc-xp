@@ -281,6 +281,22 @@ TIP: image:xp-760.svg[XP 7.6.0,opts=inline] It's possible to configure a layout 
 </layout>
 ----
 
+.Example layout descriptor NOT allowed for content types that end with ":post"
+[source,XML]
+----
+<layout>
+  <display-name>70/30</display-name>
+  <regions>
+    <region name="left"/>
+    <region name="right"/>
+  </regions>
+  <config>
+    <allow-on-content-type>^(?!.*[:]post$).*$</allow-on-content-type>
+  </config>
+</layout>
+----
+
+
 In this case the layout will be available only for the content type called "article" from the same application.
 
 === Controller
