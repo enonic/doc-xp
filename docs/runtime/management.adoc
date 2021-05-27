@@ -252,7 +252,7 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
-NOTE: Task info can be fetched with <<#_task, task>> request.
+NOTE: Task info can be fetched with <<task, task>> request.
 
 .TaskInfo.progress.info value:
 [source,json]
@@ -323,7 +323,7 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
-NOTE: Task info can be fetched with <<#_task, task>> request.
+NOTE: Task info can be fetched with <<task, task>> request.
 
 .TaskInfo.progress.info value:
 [source,json]
@@ -375,7 +375,7 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
-NOTE: Task info can be fetched with <<#_task, task>> request.
+NOTE: Task info can be fetched with <<task, task>> request.
 
 .TaskInfo.progress.info value:
 [source,json]
@@ -475,7 +475,7 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
-NOTE: Task info can be fetched with <<#_task, task>> request.
+NOTE: Task info can be fetched with <<task, task>> request.
 
 .TaskInfo.progress.info value:
 [source,json]
@@ -546,7 +546,7 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
-NOTE: Task info can be fetched with <<#_task, task>> request.
+NOTE: Task info can be fetched with <<task, task>> request.
 
 .TaskInfo.progress.info value:
 [source,json]
@@ -873,7 +873,7 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
 }
 ----
 
-NOTE: Task info can be fetched with <<#_task, task>> request.
+NOTE: Task info can be fetched with <<task, task>> request.
 
 === SyncAll
 image:xp-760.svg[XP 7.6.0,opts=inline]
@@ -983,7 +983,7 @@ Calls <<#reindex,reindex>> endpoint as a task.
 }
 ----
 
-NOTE: Task info can be fetched with <<#_task, task>> request.
+NOTE: Task info can be fetched with <<task, task>> request.
 
 === Settings
 
@@ -1036,7 +1036,7 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
-=== List
+=== Repository List
 
 List available repositories.
 
@@ -1111,6 +1111,7 @@ NOTE: Task info can be fetched with <<#_task, task>> request.
 }
 ----
 
+[#task]
 === Task
 
 Fetches particular Task information.
@@ -1132,3 +1133,69 @@ Fetches particular Task information.
 
 .Response
 <<../api/lib-task#taskinfo,`TaskInfo`>> object.
+
+== Scheduled Jobs List
+
+image:xp-770.svg[XP 7.7.0,opts=inline]
+
+
+List scheduled jobs.
+
+NOTE: Read about authorization <<#authorization, here>>
+
+.Url
+ GET scheduler/list
+
+.Response
+[source,json]
+----
+[
+  {
+    "calendar": {
+      "cronValue": "* * * * *",
+      "timeZone": "GMT+03:00",
+      "type": "CRON"
+    },
+    "config": [
+      {
+        "name": "string",
+        "type": "String",
+        "values": [
+          {
+            "v": "value"
+          }
+        ]
+      }
+    ],
+    "createdTime": "2010-01-01T00:00:00Z",
+    "creator": "user:system:creator",
+    "description": "description",
+    "descriptor": "com.enonic.app.features:landing",
+    "enabled": true,
+    "lastRun": "2012-01-01T00:00:00Z",
+    "lastTaskId": "task-id",
+    "modifiedTime": "2011-02-01T00:00:00Z",
+    "modifier": "user:system:creator",
+    "name": "test1",
+    "user": "user:system:user"
+  },
+  {
+    "calendar": {
+      "type": "ONE_TIME",
+      "value": "2016-11-02T10:36:00Z"
+    },
+    "config": [],
+    "createdTime": "2010-01-01T00:00:00Z",
+    "creator": "user:system:creator",
+    "description": null,
+    "descriptor": "com.enonic.app.features:landing",
+    "enabled": false,
+    "lastRun": null,
+    "lastTaskId": null,
+    "modifiedTime": "2011-02-01T00:00:00Z",
+    "modifier": "user:system:creator",
+    "name": "test2",
+    "user": null
+  }
+]
+----

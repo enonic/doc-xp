@@ -1,0 +1,471 @@
+= Scheduler library
+:toc: right
+:imagesdir: ../images
+
+image:xp-770.svg[XP 7.7.0,opts=inline]
+
+Functions for creating scheduled jobs.
+
+== Usage
+
+Add the following to your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include "com.enonic.xp:lib-scheduler:${xpVersion}"
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+```js
+var schedulerLib = require('/lib/xp/scheduler');
+```
+
+== Functions
+
+=== get
+
+Returns scheduled job with the specified name.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with the parameters
+
+[%header,cols="1%,1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name ! Type ! Attributes ! Description
+
+! name ! string ! required ! name of the job.
+
+
+!===
+|===
+[.lead]
+Returns
+
+*object* : (<<#scheduled_job,`ScheduledJob`>>) Detail information for the job.
+Or null if the job could not be found.
+
+[.lead]
+Example
+
+.Obtains details of a scheduled job:
+```js
+var job = schedulerLib.get('myjob');
+
+if (job) {
+  log.info('Job is found: ' + JSON.stringify(job));
+} else {
+  log.info('Job not found');
+}
+```
+
+.Return value:
+```js
+var expected = {
+    'name': 'myjob',
+    'descriptor': 'com.enonic.app.myapp:mytask',
+    'description': 'cron job description',
+    'enabled': true,
+    'config': {
+        'a': 1,
+        'b': 'value',
+        'c': {
+            'd': {
+                'e': 3.6,
+                'f': true
+            }
+        }
+    },
+    'user': 'user:system:user',
+    'creator': 'user:system:creator',
+    'modifier': 'user:system:creator',
+    'createdTime': '2016-11-02T10:36:00Z',
+    'modifiedTime': '2016-11-02T10:36:00Z',
+    'lastRun': '2021-02-25T10:44:33.170079900Z',
+    'lastTaskId': 'task-id',
+    'schedule': {
+        'value': '* * * * *',
+        'type': 'CRON',
+        'timezone': 'GMT+2:00'
+    }
+};
+```
+
+=== list
+
+Returns the list of scheduled jobs.
+
+[.lead]
+Returns
+
+*Array* : (<<#scheduled_job,`ScheduledJob[]`>>) List of all scheduled jobs.
+
+[.lead]
+Example
+
+.Obtains list of existing jobs:
+```js
+var jobs = schedulerLib.list();
+```
+
+.Return value:
+```js
+var expected = [
+  {
+        'name': 'job1',
+        'descriptor': 'appKey:task',
+        'description': 'job description',
+        'enabled': true,
+        'config': {
+            'a': 1
+        },
+        'user': 'user:system:user',
+        'creator': 'user:system:creator',
+        'modifier': 'user:system:creator',
+        'createdTime': '2016-11-02T10:36:00Z',
+        'modifiedTime': '2016-11-02T10:36:00Z',
+        'lastRun': '2021-02-25T10:44:00.170079900Z',
+        'lastTaskId': 'task-id',
+        'schedule': {
+            'value': '* * * * *',
+            'timeZone': 'GMT+05:30',
+            'type': 'CRON'
+        }
+    },
+    {
+        'name': 'job2',
+        'descriptor': 'appKey:task',
+        'description': 'job description',
+        'enabled': false,
+        'config': { },
+        'user': 'user:system:user',
+        'creator': 'user:system:creator',
+        'modifier': 'user:system:creator',
+        'createdTime': '2021-02-02T10:36:00Z',
+        'modifiedTime': '2021-02-02T10:36:00Z',
+        'schedule': {
+            'value': '2012-01-01T00:00:00Z',
+            'type': 'ONE_TIME'
+        }
+    }
+];
+```
+
+=== create
+
+Creates a scheduled job .
+
+This function returns immediately.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with the parameters
+
+[%header,cols="1%,1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name ! Type ! Attributes ! Description
+
+! name ! string ! required ! unique job name.
+! description ! string ! optional ! job description.
+! descriptor ! string ! required !descriptor of the task to be scheduled.
+! config ! string ! optional !config of the task to be scheduled.
+! schedule ! object ! required ! task time run config.
+! schedule.value ! string ! required ! schedule value according to its type.
+! schedule.type ! string ! required ! schedule type (CRON or ONE_TIME).
+! schedule.timezone ! string !required for schedule.type = CRON ! time zone of cron scheduling. It isn't applicable to a onetime job.
+! user ! string ! optional ! principal key of the user that submitted the task.
+! enabled ! boolean ! required ! job is active or not.
+
+!===
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#scheduled_job,`ScheduledJob`>>) Detail information for the created job.
+
+[.lead]
+Example
+```js
+var simpleOneTimeJob = schedulerLib.create({
+    name: 'my-project',
+    descriptor: 'appKey:task',
+    enabled: true,
+    schedule: {type: 'ONE_TIME', value: '2021-01-01T00:00:00.00Z'}
+});
+
+var extendedCronJob = schedulerLib4.create({
+    name: 'myjob',
+    descriptor: 'appKey:task',
+    description: 'job description',
+    user: 'user:system:user',
+    enabled: true,
+    config: {
+        a: 1,
+        b: 2,
+        c: ['1', '2'],
+        d: {
+            e: {
+                f: 3.6,
+                g: true
+            }
+        }
+    },
+    schedule: {type: 'CRON', value: '* * * * 5', timeZone: 'GMT-2:00'}
+});
+```
+
+.Return value:
+```js
+var expectedSimpleOneTimeJob = {
+    'name': 'my-project',
+    'descriptor': 'appKey:task',
+    'enabled': true,
+    'config': {},
+    'creator': 'user:system:creator',
+    'modifier': 'user:system:creator',
+    'createdTime': '2016-11-02T10:36:00Z',
+    'modifiedTime': '2016-11-02T10:36:00Z',
+    'schedule': {
+        'value': '2012-01-01T00:00:00Z',
+        'type': 'ONE_TIME'
+    }
+}
+
+var expectedExtendedCronJob = {
+    'name': 'myjob',
+    'descriptor': 'appKey:task',
+    'description': 'job description',
+    'enabled': true,
+    'config': {
+        'a': 1,
+        'b': 2,
+        'c': {
+            '0': '1',
+            '1': '2'
+        },
+        'd': {
+            'e': {
+                'f': 3.6,
+                'g': true
+            }
+        }
+    },
+    'user': 'user:system:user',
+    'creator': 'user:system:creator',
+    'modifier': 'user:system:creator',
+    'createdTime': '2021-01-01T10:36:00Z',
+    'modifiedTime': '2016-01-01T10:36:00Z',
+    'schedule': {
+        'value': '* * * * 5',
+        'timeZone': 'GMT-02:00',
+        'type': 'CRON'
+    }
+}
+```
+
+=== modify
+
+Modifies a job. The previous task will be rescheduled, `lastRun` and `lastTaskId` properties will be cleaned.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with the parameters
+
+[%header,cols="1%,1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name ! Type ! Attributes ! Description
+
+! name ! string ! required ! unique job name.
+! editor ! function ! required ! editor callback function has an editable existing job as a param.
+
+
+!===
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#scheduled_job,`ScheduledJob`>>) Detail information for the modified job.
+
+[.lead]
+Example
+```js
+schedulerLib.create({
+    name: 'myjob',
+    descriptor: 'appKey:task',
+    description: 'job description',
+    user: 'user:system:user',
+    enabled: true,
+    config: {
+        a: 1
+    },
+    schedule: {type: 'ONE_TIME', value: '2012-01-01T00:00:00.00Z'}
+});
+
+var result = schedulerLib.modify({
+    name: 'myjob',
+    editor: (edit) => {
+        edit.descriptor = 'appKey:new-task';
+        edit.description = 'new job description';
+        edit.user = 'user:system:new-user';
+        edit.enabled = false;
+        edit.config = {
+            a1: 3
+        };
+        edit.schedule = {type: 'CRON', value: '* * * * *', timeZone: 'GMT+5:30'};
+
+        return edit;
+    }
+});
+```
+
+.Return value:
+```js
+var resultExpected = {
+    'name': 'myjob',
+    'descriptor': 'appKey:new-task',
+    'description': 'new job description',
+    'enabled': false,
+    'config': {
+        'a1': 3
+    },
+    'user': 'user:system:new-user',
+    'creator': 'user:system:creator',
+    'modifier': 'user:system:modifier',
+    'createdTime': '2016-11-02T10:36:00Z',
+    'modifiedTime': '2021-02-25T10:44:33.170079900Z',
+    'schedule': {
+        'value': '* * * * *',
+        'timeZone': 'GMT+05:30',
+        'type': 'CRON'
+    }
+}
+```
+
+=== delete
+
+Deletes a scheduled job.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with the parameters
+
+[%header,cols="1%,1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name ! Type ! Attributes ! Description
+
+! name ! string ! required ! name of the job to be deleted.
+
+!===
+|===
+[.lead]
+Returns
+
+*boolean* : True if deleted, false otherwise
+
+[.lead]
+Example
+
+```js
+var result = schedulerLib.delete({
+    name: 'myjob'
+});
+
+if (result) {
+    log.info('Job deleted');
+} else {
+    log.info('Job was not found');
+}
+```
+
+== Type Definitions
+
+=== ScheduledJob
+
+[[scheduled_job]]
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name        | Type   | Description
+| name        | string | Job name
+| description | string | Job description
+| descriptor | string | descriptor of the task to be scheduled
+| config | string | config of the task to be scheduled
+| schedule | object | task time run config
+
+[%header,cols="1%,1%,98%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name ! Type ! Description
+
+! schedule.value ! string ! schedule value
+! schedule.type ! string ! schedule type.
+! schedule.timezone ! string ! time zone of cron scheduling. It isn't applicable to a onetime job
+!===
+
+| user | string |  principal key of the user that submitted the task
+| enabled | boolean |  job is active or not
+| creator | string | principal key of user that created the task
+| modifier | string | principal key of the last user that modified the task
+| createdTime | string | time of the task creation
+| modifiedTime | string | time of the last task modification
+| lastRun | string | time of the last job run
+| lastTaskId | string | task id of the last job run
+
+|===
