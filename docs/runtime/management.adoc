@@ -19,7 +19,7 @@ Encode it to base64:
 
 Add a header to your request:
 
-[cols="1,1", options="header"]
+[cols="1,1",options="header"]
 |===
 |Key
 |Value
@@ -41,7 +41,8 @@ Commands for manipulating repository snapshots
 === Create
 
 Create a snapshot of all or a single repository while running.
-NOTE: The first snapshot only stores markers in the repository for the current state. Subsequent snapshots stores the changes since the last snapshot.
+NOTE: The first snapshot only stores markers in the repository for the current state.
+Subsequent snapshots stores the changes since the last snapshot.
 
 WARNING: For a clustered installation, the snapshot-location must be on a shared file-system.
 
@@ -49,7 +50,7 @@ WARNING: For a clustered installation, the snapshot-location must be on a shared
  POST repo/snapshot
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -127,7 +128,7 @@ NOTE: Read about authorization <<#authorization, here>>
  POST repo/snapshot/restore
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -172,7 +173,7 @@ Deletes a snapshot by name or date:
  POST repo/snapshot/delete
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -209,13 +210,14 @@ List of command for manipulating all repositories
 
 === Create
 
-Export data from every repository. The result will be stored in the `$XP_HOME/data/dump` directory.
+Export data from every repository.
+The result will be stored in the `$XP_HOME/data/dump` directory.
 
 .Url
  POST system/dump
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -292,7 +294,8 @@ NOTE: Task info can be fetched with <<task, task>> request.
 
 === Upgrade
 
-Upgrade a data dump from a previous version to the current version. The output of the upgrade will be placed alongside the dump that is being upgraded and will have the name `<dump-name>_upgraded_<new-version>`.
+Upgrade a data dump from a previous version to the current version.
+The output of the upgrade will be placed alongside the dump that is being upgraded and will have the name `<dump-name>_upgraded_<new-version>`.
 
 NOTE: The current version XP installation must be running with the upgraded app deployed.
 
@@ -302,7 +305,7 @@ NOTE: Upgrade does not work with archived dumps.
  POST system/upgrade
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -336,7 +339,8 @@ NOTE: Task info can be fetched with <<task, task>> request.
 
 === Load
 
-Load data from a named system dump into Enonic XP. The dump read has to be stored in the `$XP_HOME/data/dump` directory.
+Load data from a named system dump into Enonic XP.
+The dump read has to be stored in the `$XP_HOME/data/dump` directory.
 
 NOTE: Upgrade does not work with archived dumps.
 
@@ -346,7 +350,7 @@ WARNING: A load will delete all existing repositories before loading the reposit
  POST system/load
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -429,7 +433,8 @@ Export and import data from a given repository, branch and content path.
 
 === Create
 
-Extract data from a given repository, branch and content path. The result will be stored in the `$XP_HOME/data/export` directory.
+Extract data from a given repository, branch and content path.
+The result will be stored in the `$XP_HOME/data/export` directory.
 This is useful to move a part of a site from one installation to another.
 
 WARNING: Exporting content will not include the version history of the content, just the current version.
@@ -438,7 +443,7 @@ WARNING: Exporting content will not include the version history of the content, 
  POST repo/export
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -450,7 +455,8 @@ WARNING: Exporting content will not include the version history of the content, 
 
 |`sourceRepoPath`
 |String
-|path of data to export. Format: `<repo-name>:<branch-name>:<node-path>` e.g. `cms-repo:draft:/some-content`
+|path of data to export.
+Format: `<repo-name>:<branch-name>:<node-path>` e.g. `cms-repo:draft:/some-content`
 
 |`exportWithIds`
 |Boolean
@@ -501,7 +507,7 @@ The export read has to be stored in the `$XP_HOME/data/export` directory.
  POST repo/import
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -513,7 +519,8 @@ The export read has to be stored in the `$XP_HOME/data/export` directory.
 
 |`targetRepoPath`
 |String
-|target path for import. Format: `<repo-name>:<branch-name>:<node-path>` e.g. `cms-repo:draft:/some-content`
+|target path for import.
+Format: `<repo-name>:<branch-name>:<node-path>` e.g. `cms-repo:draft:/some-content`
 
 |`xslSource`
 |String
@@ -521,7 +528,8 @@ The export read has to be stored in the `$XP_HOME/data/export` directory.
 
 |`xslParams`
 |JSON
-|parameters to pass to the XSL transformations before importing nodes. Format: `{"applicationId": "com.enonic.myapp"}`
+|parameters to pass to the XSL transformations before importing nodes.
+Format: `{"applicationId": "com.enonic.myapp"}`
 
 |`importWithIds`
 |Boolean
@@ -568,7 +576,8 @@ NOTE: Task info can be fetched with <<task, task>> request.
 ====
 An XSL file and a set of name=value parameters can be optionally passed for applying transformations to each node.xml file, before importing it.
 
-This option could for example be used for renaming types or fields. The .xsl file must be located in the `$XP_HOME/data/export` directory.
+This option could for example be used for renaming types or fields.
+The .xsl file must be located in the `$XP_HOME/data/export` directory.
 ====
 
 ////
@@ -587,7 +596,7 @@ Installs an application from file on all nodes.
  POST app/install
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -633,7 +642,7 @@ Installs an application from url on all nodes.
  POST app/installUrl
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -645,7 +654,9 @@ Installs an application from url on all nodes.
 
 |`sha512`
 |String
-|image:xp-760.svg[XP 7.6.0,opts=inline] application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.
+|image:xp-760.svg[XP 7.6.0,opts=inline] application file SHA-512 checksum.
+Optional.
+If provided, and checksum does not match, installation will fail.
 |===
 
 NOTE: Read about authorization <<#authorization, here>>
@@ -683,7 +694,7 @@ image:xp-760.svg[XP 7.6.0,opts=inline] Starts an application with specific appli
  POST app/start
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -710,7 +721,7 @@ image:xp-760.svg[XP 7.6.0,opts=inline] Stops an application with specific applic
  POST app/stop
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -737,7 +748,7 @@ image:xp-760.svg[XP 7.6.0,opts=inline] Uninstalls an application with specific a
  POST app/uninstall
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -758,7 +769,8 @@ No response body
 
 === Server-Sent Events
 
-image:xp-760.svg[XP 7.6.0,opts=inline] The client initiates the SSE connection by using the media type `text/event-stream` in the `Accept` header. Then it gets updates automatically without requesting the server.
+image:xp-760.svg[XP 7.6.0,opts=inline] The client initiates the SSE connection by using the media type `text/event-stream` in the `Accept` header.
+Then it gets updates automatically without requesting the server.
 
 .Url
  GET app/events
@@ -795,6 +807,7 @@ event: uninstalled
 id: b7a0f608-631f-4a1d-bda0-5459b87a99a6
 data: {"key":"com.enonic.app.contentstudio"}
 ----
+
 ////
         CMS tasks
 ////
@@ -805,7 +818,8 @@ Content metadata commands.
 
 === Reprocess
 
-Reprocesses content in the repository and *regenerates metadata for the media attachments*. Only content of a media type (super-type = _base:media_) are processed.
+Reprocesses content in the repository and *regenerates metadata for the media attachments*.
+Only content of a media type (super-type = _base:media_) are processed.
 Unless the `skipChildren` flag is specified, it processes all descendants of the specified content path.
 
 NOTE: This command should be used after migrating content from Enonic CMS using the cms2xp tool.
@@ -814,7 +828,7 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
  POST content/reprocess
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -822,7 +836,8 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
 
 |`sourceBranchPath`
 |String
-|target content path to be reprocessed. Format: `<branch-name>:<content-path>`. e.g `draft:/`
+|target content path to be reprocessed.
+Format: `<branch-name>:<content-path>`. e.g `draft:/`
 
 |`skipChildren`
 |Boolean
@@ -850,7 +865,7 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
  POST content/reprocessTask
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -858,7 +873,8 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
 
 |`sourceBranchPath`
 |String
-|target content path to be reprocessed. Format: `<branch-name>:<content-path>`. e.g `draft:/`
+|target content path to be reprocessed.
+Format: `<branch-name>:<content-path>`. e.g `draft:/`
 
 |`skipChildren`
 |Boolean
@@ -876,6 +892,7 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
 NOTE: Task info can be fetched with <<task, task>> request.
 
 === SyncAll
+
 image:xp-760.svg[XP 7.6.0,opts=inline]
 
 Calls forced content sync for all available projects.
@@ -904,13 +921,14 @@ Commands for configuring and managing repositories.
 [#reindex]
 === Reindex
 
-Reindex the content in the search indices for the given repository and branches. This is usually required after upgrades and may be useful in many other cases.
+Reindex the content in the search indices for the given repository and branches.
+This is usually required after upgrades and may be useful in many other cases.
 
 .Url
  POST repo/index/reindex
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -951,12 +969,11 @@ NOTE: Read about authorization <<#authorization, here>>
 
 Calls <<#reindex,reindex>> endpoint as a task.
 
-
 .Url
  POST repo/index/reindex
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -993,7 +1010,7 @@ Update settings for a specified repository.
  POST repo/index/updateSettings
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
@@ -1111,6 +1128,65 @@ NOTE: Task info can be fetched with <<#_task, task>> request.
 }
 ----
 
+== Clean Up Audit Log
+
+Deletes records from audit log repository.
+
+WARNING: Make sure you have a backup of the installation available before running a cleanUp.
+
+.Url
+ POST system/cleanUpAuditLog
+
+.Params
+[cols="1,1,3",options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`ageThreshold`
+|String
+|Age of records to be removed.
+The format based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours.
+|===
+
+.Response
+[source,json]
+----
+{
+    "TaskResults": [
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 7,
+            "Processed": 7,
+            "TaskName": "UnusedSegmentsCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 39,
+            "Processed": 39,
+            "TaskName": "UnusedVersionFilesCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 2,
+            "Processed": 2,
+            "TaskName": "UnusedBinaryFilesCleaner"
+        },
+        {
+            "Deleted": 0,
+            "Failed": 0,
+            "InUse": 123,
+            "Processed": 123,
+            "TaskName": "UnusedVersionTableEntryCleaner"
+        }
+    ]
+}
+----
+
 [#task]
 === Task
 
@@ -1120,7 +1196,7 @@ Fetches particular Task information.
  GET task/{taskId}
 
 .Params
-[cols="1,1,3", options="header"]
+[cols="1,1,3",options="header"]
 |===
 |Param
 |Type
