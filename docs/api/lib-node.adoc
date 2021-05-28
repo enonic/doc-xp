@@ -580,7 +580,7 @@ Returns
 [.lead]
 Example
 
-.Comparing draft and master branch
+.Find child nodes under a given parent path
 [source,js]
 ----
 var result = repo.findChildren({
@@ -619,7 +619,7 @@ An object with the following keys and their values:
 [grid="none"]
 |===
 | Name | Type | Attributes | Details
-| key | string | | Path or ID of parent to get children of
+| key | string | | Path or ID of a node to get versions of
 | start | number | optional | start index used for paging - default: 0
 | count | number | optional | number of content to fetch, used for paging - default: 10
 |===
@@ -632,7 +632,7 @@ Returns
 [.lead]
 Example
 
-.Comparing draft and master branch
+.Fetch all versions of a content with a given path
 [source,js]
 ----
 var result = repo.findVersions({
