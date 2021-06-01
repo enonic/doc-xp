@@ -6,32 +6,32 @@ include::variables.adoc[]
 
 == XP7 Update 7
 
-== Scheduler
+=== Scheduler
 
 Periodical (cron-like) and one-time job <<framework/scheduler#_scheduler, Scheduler>> is now available.
 
 * Two jobs for periodical vacuum and audit-log cleanup were added. Preconfigured in <<deployment/config#scheduler, Scheduler config>>.
 * New <<api/lib-scheduler#_scheduler_library, scheduler core library>> allows controlling jobs programmatically.
-* Management Endpoint <<runtime/management#_scheduled_jobs_list, extended>> to be able to list currently scheduled jobs.
+* Management Endpoint was extended to be able to <<runtime/management#scheduled_jobs_list, list>> currently scheduled jobs.
 
-== Audit-log cleanup
+=== Audit-log cleanup
 
-* Management port <<runtime/management#_clean_up_audit_log, extended>> to be able to clean up audit-log records.
+* Management port was extended to be able to <<runtime/management#clean_up_audit_log, clean up audit-log>> records.
 
-== SameSite cookies
+=== SameSite cookies
 
-* SameSite attribute for cookies can be set <<framework/http#http-cookies>>.
+* Added support for <<framework/http#http-cookies, SameSite attribute>> for cookies.
 * Session cookie sets SameSite=Lax by default.
 
-== Content-type filtering
+=== Content-type filtering
 
-* `allow-child-content-type` for <<cms/content-types#_content_types, Content-Types>>
+* `allow-child-content-type` in <<cms/content-types#form_definition, Content Type descriptor>>
 
 === Other improvements
 
 * New and improved <<storage/aggregations#_aggregations, aggregations>>.
-* `getCommit` in <<api/lib-node#_getcommit, Node JS API>>.
-* `srcset` support in <<api/lib-portal#_processhtml, processHtml>>.
+* `getCommit` in <<api/lib-node#getcommit, Node JS API>>.
+* `srcset` support in <<api/lib-portal#processhtml, processHtml>>.
 
 == XP7 Update 6
 
