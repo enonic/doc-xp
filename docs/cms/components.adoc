@@ -264,41 +264,6 @@ The layout descriptor defines regions within the layout where parts can be place
 </layout>
 ----
 
-TIP: image:xp-760.svg[XP 7.6.0,opts=inline] It's possible to configure a layout to be used only on specific content types by using the config `<allow-on-content-type>`:
-
-.Example layout descriptor allowed for one content type
-[source,XML]
-----
-<layout>
-  <display-name>70/30</display-name>
-  <regions>
-    <region name="left"/>
-    <region name="right"/>
-  </regions>
-  <config>
-    <allow-on-content-type>${app}:article</allow-on-content-type>
-  </config>
-</layout>
-----
-
-.Example layout descriptor NOT allowed for content types that end with ":post"
-[source,XML]
-----
-<layout>
-  <display-name>70/30</display-name>
-  <regions>
-    <region name="left"/>
-    <region name="right"/>
-  </regions>
-  <config>
-    <allow-on-content-type>^(?!.*[:]post$).*$</allow-on-content-type>
-  </config>
-</layout>
-----
-
-
-In this case the layout will be available only for the content type called "article" from the same application.
-
 === Controller
 
 Controller is a Javascript file responsible for rendering of the layout view.
@@ -376,8 +341,6 @@ The same part dropdown selector will appear in the "Inspect" tab. Use one of the
 Once a part component is selected, the placeholder will be replaced with the actual part, and the "Inspect" tab will show the part’s form, if available.
 
 Parts can be added to multiple pages, or even multiple times within the same page. Each instance can have different form values.
-
-TIP: image:xp-760.svg[XP 7.6.0,opts=inline] Just like layouts, parts can be configured to be available only for specific content types by using the config `<allow-on-content-type>`.
 
 === Custom icon
 image:xp-720.svg[XP 7.2.0,opts=inline]
