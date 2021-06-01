@@ -10,7 +10,7 @@ include::variables.adoc[]
 
 Periodical (cron-like) and one-time job <<framework/scheduler#_scheduler, Scheduler>> is now available.
 
-* Two jons for periodical vacuum and audit-log cleanup were added. Preconfigured in <<deployment/config#scheduler, Scheduler config>>.
+* Two jobs for periodical vacuum and audit-log cleanup were added. Preconfigured in <<deployment/config#scheduler, Scheduler config>>.
 * New <<api/lib-scheduler#_scheduler_library, scheduler core library>> allows controlling jobs programmatically.
 * Management Endpoint <<runtime/management#_scheduled_jobs_list, extended>> to be able to list currently scheduled jobs.
 
