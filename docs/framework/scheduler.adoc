@@ -93,6 +93,8 @@ init-job.vacuum.description=Job to run vacuum
 init-job.vacuum.user=system:su
 ----
 
+Common vacuum process config can be found in <<../deployment/config#vacuum, Vacuum config file>>.
+
 .Audit log cleanUp
 Deletes records from audit log repository.
 
