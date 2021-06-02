@@ -281,6 +281,8 @@ gateway.recover_after_nodes = 1
 discovery.zen.minimum_master_nodes = 1
 discovery.unicast.port = 9300
 index.recovery.initial_shards = 1
+
+discovery.unicast.sockets =
 ----
 
 node.data::  Allow data to be distributed to this node. Default: `true`.
@@ -300,7 +302,9 @@ gateway.expected_nodes:: Number of nodes expected to be in the cluster to start 
 gateway.recover_after_time:: Time to wait until recovery happens once the nodes are met. Default: `5m`.
 gateway.recover_after_nodes:: Number of nodes expected to be in the cluster to start the recovery after gateway.recover_after_time. Default: `1`.
 discovery.unicast.port:: List of ports to perform discovery when new nodes are started. Default: `9300`.
+discovery.unicast.sockets:: Comma separated list of hosts to be discovered as seed nodes.
 index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
+index.auto_expand_replicas:: Auto-expand the number of replicas based on the number of available nodes. Set to a dash delimited lower and upper bound (e.g. 0-5) or use all for the upper bound (e.g. 0-all). Defaults to `false` (i.e. disabled).
 
 === Hazelcast
 image:xp-740.svg[XP 7.4.0,opts=inline]
@@ -740,13 +744,15 @@ Configure the audit log feature.
 .Sample audit config file
 [source,properties]
 ----
-# enabled = true
-# outputLogs = false
+enabled = true
+outputLogs = false
+ageThreshold =
 ----
 
+[#audit_enabled]
 enabled:: Set to false to disable the creation of audit log entries. Default: `true`.
 outputLogs:: Set to true to log the stored audit log entries. Default: `false`.
-
+ageThreshold:: Age of data to be removed by a cleanup task. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Nothing will be removed by default, duration must me set.
 
 === Content
 
@@ -765,6 +771,20 @@ auditlog.enabled = true
 auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
 
 attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in content attachment file names. Default: `false`.
+
+[#vacuum]
+=== Vacuum
+
+`XP_HOME/config/com.enonic.xp.vacuum.cfg`
+
+Configure default properties for vacuum process.
+.Sample vacuum config file
+[source,properties]
+----
+ageThreshold = P21D
+----
+
+ageThreshold:: Age of data to be vacuumed. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Default: `P21D` (21 days).
 
 === Application
 
