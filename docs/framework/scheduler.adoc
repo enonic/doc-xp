@@ -110,6 +110,10 @@ init-job.audit-log-cleanup.description=Job to clean up old audit log history
 init-job.audit-log-cleanup.user=system:su
 ----
 
+Common cleanup process config can be found in <<../deployment/config#audit,Audit config file>>.
+
+IMPORTANT: `ageThreshold` property must be set to appropriate value, otherwise nothing will be removed.
+
 == Distributable
 XP platform guarantees that a scheduled job won't be executed by multiple threads concurrently for the cluster environment.
 

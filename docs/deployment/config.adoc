@@ -769,6 +769,7 @@ auditlog.enabled = true
 ----
 
 auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
+IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
 
 attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in content attachment file names. Default: `false`.
 
