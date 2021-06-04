@@ -449,7 +449,7 @@ repo.create({
 });
 ----
 
-Stemmed english indices will be generated for `_name`, `displayName`, `description` and all strings inside `english_set`.
+Stemmed english indices will be generated for `displayName`, `description` and all strings inside `english_set`.
 Norwegian indices will be created for strings inside `norwegian_set` only.
 
 == Templates
