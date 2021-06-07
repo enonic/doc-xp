@@ -22,7 +22,7 @@ We recommend the following procedure:
 . Upgrade all other nodes. If you run a combination of back-end and front-end nodes, we recommend upgrading the back-end nodes before you move on to the front-end nodes.
 
 If this is done correctly, bugfix upgrades (v7.x.y) can be executed without downtime.
-For feature upgrades (7.x.0), the forming of the cluster is a little bit more complicated, and there may be some requests to the site that are rejected during the upgrade but the process should still be really smooth.
+For feature upgrades (7.x.0), the forming of the cluster is more complicated and require full cluster restart. Rolling update is sometimes possible but not recommended/supported out of the box.
 
 === Applications
 When upgrading to new feature versions of Enonic XP, new versions of standard apps may also be available. 
@@ -31,6 +31,9 @@ After upgrading XP, check for new versions of your installed applications from E
 We generally always recommend updating your apps to the latest version!
 
 == v7.7 notes
+
+WARNING: Due to security fixes, new version of Hazelcast dependency version is part of 7.7.0 release. Full cluster restart during the update is unavoidable.
+
 * Session cookie specifies `SameSite=Lax` by default. It is similar to modern browsers default value except for "Lax + POST mitigation".
 You can revert to previous behavior by setting `session.cookieSameSite =` in <<../deployment/config#_jetty, Configuration Files / Jetty>>
 
