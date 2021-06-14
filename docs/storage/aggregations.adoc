@@ -1,6 +1,6 @@
 = Aggregations
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 == Introduction
 With Aggregations, developers may extract statistical data from search results.
@@ -33,6 +33,7 @@ get its own bucket. Here's a list of properties:
 field (string):: The property path.
 size (int):: The number of bucket to return, ordered by the given orderType and orderDirection. Default to ``10``.
 order (string):: How to order the results, type and direction. Default to ``_term ASC``.
+image:xp-770.svg[XP 7.7.0,opts=inline] minDocCount (int):: Only include bucket in the result if number of hits is ``minDocCount`` or more. This parameter is optional.
 
 Types:
 
@@ -74,7 +75,59 @@ include::code/stats-query.json[]
 include::code/stats-result.json[]
 ----
 
+== Min
 
+image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that computes the minimum of the values in the current bucket. Here's the list of properties:
+
+field (string):: The property path.
+
+.Sample min aggregation
+[source,json]
+----
+include::code/min-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/min-result.json[]
+----
+
+== Max
+
+image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that computes the maximum of the values in the current bucket. Here's the list of properties:
+
+field (string):: The property path.
+
+.Sample max aggregation
+[source,json]
+----
+include::code/max-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/max-result.json[]
+----
+
+== Value Count
+
+image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that counts the number of values that current document set has for a specific field. Here's the list of properties:
+
+field (string):: The property path.
+
+.Sample value count aggregation
+[source,json]
+----
+include::code/value-count-query.json[]
+----
+
+.Sample result from the above agg
+[source,json]
+----
+include::code/value-count-result.json[]
+----
 
 == Range
 
@@ -83,7 +136,7 @@ Here's a list of properties:
 
 field (string):: The property path.
 ranges (range[]):: The range-buckets to create.
-range (from: number, to: number):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded.
+range (from: number, to: number):: Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
 
 .Sample range aggregation
 [source,json]
@@ -107,7 +160,7 @@ Here's a list of properties:
 
 field (string):: The property path.
 ranges (range[]):: The range-buckets to create.
-range (from: number, to: number):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded.
+range (from: number, to: number):: Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
 unit (string):: The meassurement unit to use for the ranges.  Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet) or nmi (nauticalmiles).
 origin (lat: number, lon: number):: The GeoPoint from which the distance is measured.
 
@@ -141,7 +194,7 @@ Here's a list of properties:
 field (string):: The property path.
 format (string):: The date-format of which the buckets will be formatted to on return. Defaults to ``yyyy-MM-dd'T'HH:mm:ss.SSSZ``.
 ranges (range[]):: The range-buckets to create.
-range (from: <number>, to: <number>):: Defines a range to create a bucket for. From-value is included in bucket, to is excluded. The from and to follows a special date-math explained below.
+range (from: <number>, to: <number>):: Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded. Values in `from` and `to` follow a special date-math expression explained below.
 
 
 .Sample dateRange aggregation

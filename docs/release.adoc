@@ -4,6 +4,35 @@ include::variables.adoc[]
 :imagesdir: release/images
 
 
+== XP7 Update 7
+
+=== Scheduler
+
+Periodical (cron-like) and one-time <<framework/scheduler#_scheduler, Job Scheduler>> is now available.
+
+* Two jobs for periodical vacuum and audit-log cleanup were added. Preconfigured in <<deployment/config#scheduler, Scheduler config>>.
+* New <<api/lib-scheduler#_scheduler_library, scheduler core library>> allows controlling jobs programmatically.
+* Management Endpoint was extended to be able to <<runtime/management#scheduled_jobs_list, list>> currently scheduled jobs.
+
+=== Audit-log cleanup
+
+* Management port was extended to be able to <<runtime/management#clean_up_audit_log, clean up audit-log>> records.
+
+=== SameSite cookies
+
+* Added support for <<framework/http#http-cookies, SameSite attribute>> for cookies.
+* Session cookie sets SameSite=Lax by default.
+
+=== Content-type filtering
+
+* `allow-child-content-type` in <<cms/content-types#form_definition, Content Type descriptor>>
+
+=== Other improvements
+
+* New and improved <<storage/aggregations#_aggregations, aggregations>>.
+* `getCommit` in <<api/lib-node#getcommit, Node JS API>>.
+* `srcset` support in <<api/lib-portal#processhtml, processHtml>>.
+
 == XP7 Update 6
 
 === Content Layers
@@ -147,7 +176,7 @@ A core JS library <<api/lib-audit#,Audit Library>> has been added to help you st
 
 All successful state-changing operations, through the Content API, will create an audit log entry.
 In other words, all create/edit/publish/... in Content Studio or by using the content library will create an audit log entry
-This feature can be disable by modifying the configuration file <<deployment/config#_content,com.enonic.xp.content.cfg>>.
+This feature can be disabled by modifying the configuration file <<deployment/config#_content,com.enonic.xp.content.cfg>>.
 
 === Node library - Get node by version
 

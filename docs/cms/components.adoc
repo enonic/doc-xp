@@ -1,6 +1,6 @@
 = Page components
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Pages are composed from a set of editorially manageable components.
 
@@ -264,13 +264,35 @@ The layout descriptor defines regions within the layout where parts can be place
 </layout>
 ----
 
+=== Controller
+
+Controller is a Javascript file responsible for rendering of the layout view.
+
+.Example layout controller
+[source,js]
+----
+var portal = require('/lib/xp/portal');
+var thymeleaf = require('/lib/thymeleaf');
+
+exports.get = function (req) {
+    var component = portal.getComponent();
+
+    return {
+        body: thymeleaf.render(resolve('./layout-70-30.html'), {
+            leftRegion: component.regions["left"],
+            rightRegion: component.regions["right"],
+        })
+    };
+
+};
+----
 
 === View
 
 A layout view defines the markup for the layout component. The sample view below is created in Thymeleaf, but it could be created in any view engine that is supported.
 
 .Example layout defined in Thymeleaf
-[source,xml]
+[source,HTML]
 ----
 <div class="row">
   <div data-portal-region="left" class="col-sm-8">
@@ -289,7 +311,7 @@ A layout view defines the markup for the layout component. The sample view below
 
 IMPORTANT: The HTML generated for the layout view must have a single root element.
 
-Styling
+=== Styling
 
 For a layout to have any meaning, some styling must be applied to the view. The desired CSS should be placed in the /assets folder of the application, and included in the page where the layout should be supported. For example, the view my-first-page.html supports Bootstrap layouts:
 
@@ -310,23 +332,28 @@ Part components can be placed into any region of a page using the page editor ht
 This allows content editors to build and customize pages without writing any code. There are no built-in part components.
 Each one is custom made in the application code. Parts are typically created to render custom content, lists of content, forms, etc.
 
-The first step in adding a part component to a page is to edit the page content and open the component widget's “Insert” tab.
-Drag the part component placeholder (puzzle piece) to the desired location on the page. 
-The part placeholder will now appear as a blue box with a dropdown selector. The same part dropdown selector will appear in the inspect tab. 
-Use one of the selectors to find the desired part component. 
-Once a part component is selected, the placeholder will be replaced with the actual part and the Inspect tab will show the part’s form, if available.
+IMPORTANT: Just as with a layout, a part needs an XML descriptor, an HTML view and a Javascript controller. Part config can be placed inside
+the `<form>` of the part descriptor.
+
+To add a part component to a page, edit the page content, open the “Insert” tab of the "Components" widget and drag the part component
+placeholder (puzzle piece) to the desired location on the page. The part placeholder will now appear as a blue box with a dropdown selector.
+The same part dropdown selector will appear in the "Inspect" tab. Use one of the selectors to find the desired part component.
+Once a part component is selected, the placeholder will be replaced with the actual part, and the "Inspect" tab will show the part’s form, if available.
 
 Parts can be added to multiple pages, or even multiple times within the same page. Each instance can have different form values.
+
+=== Custom icon
+image:xp-720.svg[XP 7.2.0,opts=inline]
 
 It's possible to define a custom icon for part which then will be used instead of the default one in the Page Component tree and dropdowns with part descriptors. 
 Simply place an icon (in either PNG or SVG format) with the same name as the descriptor schema into the same folder. 
 For example, if folder/part is called _mypart_ then part descriptor is called _mypart.xml_ and the icon file should be called either _mypart.svg_ or _mypart.png_.
 In the screenshots below parts "_HTML Area Example_" and "_Image filters test_" are using custom icons.
 
-image::part-component-1.png[Part descrtiptor list]
-image::part-component-2.png[Page Components tree]
 
-NOTE: Custom part icons was introduced with XP 7.2.0
+:imagesdir: images
+image::part-component-1.png[Part descrtiptor list, 289]
+image::part-component-2.png[Page Components tree, 211]
 
 == Text
 
@@ -346,6 +373,8 @@ it is hovering above the Underline box in the formatting toolbar, in order to un
 image::text-component.png[Component list, 1305px]
 
 == Image
+
+IMPORTANT: This page component is *deprecated* and will be removed in XP 8.0. Use "Insert Image" feature of the Text Component instead.
 
 The Image component allows content editors to place an image into any region on a page without writing any code.
 

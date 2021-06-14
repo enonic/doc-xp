@@ -83,7 +83,7 @@ node.name=master-1 # This should be different for every node
 network.host=10.0.0.1         # This should be different for every node
 network.publish.host=10.0.0.1 # This should be different for every node
 
-# Discover nodes on a comma seperated list of node IPs
+# Discover nodes on a comma separated list of node IPs
 discovery.unicast.hosts=10.0.0.1,10.0.0.2,10.0.0.3,10.0.0.4,10.0.0.5
 ----
 

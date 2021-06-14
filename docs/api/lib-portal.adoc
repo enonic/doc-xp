@@ -1,6 +1,6 @@
 = Portal Library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Functions to access portal functionality.
 
@@ -767,6 +767,7 @@ Parameters
 ! Name  ! Type   ! Attributes ! Default ! Description
 ! value ! string !            !         ! Html value string to process.
 ! type  ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! image:xp-770.svg[XP 7.7.0,opts=inline] imageWidths  ! Array.<number> ! <optional> ! ! A comma-separated list of image widths. If this parameter is provided, all `<img>` tags will have an additional `srcset` attribute with image URLs generated for specified widths.
 !===
 
 |===
@@ -784,7 +785,9 @@ Example
 var html = portalLib.processHtml({
   value: '<a href="content://123" target="">Content</a>' +
          '<a href="media://inline/123" target="">Inline</a>' +
-         '<a href="media://download/123" target="">Download</a>'
+         '<a href="media://download/123" target="">Download</a>' +
+         '<img src="image://123"/>',
+  imageWidths: [32, 480, 800]
 });
 ```
 

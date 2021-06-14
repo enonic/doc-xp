@@ -87,8 +87,7 @@ image::Content-selector-default.png[An input box with a dropdown options below i
     <allowPath>./*</allowPath>
     <allowPath>/quotes*</allowPath>
     <treeMode>true</treeMode>  <!--3-->
-    <showStatus>true</showStatus>  <!--4-->
-    <hideToggleIcon>true</hideToggleIcon> <!--5-->
+    <hideToggleIcon>true</hideToggleIcon> <!--4-->
   </config>
 </input>
 ----
@@ -97,9 +96,7 @@ image::Content-selector-default.png[An input box with a dropdown options below i
 only displays content from the same site.
 <3> *treeMode* toggles between tree and flat modes. Default value is `false` (flat mode). +
 image:Content-selector-tree.png[Input box with a dropdown with a tree structure, 350]
-<4> *showStatus* toggles content status - default is `false`. +
-image:Content-selector-status.png[Input box with a dropwdown showing status on each option, 365]
-<5> *hideToggleIcon* hides the toggle icon when set to `false`. +
+<4> *hideToggleIcon* hides the toggle icon when set to `false`. +
 image:Content-selector-no-icon.png[Input box without an icon, 500]
 
 === allowContentType Samples
@@ -545,7 +542,6 @@ image::Image-selector.png[Input box with a grid of images to select below it, 50
   <config> <!--1-->
     <allowPath>${site}/*</allowPath> <!--2-->
     <treeMode>true</treeMode>
-    <showStatus>true</showStatus>
     <hideToggleIcon>true</hideToggleIcon>
   </config>
 </input>
@@ -592,7 +588,6 @@ The MediaSelector is a specialized version of the <<ContentSelector>> that is li
     <allowContentType>media:archive</allowContentType>
     <allowPath>${site}/*</allowPath> <!--2-->
     <treeMode>true</treeMode>
-    <showStatus>true</showStatus>
     <hideToggleIcon>true</hideToggleIcon>
   </config>
 </input>
@@ -650,11 +645,15 @@ A plain text, multi-line input field
   <default>Default text goes here</default> <!--1-->
   <config>
     <max-length>42</max-length> <!--2-->
+    <show-counter>true</show-counter> <!--3-->
   </config>
 </input>
 ----
 <1> *default* specifies the default string for the TextArea
-<2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
+<2> *max-length* specifies the maximum allowed number of characters (default: unlimited)
+<3> *show-counter* specifies whether text length counter should be shown (default: hidden)
+
+image::TextArea.png[Text Area with various settings, 700]
 
 == TextLine
 
@@ -674,15 +673,19 @@ A plain text, single line input with advanced validation options. Stored as stri
   <default>000-00-0000</default> <!--1-->
   <config>
     <max-length>11</max-length> <!--2-->
-    <regexp>\b\d{3}-\d{2}-\d{4}\b</regexp> <!--3-->
+    <show-counter>true</show-counter> <!--3-->
+    <regexp>\b\d{3}-\d{2}-\d{4}\b</regexp> <!--4-->
   </config>
 </input>
 ----
 <1> *default* specifies the default string for the TextArea
-<2> *max-length* specifies the maximum number of characters allowed. If not specified the length is unrestricted.
-<3> *regexp* supports validation by defining regular expressions.
+<2> *max-length* specifies the maximum allowed number of characters (default: unlimited)
+<3> *show-counter* specifies whether text length counter should be shown (default: hidden)
+<4> *regexp* supports validation by defining regular expressions
 +
 NOTE: Regex validation is performed by the browser's https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test[regex testing function]. Visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation on regexes] for more information on the supported expressions and character classes.
+
+image::TextLine.png[Text Line with various settings, 700]
 
 == Time
 

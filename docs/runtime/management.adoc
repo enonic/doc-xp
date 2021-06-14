@@ -248,6 +248,16 @@ NOTE: Read about authorization <<#authorization, here>>
 [source,json]
 ----
 {
+"taskId": "f8565e19-3960-4bf0-8daa-f4ca77ef338f"
+}
+----
+
+NOTE: Task info can be fetched with <<task, task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
     "Repositories": [
         {
             "RepositoryId": "com.enonic.cms.default",
@@ -309,6 +319,16 @@ NOTE: Read about authorization <<#authorization, here>>
 [source,json]
 ----
 {
+    "taskId": "549c38ac-e20a-4851-8536-3fd2b937e328"
+}
+----
+
+NOTE: Task info can be fetched with <<task, task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
     "InitialVersion": "8.0.0",
     "UpgradedVersion": "8.0.0"
 }
@@ -348,6 +368,16 @@ WARNING: A load will delete all existing repositories before loading the reposit
 NOTE: Read about authorization <<#authorization, here>>
 
 .Response
+[source,json]
+----
+{
+    "taskId": "a0b774dd-03f1-48fd-b500-b76a93c6b6fe"
+}
+----
+
+NOTE: Task info can be fetched with <<task, task>> request.
+
+.TaskInfo.progress.info value:
 [source,json]
 ----
 {
@@ -441,6 +471,16 @@ NOTE: Read about authorization <<#authorization, here>>
 [source,json]
 ----
 {
+"taskId": "2003993f-cf52-4aa0-aca8-66c3911e6b31"
+}
+----
+
+NOTE: Task info can be fetched with <<task, task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
     "DryRun": false,
     "ExportedBinaries": [],
     "ExportedNodes": [
@@ -499,6 +539,16 @@ The export read has to be stored in the `$XP_HOME/data/export` directory.
 NOTE: Read about authorization <<#authorization, here>>
 
 .Response
+[source,json]
+----
+{
+    "taskId": "767dad91-eecd-442b-a9f8-d3a892e1e8c4"
+}
+----
+
+NOTE: Task info can be fetched with <<task, task>> request.
+
+.TaskInfo.progress.info value:
 [source,json]
 ----
 {
@@ -790,7 +840,43 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
+=== Reprocess Task
+
+Calls <<#_reprocess,reprocess>> endpoint as a task.
+
+NOTE: This command should be used after migrating content from Enonic CMS using the cms2xp tool.
+
+.Url
+ POST content/reprocessTask
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`sourceBranchPath`
+|String
+|target content path to be reprocessed. Format: `<branch-name>:<content-path>`. e.g `draft:/`
+
+|`skipChildren`
+|Boolean
+|flag to skip processing of content children
+|===
+
+.Response
+[source,json]
+----
+{
+    "taskId": "07500a00-8d60-4084-9657-af6725dc587d"
+}
+----
+
+NOTE: Task info can be fetched with <<task, task>> request.
+
 === SyncAll
+image:xp-760.svg[XP 7.6.0,opts=inline]
 
 Calls forced content sync for all available projects.
 
@@ -798,6 +884,14 @@ Calls forced content sync for all available projects.
  POST content/syncAll
 
 NOTE: Read about authorization <<#authorization, here>>
+
+.Response
+[source,json]
+----
+{
+    "taskId": "767dad91-eecd-442b-a9f8-d3a892e1e8c4"
+}
+----
 
 ////
         Repository tasks
@@ -807,9 +901,10 @@ NOTE: Read about authorization <<#authorization, here>>
 
 Commands for configuring and managing repositories.
 
+[#reindex]
 === Reindex
 
-Reindex the content in the search indices for the given repository and branches. This is usually required after upgrades, and may be useful in many other situation.
+Reindex the content in the search indices for the given repository and branches. This is usually required after upgrades and may be useful in many other cases.
 
 .Url
  POST repo/index/reindex
@@ -851,6 +946,44 @@ NOTE: Read about authorization <<#authorization, here>>
     "Duration": "PT-0.056S"
 }
 ----
+
+=== Reindex Task
+
+Calls <<#reindex,reindex>> endpoint as a task.
+
+
+.Url
+ POST repo/index/reindex
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`branches`
+|String
+|a comma-separated list of branches to be reindexed
+
+|`repository`
+|String
+|the name of the repository to reindex
+
+|`initialize`
+|Boolean
+|if true, the indices will be deleted before recreated
+|===
+
+.Response
+[source,json]
+----
+{
+    "taskId": "cb1b4e06-22ad-4235-8876-a443c88c290b"
+}
+----
+
+NOTE: Task info can be fetched with <<task, task>> request.
 
 === Settings
 
@@ -903,7 +1036,7 @@ NOTE: Read about authorization <<#authorization, here>>
 }
 ----
 
-=== List
+=== Repository List
 
 List available repositories.
 
@@ -940,8 +1073,32 @@ Deletes unused blobs and binaries from blobstore.
 
 WARNING: Make sure you have a backup of the installation available before doing a vacuum.
 
+NOTE: Read about authorization <<#authorization, here>>
+
 .Url
  POST system/vacuum
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`ageThreshold`
+|String
+|Age of data to be removed. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours.
+
+|`tasks`
+|String[]
+|List of vacuum task to be run. Default : ["SegmentVacuumTask", "VersionTableVacuumTask"]
+|===
+
+This API supports the following tasks: +
+**SegmentVacuumTask** - removes unused repositories. +
+**VersionTableVacuumTask** - removes unused and non-commited versions together with it's blobs. +
+**BinaryBlobVacuumTask** - checks all binary blobs and removes unused. +
+**NodeBlobVacuumTask** - checks all node blobs and removes unused. +
 
 NOTE: Read about authorization <<#authorization, here>>
 
@@ -949,35 +1106,157 @@ NOTE: Read about authorization <<#authorization, here>>
 [source,json]
 ----
 {
-    "TaskResults": [
+    "taskId": "cb1b4e06-22ad-4235-8876-a443c88c290b"
+}
+----
+
+NOTE: Task info can be fetched with <<task, task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
+     "TaskResults": [
         {
             "Deleted": 0,
             "Failed": 0,
-            "InUse": 7,
-            "Processed": 7,
-            "TaskName": "UnusedSegmentsCleaner"
+            "InUse": 13,
+            "Processed": 13,
+            "TaskName": "SegmentVacuumTask"
         },
         {
-            "Deleted": 0,
+            "Deleted": 4,
             "Failed": 0,
-            "InUse": 39,
-            "Processed": 39,
-            "TaskName": "UnusedVersionFilesCleaner"
-        },
-        {
-            "Deleted": 0,
-            "Failed": 0,
-            "InUse": 2,
-            "Processed": 2,
-            "TaskName": "UnusedBinaryFilesCleaner"
-        },
-        {
-            "Deleted": 0,
-            "Failed": 0,
-            "InUse": 123,
-            "Processed": 123,
-            "TaskName": "UnusedVersionTableEntryCleaner"
+            "InUse": 96,
+            "Processed": 100,
+            "TaskName": "VersionTableVacuumTask"
         }
     ]
 }
+----
+
+== Clean Up Audit Log
+
+Deletes records from audit log repository.
+
+WARNING: Make sure you have a backup of the installation available before running a cleanup.
+
+.Url
+ POST auditlog/cleanup
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`ageThreshold`
+|String
+|Age of records to be removed. The format based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours.
+|===
+
+.Request Body Example
+[source,javascript]
+----
+{
+    "ageThreshold" : "PT10H" //all records older than 10 hours will be removed
+}
+----
+
+.Response
+[source,json]
+----
+{
+    "taskId": "cb1b4e06-22ad-4235-8876-a443c88c290b"
+}
+----
+
+[#task]
+=== Task
+
+Fetches particular Task information.
+
+.Url
+ GET task/{taskId}
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Param
+|Type
+|Description
+
+|`taskId`
+|String
+|particular task id
+|===
+
+.Response
+<<../api/lib-task#taskinfo,`TaskInfo`>> object.
+
+== Scheduled Jobs List
+
+image:xp-770.svg[XP 7.7.0,opts=inline]
+
+
+List scheduled jobs.
+
+NOTE: Read about authorization <<#authorization, here>>
+
+.Url
+ GET scheduler/list
+
+.Response
+[source,json]
+----
+[
+  {
+    "calendar": {
+      "cronValue": "* * * * *",
+      "timeZone": "GMT+03:00",
+      "type": "CRON"
+    },
+    "config": [
+      {
+        "name": "string",
+        "type": "String",
+        "values": [
+          {
+            "v": "value"
+          }
+        ]
+      }
+    ],
+    "createdTime": "2010-01-01T00:00:00Z",
+    "creator": "user:system:creator",
+    "description": "description",
+    "descriptor": "com.enonic.app.features:landing",
+    "enabled": true,
+    "lastRun": "2012-01-01T00:00:00Z",
+    "lastTaskId": "task-id",
+    "modifiedTime": "2011-02-01T00:00:00Z",
+    "modifier": "user:system:creator",
+    "name": "test1",
+    "user": "user:system:user"
+  },
+  {
+    "calendar": {
+      "type": "ONE_TIME",
+      "value": "2016-11-02T10:36:00Z"
+    },
+    "config": [],
+    "createdTime": "2010-01-01T00:00:00Z",
+    "creator": "user:system:creator",
+    "description": null,
+    "descriptor": "com.enonic.app.features:landing",
+    "enabled": false,
+    "lastRun": null,
+    "lastTaskId": null,
+    "modifiedTime": "2011-02-01T00:00:00Z",
+    "modifier": "user:system:creator",
+    "name": "test2",
+    "user": null
+  }
+]
 ----

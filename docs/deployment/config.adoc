@@ -281,6 +281,8 @@ gateway.recover_after_nodes = 1
 discovery.zen.minimum_master_nodes = 1
 discovery.unicast.port = 9300
 index.recovery.initial_shards = 1
+
+discovery.unicast.sockets =
 ----
 
 node.data::  Allow data to be distributed to this node. Default: `true`.
@@ -300,7 +302,9 @@ gateway.expected_nodes:: Number of nodes expected to be in the cluster to start 
 gateway.recover_after_time:: Time to wait until recovery happens once the nodes are met. Default: `5m`.
 gateway.recover_after_nodes:: Number of nodes expected to be in the cluster to start the recovery after gateway.recover_after_time. Default: `1`.
 discovery.unicast.port:: List of ports to perform discovery when new nodes are started. Default: `9300`.
+discovery.unicast.sockets:: Comma separated list of hosts to be discovered as seed nodes.
 index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
+index.auto_expand_replicas:: Auto-expand the number of replicas based on the number of available nodes. Set to a dash delimited lower and upper bound (e.g. 0-5) or use all for the upper bound (e.g. 0-all). Defaults to `false` (i.e. disabled).
 
 === Hazelcast
 image:xp-740.svg[XP 7.4.0,opts=inline]
@@ -317,7 +321,7 @@ network.join.tcpIp.members=127.0.0.1:5701,127.0.0.1:5702
 system.hazelcast.initial.min.cluster.size=2
 ----
 
-.Sample Hazelcast configuration for Kubernetes
+.Sample Hazelcast configuration for Kubernetes DNS discovery
 [source,properties]
 ----
 clusterConfigDefaults=false
@@ -325,6 +329,19 @@ system.hazelcast.initial.min.cluster.size=2
 network.join.tcpIp.enabled=false
 network.join.kubernetes.enabled=true
 network.join.kubernetes.serviceDns=main.default.svc.cluster.local
+----
+
+.Sample Hazelcast configuration for Kubernetes API discovery
+[source,properties]
+----
+clusterConfigDefaults=false
+system.hazelcast.initial.min.cluster.size=2
+network.join.tcpIp.enabled=false
+network.join.kubernetes.enabled=true
+network.join.kubernetes.serviceName=cluster-discovery
+network.join.kubernetes.namespace=my-namespace
+network.join.kubernetes.kubernetesApiRetries=10
+network.join.kubernetes.resolveNotReadyAddresses=true
 ----
 
 clusterConfigDefaults:: If true some properties set based on xp cluster configuration. Default: `true`
@@ -342,7 +359,25 @@ network.join.multicast.enabled:: Enable Multicast discovery. Default: `false`.
 
 network.join.kubernetes.enabled:: Enable Kubernetes discovery. Default: `false`.
 
-network.join.kubernetes.serviceDns:: Service DNS for Kubernetes discovery.
+network.join.kubernetes.serviceDns:: image:xp-770.svg[XP 7.7.0,opts=inline] Service DNS for Kubernetes discovery. If not set, discovery over Kubernetes API is used. Default is not set.
+
+network.join.kubernetes.namespace:: image:xp-770.svg[XP 7.7.0,opts=inline] Kubernetes Namespace where Hazelcast is running. Default is not set.
+
+network.join.kubernetes.serviceName:: image:xp-770.svg[XP 7.7.0,opts=inline] Service name used to scan only PODs connected to the given service. Default is not set.
+
+network.join.kubernetes.serviceLabelName:: image:xp-770.svg[XP 7.7.0,opts=inline] Service label used to tag services that should form the Hazelcast cluster together. Default is not set.
+
+network.join.kubernetes.serviceLabelValue:: image:xp-770.svg[XP 7.7.0,opts=inline] Service value used to tag services that should form the Hazelcast cluster together. Default is not set.
+
+network.join.kubernetes.podLabelName:: image:xp-770.svg[XP 7.7.0,opts=inline] POD label used to tag PODs that should form the Hazelcast cluster together. Default is not set.
+
+network.join.kubernetes.podLabelValue:: image:xp-770.svg[XP 7.7.0,opts=inline] POD value used to tag PODs that should form the Hazelcast cluster together. Default is not set.
+
+network.join.kubernetes.resolveNotReadyAddresses:: image:xp-770.svg[XP 7.7.0,opts=inline] If set to `true`, it checks also the addresses of PODs which are not ready. Default: `false`.
+
+network.join.kubernetes.useNodeNameAsExternalAddress:: image:xp-770.svg[XP 7.7.0,opts=inline] If set to `true`, uses the node name to connect to a NodePort service instead of looking up the external IP using the API. Default: `false`.
+
+network.join.kubernetes.kubernetesApiRetries:: image:xp-770.svg[XP 7.7.0,opts=inline] Number of retries in case of issues while connecting to Kubernetes API. Default: `3`.
 
 network.join.tcpIp.enabled:: Enable TcpIP discovery. Default: `true`.
 
@@ -355,6 +390,10 @@ network.interfaces:: Comma separated list of ip addresses for binding. Ignored w
 network.restApi.enabled:: Enable Hazelcast REST API. Default: `false`.
 
 network.restApi.restEndpointGroups:: Comma separated list of REST API Endpoint Groups. Default: `HEALTH_CHECK, CLUSTER_READ`.
+
+partition.group.enabled:: image:xp-770.svg[XP 7.7.0,opts=inline] Enable partition grouping. Default: `false`.
+
+partition.group.groupType:: image:xp-770.svg[XP 7.7.0,opts=inline] Partition grouping type. Default: `PER_MEMBER`.
 
 system.hazelcast.phone.home.enabled:: Enable or disable the sending of phone home data to Hazelcast's phone home server. Default: `true`.
 
@@ -375,6 +414,9 @@ system.hazelcast.mastership.claim.timeout.seconds:: Timeout which defines when m
 hazelcast.wait.seconds.before.join:: Wait time in seconds before join operation. Default: `5`.
 
 hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before join operation Default: `20`.
+
+NOTE: In case of using Kubernetes API discovery each node makes a call to Kubernetes Master in order to discover PODs.
+It also requires granting certain permissions. You can find more information in the documentation of https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes].
 
 === Admin
 
@@ -444,6 +486,8 @@ http.port:: specifies http port number to use. Default: `8080`.
 http.requestHeaderSize:: Maximum request header size. Default: 32K.
 http.requestHeaderSize:: Maximum response header size. Default: 32K.
 session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
+session.cookieSameSite:: image:xp-730.svg[XP 7.3.0,opts=inline]:: Specifies SameSite flag for session cookie. Can be `Lax`, `None`, `Strict` or unspecified. Default: `Lax`.
+session.cookieAlwaysSecure:: image:xp-730.svg[XP 7.3.0,opts=inline]:: If true, forces session cooke Secure flag even for HTTP connections. Default: `false`.
 session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
 gzip.enabled:: Enables GZIP compression for responses. Default: `true`.
 gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `23`.
@@ -457,6 +501,8 @@ threadPool.maxThreads  image:xp-730.svg[XP 7.3.0,opts=inline]:: Maximum number o
 threadPool.minThreads image:xp-730.svg[XP 7.3.0,opts=inline]:: Minimum number of threads. Default: `8`.
 threadPool.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: Thread idle timeout (in milliseconds). Default: `60000`.
 websocket.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
+
+WARNING: Setting `session.cookieAlwaysSecure` to `true` would make session-involved login on HTTP connections impossible.
 
 === SessionStore
 image:xp-740.svg[XP 7.4.0,opts=inline]
@@ -698,13 +744,15 @@ Configure the audit log feature.
 .Sample audit config file
 [source,properties]
 ----
-# enabled = true
-# outputLogs = false
+enabled = true
+outputLogs = false
+ageThreshold =
 ----
 
+[#audit_enabled]
 enabled:: Set to false to disable the creation of audit log entries. Default: `true`.
 outputLogs:: Set to true to log the stored audit log entries. Default: `false`.
-
+ageThreshold:: Age of data to be removed by a cleanup task. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Nothing will be removed by default, duration must me set.
 
 === Content
 
@@ -720,7 +768,24 @@ Configure the content layer behaviour.
 auditlog.enabled = true
 ----
 
-auditlog.enabled:: Set to false to disable the creation of audit log entries on content API operations. Default: `true`.
+auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
+IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
+
+attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in content attachment file names. Default: `false`.
+
+[#vacuum]
+=== Vacuum
+
+`XP_HOME/config/com.enonic.xp.vacuum.cfg`
+
+Configure default properties for vacuum process.
+.Sample vacuum config file
+[source,properties]
+----
+ageThreshold = P21D
+----
+
+ageThreshold:: Age of data to be vacuumed. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Default: `P21D` (21 days).
 
 === Application
 
@@ -770,7 +835,7 @@ image:xp-760.svg[XP 7.6.0,opts=inline]
 
 Configure the task behaviour.
 
-.Sample content config file
+.Sample task config file
 [source,properties]
 ----
 distributable.acceptInbound = false
@@ -779,3 +844,115 @@ clustered.timeout = PT10S
 
 distributable.acceptInbound:: If true, accept inbound distributable tasks. Default: `true`.
 clustered.timeout:: The time (in ISO-8601 Period format) the node waits for a job (task or task-info job) to be submitted to another cluster node. Default: `PT5S` (5 seconds).
+
+[#scheduler]
+=== Scheduler
+image:xp-770.svg[XP 7.7.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.scheduler.cfg`
+
+Configure default custom jobs to be created for scheduling when an XP instance start. Skip creation if a job with the same name exists already. Only recurring (cron) jobs can be created by the config file. There is no guaranteed order for distributed environment, so the first started node will create its version of a job for the whole cluster.
+
+Properties prefixed with `init-job.<my-job-name>` will describe properties of a job with `<my-job-name>` name.
+
+.Params
+[cols="1,1,3", options="header"]
+|===
+|Property
+|Type
+|Description
+
+|`init-job.<my-job-name>.enabled`
+|required
+|`true` - a created job will be able to be run according to its cron value and timezone. `false` - the job will be created, but never run until this property is set to true".
+
+|`init-job.<my-job-name>.cron`
+|required
+|Cron value describes how often the described task should be run. See string <<https://www.unix.com/man-page/linux/5/crontab, format>>.
+
+|`init-job.<my-job-name>.timezone`
+|optional
+|Timezone used for cron. See string <<https://docs.oracle.com/en/java/javase/11/docs/api/java, format>>. JVM value will be used if nothing is set.
+
+|`init-job.<my-job-name>.descriptor`
+|required
+|Descriptor of the task to be scheduled. Format: `<idProvider>:<user>`
+
+|`init-job.<my-job-name>.config`
+|optional
+|JSON string with params for described task.
+
+|`init-job.<my-job-name>.user`
+|required
+|Principal key of the task submitter. Format: `<applicationKey>:<taskName>`
+
+|`init-job.<my-job-name>.description`
+|optional
+|contains string-format description of scheduled job.
+
+|===
+
+.Sample scheduler config file
+[source,properties]
+----
+init-job.my-job1.enabled=true
+init-job.my-job1.cron=* * * * *
+init-job.my-job1.descriptor=com.enonic.xp.app.myapp:task1
+init-job.my-job1.description=Job to run `myapp:task1` every minute without params
+init-job.my-job1.user=system:user1
+
+init-job.my-job2.enabled=false
+init-job.my-job2.cron=0 5 * * *
+init-job.my-job2.timezone=GMT+2:00
+init-job.my-job2.descriptor=com.enonic.xp.app.myapp:task2
+init-job.my-job2.description=Job to run `myapp:task2` every minute with `config` params
+init-job.my-job2.user=system:user1
+init-job.my-job2.config={"myparam1":"value1","myset":{"myparam2":"value2"}}
+----
+Properties prefixed with `init-job.my-job1` describe properties of `my-job1` job.
+
+init-job.my-job1.enabled:: true - job will be scheduled at server start.
+init-job.my-job1.cron:: * * * * *  - will be run every minute.
+
+Properties prefixed with `init-job.my-job2` describe properties of `my-job2` job.
+
+init-job.my-job2.enabled:: False - job will be created, but never run until it changes.
+init-job.my-job2.cron:: 0 5 * * * - job will be created to run task at 5:00AM every day according to it's timezone.
+
+=== Portal
+
+image:xp-770.svg[XP 7.7.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.portal.cfg`
+
+Configure the portal behaviour.
+
+.Sample content config file
+[source,properties]
+----
+asset.cacheControl = public, max-age=31536000, immutable
+media.public.cacheControl = public, max-age=31536000, immutable
+media.private.cacheControl = private, max-age=31536000, immutable
+----
+
+asset.cacheControl:: Defines assets cache-control header when asset is cachable. Default: `public, max-age=31536000, immutable`
+media.public.cacheControl:: = Defines media (images, attachments) cache-control header when media is cachable and accessible by Everyone. Default: `public, max-age=31536000, immutable`
+media.private.cacheControl:: = Defines media (images, attachments) cache-control header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
+
+=== Image
+
+image:xp-770.svg[XP 7.7.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.image.cfg`
+
+Configure the image service behaviour.
+
+.Sample content config file
+[source,properties]
+----
+scale.maxDimension = 8000
+filters.maxTotal = 5
+----
+
+scale.maxDimension:: Defines maximum dimension size (both height and width) when scaling is done. Default: `8000`
+filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
