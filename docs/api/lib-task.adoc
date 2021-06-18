@@ -1,6 +1,6 @@
 = Task library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Functions for execution of asynchronous tasks.
 
@@ -456,6 +456,14 @@ var taskId = taskLib.submitTask({
   config: {}
 });
 ```
+
+=== submit
+_Deprecated from_ image:xp-770.svg[XP 7.7.0,opts=inline] +
+Replaced with <<executeFunction>>.
+
+=== submitNamed
+_Deprecated from_ image:xp-770.svg[XP 7.7.0,opts=inline] +
+Replaced with <<submitTask>>
 
 == Type Definitions
 
