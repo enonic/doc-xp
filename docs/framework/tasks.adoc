@@ -95,7 +95,7 @@ If you need such check, use inline function task instead.
 
 NOTE: Nodes that do not accept distributable tasks execution are still capable to submit them.
 
-NOTE: For fine-grained control which nodes should be capable to execute distributable tasks use <<../deployment/config.adoc#_application, Application>> filter config or local apps. Or disable execution of named tasks entirely on some nodes by <<../deployment/config.adoc#_task, Task>> config.
+NOTE: For fine-grained control which nodes should be capable to execute distributable tasks use <<../deployment/config.adoc#application, Application>> filter config or local apps. Or disable execution of named tasks entirely on some nodes by <<../deployment/config.adoc#task, Task>> config.
 
 == API
 
