@@ -1,4 +1,4 @@
-= Audit Library
+= Auditlog Library
 
 :toc: right
 :imagesdir: ../images
@@ -14,7 +14,7 @@ Add the following into your `build.gradle` file:
 [source,groovy]
 ----
 dependencies {
-  include "com.enonic.xp:lib-audit:${xpVersion}"
+  include "com.enonic.xp:lib-auditlog:${xpVersion}"
 }
 ----
 
@@ -22,7 +22,7 @@ In your JavaScript controller, add a require statement:
 
 [source,js]
 ----
-const authLib = require('/lib/xp/audit');
+const auditlogLib = require('/lib/xp/auditlog');
 ----
 
 You are now ready to use the library functionality.
@@ -67,7 +67,7 @@ Examples
 
 ```js
 // Find first audit log by ids
-var result = auditLib.find({
+var result = auditlogLib.find({
     start: 0,
     count: 1,
     ids: [
@@ -102,7 +102,7 @@ Examples
 
 ```js
 // Gets an audit log by id.
-var log = auditLib.get({
+var log = auditlogLib.get({
     id: '90b976f7-55ab-48ef-acb8-e7c6f0744442'
 });
 ```
@@ -137,14 +137,14 @@ Examples
 
 ```js
 // Creates an audit log.
-var log1 = auditLib.log({
+var log1 = auditlogLib.log({
     type: 'testlog'
 });
 ```
 
 ```js
 // Creates an audit log with more custom parameters.
-var log2 = auditLib.log({
+var log2 = auditlogLib.log({
     type: 'testlog',
     time: '2019-08-12T08:44:02.767Z',
     source: 'unittests',
