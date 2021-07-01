@@ -1,0 +1,173 @@
+= Export Library
+
+:toc: right
+:imagesdir: ../images
+
+image:xp-780.svg[XP 7.8.0,opts=inline]
+
+This library provides functions for generation node exports and importing them.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include "com.enonic.xp:lib-export:${xpVersion}"
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+[source,js]
+----
+const exportLib = require('/lib/xp/export');
+----
+
+You are now ready to use the library functionality.
+
+== Functions
+
+=== exportNodes
+
+Export nodes to a nodes-export.
+Export is created in <<../deployment/config#_export, exports>> directory.
+
+[.lead]
+Parameters
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes | Default | Description
+
+| sourceNodePath | string | | | Source nodes path
+| exportName | string | | | Export name
+| includeNodeIds | boolean | <optional>| true | Set to true to export node IDs
+| includeVersions | boolean | <optional>| false | Set to true to export all node versions
+| nodeResolved | function | <optional>| | A function to be called before export starts with number of nodes to export
+| nodeExported | function | <optional>| | A function to be called during export with number of nodes exported since last call
+|===
+
+
+[.lead]
+Returns
+
+*object* : Node export results
+
+[.lead]
+Examples
+
+```js
+// Export content nodes.
+let exportNodes = exportLib.exportNodes({
+    sourceNodePath: '/content',
+    exportName: 'export-1',
+    includeNodeIds: true,
+    includeVersions: true,
+    nodeImported: (i) => {
+    },
+    nodeResolved: (i) => {
+    }
+});
+```
+
+```js
+// Information about exported nodes.
+var expected = {
+    'exportedNodes': [
+        '/content'
+    ],
+    'exportedBinaries': [
+        'binaryPath [ref]'
+    ],
+    'exportErrors': [
+        'some error'
+    ]
+};
+```
+=== importNodes
+
+Import nodes from a nodes-export.
+Could be used to import node-export from <<../deployment/config#_export, exports>> directory or from application resource files.
+Optionally pre-transforms node XML node files with XSLT before import.
+
+[.lead]
+Parameters
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes | Default | Description
+
+| source | string or object | | | Either name of nodes-export located in exports directory or application resource key
+| targetNodePath | string | | | Target path for imported nodes
+| xslt | string or object  | <optional>| true | XSLT file name in exports directory or application resource key. Used for XSLT transformation
+| xsltParams | object  | <optional>| | Parameters used in XSLT transformation
+| includeNodeIds | boolean | <optional>| false | Set to true to use node IDs from the import, false to generate new node IDs
+| includePermissions | boolean | <optional>| false | Set to true to use Node permissions from the import, false to use target node permissions
+| nodeResolved | function | <optional>| | A function to be called during export with number of nodes exported since last call
+| nodeExported | function | <optional>| | A function to be called during export with number of nodes exported since last call
+|===
+
+
+[.lead]
+Returns
+
+*object* : Node import results
+
+[.lead]
+Examples
+
+```js
+// Import from application resource files
+let importNodes = exportLib.importNodes({
+    source: resolve('/import'),
+    targetNodePath: '/content',
+    xslt: 'transform.xslt',
+    xsltParams: {'k': 'v'},
+    includeNodeIds: true,
+    includePermissions: true,
+    nodeImported: (i) => {
+    },
+    nodeResolved: (i) => {
+    }
+});
+```
+
+```js
+// Import from an export in exports directory
+let importNodes = exportLib.importNodes({
+    source: 'export-1',
+    targetNodePath: '/content'
+});
+```
+
+```js
+// Information about imported nodes.
+var expected = {
+    'addedNodes': [
+        '/added'
+    ],
+    'updatedNodes': [
+        '/updated'
+    ],
+    'importedBinaries': [
+        'binaryPath [ref]'
+    ],
+    'importErrors': [
+        {
+            'exception': 'com.enonic.xp.lib.export.ImportHandlerTest$NoStacktraceException',
+            'message': 'error',
+            'stacktrace': []
+        }
+    ]
+};
+```

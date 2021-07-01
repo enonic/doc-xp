@@ -956,3 +956,21 @@ filters.maxTotal = 5
 
 scale.maxDimension:: Defines maximum dimension size (both height and width) when scaling is done. Default: `8000`
 filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
+
+
+=== Export
+
+image:xp-780.svg[XP 7.8.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.export.cfg`
+
+Configure exports service behaviour.
+
+.Sample content config file
+[source,properties]
+----
+exports.dir = /xp-exports
+----
+
+exports.dir:: Defines location of exports directory. Default: `${xp.home}/data/export`
+
