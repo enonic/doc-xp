@@ -5,11 +5,11 @@
 
 image:xp-780.svg[XP 7.8.0,opts=inline]
 
-This library provides functions for generation node exports and importing them.
+This library provides functions for creating and importing node-exports.
 
 == Usage
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -69,7 +69,7 @@ let exportNodes = exportLib.exportNodes({
     exportName: 'export-1',
     includeNodeIds: true,
     includeVersions: true,
-    nodeImported: (i) => {
+    nodeExported: (i) => {
     },
     nodeResolved: (i) => {
     }
@@ -113,8 +113,8 @@ An object with the following keys and their values:
 | xsltParams | object  | <optional>| | Parameters used in XSLT transformation
 | includeNodeIds | boolean | <optional>| false | Set to true to use node IDs from the import, false to generate new node IDs
 | includePermissions | boolean | <optional>| false | Set to true to use Node permissions from the import, false to use target node permissions
-| nodeResolved | function | <optional>| | A function to be called during export with number of nodes exported since last call
-| nodeExported | function | <optional>| | A function to be called during export with number of nodes exported since last call
+| nodeResolved | function | <optional>| | A function to be called during import with number of nodes imported since last call
+| nodeImported | function | <optional>| | A function to be called during import with number of nodes imported since last call
 |===
 
 
