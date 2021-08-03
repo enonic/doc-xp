@@ -20,7 +20,7 @@ Properties
 | Name        | Type   | Description
 | name        | string | Name of a job, unique for the entire environment
 | description | string | String-format description of scheduled job
-| descriptor | string | Descriptor of the task to be scheduled. Format: `<idProvider>:<user>`
+| descriptor | string | Descriptor of the task to be scheduled. Format: `<applicationKey>:<taskName>`
 | config | object | JSON object contains described task parameters
 | calendar | object | Describes when the task should run
 
@@ -37,7 +37,7 @@ Properties
 !  timezone ! string ! time zone of cron scheduling. It doesn't apply to a onetime calendar.
 !===
 
-| user | string |  Principal key of the task submitter. Format: `<applicationKey>:<taskName>`
+| user | string |  Principal key of the task submitter. Format: `<idProvider>:<user>`
 | enabled | boolean | If `true` - the job is active and can be run according to it's cron value and timezone.
 | creator | string | Principal key of user that created the task
 | modifier | string | Principal key of the last user that modified the task
