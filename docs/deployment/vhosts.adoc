@@ -17,7 +17,7 @@ By default, XP provides the following endpoints:
 
 By using vhosts, traffic for specific domains and url patterns may be routed directly to defined service paths in XP.
 
-  I.e. example.com -> 8080/site/default/master/homepage
+  I.e. example.com -> :8080/site/default/master/homepage
 
 With vhosts enabled, unexposed services are no longer accessible.
 
