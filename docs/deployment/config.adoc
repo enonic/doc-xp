@@ -959,23 +959,6 @@ scale.maxDimension:: Defines maximum dimension size (both height and width) when
 filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
 memoryLimit:: Defines (soft) Java Heap memory limit for image processing. Either in percentage of total Java Heap, or in memory units (mb, gb, ...). Default: `10%`
 
-[#admin]
-=== Admin
-image:xp-780.svg[XP 7.8.0,opts=inline]
-
-`XP_HOME/config/com.enonic.xp.admin.rest`
-
-Configure the contentstudio admin behavior.
-
-.Sample config file
-[source,properties]
-----
-uploadMaxFileSize = 10mb
-----
-
-uploadMaxFileSize:: maximum upload file size allowed by admin API. Default: `100mb`
-
-
 === Export
 
 image:xp-780.svg[XP 7.8.0,opts=inline]
