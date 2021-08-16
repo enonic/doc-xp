@@ -1,0 +1,319 @@
+= Systemd deployments
+:toc: right
+:imagesdir: images
+
+This section describes how to run Enonic XP as a systemd service.
+
+== Explanation of the setup
+
+What we want to achieve is to setup XP with systemd. The setup should be easy to install, upgrade, rollback and backup. We will setup the following:
+
+1. Set correct `vm.max_map_count`.
+2. Create a user and group for XP.
+3. Download and extract the desired distribution into `/opt/enonic/distros`.
+4. Setup the XP home folder at `/opt/enonic/home`.
+5. Create a systemd service file using the desired distro.
+6. Start the systemd service.
+
+This guide will use the following folder setup:
+
+[source,files]
+----
+/opt/enonic <1>
+  /distros <2>
+  /home <3>
+----
+
+<1> Root folder to contain all Enonic related files
+<2> Folder to store all downloaded distributions
+<3> Folder containing XP home, that includes blobstore, index, configuration, e.t.c.
+
+== Using Ansible
+
+The easiest way to achive this is to use an ansible playbook. We will focus on that first. If you are not familiar with ansible, don't worry. We will also show you how to do this manually in section <<manual-setup>>.
+
+=== Creating the Ansible playbook
+
+Let's create an ansible playbook that will handle all the setup for you. Create a file called `xp-systemd.yaml` and paste the following contents into it:
+
+.xp-systemd.yaml
+[source,yaml]
+----
+- hosts: "all"  # Run on all hosts in your inventory. You should probably change this!
+  become: true  # Run playbook as root. This is required!
+
+  # Variable you can set to customize your setup. Remember to set JVM heap (XP_OPTS) to the correct value based on your setup!
+  vars:
+    XP_VERSION: 7.7.1
+    XP_USER: xp
+    XP_GROUP: xp
+    XP_DIR_DISTROS: /opt/enonic/distros
+    XP_DIR_HOME: /opt/enonic/home
+    XP_SERVICE_NAME: xp.service
+    XP_SERVICE_FILE: "/etc/systemd/system/{{ XP_SERVICE_NAME }}"
+    XP_OPTS: "-Xms1G -Xmx1G"
+
+  tasks:
+    - name: Set vm.max_map_count
+      sysctl:
+        name: vm.max_map_count
+        value: "262144"
+        sysctl_set: true
+
+    - name: Ensure user group exists
+      ansible.builtin.group:
+        name: "{{ XP_GROUP }}"
+    
+    - name: Ensure user exists
+      ansible.builtin.user:
+        name: "{{ XP_USER }}"
+        group: "{{ XP_GROUP }}"
+        system: true
+
+    - name: Check if distro directory exists
+      ansible.builtin.stat:
+        path: "{{ XP_DIR_HOME }}"
+      register: distro_details
+
+    - name: Create distro directory
+      when: not distro_details.stat.exists
+      ansible.builtin.file:
+        path: "{{ XP_DIR_DISTROS }}"
+        state: directory
+        recurse: true
+        owner: "{{ XP_USER }}"
+        group: "{{ XP_GROUP }}"
+        mode: 0775
+
+    - name: Check if desired distro exists
+      ansible.builtin.stat:
+        path: "{{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}"
+      register: distro_details
+
+    - name: Download desired distro
+      when: not distro_details.stat.exists
+      ansible.builtin.unarchive:
+        src: "https://repo.enonic.com/public/com/enonic/xp/enonic-xp-linux-server/{{ XP_VERSION }}/enonic-xp-linux-server-{{ XP_VERSION }}.tgz"
+        dest: "{{ XP_DIR_DISTROS }}"
+        owner: "{{ XP_USER }}"
+        group: "{{ XP_GROUP }}"
+        remote_src: true
+
+    - name: Check if home directory exists
+      ansible.builtin.stat:
+        path: "{{ XP_DIR_HOME }}"
+      register: home_details
+
+    - name: Copy home directory from distro
+      when: not home_details.stat.exists
+      ansible.posix.synchronize:
+        src: "{{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}/home/"
+        dest: "{{ XP_DIR_HOME }}"
+      delegate_to: "{{ inventory_hostname }}"
+
+    - name: Create systemd service
+      ansible.builtin.copy:
+        dest: "{{ XP_SERVICE_FILE }}"
+        content: |
+          [Unit]
+          Description=Enonic XP
+          Documentation=https://developer.enonic.com/docs
+          Wants=network-online.target
+          After=network-online.target
+
+          [Service]
+          Type=simple
+          PrivateTmp=true
+          Environment=XP_INSTALL={{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}
+          Environment=XP_JAVA_HOME={{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}/jdk
+          Environment=XP_HOME={{ XP_DIR_HOME }}
+          Environment=XP_OPTS={{ XP_OPTS }}
+
+          User={{ XP_USER }}
+          Group={{ XP_GROUP }}
+
+          ExecStart={{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}/bin/server.sh
+
+          StandardOutput=journal
+          StandardError=inherit
+
+          LimitNOFILE=65536
+          LimitNPROC=4096
+          LimitAS=infinity
+          LimitFSIZE=infinity
+
+          KillSignal=SIGTERM
+          KillMode=process
+          SendSIGKILL=no
+          SuccessExitStatus=143
+
+          [Install]
+          WantedBy=multi-user.target
+      register: systemd_service_definition
+
+    # Only runs the first time the service definition is created
+    - name: Enable and start systemd service
+      when: systemd_service_definition.changed
+      ansible.builtin.systemd:
+        name: "{{ XP_SERVICE_NAME }}"
+        state: started
+        enabled: yes
+        daemon_reload: yes
+      register: systemd_service_enabled
+
+    # Only runs if the service definition changed and the service is already running
+    - name: Restart systemd service
+      when: systemd_service_definition.changed and not systemd_service_enabled.changed
+      ansible.builtin.systemd:
+        name: "{{ XP_SERVICE_NAME }}"
+        state: restarted
+        daemon_reload: yes
+----
+
+### Running the Ansible playbook
+
+Assuming you already have an ansible inventory file called `hosts` you can run the playbook by running this command:
+
+[source,bash]
+----
+$ ansible-playbook -i hosts xp-systemd.yaml
+----
+
+Once the playbook has finished, XP should be up and running using systemd. See section <<useful-commands>> to check logs.
+
+[#manual-setup]
+== Manual setup
+
+Here we will do the exact same steps as are done in the ansible playbook. But in this case we will execute them manually.
+
+To avoid making errors, lets set the `XP_VERSION` variable:
+
+[source,bash]
+----
+$ export XP_VERSION=7.7.1
+----
+
+NOTE: Step 1, 2 and 4 only have to be executed the first time you setup Enonic XP with systemd.
+
+1. Set correct `vm.max_map_count`.
+
+[source,bash]
+----
+$ echo "vm.max_map_count=262144" > "/etc/sysctl.d/99-xp.conf"
+$ sysctl --system
+----
+
+2. Create a user and group for XP.
+
+[source,bash]
+----
+$ groupadd -f xp
+$ useradd --gid xp --system xp
+----
+
+3. Download and extract the desired distribution into `/opt/enonic/distros`.
+
+First create the required directories:
+
+[source,bash]
+----
+$ install -d -m 0755 -o xp -g xp /opt/enonic/distros
+$ install -d -m 0755 -o xp -g xp /opt/enonic/home
+----
+
+Then download the distribution:
+
+[source,bash]
+----
+$ su -m xp -c "wget -q -c https://repo.enonic.com/public/com/enonic/xp/enonic-xp-linux-server/${XP_VERSION}/enonic-xp-linux-server-${XP_VERSION}.tgz -O - | tar -xz -C /opt/enonic/distros"
+----
+
+4. Setup the XP home folder at `/opt/enonic/home`.
+
+[source,bash]
+----
+$ cp -rp /opt/enonic/distros/enonic-xp-linux-server-${XP_VERSION}/home/* /opt/enonic/home
+----
+
+5. Create a systemd service file using the desired distro.
+
+[source,bash]
+----
+$ cat << EOF > /etc/systemd/system/xp.service
+[Unit]
+Description=Enonic XP
+Documentation=https://developer.enonic.com/docs
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+PrivateTmp=true
+Environment=XP_INSTALL=/opt/enonic/distros/enonic-xp-linux-server-${XP_VERSION}
+Environment=XP_JAVA_HOME=/opt/enonic/distros/enonic-xp-linux-server-${XP_VERSION}/jdk
+Environment=XP_HOME=/opt/enonic/distros/home
+Environment=XP_OPTS=-Xms1G -Xmx1G
+
+User=xp
+Group=xp
+
+ExecStart=/opt/enonic/distros/enonic-xp-linux-server-${XP_VERSION}/bin/server.sh
+
+StandardOutput=journal
+StandardError=inherit
+
+LimitNOFILE=65536
+LimitNPROC=4096
+LimitAS=infinity
+LimitFSIZE=infinity
+
+KillSignal=SIGTERM
+KillMode=process
+SendSIGKILL=no
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+EOF
+----
+
+6. Start the systemd service.
+
+[source,bash]
+----
+$ systemctl daemon-reload
+$ systemctl enable --now xp.service
+----
+
+XP should now be up and running using systemd. See section <<useful-commands>> to check logs.
+
+[#useful-commands]
+== Useful commands
+
+View Enonic XP logs:
+
+[source,bash]
+----
+$ journalctl -u xp.service
+----
+
+Stop Enonic XP:
+
+[source,bash]
+----
+$ systemctl stop xp.service
+----
+
+Start Enonic XP:
+
+[source,bash]
+----
+$ systemctl start xp.service
+----
+
+Restart Enonic XP:
+
+[source,bash]
+----
+$ systemctl restart xp.service
+----
