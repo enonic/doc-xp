@@ -514,7 +514,7 @@ image::Html-area-editor.png[Input field with a toolbar at the top. Source and fu
 
 Below is the default editor tools configuration:
 
-  Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | SpecialChar Anchor Image Macro Link Unlink | Table
+  Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | SpecialChar Anchor Image Macro Link Unlink | Table | PasteModeSwitcher
 
 
 Below is the complete list of available editor tools:
@@ -541,6 +541,7 @@ Below is the complete list of available editor tools:
 | Link | Insert/Edit a link
 | Unlink | Remove link
 | Table | Table format menu
+| PasteModeSwitcher | Paste mode (formatted/plain text)
 | BGColor | Background color
 | Blockquote | Quotation
 | Copy | Copy selected text into buffer
