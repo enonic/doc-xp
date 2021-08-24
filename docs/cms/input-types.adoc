@@ -103,10 +103,15 @@ image:Content-selector-no-icon.png[Input box without an icon, 500]
 === Allow content type pattern
 XP uses one of two modes when matching content type patterns:
 
-`LEGACY`:: this mode simulates the pattern matching functionality that was the default before XP 7.7.0. image:../images/xp-770.svg[XP 7.7.0,opts=inline] 
+:imagesdir: ../images
+
+`LEGACY`:: this mode simulates the pattern matching functionality that was the default before XP 7.7.0. image:xp-770.svg[XP 7.7.0,opts=inline]
 `MATCH`:: this mode is the current default mode and has a few notable changes from `LEGACY` mode.
 
-The modes are explained in further detail below. You can configure which mode to use in  <<../deployment/config.adoc#admin, the admin config>>.
+The modes are explained in further detail below. You can configure which mode to use in  <<../deployment/config.adoc#admin_rest, the admin config>>.
+
+:imagesdir: schemas/images
+
 ==== Legacy +
 
 If the pattern value can be found in any part of the content type name, then it is considered a match.

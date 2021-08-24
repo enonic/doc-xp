@@ -957,8 +957,8 @@ filters.maxTotal = 5
 scale.maxDimension:: Defines maximum dimension size (both height and width) when scaling is done. Default: `8000`
 filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
 
-[#admin]
-=== Admin
+[#admin_rest]
+=== Admin REST
 image:xp-770.svg[XP 7.7.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.admin.rest`

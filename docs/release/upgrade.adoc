@@ -75,7 +75,7 @@ If application code relies on checking directory existence in jar, consider chec
 * `page-template` content now accepts child content, but only `fragment` and `media:*`. Attachments are no longer redirected to the nearest template's site.
 
 * input-type's `allow-content-type`, x-data `allow-content-types` and newest content-type's `allow-child-content-type` share the same <<../cms/input-types#allowContentType, pattern matching>>, that is stricter than before.
-You can switch back to legacy mode by setting `contentTypePatternMode = LEGACY` in  <<../deployment/config#_admin, Configuration Files / Admin>> for `allow-content-type` and `allow-content-types`, but it won't affect `allow-child-content-type` pattern matching.
+You can switch back to legacy mode by setting `contentTypePatternMode = LEGACY` in  <<../deployment/config#admin_rest, Configuration Files / Admin>> for `allow-content-type` and `allow-content-types`, but it won't affect `allow-child-content-type` pattern matching.
 
 
 == v7.6 notes
