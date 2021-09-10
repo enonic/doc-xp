@@ -905,7 +905,7 @@ init-job.my-job2.enabled=false
 init-job.my-job2.cron=0 5 * * *
 init-job.my-job2.timezone=GMT+2:00
 init-job.my-job2.descriptor=com.enonic.xp.app.myapp:task2
-init-job.my-job2.description=Job to run `myapp:task2` every minute with `config` params
+init-job.my-job2.description=Job to run `myapp:task2` at 5:00AM every day according to it's timezone.
 init-job.my-job2.user=system:user1
 init-job.my-job2.config={"myparam1":"value1","myset":{"myparam2":"value2"}}
 ----
