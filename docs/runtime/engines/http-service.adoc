@@ -16,16 +16,10 @@ Example service controller
 .src/main/resources/services/<service-name>/<service-name>.js
 [source,JavaScript]
 ----
-var counter = 0;
-
 exports.get = function(req) {
-
-  counter++;
-
   return {
     body: {
-      time: new Date(),
-      counter: counter
+      time: new Date()
     },
     contentType: 'application/json'
   };
