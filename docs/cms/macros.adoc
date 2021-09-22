@@ -13,12 +13,12 @@ There are two built-in macros included in XP. But its real power comes from macr
 
 A macro instruction is similar to an HTML or XML tag but using square brackets instead of angle brackets.
 
- [macroname attrib1="value1" attrib2="value2"] body [/macroname]
+ [disable][macroname attrib1="value1" attrib2="value2"] body [/macroname][/disable]
 
 A macro has a name, a set of attributes, and optionally a body (anything that is too long to be
 passed via parameters).
 
- [macroname attrib1="value1" attrib2="value2"/]
+ [disable][macroname attrib1="value1" attrib2="value2"/][/disable]
 
 Macro instructions can be added anywhere in an HTML page, usually inside a content’s HtmlArea field.
 
@@ -43,7 +43,7 @@ The config element is a form where each input element corresponds to a macro par
 
 NOTE: The config form does not support nested elements, so https://developer.enonic.com/docs/xp/stable/cms/schemas#itemset[Item Sets] are not allowed in the macro config form. Also the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea] input type is not allowed in the config form, since it may contain macros itself.
 
-IMPORTANT: If you don't have a input with the `name="body"`, the generated macro tag will be self closing [macro attr="" /]
+IMPORTANT: If you don't have a input with the `name="body"`, the generated macro tag will be self closing [disable][macro attr="" /][/disable]
 
 Its path follows the pattern `site/macros/<macroName>/<macroName>.xml`
 
