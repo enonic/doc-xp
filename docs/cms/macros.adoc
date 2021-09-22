@@ -43,6 +43,8 @@ The config element is a form where each input element corresponds to a macro par
 
 NOTE: The config form does not support nested elements, so https://developer.enonic.com/docs/xp/stable/cms/schemas#itemset[Item Sets] are not allowed in the macro config form. Also the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea] input type is not allowed in the config form, since it may contain macros itself.
 
+IMPORTANT: If you don't have a input with the name="body" the tag in the html area will be self closing [macro attr="" /]
+
 Its path follows the pattern `site/macros/<macroName>/<macroName>.xml`
 
 [source, xml]
@@ -52,6 +54,9 @@ Its path follows the pattern `site/macros/<macroName>/<macroName>.xml`
   <description i18n="a-macro.description">Shows currently logged user</description>
 
   <form>
+    <input name="body" type="TextLine">
+      <label>Macro body</label>
+    </input>
     <input name="defaultText" type="TextLine">
       <label>Text to show if no user logged in</label>
     </input>
