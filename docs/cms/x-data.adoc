@@ -90,4 +90,4 @@ In the example above _my-x-data-1_ will be enabled for all content types, with n
 
 _my-x-data-2_ will be added for all content types with no option to remove it in the Content Wizard, except for content type `base:folder` for which it will not be shown at all.
 
-_my-x-data-3_ will be enabled only for sites (which are using internal content type _portal:site_) and will be optional, meaning user has to manually turn it on in the Content Wizard.
+_my-x-data-3_ will be enabled only for sites (which are using internal content type `portal:site`) and will be optional, meaning user has to manually turn it on in the Content Wizard.
