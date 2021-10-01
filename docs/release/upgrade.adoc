@@ -1,28 +1,42 @@
 = Upgrading
 :toc: right
 :imagesdir: images
-
-
-== Upgrading minor versions
 This procedure applies to feature (7.x.0) and fix upgrades (7.x.y, etc).
 
-=== Single instance
-To upgrade a single instance deployment:
+=== Non-cluster upgrade
+Single node deployments cannot be performed without downtime. To upgrade a single instance deployment, follow the instructions below:
 
-. stop your instance
-. replace your current 7.x runtime image with the new v7.(x+1) image
-. restart the instance.
+. Stop your instance
+. Replace your XP7 runtime image with the new XP7 image
+. Start the instance.
 
-=== Clusters
-The procedure is essentially the same as for a single instance, but repeated for all cluster nodes.
-We recommend the following procedure:
+=== Rolling Cluster upgrade
 
-. Update only one node at a time. Wait for a node to start and join the cluster before you move on to the next node.
-. Upgrade your master nodes first (We always recommend using dedicated master nodes)
-. Upgrade all other nodes. If you run a combination of back-end and front-end nodes, we recommend upgrading the back-end nodes before you move on to the front-end nodes.
+All fix upgrades (i.e. from 7.4.1 to 7.4.8), and most feature upgrades (i.e. from 7.5.x to 7.6.x) support rolling upgrades - with zero downtime.
 
-If this is done correctly, bugfix upgrades (v7.x.y) can be executed without downtime.
-For feature upgrades (7.x.0), the forming of the cluster is a little bit more complicated, and there may be some requests to the site that are rejected during the upgrade but the process should still be really smooth.
+To safely perform a rolling upgrade, perform the following steps.
+
+WARN: Before you perform a rolling upgrade, verify that all feature version in your upgrade path (from version -> to version) support rolling upgrade
+
+. Upgrade only one node at a time. Wait for the node to start and join the cluster before you move on
+. Stop, upgrade image and start your master nodes first (We always recommend using dedicated master nodes)
+. Stop, upgrade image and start data nodes
+. Stop, upgrade image and start remaining nodes
+
+=== Full restart Cluster upgrade
+
+Selected feature versions (i.e. from 7.6.x to 7.7.x) may require a full restart in order to guarantee no loss of data and/or state. Releases that require full restart are explicitly listed below.
+
+NOTE: This strategy may safely be applied to upgrading any xp cluster and/or version
+
+Follow the steps below to complete a restart upgrade:
+
+. Stop all cluster nodes
+. Replace the xp runtime image with the new for all nodes
+. Start all nodes in parallell
+
+NOTE: It is important to start the nodes at the same time to avoid timeouts, should any upgrade scripts be supplied with the new version.
+
 
 === Applications
 When upgrading to new feature versions of Enonic XP, new versions of standard apps may also be available. 
@@ -33,6 +47,9 @@ We generally always recommend updating your apps to the latest version!
 == v7.8 notes
 
 == v7.7 notes
+
+WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (Hazelcast) has been updated in this release. A full restart is required in order to prevent loss of data or state.  
+
 * Session cookie specifies `SameSite=Lax` by default. It is similar to modern browsers default value except for "Lax + POST mitigation".
 You can revert to previous behavior by setting `session.cookieSameSite =` in <<../deployment/config#_jetty, Configuration Files / Jetty>>
 
@@ -40,16 +57,14 @@ You can revert to previous behavior by setting `session.cookieSameSite =` in <<.
 
 * Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <<../deployment/config#_image, Configuration Files / Image>>
 
-* Image Service has more eager validation of scale, filters, background and quality parameter values.
-Make sure the requests to Image Service use only correct/supported values.
+* Image Service has more eager validation of scale, filters, background and quality parameter values. Make sure the requests to Image Service use only correct/supported values.
 
 * Built-in Embed Macro now requires body part to be HTML escaped. In general, it should not cause issues because ContentStudio HTML editor always escapes macro body.
 
 * Content attachment file names can no longer contain suspicious characters.
 You can revert to previous behavior by setting `attachments.allowUnsafeNames = true` in <<../deployment/config#_content, Configuration Files / Content>>
 
-* Assets Service URL fingerprint part now uses application's "build time" instead of application's startup time.
-Make sure "build time" always changes for new versions of an application.
+* Assets Service URL fingerprint part now uses application's "build time" instead of application's startup time. Make sure "build time" always changes for new versions of an application (this happens automatically if you use the standard xp build system)
 
 * Default Cache-Control headers for Assets Service and Portal Media Attachments have been changed.
 You can change default settings in <<../deployment/config#_portal, Configuration Files / Portal>>
@@ -57,9 +72,13 @@ You can change default settings in <<../deployment/config#_portal, Configuration
 * ResourceService no longer considers directories in jar as existing resources.
 If application code relies on checking directory existence in jar, consider checking existence of a file inside that directory instead.
 
-* Content integrity is verified on move as it was done on create for `page-template`, `template-folder` and `site` built-in content types.
+* Content integrity is verified during move operation, as it was done on create for `page-template`, `template-folder` and `site` built-in content types.
 
 * `page-template` content now accepts child content, but only `fragment` and `media:*`. Attachments are no longer redirected to the nearest template's site.
+
+* input-type's `allow-content-type`, x-data `allow-content-types` and newest content-type's `allow-child-content-type` share the same <<../cms/input-types#allowContentType, pattern matching>>, that is stricter than before.
+You can switch back to legacy mode by setting `contentTypePatternMode = LEGACY` in  <<../deployment/config#admin_rest, Configuration Files / Admin>> for `allow-content-type` and `allow-content-types`, but it won't affect `allow-child-content-type` pattern matching.
+
 
 == v7.6 notes
 * Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <<../framework/tasks#_distributable, Tasks / Distributable>> for more information.

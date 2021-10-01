@@ -65,14 +65,14 @@ to all content types via `site.xml` but want to exclude some content types.
 Use regular expressions in the `allowContentTypes` attribute of the `<x-data/>` field inside `site.xml` to enable or disable it for specific content type(s).
 By default x-data will be added to content items of all types with no option to remove it but you can make it optional by setting `optional` attribute to _true_. Optional x-data has to be manually enabled inside Content Wizard to be added to the content data.
 
-If `allowContentTypes` and `optional` attributes are not set, the x-data will automatically be enabled for all content types.
+If `allowContentTypes` and `optional` attributes are not set, the x-data will automatically be enabled for all content types. See <<input-types#allowContentType, modes>> of content type filtering.
 
 [source,xml]
 ----
 <site>
   <x-data name="my-x-data-1" />
   <x-data name="my-x-data-2" allowContentTypes="^(?!base:folder$).*" />
-  <x-data name="my-x-data-3" allowContentTypes="base:folder" optional="true" />
+  <x-data name="my-x-data-3" allowContentTypes="portal:site" optional="true" />
   <form>
     <input type="TextLine" name="company">
       <label>Company</label>
@@ -88,6 +88,6 @@ If `allowContentTypes` and `optional` attributes are not set, the x-data will au
 
 In the example above _my-x-data-1_ will be enabled for all content types, with no option to disable it in the Content Wizard.
 
-_my-x-data-2_ will be added for all content types with no option to remove it in the Content Wizard, except for content type base:folder for which it will not be shown at all.
+_my-x-data-2_ will be added for all content types with no option to remove it in the Content Wizard, except for content type `base:folder` for which it will not be shown at all.
 
-_my-x-data-3_ will be enabled only for content type _base:folder_ and will be optional, meaning user has to manually turn it on in the Content Wizard.
+_my-x-data-3_ will be enabled only for sites (which are using internal content type `portal:site`) and will be optional, meaning user has to manually turn it on in the Content Wizard.

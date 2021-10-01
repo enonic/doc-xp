@@ -99,7 +99,7 @@ var expected = {
     'schedule': {
         'value': '* * * * *',
         'type': 'CRON',
-        'timezone': 'GMT+2:00'
+        'timeZone': 'GMT+2:00'
     }
 };
 ```
@@ -195,7 +195,7 @@ Parameters
 ! schedule ! object ! required ! task time run config.
 ! schedule.value ! string ! required ! schedule value according to its type.
 ! schedule.type ! string ! required ! schedule type (CRON or ONE_TIME).
-! schedule.timezone ! string !required for schedule.type = CRON ! time zone of cron scheduling. It isn't applicable to a onetime job.
+! schedule.timeZone ! string !required for schedule.type = CRON ! time zone of cron scheduling. It isn't applicable to a onetime job.
 ! user ! string ! optional ! principal key of the user that submitted the task.
 ! enabled ! boolean ! required ! job is active or not.
 
@@ -324,18 +324,6 @@ Returns
 [.lead]
 Example
 ```js
-schedulerLib.create({
-    name: 'myjob',
-    descriptor: 'appKey:task',
-    description: 'job description',
-    user: 'user:system:user',
-    enabled: true,
-    config: {
-        a: 1
-    },
-    schedule: {type: 'ONE_TIME', value: '2012-01-01T00:00:00.00Z'}
-});
-
 var result = schedulerLib.modify({
     name: 'myjob',
     editor: (edit) => {
@@ -456,7 +444,7 @@ Properties
 
 ! schedule.value ! string ! schedule value
 ! schedule.type ! string ! schedule type.
-! schedule.timezone ! string ! time zone of cron scheduling. It isn't applicable to a onetime job
+! schedule.timeZone ! string ! time zone of cron scheduling. It isn't applicable to a onetime job
 !===
 
 | user | string |  principal key of the user that submitted the task

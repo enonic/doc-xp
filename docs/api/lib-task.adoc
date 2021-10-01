@@ -295,9 +295,9 @@ Example
 
 .Execute task and keep taskId for polling status:
 ```js
-var taskId = taskLib.submit({
+var taskId = taskLib.executeFunction({
   description: 'Background task',
-  task: function () {
+  func: function () {
 
     taskLib.progress({info: 'Initializing task'});
 

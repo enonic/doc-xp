@@ -91,7 +91,7 @@ image::Content-selector-default.png[An input box with a dropdown options below i
   </config>
 </input>
 ----
-<1> *allowContentType* is used to limit the content types that may be selected using the <<allowContentType Samples>>
+<1> *allowContentType* is used to limit the content types that may be selected using the <<allowContentType>>
 <2> *allowPath* is used to limit the path of the content that may be selected using the <<allowPath Samples>>. By default, Content Selector
 only displays content from the same site.
 <3> *treeMode* toggles between tree and flat modes. Default value is `false` (flat mode). +
@@ -99,14 +99,56 @@ image:Content-selector-tree.png[Input box with a dropdown with a tree structure,
 <4> *hideToggleIcon* hides the toggle icon when set to `false`. +
 image:Content-selector-no-icon.png[Input box without an icon, 500]
 
-=== allowContentType Samples
+[#allowContentType]
+=== Allow content type pattern
+XP uses one of two modes when matching content type patterns:
 
+:imagesdir: ../images
+
+`LEGACY`:: this mode simulates the pattern matching functionality that was the default before XP 7.7.0. image:xp-770.svg[XP 7.7.0,opts=inline]
+`MATCH`:: this mode is the current default mode and has a few notable changes from `LEGACY` mode.
+
+The modes are explained in further detail below. You can configure which mode to use in  <<../deployment/config.adoc#admin_rest, the admin config>>.
+
+:imagesdir: schemas/images
+
+==== Legacy +
+
+If the pattern value can be found in any part of the content type name, then it is considered a match.
+The pattern will be prefixed by the current application name unless:
+
+- the pattern uses the <application-name:content-name> format
+- the pattern includes one of `:` or `*`
+- the pattern starts with `${app}`.
+
+==== Match +
+The pattern will be treated as a Java Regular Expression (with <<#regex-differences, a few notable exceptions>>) and the whole content type name must match it to be accepted.
+The pattern will be prefixed by the current application name if it does _not_ contain any of the following characters: `\^$.|?*+()[{:`.
+
+[#regex-differences]
+==== XP patterns: special cases
+
+XP's patterns have a few cases where they differ from normal Java Regular Expression syntax:
+
+.`${app}` template expression
+Most content type names start with the name of the application where they are stored. It may be quite messy and hard to maintain the whole application name in every pattern, so the `${app}` template expression can be used to replace it.
+
+.The '*' character
+In most regex engines, the `*` character means "0 or more of the preceding token". However, XP treats it differently and interprets it as "0 or more of any character(s) except for line breaks". In that way, it's similar to https://en.wikipedia.org/wiki/Glob_%28programming%29[glob patterns].
+
+To further clarify, in XP:
+
+- `*day` would match "monday", "day", and "mayday". This pattern would be invalid in most regex engines.
+- `p*age` would match "page" and "package", but _not_ "age".
+- `monk*` would match "monkey" and  "monk", but _not_ "mon".
+
+.Samples
 ====
 Content type "citation" within your current application +
 
   <allowContentType>citation</allowContentType>
 
-Content type "quote" from the application "my.other.app"
+Content type "quote" from the application "my.other.app" +
 
   <allowContentType>my.other.app:quote</allowContentType>
 
@@ -120,11 +162,11 @@ Any content types from current application +
 
 All content types starting with banana (using regular expressions) +
 
-  <allowContentType>*:^banana*</allowContentType>
+  <allowContentType>*:banana*</allowContentType>
 
-All content types except folders +
+All content types except 'base:folder' +
 
-  <allowContentType>^(?!base:folder$).*</allowContentType>
+  <allowContentType>^(?!base:folder$)*</allowContentType>
 ====
 
 === allowPath Samples
@@ -477,7 +519,7 @@ image::Html-area-editor.png[Input field with a toolbar at the top. Source and fu
 
 Below is the default editor tools configuration:
 
-  Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | SpecialChar Anchor Image Macro Link Unlink | Table
+  Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | SpecialChar Anchor Image Macro Link Unlink | Table | PasteModeSwitcher
 
 
 Below is the complete list of available editor tools:
@@ -504,6 +546,7 @@ Below is the complete list of available editor tools:
 | Link | Insert/Edit a link
 | Unlink | Remove link
 | Table | Table format menu
+| PasteModeSwitcher | Paste mode (formatted/plain text)
 | BGColor | Background color
 | Blockquote | Quotation
 | Copy | Copy selected text into buffer

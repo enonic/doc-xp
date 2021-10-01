@@ -18,7 +18,7 @@ The site pipeline is executed as a subset of the <<../engines#common_request_pip
 
 image::idprovider-pipeline.svg[ID provider rendering pipeline, 768px]
 
-Login:: Fixed endpoint for logging in: `/_/idprovider/<idprovider-name>/logout`.
+Login:: Fixed endpoint for logging in: `/_/idprovider/<idprovider-name>/login`.
 
 Logout:: Fixed endpoint for logging out: `/_/idprovider/<idprovider-name>/logout`.
 

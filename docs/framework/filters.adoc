@@ -54,7 +54,5 @@ exports.filter = function (req, next) {
 };
 ----
 
-Filters may currently be wired into the execution pipeline in the following ways:
+Filters can be wired into the execution pipeline as described in the <<../cms/mappings#, Site mappings>> section.
 
-* Using a https://market.enonic.com/vendors/enonic/router-lib[router]
-* Using <<../cms/mappings#, site mappings>>

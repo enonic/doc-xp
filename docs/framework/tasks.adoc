@@ -71,7 +71,7 @@ Below is an example of how to run a specific task.
 ----
 var taskLib = require('/lib/xp/task');
 
-var taskId = taskLib.submitNamed({
+var taskId = taskLib.submitTask({
         name: `mytask`,
         config: {
             count: 10
