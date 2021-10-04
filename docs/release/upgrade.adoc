@@ -46,6 +46,8 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.8 notes
 
+* params returned from HTTP Filter now replace original request params with the same names.
+
 == v7.7 notes
 
 WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (Hazelcast) has been updated in this release. A full restart is required in order to prevent loss of data or state.  

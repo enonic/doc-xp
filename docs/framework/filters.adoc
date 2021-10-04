@@ -54,5 +54,18 @@ exports.filter = function (req, next) {
 };
 ----
 
+.Filter changing request params
+[source,js]
+----
+exports.filter = function (req, next) {
+    req.params = {
+            param1: 'val', // if param1 was not in the original request it will be added, otherwise the original value will be replaced
+            param2: null, // remove param2 from the original request
+            param3: [] // another way to remove a parameter
+        }
+    }
+};
+----
+
 Filters can be wired into the execution pipeline as described in the <<../cms/mappings#, Site mappings>> section.
 
