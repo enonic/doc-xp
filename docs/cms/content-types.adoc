@@ -47,7 +47,7 @@ The exception to this naming scheme are <<built-in>> content types, since these 
 
 <1> *display-name* (required) The human readable name of the content type.
 Optionally specify the <<../api/lib-i18n.adoc#,i18n>> attribute to define a mapping to localize the value.
-The localisation key must then be declared and localised in the resource bundle.
+The localization key must then be declared and localised in the resource bundle.
 <2> *display-name-label* (optional; _since v7.1_) Enables you to override the default <Display Name> placeholder used in the content form.
 <3> *description* (optional) Set a description that is shown when creating the content type.
 <4> *super-type* (required) Refers to the root controller of the form. For most custom content types this should be set to `base:structured`.

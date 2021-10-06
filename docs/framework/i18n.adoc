@@ -1,6 +1,6 @@
-= Localisation
+= Localization
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Localizing your projects
 
@@ -10,13 +10,13 @@ NOTE: This section applies to code level localization, not multi-lingual content
 
 Any project targeting users with different languages, you may want to localize the interface.
 
-The XP framework provides localisation a standard approach to localization for the following use-cases:
+The XP framework provides localization a standard approach to localization for the following use-cases:
 
-CMS/Sites::  Use the <<../api/lib-i18n#,the localization API>> to dynamically localize any text phares in your app. The framework will attempt to apply the locale specified in the site's language property.
+CMS/Sites::  Use the <<../api/lib-i18n#,the localization API>> to dynamically localize any text phrases in your app. The framework will attempt to apply the locale specified in the site's language property.
 
 Admin Console:: Localise labels and texts in <<../cms/schemas#schema_localization, schemas>> such as content types. The framework will attempt to use the locale derived from the browser's "accept-language" settings.
 
-Webapps and more:: The <<../api/lib-i18n#,the localization API>> may also be used for any other purpose. In tese cases, the developer must control and specify which locale to explicitly.
+Webapps and more:: The <<../api/lib-i18n#,the localization API>> may also be used for any other purpose. In these cases, the developer must control and specify which locale to explicitly.
 
 == Localization files
 
@@ -62,7 +62,7 @@ The string-representation of a locale is::
 where
 
 * `la`= two letter language code as specified by https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes[ISO-639]
-* `CO` = optional two letter country code as specified by https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes[ISO-3166]
+* `CO` = optional two-letter country code as specified by https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes[ISO-3166]
 * `VA` = two letter rarely used variant-code.
 
 A sample locale including vendor specific variant:
@@ -73,7 +73,7 @@ NOTE: Variants are rarely used in XP, and can pretty much be discarded.
 
 == Best match resolving
 
-Based on the requested locale to be used, the framework applies a best match pattern to find the optimal localisation file.
+Based on the requested locale to be used, the framework applies the best match pattern to find the optimal localization file.
 
 If the requested locale is "en-US", the XP framework will look for localization files in the following order:
 
@@ -83,7 +83,7 @@ If the requested locale is "en-US", the XP framework will look for localization 
 
 As such, if the locale for a request was ``en``, the ``phrases_en.properties`` file would be used.
 
-If the locale does not match a any specific file, the default ``phrases.properties`` will be used as fallback.
+If the locale does not match any specific file, the default ``phrases.properties`` will be used as fallback.
 
 If no matching localization key is found in any of the files in a bundle, a default ``NOT_TRANSLATED`` will be displayed.
 
@@ -125,3 +125,9 @@ message_placeholder = Hello, my name is {0}.
 
 Placeholders are marked with ``{<number>}``.
 The given number corresponds with the function argument named ``values`` and the position of the parameter.
+
+See Java documentation for https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/MessageFormat.html[MessageFormat] for advanced use of placeholders.
+The only difference with Java MessageFormat implementation is that DateFormat timezone is `UTC`.
+
+NOTE: image:xp-780.svg[XP 7.8.0,opts=inline] Placeholders get formatted according to requested locale
+
