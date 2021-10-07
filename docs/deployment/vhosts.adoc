@@ -1,6 +1,6 @@
 = Virtual hosts
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Use vhosts to safely expose services (sites/webapps etc) through public domains.
 
@@ -19,13 +19,76 @@ By using vhosts, traffic for specific domains and url patterns may be routed dir
 
   I.e. example.com -> :8080/site/default/master/homepage
 
+image:xp-780.svg[XP 7.8.0,opts=inline] Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with `~` symbol).
+
+
+NOTE: IDN hosts should be specified using Punycode representation.
+
 With vhosts enabled, unexposed services are no longer accessible.
 
 Vhosts may also define the relationship to one or more ID providers.
-This enables pluggable authentication on a per vhost basis.
+This enables pluggable authentication on a per-vhost basis.
 
 NOTE: Vhosts only apply to XP service port (defaults to 8080), not the monitoring and management ports.
 
+== Request Matching
+
+VHost matches the request if `host` value matches the requested host _AND_ request-uri matches `source`.
+
+image:xp-780.svg[XP 7.8.0,opts=inline] Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[Pattern JavaDoc]
+Host matching is case-insensitive in both cases.
+
+NOTE: For backwards compatibility with old versions of XP root domain is not normalized in host.
+Specify both host values `mapping.example.host = example.com. example.com` if case you need to support FQDN-style host.
+
+.image:xp-780.svg[XP 7.8.0,opts=inline] host mapping match both `www.example.com` and `example.com` hosts
+[source,properties]
+----
+mapping.example.host = www.example.com example.com
+----
+
+.image:xp-780.svg[XP 7.8.0,opts=inline] host mapping will match any sub-domain: `1.example.com`, `2.example.com` hosts (but not sub-sub-domains)
+[source,properties]
+----
+mapping.example.host = ~[^.]+\\.example\\.com
+----
+
+Source matching is done with "exact" or "starts-with" match.
+Source matching is case-sensitive, and is done before URI decoding.
+
+.source mapping matches any request-uri
+[source,properties]
+----
+mapping.example.source = /
+----
+
+.source mapping matches any request-uri that equals to `/hello` or starts with `/hello/`
+[source,properties]
+----
+mapping.example.source = /hello
+----
+
+If multiple VHosts match the request, disambiguation rules apply in the following order:
+
+- image:xp-780.svg[XP 7.8.0,opts=inline] VHost with lower `order` value is preferred.
+If `order` is not specified, order is considered _least_ preferable (`Integer.MAX_VALUE`).
+- VHost with the longest `source` value is preferred.
+- arbitrary VHost is selected.
+
+== Capture Groups image:xp-780.svg[XP 7.8.0,opts=inline]
+
+When VHost matched by a host regular expression, capture groups can be used in `target` via group references.
+
+[source,properties]
+----
+mapping.example.host = ~example\\.(?<tld>[^.]+)
+mapping.example.target = /site/default/master/${tld}
+----
+
+In this example if host is `example.no`, then target becomes `/site/default/master/no`
+
+WARNING: Avoid mixing regular expressions, multiple hosts and capture groups.
+If host is not matched by regular expression, then group references in `target` will remain as-is.
 
 == Examples
 
