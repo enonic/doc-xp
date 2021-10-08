@@ -54,7 +54,7 @@ The controller file must match the widget name, i.e. `admin/widgets/<widget-name
 ----
 exports.get = function (req) {
     return {
-        body: '<html><head></head><body><h1>My first widget</h1></body></html>',
+        body: '<widget>My first widget</widget>',
         contentType: 'text/html'
     };
 };
@@ -66,11 +66,11 @@ NOTE: Depending on the interface the widget is implementing, the controller may 
 
 Widgets may also have icons. Simply place an SVG or PNG file into the widget folder, i.e. `admin/widgets/<widget-name>/<widget-name>.svg``
 
-== Context Panel widgets 
+== Context Panel widgets
 
 INFO: This section contains specific details on implementing Context panels for Content studio.
 
-Once your widget application is deployed, the widget should become available in the Content Studio's Context Panel. 
+Once your widget application is deployed, the widget should become available in the Content Studio's Context Panel.
 
 The ID of currently selected content item and the contextual repository/branch will be passed to the widget via request parameter: `contentId`
 
