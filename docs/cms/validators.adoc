@@ -6,7 +6,7 @@ image:xp-780.svg[XP 7.8.0,opts=inline]
 
 == Introduction
 
-XP by default validates nearly created and modified content:
+XP by default validates newly created and modified content:
 - name and displayName not empty - Data for form elements is in accordance with Forms
 
 It is also possible to provide custom validators for existing content via Java API.
