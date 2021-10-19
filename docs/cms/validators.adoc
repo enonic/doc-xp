@@ -67,7 +67,7 @@ Validation error must be identified with ValidationErrorCode, that consists of `
 
 `i18n` field defiles i18n key and can be used to identify a message key in Localization bundle.
 
-NOTE: Applications like ContentStudio use `ValidationErrorCode` as a fallback to _guess_ i18n key, for instance if `ValidationErrorCode` is `my.app:custom.invalid` fallback i18k for it is `my.app.custom.invalid`.
+NOTE: Applications like ContentStudio use `ValidationErrorCode` as a fallback to _guess_ i18n key, for instance if `ValidationErrorCode` is `my.app:custom.invalid` fallback i18n for it is `my.app.custom.invalid`.
 
 It is also possible to provide an inline error message via `message` field.
 
