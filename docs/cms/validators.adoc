@@ -65,7 +65,7 @@ Here is an example of a general message builder:
 
 Validation error must be identified with ValidationErrorCode, that consists of `ApplicationKey` and code string. `ApplicationKey` can be used to identify Localization bundle for the error message.
 
-`i18n` filed defiles i18n key and can be used to identify a message key in Localization bundle.
+`i18n` field defiles i18n key and can be used to identify a message key in Localization bundle.
 
 NOTE: Applications like ContentStudio use `ValidationErrorCode` as a fallback to _guess_ i18n key, for instance if `ValidationErrorCode` is `my.app:custom.invalid` fallback i18k for it is `my.app.custom.invalid`.
 
