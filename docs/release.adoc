@@ -1,5 +1,5 @@
 = Release Notes
-include::variables.adoc[]
+include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
@@ -170,7 +170,7 @@ NOTE: v7.2 is fully backward compatible with previous v7.x versions.
 
 Any application can now store audit logs in a new common repository: "system.auditlog".
 
-A core JS library <<api/lib-audit#,Audit Library>> has been added to help you store and retrieve these audit logs
+A core JS library <<api/lib-auditlog#,Audit Library>> has been added to help you store and retrieve these audit logs
 
 === Content API - Audit Log
 

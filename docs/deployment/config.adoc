@@ -98,7 +98,7 @@ xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Usefu
 The standard XP port (default: 8080) provides access to `webapps/`, `site/` and `admin/` endpoints.
 Vhosts enable you to define controlled and secured access to a single webapp, site or even the admin console.
 
-Virtual hosts are instantly updated automatically updated upon changes.
+Virtual hosts are automatically updated upon change.
 
 .Sample vhost config file with a one entry
 [source,properties]
@@ -158,6 +158,7 @@ smtpUser:: User to be used during authentication with the SMTP server, if ‘smt
 smtpPassword:: Password to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
 smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required. Default: `false`.
 
+[#repo]
 === Repo
 
 `XP_HOME/config/com.enonic.xp.repo.cfg`
@@ -192,6 +193,7 @@ cache:: enables or disables memory caching of blobs fetched from the blobstore. 
 cache.sizeThreshold:: specifies the maximum size for objects to be cached. Default: 1mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
 cache.memoryCapacity:: is the maximum memory footprint of the blob cache. Default: 100mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
 
+[#file-blobstore]
 === File blobstore
 
 `XP_HOME/config/com.enonic.xp.blobstore.file.cfg`
