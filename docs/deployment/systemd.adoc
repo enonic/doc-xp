@@ -39,8 +39,10 @@ Let's create an ansible playbook that will handle all the setup for you. Create 
 .xp-systemd.yaml
 [source,yaml]
 ----
-- hosts: "all"  # Run on all hosts in your inventory. You should probably change this!
-  become: true  # Run playbook as root. This is required!
+# Run on all hosts in your inventory. You should probably change this!
+- hosts: "all"
+# Run playbook as root. This is required!
+  become: true
 
   # Variable you can set to customize your setup. Remember to set JVM heap (XP_OPTS) to the correct value based on your setup!
   vars:

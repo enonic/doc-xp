@@ -243,7 +243,8 @@ Next we want to create a `setenv.sh` to install the snapshotter. Create a file c
 ----
 #!/bin/sh
 
-set -e # Exit on failure
+# Exit on failure
+set -e
 
 echo "Install bootstrap apps"
 # Install snapshotter to create index snapshots
