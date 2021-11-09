@@ -77,11 +77,17 @@ NOTE: We assume that the IP addresses for the nodes are 10.0.0.1, 10.0.0.2, 10.0
 ----
 # Enable cluster and set node name
 cluster.enabled=true
-node.name=master-1 # This should be different for every node
+
+# This should be different for every node
+node.name=master-1
 
 # Bind to an IP and publish the same IP to other cluster members
-network.host=10.0.0.1         # This should be different for every node
-network.publish.host=10.0.0.1 # This should be different for every node
+
+# This should be different for every node
+network.host=10.0.0.1
+
+# This should be different for every node
+network.publish.host=10.0.0.1
 
 # Discover nodes on a comma separated list of node IPs
 discovery.unicast.hosts=10.0.0.1,10.0.0.2,10.0.0.3,10.0.0.4,10.0.0.5
@@ -94,8 +100,12 @@ discovery.unicast.hosts=10.0.0.1,10.0.0.2,10.0.0.3,10.0.0.4,10.0.0.5
 cluster.name=demo_cluster
 
 # Set node type
-node.master=true  # This should only be true on the master nodes
-node.data=false   # This should only be true on the data (combined) nodes
+
+# This should only be true on the master nodes
+node.master=true
+
+# This should only be true on the data (combined) nodes
+node.data=false
 
 # Set minimum master nodes to ((number of master nodes) / 2) + 1
 discovery.zen.minimum_master_nodes=2
