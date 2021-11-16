@@ -1,6 +1,6 @@
 = Mappings
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 Mappings enable wiring of controllers or filters to site relative URL pattern or content matches
 
@@ -35,12 +35,12 @@ Mapping are defined in the <<sites#site_xml, site descriptor>>.
 ----
 
 <1> *@controller* defines the path to a standard <<../framework/controllers#, HTTP controller>>
-<2> *@order* defines the <<Execution order>> across apps
-<3> *<pattern>* specifies a regular expression based site contextual URL <<Patterns>>.
+<2> *@order* defines the <<Execution order>> across apps. Default is `50`.
+<3> *<pattern>* specifies a regular expression based site contextual URL <<Patterns>>. Default is `/.*`
 <4> *<match>* a property condition to evaluate <<Matches>> for the contextual content.
 <5> *@filter* defines the path to the <<../framework/filters#, HTTP filter>>
 
-NOTE: Each mapping may exclusively specify a filter OR a controller, and it must define at least one pattern or match setting
+NOTE: Each mapping may exclusively specify a filter OR a controller, and it must define at least one pattern or match setting.
 
 === Execution order
 
@@ -50,9 +50,7 @@ If two different apps within a site has the same mapping path or match expressio
 the mapping with the *lower* `order` value (as defined in the <<sites#site_xml, site descriptor>>) is used.
 
 In case there are several mappings with the same ``order`` number,
-the position of the applications (as configured on the site) determines the order of execution.
-
-
+the position of the applications (as configured on the site) determines which mapping will be used.
 
 == Patterns
 
@@ -66,7 +64,7 @@ The protocol, host and port are not involved in the pattern matching.
 
 
 If the pattern contains the question mark ``?`` character, the URL to match will also include query parameters.
-The query parameters will be normalized so they are always in alphabetical order.
+The query parameters will be normalized, so they are always in alphabetical order.
 
 For example the pattern `<pattern>/api\?category=foo&amp;key=\d+</pattern>` will match with both:
 
@@ -87,11 +85,12 @@ The pattern string must be a valid https://docs.oracle.com/en/java/javase/11/doc
 Examples:
 
 * Anything ending with .json within the /api/* path: `<pattern>/api/.*\.json</pattern>`
-* All items within the site: `<pattern>/.*</pattern>`
+* All items within the site, including site itself: `<pattern>/.*</pattern>`
 * Regular expression pattern: `<pattern>/endpoint\?bar=\d+&amp;foo=.*</pattern>`
 * Regular expression encapsulated in CDATA to avoid XML encoding: `<pattern><![CDATA[/endpoint\?bar=\d+&foo=.*]]></pattern>`
 * Inverted with invert option enabled: `<pattern invert="true">/section/.*</pattern>`
 
+NOTE: Before image:xp-780.svg[XP 7.8.0,opts=inline] it was not possible to map controller or filter to the site itself.
 
 == Matches
 
@@ -111,5 +110,9 @@ Examples:
 * Match custom property with string value `<match>data.employee.type:'developer'</match>`
 * Match custom property with a number: `<match>data.product.category:42</match>`
 * Match custom property with a boolean: `<match>x.com-enonic-myapp.menuItem.show:true</match>`
+* Match any content: `<match>type:'.+'</match>`
 
 The expected value can be either a regular expression to match the property value, or simply a string, number or boolean (`true` | `false`).
+
+NOTE: image:xp-780.svg[XP 7.8.0,opts=inline] Missing/unavailable content does not match any condition.
+Don't specify `<match>` if you need to map controller/filter to the URL that does not correspond to any content.
