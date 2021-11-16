@@ -33,7 +33,7 @@ Follow the steps below to complete a restart upgrade:
 
 . Stop all cluster nodes
 . Replace the xp runtime image with the new for all nodes
-. Start all nodes in parallell
+. Start all nodes in parallel
 
 NOTE: It is important to start the nodes at the same time to avoid timeouts, should any upgrade scripts be supplied with the new version.
 
@@ -46,7 +46,17 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.8 notes
 
-* params returned from HTTP Filter now replace original request params with the same names.
+* `params` returned from HTTP Filter now replace original request params with the same names. There is no way to restore previous behavior.
+
+* Internal Admin Rest API was moved to respective applications. Any use of `/admin/rest/*` endpoints was for internal use only.
+It was never documented or supported for external use. We recommend implementing your own application with GraphQL/REST api as an alternative.
+
+* `contentTypePatternMode` configuration parameter has been moved to Content Studio configuration.
+
+* JaxRS API backend was updated to the next major release. We didn't observe any incompatibilities, but if your application uses XP JaxRS API make sure you thoroughly test it.
+
+* Image Service now has memory usage constraints  configured by `memoryLimit` parameter in <<../deployment/config#_image, Configuration Files / Image>>.
+This may cause `429 Too Many Requests` HTTP responses for images, if they are not yet scaled at least once and put into disk cache.
 
 == v7.7 notes
 
