@@ -974,20 +974,3 @@ exports.dir = /xp-exports
 ----
 
 exports.dir:: Defines location of exports directory. Default: `${xp.home}/data/export`
-
-
-[#admin_rest]
-=== Admin REST
-image:xp-770.svg[XP 7.7.0,opts=inline]
-
-`XP_HOME/config/com.enonic.xp.admin.rest`
-
-Configure the contentstudio admin behavior.
-
-.Sample config file
-[source,properties]
-----
-contentTypePatternMode = MATCH
-----
-
-contentTypePatternMode:: Defines matching mode for content type patterns Can be `MATCH` or `LEGACY`. Default: `MATCH`. See <<../cms/input-types#allowContentType, description>>.
