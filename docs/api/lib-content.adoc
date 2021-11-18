@@ -1099,6 +1099,97 @@ try {
 }
 ```
 
+== archive
+
+Archive a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| сontent | string | Path or id of the content to be archived
+|===
+
+[.lead]
+Returns
+
+*string[]* : List with ids of the contents that were archived
+
+[.lead]
+Examples
+```js
+
+// Archive content by path.
+var result1 = contentLib.archive({
+content: '/path/to/mycontent',
+});
+
+log.info('Archived content ids: ' + result1.join(''));
+
+// Archive content by id.
+var result2 = contentLib.archive({
+content: 'my-content-id'
+});
+
+log.info('Archived content ids: ' + result2.join(','));
+
+```
+
+== restore
+
+Restore a content from the archive
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| content | string | Path or id of the content to be restored
+| path | string | Path of parent for restored content
+|===
+
+[.lead]
+Returns
+
+*string[]* : List with ids of the contents that were restored
+
+[.lead]
+Examples
+```js
+// Restore content by path.
+var result1 = contentLib.restore({
+    content: '/path/to/mycontent',
+});
+
+log.info('Restored content ids: ' + result1.join(','));
+
+// Restore content by id.
+var result2 = contentLib.restore({
+    content: 'my-content-id'
+});
+
+log.info('Restored content ids: ' + result2.join(','));
+
+// Restore content by id to custom path.
+var result3 = contentLib.restore({
+    content: 'my-content-id',
+    path: '/custom-parent'
+});
+
+log.info('Restored content ids: ' + result3.join(','));
+```
+
 === publish
 
 This function publishes content to a branch
