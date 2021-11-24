@@ -24,6 +24,28 @@ var contentLib = require('/lib/xp/content');
 
 You are now free to use the library functionality.
 
+== Constants
+
+=== CONTENT_ROOT_PATH
+Variable of NodePath java type describing content node root path.
+[.lead]
+Usage
+
+```js
+var myRoot = contentLib.CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()
+```
+
+=== ARCHIVE_ROOT_PATH
+Variable of NodePath java type describing archive node root path.
+
+
+[.lead]
+Usage
+
+```js
+var myRoot = contentLib.ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()
+```
+
 == Functions
 
 === addAttachment
