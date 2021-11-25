@@ -104,7 +104,7 @@ NOTE: XP uses the  Nashorn JavaScript engine for compiling JavaScript. For an ov
 +
 - XP will not pick up _new_ content types. If you add a new content type after your previous project deploy, XP will not be able to see it. However, changes to _existing_ content types _are_ picked up. XP will pick up new JavaScript controllers as long as it can run them without compilation (as per the previous point).
 
-If you need any of the above features, try using xref:build-system#_continuous_building[continuous build mode] instead.
+If development mode does not work for you, try using xref:build-system#_continuous_building[continuous build mode] instead.
 
 Development mode also disables some of XP's caching mechanisms. To make the development workflow as smooth as possible, XP tries to invalidate caches for your static assets. This is to prevent you from getting stale resources so that what you see in the browser is always as up to date as possible.
 
