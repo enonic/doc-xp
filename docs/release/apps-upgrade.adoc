@@ -251,14 +251,14 @@ content-type.xml
 
 === FieldSet
 
-Fieldsets used to require a name attribute. The name attribute has no particular use-case, and is now deprecated.
-Update schemas using fieldsets by removing the name
+FieldSets used to require `name` attribute. The `name` attribute has no particular use-case and is now deprecated.
+Update schemas using fieldsets by removing the `name` attribute.
 
 .Old fieldset in schema
 [source,xml]
 ----
 <form>
-  <fieldset name="myname">schema goes here...</fieldset>
+  <field-set name="myname">schema goes here...</field-set>
 </form>
 ----
 
@@ -266,7 +266,7 @@ Update schemas using fieldsets by removing the name
 [source,xml]
 ----
 <form>
-  <fieldset>schema goes here...</fieldset>
+  <field-set>schema goes here...</field-set>
 </form>
 ----
 
