@@ -102,7 +102,6 @@ Because of the way XP reads source files directly in development mode, it has a 
 +
 NOTE: XP uses the  Nashorn JavaScript engine for compiling JavaScript. For an overview over what JavaScript features Nashorn supports, see https://kangax.github.io/compat-table/es6/#nashorn1_8[this feature table].
 +
-- XP will not pick up _new_ content types. If you add a new content type after your previous project deploy, XP will not be able to see it. However, changes to _existing_ content types _are_ picked up. XP will pick up new JavaScript controllers as long as it can run them without compilation (as per the previous point).
 
 If development mode does not work for you, try using xref:build-system#_continuous_building[continuous build mode] instead.
 
