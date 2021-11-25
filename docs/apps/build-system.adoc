@@ -100,7 +100,7 @@ Because of the way XP reads source files directly in development mode, it has a 
 
 - Files that require any sort of compilation (including transpilation) are not detected unless you run a build process on the side. For instance, if you use TypeScript or JavaScript features that XP doesn't support, these files won't be picked up by default. To have XP detect them, run a separate build process on the side, such as either a xref:build-system#_continuous_building[continuous build] or a webpack build.
 +
-NOTE: XP uses the  Nashorn JavaScript engine for compiling JavaScript. For an overview over what JavaScript features Nashorn supports, see https://kangax.github.io/compat-table/es6/#nashorn1_8[this feature table].
+NOTE: XP uses the  Nashorn JavaScript engine for executing JavaScript. For an overview over what JavaScript features Nashorn supports, see https://kangax.github.io/compat-table/es6/#nashorn1_8[this feature table].
 +
 
 If development mode does not work for you, try using xref:build-system#_continuous_building[continuous build mode] instead.
