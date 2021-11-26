@@ -119,7 +119,7 @@ Windows:: `$XP_INSTALL/bin/server.sh dev`
 === Continuous building
 
 Gradle also supports a https://docs.gradle.org/current/userguide/command_line_interface.html#sec:continuous_build[continuous build mode].
-In continuous build mode, Gradle will monitor your project assets for changes and run a task you specify task when something changes.
+In continuous build mode, Gradle will monitor your project assets for changes and run a task you specify when something changes.
 
 Continuous builds come in handy when the changes you're working on require a full compile and redeploy, such as when you're working with Java or need to build/compile client-side assets with an external build tool (such as webpack).
 
