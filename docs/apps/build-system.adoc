@@ -123,7 +123,6 @@ In continuous build mode, Gradle will monitor your project assets for changes an
 
 Continuous builds come in handy when the changes you're working on require a full compile and redeploy, such as when you're working with Java or need to build/compile client-side assets with an external build tool (such as webpack).
 
-Another use case for continuous builds is if you're adding _new_ content types (or other XML schemas?). Because these are registered when an app is deployed, you need to compile and redeploy your app for XP to become aware of them.
 
 If you don't need a full compile or don't need to run external build tools, you may be better served by using xref:build-system#_development_mode[XP's development mode].
 
