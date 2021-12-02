@@ -113,17 +113,22 @@ Below is the complete list of all supported value-types.
 |Instant
 |2015-03-16T10:00:02Z
 |datetime, string
-|A single point on the time-line.
+|A single point on the time-line (may include subsecond up to 9 digits).
+
+|LocalDate
+|2015-03-16
+|datetime, text
+|A date representation.
+
+|LocalDateTime
+|2015-03-16T10:00:02
+|text
+|A date-time representation without timezone (may include subsecond up to 9 digits).
 
 |LocalTime
 |10:00:03
 |datetime, text
-|A time representation without timezone
-
-|LocalDateTime
-|2015-03-16T10:00:02
-|datetime, text
-|A date-time representation without timezone.
+|A time representation without timezone (nor subsecond).
 
 |Long
 |1234
