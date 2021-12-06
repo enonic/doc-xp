@@ -77,7 +77,7 @@ The "orderby" index type lets us sort text and numbers in a natural way across p
 == ValueTypes
 
 Every property in a node has a specific value type.
-The value type enables the the data storage to interpret and handle each value specially - applying to both validation and indexing.
+The value type enables the data storage to interpret and handle each value specially - applying to both validation and indexing.
 
 Below is the complete list of all supported value-types.
 
@@ -112,18 +112,23 @@ Below is the complete list of all supported value-types.
 
 |Instant
 |2015-03-16T10:00:02Z
-|datetime, string
-|A single point on the time-line.
+|datetime, text
+|A single point on the time-line (may include subsecond up to 9 digits).
 
 |LocalTime
 |10:00:03
+|text
+|A time representation without date or timezone(nor subsecond).
+
+|LocalDate
+|2015-03-16
 |datetime, text
-|A time representation without timezone
+|A date representation. Will be indexed with UTC timezone offset.
 
 |LocalDateTime
 |2015-03-16T10:00:02
 |datetime, text
-|A date-time representation without timezone.
+|A date-time representation without timezone. Will be indexed with UTC timezone offset.
 
 |Long
 |1234

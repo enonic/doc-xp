@@ -76,10 +76,11 @@ constraintExpr = compareExpr
 compareExpr   = fieldExpr operator valueExpr ;
 fieldExpr     = propertyPath ;
 operator      = '=', '!=', '>', '>', '<', '<=', 'LIKE', 'NOT LIKE', 'IN', 'NOT IN' ;
-valueExpr     = string | number | valueFunc ;
-valueFunc     = geoPoint | instant | time | dateTime, localDateTime ;
+valueExpr     = string | number | valueFunc ;
+valueFunc     = geoPoint | instant | time | date | dateTime | localDateTime ;
 geoPoint      =  '"' lat ',' lon '"' ;
 instant       = 'instant(' string ')' ;
+date          = 'date(' string ')' ;
 time          = 'time(' string ')' ;
 dateTime      = 'dateTime(' string ')' ;
 localDateTime = 'localDateTime(' string ')' ;
@@ -101,10 +102,13 @@ myInstant = instant('2014-02-26T14:52:30.00Z')
 myInstant <= instant('2014-02-26T14:52:30.00Z')
 myInstant <= dateTime('2014-02-26T14:52:30.00+02:00')
 myTime = time('09:00')
-myLocalDateTime = time('2014-02-26T14:52:30.00')
+myDate = date('2015-02-26')
+myLocalDateTime = localDateTime('2015-02-26T15:00')
 myLocation = '59.9127300,10.7460900'
 myLocation IN ('59.9127300,10.7460900','59.2181000,10.9298000')
 ----
+
+NOTE: `instant`, `dateTime`, `localDateTime`, `date` functions will force search in `datetime` index, meanwhile for `time` function  usual `text` index will be used. Using expressions without functions perform a search in `text` index for any time-related field. See more about indexing <<indexing#value_types, there>>.
 
 ==== logicalExpr
 
