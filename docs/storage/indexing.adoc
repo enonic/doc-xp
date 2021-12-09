@@ -2,19 +2,24 @@
 :toc: right
 :imagesdir: images
 
-All properties in a node may be indexed.
+Properties in a node can be indexed.
 Indexing is the process of extracting, processing and storing a search-optimized version of the property value.
 
-== Index types
+Properties are mapped to specific indexes based on its <<ValueTypes,valueType>>, and the node's <<Index config>> - as illustrated below:
+
+image::indexmapping.svg[]
+
+
+== Index Mappings
 
 When nodes are persisted, the property values are instantly indexed.
-A single property can be indexed in multiple ways, also known as index types.
+A single property can be indexed multiple times - each index is referred to as an index mapping.
 
-Each index type enables specific query capabilities:
+Each mapping enables specific query capabilities:
 
 === text
 
-The basic index type used for any value.
+The default mapping used for all value types.
 
 === number
 
@@ -22,7 +27,7 @@ Effectively handles any numeric value
 
 === datetime
 
-Handles any date specific value
+Handles any date value
 
 === geoPoint
 
@@ -30,10 +35,10 @@ Supports earth based geographical locations
 
 === ngram
 
-nGram-indexed fields are available for search by using the nGram-function.
+nGram-mappings are accessed via queries, using the nGram-function.
 An nGram-analyzed field will index all substring values from 2 to 25 characters.
 
-Consider a property of type string, with value `article`.
+Consider a string property, with the value `article`.
 ngram indexing will split the string into the following tokens when analyzed::
 
   'ar', 'art', 'arti', 'artic', 'articl', 'article'
@@ -45,7 +50,7 @@ For more information about how the nGram-function works, check out the nGram-fun
 Splits the string into tokens for effective free text search.
 Used by the <<./noql#fulltext,fulltext()>> query function.
 
-Consider a property of type string, with value `This is test-driven development`
+Consider a string property, with the value `This is test-driven development`
 When analyzed, it is split into the following tokens:
 
   'this', 'is', 'test', 'driven', 'development'
@@ -53,7 +58,7 @@ When analyzed, it is split into the following tokens:
 [#stemmed]
 === stemmed
 
-Language optimized version of the analyzed index type.
+Language optimized version of the analyzed index mapping.
 Used by the <<noql#stemmed,stemmed()>> query function.
 
 Tokens are trimmed based on language specific features such as plurals and gender specific endings.
@@ -70,8 +75,8 @@ The path-elements (separated by default path-separator '/') are indexed as token
 
 === orderby
 
-Any property that is indexed, automatically gets indexed with the orderby type.
-The "orderby" index type lets us sort text and numbers in a natural way across properties with different <<ValueTypes>>
+Any indexed property automatically gets indexed with the orderby mapping as well.
+The "orderby" index mapping lets us sort text and numbers in a natural way across properties with different <<ValueTypes>>
 
 [#value_types]
 == ValueTypes
@@ -258,15 +263,15 @@ I.e. numeric values are indexed as both string and numeric.
 
 === fulltext
 
-Values are stored as 'ngram', 'analyzed' and also added to the _allText system property
+Values are indexed as 'ngram', 'analyzed' and also added to the _allText system property
 
 === ngram
 
-Values are stored as 'ngram'
+Values are indexed as 'ngram'
 
 === path
 
-Values are stored as 'path' type and applicable for the pathMatch-function
+Values are indexed as 'path' and applicable for the pathMatch-function
 
 === includeInAllText
 
