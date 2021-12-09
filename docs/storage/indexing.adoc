@@ -457,10 +457,10 @@ repo.create({
 Stemmed english indices will be generated for `displayName`, `description` and all strings inside `english_set`.
 Norwegian indices will be created for strings inside `norwegian_set` only.
 
-== Templates
+== Config templates
 
 For simplicity, index configs may also be defined using a shorthand format.
-Rather than providing a full config object, you may simply specify a template name.
+Rather than providing a full config object, you may instead reference a standard template.
 
 .Sample use of templates
 [source,json]
