@@ -676,28 +676,6 @@ A simple input for adding free-text tags. Tags will be autocompleted based on ta
 </input>
 ----
 
-
-== TextArea
-
-A plain text, multi-line input field
-
-[source,xml]
-----
-<input name="mytextarea" type="TextArea">
-  <label>My TextArea</label>
-  <default>Default text goes here</default> <!--1-->
-  <config>
-    <max-length>42</max-length> <!--2-->
-    <show-counter>true</show-counter> <!--3-->
-  </config>
-</input>
-----
-<1> *default* specifies the default string for the TextArea
-<2> *max-length* specifies the maximum allowed number of characters (default: unlimited)
-<3> *show-counter* specifies whether text length counter should be shown (default: hidden)
-
-image::TextArea.png[Text Area with various settings, 700]
-
 == TextLine
 
 A plain text, single line input with advanced validation options. Stored as string.
@@ -729,6 +707,51 @@ A plain text, single line input with advanced validation options. Stored as stri
 NOTE: Regex validation is performed by the browser's https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test[regex testing function]. Visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation on regexes] for more information on the supported expressions and character classes.
 
 image::TextLine.png[Text Line with various settings, 700]
+
+:imagesdir: ../images
+=== Spell checking image:../images/xp-780.svg[XP 7.8.0,opts=inline]
+:imagesdir: schemas/images
+
+When displayed in the Content Studio, input value will be checked for spelling errors by built-in browser spell checker
+based on the language set for the content.
+If language for the content is not set, spell checker will use default language set in the browser.
+
+In order for the spell checker to work, the following conditions should be met:
+
+* You should have spell checking enabled in your browser
+* Spell checking will be performed only in languages that are enabled in your browser (i.e.
+if you have set Norwegian language in the content but Norwegian language is not enabled in your
+browser, then spell checking will not work)
+
+image::TextLine-spellcheck-1.png[Spell checking in TextLine, 400]
+image::TextLine-spellcheck-2.png[Spell checking in TextLine, 400]
+
+NOTE: In the second screenshot above English text in the first input is grammatically correct,
+but language of the content is set to Norsk Bokmål, therefore English text is not recognised
+by the spell checker. Text in the second is in Norsk Bokmål and correctly checked for spelling errors.
+
+== TextArea
+
+A plain text, multi-line input field.
+
+[source,xml]
+----
+<input name="mytextarea" type="TextArea">
+  <label>My TextArea</label>
+  <default>Default text goes here</default> <!--1-->
+  <config>
+    <max-length>42</max-length> <!--2-->
+    <show-counter>true</show-counter> <!--3-->
+  </config>
+</input>
+----
+<1> *default* specifies the default string for the TextArea
+<2> *max-length* specifies the maximum allowed number of characters (default: unlimited)
+<3> *show-counter* specifies whether text length counter should be shown (default: hidden)
+
+image::TextArea.png[Text Area with various settings, 700]
+
+NOTE: Contents of TextArea will be automatically checked for spelling errors as described above for TextLine.
 
 == Time
 
