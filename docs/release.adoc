@@ -7,16 +7,22 @@ include::variables.adoc[]
 
 === Libraries
 
-Library for creating and importing <<api/lib-export#_export_library, node-exports>> is now available.
+* Javascript API for creating and importing is now available as a new library called <<api/lib-export#, `lib-export`>>.
+* Content API has been extended with new constants and functions for <<api/lib-content#archive, archive>> and <<api/lib-content#restore, restore>>
+* Authentication API now allows verifying credentials without actual <<api/lib-auth#login, login>>
+* Context API now allows passing custom attributes in the <<api/lib-context#context, Context>> object
+* Portal API now supports imageSizes parameter in <<api/lib-portal#processhtml, `processHtml`>> function
 
-<<framework/i18n#_localization, Localization service>> now officially supports Java MessageFormat.
+=== Custom content validators
 
-Java <<cms/validators#_content_validators, Content Validators API>> is now available.
+It's now possible to implement custom content validators via <<cms/validators#_content_validators, Content Validators Java API>>. Custom error messages
+can be i18n-localised and will be displayed in Content Studio.
 
 === Other improvements
 
+* Service mapping and request matching in <<deployment/vhosts#, Vhosts>> has been greatly improved
 * Exports folder location is now <<deployment/config#_export, configurable>>
-
+* <<framework/i18n#_localization, Localization service>> now officially supports Java MessageFormat.
 
 == XP7 Update 7
 
