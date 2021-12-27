@@ -33,7 +33,7 @@ Follow the steps below to complete a restart upgrade:
 
 . Stop all cluster nodes
 . Replace the xp runtime image with the new for all nodes
-. Start all nodes in parallell
+. Start all nodes in parallel
 
 NOTE: It is important to start the nodes at the same time to avoid timeouts, should any upgrade scripts be supplied with the new version.
 
@@ -43,6 +43,66 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 
 After upgrading XP, check for new versions of your installed applications from Enonic market. 
 We generally always recommend updating your apps to the latest version!
+
+== v7.8 notes
+
+* `params` returned from HTTP Filter now replace original request params with the same names. There is no way to restore previous behavior.
+
+* Internal Admin Rest API was moved to respective applications. Any use of `/admin/rest/*` endpoints was for internal use only.
+It was never documented or supported for external use. We recommend implementing your own application with GraphQL/REST api as an alternative.
+
+* `contentTypePatternMode` configuration parameter has been moved to Content Studio configuration.
+
+* JaxRS API backend was updated to the next major release. We didn't observe any incompatibilities, but if your application uses XP JaxRS API make sure you thoroughly test it.
+
+* Image Service now has memory usage constraints  configured by `memoryLimit` parameter in <<../deployment/config#_image, Configuration Files / Image>>.
+This may cause `429 Too Many Requests` HTTP responses for images, if they are not yet scaled at least once and put into disk cache.
+
+* XP 7.8 fixed a bug when `lib-portal.getContent()` would return a non-empty value in a context where no content should be returned, for example
+inside a responseProcessor or a service. If you didn't have a proper check for non-empty content object returned by `lib-portal.getContent()`, you will have to fix your code.
+Please find an example of the fix below:
+
+.Before
+[source,Javascript]
+----
+exports.responseProcessor = function (req, res) {
+    const content = portalLib.getContent(); // This now returns null
+    let contentId = req.params.contentId;
+    if (!contentId) {
+        contentId = content._id; // This will be not null only inside a widget
+    }
+    const siteConfig = contentLib.getSiteConfig({
+        key: contentId, // This code assumes contentId is never null
+        applicationKey: app.name
+    });
+}
+----
+
+.After
+[source,Javascript]
+----
+exports.responseProcessor = function (req, res) {
+    const siteConfig = portalLib.getSiteConfig();
+    if (!siteConfig) {
+        return res;
+    }
+    let contentId = req.params.contentId;
+    if (!contentId) {
+        const content = portalLib.getContent();
+        if (content) {
+            contentId = content._id;
+        }
+    }
+    if (!contentId) {
+        return res;
+    }
+}
+----
+
+IMPORTANT: If you are using https://market.enonic.com/vendors/enonic/siteimprove[Siteimprove],
+https://market.enonic.com/vendors/enonic/google-analytics[Google Analytics]
+or https://market.enonic.com/vendors/enonic/com.enonic.app.metafields[SEO Meta Fields] applications, we recommend upgrading them to the latest
+versions (where this bug has been mitigated) before upgrading to XP 7.8.
 
 == v7.7 notes
 

@@ -954,23 +954,25 @@ Configure the image service behaviour.
 ----
 scale.maxDimension = 8000
 filters.maxTotal = 5
+memoryLimit = 100mb
 ----
 
 scale.maxDimension:: Defines maximum dimension size (both height and width) when scaling is done. Default: `8000`
 filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
+memoryLimit:: Defines (soft) Java Heap memory limit for image processing. Either in percentage of total Java Heap, or in memory units (mb, gb, ...). Default: `10%`
 
-[#admin_rest]
-=== Admin REST
-image:xp-770.svg[XP 7.7.0,opts=inline]
+=== Export
 
-`XP_HOME/config/com.enonic.xp.admin.rest`
+image:xp-780.svg[XP 7.8.0,opts=inline]
 
-Configure the contentstudio admin behavior.
+`XP_HOME/config/com.enonic.xp.export.cfg`
 
-.Sample config file
+Configure exports service behaviour.
+
+.Sample content config file
 [source,properties]
 ----
-contentTypePatternMode = MATCH
+exports.dir = /xp-exports
 ----
 
-contentTypePatternMode:: Defines matching mode for content type patterns Can be `MATCH` or `LEGACY`. Default: `MATCH`. See <<../cms/input-types#allowContentType, description>>.
+exports.dir:: Defines location of exports directory. Default: `${xp.home}/data/export`

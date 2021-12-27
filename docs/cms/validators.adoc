@@ -1,0 +1,83 @@
+= Content Validators
+:toc: right
+:imagesdir: ../images
+
+image:xp-780.svg[XP 7.8.0,opts=inline]
+
+== Introduction
+
+XP by default validates newly created and modified content:
+- name and displayName not empty - Data for form elements is in accordance with Forms
+
+It is also possible to provide custom validators for existing content via Java API.
+
+== ContentValidator
+
+In order to validate Content, create an OSGi component with `com.enonic.xp.content.ContentValidator` type
+
+[source,java]
+----
+@Component
+public class CustomValidator
+    implements ContentValidator
+{
+    @Override
+    public boolean supports( ContentTypeName contentType )
+    {
+        // return true, if validator should validate content with provided content type.
+        // If method is not provided, it is assumed that validator can validate any content.
+        return contentType.equals( ContentTypeName.from( "my.app:myContent" ) );
+    }
+
+    @Override
+    public void validate( ContentValidatorParams params, ValidationErrors.Builder builder )
+    {
+        // Every time supported content gets created or modified, validate method is called
+        // Found Validation errors should be added into builder
+        if ( !params.getData().getString( "field" ).startsWith( "CODE-" ) )
+        {
+            builder.add( ValidationError.dataError( ValidationErrorCode.from( ApplicationKey.from( "my.app" ), "custom.invalid" ),
+                                                    PropertyPath.from( "field" ) ).message( "field must start with CODE-" ).build() );
+
+        }
+    }
+}
+----
+
+== ValidationError
+
+There are three types of validation errors:
+
+- `ValidationError` - a general error of content
+- `DataValidationError` - an error connected to content data
+- `AttachmentValidationError` - an error connected to content attachment
+
+Here is an example of a general message builder:
+[source,java]
+----
+    ValidationError
+        .generalError( ValidationErrorCode.from( ApplicationKey.from( "my.app" ), "custom.invalid" ) )
+        .i18n( "my.app.custom.invalid" )
+        .message( "{0} is not a dog" )
+        .args( "cat" )
+        .build();
+----
+
+Validation error must be identified with ValidationErrorCode, that consists of `ApplicationKey` and code string. `ApplicationKey` can be used to identify Localization bundle for the error message.
+
+`i18n` field defines i18n key and can be used to identify a message key in Localization bundle.
+
+NOTE: Applications like ContentStudio use `ValidationErrorCode` as a fallback to _guess_ i18n key, for instance if `ValidationErrorCode` is `my.app:custom.invalid` fallback i18n for it is `my.app.custom.invalid`.
+
+It is also possible to provide an inline error message via `message` field.
+
+The arguments provided via `args` field are used to format both inline message and i18n message.
+
+Arguments have specific conversion rules:
+
+- `null` is kept as is
+- `Number` type value is kept as is
+- `Date` type value is converted to milliseconds since epoch and stored as `Number`
+-  Anything else converted to `String` via `toString` method
+
+NOTE: `AttachmentValidationError` removed automatically from modified content when attachment it is referring to is removed.

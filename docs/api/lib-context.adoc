@@ -1,6 +1,6 @@
 = Context Library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 This library contains functions to access and use the current context.  It comes bundled with the XP runtime, so it should always use the same version as XP.
 
@@ -73,6 +73,9 @@ const context = contextLib.get();
           "role:system.authenticated",
           "role:system.everyone"
       ]
+  },
+  attributes: {
+     optionalAttributes: "of any kind"
   }
 }
 ----
@@ -135,14 +138,16 @@ The context object is always available within the scope of a request
 {
   repository: "some.repo.name", <1>
   branch: "master", <2>
-  user: { <3>
-      login: "mylogin",
-      idProvider: "idprovidername"
+  authInfo: {
+      user: { <3>
+          login: "mylogin",
+          idProvider: "idprovidername"
+      },
+      principals: ["role:system.admin"] <4>
   },
-  principals: ["role:system.admin"], <4>
   attributes: { <5>
-      optionalAttributes: "of any kind"
-      }
+     optionalAttributes: "of any kind"
+  }
 }
 ----
 
@@ -150,4 +155,4 @@ The context object is always available within the scope of a request
 <2> *branch* (_string_) Branch context.
 <3> *user* (_object_) Specify a valid user/idprovider combination
 <4> *principals* (_object_) Roles or group principals applicable for current user
-<5> *attributes* (_object_) custom attributes
+<5> *attributes* (_object_) custom attributes image:xp-780.svg[XP 7.8.0,opts=inline]

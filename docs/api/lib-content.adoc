@@ -24,6 +24,28 @@ var contentLib = require('/lib/xp/content');
 
 You are now free to use the library functionality.
 
+== Constants
+
+=== CONTENT_ROOT_PATH
+Variable of NodePath java type describing content node root path.
+[.lead]
+Usage
+
+```js
+var myRoot = contentLib.CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()
+```
+
+=== ARCHIVE_ROOT_PATH
+Variable of NodePath java type describing archive node root path.
+
+
+[.lead]
+Usage
+
+```js
+var myRoot = contentLib.ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()
+```
+
 == Functions
 
 === addAttachment
@@ -1097,6 +1119,99 @@ try {
         log.error('Unexpected error: ' + e.message);
     }
 }
+```
+
+== archive
+image:xp-780.svg[XP 7.8.0,opts=inline]
+
+Archive a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| сontent | string | Path or id of the content to be archived
+|===
+
+[.lead]
+Returns
+
+*string[]* : List with ids of the contents that were archived
+
+[.lead]
+Examples
+```js
+
+// Archive content by path.
+var result1 = contentLib.archive({
+content: '/path/to/mycontent',
+});
+
+log.info('Archived content ids: ' + result1.join(''));
+
+// Archive content by id.
+var result2 = contentLib.archive({
+content: 'my-content-id'
+});
+
+log.info('Archived content ids: ' + result2.join(','));
+
+```
+
+== restore
+image:xp-780.svg[XP 7.8.0,opts=inline]
+
+Restore a content from the archive
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| content | string | Path or id of the content to be restored
+| path | string | Path of parent for restored content
+|===
+
+[.lead]
+Returns
+
+*string[]* : List with ids of the contents that were restored
+
+[.lead]
+Examples
+```js
+// Restore content by path.
+var result1 = contentLib.restore({
+    content: '/path/to/mycontent',
+});
+
+log.info('Restored content ids: ' + result1.join(','));
+
+// Restore content by id.
+var result2 = contentLib.restore({
+    content: 'my-content-id'
+});
+
+log.info('Restored content ids: ' + result2.join(','));
+
+// Restore content by id to custom path.
+var result3 = contentLib.restore({
+    content: 'my-content-id',
+    path: '/custom-parent'
+});
+
+log.info('Restored content ids: ' + result3.join(','));
 ```
 
 === publish
