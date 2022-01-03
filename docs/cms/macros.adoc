@@ -114,7 +114,7 @@ exports.macro = function (context) {
         body: body,
         pageContributions: {
             headEnd: [
-                '<link href="' + portalLib.assetUrl({path: 'css/current-user.css'}) + '"/>'
+                '<link rel="stylesheet" href="' + portalLib.assetUrl({path: 'css/current-user.css'}) + '"/>'
             ]
         }
     }
