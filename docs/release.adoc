@@ -21,6 +21,7 @@ can be i18n-localised and will be displayed in Content Studio.
 === Other improvements
 
 * Service mapping and request matching in <<deployment/vhosts#, Vhosts>> has been greatly improved
+* Now possible to map controller or filter to the site itself.
 * Exports folder location is now <<deployment/config#_export, configurable>>
 * <<framework/i18n#_localization, Localization service>> now officially supports Java MessageFormat.
 
