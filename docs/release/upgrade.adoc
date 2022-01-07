@@ -48,8 +48,6 @@ We generally always recommend updating your apps to the latest version!
 
 * `params` returned from HTTP Filter now replace original request params with the same names. There is no way to restore previous behavior.
 
-* Now possible to map controller or filter to the site itself.
-
 * Internal Admin Rest API was moved to respective applications. Any use of `/admin/rest/*` endpoints was for internal use only.
 It was never documented or supported for external use. We recommend implementing your own application with GraphQL/REST api as an alternative.
 
