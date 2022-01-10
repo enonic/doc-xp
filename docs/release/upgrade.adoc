@@ -46,6 +46,8 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.8 notes
 
+* Versions of Content Studio before 4.0.0 will not run on XP 7.8.0 or later.
+
 * `params` returned from HTTP Filter now replace original request params with the same names. There is no way to restore previous behavior.
 
 * Internal Admin Rest API was moved to respective applications. Any use of `/admin/rest/*` endpoints was for internal use only.
