@@ -46,6 +46,9 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.9 notes
 
+* <<deployment/config#_portal, Portal config>> now specifies default Content-Security-Policy for page `preview`/`inline`/`edit` mode (it does not affect `live` mode) .
+It is possible to turn the header off or configure via `page.defaultContentSecurityPolicy` value.
+Default value prevents inline scripts, eval, data: urls, plugins and external resources (scripts, fonts, images, etc.) to be loaded.
 
 == v7.8 notes
 
