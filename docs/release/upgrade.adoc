@@ -25,9 +25,10 @@ WARN: Before you perform a rolling upgrade, verify that all feature version in y
 
 === Full restart Cluster upgrade
 
-Selected feature versions (i.e. from 7.6.x to 7.7.x) may require a full restart in order to guarantee no loss of data and/or state. Releases that require full restart are explicitly listed below.
+Selected feature versions (i.e. when upgrading from 7.6.x to 7.7.x or 7.8.x) may require a full restart in order to guarantee no loss of
+data and/or state. Releases that require full restart are marked with a special warning section below.
 
-NOTE: This strategy may safely be applied to upgrading any xp cluster and/or version
+NOTE: This strategy may safely be applied to upgrading any XP cluster and/or version
 
 Follow the steps below to complete a restart upgrade:
 
@@ -45,6 +46,9 @@ After upgrading XP, check for new versions of your installed applications from E
 We generally always recommend updating your apps to the latest version!
 
 == v7.8 notes
+
+WARNING: FULL RESTART REQUIRED - A new feature for archiving content has been implemented in this release.
+A full restart is required in order for XP to create and correctly access the `/archive` node.
 
 * Versions of Content Studio before 4.0.0 will not run on XP 7.8.0 or later.
 
