@@ -39,7 +39,7 @@ None
 [.lead]
 Returns
 
-<<Context>>
+<<GetContext>>
 
 [.lead]
 Example
@@ -95,7 +95,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| context | object | <<Context>> to be used for the scope of the callback function
+| context | object | <<RunContext>> to be used for the scope of the callback function
 | callback | function | Function to execute
 |===
 
@@ -128,7 +128,7 @@ const result = contextLib.run(context, callback);
 
 == Objects
 
-=== Context
+=== GetContext
 
 The context object is always available within the scope of a request
 
@@ -145,6 +145,33 @@ The context object is always available within the scope of a request
       },
       principals: ["role:system.admin"] <4>
   },
+  attributes: { <5>
+     optionalAttributes: "of any kind"
+  }
+}
+----
+
+<1> *repository* (_string_) Repository context.
+<2> *branch* (_string_) Branch context.
+<3> *user* (_object_) Specify a valid user/idprovider combination
+<4> *principals* (_object_) Roles or group principals applicable for current user
+<5> *attributes* (_object_) custom attributes image:xp-780.svg[XP 7.8.0,opts=inline]
+
+=== RunContext
+
+The context object is always available within the scope of a request
+
+.Sample context object
+[source,js]
+----
+{
+  repository: "some.repo.name", <1>
+  branch: "master", <2>
+  user: { <3>
+      login: "mylogin",
+      idProvider: "idprovidername"
+  },
+  principals: ["role:system.admin"], <4>
   attributes: { <5>
      optionalAttributes: "of any kind"
   }
