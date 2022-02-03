@@ -7,9 +7,8 @@ include::.variables.adoc[]
 
 === Other improvements
 
-=== Other improvements
-
 * Default Content-Security-Policy header for page preview/inline/edit. Can be configured in <<deployment/config#_portal, Portal config>>
+* Default security headers are turned on by default. As before they can be customized in <<deployment/config#_header_filter, header filter config>> or turned off completely
 
 == XP7 Update 8
 
