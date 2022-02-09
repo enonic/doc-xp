@@ -32,9 +32,18 @@ This section describes the standard pipeline involved in processing a page reque
 
 Mappings:: Uses path and content based mappings from site descriptor to trigger filters and controllers
 
-Page resolver:: Looks up content in path, and resolves it's controller + config (optionally via page template). If no controller is found, the return code is set to 404.
+Page resolver:: Looks up content in path to determine next step:
++
+* Content does not exist, returns 404 (Not found)
+* Content exits, and user has read-permissions, continue pipeline processing
+* Content exists, and user does not have read-permissions
+    * If user is not logged in, returns 401 (Not authenticated)
+    * If user is logged in, returns 403 (Acccess denied)
 
-Page renderer:: Based on the controller in the previous step is executed, producing output - potentially including component placeholders
+Page renderer:: Resolves controller and optional configuration (could also come from page template). 
++
+* If controller is missing, returns 404 (Not found)
+* If controller exists, executes it and returns 200 (OK) by default. Output may potentially include component placeholders
 
 Component renderer:: For text/html responses, any compontent placeholders in the response body are processed. Each compontent's controller is executed and the output replaces the compontent placeholder in the response body. Layouts compontents may leave new placeholders, as such, this step will be repeated until no placeholders remain to be processed.
 
