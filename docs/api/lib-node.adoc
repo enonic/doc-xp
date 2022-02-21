@@ -1012,7 +1012,7 @@ An object with the following keys and their values:
 | Name | Type | Attributes | Details
 | start | number | optional | Start index used for paging - default: 0
 | count | number | optional | Number of content to fetch, used for paging - default: 10
-| query | string | | Query expression
+| query | string/object | | Query string or <<../storage/dsl#, DSL>> expression.
 | filters | object | optional | Query filters
 | sort | string | optional | Sorting expression - default: '_score DESC'
 | aggregations | object | optional | <<../storage/aggregations#,Aggregations>> config

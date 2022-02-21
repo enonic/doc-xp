@@ -94,7 +94,7 @@ Creates a new Content Project. Only `system.admin` and `cms.admin` roles have pe
 [.lead]
 Parameters
 
-[%header,cols="1,45,1,53a"]
+[cols="1,45,1,53a"]
 [frame="none"]
 [grid="none"]
 |===
@@ -102,6 +102,7 @@ Parameters
 | id | string | | Unique project id (alpha-numeric characters and hyphens allowed).
 | displayName | string | | Project display name.
 | parent | string | <optional> | image:xp-760.svg[XP 7.6.0,opts=inline] Parent project id. If provided, the new project will be a Content Layer that automatically inherits changes from the parent project.
+
 | description | string | <optional> | Project description.
 | language | string | <optional> | Default project language.
 | permissions | Object.<string, Array.<string>> | <optional> | Project permissions. 1 to 5 properties where key is role id and value is an array of principals.
