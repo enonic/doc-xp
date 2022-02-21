@@ -1,0 +1,674 @@
+= Query DSL
+:toc: right
+:imagesdir: ../images
+
+image:xp-790.svg[XP 7.9.0,opts=inline]
+
+== Introduction
+
+Enonic XP provides a Query DSL (Domain Specific Language) based on JSON to define queries.
+Usually query JSON object looks like syntax tree consisting of two types of operators:
+
+* ``Expression``:
+Provides a way to check particular fields for various native and analysed values.
+
+* ``Compound``:
+Provides a way to logically combine various expressions and compounds to fetch nodes based on complex conditions.
+
+== Expressions
+
+Each node field could be indexed in many ways according to its type and user mappings.
+By default, a query searches in base primitive value index of a field (number, string, boolean).
+To force search in a field's advanced analysed index (like dates and geoPoints), a `type` of expression must be provided.
+
+NOTE: Search could be done by an expression with particular type only for analyzed fields with compatible <<indexing#value_types, value type>> and not prohibiting type mapping.
+
+=== Expression types
+
+==== time
+
+Time expression converts expression as <<indexing#value_types,LocalTime>> string and makes a search for a field indexed as 'string'.
+
+==== dateTime
+
+DateTime expression makes a search for fields indexed as 'datetime' (`Instant`, `LocalDate`, `LocalDateTime` <<indexing#value_types, value types>>). If time is not specified it will be set to zero. If timezone is not specified it will be set to UTC.
+
+=== term
+
+Fetch nodes with exact value in a provided field.
+
+*Request examples:*
+
+.Matches if the exact value in "myNumber" field.
+[source,json]
+----
+{
+  "term": {
+    "field": "myNumber",
+    "value": 4.2
+  }
+}
+----
+
+.Matches if the exact value and boost the score of the result.
+[source,json]
+----
+{
+  "term": {
+    "field": "myBoolean",
+    "value": true,
+    "boost": 2
+  }
+}
+----
+
+.Matches if the field has one of exact values in typed index.
+[source,json]
+----
+{
+  "in": {
+    "field": "myDateTime",
+    "type": "dateTime",
+    "values": [
+      "2015-02-26T12:00:00.030Z",
+      "2015-02-26T12:00:00-02:23"
+    ]
+  }
+}
+----
+
+=== in
+
+Fetch nodes if a provided field contains any of listed values.
+
+*Request examples:*
+
+.Matches if "myNumber" field contains any of the values.
+[source,json]
+----
+{
+  "in": {
+    "field": "myNumber",
+    "values": [
+      3.2,
+      4.0,
+      5
+    ]
+  }
+}
+----
+
+.Matches if "myDateTime" field contains any of the <<dateTime,dateTime>> indexed values.
+[source,json]
+----
+{
+  "in": {
+    "field": "myDateTime",
+    "type": "dateTime",
+    "values": [
+      "2015-02-26T12:00:00.030Z",
+      "2015-02-26T12:00:00-02:23"
+    ]
+  }
+}
+----
+
+=== like
+
+Returns nodes that contain the field matching a wildcard pattern.
+A wildcard operator ( `*` ) is a placeholder that matches one or more characters.
+
+*Request examples:*
+
+.Matches if "myString" field contains a value starts with 'start' .
+[source,json]
+----
+{
+  "like": {
+    "field": "myString",
+    "value": "start*"
+  }
+}
+----
+
+.Matches if "myString" field contains a value ends with 'end' .
+[source,json]
+----
+{
+  "like": {
+    "field": "myString",
+    "value": "*end"
+  }
+}
+----
+
+.Matches if "myString" field contains a value and boost the result hits.
+[source,json]
+----
+{
+  "like": {
+    "field": "myString",
+    "value": "*middle*",
+    "boost": 2.2
+  }
+}
+----
+
+=== range
+
+Matches the nodes with fields that have terms within a certain range.
+Index to search depends on the field and expression types.
+
+*Request examples:*
+
+.Matches if "myNumber" field contains a number value less than 5, inclusive.
+[source,json]
+----
+{
+  "range": {
+    "field": "myNumber",
+    "lte": 5
+  }
+}
+----
+
+.Matches if "myString" field contains a string value from 'a' to 'd' (inclusive 'a') and boosts the result hits.
+[source,json]
+----
+{
+  "range": {
+    "field": "myString",
+    "gte": "a",
+    "lt": "d",
+    "boost": 1.5
+  }
+}
+----
+
+.Matches if "myDateTime" field contains a <<dateTime,dateTime>> value from '2017-09-11T09:00:00Z' zulu time.
+[source,json]
+----
+{
+  "range": {
+    "field": "myDateTime",
+    "type": "dateTime",
+    "gt": "2017-09-11T09:00:00Z"
+  }
+}
+----
+
+=== pathMatch
+
+The path-match matches a path in a same branch, scoring the paths closest to the given query path first.
+Also, a number of minimum matching elements that must match could be set.
+
+*Request examples:*
+
+.Matches property '_path' with minimum 2 path elements
+[source,json]
+----
+{
+  "pathMatch": {
+    "field": "_path",
+    "path": "/mySite/folder1/folder2/images",
+    "minimumMatch": 2
+  }
+}
+----
+
+=== String expressions
+
+[cols="1,1,2a"]
+|===
+|Parameter |Type |Description
+
+|fields
+|string[]
+|List of <<noql#_propertypath, propertyPaths>> to match.
+
+|query
+|string
+|The search-string to match a field's value.
+Support the set of <<search-string operators:,operators>>.
+
+|operator
+|string
+|A default operator used if no explicit operator is specified in the query.
+
+[stripes=none,cols="1,10"]
+!===
+!`OR` !Any of the words in the search-string matches (by default).
+!`AND`!All words in search-string matches.
+!===
+
+|===
+
+===== search-string operators:
+
+* ``+`` signifies AND operation.
+* ``|`` signifies OR operation.
+* ``-`` negates a single token.
+* ``*`` at the end of a term signifies a prefix query.
+* ``(`` and ``)`` signify precedence.
+* ``"`` and ``"`` wraps a number of tokens to signify a phrase for searching
+* ``~N`` after a word signifies edit distance (fuzziness) with a number representing https://en.wikipedia.org/wiki/Levenshtein_distance[Levenshtein distance].
+* ``~N`` after a phrase signifies slop amount (how far apart terms in phrase are allowed)
+
+To use one of these characters literally, escape it with a preceding backslash (\).
+
+NOTE: You can boost - thus increasing or decreasing hit-score per field basis. By providing more than one field to the query by appending a weight-factor: ^N
+
+==== fulltext
+
+The fulltext expression is searching for words in a field, and calculates relevance scores based on a set of rules (e.g number of occurences, field-length, etc).
+
+NOTE: Only analyzed properties are considered when applying the fulltext function.
+
+*Request examples:*
+
+.Matches if any of query's words found in listed properties and boosts the match in '_name' field
+[source,json]
+----
+{
+  "fulltext": {
+    "fields": [
+      "_name^3",
+      "my.inner.analyzed.property",
+      "custom.*"
+    ],
+    "query": "apple pork fish",
+    "operator": "OR"
+  }
+}
+
+----
+
+.Matches displayName field started with 'pork pie' words combination and negates 'apple' token
+[source,json]
+----
+{
+  "fulltext": {
+    "field": "displayName",
+    "query": "~apple pork+pie*"
+  }
+}
+----
+
+==== ngram
+
+An edge n-gram is a sequence of n letters from a term.
+During ngram indexing, the term "foxy" is also indexed as: "f", "fo", and "fox".
+
+When using the nGram search expression, we are able get matches, even if the search only contains parts of a term.
+This is for instance useful when creating autocomplete functionality.
+The max limit of the ngram tokenizer is 25 characters, meaning that search strings over 25 characters will not match.
+As such, ngram queries may successfully be combined with the fulltext search function or other query expressions, to both match fragments of words as well as full phrases.
+
+NOTE: Only properties analyzed as text are considered when applying the ngram expression.
+This includes, by default, all text-based fields in the content domain.
+
+*Request examples:*
+
+.Matches properties within "myProp" contain words beginning with "fish" or "boat", e.g "fishpond" or "boatman".
+[source,json]
+----
+{
+  "ngram": {
+    "fields": [
+      "displayName",
+      "_name^3"
+    ],
+    "query": "fish boat"
+  }
+}
+----
+
+.Analyzed child fields of "custom" contain words beginning with "lev" and "alg", e.g "Levenshteins Algorithm".
+[source,json]
+----
+{
+  "ngram": {
+    "field": "custom.",
+    "query": "lev alg",
+    "operator": "AND"
+  }
+}
+----
+
+==== stemmed
+
+The stemmed expression is similar to <<Fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
+E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
+
+NOTE: Stemming is language-dependent, so <<indexing#languages,language>> must be set either on the content or directly in the node indices via indexConfig.
+
+===== special expression fields:
+
+field/fields:: Comma-separated list of <<propertyPath, propertyPaths>> to include in the search.
+Only `_alltext` field is currently indexed for stemming by default.
+
+language:: Content language that was used for stemming.
+List of <<indexing#languages, supported languages>>
+
+*Request examples:*
+
+.Matches any field value that contains any of the given words or their derivatives in English ("fishing", "cakes"…)
+[source,json]
+----
+{
+  "stemmed": {
+    "field": "_alltext",
+    "query": "fish boat",
+    "language": "en"
+  }
+}
+----
+
+== Compounds
+
+Compound expressions wrap other compounds or expressions, either to combine their results and scores or to change their behaviour.
+
+=== boolean
+
+Boolean provides the way to combine logical operations on expressions.
+All sub-expressions can contain a single expression or an array.
+
+.Structure example
+[source,json]
+----
+{
+  "boolean": {
+    "should": {
+        ...
+    },
+    "must": {
+        ...
+    },
+    "mustNot": [
+        "should":{
+            ...
+        }
+        ...
+    ]
+  }
+}
+----
+
+==== must
+
+All expressions must evaluate to true to include a node in the result.
+
+.Single expression
+[source,json]
+----
+{
+  "boolean": {
+    "must": {
+      "term": {
+        "field": "myNumber",
+        "value": 2.4
+      }
+    }
+  }
+}
+----
+
+.Array expression
+[source,json]
+----
+{
+  "boolean": {
+    "must": [
+      {
+        "term": {
+          "field": "myNumber",
+          "value": 2.4
+        }
+      },
+      {
+        "ngram": {
+          "field": "displayName",
+          "query": "fisk"
+        }
+      }
+    ]
+  }
+}
+----
+
+==== should
+
+One or more expressions must evaluate to true to include a node in the result.
+
+.'_path' OR 'displayName' must evaluate to true.
+[source,json]
+----
+{
+  "boolean": {
+    "should": [
+      {
+        "pathMatch": {
+          "field": "_path",
+          "path": "/fisk/a/b",
+          "minimumMatch": 2
+        }
+      },
+      {
+        "like": {
+          "field": "displayName",
+          "value": "fol*der"
+        }
+      }
+    ]
+  }
+}
+
+----
+
+==== mustNot
+
+All expressions in the mustNot must evaluate to false for nodes to match.
+
+.'_path' expression must evaluate to true AND 'displayName' expression to false.
+[source,json]
+----
+{
+  "boolean": {
+    "must":
+      {
+        "pathMatch": {
+          "field": "_path",
+          "path": "/fisk/a/b",
+          "minimumMatch": 2
+        }
+      },
+    "mustNot":
+    {
+      "like": {
+        "field": "displayName",
+        "value": "fol*der"
+      }
+    }
+  }
+}
+
+----
+
+== Boosting
+
+Any query operator result (expression or compound) can be boosted to change the relevance score of the nodes.
+
+.Positive boost
+[source,json]
+----
+{
+  "boolean": {
+    "should": [
+      {
+        "term": {
+          "field": "myString",
+          "value": "value 1"
+        }
+      },
+      {
+        "term": {
+          "field": "myString",
+          "value": "value 2",
+          "boost": 2.0 <!--1-->
+        }
+      },
+{
+        "term": {
+          "field": "myString",
+          "value": "value 3",
+          "boost": 0.5 <!--2-->
+        }
+      }
+    ]
+  }
+}
+----
+<1> Positive boost, increasing the score.
+<2> Negative boost, decreasing the score.
+
+To boost the bunch of expressions they could be wrapped by an inner boolean query:
+
+[source,json]
+----
+{
+  "boolean": {
+    "should": [
+      {
+        "boolean": {
+          "should": [
+            {
+              "term": {
+                "field": "field",
+                "value": "a"
+              }
+            },
+            {
+              "term": {
+                "field": "field",
+                "value": "b"
+              }
+            }
+          ],
+          "boost": 2.2
+        }
+      },
+      {
+        "term": {
+          "field": "field",
+          "value": "c"
+        }
+      }
+    ]
+  }
+}
+
+----
+
+[#sort]
+== Sort
+
+It's a way to place result nodes in specific order based on their property values.
+The sort is defined on a per property level, with special field name for `_score` to sort by relevance.
+Relevance is done by scoring each individual item based on how it matches your query.
+
+.Score sorting
+[source,json]
+----
+{
+  "sort": {
+    "field": "_score"
+  }
+}
+----
+NOTE: Order defaults to DESC when sorting by `_score`, and ASC when sorting by anything else.
+
+To change a direction of sorting use `direction` property:
+
+.Score sorting
+[source,json]
+----
+{
+  "sort": {
+    "field": "myField",
+    "direction": "ASC"
+  }
+}
+----
+
+To sort by a few fields just set them in the right order:
+.Score sorting
+[source,json]
+----
+{
+  "sort": [
+    {
+      "field": "myFirstField",
+      "direction": "DESC"
+    },
+    {
+      "field": "mySecondField"  //Defaults to ASC
+    }
+  ]
+}
+----
+=== geoDistance
+The geoDistance allows to order the results according to distance to a given geo-point.
+
+==== geoDistance properties
+
+[cols="1,1,2a"]
+|===
+|Parameter |Type |Description
+
+|field
+|string
+|geoPoint type property
+
+|direction
+|string
+|'ASC' or 'DESC'.
+
+|location
+|object
+|A geoPoint from which the distance factor should be calculated
+[stripes=none,cols="3,3,10"]
+!===
+!`lat` !number !latitude
+!`lon`!number !longitude
+!===
+
+|unit
+|string
+| The string representation of distance unit to use. Defaults to "m" or "meters".
+
+. `"m" or "meters"`
+. `"in" or "inch"`
+. `"yd" or "yards"`
+. `"ft" or "feet"`
+. `"km" or "kilometers"`
+. `"NM" or "nmi" or "nauticalmiles"`
+. `"mm" or "millimeters"`
+. `"cm" or "centimeters"`
+. `"mi" or "miles"`
+|===
+
+.geoDistance sort example
+[source,json]
+----
+{
+  "sort": [
+    {
+      "field": "myFirstField",
+      "direction": "ASC"
+    },
+    {
+      "field": "mySecondField"
+    }
+  ]
+}
+----
