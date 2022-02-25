@@ -6,8 +6,8 @@ The ID provider service offers a contextual endpoint for communicating directly 
 
 == Endpoint
 
-The endpoint is located at the root of an application or site's url space as `/_/idprovider/<idprovider-name>`.
-A live contextual idprovider URL pattern may for instance be: company.com/_/idprovider/myidprovider
+The endpoint is located at the root of an application or site's url space as `+/_/idprovider/<idprovider-name>+`.
+A live contextual idprovider URL pattern may for instance be: `+company.com/_/idprovider/myidprovider+`
 
 The ID provider itself is added to the context of your site or service via <<../../deployment/vhosts#, Vhost configuration>>.
 
@@ -18,9 +18,9 @@ The site pipeline is executed as a subset of the <<../engines#common_request_pip
 
 image::idprovider-pipeline.svg[ID provider rendering pipeline, 768px]
 
-Login:: Fixed endpoint for logging in: `/_/idprovider/<idprovider-name>/login`.
+Login:: Fixed endpoint for logging in: `+/_/idprovider/<idprovider-name>/login+`.
 
-Logout:: Fixed endpoint for logging out: `/_/idprovider/<idprovider-name>/logout`.
+Logout:: Fixed endpoint for logging out: `+/_/idprovider/<idprovider-name>/logout+`.
 
 Controller:: All other request paths are routed to the ID providers, acting as a regular controller
 
