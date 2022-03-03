@@ -47,12 +47,12 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.9 notes
 
-* <<deployment/config#_portal, Portal config>> now specifies default Content-Security-Policy for page `preview`/`inline`/`edit` mode (it does not affect `live` mode) .
-It is possible to configure the header via `page.defaultContentSecurityPolicy` value or go back to previous behavior by setting `page.defaultContentSecurityPolicy` to an empty value.
-Default value prevents inline scripts, eval, data: urls, plugins and external resources (scripts, fonts, images, etc.) to be loaded.
-* Security headers are now specified in <<deployment/config#_header_filter, header filter config>> be default.
-It may prevent some pages to work properly if they, for instance, require to be loaded from IFrame. You can customize default headers
-in <<deployment/config#_header_filter, header filter config>> `headerConfig` value to get back to previous behaviour.
+* <<deployment/config#_portal, Portal config>> now specifies default Content-Security-Policy for page `preview` and `inline` mode.
+It is possible to configure the header via `page.previewContentSecurityPolicy` value or go back to previous behavior by setting `page.previewContentSecurityPolicy` to an empty value.
+Default value is crafted to prevent common Persistent XSS attacks in Content Studio.
+* Security headers are now specified in <<deployment/config#_header_filter, header filter config>> by default.
+Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from IFrame.
+You can customize default headers in <<deployment/config#_header_filter, header filter config>> `headerConfig` value to get back to previous behaviour.
 
 == v7.8 notes
 
