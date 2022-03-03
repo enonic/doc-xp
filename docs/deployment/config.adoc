@@ -941,7 +941,7 @@ media.private.cacheControl = private, max-age=31536000, immutable
 asset.cacheControl:: Defines assets cache-control header when asset is cachable. Default: `public, max-age=31536000, immutable`
 media.public.cacheControl:: Defines media (images, attachments) cache-control header when media is cachable and accessible by Everyone. Default: `public, max-age=31536000, immutable`
 media.private.cacheControl:: Defines media (images, attachments) cache-control header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
-page.defaultContentSecurityPolicy:: Defines default value for Content-Security-Policy header for pages. Is not applied in `live` mode or if page controllers specify own CSP header. Default: `default-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'`
+page.previewContentSecurityPolicy:: Defines default value for Content-Security-Policy header for pages. Applied in `preview`/`inline` mode and only if page controllers do not specify own Content-Security-Policy header. Default: `default-src 'self'; object-src 'none'; img-src 'self' data:; style-src * 'unsafe-inline'; font-src * data:'`
 
 === Image
 
