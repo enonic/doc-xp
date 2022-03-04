@@ -62,21 +62,6 @@ Fetch nodes with exact value in a provided field.
 }
 ----
 
-.Matches if the field has one of exact values in typed index.
-[source,json]
-----
-{
-  "in": {
-    "field": "myDateTime",
-    "type": "dateTime",
-    "values": [
-      "2015-02-26T12:00:00.030Z",
-      "2015-02-26T12:00:00-02:23"
-    ]
-  }
-}
-----
-
 === in
 
 Fetch nodes if a provided field contains any of listed values.
@@ -216,7 +201,7 @@ Also, a number of minimum matching elements that must match could be set.
 }
 ----
 
-=== String expressions
+== String expressions
 
 [cols="1,1,2a"]
 |===
@@ -243,7 +228,7 @@ Support the set of <<search-string operators:,operators>>.
 
 |===
 
-===== search-string operators:
+==== search-string operators:
 
 * ``+`` signifies AND operation.
 * ``|`` signifies OR operation.
@@ -258,7 +243,7 @@ To use one of these characters literally, escape it with a preceding backslash (
 
 NOTE: You can boost - thus increasing or decreasing hit-score per field basis. By providing more than one field to the query by appending a weight-factor: ^N
 
-==== fulltext
+=== fulltext
 
 The fulltext expression is searching for words in a field, and calculates relevance scores based on a set of rules (e.g number of occurences, field-length, etc).
 
@@ -294,7 +279,7 @@ NOTE: Only analyzed properties are considered when applying the fulltext functio
 }
 ----
 
-==== ngram
+=== ngram
 
 An edge n-gram is a sequence of n letters from a term.
 During ngram indexing, the term "foxy" is also indexed as: "f", "fo", and "fox".
@@ -335,7 +320,7 @@ This includes, by default, all text-based fields in the content domain.
 }
 ----
 
-==== stemmed
+=== stemmed
 
 The stemmed expression is similar to <<Fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
 E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
@@ -517,7 +502,7 @@ Any query operator result (expression or compound) can be boosted to change the 
           "boost": 2.0 <!--1-->
         }
       },
-{
+      {
         "term": {
           "field": "myString",
           "value": "value 3",
