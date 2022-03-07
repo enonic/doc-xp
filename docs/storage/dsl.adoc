@@ -23,7 +23,7 @@ To force search in a field's advanced analysed index (like dates and geoPoints),
 
 NOTE: Search could be done by an expression with particular type only for analyzed fields with compatible <<indexing#value_types, value type>> and not prohibiting type mapping.
 
-=== Expression types
+=== Value types
 
 ==== time
 
@@ -82,6 +82,8 @@ Fetch nodes if a provided field contains any of listed values.
   }
 }
 ----
+
+NOTE: You cannot mix values of different types in the same `in` expression.
 
 .Matches if "myDateTime" field contains any of the <<dateTime,dateTime>> indexed values.
 [source,json]
@@ -211,9 +213,9 @@ Also, a number of minimum matching elements that must match could be set.
 |string[]
 |List of <<noql#_propertypath, propertyPaths>> to match.
 
-|query
+|searchString
 |string
-|The search-string to match a field's value.
+|A search string to match field value(s).
 Support the set of <<search-string operators:,operators>>.
 
 |operator
@@ -553,6 +555,8 @@ To boost the bunch of expressions they could be wrapped by an inner boolean quer
 }
 
 ----
+
+TIP: Avoid combining group boosting and single term boosting in the same expression.
 
 [#sort]
 == Sort
