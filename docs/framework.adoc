@@ -2,12 +2,14 @@
 :toc: right
 :imagesdir: framework/images
 
-Enonic XP extensively uses server-side JavaScript for application development.
-Our goal is to enable developer of any language - PHP, .net, Java, Python, etc to quickly grasp and be productive with Enonic XP.
+Enonic XP ships with a flexible JavaScript MVC framework for server-side execution.
 
 Here are some highlights:
 
-* *Javascripts are compiled and cached* on first request, for optimal performance
-* *Multithreaded* request-response approach - simplifying software development and utilization of modern multi-core infrastructure
+* *Integrated* with the Enonic applications runtime. Ship and execute JavaScript within your apps
+* *Compatible* across all releases of XP within a major version i.e. 7.x.x
+* *Supports* request-response, clustered events and and background task execution 
+* *Multithreaded* for ease of development and effective use of multi-core CPU arcitectures
+* *Fast and performant* as JavaScripts are compiled and cached on first request
 * *Based on the http://wiki.commonjs.org/wiki/Modules/1.1[CommonJS module specification]*
-* *Powered by the JVM* using the Nashorn scripting engine. Future releases of XP are expected to be using Graal.
+* *Powered by the JVM* Unlike most JavaScript frameworks, this is not powered by Node.js, but uses the Nashorn scripting engine from the Java Virtual Machine. Next major release of XP is expected to be using GraalJS.
