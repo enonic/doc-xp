@@ -1,10 +1,12 @@
-= Query DSL
+= DSL
 :toc: right
+:toclevels: 4
 :imagesdir: ../images
 
 image:xp-790.svg[XP 7.9.0,opts=inline]
 
-== Introduction
+== Query DSL
+=== Introduction
 
 Enonic XP provides a Query DSL (Domain Specific Language) based on JSON to define queries.
 Usually query JSON object looks like syntax tree consisting of two types of operators:
@@ -15,7 +17,7 @@ Provides a way to check particular fields for various native and analysed values
 * ``Compound``:
 Provides a way to logically combine various expressions and compounds to fetch nodes based on complex conditions.
 
-== Expressions
+=== Expressions
 
 Each node field could be indexed in many ways according to its type and user mappings.
 By default, a query searches in base primitive value index of a field (number, string, boolean).
@@ -23,19 +25,51 @@ To force search in a field's advanced analysed index (like dates and geoPoints),
 
 NOTE: Search could be done by an expression with particular type only for analyzed fields with compatible <<indexing#value_types, value type>> and not prohibiting type mapping.
 
-=== Value types
 
-==== time
+==== Value types
+[[value_types]]
+
+As said above, fields could be indexed in many ways. Which one will be used to make a search for an expression? By default, it depends on a specified JSON value type (string, number or boolean).  But a developer can force a search by pointing 'type' expression property for some indices.
+
+===== time
 
 Time expression converts expression as <<indexing#value_types,LocalTime>> string and makes a search for a field indexed as 'string'.
 
-==== dateTime
+===== dateTime
 
 DateTime expression makes a search for fields indexed as 'datetime' (`Instant`, `LocalDate`, `LocalDateTime` <<indexing#value_types, value types>>). If time is not specified it will be set to zero. If timezone is not specified it will be set to UTC.
 
-=== term
+==== Expression types
+===== term
 
 Fetch nodes with exact value in a provided field.
+
+.Expression parameters
+[cols="1,1,1, 2a"]
+|===
+|Parameter |Type |Required |Description
+
+|field
+|string
+|true
+|property name to search.
+
+|value
+|object
+|true
+|exact property value.
+
+|type
+|string
+|false
+|value <<value_types, type>>.
+
+|boost
+|number
+|false
+|multiplier for `_score` result value.
+
+|===
 
 *Request examples:*
 
@@ -62,9 +96,36 @@ Fetch nodes with exact value in a provided field.
 }
 ----
 
-=== in
+===== in
 
 Fetch nodes if a provided field contains any of listed values.
+
+.Expression parameters
+[cols="1,1,1, 2a"]
+|===
+|Parameter |Type |Required |Description
+
+|field
+|string
+|true
+|property name to search.
+
+|values
+|object[]
+|true
+|array of possible property values. All values must be of the same type.
+
+|type
+|string
+|false
+|value <<value_types, type>>.
+
+|boost
+|number
+|false
+|multiplier for `_score` result value.
+
+|===
 
 *Request examples:*
 
@@ -100,10 +161,37 @@ NOTE: You cannot mix values of different types in the same `in` expression.
 }
 ----
 
-=== like
+===== like
 
 Returns nodes that contain the field matching a wildcard pattern.
 A wildcard operator ( `*` ) is a placeholder that matches one or more characters.
+
+.Expression parameters
+[cols="1,1,1, 2a"]
+|===
+|Parameter |Type |Required |Description
+
+|field
+|string
+|true
+|property name to search.
+
+|value
+|string
+|true
+|search string.
+
+|type
+|string
+|false
+|value <<value_types, type>>.
+
+|boost
+|number
+|false
+|multiplier for `_score` result value.
+
+|===
 
 *Request examples:*
 
@@ -141,10 +229,57 @@ A wildcard operator ( `*` ) is a placeholder that matches one or more characters
 }
 ----
 
-=== range
+===== range
 
 Matches the nodes with fields that have terms within a certain range.
 Index to search depends on the field and expression types.
+
+.Expression parameters
+[cols="1,1,1,2a"]
+|===
+|Parameter |Type |Required |Description
+
+|field
+|string
+|true
+|property name to search.
+
+|lt
+|object
+|false
+|less than.
+
+|lte
+|object
+|false
+|less than or equals.
+
+|gt
+|object
+|false
+|greater than.
+
+|gte
+|object
+|false
+|greater than or equals.
+
+|type
+|string
+|false
+|value <<value_types, type>>.
+
+|boost
+|number
+|false
+|multiplier for `_score` result value.
+
+|===
+
+1. `gt` and `gte` cannot be used together.
+2. `lt` and `lte` cannot be used together.
+3. At least one range property must be specified.
+4. All specified properties must be of the same type.
 
 *Request examples:*
 
@@ -184,10 +319,37 @@ Index to search depends on the field and expression types.
 }
 ----
 
-=== pathMatch
+===== pathMatch
 
 The path-match matches a path in a same branch, scoring the paths closest to the given query path first.
 Also, a number of minimum matching elements that must match could be set.
+
+.Expression parameters
+[cols="1,1,1, 2a"]
+|===
+|Parameter |Type |Required |Description
+
+|field
+|string
+|true
+|property name to search.
+
+|path
+|string
+|true
+|path value.
+
+|minimumMatch
+|number
+|false
+|number of minimum matching elements.
+
+|boost
+|number
+|false
+|multiplier for `_score` result value.
+
+|===
 
 *Request examples:*
 
@@ -203,23 +365,60 @@ Also, a number of minimum matching elements that must match could be set.
 }
 ----
 
-== String expressions
+===== matchAll
 
-[cols="1,1,2a"]
+Matches all documents, giving them all a `_score` of '1.0'.
+
+.Expression parameters
+[cols="1,1,1, 2a"]
 |===
-|Parameter |Type |Description
+|Parameter |Type |Required |Description
+
+|boost
+|number
+|false
+|multiplier for `_score` result value.
+
+|===
+
+.Matches all nodes
+[source,json]
+----
+{
+  "matchAll": { }
+}
+----
+
+.Matches all nodes and boosts the score
+[source,json]
+----
+{
+  "matchAll": {
+    "boost": 2
+  }
+}
+----
+
+==== String expressions
+
+[cols="1,1,1,2a"]
+|===
+|Parameter |Type |Required |Description
 
 |fields
 |string[]
+|true
 |List of <<noql#_propertypath, propertyPaths>> to match.
 
 |searchString
 |string
+|true
 |A search string to match field value(s).
-Support the set of <<search-string operators:,operators>>.
+Support the set of <<search_string_operators,operators>>.
 
 |operator
 |string
+|false
 |A default operator used if no explicit operator is specified in the query.
 
 [stripes=none,cols="1,10"]
@@ -229,8 +428,8 @@ Support the set of <<search-string operators:,operators>>.
 !===
 
 |===
-
-==== search-string operators:
+[#search_string_operators]
+.search-string operators:
 
 * ``+`` signifies AND operation.
 * ``|`` signifies OR operation.
@@ -245,7 +444,7 @@ To use one of these characters literally, escape it with a preceding backslash (
 
 NOTE: You can boost - thus increasing or decreasing hit-score per field basis. By providing more than one field to the query by appending a weight-factor: ^N
 
-=== fulltext
+===== fulltext
 
 The fulltext expression is searching for words in a field, and calculates relevance scores based on a set of rules (e.g number of occurences, field-length, etc).
 
@@ -281,7 +480,7 @@ NOTE: Only analyzed properties are considered when applying the fulltext functio
 }
 ----
 
-=== ngram
+===== ngram
 
 An edge n-gram is a sequence of n letters from a term.
 During ngram indexing, the term "foxy" is also indexed as: "f", "fo", and "fox".
@@ -322,14 +521,14 @@ This includes, by default, all text-based fields in the content domain.
 }
 ----
 
-=== stemmed
+===== stemmed
 
 The stemmed expression is similar to <<Fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
 E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
 
 NOTE: Stemming is language-dependent, so <<indexing#languages,language>> must be set either on the content or directly in the node indices via indexConfig.
 
-===== special expression fields:
+.special expression fields:
 
 field/fields:: Comma-separated list of <<propertyPath, propertyPaths>> to include in the search.
 Only `_alltext` field is currently indexed for stemming by default.
@@ -351,11 +550,11 @@ List of <<indexing#languages, supported languages>>
 }
 ----
 
-== Compounds
+=== Compounds
 
 Compound expressions wrap other compounds or expressions, either to combine their results and scores or to change their behaviour.
 
-=== boolean
+==== boolean
 
 Boolean provides the way to combine logical operations on expressions.
 All sub-expressions can contain a single expression or an array.
@@ -381,7 +580,7 @@ All sub-expressions can contain a single expression or an array.
 }
 ----
 
-==== must
+===== must
 
 All expressions must evaluate to true to include a node in the result.
 
@@ -423,7 +622,7 @@ All expressions must evaluate to true to include a node in the result.
 }
 ----
 
-==== should
+===== should
 
 One or more expressions must evaluate to true to include a node in the result.
 
@@ -452,7 +651,7 @@ One or more expressions must evaluate to true to include a node in the result.
 
 ----
 
-==== mustNot
+===== mustNot
 
 All expressions in the mustNot must evaluate to false for nodes to match.
 
@@ -481,7 +680,7 @@ All expressions in the mustNot must evaluate to false for nodes to match.
 
 ----
 
-== Boosting
+=== Boosting
 
 Any query operator result (expression or compound) can be boosted to change the relevance score of the nodes.
 
@@ -559,7 +758,7 @@ To boost the bunch of expressions they could be wrapped by an inner boolean quer
 TIP: Avoid combining group boosting and single term boosting in the same expression.
 
 [#sort]
-== Sort
+== Sort DSL
 
 It's a way to place result nodes in specific order based on their property values.
 The sort is defined on a per property level, with special field name for `_score` to sort by relevance.
@@ -608,8 +807,7 @@ To sort by a few fields just set them in the right order:
 === geoDistance
 The geoDistance allows to order the results according to distance to a given geo-point.
 
-==== geoDistance properties
-
+.geoDistance properties
 [cols="1,1,2a"]
 |===
 |Parameter |Type |Description
@@ -652,12 +850,14 @@ The geoDistance allows to order the results according to distance to a given geo
 {
   "sort": [
     {
-      "field": "myFirstField",
-      "direction": "ASC"
-    },
-    {
-      "field": "mySecondField"
+      "field": "myGeoPoint",
+      "direction": "ASC",
+      "location": {
+        "lat": "90.0",
+        "lon": "0.0"
+      },
+      "unit": "km"
     }
-  ]
+    ]
 }
 ----
