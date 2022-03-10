@@ -1262,7 +1262,7 @@ An object with the following keys and their values:
 | count | number | <optional> | 10 | Number of contents to fetch
 | query | string/object | | | Query string or <<../storage/dsl#, DSL>> expression
 | filters | object | <optional> | | Filters to apply to query result
-| sort | string | <optional> | | Sorting expression
+| sort | string/object | <optional> | | Sorting string or <<../storage/dsl#sort, DSL>> expression
 | aggregations | string | <optional> | | Aggregations expression
 | contentTypes | Array.<string> | <optional> | | Content types to filter on
 |===
