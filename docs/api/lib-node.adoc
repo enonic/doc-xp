@@ -1014,7 +1014,7 @@ An object with the following keys and their values:
 | count | number | optional | Number of content to fetch, used for paging - default: 10
 | query | string/object | | Query string or <<../storage/dsl#, DSL>> expression.
 | filters | object | optional | Query filters
-| sort | string | optional | Sorting expression - default: '_score DESC'
+| sort | string/object | optional | Sorting string or <<../storage/dsl#sort, DSL>> expression. Default: '_score DESC'
 | aggregations | object | optional | <<../storage/aggregations#,Aggregations>> config
 | highlight | object | optional | <<../storage/highlighting#,Highlighting>> config
 | explain | boolean | optional | If set to `true`, score calculation explanation will be included in result.
