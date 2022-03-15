@@ -348,7 +348,7 @@ network.join.kubernetes.resolveNotReadyAddresses=true
 
 clusterConfigDefaults:: If true some properties set based on xp cluster configuration. Default: `true`
 
-lightMember:: Hazelcast Lite member which does not own any partitions. Default: `false`.
+liteMember:: Hazelcast Lite member which does not own any partitions. Default: `false`.
 
 network.port:: Custom port for the node to node communication. Default: `5701`.
 
