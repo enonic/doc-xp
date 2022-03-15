@@ -7,7 +7,7 @@ include::.variables.adoc[]
 
 === Other improvements
 
-* Default Content-Security-Policy header for page preview/inline/edit. Can be configured in <<deployment/config#_portal, Portal config>>
+* Default Content-Security-Policy header for page preview/inline/edit. Can be configured in <<deployment/config#_admin, Admin config>>
 * Default security headers are turned on by default. As before they can be customized in <<deployment/config#_header_filter, header filter config>> or turned off completely
 
 == XP7 Update 8
@@ -226,6 +226,8 @@ NOTE: This feature requires https://developer.enonic.com/docs/content-studio/mas
 
 It is now possible to specify default headers set for every HTTP response via header filter.
 Default headers can be configured in `com.enonic.xp.web.header.cfg` configuration file via `headerConfig` property.
+If no value is specified `set X-Frame-Options: DENY,set X-XSS-Protection: 1; mode=block,set X-Content-Type-Options: nosniff` is used.
+Empty value disables Header filter.
 
 .Cross site scripting prevention headers
 [source,properties]

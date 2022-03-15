@@ -422,6 +422,24 @@ It also requires granting certain permissions. You can find more information in 
 
 === Admin
 
+`XP_HOME/config/com.enonic.xp.admin.cfg`
+
+.Disable Content Security Policy for site preview
+[source,properties]
+----
+site.preview.contentSecurityPolicy =
+----
+
+.Allow scripts from maps.googleapis.com
+[source,properties]
+----
+`default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self' maps.googleapis.com; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:`
+----
+
+site.preview.contentSecurityPolicy:: Defines default value for Content-Security-Policy header for pages. Applied in `preview`/`inline` mode and only if page controllers do not specify own Content-Security-Policy header. Default: `default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:`
+
+=== Admin Console
+
 `XP_HOME/config/com.enonic.xp.app.main.cfg`
 
 Basic settings for the XP admin console
@@ -938,10 +956,18 @@ media.public.cacheControl = public, max-age=31536000, immutable
 media.private.cacheControl = private, max-age=31536000, immutable
 ----
 
+.Disable Content Security Policy for media
+[source,properties]
+----
+media.contentSecurityPolicy =
+media.contentSecurityPolicy.svg =
+----
+
 asset.cacheControl:: Defines assets cache-control header when asset is cachable. Default: `public, max-age=31536000, immutable`
-media.public.cacheControl:: Defines media (images, attachments) cache-control header when media is cachable and accessible by Everyone. Default: `public, max-age=31536000, immutable`
-media.private.cacheControl:: Defines media (images, attachments) cache-control header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
-page.previewContentSecurityPolicy:: Defines default value for Content-Security-Policy header for pages. Applied in `preview`/`inline` mode and only if page controllers do not specify own Content-Security-Policy header. Default: `default-src 'self'; object-src 'none'; img-src 'self' data:; style-src * 'unsafe-inline'; font-src * data:'`
+media.public.cacheControl:: Defines media (images, attachments) `Cache-Control` header when media is cachable and accessible by Everyone. Default: `public, max-age=31536000, immutable`
+media.private.cacheControl:: Defines media (images, attachments) `Cache-Control` header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
+media.contentSecurityPolicy:: Defines media (images, attachments) `Content-Security-Policy` header. Default: `default-src 'none'; base-uri 'none'; form-action 'none'`
+media.contentSecurityPolicy.svg:: Defines media (images, attachments) `Content-Security-Policy` header in cases when it is `image/svg+xml` mime type. Default: `default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`
 
 === Image
 
