@@ -47,11 +47,16 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.9 notes
 
-* <<deployment/config#_portal, Portal config>> now specifies default Content-Security-Policy for page `preview` and `inline` mode.
-It is possible to configure the header via `page.previewContentSecurityPolicy` value or go back to previous behavior by setting `page.previewContentSecurityPolicy` to an empty value.
+* <<deployment/config#_portal, Portal config>> now specifies default `Content-Security-Policy` for attachments and images.
+It is possible to configure the header via `media.contentSecurityPolicy` and `media.contentSecurityPolicy.svg` values. Empty value disables `Content-Security-Policy` for attachments and images.
+Default value is crafted to prevent common Persistent XSS attacks.
+
+* <<deployment/config#_admin, Admin config>> now specifies default Content-Security-Policy for page `preview` and `inline` mode (used by Content Studio).
+It is possible to configure the header via `site.preview.contentSecurityPolicy` value or go back to previous behavior by setting `site.preview.contentSecurityPolicy` to an empty value.
 Default value is crafted to prevent common Persistent XSS attacks in Content Studio.
-* Security headers are now specified in <<deployment/config#_header_filter, header filter config>> by default.
-Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from IFrame.
+
+* Certain Security headers are now specified in <<deployment/config#_header_filter, header filter config>> by default.
+Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from an IFrame.
 You can customize default headers in <<deployment/config#_header_filter, header filter config>> `headerConfig` value to get back to previous behaviour.
 
 == v7.8 notes
