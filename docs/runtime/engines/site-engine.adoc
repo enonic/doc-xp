@@ -7,7 +7,7 @@ The Site engine enables development and delivery of content driven web apps AKA 
 == Sites vs webapps
 
 Sites are essentially content driven webapps.
-This means that URLs and the content within the application can be controlled by non-techinical editors.
+This means that URLs and the content within the application can be controlled by non-technical editors.
 In XP this boils down to a mapping between content (from the Content API) and a controller.
 Unlike webapps, sites do not have a default controller. 
 
@@ -32,11 +32,28 @@ This section describes the standard pipeline involved in processing a page reque
 
 Mappings:: Uses path and content based mappings from site descriptor to trigger filters and controllers
 
-Page resolver:: Looks up content in path, and resolves it's controller + config (optionally via page template). If no controller is found, the return code is set to 404.
+Page resolver:: Looks up content in path, and resolves its controller + config (optionally via page template).
+
+For two content types Page resolver does not resolve any controller.
+- For `base:shortcut` the referenced content path is returned with status code `307 Temporary Redirect`.
+- For `portal:fragment` the controller is not applicable. The fragment is rendered directly.
+
+
+For the rest of content types controllers are considered in the following order:
+
+- Controller that is set directly on content.
+- Controller that is set on page-template for content.
+If set page-template is unavailable (i.e. deleted), Page resolver considers it as page-template is not set.
+- Controller that set on first found page-template (in `\{site}/_templates` folder) that supports content's content type.
+
+If no controller is found, the response status code is set to `404 Not Found`.
+
+NOTE: In `inline` rendering mode response status code is set to `418` instead of `404`, so Content Studio can switch to alternative rendering.
+In `edit` rendering mode status code is `200` instead of `404` to allow Content Studio to render in-place Controller selector.
 
 Page renderer:: Based on the controller in the previous step is executed, producing output - potentially including component placeholders
 
-Component renderer:: For text/html responses, any compontent placeholders in the response body are processed. Each compontent's controller is executed and the output replaces the compontent placeholder in the response body. Layouts compontents may leave new placeholders, as such, this step will be repeated until no placeholders remain to be processed.
+Component renderer:: For text/html responses, any component placeholders in the response body are processed. Each component's controller is executed and the output replaces the component placeholder in the response body. Layouts components may leave new placeholders, as such, this step will be repeated until no placeholders remain to be processed.
 
 Response processors:: For text/html responses, any response processors defined in the site descriptor will be executed. Processors may manipulate the result, for instance by adding pageContributions
 
@@ -46,4 +63,4 @@ Response filters:: Any filters registered through a mapping may now execute thei
 
 Image service:: Requests for the _/image/ url pattern activate the <<site-engine/image-service#,image service>>, which will process and return images on demand
 
-Component service:: Requests for the _/compontent/ url pattern trigger direct access to the <<site-engine/component-service#,component service>>. Enabling direct HTTP request processing on a single compontent. This is effectively a subset of the site engine itself.
+Component service:: Requests for the _/component/ url pattern trigger direct access to the <<site-engine/component-service#,component service>>. Enabling direct HTTP request processing on a single component. This is effectively a subset of the site engine itself.
