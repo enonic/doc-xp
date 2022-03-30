@@ -1,0 +1,150 @@
+= Audit Logs
+:toc: right
+
+XP registers successfully completed actions that affect content, applications, principals and ID providers in the `system.auditlog` repository.
+
+== Principals and ID providers
+
+In order to enable or disable audit logs for actions affecting ID providers and principal entities (such as `users`, `roles` and `groups`) you have to modify configuration file `com.enonic.xp.security.cfg` and set `auditlog.enabled` option to `true` to enable or `false` to disable logging. Default value is `true`.
+
+.com.enonic.xp.security.cfg
+[source,properties]
+----
+
+auditlog.enabled = true
+----
+
+=== XP registers the following actions for principals and ID providers:
+
+* `system.security.principal.create` - a principal (user, group or role) has been created
+* `system.security.principal.update` - a principal (user, group or role) has been updated
+* `system.security.principal.delete` - a principal (user, group or role) has been deleted
+* `system.security.principal.addRelationship` - a principal joins a group or a role
+* `system.security.principal.removeRelationship` - a principal leaves a group or a role
+* `system.security.principal.removeRelationships` - all group or role relationships have been removed (deprecated)
+* `system.security.principal.setPassword` - new password has been set for a user
+* `system.security.idProvider.create` - an ID provider has been created
+* `system.security.idProvider.update` - an ID provider has been updated
+* `system.security.idProvider.delete` - an ID provider has been deleted
+
+Below you can see some examples of how data is stored for various actions:
+
+.`system.security.principal.addRelationship`
+
+User `user:system:username` has been added to group `group:system:usergroup`.
+[source,JSON]
+----
+{
+  "type": "system.security.principal.addRelationship",
+  "source": "com.enonic.xp.security",
+  "user": "user:system:admin",
+  "objects": ["user:system:username","group:system:usergroup"],
+  "data": {
+    "params": {
+      "principal": "user:system:username",
+      "joins": "group:system:usergroup"
+    }
+  }
+}
+----
+
+Role `role:system.admin` has been assigned to user `user:system:username`.
+[source,JSON]
+----
+{
+  "type": "system.security.principal.addRelationship",
+  "source": "com.enonic.xp.security",
+  "user": "user:system:admin",
+  "objects": ["user:system:username","role:system.admin"],
+  "data": {
+    "params": {
+      "principal": "user:system:username",
+      "joins": "role:system.admin"
+    }
+  }
+}
+----
+
+Group `group:system:group1` has been added to group `group:system:group2`.
+[source,JSON]
+----
+{
+  "type": "system.security.principal.addRelationship",
+  "source": "com.enonic.xp.security",
+  "user": "user:system:admin",
+  "objects": ["group:system:group1","group:system:group2"],
+  "data": {
+    "params": {
+      "principal": "group:system:group1",
+      "joins": "group:system:group2"
+    }
+  }
+}
+----
+
+.`system.security.principal.removeRelationship`
+
+Role `role:system.admin` has been unassigned from user `user:system:username`.
+[source,JSON]
+----
+{
+  "type": "system.security.principal.removeRelationship",
+  "source": "com.enonic.xp.security",
+  "user": "user:system:admin",
+  "objects": ["user:system:username","role:system.admin"],
+  "data": {
+    "params": {
+      "principal": "user:system:username",
+      "leaves": "role:system.admin"
+    }
+  }
+}
+----
+
+
+== Application
+
+In order to enable or disable audit logs for application actions you have to modify configuration file `com.enonic.xp.app.cfg` and set `auditlog.enabled` option to `true` to enable or `false` to disable logging. Default value is `true`.
+
+.com.enonic.xp.app.cfg
+[source,properties]
+----
+
+auditlog.enabled = true
+----
+
+=== XP registers the following actions for applications:
+
+* `system.application.start` - an application has been started
+* `system.application.stop` - an application has been stopped
+* `system.application.install` - an application has been installed
+* `system.application.uninstall` - an application has been uninstalled
+
+== Content
+
+In order to enable or disable audit logs for content actions you have to modify configuration file `com.enonic.xp.content.cfg` and set `auditlog.enabled` option to `true` to enable or `false` to disable logging. Default value is `true`.
+
+.com.enonic.xp.app.cfg
+[source,properties]
+----
+
+auditlog.enabled = true
+----
+
+=== XP registers the following actions for content:
+
+* `system.content.create` - a content has been created, for instance, `content`, `site` or `media`
+* `system.content.update` - a content has been updated
+* `system.content.delete` - a content has been deleted
+* `system.content.publish` - a content has been published
+* `system.content.unpublishContent` - a content has been unpublished
+* `system.content.duplicate` - a content has been duplicated
+* `system.content.move` - a content has been moved
+* `system.content.archive` - a content has been archived
+* `system.content.restore` - a content has been restored
+* `system.content.rename` - a content has been renamed
+* `system.content.setActiveContentVersion` - an activeContentVersion has been set for the content
+* `system.content.setChildOrder` - a `childOrder` has been set
+* `system.content.reorderChildren` - a `childOrder` has been reordered
+* `system.content.applyPermissions` - content permissions have been applied
+* `system.content.reprocess` - a content has been reprocessed
