@@ -36,17 +36,17 @@ Page resolver:: Looks up content in path, and resolves its controller + config (
 
 For two content types Page resolver does not resolve any controller.
 - For `base:shortcut` the referenced content path is returned with status code `307 Temporary Redirect`.
-- For `portal:fragment` the controller is not applicable. The fragment is rendered directly.
+- For `portal:fragment` controller is not applicable. A fragment is rendered directly.
 
 
 For the rest of content types controllers are considered in the following order:
 
 - Controller that is set directly on content.
-- Controller that is set on page-template for content.
-If set page-template is unavailable (i.e. deleted), Page resolver considers it as page-template is not set.
-- Controller that set on first found page-template (in `\{site}/_templates` folder) that supports content's content type.
+- Controller that is set on a page template for content.
+If set page template is unavailable (i.e. deleted), Page resolver considers it as if page template was not set.
+- Controller that is set on the first found page template (in `\{site}/_templates` folder) that supports content's content type.
 
-If no controller is found, the response status code is set to `404 Not Found`.
+If no controller is found, response status code is set to `404 Not Found`.
 
 NOTE: In `inline` rendering mode response status code is set to `418` instead of `404`, so Content Studio can switch to alternative rendering.
 In `edit` rendering mode status code is `200` instead of `404` to allow Content Studio to render in-place Controller selector.
@@ -63,4 +63,4 @@ Response filters:: Any filters registered through a mapping may now execute thei
 
 Image service:: Requests for the _/image/ url pattern activate the <<site-engine/image-service#,image service>>, which will process and return images on demand
 
-Component service:: Requests for the _/component/ url pattern trigger direct access to the <<site-engine/component-service#,component service>>. Enabling direct HTTP request processing on a single component. This is effectively a subset of the site engine itself.
+Component service:: Requests for the _/component/ url pattern trigger direct access to the <<site-engine/component-service#,component service>>, enabling direct HTTP request processing on a single component. This is effectively a subset of the site engine itself.
