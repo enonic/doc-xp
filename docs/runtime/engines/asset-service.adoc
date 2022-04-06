@@ -7,15 +7,15 @@ XP provides a standard and cache optimized approach to serving assets.
 
 == Endpoint
 
-The attachment endpoint is located at the root of an application or site's url space as `/_/asset/`.
+The asset endpoint is located at the root of an application or site's url space as `+/_/asset/+`.
 
 The asset endpoint consists of three elements:
 
-* Mount point `/_/asset/`
+* Mount point `+/_/asset/+`
 * App identifier with optional _fingerprint_ i.e. `com.company.app` or `com.company.app:235293024/`
 * Asset path i.e. `path/to/asset.css`
 
-A complete asset URL pattern: `<app-root>/\_/asset/<app-name><:build-id>/<asset-path>` i.e. `company.com/_/asset/com.company.app:235293024/path/to/asset.css`
+A complete asset URL pattern: `+<app-root>/_/asset/<app-name><:build-id>/<asset-path>+` i.e. `+company.com/_/asset/com.company.app:235293024/path/to/asset.css+`
 
 
 == Asset files
@@ -25,7 +25,7 @@ Once the application is deployed, it will be publicly available through the asse
 
 ====
 If a file is placed in your projects `src/main/resources/assets/path/to/asset.ext`
-- the same file will always be available on the contextual url: ``<webapp-root>/_/asset/<app-name>/path/to/myasset.ext``.
+- the same file will always be available on the contextual url: `+<webapp-root>/_/asset/<app-name>/path/to/myasset.ext+`.
 ====
 
 == Cache headers
