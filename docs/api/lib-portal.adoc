@@ -852,7 +852,7 @@ Parameters
 ! Name        ! Type   ! Attributes ! Default ! Description
 ! service     ! string !            !         ! Name of the service.
 ! application ! string ! <optional> !         ! Other application to reference to. Default is current application.
-! type        ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! type        ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute or websocket.
 ! params      ! object ! <optional> !         ! Custom parameters to append to the url.
 !===
 
@@ -898,7 +898,7 @@ Parameters
 !===
 ! Name   ! Type   ! Attributes ! Default ! Description
 ! path   ! string !            !         ! Path of the resource.
-! type   ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! type   ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute or websocket.
 ! params ! object ! <optional> !         ! Custom parameters to append to the url.
 !===
 
