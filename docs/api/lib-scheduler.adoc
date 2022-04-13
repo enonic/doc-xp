@@ -63,7 +63,7 @@ Example
 
 .Obtains details of a scheduled job:
 ```js
-var job = schedulerLib.get('myjob');
+var job = schedulerLib.get({ name: 'myjob' });
 
 if (job) {
   log.info('Job is found: ' + JSON.stringify(job));
