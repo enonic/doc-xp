@@ -9,7 +9,7 @@ include::.variables.adoc[]
 
 <<storage/dsl#_dsl, Query DSL>> can now be used instead of NoQL for content and node searches.
 It also supports <<storage/dsl#_boosting, boosting>> of any expressions.
-Soring can also be done with <<storage/dsl#sort, Sort DSL>> syntax.
+Sorting can also be done with <<storage/dsl#sort, Sort DSL>> syntax.
 
 === Applications and Security Audit Log
 
@@ -19,13 +19,12 @@ and global <<auditLogs#_principals_and_id_providers, Application>> actions.
 == Content-Security-Policy
 
 Default Content-Security-Policy (CSP) header is now applied for page preview.
-It improves Content Studio security but may introduce issues for pages which use inline scripts:
-inline scripts cannot be easily distinguishable from XSS attacks and must be avoided.
-If you are experiencing problems with CSP header you can configure or disable it in <<deployment/config#_admin, Admin config>>
+It improves Content Studio security but may introduce issues for pages which use inline scripts: inline scripts cannot be easily distinguished from XSS attacks and must be avoided.
+If you are experiencing problems with CSP header you can configure or disable it in <<deployment/config#_admin, Admin config>>.
 Controllers can provide their own CSP, if needed.
 
-Attachment and Image Services now have Content-Security-Policy header with strict CSP to mitigate possible XSS vulnerabilities.
-It can be configured in <<deployment/config#_portal, Portal config>>
+Attachment and Image Services now have a strict Content-Security-Policy header to mitigate possible XSS vulnerabilities.
+It can be configured in <<deployment/config#_portal, Portal config>>.
 
 == Default security headers
 
@@ -36,7 +35,7 @@ X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 ```
 
-As before they can be customized in <<deployment/config#_header_filter, header filter config>> or turned off completely.
+As before, they can be customized in <<deployment/config#_header_filter, header filter config>> or turned off completely.
 Controllers can override them, if needed.
 
 === Other improvements
