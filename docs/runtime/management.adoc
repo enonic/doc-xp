@@ -1087,7 +1087,7 @@ NOTE: Read about authorization <<#authorization, here>>
 
 |`ageThreshold`
 |String
-|Age of data to be removed. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours.
+|Age of data to be removed. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Default is defined by `ageThreshold` property in <<../deployment/config#vacuum, Vacuum config file>>
 
 |`tasks`
 |String[]
