@@ -83,6 +83,49 @@ contentLib.addAttachment({
 });
 ```
 
+=== archive
+image:xp-780.svg[XP 7.8.0,opts=inline]
+
+Archive a content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| сontent | string | Path or id of the content to be archived
+|===
+
+[.lead]
+Returns
+
+*string[]* : List with ids of the contents that were archived
+
+[.lead]
+Examples
+```js
+
+// Archive content by path.
+var result1 = contentLib.archive({
+content: '/path/to/mycontent',
+});
+
+log.info('Archived content ids: ' + result1.join(''));
+
+// Archive content by id.
+var result2 = contentLib.archive({
+content: 'my-content-id'
+});
+
+log.info('Archived content ids: ' + result2.join(','));
+
+```
+
 === create
 
 This function creates a content.
@@ -1121,99 +1164,6 @@ try {
 }
 ```
 
-== archive
-image:xp-780.svg[XP 7.8.0,opts=inline]
-
-Archive a content
-
-[.lead]
-*Parameters:*
-
-An object with the following keys and their values:
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| сontent | string | Path or id of the content to be archived
-|===
-
-[.lead]
-Returns
-
-*string[]* : List with ids of the contents that were archived
-
-[.lead]
-Examples
-```js
-
-// Archive content by path.
-var result1 = contentLib.archive({
-content: '/path/to/mycontent',
-});
-
-log.info('Archived content ids: ' + result1.join(''));
-
-// Archive content by id.
-var result2 = contentLib.archive({
-content: 'my-content-id'
-});
-
-log.info('Archived content ids: ' + result2.join(','));
-
-```
-
-== restore
-image:xp-780.svg[XP 7.8.0,opts=inline]
-
-Restore a content from the archive
-
-[.lead]
-*Parameters:*
-
-An object with the following keys and their values:
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Description
-| content | string | Path or id of the content to be restored
-| path | string | Path of parent for restored content
-|===
-
-[.lead]
-Returns
-
-*string[]* : List with ids of the contents that were restored
-
-[.lead]
-Examples
-```js
-// Restore content by path.
-var result1 = contentLib.restore({
-    content: '/path/to/mycontent',
-});
-
-log.info('Restored content ids: ' + result1.join(','));
-
-// Restore content by id.
-var result2 = contentLib.restore({
-    content: 'my-content-id'
-});
-
-log.info('Restored content ids: ' + result2.join(','));
-
-// Restore content by id to custom path.
-var result3 = contentLib.restore({
-    content: 'my-content-id',
-    path: '/custom-parent'
-});
-
-log.info('Restored content ids: ' + result3.join(','));
-```
-
 === publish
 
 This function publishes content to a branch
@@ -1588,7 +1538,6 @@ contentLib.removeAttachment({key: '/mySite/mycontent', name: 'document'});
 contentLib.removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document', 'image']});
 ```
 
-
 === resetInheritance
 image:xp-760.svg[XP 7.6.0,opts=inline]
 
@@ -1623,6 +1572,56 @@ contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', 
 ```js
 // Resets custom sorting of inherited item '/mySite/mycontent' in the layer 'layer-no', but preserves any other changes
 contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['SORT']});
+```
+
+=== restore
+image:xp-780.svg[XP 7.8.0,opts=inline]
+
+Restore a content from the archive
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| content | string | Path or id of the content to be restored
+| path | string | Path of parent for restored content
+|===
+
+[.lead]
+Returns
+
+*string[]* : List with ids of the contents that were restored
+
+[.lead]
+Examples
+```js
+// Restore content by path.
+var result1 = contentLib.restore({
+    content: '/path/to/mycontent',
+});
+
+log.info('Restored content ids: ' + result1.join(','));
+
+// Restore content by id.
+var result2 = contentLib.restore({
+    content: 'my-content-id'
+});
+
+log.info('Restored content ids: ' + result2.join(','));
+
+// Restore content by id to custom path.
+var result3 = contentLib.restore({
+    content: 'my-content-id',
+    path: '/custom-parent'
+});
+
+log.info('Restored content ids: ' + result3.join(','));
 ```
 
 === setPermissions
