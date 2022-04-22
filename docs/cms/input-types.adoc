@@ -361,6 +361,11 @@ An offset consists of: a plus or minus sign, followed by an integer, followed by
 An offset can also be the string ``now``, which means current date.
 ====
 
+If `<default>` value is set for an input, the Date picker will display "*Set default*" button for setting the default value with one click.
+
+image::Date-selector-default.png[Date selector with default value, 500]
+
+
 == DateTime
 
 A simple field for dates with time.  A pop-up box with a calendar and time selector allows easy editing.
@@ -409,6 +414,8 @@ An offset consists of: a plus or minus sign, followed by an integer, followed by
 
 An offset can also be the string ``now``, which means current date and time.
 ====
+
+If `<default>` value is set for an input, the Date/Time picker will display "*Set default*" button for setting the default value with one click.
 
 Examples:
 
@@ -793,6 +800,8 @@ An offset consists of: a plus or minus sign, followed by an integer, followed by
 
 An offset can also be the string ``now``, which means current date and time.
 ====
+
+If `<default>` value is set for an input, the Time picker will display "*Set default*" button for setting the default value with one click.
 
 Examples:
 
