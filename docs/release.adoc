@@ -13,20 +13,20 @@ Sorting can also be done with <<storage/dsl#sort, Sort DSL>> syntax.
 
 === Applications and Security Audit Log
 
-<<auditLogs#_audit_logs, Audit Log>> now logs <<auditLogs#_principals_and_id_providers, Principals and ID providers>> modifications
-and global <<auditLogs#_principals_and_id_providers, Application>> actions.
+<<auditLogs#_audit_logs, Audit Log>> now logs <<auditLogs#principals_and_id_providers, Principals and ID providers>> modifications
+and global <<auditLogs#application, Application>> actions.
 
-== Content-Security-Policy
+=== Content-Security-Policy
 
 Default Content-Security-Policy (CSP) header is now applied for page preview.
 It improves Content Studio security but may introduce issues for pages which use inline scripts: inline scripts cannot be easily distinguished from XSS attacks and must be avoided.
-If you are experiencing problems with CSP header you can configure or disable it in <<deployment/config#_admin, Admin config>>.
+If you are experiencing problems with CSP header you can configure or disable it in <<deployment/config#admin, Admin config>>.
 Controllers can provide their own CSP, if needed.
 
 Attachment and Image Services now have a strict Content-Security-Policy header to mitigate possible XSS vulnerabilities.
-It can be configured in <<deployment/config#_portal, Portal config>>.
+It can be configured in <<deployment/config#portal, Portal config>>.
 
-== Default security headers
+=== Default security headers
 
 All http responses now have the following headers set:
 ```
@@ -35,12 +35,12 @@ X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 ```
 
-As before, they can be customized in <<deployment/config#_header_filter, header filter config>> or turned off completely.
+As before, they can be customized in <<deployment/config#header_filter, header filter config>> or turned off completely.
 Controllers can override them, if needed.
 
 === Other improvements
 
-* <<api/lib-portal#_portal_library, Portal lib API>> can now construct websocket URIs with `serviceUrl` and `url` methods.
+* <<api/lib-portal#, Portal lib API>> can now construct websocket URIs with `serviceUrl` and `url` methods.
 * Testing API `com.enonic.xp:testing` now supports `assertThrows` method.
 
 == XP7 Update 8
