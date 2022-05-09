@@ -531,7 +531,7 @@ NOTE: Stemming is language-dependent, so <<indexing#languages,language>> must be
 .special expression fields:
 
 field/fields:: Comma-separated list of <<propertyPath, propertyPaths>> to include in the search.
-Only `_alltext` field is currently indexed for stemming by default.
+Only `_allText` field is currently indexed for stemming by default.
 
 language:: Content language that was used for stemming.
 List of <<indexing#languages, supported languages>>
@@ -543,7 +543,7 @@ List of <<indexing#languages, supported languages>>
 ----
 {
   "stemmed": {
-    "field": "_alltext",
+    "field": "_allText",
     "query": "fish boat",
     "language": "en"
   }
