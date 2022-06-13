@@ -17,7 +17,7 @@ Define a file called `styles.xml` in the `site` folder of your app.
 
 Each `image` field inside the root element declares a custom style for an `<img>` element, with corresponding `name` and style properties inside.
 
-./site/styles.xml
+./resources/site/styles.xml
 [source,xml]
 ----
 include::code/styles.xml[]
@@ -32,7 +32,7 @@ Define a file called `styles.css` inside `resources/assets` folder. It has to ma
 in `styles.xml`. So, in case of `css="styles/styles.css"` the file has to be located at `resources/assets/styles/styles.css`.
 
 
-./site/styles.css
+./resources/assets/styles/styles.css
 [source,css]
 ----
 include::code/styles.css[]
