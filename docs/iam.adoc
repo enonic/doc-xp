@@ -86,34 +86,36 @@ Users with the *Administrator* role have full access to all content and admin to
 **Administration Console Login**
 Users with this role can log in to the administration console. These users will also require a role for each of the admin tools that the users need access to.
 
-*Content Manager App*
+*Content Manager Administrator*
 
-This role allows users to access Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project root.
+This role allows full access to Content Studio, including ability to create and delete content projects.
 
 *Content Manager Expert*
 
-This role is similar to *Content Manager App* but can also access and modify source code inside HTML area and text components on pages.
+This role gives members ability to view and modify source code in the rich text editor.
 
-*Content Manager Administrator*
+*Content Manager App*
 
-This role allows full access to Content Studio, as well as being able to change content permissions.
+Give users to access to the legacy `default` project in Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project.
+
+NOTE: As of v7.3, XP supports creation of custom content projects. These offer project-specific roles that automatically provide access to both Content Studio and the project itself.
 
 *Users App*
 
-This role allows view-only access to the Users admin tool.
+Provides view-only access to the Users admin tool.
 
 *Users Administrator*
 
-This role allows full access to the Users admin tool, including create/edit/delete for Id providers, users, roles, and groups.
+Grants full access to the Users admin tool, including create/edit/delete for Id providers, users, roles, and groups.
 
 *Authenticated*
 
-Users automatically have this role when they are logged into the system in any way.
+Users automatically get this role when they are logged into the platform, regardless of IDprovider.
 
 *Everyone*
 
-This is a special role that any user/site visitor - authenticated or not - will always have.
-This role is typically used to grant read permissions to publicly available content.
+A special role that both authenticated users, and visitors (Anonymous user) all have in common.
+The role is for instance used to grant read permissions to publicly available content projects.
 
 NOTE:
 If you are using <<cms/projects#, Content Projects>>, your project will have a set of <<cms/projects#roles, project-specific roles>> in addition to the built-in ones.
