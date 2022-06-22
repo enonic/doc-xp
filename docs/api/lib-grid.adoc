@@ -3,9 +3,9 @@
 :toc: right
 :imagesdir: ../images
 
-image:xp-710.svg[XP 7.10.0,opts=inline] This library contains functions to share data across all applications and cluster nodes.
+image:xp-710.svg[XP 7.10.0,opts=inline] This library contains functions that enable sharing data across all applications and cluster nodes.
 
-NOTE: Due to distributed nature of the `SharedMap` not all value types can be used. Strings, numbers, and pure JSON objects are supported. There is no runtime check for type compatibility due to performance reasons. The developer is also responsible for NOT modifying shared objects (keys and values) in place.
+NOTE: Due to distributed nature of `SharedMap` not all value types can be used. Strings, numbers, and pure JSON objects are supported. There is no runtime check for type compatibility due to performance reasons. Developer are themselves responsible for NOT modifying shared objects (keys and values) in place.
 
 == Usage
 
@@ -25,13 +25,13 @@ In your JavaScript controller, add a `require` statement:
 const gridLib = require('/lib/xp/grid');
 ----
 
-You are now free to use the library functionality.
+You are now ready to use the library functionality.
 
 == Functions
 
 === getMap
 
-This function returns an instance of `SharedMap` by the specified map identifier.
+This function returns an instance of `SharedMap` for the specified map identifier.
 
 [.lead]
 Parameters
@@ -57,7 +57,7 @@ const gridLib = require('/lib/xp/grid');
 var sharedMap = gridLib.getMap('mapId');
 ----
 
-== Below are available functions for the `SharedMap` type.
+== Below are available functions for the SharedMap API.
 
 === set
 
@@ -71,9 +71,9 @@ Parameters
 [grid="none"]
 |===
 | Name  | Kind   | Description
-| key   | string | key of the entry
-| value | string\|number\|boolean\|JSON\|null | value of the entry
-| ttlSeconds  | number | maximum time to live in seconds for this entry to stay in the map. (0 means infinite, negative means map config default or infinite if map config is not available)
+| key   | string | Key of the entry
+| value | string\|number\|boolean\|JSON\|null | Value of the entry
+| ttlSeconds | number    | Maximum time (in seconds) for this entry to remain in the map. 0 means infinite, a negative value means default TTL setting of the map provider (for instance, Hazelcast) or infinite if map provider doesn't have own TTL setting.
 |===
 
 [source,js]
@@ -92,7 +92,7 @@ sharedMap.set({
 
 === get
 
-Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+Returns a value to which the specified key is mapped, or null if this map contains no mapping for the key.
 
 [.lead]
 Parameters
@@ -102,7 +102,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind   | Description
-| key  | string | key the key whose associated value is to be returned
+| key  | string | The key for a value to be returned
 |===
 
 [source,js]
@@ -116,7 +116,7 @@ let value = sharedMap.get('key');
 
 === delete
 
-Removes the mapping for the key from this map if it is present.
+Removes entry for the specified key if it is present in the map.
 
 [.lead]
 Parameters
@@ -126,7 +126,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind   | Description
-| key  | string | the key whose associated value is to be removed
+| key  | string | The key for a value to be removed
 |===
 
 [source,js]
@@ -151,8 +151,8 @@ Parameters
 |===
 | Name       | Kind      | Description
 | key        | string    | Key of the entry.
-| func       | function  | Mapping function that accepts the existing mapped value (or null, if there is no associated mapping). The returned value replaces the existing mapped value for the specified key. If the returned value is null then the value is removed from the map.
-| ttlSeconds | number    | Maximum time to live in seconds for this entry to stay in the map. (0 means infinite, negative means map config default or infinite if map config is not available).
+| func       | function  | Mapping function that accepts the existing mapped value (or null, if there is no associated mapping). A value returned by the function will replace the existing mapped value for the specified key. If the returned value is null then the entry will be removed from the map.
+| ttlSeconds | number    | Maximum time (in seconds) for this entry to remain in the map. 0 means infinite, a negative value means default TTL setting of the map provider (for instance, Hazelcast) or infinite if map provider doesn't have own TTL setting.
 |===
 
 [source,js]
