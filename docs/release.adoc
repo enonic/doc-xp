@@ -3,6 +3,20 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP7 Update 10
+
+=== Shared Map
+
+Shared Map framework is now part of XP.
+Shared Map сan be used to share transient data between nodes in cluster and/or applications.
+Both <<api/lib-grid#_grid_library, JavaScript>> and Java APIs are available.
+
+=== Other improvements
+
+* XP distro is now bundled with GraalVM Community Edition based JDK (v.22.1). JavaScript Engine is still Nashorn.
+* Introduced _experimental_ support of arm64 (aarch64) based CPUs. (For instance, Apple M1 CPU)
+* Content related descriptors expose `modifiedTime` field to check for content schema changes.
+
 == XP7 Update 9
 
 === Query DSL

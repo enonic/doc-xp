@@ -1,0 +1,171 @@
+= Grid Library
+
+:toc: right
+:imagesdir: ../images
+
+image:xp-710.svg[XP 7.10.0,opts=inline] This library contains functions that enable sharing data across all applications and cluster nodes.
+
+NOTE: Due to distributed nature of `SharedMap` not all value types can be used. Strings, numbers, and pure JSON objects are supported. There is no runtime check for type compatibility due to performance reasons. Developer are themselves responsible for NOT modifying shared objects (keys and values) in place.
+
+== Usage
+
+Add the following dependency to your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include "com.enonic.xp:lib-grid:${xpVersion}"
+}
+----
+
+In your JavaScript controller, add a `require` statement:
+
+[source,js]
+----
+const gridLib = require('/lib/xp/grid');
+----
+
+You are now ready to use the library functionality.
+
+== Functions
+
+=== getMap
+
+This function returns an instance of `SharedMap` for the specified map identifier.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind   | Description
+| key  | string | map identifier
+|===
+
+[.lead]
+Returns
+
+*SharedMap* :
+JS object.
+
+[source,js]
+----
+const gridLib = require('/lib/xp/grid');
+
+var sharedMap = gridLib.getMap('mapId');
+----
+
+== Below are available functions for the SharedMap API.
+
+=== set
+
+Puts an entry into this map with a given time to live (TTL).
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name  | Kind   | Description
+| key   | string | Key of the entry
+| value | string\|number\|boolean\|JSON\|null | Value of the entry
+| ttlSeconds | number    | Maximum time (in seconds) for this entry to remain in the map. 0 means infinite, a negative value means default TTL setting of the map provider (for instance, Hazelcast) or infinite if map provider doesn't have own TTL setting.
+|===
+
+[source,js]
+----
+const gridLib = require('/lib/xp/grid');
+
+const sharedMap = gridLib.getMap('mapId');
+
+sharedMap.set({
+  key: 'key',
+  value: 'value',
+  ttlSeconds: 2 * 60 * 1000
+});
+----
+
+
+=== get
+
+Returns a value to which the specified key is mapped, or null if this map contains no mapping for the key.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind   | Description
+| key  | string | The key for a value to be returned
+|===
+
+[source,js]
+----
+const gridLib = require('/lib/xp/grid');
+
+const sharedMap = gridLib.getMap('mapId');
+
+let value = sharedMap.get('key');
+----
+
+=== delete
+
+Removes entry for the specified key if it is present in the map.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind   | Description
+| key  | string | The key for a value to be removed
+|===
+
+[source,js]
+----
+const gridLib = require('/lib/xp/grid');
+
+const sharedMap = gridLib.getMap('mapId');
+
+sharedMap.delete('key');
+----
+
+=== modify
+
+Attempts to compute a mapping for the specified key and its current mapped value.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name       | Kind      | Description
+| key        | string    | Key of the entry.
+| func       | function  | Mapping function that accepts the existing mapped value (or null, if there is no associated mapping). A value returned by the function will replace the existing mapped value for the specified key. If the returned value is null then the entry will be removed from the map.
+| ttlSeconds | number    | Maximum time (in seconds) for this entry to remain in the map. 0 means infinite, a negative value means default TTL setting of the map provider (for instance, Hazelcast) or infinite if map provider doesn't have own TTL setting.
+|===
+
+[source,js]
+----
+const gridLib = require('/lib/xp/grid');
+
+const sharedMap = gridLib.getMap('mapId');
+
+let newValue = sharedMap.modify({
+  key: 'key',
+  func: function (oldValue) {
+      return oldValue + 1;
+  },
+  ttlSeconds: 2 * 60 * 1000
+});
+----
