@@ -45,6 +45,16 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market. 
 We generally always recommend updating your apps to the latest version!
 
+== v7.10 notes
+
+* XP now bundled with GraalVM based JDK.
+We do not support running XP on other JDK except for the one bundled in distributive.
+Note that JavaScript Engine is still Nashorn.
+
+* Experimental support of arm64 (aarch64) based CPUs is added.
+You may see a WARNING message on XP startup `java.lang.UnsatisfiedLinkError: Can’t load library ...`. It does not affect XP operations and can be ignored.
+
+
 == v7.9 notes
 
 * <<deployment/config#_portal, Portal config>> now specifies default `Content-Security-Policy` for attachments and images.
