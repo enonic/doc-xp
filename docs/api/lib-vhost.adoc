@@ -1,0 +1,116 @@
+= Virtual Host Library
+:toc: right
+:imagesdir: ../images
+
+NOTE: This library has been introduced in XP 7.6.0.
+
+This library contains functions for retrieving information about existing virtual host mappings.
+
+== Usage
+
+Add the following dependency to your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include "com.enonic.xp:lib-vhost:${xpVersion}"
+}
+----
+
+In your JavaScript controller, add a `require` statement:
+
+[source,js]
+----
+const vhostLib = require('/lib/xp/vhost');
+----
+
+== Functions
+
+=== isEnabled
+
+Returns value which is set for the `enabled` property in the `com.enonic.xp.web.vhost.cfg` file.
+
+[.lead]
+Returns
+
+*Boolean* : Returns `true` if vhost mapping is enabled, otherwise `false`.
+
+[.lead]
+Example
+
+[source,js]
+----
+const vhostLib = require('/lib/xp/vhost');
+
+const isEnabled = vhostLib.isEnabled();
+----
+
+=== list
+
+Returns list of vhost mappings which are specified in the `com.enonic.xp.web.vhost.cfg` file.
+
+[.lead]
+Returns
+
+*Object* : Returns an object with  `vhosts` array.
+
+
+[.lead]
+Example
+
+[source,js]
+----
+const vhostLib = require('/lib/xp/vhost');
+
+const vhostMappings = vhostLib.list();
+
+const vhosts = vhostMappings.vhosts;
+----
+
+For instance, if the `com.enonic.xp.web.vhost.cfg` file contains the following mapping:
+
+[source,properties]
+----
+mapping.admin.host = localhost
+mapping.admin.source = /admin
+mapping.admin.target = /admin
+mapping.admin.idProvider.system = default
+
+mapping.admintool.host = localhost
+mapping.admintool.source = /admin
+mapping.admintool.target = /admin
+mapping.admintool.idProvider.system = default
+----
+
+.Sample response
+[source,JSON]
+----
+{
+  "vhosts": [
+    {
+      "name": "admin",
+      "source": "/admin",
+      "target": "/admin",
+      "host": "localhost",
+      "defaultIdProviderKey": "system",
+      "idProviderKeys": [
+        {
+          "idProviderKey": "system"
+        }
+      ]
+    },
+    {
+      "name": "admintool",
+      "source": "/admin",
+      "target": "/admin",
+      "host": "localhost",
+      "defaultIdProviderKey": "system",
+      "idProviderKeys": [
+        {
+          "idProviderKey": "system"
+        }
+      ]
+    }
+  ]
+}
+----
