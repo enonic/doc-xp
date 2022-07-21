@@ -13,6 +13,10 @@ A filter _only_ removes nodes from the result - and is executed after the query 
 
 As such, filters are the most efficient way of limiting hits when you only need basic comparison statements.
 
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+NOTE: Filters can be used together with <<dsl#_filter, query filtering>>.
+
 
 === Syntax
 

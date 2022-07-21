@@ -679,6 +679,37 @@ All expressions in the mustNot must evaluate to false for nodes to match.
 }
 
 ----
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+===== filter
+All expressions must evaluate to true to include a node in the result (similar to <<#_must>>), but they will not affect the score for matching nodes.
+
+.'date_field' must be greater that the specified date and 'displayName' must start with 'my'
+[source,json]
+----
+{
+  "boolean": {
+    "filter": [
+      {
+        "range": {
+          "field": "date_field",
+          "type": "dateTime",
+          "gt": "2017-09-11T09:00:00Z"
+        }
+      },
+      {
+        "like": {
+          "field": "displayName",
+          "value": "my*"
+        }
+      }
+    ]
+  }
+}
+----
+
+NOTE: query filtering can be used together with separate <<filters#, filters>>.
+
 
 === Boosting
 
