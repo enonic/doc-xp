@@ -242,7 +242,7 @@ We can now use the Page Editor drag and drop interface to drag components into o
 [#layout]
 == Layout
 
-Layouts - like page components a made up from a descriptor and a controller. 
+Layouts - like page components a made up from a descriptor and a controller.
 
 
 === Descriptor
@@ -331,14 +331,14 @@ Like pages and layouts, parts needs a descriptor. The descriptor file must be pl
 <part>
   <display-name>Content List</display-name>
   <form />
-</layout>
+</part>
 ----
 
 TIP: In addition to the standard configuration options, Content Studio supports https://developer.enonic.com/docs/content-studio/stable/editor/component-types#part_component[custom filter definitions] that limit which content items the part may be placed on.
 
 === Controller
 
-Just like pages and layouts, parts will need a controller in order to render properly. 
+Just like pages and layouts, parts will need a controller in order to render properly.
 
 The controller file must be placed within the component structure as follows /resources/site/parts/[part-name]/[part-name].js.
 
@@ -349,8 +349,8 @@ IMPORTANT: Markup generated for a part must have a single root element.
 === Custom icon
 image:xp-720.svg[XP 7.2.0,opts=inline]
 
-It's possible to define a custom icon for part which then will be used instead of the default one in the Page Component tree and dropdowns with part descriptors. 
-Simply place an icon (in either PNG or SVG format) with the same name as the descriptor schema into the same folder. 
+It's possible to define a custom icon for part which then will be used instead of the default one in the Page Component tree and dropdowns with part descriptors.
+Simply place an icon (in either PNG or SVG format) with the same name as the descriptor schema into the same folder.
 For example, if folder/part is called _mypart_ then part descriptor is called _mypart.xml_ and the icon file should be called either _mypart.svg_ or _mypart.png_.
 In the screenshots below parts "_HTML Area Example_" and "_Image filters test_" are using custom icons.
 
@@ -375,12 +375,12 @@ image::text-component.png[Component list, 1305px]
 
 Fragments are essentially components stored as individual content.
 When a fragment is altered, the change is instantly visible on every page that uses it.
-This also adds a range of new possibilities when creating pages, such as time based publishing and permission control. 
+This also adds a range of new possibilities when creating pages, such as time based publishing and permission control.
 
 
 === Creating fragments
 
-Fragments are essentially component instances that can be re-used across pages. A fragment can be created from any component on a given page. 
+Fragments are essentially component instances that can be re-used across pages. A fragment can be created from any component on a given page.
 
 A fragment is saved as a separate content instance, which means it can be managed and published like any other content item.
 
