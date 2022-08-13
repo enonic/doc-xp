@@ -1,0 +1,1458 @@
+= Dynamic schema library
+:toc: right
+:imagesdir: ../images
+
+Functions to fetch and manipulate dynamic schemas.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include "com.enonic.xp:lib-schema:${xpVersion}"
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+```js
+var schemaLib = require('/lib/xp/schema');
+```
+
+You are now free to use the library functionality.
+
+== Functions
+
+=== getSchema
+
+Fetches schema from an application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name      ! Type   !  Description
+! name      ! string !  Schema name
+! type      ! string !  Schema type(`CONTENT_TYPE`, `MIXIN` or `XDATA`)
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#schema,`Schema`>>) Detail information for the fetched schema.
+
+[.lead]
+Example
+
+.Creates a content type schema:
+```js
+var result = schemaLib.getSchema({
+    name: 'myapp:mytype',
+    type: 'CONTENT_TYPE'
+
+});
+```
+.Return value:
+```js
+var expected = {
+  "name": "myapp:mytype",
+  "displayName": "Tag",
+  "displayNameI18nKey": "",
+  "createdTime": "2021-09-25T10:00:00Z",
+  "creator": "user:system:anonymous",
+  "modifiedTime": "2021-09-25T10:00:00Z",
+  "resource" : <!-- resource string value -->,
+  "type": "CONTENT_TYPE",
+  "icon": {
+    "data": {},
+    "mimeType": "image/png",
+    "modifiedTime": "2016-01-01T12:00:00Z"
+  },
+  "form": [
+    {
+      "formItemType": "Input",
+      "name": "tag",
+      "label": "Tag, unlimited occurrences",
+      "maximize": true,
+      "inputType": "Tag",
+      "occurrences": {
+        "maximum": 0,
+        "minimum": 0
+      },
+      "config": {}
+    }
+  ],
+  "config": {}
+};
+```
+
+=== createSchema
+
+Creates dynamic schema in virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name      ! Type   !  Description
+! name      ! string !  Dynamic schema name
+! type      ! string !  Dynamic schema type(`CONTENT_TYPE`,`MIXIN` or `XDATA`)
+! resource  ! string !  Dynamic schema resource value
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#schema,`Schema`>>) Detail information for the created dynamic schema.
+
+[.lead]
+Example
+
+.Creates a content type schema:
+```js
+var resource = `<?xml version='1.0' encoding='UTF-8'?>
+                <content-type xmlns='urn:enonic:xp:model:1.0'>
+               <display-name>Tag</display-name>
+               <super-type>base:structured</super-type>
+               <form>
+                 <input name="tag" type="Tag">
+                   <label>Tag, unlimited occurrences</label>
+                   <occurrences minimum="0"
+                    maximum="0"/>
+                 </input>
+               </form>
+              </content-type>`;
+
+var result = schemaLib.createSchema({
+    name: 'myapp:mytype',
+    type: 'CONTENT_TYPE',
+    resource
+
+});
+```
+.Return value:
+```js
+var expected = {
+  "name": "myapp:mytype",
+  "displayName": "Tag",
+  "displayNameI18nKey": "",
+  "createdTime": "2021-09-25T10:00:00Z",
+  "creator": "user:system:anonymous",
+  "modifiedTime": "2021-09-25T10:00:00Z",
+  "resource" : <!-- resource string value -->,
+  "type": "CONTENT_TYPE",
+  "icon": {
+    "data": {},
+    "mimeType": "image/png",
+    "modifiedTime": "2016-01-01T12:00:00Z"
+  },
+  "form": [
+    {
+      "formItemType": "Input",
+      "name": "tag",
+      "label": "Tag, unlimited occurrences",
+      "maximize": true,
+      "inputType": "Tag",
+      "occurrences": {
+        "maximum": 0,
+        "minimum": 0
+      },
+      "config": {}
+    }
+  ],
+  "config": {}
+};
+```
+
+=== updateSchema
+
+Updates dynamic schema in virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name      ! Type   !  Description
+! name      ! string !  Dynamic schema name
+! type      ! string !  Dynamic schema type(`CONTENT_TYPE`,`MIXIN` or `XDATA`)
+! resource  ! string !  Dynamic schema resource value
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#schema,`Schema`>>) Detail information for the modified dynamic schema.
+
+[.lead]
+Example
+
+.Updates a mixin schema:
+```js
+let resource = `<?xml version='1.0' encoding='UTF-8'?>
+       <mixin xmlns='urn:enonic:xp:model:1.0'>
+          <display-name>Virtual Mixin</display-name>
+          <description>Mixin description</description>
+          <form>
+            <input type='TextLine' name='text2'>
+              <label>Text 2</label>
+            </input>
+
+            <mixin name='myapplication:inline'/>
+          </form>
+        </mixin>`;
+
+var result = schemaLib.createSchema({
+    name: 'myapp:mytype',
+    type: 'MIXIN',
+    resource
+
+});
+```
+.Return value:
+```js
+var expected = {
+    name: 'myapp:mytype',
+    displayName: 'Virtual Mixin',
+    displayNameI18nKey: '',
+    description: 'Mixin description',
+    descriptionI18nKey: '',
+    createdTime: '2021-09-25T10:00:00Z',
+    modifiedTime: '2021-09-25T10:00:00Z',
+    resource: <!-- resource string value -->,
+    type: 'MIXIN',
+    form: [
+        {
+            'formItemType': 'Input',
+            'name': 'text2',
+            'label': 'Text 2',
+            'maximize': true,
+            'inputType': 'TextLine',
+            'occurrences': {
+                'maximum': 1,
+                'minimum': 0
+            },
+            'config': {}
+        },
+        {
+            'formItemType': 'InlineMixin',
+            'name': 'myapplication:inline'
+        }
+    ]
+};
+```
+
+=== deleteSchema
+
+Removes dynamic schema from virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name      ! Type   !  Description
+! name      ! string !  Dynamic schema name
+! type      ! string !  Dynamic schema type(`CONTENT_TYPE`,`MIXIN` or `XDATA`)
+!===
+
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if the deletion was successful.
+
+[.lead]
+Example
+
+.Updates a mixin schema:
+```js
+var result = schemaLib.deleteSchema({
+    name: 'myapp:mytype',
+    type: 'XDATA'
+});
+
+if (result) {
+    log.info('Deleted x-data: [myapp:mytype]');
+} else {
+    log.info('X-data deletion failed: [myapp:mytype]');
+}
+```
+
+=== getComponent
+
+Fetches component from an application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name      ! Type   !  Description
+! key       ! string !  Component key
+! type      ! string !  Component type(`PAGE`, `PART` or `LAYOUT`)
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#component,`Component`>>) Detail information for the fetched component.
+
+[.lead]
+Example
+
+.Fetches a page component:
+```js
+var result = schemaLib.getComponent({
+    key: 'myapp:mypage',
+    type: 'PAGE'
+
+});
+```
+.Return value:
+```js
+var expected = {
+    key: 'myapp:mypage',
+    displayName: 'News page',
+    description: 'My news page',
+    descriptionI18nKey: 'key.description',
+    componentPath: 'myapp:/site/pages/mypage',
+    modifiedTime: '2021-02-25T10:44:33.170079900Z',
+    resource: '<page><some-data></some-data></page>',
+    type: 'PAGE',
+    form: [
+        {
+            'formItemType': 'Input',
+            'name': 'width',
+            'label': 'width',
+            'maximize': true,
+            'inputType': 'Double',
+            'occurrences': {
+                'maximum': 1,
+                'minimum': 0
+            },
+            'config': {}
+        }
+    ],
+    config: {},
+    regions: [
+        'region-one'
+    ]
+};
+```
+
+=== createComponent
+
+Creates dynamic component in virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name      ! Type   !  Description
+! key       ! string !  Dynamic component key
+! type      ! string !  Dynamic schema type(`PAGE`, `PART` or `LAYOUT`)
+! resource  ! string !  Dynamic component resource value
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#component,`Component`>>) Detail information for the created dynamic component.
+
+[.lead]
+Example
+
+.Creates a part type component:
+```js
+var resource = `<?xml version='1.0' encoding='UTF-8'?>
+                <content-type xmlns='urn:enonic:xp:model:1.0'>
+               <display-name>Tag</display-name>
+               <super-type>base:structured</super-type>
+               <form>
+                 <input name="tag" type="Tag">
+                   <label>Tag, unlimited occurrences</label>
+                   <occurrences minimum="0"
+                    maximum="0"/>
+                 </input>
+               </form>
+              </content-type>`;
+
+var result = schemaLib.createComponent({
+    key: 'myapp:mypart',
+    type: 'PART',
+    resource
+});
+```
+.Return value:
+```js
+var expected = {
+    key: 'myapp:mypart',
+    displayName: 'Virtual Part',
+    displayNameI18nKey: 'key.display-name',
+    description: 'My Part Description',
+    descriptionI18nKey: 'key.description',
+    componentPath: 'myapp:/site/parts/mypart',
+    modifiedTime: '2021-09-25T10:00:00Z',
+    resource: <!-- resource string value -->,
+    type: 'PART',
+    form: [
+        {
+            'formItemType': 'Input',
+            'name': 'width',
+            'label': 'Column width',
+            'helpText': 'key.help-text',
+            'maximize': true,
+            'inputType': 'Double',
+            'occurrences': {
+                'maximum': 1,
+                'minimum': 0
+            },
+            'config': {}
+        },
+        {
+            'formItemType': 'InlineMixin',
+            'name': 'myapplication:link-urls'
+        }
+    ],
+
+    config: {
+        'input': [{
+            'value': '', '@name': 'width', '@type': 'Double'
+        }]
+    }
+};
+```
+
+=== updateComponent
+
+Updates dynamic component in virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name      ! Type   !  Description
+! key       ! string !  Dynamic component key
+! type      ! string !  Dynamic component type(`PAGE`, `PART` or `LAYOUT`)
+! resource  ! string !  Dynamic component resource value
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#component,`Component`>>) Detail information for the modified dynamic component.
+
+[.lead]
+Example
+
+.Updates a layout component:
+```js
+let resource = `<?xml version='1.0' encoding='UTF-8'?>
+                <layout xmlns='urn:enonic:xp:model:1.0'>
+                  <display-name i18n='key.display-name'>Virtual Layout</display-name>
+                  <description i18n='key.description'>My Layout Description</description>
+                  <form>
+                    <input type='Double' name='pause'>
+                      <label i18n='key1.label'>Pause parameter</label>
+                      <immutable>false</immutable>
+                      <indexed>false</indexed>
+                      <help-text i18n='key1.help-text'/>
+                      <occurrences minimum='0' maximum='1'/>
+                    </input>
+                    <item-set name='myFormItemSet'>
+                      <label>My form item set</label>
+                      <immutable>false</immutable>
+                      <occurrences minimum='0' maximum='1'/>
+                      <items>
+                        <input type='TextLine' name='myTextLine'>
+                          <label>My text line</label>
+                          <immutable>false</immutable>
+                          <indexed>false</indexed>
+                          <occurrences minimum='1' maximum='1'/>
+                        </input>
+                        <input type='TextLine' name='myCustomInput'>
+                          <label>My custom input</label>
+                          <immutable>false</immutable>
+                          <indexed>false</indexed>
+                          <occurrences minimum='0' maximum='1'/>
+                        </input>
+                      </items>
+                    </item-set>
+                  </form>
+                  <regions>
+                    <region name='header'/>
+                    <region name='main'/>
+                    <region name='footer'/>
+                  </regions>
+                </layout>
+                `;
+
+var result = schemaLib.updateComponent({
+    key: 'myapp:mylayout',
+    type: 'LAYOUT',
+    resource
+});
+```
+.Return value:
+```js
+var expected = {
+    key: 'myapp:mylayout',
+    displayName: 'Virtual Layout',
+    displayNameI18nKey: 'key.display-name',
+    description: 'My Layout Description',
+    descriptionI18nKey: 'key.description',
+    componentPath: 'myapp:/site/layouts/mylayout',
+    modifiedTime: '2021-09-25T10:00:00Z',
+    resource: <!-- resource string value -->,
+    type: 'LAYOUT',
+    form: [
+        {
+            'formItemType': 'Input',
+            'name': 'pause',
+            'label': 'Pause parameter',
+            'helpText': 'key1.help-text',
+            'maximize': true,
+            'inputType': 'Double',
+            'occurrences': {
+                'maximum': 1,
+                'minimum': 0
+            },
+            'config': {}
+        },
+        {
+            'formItemType': 'ItemSet',
+            'name': 'myFormItemSet',
+            'label': 'My form item set',
+            'occurrences': {
+                'maximum': 1,
+                'minimum': 0
+            },
+            'items': [
+                {
+                    'formItemType': 'Input',
+                    'name': 'myTextLine',
+                    'label': 'My text line',
+                    'maximize': true,
+                    'inputType': 'TextLine',
+                    'occurrences': {
+                        'maximum': 1,
+                        'minimum': 1
+                    },
+                    'config': {}
+                },
+                {
+                    'formItemType': 'Input',
+                    'name': 'myCustomInput',
+                    'label': 'My custom input',
+                    'maximize': true,
+                    'inputType': 'TextLine',
+                    'occurrences': {
+                        'maximum': 1,
+                        'minimum': 0
+                    },
+                    'config': {}
+                }
+            ]
+        }
+    ],
+    config: {},
+    regions: [
+        'header',
+        'main',
+        'footer'
+    ]
+};
+```
+
+=== deleteComponent
+
+Removes dynamic component from virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name      ! Type   !  Description
+! key       ! string !  Dynamic component key
+! type      ! string !  Dynamic component type(`PAGE`, `PART` or `LAYOUT`)
+!===
+
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if the deletion was successful.
+
+[.lead]
+Example
+
+.Removes a layout component:
+```js
+var result = schemaLib.deleteComponent({
+    key: 'myapp:mylayout',
+    type: 'LAYOUT'
+});
+
+if (result) {
+    log.info('Deleted layout: [myapp:mylayout]');
+} else {
+    log.info('Layout deletion failed: [myapp:mylayout]');
+}
+```
+
+=== getStyles
+
+Fetch styles from an application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name              ! Type   !  Description
+! application       ! string !  Application key
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#styles,`Styles`>>) Detail information for the fetched styles.
+
+[.lead]
+Example
+
+.Fetch application styles:
+```js
+var result = schemaLib.getStyles({
+    application: 'myapp'
+});
+```
+.Return value:
+```js
+var expected = {
+    application: 'myapp',
+    cssPath: 'assets/styles.css',
+    modifiedTime: '2021-02-25T10:44:33.170079900Z',
+    resource: '<styles><some-data></some-data></styles>',
+    elements: [
+        {
+            element: 'style',
+            displayName: 'Style display name',
+            name: 'mystyle'
+        }
+    ]
+};
+```
+
+=== createStyles
+
+Create styles in virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name              ! Type   !  Description
+! application       ! string !  Virtual application key
+! resource          ! string !  Dynamic styles resource value
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#styles,`Styles`>>) Detail information for the created dynamic styles.
+
+[.lead]
+Example
+
+.Creates application styles:
+```js
+var resource = '<?xml version="1.0" encoding="UTF-8"?>' +
+               '<styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0">' +
+               '<style name="warning">' +
+               '<display-name i18n="warning.displayName">Warning</display-name>' +
+               '</style>' +
+               '<image name="editor-width-auto">' +
+               '<display-name i18n="editor-width-auto-text">Override ${width}</display-name>' +
+               '</image>' +
+               '<image name="editor-style-cinema">' +
+               '<display-name i18n="editor-style-cinema-text">Cinema</display-name>' +
+               '<aspect-ratio>21:9</aspect-ratio>' +
+               '<filter>pixelate(10)</filter>' +
+               '</image>' +
+               '</styles>';
+
+var result = schemaLib.createStyles({
+    application: 'myapp',
+    resource
+});
+```
+.Return value:
+```js
+var expected =
+    application: 'myapp',
+    cssPath: 'assets/styles.css',
+    modifiedTime: '2021-09-25T10:00:00Z',
+    resource: <!-- resource string value -->,
+    elements: [
+        {
+            element: 'style',
+            displayName: 'Warning',
+            name: 'warning'
+        },
+        {
+            element: 'image',
+            displayName: 'Override ${width}',
+            name: 'editor-width-auto'
+        },
+        {
+            element: 'image',
+            displayName: 'Cinema',
+            name: 'editor-style-cinema'
+        }
+    ]
+};
+```
+
+=== updateStyles
+
+Updates dynamic styles in virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name              ! Type   !  Description
+! application       ! string !  Dynamic application key
+! resource          ! string !  Dynamic styles resource value
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#styles,`Styles`>>) Detail information for the modified styles.
+
+[.lead]
+Example
+
+.Updates application styles:
+```js
+let resource = '<?xml version="1.0" encoding="UTF-8"?>' +
+               '<styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0">' +
+               '<style name="warning">' +
+               '<display-name i18n="warning.displayName">Warning</display-name>' +
+               '</style>' +
+               '<image name="editor-width-auto">' +
+               '<display-name i18n="editor-width-auto-text">Override ${width}</display-name>' +
+               '</image>' +
+               '<image name="editor-style-cinema">' +
+               '<display-name i18n="editor-style-cinema-text">Cinema</display-name>' +
+               '<aspect-ratio>21:9</aspect-ratio>' +
+               '<filter>pixelate(10)</filter>' +
+               '</image>' +
+               '</styles>';
+
+var result = schemaLib.updateStyles({
+    application: 'myapp',
+    resource
+});
+```
+.Return value:
+```js
+var expected = {
+    application: 'myapp',
+    cssPath: 'assets/styles.css',
+    modifiedTime: '2021-09-25T10:00:00Z',
+    resource: <!-- resource string value -->,
+    elements: [
+        {
+            element: 'style',
+            displayName: 'Warning',
+            name: 'warning'
+        },
+        {
+            element: 'image',
+            displayName: 'Override ${width}',
+            name: 'editor-width-auto'
+        },
+        {
+            element: 'image',
+            displayName: 'Cinema',
+            name: 'editor-style-cinema'
+        }
+    ]
+};
+```
+
+=== deleteStyles
+
+Removes dynamic styles from virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name              ! Type   !  Description
+! application       ! string !  Dynamic application key
+!===
+
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if the deletion was successful.
+
+[.lead]
+Example
+
+.Removes an application styles:
+```js
+var result = schemaLib.deleteStyles({
+    application: 'myapp'
+});
+
+if (result) {
+    log.info('Styles were deleted: [myapp]');
+} else {
+    log.info('Styles deletion failed: [myapp]');
+}
+```
+
+=== getSite
+
+Fetch site descriptor from an application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name              ! Type   !  Description
+! application       ! string !  Application key
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#site,`Site`>>) Detail information for fetched site descriptor.
+
+[.lead]
+Example
+
+.Fetch application site descriptor:
+```js
+var result = schemaLib.getSite({
+    application: 'myapp'
+});
+```
+.Return value:
+```js
+var expected = {
+    application: 'myapp',
+    resource: <!-- resource string value -->,
+    modifiedTime: '2021-02-25T10:44:33.170079900Z',
+    form: [
+        {
+            'formItemType': 'Input',
+            'name': 'input',
+            'label': 'Input',
+            'maximize': true,
+            'inputType': 'Double',
+            'occurrences': {
+                'maximum': 1,
+                'minimum': 0
+            },
+            'config': {}
+        }
+    ],
+    xDataMappings: [
+        {
+            'name': 'myapplication:my',
+            'optional': false
+        }
+    ]
+};
+```
+
+=== updateSite
+
+Updates dynamic site descriptor in virtual application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name              ! Type   !  Description
+! application       ! string !  Dynamic application key
+! resource          ! string !  Dynamic site descriptor resource value
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#site,`Site`>>) Detail information for the modified site descriptor.
+
+[.lead]
+Example
+
+.Updates application site descriptor:
+```js
+let resource = `<?xml version='1.0' encoding='UTF-8'?>
+                <site xmlns='urn:enonic:xp:model:1.0'>
+                  <x-data name='myapp1:menu-item'/>
+                  <x-data name='myapp2:my-meta-mixin'/>
+                  <form>
+                    <input type='TextLine' name='some-name'>
+                      <label>Textline</label>
+                      <immutable>false</immutable>
+                      <indexed>false</indexed>
+                      <custom-text/>
+                      <help-text/>
+                      <occurrences minimum='0' maximum='1'/>
+                    </input>
+                  </form>
+                  <processors>
+                    <response-processor name='filter1' order='10'/>
+                    <response-processor name='filter2' order='20'/>
+                  </processors>
+                  <mappings>
+                    <mapping controller='/site/page/person/person.js' order='10'>
+                      <pattern>/person/*</pattern>
+                    </mapping>
+                    <mapping controller='controller1.js'>
+                      <match>_path:'/*/fisk'</match>
+                    </mapping>
+                    <mapping controller='controller2.js' order='5'>
+                      <pattern invert='true'>/.*</pattern>
+                      <match>type:'portal:fragment'</match>
+                    </mapping>
+                  </mappings>
+                </site>`;
+
+var result = schemaLib.updateSite({
+    application: 'myapp',
+    resource
+});
+```
+.Return value:
+```js
+var expected = {
+    application: 'myapp',
+    modifiedTime: '2021-09-25T10:00:00Z',
+    resource: <!-- resource string value -->,
+    form: [
+        {
+            'formItemType': 'Input',
+            'name': 'some-name',
+            'label': 'Textline',
+            'customText': '',
+            'maximize': true,
+            'inputType': 'TextLine',
+            'occurrences': {
+                'maximum': 1,
+                'minimum': 0
+            },
+            'config': {}
+        }
+    ],
+    xDataMappings: [
+        {
+            'name': 'myapp1:menu-item',
+            'optional': false,
+            'allowContentTypes': ''
+        },
+        {
+            'name': 'myapp2:my-meta-mixin',
+            'optional': false,
+            'allowContentTypes': ''
+        }
+    ]
+};
+```
+
+
+
+
+
+
+
+
+
+
+== Type Definitions
+
+=== Schema
+[[schema]]
+(abstract for <<#content_type,ContentType>>, <<#mixin,Mixin>> and <<#xdata,XData>>)
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type               | Description
+| name                      | string             | Component name
+| displayName               | string             | Display name
+| displayNameI18nKey        | string             | Display name i18n key
+| description               | string             | Schema description
+| descriptionI18nKey        | string             | Schema description i18n key
+| createdTime               | string             | Created zulu time
+| creator                   | string             | Creator principal key
+| modifiedTime              | string             | Modified zulu time
+| modifier                  | string             | Modifier principal key
+| resource                  | string             | Schema resource value
+| type                      | string             | Schema type(`CONTENT_TYPE`, `MIXIN`, `XDATA`)
+| form                      | object[]           | Schema form
+| icon                      | <<#icon,`Icon`>>   | Schema icon
+
+
+
+|===
+
+=== ContentType
+[[content_type]]
+(extends <<#schema,`Schema`>>)
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type                      | Description
+| config                    | object                    | Content type config
+| xDataNames                | string[]                  | Form x-data names
+
+|===
+
+=== Mixin
+[[mixin]]
+(extends <<#schema,`Schema`>>)
+
+[.lead]
+Type
+
+*object*
+
+=== XData
+[[xdata]]
+(extends <<#schema,`Schema`>>)
+
+[.lead]
+Type
+
+*object*
+
+=== Component
+[[component]]
+(abstract for <<#page,Page>>, <<#part,Part>> and <<#layout,Layout>>)
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type    | Description
+| key                       | string  | Component key
+| displayName               | string  | Display name
+| displayNameI18nKey        | string  | Display name i18n key
+| description               | string  | Component description
+| descriptionI18nKey        | string  | Component description i18n key
+| componentPath             | string  | Component path
+| modifiedTime              | string  | Modified zulu time
+| resource                  | string  | Component resource value
+| type                      | string  | Component type(`PAGE`, `PART`, `LAYOUT`)
+| form                      | object[]| Component form
+| config                    | object  | Component config
+
+|===
+
+=== Page
+[[page]]
+(extends <<#component,`Component`>>)
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type                      | Description
+| regions                   | string[]                  | Page regions
+
+|===
+
+=== Layout
+[[layout]]
+(extends <<#component,`Component`>>)
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type                      | Description
+| regions                   | string[]                  | Layout regions
+
+|===
+
+=== Part
+[[part]]
+(extends <<#component,`Component`>>)
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type                      | Description
+| icon                      | <<#icon,`Icon`>>          | Part icon
+
+|===
+
+=== Site
+[[site]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type                              | Description
+| application               | string                            | Application key
+| modifiedTime              | string                            | Site zulu modified time
+| resource                  | string                            | Site xml resource value
+| form                      | object[]                          | Site descriptor form
+| xDataMappings             | <<#xDataMapping,`XDataMapping[]`>>| XData mappings
+
+|===
+
+=== Styles
+[[styles]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type                              | Description
+| application               | string                            | Application key
+| cssPath                   | string                            | CSS path
+| modifiedTime              | string                            | Styles zulu modified time
+| resource                  | string                            | Styles xml resource value
+| elements                  | <<#element,`StyleElement[]`>>     | style elements
+
+|===
+
+=== XDataMapping
+[[xDataMapping]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                   | Type    | Description
+| name                   | object  | xdata name
+| optional               | boolean | `true` if optional
+| allowContentTypes      | string  | allowed content type pattern
+
+|===
+
+=== StyleElement
+[[element]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type    | Description
+| name                      | object  | Style element name
+| displayName               | object  | Style element display name
+| element                   | object  | Style element value
+
+|===
+
+=== Icon
+[[icon]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type    | Description
+| data                      | object  | icon stream data
+| mimeType                  | string  | icon mime type
+| modifiedTime              | string  | icon modified time
+
+|===
+
+
+

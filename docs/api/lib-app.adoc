@@ -1,0 +1,441 @@
+= Application library
+:toc: right
+:imagesdir: ../images
+
+Functions to fetch and manipulate applications.
+
+== Usage
+
+Add the following into your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+  include "com.enonic.xp:lib-app:${xpVersion}"
+}
+----
+
+In your JavaScript controller, add a require statement:
+
+```js
+var appLib = require('/lib/xp/app');
+```
+
+You are now free to use the library functionality.
+
+== Functions
+
+=== get
+
+Returns installed application. If both local and virtual apps are installed with specified key, then local will be in the result.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name  ! Type   !  Description
+! key  ! string !  Application key
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#Application,`Application`>>) Detail information for the application. Or null if the application could not be found.
+
+[.lead]
+Example
+
+.Obtains details for an application:
+```js
+var application = appLib.get('my-app-key');
+
+if (application) {
+  log.info('Application name = %s', application.displayName);
+} else {
+  log.info('Application not found');
+}
+```
+.Return value:
+```js
+var expected = {
+    'key': 'my-app',
+    'displayName': 'app display name',
+    'vendorName': 'vendor name',
+    'vendorUrl': 'https://vendor.url',
+    'url': 'https://myapp.url',
+    'version': '1.0.0',
+    'systemVersion': '4.2.3-SNAPSHOT',
+    'minSystemVersion': '2.0.0',
+    'maxSystemVersion': '3.0.0',
+    'modifiedTime': '2020-09-25T10:00:00Z',
+    'started': true,
+    'system': false
+};
+```
+
+=== list
+
+Fetches all installed applications. If both local and virtual apps are installed with the same key, then local will be in the result.
+
+[.lead]
+Returns
+
+*object[]* : (<<#Application,`Application[]`>>) Detail information for the applications. Or an empty list if there are no installed applications.
+
+[.lead]
+Example
+
+.Fetching all applications:
+```js
+var apps = appLib.list();
+```
+.Return value:
+```js
+var expected = [
+    {
+        'key': 'app1',
+        'displayName': 'app display name',
+        'vendorName': 'vendor name',
+        'vendorUrl': 'https://vendor.url',
+        'url': 'https://myapp.url',
+        'version': '1.0.0',
+        'systemVersion': '1.21.3',
+        'minSystemVersion': '2.0.0',
+        'maxSystemVersion': '3.0.0',
+        'modifiedTime': '2020-09-25T10:00:00Z',
+        'started': true,
+        'system': false
+    },
+    {
+        'key': 'app2',
+        'displayName': 'app display name 2',
+        'vendorName': 'vendor name 2',
+        'vendorUrl': 'https://vendor2.url',
+        'url': 'https://myapp2.url',
+        'version': '4.1.2',
+        'systemVersion': '1.2.33-SNAPSHOT',
+        'minSystemVersion': '5.3.11',
+        'maxSystemVersion': '3.0.6',
+        'modifiedTime': '2021-09-25T10:00:00Z',
+        'started': false,
+        'system': true
+    }
+];
+```
+
+=== getDescriptor
+
+Returns the descriptor of the installed application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name  ! Type   !  Description
+! key   ! string  !  Application key
+!===
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#ApplicationDescriptor,`ApplicationDescriptor`>>) Application descriptor.
+
+[.lead]
+Example
+
+.Fetches application descriptor:
+```js
+var descriptor = appLib.getDescriptor('my-app-key');
+```
+
+.Return value:
+```js
+var expected = {
+    'key': 'my-app',
+    'description': 'my app description',
+    'icon': {
+        'data': {},
+        'mimeType': 'image/png',
+        'modifiedTime': '2021-12-03T10:15:30Z'
+    }
+};
+```
+
+=== createVirtualApplication
+
+Creates a virtual application with the specified key together with schema repositories nodes inside it.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with params
+
+[%header,cols="1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name   ! Type   ! Description
+! key    ! string ! Application key
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object* : (<<#Application,`Application`>>) Information for the created application.
+
+[.lead]
+Example
+
+.removes an app with `my-app-key` key:
+```js
+var app = appLib.createVirtualApplication({
+    'key':'my-app-key',
+    'displayName':'my-app-key',
+    'version':'0.0.0',
+    'systemVersion':'7.11.0',
+    'minSystemVersion':'7.11.0',
+    'maxSystemVersion':'7.11.0',
+    'modifiedTime':'2022-08-11T11:34:47.949533Z',
+    'started':true,
+    'system':false
+});
+```
+
+=== deleteVirtualApplication
+
+Removes a virtual application with the specified key.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with params
+
+[%header,cols="1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name   ! Type   ! Description
+! key    ! string ! Application key
+!===
+
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if succeed and `false` otherwise.
+
+[.lead]
+Example
+
+.removes an app with `my-app-key` key:
+```js
+var result = appLib.deleteVirtualApplication({
+    'key':'my-app-key'
+});
+```
+
+=== hasVirtual
+
+Checks if there is virtual application with the specified key.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with params
+
+[%header,cols="1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name   ! Type   ! Description
+! key    ! string ! Application key
+!===
+
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if the virtual application exists and `false` otherwise.
+
+[.lead]
+Example
+
+.checks if there is a virtual app with `my-app-key` key:
+```js
+var result = appLib.hasVirtual({
+    'key':'my-app-key'
+});
+```
+
+
+=== hasReal
+
+Checks if there is local installed application with the specified key.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with params
+
+[%header,cols="1%,1%,97%a", options="header"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name   ! Type   ! Description
+! key    ! string ! Application key
+!===
+
+|===
+
+[.lead]
+Returns
+
+*boolean* : `true` if the real application exists and `false` otherwise.
+
+[.lead]
+Example
+
+.checks if there is a real app with `my-app-key` key:
+```js
+var result = appLib.hasReal({
+    'key':'my-app-key'
+});
+```
+
+
+== Type Definitions
+
+=== Application
+[[application]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name               | Type    | Description
+| key                | string  | Application key
+| displayName        | string  | Display name
+| vendorName         | string  | Vendor name
+| vendorUrl          | string  | Vendor url
+| url                | string  | Application url
+| version            | string  | Application version
+| systemVersion      | string  | System version
+| minSystemVersion   | string  | Min system version
+| maxSystemVersion   | string  | Max system version
+| modifiedTime       | object  | Application modified time
+| started            | boolean | `true` the application is started
+| system             | boolean | `true` the application is system
+
+|===
+
+
+=== ApplicationDescriptor
+[[applicationDescriptor]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name               | Type             | Description
+| key                | string           | Application key
+| description        | string           | Application description
+| icon               | <<#icon,`Icon`>> | Application icon
+
+|===
+
+=== Icon
+[[icon]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name                      | Type    | Description
+| data                      | object  | icon stream data
+| mimeType                  | string  | icon mime type
+| modifiedTime              | string  | icon modified time
+
+|===
