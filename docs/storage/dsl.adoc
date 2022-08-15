@@ -367,7 +367,7 @@ Also, a number of minimum matching elements that must match could be set.
 
 ===== matchAll
 
-Matches all documents, giving them all a `_score` of '1.0'.
+Matches all nodes, giving them all a `_score` of '1.0'.
 
 .Expression parameters
 [cols="1,1,1, 2a"]
@@ -397,6 +397,33 @@ Matches all documents, giving them all a `_score` of '1.0'.
     "boost": 2
   }
 }
+----
+
+===== exists
+
+Returns nodes that contain a value for a field.
+
+.Expression parameters
+[cols="1,1,1, 2a"]
+|===
+|Parameter |Type |Required |Description
+
+|field
+|string
+|true
+|name of a field to check on existence.
+
+|===
+
+.Matches all nodes
+[source,json]
+----
+{
+  "exists": {
+    "field": "displayName"
+  }
+}
+
 ----
 
 ==== String expressions
