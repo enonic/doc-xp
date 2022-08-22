@@ -54,7 +54,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#Application,`Application`>>) Detail information for the application. Or null if the application could not be found.
+*object* : (<<#Application,`Application`>>) Detail information for the application. Properties object of an installed application with the specified key, or null if the application could not be found.
 
 [.lead]
 Example
@@ -89,7 +89,7 @@ var expected = {
 
 === list
 
-Fetches all installed applications. If both local and virtual apps are installed with the same key, then local will be in the result.
+Fetches all installed applications. If a local and a virtual app are both installed with the same key, then the local one will take precedence and will be returned in the result.
 
 [.lead]
 Returns
