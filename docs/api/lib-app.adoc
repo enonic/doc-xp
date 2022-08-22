@@ -27,7 +27,7 @@ You are now free to use the library functionality.
 
 === get
 
-Returns installed application. If both local and virtual apps are installed with specified key, then local will be in the result.
+Returns an installed application. If a local and a virtual app are both installed with the specified key, then the local one will take precedence and will be returned in the result.
 
 [.lead]
 Parameters
