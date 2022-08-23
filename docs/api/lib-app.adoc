@@ -390,7 +390,7 @@ Properties
 | minSystemVersion   | string  | Min system version
 | maxSystemVersion   | string  | Max system version
 | modifiedTime       | object  | Application modified time
-| started            | boolean | `true` the application is started
+| started            | boolean | `true` the application is started. Virtual applications are always started
 | system             | boolean | `true` the application is system
 
 |===
