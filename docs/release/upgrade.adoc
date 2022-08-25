@@ -45,6 +45,17 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market. 
 We generally always recommend updating your apps to the latest version!
 
+== v7.11 notes
+
+WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (Hazelcast) has been updated in this release.
+A full restart is required in order to prevent loss of data or state.
+
+* Virtual application schemas may now override schema present in any installed (real) application.
+To prevent virtual applications from overriding use config
+
+* OSGi Compendium r8 is now provided as API dependency for Java Core API. (Component, Component Annotations and CM only)
+This may cause some compilation errors when XP application dependency version is bumped, but should not affect existing applications in runtime.
+
 == v7.10 notes
 
 * XP now bundled with GraalVM based JDK.
