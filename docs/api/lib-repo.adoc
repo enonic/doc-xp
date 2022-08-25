@@ -6,7 +6,7 @@ Node repository related functions.
 
 == Usage
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -21,7 +21,7 @@ In your JavaScript controller, add a require statement:
 var repoLib  = require('/lib/xp/repo');
 ```
 
-You are now free to use the library functionality.
+You are now ready to use the library functionality.
 
 == Events
 
@@ -29,7 +29,7 @@ Usage of this API produces the following events:
 
 .Distributed events
 |===
-|Event |Occurs when 
+|Event |Occurs when
 
 |repository.created
 |repository is created

@@ -2,11 +2,11 @@
 :toc: right
 :imagesdir: ../images
 
-Functions to fetch and manipulate applications.
+image:xp-7110.svg[XP 7.11.0,opts=inline] API for fetching and manipulating applications.
 
 == Usage
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -21,7 +21,7 @@ In your JavaScript controller, add a require statement:
 var appLib = require('/lib/xp/app');
 ```
 
-You are now free to use the library functionality.
+You are now ready to use the library functionality.
 
 == Functions
 

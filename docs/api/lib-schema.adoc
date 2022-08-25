@@ -2,11 +2,11 @@
 :toc: right
 :imagesdir: ../images
 
-Functions to fetch and manipulate dynamic schemas.
+image:xp-7110.svg[XP 7.11.0,opts=inline] API for fetching and manipulating dynamic schemas.
 
 == Usage
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -21,13 +21,13 @@ In your JavaScript controller, add a require statement:
 var schemaLib = require('/lib/xp/schema');
 ```
 
-You are now free to use the library functionality.
+You are now ready to use the library functionality.
 
 == Functions
 
 === getSchema
 
-Fetches schema from an application.
+Fetches a schema from an application.
 
 [.lead]
 Parameters
@@ -55,7 +55,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#schema,`Schema`>>) Detail information for the fetched schema.
+*object* : (<<#schema,`Schema`>>) Properties object of the fetched schema.
 
 [.lead]
 Example
@@ -104,7 +104,7 @@ var expected = {
 
 === createSchema
 
-Creates dynamic schema in virtual application.
+Creates a dynamic schema in a virtual application.
 
 [.lead]
 Parameters
@@ -133,7 +133,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#schema,`Schema`>>) Detail information for the created dynamic schema.
+*object* : (<<#schema,`Schema`>>) Properties object of the created dynamic schema.
 
 [.lead]
 Example
@@ -196,7 +196,7 @@ var expected = {
 
 === updateSchema
 
-Updates dynamic schema in virtual application.
+Updates a dynamic schema in a virtual application.
 
 [.lead]
 Parameters
@@ -225,7 +225,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#schema,`Schema`>>) Detail information for the modified dynamic schema.
+*object* : (<<#schema,`Schema`>>) Properties object for the modified dynamic schema.
 
 [.lead]
 Example
@@ -315,7 +315,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : `true` if the deletion was successful.
+*boolean* : `true` if deletion was successful.
 
 [.lead]
 Example
@@ -336,7 +336,7 @@ if (result) {
 
 === getComponent
 
-Fetches component from an application.
+Fetches a component from an application.
 
 [.lead]
 Parameters
@@ -364,7 +364,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#component,`Component`>>) Detail information for the fetched component.
+*object* : (<<#component,`Component`>>) Properties object of the fetched component.
 
 [.lead]
 Example
@@ -411,7 +411,7 @@ var expected = {
 
 === createComponent
 
-Creates dynamic component in virtual application.
+Creates a dynamic component in a virtual application.
 
 [.lead]
 Parameters
@@ -440,7 +440,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#component,`Component`>>) Detail information for the created dynamic component.
+*object* : (<<#component,`Component`>>) Properties object of the created dynamic component.
 
 [.lead]
 Example
@@ -508,7 +508,7 @@ var expected = {
 
 === updateComponent
 
-Updates dynamic component in virtual application.
+Updates a dynamic component in a virtual application.
 
 [.lead]
 Parameters
@@ -537,7 +537,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#component,`Component`>>) Detail information for the modified dynamic component.
+*object* : (<<#component,`Component`>>) Properties object of the modified dynamic component.
 
 [.lead]
 Example
@@ -663,7 +663,7 @@ var expected = {
 
 === deleteComponent
 
-Removes dynamic component from virtual application.
+Deletes a dynamic component from a virtual application.
 
 [.lead]
 Parameters
@@ -691,7 +691,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : `true` if the deletion was successful.
+*boolean* : `true` if deletion was successful.
 
 [.lead]
 Example
@@ -739,7 +739,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#styles,`Styles`>>) Detail information for the fetched styles.
+*object* : (<<#styles,`Styles`>>) Properties object of the fetched styles.
 
 [.lead]
 Example
@@ -797,7 +797,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#styles,`Styles`>>) Detail information for the created dynamic styles.
+*object* : (<<#styles,`Styles`>>) Properties object of the created dynamic styles.
 
 [.lead]
 Example
@@ -853,7 +853,7 @@ var expected =
 
 === updateStyles
 
-Updates dynamic styles in virtual application.
+Updates styles in a virtual application.
 
 [.lead]
 Parameters
@@ -937,7 +937,7 @@ var expected = {
 
 === deleteStyles
 
-Removes dynamic styles from a virtual application.
+Deletes dynamic styles from a virtual application.
 
 [.lead]
 Parameters
@@ -964,7 +964,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : `true` if the deletion was successful.
+*boolean* : `true` if deletion was successful.
 
 [.lead]
 Example
@@ -1081,7 +1081,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#site,`Site`>>) Detail information for the modified site descriptor.
+*object* : (<<#site,`Site`>>) Properties object of the modified site descriptor.
 
 [.lead]
 Example
@@ -1160,15 +1160,6 @@ var expected = {
     ]
 };
 ```
-
-
-
-
-
-
-
-
-
 
 == Type Definitions
 
