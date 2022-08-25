@@ -21,10 +21,13 @@ They are code-less and can only contribute to schema definitions.
 * Virtual and real applications can now be configured on a project level.
 This allows custom content types to be used in a root of the project.
 
+
+Virtual application behavior can be configured in <<deployment/config#_application, application config>>
+
 === Query DSL improvements
 
-* `exists` expression support
-* `filter` clause support in `boolean` query
+* <<storage/dsl#_exists, `exists`>> expression support
+* <<storage/dsl#_filter, `filter`>> clause support in `boolean` query
 
 === Other improvements
 
