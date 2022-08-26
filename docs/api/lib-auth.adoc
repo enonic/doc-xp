@@ -479,10 +479,11 @@ var result = authLib.getMemberships('user:system:user1');
 .Sample response
 [source,js]
 ----
-[
-    "role:system.admin.login",
-    "group:system:content-managers"
-]
+[{
+    "type": "role",
+    "key": "role:system.admin",
+    "displayName":"Administrator"
+}]
 ----
 
 .Searching for transitive memberships of 'user1'
