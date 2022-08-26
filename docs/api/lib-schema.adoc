@@ -60,7 +60,7 @@ Returns
 [.lead]
 Example
 
-.Creates a content type schema:
+.Fetches a content type schema:
 ```js
 var result = schemaLib.getSchema({
     name: 'myapp:mytype',
