@@ -102,6 +102,103 @@ var expected = {
 };
 ```
 
+=== listSchemas
+
+Fetches schemas of a particular type from an application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name             ! Type   !  Description
+! application      ! string !  Application key
+! type             ! string !  Schema type(`CONTENT_TYPE`, `MIXIN` or `XDATA`)
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object[]* : (<<#schema,`Schema[]`>>) Properties object of the fetched schemas.
+
+[.lead]
+Example
+
+.Fetches application's content type schemas:
+```js
+var result = schemaLib.listSchemas({
+    application: 'myapp',
+    type: 'CONTENT_TYPE'
+
+});
+```
+.Return value:
+```js
+var expected = {
+        name: 'myapp:type1',
+        displayName: 'My type display name',
+        description: 'My type description',
+        modifiedTime: '2010-01-01T10:00:00Z',
+        resource: '<content-type><some-data></some-data></content-type>',
+        type: 'CONTENT_TYPE',
+        form: [
+            {
+                'formItemType': 'Layout',
+                'name': 'myLayout',
+                'label': 'My layout',
+                'items': [
+                    {
+                        'formItemType': 'ItemSet',
+                        'name': 'mySet',
+                        'occurrences': {
+                            'maximum': 1,
+                            'minimum': 1
+                        },
+                        'items': [
+                            {
+                                'formItemType': 'Input',
+                                'name': 'myInput',
+                                'label': 'Input',
+                                'maximize': true,
+                                'inputType': 'TextLine',
+                                'occurrences': {
+                                    'maximum': 1,
+                                    'minimum': 0
+                                },
+                                'config': {}
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        config: {}
+    },
+    {
+        name: 'myapp:type2',
+        displayName: 'My type display name 2',
+        description: 'My type description 2',
+        modifiedTime: '2012-01-01T10:00:00Z',
+        resource: '<content-type><some-other-data></some-other-data></content-type>',
+        type: 'CONTENT_TYPE',
+        form: [],
+        config: {}
+    };
+```
+
 === createSchema
 
 Creates a dynamic schema in a virtual application.
@@ -407,6 +504,90 @@ var expected = {
         'region-one'
     ]
 };
+```
+
+=== listComponents
+
+Fetches components of particular type from an application.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name   | Type   | Description
+| params | object | JSON with parameters
+
+[%header,cols="1%,1%,97%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name              ! Type   !  Description
+! application       ! string !  Application key
+! type              ! string !  Component type(`PAGE`, `PART` or `LAYOUT`)
+!===
+
+|===
+
+[.lead]
+Returns
+
+*object[]* : (<<#component,`Component[]`>>) Array of properties objects of the fetched components.
+
+[.lead]
+Example
+
+.Fetches application's part components:
+```js
+var result = schemaLib.listComponents({
+    application: 'myapp',
+    type: 'PART'
+
+});
+```
+.Return value:
+```js
+var expected = [
+    {
+        key: 'myapp:part1',
+        displayName: 'News part',
+        description: 'My news part',
+        descriptionI18nKey: 'key.description',
+        componentPath: 'myapp:/site/parts/part1',
+        modifiedTime: '2021-02-25T10:44:33.170079900Z',
+        resource: '<part><some-data></some-data></part>',
+        type: 'PART',
+        form: [
+            {
+                'formItemType': 'Input',
+                'name': 'width',
+                'label': 'width',
+                'maximize': true,
+                'inputType': 'Double',
+                'occurrences': {
+                    'maximum': 1,
+                    'minimum': 0
+                },
+                'config': {}
+            }
+        ],
+        config: {}
+    },
+    {
+        key: 'myapp:part2',
+        displayName: 'Other part',
+        componentPath: 'myapp:/site/parts/part2',
+        modifiedTime: '2022-02-25T10:44:33.170079900Z',
+        resource: '<part><some-other-data></some-other-data></part>',
+        type: 'PART',
+        form: [],
+        config: {}
+    }
+];
 ```
 
 === createComponent
