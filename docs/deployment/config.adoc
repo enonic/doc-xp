@@ -849,6 +849,23 @@ Stored application installation is skipped if filter denies it.
 
 NOTE: Filter rules apply separately on different nodes in cluster. If one cluster node denies an app, another cluster node may still allow it.
 
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+virtual.enabled:: Allows the use of virtual applications. Default: `true`.
+virtual.schema.override:: If there is a schema in the virtual application with the same name as in the real one, priority will be given to the scheme from the virtual application. Default: `true`.
+
+.Disables virtual applications.
+[source,properties]
+----
+virtual.enabled = false
+----
+
+.Disables priority of schemas from virtual applications.
+[source,properties]
+----
+virtual.schema.override = false
+----
+
 === Task
 image:xp-760.svg[XP 7.6.0,opts=inline]
 
