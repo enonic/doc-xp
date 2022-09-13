@@ -853,7 +853,7 @@ NOTE: Filter rules apply separately on different nodes in cluster. If one cluste
 
 image:xp-7110.svg[XP 7.11.0,opts=inline]
 
-virtual.enabled:: Allows the use of virtual applications. Default: `true`.
+virtual.enabled:: Allows the use of virtual applications. If set to `true` then schemas from virtual applications will be visible as resources. Default: `true`.
 virtual.schema.override:: When set to `true`, virtual application schemes will have a priority over schemes in a real application with the same name. When set to `false` virtual application schemes have no affect if real application with the same name exists. Default: `true`.
 
 .Disables virtual applications.
