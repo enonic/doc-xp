@@ -474,7 +474,7 @@ NOTE: Only analyzed properties are considered when applying the fulltext functio
 ----
 {
   "fulltext": {
-    "field": "displayName",
+    "fields": "displayName",
     "query": "~apple pork+pie*"
   }
 }
@@ -514,7 +514,7 @@ This includes, by default, all text-based fields in the content domain.
 ----
 {
   "ngram": {
-    "field": "custom.",
+    "fields": "custom.",
     "query": "lev alg",
     "operator": "AND"
   }
