@@ -44,7 +44,7 @@ It can be configured in <<deployment/config#portal, Portal config>>.
 
 All http responses now have the following headers set:
 ```
-X-Frame-Options: SAMEORIGIN
+X-Frame-Options: DENY
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 ```
