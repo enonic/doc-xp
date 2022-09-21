@@ -1006,3 +1006,19 @@ exports.dir = /xp-exports
 ----
 
 exports.dir:: Defines location of exports directory. Default: `${xp.home}/data/export`
+
+=== Binary Extractor
+
+image:xp-720.svg[XP 7.2.0,opts=inline]
+
+`XP_HOME/config/com.enonic.xp.extractor.cfg`
+
+Configure binary extractor service behaviour.
+
+.Sample content config file
+[source,properties]
+----
+body.size.limit = 500000
+----
+
+body.size.limit:: Defines maximum number of characters from a textual media. Default: `500000`
