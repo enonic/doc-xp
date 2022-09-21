@@ -6,7 +6,7 @@ This library contains built-in authentication functions.
 
 TIP: If, when using functions of this library, you are getting authentication errors like "_Access denied to user [unknown]_"
 it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
-In this case you must explicitly execute the function in the <<lib_context#runcontext, context>> of System Administrator role.
+In this case you must explicitly execute the function in the <<lib-context#runcontext, context>> of System Administrator role.
 
 == Usage
 
