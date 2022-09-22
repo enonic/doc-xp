@@ -191,7 +191,7 @@ Parameters
 ! name ! string ! required ! unique job name.
 ! description ! string ! optional ! job description.
 ! descriptor ! string ! required !descriptor of the task to be scheduled.
-! config ! string ! optional !config of the task to be scheduled.
+! config ! object ! optional !config of the task to be scheduled.
 ! schedule ! object ! required ! task time run config.
 ! schedule.value ! string ! required ! schedule value according to its type.
 ! schedule.type ! string ! required ! schedule type (CRON or ONE_TIME).
@@ -431,7 +431,7 @@ Properties
 | name        | string | Job name
 | description | string | Job description
 | descriptor | string | descriptor of the task to be scheduled
-| config | string | config of the task to be scheduled
+| config | object | config of the task to be scheduled
 | schedule | object | task time run config
 
 [%header,cols="1%,1%,98%a", options="header"]
