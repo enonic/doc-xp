@@ -42,7 +42,7 @@ exports.filter = function (req, next) {
 ----
 exports.filter = function (req, next) {
 
-    if (req.headers['X-Auth-Token'] !== 'letMeIn') {
+    if (req.getHeader('X-Auth-Token') !== 'letMeIn') {
         // intercept request pipeline
         return {
             status: 403
@@ -63,7 +63,7 @@ exports.filter = function (req, next) {
             param2: null, // remove param2 from the original request
             param3: [] // another way to remove a parameter
         }
-    }
+    return next(req);
 };
 ----
 
