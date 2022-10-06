@@ -4,6 +4,9 @@
 
 image:xp-7110.svg[XP 7.11.0,opts=inline] API for fetching and manipulating applications.
 
+WARNING: This is an experimental API.
+
+
 == Usage
 
 Add the following to your `build.gradle` file:
@@ -310,13 +313,12 @@ Parameters
 Returns
 
 *string* : Application mode. Can be one of the following types:
+
 * `bundled` - an installed and active application, no virtual app with the same key exists;
 * `virtual` - a "virtual", node-based application, no bundled app with the same key exists;
 * `augmented` - both bundled and virtual application co-exist with the same application key.
 
 NOTE: Installed but disabled bundled applications are considered missing.
-
-WARN: This is an experimental API.
 
 [.lead]
 Example
