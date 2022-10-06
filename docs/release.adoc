@@ -7,8 +7,12 @@ include::.variables.adoc[]
 
 === TypeScript Core libraries
 
-All XP core libraries have been rewritten to TypeScript.
-TypeScript definitions are available on https://www.npmjs.com
+All JavaScript XP core libraries have been rewritten to TypeScript.
+TypeScript definitions are published on https://www.npmjs.com/search?q=%40enonic-types[NPM]
+
+Learn how to include references to TS definitions in your project <<api#typescript_definitions, here>>.
+
+NOTE: Special thanks to Tom Arild Jakobsen for his contribution to TypeScript support in XP.
 
 === Virtual Applications and No-code Schema
 
