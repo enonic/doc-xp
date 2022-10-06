@@ -550,7 +550,7 @@ This includes, by default, all text-based fields in the content domain.
 
 ===== stemmed
 
-The stemmed expression is similar to <<Fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
+The stemmed expression is similar to <<#fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
 E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
 
 NOTE: Stemming is language-dependent, so <<indexing#languages,language>> must be set either on the content or directly in the node indices via indexConfig.
@@ -735,7 +735,7 @@ All expressions must evaluate to true to include a node in the result (similar t
 }
 ----
 
-NOTE: query filtering can be used together with separate <<filters#, filters>>.
+NOTE: Query filtering is a preferable way to filter nodes, however it can be used together with <<filters#_filters, filters>>.
 
 
 === Boosting

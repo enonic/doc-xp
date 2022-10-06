@@ -3,6 +3,45 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP7 Update 11
+
+=== TypeScript Core libraries
+
+All JavaScript XP core libraries have been rewritten to TypeScript.
+TypeScript definitions are published on https://www.npmjs.com/search?q=%40enonic-types[NPM]
+
+Learn how to include references to TS definitions in your project <<api#typescript_definitions, here>>.
+
+NOTE: Special thanks to Tom Arild Jakobsen for his contribution to TypeScript support in XP.
+
+=== Virtual Applications and No-code Schema
+
+WARNING: This feature is _experimental_.
+Its design is not finalized and the feature is available for users to test and provide feedback.
+
+* Virtual Applications can be used as an alternative to installed (real) ones.
+They are code-less and can only contribute to schema definitions.
+
+* Virtual and real applications can now be configured on a project level.
+This allows custom content types to be used in a root of the project.
+
+
+Virtual application behavior can be configured in <<deployment/config#_application, application config>>
+
+=== Query DSL improvements
+
+* <<storage/dsl#_exists, `exists`>> expression support
+* <<storage/dsl#_filter, `filter`>> clause support in `boolean` query
+
+=== Other improvements
+
+* Support content links with query parameters in HtmlArea
+* Various Vacuum performance and stability improvements
+* Migrate to OSGi Compendium 8
+* Query parameters are now supported for content URLs in HtmlArea
+* Content API verifies checksum for attachments and skips update if attachment is not changed
+* Support setting Workflow status on Media update
+
 == XP7 Update 10
 
 === Shared Map
