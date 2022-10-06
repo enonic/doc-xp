@@ -4,6 +4,9 @@
 
 image:xp-7110.svg[XP 7.11.0,opts=inline] API for fetching and manipulating applications.
 
+WARNING: This is an experimental API.
+
+
 == Usage
 
 Add the following to your `build.gradle` file:
@@ -278,51 +281,11 @@ var result = appLib.deleteVirtualApplication({
 });
 ```
 
-=== hasVirtual
+image:xp-7110.svg[XP 7.11.0,opts=inline]
 
-Checks if there is a virtual application with the specified key.
+=== getApplicationMode
 
-[.lead]
-Parameters
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name   | Type   | Description
-| params | object | JSON with params
-
-[%header,cols="1%,1%,97%a", options="header"]
-[frame="topbot"]
-[grid="none"]
-[caption=""]
-.Properties
-!===
-! Name   ! Type   ! Description
-! key    ! string ! Application key
-!===
-
-|===
-
-[.lead]
-Returns
-
-*boolean* : `true` if the virtual application exists and `false` otherwise.
-
-[.lead]
-Example
-
-.checks if there is a virtual app with `my-app-key` key:
-```js
-var result = appLib.hasVirtual({
-    'key':'my-app-key'
-});
-```
-
-
-=== hasReal
-
-Checks if there is local installed application with the specified key.
+Fetches mode of an application with the specified key.
 
 [.lead]
 Parameters
@@ -349,14 +312,20 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : `true` if the real application exists and `false` otherwise.
+*string* : Application mode. Can be one of the following types:
+
+* `bundled` - an installed and active application, no virtual app with the same key exists;
+* `virtual` - a "virtual", node-based application, no bundled app with the same key exists;
+* `augmented` - both bundled and virtual application co-exist with the same application key.
+
+NOTE: Installed but disabled bundled applications are considered missing.
 
 [.lead]
 Example
 
-.checks if there is a real app with `my-app-key` key:
+.fetches mode of an application with `my-app-key` key:
 ```js
-var result = appLib.hasReal({
+var result = appLib.getApplicationMode({
     'key':'my-app-key'
 });
 ```
