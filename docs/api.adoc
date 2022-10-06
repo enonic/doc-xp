@@ -46,10 +46,24 @@ npm i --save-dev @enonic-types/lib-auth
 
 ==== Global
 
-Along with library types it may be useful to install definitions for global objects (`app`, `__`, `log`) and functions (`resolve`, `require`):
+Along with library types it is *higlhy recommended* to install definitions for global objects (`app`, `__`, `log`) and functions (`resolve`, `require`):
 
 ```bash
 npm i --save-dev @enonic-types/global
+```
+
+Since `global` types are not placed under the `node_modules/@types`, it is neccessary to include them manually:
+
+`tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "types": [
+      "@enonic-types/global"
+    ]
+  }
+}
 ```
 
 ==== Core
@@ -102,32 +116,10 @@ type Workflow = Content['workflow'];
 
 === Use
 
-==== tsconfig.json
-
-Add the corresponding types to your `tsconfig.json` file that is used for application's server-side TypeScript code:
-
-```json
-{
-  "compilerOptions": {
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/@enonic-types"
-    ]
-  }
-}
-```
-
-NOTE: Config above assumes that your `tsconfig.json` is placed in your project root.
-
-After that, all the global XP variables will be typed.
-
-Using `"typeRoots"` instead of `"types": [...]` will allow to discover types for any other Enonic library, that will be installed later.
-
-Import functions, such as `require`, will return typed objects if the corresponding types for imported libraries are also added to your `tsconfig.json`.
-
 ==== require
 
-After types are installed and configured in `tsconfig.json`, libraries can be imported just like they would be in JS code:
+After `global` and library types are installed and configured in `tsconfig.json`, libraries can be imported just like they would be in JS code:
+
 ```ts
 const libAuth = require('/lib/xp/auth');
 ```
@@ -138,9 +130,6 @@ If you are planning to use `import` in your code and transpile it with the defau
 ```json
 {
   "compilerOptions": {
-    "types": [
-      "@enonic-types/lib-auth"
-    ]
     "baseUrl": "./",
     "paths": {
       "/lib/xp/auth": ["node_modules/@enonic-types/lib-auth"],
@@ -174,7 +163,7 @@ declare global {
 
 ===== Other imports
 
-If you want to use custom import functions, like `__non_webpack_require__` with Webpack, just use global `XpRequire` type for this:
+If you want to use custom import functions, like `__non_webpack_require__` with Webpack, just use `XpRequire` from `global` types for this:
 
 ```ts
 declare const __non_webpack_require__: XpRequire;
