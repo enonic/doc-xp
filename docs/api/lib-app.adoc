@@ -309,7 +309,10 @@ Parameters
 [.lead]
 Returns
 
-*string* : Application mode. "bundled" - only installed and active application is presented. "virtual" - only virtual, a node-based application is presented. "augmented" - both bundled and virtual application are presented with passed application key.
+*string* : Application mode. Can be one of the following types:
+* `bundled` - an installed and active application, no virtual app with the same key exists;
+* `virtual` - a "virtual", node-based application, no bundled app with the same key exists;
+* `augmented` - both bundled and virtual application co-exist with the same application key.
 
 NOTE: Installed but disabled bundled applications are considered missing.
 
