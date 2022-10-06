@@ -321,7 +321,7 @@ WARN: This is an experimental API.
 [.lead]
 Example
 
-.fetches application mode of an app with `my-app-key` key:
+.fetches mode of an application with `my-app-key` key:
 ```js
 var result = appLib.getApplicationMode({
     'key':'my-app-key'
