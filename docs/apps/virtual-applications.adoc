@@ -1,0 +1,39 @@
+= Virtual Applications
+:toc: right
+:imagesdir: ../images
+
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+Virtual Application allows to extend/override schemas and descriptors from usual bundled application or create separated containers for it. Applications, schemas and descriptors data is stored in nodes in separated `system.app` repository. Use <<../api/lib-app, lib-app>> to manipulate virtual applications.
+
+
+=== Structure
+Virtual application node structure follows bundled applications site's file structure:
+[source,files]
+----
+virtual-app/
+    site/
+      content-types/
+      layouts/
+      mixins/
+      pages/
+      parts/
+      x-data/
+      site.xml
+      styles.xml
+
+----
+Use <<../api/lib-schema, lib-schema>> to manipulate schemas and descriptors of virtual apps.
+
+=== Application Mode
+Depends on app config, xp can work with application resources in different modes:
+
+VIRTUAL::
+    If specified resource is presented in both virtual and bundled app, then virtual will be used.
+BUNDLED::
+    Resources only from bundled applications are used, virtual apps are disabled and its resources are ignored.
+AUGMENTED::
+    If specified resource is presented in both virtual and bundled app, then virtual will be used.
+
+
+Check the <<../deployment/config#application, documentation>> to find how config the mode.

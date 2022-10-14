@@ -528,3 +528,44 @@ var currentPermissions = projectLib.removePermissions({
     }
 }
 ----
+
+=== getAvailableApplications
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+
+Returns available applications of specified project. The result contains active apps specified for the project and all it's parents.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| id | string | Unique project id to identify the project.
+|===
+
+[.lead]
+Returns
+
+*string[]* : Available applications keys.
+
+[.lead]
+Example
+
+.Fetch available applications.
+[source,js]
+----
+var projectLib = require('/lib/xp/project');
+
+var project = projectLib.getAvailableApplications({
+    id: 'my-project'
+});
+----
+
+.Sample response
+[source,JSON]
+----
+['app1', 'app2']
+----

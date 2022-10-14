@@ -1,13 +1,13 @@
 = Content layers
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
+
+image:xp-760.svg[XP 7.6.0,opts=inline]
 
 
 == Introduction
 
 Enriching, translating, localising and reusing content across different channels are among the most complex content management practices to solve. Content layers offer a practical and secure solution to this for both editors and developers. 
-
-NOTE: Content layering support was first introduced in v7.6
 
 == The problem
 Multi-site, multi-region, multi-language and more. Supporting management of content across regions, languages and other channels has been the goal of CMS since its conception. The problems are many and complex:
@@ -25,6 +25,8 @@ Multi-site, multi-region, multi-language and more. Supporting management of cont
 == A layered solution
 
 Layers are essentially <<projects#, content projects>> with a twist. Like regular projects, each layer has it's own repository, permissions and default language. Layers introduce the additional setting of parent project. Layers will automatically inherit content from their parent layer. Multiple layers can collectively form a tree structure, where the root layer itself is a regular project.
+
+:imagesdir: images
 
 image::layers-concept.svg[Tree structure of projects, aka layers, 720]
 
