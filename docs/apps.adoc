@@ -19,13 +19,17 @@ The marketplace also offers starter kits and software libraries that help you cr
 
 == Installation
 
-There are three ways, by default, to get your applications running on Enonic XP:
+There are four ways, by default, to get your applications running on Enonic XP:
 
 Via Admin Interface:: Applications can be manually installed through the admin tool "Applications", packaged with Enonic XP. The applications will be available for all nodes in an XP cluster.
 
 Via Management API:: Applications can be installed, in an automated way, through the Management API. The applications will be available for all nodes in an XP cluster.
 
 Via File system:: File system deployment is most commonly used in development phases, but it can also be applied for specialized deployments scenarios. These applications will only be available on the local node and overrides already existing applications
+
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+Via API:: Virtual applications can be created with <<api/lib-app, applications API>>. They allow to extend/override schemas and descriptors from usual bundled application or create separated containers for it. Priority for virtual applications can be set in <<deployment/config#application, app config>>.
 
 Consider a microservice style highly isolated and controlled deployment,
 you will bundle your app(s) together with the XP runtime and launch it as a separate instance.
@@ -57,6 +61,12 @@ To create an application you need to setup a project.
 Projects contain all code and configuration required to build the application.
 
 For more details, check out the <<apps/projects#, project reference documentation>>.
+
+== Virtual Applications
+
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+For more details, check out the <<apps/virtual-applications#, virtual applications>>.
 
 === Languages
 

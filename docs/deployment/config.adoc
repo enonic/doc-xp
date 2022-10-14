@@ -808,6 +808,7 @@ ageThreshold = P21D
 
 ageThreshold:: Age of data to be vacuumed. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Default: `P21D` (21 days).
 
+[#application]
 === Application
 
 image:xp-760.svg[XP 7.6.0,opts=inline]
