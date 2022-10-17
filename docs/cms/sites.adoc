@@ -6,7 +6,7 @@
 
 A highly central component of the XP CMS are sites.
 Site is shipped as a standard content type, which means it can easily be created and added by editors.
-However, sites have an ability to let you add applications to them. Site applications isolated from <<projects#, projects>> applications and can't be inherited.
+However, sites have an ability to let you add applications to them. Site applications isolated from <<projects#, projects>> applications. If a site needs an application from its project - add the application to the site.
 
 Whenever an app is added to a site, all functionality and all content types from the app will be available within the scope of the site.
 
