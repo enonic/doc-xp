@@ -29,7 +29,7 @@ Via File system:: File system deployment is most commonly used in development ph
 
 image:xp-7110.svg[XP 7.11.0,opts=inline]
 
-Via API:: Virtual applications can be created with <<api/lib-app, applications API>>. They allow to extend/override schemas and descriptors from usual bundled application or create separated containers for it. Priority for virtual applications can be set in <<deployment/config#application, app config>>.
+Via API:: Virtual applications can be created with <<api/lib-app, applications API>>. Virtual application can co-exist with bundled application (`AUGMENTED` mode) or be stand-alone. For more details, check out the <<apps/virtual-applications#, virtual applications>>.
 
 Consider a microservice style highly isolated and controlled deployment,
 you will bundle your app(s) together with the XP runtime and launch it as a separate instance.
