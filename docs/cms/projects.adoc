@@ -41,7 +41,9 @@ An example might be com.enonic.cms.myproject.author.
 === Applications
 image:xp-7110.svg[XP 7.11.0,opts=inline]
 
-Just like with sites, applications can be added to projects. All functionality and all schemas (content types, schemas, mixins) and descriptors (pages, parts, layouts) from the app will be available within the scope of the project down to the site. Sites override project applications. If a site needs an application from its project - add the application to the site.
+Just like with sites, applications can be added to projects. All functionality and all schemas (content types, schemas, mixins) and descriptors (pages, parts, layouts) from an app will be available within the scope of the project down to a site. 
+
+IMPORTANT: Sites override project applications. If a site should use an application already assigned to its project, you must assign the application directly to the site.
 
 <<layers#, Layers>> inherit applications from all parent layers and their base project.
 
