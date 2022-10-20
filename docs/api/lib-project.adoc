@@ -533,7 +533,7 @@ var currentPermissions = projectLib.removePermissions({
 image:xp-7110.svg[XP 7.11.0,opts=inline]
 
 
-Returns available applications of specified project. The result contains active apps specified for the project and all it's parents.
+Returns available applications of a specified project. The result contains active apps assigned to the project and all of its parents, if any.
 
 [.lead]
 Parameters
