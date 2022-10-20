@@ -26,14 +26,16 @@ virtual-app/
 Use <<../api/lib-schema, lib-schema>> to manipulate schemas and descriptors of virtual apps.
 
 === Application Mode
-Depends on app config, xp can work with application resources in different modes:
+Depending on app data and config, the application can work with its resources in different ways:
 
 VIRTUAL::
-    If specified resource is presented in both virtual and bundled app, then virtual will be used.
+Shows that only virtual application is presented in the system and support of virtual apps is enabled.
 BUNDLED::
-    Resources only from bundled applications are used, virtual apps are disabled and its resources are ignored.
+Shows one of the next cases:
+- Only bundled application is presented in the system.
+- Both bundled and virtual applications are presented, but bundled resources override virtual.
+- Both bundled and virtual applications are presented, but virtual app support is disabled.
 AUGMENTED::
-    If specified resource is presented in both virtual and bundled app, then virtual will be used.
+Both bundled and virtual applications are presented in the system and virtual resources override bundled.
 
-
-Check the <<../deployment/config#application, documentation>> to find out how to configure each mode.
+Check the <<../deployment/config#application, documentation>> to find out how to configure application behaviour.
