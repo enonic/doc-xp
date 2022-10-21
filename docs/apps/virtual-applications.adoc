@@ -29,13 +29,13 @@ Use <<../api/lib-schema, lib-schema>> to manipulate schemas and descriptors of v
 Depending on app data and config, the application can work with its resources in different ways:
 
 VIRTUAL::
-Shows that only virtual application is presented in the system and support of virtual apps is enabled.
+Shows that only virtual application is present in the system and support of virtual apps is enabled.
 BUNDLED::
-Shows one of the next cases:
-- Only bundled application is presented in the system.
-- Both bundled and virtual applications are presented, but bundled resources override virtual.
-- Both bundled and virtual applications are presented, but virtual app support is disabled.
+Can be one of the next cases:
+- Only bundled application is present in the system.
+- Both bundled and virtual applications are present, but bundled resources are configured to override virtual.
+- Both bundled and virtual applications are present, but virtual app support is disabled via config.
 AUGMENTED::
-Both bundled and virtual applications are presented in the system and virtual resources override bundled.
+Both bundled and virtual applications are present in the system and virtual resources override bundled.
 
 Check the <<../deployment/config#application, documentation>> to find out how to configure application behaviour.
