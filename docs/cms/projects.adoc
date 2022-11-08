@@ -1,10 +1,9 @@
 = Content projects
 :toc: right
-:imagesdir: images
-
+:imagesdir: ../images
 == Introduction
 
-Content projects represet the starting point of XP's CMS. In order to create sites and content, you first need to create a project. Project defines default permissions and other useful settings for your content and editors. 
+Content projects represent the starting point of XP's CMS. In order to create sites and content, you first need to create a project. Project defines default permissions and other useful settings for your content and editors.
 
 == Project settings
 
@@ -39,6 +38,16 @@ For each project, dedicated principal roles are created. The roles are named as 
 
 An example might be com.enonic.cms.myproject.author.
 
+=== Applications
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+Just like with sites, applications can be added to projects. All functionality and all schemas (content types, schemas, mixins) and descriptors (pages, parts, layouts) from an app will be available within the scope of the project down to a site. 
+
+IMPORTANT: Sites override project applications. If a site should use an application already assigned to its project, you must assign the application directly to the site.
+
+<<layers#, Layers>> inherit applications from all parent layers and their base project.
+
+NOTE: Sites inside the project are isolated and have no access to project's or each other's apps.
 
 == Storage
 

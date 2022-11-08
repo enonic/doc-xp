@@ -367,7 +367,7 @@ Also, a number of minimum matching elements that must match could be set.
 
 ===== matchAll
 
-Matches all documents, giving them all a `_score` of '1.0'.
+Matches all nodes, giving them all a `_score` of '1.0'.
 
 .Expression parameters
 [cols="1,1,1, 2a"]
@@ -397,6 +397,33 @@ Matches all documents, giving them all a `_score` of '1.0'.
     "boost": 2
   }
 }
+----
+
+===== exists
+
+image:xp-7110.svg[XP 7.11.0,opts=inline] Returns nodes that contain a value for a field.
+
+.Expression parameters
+[cols="1,1,1, 2a"]
+|===
+|Parameter |Type |Required |Description
+
+|field
+|string
+|true
+|name of a field to check on existence.
+
+|===
+
+.Matches all nodes
+[source,json]
+----
+{
+  "exists": {
+    "field": "displayName"
+  }
+}
+
 ----
 
 ==== String expressions
@@ -523,7 +550,7 @@ This includes, by default, all text-based fields in the content domain.
 
 ===== stemmed
 
-The stemmed expression is similar to <<Fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
+The stemmed expression is similar to <<#fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
 E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
 
 NOTE: Stemming is language-dependent, so <<indexing#languages,language>> must be set either on the content or directly in the node indices via indexConfig.
@@ -679,6 +706,37 @@ All expressions in the mustNot must evaluate to false for nodes to match.
 }
 
 ----
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+===== filter
+All expressions must evaluate to true to include a node in the result (similar to <<#_must>>), but they will not affect the score for matching nodes.
+
+.'date_field' must be greater that the specified date and 'displayName' must start with 'my'
+[source,json]
+----
+{
+  "boolean": {
+    "filter": [
+      {
+        "range": {
+          "field": "date_field",
+          "type": "dateTime",
+          "gt": "2017-09-11T09:00:00Z"
+        }
+      },
+      {
+        "like": {
+          "field": "displayName",
+          "value": "my*"
+        }
+      }
+    ]
+  }
+}
+----
+
+NOTE: Query filtering is a preferable way to filter nodes, however it can be used together with <<filters#_filters, filters>>.
+
 
 === Boosting
 

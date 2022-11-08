@@ -6,7 +6,7 @@ Functions to pass java-types in JSON, typically usage is to type e.g a Geo-point
 
 == Usage
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -21,7 +21,7 @@ In your JavaScript controller, add a require statement:
 var valueLib = require('/lib/xp/value');
 ```
 
-You are now free to use the library functionality.
+You are now ready to use the library functionality.
 
 == Functions
 

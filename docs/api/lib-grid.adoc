@@ -3,7 +3,7 @@
 :toc: right
 :imagesdir: ../images
 
-image:xp-710.svg[XP 7.10.0,opts=inline] This library contains functions that enable sharing data across all applications and cluster nodes.
+image:xp-7100.svg[XP 7.10.0,opts=inline] This library contains functions that enable sharing data across all applications and cluster nodes.
 
 NOTE: Due to distributed nature of `SharedMap` not all value types can be used. Strings, numbers, and pure JSON objects are supported. There is no runtime check for type compatibility due to performance reasons. Developer are themselves responsible for NOT modifying shared objects (keys and values) in place.
 

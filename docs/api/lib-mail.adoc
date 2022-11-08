@@ -6,7 +6,7 @@ This library contains one function to send an e-mail.
 
 == Usage
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -22,7 +22,7 @@ In your JavaScript controller, add a require statement:
 const mailLib = require('/lib/xp/mail');
 ----
 
-You are now free to use the library functionality.
+You are now ready to use the library functionality.
 
 
 == Functions

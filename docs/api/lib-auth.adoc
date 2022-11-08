@@ -10,7 +10,7 @@ In this case you must explicitly execute the function in the <<lib-context#runco
 
 == Usage
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -26,7 +26,7 @@ In your JavaScript controller, add a require statement:
 const authLib = require('/lib/xp/auth');
 ----
 
-You are now free to use the library functionality.
+You are now ready to use the library functionality.
 
 
 == Functions

@@ -810,6 +810,7 @@ ageThreshold = P21D
 
 ageThreshold:: Age of data to be vacuumed. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Default: `P21D` (21 days).
 
+[#application]
 === Application
 
 image:xp-760.svg[XP 7.6.0,opts=inline]
@@ -850,6 +851,23 @@ Global application installation is denied (error is thrown), if filter denies it
 Stored application installation is skipped if filter denies it.
 
 NOTE: Filter rules apply separately on different nodes in cluster. If one cluster node denies an app, another cluster node may still allow it.
+
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+
+virtual.enabled:: Allows the use of virtual applications. If set to `true` then schemas from virtual applications will be visible as resources. Default: `true`.
+virtual.schema.override:: When set to `true`, virtual application schemes will have a priority over schemes in a real application with the same name. When set to `false` virtual application schemes have no affect if real application with the same name exists. Default: `true`.
+
+.Disables virtual applications.
+[source,properties]
+----
+virtual.enabled = false
+----
+
+.Disables priority of schemas from virtual applications.
+[source,properties]
+----
+virtual.schema.override = false
+----
 
 === Task
 image:xp-760.svg[XP 7.6.0,opts=inline]
