@@ -64,7 +64,7 @@ Example
 
 .Obtains details for an application:
 ```js
-var application = appLib.get('my-app-key');
+var application = appLib.get({key: 'my-app-key'});
 
 if (application) {
   log.info('Application name = %s', application.displayName);
@@ -175,7 +175,7 @@ Example
 
 .Fetches application descriptor:
 ```js
-var descriptor = appLib.getDescriptor('my-app-key');
+var descriptor = appLib.getDescriptor({key: 'my-app-key'});
 ```
 
 .Return value:
