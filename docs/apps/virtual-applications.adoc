@@ -7,7 +7,7 @@ image:xp-7110.svg[XP 7.11.0,opts=inline]
 WARNING: This feature is _experimental_.
 It's still under development design but is available for users to test and provide feedback.
 
-Virtual Applications allow to extend/override schemas and descriptors from usual bundled application or create a standalone application container. Applications, schemas and descriptors data are stored in nodes in separate `system.app` repository. Use <<api/lib-app#, lib-app>> to manipulate virtual applications.
+Virtual Applications allow to extend/override schemas and descriptors from usual bundled application or create a standalone application container. Applications, schemas and descriptors data are stored in nodes in separate `system.app` repository. Use <<../api/lib-app#, lib-app>> to manipulate virtual applications.
 
 
 === Structure
@@ -26,7 +26,7 @@ virtual-app/
       styles.xml
 
 ----
-Use <<api/lib-schema#, lib-schema>> to manipulate schemas and descriptors of virtual apps.
+Use <<../api/lib-schema#, lib-schema>> to manipulate schemas and descriptors of virtual apps.
 
 === Application Mode
 Depending on app data and config, the application can work with its resources in different ways:
