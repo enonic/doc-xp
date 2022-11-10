@@ -19,7 +19,7 @@ In your JavaScript controller, add a require statement:
 
 [source,js]
 ----
-var contentLib = require('/lib/xp/content');
+const contentLib = require('/lib/xp/content');
 ----
 
 You are now ready to use the library functionality.
@@ -32,7 +32,7 @@ Variable of NodePath java type describing content node root path.
 Usage
 
 ```js
-var myRoot = contentLib.CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()
+const myRoot = contentLib.CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()
 ```
 
 === ARCHIVE_ROOT_PATH
@@ -43,7 +43,7 @@ Variable of NodePath java type describing archive node root path.
 Usage
 
 ```js
-var myRoot = contentLib.ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()
+const myRoot = contentLib.ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()
 ```
 
 == Functions
@@ -111,14 +111,14 @@ Examples
 ```js
 
 // Archive content by path.
-var result1 = contentLib.archive({
+const result1 = contentLib.archive({
 content: '/path/to/mycontent',
 });
 
 log.info('Archived content ids: ' + result1.join(''));
 
 // Archive content by id.
-var result2 = contentLib.archive({
+const result2 = contentLib.archive({
 content: 'my-content-id'
 });
 
@@ -166,7 +166,7 @@ Examples
 
 ```js
 // Creates a content.
-var result1 = contentLib.create({
+const result1 = contentLib.create({
     name: 'mycontent',
     parentPath: '/a/b',
     displayName: 'My Content',
@@ -199,7 +199,7 @@ log.info('Content created with id ' + result1._id);
 ```js
 // Check if content already exists.
 try {
-    var result2 = contentLib.create({
+    const result2 = contentLib.create({
         name: 'mycontent',
         parentPath: '/a/b',
         displayName: 'My Content',
@@ -219,7 +219,7 @@ try {
 ```
 ```js
 // Content created.
-var expected = {
+const expected = {
     "_id": "123456",
     "_name": "mycontent",
     "_path": "/a/b/mycontent",
@@ -289,7 +289,7 @@ Examples
 
 ```js
 // Creates a media.
-var result = contentLib.createMedia({
+const result = contentLib.createMedia({
     name: 'mycontent',
     parentPath: '/a/b',
     mimeType: 'text/plain',
@@ -298,7 +298,7 @@ var result = contentLib.createMedia({
 ```
 ```js
 // Media created.
-var expected = {
+const expected = {
     "_id": "123456",
     "_name": "mycontent",
     "_path": "/a/b/mycontent",
@@ -342,7 +342,7 @@ Examples
 
 ```js
 // Deletes a content by path.
-var result = contentLib.delete({
+const result = contentLib.delete({
     key: '/features/js-libraries/mycontent'
 });
 
@@ -380,7 +380,7 @@ Examples
 
 ```js
 // Checking if a content exists
-var result = contentLib.exists({
+const result = contentLib.exists({
     key: '/path/to/mycontent'
 });
 
@@ -420,7 +420,7 @@ Examples
 
 ```js
 // Gets a single content by path.
-var result = contentLib.get({
+const result = contentLib.get({
     key: '/path/to/mycontent'
 });
 
@@ -432,7 +432,7 @@ if (result) {
 ```
 ```js
 // Content as it is returned.
-var expected = {
+const expected = {
     "_id": "123456",
     "_name": "mycontent",
     "_path": "/path/to/mycontent",
@@ -493,7 +493,7 @@ Examples
 
 ```js
 // Attachments returned.
-var expected = {
+const expected = {
     "logo.png": {
         "name": "logo.png",
         "label": "small",
@@ -536,7 +536,7 @@ Examples
 
 ```js
 // Get stream for attachment.
-var stream = contentLib.getAttachmentStream({
+const stream = contentLib.getAttachmentStream({
     key: '/a/b/mycontent',
     name: 'document.pdf'
 });
@@ -572,7 +572,7 @@ Examples
 
 ```js
 // Returns the children of specified path.
-var result = contentLib.getChildren({
+const result = contentLib.getChildren({
     key: '/path/to',
     start: 0,
     count: 2,
@@ -581,14 +581,14 @@ var result = contentLib.getChildren({
 
 log.info('Found ' + result.total + ' number of contents');
 
-for (var i = 0; i < result.hits.length; i++) {
-    var content = result.hits[i];
+for (let i = 0; i < result.hits.length; i++) {
+    const content = result.hits[i];
     log.info('Content ' + content._name + ' loaded');
 }
 ```
 ```js
 // Result set returned.
-var expected = {
+const expected = {
     "total": 20,
     "count": 2,
     "hits": [
@@ -664,7 +664,7 @@ Examples
 
 ```js
 // Gets outbound dependencies of content by its Id.
-var result = contentLib.getOutboundDependencies({
+const result = contentLib.getOutboundDependencies({
     key: '/features/js-libraries/mycontent'
 });
 
@@ -702,7 +702,7 @@ Examples
 
 ```js
 // Return permissions for content by path.
-var result = contentLib.getPermissions({
+const result = contentLib.getPermissions({
     key: '/features/js-libraries/mycontent'
 });
 
@@ -714,7 +714,7 @@ if (result) {
 ```
 ```js
 // Permissions returned.
-var expected = {
+const expected = {
     "inheritsPermissions": false,
     "permissions": [
         {
@@ -755,14 +755,14 @@ Examples
 
 ```js
 // Returns content's parent site
-var result = contentLib.getSite({
+const result = contentLib.getSite({
     key: '/path/to/mycontent'
 });
 log.info('Site name = %s', result._name);
 ```
 ```js
 // Site data returned.
-var expected = {
+const expected = {
     "_id": "100123",
     "_name": "my-content",
     "_path": "/my-content",
@@ -812,7 +812,7 @@ Examples
 
 ```js
 // Returns config of the content's parent site
-var result = contentLib.getSiteConfig({
+const result = contentLib.getSiteConfig({
     key: '/path/to/mycontent',
     applicationKey: app.name
 });
@@ -820,7 +820,7 @@ log.info('Field value for the site config = %s', result.Field);
 ```
 ```js
 // Site config returned.
-var expected = {
+const expected = {
     "Field": 42
 };
 ```
@@ -850,11 +850,11 @@ Examples
 
 ```js
 // Get a content type by name
-var contentType = contentLib.getType('com.enonic.myapp:person');
+const contentType = contentLib.getType('com.enonic.myapp:person');
 ```
 ```js
 // Content type returned:
-var expected = {
+const expected = {
     "name": "com.enonic.myapp:person",
     "displayName": "Person",
     "description": "Person content type",
@@ -959,8 +959,8 @@ var expected = {
 ```
 ```js
 // Get a content type icon
-var ct = contentLib.getType('com.enonic.myapp:person');
-var icon = ct.icon;
+const ct = contentLib.getType('com.enonic.myapp:person');
+const icon = ct.icon;
 return {
     body: icon.data,
     contentType: icon.mimeType
@@ -981,7 +981,7 @@ Examples
 
 ```js
 // Gets the list of all content types in the system
-var contentTypes = contentLib.getTypes();
+const contentTypes = contentLib.getTypes();
 
 log.info(contentTypes.length + ' content types found:');
 contentTypes.forEach(function (ct) {
@@ -1033,7 +1033,7 @@ function editor(c) {
 }
 
 // Modify content by path
-var result = contentLib.modify({
+const result = contentLib.modify({
     key: '/a/b/mycontent',
     editor: editor
 });
@@ -1046,7 +1046,7 @@ if (result) {
 ```
 ```js
 // Content modified.
-var expected = {
+const expected = {
     "_id": "123456",
     "_name": "mycontent",
     "_path": "/path/to/mycontent",
@@ -1118,7 +1118,7 @@ Examples
 
 ```js
 // Rename content by path. Keeps same parent.
-var content1 = contentLib.move({
+const content1 = contentLib.move({
     source: '/my-site/my-content-name',
     target: 'new-name'
 });
@@ -1127,7 +1127,7 @@ log.info('New path: ' + content1._path); // '/my-site/new-name'
 ```
 ```js
 // Move content by path. New parent path, keeps same name.
-var content2 = contentLib.move({
+const content2 = contentLib.move({
     source: '/my-site/my-content-name',
     target: '/my-site/folder/'
 });
@@ -1136,7 +1136,7 @@ log.info('New path: ' + content2._path); // '/my-site/folder/my-content-name'
 ```
 ```js
 // Move content by id to new path. New parent path, keeps same name.
-var content3 = contentLib.move({
+const content3 = contentLib.move({
     source: '8d933461-ede7-4dd5-80da-cb7de0cd7bba',
     target: '/my-site/folder/'
 });
@@ -1145,7 +1145,7 @@ log.info('New path: ' + content3._path); // '/my-site/folder/my-content-name'
 ```
 ```js
 // Move and rename content.
-var content4 = contentLib.move({
+const content4 = contentLib.move({
     source: '/my-site/my-content-name',
     target: '/my-site/folder/new-name'
 });
@@ -1155,7 +1155,7 @@ log.info('New path: ' + content4._path); // '/my-site/folder/new-name'
 ```js
 // Handle error if target already exists.
 try {
-    var content5 = contentLib.move({
+    const content5 = contentLib.move({
         source: '/my-site/my-content-name',
         target: '/my-site/folder/existing-content'
     });
@@ -1213,7 +1213,7 @@ Examples
 
 ```js
 // Publish content by path or key
-var result = contentLib.publish({
+const result = contentLib.publish({
     keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd'],
     sourceBranch: 'draft',
     targetBranch: 'master',
@@ -1234,7 +1234,7 @@ if (result) {
 ```
 ```js
 // Content published.
-var expected = {
+const expected = {
     "pushedContents": [
         "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
         "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
@@ -1285,7 +1285,7 @@ Examples
 
 ```js
 // Query content using aggregations.
-var result = contentLib.query({
+const result = contentLib.query({
     start: 0,
     count: 2,
     sort: "modifiedTime DESC, geoDistance('data.location', '59.91,10.75', 'km')",
@@ -1383,14 +1383,14 @@ var result = contentLib.query({
 
 log.info('Found ' + result.total + ' number of contents');
 
-for (var i = 0; i < result.hits.length; i++) {
-    var content = result.hits[i];
+for (let i = 0; i < result.hits.length; i++) {
+    const content = result.hits[i];
     log.info('Content ' + content._name + ' found');
 }
 ```
 ```js
 // Result set returned.
-var expected = {
+const expected = {
     "total": 20,
     "count": 2,
     "hits": [
@@ -1607,21 +1607,21 @@ Returns
 Examples
 ```js
 // Restore content by path.
-var result1 = contentLib.restore({
+const result1 = contentLib.restore({
     content: '/path/to/mycontent',
 });
 
 log.info('Restored content ids: ' + result1.join(','));
 
 // Restore content by id.
-var result2 = contentLib.restore({
+const result2 = contentLib.restore({
     content: 'my-content-id'
 });
 
 log.info('Restored content ids: ' + result2.join(','));
 
 // Restore content by id to custom path.
-var result3 = contentLib.restore({
+const result3 = contentLib.restore({
     content: 'my-content-id',
     path: '/custom-parent'
 });
@@ -1672,7 +1672,7 @@ Examples
 
 ```js
 // Set permissions for content by path.
-var flag = contentLib.setPermissions({
+const flag = contentLib.setPermissions({
     key: '/features/js-libraries/mycontent',
     inheritPermissions: false,
     overwriteChildPermissions: true,
@@ -1717,7 +1717,7 @@ Examples
 
 ```js
 // Unpublish content by path or key
-var result = contentLib.unpublish({
+const result = contentLib.unpublish({
     keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd']
 });
 
@@ -1725,7 +1725,7 @@ log.info('Unpublished content ids: ' + result.join(','));
 ```
 ```js
 // Content unpublished.
-var expected = [
+const expected = [
     "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
     "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
     "e1f57280-d672-4cd8-b674-98e26e5b69ae"
