@@ -24,8 +24,9 @@ Metrics aggeregations:: A metric aggeregation computes metrics over a set of doc
 Typically, you will divide data into buckets and then use metric aggregations to calculate e.g average values,
 sum, etc for each bucket, if necessary.
 
+== Aggregations
 
-== Term
+=== Term
 
 The `terms` aggregation places documents into bucket based on property values. Each unique value of a property will
 get its own bucket. Here's a list of properties:
@@ -53,7 +54,7 @@ include::code/terms-result.json[]
 ----
 
 
-== Stats
+=== Stats
 
 The stats-aggregations calculates statistics over numeric values extracted from the aggregated documents. The following statistics are supported:
 
@@ -75,7 +76,7 @@ include::code/stats-query.json[]
 include::code/stats-result.json[]
 ----
 
-== Min
+=== Min
 
 image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that computes the minimum of the values in the current bucket. Here's the list of properties:
 
@@ -93,7 +94,7 @@ include::code/min-query.json[]
 include::code/min-result.json[]
 ----
 
-== Max
+=== Max
 
 image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that computes the maximum of the values in the current bucket. Here's the list of properties:
 
@@ -111,7 +112,7 @@ include::code/max-query.json[]
 include::code/max-result.json[]
 ----
 
-== Value Count
+=== Value Count
 
 image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that counts the number of values that current document set has for a specific field. Here's the list of properties:
 
@@ -129,14 +130,21 @@ include::code/value-count-query.json[]
 include::code/value-count-result.json[]
 ----
 
-== Range
+=== Range
 
 The range aggregation query defines a set of ranges that represents a bucket.
-Here's a list of properties:
 
-field (string):: The property path.
-ranges (range[]):: The range-buckets to create.
-range (from: number, to: number):: Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Details
+| field | string | The property path
+| ranges | <<numeric_range,Numeric range>>[] | The range-buckets to create
+|===
 
 .Sample range aggregation
 [source,json]
@@ -151,19 +159,24 @@ include::code/range-result.json[]
 ----
 
 
-== geoDistance
+=== geoDistance
 
 The geoDistance aggregation needs a defined range to split the documents into buckets.
 Only documents with properties of type 'GeoPoint' will be considered in the ``geoDistance`` aggregation buckets.
 
-Here's a list of properties:
+[.lead]
+Parameters
 
-field (string):: The property path.
-ranges (range[]):: The range-buckets to create.
-range (from: number, to: number):: Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
-unit (string):: The meassurement unit to use for the ranges.  Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet) or nmi (nauticalmiles).
-origin (lat: number, lon: number):: The GeoPoint from which the distance is measured.
-
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Details
+| field | string | The property path
+| origin | <<origin,Origin>> | The GeoPoint from which the distance is measured.
+| ranges | <<numeric_range,Numeric range>>[] | The range-buckets to create.
+| unit | string | The meassurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet) or nmi (nauticalmiles).
+|===
 
 .Sample geoDistance aggregation
 [source,json]
@@ -185,16 +198,23 @@ In a future version, there will easier ways of doing this.
 ====
 
 
-== dateRange
+=== dateRange
 
 The dateRange aggregation query defines a set of date-ranges that represents a bucket. Only
 documents with properties of type 'DateTime' will considered in the ``dateRange`` aggregation buckets.
-Here's a list of properties:
 
-field (string):: The property path.
-format (string):: The date-format of which the buckets will be formatted to on return. Defaults to ``yyyy-MM-dd'T'HH:mm:ss.SSSZ``.
-ranges (range[]):: The range-buckets to create.
-range (from: <number>, to: <number>):: Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded. Values in `from` and `to` follow a special date-math expression explained below.
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Details
+| field | string | The property path
+| format | string | The date-format of which the buckets will be formatted to on return. Defaults to ``yyyy-MM-dd'T'HH:mm:ss.SSSZ``.
+| ranges | <<date_range,Date range>>[] | The range-buckets to create. Follows a special <<date_math_expression, Date-math expression>>.
+|===
 
 
 .Sample dateRange aggregation
@@ -211,7 +231,7 @@ include::code/date-range-result.json[]
 
 
 
-=== Date-math expression
+==== Date-math expression
 
 The range fields accepts a date-math expression to calculate the time-spans.
 
@@ -220,7 +240,7 @@ The range fields accepts a date-math expression to calculate the time-spans.
 * Range describing now plus one day and thirty minutes, rounded to minutes: `now+1d+30m/m`
 
 
-== dateHistogram
+=== dateHistogram
 
 The date-histogram aggregation query defines a set of bucket based on a given time-unit. For instance,
 if querying a set of log-events,  a ``dateHistorgram`` aggregations query with interval ``h`` (hour) will divide each log
@@ -252,3 +272,87 @@ include::code/date-histogram-query.json[]
 ----
 include::code/date-histogram-result.json[]
 ----
+
+
+== Types
+
+=== Date range
+
+Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
+Values in `from` and `to` follow a special <<date_math_expression, Date-math expression>>.
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Details
+| from | string | inclusive from
+| to | string | exclusive to
+|===
+
+
+=== Numeric range
+
+Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Details
+| from | number | inclusive from
+| to | number | exclusive to
+|===
+
+Examples:
+
+[source,json]
+----
+{
+  "to": 50 <1>
+}
+----
+<1> The bucket will contain minus infinity unto 49.[overline]#999#
+
+[source,json]
+----
+{
+  "from": 50, <1>
+  "to": 100 <2>
+}
+----
+The bucket will contain
+
+<1> 50
+<2> unto 99.[overline]#999#
+
+[source,json]
+----
+{
+  "from": 100 <1>
+}
+----
+<1> The bucket will contain 100 unto infinity
+
+
+=== Origin
+
+The GeoPoint from which the distance is measured.
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Details
+| lat | number | Latitude
+| lon | number | Longitude
+|===
