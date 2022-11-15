@@ -148,7 +148,7 @@ NOTE: Read about authorization <<#authorization, here>>
 |`force`
 |Boolean
 | image:xp-7120.svg[XP 7.12.0,opts=inline]
- if that parameter has value `true` then affected indices will be removed before snapshot is applied. Default: `false`
+ if this parameter is set to `true` then affected indices will be removed before a snapshot is restored. Default: `false`
 |===
 
 NOTE: Read about authorization <<#authorization, here>>
