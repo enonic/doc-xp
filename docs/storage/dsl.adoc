@@ -437,11 +437,11 @@ image:xp-7110.svg[XP 7.11.0,opts=inline] Returns nodes that contain a value for 
 |true
 |List of <<noql#_propertypath, propertyPaths>> to match.
 
-|searchString
+|query
 |string
 |true
-|A search string to match field value(s).
-Support the set of <<search_string_operators,operators>>.
+|A query string to match field value(s).
+Support the set of <<query_operators,operators>>.
 
 |operator
 |string
@@ -450,13 +450,13 @@ Support the set of <<search_string_operators,operators>>.
 
 [stripes=none,cols="1,10"]
 !===
-!`OR` !Any of the words in the search-string matches (by default).
-!`AND`!All words in search-string matches.
+!`OR` !Any of the words in the query string matches (by default).
+!`AND`!All words in the query string matches.
 !===
 
 |===
-[#search_string_operators]
-.search-string operators:
+[#query_operators]
+.query operators:
 
 * ``+`` signifies AND operation.
 * ``|`` signifies OR operation.
