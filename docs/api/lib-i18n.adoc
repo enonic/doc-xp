@@ -9,7 +9,7 @@ This library contains functions for localization of text phrases.
 
 NOTE: This API uses standard framework functionality. Please consult the <<../framework/i18n#, framework localization docs>> before using this API.
 
-Add the following into your `build.gradle` file:
+Add the following to your `build.gradle` file:
 
 [source,groovy]
 ----
@@ -45,7 +45,7 @@ action.preview=Vista Previa
 notify.process.failed=Error al procesar: {0}.
 ----
 
-With these basics in place, you are free to invoke to use the library functionality.
+With these basics in place, you are ready to invoke to use the library functionality.
 
 
 == Functions

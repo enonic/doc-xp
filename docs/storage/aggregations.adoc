@@ -55,7 +55,7 @@ include::code/terms-result.json[]
 
 == Stats
 
-The stats-aggregations calculates the following statistics for the parent-aggregation buckets:
+The stats-aggregations calculates statistics over numeric values extracted from the aggregated documents. The following statistics are supported:
 
 `avg`, `min`, `max`, `count`, and `sum`
 
