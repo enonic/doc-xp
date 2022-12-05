@@ -1171,7 +1171,7 @@ try {
 
 === publish
 
-This function publishes content to a branch
+This function publishes content to the master branch
 
 [.lead]
 *Parameters:*
@@ -1184,8 +1184,8 @@ An object with the following keys and their values:
 |===
 | Name | Type | Attributes| Default| Description
 | keys | Array.<string> | | | List of all content keys(path or id) that should be published
-| sourceBranch | string | | | The branch where the content to be published is stored
-| targetBranch | string | | | The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master
+| sourceBranch | string | | | _Not in use from_ image:xp-7120.svg[XP 7.12.0,opts=inline]. The branch where the content to be published is stored.
+| targetBranch | string | | | _Not in use since_ image:xp-7120.svg[XP 7.12.0,opts=inline]. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master
 | schedule | <<ScheduleParams>> | <optional> | | Schedule the publish
 | excludeChildrenIds | Array.<string> | <optional> | | List of content keys whose descendants should be excluded from publishing
 | includeDependencies | boolean | <optional> | true | Whether all related content should be included when publishing content
@@ -1240,7 +1240,7 @@ const expected = {
         "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
         "e1f57280-d672-4cd8-b674-98e26e5b69ae"
     ],
-    "deletedContents": [
+    "deletedContents": [ // Removed from 7.12.0
         "45d67001-7f2b-4093-99ae-639be9fdd1f6"
     ],
     "failedContents": [
