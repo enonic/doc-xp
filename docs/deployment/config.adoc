@@ -801,7 +801,7 @@ auditlog.filter:: Comma separated values `rule(,rule)\*` of allow/deny rules. De
 A rule prefixed with `!` is a `deny` rule, otherwise it is an `allow` rule.
 A rule suffixed with `*` is a wildcard rule.
 
-Rules applied in order. First matching rule wins. If no matching rule found, event type is denied.
+Rules are applied in sequence. A first matching rule wins. If no matching rule found, event type is denied.
 Only content event types can be filtered.
 
 .None of events will be logged
