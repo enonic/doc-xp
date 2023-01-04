@@ -817,8 +817,8 @@ image:xp-7120.svg[XP 7.12.0,opts=inline]
 
 auditlog.filter:: Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `*` (allow all).
 
-Rule can be prefixed with `!` - that it is a `deny` rule, otherwise it is an `allow` rule.
-Rule can be suffixed with `*` - that is a wildcard rule.
+A rule prefixed with `!` is a `deny` rule, otherwise it is an `allow` rule.
+A rule suffixed with `*` is a wildcard rule.
 
 Rules applied in order. First matching rule wins. If no matching rule found, event type is denied.
 Only content event types can be filtered.
