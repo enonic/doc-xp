@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: ../images
 
-Mappings enable wiring of controllers or filters to site relative URL pattern or content matches
+Mappings enable the wiring of controllers or filters to site relative URL patterns, content matches, or specific service requests.
 
 == Introduction
 
@@ -29,6 +29,9 @@ Mapping are defined in the <<sites#site_xml, site descriptor>>.
     <mapping filter="/site/foobar/filter.js" order="10"> <!--5-->
       <pattern invert="true">/dont-match-me/.*</pattern>
     </mapping>
+    <mapping filter="/site/services/image.js"> <!--6-->
+      <service>image</pattern>
+    </mapping>
   </mappings>
   <form/>
 </site>
@@ -39,6 +42,7 @@ Mapping are defined in the <<sites#site_xml, site descriptor>>.
 <3> *<pattern>* specifies a regular expression based site contextual URL <<Patterns>>. Default is `/.*`
 <4> *<match>* a property condition to evaluate <<Matches>> for the contextual content.
 <5> *@filter* defines the path to the <<../framework/filters#, HTTP filter>>
+<6> *@service* specifies a service type endpoint request which will be handled by the filter (`.../_/image/...` endpoint).
 
 NOTE: Each mapping may exclusively specify a filter OR a controller, and it must define at least one pattern or match setting.
 
@@ -116,3 +120,19 @@ The expected value can be either a regular expression to match the property valu
 
 NOTE: image:xp-780.svg[XP 7.8.0,opts=inline] Missing/unavailable content does not match any condition.
 Don't specify `<match>` if you need to map controller/filter to the URL that does not correspond to any content.
+
+== Services
+Service-based mappings can be used to associate particular types of service requests with controllers or filters directly.
+
+Supported services: `image`, `attachment`, and `component`.
+
+Examples:
+
+* `<service>component</service>`
+
+Allows to filter or redirect to a controller rendering of contextual page components on URLs like `<host>:<port>/site/<repo>/<branch>/<path-to-page>/_/component/<component-path>`
+
+* `<service>image</service>`
+
+Allows to filter or redirect to a controller rendering of images on URLs like `<host>:<port>/site/<repo>/<branch>/<path-to-content>/_/image/<image-path>`
+
