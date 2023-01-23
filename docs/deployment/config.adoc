@@ -420,11 +420,11 @@ hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before joi
 NOTE: In case of using Kubernetes API discovery each node makes a call to Kubernetes Master in order to discover PODs.
 It also requires granting certain permissions. You can find more information in the documentation of https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes].
 
-=== Admin Console
+=== Admin
 
 `XP_HOME/config/com.enonic.xp.admin.cfg`
 
-Configuration examples:
+General setting for /admin
 
 .Disable Content Security Policy for site preview
 [source,properties]
@@ -443,7 +443,7 @@ site.preview.contentSecurityPolicy:: Defines default value for Content-Security-
 Default: `default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:`
 
 
-=== Home app (Admin console)
+=== Home app
 
 `XP_HOME/config/com.enonic.xp.app.main.cfg`
 
@@ -458,7 +458,7 @@ tourDisabled:: Specify if welcome tour should be enabled or not.
 Default: `false`
 
 
-=== Applications app (Admin console)
+=== Applications app
 
 `XP_HOME/config/com.enonic.xp.app.applications.cfg`
 
