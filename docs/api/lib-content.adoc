@@ -315,6 +315,91 @@ var expected = {
 };
 ```
 
+=== modifyMedia
+
+Modifies a media content
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| key | string | | | Path or id of the media content
+| name | string | | | Name of the media content
+| data | | | | Media data (as a stream)
+| mimeType | string | <optional> | | Mime-type of the data
+| focalX | number | <optional> | | Focal point for X axis (if content is an image)
+| focalY | number | <optional> | | Focal point for Y axis (if content is an image)
+| caption | string | <optional> | | Caption
+| artist | string \| Array.<string>  | <optional> | | Artist
+| copyright | string | <optional> | | Copyright
+| tags | string \| Array.<string> | <optional> | | Tags
+| workflowInfo | object | <optional> | | Workflow state (default: READY).
+
+|===
+
+[.lead]
+Returns
+
+*object* : Returns the modified media content
+
+[.lead]
+Examples
+
+```js
+// Modifies a media.
+const result = contentLib.modifyMedia({
+    key: '/a/b/mycontent',
+    name: 'mycontent',
+    data: stream,
+    artist: ['Artist 1', 'Artist 2'],
+    caption: 'Caption',
+    copyright: 'Copyright',
+    mimeType: 'text/plan',
+    tags: ['tag1', 'tag2']
+});
+```
+
+```js
+// Modified media.
+const expected = {
+    "_id": "123456",
+    "_name": "myMedia",
+    "_path": "/a/b/myMedia",
+    "creator": "user:system:anonymous",
+    "createdTime": "1975-01-08T00:00:00Z",
+    "type": "base:unstructured",
+    "hasChildren": false,
+    "valid": false,
+    "data": {
+        "caption": "Caption",
+        "artist": [
+            "Artist 1",
+            "Artist 2"
+        ],
+        "copyright": "Copyright",
+        "mimeType": "text/plan",
+        "tags": [
+            "tag1",
+            "tag2"
+        ]
+    },
+    "x": {},
+    "page": {},
+    "attachments": {},
+    "publish": {},
+    "workflow": {
+        "state": "READY",
+        "checks": {}
+    }
+};
+```
+
 === delete
 
 This function deletes a content
