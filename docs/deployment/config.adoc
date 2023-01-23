@@ -420,12 +420,11 @@ hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before joi
 NOTE: In case of using Kubernetes API discovery each node makes a call to Kubernetes Master in order to discover PODs.
 It also requires granting certain permissions. You can find more information in the documentation of https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes].
 
-=== Admin
+=== Admin Console
 
 `XP_HOME/config/com.enonic.xp.admin.cfg`
 
-site.preview.contentSecurityPolicy:: Defines default value for Content-Security-Policy header for pages. Applied in `preview`/`inline` mode and only if page controllers do not specify own Content-Security-Policy header.
-Default: `default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:`
+Configuration examples:
 
 .Disable Content Security Policy for site preview
 [source,properties]
@@ -440,18 +439,38 @@ site.preview.contentSecurityPolicy=default-src 'self'; base-uri 'self'; form-act
 ----
 
 
-=== Admin Console
+site.preview.contentSecurityPolicy:: Defines default value for Content-Security-Policy header for the site engine - when running in Admin Context. The policy is applied in `preview` and `inline` mode - if the page controllers do not specify a Content-Security-Policy header itself.
+Default: `default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:`
+
+
+=== Home app (Admin console)
 
 `XP_HOME/config/com.enonic.xp.app.main.cfg`
 
-Basic settings for the XP admin console
-
-.Sample configuration
+.Disable welcome tour
 [source,properties]
 ----
-# Disable the "Welcome tour" from the XP Home Screen. Default enabled.
+# Disable the "Welcome tour". Default: false
 tourDisabled = true
 ----
+
+tourDisabled:: Specify if welcome tour should be enabled or not.
+Default: `false`
+
+
+=== Applications app (Admin console)
+
+`XP_HOME/config/com.enonic.xp.app.applications.cfg`
+
+.Disable installation of apps from UI
+[source,properties]
+----
+readonlyMode = true
+----
+
+readonlyMode:: Activate read only mode to prevent installation and stop/start of applications via UI.
+Default: `false`
+
 
 === Jetty
 
