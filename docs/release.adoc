@@ -3,6 +3,37 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP7 Update 12
+
+=== Content Variants
+
+* Content Duplicate API was extended to support Content Variants, useful for A/B testing
+* Added `name` and `parent` to `duplicate` Java API
+* Added `duplicate` method to the JS lib-content and lib-node APIs
+
+=== Site mapping for services
+
+Site Mappings now allow to customize the behavior of Image, Attachment and Component <<cms/mappings#_services, Services>>.
+
+=== Project Applications
+
+<<cms/projects#_applications, Project Applications>> feature was first introduced in 7.11 but not announced due to incompleteness.
+In 7.12 Projects Applications, support was refactored and extended:
+
+* Application configurations are now stored in the repository itself, similar to the site's application configurations
+* Site <<cms/mappings#_mappings, Mappings>> work with Projects as well
+
+=== Other improvements
+
+* Virtual Applications and No-code Schema are no longer experimental features. Read more about <<apps/virtual-applications#_virtual_applications, Virtual Applications>>.
+* Support of arm64 (aarch64) is no longer experimental. You may see a message `WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.` It does not affect XP operations and can be safely ignored.
+* Restricted access to draft branch. Can be configured in <<deployment/config#_portal, portal config>> by `draftBranchAllowedFor` setting
+* Added `modifyMedia` method to the JS lib-content API
+* Improved Content API audit-log
+* Added possibility to delete indices before <<runtime/management#_restore, Restore>> by using `force` option
+* 403 Error page has Logout button
+* Various TypeScript type improvements
+
 == XP7 Update 11
 
 === TypeScript Core libraries

@@ -43,6 +43,10 @@ image:xp-7110.svg[XP 7.11.0,opts=inline]
 
 Similar to how applications (and their configs) can be assigned to sites, they can also be assigned (on even a higher level) to content projects. All functionality, schemas (content types, schemas, mixins etc.) and descriptors (pages, parts, layouts) from all assigned applications will be available within the scope of the project down to a site.
 
+Unlike Sites, Projects do not have templates, so content rendering must be done directly via <<cms/mappings#_mappings, Mappings>>.
+
+It is also worth noting that Application configurations get published together with any content published on that project.
+
 IMPORTANT: Sites override project applications. If a site should use an application already assigned to its project, you must assign the application directly to the site.
 
 <<layers#, Layers>> inherit applications from all parent layers and their base project.
@@ -58,7 +62,7 @@ This means, that editors of a particular project will not be able to see, use or
 
 == Site engine
 
-When accessing your content through the <<../runtime/engines/site-engine#, site engine>>, the project identifier is used to access the specific project. I.e. the internal path `/site/myproject/draft` can be used to access draft items of the project with identifier ´myproject´. 
+When accessing your content through the <<../runtime/engines/site-engine#, site engine>>, the project identifier is used to access the specific project. I.e. the internal path `/site/myproject/draft` can be used to access draft items of the project with identifier ´myproject´.
 
 == API
 
