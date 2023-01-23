@@ -1027,6 +1027,7 @@ Configure the portal behaviour.
 asset.cacheControl = public, max-age=31536000, immutable
 media.public.cacheControl = public, max-age=31536000, immutable
 media.private.cacheControl = private, max-age=31536000, immutable
+draftBranchAllowedFor = role:system.admin.login
 ----
 
 .Disable Content Security Policy for media
@@ -1041,6 +1042,7 @@ media.public.cacheControl:: Defines media (images, attachments) `Cache-Control` 
 media.private.cacheControl:: Defines media (images, attachments) `Cache-Control` header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
 media.contentSecurityPolicy:: Defines media (images, attachments) `Content-Security-Policy` header. Default: `default-src 'none'; base-uri 'none'; form-action 'none'`
 media.contentSecurityPolicy.svg:: Defines media (images, attachments) `Content-Security-Policy` header in cases when it is `image/svg+xml` mime type. Default: `default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`
+draftBranchAllowedFor:: Defines comma separated list of roles which are allowed to access the draft branch. Default: `role:system.admin.login`. Also, a user with role `role:system.admin` implicitly has access to the draft branch.
 
 === Image
 
