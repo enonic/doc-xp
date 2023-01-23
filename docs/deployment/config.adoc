@@ -43,18 +43,18 @@ Files ending with .properties require a full restart of the XP instance to be ap
 In a clustered environment, configuration files must be distributed to all nodes where it is relevant.
 
 
-== Application config
+== Custom app config
 
 To provide file based configuration to custom applications,
-simply place a file with the name `<app-name>.cfg` i.e. `my.custom.app.cfg`. in the config/ folder, and it will instantly be available for the application.
+simply place a file with the name `<app-name>.cfg` i.e. `my.custom.app.cfg`. in the `XP_HOME/config/` folder, and it will instantly be available for the application.
 
-Changing these files while running will restart application within XP, injecting the new configuration file when the app starts again.
+Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.
 
 // TODO: Link to details on how to use configuration files in apps.
 
-== XP config files
+== Standard config files
 
-The following config files are standard in Enonic XP, and by default placed in the `XP_HOME/config/` folder.
+The following are standard configuration files for Enonic XP
 
 === System Properties
 
