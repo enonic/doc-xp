@@ -105,6 +105,13 @@ Parameters
 
 | description | string | <optional> | Project description.
 | language | string | <optional> | Default project language.
+| siteConfig | Array.<Object.<string, Object>> | <optional> | Connected applications configs.
+[stripes=none,cols="1,49,50"]
+!===
+! Name ! Type ! Description
+! applicationKey ! string ! Application key
+! config ! Object ! Application config json
+!===
 | permissions | Object.<string, Array.<string>> | <optional> | Project permissions. 1 to 5 properties where key is role id and value is an array of principals.
 [stripes=none,cols="1,49,50"]
 !===
@@ -178,6 +185,18 @@ var project = projectLib.create({
         contributor: ['user:mystore:user4'],
         viewer: ['user:mystore:user5']
     },
+    siteConfig: [{
+            applicationKey: 'app1',
+            config: {
+                a: 'b'
+            }
+        } ,{
+            applicationKey: 'app2',
+            config: {
+                a: true,
+                b: 3.4
+            }
+        }],
     readAccess: {
         public: false
     }
@@ -192,6 +211,21 @@ var project = projectLib.create({
   'displayName': 'My Content Project',
   'description': 'Some exciting content is stored here',
   'language': 'no',
+  'siteConfig': [
+        {
+            'applicationKey': 'app1',
+            'config': {
+                'a': 'b'
+            }
+        },
+        {
+            'applicationKey': 'app2',
+            'config': {
+                'a': true,
+                'b': 3.4
+            }
+        }
+    ],
   'permissions': {
     'owner': [
         'user:mystore:user1'
@@ -367,6 +401,13 @@ Parameters
 | displayName | string | <optional> | Project display name.
 | description | string | <optional> | Project description.
 | language | string | <optional> | Default project language.
+| siteConfig | Array.<Object.<string, Object>> | <optional> | Connected applications configs.
+[stripes=none,cols="1,49,50"]
+!===
+! Name ! Type ! Description
+! applicationKey ! string ! Application key
+! config ! Object ! Application config json
+!===
 |===
 
 [.lead]
@@ -387,7 +428,19 @@ var project = projectLib.modify({
     id: 'my-project',
     displayName: 'New project name',
     description: 'New project description',
-    language: 'en'
+    language: 'en',
+    siteConfig: [{
+            applicationKey: 'app1',
+            config: {
+                a: 'b'
+            }
+        } ,{
+            applicationKey: 'app2',
+            config: {
+                a: true,
+                b: 3.4
+            }
+        }],
 });
 ----
 
@@ -399,6 +452,21 @@ var project = projectLib.modify({
     'displayName': 'New project name',
     'description': 'New project description',
     'language': 'en',
+    'siteConfig': [
+        {
+            'applicationKey': 'app1',
+            'config': {
+                'a': 'b'
+            }
+        },
+        {
+            'applicationKey': 'app2',
+            'config': {
+                'a': true,
+                'b': 3.4
+            }
+        }
+    ],
     'permissions': {},
     'readAccess': {
         'public': true
