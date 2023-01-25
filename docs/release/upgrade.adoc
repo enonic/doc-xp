@@ -48,7 +48,7 @@ We generally always recommend updating your apps to the latest version!
 == v7.12 notes
 
 * Applications can now be installed on Project level. This makes Project root similar to Site: any content provided by apps can be created on the Project root and Site <<cms/mappings#_mappings, Mappings>> provided by apps allow intercepting content calls.
-* You need to reconfigure All Project level Applications configured before version 7.12, if you have any. This is not a breaking change, as this feature was not announced in 7.11 and was not supported.
+* You need to reconfigure all Project level applications configured before version 7.12, if you have any. This is not a breaking change, as this feature was not announced in 7.11 and was not officially supported until 7.12.
 * Content API is now enforced to support only `draft` and `master` branches. Node API continues to support custom branches.
 * Content API does not allow to create/modify/delete content directly on `master` branch or to publish to any other branch than `master.`
 * Content `PENDING_DELETE` state is no longer in use. Content deletion no longer happens during unpublishing. Instead, content deletion forces content to be unpublished immediately.
