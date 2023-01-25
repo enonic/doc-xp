@@ -52,7 +52,7 @@ We generally always recommend updating your apps to the latest version!
 * Content API is now enforced to support only `draft` and `master` branch. Node API continues to support custom branches.
 * Content API does not allow to create/modify/delete content directly on `master` branch or to publish to any other branch than `master.`
 * Content `PENDING_DELETE` state is no longer in use. Content deletion no longer happens during unpublishing. Instead, content deletion forces content to be unpublished immediately.
-* Node state has been deprecated and no longer in use. In was only used for content's `PENDING_DELETE` status.
+* Node state has been deprecated and is no longer in use, as it was only used for content's `PENDING_DELETE` status.
 * Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<deployment/config#_content, content config>>
 * `draft` branch access is now restricted. By default, only `system.admin.login` role has access. Additional principles can be configured in <<deployment/config#_portal, portal config>> by `draftBranchAllowedFor` setting. Note that `system.admin` role always has access.
 * Bundled GraalVM has been updated to version 22.3. Other JVM versions are not supported, although they may also work.
