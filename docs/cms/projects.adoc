@@ -41,7 +41,7 @@ An example might be com.enonic.cms.myproject.author.
 === Applications
 image:xp-7110.svg[XP 7.11.0,opts=inline]
 
-Just like with sites, applications can be added to projects. All functionality and all schemas (content types, schemas, mixins) and descriptors (pages, parts, layouts) from an app will be available within the scope of the project down to a site.
+Similar to how applications can be assigned to sites, they can also be assigned (on even a higher level) to content projects. All functionality, schemas (content types, schemas, mixins etc.) and descriptors (pages, parts, layouts) from all assigned applications will be available within the scope of the project down to a site.
 
 Unlike Sites, Projects do not have templates, so content rendering must be done directly via <<cms/mappings#_mappings, Mappings>>.
 
