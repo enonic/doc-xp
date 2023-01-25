@@ -43,7 +43,7 @@ image:xp-7110.svg[XP 7.11.0,opts=inline]
 
 Similar to how applications can be assigned to sites, they can also be assigned (on even a higher level) to content projects. All functionality, schemas (content types, schemas, mixins etc.) and descriptors (pages, parts, layouts) from all assigned applications will be available within the scope of the project down to a site.
 
-Unlike Sites, Projects do not have templates, so content rendering must be done directly via <<cms/mappings#_mappings, Mappings>>.
+Unlike sites, content projects do not have page templates, so content rendering must be done directly via <<cms/mappings#_mappings, Mappings>>.
 
 It is also worth noting that configurations of applications assigned to a project will be published whenever any content in that project gets published.
 
