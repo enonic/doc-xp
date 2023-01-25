@@ -45,7 +45,7 @@ Similar to how applications (and their configs) can be assigned to sites, they c
 
 Unlike Sites, Projects do not have templates, so content rendering must be done directly via <<cms/mappings#_mappings, Mappings>>.
 
-It is also worth noting that Application configurations get published together with any content published on that project.
+It is also worth noting that configurations of applications assigned to a project will be published whenever any content in that project gets published.
 
 IMPORTANT: Sites override project applications. If a site should use an application already assigned to its project, you must assign the application directly to the site.
 
