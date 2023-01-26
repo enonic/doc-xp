@@ -28,7 +28,7 @@ In 7.12 Projects Applications, support was refactored and extended:
 * Virtual Applications and No-code Schema are no longer experimental features. Read more about <<apps/virtual-applications#_virtual_applications, Virtual Applications>>.
 * Support of arm64 (aarch64) is no longer experimental. You may see a message `WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.` It does not affect XP operations and can be safely ignored.
 * Restricted access to draft branch. Can be configured in <<deployment/config#_portal, portal config>> by `draftBranchAllowedFor` setting
-* Added `modifyMedia` method to the JS lib-content API
+* Added `modifyMedia` method to the JS <<api/lib-content#_modifymedia, lib-content>> API
 * Improved Content API audit-log
 * Added possibility to delete indices before <<runtime/management#_restore, Restore>> by using `force` option
 * 403 Error page has Logout button
