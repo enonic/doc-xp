@@ -29,7 +29,7 @@ Since the previous release this feature has been refactored and improved:
 * Support of arm64 (aarch64) is no longer experimental. You may see a message `WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.` It does not affect XP operations and can be safely ignored.
 * Restricted access to draft branch. Can be configured via `draftBranchAllowedFor` setting in the <<deployment/config#_portal, portal config>>
 * Added `modifyMedia` method to the JS <<api/lib-content#_modifymedia, lib-content>> API
-* Improved Content API audit-log
+* Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<deployment/config#_content, content config>>
 * Added possibility to delete indices before <<runtime/management#_restore, Restore>> by using `force` option
 * 403 Error page has Logout button
 * Various TypeScript type improvements
