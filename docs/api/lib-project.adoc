@@ -401,7 +401,7 @@ Parameters
 | displayName | string | <optional> | Project display name.
 | description | string | <optional> | Project description.
 | language | string | <optional> | Default project language.
-| siteConfig | Array.<Object.<string, Object>> | <optional> | Connected applications configs.
+| siteConfig | Array.<Object.<string, Object>> | <optional> | Applications (with optional configurations) to be assigned to the project.
 [stripes=none,cols="1,49,50"]
 !===
 ! Name ! Type ! Description
