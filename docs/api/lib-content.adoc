@@ -1817,6 +1817,74 @@ var expected = [
 ];
 ```
 
+=== duplicate
+
+This function duplicates a content.
+
+[.lead]
+*Parameters:*
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,1%,1%,96%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default | Description
+| contentId | string | | | Id of the content.
+| workflow | Object | <optional> | ```{
+"state": "READY",
+"checks": {}
+}``` | Workflow state.
+| includeChildren |  boolean | <optional> | true | Indicates that children contents must be duplicated, too. Ignored if `variant=true`.
+| variant | boolean | <optional> | false | Indicates that duplicated content is a variant.
+| parent | string | <optional> | | Destination parent path. By default, a duplicated content will be added as a sibling of the source content.
+| name | string | <optional> | | New content name.
+|===
+
+[.lead]
+Returns summary about duplicated content.
+
+*object* : Summary about duplicated content.
+
+[.lead]
+Examples
+
+Duplicate content
+```js
+// Duplicate content by id
+var result = contentLib.duplicate({
+    contentId: '79e21db0-5b43-45ce-b58c-6e1c420b22bd',
+    includeChildren: false,
+});
+
+// Summary of the duplicated content.
+var expected = {
+    "contentName": "sourcecontentname-copy",
+    "sourceContentPath": "/path/to/duplicated-content",
+    "duplicatedContents": [
+        "duplicated-content-id"
+    ]
+};
+```
+
+Create variant
+```js
+// Create a variant of the content
+var result = contentLib.duplicate({
+    contentId: '79e21db0-5b43-45ce-b58c-6e1c420b22bd',
+    variant: true,
+    name: 'variant-name'
+});
+
+var expected = {
+    "contentName": "variant-name",
+    "sourceContentPath": "/path/to/variant-name",
+    "duplicatedContents": [
+        "variant-content-id"
+    ]
+}
+```
 == Objects
 
 === ContentType

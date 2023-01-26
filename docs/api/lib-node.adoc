@@ -1358,6 +1358,52 @@ var result = repo.setRootPermissions({
 });
 ----
 
+=== duplicate
+
+This function duplicates a node.
+
+[.lead]
+Parameters
+
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,1%,1%,96%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Attributes| Default | Details
+| nodeId | string | | | Id to the node.
+| name | string | <optional> | | New node name.
+| includeChildren | boolean | <optional> | true | Indicates that children nodes must be duplicated, too.
+| parent | string | <optional> | | Destination parent path. By default, a duplicated node will be added as a sibling of the source node.
+| refresh | string | <optional> | | Refresh the index for the current repoConnection.
+| dataProcessor | function | <optional> | | Node data processor.
+|===
+
+[.lead]
+Returns duplicated node.
+
+*object* : Duplicated node
+
+[.lead]
+Example
+
+.Duplicate a node
+[source,js]
+----
+var result = repo.duplicate({
+    nodeId: 'nodeId',
+    name: 'duplicated-node',
+    includeChildren: false,
+    dataProcessor: function (originalData) {
+        originalData.data.extraProp = 'extraPropValue';
+        return originalData;
+    },
+    parent: '/',
+    refresh: 'SEARCH'
+});
+----
+
 == Source
 
 A source definition of repositories:
