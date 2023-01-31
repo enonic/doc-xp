@@ -175,7 +175,7 @@ Parameters
 | field | string | The property path
 | origin | <<origin,Origin>> | The GeoPoint from which the distance is measured.
 | ranges | <<numeric_range,Numeric range>>[] | The range-buckets to create.
-| unit | string | The meassurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet) or nmi (nauticalmiles).
+| unit | string | The meassurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).
 |===
 
 .Sample geoDistance aggregation
