@@ -122,6 +122,8 @@ NOTE: image:xp-780.svg[XP 7.8.0,opts=inline] Missing/unavailable content does no
 Don't specify `<match>` if you need to map controller/filter to the URL that does not correspond to any content.
 
 == Services
+image:xp-7120.svg[XP 7.12.0]
+
 Service-based mappings can be used to associate particular types of service requests with controllers or filters directly.
 
 Supported services: `image`, `attachment`, and `component`.
