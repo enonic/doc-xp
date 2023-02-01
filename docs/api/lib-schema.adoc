@@ -55,7 +55,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#schema,`Schema`>>) Properties object of the fetched schema.
+*object* : (<<#schema,`Schema`>>) Property object of the fetched schema.
 
 [.lead]
 Example
@@ -132,7 +132,7 @@ Parameters
 [.lead]
 Returns
 
-*object[]* : (<<#schema,`Schema[]`>>) Properties object of the fetched schemas.
+*object[]* : (<<#schema,`Schema[]`>>) Property object of the fetched schemas.
 
 [.lead]
 Example
@@ -230,7 +230,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#schema,`Schema`>>) Properties object of the created dynamic schema.
+*object* : (<<#schema,`Schema`>>) Property object of the created dynamic schema.
 
 [.lead]
 Example
@@ -322,7 +322,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#schema,`Schema`>>) Properties object for the modified dynamic schema.
+*object* : (<<#schema,`Schema`>>) Property object for the modified dynamic schema.
 
 [.lead]
 Example
@@ -342,7 +342,7 @@ let resource = `<?xml version='1.0' encoding='UTF-8'?>
           </form>
         </mixin>`;
 
-var result = schemaLib.createSchema({
+var result = schemaLib.updateSchema({
     name: 'myapp:mytype',
     type: 'MIXIN',
     resource
@@ -461,7 +461,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#component,`Component`>>) Properties object of the fetched component.
+*object* : (<<#component,`Component`>>) Property object of the fetched component.
 
 [.lead]
 Example
@@ -536,7 +536,7 @@ Parameters
 [.lead]
 Returns
 
-*object[]* : (<<#component,`Component[]`>>) Array of properties objects of the fetched components.
+*object[]* : (<<#component,`Component[]`>>) Array of Property objects of the fetched components.
 
 [.lead]
 Example
@@ -621,7 +621,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#component,`Component`>>) Properties object of the created dynamic component.
+*object* : (<<#component,`Component`>>) Property object of the created dynamic component.
 
 [.lead]
 Example
@@ -718,7 +718,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#component,`Component`>>) Properties object of the modified dynamic component.
+*object* : (<<#component,`Component`>>) Property object of the modified dynamic component.
 
 [.lead]
 Example
@@ -920,7 +920,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#styles,`Styles`>>) Properties object of the fetched styles.
+*object* : (<<#styles,`Styles`>>) Property object of the fetched styles.
 
 [.lead]
 Example
@@ -978,7 +978,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#styles,`Styles`>>) Properties object of the created dynamic styles.
+*object* : (<<#styles,`Styles`>>) Property object of the created dynamic styles.
 
 [.lead]
 Example
@@ -1062,7 +1062,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#styles,`Styles`>>) Properties object with the modified styles.
+*object* : (<<#styles,`Styles`>>) Property object with the modified styles.
 
 [.lead]
 Example
@@ -1192,7 +1192,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#site,`Site`>>) Properties object of the fetched site descriptor.
+*object* : (<<#site,`Site`>>) Property object of the fetched site descriptor.
 
 [.lead]
 Example
@@ -1262,7 +1262,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#site,`Site`>>) Properties object of the modified site descriptor.
+*object* : (<<#site,`Site`>>) Property object of the modified site descriptor.
 
 [.lead]
 Example

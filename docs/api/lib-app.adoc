@@ -55,12 +55,12 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#Application,`Application`>>) Detail information for the application. Properties object of an installed application with the specified key, or null if the application could not be found.
+*object* : (<<#Application,`Application`>>) Property object of an installed application with the specified key, or `null` if the application was not found.
 
 [.lead]
 Example
 
-.Obtains details for an application:
+.Fetches an application:
 ```js
 var application = appLib.get({key: 'my-app-key'});
 
@@ -95,7 +95,7 @@ Fetches all installed applications. If a local and a virtual app are both instal
 [.lead]
 Returns
 
-*object[]* : (<<#Application,`Application[]`>>) Detail information for the applications. Or an empty list if there are no installed applications.
+*object[]* : (<<#Application,`Application[]`>>) Array of applications' property objects, or an empty array if there are no installed applications.
 
 [.lead]
 Example
@@ -191,7 +191,7 @@ var expected = {
 
 === createVirtualApplication
 
-Creates a virtual application with the specified key together with schema repositories nodes inside of it.
+Creates a virtual application (along with its schema repository nodes) with the specified key.
 
 [.lead]
 Parameters
@@ -218,7 +218,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#Application,`Application`>>) Information for the created application.
+*object* : (<<#Application,`Application`>>) Property object of the created application.
 
 [.lead]
 Example
@@ -259,7 +259,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : `true` if succeed and `false` otherwise.
+*boolean* : `true` if deletion succeeded, otherwise `false`.
 
 [.lead]
 Example
@@ -270,8 +270,6 @@ var result = appLib.deleteVirtualApplication({
     'key':'my-app-key'
 });
 ```
-
-image:xp-7110.svg[XP 7.11.0,opts=inline]
 
 === getApplicationMode
 
