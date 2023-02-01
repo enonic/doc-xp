@@ -225,18 +225,10 @@ Returns
 [.lead]
 Example
 
-.removes an app with `my-app-key` key:
+.creates an app with `my-app-key` key:
 ```js
 var app = appLib.createVirtualApplication({
-    'key':'my-app-key',
-    'displayName':'my-app-key',
-    'version':'0.0.0',
-    'systemVersion':'7.11.0',
-    'minSystemVersion':'7.11.0',
-    'maxSystemVersion':'7.11.0',
-    'modifiedTime':'2022-08-11T11:34:47.949533Z',
-    'started':true,
-    'system':false
+    'key':'my-app-key'
 });
 ```
 
