@@ -25,7 +25,6 @@ Since the previous release this feature has been refactored and improved:
 
 === Other improvements
 
-* Virtual Applications and No-code Schemas are no longer experimental features. Read more about <<apps/virtual-applications#_virtual_applications, Virtual Applications>>.
 * Support of arm64 (aarch64) is no longer experimental. You may see a message `WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.` It does not affect XP operations and can be safely ignored.
 * Restricted access to draft branch. Can be configured via `draftBranchAllowedFor` setting in the <<deployment/config#_portal, portal config>>
 * Added `modifyMedia` method to the JS <<api/lib-content#_modifymedia, lib-content>> API
