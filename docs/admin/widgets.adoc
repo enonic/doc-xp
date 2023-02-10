@@ -1,43 +1,32 @@
 = Widgets
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 == Introduction
 
-Widgets are user interface components that dynamically extends Admin interfaces.
+Widgets are visual components that dynamically extend Admin UI.
 Widgets may or may not be context-dependent (require id of selected content and current branch).
-
-== Interface
-
-Currently, the only admin tool that implements widget support is Content Studio.
-Read more about Content Studio widgets https://developer.enonic.com/docs/content-studio/stable/widgets[here]
 
 == Implementation
 
-Widgets are essentially a specialized web apps. Like all other XP components, they are defined by a controller and a descriptor.
+Widget is essentially a special, admin-only kind of a web application. Like all other XP components, widgets are defined by a controller and a descriptor.
 
 To create a widget, add a new folder in your project structure, i.e.  `src/main/resources/admin/widgets/<widget-name>`.
-The folder must contain both a descriptor (`<widget-name>.xml`), and a controller (`<widget-name>.js`).
+The folder must contain both a descriptor (`<widget-name>.xml`) and a controller (`<widget-name>.js`).
 
 === Descriptor
 
-The widget descriptor defines the display name, which roles are required to access the widget and the interfaces it implements.
-
-An interface is simply a unique identifier that links the widget to its extension point (i.e. Content Studio's context panel)
-
-For example, for your widget to be displayed in the Content Studio's Context panel, specify interface `contentstudio.contextpanel`.
-To extend the Content Studio top menu, specify interface `contentstudio.menuitem`.
-
+Widget descriptor defines a display name, a list of roles required to access the widget and interfaces it implements.
 The descriptor file must match the widget folder name, i.e. `admin/widgets/<widget-name>/<widget-name>.xml`.
 
 .Sample descriptor file:
 [source,xml]
 ----
 <widget>
-  <display-name>My first widget</display-name>
-  <description>Description of my first widget</description>
+  <display-name>My dashboard widget</display-name>
+  <description>Description of my dashboard widget</description>
   <interfaces>
-    <interface>contentstudio.contextpanel</interface>
+    <interface>admin.dashboard</interface>
   </interfaces>
   <allow>
     <principal>role:system.admin</principal>
@@ -58,7 +47,7 @@ The controller file must match the widget name, i.e. `admin/widgets/<widget-name
 ----
 exports.get = function (req) {
     return {
-        body: '<widget>My first widget</widget>',
+        body: '<widget>My dashboard widget</widget>',
         contentType: 'text/html'
     };
 };
@@ -70,29 +59,104 @@ NOTE: Depending on the interface a widget is implementing, controller may be ini
 
 Widgets may also have icons. Simply place an SVG or PNG file into the widget folder, i.e. `admin/widgets/<widget-name>/<widget-name>.svg``
 
-== Context Panel widgets
-
-INFO: This section contains specific details on implementing Context panels for Content studio.
-
-Once your widget application is deployed, the widget should become available in the Content Studio's Context Panel.
-
-The ID of currently selected content item and the contextual repository/branch will be passed to the widget via query parameters: `contentId`, `repository` and `branch`.
-
-image::context-panel-widget.png[Widget inside Context Panel, 392]
+NOTE: Widget icon will not be used for Dashboard widgets, only for Content Studio widgets.
 
 
-If your widget is context-dependent (requires content id), remember to add a proper check/error feedback to the controller:
+== Widget Types (Interface)
 
-[source, js]
+Widget interface is simply a unique identifier (or widget type, if you will) that links the widget to its extension point (i.e. Dashboard or Content Studio's context panel). XP currently supports one type of widgets: Dashboard Widgets (interface `admin.dashboard`).
+
+TIP: Content Studio supports other types of widgets that will be embedded inside the Content Studio UI.
+Read more about Content Studio widgets https://developer.enonic.com/docs/content-studio/stable/widgets[here]
+
+=== Dashboard Widgets
+
+image:xp-7120.svg[XP 7.12.0,opts=inline]
+
+Dashboard Widgets will be identified by interface `admin.dashboard` and displayed on the Admin Dashboard screen.
+
+Following properties are supported in `<config>` of Dashboard Widget descriptor:
+
+* `width`
+
+Used to specify widget width. Default value (if `width` is not specified) is `auto`, which means that widget width will be determined
+by the widget contents. Other supported values are: `small` (25% of the screen width), `medium` (50%), `large` (75%) and `full` (100%).
+
+TIP: We don't recommend using auto-width as this may cause widget contents to overflow onto the widget to the right of it.
+
+* `height`
+
+Used to specify widget height. Default value (if `height` is not specified) is `auto`, which means that widget height will be determined
+by the widget contents. Other supported values are: `small` (25% of the screen height), `medium` (50%), `large` (75%) and `full` (100%).
+
+TIP: We don't recommend using auto-height as this may cause widget contents to overflow onto the widget below.
+
+* `header`
+
+Specifies whether widget will automatically have a header with widget title (coming from `display-name` field in descriptor).
+Default value (when nothing is specified) is `true` which means that widget will have a header by default.
+To hide the header, use `<header>false</header>`.
+
+* `style`
+
+Specifies whether XP will apply default styling to the widget (default). If you want to have full control over widget styling, use `<style>custom</style>`.
+
+* `order`
+
+Specifies desired order of the widget on the Dashboard (with `0` being the top-left position). If `order` is not specified, the widget will be placed after widgets with specified order.
+
+TIP: Widgets with equal order or no order will be placed based on their size (to fit as many widgets as possible next to each other).
+
+:imagesdir: images
+image:dashboard-widgets.png[Dashboard Widgets, 900px]
+
+Widgets in the screenshot above are configured in three different ways (from left to right):
+
+.Custom styling, position 0, display name in the header, width 25%, height auto:
+[source,xml]
 ----
-exports.get = function (req) {
-    var contentId = req.params.contentId;
-
-    if (!contentId) {
-        return {
-            contentType: 'text/html',
-            body: '<widget class="error">No content selected</widget>'
-        };
-    }
-}
+<widget xmlns="urn:enonic:xp:model:1.0">
+  <display-name>Useful Links</display-name>
+  <interfaces>
+    <interface>admin.dashboard</interface>
+  </interfaces>
+  <config>
+    <property name="width" value="small"/>
+    <property name="style" value="custom"/>
+    <property name="order" value="0"/>
+  </config>
+</widget>
 ----
+
+.Default styling, position 1, display name in the header, width 50%, height 50%:
+[source,xml]
+----
+<widget xmlns="urn:enonic:xp:model:1.0">
+  <display-name>Content Studio: Recent items</display-name>
+  <interfaces>
+    <interface>admin.dashboard</interface>
+  </interfaces>
+  <config>
+    <property name="width" value="medium"/>
+    <property name="height" value="medium"/>
+    <property name="order" value="1"/>
+  </config>
+</widget>
+----
+
+.Default styling, last position, no header, width 25%, height 100%:
+[source,xml]
+----
+<widget xmlns="urn:enonic:xp:model:1.0">
+  <display-name>Statistics</display-name>
+  <interfaces>
+    <interface>admin.dashboard</interface>
+  </interfaces>
+  <config>
+    <property name="width" value="small"/>
+    <property name="height" value="full"/>
+    <property name="header" value="false"/>
+  </config>
+</widget>
+----
+
