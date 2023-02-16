@@ -79,17 +79,15 @@ Following properties are supported in `<config>` of Dashboard Widget descriptor:
 
 * `width`
 
-Used to specify widget width. Default value (if `width` is not specified) is `auto`, which means that widget width will be determined
-by the widget contents. Other supported values are: `small` (25% of the screen width), `medium` (50%), `large` (75%) and `full` (100%).
+Used to specify widget width. Supported values are: `small` (25% of the screen width), `medium` (50%), `large` (75%) and `full` (100%).
 
-TIP: We don't recommend using auto-width as this may cause widget contents to overflow onto the widget to the right of it.
+NOTE: `medium` is a default value for `width` config, if `width` is not specified or unsupported value is used.
 
 * `height`
 
-Used to specify widget height. Default value (if `height` is not specified) is `auto`, which means that widget height will be determined
-by the widget contents. Other supported values are: `small` (25% of the screen height), `medium` (50%), `large` (75%) and `full` (100%).
+Used to specify widget height. Supported values are: `small` (25% of the screen height), `medium` (50%), `large` (75%) and `full` (100%).
 
-TIP: We don't recommend using auto-height as this may cause widget contents to overflow onto the widget below.
+NOTE: `medium` is a default value for `height` config, if `height` is not specified or unsupported value is used.
 
 * `header`
 
@@ -112,7 +110,7 @@ image:dashboard-widgets.png[Dashboard Widgets, 900px]
 
 Widgets in the screenshot above are configured in three different ways (from left to right):
 
-.Custom styling, position 0, display name in the header, width 25%, height auto:
+.Custom styling, position 0, display name in the header, width 25%, height 50% (default):
 [source,xml]
 ----
 <widget xmlns="urn:enonic:xp:model:1.0">
@@ -128,7 +126,7 @@ Widgets in the screenshot above are configured in three different ways (from lef
 </widget>
 ----
 
-.Default styling, position 1, display name in the header, width 50%, height 50%:
+.Default styling, position 1, display name in the header, width 50% (default), height 50% (default):
 [source,xml]
 ----
 <widget xmlns="urn:enonic:xp:model:1.0">
@@ -137,8 +135,6 @@ Widgets in the screenshot above are configured in three different ways (from lef
     <interface>admin.dashboard</interface>
   </interfaces>
   <config>
-    <property name="width" value="medium"/>
-    <property name="height" value="medium"/>
     <property name="order" value="1"/>
   </config>
 </widget>
