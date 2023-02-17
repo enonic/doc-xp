@@ -5,6 +5,10 @@
 
 The image service enables real-time processing and delivery of rasterized RGB/RGBa image media via the `:8080/site/<repo>/<branch>/<path-to-page>/_/image/` endpoint
 
+The image services are usually only used from one of our APIs: +
+<<../../../api/lib-portal#image_url#imageUrl, Portal API, imageUrl>> +
+https://developer.enonic.com/docs/guillotine/stable/usage#accessing_images[Guillotine api, imageUrl]
+
 == Image URL
 
 An image URL consists of the following components:
