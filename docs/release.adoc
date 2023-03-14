@@ -22,7 +22,11 @@ Site Mappings now allow to customize the behavior of Image, Attachment and Compo
 
 === Project Applications
 
-<<cms/projects#applications, Project Applications>> feature was introduced as an experimental feature in 7.11.
+<<cms/projects#applications, Project Applications>> feature is now production ready and turned on by default.
+
+=== Virtual Applications and No-code Schema
+
+<<apps/virtual-applications#virtual_applications, Virtual Applications>> feature was introduced as an experimental feature in 7.11.
 As of 7.12 this feature is still experimental but has been refactored and improved:
 
 * Application configurations are now stored in the repository itself, similar to how application configurations are stored on a site.
