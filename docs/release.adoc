@@ -3,6 +3,41 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP7 Update 12
+
+=== Dashboard Widgets
+
+New widget interface `admin.dashboard` can be used to create widgets for the Admin Dashboard.
+Read more about implementation details <<admin/widgets#dashboard_widgets, here>>.
+
+=== Content Variants
+
+* Content Duplicate API was extended to support Content Variants, useful for A/B testing
+* Added `name` and `parent` to `duplicate` Java API
+* Added `duplicate` method to the JS lib-content and lib-node APIs
+
+=== Site mapping for services
+
+Site Mappings now allow to customize the behavior of Image, Attachment and Component <<cms/mappings#services, Services>>.
+
+=== Project Applications
+
+<<cms/projects#applications, Project Applications>> feature was introduced as an experimental feature in 7.11.
+As of 7.12 this feature is still experimental but has been refactored and improved:
+
+* Application configurations are now stored in the repository itself, similar to how application configurations are stored on a site.
+* Site <<cms/mappings#mappings, Mappings>> work with Projects as well
+
+=== Other improvements
+
+* Support of arm64 (aarch64) is no longer experimental. You may see a message `WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.` It does not affect XP operations and can be safely ignored.
+* Restricted access to draft branch. Can be configured via `draftBranchAllowedFor` setting in the <<deployment/config#portal, portal config>>
+* Added `modifyMedia` method to the JS <<api/lib-content#modifymedia, lib-content>> API
+* Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<deployment/config#content, content config>>
+* Added possibility to delete indices before <<runtime/management#restore, Restore>> by using `force` option
+* 403 Error page has Logout button
+* Various TypeScript type improvements
+
 == XP7 Update 11
 
 === TypeScript Core libraries
@@ -26,7 +61,7 @@ They are code-less and can only contribute to schema definitions.
 This allows custom content types to be used in a root of the project.
 
 
-Virtual application behavior can be configured in <<deployment/config#_application, application config>>
+Virtual application behavior can be configured in <<deployment/config#application, application config>>
 
 === Query DSL improvements
 

@@ -813,6 +813,40 @@ auditlog.enabled = true
 auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
 IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
 
+image:xp-7120.svg[XP 7.12.0,opts=inline]
+
+auditlog.filter:: Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `!system.content.update,*` (allow everything except "content update" event).
+
+A rule prefixed with `!` is a `deny` rule, otherwise it is an `allow` rule.
+A rule suffixed with `*` is a wildcard rule.
+
+Rules are applied in sequence. A first matching rule wins. If no matching rule found, event type is denied.
+Only content event types can be filtered.
+
+.None of events will be logged
+[source,properties]
+----
+auditlog.filter = !*
+----
+
+.Allow all event types
+[source,properties]
+----
+auditlog.filter = *
+----
+
+.Every event type except 'system.content.update' will be logged (default behavior)
+[source,properties]
+----
+auditlog.filter = !system.content.update,*
+----
+
+.Allow only event types with "system.content.set*" prefix.
+[source,properties]
+----
+auditlog.filter = system.content.set*
+----
+
 attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in content attachment file names. Default: `false`.
 
 [#vacuum]
@@ -873,7 +907,7 @@ NOTE: Filter rules apply separately on different nodes in cluster. If one cluste
 
 image:xp-7110.svg[XP 7.11.0,opts=inline]
 
-virtual.enabled:: Allows the use of virtual applications. If set to `true` then schemas from virtual applications will be visible as resources. Default: `true`.
+virtual.enabled:: Allows the use of virtual applications. If set to `true` then schemas from virtual applications will be visible as resources. Default: `false`.
 virtual.schema.override:: When set to `true`, virtual application schemes will have a priority over schemes in a real application with the same name. When set to `false` virtual application schemes have no affect if real application with the same name exists. Default: `true`.
 
 .Disables virtual applications.
@@ -993,6 +1027,7 @@ Configure the portal behaviour.
 asset.cacheControl = public, max-age=31536000, immutable
 media.public.cacheControl = public, max-age=31536000, immutable
 media.private.cacheControl = private, max-age=31536000, immutable
+draftBranchAllowedFor = role:system.admin.login
 ----
 
 .Disable Content Security Policy for media
@@ -1007,6 +1042,7 @@ media.public.cacheControl:: Defines media (images, attachments) `Cache-Control` 
 media.private.cacheControl:: Defines media (images, attachments) `Cache-Control` header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
 media.contentSecurityPolicy:: Defines media (images, attachments) `Content-Security-Policy` header. Default: `default-src 'none'; base-uri 'none'; form-action 'none'`
 media.contentSecurityPolicy.svg:: Defines media (images, attachments) `Content-Security-Policy` header in cases when it is `image/svg+xml` mime type. Default: `default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`
+draftBranchAllowedFor:: Defines comma separated list of roles which are allowed to access the draft branch. Default: `role:system.admin.login`. Also, a user with role `role:system.admin` implicitly has access to the draft branch.
 
 === Image
 

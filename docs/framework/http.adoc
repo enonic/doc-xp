@@ -54,6 +54,11 @@ controller.
 <12> Name/value pairs of the HTTP request headers.
 <13> Name/value pairs of the HTTP request cookies.
 
+image:xp-7120.svg[XP 7.12.0,opts=inline] The ``request`` object also has `getHeader(name)` function that reads out a header on the request. The name is case-insensitive.
+Use it instead of accessing ``headers`` values directly.
+
+NOTE: Modification of ``headers`` does not affect the result of `getHeader(name)` calls.
+
 [#http-response]
 == HTTP Response
 

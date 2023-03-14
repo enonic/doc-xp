@@ -45,6 +45,17 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market.
 We generally always recommend updating your apps to the latest version!
 
+== v7.12 notes
+
+* You need to reconfigure all Project level applications configured before version 7.12, if you have any. This is not a breaking change, as this feature was not announced in 7.11 and was not officially supported until 7.12.
+* Content API is now enforced to support only `draft` and `master` branches. Node API continues to support custom branches.
+* Content API does not allow to create/modify/delete content directly on `master` branch or to publish to any other branch than `master.`
+* Content `PENDING_DELETE` state is no longer in use. Content deletion no longer happens during unpublishing. Instead, content deletion forces content to be unpublished immediately.
+* Node state has been deprecated and is no longer in use, as it was only used for content's `PENDING_DELETE` status.
+* Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<deployment/config#_content, content config>>.
+* `draft` branch is now restricted for unauthenticated access. By default, only `system.admin.login` role has access. Additional principles can be configured in <<deployment/config#_portal, portal config>> via `draftBranchAllowedFor` setting. Note that `system.admin` role always has access, regardless of the config.
+* Bundled GraalVM has been updated to version 22.3.1. Other JVM versions are not supported, although they may also work.
+
 == v7.11 notes
 
 WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (Hazelcast) has been updated in this release.
