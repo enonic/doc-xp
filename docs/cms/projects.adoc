@@ -39,17 +39,17 @@ For each project, dedicated principal roles are created. The roles are named as 
 An example might be com.enonic.cms.myproject.author.
 
 === Applications
-image:xp-7110.svg[XP 7.11.0,opts=inline]
+image:xp-7120.svg[XP 7.12.0,opts=inline]
 
-Similar to how applications (and their configs) can be assigned to sites, they can also be assigned (on even a higher level) to content projects. All functionality, schemas (content types, schemas, mixins etc.) and descriptors (pages, parts, layouts) from all assigned applications will be available within the scope of the project down to a site.
+Applications can be assigned directly to a content project. Most functionality, schemas (content types, mixins, x-data) as well as controller mappings be available within the scope of the project, until a site item appears.
 
-Unlike sites, content projects do not have page templates, so content rendering must be done directly via <<cms/mappings#_mappings, Mappings>>.
+Unlike sites, content at project level does not support pages, fragments and page page templates, so content preview and rendring must be done directly via <<cms/mappings#_mappings, Mappings>>.
 
-It is also worth noting that configurations of applications assigned to a project will be published whenever any content in that project gets published.
+It is also worth noting that configurations of applications assigned to a project will be published instantly - unlike changes to a site.
 
 IMPORTANT: Sites override project applications. If a site should use an application already assigned to its project, you must assign the application directly to the site.
 
-<<layers#, Layers>> inherit applications from all parent layers and their base project.
+<<layers#, Layered projects>> inherit application settings from parent layers, just like .
 
 NOTE: Sites inside the project are isolated and have no access to project's or each other's apps.
 
