@@ -18,29 +18,26 @@ Read more about implementation details <<admin/widgets#dashboard_widgets, here>>
 
 === Site mapping for services
 
-Site Mappings now allow to customize the behavior of Image, Attachment and Component <<cms/mappings#services, Services>>.
+Site Mappings can now be used to customize the behavior of Image, Attachment and Component services <<cms/mappings#services, Services>>.
 
-=== Project Applications
+=== Add apps to projects
 
-<<cms/projects#applications, Project Applications>> feature is now production ready and turned on by default.
+Previously, custom content types required you to create a site, and link your app to the site before you could create them. <<cms/projects#applications, Project Applications>> enable you to add apps directly to the project instead, and thus create custom content directly on the project root.
 
-=== Virtual Applications and No-code Schema
+Also, <<cms/mappings#mappings, controller mappings>> will now work on project level, which means you may also write custom previews without using sites.
 
-<<apps/virtual-applications#virtual_applications, Virtual Applications>> feature was introduced as an experimental feature in 7.11.
-As of 7.12 this feature is still experimental but has been refactored and improved:
+NOTE: Pages, fragments and page templates still require to be in the context of a site. 
 
-* Application configurations are now stored in the repository itself, similar to how application configurations are stored on a site.
-* Site <<cms/mappings#mappings, Mappings>> work with Projects as well
+=== Other changes
 
-=== Other improvements
-
-* Support of arm64 (aarch64) is no longer experimental. You may see a message `WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.` It does not affect XP operations and can be safely ignored.
-* Restricted access to draft branch. Can be configured via `draftBranchAllowedFor` setting in the <<deployment/config#portal, portal config>>
+* Draft branch access was previously restricted through the use of virtual hosts solely. Direct access now requires an authorized user. Role-based access can be configured via `draftBranchAllowedFor` setting in the <<deployment/config#portal, Portal configuration>> settings.
+* Support of arm64 (aarch64) used in Apple M1/M2 chips for instance, is no longer experimental. You may see a message `WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.` It does not affect XP operations and can be safely ignored.
+config#portal, portal config>>
 * Added `modifyMedia` method to the JS <<api/lib-content#modifymedia, lib-content>> API
 * Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<deployment/config#content, content config>>
 * Added possibility to delete indices before <<runtime/management#restore, Restore>> by using `force` option
-* 403 Error page has Logout button
-* Various TypeScript type improvements
+* The standard 403 error page now has a handy Logout button
+* Various improvements to the TypeScript types
 
 == XP7 Update 11
 
@@ -60,10 +57,6 @@ It's still under development design but is available for users to test and provi
 
 * Virtual Applications can be used as an alternative to installed (real) ones.
 They are code-less and can only contribute to schema definitions.
-
-* Virtual and real applications can now be configured on a project level.
-This allows custom content types to be used in a root of the project.
-
 
 Virtual application behavior can be configured in <<deployment/config#application, application config>>
 
