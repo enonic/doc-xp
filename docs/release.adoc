@@ -32,7 +32,6 @@ NOTE: Pages, fragments and page templates still require to be in the context of 
 
 * Draft branch access was previously restricted through the use of virtual hosts solely. Direct access now requires an authorized user. Role-based access can be configured via `draftBranchAllowedFor` setting in the <<deployment/config#portal, Portal configuration>> settings.
 * Support of arm64 (aarch64) used in Apple M1/M2 chips for instance, is no longer experimental. You may see a message `WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.` It does not affect XP operations and can be safely ignored.
-config#portal, portal config>>
 * Added `modifyMedia` method to the JS <<api/lib-content#modifymedia, lib-content>> API
 * Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<deployment/config#content, content config>>
 * Added possibility to delete indices before <<runtime/management#restore, Restore>> by using `force` option
