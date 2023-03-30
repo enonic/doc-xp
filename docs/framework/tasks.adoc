@@ -33,19 +33,21 @@ The form element in the descriptor XML is optional, and may be left empty if the
 
 Named tasks require a controller that represents the actual code to be executed. The controller must be placed in the task folder as `src/main/resources/tasks/<taskname>/<taskname>.js`.
 
-A named task controller must export a run function, which will be invoked by the <<../runtime/task-engine#,task engine>>. once a task is executed. 
+A named task controller must export a run function, which will be invoked by the <<../runtime/task-engine#,task engine>>. once a task is executed.
 
 The run function will receive the task parameters as a JSON object.
+
+`taskId` is provided as a second argument of the function image:xp-7130.svg[XP 7.13.0,opts=inline]
 
 .Example task controller
 [source,javascript]
 ----
 var taskLib = require('/lib/xp/task');
 
-exports.run = function (params) {
+exports.run = function (params, taskId) {
 
     var count = params.count || 42;
-    taskLib.progress({info: 'Initializing task'});
+    taskLib.progress({info: 'Initializing task ' + taskId});
 
     for (var i = 0; i < count; i++) {
         taskLib.progress({
@@ -56,7 +58,7 @@ exports.run = function (params) {
         processItem(i);
     }
 
-    taskLib.progress({info: 'Task completed'});
+    taskLib.progress({info: 'Task completed ' + taskId});
 };
 ----
 
