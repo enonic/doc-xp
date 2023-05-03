@@ -183,7 +183,7 @@ A basic index config might look something like this:
 [source,json]
 ----
 "_indexConfig": {
-    "default": { <!--1-->
+    "default": {  // <1>
         "enabled": true,
         "decideByType": false,
         "nGram": false,
@@ -193,10 +193,10 @@ A basic index config might look something like this:
         "indexValueProcessors": [],
         "languages": []
     },
-    "configs": [  <!--2-->
+    "configs": [   // <2>
         {
-            "path": "myProperty",  <!--3-->
-            "config": {  <!--4-->
+            "path": "myProperty",   // <3>
+            "config": {   // <4>
                 "enabled": true,
                 "decideByType": false,
                 "nGram": true,
@@ -207,7 +207,7 @@ A basic index config might look something like this:
             }
         },
         {
-            "path": "mySet.**",  <!--5-->
+            "path": "mySet.**",   // <5>
             "config": {
                 "enabled": true,
                 "decideByType": false,
@@ -215,7 +215,7 @@ A basic index config might look something like this:
                 "fulltext": false,
                 "includeInAllText": false,
                 "path": false,
-                "languages": ['en','no'] <!--6-->
+                "languages": ['en','no']  // <6>
             }
         }
     ]
@@ -471,11 +471,11 @@ Rather than providing a full config object, you may instead reference a standard
 [source,json]
 ----
 "_indexConfig": {
-    "default": "byType", <!--1-->
+    "default": "byType",  // <1>
     "configs": [
         {
             "path": "myProperty",
-            "config": "fulltext" <!--2-->
+            "config": "fulltext"  // <2>
         }
     ]
 }

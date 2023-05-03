@@ -64,12 +64,12 @@ The following configuration is common for all input types:
 
 [source,xml]
 ----
-<input type="InputTypeName" name="myname" > <!--1-->
-  <label i18n="myname.label">My label</label> <!--2-->
-  <default/> <!--3-->
-  <help-text i18n="myname.help-text">Help text here</help-text>  <!--4-->
-  <occurrences minimum="0" maximum="1"/>  <!--5-->
-  <config/> <!--6-->
+<input type="InputTypeName" name="myname" >  // <1>
+  <label i18n="myname.label">My label</label>  // <2>
+  <default/>  // <3>
+  <help-text i18n="myname.help-text">Help text here</help-text>   // <4>
+  <occurrences minimum="0" maximum="1"/>   // <5>
+  <config/>  // <6>
 </input>
 ----
 
@@ -101,9 +101,9 @@ label of the field set.
 
 [source,xml]
 ----
-<field-set> <!--1-->
+<field-set>  // <1>
   <label i18n="metadata.label">Metadata</label>
-  <items> <!--2-->
+  <items>  // <2>
     <input name="tags" type="Tag">
       <label>Tags for tag cloud</label>
       <occurrences minimum="0" maximum="5"/>
@@ -126,9 +126,9 @@ Here is an example of an item set with two inputs. The resulting form will allow
 
 [source,xml]
 ----
-<item-set name="contact_info"> <!--1-->
-  <label i18n="contact_info.label">Contact Info</label> <!--2-->
-  <occurrences minimum="0" maximum="0"/> <!--3-->
+<item-set name="contact_info">  // <1>
+  <label i18n="contact_info.label">Contact Info</label>  // <2>
+  <occurrences minimum="0" maximum="0"/>  // <3>
   <items>
     <input name="label" type="TextLine">
       <label>Label</label>
@@ -169,10 +169,10 @@ For multi-select options sets, it is also possible to pre-select options by defa
 ----
 <option-set name="blockOptionSet">
   <label>Content blocks</label>
-  <occurrences minimum="0" maximum="0"/> <!--1-->
+  <occurrences minimum="0" maximum="0"/>  // <1>
   <help-text>Create content with optional blocks</help-text>
-  <options minimum="1" maximum="1">  <!--2-->
-    <option name="hr"> <!--3-->
+  <options minimum="1" maximum="1">   // <2>
+    <option name="hr">  // <3>
       <label>Horisontal line</label>
       <help-text>Adds a separator between blocks</help-text>
     </option>
@@ -221,18 +221,18 @@ For multi-select options sets, it is also possible to pre-select options by defa
 ----
 <option-set name="checkOptionSet">
   <label i18n="checkOptionSet.label">Multi-selection OptionSet</label>
-  <expanded>true</expanded> <!--1-->
-  <occurrences minimum="1" maximum="1"/> <!--2-->
+  <expanded>true</expanded>  // <1>
+  <occurrences minimum="1" maximum="1"/>  // <2>
   <help-text>You can select up to 2 options</help-text>
-  <options minimum="1" maximum="2">  <!--3--> <!--4--> <!--5-->
-    <option name="option_1"> <!--6--> <!--7-->
-      <label i18n="checkOptionSet.option_1.label">Option 1</label> <!--8--> <!--9-->
-      <help-text i18n="checkOptionSet.option_1.help-text">Help text for Option 1</help-text> <!--10--> <!--11-->
+  <options minimum="1" maximum="2"> // <3> <4> <5>
+    <option name="option_1"> // <6> <7>
+      <label i18n="checkOptionSet.option_1.label">Option 1</label> // <8> <9>
+      <help-text i18n="checkOptionSet.option_1.help-text">Help text for Option 1</help-text> // <10> <11>
     </option>
     <option name="option_2">
       <label i18n="checkOptionSet.option_2.label">Option 2</label>
-      <default>true</default> <!--12-->
-      <items> <!--13-->
+      <default>true</default> // <12>
+      <items> // <13>
         <input name="contentSelector" type="ContentSelector">
           <label>Content selector</label>
           <occurrences minimum="0" maximum="0"/>

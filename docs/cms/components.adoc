@@ -48,11 +48,11 @@ The xml file placed in the component structure serves several purposes.
 [source,xml]
 ----
 <page>
-  <display-name i18n="component.page.name">My first page</display-name> <!--1--> <!--2-->
-  <description>Front page of our site</description> <!--3-->
-  <form/> <!--4-->
+  <display-name i18n="component.page.name">My first page</display-name> // <1> <2>
+  <description>Front page of our site</description>  // <3>
+  <form/>  // <4>
   <regions>
-    <region name="main"/> <!--5-->
+    <region name="main"/>  // <5>
   </regions>
 </page>
 ----

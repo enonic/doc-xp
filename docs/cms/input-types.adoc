@@ -35,9 +35,9 @@ image::Checkboxes.png[two checkboxes one is selected the other is not, 200]
 ----
 <input  name="mycheckbox" type="CheckBox">
   <label>My Checkbox</label>
-  <default>checked</default> <!--1-->
+  <default>checked</default>  // <1>
   <config>
-    <alignment>right</alignment> <!--2-->
+    <alignment>right</alignment>  // <2>
   </config>
 </input>
 ----
@@ -57,10 +57,10 @@ image::Combobox.png[two checkboxes one is selected the other is not, 700]
   <label>My Combobox</label>
   <occurrences minimum="1" maximum="2"/>
   <config>
-    <option value="one">Option One</option> <!--1-->
+    <option value="one">Option One</option>  // <1>
     <option value="two">Option Two</option>
   </config>
-  <default>one</default> <!--2-->
+  <default>one</default>  // <2>
 </input>
 ----
 <1> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple `option` elements are allowed and ordered.
@@ -81,13 +81,13 @@ image::Content-selector-default.png[An input box with a dropdown options below i
   <label>My ContentSelector</label>
   <occurrences minimum="0" maximum="0"/>
   <config>
-    <allowContentType>citation</allowContentType> <!--1-->
+    <allowContentType>citation</allowContentType>  // <1>
     <allowContentType>my.other.app:quote</allowContentType>
-    <allowPath>${site}/people/</allowPath> <!--2-->
+    <allowPath>${site}/people/</allowPath>  // <2>
     <allowPath>./*</allowPath>
     <allowPath>/quotes*</allowPath>
-    <treeMode>true</treeMode>  <!--3-->
-    <hideToggleIcon>true</hideToggleIcon> <!--4-->
+    <treeMode>true</treeMode>   // <3>
+    <hideToggleIcon>true</hideToggleIcon>  // <4>
   </config>
 </input>
 ----
@@ -222,7 +222,7 @@ image::Content-type-default.png[input field with a dropdown of all content, 700]
   <label>My CTYFilter</label>
   <occurrences minimum="0" maximum="0"/>
   <config>
-    <context>true</context> <!--1-->
+    <context>true</context>  // <1>
   </config>
 </input>
 ----
@@ -245,7 +245,7 @@ Below are two sample usages of CustomSelector:
   <label>My Custom Selector</label>
   <occurrences minimum="0" maximum="0"/>
   <config>
-    <service>my-custom-selector</service> <!--1-->
+    <service>my-custom-selector</service>  // <1>
   </config>
 </input>
 
@@ -254,7 +254,7 @@ Below are two sample usages of CustomSelector:
   <label>Intro song</label>
   <config>
     <service>spotify-music-selector</service>
-    <param value="genre">classic</param>  <!--2-->
+    <param value="genre">classic</param>   // <2>
     <param value="sortBy">length</param>
   </config>
 </input>
@@ -337,7 +337,7 @@ image::Date-selector.png[Input field with a calander above it and a blue ok butt
 ----
 <input name="mydate" type="Date">
   <label>My Date</label>
-  <default>2011-09-12</default> <!--1-->
+  <default>2011-09-12</default>  // <1>
 </input>
 ----
 <1> *default* date value to be used. The format for the default date value can be:
@@ -379,9 +379,9 @@ image::Datetime-selector.png[Input field with both a calander and time selection
 <input name="mydatetime" type="DateTime">
   <label>My DateTime</label>
   <config>
-    <timezone>true</timezone> <!--1-->
+    <timezone>true</timezone>  // <1>
   </config>
-  <default>2011-09-12</default> <!--2-->
+  <default>2011-09-12</default>  // <2>
 </input>
 ----
 <1> *timezone* set to `true` if timezone information should be used. Default is `false`.
@@ -456,14 +456,14 @@ image::Double.png[An inpt field with a lot of decimal numbers, 700]
 ----
 <input name="mydouble" type="Double">
   <label>My Double</label>
-  <default>3.89</default> <!--1-->
+  <default>3.89</default>  // <1>
 </input>
 
 <input name="angle" type="Double">
   <label>Angle (rad)</label>
   <config>
-    <min>0</min> <!--2-->
-    <max>3.14159</max> <!--3-->
+    <min>0</min>  // <2>
+    <max>3.14159</max>  // <3>
   </config>
 </input>
 ----
@@ -486,7 +486,7 @@ image::Geo-point.png[text input with a longitude and latitude numbers, 700]
 <input name="mygeopoint" type="GeoPoint">
   <label>My GeoPoint</label>
   <occurrences minimum="0" maximum="1"/>
-  <default>51.5,-0.1</default><!--1-->
+  <default>51.5,-0.1</default> // <1>
 </input>
 ----
 <1> *default* specifies a default string value for the GeoPoint, for example ``51.5,-0.1``.
@@ -500,11 +500,11 @@ A field for entering multi-line text with rich-formatting options.
 ----
 <input name="myhtmlarea" type="HtmlArea">
   <label>My HtmlArea</label>
-  <default><h3>Enter description here</h3></default><!--1-->
+  <default><h3>Enter description here</h3></default> // <1>
   <config>
-    <exclude>*</exclude> <!--2-->
-    <include>JustifyLeft JustifyRight | Bold Italic</include> <!--3-->
-    <allowHeadings>h2 h4 h6</allowHeadings> <!--4-->
+    <exclude>*</exclude>  // <2>
+    <include>JustifyLeft JustifyRight | Bold Italic</include>  // <3>
+    <allowHeadings>h2 h4 h6</allowHeadings>  // <4>
   </config>
 </input>
 ----
@@ -589,8 +589,8 @@ image::Image-selector.png[Input box with a grid of images to select below it, 50
 <input name="myimage" type="ImageSelector">
   <label>My Image</label>
   <occurrences minimum="0" maximum="1"/>
-  <config> <!--1-->
-    <allowPath>${site}/*</allowPath> <!--2-->
+  <config>  // <1>
+    <allowPath>${site}/*</allowPath>  // <2>
     <treeMode>true</treeMode>
     <hideToggleIcon>true</hideToggleIcon>
   </config>
@@ -609,14 +609,14 @@ image::Long.png[Number input showing a large number, 700]
 ----
 <input name="mylong" type="Long">
   <label>My Long</label>
-  <default>42</default> <!--1-->
+  <default>42</default>  // <1>
 </input>
 
 <input name="degrees" type="Long">
   <label>Degrees</label>
   <config>
-    <min>0</min> <!--2-->
-    <max>360</max> <!--3-->
+    <min>0</min>  // <2>
+    <max>360</max>  // <3>
   </config>
 </input>
 ----
@@ -634,9 +634,9 @@ The MediaSelector is a specialized version of the <<ContentSelector>> that is li
 <input name="mymedia" type="MediaSelector">
   <label>My Media</label>
   <occurrences minimum="0" maximum="1"/>
-  <config> <!--1-->
+  <config>  // <1>
     <allowContentType>media:archive</allowContentType>
-    <allowPath>${site}/*</allowPath> <!--2-->
+    <allowPath>${site}/*</allowPath>  // <2>
     <treeMode>true</treeMode>
     <hideToggleIcon>true</hideToggleIcon>
   </config>
@@ -657,12 +657,12 @@ image::Radio-buttons.png[two button where one of them is selected, 200]
 ----
 <input name="myradiobutton" type="RadioButton">
   <label>My RadioButton</label>
-  <occurrences minimum="1" maximum="1"/> <!--1-->
+  <occurrences minimum="1" maximum="1"/>  // <1>
   <config>
-    <option value="one" i18n="option_one.label">Option One</option> <!--2-->
+    <option value="one" i18n="option_one.label">Option One</option>  // <2>
     <option value="two" i18n="option_two.label">Option Two</option>
   </config>
-  <default>one</default> <!--3-->
+  <default>one</default>  // <3>
 </input>
 ----
 <1> *occurences* only make supports minumum=1 or 0 - maximum will always be 1.
@@ -698,11 +698,11 @@ A plain text, single line input with advanced validation options. Stored as stri
 <input name="socialsecuritynumber" type="TextLine">
   <label>My SSN</label>
   <occurrences minimum="1" maximum="3"/>
-  <default>000-00-0000</default> <!--1-->
+  <default>000-00-0000</default>  // <1>
   <config>
-    <max-length>11</max-length> <!--2-->
-    <show-counter>true</show-counter> <!--3-->
-    <regexp>\b\d{3}-\d{2}-\d{4}\b</regexp> <!--4-->
+    <max-length>11</max-length>  // <2>
+    <show-counter>true</show-counter>  // <3>
+    <regexp>\b\d{3}-\d{2}-\d{4}\b</regexp>  // <4>
   </config>
 </input>
 ----
@@ -748,10 +748,10 @@ A plain text, multi-line input field.
 ----
 <input name="mytextarea" type="TextArea">
   <label>My TextArea</label>
-  <default>Default text goes here</default> <!--1-->
+  <default>Default text goes here</default>  // <1>
   <config>
-    <max-length>42</max-length> <!--2-->
-    <show-counter>true</show-counter> <!--3-->
+    <max-length>42</max-length>  // <2>
+    <show-counter>true</show-counter>  // <3>
   </config>
 </input>
 ----
@@ -774,7 +774,7 @@ image::Time-selector.png[input field with a hour and minute selector above it, 7
 ----
 <input name="mytime" type="Time">
   <label>My Time</label>
-  <default>13:22</default> <!--1-->
+  <default>13:22</default>  // <1>
 </input>
 ----
 <1> *default* date value to be used. The format for the default date value can be:

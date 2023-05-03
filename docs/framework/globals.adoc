@@ -28,25 +28,25 @@ This globally available ``log`` object holds the logging methods. It's one metho
 level and takes the same number of parameters.
 
 [source,javascript]
-  log.debug(message, [args]) <!--1--> <!--2-->
+  log.debug(message, [args]) // <1> <2>
 
 <1> *string message* Message to log as a debug-level message.
 <2> *array args* Optional arguments used in message format.
 
 [source,javascript]
-  log.info(message, [args]) <!--1--> <!--2-->
+  log.info(message, [args]) // <1> <2>
 
 <1> *string message* Message to log as a info-level message.
 <2> *array args* Optional arguments used in message format.
 
 [source,javascript]
-  log.warning(message, [args]) <!--1--> <!--2-->
+  log.warning(message, [args]) // <1> <2>
 
 <1> *string message* Message to log as a warning-level message.
 <2> *array args* Optional arguments used in message format.
 
 [source,javascript]
-  log.error(message, [args]) <!--1--> <!--2-->
+  log.error(message, [args]) // <1> <2>
 
 <1> *string message* Message to log as a error-level message.
 <2> *array args* Optional arguments used in message format.
@@ -66,7 +66,7 @@ on the current location. It does not check if a resource exists at the specified
 This function supports both relative (with dot-references) and absolute paths.
 
 [source,javascript]
-  resolve(path) <!--1--> <!--2-->
+  resolve(path) // <1> <2>
 
 <1> *string path* Path to resolve using current location.
 <2> *returns* the fully qualified resource path of the location.
@@ -86,7 +86,7 @@ This globally available function will load a JavaScript file and return the expo
 The function implements parts of the `CommonJS Modules Specification`_.
 
 [source,javascript]
-  require(path) <!--1--> <!--2-->
+  require(path) // <1> <2>
 
 <1> *string path* Path to the JavaScript to load.
 <2> *returns* The loaded JavaScript object exports.

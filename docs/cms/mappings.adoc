@@ -20,16 +20,16 @@ Mapping are defined in the <<sites#site_xml, site descriptor>>.
 ----
 <site>
   <mappings>
-    <mapping controller="/site/foobar/api.js" order="10"> <!--1--> <!--2-->
-      <pattern>/api/v\d+/.*</pattern> <!--3-->
+    <mapping controller="/site/foobar/api.js" order="10"> // <1> <2>
+      <pattern>/api/v\d+/.*</pattern>  // <3>
     </mapping>
     <mapping controller="/site/pages/default/default.js">
-      <match>type:'portal:fragment'</match> <!--4-->
+      <match>type:'portal:fragment'</match>  // <4>
     </mapping>
-    <mapping filter="/site/foobar/filter.js" order="10"> <!--5-->
+    <mapping filter="/site/foobar/filter.js" order="10">  // <5>
       <pattern invert="true">/dont-match-me/.*</pattern>
     </mapping>
-    <mapping filter="/site/services/image.js"> <!--6-->
+    <mapping filter="/site/services/image.js">  // <6>
       <service>image</pattern>
     </mapping>
   </mappings>

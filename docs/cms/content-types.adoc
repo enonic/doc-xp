@@ -22,17 +22,17 @@ Below is an example content type definition:
 [source,xml]
 ----
 <content-type>
-  <display-name i18n="cty.person.displayname">Person</display-name> <!--1-->
-  <display-name-label i18n="cty.person.displayname.label">Full Name</display-name-label><!--2-->
-  <description>Create a new person</description> <!--3-->
-  <super-type>base:structured</super-type> <!--4-->
-  <is-abstract>false</is-abstract> <!--5-->
-  <is-final>true</is-final> <!--6-->
-  <is-built-in>false</is-built-in>  <!--7-->
-  <allow-child-content>true</allow-child-content> <!--8-->
-  <allow-child-content-type>base:folder</allow-child-content-type> <!--9-->
+  <display-name i18n="cty.person.displayname">Person</display-name>  // <1>
+  <display-name-label i18n="cty.person.displayname.label">Full Name</display-name-label> // <2>
+  <description>Create a new person</description>  // <3>
+  <super-type>base:structured</super-type>  // <4>
+  <is-abstract>false</is-abstract>  // <5>
+  <is-final>true</is-final>  // <6>
+  <is-built-in>false</is-built-in>   // <7>
+  <allow-child-content>true</allow-child-content>  // <8>
+  <allow-child-content-type>base:folder</allow-child-content-type>  // <9>
   <allow-child-content-type>${app}:article-*</allow-child-content-type>
-  <form> <!--10-->
+  <form> // <10>
     <input name="firstname" type="TextLine">
       <label>First Name</label>
     </input>

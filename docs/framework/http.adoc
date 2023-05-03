@@ -16,24 +16,24 @@ controller.
 [source,json]
 ----
 {
-  "method": "GET", <!--1-->
-  "scheme": "http", <!--2-->
-  "host": "enonic.com", <!--3-->
-  "port": "80", <!--4-->
-  "path": "/my/page", <!--5-->
-  "url": "http://enonic.com/my/page?debug=true", <!--6-->
-  "remoteAddress": "10.0.0.1", <!--7-->
-  "mode": "edit", <!--8-->
-  "branch": "master", <!--9-->
-  "body": null <!--10-->
-  "params": { <!--11-->
+  "method": "GET",  // <1>
+  "scheme": "http",  // <2>
+  "host": "enonic.com",  // <3>
+  "port": "80",  // <4>
+  "path": "/my/page",  // <5>
+  "url": "http://enonic.com/my/page?debug=true",  // <6>
+  "remoteAddress": "10.0.0.1",  // <7>
+  "mode": "edit",  // <8>
+  "branch": "master",  // <9>
+  "body": null // <10>
+  "params": { // <11>
     "debug": "true"
   },
-  "headers": { <!--12-->
+  "headers": { // <12>
     "Language": "en",
     "Cookies": "mycookie=123; other=abc;"
   },
-  "cookies": { <!--13-->
+  "cookies": { // <13>
     "mycookie": "123",
     "other": "abc"
   }
@@ -67,17 +67,17 @@ The ``response`` object is the value returned by an HTTP controller - as a respo
 [source,json]
 ----
 {
-  "status": 200, <!--1-->
-  "body": "Hello World", <!--2-->
-  "contentType": "text/plain", <!--3-->
-  "headers": {  <!--4-->
+  "status": 200,  // <1>
+  "body": "Hello World",  // <2>
+  "contentType": "text/plain",  // <3>
+  "headers": {   // <4>
       "key": "value"
   },
-  "cookies": {},  <!--5-->
-  "redirect": "/another/page",  <!--6-->
-  "postProcess": true,  <!--7-->
-  "pageContributions": {},  <!--8-->
-  "applyFilters": true  <!--9-->
+  "cookies": {},   // <5>
+  "redirect": "/another/page",   // <6>
+  "postProcess": true,   // <7>
+  "pageContributions": {},   // <8>
+  "applyFilters": true   // <9>
 }
 ----
 
@@ -104,16 +104,16 @@ return {
     status: 200,
     body: "Hello World",
     cookies: {
-        "plain": "value", <!--1-->
-        "complex": { <!--2-->
-            value: "value", <!--3-->
-            path: "/valid/path", <!--4-->
-            domain: "enonic.com", <!--5-->
-            comment: "Some cookie comments", <!--6-->
-            maxAge: 2000, <!--7-->
-            secure: false, <!--8-->
-            httpOnly: false, <!--9-->
-            sameSite: "Lax" <!--10-->
+        "plain": "value",  // <1>
+        "complex": {  // <2>
+            value: "value",  // <3>
+            path: "/valid/path",  // <4>
+            domain: "enonic.com",  // <5>
+            comment: "Some cookie comments",  // <6>
+            maxAge: 2000,  // <7>
+            secure: false,  // <8>
+            httpOnly: false,  // <9>
+            sameSite: "Lax" // <10>
         }
     }
 };

@@ -21,8 +21,8 @@ The descriptor should be placed in your project as `src/main/resources/idprovide
 [source,XML]
 ----
 <id-provider>
-  <mode>LOCAL</mode> <!--1-->
-  <form> <!--2-->
+  <mode>LOCAL</mode>  // <1>
+  <form>  // <2>
     <input name="title" type="TextLine">
       <label>Title</label>
       <occurrences minimum="0" maximum="1"/>
