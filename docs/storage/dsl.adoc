@@ -758,14 +758,14 @@ Any query operator result (expression or compound) can be boosted to change the 
         "term": {
           "field": "myString",
           "value": "value 2",
-          "boost": 2.0 <!--1-->
+          "boost": 2.0  // <1>
         }
       },
       {
         "term": {
           "field": "myString",
           "value": "value 3",
-          "boost": 0.5 <!--2-->
+          "boost": 0.5  // <2>
         }
       }
     ]

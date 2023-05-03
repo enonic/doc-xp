@@ -11,13 +11,13 @@ When downloading and unzipping the XP distro, you will find the following root s
 .XP distribution folder structure
 [source,folders]
 ----
-enonic-xp-<OS>-<type>-<version> <!--1-->
- |- bin/ <!--2-->
- |- home/  <!--3-->
- |- java/ <!--4-->
- |- lib/ <!--5-->
- |- service/ <!--6-->
- |- system/ <!--7-->
+enonic-xp-<OS>-<type>-<version>  // <1>
+ |- bin/  // <2>
+ |- home/   // <3>
+ |- java/  // <4>
+ |- lib/  // <5>
+ |- service/  // <6>
+ |- system/  // <7>
 ----
 
 <1> The root folder is simply referred to as XP_INSTALL.
@@ -43,17 +43,17 @@ NOTE: Folders marked with * will not appear until XP is started the first time
 [source,folders]
 ----
 XP_HOME/
-|- config/ <!--1-->
-|- data/ * <!--2-->
+|- config/  // <1>
+|- data/ *  // <2>
    |- dump/
    |- export/
-|- deploy/ <!--3-->
-|- logs/ <!--4-->
+|- deploy/  // <3>
+|- logs/  // <4>
 |- repo/ *
-   |- index/ <!--5-->
-   |- blob/ <!--6-->
-|- snapshots/ * <!--7-->
-|- work/ * <!--8-->
+   |- index/  // <5>
+   |- blob/  // <6>
+|- snapshots/ *  // <7>
+|- work/ *  // <8>
 ----
 
 <1> `config/` holds all configuration files, including vhost.cfg and system.properties. XP supports hot reloading of all files ending with .cfg

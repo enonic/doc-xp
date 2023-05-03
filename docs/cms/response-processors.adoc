@@ -50,7 +50,7 @@ In order to actually be executed, the processor must be declared in the app's <<
 [source,xml]
 <site>
   <processors>
-    <response-processor name="tracker" order="10"/> <!--1--> <!--2-->
+    <response-processor name="tracker" order="10"/> // <1> <2>
   </processors>
   <form/>
 </site>

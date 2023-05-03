@@ -31,12 +31,12 @@ Event object example:
 [source,JSON]
 ----
   {
-    "type": "message", <!--1-->
+    "type": "message",  // <1>
     "session": {
-      "id": "7",  <!--2-->
-      "path": "/",  <!--3-->
-      "params": {},  <!--4-->
-      "user": {  <!--5-->
+      "id": "7",   // <2>
+      "path": "/",   // <3>
+      "params": {},   // <4>
+      "user": {   // <5>
         "key": "user:system:user",
         "displayName": "User",
         "modifiedTime": "1970-01-01T00:00:00Z",
@@ -46,12 +46,12 @@ Event object example:
         "email": "email@example.com"
       }
     },
-    "data": {  <!--6-->
+    "data": {   // <6>
       "field": "value"
     },
-    "error": "",  <!--7-->
-    "closeReason":  1000,  <!--8-->
-    "message": "Hello World"  <!--9-->
+    "error": "",   // <7>
+    "closeReason":  1000,   // <8>
+    "message": "Hello World"   // <9>
   }
 ----
 

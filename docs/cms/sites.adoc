@@ -38,10 +38,10 @@ The descriptor must be placed in your project as: `src/main/resources/site/site.
 [source,xml]
 ----
 <site>
-  <processors> <!--1-->
-    <response-processor name="tracker" order="10"/> <!--1--> <!--2-->
+  <processors>  // <1>
+    <response-processor name="tracker" order="10"/> // <1> <2>
   </processors>
-  <mappings> <!--2-->
+  <mappings>  // <2>
      <mapping controller="/site/foobar/api.js" order="10">
        <pattern>/api/v\d+/.*</pattern>
      </mapping>
@@ -49,8 +49,8 @@ The descriptor must be placed in your project as: `src/main/resources/site/site.
        <match>type:'portal:fragment'</match>
      </mapping>
    </mappings>
-   <x-data name="seo-settings"/> <!--3-->
-   <form> <!--4-->
+   <x-data name="seo-settings"/>  // <3>
+   <form>  // <4>
     <input type="TextLine" name="company">
       <label>Company</label>
       <occurrences minimum="1" maximum="1"/>
