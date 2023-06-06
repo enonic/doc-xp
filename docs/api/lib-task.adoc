@@ -55,6 +55,7 @@ For more information on events, check out the <<lib-event#, event API>>
 
 == Functions
 
+[#get]
 === get
 
 Returns the current state and progress details for the specified task.
@@ -140,6 +141,7 @@ if (!isRunning) {
 }
 ```
 
+[#list]
 === list
 
 Returns the list of running tasks with their current state and progress details.
@@ -462,6 +464,7 @@ var taskId = taskLib.submitTask({
 _Deprecated from_ image:xp-770.svg[XP 7.7.0,opts=inline] +
 Replaced with <<executeFunction>>.
 
+[#submittask]
 === submitNamed
 _Deprecated from_ image:xp-770.svg[XP 7.7.0,opts=inline] +
 Replaced with <<submitTask>>

@@ -29,6 +29,7 @@ When parameters are passed to the task controller, they will be validated accord
 
 The form element in the descriptor XML is optional, and may be left empty if the task does not accept any parameters.
 
+[#controller]
 == Controller
 
 Named tasks require a controller that represents the actual code to be executed. The controller must be placed in the task folder as `src/main/resources/tasks/<taskname>/<taskname>.js`.

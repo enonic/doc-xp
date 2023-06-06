@@ -14,6 +14,7 @@ Widget is essentially a special, admin-only kind of a web application. Like all 
 To create a widget, add a new folder in your project structure, i.e.  `src/main/resources/admin/widgets/<widget-name>`.
 The folder must contain both a descriptor (`<widget-name>.xml`) and a controller (`<widget-name>.js`).
 
+[#descriptor]
 === Descriptor
 
 Widget descriptor defines a display name, a list of roles required to access the widget and interfaces it implements.
