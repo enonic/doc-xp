@@ -47,11 +47,25 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.13 notes
 
+* Bundled Java version was upgraded to Java 17. Our internal testing didn't show any significant issues with this upgrade (except Nashorn engine removal), but we recommend testing your applications before upgrading to this version as always. Consult with https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html[Oracle JDK Migration Guide] for more information about migrating from Java 11 to Java 17 in case you experience any issues.
+When building applications it is recommended to specify `options.release = 11` for `compileJava` task https://docs.gradle.org/current/userguide/building_java_projects.html#sec:compiling_with_release[in Gradle build file] to preserve compatibility with XP versions lower than 7.13.
+XP Gradle plugin `com.enonic.xp.app` version `3.4.0` does this automatically for you when `systemVersion` is set to `7.12.x` or lower.
+
+* Usage of Java 11 Nashorn engine is now deprecated and will be removed in future XP versions. Currently warning is issued for each usage: `Class x.y.Z uses unsupported jdk.nashorn. Application may stop working in future XP versions.` Applications must not use Nashorn engine directly, but instead use XP's Javascript API.
+
+* `base:media` content type is now abstract - it can no longer be created directly. It was documented as abstract, but was not enforced in previous versions.
+
+* Content API no longer reads Page/Layout descriptors to determine regions for every fetched content.
+Regions are built from `components` array in content data. This changes the behaviour for regions with no component assigned.
+Rendering engine is now responsible for reconstructing unused regions from Page/Layout descriptors.
+
+* Server Distro Mac ARM64 bundles GraalVM 22.3.1 Java 17 due to lack of GraalVM 22.3.2 image for Mac ARM64. Other distros are based on GraalVM 22.3.2 Java 17
+
 == v7.12 notes
 
 * You need to reconfigure all Project level applications configured before version 7.12, if you have any. This is not a breaking change, as this feature was not announced in 7.11 and was not officially supported until 7.12.
 * Content API is now enforced to support only `draft` and `master` branches. Node API continues to support custom branches.
-* Content API does not allow to create/modify/delete content directly on `master` branch or to publish to any other branch than `master.`
+* Content API does not allow to create/modify/delete content directly on `master` branch or to publish to any other branch than `master`.
 * Content `PENDING_DELETE` state is no longer in use. Content deletion no longer happens during unpublishing. Instead, content deletion forces content to be unpublished immediately.
 * Node state has been deprecated and is no longer in use, as it was only used for content's `PENDING_DELETE` status.
 * Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<deployment/config#_content, content config>>.

@@ -5,6 +5,30 @@ include::.variables.adoc[]
 
 == XP7 Update 13
 
+=== Java 17
+
+* XP now runs on Java 17 GraalVM based version - latest LTS version of Java.
+
+=== Management API
+
+* `webapps`, `projects` and `idproviders` have been added to the <<runtime/management#management_endpoint, Management API>>.
+* A new healthcheck (`health`) and readiness (`ready`) endpoint has been added to the <<runtime/statistics#statistics_endpoint, Management API>>.
+
+=== Task API
+
+* A new `taskId` parameter has been added to the Task <<framework/tasks#controller, Controller>>.
+* Added ability to set custom task `name` when <<api/lib-task#submittask, Submitting>> a task.
+* Task info returned by <<api/lib-task#get, get>> and <<api/lib-task#list, list>> now includes `node` - XP node name where the task runs.
+
+=== Other Changes
+
+* <<admin/widgets#descriptor, Widget Descriptor>> now supports localization of widget title and description.
+* Vacuum, Dump, Load, AuditLog-Cleanup and Reindex tasks can only run single instance at a time within a cluster.
+* Introduced Node Repo cache to improve performance of Node API. Can be configured in <<deployment/config#repo, Repo config>>.
+* Robustness of scheduled jobs has been improved.
+* Various improvements to the TypeScript types.
+* Various bug fixes and performance improvements.
+
 == XP7 Update 12
 
 === Dashboard Widgets
@@ -28,7 +52,7 @@ Previously, custom content types required you to create a site, and link your ap
 
 Also, <<cms/mappings#mappings, controller mappings>> will now work on project level, which means you may also write custom previews without using sites.
 
-NOTE: Pages, fragments and page templates still require to be in the context of a site. 
+NOTE: Pages, fragments and page templates still require to be in the context of a site.
 
 === Other changes
 
