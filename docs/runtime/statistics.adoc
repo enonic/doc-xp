@@ -263,7 +263,7 @@ This view gives a brief overview of the nodes in the Hazelcast cluster. Check Ha
 === Health check
 image:xp-7130.svg[XP 7.13.0,opts=inline]
 
- GET http://<host>:2609/healthz
+ GET http://<host>:2609/health
 
 Health check validates that essential data services are available and ready to serve requests.
 
