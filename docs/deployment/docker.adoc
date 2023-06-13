@@ -31,7 +31,7 @@ The goals of this docker image is to:
 
 === Base image
 
-Every time the Enonic XP image is built it will be based off the latest `adoptopenjdk:11-jre-hotspot` docker image. This ensures the latest updates to the JVM and OS.
+Every time the Enonic XP image is built it will be based off the latest `enonic/graalvm` docker image. This ensures the latest updates to the JVM and OS.
 
 === Enforced best practices
 
