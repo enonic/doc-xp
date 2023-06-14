@@ -272,7 +272,7 @@ Successful validation will return an empty response with `200` status code. Fail
 ----
 {
     "errors": [
-      "org.elasticsearch.client.Client service in not available"
+      "org.elasticsearch.client.Client service is not available"
     ]
 }
 ----
