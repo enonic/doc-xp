@@ -285,7 +285,7 @@ image:xp-7130.svg[XP 7.13.0,opts=inline]
 
 Readiness check validates that all services needed for the instance to be fully operational are available and ready to serve requests.
 
-Successful returns an empty response with `200` status code. Failed check returns `503` status code with the list of errors:
+Successful validation will return an empty response with `200` status code. Failed validation will return `503` status code with the list of errors:
 
 [source, json]
 ----
