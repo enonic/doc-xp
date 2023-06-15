@@ -11,8 +11,8 @@ include::.variables.adoc[]
 
 === Management API
 
-* `webapps`, `projects` and `idproviders` have been added to the <<runtime/management#management_endpoint, Management API>>.
-* A new healthcheck (`health`) and readiness (`ready`) endpoint has been added to the <<runtime/statistics#statistics_endpoint, Management API>>.
+* `webapps`, `projects` and `idproviders` have been added to the <<runtime/management#management_endpoint, Management Endpoint>>.
+* A new healthcheck (`health`) and readiness (`ready`) endpoint has been added to the <<runtime/statistics#statistics_endpoint, Statistics Endpoint>>.
 
 === Task API
 
