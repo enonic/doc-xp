@@ -8,7 +8,7 @@ JavaScript developers may directly invoke and use Java-based code, since the XP 
 == The `__` object
 
 In Enonic XP, there is a global object named `+__+` (double underscore), accessible from any serverside JavaScript code, which provides
-a way to wrap Java objects in a JavaScript object.  The `+__+` object has functions that allow JavaScript to communicate with Java
+a way to wrap Java objects in a JavaScript object. The `+__+` object has functions that allow JavaScript to communicate with Java
 classes. The ``newBean`` function will wrap the Java object named in the parameter, for instance:
 
 [source,javascript]
@@ -41,6 +41,8 @@ exports.readLines = function (stream) {
 This results in a global JavaScript function ``readLines``. This example also shows the use of the ``toNativeObject`` method, which in
 this case, converts a Java String array to a JSON object.
 
+Java objects constructed by `newBean` may, but not required to, implement `com.enonic.xp.script.bean.ScriptBean` interface.
+`ScriptBean::initialize` is used to inject `com.enonic.xp.script.bean.BeanContext` object, which can be used to access the application and resource keys, as well as current Request, Context and XP Java API Services.
 
 === Passing parameters to Java
 
