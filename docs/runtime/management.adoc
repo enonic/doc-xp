@@ -147,8 +147,7 @@ NOTE: Read about authorization <<#authorization, here>>
 
 |`force`
 |Boolean
-| image:xp-7120.svg[XP 7.12.0,opts=inline]
-|if that parameter has value `true` then affected indices will be removed before snapshot is applied. Default: `false`
+| image:xp-7120.svg[XP 7.12.0,opts=inline] If `true` then affected indices will be removed before snapshot is applied. It is helpful when Elasticsearch indices are corrupted. Default: `false`
 |===
 
 NOTE: Read about authorization <<#authorization, here>>
