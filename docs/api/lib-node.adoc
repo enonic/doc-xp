@@ -577,7 +577,7 @@ Fields
 
 === exists
 
-Checking if a node or nodes exist for the current context.
+Checks if a node exists for the current context.
 
 [.lead]
 Parameters
@@ -587,32 +587,42 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| keys | string \| Array.<string> | Node keys to check. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
+| key | string | Path or id to the node
 |===
 
 [.lead]
 Returns
 
-*Array.<string>* : The list of keys that exist.
+*boolean* : true if exists, false otherwise
 
 [.lead]
-Example
+Examples
 
-.Check for existing nodes
+.Check for existing node by path
 [source,js]
 ----
-var result = repo.exists('existingNodeId', '/path/to/existingNode', 'nonExistingNodeId');
+// Checking if a node exists by path
+const result = repo.exists('/path/to/mynode');
+
+if (result) {
+    log.info('Node exists');
+} else {
+    log.info('Node does not exist');
+}
 ----
 
-.Sample response
+.Check for existing node by id
 [source,js]
 ----
-[
-    "existingNodeId",
-    "nodeId of node at /path/to/existingNode"
-]
-----
+// Checking if a node exists by id
+const result = repo.exists('77963d9e-b3c8-4a53-85a9-20c375a92742');
 
+if (result) {
+    log.info('Node exists');
+} else {
+    log.info('Node does not exist');
+}
+----
 
 === findChildren
 
