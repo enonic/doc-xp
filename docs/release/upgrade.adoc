@@ -47,9 +47,12 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.13 notes
 
-* Bundled Java version was upgraded to Java 17. Our internal testing didn't show any significant issues with this upgrade (except Nashorn engine removal), but we recommend testing your applications before upgrading to this version as always. Consult with https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html[Oracle JDK Migration Guide] for more information about migrating from Java 11 to Java 17 in case you experience any issues.
-When building applications it is recommended to specify `options.release = 11` for `compileJava` task https://docs.gradle.org/current/userguide/building_java_projects.html#sec:compiling_with_release[in Gradle build file] to preserve compatibility with XP versions lower than 7.13.
+* Bundled Java version was upgraded to Java 17 Our internal testing didn't show any significant issues with this upgrade (except Nashorn engine removal), but we recommend testing your applications before upgrading to this version as always. Consult with https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html[Oracle JDK Migration Guide] for more information about migrating from Java 11 to Java 17 in case you experience any issues.
+
+* When building applications it is recommended to specify `options.release = 11` for `compileJava` task https://docs.gradle.org/current/userguide/building_java_projects.html#sec:compiling_with_release[in Gradle build file] to preserve compatibility with XP versions lower than 7.13.
 XP Gradle plugin `com.enonic.xp.app` version `3.4.0` does this automatically for you when `systemVersion` is set to `7.12.x` or lower.
+
+* Ensure you are using the latest version of the Test Framework `com.enonic.xp:testing` in your Gradle project. For example, if your Test Framework dependency is defined as `testImplementation "com.enonic.xp:testing:$\{xpVersion}"` you might need to change it to `testImplementation "com.enonic.xp:testing:7.13.0"`. Older versions may not work with Java 17 and will cause tests to fail with `java.lang.NoClassDefFoundError: jdk/nashorn/api/scripting/NashornScriptEngineFactory`.
 
 * Usage of Java 11 Nashorn engine is now deprecated and will be removed in future XP versions. Currently warning is issued for each usage: `Class x.y.Z uses unsupported jdk.nashorn. Application may stop working in future XP versions.` Applications must not use Nashorn engine directly, but instead use XP's Javascript API.
 
