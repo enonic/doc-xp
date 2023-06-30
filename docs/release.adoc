@@ -3,6 +3,47 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP7 Update 13
+
+=== Java 17
+
+* XP now runs on Java 17 GraalVM based version - latest LTS version of Java.
+
+=== Management API
+
+* `webapps`, `projects` and `idproviders` have been added to the <<runtime/management#management_endpoint, Management Endpoint>>.
+
+=== Statistics API
+
+* A new healthcheck (`health`) and readiness (`ready`) endpoint has been added to the <<runtime/statistics#statistics_endpoint, Statistics Endpoint>>.
+
+=== Task API
+
+* A new `taskId` parameter has been added to the Task <<framework/tasks#controller, Controller>>.
+* Added ability to set custom task `name` when <<api/lib-task#submittask, Submitting>> a task.
+* Task info returned by <<api/lib-task#get, get>> and <<api/lib-task#list, list>> now includes `node` - XP node name where the task runs.
+
+=== SDK
+
+* Welcome page of the Enonic SDK has been greatly improved to show the main XP endpoints, a new section with installed applications and allow browsing existing content projects, sites and webapps. Admin section allows logging in as a guest, unless admin user has been created. You can open admin tools and webapps with one click, directly from this page. Content Projects and Sites can be open with one click in Content Studio, if it's installed.
+
+image:713-sdk-welcome.png["SDK Welcome page", 75%]
+
+image:713-sdk-welcome-projects.png["SDK Welcome page projects", 50%]
+
+* Login page in SDK has been slightly improved to emphasise the "Log in as Guest" action until an admin user is created.
+
+image:713-sdk-login.png["SDK Login page", 75%]
+
+=== Other Changes
+
+* <<admin/widgets#descriptor, Widget Descriptor>> now supports localization of widget title and description.
+* Vacuum, Dump, Load, AuditLog-Cleanup and Reindex tasks can only run single instance at a time within a cluster.
+* Introduced Node Repo cache to improve performance of Node API. Can be configured in <<deployment/config#repo, Repo config>>.
+* Robustness of scheduled jobs has been improved.
+* Various improvements to the TypeScript types.
+* Various bug fixes and performance improvements.
+
 == XP7 Update 12
 
 === Dashboard Widgets
@@ -26,7 +67,7 @@ Previously, custom content types required you to create a site, and link your ap
 
 Also, <<cms/mappings#mappings, controller mappings>> will now work on project level, which means you may also write custom previews without using sites.
 
-NOTE: Pages, fragments and page templates still require to be in the context of a site. 
+NOTE: Pages, fragments and page templates still require to be in the context of a site.
 
 === Other changes
 

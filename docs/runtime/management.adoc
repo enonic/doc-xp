@@ -1,3 +1,4 @@
+[#management_endpoint]
 = Management Endpoint
 :toc: right
 :imagesdir: ../images
@@ -879,6 +880,79 @@ NOTE: This command should be used after migrating content from Enonic CMS using 
 
 NOTE: Task info can be fetched with <<task, task>> request.
 
+=== Projects
+
+Project related commands.
+
+=== List
+image:xp-7130.svg[XP 7.13.0,opts=inline]
+
+Lists all projects together with their sites.
+
+.Url
+ GET content/projects/list
+
+.Response
+[source,json]
+----
+[
+  {
+    "description" : "Testing features for Enonic XP",
+    "displayName" : "Features",
+    "name" : "features",
+    "parent" : "default",
+    "branches" : [
+      {
+        "name" : "draft",
+        "sites" : [
+          {
+            "displayName" : "Features",
+            "language" : "en",
+            "path" : "/features"
+          },
+          {
+            "displayName" : "AuditLogsDemo",
+            "language" : null,
+            "path" : "/features/js-libraries/audit-logs"
+          }
+        ]
+      },
+      {
+        "name" : "master",
+        "sites" : [
+          {
+            "name": "master",
+            "sites": [
+              {
+                "displayName": "Features",
+                "language": null,
+                "path": "/features"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "description" : null,
+    "displayName" : "Default",
+    "name" : "default",
+    "parent" : null,
+    "branches" : [
+      {
+        "name" : "draft",
+        "sites" : []
+      },
+      {
+        "name" : "master",
+        "sites" : []
+      }
+    ]
+  }
+]
+----
+
 === SyncAll
 image:xp-760.svg[XP 7.6.0,opts=inline]
 
@@ -895,6 +969,61 @@ NOTE: Read about authorization <<#authorization, here>>
 {
     "taskId": "767dad91-eecd-442b-a9f8-d3a892e1e8c4"
 }
+----
+== ID Providers
+image:xp-7130.svg[XP 7.13.0,opts=inline]
+
+Id providers related commands.
+
+=== List
+Lists all the id providers.
+
+.Url
+ GET idproviders/list
+
+.Response
+[source,json]
+----
+[
+  {
+    "description" : null,
+    "displayName" : "Auth ID Provider",
+    "key" : "auth-id-provider"
+  },
+  {
+    "description" : "Azure connection",
+    "displayName" : "Azure ID Provider",
+    "key" : "azure-id-provider"
+  },
+  {
+    "description" : null,
+    "displayName" : "System Id Provider",
+    "key" : "system"
+  }
+]
+----
+== Webapps
+image:xp-7130.svg[XP 7.13.0,opts=inline]
+
+Web apps related commands.
+
+=== List
+Lists all the web apps.
+
+.Url
+ GET webapps/list
+
+.Response
+[source,json]
+----
+[
+    {
+      "name": "com.enonic.cloud.console"
+    },
+    {
+      "name": "com.enonic.cloud.api"
+    }
+]
 ----
 
 ////

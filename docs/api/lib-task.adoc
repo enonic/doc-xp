@@ -55,6 +55,7 @@ For more information on events, check out the <<lib-event#, event API>>
 
 == Functions
 
+[#get]
 === get
 
 Returns the current state and progress details for the specified task.
@@ -140,6 +141,7 @@ if (!isRunning) {
 }
 ```
 
+[#list]
 === list
 
 Returns the list of running tasks with their current state and progress details.
@@ -425,7 +427,8 @@ Parameters
 .Properties
 !===
 ! Name   ! Type   ! Attributes ! Description
-! descriptor   ! string !            ! Descriptor of the task to execute. Descriptor can be relative to the current application, or a fully qualified task name (<appname>:<taskname>)
+! descriptor   ! string !            ! Descriptor of the task to execute. Descriptor can be relative to the current application, or a fully qualified task descriptor name (<appname>:<taskname>) image:xp-7130.svg[XP 7.13.0,opts=inline]
+! name ! string ! <optional> ! Optional name of the task which appears in task info. If not specified, descriptor name will be used instead.
 ! config ! object ! <optional> ! Configuration parameters to pass to the task to be executed. The object must be valid according to the schema defined in the form of the task descriptor XML.
 !===
 
@@ -461,6 +464,7 @@ var taskId = taskLib.submitTask({
 _Deprecated from_ image:xp-770.svg[XP 7.7.0,opts=inline] +
 Replaced with <<executeFunction>>.
 
+[#submittask]
 === submitNamed
 _Deprecated from_ image:xp-770.svg[XP 7.7.0,opts=inline] +
 Replaced with <<submitTask>>
@@ -491,6 +495,7 @@ Properties
 | user        | string | Key of the user that submitted the task
 | startTime   | string | Time when the task was submitted (in ISO-8601 format)
 | progress    | object | Progress information provided by the running task
+| node        | string | XP cluster node the task is running on image:xp-7130.svg[XP 7.13.0,opts=inline]
 
 [%header,cols="1%,1%,98%a", options="header"]
 [grid="none"]

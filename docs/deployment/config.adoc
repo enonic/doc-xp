@@ -163,13 +163,18 @@ smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required.
 
 `XP_HOME/config/com.enonic.xp.repo.cfg`
 
-Specifies the root location for where to find and place snapshot files.
+Use this file to configure the node repository layer.
 
 .Example below uses default settings
 [source,properties]
 ----
+cache.size = 1000000
 snapshots.dir = ${xp.home}/snapshots
 ----
+
+cache.size:: image:xp-7130.svg[XP 7.13.0,opts=inline] Specifies the maximum number of nodes to keep in memory. Default: `100000`
+
+snapshots.dir:: Specifies the root location for where to find and place snapshot files. Default: `${xp.home}/snapshots`
 
 NOTE: If you change this value, remember to update value for `path.repo` in `com.enonic.xp.elasticsearch.cfg` as well.
 
@@ -177,7 +182,7 @@ NOTE: If you change this value, remember to update value for `path.repo` in `com
 
 `XP_HOME/config/com.enonic.xp.blobstore.cfg`
 
-Control settings for the blobstore persistance layer.
+Control settings for the blobstore persistence layer.
 
 .Sample showing default settings
 [source,properties]
@@ -190,8 +195,8 @@ cache.FCapacity = 100mb
 
 provider:: is the blobstore provider to use. Default value is `file`. Other providers will be made available in future releases. Each provider will have a separate configuration file named `com.enonic.xp.blobstore.<providername>.cfg`
 cache:: enables or disables memory caching of blobs fetched from the blobstore. Default: true
-cache.sizeThreshold:: specifies the maximum size for objects to be cached. Default: 1mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
-cache.memoryCapacity:: is the maximum memory footprint of the blob cache. Default: 100mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
+cache.sizeThreshold:: specifies the maximum size for objects to be cached. Default: 1mb. The size notation accepts a number plus byte-size identifier (b/kb/mb/gb/tb/pb)
+cache.memoryCapacity:: is the maximum memory footprint of the blob cache. Default: 100mb. The size notation accepts a number plus byte-size identifier (b/kb/mb/gb/tb/pb)
 
 [#file-blobstore]
 === File blobstore

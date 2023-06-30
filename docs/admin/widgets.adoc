@@ -9,7 +9,7 @@ Widgets may or may not be context-dependent (require id of selected content and 
 
 == Implementation
 
-Widget is essentially a special, admin-only kind of a web application. Like all other XP components, widgets are defined by a controller and a descriptor.
+Widget is essentially a special, admin-only kind of web application. Like all other XP components, widgets are defined by a controller and a descriptor.
 
 To create a widget, add a new folder in your project structure, i.e.  `src/main/resources/admin/widgets/<widget-name>`.
 The folder must contain both a descriptor (`<widget-name>.xml`) and a controller (`<widget-name>.js`).
@@ -23,8 +23,8 @@ The descriptor file must match the widget folder name, i.e. `admin/widgets/<widg
 [source,xml]
 ----
 <widget>
-  <display-name>My dashboard widget</display-name>
-  <description>Description of my dashboard widget</description>
+  <display-name i18n="phrases.my-dashboard-widget">My dashboard widget</display-name>
+  <description i18n="phrases.my-dashboard-widget-desc">Description of my dashboard widget</description>
   <interfaces>
     <interface>admin.dashboard</interface>
   </interfaces>
@@ -37,7 +37,7 @@ The descriptor file must match the widget folder name, i.e. `admin/widgets/<widg
 
 === Controller
 
-To drive the widget, we will need a <<../framework/controllers#, controller>>. The controller typically renders the  widget's initial html.
+To drive the widget, we will need a <<../framework/controllers#, controller>>. The controller typically renders the widget's HTML template.
 Depending on the widget implementation it may also handle any further server requests from the widgets interface.
 
 The controller file must match the widget name, i.e. `admin/widgets/<widget-name>/<widget-name>.js`:
