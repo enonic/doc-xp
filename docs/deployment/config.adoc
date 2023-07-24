@@ -854,6 +854,10 @@ auditlog.filter = system.content.set*
 
 attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in content attachment file names. Default: `false`.
 
+image:xp-7131.svg[XP 7.13.1,opts=inline]
+
+resolveEmptyRegions:: Set to `true` to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: `false`.
+
 [#vacuum]
 === Vacuum
 
