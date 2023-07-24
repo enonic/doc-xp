@@ -64,6 +64,8 @@ XP Gradle plugin `com.enonic.xp.app` version `3.4.0` does this automatically for
 Regions are built from `components` array in content data. This changes the behaviour for regions with no component assigned.
 Rendering engine is now responsible for reconstructing unused regions from Page/Layout descriptors.
 
+IMPORTANT: In `7.13.1` you can bring back the old deprecated behaviour making Content API inject empty regions by setting `resolveEmptyRegions` parameter to `true` in the <<deployment/config#_content, content config>>
+
 * Server Distro Mac ARM64 bundles GraalVM 22.3.1 Java 17 due to lack of GraalVM 22.3.2 image for Mac ARM64. Other distros are based on GraalVM 22.3.2 Java 17
 
 == v7.12 notes
