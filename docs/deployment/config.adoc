@@ -801,6 +801,7 @@ enabled:: Set to false to disable the creation of audit log entries. Default: `t
 outputLogs:: Set to true to log the stored audit log entries. Default: `false`.
 ageThreshold:: Age of data to be removed by a cleanup task. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Nothing will be removed by default, duration must me set.
 
+[#content_config]
 === Content
 
 NOTE: This config file was first introduced in v7.2
@@ -816,7 +817,7 @@ auditlog.enabled = true
 ----
 
 auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
-IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
+IMPORTANT: Audit log can be disabled by common `<<#audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
 
 image:xp-7120.svg[XP 7.12.0,opts=inline]
 
