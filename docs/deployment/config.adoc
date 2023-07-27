@@ -859,6 +859,10 @@ image:xp-7131.svg[XP 7.13.1,opts=inline]
 
 resolveEmptyRegions:: Set to `true` to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: `false`.
 
+WARNING: Setting `resolveEmptyRegions` to `true` can adversely impact system performance. 
+By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required. 
+As such, it may lead to slower system response and reduced efficiency. By default, this setting is turned off (false) to prioritize optimal performance.
+
 [#vacuum]
 === Vacuum
 
