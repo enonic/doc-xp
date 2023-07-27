@@ -858,7 +858,7 @@ resolveEmptyRegions:: image:xp-7131.svg[XP 7.13.1,opts=inline] Set to `true` to 
 
 WARNING: Setting `resolveEmptyRegions` to `true` can adversely impact system performance. 
 By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required. 
-As such, it may lead to slower system response and reduced efficiency. By default, this setting is turned off (false) to prioritize optimal performance.
+As such, it may lead to slower system response and reduced efficiency. Importantly, this functionality is deprecated and will be removed in future versions of Enonic XP. It is advisable to adapt your workflows to operate without this feature to ensure future compatibility.
 
 [#vacuum]
 === Vacuum
