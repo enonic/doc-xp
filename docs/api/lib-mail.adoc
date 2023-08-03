@@ -24,6 +24,10 @@ const mailLib = require('/lib/xp/mail');
 
 You are now ready to use the library functionality.
 
+====
+[NOTE]
+You also need to configure your smtp-server before you can send out email. For details, see <<../deployment/config#mail, the configuration page>>
+====
 
 == Functions
 
