@@ -1,0 +1,418 @@
+{
+  "menuItems": [
+    {
+      "title": "Manifesto",
+      "document": "manifesto"
+    },
+    {
+      "title": "Applications",
+      "document": "apps",
+      "menuItems": [
+        {
+          "title": "Projects",
+          "document": "apps/projects"
+        },
+        {
+          "title": "Build System",
+          "document": "apps/build-system"
+        },
+        {
+          "title": "Virtual Applications",
+          "document": "apps/virtual-applications"
+        }
+      ]
+    },
+    {
+      "title": "JS Framework",
+      "document": "framework",
+      "menuItems": [
+        {
+          "title": "Globals",
+          "document": "framework/globals"
+        },
+        {
+          "title": "HTTP",
+          "document": "framework/http"
+        },
+        {
+          "title": "Controllers",
+          "document": "framework/controllers"
+        },
+        {
+          "title": "Filters",
+          "document": "framework/filters"
+        },
+        {
+          "title": "Events",
+          "document": "framework/events"
+        },
+        {
+          "title": "Websocket",
+          "document": "framework/websocket"
+        },
+        {
+          "title": "Error handler",
+          "document": "framework/error"
+        },
+        {
+          "title": "ID provider",
+          "document": "framework/idprovider"
+        },
+        {
+          "title": "Tasks",
+          "document": "framework/tasks"
+        },
+        {
+          "title": "Localization",
+          "document": "framework/i18n"
+        },
+        {
+          "title": "Java bridge",
+          "document": "framework/java-bridge"
+        }
+      ]
+    },
+    {
+      "title": "Runtime",
+      "document": "runtime",
+      "menuItems": [
+        {
+          "title": "HTTP engines",
+          "document": "runtime/engines",
+          "menuItems": [
+            {
+              "title": "Webapp Engine",
+              "document": "runtime/engines/webapp-engine"
+            },
+            {
+              "title": "Site Engine",
+              "document": "runtime/engines/site-engine",
+              "menuItems": [
+                {
+                  "title": "Image service",
+                  "document": "runtime/engines/site-engine/image-service"
+                },
+                {
+                  "title": "Component service",
+                  "document": "runtime/engines/site-engine/component-service"
+                }
+              ]
+            },
+            {
+              "title": "Admin Engine",
+              "document": "runtime/engines/admin-engine"
+            },
+            {
+              "title": "Asset service",
+              "document": "runtime/engines/asset-service"
+            },
+            {
+              "title": "HTTP service",
+              "document": "runtime/engines/http-service"
+            },
+            {
+              "title": "IDprovider service",
+              "document": "runtime/engines/idprovider-service"
+            }
+          ]
+        },
+        {
+          "title": "Task engine",
+          "document": "runtime/task-engine"
+        },
+        {
+          "title": "Management Endpoint",
+          "document": "runtime/management"
+        },
+        {
+          "title": "Statistics Endpoint",
+          "document": "runtime/statistics"
+        }
+      ]
+    },
+    {
+      "title": "Storage",
+      "document": "storage",
+      "menuItems": [
+        {
+          "title": "Nodes and repos",
+          "document": "storage/nodes"
+        },
+        {
+          "title": "Properties",
+          "document": "storage/properties"
+        },
+        {
+          "title": "Indexing",
+          "document": "storage/indexing"
+        },
+        {
+          "title": "Branches",
+          "document": "storage/branches"
+        },
+        {
+          "title": "Queries (NoQL)",
+          "document": "storage/noql"
+        },
+        {
+          "title": "Queries (DSL)",
+          "document": "storage/dsl"
+        },
+        {
+          "title": "Filters",
+          "document": "storage/filters"
+        },
+        {
+          "title": "Aggregations",
+          "document": "storage/aggregations"
+        },
+        {
+          "title": "Highlighting",
+          "document": "storage/highlighting"
+        },
+        {
+          "title": "Editors",
+          "document": "storage/editors"
+        }
+      ]
+    },
+    {
+      "title": "IAM",
+      "document": "iam"
+    },
+    {
+      "title": "Admin",
+      "document": "admin",
+      "menuItems": [
+        {
+          "title": "Widgets",
+          "document": "admin/widgets"
+        }
+      ]
+    },
+    {
+      "title": "CMS",
+      "document": "cms",
+      "menuItems": [
+        {
+          "title": "Projects",
+          "document": "cms/projects"
+        },
+        {
+          "title": "Layers",
+          "document": "cms/layers"
+        },
+        {
+          "title": "Schemas",
+          "document": "cms/schemas"
+        },
+        {
+          "title": "Mixins",
+          "document": "cms/mixins"
+        },
+        {
+          "title": "Input Types",
+          "document": "cms/input-types"
+        },
+        {
+          "title": "Sets",
+          "document": "cms/sets"
+        },
+        {
+          "title": "Content Types",
+          "document": "cms/content-types"
+        },
+        {
+          "title": "X-data",
+          "document": "cms/x-data"
+        },
+        {
+          "title": "Macros",
+          "document": "cms/macros"
+        },
+        {
+          "title": "Custom styles",
+          "document": "cms/styles"
+        },
+        {
+          "title": "Sites",
+          "document": "cms/sites"
+        },
+        {
+          "title": "Page Components",
+          "document": "cms/components"
+        },
+        {
+          "title": "Contributions",
+          "document": "cms/contributions"
+        },
+        {
+          "title": "Mappings",
+          "document": "cms/mappings"
+        },
+        {
+          "title": "Response Processors",
+          "document": "cms/response-processors"
+        }
+      ]
+    },
+    {
+      "title": "Deployment",
+      "document": "deployment",
+      "menuItems": [
+        {
+          "title": "Strategies",
+          "document": "deployment/strategies"
+        },
+        {
+          "title": "Distributions",
+          "document": "deployment/distro"
+        },
+        {
+          "title": "Docker image",
+          "document": "deployment/docker"
+        },
+        {
+          "title": "Vhosts",
+          "document": "deployment/vhosts"
+        },
+        {
+          "title": "Configuration",
+          "document": "deployment/config"
+        },
+        {
+          "title": "Backup & restore",
+          "document": "deployment/backup-restore"
+        },
+        {
+          "title": "Systemd",
+          "document": "deployment/systemd"
+        },
+        {
+          "title": "Clustering",
+          "document": "deployment/clustering"
+        }
+      ]
+    },
+    {
+      "title": "API Reference",
+      "document": "api",
+      "menuItems": [
+        {
+          "title": "Admin API",
+          "document": "api/lib-admin"
+        },
+        {
+          "title": "Application API",
+          "document": "api/lib-app"
+        },
+        {
+          "title": "Audit API",
+          "document": "api/lib-auditlog"
+        },
+        {
+          "title": "Authentication API",
+          "document": "api/lib-auth"
+        },
+        {
+          "title": "Cluster API",
+          "document": "api/lib-cluster"
+        },
+        {
+          "title": "Common API",
+          "document": "api/lib-common"
+        },
+        {
+          "title": "Content API",
+          "document": "api/lib-content"
+        },
+        {
+          "title": "Context API",
+          "document": "api/lib-context"
+        },
+        {
+          "title": "Export API",
+          "document": "api/lib-export"
+        },
+        {
+          "title": "Event API",
+          "document": "api/lib-event"
+        },
+        {
+          "title": "Grid API",
+          "document": "api/lib-grid"
+        },
+        {
+          "title": "I18N API",
+          "document": "api/lib-i18n"
+        },
+        {
+          "title": "IO API",
+          "document": "api/lib-io"
+        },
+        {
+          "title": "Mail API",
+          "document": "api/lib-mail"
+        },
+        {
+          "title": "Node API",
+          "document": "api/lib-node"
+        },
+        {
+          "title": "Portal API",
+          "document": "api/lib-portal"
+        },
+        {
+          "title": "Project API",
+          "document": "api/lib-project"
+        },
+        {
+          "title": "Repo API",
+          "document": "api/lib-repo"
+        },
+        {
+          "title": "Scheduler API",
+          "document": "api/lib-scheduler"
+        },
+        {
+          "title": "Schema API",
+          "document": "api/lib-schema"
+        },
+        {
+          "title": "Tasks API",
+          "document": "api/lib-task"
+        },
+        {
+          "title": "Value API",
+          "document": "api/lib-value"
+        },
+        {
+          "title": "VHost API",
+          "document": "api/lib-vhost"
+        },
+        {
+          "title": "Websocket API",
+          "document": "api/lib-websocket"
+        }
+      ]
+    },
+    {
+      "title": "Audit Logs",
+      "document": "auditLogs"
+    },
+    {
+      "title": "Release Notes",
+      "document" : "release",
+      "menuItems" : [
+        {
+          "title": "Upgrade Notes",
+          "document" : "release/upgrade"
+        },
+        {
+          "title": "Upgrading Apps",
+          "document": "release/apps-upgrade"
+        }
+      ]
+    }
+  ]
+}
