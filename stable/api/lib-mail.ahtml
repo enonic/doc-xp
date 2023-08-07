@@ -486,6 +486,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>You are now ready to use the library functionality.</p>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You also need to configure your smtp-server before you can send out email. For details, see <a href="../deployment/config.ahtml#mail">the configuration page</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -714,7 +730,7 @@ email will be enclosed with angle brackets (e.g. ‘Some Name &lt;<a href="mailt
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 15:28:45 UTC
+Last updated 2023-08-07 06:46:30 UTC
 </div>
 </div>
 </body>
