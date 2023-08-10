@@ -920,7 +920,26 @@ This <code>i18n</code> attribute will contain a key string that refers to the tr
 <div class="listingblock">
 <div class="title">Example of localized Content Type</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">Unresolved directive in schemas.adoc - include::schemas/code/localized-cty.xml[]</code></pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;content-type&gt;
+  &lt;display-name i18n="person.display-name"&gt;Person&lt;/display-name&gt;
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt;
+    &lt;input type="TextLine" name="name"&gt;
+      &lt;label i18n="person.name.label"&gt;Name&lt;/label&gt;
+      &lt;occurrences minimum="1" maximum="1"/&gt;
+    &lt;/input&gt;
+    &lt;input type="TextLine" name="age"&gt;
+      &lt;label i18n="person.age.label"&gt;Age&lt;/label&gt;
+      &lt;occurrences minimum="1" maximum="1"/&gt;
+    &lt;/input&gt;
+    &lt;input type="imageSelector" name="photo"&gt;
+      &lt;label i18n="person.photo.label"&gt;Photo&lt;/label&gt;
+      &lt;help-text i18n="person.photo.help-text"&gt;Passport photo&lt;/help-text&gt;
+      &lt;occurrences minimum="0" maximum="1"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1050,7 +1069,7 @@ person.photo.help-text=Passbilde</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-10 13:38:46 UTC
+Last updated 2023-08-10 13:51:10 UTC
 </div>
 </div>
 </body>

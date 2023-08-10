@@ -5,7 +5,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="author" content="Unresolved directive in lib-node.adoc - include::../.variables.adoc[]">
 <title>Node Library</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -438,9 +437,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article toc2 toc-right">
 <div id="header">
 <h1>Node Library</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in lib-node.adoc - include::../.variables.adoc[]</span><br>
-</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -1298,7 +1294,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="duplicate"><a class="link" href="#duplicate">duplicate</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.12.0</span></span> This function duplicates a node.</p>
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> This function duplicates a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1879,7 +1875,7 @@ if (result) {
 <div class="sect2">
 <h3 id="getcommit"><a class="link" href="#getcommit">getCommit</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.7.0</span></span></p>
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.7.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.7.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
 <p>Returns a node version commit.</p>
@@ -2853,7 +2849,7 @@ var result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-10 13:38:46 UTC
+Last updated 2023-08-10 13:51:10 UTC
 </div>
 </div>
 </body>

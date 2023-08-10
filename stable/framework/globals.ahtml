@@ -484,7 +484,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in globals.adoc - include::code/app.js[]</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Get application name
+var name = app.name;  // com.enonic.app.superhero
+
+// Get application version
+var version = app.version;  // 1.2.0
+
+// Get some config from the &lt;app.name&gt;.cfg file
+var myKey = app.config.secretkey; // Reads the string stored in the "secretkey" property</code></pre>
 </div>
 </div>
 </div>
@@ -569,7 +576,17 @@ level and takes the same number of parameters.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in globals.adoc - include::code/log.js[]</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Log a simple message
+log.debug('Hello World');
+
+// Log a formatting message
+log.info('Hello %s', 'World');
+
+// Log a formatting message
+log.warning('%s %s', 'Hello', 'World');
+
+// Log using the built-in JSON converter
+log.error('My JSON %s', object );</code></pre>
 </div>
 </div>
 </div>
@@ -604,7 +621,17 @@ This function supports both relative (with dot-references) and absolute paths.</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in globals.adoc - include::code/resolve.js[]</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Absolute path
+var path1 = resolve('/views/myview.html');
+
+// Relative path - in this case, the resource must be in the same folder
+var path2 = resolve('myview.html');
+
+// Relative path (same as above)
+var path3 = resolve('./myview.html');
+
+// Relative path - resource is one level up
+var path4 = resolve('../myview.html');</code></pre>
 </div>
 </div>
 </div>
@@ -638,7 +665,17 @@ The function implements parts of the `CommonJS Modules Specification`_.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in globals.adoc - include::code/require.js[]</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Absolute path
+var lib1 = require('/lib/mylib.js');
+
+// Relative path
+var lib2 = require('mylib');
+
+// Relative path (same as above)
+var lib3 = require('./mylib.js');
+
+// Relative path
+var lib4 = require('../mylib');</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -671,7 +708,7 @@ more about the <a href="java-bridge.ahtml">Java bridge</a>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-10 13:38:46 UTC
+Last updated 2023-08-10 13:51:10 UTC
 </div>
 </div>
 </body>

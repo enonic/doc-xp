@@ -472,7 +472,14 @@ As such, any controller must explicitly declare one or more "exports" in order t
 <div class="listingblock">
 <div class="title">Example usage</div>
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in controllers.adoc - include::code/controller-1.js[]</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Handles a GET request
+exports.get = function(req) {}
+
+// Handles a POST request
+exports.post = function(req) {}
+
+// Handles all requests, other than GET or POST which are handled by the functions above
+exports.all = function(req) {}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -480,7 +487,21 @@ As such, any controller must explicitly declare one or more "exports" in order t
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in controllers.adoc - include::code/controller-2.js[]</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">exports.get = function(request) {
+
+  if (request.mode === 'edit') {
+    // do something...
+  }
+
+  var name = request.params.name;
+  log.info('Name = %s', name);
+
+  return {
+    body: 'Hello ' + name,
+    contentType: 'text/plain'
+  };
+
+};</code></pre>
 </div>
 </div>
 </div>
@@ -488,7 +509,7 @@ As such, any controller must explicitly declare one or more "exports" in order t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-10 13:38:46 UTC
+Last updated 2023-08-10 13:51:10 UTC
 </div>
 </div>
 </body>
