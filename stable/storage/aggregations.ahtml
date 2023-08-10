@@ -481,17 +481,7 @@ Aggregations can be used for anything from data visualization to creating naviga
 <div class="listingblock">
 <div class="title">Basic aggregation DSL</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-"aggregations" : {
-  "[name]" : {
-    "[type]" : {
-      ... body ...
-    },
-    "aggregations": {
-      ... sub-aggregations ...
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/expr.json[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -538,7 +528,7 @@ get its own bucket. Here&#8217;s a list of properties:</p>
 <dd>
 <p>How to order the results, type and direction. Default to <code>_term ASC</code>.</p>
 </dd>
-<dt class="hdlist1"><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.7.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.7.0</text></g></svg></span> minDocCount (int)</dt>
+<dt class="hdlist1"><span class="image"><span class="alt">XP 7.7.0</span></span> minDocCount (int)</dt>
 <dd>
 <p>Only include bucket in the result if number of hits is <code>minDocCount</code> or more. This parameter is optional.</p>
 </dd>
@@ -560,42 +550,13 @@ get its own bucket. Here&#8217;s a list of properties:</p>
 <div class="listingblock">
 <div class="title">Sample term aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "categories": {
-      "terms": {
-        "field": "myCategory",
-        "order": "_count desc",
-        "size": 10
-      }
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/terms-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "categories": {
-      "buckets": [
-        {
-          "docCount": 132,
-          "key": "articles"
-        },
-        {
-          "docCount": 101,
-          "key": "documents"
-        },
-        {
-          "docCount": 43,
-          "key": "case-studies"
-        }
-      ]
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/terms-result.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -621,77 +582,20 @@ get its own bucket. Here&#8217;s a list of properties:</p>
 <div class="listingblock">
 <div class="title">Sample stats aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "start": 0,
-  "count": 0,
-  "aggregations": {
-    "products": {
-      "terms": {
-        "field": "data.product.category",
-        "order": "_count desc",
-        "size": 10
-      },
-      "aggregations": {
-        "priceStats": {
-          "stats": {
-            "field": "data.product.price"
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/stats-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "products": {
-    "buckets": [
-      {
-        "key": "tv",
-        "docCount": 123,
-        "priceStats": {
-          "count": 123,
-          "min": 2599,
-          "max": 87944,
-          "avg": 7400,
-          "sum": 578100
-        }
-      },
-      {
-        "key": "blu-ray player",
-        "docCount": 42,
-        "priceStats": {
-          "count": 42,
-          "min": 699,
-          "max": 5999,
-          "avg": 1548,
-          "sum": 65016
-        }
-      },
-      {
-        "key": "reciever",
-        "docCount": 12,
-        "priceStats": {
-          "count": 12,
-          "min": 2999,
-          "max": 26950,
-          "avg": 5548,
-          "sum": 66756
-        }
-      }
-    ]
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/stats-result.json[]</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="min"><a class="link" href="#min">Min</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.7.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.7.0</text></g></svg></span> An aggregation that computes the minimum of the values in the current bucket. Here&#8217;s the list of properties:</p>
+<p><span class="image"><span class="alt">XP 7.7.0</span></span> An aggregation that computes the minimum of the values in the current bucket. Here&#8217;s the list of properties:</p>
 </div>
 <div class="dlist">
 <dl>
@@ -704,32 +608,20 @@ get its own bucket. Here&#8217;s a list of properties:</p>
 <div class="listingblock">
 <div class="title">Sample min aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "minPrice": {
-      "min": {
-        "field": "data.product.price"
-      }
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/min-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "minPrice": {
-    "value": 10
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/min-result.json[]</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="max"><a class="link" href="#max">Max</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.7.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.7.0</text></g></svg></span> An aggregation that computes the maximum of the values in the current bucket. Here&#8217;s the list of properties:</p>
+<p><span class="image"><span class="alt">XP 7.7.0</span></span> An aggregation that computes the maximum of the values in the current bucket. Here&#8217;s the list of properties:</p>
 </div>
 <div class="dlist">
 <dl>
@@ -742,32 +634,20 @@ get its own bucket. Here&#8217;s a list of properties:</p>
 <div class="listingblock">
 <div class="title">Sample max aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "maxPrice": {
-      "max": {
-        "field": "data.product.price"
-      }
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/max-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "maxPrice": {
-    "value": 10
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/max-result.json[]</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="value_count"><a class="link" href="#value_count">Value Count</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.7.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.7.0</text></g></svg></span> An aggregation that counts the number of values that current document set has for a specific field. Here&#8217;s the list of properties:</p>
+<p><span class="image"><span class="alt">XP 7.7.0</span></span> An aggregation that counts the number of values that current document set has for a specific field. Here&#8217;s the list of properties:</p>
 </div>
 <div class="dlist">
 <dl>
@@ -780,25 +660,13 @@ get its own bucket. Here&#8217;s a list of properties:</p>
 <div class="listingblock">
 <div class="title">Sample value count aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "countProductsWithPrice": {
-      "count": {
-        "field": "data.product.price"
-      }
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/value-count-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "countProductsWithPrice": {
-    "value": 5
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/value-count-result.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -843,52 +711,13 @@ get its own bucket. Here&#8217;s a list of properties:</p>
 <div class="listingblock">
 <div class="title">Sample range aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "price_ranges": {
-    "range": {
-      "field": "price",
-      "ranges": [
-        {
-          "to": 50
-        },
-        {
-          "from": 50,
-          "to": 100
-        },
-        {
-          "from": 100
-        }
-      ]
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/range-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "price_ranges": {
-    "buckets": [
-      {
-        "docCount": 2,
-        "key": "a",
-        "to": 50
-      },
-      {
-        "docCount": 4,
-        "from": 50,
-        "key": "b",
-        "to": 100
-      },
-      {
-        "docCount": 4,
-        "from": 100,
-        "key": "c"
-      }
-    ]
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/range-result.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -948,66 +777,13 @@ Only documents with properties of type 'GeoPoint' will be considered in the <cod
 <div class="listingblock">
 <div class="title">Sample geoDistance aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "distance": {
-      "geoDistance": {
-        "field": "data.cityLocation",
-        "unit": "km",
-        "origin": {
-          "lat": "90.0",
-          "lon": "0.0"
-        },
-        "ranges": [
-          {
-            "from": 0,
-            "to": 1200
-          },
-          {
-            "from": 1200,
-            "to": 4000
-          },
-          {
-            "from": 4000,
-            "to": 12000
-          },
-          {
-            "from": 12000
-          }
-        ]
-      }
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/geo-distance-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "distance": {
-      "buckets": [
-        {
-          "key": "*-1200.0",
-          "doc_count": 3
-        },
-        {
-          "key": "1200.0-4000.0",
-          "doc_count": 4
-        },
-        {
-          "key": "4000.0-12000.0",
-          "doc_count": 5
-        },
-        {
-          "key": "12000.0-*",
-          "doc_count": 1
-        }
-      ]
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/geo-distance-result.json[]</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1076,43 +852,13 @@ documents with properties of type 'DateTime' will considered in the <code>dateRa
 <div class="listingblock">
 <div class="title">Sample dateRange aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "my_date_range": {
-    "dateRange": {
-      "field": "date",
-      "format": "MM-yyy",
-      "ranges": [
-        {
-          "to": "now-10M"
-        },
-        {
-          "from": "now-10M"
-        }
-      ]
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/date-range-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "my_date_range": {
-    "buckets": [
-      {
-        "key": "*-12-2017",
-        "docCount": 2,
-        "to": "2017-12-01T00:00:00Z"
-      },
-      {
-        "key": "12-2017-*",
-        "docCount": 4,
-        "from": "2017-12-01T00:00:00Z"
-      }
-    ]
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/date-range-result.json[]</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -1190,39 +936,13 @@ event into a bucket for each hour in the time-span of the matching events. Here&
 <div class="listingblock">
 <div class="title">Sample dateHistogram aggregation</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "by_month": {
-    "dateHistogram": {
-      "field": "init_date",
-      "interval": "1M",
-      "minDocCount": 0,
-      "format": "MM-yyy"
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/date-histogram-query.json[]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample result from the above agg</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "by_month": {
-    "buckets": [
-      {
-        "docCount": 8,
-        "key": "2014-01"
-      },
-      {
-        "docCount": 10,
-        "key": "2014-02"
-      },
-      {
-        "docCount": 12,
-        "key": "2014-03"
-      }
-    ]
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in aggregations.adoc - include::code/date-histogram-result.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -1410,7 +1130,7 @@ Values in <code>from</code> and <code>to</code> follow a special <a href="#date_
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>

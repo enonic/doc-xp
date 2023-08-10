@@ -1236,36 +1236,7 @@ However, to support inserting new images with the same style formats, add this f
 <div class="listingblock">
 <div class="title">/site/styles.xml</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;styles xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;image name="editor-image-cinema"&gt;
-    &lt;display-name&gt;Cinema&lt;/display-name&gt;
-    &lt;aspect-ratio&gt;21:9&lt;/aspect-ratio&gt;
-  &lt;/image&gt;
-  &lt;image name="editor-image-widescreen"&gt;
-    &lt;display-name&gt;Widescreen&lt;/display-name&gt;
-    &lt;aspect-ratio&gt;16:9&lt;/aspect-ratio&gt;
-  &lt;/image&gt;
-  &lt;image name="editor-image-regular"&gt;
-    &lt;display-name&gt;Regular&lt;/display-name&gt;
-    &lt;aspect-ratio&gt;4:3&lt;/aspect-ratio&gt;
-  &lt;/image&gt;
-  &lt;image name="editor-image-square"&gt;
-    &lt;display-name&gt;Square&lt;/display-name&gt;
-    &lt;aspect-ratio&gt;1:1&lt;/aspect-ratio&gt;
-  &lt;/image&gt;
-  &lt;image name="editor-image-portrait"&gt;
-    &lt;display-name&gt;Portrait&lt;/display-name&gt;
-    &lt;aspect-ratio&gt;3:4&lt;/aspect-ratio&gt;
-  &lt;/image&gt;
-  &lt;image name="editor-image-tall"&gt;
-    &lt;display-name&gt;Tall&lt;/display-name&gt;
-    &lt;aspect-ratio&gt;9:16&lt;/aspect-ratio&gt;
-  &lt;/image&gt;
-  &lt;image name="editor-image-skyscraper"&gt;
-    &lt;display-name&gt;Skyscraper&lt;/display-name&gt;
-    &lt;aspect-ratio&gt;9:21&lt;/aspect-ratio&gt;
-  &lt;/image&gt;
-&lt;/styles&gt;</code></pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">Unresolved directive in apps-upgrade.adoc - include::code/styles.xml[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1882,7 +1853,7 @@ The new sandbox will have Java 11 bundled inside the package and you don&#8217;t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>

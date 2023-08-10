@@ -484,8 +484,7 @@ Don&#8217;t call remote endpoints or wait in loops for events inside <code>main.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Log application started
-log.info('Application ' + app.name + ' started');</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in app-controller.adoc - include::code/main-1.js[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -493,13 +492,7 @@ log.info('Application ' + app.name + ' started');</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Log application started
-log.info('Application ' + app.name + ' started');
-
-// Log when application is stopped
-__.disposer(function() {
-    log.info('Application ' + app.name + ' stopped');
-});</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in app-controller.adoc - include::code/main-2.js[]</code></pre>
 </div>
 </div>
 </div>
@@ -507,7 +500,7 @@ __.disposer(function() {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>

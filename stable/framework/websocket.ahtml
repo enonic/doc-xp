@@ -466,24 +466,7 @@ It can supply <code>data</code> object that will be available via <code>event.da
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Create a websocket if websocket request.
-exports.get = function (req) {
-
-  if (!req.webSocket) {
-    return {
-      status: 404
-    };
-  }
-
-  return {
-    webSocket: {
-      data: {
-        user: "test"
-      },
-      subProtocols: ["text"]
-    }
-  };
-};</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in websocket.adoc - include::code/websockets-1.js[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -491,22 +474,7 @@ exports.get = function (req) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Listen to a websocket event
-exports.webSocketEvent = function (event) {
-
-  if (event.type == 'open' &amp;&amp; event.data.user == 'test') {
-    // Do something on open
-  }
-
-  if (event.type == 'message') {
-    // Do something on message recieved
-  }
-
-  if (event.type == 'close') {
-    // Do something on close
-  }
-
-};</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in websocket.adoc - include::code/websockets-2.js[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -559,7 +527,7 @@ exports.webSocketEvent = function (event) {
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Authenticated user data when WebSocket was opened, if available. <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span></td>
+<td>Authenticated user data when WebSocket was opened, if available. <span class="image"><span class="alt">XP 7.6.0</span></span></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
@@ -585,33 +553,7 @@ in groups. Adding to groups allows for multicast message sending.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Lib that contains websocket functions.
-var webSocketLib = require('/lib/xp/websocket');
-
-// Listen to a websocket event
-exports.webSocketEvent = function (event) {
-
-  if (event.type == 'open') {
-    // Send message back to client
-    webSocketLib.send(event.session.id, 'Welcome to our chat ' + event.session.user ? event.session.user.displayName : 'anonymous' );
-
-    // Add client into a group
-    webSocketLib.addToGroup('chat', event.session.id);
-
-    log.info(`New group size ${webSocketLib.getGroupSize('chat')}`);
-  }
-
-  if (event.type == 'message') {
-    // Propegate message to group
-    webSocketLib.sendToGroup('chat', event.message);
-  }
-
-  if (event.type == 'close') {
-    // Remove client from a group
-    webSocketLib.removeFromGroup('chat', event.session.id);
-  }
-
-};</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in websocket.adoc - include::code/websockets-3.js[]</code></pre>
 </div>
 </div>
 </div>
@@ -619,7 +561,7 @@ exports.webSocketEvent = function (event) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>

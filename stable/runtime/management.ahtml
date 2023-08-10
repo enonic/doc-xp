@@ -755,7 +755,7 @@ Read about authorization <a href="#authorization">here</a>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>force</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> If <code>true</code> then affected indices will be removed before snapshot is applied. It is helpful when Elasticsearch indices are corrupted. Default: <code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><span class="alt">XP 7.12.0</span></span> If <code>true</code> then affected indices will be removed before snapshot is applied. It is helpful when Elasticsearch indices are corrupted. Default: <code>false</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -904,7 +904,7 @@ Read about authorization <a href="#authorization">here</a>
 <td class="tableblock halign-left valign-top"><p class="tableblock">max number of versions to dump in addition to current version</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>archive</code> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.3.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.3.0</text></g></svg></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>archive</code> <span class="image"><span class="alt">XP 7.3.0</span></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">outputs dump output to an archive (<code>%name%</code>.zip) file (default is <code>false</code>)</p></td>
 </tr>
@@ -1139,7 +1139,7 @@ A load will delete all existing repositories before loading the repositories pre
 <td class="tableblock halign-left valign-top"><p class="tableblock">upgrade the dump if necessary (default is <code>false</code>)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>archive</code> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.3.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.3.0</text></g></svg></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>archive</code> <span class="image"><span class="alt">XP 7.3.0</span></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">loads dump form an archive (<code>%name%</code>.zip) file (default is <code>false</code>)</p></td>
 </tr>
@@ -1585,7 +1585,7 @@ Read about authorization <a href="#authorization">here</a>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sha512</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span> application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><span class="alt">XP 7.6.0</span></span> application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1630,7 +1630,7 @@ Read about authorization <a href="#authorization">here</a>
 <div class="sect2">
 <h3 id="start"><a class="link" href="#start">Start</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span> Starts an application with specific application key.</p>
+<p><span class="image"><span class="alt">XP 7.6.0</span></span> Starts an application with specific application key.</p>
 </div>
 <div class="literalblock">
 <div class="title">Url</div>
@@ -1682,7 +1682,7 @@ Read about authorization <a href="#authorization">here</a>
 <div class="sect2">
 <h3 id="stop"><a class="link" href="#stop">Stop</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span> Stops an application with specific application key.</p>
+<p><span class="image"><span class="alt">XP 7.6.0</span></span> Stops an application with specific application key.</p>
 </div>
 <div class="literalblock">
 <div class="title">Url</div>
@@ -1734,7 +1734,7 @@ Read about authorization <a href="#authorization">here</a>
 <div class="sect2">
 <h3 id="uninstall"><a class="link" href="#uninstall">Uninstall</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span> Uninstalls an application with specific application key.</p>
+<p><span class="image"><span class="alt">XP 7.6.0</span></span> Uninstalls an application with specific application key.</p>
 </div>
 <div class="literalblock">
 <div class="title">Url</div>
@@ -1786,7 +1786,7 @@ Read about authorization <a href="#authorization">here</a>
 <div class="sect2">
 <h3 id="server_sent_events"><a class="link" href="#server_sent_events">Server-Sent Events</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span> The client initiates the SSE connection by using the media type <code>text/event-stream</code> in the <code>Accept</code> header. Then it gets updates automatically without requesting the server.</p>
+<p><span class="image"><span class="alt">XP 7.6.0</span></span> The client initiates the SSE connection by using the media type <code>text/event-stream</code> in the <code>Accept</code> header. Then it gets updates automatically without requesting the server.</p>
 </div>
 <div class="literalblock">
 <div class="title">Url</div>
@@ -2002,7 +2002,7 @@ Task info can be fetched with <a href="#task">task</a> request.
 <div class="sect2">
 <h3 id="list_2"><a class="link" href="#list_2">List</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.13.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.13.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.13.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>Lists all projects together with their sites.</p>
@@ -2078,7 +2078,7 @@ Task info can be fetched with <a href="#task">task</a> request.
 <div class="sect2">
 <h3 id="syncall"><a class="link" href="#syncall">SyncAll</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.6.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>Calls forced content sync for all available projects.</p>
@@ -2116,7 +2116,7 @@ Read about authorization <a href="#authorization">here</a>
 <h2 id="id_providers"><a class="link" href="#id_providers">ID Providers</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.13.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.13.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.13.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>Id providers related commands.</p>
@@ -2161,7 +2161,7 @@ Read about authorization <a href="#authorization">here</a>
 <h2 id="webapps"><a class="link" href="#webapps">Webapps</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.13.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.13.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.13.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>Web apps related commands.</p>
@@ -2703,7 +2703,7 @@ Make sure you have a backup of the installation available before running a clean
 <h2 id="scheduled_jobs_list"><a class="link" href="#scheduled_jobs_list">Scheduled Jobs List</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.7.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.7.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.7.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>List scheduled jobs.</p>
@@ -2785,7 +2785,7 @@ Read about authorization <a href="#authorization">here</a>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>

@@ -442,7 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#service_mapping">Service mapping</a></li>
 <li><a href="#request_matching">Request Matching</a></li>
-<li><a href="#capture_groups_xpxp7_8_07_8_0">Capture Groups <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></a></li>
+<li><a href="#capture_groups_xp_7_8_0">Capture Groups <span class="image"><span class="alt">XP 7.8.0</span></span></a></li>
 <li><a href="#examples">Examples</a></li>
 <li><a href="#testing_vhosts">Testing vhosts</a></li>
 </ul>
@@ -488,7 +488,7 @@ By default, XP provides the following endpoints:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span> Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with <code>~</code> symbol).</p>
+<p><span class="image"><span class="alt">XP 7.8.0</span></span> Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with <code>~</code> symbol).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -530,7 +530,7 @@ Vhosts only apply to XP service port (defaults to 8080), not the monitoring and 
 <p>VHost matches the request if <code>host</code> value matches the requested host <em>AND</em> request-uri matches <code>source</code>.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span> Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Pattern JavaDoc</a>
+<p><span class="image"><span class="alt">XP 7.8.0</span></span> Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Pattern JavaDoc</a>
 Host matching is case-insensitive in both cases.</p>
 </div>
 <div class="admonitionblock note">
@@ -547,13 +547,13 @@ Specify both host values <code>mapping.example.host = example.com. example.com</
 </table>
 </div>
 <div class="listingblock">
-<div class="title"><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span> host mapping match both <code>www.example.com</code> and <code>example.com</code> hosts</div>
+<div class="title"><span class="image"><span class="alt">XP 7.8.0</span></span> host mapping match both <code>www.example.com</code> and <code>example.com</code> hosts</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">mapping.example.host = www.example.com example.com</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title"><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span> host mapping will match any sub-domain: <code>1.example.com</code>, <code>2.example.com</code> hosts (but not sub-sub-domains)</div>
+<div class="title"><span class="image"><span class="alt">XP 7.8.0</span></span> host mapping will match any sub-domain: <code>1.example.com</code>, <code>2.example.com</code> hosts (but not sub-sub-domains)</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">mapping.example.host = ~[^.]+\\.example\\.com</code></pre>
 </div>
@@ -580,7 +580,7 @@ Source matching is case-sensitive, and is done before URI decoding.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span> VHost with lower <code>order</code> value is preferred.
+<p><span class="image"><span class="alt">XP 7.8.0</span></span> VHost with lower <code>order</code> value is preferred.
 If <code>order</code> is not specified, order is considered <em>least</em> preferable (<code>Integer.MAX_VALUE</code>).</p>
 </li>
 <li>
@@ -594,7 +594,7 @@ If <code>order</code> is not specified, order is considered <em>least</em> prefe
 </div>
 </div>
 <div class="sect1">
-<h2 id="capture_groups_xpxp7_8_07_8_0"><a class="link" href="#capture_groups_xpxp7_8_07_8_0">Capture Groups <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></a></h2>
+<h2 id="capture_groups_xp_7_8_0"><a class="link" href="#capture_groups_xp_7_8_0">Capture Groups <span class="image"><span class="alt">XP 7.8.0</span></span></a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When VHost matched by a host regular expression, capture groups can be used in <code>target</code> via group references.</p>
@@ -727,7 +727,7 @@ Location of hosts file on Mac/Linux_: <code>/etc/hosts</code>, on Windows: <code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>

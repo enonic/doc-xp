@@ -498,47 +498,7 @@ GET, POST, etc.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">var mustache = require('/lib/xp/mustache');
-
-// Handles a GET request
-exports.get = function (req) {
-
-    var view = resolve('my-page.html');
-    var params = {
-        appId: app.name,
-        title: 'Hello world'
-    };
-
-    return {
-        body: mustache.render(view, params),
-        contentType: 'text/html'
-    };
-};
-
-// Handles a POST request
-exports.post = function (req) {
-    var name = request.params.name;
-
-    return {
-        body: {'Hello': name},
-        contentType: 'application/json'
-    };
-};
-
-// Handles all other method requests
-exports.all = function (req) {
-    if (req.method === 'DELETE') {
-        handleDelete(req);
-
-    } else if (req.method === 'PUT') {
-        handlePut(req);
-    }
-
-    return {
-        body: {'Hello': name, 'Method': req.method},
-        contentType: 'application/json'
-    };
-};</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in webapp-engine.adoc - include::code/webapp.js[]</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -558,7 +518,7 @@ To handle routing and filters in web apps, the implementer should use the <a hre
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>

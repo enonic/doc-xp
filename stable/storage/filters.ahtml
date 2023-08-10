@@ -470,7 +470,7 @@ A filter <em>only</em> removes nodes from the result - and is executed after the
 <p>As such, filters are the most efficient way of limiting hits when you only need basic comparison statements.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.11.0</span></span></p>
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.11.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.11.0</text></g></svg></span></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -495,36 +495,7 @@ It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead
 <div class="listingblock">
 <div class="title">Sample filter usage</div>
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">var result = contentLib.query({
-    start: 0,
-    count: 2,
-    query: "data.city = 'Oslo' AND fulltext('data.description', 'garden', 'AND') ",
-    filters: {
-        boolean: {
-            must: {
-                exists: {
-                    field: "modifiedTime"
-                }
-            },
-            mustNot: {
-                hasValue: {
-                    field: "myField",
-                    values: [
-                        "cheese",
-                        "fish",
-                        "onion"
-                    ]
-                }
-            }
-        },
-        notExists: {
-            field: "unwantedField"
-        },
-        ids: {
-            values: ["id1", "id2"]
-        }
-    }
-});</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in filters.adoc - include::code/content-api-query.js[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -550,15 +521,7 @@ It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead
 <div class="listingblock">
 <div class="title">Sample use of exists filter</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "start": 0,
-  "count": 2,
-  "filters": {
-    "exists": {
-      "field": "publish.from"
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in filters.adoc - include::code/exists-filter.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -578,15 +541,7 @@ It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead
 <div class="listingblock">
 <div class="title">Sample use of notExists filter</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "start": 0,
-  "count": 2,
-  "filters": {
-    "notExists": {
-      "field": "publish.from"
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in filters.adoc - include::code/notExists-filter.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -606,21 +561,7 @@ It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead
 <div class="listingblock">
 <div class="title">Sample hasValue filter</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "start": 0,
-  "count": 2,
-  "filters": {
-    "hasValue": {
-      "field": "product",
-      "values" : [
-        "plunge saw",
-        "combination square",
-        "router",
-        "mitre saw"
-      ]
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in filters.adoc - include::code/hasValue-filter.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -636,18 +577,7 @@ It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead
 <div class="listingblock">
 <div class="title">Sample ids filter</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "start": 0,
-  "count": 2,
-  "filters": {
-    "ids": {
-      "values": [
-        "0123456789",
-        "1234567890"
-      ]
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in filters.adoc - include::code/ids-filter.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -675,29 +605,7 @@ It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead
 <div class="listingblock">
 <div class="title">Sample boolean filter</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "start": 0,
-  "count": 2,
-  "filters": {
-    "boolean": {
-      "must": {
-        "exists": {
-          "field": "modifiedTime"
-        }
-      },
-      "mustNot": {
-        "hasValue": {
-          "field": "myField",
-          "values": [
-            "cheese",
-            "fish",
-            "onion"
-          ]
-        }
-      }
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">Unresolved directive in filters.adoc - include::code/boolean-filter.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -706,7 +614,7 @@ It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>

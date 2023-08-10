@@ -512,31 +512,7 @@ If not found, it will attempt to execute the fallback export <code>handleError</
 <div class="listingblock">
 <div class="title">Basic error handler example</div>
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">exports.handle404 = function (err) {
-  return {
-    contentType: 'text/html',
-    body: `
-&lt;html&gt;
-  &lt;body&gt;
-      &lt;h1&gt;No page for you!&lt;/h1&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-`
-  }
-};
-
-exports.handleError = function (err) {
-  return {
-    contentType: 'text/html',
-    body: `
-&lt;html&gt;
-  &lt;body&gt;
-      &lt;h1&gt;Error code "${err.status}" &lt;/h1&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-`
-  }
-};</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in error.adoc - include::code/error.js[]</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -567,12 +543,7 @@ The object contains the status code, error message, Java Exception object, and t
 <div class="listingblock">
 <div class="title">Sample error object</div>
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">{
-    "status": 404,
-    "message": "Some error message",
-    "exception": "&lt;the actual exception object in Java&gt;",
-    "request": "&lt;original request JSON&gt;"
-}</code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Unresolved directive in error.adoc - include::code/error.json[]</code></pre>
 </div>
 </div>
 </div>
@@ -580,7 +551,7 @@ The object contains the status code, error message, Java Exception object, and t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 06:46:30 UTC
+Last updated 2023-08-10 09:39:12 UTC
 </div>
 </div>
 </body>
