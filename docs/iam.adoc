@@ -99,7 +99,7 @@ Each service account can store multiple Public keys in order to support rotation
 
 NOTE: Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Whenever possible use other ID providers instead, such as OIDC ID provider.
 
-.JWT header
+.JWT header example
 [source,JSON]
 ----
 {
