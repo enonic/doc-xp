@@ -88,7 +88,7 @@ JWT token must follow the following rules:
 * it must be valid RFC-7519 JWT token.
 * `alg` header parameter must be set to `RS256`.
 * `kid` header parameter must be set to the ID of the public key that corresponds to the private key used to sign the token.
-* `sub` claim must be set to the ID of the service account.
+* `sub` claim must be set to the ID of the service account, for instance, `user:system:user_id`.
 * `exp` claim must be set to the expiration time of the token. The token will be rejected if it is expired.
 * `iat` claim must be set to the time when the token was issued. The token will be rejected if it was issued in the future.
 
@@ -98,6 +98,27 @@ Public key from Public-Private key-pair is stored in the XP server and is used t
 Each service account can store multiple Public keys in order to support rotation of Public-Private key-pairs without service interruption.
 
 NOTE: Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Whenever possible use other ID providers instead, such as OIDC ID provider.
+
+.JWT header
+[source,JSON]
+----
+{
+  "kid": "51a29c2ab5ebf945f6a5ddac8935bf8b",
+  "typ": "JWT",
+  "alg": "RS256"
+}
+----
+
+.JWT payload
+[source,JSON]
+----
+{
+  "sub": "user:system:user_id",
+  "iss": "issuer",
+  "exp": 1692787396,
+  "iat": 1692787366
+}
+----
 
 === ID provider apps
 

@@ -703,9 +703,15 @@ When enabled, you may postpone creation of the admin user. You may turn off this
 [source,properties]
 ----
 loginWithoutUser = true
+idprovider.system.autologin.jwt.enabled = true
+idprovider.system.autologin.jwt.acceptLeewaySeconds = -1
+idprovider.system.autologin.jwt.maxLifetimeSeconds = 30
 ----
 
 loginWithoutUser:: Set to false to force creation of user before logging in. Default: `true`.
+idprovider.system.autologin.jwt.enabled:: Set to false to disable auto-login with JWT token. Default: `true`.
+idprovider.system.autologin.jwt.acceptLeewaySeconds:: This option allows you to set the default time window in seconds during which the `Not Before`, `Issued At`, and `Expires At` claims will remain valid. To enable this option, the value must be a positive number. By default, this option is disabled with a value of `-1`.
+idprovider.system.autologin.jwt.maxLifetimeSeconds:: This option allows you to limit the lifetime of the JWT token in the XP environment to avoid the usage of long-lived tokens. The default value is `30`.
 
 === Logging
 
