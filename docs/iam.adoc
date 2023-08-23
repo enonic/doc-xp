@@ -1,6 +1,6 @@
 = Identity and access management (IAM)
 :toc: right
-:imagesdir: iam/images
+:imagesdir: images
 
 Enonic XP ships with a clearly defined and pluggable concept for handling authentication and authorization
 
@@ -31,14 +31,14 @@ An example of this is the XP CMS, where users typically get access to create or 
 ID providers offer pluggable abstraction layer for user authentication.
 As such, in order to authenticate or even create users in XP, you will need to define an ID provider.
 
-IDproviders are linked to your webapp or site through <<./deployment/vhosts#,virtual hosts>>.
+ID providers are linked to your webapp or site through <<./deployment/vhosts#,virtual hosts>>.
 
 
 === Creating an ID provider
-IDproviders can be created and managed through the API,
+ID providers can be created and managed through the API,
 or through the Users app in the XP admin console.
 
-An idprovider essentially consist of the following:
+An ID provider essentially consist of the following:
 
 * A unique name (cannot be changed later)
 * ID provider application, with optional configuration settings.
@@ -46,23 +46,80 @@ An idprovider essentially consist of the following:
 
 NOTE: ID provider applications must be installed before you can select them.
 
-image::system-idprovider-admin.png[Setting up an ID provider from the Users admin tool, 819]
+image::iam/system-idprovider-admin.png[Setting up an ID provider from the Users admin tool, 819]
 
 [#system-id-provider]
 === System ID provider
 
-XP ships with a special ID provider that cannot be removed or renamed.
-It is called the `system` ID provider.
+XP ships with a special ID provider that cannot be removed or renamed. It is called the System ID provider.
 
-The purpose of the system ID provider is to hold system users such as `su` - the Super User, and `anonymous` - the user that is defacto if no other user is specified.
+When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.
 
-When accessing the XP admin console for the first time in a fresh installation, you will see the system IDprovider.
+image::iam/system-idprovider.png[System ID provider login screen, 828]
 
-image::system-idprovider.png[System ID provider login screen, 828]
+The purpose of the System ID provider is to hold system users such as `su` - the Super User, and `anonymous` - the user that is _de facto_ if no other user is specified.
 
-NOTE: Avoid placing your regular users in the system ID provider, rather create a new ID provider instead.
+image:xp-7140.svg[XP 7.14.0,opts=inline]
+System ID provider users - other than system users - are called <<#service-accounts>>.
 
-=== IDprovider apps
+NOTE: Prior to XP 7.14.0, manually added users to the System ID provider were treated as regular users with username-password credentials. System ID provider username-password credentials are still supported, but strongly discouraged. Instead, use service accounts with JWT tokens. See <<#service-accounts>> for more details.
+
+NOTE: Avoid placing your regular users in the System ID provider, rather create a new ID provider instead.
+
+[#service-accounts]
+==== Service Accounts
+
+A service account is a special kind of user used by remote applications and services to authenticate with XP.
+Service accounts are not meant to be used by humans.
+
+Service accounts are used to make authorized call to
+
+* <<management_endpoint, Management Endpoint>>
+* any other XP service port endpoint that supports authentication and configured to use the System ID provider. See <<deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
+
+Requests are authenticated by JWT token in the `Authorization` header.
+
+The content of the header should look like the following:
+[source,options="nowrap"]
+Authorization: Bearer <token>
+
+JWT token must follow the following rules:
+
+* it must be valid RFC-7519 JWT token.
+* `alg` header parameter must be set to `RS256`.
+* `kid` header parameter must be set to the ID of the public key that corresponds to the private key used to sign the token.
+* `sub` claim must be set to the ID of the service account, for instance, `user:system:user_id`.
+* `exp` claim must be set to the expiration time of the token. The token will be rejected if it is expired.
+* `iat` claim must be set to the time when the token was issued. The token will be rejected if it was issued in the future.
+
+Private key from Public-Private key-pair is stored only on the client side and must not be shared with the XP server.
+
+Public key from Public-Private key-pair is stored in the XP server and is used to verify the signature of the token.
+Each service account can store multiple Public keys in order to support rotation of Public-Private key-pairs without service interruption.
+
+NOTE: Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Whenever possible use other ID providers instead, such as OIDC ID provider.
+
+.JWT header example
+[source,JSON]
+----
+{
+  "kid": "51a29c2ab5ebf945f6a5ddac8935bf8b",
+  "typ": "JWT",
+  "alg": "RS256"
+}
+----
+
+.JWT payload example
+[source,JSON]
+----
+{
+  "sub": "user:system:user_id",
+  "exp": 1692787396,
+  "iat": 1692787366
+}
+----
+
+=== ID provider apps
 
 In order for an ID provider to work, it must be associated with an ID provider application that handles the authentication process.
 
@@ -70,7 +127,8 @@ You may install ID providers from Enonic Market,
 or <<./framework/idprovider#, build your own>> for a fully customized experience.
 
 === Standard ID provider app
-By default, XP ships with an app app called the "Standard ID provider".
+
+By default, XP ships with an app called the "Standard ID provider".
 This is also the app that is being used by the <<#system-id-provider>>
 
 == Built-in roles
@@ -106,11 +164,11 @@ Provides view-only access to the Users admin tool.
 
 *Users Administrator*
 
-Grants full access to the Users admin tool, including create/edit/delete for Id providers, users, roles, and groups.
+Grants full access to the Users admin tool, including create/edit/delete for ID providers, users, roles, and groups.
 
 *Authenticated*
 
-Users automatically get this role when they are logged into the platform, regardless of IDprovider.
+Users automatically get this role when they are logged into the platform, regardless of ID provider.
 
 *Everyone*
 
