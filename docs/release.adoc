@@ -3,6 +3,13 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP8
+
+=== Service Accounts
+
+* Manually added <<iam#system-id-provider, System ID provider>> users are now called Service Accounts.
+* Service Accounts can be authenticated with JWT tokens.
+
 == XP7 Update 13
 
 NOTE: Enonic XP 7.13.0 requires Content Studio 5.0.0
