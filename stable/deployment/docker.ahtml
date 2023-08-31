@@ -530,7 +530,7 @@ Running this command requires you to have docker installed.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">docker run -it --rm -p 8080:8080 enonic/xp:7.12.2-ubuntu</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">docker run -it --rm -p 8080:8080 enonic/xp:7.13.2-ubuntu</code></pre>
 </div>
 </div>
 </div>
@@ -569,7 +569,7 @@ Running this command requires you to have docker installed.
 <div class="sect2">
 <h3 id="base_image"><a class="link" href="#base_image">Base image</a></h3>
 <div class="paragraph">
-<p>Every time the Enonic XP image is built it will be based off the latest <code>enonic/graalvm</code> docker image. This ensures the latest updates to the JVM and OS.</p>
+<p>Every time the Enonic XP image is built it will be based off the latest <a href="https://hub.docker.com/r/enonic/graalvm">enonic/graalvm</a> docker image. This ensures the latest updates to the JVM and OS.</p>
 </div>
 </div>
 <div class="sect2">
@@ -771,7 +771,7 @@ docker rm tmp</code></pre>
 <div class="sect4">
 <h5 id="memory"><a class="link" href="#memory">Memory</a></h5>
 <div class="paragraph">
-<p>Like described in the <a href="#java-heap-memory">Java heap memory</a> section, you should set the java heap memory limits. If your machine has 4GB of memory and you want to allocate 75% of that to heap memory, do that by adding to <code>XP_OPTS</code>.</p>
+<p>Like described in the <a href="#java-heap-memory">Java heap memory</a> section, you should set the java heap memory limits. If your machine has 4GB of memory, and you want to allocate 75% of that to heap memory, do that by adding to <code>XP_OPTS</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1120,7 +1120,7 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-10 14:04:37 UTC
+Last updated 2023-08-31 12:10:18 UTC
 </div>
 </div>
 </body>
