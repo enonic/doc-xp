@@ -593,8 +593,8 @@ Enonic CLI adds a <code>.enonic</code> file to your project root, consider updat
 <div class="sect2">
 <h3 id="gradle_wrapper"><a class="link" href="#gradle_wrapper">Gradle Wrapper</a></h3>
 <div class="paragraph">
-<p>XP 7 standardizes on the use of Gradle 5.
-We recommend bundling Gradle wrapper of version 5.0 or later in your project</p>
+<p>XP 7.0 to 7.12 standardizes on the use of Gradle 5. XP 7.13 standardizes on the use of Gradle 8.3.
+We recommend bundling Gradle wrapper of version 8.3 or later in your project</p>
 </div>
 <div class="paragraph">
 <p>If you have installed Gradle 5, from your project root, run:</p>
@@ -614,7 +614,11 @@ We recommend bundling Gradle wrapper of version 5.0 or later in your project</p>
 <h4 id="application_upgrade"><a class="link" href="#application_upgrade">Application upgrade</a></h4>
 <div class="paragraph">
 <p>If you are upgrading <strong>an application</strong>, you need to use version greater or equal to '2.0.0' of the XP Gradle plugin (<em>com.enonic.xp.app</em>).
-It supports Gradle 5, Java 11 and building for XP 7. This plugin expects application properties to be defined in the <code>app {}</code> section of <em>build.gradle</em>
+It supports Gradle 5, Java 11 and building for XP 7.
+Gradle plugin '3.4.0' supports Gradle 8.3 and Java 17 - recommended to build apps for XP versions 7.13 and greater</p>
+</div>
+<div class="paragraph">
+<p>This plugin expects application properties to be defined in the <code>app {}</code> section of <em>build.gradle</em>
 and enables quick reference to the Enonic repo via <em>xp.enonicRepo()</em> shortcut</p>
 </div>
 <div class="admonitionblock note">
@@ -624,7 +628,7 @@ and enables quick reference to the Enonic repo via <em>xp.enonicRepo()</em> shor
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-It is recommended to use latest version of Gradle 6.x as older Gradle versions may not work properly.
+It is recommended to use latest version of Gradle 8.x as older Gradle versions may not work properly.
 </td>
 </tr>
 </table>
@@ -645,7 +649,7 @@ Syntax for adding plugins to Gradle may have changed for your project, we recomm
 <div class="title">build.gradle sample</div>
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">plugins {
-    id 'com.enonic.xp.app' version '3.0.0'
+    id 'com.enonic.xp.app' version '3.4.0'
 }
 
 app {
@@ -657,7 +661,7 @@ app {
 }
 
 dependencies {
-    compile "com.enonic.xp:script-api:${xpVersion}"
+    implementation "com.enonic.xp:script-api:${xpVersion}"
     include "com.enonic.xp:lib-content:${xpVersion}"
     include "com.enonic.xp:lib-portal:${xpVersion}"
 }
@@ -714,7 +718,7 @@ Below is a sample content of <em>build.gradle</em> and <em>gradle.properties</em
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '3.0.0'
+    id 'com.enonic.xp.base' version '3.4.0'
 }
 
 repositories {
@@ -1882,7 +1886,7 @@ The new sandbox will have Java 11 bundled inside the package and you don&#8217;t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-31 12:10:18 UTC
+Last updated 2023-09-12 08:19:51 UTC
 </div>
 </div>
 </body>
