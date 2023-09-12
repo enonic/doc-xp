@@ -38,8 +38,8 @@ The standard build system used for XP projects must be updated.
 
 === Gradle Wrapper
 
-XP 7 standardizes on the use of Gradle 5.
-We recommend bundling Gradle wrapper of version 5.0 or later in your project
+XP 7.0 to 7.12 standardizes on the use of Gradle 5. XP 7.13 standardizes on the use of Gradle 8.3.
+We recommend bundling Gradle wrapper of version 8.3 or later in your project
 
 If you have installed Gradle 5, from your project root, run:
 
@@ -52,10 +52,13 @@ This will install or update your project with a new Gradle wrapper.
 ==== Application upgrade
 
 If you are upgrading *an application*, you need to use version greater or equal to '2.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
-It supports Gradle 5, Java 11 and building for XP 7. This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
+It supports Gradle 5, Java 11 and building for XP 7. 
+Gradle plugin '3.4.0' supports Gradle 8.3 and Java 17 - recommended to build apps for XP versions 7.13 and greater
+
+This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
 and enables quick reference to the Enonic repo via _xp.enonicRepo()_ shortcut
 
-NOTE: It is recommended to use latest version of Gradle 6.x as older Gradle versions may not work properly.
+NOTE: It is recommended to use latest version of Gradle 8.x as older Gradle versions may not work properly.
 
 NOTE: Syntax for adding plugins to Gradle may have changed for your project, we recommend the following updates to your build files:
 
@@ -63,7 +66,7 @@ NOTE: Syntax for adding plugins to Gradle may have changed for your project, we 
 [source,groovy]
 ----
 plugins {
-    id 'com.enonic.xp.app' version '3.0.0'
+    id 'com.enonic.xp.app' version '3.4.0'
 }
 
 app {
@@ -75,7 +78,7 @@ app {
 }
 
 dependencies {
-    compile "com.enonic.xp:script-api:${xpVersion}"
+    implementation "com.enonic.xp:script-api:${xpVersion}"
     include "com.enonic.xp:lib-content:${xpVersion}"
     include "com.enonic.xp:lib-portal:${xpVersion}"
 }
@@ -119,7 +122,7 @@ Below is a sample content of _build.gradle_ and _gradle.properties_ files for a 
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '3.0.0'
+    id 'com.enonic.xp.base' version '3.4.0'
 }
 
 repositories {
