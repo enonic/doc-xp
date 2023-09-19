@@ -598,10 +598,14 @@ All sub-expressions can contain a single expression or an array.
         ...
     },
     "mustNot": [
-        "should":{
-            ...
+      {
+        "boolean": {
+          "should": {
+              ...
+          }
         }
-        ...
+      }
+      ...
     ]
   }
 }
