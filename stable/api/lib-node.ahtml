@@ -1702,8 +1702,8 @@ if (result) {
 <div class="title">Fetch all versions of a content with a given path</div>
 <div class="content">
 <pre class="highlight"><code class="language-js" data-lang="js">var result = repo.findVersions({
-                    key: '/my-name'
-                });</code></pre>
+    key: '/my-name'
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1738,9 +1738,6 @@ if (result) {
 <div class="paragraph lead">
 <p>Parameters</p>
 </div>
-<div class="paragraph">
-<p>An object with the following key and value:</p>
-</div>
 <table class="tableblock frame-none grid-none stretch">
 <colgroup>
 <col style="width: 1%;">
@@ -1756,11 +1753,50 @@ if (result) {
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">params</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;|object</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Array of ids or paths to the nodes</p>
+<p>One or multiple strings, or one or multiple arrays of strings, or an object with the following properties:</p>
+</div>
+<table class="tableblock frame-ends grid-none stretch">
+<caption class="title">Properties</caption>
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 96%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Node id or path</p>
 </div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">versionId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specific version to get the node from (default is active version)</p>
+</div></div></td>
+</tr>
+</tbody>
+</table></div></td>
 </tr>
 </tbody>
 </table>
@@ -1769,6 +1805,38 @@ if (result) {
 </div>
 <div class="paragraph">
 <p><strong>object</strong> : The node or node array (as JSON) fetched from the repository.</p>
+</div>
+<div class="paragraph lead">
+<p>Example</p>
+</div>
+<div class="listingblock">
+<div class="title">Fetch a single node using id as a string.</div>
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">var node = repo.get('nodeId');</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Fetch several nodes using a sequence of nodeIds.</div>
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">var nodes = repo.get('nodeId_1', 'nodeId_2');</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Fetch several nodes using an array of nodeIds.</div>
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">var nodes = repo.get(['nodeId_1', 'nodeId_2']);</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Fetch several nodes using mixed parameters.</div>
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">var nodes = repo.get([{
+    key: 'nodeId',
+    versionId: 'versionKey'
+}, {
+    key: '/my-name'
+}, 'nodeId']);</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2849,7 +2917,7 @@ var result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-06 15:28:34 UTC
+Last updated 2023-11-10 15:42:30 UTC
 </div>
 </div>
 </body>
