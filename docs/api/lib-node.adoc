@@ -710,8 +710,8 @@ Example
 [source,js]
 ----
 var result = repo.findVersions({
-                    key: '/my-name'
-                });
+    key: '/my-name'
+});
 
 ----
 
@@ -745,20 +745,63 @@ Fetches specific nodes by path or ID.
 [.lead]
 Parameters
 
-An object with the following key and value:
-
 [%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
 | Name | Kind | Details
-| keys | Array.<string> | Array of ids or paths to the nodes
+| params | string \| Array.<string>\|object | One or multiple strings, or one or multiple arrays of strings, or an object with the following properties:
+
+[%header,cols="1%,1%,1%,1%,96%a"]
+[frame="topbot"]
+[grid="none"]
+[caption=""]
+.Properties
+!===
+! Name        ! Type   ! Attributes ! Default ! Description
+! key        ! string !            !         ! Node id or path
+! versionId ! string ! <optional> !         ! Specific version to get the node from (default is active version)
+!===
+
 |===
 
 [.lead]
 Returns
 
 *object* : The node or node array (as JSON) fetched from the repository.
+
+
+[.lead]
+Example
+
+.Fetch a single node using id as a string.
+[source,js]
+----
+var node = repo.get('nodeId');
+----
+
+.Fetch several nodes using a sequence of nodeIds.
+[source,js]
+----
+var nodes = repo.get('nodeId_1', 'nodeId_2');
+----
+
+.Fetch several nodes using an array of nodeIds.
+[source,js]
+----
+var nodes = repo.get(['nodeId_1', 'nodeId_2']);
+----
+
+.Fetch several nodes using mixed parameters.
+[source,js]
+----
+var nodes = repo.get([{
+    key: 'nodeId',
+    versionId: 'versionKey'
+}, {
+    key: '/my-name'
+}, 'nodeId']);
+----
 
 === getActiveVersion
 
