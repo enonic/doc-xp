@@ -87,7 +87,7 @@ $XP_HOME/work:: Various cached files used by Enonic XP, e.g. resized images.
 [#java-heap-memory]
 === Java heap memory
 
-Since this image uses Java 11 it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:
+Since this image uses a modern Java VM, it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:
 
 * set the Java heap size to `30%` of the available memory to the container
 * if the Enonic XP node is a pure master node, set the Java heap size to `75%` of the available memory to the container

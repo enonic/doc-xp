@@ -1,8 +1,18 @@
 {
   "menuItems": [
     {
-      "title": "Manifesto",
-      "document": "manifesto"
+      "title": "Admin",
+      "document": "admin",
+      "menuItems": [
+        {
+          "title": "Widgets",
+          "document": "admin/widgets"
+        }
+      ]
+    },
+    {
+      "title": "IAM",
+      "document": "iam"
     },
     {
       "title": "Applications",
@@ -335,21 +345,7 @@
       ]
     },
     {
-      "title": "IAM",
-      "document": "iam"
-    },
-    {
-      "title": "Admin",
-      "document": "admin",
-      "menuItems": [
-        {
-          "title": "Widgets",
-          "document": "admin/widgets"
-        }
-      ]
-    },
-    {
-      "title": "Deployment",
+      "title": "Hosting",
       "document": "deployment",
       "menuItems": [
         {
