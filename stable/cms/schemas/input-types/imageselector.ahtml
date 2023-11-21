@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Mixin schemas</title>
+<title>ImageSelector input type</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,11 +436,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Mixin schemas</h1>
+<h1>ImageSelector input type</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#definition">Definition</a></li>
+<li><a href="#appearance">Appearance</a></li>
 <li><a href="#usage">Usage</a></li>
 </ul>
 </div>
@@ -449,52 +449,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you need to repeat a group of fields in several different content types, consider extracting them into a mixin.
-After that you can add a reference to the mixin inside forms of required content types.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you want to append a separate form of fields rather than injecting fields inside content type&#8217;s form, consider using <a href="x-data.ahtml">X-data</a>
-</td>
-</tr>
-</table>
+<p>The ImageSelector is a specialized version of the <a href="contentselector.ahtml">ContentSelector</a> that is limited to selecting images (content of type "media:image"), but also upload new images.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="definition"><a class="link" href="#definition">Definition</a></h2>
+<h2 id="appearance"><a class="link" href="#appearance">Appearance</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The file with mixin schema must be placed in the folder <code>site/mixins/[name]</code> and called <code>[name].xml</code>. For example, <em>site/mixins/address/address.xml</em>.</p>
-</div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;mixin&gt;
-  &lt;display-name&gt;Full address&lt;/display-name&gt;
-  &lt;form&gt;
-    &lt;input type="TextLine" name="addressLine"&gt;
-      &lt;label&gt;Street address&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="2"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="city"&gt;
-      &lt;label&gt;City&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="zipCode"&gt;
-      &lt;label&gt;Zip code&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="country"&gt;
-      &lt;label&gt;Country&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-  &lt;/form&gt;
-&lt;/mixin&gt;</code></pre>
+<img src="images/Image-selector.png" alt="Input box with a grid of images to select below it" width="500">
 </div>
 </div>
 </div>
@@ -502,38 +466,28 @@ If you want to append a separate form of fields rather than injecting fields ins
 <div class="sect1">
 <h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Below is an example of a simple content type that uses the abovementioned address mixin.
-In this case fields defined in the mixin will be injected after the form fields of the content type schema,
-and their values will be saved with content data. Notice that the name of the mixin file is used and not the mixin’s Display Name.</p>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Using mixins&lt;/display-name&gt;
-  &lt;form&gt;
-    &lt;input type="TextLine" name="firstName"&gt;
-      &lt;label&gt;First Name&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="lastName"&gt;
-      &lt;label&gt;Last Name&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;mixin name="address"/&gt;
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="myimage" type="ImageSelector"&gt;
+  &lt;label&gt;My Image&lt;/label&gt;
+  &lt;occurrences minimum="0" maximum="1"/&gt;
+  &lt;config&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;allowPath&gt;${site}/*&lt;/allowPath&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
+    &lt;treeMode&gt;true&lt;/treeMode&gt;
+    &lt;hideToggleIcon&gt;true&lt;/hideToggleIcon&gt;
+  &lt;/config&gt;
+&lt;/input&gt;</code></pre>
 </div>
 </div>
-<div class="admonitionblock tip">
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Mixins can be used in content types, component descriptors and the <em>site.xml</em> file.
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>With the exception of <code>&lt;allowContentType&gt;</code> (which is not supported here) and <code>&lt;allowPath&gt;</code>, ImageSelector supports the same configuration options as <a href="contentselector.ahtml">ContentSelector</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>By default, Image Selector displays all images from the root. If you want to limit images to the same site, use <code>&lt;allowPath&gt;${site}/*&lt;/allowPath&gt;</code></td>
 </tr>
 </table>
 </div>
@@ -542,7 +496,7 @@ Mixins can be used in content types, component descriptors and the <em>site.xml<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-10 15:42:30 UTC
+Last updated 2023-11-21 10:19:42 UTC
 </div>
 </div>
 </body>

@@ -527,7 +527,7 @@ public class CustomValidator
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    ValidationError
+<pre class="highlight"><code class="language-Java" data-lang="Java">    ValidationError
         .generalError( ValidationErrorCode.from( ApplicationKey.from( "my.app" ), "custom.invalid" ) )
         .i18n( "my.app.custom.invalid" )
         .message( "{0} is not a dog" )
@@ -595,7 +595,7 @@ Applications like ContentStudio use <code>ValidationErrorCode</code> as a fallba
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-10 15:42:30 UTC
+Last updated 2023-11-21 10:19:42 UTC
 </div>
 </div>
 </body>

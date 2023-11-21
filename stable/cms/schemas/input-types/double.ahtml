@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>All Input types</title>
+<title>Double input type</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,29 +436,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>All Input types</h1>
+<h1>Double input type</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#attachmentuploader">AttachmentUploader</a></li>
-<li><a href="#checkbox">CheckBox</a></li>
-<li><a href="#combobox">ComboBox</a></li>
-<li><a href="#contentselector">ContentSelector</a>
-<ul class="sectlevel2">
-<li><a href="#allowContentType">Allow content type pattern</a></li>
-<li><a href="#allowpath_samples">allowPath Samples</a></li>
-</ul>
-</li>
-<li><a href="#contenttypefilter">ContentTypeFilter</a></li>
-<li><a href="#customselector">CustomSelector</a>
-<ul class="sectlevel2">
-<li><a href="#service_request">Service Request</a></li>
-<li><a href="#service_response">Service Response</a></li>
-</ul>
-</li>
-<li><a href="#date">Date</a></li>
-<li><a href="#datetime">DateTime</a></li>
-<li><a href="#double">Double</a></li>
+<li><a href="#appearance">Appearance</a></li>
+<li><a href="#usage">Usage</a></li>
 <li><a href="#geopoint">GeoPoint</a></li>
 <li><a href="#htmlarea">HtmlArea</a></li>
 <li><a href="#imageselector">ImageSelector</a></li>
@@ -480,769 +463,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section lists all available input types available for XP schemas.<br>
-This list only shows selector specific configuration. See <a href="schemas.ahtml#input_types">schemas</a> for configuration used by all input types.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="attachmentuploader"><a class="link" href="#attachmentuploader">AttachmentUploader</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This field enables uploading of one or more files that will be stored as attachments to the current node/content.
-This is different from media content where each media is a separate node that can be linked to.</p>
-</div>
-<div class="imageblock thumb">
-<div class="content">
-<img src="schemas/images/Attachment.png" alt="An empty attachment input box" width="700">
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="myattachment" type="AttachmentUploader"&gt;
-  &lt;label&gt;My AttachmentUploader&lt;/label&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="checkbox"><a class="link" href="#checkbox">CheckBox</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A checkbox field has a value if it is checked, or no value if it is not checked.  Therefore, the only values for occurrences
-that makes sense is a minimum of zero and a maximum of one, which is default and may be skipped.</p>
-</div>
-<div class="imageblock thumb">
-<div class="content">
-<img src="schemas/images/Checkboxes.png" alt="two checkboxes one is selected the other is not" width="200">
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input  name="mycheckbox" type="CheckBox"&gt;
-  &lt;label&gt;My Checkbox&lt;/label&gt;
-  &lt;default&gt;checked&lt;/default&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;config&gt;
-    &lt;alignment&gt;right&lt;/alignment&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>default</strong> - Use <code>checked</code> to check it, default is unchecked.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>alignment</strong> defines placement of checkbox relative to label text. Supported values are: "left", "right", "top", "bottom", default is "left".</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="combobox"><a class="link" href="#combobox">ComboBox</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Combobox allows you to select one or more options from a statically defined list</p>
-</div>
-<div class="imageblock thumb">
-<div class="content">
-<img src="schemas/images/Combobox.png" alt="two checkboxes one is selected the other is not" width="700">
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mycombobox" type="ComboBox"&gt;
-  &lt;label&gt;My Combobox&lt;/label&gt;
-  &lt;occurrences minimum="1" maximum="2"/&gt;
-  &lt;config&gt;
-    &lt;option value="one"&gt;Option One&lt;/option&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-    &lt;option value="two"&gt;Option Two&lt;/option&gt;
-  &lt;/config&gt;
-  &lt;default&gt;one&lt;/default&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>option</strong> elements and the <code>@value</code> attribute defines the actual value to store when the option is selected. Multiple <code>option</code> elements are allowed and ordered.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>default</strong> is optional, and may be equal to <em>one</em> of the option values.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="contentselector"><a class="link" href="#contentselector">ContentSelector</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>References to other content are specified by this input type. Use the toggle icon to switch between the list mode (default) and the tree mode.</p>
-</div>
-<div class="paragraph">
-<p>Content Selector:</p>
-</div>
-<div class="imageblock thumb">
-<div class="content">
-<img src="schemas/images/Content-selector-default.png" alt="An input box with a dropdown options below it" width="700">
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mycontentselector" type="ContentSelector"&gt;
-  &lt;label&gt;My ContentSelector&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="0"/&gt;
-  &lt;config&gt;
-    &lt;allowContentType&gt;citation&lt;/allowContentType&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-    &lt;allowContentType&gt;my.other.app:quote&lt;/allowContentType&gt;
-    &lt;allowPath&gt;${site}/people/&lt;/allowPath&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;allowPath&gt;./*&lt;/allowPath&gt;
-    &lt;allowPath&gt;/quotes*&lt;/allowPath&gt;
-    &lt;treeMode&gt;true&lt;/treeMode&gt;   <i class="conum" data-value="3"></i><b>(3)</b>
-    &lt;hideToggleIcon&gt;true&lt;/hideToggleIcon&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>allowContentType</strong> is used to limit the content types that may be selected using the <a href="#allowContentType">Allow content type pattern</a></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>allowPath</strong> is used to limit the path of the content that may be selected using the <a href="#allowpath_samples">allowPath Samples</a>. By default, Content Selector
-only displays content from the same site.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>treeMode</strong> toggles between tree and flat modes. Default value is <code>false</code> (flat mode).<br>
-<span class="image"><img src="schemas/images/Content-selector-tree.png" alt="Input box with a dropdown with a tree structure" width="350"></span></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>hideToggleIcon</strong> hides the toggle icon when set to <code>false</code>.<br>
-<span class="image"><img src="schemas/images/Content-selector-no-icon.png" alt="Input box without an icon" width="500"></span></td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="allowContentType"><a class="link" href="#allowContentType">Allow content type pattern</a></h3>
-<div class="paragraph">
-<p>XP uses one of two modes when matching content type patterns:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>LEGACY</code></dt>
-<dd>
-<p>this mode simulates the pattern matching functionality that was the default before XP 7.7.0. <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.7.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.7.0</text></g></svg></span></p>
-</dd>
-<dt class="hdlist1"><code>MATCH</code></dt>
-<dd>
-<p>this mode is the current default mode and has a few notable changes from <code>LEGACY</code> mode.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>The modes are explained in further detail below. You can configure which mode to use in  <a href="../deployment/config.ahtml#admin_rest">the admin config</a>.</p>
-</div>
-<div class="sect3">
-<h4 id="legacy"><a class="link" href="#legacy">Legacy<br></a></h4>
-<div class="paragraph">
-<p>If the pattern value can be found in any part of the content type name, then it is considered a match.
-The pattern will be prefixed by the current application name unless:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the pattern uses the &lt;application-name:content-name&gt; format</p>
-</li>
-<li>
-<p>the pattern includes one of <code>:</code> or <code>*</code></p>
-</li>
-<li>
-<p>the pattern starts with <code>${app}</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="match"><a class="link" href="#match">Match<br></a></h4>
-<div class="paragraph">
-<p>The pattern will be treated as a Java Regular Expression (with <a href="#regex-differences">a few notable exceptions</a>) and the whole content type name must match it to be accepted.
-The pattern will be prefixed by the current application name if it does <em>not</em> contain any of the following characters: <code>\^$.|?*+()[{:</code>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="regex-differences"><a class="link" href="#regex-differences">XP patterns: special cases</a></h4>
-<div class="paragraph">
-<p>XP&#8217;s patterns have a few cases where they differ from normal Java Regular Expression syntax:</p>
-</div>
-<div class="paragraph">
-<div class="title"><code>${app}</code> template expression</div>
-<p>Most content type names start with the name of the application where they are stored. It may be quite messy and hard to maintain the whole application name in every pattern, so the <code>${app}</code> template expression can be used to replace it.</p>
-</div>
-<div class="paragraph">
-<div class="title">The '*' character</div>
-<p>In most regex engines, the <code>*</code> character means "0 or more of the preceding token". However, XP treats it differently and interprets it as "0 or more of any character(s) except for line breaks". In that way, it&#8217;s similar to <a href="https://en.wikipedia.org/wiki/Glob_%28programming%29">glob patterns</a>.</p>
-</div>
-<div class="paragraph">
-<p>To further clarify, in XP:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>*day</code> would match "monday", "day", and "mayday". This pattern would be invalid in most regex engines.</p>
-</li>
-<li>
-<p><code>p*age</code> would match "page" and "package", but <em>not</em> "age".</p>
-</li>
-<li>
-<p><code>monk*</code> would match "monkey" and  "monk", but <em>not</em> "mon".</p>
-</li>
-</ul>
-</div>
-<div class="exampleblock">
-<div class="title">Example 1. Samples</div>
-<div class="content">
-<div class="paragraph">
-<p>Content type "citation" within your current application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;citation&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Content type "quote" from the application "my.other.app"<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;my.other.app:quote&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Content types "quote" from any application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;*:quote&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Any content types from current application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;${app}:*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All content types starting with banana (using regular expressions)<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;*:banana*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All content types except 'base:folder'<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;^(?!base:folder$)*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="allowpath_samples"><a class="link" href="#allowpath_samples">allowPath Samples</a></h3>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p>Allow all content starting from the root<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Only content from the current site (but from any location), e.g<br>
-* /mySite/fish.jpg<br>
-* /mySite/articles/new-blog-post<br>
-* /mySite/someFolder/anotherFolder/rubarb/lettuce<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;${site}/*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All children of &lt;site&gt;/people, e.g<br>
-* /mySite/people/myContent<br>
-* /mySite/people/myGroup/anotherContent<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;${site}/people/*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All content in mySite starting with people, including children, e.g<br>
-* /mySite/peoples<br>
-* /mySite/people/myContent<br>
-* /mySite/peoples/myContent<br>
-* /mySite/people/myGroup/anotherContent<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;/mySite/people*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All children of the current content<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;./*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All children of the current content&#8217;s parent<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;../*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="contenttypefilter"><a class="link" href="#contenttypefilter">ContentTypeFilter</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A field for selecting a content type.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="schemas/images/Content-type-default.png" alt="input field with a dropdown of all content" width="700">
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="myctyfilter" type="ContentTypeFilter"&gt;
-  &lt;label&gt;My CTYFilter&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="0"/&gt;
-  &lt;config&gt;
-    &lt;context&gt;true&lt;/context&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>context</strong> <code>true</code> limits the list of content types to the applications configured for the current site. Default is <code>false</code>.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="customselector"><a class="link" href="#customselector">CustomSelector</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Selector input type with a customizable data source. Application developers must create a service that returns results according to the
-required JSON format, and then specify the service name in the input config. For information on creating a service see the
-:ref:`services` section.</p>
-</div>
-<div class="paragraph">
-<p>Below are two sample usages of CustomSelector:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;!-- Basic Sample --&gt;
-&lt;input name="mycustomselector" type="CustomSelector"&gt;
-  &lt;label&gt;My Custom Selector&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="0"/&gt;
-  &lt;config&gt;
-    &lt;service&gt;my-custom-selector&lt;/service&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;/config&gt;
-&lt;/input&gt;
-
-&lt;!-- Sample with parameters --&gt;
-&lt;input name="musicTrack" type="CustomSelector"&gt;
-  &lt;label&gt;Intro song&lt;/label&gt;
-  &lt;config&gt;
-    &lt;service&gt;spotify-music-selector&lt;/service&gt;
-    &lt;param value="genre"&gt;classic&lt;/param&gt;   <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;param value="sortBy"&gt;length&lt;/param&gt;
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>service</strong> holds the name of a JavaScript service file, located under <code>/resources/services/[my-custom-selector]/[my-custom-selector].js</code>. You can also refer to a service file in another application, for example <strong>com.myapplication.app:myservice</strong>.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>param</strong> lets you pass parameters to the service. This allows for the service to be used in different contexts. There can be multiple parameters or none. The parameters will be included in the HTTP request to the service as name-value query parameters.</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="service_request"><a class="link" href="#service_request">Service Request</a></h3>
-<div class="paragraph">
-<p>In addition to the param values, the service will receive the following query parameters in the HTTP request:</p>
-</div>
-<div class="paragraph">
-<p><strong>ids</strong><br>
-Array of item ids already selected in the CustomSelector. The service is expected to return the items with the specified ids.</p>
-</div>
-<div class="paragraph">
-<p><strong>start</strong><br>
-Index of the first item expected. Used for pagination of the results.</p>
-</div>
-<div class="paragraph">
-<p><strong>count</strong><br>
-Maximum number of items expected. Used for pagination of the results.</p>
-</div>
-<div class="paragraph">
-<p><strong>query</strong><br>
-String with the search text typed by the user in the CustomSelector input field.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="service_response"><a class="link" href="#service_response">Service Response</a></h3>
-<div class="paragraph">
-<p>The service controller must have a GET handler that returns results in JSON format.
-The JSON object returned must include <code>total</code> and <code>count</code> properties as numbers, and <code>hits</code> containing an array of items.
-Each item in the hits property must have the following fields:</p>
-</div>
-<div class="paragraph">
-<p><strong>id</strong><br>
-Unique Id of the option</p>
-</div>
-<div class="paragraph">
-<p><strong>displayName</strong><br>
-Option title</p>
-</div>
-<div class="paragraph">
-<p><strong>description (optional)</strong><br>
-Detailed description</p>
-</div>
-<div class="paragraph">
-<p><strong>iconUrl (optional)</strong><br>
-Path to the thumbnail image file</p>
-</div>
-<div class="paragraph">
-<p><strong>icon (optional)</strong><br>
-Inline image content (for example, SVG)</p>
-</div>
-<div class="paragraph">
-<p>Sample JSON response from a CustomSelector service:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-  "total": 10,
-  "count": 2,
-  "hits": [
-    {
-      "id": "1",
-      "displayName": "Option number 1",
-      "description": "External SVG file is used as icon",
-      "iconUrl": "/some/path/images/number_1.svg"
-    },
-    {
-      "id": "2",
-      "displayName": "Option number 2",
-      "description": "Inline SVG markup is used as icon",
-      "icon": {
-        "data": "&lt;svg xmlns=\"http://www.w3.org/2000/svg\"/&gt;",
-        "type": "image/svg+xml"
-      }
-    }
-  ]
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="date"><a class="link" href="#date">Date</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A simple field for dates with a calendar pop-up box in the admin console. The default format is <code>yyyy-MM-dd</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="schemas/images/Date-selector.png" alt="Input field with a calander above it and a blue ok button" width="500">
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mydate" type="Date"&gt;
-  &lt;label&gt;My Date&lt;/label&gt;
-  &lt;default&gt;2011-09-12&lt;/default&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>default</strong> date value to be used. The format for the default date value can be:</td>
-</tr>
-</table>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Date in ISO 8601 format: <code>yyyy-MM-dd</code>  (e.g. "2016-12-31")</p>
-</li>
-<li>
-<p>Relative date expression (e.g. "+1year -12days")</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>A relative date expression is a sequence of one or more date offsets.<br>
-An offset consists of: a plus or minus sign, followed by an integer, followed by a date unit string (e.g. "+3 days")<br></p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Unit strings</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Singular</th>
-<th class="tableblock halign-left valign-top">Plural</th>
-<th class="tableblock halign-left valign-top">initial letter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"year"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"years"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"y"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"month"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"months"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"M"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"week"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"weeks"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"w"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"day"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"days"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"d"</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>An offset can also be the string <code>now</code>, which means current date.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>If <code>&lt;default&gt;</code> value is set for an input, the Date picker will display "<strong>Set default</strong>" button for setting the default value with one click.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="schemas/images/Date-selector-default.png" alt="Date selector with default value" width="500">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="datetime"><a class="link" href="#datetime">DateTime</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A simple field for dates with time.  A pop-up box with a calendar and time selector allows easy editing.
-The format is <code>yyyy-MM-dd hh:mm</code> for example, <code>2015-02-09T09:00</code>. The date-time could be of type
-<code>local</code> (no timezone) or with a timezone. This is done using configuration:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="schemas/images/Datetime-selector.png" alt="Input field with both a calander and time selection above" width="500">
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mydatetime" type="DateTime"&gt;
-  &lt;label&gt;My DateTime&lt;/label&gt;
-  &lt;config&gt;
-    &lt;timezone&gt;true&lt;/timezone&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;/config&gt;
-  &lt;default&gt;2011-09-12&lt;/default&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>timezone</strong> set to <code>true</code> if timezone information should be used. Default is <code>false</code>.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>default</strong> date value to be used. The format for the default date value can be:</td>
-</tr>
-</table>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Combined date and time in ISO 8601 format, with timezone: <code>yyyy-MM-ddThh:mm±hh:mm</code>  (e.g. "2016-12-31T23:59+01:00")</p>
-</li>
-<li>
-<p>Combined date and time in ISO 8601 format, without timezone: <code>yyyy-MM-ddThh:mm</code>  (e.g. "2016-12-31T23:59")</p>
-</li>
-<li>
-<p>Relative datetime expression (e.g. "+1year -12hours")</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Note that the ISO8601 format consists of concatenating a complete date expression, the letter <code>T</code> as a delimiter, and a valid time expression.</p>
-</div>
-<div class="paragraph">
-<p>The timezone offset is a plus or minus sign, followed by an hour offset, followed by a colon, followed by a minute offset.
-A timezone offset of zero can also be represented as 'Z', meaning UTC or Zulu time. It is equivalent to offset <code>+00:00</code>.</p>
-</div>
-<div class="paragraph">
-<p>A relative date expression is a sequence of one or more datetime offsets.
-An offset consists of: a plus or minus sign, followed by an integer, followed by a date/time unit string (e.g. "+3 days")</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Unit strings</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Singular</th>
-<th class="tableblock halign-left valign-top">Plural</th>
-<th class="tableblock halign-left valign-top">initial letter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"year"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"years"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"y"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"month"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"months"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"M"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"week"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"weeks"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"w"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"day"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"days"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"d"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"hour"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"hours"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"h"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"minute"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"minutes"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"m"</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>An offset can also be the string <code>now</code>, which means current date and time.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>If <code>&lt;default&gt;</code> value is set for an input, the Date/Time picker will display "<strong>Set default</strong>" button for setting the default value with one click.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="dateTimeDefaultTz" type="DateTime"&gt;
-  &lt;label&gt;DateTime (with tz and default value)&lt;/label&gt;
-  &lt;config&gt;
-    &lt;timezone&gt;true&lt;/timezone&gt;
-  &lt;/config&gt;
-  &lt;default&gt;2000-01-01T12:30+01:00&lt;/default&gt;
-&lt;/input&gt;
-
-&lt;input name="dateTimeDefaultNoTz" type="DateTime"&gt;
-  &lt;label&gt;DateTime (without tz and default value)&lt;/label&gt;
-  &lt;default&gt;2000-01-01T12:30&lt;/default&gt;
-&lt;/input&gt;
-
-&lt;input name="dateTimeRelative" type="DateTime"&gt;
-  &lt;label&gt;DateTime (relative default value)&lt;/label&gt;
-  &lt;default&gt;+1year -12hours&lt;/default&gt;
-&lt;/input&gt;
-
-&lt;input name="dateTimeNow" type="DateTime"&gt;
-  &lt;label&gt;DateTime (current time as default value)&lt;/label&gt;
-  &lt;default&gt;now&lt;/default&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="double"><a class="link" href="#double">Double</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
 <p>A simple input type for storing decimal numbers.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="appearance"><a class="link" href="#appearance">Appearance</a></h2>
+<div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="schemas/images/Double.png" alt="An inpt field with a lot of decimal numbers" width="700">
+<img src="images/Double.png" alt="An inpt field with a lot of decimal numbers" width="700">
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mydouble" type="Double"&gt;
@@ -1285,7 +522,7 @@ An offset consists of: a plus or minus sign, followed by an integer, followed by
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="schemas/images/Geo-point.png" alt="text input with a longitude and latitude numbers" width="700">
+<img src="images/Geo-point.png" alt="text input with a longitude and latitude numbers" width="700">
 </div>
 </div>
 <div class="ulist">
@@ -1383,7 +620,7 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="schemas/images/Html-area-editor.png" alt="Input field with a toolbar at the top. Source and fullscreen buttons on the bottom left" width="600">
+<img src="images/Html-area-editor.png" alt="Input field with a toolbar at the top. Source and fullscreen buttons on the bottom left" width="600">
 </div>
 </div>
 <div class="paragraph">
@@ -1581,11 +818,11 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 <h2 id="imageselector"><a class="link" href="#imageselector">ImageSelector</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The ImageSelector is a specialized version of the <a href="#contentselector">ContentSelector</a> that is limited to selecting images (content of type "media:image"), but also upload new images.</p>
+<p>The ImageSelector is a specialized version of the <a href="#ContentSelector">[ContentSelector]</a> that is limited to selecting images (content of type "media:image"), but also upload new images.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="schemas/images/Image-selector.png" alt="Input box with a grid of images to select below it" width="500">
+<img src="images/Image-selector.png" alt="Input box with a grid of images to select below it" width="500">
 </div>
 </div>
 <div class="listingblock">
@@ -1605,7 +842,7 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>With the exception of <code>&lt;allowContentType&gt;</code> (which is not supported here) and <code>&lt;allowPath&gt;</code>, ImageSelector supports the same configuration options as <a href="#contentselector">ContentSelector</a>.</td>
+<td>With the exception of <code>&lt;allowContentType&gt;</code> (which is not supported here) and <code>&lt;allowPath&gt;</code>, ImageSelector supports the same configuration options as <a href="#ContentSelector">[ContentSelector]</a>.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -1623,7 +860,7 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="schemas/images/Long.png" alt="Number input showing a large number" width="700">
+<img src="images/Long.png" alt="Number input showing a large number" width="700">
 </div>
 </div>
 <div class="listingblock">
@@ -1664,7 +901,7 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 <h2 id="mediaselector"><a class="link" href="#mediaselector">MediaSelector</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The MediaSelector is a specialized version of the <a href="#contentselector">ContentSelector</a> that is limited to selecting media only (content of type "media:*"), including also uploading new media (any kind of files).</p>
+<p>The MediaSelector is a specialized version of the <a href="#ContentSelector">[ContentSelector]</a> that is limited to selecting media only (content of type "media:*"), including also uploading new media (any kind of files).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1684,7 +921,7 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>MediaSelector supports the same configuration options as <a href="#contentselector">ContentSelector</a>, but is limited to using <code>media:*</code> content types in the <code>&lt;allowContentType&gt;</code> configuration.</td>
+<td>MediaSelector supports the same configuration options as <a href="#ContentSelector">[ContentSelector]</a>, but is limited to using <code>media:*</code> content types in the <code>&lt;allowContentType&gt;</code> configuration.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -1702,7 +939,7 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 </div>
 <div class="imageblock thumb">
 <div class="content">
-<img src="schemas/images/Radio-buttons.png" alt="two button where one of them is selected" width="200">
+<img src="images/Radio-buttons.png" alt="two button where one of them is selected" width="200">
 </div>
 </div>
 <div class="listingblock">
@@ -1813,13 +1050,13 @@ Regex validation is performed by the browser&#8217;s <a href="https://developer.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="schemas/images/TextLine.png" alt="Text Line with various settings" width="700">
+<img src="images/TextLine.png" alt="Text Line with various settings" width="700">
 </div>
 </div>
 <div class="sect2">
 <h3 id="spell_checking"><a class="link" href="#spell_checking">Spell checking</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.8.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>When displayed in the Content Studio, input value will be checked for spelling errors by built-in browser spell checker
@@ -1966,7 +1203,7 @@ Contents of TextArea will be automatically checked for spelling errors as descri
 An offset consists of: a plus or minus sign, followed by an integer, followed by a time unit string (e.g. "+3 minutes")</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Unit strings</caption>
+<caption class="title">Table 1. Unit strings</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2034,7 +1271,7 @@ An offset consists of: a plus or minus sign, followed by an integer, followed by
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-10 15:42:30 UTC
+Last updated 2023-11-21 10:19:42 UTC
 </div>
 </div>
 </body>

@@ -463,7 +463,7 @@ When editing content, X-data fields will be displayed inside a separate step in 
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If you want to inject fields inside content type&#8217;s form rather than appending a form, consider using <a href="mixins.ahtml">a mixin</a>
+If you want to inject fields inside content type&#8217;s form rather than appending a form, consider using <a href="schemas/mixins.ahtml">a mixin</a>
 </td>
 </tr>
 </table>
@@ -538,7 +538,7 @@ to all content types via <code>site.xml</code> but want to exclude some content 
 By default x-data will be added to content items of all types with no option to remove it but you can make it optional by setting <code>optional</code> attribute to <em>true</em>. Optional x-data has to be manually enabled inside Content Wizard to be added to the content data.</p>
 </div>
 <div class="paragraph">
-<p>If <code>allowContentTypes</code> and <code>optional</code> attributes are not set, the x-data will automatically be enabled for all content types. See <a href="input-types.ahtml#allowContentType">modes</a> of content type filtering.</p>
+<p>If <code>allowContentTypes</code> and <code>optional</code> attributes are not set, the x-data will automatically be enabled for all content types. See <a href="input-types/customselector.ahtml#allowContentType">modes</a> of content type filtering.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -573,7 +573,7 @@ By default x-data will be added to content items of all types with no option to 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-10 15:42:30 UTC
+Last updated 2023-11-21 10:19:42 UTC
 </div>
 </div>
 </body>

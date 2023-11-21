@@ -440,34 +440,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#macros">Macros</a>
-<ul class="sectlevel2">
-<li><a href="#macro_instruction">Macro instruction</a></li>
+<li><a href="#macro_instructions">Macro instructions</a></li>
 <li><a href="#descriptor">Descriptor</a></li>
 <li><a href="#controller">Controller</a></li>
 <li><a href="#built_in_macros">Built-in macros</a></li>
 </ul>
-</li>
-</ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="macros"><a class="link" href="#macros">Macros</a></h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Macros are instructions that allow adding extra functionality or include dynamic content in the Html Editor.</p>
+<p>Macros enable editors to add rich functionality or include dynamic content in the rich text editor.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="macro_instructions"><a class="link" href="#macro_instructions">Macro instructions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A macro instruction is written in plain text. They are similar to HTML or XML tags, but uses square brackets instead of angle brackets.</p>
 </div>
 <div class="paragraph">
-<p>The Html Editor is used when editing <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea</a> input fields, or while editing a <a href="https://developer.enonic.com/docs/xp/stable/cms/components#text">Text component</a> in Page Editor.</p>
-</div>
-<div class="paragraph">
-<p>There are two built-in macros included in XP. But its real power comes from macros provided by applications. When an application that contains macros is added to a site, they will be available for any HtmlArea or Text component inside the site.</p>
-</div>
-<div class="sect2">
-<h3 id="macro_instruction"><a class="link" href="#macro_instruction">Macro instruction</a></h3>
-<div class="paragraph">
-<p>A macro instruction is similar to an HTML or XML tag but using square brackets instead of angle brackets.</p>
+<p>A macro has a name, a set of attributes, and optionally a body:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -475,8 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>A macro has a name, a set of attributes, and optionally a body (anything that is too long to be
-passed via parameters).</p>
+<p>Sample macro without the body:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -484,17 +478,13 @@ passed via parameters).</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Macro instructions can be added anywhere in an HTML page, usually inside a content’s HtmlArea field.</p>
-</div>
-<div class="paragraph">
-<p>During the rendering of the page the macros are resolved and executed. Then the result from executing the macro replaces the instruction text. In addition, a macro can also add styles or scripts to the page, by setting <a href="https://developer.enonic.com/docs/xp/stable/cms/contributions">Page Contributions</a> in its response.</p>
-</div>
-<div class="paragraph">
-<p>A user can add macro instructions by typing the square bracket tags, as the examples above. But more frequently it will click on the Insert macro button and select one of the macros available.</p>
+<p>A user can add macro instructions by typing in the macro manually. But more conveniently by clicking the Insert macro button and selecting one of the macros available in Content Studio.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h3>
+</div>
+<div class="sect1">
+<h2 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>A macro descriptor is an xml file that allows assigning a user-friendly name, and a description to the macro. It also has a configuration to define the types and names of the macro parameters.</p>
 </div>
@@ -506,7 +496,7 @@ passed via parameters).</p>
 </dd>
 <dt class="hdlist1">display-name@i18n</dt>
 <dd>
-<p>The key to look up the display-name text in the localization bundles. Optional. (See also <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization">Localization of Schemas</a>)</p>
+<p>The key to look up the display-name text in the localization bundles. Optional. Visit <a href="schemas/localization.ahtml">Schema localization</a> for more details.</p>
 </dd>
 <dt class="hdlist1">description</dt>
 <dd>
@@ -514,7 +504,7 @@ passed via parameters).</p>
 </dd>
 <dt class="hdlist1">description@i18n</dt>
 <dd>
-<p>The key to look up the description text in the localization bundles. Optional. (See also <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization">Localization of Schemas</a>)</p>
+<p>The key to look up the description text in the localization bundles. Optional. Visit <a href="schemas/localization.ahtml">Schema localization</a> for more details.</p>
 </dd>
 <dt class="hdlist1">config</dt>
 <dd>
@@ -529,7 +519,7 @@ passed via parameters).</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The config form does not support nested elements, so <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#itemset">Item Sets</a> are not allowed in the macro config form. Also the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea</a> input type is not allowed in the config form, since it may contain macros itself.
+The config form does not support nested elements, so <a href="schemas/item-set.ahtml">Item Sets</a> are not allowed in the macro config form. Also the <a href="schemas/input-types/htmlarea.ahtml">HtmlArea</a> input type is not allowed in the config form, since it may contain macros itself.
 </td>
 </tr>
 </table>
@@ -541,17 +531,17 @@ The config form does not support nested elements, so <a href="https://developer.
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-If you don&#8217;t have a input with the <code>name="body"</code>, the generated macro tag will be self closing [disable][macro attr="" /][/disable]
+If you don&#8217;t have a input with the <code>name="body"</code>, the generated macro tag will be self closing <code>[disable][macro attr="" /][/disable]`</code>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Its path follows the pattern <code>site/macros/&lt;macroName&gt;/&lt;macroName&gt;.xml</code></p>
+<p>Its path follows the pattern <code>src/main/resources/site/macros/&lt;macroName&gt;/&lt;macroName&gt;.xml</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;macro&gt;
+<pre class="highlight"><code class="language-XML" data-lang="XML">&lt;macro&gt;
   &lt;display-name i18n="a-macro.display-name"&gt;Current user&lt;/display-name&gt;
   &lt;description i18n="a-macro.description"&gt;Shows currently logged user&lt;/description&gt;
 
@@ -573,7 +563,7 @@ If you don&#8217;t have a input with the <code>name="body"</code>, the generated
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The macro texts (display-name, description, label and help-text from config input types) can be provided in multiple languages. See <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization">Localization of Schemas</a> for details.
+The macro texts (display-name, description, label and help-text from config input types) can be provided in multiple languages. Visit <a href="schemas/localization.ahtml">Schema localization</a> for more details.
 </td>
 </tr>
 </table>
@@ -582,16 +572,30 @@ The macro texts (display-name, description, label and help-text from config inpu
 <p>Although not strictly required, it is recommended to create a descriptor, as it provides the required details for adding macros through the UI in Content Studio.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="controller"><a class="link" href="#controller">Controller</a></h3>
+</div>
+<div class="sect1">
+<h2 id="controller"><a class="link" href="#controller">Controller</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The functionality of a macro is implemented in a JavaScript controller, inside an application.</p>
+<p>When using the Enonic framework, optionally add a JavaScript controller to render the macro.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When using 3rd party front-end frameworks, the controller can also be used to provide a preview of the macro in Content Studio.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Its path follows the pattern <code>site/macros/&lt;macroName&gt;/&lt;macroName&gt;.js</code></p>
+<p>Its path follows the pattern <code>src/main/resources/site/macros/&lt;macroName&gt;/&lt;macroName&gt;.js</code></p>
 </div>
 <div class="paragraph">
-<p>A macro controller must export a single <code>macro</code> function that takes a <code>context</code> parameter and returns a response object (see <a href="https://developer.enonic.com/docs/xp/stable/framework/http#http-response">HTTP Response</a>).</p>
+<p>A macro controller must export a single <code>macro</code> function that takes a <code>context</code> parameter and returns a response object (see <a href="../framework/http.ahtml#http-response">HTTP Response</a>).</p>
 </div>
 <div class="paragraph">
 <p>The context parameter is a Javascript object with the following properties:</p>
@@ -668,8 +672,10 @@ A macro controller can also use libraries, like any other JavaScript controller.
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="built_in_macros"><a class="link" href="#built_in_macros">Built-in macros</a></h3>
+</div>
+<div class="sect1">
+<h2 id="built_in_macros"><a class="link" href="#built_in_macros">Built-in macros</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>There are currently 2 built-in macros that are included in XP and available for any site:</p>
 </div>
@@ -688,11 +694,14 @@ A macro controller can also use libraries, like any other JavaScript controller.
 <div class="paragraph">
 <p>Examples:</p>
 </div>
-<div class="listingblock">
+<div class="literalblock">
 <div class="content">
-<pre>[disable]Example of macro instruction: [myMacro param1="value1"/][/disable]
-
-[embed]&lt;iframe src="https://www.youtube.com/embed/cFfxuWUgcvI" allowfullscreen&gt;&lt;/iframe&gt;[/embed]</pre>
+<pre>[disable]Example of macro instruction: [myMacro param1="value1"/][/disable]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[embed]&lt;iframe src="https://www.youtube.com/embed/cFfxuWUgcvI" allowfullscreen&gt;&lt;/iframe&gt;[/embed]</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -710,10 +719,9 @@ A macro may optionally have its own specific icon. The icon can be assigned to t
 </div>
 </div>
 </div>
-</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-10 15:42:30 UTC
+Last updated 2023-11-21 10:19:42 UTC
 </div>
 </div>
 </body>

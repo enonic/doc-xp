@@ -443,17 +443,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#forms">Forms</a>
 <ul class="sectlevel2">
-<li><a href="#xml_schema_definition_xsd">XML Schema Definition (XSD)</a></li>
-</ul>
-</li>
-<li><a href="#input_types">Input types</a></li>
-<li><a href="#field_set">Field Set</a></li>
-<li><a href="#item_set">Item Set</a></li>
-<li><a href="#option_set">Option Set</a></li>
-<li><a href="#schema_localization">Schema Localization</a>
-<ul class="sectlevel2">
-<li><a href="#supported_fields">Supported Fields</a></li>
-<li><a href="#translations">Translations</a></li>
+<li><a href="#form_grouping">Form grouping</a></li>
+<li><a href="#xsd">XML Schema Definition (XSD)</a></li>
 </ul>
 </li>
 </ul>
@@ -471,7 +462,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To facilitate creation of various forms and data types throughout Content Studio, Enonic XP ships with a high-level schema concept that requires no coding.</p>
+<p>To facilitate creation of structured content Content Studio, Enonic XP ships with a high-level schema concept that requires no coding.</p>
+</div>
+<div class="paragraph">
+<p>Each schema will produce a deterministic set of properties with valid values and indexing rules. Content can be submitted through both via UI, and API.</p>
 </div>
 </div>
 </div>
@@ -479,468 +473,64 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="forms"><a class="link" href="#forms">Forms</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The main use of schemas is to define forms that can be edited through the admin interface.
-In addition to user interface, schemas also have a back-end equivalent that can be used programmatically,
-for instance through the content API.</p>
+<p>First and foremost, schemas define forms that can be edited through an administrative interface, typically <a href="https://developer.enonic.com/docs/content-studio">Content Studio</a>.</p>
 </div>
 <div class="paragraph">
-<p>All forms are essentially compositions of <a href="#input_types">Input types</a> and optionally <a href="sets.ahtml">Sets</a> when more complex structures are required.</p>
+<p>In addition to the user interface, schemas also have a back-end equivalent that can be used programmatically, for instance through the content API.</p>
+</div>
+<div class="paragraph">
+<p>All forms are essentially compositions of various <a href="schemas/input-types.ahtml">Input types</a>.</p>
 </div>
 <div class="paragraph">
 <p>Once a form is populated and submitted, the end-result will be a property structure that matches 1-1 with the schema definition.
 The property structure can then be persisted directly into the XP repository.</p>
 </div>
 <div class="paragraph">
-<p>Forms can be created either with XML or with Java, where the former is the most common.</p>
+<p>Forms can be declared statically with XML, using a format that looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;someform&gt;
-  &lt;formconfig/&gt;
-  &lt;form&gt;
-    &lt;input name="firstname" type="TextLine"&gt;
-      &lt;label&gt;First Name&lt;/label&gt;
-    &lt;/input&gt;
-    &lt;input name="lastname" type="TextLine"&gt;
-      &lt;label&gt;Last Name&lt;/label&gt;
-    &lt;/input&gt;
-  &lt;/form&gt;
-&lt;/someForm&gt;</code></pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;form&gt;
+  &lt;input name="firstname" type="TextLine"&gt;
+    &lt;label&gt;First Name&lt;/label&gt;
+  &lt;/input&gt;
+  &lt;input name="lastname" type="TextLine"&gt;
+    &lt;label&gt;Last Name&lt;/label&gt;
+  &lt;/input&gt;
+&lt;/form&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>There are many types of forms, each with their specific purpose and options.
-The form implementation will control where and how end result is actually persisted:</p>
+The form implementation will control where and how end result is actually persisted.</p>
 </div>
 <div class="paragraph">
-<p>Below are the currently available forms implementations used by XP:</p>
+<p>The persisted output form the above form might look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
+  firstname: "Tom",
+  lastname: "Cat"
+}</code></pre>
+</div>
 </div>
 <div class="sect2">
-<h3 id="xml_schema_definition_xsd"><a class="link" href="#xml_schema_definition_xsd">XML Schema Definition (XSD)</a></h3>
+<h3 id="form_grouping"><a class="link" href="#form_grouping">Form grouping</a></h3>
 <div class="paragraph">
-<p>An XSD is available to simplify editing of XML-based form files.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="input_types"><a class="link" href="#input_types">Input types</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Input types represent the most important part of any form.
-Their purpose is to enable editing and persistence of data.
-Input types have both front-end and back-end components. The front-end represents the visual editing interface used in the XP admin console, where the back-end is solely used for validation purposes.
-An input type will handle a single property, with zero, 1 or many values. I.e. the TextLine input type will return Strings. Normally, an input type will use a fixed propertyType, but this is optional.</p>
-</div>
-<div class="imageblock thumb">
-<div class="content">
-<img src="schemas/images/Default-input.png" alt="An input box with help-text below it" width="700">
-</div>
+<p>In addition to input types, one may use sets to group form items to construct more advanced forms, and hence richer data models.</p>
 </div>
 <div class="paragraph">
-<p>The following configuration is common for all input types:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="InputTypeName" name="myname" &gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;label i18n="myname.label"&gt;My label&lt;/label&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;default/&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
-  &lt;help-text i18n="myname.help-text"&gt;Help text here&lt;/help-text&gt;   <i class="conum" data-value="4"></i><b>(4)</b>
-  &lt;occurrences minimum="0" maximum="1"/&gt;   <i class="conum" data-value="5"></i><b>(5)</b>
-  &lt;config/&gt;  <i class="conum" data-value="6"></i><b>(6)</b>
-&lt;/input&gt;</code></pre>
+<p>Use form items like <a href="schemas/field-set.ahtml">Field sets</a> (decorative only), <a href="schemas/item-set.ahtml">Item sets</a>, and <a href="schemas/option-set.ahtml">Option sets</a> for this purpose.</p>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>input</strong> contains two mandatory attributes:<br>
-<em>@name</em> is used when storing the data in a property, and must be unique on each level.<br>
-<em>@type</em> refers to one of the many input types which are listed below.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>label</strong> is another mandatory field that holds the human readable value that will be displayed when listing the input type control in the administrative interface<br>
-<em>@i18n</em> is an optional attribute holding the key to localization phrase of the form (see <a href="#schema_localization">localization</a>).</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>default</strong> is an optional field that lets you specify default values to be used by the input type.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>help-text</strong> is an optional field that lets you specify a text label shown below the input field. Used for explanation of the field&#8217;s purpose.<br>
-<em>@i18n</em> is an optional attribute holding the key to localization phrase of the form (see <a href="#schema_localization">localization</a>).</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><strong>occurrences</strong> is an optional field used to control the number of values stored by a single input.<br>
-<em>@minimum</em> set to to zero means the input is not mandatory<br>
-<em>@maximum</em> to zero means there is no upper limit to the number of values.<br>
-This element is optional, if omitted the default will be <code>minimum="0"</code> and <code>maximum="1"</code>.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><strong>config</strong> is an optional element designed to hold custom configuration for each input-type.</td>
-</tr>
-</table>
+<div class="sect2">
+<h3 id="xsd"><a class="link" href="#xsd">XML Schema Definition (XSD)</a></h3>
+<div class="paragraph">
+<p>To simplify editing, an XSD is available.</p>
 </div>
 <div class="paragraph">
-<p>Here is the <a href="input-types.ahtml">the complete list of input types</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="field_set"><a class="link" href="#field_set">Field Set</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A field set may be used to group items visually. The example below will create a form in the admin console with the inputs grouped under the
-label of the field set.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;field-set&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;label i18n="metadata.label"&gt;Metadata&lt;/label&gt;
-  &lt;items&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;input name="tags" type="Tag"&gt;
-      &lt;label&gt;Tags for tag cloud&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="5"/&gt;
-    &lt;/input&gt;
-  &lt;/items&gt;
-&lt;/field-set&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>field-set</strong> does not need a name since it is only visual, and does not affect the data model</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>items</strong> allow placement of form items to be contained within it</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="item_set"><a class="link" href="#item_set">Item Set</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Item sets provide a special capability that allows you to nest form items hierarchically.</p>
-</div>
-<div class="paragraph">
-<p>Input types in item sets are grouped into logical units, allowing them to repeat as a complex input types, as item sets support occurrences too.
-Item sets are both visually and semantically grouped as the name of the item set is used in the persisted property structure. An item set actually produces a property set.</p>
-</div>
-<div class="paragraph">
-<p>Here is an example of an item set with two inputs. The resulting form will allow multiple entries of phone numbers with labels:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;item-set name="contact_info"&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;label i18n="contact_info.label"&gt;Contact Info&lt;/label&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;occurrences minimum="0" maximum="0"/&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
-  &lt;items&gt;
-    &lt;input name="label" type="TextLine"&gt;
-      &lt;label&gt;Label&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input name="phone_number" type="TextLine"&gt;
-      &lt;label&gt;Phone Number&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="1"/&gt;
-    &lt;/input&gt;
-  &lt;/items&gt;
-&lt;/item-set&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>name</strong> defines the mapping to the property name</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>label</strong> - The displayed identfier of the input.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>occurences</strong> control the minimum and maximum instances of the ItemSet that may be created</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-It is also possible to nest item sets inside each other
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="option_set"><a class="link" href="#option_set">Option Set</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Option sets enable editors to select the content of a set instance between pre-defined options.</p>
-</div>
-<div class="paragraph">
-<p>There are essentially two distinct variants of option sets.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Single select - Visually represented by dropdowns</p>
-</li>
-<li>
-<p>Multi select - Visually represented by a multi select form</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>An option may define zero or more items. Hence, a single option may be represented by the option itself, or contain more form items - just like an item set.</p>
-</div>
-<div class="paragraph">
-<p>By default, the option&#8217;s form will only be displayed after the option is selected. However, a multi-select option set can also be configured to have the forms expanded by default.</p>
-</div>
-<div class="paragraph">
-<p>For multi-select options sets, it is also possible to pre-select options by default.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample 1: single-select option set for creating blocks of content</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;option-set name="blockOptionSet"&gt;
-  &lt;label&gt;Content blocks&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="0"/&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;help-text&gt;Create content with optional blocks&lt;/help-text&gt;
-  &lt;options minimum="1" maximum="1"&gt;   <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;option name="hr"&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
-      &lt;label&gt;Horisontal line&lt;/label&gt;
-      &lt;help-text&gt;Adds a separator between blocks&lt;/help-text&gt;
-    &lt;/option&gt;
-    &lt;option name="text"&gt;
-      &lt;label&gt;Text&lt;/label&gt;
-      &lt;items&gt;
-        &lt;input name="text" type="TextArea"&gt;
-          &lt;label&gt;Text&lt;/label&gt;
-          &lt;occurrences minimum="1" maximum="1"/&gt;
-        &lt;/input&gt;
-      &lt;/items&gt;
-    &lt;/option&gt;
-    &lt;option name="gallery"&gt;
-      &lt;label&gt;Image gallery&lt;/label&gt;
-      &lt;items&gt;
-        &lt;input name="images" type="ImageSelector"&gt;
-          &lt;label&gt;Images&lt;/label&gt;
-          &lt;occurrences minimum="1" maximum="0"/&gt;
-          &lt;config/&gt;
-        &lt;/input&gt;
-      &lt;/items&gt;
-    &lt;/option&gt;
-    &lt;option name="quote"&gt;
-      &lt;label&gt;Quote&lt;/label&gt;
-      &lt;items&gt;
-        &lt;input name="quote" type="TextLine"&gt;
-          &lt;label&gt;Quote&lt;/label&gt;
-          &lt;occurrences minimum="1" maximum="1"/&gt;
-        &lt;/input&gt;
-        &lt;input name="quotee" type="TextLine"&gt;
-          &lt;label&gt;Quotee&lt;/label&gt;
-          &lt;occurrences minimum="1" maximum="1"/&gt;
-        &lt;/input&gt;
-      &lt;/items&gt;
-    &lt;/option&gt;
-  &lt;/options&gt;
-&lt;/option-set&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>occurences</strong> Set value to maximum=0 for unlimited block instances</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>options/@maximum</strong> Refers to selectable options per instance. A value of 1 &#8658; single-select mode.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>option</strong> (required) Container of options. Each option may be empty or contain items, just like an item set.</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">Sample 2: multi-select option set with options expanded by default, empty first option and pre-selected second option:</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;option-set name="checkOptionSet"&gt;
-  &lt;label i18n="checkOptionSet.label"&gt;Multi-selection OptionSet&lt;/label&gt;
-  &lt;expanded&gt;true&lt;/expanded&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;occurrences minimum="1" maximum="1"/&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;help-text&gt;You can select up to 2 options&lt;/help-text&gt;
-  &lt;options minimum="1" maximum="2"&gt; <i class="conum" data-value="3"></i><b>(3)</b> <i class="conum" data-value="4"></i><b>(4)</b> <i class="conum" data-value="5"></i><b>(5)</b>
-    &lt;option name="option_1"&gt; <i class="conum" data-value="6"></i><b>(6)</b> <i class="conum" data-value="7"></i><b>(7)</b>
-      &lt;label i18n="checkOptionSet.option_1.label"&gt;Option 1&lt;/label&gt; <i class="conum" data-value="8"></i><b>(8)</b> <i class="conum" data-value="9"></i><b>(9)</b>
-      &lt;help-text i18n="checkOptionSet.option_1.help-text"&gt;Help text for Option 1&lt;/help-text&gt; <i class="conum" data-value="10"></i><b>(10)</b> <i class="conum" data-value="11"></i><b>(11)</b>
-    &lt;/option&gt;
-    &lt;option name="option_2"&gt;
-      &lt;label i18n="checkOptionSet.option_2.label"&gt;Option 2&lt;/label&gt;
-      &lt;default&gt;true&lt;/default&gt; <i class="conum" data-value="12"></i><b>(12)</b>
-      &lt;items&gt; <i class="conum" data-value="13"></i><b>(13)</b>
-        &lt;input name="contentSelector" type="ContentSelector"&gt;
-          &lt;label&gt;Content selector&lt;/label&gt;
-          &lt;occurrences minimum="0" maximum="0"/&gt;
-          &lt;config/&gt;
-        &lt;/input&gt;
-      &lt;/items&gt;
-    &lt;/option&gt;
-    &lt;option name="option_3"&gt;
-      &lt;label&gt;Option 3&lt;/label&gt;
-      &lt;help-text&gt;Help text for Option 3&lt;/help-text&gt;
-      &lt;items&gt;
-        &lt;input name="textarea" type="TextArea"&gt;
-          &lt;label&gt;Text Area&lt;/label&gt;
-          &lt;occurrences minimum="0" maximum="1"/&gt;
-        &lt;/input&gt;
-        &lt;input name="long" type="Long"&gt;
-          &lt;label&gt;Long&lt;/label&gt;
-          &lt;indexed&gt;true&lt;/indexed&gt;
-          &lt;occurrences minimum="0" maximum="1"/&gt;
-        &lt;/input&gt;
-      &lt;/items&gt;
-    &lt;/option&gt;
-  &lt;/options&gt;
-&lt;/option-set&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>expanded</strong> Set to <code>true</code> to expand all of the options by default</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>occurrences</strong> For multi-select option sets, one normally only wants a single instance</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>options</strong> (required) Container of options.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>options/@minimum</strong> (required) Minimum number of options that must be selected in this option set.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><strong>options/@maximum</strong> (required) Maximum number of options to create. &gt; 1 provides multi-select mode. 1 provides single-select mode.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><strong>option</strong> (required) Container of the option form.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td><strong>option/@name</strong> (required) Must be unique within the option set.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td><strong>label</strong> (required) Label of the option&#8217;s checkbox or radio button.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="9"></i><b>9</b></td>
-<td><strong>label/@i18n</strong> localization bundles.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="10"></i><b>10</b></td>
-<td><strong>help-text</strong> Help text for the option.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="11"></i><b>11</b></td>
-<td><strong>help-text/@i18n</strong> localization bundle key.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="12"></i><b>12</b></td>
-<td><strong>default</strong> Set to <code>true</code> to pre-select one of the options.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="13"></i><b>13</b></td>
-<td><strong>items</strong> Container of the option form&#8217;s inputs.</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Use <code>&lt;options minimum="1" maximum="1"&gt;</code> for a single-select option set, or any other number greater
-than "1" in <code>options.maximum</code> for a multi-select option set.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="schema_localization"><a class="link" href="#schema_localization">Schema Localization</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Schema localization is based on standard framework functionality. Please consult the <a href="../framework/i18n.ahtml">framework localization docs</a> for more details.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Labels and texts in schemas be displayed in the preferred language according to the user&#8217;s browser settings.</p>
-</div>
-<div class="paragraph">
-<p>The schema fields that support localization may have an optional <code>i18n="key"</code> attribute in the XML schema descriptor.
-This <code>i18n</code> attribute will contain a key string that refers to the translated texts in the <code>i18n/phrases.properties</code> bundle files.</p>
-</div>
-<div class="paragraph">
-<p>The <code>i18n</code> attributes are always optional. If the <code>i18n</code> attribute is not specified, the value of the XML element will be used.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example of localized Content Type</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;content-type&gt;
-  &lt;display-name i18n="person.display-name"&gt;Person&lt;/display-name&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
-    &lt;input type="TextLine" name="name"&gt;
-      &lt;label i18n="person.name.label"&gt;Name&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="age"&gt;
-      &lt;label i18n="person.age.label"&gt;Age&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="imageSelector" name="photo"&gt;
-      &lt;label i18n="person.photo.label"&gt;Photo&lt;/label&gt;
-      &lt;help-text i18n="person.photo.help-text"&gt;Passport photo&lt;/help-text&gt;
-      &lt;occurrences minimum="0" maximum="1"/&gt;
-    &lt;/input&gt;
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
-</div>
+<p>Addf the following attributes to the first element of your XML file in order to enjoy validation while typing:</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -949,119 +539,34 @@ This <code>i18n</code> attribute will contain a key string that refers to the tr
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The localization of schemas applies to the admin tool apps included in XP: <code>Home</code>, <code>Content Studio</code>, <code>Applications</code> and <code>Users</code>.
+Not all editors support XSD validation
 </td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="supported_fields"><a class="link" href="#supported_fields">Supported Fields</a></h3>
-<div class="paragraph">
-<p>The following schemas and fields support the <code>i18n</code> attribute for localization:</p>
+<div class="listingblock">
+<div class="title">XSD attributes</div>
+<div class="content">
+<pre class="highlight"><code class="language-XML" data-lang="XML">xmlns="urn:enonic:xp:model:1.0"
+
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd"</code></pre>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Input type: <code>label</code>, <code>help-text</code></p>
-</li>
-<li>
-<p>Item set: <code>label</code>, <code>help-text</code></p>
-</li>
-<li>
-<p>Field set: <code>label</code></p>
-</li>
-<li>
-<p>Option set: <code>label</code>, <code>help-text</code></p>
-</li>
-<li>
-<p>Radio button: <code>config.option</code></p>
-</li>
-<li>
-<p>Content Type: <code>displayName</code>, <code>description</code></p>
-</li>
-<li>
-<p>Mixin: <code>displayName</code>, <code>description</code>, input types</p>
-</li>
-<li>
-<p>Page descriptor: <code>displayName</code>, input types in config</p>
-</li>
-<li>
-<p>Part descriptor: <code>displayName</code>, input types in config</p>
-</li>
-<li>
-<p>Layout descriptor: <code>displayName</code>, input types in config</p>
-</li>
-<li>
-<p>Admin Tool descriptor: <code>displayName</code>, <code>description</code></p>
-</li>
-<li>
-<p>Macro: <code>displayName</code>, <code>description</code>, input types in config</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="translations"><a class="link" href="#translations">Translations</a></h3>
-<div class="paragraph">
-<p>The translated texts for each of the i18n keys should be placed in the corresponding <code>phrases.properties</code> file, in the same application where the schema is defined.</p>
 </div>
 <div class="paragraph">
-<p>Steps to add the translations for a schema:</p>
-</div>
-<div class="paragraph">
-<p><strong>1. Add or edit one file per language supported:</strong></p>
-</div>
-<div class="paragraph">
-<p><code>src/main/resources/i18n/phrases_&lt;language-code&gt;.properties</code></p>
+<p>If added to a content type schema, it would look something like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">Example files to support English and Norwegian</div>
+<div class="title">Example when added to content type schema</div>
 <div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">src/main/resources/i18n/phrases.properties
-src/main/resources/i18n/phrases_en.properties
-src/main/resources/i18n/phrases_no.properties</code></pre>
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;content-type
+    xmlns="urn:enonic:xp:model:1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd"&gt;
+  &lt;display-name&gt;Content type display name&lt;/display-name&gt;</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p><strong>2. Add the i18n keys from the schema in each of the phrases.properties files.</strong></p>
-</div>
-<div class="paragraph">
-<p>Each line should have the key, an equals <code>=</code> sign, and the text in the specific language.</p>
-</div>
-<div class="listingblock">
-<div class="title">phrases_en.properties</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">person.display-name=Person
-person.name.label=Name
-person.age.label=Age
-person.photo.label=Photo
-person.photo.help-text=Passport photo</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">phrases_no.properties</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">person.display-name=Person
-person.name.label=Navn
-person.age.label=Alder
-person.photo.label=Bilde
-person.photo.help-text=Passbilde</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>3. fallback file <code>phrases.properties</code> file</strong></p>
-</div>
-<div class="paragraph">
-<p>It is recommended to have default phrases file. This will be used if the translation for the browser language cannot be found.</p>
-</div>
-<div class="paragraph">
-<p><strong>4. Build and deploy the application.</strong></p>
-</div>
-<div class="paragraph">
-<p>The texts in the schema will appear depending on the language configured in the browser.</p>
-</div>
-<div class="paragraph">
-<p>For more details, check out the <a href="../api/lib-i18n.ahtml">runtime localization docs</a></p>
 </div>
 </div>
 </div>
@@ -1069,7 +574,7 @@ person.photo.help-text=Passbilde</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-10 15:42:30 UTC
+Last updated 2023-11-21 10:19:42 UTC
 </div>
 </div>
 </body>

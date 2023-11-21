@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Sets</title>
+<title>MediaSelector input type</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,13 +436,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Sets</h1>
+<h1>MediaSelector input type</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#field_set">Field Set</a></li>
-<li><a href="#item_set">Item Set</a></li>
-<li><a href="#option_set">Option Set</a></li>
+<li><a href="#usage">Usage</a></li>
 </ul>
 </div>
 </div>
@@ -450,160 +448,45 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>To enable building more complex forms by grouping inputs together into nested structures, Enonic XP supports the following types of sets:</p>
+<p>The MediaSelector is a specialized version of the <a href="contentselector.ahtml">ContentSelector</a> that is limited to selecting media only (content of type "media:*"), including also uploading new media (any kind of files).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="field_set"><a class="link" href="#field_set">Field Set</a></h2>
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
-<div class="admonitionblock tip">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mymedia" type="MediaSelector"&gt;
+  &lt;label&gt;My Media&lt;/label&gt;
+  &lt;occurrences minimum="0" maximum="1"/&gt;
+  &lt;config&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;allowContentType&gt;media:archive&lt;/allowContentType&gt;
+    &lt;allowPath&gt;${site}/*&lt;/allowPath&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
+    &lt;treeMode&gt;true&lt;/treeMode&gt;
+    &lt;hideToggleIcon&gt;true&lt;/hideToggleIcon&gt;
+  &lt;/config&gt;
+&lt;/input&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Schema description of a fieldset can be found <a href="schemas.ahtml#field_set">here</a>.
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>MediaSelector supports the same configuration options as <a href="contentselector.ahtml">ContentSelector</a>, but is limited to using <code>media:*</code> content types in the <code>&lt;allowContentType&gt;</code> configuration.</td>
 </tr>
-</table>
-</div>
-<div class="paragraph">
-<p>A field set may be used to group items visually under a common label and distinguish this group from the rest of the form.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/fieldset-1.png" alt="Example of a fieldset" width="690">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="item_set"><a class="link" href="#item_set">Item Set</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
 <tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Schema description of an item set can be found <a href="schemas.ahtml#item_set">here</a>.
-</td>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Just like <a href="imageselector.ahtml">ImageSelector</a>, MediaSelector by default displays all media items starting from the content root.</td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Item sets enable combining inputs (or other sets) into complex, nested structures.
-Item sets are grouped both visually and semantically, as the name of the item set is used in the persisted property structure.</p>
-</div>
-<div class="paragraph">
-<p>A new or a single occurrence of an item set is by default expanded and can be collapsed by a click anywhere inside the item set header.
-Multiple occurrences of an item set will be collapsed by default to ensure better readability of a form containing several occurrences of complex item sets.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/itemset-1.png" alt="Example of an expanded item-set">
-</div>
-</div>
-<div class="paragraph">
-<p>Label of an item set will dynamically change to value of the first non-empty field inside the set.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/itemset-2.png" alt="Example of an item-set with a label">
-</div>
-</div>
-<div class="paragraph">
-<p>This helps to distinguish between multiple collapsed occurrences of the same item set without having to expand them.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/itemset-3.png" alt="Example of collapsed item-sets">
-</div>
-</div>
-<div class="paragraph">
-<p>Context menu of an item-set occurrence can be used to add a new occurrence of the set above or below the current one, or delete current occurrence.
-Add/delete actions can be disabled based on the item set&#8217;s occurrence configuration.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/itemset-4.png" alt="Item-set with context menu">
-</div>
-</div>
-<div class="paragraph">
-<p>Item sets can be nested inside each other.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/itemset-5.png" alt="Nested item-sets">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="option_set"><a class="link" href="#option_set">Option Set</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Schema description of an option set can be found <a href="schemas.ahtml#option_set">here</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>An option set is a group of options presented either as a radio-group (multi-select option set) or as a dropdown (single-select option set).
-Each option may have an optional underlying form for providing additional data.</p>
-</div>
-<div class="paragraph">
-<p>By default, an option&#8217;s form will only be shown upon selection of the option, but a multi-select option set can be configured to have all of
-its options expanded by default. Forms of unselected options will be disabled until the option is selected.</p>
-</div>
-<div class="paragraph">
-<p>Default behaviour of an option-set is very similar to an item-set: a single occurrence will by default be expanded, multiple occurrences will
-be collapsed. An occurrence can be expanded/collapsed by a click anywhere inside the header.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/optionset-single-1.png" alt="Example of a single-select option set">
-</div>
-</div>
-<div class="paragraph">
-<p>Form of a selected option can include simple inputs or more complex structures, like for example an item set:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/optionset-single-2.png" alt="Example of a single-select option set with a selected option">
-</div>
-</div>
-<div class="paragraph">
-<p>Title of a multi-select option set occurrence will reflect labels of all selected options:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/optionset-multi.png" alt="Example of a multi-select option set">
-</div>
-</div>
-<div class="paragraph">
-<p>Use "Reset" action in the context menu of a single-select option set to change current selection:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/optionset-single-3.png" alt="Reset function of a single-select option set">
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-10 15:42:30 UTC
+Last updated 2023-11-21 10:19:42 UTC
 </div>
 </div>
 </body>
