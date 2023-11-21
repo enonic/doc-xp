@@ -443,10 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#single_select_mode">Single select mode</a>
 <ul class="sectlevel2">
 <li><a href="#appearance">Appearance</a></li>
-</ul>
-</li>
-<li><a href="#usage">Usage</a>
-<ul class="sectlevel2">
+<li><a href="#usage">Usage</a></li>
 <li><a href="#output">Output</a></li>
 </ul>
 </li>
@@ -540,11 +537,8 @@ Easily shuffle the order of the option sets by dragging the cards from the grip 
 </table>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="usage"><a class="link" href="#usage">Usage</a></h3>
 <div class="paragraph">
 <p>The schema below demonstrates how you may create blocks of structured content using the single-select mode.</p>
 </div>
@@ -611,6 +605,7 @@ Easily shuffle the order of the option sets by dragging the cards from the grip 
 <td><strong>option</strong> (required) Container of options. Each option may be empty or contain items, just like an item set.</td>
 </tr>
 </table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="output"><a class="link" href="#output">Output</a></h3>
@@ -827,7 +822,7 @@ The <code>_selected</code> property contains information about which options wer
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-21 10:19:42 UTC
+Last updated 2023-11-21 10:29:56 UTC
 </div>
 </div>
 </body>
