@@ -1,0 +1,100 @@
+= Schema localization
+:toc: right
+:imagesdir: images
+
+Labels and texts in schemas can be displayed in the users preferred language (based on browser settings).
+
+Simply add an `i18n="key"` attribute to the form elements. The key mustmatch an entry in your application's `src/main/resources/i18n/phrases.properties` file.
+
+NOTE: Schema localization uses the same properties files format as the rest of XP. Please consult the <<../../framework/i18n#, framework localization docs>> for more details.
+
+Localization is optional. If the `i18n` attribute is not specified, the value of the XML element will be used.
+
+== Example
+
+Below is an example of a content type where localization has been enabled.
+
+.Localized content type schema
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<content-type>
+  <display-name i18n="person.display-name">Person</display-name>
+  <super-type>base:structured</super-type>
+  <form>
+    <input type="TextLine" name="name">
+      <label i18n="person.name.label">Name</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="age">
+      <label i18n="person.age.label">Age</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="imageSelector" name="photo">
+      <label i18n="person.photo.label">Photo</label>
+      <help-text i18n="person.photo.help-text">Passport photo</help-text>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </form>
+</content-type>
+----
+
+
+== Supported Fields
+
+In general, the following schema elements support the `i18n` localization attribute:
+
+* displayName
+* label
+* help-text
+* description
+
+Other elements may also support localization, simply try adding the attribute to see if it works.
+
+== Translation files
+
+The translated texts for each of the i18n keys should be placed in the corresponding `phrases.properties` file within the same application where the schema is defined.
+
+Steps to add the translations for a schema:
+
+. Add or edit one file per language supported:
++
+`src/main/resources/i18n/phrases_<language-code>.properties`
++
+.Example files to support English and Norwegian
+[source,properties]
+----
+src/main/resources/i18n/phrases.properties
+src/main/resources/i18n/phrases_en.properties
+src/main/resources/i18n/phrases_no.properties
+----
++
+. Add the i18n keys from the schema in each of the phrases.properties files.
++
+Each line should have the key, an equals `=` sign, and the text in the specific language.
++
+.phrases_en.properties
+[source,properties]
+----
+person.display-name=Person
+person.name.label=Name
+person.age.label=Age
+person.photo.label=Photo
+person.photo.help-text=Passport photo
+----
++
+.phrases_no.properties
+[source,properties]
+----
+person.display-name=Person
+person.name.label=Navn
+person.age.label=Alder
+person.photo.label=Bilde
+person.photo.help-text=Passbilde
+----
++
+. fallback file `phrases.properties` file
++
+It is recommended to have default phrases file. This will be used if the translation for the browser language cannot be found.
+
+For more details, check out the <<../../api/lib-i18n#,runtime localization docs>>

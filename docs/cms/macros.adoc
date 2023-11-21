@@ -1,53 +1,44 @@
 = Macros
 :toc: right
 
-== Macros
+Macros enable editors to add rich functionality or include dynamic content in the rich text editor.
 
-Macros are instructions that allow adding extra functionality or include dynamic content in the Html Editor.
+== Macro instructions
 
-The Html Editor is used when editing https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea] input fields, or while editing a https://developer.enonic.com/docs/xp/stable/cms/components#text[Text component] in Page Editor.
+A macro instruction is written in plain text. They are similar to HTML or XML tags, but uses square brackets instead of angle brackets.
 
-There are two built-in macros included in XP. But its real power comes from macros provided by applications. When an application that contains macros is added to a site, they will be available for any HtmlArea or Text component inside the site.
-
-=== Macro instruction
-
-A macro instruction is similar to an HTML or XML tag but using square brackets instead of angle brackets.
+A macro has a name, a set of attributes, and optionally a body:
 
  [disable][macroname attrib1="value1" attrib2="value2"] body [/macroname][/disable]
 
-A macro has a name, a set of attributes, and optionally a body (anything that is too long to be
-passed via parameters).
+Sample macro without the body:
 
  [disable][macroname attrib1="value1" attrib2="value2"/][/disable]
 
-Macro instructions can be added anywhere in an HTML page, usually inside a content’s HtmlArea field.
+A user can add macro instructions by typing in the macro manually. But more conveniently by clicking the Insert macro button and selecting one of the macros available in Content Studio.
 
-During the rendering of the page the macros are resolved and executed. Then the result from executing the macro replaces the instruction text. In addition, a macro can also add styles or scripts to the page, by setting https://developer.enonic.com/docs/xp/stable/cms/contributions[Page Contributions] in its response.
-
-A user can add macro instructions by typing the square bracket tags, as the examples above. But more frequently it will click on the Insert macro button and select one of the macros available.
-
-=== Descriptor
+== Descriptor
 
 A macro descriptor is an xml file that allows assigning a user-friendly name, and a description to the macro. It also has a configuration to define the types and names of the macro parameters.
 
 display-name::
 A simple human readable display name.
 display-name@i18n::
-The key to look up the display-name text in the localization bundles. Optional. (See also https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization[Localization of Schemas])
+The key to look up the display-name text in the localization bundles. Optional. Visit <<schemas/localization#, Schema localization>> for more details.
 description::
 A description to show in the Insert macro dialog in Content Studio.
 description@i18n::
-The key to look up the description text in the localization bundles. Optional. (See also https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization[Localization of Schemas])
+The key to look up the description text in the localization bundles. Optional. Visit <<schemas/localization#, Schema localization>> for more details.
 config::
 The config element is a form where each input element corresponds to a macro parameter. The macro body is represented with an input named "body".
 
-NOTE: The config form does not support nested elements, so https://developer.enonic.com/docs/xp/stable/cms/schemas#itemset[Item Sets] are not allowed in the macro config form. Also the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea] input type is not allowed in the config form, since it may contain macros itself.
+NOTE: The config form does not support nested elements, so <<schemas/item-set#, Item Sets>> are not allowed in the macro config form. Also the <<schemas/input-types/htmlarea#, HtmlArea>> input type is not allowed in the config form, since it may contain macros itself.
 
-IMPORTANT: If you don't have a input with the `name="body"`, the generated macro tag will be self closing [disable][macro attr="" /][/disable]
+IMPORTANT: If you don't have a input with the `name="body"`, the generated macro tag will be self closing `[disable][macro attr="" /][/disable]``
 
-Its path follows the pattern `site/macros/<macroName>/<macroName>.xml`
+Its path follows the pattern `src/main/resources/site/macros/<macroName>/<macroName>.xml`
 
-[source, xml]
+[source, XML]
 ----
 <macro>
   <display-name i18n="a-macro.display-name">Current user</display-name>
@@ -64,28 +55,34 @@ Its path follows the pattern `site/macros/<macroName>/<macroName>.xml`
 </macro>
 ----
 
-TIP: The macro texts (display-name, description, label and help-text from config input types) can be provided in multiple languages. See https://developer.enonic.com/docs/xp/stable/cms/schemas#schema_localization[Localization of Schemas] for details.
+TIP: The macro texts (display-name, description, label and help-text from config input types) can be provided in multiple languages. Visit <<schemas/localization#, Schema localization>> for more details.
 
 Although not strictly required, it is recommended to create a descriptor, as it provides the required details for adding macros through the UI in Content Studio.
 
-=== Controller
+== Controller
 
-The functionality of a macro is implemented in a JavaScript controller, inside an application.
+When using the Enonic framework, optionally add a JavaScript controller to render the macro.
 
-Its path follows the pattern `site/macros/<macroName>/<macroName>.js`
+NOTE: When using 3rd party front-end frameworks, the controller can also be used to provide a preview of the macro in Content Studio.
 
-A macro controller must export a single `macro` function that takes a `context` parameter and returns a response object (see https://developer.enonic.com/docs/xp/stable/framework/http#http-response[HTTP Response]).
+Its path follows the pattern `src/main/resources/site/macros/<macroName>/<macroName>.js`
+
+A macro controller must export a single `macro` function that takes a `context` parameter and returns a response object (see <<../framework/http#http-response, HTTP Response>>).
 
 The context parameter is a Javascript object with the following properties:
 
 name::
 a string containing the macro name.
+
 body::
 a string containing the body of the macro instruction.
+
 params::
 an object with key-value pairs containing the macro parameters. The values are the strings from the macro instruction attributes.
+
 document::
 a string with the HTML document that contains the current macro. The document contains the raw source HTML, before any macro instructions have been executed, and before image or content URLs have been resolved. The document is only an input parameter to the macro, it cannot be modified.
+
 request::
 the request object.
 
@@ -125,19 +122,20 @@ Note that only the `body` and `pageContributions` fields of the response are rel
 
 TIP: A macro controller can also use libraries, like any other JavaScript controller.
 
-=== Built-in macros
+== Built-in macros
 
 There are currently 2 built-in macros that are included in XP and available for any site:
 
 disable::
 The contents (body) of this macro will not be evaluated as macros. That allows rendering another macro instruction as text without executing it. It is useful for documenting macros, for example. This macro has no parameters.
+
 embed::
 It allows embedding an <iframe> element in an HTML area. This is a generic way for embedding content from an external source (e.g. YouTube videos). This macro has no parameters.
 
 Examples:
-----
-[disable]Example of macro instruction: [myMacro param1="value1"/][/disable]
 
-[embed]<iframe src="https://www.youtube.com/embed/cFfxuWUgcvI" allowfullscreen></iframe>[/embed]
-----
+  [disable]Example of macro instruction: [myMacro param1="value1"/][/disable]
+
+  [embed]<iframe src="https://www.youtube.com/embed/cFfxuWUgcvI" allowfullscreen></iframe>[/embed]
+
 NOTE: A macro may optionally have its own specific icon. The icon can be assigned to the macro by adding a PNG or SVG file with the same name, in the macro folder, e.g. `site/macros/myMacro/myMacro.svg`

@@ -1,0 +1,94 @@
+= HtmlArea input type
+
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+A field for entering multi-line text with rich-formatting options.
+
+== Appearance
+
+The rich text editor as seen with default configuration. The `Add` button indicated that this setup also supports multiple occurences of the editor.
+
+image::Html-area-editor.png[Input field with a toolbar at the top. Source and fullscreen buttons on the bottom left, 600]
+
+
+== Usage
+
+[source,xml]
+----
+<input name="myhtmlarea" type="HtmlArea">
+  <label>My HtmlArea</label>
+  <default><h3>Enter description here</h3></default> // <1>
+  <config>
+    <exclude>*</exclude>  // <2>
+    <include>JustifyLeft JustifyRight | Bold Italic</include>  // <3>
+    <allowHeadings>h2 h4 h6</allowHeadings>  // <4>
+  </config>
+</input>
+----
+
+<1> *default* can contain any valid HTML elements, but tags must be correctly closed since the input type is defined inside an XML.
+<2> *exclude* optionally removes the standard tools from the editor toolbar
+<3> *include* optionally adds more tools to the editor toolbar.
+<4> *allowHeadings* space-separated list of allowed heading tags (from `<h1>` to `<h6>`); by default all are allowed
+
+
+TIP: If you are manually outputting contents of an HtmlArea input in your template, you might have to use
+<<../api/lib-portal#processhtml,processHtml()>> function which will process macros and generate correct links inside the HTML content.
+
+TIP: HTML Area is configured with default set of tools but the toolbar can be customized. Using the config setting you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. Complete list of supported tools can be found below.
+
+Below is the default editor tools configuration:
+
+  Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | SpecialChar Anchor Image Macro Link Unlink | Table | PasteModeSwitcher
+
+
+Below is the complete list of available editor tools:
+
+|===
+|Name | Description
+
+| Format | Text format menu
+| Bold | Bold text
+| Italic | Italic text
+| Underline | Underline text
+| JustifyBlock | Justify content
+| JustifyLeft | Left align content
+| JustifyCenter | Center content
+| JustifyRight | Right align content
+| BulletedList | Insert a bullet list
+| NumberedList | Insert a numbered list
+| Outdent | Decrease indent
+| Indent | Increase indent
+| SpecialChar | Insert a special character
+| Anchor | Insert an anchor
+| Image | Insert/Edit an image
+| Macro | Insert a macro
+| Link | Insert/Edit a link
+| Unlink | Remove link
+| Table | Table format menu
+| PasteModeSwitcher | Paste mode (formatted/plain text)
+| BGColor | Background color
+| Blockquote | Quotation
+| Copy | Copy selected text into buffer
+| CopyFormatting | Copy formatting
+| CreateDiv | Wrap with div
+| Cut | Cut selected text into buffer
+| Font | Font menu
+| FontSize | Font size menu
+| HorizontalRule | Insert a horizontal line
+| ListStyle | Change style of BulletedList
+| NewPage | Clean editor's content
+| Preview | Preview HTML Area contents
+| Redo | Repeat last action
+| RemoveFormat | Remove formatting
+| SelectAll | Select editor's content
+| Strike | Strikethrough over text
+| Styles | Text styles menu
+| Subscript | Subscript text
+| Superscript | Superscript text
+| TextColor | Text color
+| Undo | Undo last action
+|===

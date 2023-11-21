@@ -1,0 +1,108 @@
+= CustomSelector input type
+
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+Selector with customizable data source. Useful for live integrations with external data sources.
+
+
+TIP: Tutorial: Check out https://developer.enonic.com/docs/build-a-custom-selector[Building a custom selector] for hands on learning.
+
+== Usage
+
+Application developers must create a service that returns results according to the required JSON format, and then specify the service name in the input config. For information on creating a service see the
+:ref:`services` section.
+
+Below are two sample usages of CustomSelector:
+
+[source,xml]
+----
+
+<!-- Basic Sample -->
+<input name="mycustomselector" type="CustomSelector">
+  <label>My Custom Selector</label>
+  <occurrences minimum="0" maximum="0"/>
+  <config>
+    <service>my-custom-selector</service>  // <1>
+  </config>
+</input>
+
+<!-- Sample with parameters -->
+<input name="musicTrack" type="CustomSelector">
+  <label>Intro song</label>
+  <config>
+    <service>spotify-music-selector</service>
+    <param value="genre">classic</param>   // <2>
+    <param value="sortBy">length</param>
+  </config>
+</input>
+----
+<1> *service* holds the name of a JavaScript service file, located under ``/resources/services/[my-custom-selector]/[my-custom-selector].js``. You can also refer to a service file in another application, for example *com.myapplication.app:myservice*.
+<2> *param* lets you pass parameters to the service. This allows for the service to be used in different contexts. There can be multiple parameters or none. The parameters will be included in the HTTP request to the service as name-value query parameters.
+
+=== Service Request
+
+In addition to the param values, the service will receive the following query parameters in the HTTP request:
+
+*ids* +
+Array of item ids already selected in the CustomSelector. The service is expected to return the items with the specified ids.
+
+*start* +
+Index of the first item expected. Used for pagination of the results.
+
+*count* +
+Maximum number of items expected. Used for pagination of the results.
+
+*query* +
+String with the search text typed by the user in the CustomSelector input field.
+
+
+=== Service Response
+
+The service controller must have a GET handler that returns results in JSON format.
+The JSON object returned must include ``total`` and ``count`` properties as numbers, and ``hits`` containing an array of items.
+Each item in the hits property must have the following fields:
+
+*id* +
+Unique Id of the option
+
+*displayName* +
+Option title
+
+*description (optional)* +
+Detailed description
+
+*iconUrl (optional)* +
+Path to the thumbnail image file
+
+*icon (optional)* +
+Inline image content (for example, SVG)
+
+Sample JSON response from a CustomSelector service:
+
+[source,JSON]
+----
+{
+  "total": 10,
+  "count": 2,
+  "hits": [
+    {
+      "id": "1",
+      "displayName": "Option number 1",
+      "description": "External SVG file is used as icon",
+      "iconUrl": "/some/path/images/number_1.svg"
+    },
+    {
+      "id": "2",
+      "displayName": "Option number 2",
+      "description": "Inline SVG markup is used as icon",
+      "icon": {
+        "data": "<svg xmlns=\"http://www.w3.org/2000/svg\"/>",
+        "type": "image/svg+xml"
+      }
+    }
+  ]
+}
+----

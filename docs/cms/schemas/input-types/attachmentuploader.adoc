@@ -1,0 +1,30 @@
+= AttachmentUploader input type
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+Input types enables uploading of one or more files that will be stored as attachments to the current node/content, similar to how you would add attachments to an e-mail.
+
+AttachmentUploader is different from media content where each media is a separate content item which is automatically indexed, can be linked to, published and deleted individually.
+
+
+== Appearance
+
+AttachmentUplaoder as seen in Content Studio.
+
+[.thumb]
+image::Attachment.png[An empty attachment input box, 700]
+
+
+== Usage
+
+[source,xml]
+----
+<input name="myattachment" type="AttachmentUploader">
+  <label>My AttachmentUploader</label>
+</input>
+----
+
+
+

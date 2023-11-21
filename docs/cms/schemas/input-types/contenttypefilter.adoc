@@ -1,0 +1,27 @@
+= ContentTypeFilter input type
+
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+A field for selecting a content type.
+
+== Appearance
+
+image::Content-type-default.png[input field with a dropdown of all content, 700]
+
+
+== Usage
+
+[source,xml]
+----
+<input name="myctyfilter" type="ContentTypeFilter">
+  <label>My CTYFilter</label>
+  <occurrences minimum="0" maximum="0"/>
+  <config>
+    <context>true</context>  // <1>
+  </config>
+</input>
+----
+<1> *context* `true` limits the list of content types to the applications configured for the current site. Default is `false`.

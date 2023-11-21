@@ -2,15 +2,13 @@
 :toc: right
 :imagesdir: images
 
-If you need to repeat a group of fields in several different content types, consider extracting them into a mixin.
-After that you can add a reference to the mixin inside forms of required content types.
+If you need to repeat the exact same form structure across several different schemas, consider using a mixin.
 
-TIP: If you want to append a separate form of fields rather than injecting fields inside content type's form, consider using <<x-data.adoc#,X-data>>
+== Usage
 
-== Definition
+Like other schemas, mixins schema must be placed in a special folder structure `site/mixins/[name]/[name].xml`. I.e. `src/main/resources/site/mixins/address/address.xml`.
 
-The file with mixin schema must be placed in the folder `site/mixins/[name]` and called `[name].xml`. For example, _site/mixins/address/address.xml_.
-
+.Sample mixin
 [source,xml]
 ----
 <mixin>
@@ -36,11 +34,9 @@ The file with mixin schema must be placed in the folder `site/mixins/[name]` and
 </mixin>
 ----
 
-== Usage
+Below is an example of a simple content type that references the address mixin above.
 
-Below is an example of a simple content type that uses the abovementioned address mixin.
-In this case fields defined in the mixin will be injected after the form fields of the content type schema,
-and their values will be saved with content data. Notice that the name of the mixin file is used and not the mixin’s Display Name.
+The mixin fields will simply be merged into the content type schema. 
 
 [source,xml]
 ----
@@ -59,5 +55,3 @@ and their values will be saved with content data. Notice that the name of the mi
   </form>
 </content-type>
 ----
-
-TIP: Mixins can be used in content types, component descriptors and the _site.xml_ file.
