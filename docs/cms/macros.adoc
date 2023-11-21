@@ -132,9 +132,12 @@ The contents (body) of this macro will not be evaluated as macros. That allows r
 embed::
 It allows embedding an <iframe> element in an HTML area. This is a generic way for embedding content from an external source (e.g. YouTube videos). This macro has no parameters.
 
-Examples:
+Example using the disable macro:
 
   [disable]Example of macro instruction: [myMacro param1="value1"/][/disable]
+
+
+Example using the embed macro:
 
   [embed]<iframe src="https://www.youtube.com/embed/cFfxuWUgcvI" allowfullscreen></iframe>[/embed]
 
