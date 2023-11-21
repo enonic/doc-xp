@@ -685,7 +685,7 @@ Running this command requires you to have docker installed.
 <div class="sect2">
 <h3 id="java-heap-memory"><a class="link" href="#java-heap-memory">Java heap memory</a></h3>
 <div class="paragraph">
-<p>Since this image uses Java 11 it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:</p>
+<p>Since this image uses a modern Java VM, it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1120,7 +1120,7 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-21 13:21:11 UTC
+Last updated 2023-11-21 17:11:02 UTC
 </div>
 </div>
 </body>
