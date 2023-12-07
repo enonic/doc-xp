@@ -654,10 +654,10 @@ In <code>7.13.1</code> you can bring back the old deprecated behaviour making Co
 <p>Node state has been deprecated and is no longer in use, as it was only used for content&#8217;s <code>PENDING_DELETE</code> status.</p>
 </li>
 <li>
-<p>Content API audit-log no longer logs <code>system.content.update</code> events by default. This can be changed back by setting <code>auditlog.filter = *</code> in <a href="deployment/config.ahtml#_content">content config</a>.</p>
+<p>Content API audit-log no longer logs <code>system.content.update</code> events by default. This can be changed back by setting <code>auditlog.filter = *</code> in <a href="../deployment/config.ahtml#content_config">content config</a>.</p>
 </li>
 <li>
-<p><code>draft</code> branch is now restricted for unauthenticated access. By default, only <code>system.admin.login</code> role has access. Additional principles can be configured in <a href="deployment/config.ahtml#_portal">portal config</a> via <code>draftBranchAllowedFor</code> setting. Note that <code>system.admin</code> role always has access, regardless of the config.</p>
+<p><code>draft</code> branch is now restricted for unauthenticated access. By default, only <code>system.admin.login</code> role has access. Additional principles can be configured in <a href="../deployment/config.ahtml#_portal">portal config</a> via <code>draftBranchAllowedFor</code> setting. Note that <code>system.admin</code> role always has access, regardless of the config.</p>
 </li>
 <li>
 <p>Bundled GraalVM has been updated to version 22.3.1. Other JVM versions are not supported, although they may also work.</p>
@@ -686,7 +686,7 @@ A full restart is required in order to prevent loss of data or state.
 <ul>
 <li>
 <p>Virtual application schemas may now override schema present in any installed (real) application.
-To prevent virtual applications from overriding schemas use <a href="deployment/config.ahtml#_application">application config</a> <code>virtual.schema.override = false</code>
+To prevent virtual applications from overriding schemas use <a href="../deployment/config.ahtml#_application">application config</a> <code>virtual.schema.override = false</code>
 or disable virtual applications completely <code>virtual.enabled = false</code></p>
 </li>
 <li>
@@ -742,19 +742,19 @@ You may see a WARNING message on XP startup <code>java.lang.UnsatisfiedLinkError
 <div class="ulist">
 <ul>
 <li>
-<p><a href="deployment/config.ahtml#_portal">Portal config</a> now specifies default <code>Content-Security-Policy</code> for attachments and images.
+<p><a href="../deployment/config.ahtml#_portal">Portal config</a> now specifies default <code>Content-Security-Policy</code> for attachments and images.
 It is possible to configure the header via <code>media.contentSecurityPolicy</code> and <code>media.contentSecurityPolicy.svg</code> values. Empty value disables <code>Content-Security-Policy</code> for attachments and images.
 Default value is crafted to prevent common Persistent XSS attacks.</p>
 </li>
 <li>
-<p><a href="deployment/config.ahtml#_admin">Admin config</a> now specifies default Content-Security-Policy for page <code>preview</code> and <code>inline</code> mode (used by Content Studio).
+<p><a href="../deployment/config.ahtml#_admin">Admin config</a> now specifies default Content-Security-Policy for page <code>preview</code> and <code>inline</code> mode (used by Content Studio).
 It is possible to configure the header via <code>site.preview.contentSecurityPolicy</code> value or go back to previous behavior by setting <code>site.preview.contentSecurityPolicy</code> to an empty value.
 Default value is crafted to prevent common Persistent XSS attacks in Content Studio.</p>
 </li>
 <li>
-<p>Certain Security headers are now specified in <a href="deployment/config.ahtml#_header_filter">header filter config</a> by default.
+<p>Certain Security headers are now specified in <a href="../deployment/config.ahtml#_header_filter">header filter config</a> by default.
 Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from an IFrame.
-You can customize default headers in <a href="deployment/config.ahtml#_header_filter">header filter config</a> <code>headerConfig</code> value to get back to previous behaviour.</p>
+You can customize default headers in <a href="../deployment/config.ahtml#_header_filter">header filter config</a> <code>headerConfig</code> value to get back to previous behaviour.</p>
 </li>
 </ul>
 </div>
@@ -1309,7 +1309,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-06 10:30:33 UTC
+Last updated 2023-12-07 15:40:06 UTC
 </div>
 </div>
 </body>
