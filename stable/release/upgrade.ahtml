@@ -657,7 +657,7 @@ In <code>7.13.1</code> you can bring back the old deprecated behaviour making Co
 <p>Content API audit-log no longer logs <code>system.content.update</code> events by default. This can be changed back by setting <code>auditlog.filter = *</code> in <a href="../deployment/config.ahtml#content_config">content config</a>.</p>
 </li>
 <li>
-<p><code>draft</code> branch is now restricted for unauthenticated access. By default, only <code>system.admin.login</code> role has access. Additional principles can be configured in <a href="../deployment/config.ahtml#_portal">portal config</a> via <code>draftBranchAllowedFor</code> setting. Note that <code>system.admin</code> role always has access, regardless of the config.</p>
+<p><code>draft</code> branch is now restricted for unauthenticated access. By default, only <code>system.admin.login</code> role has access. Additional principles can be configured in <a href="../deployment/config.ahtml#portal">portal config</a> via <code>draftBranchAllowedFor</code> setting. Note that <code>system.admin</code> role always has access, regardless of the config.</p>
 </li>
 <li>
 <p>Bundled GraalVM has been updated to version 22.3.1. Other JVM versions are not supported, although they may also work.</p>
@@ -686,7 +686,7 @@ A full restart is required in order to prevent loss of data or state.
 <ul>
 <li>
 <p>Virtual application schemas may now override schema present in any installed (real) application.
-To prevent virtual applications from overriding schemas use <a href="../deployment/config.ahtml#_application">application config</a> <code>virtual.schema.override = false</code>
+To prevent virtual applications from overriding schemas use <a href="../deployment/config.ahtml#application">application config</a> <code>virtual.schema.override = false</code>
 or disable virtual applications completely <code>virtual.enabled = false</code></p>
 </li>
 <li>
@@ -1309,7 +1309,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:42:38 UTC
+Last updated 2023-12-07 15:45:51 UTC
 </div>
 </div>
 </body>
