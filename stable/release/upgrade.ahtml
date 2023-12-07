@@ -742,19 +742,19 @@ You may see a WARNING message on XP startup <code>java.lang.UnsatisfiedLinkError
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../deployment/config.ahtml#_portal">Portal config</a> now specifies default <code>Content-Security-Policy</code> for attachments and images.
+<p><a href="../deployment/config.ahtml#portal">Portal config</a> now specifies default <code>Content-Security-Policy</code> for attachments and images.
 It is possible to configure the header via <code>media.contentSecurityPolicy</code> and <code>media.contentSecurityPolicy.svg</code> values. Empty value disables <code>Content-Security-Policy</code> for attachments and images.
 Default value is crafted to prevent common Persistent XSS attacks.</p>
 </li>
 <li>
-<p><a href="../deployment/config.ahtml#_admin">Admin config</a> now specifies default Content-Security-Policy for page <code>preview</code> and <code>inline</code> mode (used by Content Studio).
+<p><a href="../deployment/config.ahtml#admin">Admin config</a> now specifies default Content-Security-Policy for page <code>preview</code> and <code>inline</code> mode (used by Content Studio).
 It is possible to configure the header via <code>site.preview.contentSecurityPolicy</code> value or go back to previous behavior by setting <code>site.preview.contentSecurityPolicy</code> to an empty value.
 Default value is crafted to prevent common Persistent XSS attacks in Content Studio.</p>
 </li>
 <li>
-<p>Certain Security headers are now specified in <a href="../deployment/config.ahtml#_header_filter">header filter config</a> by default.
+<p>Certain Security headers are now specified in <a href="../deployment/config.ahtml#header_filter">header filter config</a> by default.
 Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from an IFrame.
-You can customize default headers in <a href="../deployment/config.ahtml#_header_filter">header filter config</a> <code>headerConfig</code> value to get back to previous behaviour.</p>
+You can customize default headers in <a href="../deployment/config.ahtml#header_filter">header filter config</a> <code>headerConfig</code> value to get back to previous behaviour.</p>
 </li>
 </ul>
 </div>
@@ -795,7 +795,7 @@ It was never documented or supported for external use. We recommend implementing
 <p>JaxRS API backend was updated to the next major release. We didn&#8217;t observe any incompatibilities, but if your application uses XP JaxRS API make sure you thoroughly test it.</p>
 </li>
 <li>
-<p>Image Service now has memory usage constraints  configured by <code>memoryLimit</code> parameter in <a href="../deployment/config.ahtml#_image">Configuration Files / Image</a>.
+<p>Image Service now has memory usage constraints  configured by <code>memoryLimit</code> parameter in <a href="../deployment/config.ahtml#image">Configuration Files / Image</a>.
 This may cause <code>429 Too Many Requests</code> HTTP responses for images, if they are not yet scaled at least once and put into disk cache.</p>
 </li>
 <li>
@@ -878,13 +878,13 @@ FULL RESTART REQUIRED - For security reasons, XP&#8217;s clustering engine (Haze
 <ul>
 <li>
 <p>Session cookie specifies <code>SameSite=Lax</code> by default. It is similar to modern browsers default value except for "Lax + POST mitigation".
-You can revert to previous behavior by setting <code>session.cookieSameSite =</code> in <a href="../deployment/config.ahtml#_jetty">Configuration Files / Jetty</a></p>
+You can revert to previous behavior by setting <code>session.cookieSameSite =</code> in <a href="../deployment/config.ahtml#jetty">Configuration Files / Jetty</a></p>
 </li>
 <li>
 <p>Native Java primitive arrays are now converted to JavaScript arrays. You may have to adapt your application to the new behaviour if your code was using workarounds.</p>
 </li>
 <li>
-<p>Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <a href="../deployment/config.ahtml#_image">Configuration Files / Image</a></p>
+<p>Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <a href="../deployment/config.ahtml#image">Configuration Files / Image</a></p>
 </li>
 <li>
 <p>Image Service has more eager validation of scale, filters, background and quality parameter values. Make sure the requests to Image Service use only correct/supported values.</p>
@@ -894,14 +894,14 @@ You can revert to previous behavior by setting <code>session.cookieSameSite =</c
 </li>
 <li>
 <p>Content attachment file names can no longer contain suspicious characters.
-You can revert to previous behavior by setting <code>attachments.allowUnsafeNames = true</code> in <a href="../deployment/config.ahtml#_content">Configuration Files / Content</a></p>
+You can revert to previous behavior by setting <code>attachments.allowUnsafeNames = true</code> in <a href="../deployment/config.ahtml#content">Configuration Files / Content</a></p>
 </li>
 <li>
 <p>Assets Service URL fingerprint part now uses application&#8217;s "build time" instead of application&#8217;s startup time. Make sure "build time" always changes for new versions of an application (this happens automatically if you use the standard xp build system)</p>
 </li>
 <li>
 <p>Default Cache-Control headers for Assets Service and Portal Media Attachments have been changed.
-You can change default settings in <a href="../deployment/config.ahtml#_portal">Configuration Files / Portal</a></p>
+You can change default settings in <a href="../deployment/config.ahtml#portal">Configuration Files / Portal</a></p>
 </li>
 <li>
 <p>ResourceService no longer considers directories in jar as existing resources.
@@ -930,7 +930,7 @@ You can switch back to legacy mode by setting <code>contentTypePatternMode = LEG
 <p>Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <a href="../framework/tasks.ahtml#_distributable">Tasks / Distributable</a> for more information.</p>
 </li>
 <li>
-<p>XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to <a href="https://market.enonic.com" class="bare">https://market.enonic.com</a>. URL can be changed in <a href="../deployment/config.ahtml#_market">Configuration Files / Market</a>.</p>
+<p>XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to <a href="https://market.enonic.com" class="bare">https://market.enonic.com</a>. URL can be changed in <a href="../deployment/config.ahtml#market">Configuration Files / Market</a>.</p>
 </li>
 </ul>
 </div>
@@ -1309,7 +1309,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:40:06 UTC
+Last updated 2023-12-07 15:42:38 UTC
 </div>
 </div>
 </body>
