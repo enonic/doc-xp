@@ -441,8 +441,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#usage">Usage</a></li>
+<li><a href="#usage">Usage</a>
+<ul class="sectlevel2">
 <li><a href="#execution_order">Execution order</a></li>
+</ul>
+</li>
 <li><a href="#pattern_mappings">Pattern mappings</a></li>
 <li><a href="#match_mappings">Match mappings</a></li>
 <li><a href="#service_mappings">Service mappings</a></li>
@@ -462,7 +465,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Mappings are only available in the <a href="../runtime/engines/site-engine.ahtml">Site Engine</a>
+Mappings are only available when using the <a href="../runtime/engines/site-engine.ahtml">Site Engine</a>
 </td>
 </tr>
 </table>
@@ -473,10 +476,7 @@ Mappings are only available in the <a href="../runtime/engines/site-engine.ahtml
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Mappings is the first processing step in the <a href="../runtime/engines/site-engine.ahtml">site engine</a> - before page rendering starts.</p>
-</div>
-<div class="paragraph">
-<p>You may define mappings for both <a href="controllers.ahtml">controllers</a> and <a href="filters.ahtml">filters</a>. The use cases are vast.</p>
+<p>Mappings are the first processing step in the <a href="../runtime/engines/site-engine.ahtml">site engine</a> - and happens before page rendering starts. You may define mappings for both <a href="controllers.ahtml">controllers</a> and <a href="filters.ahtml">filters</a>. The use cases are vast.</p>
 </div>
 </div>
 </div>
@@ -484,10 +484,7 @@ Mappings are only available in the <a href="../runtime/engines/site-engine.ahtml
 <h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Mappings are defined in the <a href="../cms/sites.ahtml#site_xml">site descriptor</a>.</p>
-</div>
-<div class="paragraph">
-<p>Examples of use cases are:</p>
+<p>Mappings are defined in the <a href="../cms/sites.ahtml#site_xml">site descriptor</a>. Examples of use cases are:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -503,6 +500,7 @@ Mappings are only available in the <a href="../runtime/engines/site-engine.ahtml
 </ul>
 </div>
 <div class="listingblock">
+<div class="title">site.xml mapping examples</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
   &lt;mappings&gt;
@@ -531,7 +529,7 @@ Mappings are only available in the <a href="../runtime/engines/site-engine.ahtml
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>@order</strong> defines the <a href="#execution_order">Execution order</a> across apps. Default is <code>50</code>.</td>
+<td><strong>@order</strong> defines the <a href="#execution_order">Execution order</a> across apps. Default is <code>50</code>. A lower number means higher priority.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -563,21 +561,18 @@ Each mapping may exclusively specify a filter OR a controller, and it must defin
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="execution_order"><a class="link" href="#execution_order">Execution order</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="execution_order"><a class="link" href="#execution_order">Execution order</a></h3>
 <div class="paragraph">
-<p>An application can contain multiple mappings, and multiple applications can be added to a site.</p>
+<p>An application may contain multiple mappings, and multiple applications can be added to a site.</p>
 </div>
 <div class="paragraph">
 <p>If two different apps within a site has the same mapping path or match expression,
-the mapping with the <strong>lower</strong> <code>order</code> value (as defined in the <a href="../cms/sites.ahtml#site_xml">site descriptor</a>) is used.</p>
+the mapping with the <strong>lower</strong> <code>order</code> value is used.</p>
 </div>
 <div class="paragraph">
-<p>In case there are several mappings with the same <code>order</code> number,
-the position of the applications (as configured within the site) determines which mapping will be used.</p>
+<p>In case there are several mappings with the same <code>order</code> value, the sort order of the applications on the site determines which mapping will be used.</p>
+</div>
 </div>
 </div>
 </div>
@@ -770,7 +765,7 @@ Don&#8217;t specify <code>&lt;match&gt;</code> if you need to map controller/fil
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 19:27:43 UTC
+Last updated 2023-12-12 22:27:49 UTC
 </div>
 </div>
 </body>

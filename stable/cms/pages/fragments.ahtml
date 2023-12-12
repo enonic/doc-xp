@@ -441,8 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#creating_fragments">Creating fragments</a></li>
-<li><a href="#using_fragments">Using fragments</a></li>
+<li><a href="#usage">Usage</a></li>
 <li><a href="#fragment_preview">Fragment preview</a></li>
 <li><a href="#search">Search</a></li>
 </ul>
@@ -471,7 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating_fragments"><a class="link" href="#creating_fragments">Creating fragments</a></h2>
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A fragment can be created from any component on a given page. Using Content Studio, a fragment is created by selecting a component, and then choosing <code>Create fragment</code> from the context menu.</p>
@@ -484,13 +483,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <img src="media/fragment-component.png" alt="Converting a layout to a component" width="1440px">
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="using_fragments"><a class="link" href="#using_fragments">Using fragments</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Fragments can be inserted on a page just like any other component. Using content studio, fragment is available as a component type. Simply insert a fragment, an choose the fragment content item.</p>
+<p>Once a fragments is created, it can be inserted on pages just like any other component. Using Content Studio, simply insert a fragment component, an choose the fragment content item from the list.</p>
 </div>
 </div>
 </div>
@@ -521,10 +515,10 @@ This will also require some tuning when using the <a href="../../framework/compo
 <h2 id="search"><a class="link" href="#search">Search</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The content API enables searching for content in pages and components. Since a fragment is a separate content item, text stored in the fragment will not be indexed on the pages where it is in use.</p>
+<p>Since a fragment is a separate content item, text stored in the fragment will not be indexed on the pages where it is in use.</p>
 </div>
 <div class="paragraph">
-<p>This basically means that even if a fragment is placed on a page, searching for content within the fragment will not yield hits on the pages where it is included.</p>
+<p>This means that even if a fragment is placed on a page, searching for content within the fragment will not yield hits on the pages where it is included.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -543,7 +537,7 @@ When performing queries against content from customer facing solutions, make sur
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 19:27:43 UTC
+Last updated 2023-12-12 22:27:49 UTC
 </div>
 </div>
 </body>

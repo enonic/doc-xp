@@ -590,9 +590,6 @@ Page contributions will only be triggered if the response type is <code>text/htm
 <div class="paragraph">
 <p>Page contributions are merged into the response markup during a specific step in the <a href="../../runtime/engines/site-engine.ahtml">site engine</a>, called <code>Contributions filter</code>. It occurs after <a href="processors.ahtml">page processors</a> and before <a href="mappings.ahtml">the site filters</a>.</p>
 </div>
-<div class="paragraph">
-<p>During the contributions step, all contributions from previous rendering steps will be merged into the response body.</p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -610,7 +607,7 @@ Duplicate page contributions will automatically be removed, so developers do not
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 19:27:43 UTC
+Last updated 2023-12-12 22:27:49 UTC
 </div>
 </div>
 </body>

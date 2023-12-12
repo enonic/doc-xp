@@ -471,13 +471,10 @@ Response processors are only available in the <a href="../runtime/engines/site-e
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Page processing occurs between the <code>component rendring</code> step, and the <code>contributions filter</code> in the <a href="../runtime/engines/site-engine.ahtml">site engine</a> pipeline.</p>
+<p>Proessors get executed between the <code>component rendring</code> step, and the <code>contributions filter</code> in the <a href="../runtime/engines/site-engine.ahtml">site engine</a> pipeline. Response processors are commonly used by apps that need to inject &lt;&lt;<a href="contributions.ahtml">page contributions</a> without placing a component on the page.</p>
 </div>
 <div class="paragraph">
-<p>Response processors are commonly used by apps that need to inject &lt;&lt;<a href="contributions.ahtml">page contributions</a> without placing a component on the page.</p>
-</div>
-<div class="paragraph">
-<p>Use case examples are:</p>
+<p>Use cases are:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -492,31 +489,16 @@ Response processors are only available in the <a href="../runtime/engines/site-e
 <div class="paragraph">
 <p>Consider using regular <a href="filters.ahtml">HTTP Filters</a> for other use-cases.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Page contributions will only be triggered if the response type is <code>text/html</code>
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To create a processor, place a controller file in you project folder <code>src/main/resources/site/processors</code> i.e. <code>src/main/resources/site/processors/myprocessor.js</code></p>
+<p>Create a response processor by placing a controller file in you project folder under <code>src/main/resources/site/processors</code> i.e. <code>src/main/resources/site/processors/myprocessor.js</code></p>
 </div>
 <div class="paragraph">
-<p>The controller must export a <code>responseProcessor</code>. Like other <a href="filters.ahtml">filters</a>, responseProcessors receive both request and response objects.</p>
-</div>
-<div class="paragraph">
-<p>Below is an example that dynamically adds a <code>bodyEnd</code> <a href="contributions.ahtml">page contribution</a> to the response.</p>
+<p>The controller must export a <code>responseProcessor</code>. ResponseProcessors receive both a request and response objects. Below is an example that dynamically adds a <code>bodyEnd</code> <a href="contributions.ahtml">page contribution</a> to the response.</p>
 </div>
 <div class="listingblock">
 <div class="title">processors/tracker.js</div>
@@ -565,12 +547,12 @@ Page contributions will only be triggered if the response type is <code>text/htm
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>@order indicates execution order, as described below</td>
+<td>@order indicates execution order, lower value means higher priority</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Response processors may change any of the values of the response object, that includes: HTTP status code, response body, HTTP headers, cookies and page contributions.
+<p>Response processors may change any of the values of the response object, including: HTTP status code, response body, HTTP headers, cookies and page contributions.
 It is also possible to return the response object received without any changes.</p>
 </div>
 </div>
@@ -599,7 +581,7 @@ When a page is rendered, all processors are ordered and executed accordingly.</p
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If <code>applyFilters</code> is set to <code>false</code> in the <a href="http.ahtml#http-response">response object</a>, the response processing will be stopped. Default value is <code>true</code>.
+If <code>applyFilters</code> is set to <code>false</code> in the <a href="http.ahtml#http-response">response object</a>, any further response processing or filters will be ignored. Default value is <code>true</code>.
 </td>
 </tr>
 </table>
@@ -609,7 +591,7 @@ If <code>applyFilters</code> is set to <code>false</code> in the <a href="http.a
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 19:27:43 UTC
+Last updated 2023-12-12 22:27:49 UTC
 </div>
 </div>
 </body>

@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>HTTP Service</title>
+<meta name="author" content="Component content and metadata is automatically indexed and available to search">
+<title>Component indexing</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,113 +437,119 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>HTTP Service</h1>
+<h1>Component indexing</h1>
+<div class="details">
+<span id="author" class="author">Component content and metadata is automatically indexed and available to search</span><br>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#controller">Controller</a></li>
-<li><a href="#endpoint">Endpoint</a></li>
-<li><a href="#descriptor">Descriptor</a>
-<ul class="sectlevel2">
-<li><a href="#serviceurl">serviceUrl()</a></li>
-</ul>
-</li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#usage">Usage</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>HTTP Service enable mouting of <a href="../../framework/http.ahtml#http-controller">http controllers</a> safely made available within an application (or site&#8217;s) url space, without the use of routers.
-Due to the URL-pattern created, an http service will never conflict with other application url patterns.
-Services are in particular useful when used in the <a href="site-engine.ahtml">Site engine</a> or webapps where URLs are not predictable.</p>
+<p>Like other schemas, component form values are automatically indexed, including adding text values to the <code>_allText</code> field. Additionally, fields like the component name also get indexed.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="controller"><a class="link" href="#controller">Controller</a></h2>
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To create a service, place an http controller file in the <code>src/main/resources/services/</code> structure of your project.
-Each controller needs to be placed in a folder matching it&#8217;s name i.e.: <code>src/main/resources/services/myservice/myservice.js</code></p>
-</div>
-<div class="paragraph">
-<p>Example service controller</p>
+<p>To provide a predictable way of searching components, they are persisted and indexed as a flat list. Below is an example of how the components of a page may be persisted:</p>
 </div>
 <div class="listingblock">
-<div class="title">src/main/resources/services/&lt;service-name&gt;/&lt;service-name&gt;.js</div>
+<div class="title">Sample persisted component structure</div>
 <div class="content">
-<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">exports.get = function(req) {
-  return {
-    body: {
-      time: new Date()
-    },
-    contentType: 'application/json'
-  };
-
-};</code></pre>
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">"components": [
+  {
+    "type": "page",
+    "path": "/",
+    "page": {
+      "descriptor": "com.enonic.app.superhero:default",
+      "customized": true
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/0",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:featured"
+    }
+  },
+  {
+    "type": "fragment",
+    "path": "/main/1",
+    "fragment": {
+      "id": "5499dfd8-67c2-4712-a0d9-554b9817b4ad"
+    }
+  },
+  {
+    "type": "layout",
+    "path": "/main/2",
+    "layout": {
+      "descriptor": "com.enonic.app.superhero:two-column"
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/2/left/0",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:posts-list"
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/2/right/0",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:search-form",
+      "config": {
+        "com-enonic-app-superhero": {
+          "search-form": {
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/2/right/1",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:recent-posts",
+      "config": {
+        "com-enonic-app-superhero": {
+          "recent-posts": {
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/2/right/2",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:categories",
+      "config": {
+        "com-enonic-app-superhero": {
+          "categories": {
+            "showPostCount": false,
+            "showHierarchy": false
+          }
+        }
+      }
+    }
+  }
+]</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="endpoint"><a class="link" href="#endpoint">Endpoint</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Services use the following mount pattern: <code>**/_/service/&lt;appname&gt;/&lt;servicename&gt;</code>.
-This means that a service can be invoked in multiple locations, i.e. <code>domain.com/_/service/..</code> or <code>domain.com/some/path/_/service/..</code>.
-The context the service is mounted on can also be used by the controller as context.</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p>As an example the service 'profileimage' will only work in context of a profile&#8217;s url.
-I.e. <code>domain.com/profile/user1/_/service/myapp/profileimage</code> will service an image, but invoked elsewhere it will not work.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>By default, services may by used by any client or user.
-At times, it makes sense to restrict access to the service based on user roles.
-This can be done without custom coding.</p>
-</div>
-<div class="paragraph">
-<p>Sample descriptor limiting access to the service:</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/resouces/services/&lt;service-name&gt;/&lt;service-name&gt;.xml</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;service&gt;
-  &lt;allow&gt;
-    &lt;principal&gt;role:system.admin&lt;/principal&gt;
-    &lt;principal&gt;role:myapp.myrole&lt;/principal&gt;
-  &lt;/allow&gt;
-&lt;/service&gt;</code></pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="serviceurl"><a class="link" href="#serviceurl">serviceUrl()</a></h3>
-<div class="paragraph">
-<p>To safely generate a service URL, use the serviceUrl() function that is part of the <a href="../../api/lib-portal.ahtml">Portal Library</a>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-When invoked, the function will generate a contextual service url based on the context of the current controller.
-</td>
-</tr>
-</table>
-</div>
+<p>Thanks to this persistence model, it is possible to predictably query for the presence of specific component types i.e. via <code>components.part.descriptor</code> or for component form values i.e. via <code>components.part.config.&lt;app-name&gt;.&lt;component-name&gt;.&lt;form-item&gt;</code>.</p>
 </div>
 </div>
 </div>

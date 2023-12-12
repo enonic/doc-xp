@@ -461,19 +461,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Pages and components are only available within sites.</p>
+<p>Pages and components are only available within sites.  Any content item (and thus any content type) may also be a page. Similar to how you may add <a href="x-data.ahtml">X-data</a> to any content.</p>
 </div>
 <div class="paragraph">
-<p>Within a site, any content item (and thus any content type) may also be a page. Similar to how you may add <a href="x-data.ahtml">X-data</a> to any content.</p>
+<p>Pages are made up from from one or more components. In addition to the page component, there are other component types such as <a href="pages/parts.ahtml">parts</a>, <a href="pages/layouts.ahtml">layouts</a>, <a href="pages/fragments.ahtml">fragments</a> and <a href="pages/text.ahtml">text</a>.</p>
 </div>
 <div class="paragraph">
-<p>Pages are made up from from one or more components.</p>
-</div>
-<div class="paragraph">
-<p>In addition to the page component, there are other component types such as <a href="pages/parts.ahtml">parts</a>, <a href="pages/layouts.ahtml">layouts</a>, <a href="pages/fragments.ahtml">fragments</a> and <a href="pages/text.ahtml">text</a>.</p>
-</div>
-<div class="paragraph">
-<p>Regions enable editors to create hierarchical components structures.</p>
+<p><a href="regions.ahtml">Regions</a> enable creation of hierarchical components structures.</p>
 </div>
 <div class="paragraph">
 <p>Seen from Content Studio, a page, and it&#8217;s component structure might look like this:</p>
@@ -547,7 +541,10 @@ The name you choose for a component will be used in the underlying data of the s
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><strong>region</strong> optionally specify <a href="pages/regions.ahtml">regions</a> for the page.
+<td><strong>region</strong> optionally specify <a href="pages/regions.ahtml">regions</a> for the page.</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -559,9 +556,6 @@ A page component may define zero, to many regions. Conventionally, a page should
 </td>
 </tr>
 </table>
-</div></td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -569,7 +563,7 @@ A page component may define zero, to many regions. Conventionally, a page should
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 19:27:43 UTC
+Last updated 2023-12-12 22:27:49 UTC
 </div>
 </div>
 </body>

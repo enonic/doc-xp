@@ -471,7 +471,7 @@ For a hands on introduction to sites and the concepts described here, visit the 
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Sites unlock powerful functionality for managing websites and creating visually oriented content like <a href="pages.ahtml">pages</a>, <a href="page-templates.ahtml">page templates</a> and <a href="fragments.ahtml">fragments</a>.</p>
+<p>Sites unlock powerful functionality for managing websites and creating visually oriented content like <a href="pages.ahtml">pages</a>, <a href="page-templates.ahtml">page templates</a> and <a href="pages/fragments.ahtml">fragments</a>.</p>
 </div>
 <div class="paragraph">
 <p>Similar to content projects, you may add applications to a site. For sites however, purpose-specific applications like sitemap.xml, robots.txt, Google Analytics, SEO Metafields, and Siteimprove introduce features and management capabilities beyond that of basic content.</p>
@@ -516,7 +516,7 @@ Apps added to <a href="projects.ahtml">a project</a> will not apply to a site, u
 <p>Controller resolving (via page or mappings)</p>
 </li>
 <li>
-<p><a href="sites/regions.ahtml">Component rendering</a> (directly or via placeholders)</p>
+<p><a href="pages.ahtml">Component rendering</a> (directly or via placeholders)</p>
 </li>
 <li>
 <p><a href="../framework/contributions.ahtml">Page contributions</a></p>
@@ -608,11 +608,11 @@ Apps added to <a href="projects.ahtml">a project</a> will not apply to a site, u
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Controller and filter <a href="mappings.ahtml">mappings</a> definitions</td>
+<td>Controller and filter <a href="../framework/mappings.ahtml">mappings</a> definitions</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Commonly used to add <a href="contributions.ahtml">page contributions</a> to the response</td>
+<td>Commonly used to add <a href="../framework/contributions.ahtml">page contributions</a> to the response</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -625,7 +625,7 @@ Apps added to <a href="projects.ahtml">a project</a> will not apply to a site, u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 19:27:43 UTC
+Last updated 2023-12-12 22:27:49 UTC
 </div>
 </div>
 </body>

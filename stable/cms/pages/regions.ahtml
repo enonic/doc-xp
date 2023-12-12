@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Components</title>
+<meta name="author" content="Use regions to create a hierarchy of components.">
+<title>Regions</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,40 +437,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Components</h1>
+<h1>Regions</h1>
+<div class="details">
+<span id="author" class="author">Use regions to create a hierarchy of components.</span><br>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#definition">Definition</a></li>
 <li><a href="#usage">Usage</a></li>
+<li><a href="#output">Output</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>Regions let you create a hierarchy of components, for instance to build a page.</p>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Regions enable editors to create complex component structures, such as pages.</p>
-</div>
-<div class="paragraph">
-<p>Only <a href="page.ahtml">page</a>and <a href="layout.ahtml">layout</a> component types can define regions. Each region must have a unique name within the component.</p>
+<p>Regions enable editors to create complex component structures, such as pages. Only <a href="../pages.ahtml">page</a> and <a href="layouts.ahtml">layout</a> component types can define regions. Each region must have a unique name within the component.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="definition"><a class="link" href="#definition">Definition</a></h2>
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Regions are declared statically. Below is a sample definition of a page component with a single region <code>main</code>:</p>
+<p>Regions are declared statically within other components. Below is a sample definition of a page component with a single region <code>main</code>:</p>
 </div>
 <div class="listingblock">
 <div class="title">Example - page component with a single region</div>
@@ -500,13 +494,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 &lt;/layout&gt;</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Using Content Studio, this is what regions look like in the page form:</p>
+<p>From Content Studio, this is what regions look like in the page form:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -533,11 +522,16 @@ Ther dropzones are empty regions.
 <img src="media/3-region-layout.png" alt="Layout with three empty regions" width="1012px">
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="output"><a class="link" href="#output">Output</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>&#8230;&#8203;and here is a JSON version of the same page, as retrived from the content API.</p>
+<p>Using the Content API, you may access a JSON version containing the hierarchical structure of components and regions on the page.</p>
 </div>
 <div class="listingblock">
-<div class="title">JSON from content api</div>
+<div class="title">Sample JSON from the Content api</div>
 <div class="content">
 <pre class="highlight"><code class="language-JSON" data-lang="JSON">"page": {
     "type": "page",
@@ -567,7 +561,7 @@ Ther dropzones are empty regions.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Empty regions are not actually persisted, but the region name is part of the component path.
+Empty regions are never persisted. Region names are only determined from the component path.
 </td>
 </tr>
 </table>
@@ -577,7 +571,7 @@ Empty regions are not actually persisted, but the region name is part of the com
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 19:27:43 UTC
+Last updated 2023-12-12 22:27:49 UTC
 </div>
 </div>
 </body>
