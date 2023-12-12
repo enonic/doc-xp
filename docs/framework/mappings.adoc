@@ -4,24 +4,21 @@
 
 Map controllers or filters to specific content types, site relative URLs, or system services.
 
-NOTE: Mappings are only available in the <<../runtime/engines/site-engine#, Site Engine>>
+NOTE: Mappings are only available when using the <<../runtime/engines/site-engine#, Site Engine>>
 
 == Introduction
 
-Mappings is the first processing step in the <<../runtime/engines/site-engine#, site engine>> - before page rendering starts.
-
-You may define mappings for both <<controllers#, controllers>> and <<filters#,filters>>. The use cases are vast. 
+Mappings are the first processing step in the <<../runtime/engines/site-engine#, site engine>> - and happens before page rendering starts. You may define mappings for both <<controllers#, controllers>> and <<filters#,filters>>. The use cases are vast. 
 
 == Usage
 
-Mappings are defined in the <<../cms/sites#site_xml, site descriptor>>.
-
-Examples of use cases are:
+Mappings are defined in the <<../cms/sites#site_xml, site descriptor>>. Examples of use cases are:
 
 * Map a controller to a specific URL pattern i.e. /mypath
 * Map a controller to a specifc set of content through content matches, i.e. only apply to the `portal:fragment` content type
 * Map a filter to parts of or the entire site structure
 
+.site.xml mapping examples
 [source,xml]
 ----
 <site>
@@ -44,7 +41,7 @@ Examples of use cases are:
 ----
 
 <1> *@controller* defines the path to a standard <<../framework/controllers#, HTTP controller>>
-<2> *@order* defines the <<Execution order>> across apps. Default is `50`.
+<2> *@order* defines the <<Execution order>> across apps. Default is `50`. A lower number means higher priority.
 <3> *<pattern>* specifies a regular expression based site contextual URL <<Patterns>>. Default is `/.*`
 <4> *<match>* a property condition to evaluate <<Matches>> for the contextual content.
 <5> *@filter* defines the path to the <<../framework/filters#, HTTP filter>>
@@ -52,15 +49,14 @@ Examples of use cases are:
 
 NOTE: Each mapping may exclusively specify a filter OR a controller, and it must define at least one pattern or match setting.
 
-== Execution order
+=== Execution order
 
-An application can contain multiple mappings, and multiple applications can be added to a site.
+An application may contain multiple mappings, and multiple applications can be added to a site.
 
 If two different apps within a site has the same mapping path or match expression,
-the mapping with the *lower* `order` value (as defined in the <<../cms/sites#site_xml, site descriptor>>) is used.
+the mapping with the *lower* `order` value is used.
 
-In case there are several mappings with the same ``order`` number,
-the position of the applications (as configured within the site) determines which mapping will be used.
+In case there are several mappings with the same `order` value, the sort order of the applications on the site determines which mapping will be used.
 
 == Pattern mappings
 

@@ -1,0 +1,98 @@
+= Component indexing
+Component content and metadata is automatically indexed and available to search
+
+== Introduction
+
+Like other schemas, component form values are automatically indexed, including adding text values to the `_allText` field. Additionally, fields like the component name also get indexed.
+
+== Usage
+
+To provide a predictable way of searching components, they are persisted and indexed as a flat list. Below is an example of how the components of a page may be persisted:
+
+.Sample persisted component structure
+[source,JSON]
+----
+"components": [
+  {
+    "type": "page",
+    "path": "/",
+    "page": {
+      "descriptor": "com.enonic.app.superhero:default",
+      "customized": true
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/0",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:featured"
+    }
+  },
+  {
+    "type": "fragment",
+    "path": "/main/1",
+    "fragment": {
+      "id": "5499dfd8-67c2-4712-a0d9-554b9817b4ad"
+    }
+  },
+  {
+    "type": "layout",
+    "path": "/main/2",
+    "layout": {
+      "descriptor": "com.enonic.app.superhero:two-column"
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/2/left/0",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:posts-list"
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/2/right/0",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:search-form",
+      "config": {
+        "com-enonic-app-superhero": {
+          "search-form": {
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/2/right/1",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:recent-posts",
+      "config": {
+        "com-enonic-app-superhero": {
+          "recent-posts": {
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "part",
+    "path": "/main/2/right/2",
+    "part": {
+      "descriptor": "com.enonic.app.superhero:categories",
+      "config": {
+        "com-enonic-app-superhero": {
+          "categories": {
+            "showPostCount": false,
+            "showHierarchy": false
+          }
+        }
+      }
+    }
+  }
+]
+----
+
+Thanks to this persistence model, it is possible to predictably query for the presence of specific component types i.e. via `components.part.descriptor` or for component form values i.e. via `components.part.config.<app-name>.<component-name>.<form-item>`.
+
+//TODO: Query DSL examples

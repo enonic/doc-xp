@@ -8,7 +8,7 @@ To support visual editing in Content Studio's Page Editor, including drag'n drop
 
 TIP: When using the <<../../framework/components#, Enonic framework>>, editor annotations are automatically injected into your markup.
 
-=== Region annotations
+== Region annotations
 
 Regions are represented by an element with the `data-portal-region` attribute, and a value matching the region name i.e. `main`.
 
@@ -29,7 +29,7 @@ Regions are represented by an element with the `data-portal-region` attribute, a
 NOTE: For an empty region dropzone to appear in the editor, a target element must be provided, like in the example above.
 
 
-=== Component annotations
+== Component annotations
 
 Components must be annotated with a special component-type annotation.
 
@@ -53,7 +53,7 @@ The available values are: `layout`, `part`, `text`, and `fragment`
 </html>
 ----
 
-=== Hierarchies
+== Hierarchies
 
 Using layouts, you may create hierarchies of regions and components. For the page editor to work properly, the component elements must be be hierarchically structured within the page DOM. 
 

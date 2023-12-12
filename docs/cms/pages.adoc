@@ -6,15 +6,11 @@ Pages allow you to create rich visually oriented content.
 
 == Introduction
 
-Pages and components are only available within sites. 
+Pages and components are only available within sites.  Any content item (and thus any content type) may also be a page. Similar to how you may add <<x-data#, X-data>> to any content.
 
-Within a site, any content item (and thus any content type) may also be a page. Similar to how you may add <<x-data#, X-data>> to any content.
+Pages are made up from from one or more components. In addition to the page component, there are other component types such as <<pages/parts#, parts>>, <<pages/layouts#, layouts>>, <<pages/fragments#, fragments>> and <<pages/text#, text>>.
 
-Pages are made up from from one or more components.
-
-In addition to the page component, there are other component types such as <<pages/parts#, parts>>, <<pages/layouts#, layouts>>, <<pages/fragments#, fragments>> and <<pages/text#, text>>.
-
-Regions enable editors to create hierarchical components structures.
+<<regions#, Regions>> enable creation of hierarchical components structures.
 
 Seen from Content Studio, a page, and it's component structure might look like this:
 
@@ -54,6 +50,6 @@ To create a page component, place a descriptor file in your project: `src/main/r
 <3> *description* Description field shown when creating a part in content studio
 <4> *form* allows the definition of a configuration form based on the <<schemas#,schema system>>
 <5> *region* optionally specify <<pages/regions#, regions>> for the page. 
-+
+
 NOTE: A page component may define zero, to many regions. Conventionally, a page should at least define a single region called `main`.
 

@@ -70,6 +70,5 @@ return {
 
 Page contributions are merged into the response markup during a specific step in the <<../../runtime/engines/site-engine#, site engine>>, called `Contributions filter`. It occurs after <<processors#, page processors>> and before <<mappings#, the site filters>>.
 
-During the contributions step, all contributions from previous rendering steps will be merged into the response body.
 
 NOTE: Duplicate page contributions will automatically be removed, so developers do not have to worry about this.

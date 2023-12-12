@@ -8,7 +8,7 @@ NOTE: For a hands on introduction to sites and the concepts described here, visi
 
 == Introduction
 
-Sites unlock powerful functionality for managing websites and creating visually oriented content like <<pages#, pages>>, <<page-templates#,page templates>> and <<fragments#, fragments>>.
+Sites unlock powerful functionality for managing websites and creating visually oriented content like <<pages#, pages>>, <<page-templates#,page templates>> and <<pages/fragments#, fragments>>.
 
 Similar to content projects, you may add applications to a site. For sites however, purpose-specific applications like sitemap.xml, robots.txt, Google Analytics, SEO Metafields, and Siteimprove introduce features and management capabilities beyond that of basic content.
 
@@ -26,7 +26,7 @@ When rendering sites and pages with the Enonic framework, request handling and r
 
 * Access control (based on content permissions)
 * Controller resolving (via page or mappings)
-* <<sites/regions#, Component rendering>> (directly or via placeholders)
+* <<pages#, Component rendering>> (directly or via placeholders)
 * <<../framework/contributions#, Page contributions>>
 * <<../framework/processors#, Response processors>>
 * and the <<../runtime/engines/site-engine/image-service#, The Image service>>
@@ -84,6 +84,6 @@ The descriptor must be placed in your app as: `src/main/resources/site/site.xml`
 
 <1> Define a <<schemas#forms,form>> for this app. The form is used to create site specific configuration for the app.
 <2> Specify <<x-data#, X-data>> fields to use within the site scope.
-<3> Controller and filter <<mappings#,mappings>> definitions
-<4> Commonly used to add <<contributions#,page contributions>> to the response
+<3> Controller and filter <<../framework/mappings#,mappings>> definitions
+<4> Commonly used to add <<../framework/contributions#,page contributions>> to the response
 <5> The order is used to decide execution order if multiple applications and processors are added to a single site.

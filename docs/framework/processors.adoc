@@ -8,26 +8,20 @@ NOTE: Response processors are only available in the <<../runtime/engines/site-en
 
 == Introduction
 
-Page processing occurs between the `component rendring` step, and the `contributions filter` in the <<../runtime/engines/site-engine#, site engine>> pipeline. 
+Proessors get executed between the `component rendring` step, and the `contributions filter` in the <<../runtime/engines/site-engine#, site engine>> pipeline. Response processors are commonly used by apps that need to inject <<<<contributions#, page contributions>> without placing a component on the page.
 
-Response processors are commonly used by apps that need to inject <<<<contributions#, page contributions>> without placing a component on the page.
-
-Use case examples are:
+Use cases are:
 
 * Dynamically adding page contributions (i.e. script tags)
 * General manipulation of the response markup i.e. headers or body (i.e. adding SEO tags).
 
 Consider using regular <<filters#, HTTP Filters>> for other use-cases.
 
-NOTE: Page contributions will only be triggered if the response type is `text/html`
-
 == Usage
 
-To create a processor, place a controller file in you project folder `src/main/resources/site/processors` i.e. `src/main/resources/site/processors/myprocessor.js`
+Create a response processor by placing a controller file in you project folder under `src/main/resources/site/processors` i.e. `src/main/resources/site/processors/myprocessor.js`
 
-The controller must export a `responseProcessor`. Like other <<filters#, filters>>, responseProcessors receive both request and response objects.
-
-Below is an example that dynamically adds a `bodyEnd` <<contributions#, page contribution>> to the response.
+The controller must export a `responseProcessor`. ResponseProcessors receive both a request and response objects. Below is an example that dynamically adds a `bodyEnd` <<contributions#, page contribution>> to the response.
 
 .processors/tracker.js
 [source,js]
@@ -63,9 +57,9 @@ To wire a processor into the execution pipeline, it must be declared in the app'
 ----
 
 <1> @name indicates name of the controller file
-<2> @order indicates execution order, as described below
+<2> @order indicates execution order, lower value means higher priority
 
-Response processors may change any of the values of the response object, that includes: HTTP status code, response body, HTTP headers, cookies and page contributions.
+Response processors may change any of the values of the response object, including: HTTP status code, response body, HTTP headers, cookies and page contributions.
 It is also possible to return the response object received without any changes.
 
 == Execution order
@@ -80,4 +74,4 @@ Processors with a *lower* order will be executed first (across all apps within t
 
 In case there are several filters with the same ``order`` number, the position of the applications (as configured on the site) determines the order of execution.
 
-NOTE: If `applyFilters` is set to `false` in the <<http#http-response, response object>>, the response processing will be stopped. Default value is `true`.
+NOTE: If `applyFilters` is set to `false` in the <<http#http-response, response object>>, any further response processing or filters will be ignored. Default value is `true`.

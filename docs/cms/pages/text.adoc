@@ -1,14 +1,11 @@
-= Text component
+= Rich text component
 :toc: right
 :imagesdir: media
-
-The Text component allows content editors to place and visually edit text directly in a region.
+Visually add and edit rich text within a region.
 
 == Introduction
 
-Text are built-in components that require no further configuration. 
-
-They are essentially pre-configured instances of the <<../../schemas/input-types/htmlarea#, HtmlArea input types>>, adapted to work as components in the page editor.
+Text are built-in components that require no further configuration. They are essentially pre-configured instances of the <<../../schemas/input-types/htmlarea#, HtmlArea input types>>, adapted to work as components in the page editor.
 
 == Usage
 
@@ -19,7 +16,5 @@ image::text-component.png[Text component edited on a page, 1305px]
 
 == Rendering
 
-NOTE: Text components have specific requirements for styling and HTML output. They are optimized for use in combination with the <<../../framework#, Enonic Framework>>. 
-
-Consider implementing <<parts#, parts>> with an HtmlArea input as an alterative when using your own framework.
+NOTE: Text components have specific requirements for styling and HTML output. They are optimized for use in combination with the <<../../framework#, Enonic Framework>>. Consider implementing <<parts#, parts>> with an HtmlArea input when using 3rd party frameworks.
 

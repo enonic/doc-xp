@@ -1,4 +1,4 @@
-= Parts
+= Part components
 :toc: right
 :imagesdir: media
 
@@ -23,17 +23,10 @@ Each part may also declare a form using the schema system. The form data will be
 </part>
 ----
 
-TODO CS filters: 
-
-TIP: In addition to the standard configuration options, Content Studio supports https://developer.enonic.com/docs/content-studio/stable/editor/component-types#part_component[custom filter definitions] that limit which content items the part may be placed on.
-
-
 == Custom icon
 image:xp-720.svg[XP 7.2.0,opts=inline]
 
-Parts support the definition of custom icon. The icon replaces the standard part icon when working in Content Studio.
-
-Simply place an icon (in either PNG or SVG format) in the part folder.
+Parts support the definition of custom icon. The icon replaces the standard part icon when working in Content Studio. Simply place an icon (in either PNG or SVG format) in the part folder.
 
 For example, if folder/part is called _mypart_ then part descriptor is called _mypart.xml_ and the icon file should be called either _mypart.svg_ or _mypart.png_.
 In the screenshots below parts "_HTML Area Example_" and "_Image filters test_" are using custom icons.

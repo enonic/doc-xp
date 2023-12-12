@@ -1,18 +1,15 @@
-= Components
+= Regions
 :toc: right
 :imagesdir: media
-
-Regions let you create a hierarchy of components, for instance to build a page.
+Use regions to create a hierarchy of components.
 
 == Introduction
 
-Regions enable editors to create complex component structures, such as pages.
+Regions enable editors to create complex component structures, such as pages. Only <<../pages#, page>> and <<layouts#, layout>> component types can define regions. Each region must have a unique name within the component.
 
-Only <<page#, page>>and <<layout#, layout>> component types can define regions. Each region must have a unique name within the component.
+== Usage
 
-== Definition
-
-Regions are declared statically. Below is a sample definition of a page component with a single region `main`:
+Regions are declared statically within other components. Below is a sample definition of a page component with a single region `main`:
 
 .Example - page component with a single region
 [source,XML]
@@ -42,9 +39,7 @@ And here is a layout defining three regions:
 </layout>
 ----
 
-== Usage
-
-Using Content Studio, this is what regions look like in the page form:
+From Content Studio, this is what regions look like in the page form:
 
 image::component-input-type.png[Component editor, 527px]
 
@@ -54,9 +49,12 @@ NOTE: Ther dropzones are empty regions.
 
 image::3-region-layout.png[Layout with three empty regions, 1012px]
 
-...and here is a JSON version of the same page, as retrived from the content API.
 
-.JSON from content api
+== Output
+
+Using the Content API, you may access a JSON version containing the hierarchical structure of components and regions on the page.
+
+.Sample JSON from the Content api
 [source,JSON]
 ----
 "page": {
@@ -80,7 +78,5 @@ image::3-region-layout.png[Layout with three empty regions, 1012px]
   }
 ----
 
-NOTE: Empty regions are not actually persisted, but the region name is part of the component path.
-
-
+NOTE: Empty regions are never persisted. Region names are only determined from the component path.
 

@@ -1,21 +1,20 @@
-= Layouts
+= Layout components
 :toc: right
 :imagesdir: media
 
-Like page components, layouts support regions.
-
+Use layouts to organize components in columns or for other appearance effects.
 
 == Introduction
 
-Parts are leaf-nodes in the component structure. Parts are typically used in combination with forms, and have a vast range of application areas.
+Layouts are primarily used to visually organize or format your page. Layouts should always contain regions, and may optionally be used in combination with forms.
 
 == Usage
 
-To create a layout, place a descriptor file in your project, like this: `src/main/resources/site/layouts/<layout-name>/<layout-name>.xml.
+Create a layout by placing a descriptor file in your project, like this: `src/main/resources/site/layouts/<layout-name>/<layout-name>.xml.
 
-Similar to the page descriptor, the layout descriptor supports both schema and <<regions#, regions>>. 
+Similar to the page descriptor, the layout descriptor supports both schema forms and <<regions#, regions>>. 
 
-.Sample layout descriptor with three regions
+.Sample layout with three regions
 [source,xml]
 ----
 <layout>
