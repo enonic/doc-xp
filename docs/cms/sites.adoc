@@ -2,28 +2,50 @@
 :toc: right
 :imagesdir: images
 
+Sites add support for building building pages, in addition to form-based content.
+
+NOTE: For a hands on introduction to sites and the concepts described here, visit the https://developer.enonic.com/docs/my-first-site[My first site tutorial].
+
 == Introduction
 
-A highly central component of the XP CMS are sites.
-Site is shipped as a standard content type, which means it can easily be created and added by editors.
-Sites can also have applications assigned to them. Site applications are isolated from <<projects#, project>> applications. If a site should use an application already assigned to its project, you must assign the application directly to the site.
+Sites unlock powerful functionality for managing websites and creating visually oriented content like <<pages#, pages>>, <<page-templates#,page templates>> and <<fragments#, fragments>>.
 
-Whenever an app is added to a site, all functionality and all content types from the app will be available within the scope of the site.
+Similar to content projects, you may add applications to a site. For sites however, purpose-specific applications like sitemap.xml, robots.txt, Google Analytics, SEO Metafields, and Siteimprove introduce features and management capabilities beyond that of basic content.
 
-Only applications that declare support for sites can be added.
-This is done via the descriptor file called site.xml
+== Site content type 
+
+`Site` is a built-in content type, which means a site can easily be created anywhere in your content structure.
+
+Site content items are special in the way that you may add applications to them. Similar to projects, functionality and schemas from the app will be available in the scope of the site.
+
+NOTE: Apps added to <<projects#, a project>> will not apply to a site, unless explicitly added there as well. 
+
+== The site engine
+
+When rendering sites and pages with the Enonic framework, request handling and resolving is performed by the <<../runtime/engines/site-engine#, site engine>>. It offers site-specific capabilities and request handling such as:
+
+* Access control (based on content permissions)
+* Controller resolving (via page or mappings)
+* <<sites/regions#, Component rendering>> (directly or via placeholders)
+* <<../framework/contributions#, Page contributions>>
+* <<../framework/processors#, Response processors>>
+* and the <<../runtime/engines/site-engine/image-service#, The Image service>>
+
 
 [#site_xml]
 == site.xml
 
-The site form serves multiple purposes:
+Applications declare support for sites by including the site.xml descriptor file.
 
-* Declares that this app supports sites
-* Lets you to configure the application on a per site basis
-* Defines <<x-data#,X-data>> mappings for the site
-* Defines bindings to Controllers as mappings and filters
+This descriptor serves multiple purposes:
 
-The descriptor must be placed in your project as: `src/main/resources/site/site.xml`
+* Declares that this app supports sites (and CMS projects)
+* Defines a form that lets you configure the application on a per site (or project) basis
+* Define <<x-data#,X-data>> mappings
+* Define controller and filter <<../framework/mappings#, mappings>>.
+* Define <<../framework/processors#, response processors>>.
+
+The descriptor must be placed in your app as: `src/main/resources/site/site.xml`
 
 .Minimal site.xml example
 [source,xml]
@@ -34,33 +56,34 @@ The descriptor must be placed in your project as: `src/main/resources/site/site.
 ----
 
 
-.Site.xml with all options enabled
+.Site.xml with all options in use
 [source,xml]
 ----
 <site>
-  <processors>  // <1>
-    <response-processor name="tracker" order="10"/> // <1> <2>
-  </processors>
-  <mappings>  // <2>
-     <mapping controller="/site/foobar/api.js" order="10">
-       <pattern>/api/v\d+/.*</pattern>
-     </mapping>
-     <mapping controller="/site/pages/default/default.js">
-       <match>type:'portal:fragment'</match>
-     </mapping>
-   </mappings>
-   <x-data name="seo-settings"/>  // <3>
-   <form>  // <4>
+  <form>  // <1>
     <input type="TextLine" name="company">
       <label>Company</label>
       <occurrences minimum="1" maximum="1"/>
     </input>
     <mixin name="address"/>
   </form>
+  <x-data name="seo-settings"/>  // <2>
+  <mappings>  // <3>
+    <mapping controller="/site/foobar/api.js" order="10">
+      <pattern>/api/v\d+/.*</pattern>
+    </mapping>
+    <mapping controller="/site/pages/default/default.js">
+      <match>type:'portal:fragment'</match>
+    </mapping>
+  </mappings>
+  <processors>
+    <response-processor name="tracker" order="10"/> // <4> <5>
+  </processors>
 </site>
 ----
 
-<1> Commonly used to add <<contributions#,page contributions>> to the response
-<2> Controller and filter <<mappings#,mappings>> definitions
-<3> Specify <<x-data#, X-data>> fields to add across content types within the site
-<4> Define a <<./schemas#forms,form>> for this app. Used to add site specific configuration of the app
+<1> Define a <<schemas#forms,form>> for this app. The form is used to create site specific configuration for the app.
+<2> Specify <<x-data#, X-data>> fields to use within the site scope.
+<3> Controller and filter <<mappings#,mappings>> definitions
+<4> Commonly used to add <<contributions#,page contributions>> to the response
+<5> The order is used to decide execution order if multiple applications and processors are added to a single site.

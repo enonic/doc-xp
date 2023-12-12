@@ -2,19 +2,25 @@
 :toc: right
 :imagesdir: ../images
 
-Mappings enable the wiring of controllers or filters to site relative URL patterns, content matches, or specific service requests.
+Map controllers or filters to specific content types, site relative URLs, or system services.
+
+NOTE: Mappings are only available in the <<../runtime/engines/site-engine#, Site Engine>>
 
 == Introduction
 
-Mappings are executed at the very beginning of the site engine, and before the content rendering starts.
-Since mappings support both controllers and filters, the use cases are vast. Controllers will typically take over and handle the full request, while filters may process the request both at request and response level.
+Mappings is the first processing step in the <<../runtime/engines/site-engine#, site engine>> - before page rendering starts.
 
-Use cases:
+You may define mappings for both <<controllers#, controllers>> and <<filters#,filters>>. The use cases are vast. 
+
+== Usage
+
+Mappings are defined in the <<../cms/sites#site_xml, site descriptor>>.
+
+Examples of use cases are:
+
 * Map a controller to a specific URL pattern i.e. /mypath
 * Map a controller to a specifc set of content through content matches, i.e. only apply to the `portal:fragment` content type
 * Map a filter to parts of or the entire site structure
-
-Mapping are defined in the <<sites#site_xml, site descriptor>>.
 
 [source,xml]
 ----
@@ -42,26 +48,27 @@ Mapping are defined in the <<sites#site_xml, site descriptor>>.
 <3> *<pattern>* specifies a regular expression based site contextual URL <<Patterns>>. Default is `/.*`
 <4> *<match>* a property condition to evaluate <<Matches>> for the contextual content.
 <5> *@filter* defines the path to the <<../framework/filters#, HTTP filter>>
-<6> *@service* specifies a service type endpoint request which will be handled by the filter (`.../_/image/...` endpoint).
+<6> *@service* specifies a system service which will be handled by the filter i.e. (`.../_/image/...` endpoint).
 
 NOTE: Each mapping may exclusively specify a filter OR a controller, and it must define at least one pattern or match setting.
 
-=== Execution order
+== Execution order
 
 An application can contain multiple mappings, and multiple applications can be added to a site.
 
 If two different apps within a site has the same mapping path or match expression,
-the mapping with the *lower* `order` value (as defined in the <<sites#site_xml, site descriptor>>) is used.
+the mapping with the *lower* `order` value (as defined in the <<../cms/sites#site_xml, site descriptor>>) is used.
 
 In case there are several mappings with the same ``order`` number,
-the position of the applications (as configured on the site) determines which mapping will be used.
+the position of the applications (as configured within the site) determines which mapping will be used.
 
-== Patterns
+== Pattern mappings
 
 Pattern based mappings can for instance be used to take over the request for a specific URL before it reaches the content rendering.
 An example use case is exposing an API endpoint on the contextual URL /api, or triggering a filter to execute for every request within the site.
 
 The `<pattern>` element specifies a regular expression to be matched against the request URL.
+
 The part of the URL that is taken into account for the matching is the path relative to the site where the application is configured.
 For example, if a site is deployed via the virtual host `example.com/mysite/`, then the pattern ``<pattern>/api/.*</pattern>`` will match with requests with URL ending in `example.com/mysite/api/.*`
 The protocol, host and port are not involved in the pattern matching.
@@ -96,7 +103,7 @@ Examples:
 
 NOTE: Before image:xp-780.svg[XP 7.8.0,opts=inline] it was not possible to map controller or filter to the site itself.
 
-== Matches
+== Match mappings
 
 Match based mappings can for instance be used to automatically render content types without using page templates or associating content with a controller directly.
 An example use case is automatic handling of the content type `portal:fragment`.
@@ -121,10 +128,10 @@ The expected value can be either a regular expression to match the property valu
 NOTE: image:xp-780.svg[XP 7.8.0,opts=inline] Missing/unavailable content does not match any condition.
 Don't specify `<match>` if you need to map controller/filter to the URL that does not correspond to any content.
 
-== Services
+== Service mappings
 image:xp-7120.svg[XP 7.12.0,opts=inline]
 
-Service-based mappings can be used to associate particular types of service requests with controllers or filters directly.
+Service-based mappings can be used to associate service requests with controllers or filters directly.
 
 Supported services: `image`, `attachment`, and `component`.
 

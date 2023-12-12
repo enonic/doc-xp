@@ -43,14 +43,14 @@ Files ending with .properties require a full restart of the XP instance to be ap
 In a clustered environment, configuration files must be distributed to all nodes where it is relevant.
 
 
-== Custom app config
+== Custom config
 
 To provide file based configuration to custom applications,
 simply place a file with the name `<app-name>.cfg` i.e. `my.custom.app.cfg`. in the `XP_HOME/config/` folder, and it will instantly be available for the application.
 
 Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.
 
-// TODO: Link to details on how to use configuration files in apps.
+For more details visit the <<../apps/config#, application config section>>.
 
 == Standard config files
 

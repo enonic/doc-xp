@@ -1,0 +1,41 @@
+= Fragments
+:toc: right
+:imagesdir: media
+
+Fragments enable reuse of components across different pages.
+
+== Introduction
+
+A fragment is essentially a component (or a tree of components) stored as an individual content item. 
+
+A component that has been turned into a fragment can be reused across different pages.
+
+When a fragment is altered, the change will apply to every page that uses it. This also adds a range of new possibilities when creating pages, such as time based publishing and permission control selected components of a page.
+
+== Creating fragments
+
+A fragment can be created from any component on a given page. Using Content Studio, a fragment is created by selecting a component, and then choosing `Create fragment` from the context menu.
+
+The fragment is then saved as a separate content instance, with the content type `portal:fragment`. This means the fragement can be managed and published, just like any other content item.
+
+image::fragment-component.png[Converting a layout to a component, 1440px]
+
+== Using fragments
+
+Fragments can be inserted on a page just like any other component. Using content studio, fragment is available as a component type. Simply insert a fragment, an choose the fragment content item.
+
+== Fragment preview
+
+Fragments can be edited via the content form view, or visually if enabled.
+
+Since fragments are not pages, they may require special handling in order to be rendered in a visually appealing manner (with styles etc).
+
+NOTE: This will also require some tuning when using the <<../../framework/components#, Enonic framework>>.
+
+== Search
+
+The content API enables searching for content in pages and components. Since a fragment is a separate content item, text stored in the fragment will not be indexed on the pages where it is in use.
+
+This basically means that even if a fragment is placed on a page, searching for content within the fragment will not yield hits on the pages where it is included.
+
+NOTE: When performing queries against content from customer facing solutions, make sure fragment content types are excluded - as fragments are generally not directly available to end users.

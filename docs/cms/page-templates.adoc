@@ -1,0 +1,34 @@
+= Pages templates
+:toc: right
+:imagesdir: images
+
+Reuse the same page/presentation across multiple content items.
+
+== Introduction
+
+`Page template` is a built-in content type, and like <<pages#, pages>>, they are only available in the context of a site.
+
+One may use page templates to act as a base setup when creating new pages, but a more powerful application is to let editors control the presentation/page setup of structured content items like Articles.
+
+== Usage
+
+Editors work with, edit and publish page templates like any other content. Naturally, the main focus on a page template is setting up a page. 
+
+Just like for any other page, at least one <<pages#, page component>> must be available in order to actually build a page template.
+
+In addition to creating the page itself, editors may flag which content types the page template applies to.
+
+By specifying `Article` as the supported content type, the page template will be reused for rendering of all articles in the site.
+
+The idea is not that editors control the details of how the article itself is presented, but rather the surrounding compoents and layout structure of the page. As such, developer should provide specific components for rendering the actual article, and the editors may then place this component centrally within the page template.
+
+
+NOTE: A single `Article` may also be configured with a custom page, or flagged to use a specific page template. If so, this will override the page template defined above.
+
+== Rendering
+
+Page template rendering is built-in functionality when using the <<../framework/components#, Enonic Framework>>.
+
+If you are using a 3rd party front-end, you will have to ensure the same logic is also applied there.
+
+TIP: Also, check out our https://developer.enonic.com/docs/next.xp[Next.js integration], where page templates are supported out-of-the-box.

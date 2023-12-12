@@ -1,0 +1,79 @@
+= Visual page editor
+
+Content Studio offers a visual editing mode which is handy when working with pages and components.
+
+== Introduction
+
+To support visual editing in Content Studio's Page Editor, including drag'n drop, the page DOM must include annotations for regions and components.
+
+TIP: When using the <<../../framework/components#, Enonic framework>>, editor annotations are automatically injected into your markup.
+
+=== Region annotations
+
+Regions are represented by an element with the `data-portal-region` attribute, and a value matching the region name i.e. `main`.
+
+.Sample DOM annotating the main region
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Hello region</h1>
+    <div data-portal-region="main"/>
+  </body>
+</html>
+----
+
+NOTE: For an empty region dropzone to appear in the editor, a target element must be provided, like in the example above.
+
+
+=== Component annotations
+
+Components must be annotated with a special component-type annotation.
+
+The available values are: `layout`, `part`, `text`, and `fragment`
+
+
+.Sample DOM annotating two components
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Hello region</h1>
+    <div data-portal-region="main">
+      <div data-portal-component-type="text">..</div>
+      <div data-portal-component-type="part">..</div>
+    </div>
+  </body>
+</html>
+----
+
+=== Hierarchies
+
+Using layouts, you may create hierarchies of regions and components. For the page editor to work properly, the component elements must be be hierarchically structured within the page DOM. 
+
+The page editor uses this structure to identify the components by path.
+
+.Sample DOM structure with nested regions.
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Hello region</h1>
+    <div data-portal-region="main"/>
+     <div data-portal-component-type="layout">
+        <div data-portal-region="left"/>
+        <div data-portal-region="center"/>
+        <div data-portal-region="right"/>
+     </div>
+  </body>
+</html>
+----

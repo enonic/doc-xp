@@ -2,54 +2,92 @@
 :toc: right
 :imagesdir: images
 
-XP supports implementation of custom styles that can be applied to page elements for more advanced rendering capabilities.
+XP supports definition of custom styles for use in rich text content.
 
-Styles are defined inside an application and can be applied to page elements using
-https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor#custom_image_styles[Rich Text Editor] in Content Studio.
+== Introduction
 
-NOTE: As of now custom styles are supported only for `<img>` elements.
+Styles are used to add effects and styling to elements of the
+https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor#custom_image_styles[Rich Text Editor].
 
-== Declaration
+Custom styles typically map to a CSS class for client-side styling. Image styles additionally support instructions for the image service, enabling image crops and filters to be applied server-side.
 
-=== Server-side processing
+NOTE: At the moment, custom styles are only supported for Images.
 
-Define a file called `styles.xml` in the `site` folder of your app.
+== Descriptor
 
-Each `image` field inside the root element declares a custom style for an `<img>` element, with corresponding `name` and style properties inside.
+The `styles.xml` file declares the custom styles for your app.
 
-./resources/site/styles.xml
+Example style definition:
+
+./src/main/resources/site/styles.xml
 [source,xml]
 ----
-include::code/styles.xml[]
+<styles css="styles/styles.css" xmlns="urn:enonic:xp:model:1.0"> // <1>
+  <image name="editor-image-cinema"> // <2>
+    <display-name>Cinema</display-name>
+    <aspect-ratio>21:9</aspect-ratio>
+  </image>
+  <image name="editor-image-sepia">
+    <display-name>Old photo</display-name>
+    <filter>sepia(25)</filter>
+  </image>
+</styles>
 ----
 
-=== Client-side processing
+<1> The optional `css` attribute references a file in your app's `/src/main/resources/assets/` folder. The CSS declared in this file will be loaded into Content Studio's rich text editor to provide client-side styling.
 
-Option attribute `css` on the root `styles` element allows mapping styles declares in this file with client-side CSS styles. In other words,
-you can have styles with only server-side processing, or only client-side processing, or combine both under the same style name.
-
-Define a file called `styles.css` inside `resources/assets` folder. It has to match the path in the `css` attribute of `styles` element
-in `styles.xml`. So, in case of `css="styles/styles.css"` the file has to be located at `resources/assets/styles/styles.css`.
+<2> Each `<image>` element declares a custom style that can be applied to images inserted in the rich text editor. 
++
+NOTE: As of now, `aspect-ratio` and `filter` are the only options available for server-side image processing.
 
 
-./resources/assets/styles/styles.css
+//== Output
+
+//TODO: HTML
+
+
+== Client side styles
+
+Below is an example CSS, declared within your application.
+
+The file will be loaded into Content Studio and the rich text editor, and provide client-side styling.
+
+./src/main/resources/assets/styles/styles.css
 [source,css]
 ----
-include::code/styles.css[]
+.editor-image-sepia {
+    width: 100px;
+    height: 100px;
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+
+.editor-image-sepia img {
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
 ----
 
-NOTE: All custom styles (no matter if they define server-side processing or client-side processing or combine both) must be defined in `styles.xml`.
+When looking at the two styles defined, only  `editor-image-sepia` is declared in the css, and thus makes use of both server-side processing and client-side styling in Content Studio.
 
-TIP: If you want to use client-side processing *only*, define a CSS file and add reference to it from `styles.xml` via `css` attribute (as described above).
-Don't include any additional properties inside `<image>` elements but make sure that class name in the CSS file matches `image.name`
-(like `editor-style-image-sepia` in `styles.xml` and `.editor-style-image-sepia` in `styles.css` from the example above).
+== Built-in styles
 
-== Image styles
+By default, XP comes with a built-in image style called `Original (no image processing)`. 
 
-By default, XP comes with one built-in image style called “_Original (no image processing)_”. By applying this style to the image, you'll make sure
-that the image won't undergo any processing on the server and will be rendered “as is”.
-
-The example above represents two styles - `editor-image-cinema` and `editor-style-image-sepia` - that apply server-side image processing.
-One of them, `editor-style-image-sepia`, will also apply client-side styling to the image processed on the server.
-
-NOTE: As of now, only `aspect-ratio` and `filter` are supported for server-side image processing.
+By applying this style to an image, the original image file will be served, without any processing.
