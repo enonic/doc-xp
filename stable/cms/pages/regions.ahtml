@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Application controller</title>
+<title>Components</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,11 +436,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Application controller</h1>
+<h1>Components</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#main_js">main.js</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#usage">Usage</a></li>
 </ul>
 </div>
 </div>
@@ -448,23 +450,71 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Application controller enables you to handle application lifecycle events.</p>
+<p>Regions let you create a hierarchy of components, for instance to build a page.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="main_js"><a class="link" href="#main_js">main.js</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Only one controller commonly used across all XP apps.
-This is known as the Application controller, or just "main.js".</p>
+<p>Regions enable editors to create complex component structures, such as pages.</p>
 </div>
 <div class="paragraph">
-<p>To add an Application controller to your project, simply create the following file in your project: <code>src/main/resources/main.js</code>.</p>
+<p>Only <a href="page.ahtml">page</a>and <a href="layout.ahtml">layout</a> component types can define regions. Each region must have a unique name within the component.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="definition"><a class="link" href="#definition">Definition</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Regions are declared statically. Below is a sample definition of a page component with a single region <code>main</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example - page component with a single region</div>
+<div class="content">
+<pre class="highlight"><code class="language-XML" data-lang="XML">&lt;page&gt;
+  &lt;display-name&gt;The main page&lt;/display-name&gt;
+  &lt;form/&gt;
+  &lt;regions&gt;
+    &lt;region name="main"/&gt;
+  &lt;/regions&gt;
+&lt;/page&gt;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The <code>main.js</code> invoked when application start occurs.
-A common use of this controller is initialization and registration of event listeners.</p>
+<p>And here is a layout defining three regions:</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample layout with three regions</div>
+<div class="content">
+<pre class="highlight"><code class="language-XML" data-lang="XML">&lt;layout&gt;
+  &lt;display-name&gt;The main page&lt;/display-name&gt;
+  &lt;form/&gt;
+  &lt;regions&gt;
+    &lt;region name="left"/&gt;
+    &lt;region name="middle"/&gt;
+    &lt;region name="right"/&gt;
+  &lt;/regions&gt;
+&lt;/layout&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Using Content Studio, this is what regions look like in the page form:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/component-input-type.png" alt="Component editor" width="527px">
+</div>
+</div>
+<div class="paragraph">
+<p>And here is what the the exact same structure might look like in the visual page editor.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -473,41 +523,61 @@ A common use of this controller is initialization and registration of event list
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>main.js</code> execution should complete as quickly as possible to prevent applications stalling.
-Don&#8217;t call remote endpoints or wait in loops for events inside <code>main.js</code> global scope.
+Ther dropzones are empty regions.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Simple example:</p>
-</div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Log application started
-log.info('Application ' + app.name + ' started');</code></pre>
+<img src="media/3-region-layout.png" alt="Layout with three empty regions" width="1012px">
 </div>
 </div>
 <div class="paragraph">
-<p>Running code on stop:</p>
+<p>&#8230;&#8203;and here is a JSON version of the same page, as retrived from the content API.</p>
 </div>
 <div class="listingblock">
+<div class="title">JSON from content api</div>
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Log application started
-log.info('Application ' + app.name + ' started');
-
-// Log when application is stopped
-__.disposer(function() {
-    log.info('Application ' + app.name + ' stopped');
-});</code></pre>
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">"page": {
+    "type": "page",
+    "path": "/",
+    "descriptor": "com.enonic.app.superhero:default",
+    "regions": {
+      "main": {
+        "components": [
+          {
+            "path": "/main/0",
+            "type": "layout",
+            "descriptor": "com.enonic.app.superhero:three-column",
+            "config": {},
+            "regions": {}
+          }
+        ],
+        "name": "main"
+      }
+    }
+  }</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Empty regions are not actually persisted, but the region name is part of the component path.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

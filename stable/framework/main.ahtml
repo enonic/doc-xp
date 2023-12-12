@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Untitled</title>
+<title>Main controller</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -434,15 +434,89 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-right">
 <div id="header">
+<h1>Main controller</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#main_js">main.js</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
-
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Handle application lifecycle events via the main controller.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="main_js"><a class="link" href="#main_js">main.js</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enonic apps may contain a special controller known as the Application controller, or just "main.js".</p>
+</div>
+<div class="paragraph">
+<p>Simply place the file <code>src/main/resources/main.js</code> into your project.</p>
+</div>
+<div class="paragraph">
+<p>The <code>main.js</code> invoked when application starts. A common use of this controller is initialization like creating repositories, and registration of event listeners.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>main.js</code> execution should complete as quickly as possible to prevent application stalling.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Never call remote endpoints or wait in loops for events inside <code>main.js</code> global scope.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you need to perform time consuming work in the main controller, consider implementing it as a <a href="task.ahtml">task</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Simple example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Log application start
+log.info('Application ' + app.name + ' started');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Running code on stop:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Log application stop
+__.disposer(function() {
+    log.info('Application ' + app.name + ' stopped');
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

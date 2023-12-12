@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Page contributions</title>
+<title>Application config</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,12 +436,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Page contributions</h1>
+<h1>Application config</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#contribution_merging">Contribution merging</a></li>
+<li><a href="#config_folder">Config folder</a></li>
+<li><a href="#config_file">Config file</a></li>
+<li><a href="#accessing_config">Accessing config</a></li>
 </ul>
 </div>
 </div>
@@ -449,31 +450,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Page contributions enable parts, layouts, macros and other controllers contribute content to the response HTML&#8217;s header or footer.</p>
-</div>
-<div class="paragraph">
-<p>Example use cases are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Let a part contribute JavaScript to the page&#8217;s <code>&lt;head&gt;</code> section.</p>
-</li>
-<li>
-<p>Let a part contribute custom CSS to the <code>&lt;head&gt;</code> of that page.</p>
-</li>
-<li>
-<p>A layout might add a JavaScript tracker to the end of the <code>&lt;body&gt;</code> of the page.</p>
-</li>
-</ul>
+<p>Applications may be configured via file.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<h2 id="config_folder"><a class="link" href="#config_folder">Config folder</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Contributions are typically used to add content to specific segments of the response HTML.</p>
+<p>Your development environment (aka sandbox), can read application-specific configurations files and provision this to each app. By default, it will scan the folder located in <code>$XP_HOME/config/</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -482,104 +467,68 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Page contributions will only be activated if the response type is <code>text/html</code> (which is the default)
+The config folder also contains the <a href="../deployment/config.ahtml">standard XP configuration files</a>.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>There are four positions in HTML where contributed content can be inserted:</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">headBegin</dt>
-<dd>
-<p>After the <code>&lt;head&gt;</code> opening tag.</p>
-</dd>
-<dt class="hdlist1">headEnd</dt>
-<dd>
-<p>Before the <code>&lt;/head&gt;</code> closing tag.</p>
-</dd>
-<dt class="hdlist1">bodyBegin</dt>
-<dd>
-<p>After the <code>&lt;body&gt;</code> opening tag.</p>
-</dd>
-<dt class="hdlist1">bodyEnd</dt>
-<dd>
-<p>Before the <code>&lt;/body&gt;</code> closing tag.</p>
-</dd>
-</dl>
+</div>
+<div class="sect1">
+<h2 id="config_file"><a class="link" href="#config_file">Config file</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Simply adding or updating a file called <code>&lt;appname&gt;.cfg</code> in the config folder will automatically restart your application, and provision the new configuration values.</p>
 </div>
 <div class="paragraph">
-<p>To use page contributions, your component needs to return a <code>pageContributions</code> property in it&#8217;s <a href="../framework/http.ahtml#http-response">HTTP response object</a>.
-The response might look like something like this (as always, the <code>return</code> goes at the end of your component&#8217;s controller):</p>
+<p>This is a hot restart, and will typically be very fast. XP itself does not need to be restarted.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">return {
-  body: '&lt;p&gt;Some markup&lt;/p&gt;',
-  pageContributions: {
-    headEnd: [
-      "&lt;script&gt;My script&lt;/script&gt;"
-    ]
-  }
-};</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Changing the <code>headEnd</code> to one of the other possible positions will affect where the code you contributed is added in the page&#8217;s HTML before returning it to the end-user.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample with multiple contributions</div>
-<div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">return {
-  "body": "&lt;div&gt;...&lt;/div&gt;",
-  "pageContributions": {
-    "headEnd": "value",
-    "bodyEnd": [
-      "value1", "value2"
-    ]
-  }
-};</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>All <code>pageContributions</code> fields are optional.</p>
-</li>
-<li>
-<p>Contribution values are treated as plain text.</p>
-</li>
-<li>
-<p>Values must be unique within each injection point, duplicates will be truncated.</p>
-</li>
-<li>
-<p>If the target tag does not exist in the response body, the contribution will be ignored. I.e. if there is no <code>&lt;head&gt;</code> tag, the contributions to <code>headBegin</code> and  <code>headEnd</code> will be ignored.</p>
-</li>
-<li>
-<p>For consistency, all positions are automatically treated arrays in the aggregated response object, even if there is only a single value.</p>
-</li>
-</ul>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you&#8217;re operating an XP cluster, the configuration file should be copied to every server node - this is because XP by default will run all applications on every node in the cluster.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="contribution_merging"><a class="link" href="#contribution_merging">Contribution merging</a></h2>
+<h2 id="accessing_config"><a class="link" href="#accessing_config">Accessing config</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Contributions are merged into the response body immediately after <a href="response-processors.ahtml">response processors</a>, and before <a href="mappings.ahtml">site mapping filters</a> get access to the response.</p>
+<p>Developers can easily access the application&#8217;s config via the JavaScript controllers.</p>
 </div>
 <div class="paragraph">
-<p>All contributions from the previous rendering steps will be merged into the response body.
-Any duplicate page contributions will automatically be removed, so developers do not have to worry about this.</p>
+<p>Given the following configuration file:</p>
+</div>
+<div class="paragraph">
+<p>&lt;appname&gt;.cfg</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">secretkey = 123456789</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The value can be optained using a single line of code:</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample JS controller</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">var myKey = app.config.secretkey;</code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

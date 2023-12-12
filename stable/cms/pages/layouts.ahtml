@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Mappings</title>
+<title>Layouts</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,18 +436,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Mappings</h1>
+<h1>Layouts</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a>
-<ul class="sectlevel2">
-<li><a href="#execution_order">Execution order</a></li>
-</ul>
-</li>
-<li><a href="#patterns">Patterns</a></li>
-<li><a href="#matches">Matches</a></li>
-<li><a href="#services">Services</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#rendering">Rendering</a></li>
 </ul>
 </div>
 </div>
@@ -455,7 +450,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Mappings enable the wiring of controllers or filters to site relative URL patterns, content matches, or specific service requests.</p>
+<p>Like page components, layouts support regions.</p>
 </div>
 </div>
 </div>
@@ -463,283 +458,58 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Mappings are executed at the very beginning of the site engine, and before the content rendering starts.
-Since mappings support both controllers and filters, the use cases are vast. Controllers will typically take over and handle the full request, while filters may process the request both at request and response level.</p>
+<p>Parts are leaf-nodes in the component structure. Parts are typically used in combination with forms, and have a vast range of application areas.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create a layout, place a descriptor file in your project, like this: `src/main/resources/site/layouts/&lt;layout-name&gt;/&lt;layout-name&gt;.xml.</p>
 </div>
 <div class="paragraph">
-<p>Use cases:
-* Map a controller to a specific URL pattern i.e. /mypath
-* Map a controller to a specifc set of content through content matches, i.e. only apply to the <code>portal:fragment</code> content type
-* Map a filter to parts of or the entire site structure</p>
-</div>
-<div class="paragraph">
-<p>Mapping are defined in the <a href="sites.ahtml#site_xml">site descriptor</a>.</p>
+<p>Similar to the page descriptor, the layout descriptor supports both schema and <a href="regions.ahtml">regions</a>.</p>
 </div>
 <div class="listingblock">
+<div class="title">Sample layout descriptor with three regions</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;mappings&gt;
-    &lt;mapping controller="/site/foobar/api.js" order="10"&gt; <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
-      &lt;pattern&gt;/api/v\d+/.*&lt;/pattern&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
-    &lt;/mapping&gt;
-    &lt;mapping controller="/site/pages/default/default.js"&gt;
-      &lt;match&gt;type:'portal:fragment'&lt;/match&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
-    &lt;/mapping&gt;
-    &lt;mapping filter="/site/foobar/filter.js" order="10"&gt;  <i class="conum" data-value="5"></i><b>(5)</b>
-      &lt;pattern invert="true"&gt;/dont-match-me/.*&lt;/pattern&gt;
-    &lt;/mapping&gt;
-    &lt;mapping filter="/site/services/image.js"&gt;  <i class="conum" data-value="6"></i><b>(6)</b>
-      &lt;service&gt;image&lt;/pattern&gt;
-    &lt;/mapping&gt;
-  &lt;/mappings&gt;
-  &lt;form/&gt;
-&lt;/site&gt;</code></pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;layout&gt;
+  &lt;display-name&gt;3 regions&lt;/display-name&gt;
+  &lt;form /&gt;
+  &lt;regions&gt;
+    &lt;region name="left"/&gt;
+    &lt;region name="main"/&gt;
+    &lt;region name="right"/&gt;
+  &lt;/regions&gt;
+&lt;/layout&gt;</code></pre>
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>@controller</strong> defines the path to a standard <a href="../framework/controllers.ahtml">HTTP controller</a></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>@order</strong> defines the <a href="#execution_order">Execution order</a> across apps. Default is <code>50</code>.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>&lt;pattern&gt;</strong> specifies a regular expression based site contextual URL <a href="#patterns">Patterns</a>. Default is <code>/.*</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>&lt;match&gt;</strong> a property condition to evaluate <a href="#matches">Matches</a> for the contextual content.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><strong>@filter</strong> defines the path to the <a href="../framework/filters.ahtml">HTTP filter</a></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><strong>@service</strong> specifies a service type endpoint request which will be handled by the filter (<code>&#8230;&#8203;/_/image/&#8230;&#8203;</code> endpoint).</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Each mapping may exclusively specify a filter OR a controller, and it must define at least one pattern or match setting.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="execution_order"><a class="link" href="#execution_order">Execution order</a></h3>
-<div class="paragraph">
-<p>An application can contain multiple mappings, and multiple applications can be added to a site.</p>
 </div>
 <div class="paragraph">
-<p>If two different apps within a site has the same mapping path or match expression,
-the mapping with the <strong>lower</strong> <code>order</code> value (as defined in the <a href="sites.ahtml#site_xml">site descriptor</a>) is used.</p>
+<p>Here is what an empty layout with tree regions might look like in Content Studio&#8217;s visual page editor:</p>
 </div>
-<div class="paragraph">
-<p>In case there are several mappings with the same <code>order</code> number,
-the position of the applications (as configured on the site) determines which mapping will be used.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/3-region-layout-wrapped.png" alt="Layout selected in the page editor" width="1012px">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="patterns"><a class="link" href="#patterns">Patterns</a></h2>
+<h2 id="rendering"><a class="link" href="#rendering">Rendering</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Pattern based mappings can for instance be used to take over the request for a specific URL before it reaches the content rendering.
-An example use case is exposing an API endpoint on the contextual URL /api, or triggering a filter to execute for every request within the site.</p>
+<p>Layouts can be rendered using your favorite front-end framework.</p>
 </div>
 <div class="paragraph">
-<p>The <code>&lt;pattern&gt;</code> element specifies a regular expression to be matched against the request URL.
-The part of the URL that is taken into account for the matching is the path relative to the site where the application is configured.
-For example, if a site is deployed via the virtual host <code>example.com/mysite/</code>, then the pattern <code>&lt;pattern&gt;/api/.<strong>&lt;/pattern&gt;</code> will match with requests with URL ending in <code>example.com/mysite/api/.</strong></code>
-The protocol, host and port are not involved in the pattern matching.</p>
-</div>
-<div class="paragraph">
-<p>If the pattern contains the question mark <code>?</code> character, the URL to match will also include query parameters.
-The query parameters will be normalized, so they are always in alphabetical order.</p>
-</div>
-<div class="paragraph">
-<p>For example the pattern <code>&lt;pattern&gt;/api\?category=foo&amp;key=\d+&lt;/pattern&gt;</code> will match with both:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>/api?category=foo&amp;key=123</code></p>
-</li>
-<li>
-<p>and <code>/api?key=123&amp;category=foo</code></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>In the previous example the question mark character <code>?</code> is escaped with a backslash because the question mark is a quantifier in regular expressions.
-And also the ampersand character <code>&amp;</code> needs to be XML-escaped because the pattern string is in an XML.
-Another alternative to XML-escape is to wrap the string in a CDATA block, as in the example below.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>A pattern element may also contain an <strong>@invert</strong> attribute to indicate that the result of evaluating the regular expression should be negated i.e.: <code>&lt;pattern invert="true"&gt;</code></p>
-</div>
-<div class="paragraph">
-<p>The pattern string must be a valid <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Java regular expression</a>.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Anything ending with .json within the /api/* path: <code>&lt;pattern&gt;/api/.*\.json&lt;/pattern&gt;</code></p>
-</li>
-<li>
-<p>All items within the site, including site itself: <code>&lt;pattern&gt;/.*&lt;/pattern&gt;</code></p>
-</li>
-<li>
-<p>Regular expression pattern: <code>&lt;pattern&gt;/endpoint\?bar=\d+&amp;foo=.*&lt;/pattern&gt;</code></p>
-</li>
-<li>
-<p>Regular expression encapsulated in CDATA to avoid XML encoding: <code>&lt;pattern&gt;&lt;![CDATA[/endpoint\?bar=\d+&amp;foo=.*]]&gt;&lt;/pattern&gt;</code></p>
-</li>
-<li>
-<p>Inverted with invert option enabled: <code>&lt;pattern invert="true"&gt;/section/.*&lt;/pattern&gt;</code></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Before <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span> it was not possible to map controller or filter to the site itself.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="matches"><a class="link" href="#matches">Matches</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Match based mappings can for instance be used to automatically render content types without using page templates or associating content with a controller directly.
-An example use case is automatic handling of the content type <code>portal:fragment</code>.</p>
-</div>
-<div class="paragraph">
-<p>The <code>&lt;match&gt;</code> element specifies a condition related to the content corresponding with the requested URL path.</p>
-</div>
-<div class="paragraph">
-<p>The condition takes the form of a property path followed by a <code>:</code>, and a value.</p>
-</div>
-<div class="paragraph">
-<p>The property path can be one of the content properties (<code>_id</code>, <code>_name</code>, <code>_path</code>, <code>type</code>, <code>displayName</code>, <code>hasChildren</code>, <code>language</code>, <code>valid</code>) or any other custom property within the content</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Match fragment content type: <code>&lt;match&gt;type:'portal:fragment'&lt;/match&gt;</code></p>
-</li>
-<li>
-<p>Match content within the features/ path: <code>&lt;match&gt;_path:'/features/.*'&lt;/match&gt;</code></p>
-</li>
-<li>
-<p>Match custom property with string value <code>&lt;match&gt;data.employee.type:'developer'&lt;/match&gt;</code></p>
-</li>
-<li>
-<p>Match custom property with a number: <code>&lt;match&gt;data.product.category:42&lt;/match&gt;</code></p>
-</li>
-<li>
-<p>Match custom property with a boolean: <code>&lt;match&gt;x.com-enonic-myapp.menuItem.show:true&lt;/match&gt;</code></p>
-</li>
-<li>
-<p>Match any content: <code>&lt;match&gt;type:'.+'&lt;/match&gt;</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The expected value can be either a regular expression to match the property value, or simply a string, number or boolean (<code>true</code> | <code>false</code>).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span> Missing/unavailable content does not match any condition.
-Don&#8217;t specify <code>&lt;match&gt;</code> if you need to map controller/filter to the URL that does not correspond to any content.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="services"><a class="link" href="#services">Services</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span></p>
-</div>
-<div class="paragraph">
-<p>Service-based mappings can be used to associate particular types of service requests with controllers or filters directly.</p>
-</div>
-<div class="paragraph">
-<p>Supported services: <code>image</code>, <code>attachment</code>, and <code>component</code>.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>&lt;service&gt;component&lt;/service&gt;</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Allows to filter or redirect to a controller rendering of contextual page components on URLs like <code>&lt;host&gt;:&lt;port&gt;/site/&lt;repo&gt;/&lt;branch&gt;/&lt;path-to-page&gt;/_/component/&lt;component-path&gt;</code></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>&lt;service&gt;image&lt;/service&gt;</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Allows to filter or redirect to a controller rendering of images on URLs like <code>&lt;host&gt;:&lt;port&gt;/site/&lt;repo&gt;/&lt;branch&gt;/&lt;path-to-content&gt;/_/image/&lt;image-path&gt;</code></p>
+<p>Visit the <a href="../../framework/components.ahtml">component rendering</a> section for details on rendering layouts with the Enonic Framework.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

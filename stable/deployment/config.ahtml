@@ -444,7 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#format">Format</a></li>
 <li><a href="#variables">Variables</a></li>
 <li><a href="#properties_vs_cfg">.properties vs .cfg</a></li>
-<li><a href="#custom_app_config">Custom app config</a></li>
+<li><a href="#custom_config">Custom config</a></li>
 <li><a href="#standard_config_files">Standard config files</a>
 <ul class="sectlevel2">
 <li><a href="#system_properties">System Properties</a></li>
@@ -546,7 +546,7 @@ Files ending with .properties require a full restart of the XP instance to be ap
 </div>
 </div>
 <div class="sect1">
-<h2 id="custom_app_config"><a class="link" href="#custom_app_config">Custom app config</a></h2>
+<h2 id="custom_config"><a class="link" href="#custom_config">Custom config</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To provide file based configuration to custom applications,
@@ -554,6 +554,9 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 </div>
 <div class="paragraph">
 <p>Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.</p>
+</div>
+<div class="paragraph">
+<p>For more details visit the <a href="../apps/config.ahtml">application config section</a>.</p>
 </div>
 </div>
 </div>
@@ -2436,7 +2439,7 @@ The value is set in percentage of total Java Heap, or in memory units (<code>mb<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

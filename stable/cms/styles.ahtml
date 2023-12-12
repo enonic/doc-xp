@@ -440,13 +440,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#declaration">Declaration</a>
-<ul class="sectlevel2">
-<li><a href="#server_side_processing">Server-side processing</a></li>
-<li><a href="#client_side_processing">Client-side processing</a></li>
-</ul>
-</li>
-<li><a href="#image_styles">Image styles</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#descriptor">Descriptor</a></li>
+<li><a href="#client_side_styles">Client side styles</a></li>
+<li><a href="#built_in_styles">Built-in styles</a></li>
 </ul>
 </div>
 </div>
@@ -454,11 +451,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP supports implementation of custom styles that can be applied to page elements for more advanced rendering capabilities.</p>
+<p>XP supports definition of custom styles for use in rich text content.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Styles are used to add effects and styling to elements of the
+<a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor#custom_image_styles">Rich Text Editor</a>.</p>
 </div>
 <div class="paragraph">
-<p>Styles are defined inside an application and can be applied to page elements using
-<a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor#custom_image_styles">Rich Text Editor</a> in Content Studio.</p>
+<p>Custom styles typically map to a CSS class for client-side styling. Image styles additionally support instructions for the image service, enabling image crops and filters to be applied server-side.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -467,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As of now custom styles are supported only for <code>&lt;img&gt;</code> elements.
+At the moment, custom styles are only supported for Images.
 </td>
 </tr>
 </table>
@@ -475,46 +480,68 @@ As of now custom styles are supported only for <code>&lt;img&gt;</code> elements
 </div>
 </div>
 <div class="sect1">
-<h2 id="declaration"><a class="link" href="#declaration">Declaration</a></h2>
+<h2 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="server_side_processing"><a class="link" href="#server_side_processing">Server-side processing</a></h3>
 <div class="paragraph">
-<p>Define a file called <code>styles.xml</code> in the <code>site</code> folder of your app.</p>
+<p>The <code>styles.xml</code> file declares the custom styles for your app.</p>
 </div>
 <div class="paragraph">
-<p>Each <code>image</code> field inside the root element declares a custom style for an <code>&lt;img&gt;</code> element, with corresponding <code>name</code> and style properties inside.</p>
+<p>Example style definition:</p>
 </div>
 <div class="listingblock">
-<div class="title">/resources/site/styles.xml</div>
+<div class="title">/src/main/resources/site/styles.xml</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;styles css="styles/styles.css" xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;image name="editor-image-cinema"&gt;
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;styles css="styles/styles.css" xmlns="urn:enonic:xp:model:1.0"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;image name="editor-image-cinema"&gt; <i class="conum" data-value="2"></i><b>(2)</b>
     &lt;display-name&gt;Cinema&lt;/display-name&gt;
     &lt;aspect-ratio&gt;21:9&lt;/aspect-ratio&gt;
   &lt;/image&gt;
-  &lt;image name="editor-style-image-sepia"&gt;
+  &lt;image name="editor-image-sepia"&gt;
     &lt;display-name&gt;Old photo&lt;/display-name&gt;
     &lt;filter&gt;sepia(25)&lt;/filter&gt;
   &lt;/image&gt;
 &lt;/styles&gt;</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The optional <code>css</code> attribute references a file in your app&#8217;s <code>/src/main/resources/assets/</code> folder. The CSS declared in this file will be loaded into Content Studio&#8217;s rich text editor to provide client-side styling.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Each <code>&lt;image&gt;</code> element declares a custom style that can be applied to images inserted in the rich text editor.
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of now, <code>aspect-ratio</code> and <code>filter</code> are the only options available for server-side image processing.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="client_side_processing"><a class="link" href="#client_side_processing">Client-side processing</a></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="client_side_styles"><a class="link" href="#client_side_styles">Client side styles</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Option attribute <code>css</code> on the root <code>styles</code> element allows mapping styles declares in this file with client-side CSS styles. In other words,
-you can have styles with only server-side processing, or only client-side processing, or combine both under the same style name.</p>
+<p>Below is an example CSS, declared within your application.</p>
 </div>
 <div class="paragraph">
-<p>Define a file called <code>styles.css</code> inside <code>resources/assets</code> folder. It has to match the path in the <code>css</code> attribute of <code>styles</code> element
-in <code>styles.xml</code>. So, in case of <code>css="styles/styles.css"</code> the file has to be located at <code>resources/assets/styles/styles.css</code>.</p>
+<p>The file will be loaded into Content Studio and the rich text editor, and provide client-side styling.</p>
 </div>
 <div class="listingblock">
-<div class="title">/resources/assets/styles/styles.css</div>
+<div class="title">/src/main/resources/assets/styles/styles.css</div>
 <div class="content">
-<pre class="highlight"><code class="language-css" data-lang="css">.editor-style-image-sepia {
+<pre class="highlight"><code class="language-css" data-lang="css">.editor-image-sepia {
     width: 100px;
     height: 100px;
     animation: shake 0.5s;
@@ -522,7 +549,7 @@ in <code>styles.xml</code>. So, in case of <code>css="styles/styles.css"</code> 
     animation-iteration-count: infinite;
 }
 
-.editor-style-image-sepia img {
+.editor-image-sepia img {
     animation: shake 0.5s;
     /* When the animation is finished, start again */
     animation-iteration-count: infinite;
@@ -543,64 +570,26 @@ in <code>styles.xml</code>. So, in case of <code>css="styles/styles.css"</code> 
 }</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-All custom styles (no matter if they define server-side processing or client-side processing or combine both) must be defined in <code>styles.xml</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you want to use client-side processing <strong>only</strong>, define a CSS file and add reference to it from <code>styles.xml</code> via <code>css</code> attribute (as described above).
-Don&#8217;t include any additional properties inside <code>&lt;image&gt;</code> elements but make sure that class name in the CSS file matches <code>image.name</code>
-(like <code>editor-style-image-sepia</code> in <code>styles.xml</code> and <code>.editor-style-image-sepia</code> in <code>styles.css</code> from the example above).
-</td>
-</tr>
-</table>
-</div>
+<div class="paragraph">
+<p>When looking at the two styles defined, only  <code>editor-image-sepia</code> is declared in the css, and thus makes use of both server-side processing and client-side styling in Content Studio.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="image_styles"><a class="link" href="#image_styles">Image styles</a></h2>
+<h2 id="built_in_styles"><a class="link" href="#built_in_styles">Built-in styles</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, XP comes with one built-in image style called “<em>Original (no image processing)</em>”. By applying this style to the image, you&#8217;ll make sure
-that the image won&#8217;t undergo any processing on the server and will be rendered “as is”.</p>
+<p>By default, XP comes with a built-in image style called <code>Original (no image processing)</code>.</p>
 </div>
 <div class="paragraph">
-<p>The example above represents two styles - <code>editor-image-cinema</code> and <code>editor-style-image-sepia</code> - that apply server-side image processing.
-One of them, <code>editor-style-image-sepia</code>, will also apply client-side styling to the image processed on the server.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As of now, only <code>aspect-ratio</code> and <code>filter</code> are supported for server-side image processing.
-</td>
-</tr>
-</table>
+<p>By applying this style to an image, the original image file will be served, without any processing.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

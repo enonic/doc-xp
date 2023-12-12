@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Virtual Applications</title>
+<title>Pages templates</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,12 +436,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Virtual Applications</h1>
+<h1>Pages templates</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel2">
-<li><a href="#structure">Structure</a></li>
-<li><a href="#application_mode">Application Mode</a></li>
+<ul class="sectlevel1">
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#rendering">Rendering</a></li>
 </ul>
 </div>
 </div>
@@ -449,91 +450,80 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.11.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.11.0</text></g></svg></span></p>
+<p>Reuse the same page/presentation across multiple content items.</p>
 </div>
-<div class="admonitionblock warning">
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>Page template</code> is a built-in content type, and like <a href="pages.ahtml">pages</a>, they are only available in the context of a site.</p>
+</div>
+<div class="paragraph">
+<p>One may use page templates to act as a base setup when creating new pages, but a more powerful application is to let editors control the presentation/page setup of structured content items like Articles.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Editors work with, edit and publish page templates like any other content. Naturally, the main focus on a page template is setting up a page.</p>
+</div>
+<div class="paragraph">
+<p>Just like for any other page, at least one <a href="pages.ahtml">page component</a> must be available in order to actually build a page template.</p>
+</div>
+<div class="paragraph">
+<p>In addition to creating the page itself, editors may flag which content types the page template applies to.</p>
+</div>
+<div class="paragraph">
+<p>By specifying <code>Article</code> as the supported content type, the page template will be reused for rendering of all articles in the site.</p>
+</div>
+<div class="paragraph">
+<p>The idea is not that editors control the details of how the article itself is presented, but rather the surrounding compoents and layout structure of the page. As such, developer should provide specific components for rendering the actual article, and the editors may then place this component centrally within the page template.</p>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This feature is <em>experimental</em>.
-It&#8217;s still under development design but is available for users to test and provide feedback.
+A single <code>Article</code> may also be configured with a custom page, or flagged to use a specific page template. If so, this will override the page template defined above.
 </td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rendering"><a class="link" href="#rendering">Rendering</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Virtual Applications allow to extend/override schemas and descriptors from usual bundled application or create a standalone application container. Applications, schemas and descriptors data are stored in nodes in separate <code>system.app</code> repository. Use <a href="../api/lib-app.ahtml">lib-app</a> to manipulate virtual applications.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="structure"><a class="link" href="#structure">Structure</a></h3>
-<div class="paragraph">
-<p>Node structure of a virtual application follows file structure inside the <code>site</code> folder of a bundled application:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-files" data-lang="files">virtual-app/
-    site/
-      content-types/
-      layouts/
-      mixins/
-      pages/
-      parts/
-      x-data/
-      site.xml
-      styles.xml</code></pre>
-</div>
+<p>Page template rendering is built-in functionality when using the <a href="../framework/components.ahtml">Enonic Framework</a>.</p>
 </div>
 <div class="paragraph">
-<p>Use <a href="../api/lib-schema.ahtml">lib-schema</a> to manipulate schemas and descriptors of virtual apps.</p>
+<p>If you are using a 3rd party front-end, you will have to ensure the same logic is also applied there.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Also, check out our <a href="https://developer.enonic.com/docs/next.xp">Next.js integration</a>, where page templates are supported out-of-the-box.
+</td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="application_mode"><a class="link" href="#application_mode">Application Mode</a></h3>
-<div class="paragraph">
-<p>Depending on app data and config, the application can work with its resources in different ways:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">VIRTUAL</dt>
-<dd>
-<p>Shows that only virtual application is present in the system and support of virtual apps is enabled.</p>
-</dd>
-<dt class="hdlist1">BUNDLED</dt>
-<dd>
-<p>Can be one of the next cases:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Only bundled application is present in the system.</p>
-</li>
-<li>
-<p>Both bundled and virtual applications are present, but bundled resources are configured to override virtual.</p>
-</li>
-<li>
-<p>Both bundled and virtual applications are present, but virtual app support is disabled via config.</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">AUGMENTED</dt>
-<dd>
-<p>Both bundled and virtual applications are present in the system and virtual resources override bundled.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Check the <a href="../deployment/config.ahtml#application">documentation</a> to find out how to configure application behaviour.</p>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

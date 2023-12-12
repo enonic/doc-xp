@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Response processors</title>
+<title>Sandboxes</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,14 +436,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Response processors</h1>
+<h1>Sandboxes</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#processors">Processors</a></li>
-<li><a href="#trigger">Trigger</a></li>
-<li><a href="#execution_order">Execution order</a></li>
+<li><a href="#download_distro">Download distro</a></li>
+<li><a href="#environment_variables">Environment variables</a></li>
 </ul>
 </div>
 </div>
@@ -451,7 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A response processor is a special filter that only runs at response time, earlier than other filters in the pipeline.</p>
+<p>Sandboxes are independent Enonic XP development environments</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -460,119 +458,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Consider using regular <a href="../framework/filters.ahtml">HTTP Filters</a> as an alternative if you are not planning to use <a href="contributions.ahtml">page contributions</a>.
+Using CLI, and sandbox may be created and started with the following commands: <code>enonic sandbox create</code>, <code>enonic sandbox sttart</code>.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Response processors are executed after the post processing steps, and before the contributions filter in the site engine pipeline.</p>
-</div>
-<div class="paragraph">
-<p>Common use cases for response processors are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Dynamically adding page contributions (i.e. script tags)</p>
-</li>
-<li>
-<p>Manipulation of the response i.e. headers or body</p>
-</li>
-</ul>
+<p>Below, we dive into details of manually setting up and starting sandboxes:</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="processors"><a class="link" href="#processors">Processors</a></h2>
+<h2 id="download_distro"><a class="link" href="#download_distro">Download distro</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To create a page processor, simply place a controller file in you project folder <code>src/main/resources/site/processors</code> i.e. <code>src/main/resources/site/processors/myprocessor.js</code></p>
+<p>Start by downloading an <a href="../deployment/distro.ahtml">Enonic XP distribution file</a>. This is essentially the software version of the Enonic XP platform.</p>
 </div>
 <div class="paragraph">
-<p>The controller must export a <code>responseProcessor</code>.
-The export receives the request and response objects as parameters and must return a response object as done in <a href="../framework/controllers.ahtml">HTTP Controllers</a>.</p>
-</div>
-<div class="paragraph">
-<p>Below is an example that dynamically adds a <code>bodyEnd</code> <a href="contributions.ahtml">page contribution</a> to the response.</p>
-</div>
-<div class="listingblock">
-<div class="title">processors/tracker.js</div>
-<div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">exports.responseProcessor = function (req, res) {
-    var trackingScript = '&lt;script src="http://some.cdn/js/tracker.js"&gt;&lt;/script&gt;';
-
-    // Check if contribution field exists, if not create it
-    var bodyEnd = res.pageContributions.bodyEnd;
-    if (!bodyEnd) {
-        res.pageContributions.bodyEnd = [];
-    }
-
-    // Add contribution
-    res.pageContributions.bodyEnd.push(trackingScript);
-
-    return res;
-};</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="trigger"><a class="link" href="#trigger">Trigger</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In order to actually be executed, the processor must be declared in the app&#8217;s <a href="sites.ahtml#site_xml">site descriptor</a>:</p>
-</div>
-<div class="listingblock">
-<div class="title">site.xml</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;processors&gt;
-    &lt;response-processor name="tracker" order="10"/&gt; <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;/processors&gt;
-  &lt;form/&gt;
-&lt;/site&gt;
-----</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>@name indicates name of the controller file</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>@order indicates execution order, as described below</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Response processors may change any of the values of the response object, that includes: HTTP status code, response body, HTTP headers, cookies and page contributions.
-It is also possible to return the response object received without any changes.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="execution_order"><a class="link" href="#execution_order">Execution order</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>An application may contain multiple processors.
-Multiple applications can be added to a Site.
-When a page is rendered, all processors are ordered and executed accordingly.</p>
-</div>
-<div class="paragraph">
-<p>The order of execution is determined by the <code>order</code> value (as defined in the <a href="sites.ahtml#site_xml">site descriptor</a>) combined with the order of the application list within the site.</p>
-</div>
-<div class="paragraph">
-<p>Processors with a <strong>lower</strong> order will be executed first (across all apps within the site).
-In case there are several filters with the same <code>order</code> number,
-the position of the applications (as configured on the site) determines the order of execution.</p>
+<p>Distros for your architecture can be downloaded from <a href="https://repo.enonic.com/service/rest/repository/browse/public/com/enonic/xp/">the Enonic repo</a>. Look for folders named <code>enonic-xp-&lt;architecture&gt;-sdk</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -581,17 +484,67 @@ the position of the applications (as configured on the site) determines the orde
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If <code>applyFilters</code> is set to <code>false</code> in the <a href="../framework/http.ahtml#http-response">response object</a>, the response processing will be stopped. Default value is <code>true</code>.
+Only distros ending with <code>sdk</code> are suitable for development purposes
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>After downloading and unzipping the distro, Enonic XP can be started on your local machine with the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>enonic-xp-&lt;architecture&gt;-sdk-&lt;version&gt;/bin/server.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where &lt;architecture&gt; and &lt;version&gt; must match the distro you downloaded.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="environment_variables"><a class="link" href="#environment_variables">Environment variables</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you wish to run multiple Sandboxes, this can be done by copying the <code>home</code> folder (located within your distro) to a new location. Then, use the <code>XP_HOME</code> environment variable to let XP know where to find it.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">XP_HOME</dt>
+<dd>
+<p>Defaults to the <code>home/</code> folder within the distro</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>To set these variables use one of the following approaches:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Linux/MacOS</dt>
+</dl>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>export XP_HOME=/path/to/home</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Windows</dt>
+</dl>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>set XP_HOME=c:\path\to\home</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

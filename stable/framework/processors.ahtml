@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Components</title>
+<title>Response Processors</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,38 +436,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Components</h1>
+<h1>Response Processors</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#regions">Regions</a></li>
-<li><a href="#pages">Page</a>
-<ul class="sectlevel2">
-<li><a href="#page_descriptor">Page descriptor</a></li>
-<li><a href="#page_controller">Page controller</a></li>
-</ul>
-</li>
-<li><a href="#layout">Layout</a>
-<ul class="sectlevel2">
-<li><a href="#descriptor">Descriptor</a></li>
-<li><a href="#controller">Controller</a></li>
-<li><a href="#view">View</a></li>
-</ul>
-</li>
-<li><a href="#part">Part</a>
-<ul class="sectlevel2">
-<li><a href="#descriptor_2">Descriptor</a></li>
-<li><a href="#controller_2">Controller</a></li>
-<li><a href="#custom_icon">Custom icon</a></li>
-</ul>
-</li>
-<li><a href="#text">Text</a></li>
-<li><a href="#fragment">Fragment</a>
-<ul class="sectlevel2">
-<li><a href="#creating_fragments">Creating fragments</a></li>
-</ul>
-</li>
-<li><a href="#image">Image</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#triggering">Triggering</a></li>
+<li><a href="#execution_order">Execution order</a></li>
 </ul>
 </div>
 </div>
@@ -475,54 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Any content item may be configured with a presentation - in the form of a page. Pages are editorially composed from one or more components.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="regions"><a class="link" href="#regions">Regions</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Regions are not strictly components themselves, but enable placement of components, kind of like a folder.
-Regions have a fixed name, that is known to the component the region belongs to.</p>
-</div>
-<div class="paragraph">
-<p>In Content Studio, regions are visually displayed as "dropzones" for components.</p>
-</div>
-<div class="paragraph">
-<p>To exist, regions must actually be defined within another component. This definition is placed within the application code.
-Only page and layout components support regions.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="pages"><a class="link" href="#pages">Page</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The page component is always the root entry of any component structure.
-A page component may define zero, one, or multiple regions. Each region must have a unique name.</p>
-</div>
-<div class="paragraph">
-<p>Conventionally, pages define a single region called "main".</p>
-</div>
-<div class="paragraph">
-<p>To create a page component you must create the following files and folders in your project structure:</p>
-</div>
-<div class="listingblock">
-<div class="title">page component project structure</div>
-<div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">/src/
-  main/
-    resources/
-      site/
-        pages/
-          &lt;page-name&gt;/
-            &lt;page-name&gt;.js
-            &lt;page-name&gt;.xml</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Replace &lt;component-name&gt; with your preferred name.</p>
+<p>A special filter, mainly used to inject page contributions.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -531,506 +460,156 @@ A page component may define zero, one, or multiple regions. Each region must hav
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The name you choose for a component will be used in the underlying data of the stored page. So choose your name wisely.
+Response processors are only available in the <a href="../runtime/engines/site-engine.ahtml">Site Engine</a>
 </td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="page_descriptor"><a class="link" href="#page_descriptor">Page descriptor</a></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The xml file placed in the component structure serves several purposes.</p>
+<p>Page processing occurs between the <code>component rendring</code> step, and the <code>contributions filter</code> in the <a href="../runtime/engines/site-engine.ahtml">site engine</a> pipeline.</p>
+</div>
+<div class="paragraph">
+<p>Response processors are commonly used by apps that need to inject &lt;&lt;<a href="contributions.ahtml">page contributions</a> without placing a component on the page.</p>
+</div>
+<div class="paragraph">
+<p>Use case examples are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Dynamically adding page contributions (i.e. script tags)</p>
+</li>
+<li>
+<p>General manipulation of the response markup i.e. headers or body (i.e. adding SEO tags).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Consider using regular <a href="filters.ahtml">HTTP Filters</a> for other use-cases.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Page contributions will only be triggered if the response type is <code>text/html</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create a processor, place a controller file in you project folder <code>src/main/resources/site/processors</code> i.e. <code>src/main/resources/site/processors/myprocessor.js</code></p>
+</div>
+<div class="paragraph">
+<p>The controller must export a <code>responseProcessor</code>. Like other <a href="filters.ahtml">filters</a>, responseProcessors receive both request and response objects.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example that dynamically adds a <code>bodyEnd</code> <a href="contributions.ahtml">page contribution</a> to the response.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example page descriptor</div>
+<div class="title">processors/tracker.js</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;page&gt;
-  &lt;display-name i18n="component.page.name"&gt;My first page&lt;/display-name&gt; <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;description&gt;Front page of our site&lt;/description&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
-  &lt;form/&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
-  &lt;regions&gt;
-    &lt;region name="main"/&gt;  <i class="conum" data-value="5"></i><b>(5)</b>
-  &lt;/regions&gt;
-&lt;/page&gt;</code></pre>
+<pre class="highlight"><code class="language-js" data-lang="js">exports.responseProcessor = function (req, res) {
+    var trackingScript = '&lt;script src="http://some.cdn/js/tracker.js"&gt;&lt;/script&gt;';
+
+    // Check if contribution field exists, if not create it
+    var bodyEnd = res.pageContributions.bodyEnd;
+    if (!bodyEnd) {
+        res.pageContributions.bodyEnd = [];
+    }
+
+    // Add contribution
+    res.pageContributions.bodyEnd.push(trackingScript);
+
+    return res;
+};</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="triggering"><a class="link" href="#triggering">Triggering</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To wire a processor into the execution pipeline, it must be declared in the app&#8217;s <a href="../cms/sites.ahtml#site_xml">site descriptor</a>, and the application must be added to the respective site.</p>
+</div>
+<div class="listingblock">
+<div class="title">site.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
+  &lt;processors&gt;
+    &lt;response-processor name="tracker" order="10"/&gt; <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;/processors&gt;
+  &lt;form/&gt;
+&lt;/site&gt;
+----</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>display-name</strong> provides a display name used by the editorial interface</td>
+<td>@name indicates name of the controller file</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>display-name/i18n</strong> optionally specify localization key</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>description</strong> Description field shown when creating a part in content studio</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>form</strong> allows the definition of a configuration form based on the <a href="schemas.ahtml">schema system</a></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><strong>region</strong> optionally specify regions for the page</td>
+<td>@order indicates execution order, as described below</td>
 </tr>
 </table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="page_controller"><a class="link" href="#page_controller">Page controller</a></h3>
 <div class="paragraph">
-<p>A page controller handles requests to the page. The controller is a required file written in JavaScript and must be
-named <code>[page-name].js</code>. A controller exports a method for each type of HTTP request that should be handled.
-The handle method has the request object as a parameter and returns the response object.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example page controller</div>
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// Handles a GET request
-exports.get = function(req) {}
-
-// Handles a POST request
-exports.post = function(req) {}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here&#8217;s a simple controller that acts on the <code>GET</code> request method.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example simple get request</div>
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">exports.get = function(req) {
-
-  return {
-    body: '&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;My first page&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;',
-    contentType: 'text/html'
-  };
-
-};</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Render-view</strong></p>
-</div>
-<div class="paragraph">
-<p>If you feel like concatenating strings to create an entire web page is a
-little too much hassle, Enonic XP also supports views. A view is rendered
-using a rendering engine; we currently support XSLT, Mustache and Thymeleaf
-rendering engines. This example will use Thymeleaf.</p>
-</div>
-<div class="paragraph">
-<p>To make a view, create a file <code>my-first-page.html</code> in the <code>view</code> folder.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example view file</div>
-<div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;My first page, with a view!&lt;/h1&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In our <code>[page-name].js</code> file, we will need to parse the view to a string for
-output. Here is where the Thymeleaf engine comes in. Using the Thymeleaf
-rendering engine is easy; here is how we do it.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example controller with thymeleaf</div>
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">var thymeleaf = require('/lib/thymeleaf');
-
-exports.get = function(req) {
-
-  // Resolve the view
-  var view = resolve('/site/view/my-first-page.html');
-
-  // Define the model
-  var model = {
-    name: "John Doe"
-  };
-
-  // Render a thymeleaf template
-  var body = thymeleaf.render(view, model);
-
-  // Return the result
-  return {
-    body: body,
-    contentType: 'text/html'
-  };
-
-};</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Unlike controllers and descriptors, view files can reside anywhere in your project
-and have any valid file name. This allows for code reuse as
-multiple page components can share the same view. If the view file is in the same
-folder as the page controller then it can be resolved with only the file name
-<code>resolve('file-name.html')</code>. Otherwise, the full path should be used, starting
-with a '/' as in the example above.</p>
-</div>
-<div class="paragraph">
-<p><strong>Dynamic-content</strong></p>
-</div>
-<div class="paragraph">
-<p>We can send dynamic content to the view from the controller via the <code>model</code>
-parameter of the <code>render</code> function. We then need to use the rendering engine
-specific syntax to render it. The controller file above passed a variable
-called <code>name</code> and here is how to extract its value in the view using
-Thymeleaf syntax.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;My first page, with a view!&lt;/h1&gt;
-    &lt;h2&gt;Hello &lt;span data-th-text="${name}"&gt;World&lt;/span&gt;&lt;/h2&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>More on how to use Thymeleaf can be found in <a href="https://www.thymeleaf.org/documentation.html">the official Thymeleaf documentation</a></p>
-</div>
-<div class="paragraph">
-<p><strong>Regions</strong></p>
-</div>
-<div class="paragraph">
-<p>To be able to add components like images, component parts, or text to a page via Content Studio&#8217;s page editor, we first need to create at least one region. Regions can be declared in the page descriptor. Each region will be referenced by name.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example regions in a [page].xml</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;page&gt;
-  &lt;display-name&gt;My first page&lt;/display-name&gt;
-  &lt;form /&gt;
-  &lt;regions&gt;
-    &lt;region name="main"/&gt;
-  &lt;/regions&gt;
-&lt;/page&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You will also need to handle regions in the controller.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example page controller using regions</div>
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">var portal = require('/lib/xp/portal');
-
-// Get the current content. It holds the context of the current execution
-// session, including information about regions in the page.
-var content = portal.getContent();
-
-// Include info about the region of the current content in the parameters
-// list for the rendering.
-var mainRegion = content.page.regions["main"];
-
-// Extend the model from previous example
-var model = {
-    name: "Michael",
-    mainRegion: mainRegion
-};</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To make the Page Editor understand that an element is a region, it needs an attribute called data-portal-region with value being name of the region.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example view using regions</div>
-<div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;My first page, with a view!&lt;/h1&gt;
-    &lt;h2&gt;Hello &lt;span data-th-text="${name}"&gt;World&lt;/span&gt;&lt;/h2&gt;
-    &lt;div data-portal-region="main"&gt;
-      &lt;div data-th-each="component : ${mainRegion.components}" data-th-remove="tag"&gt;
-        &lt;div data-portal-component="${component.path}" data-th-remove="tag" /&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>We can now use the Page Editor drag and drop interface to drag components into our page.</p>
-</div>
+<p>Response processors may change any of the values of the response object, that includes: HTTP status code, response body, HTTP headers, cookies and page contributions.
+It is also possible to return the response object received without any changes.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="layout"><a class="link" href="#layout">Layout</a></h2>
+<h2 id="execution_order"><a class="link" href="#execution_order">Execution order</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Layouts - like page components a made up from a descriptor and a controller.</p>
-</div>
-<div class="sect2">
-<h3 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h3>
-<div class="paragraph">
-<p>Like pages, layouts needs a descriptor. The file must be placed within the component structure as follows /resources/site/layout/[layout-name]/[layout-name].xml.</p>
+<p>An application may contain multiple processors.
+Multiple applications can be added to a Site.
+When a page is rendered, all processors are ordered and executed accordingly.</p>
 </div>
 <div class="paragraph">
-<p>Similar to the page descriptor, the layout descriptor defines regions, where other components may be placed.</p>
+<p>The order of execution is determined by the <code>order</code> value (as defined in the <a href="../cms/sites.ahtml#site_xml">site descriptor</a>) combined with the order of the application list within the site.</p>
 </div>
-<div class="listingblock">
-<div class="title">Example layout descriptor</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;layout&gt;
-  &lt;display-name&gt;70/30&lt;/display-name&gt;
-  &lt;form /&gt;
-  &lt;regions&gt;
-    &lt;region name="left"/&gt;
-    &lt;region name="right"/&gt;
-  &lt;/regions&gt;
-&lt;/layout&gt;</code></pre>
+<div class="paragraph">
+<p>Processors with a <strong>lower</strong> order will be executed first (across all apps within the site).</p>
 </div>
+<div class="paragraph">
+<p>In case there are several filters with the same <code>order</code> number, the position of the applications (as configured on the site) determines the order of execution.</p>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In addition to the standard configuration options, Content Studio supports <a href="https://developer.enonic.com/docs/content-studio/stable/editor/component-types#layout_component">custom filter definitions</a> that limit which content items a layout may be placed on.
+If <code>applyFilters</code> is set to <code>false</code> in the <a href="http.ahtml#http-response">response object</a>, the response processing will be stopped. Default value is <code>true</code>.
 </td>
 </tr>
 </table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="controller"><a class="link" href="#controller">Controller</a></h3>
-<div class="paragraph">
-<p>The JavaScript file responsible for rendering the layout.</p>
-</div>
-<div class="paragraph">
-<p>Like pages, the layout controller must be placed within the component structure as follows /resources/site/layouts/[layout-name]/[layout-name].js.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example layout controller</div>
-<div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var portal = require('/lib/xp/portal');
-var thymeleaf = require('/lib/thymeleaf');
-
-exports.get = function (req) {
-    var component = portal.getComponent();
-
-    return {
-        body: thymeleaf.render(resolve('./layout-70-30.html'), {
-            leftRegion: component.regions["left"],
-            rightRegion: component.regions["right"],
-        })
-    };
-
-};</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="view"><a class="link" href="#view">View</a></h3>
-<div class="paragraph">
-<p>Views are optional, but enable clean production of server-side markup for the component. The sample view below is created in Thymeleaf, but it could be created in any view engine that is supported.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example layout defined in Thymeleaf</div>
-<div class="content">
-<pre class="highlight"><code class="language-HTML" data-lang="HTML">&lt;div class="row"&gt;
-  &lt;div data-portal-region="left" class="col-sm-8"&gt;
-    &lt;div data-th-each="component : ${leftRegion.components}" data-th-remove="tag"&gt;
-      &lt;div data-portal-component="${component.path}" data-th-remove="tag" /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;div data-portal-region="right" class="col-sm-4" &gt;
-    &lt;div data-th-each="component : ${rightRegion.components}" data-th-remove="tag"&gt;
-      &lt;div data-portal-component="${component.path}" data-th-remove="tag" /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</div>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Markup generated for a layout must have a single root element.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="part"><a class="link" href="#part">Part</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Part components are similar to layouts, but do not support regions - making them leaf-nodes in a component structure.</p>
-</div>
-<div class="sect2">
-<h3 id="descriptor_2"><a class="link" href="#descriptor_2">Descriptor</a></h3>
-<div class="paragraph">
-<p>Like pages and layouts, parts needs a descriptor. The descriptor file must be placed within the component structure as follows /resources/site/parts/[part-name]/[part-name].xml.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example part descriptor</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;part&gt;
-  &lt;display-name&gt;Content List&lt;/display-name&gt;
-  &lt;form /&gt;
-&lt;/part&gt;</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-In addition to the standard configuration options, Content Studio supports <a href="https://developer.enonic.com/docs/content-studio/stable/editor/component-types#part_component">custom filter definitions</a> that limit which content items the part may be placed on.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="controller_2"><a class="link" href="#controller_2">Controller</a></h3>
-<div class="paragraph">
-<p>Just like pages and layouts, parts will need a controller in order to render properly.</p>
-</div>
-<div class="paragraph">
-<p>The controller file must be placed within the component structure as follows /resources/site/parts/[part-name]/[part-name].js.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Markup generated for a part must have a single root element.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="custom_icon"><a class="link" href="#custom_icon">Custom icon</a></h3>
-<div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.2.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.2.0</text></g></svg></span></p>
-</div>
-<div class="paragraph">
-<p>It&#8217;s possible to define a custom icon for part which then will be used instead of the default one in the Page Component tree and dropdowns with part descriptors.
-Simply place an icon (in either PNG or SVG format) with the same name as the descriptor schema into the same folder.
-For example, if folder/part is called <em>mypart</em> then part descriptor is called <em>mypart.xml</em> and the icon file should be called either <em>mypart.svg</em> or <em>mypart.png</em>.
-In the screenshots below parts "<em>HTML Area Example</em>" and "<em>Image filters test</em>" are using custom icons.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/part-component-1.png" alt="Part descrtiptor list" width="289">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/part-component-2.png" alt="Page Components tree" width="211">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="text"><a class="link" href="#text">Text</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Text component allows content editors to place and format text into any region of a page.</p>
-</div>
-<div class="paragraph">
-<p>Text components also support rich content such as Images and Macros</p>
-</div>
-<div class="paragraph">
-<p>The formatting and macro options are the same as those for the HtmlArea inputs that can be found in content types and other configuration forms in the Content Studio.</p>
-</div>
-<div class="paragraph">
-<p>Here is an example.  The blue box is a text component being edited:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/text-component.png" alt="Component list" width="1305px">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="fragment"><a class="link" href="#fragment">Fragment</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Fragments are essentially components stored as individual content.
-When a fragment is altered, the change is instantly visible on every page that uses it.
-This also adds a range of new possibilities when creating pages, such as time based publishing and permission control.</p>
-</div>
-<div class="sect2">
-<h3 id="creating_fragments"><a class="link" href="#creating_fragments">Creating fragments</a></h3>
-<div class="paragraph">
-<p>Fragments are essentially component instances that can be re-used across pages. A fragment can be created from any component on a given page.</p>
-</div>
-<div class="paragraph">
-<p>A fragment is saved as a separate content instance, which means it can be managed and published like any other content item.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/fragment-component.png" alt="Component list" width="578px">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="image"><a class="link" href="#image">Image</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Image comonent is <strong>deprecated</strong> and will be removed in XP 8.0. Use "Insert Image" feature of the Text Component instead.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The Image component allows content editors to place an image into any region on a page without writing any code.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/image-component.png" alt="Component list" width="1305px">
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

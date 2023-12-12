@@ -19,16 +19,24 @@
       "document": "apps",
       "menuItems": [
         {
-          "title": "Projects",
-          "document": "apps/projects"
+          "title": "Sandboxes",
+          "document": "apps/sandboxes"
         },
         {
-          "title": "Build System",
-          "document": "apps/build-system"
+          "title": "Code",
+          "document": "apps/code"
         },
         {
-          "title": "Virtual Applications",
-          "document": "apps/virtual-applications"
+          "title": "Building",
+          "document": "apps/build"
+        },
+        {
+          "title": "Configuration",
+          "document": "apps/config"
+        },
+        {
+          "title": "Virtual apps",
+          "document": "apps/virtual"
         }
       ]
     },
@@ -173,20 +181,42 @@
           "document": "cms/sites"
         },
         {
-          "title": "Page Components",
-          "document": "cms/components"
+          "title": "Pages",
+          "document": "cms/pages",
+          "menuItems": [
+            {
+              "title": "Regions",
+              "document": "cms/pages/regions"
+            },
+            {
+              "title": "Parts",
+              "document": "cms/pages/parts"
+            },
+            {
+              "title": "Layouts",
+              "document": "cms/pages/layouts"
+            },
+            {
+              "title": "Text component",
+              "document": "cms/pages/text"
+            },
+            {
+              "title": "Fragments",
+              "document": "cms/pages/fragments"
+            },
+            {
+              "title": "Filtering",
+              "document": "cms/pages/filtering"
+            },
+            {
+              "title": "Visual editor",
+              "document": "cms/pages/editor"
+            }         
+          ]
         },
         {
-          "title": "Contributions",
-          "document": "cms/contributions"
-        },
-        {
-          "title": "Mappings",
-          "document": "cms/mappings"
-        },
-        {
-          "title": "Response Processors",
-          "document": "cms/response-processors"
+          "title": "Page templates",
+          "document": "cms/page-templates"
         }
       ]
     },
@@ -233,6 +263,30 @@
         {
           "title": "Localization",
           "document": "framework/i18n"
+        },
+        {
+          "title": "Mappings",
+          "document": "framework/mappings"
+        },
+        {
+          "title": "Components",
+          "document": "framework/components"
+        },
+        {
+          "title": "Processors",
+          "document": "framework/processors"
+        },
+        {
+          "title": "Contributions",
+          "document": "framework/contributions"
+        },
+        {
+          "title": "Templating",
+          "document": "framework/templating"
+        },
+        {
+          "title": "Main controller",
+          "document": "framework/main"
         },
         {
           "title": "Java bridge",

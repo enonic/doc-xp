@@ -441,25 +441,93 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
+<li><a href="#site_content_type">Site content type</a></li>
+<li><a href="#the_site_engine">The site engine</a></li>
 <li><a href="#site_xml">site.xml</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sites add support for building building pages, in addition to form-based content.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For a hands on introduction to sites and the concepts described here, visit the <a href="https://developer.enonic.com/docs/my-first-site">My first site tutorial</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A highly central component of the XP CMS are sites.
-Site is shipped as a standard content type, which means it can easily be created and added by editors.
-Sites can also have applications assigned to them. Site applications are isolated from <a href="projects.ahtml">project</a> applications. If a site should use an application already assigned to its project, you must assign the application directly to the site.</p>
+<p>Sites unlock powerful functionality for managing websites and creating visually oriented content like <a href="pages.ahtml">pages</a>, <a href="page-templates.ahtml">page templates</a> and <a href="fragments.ahtml">fragments</a>.</p>
 </div>
 <div class="paragraph">
-<p>Whenever an app is added to a site, all functionality and all content types from the app will be available within the scope of the site.</p>
+<p>Similar to content projects, you may add applications to a site. For sites however, purpose-specific applications like sitemap.xml, robots.txt, Google Analytics, SEO Metafields, and Siteimprove introduce features and management capabilities beyond that of basic content.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="site_content_type"><a class="link" href="#site_content_type">Site content type</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>Site</code> is a built-in content type, which means a site can easily be created anywhere in your content structure.</p>
 </div>
 <div class="paragraph">
-<p>Only applications that declare support for sites can be added.
-This is done via the descriptor file called site.xml</p>
+<p>Site content items are special in the way that you may add applications to them. Similar to projects, functionality and schemas from the app will be available in the scope of the site.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Apps added to <a href="projects.ahtml">a project</a> will not apply to a site, unless explicitly added there as well.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the_site_engine"><a class="link" href="#the_site_engine">The site engine</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When rendering sites and pages with the Enonic framework, request handling and resolving is performed by the <a href="../runtime/engines/site-engine.ahtml">site engine</a>. It offers site-specific capabilities and request handling such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access control (based on content permissions)</p>
+</li>
+<li>
+<p>Controller resolving (via page or mappings)</p>
+</li>
+<li>
+<p><a href="sites/regions.ahtml">Component rendering</a> (directly or via placeholders)</p>
+</li>
+<li>
+<p><a href="../framework/contributions.ahtml">Page contributions</a></p>
+</li>
+<li>
+<p><a href="../framework/processors.ahtml">Response processors</a></p>
+</li>
+<li>
+<p>and the <a href="../runtime/engines/site-engine/image-service.ahtml">The Image service</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -467,26 +535,32 @@ This is done via the descriptor file called site.xml</p>
 <h2 id="site_xml"><a class="link" href="#site_xml">site.xml</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The site form serves multiple purposes:</p>
+<p>Applications declare support for sites by including the site.xml descriptor file.</p>
+</div>
+<div class="paragraph">
+<p>This descriptor serves multiple purposes:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Declares that this app supports sites</p>
+<p>Declares that this app supports sites (and CMS projects)</p>
 </li>
 <li>
-<p>Lets you to configure the application on a per site basis</p>
+<p>Defines a form that lets you configure the application on a per site (or project) basis</p>
 </li>
 <li>
-<p>Defines <a href="x-data.ahtml">X-data</a> mappings for the site</p>
+<p>Define <a href="x-data.ahtml">X-data</a> mappings</p>
 </li>
 <li>
-<p>Defines bindings to Controllers as mappings and filters</p>
+<p>Define controller and filter <a href="../framework/mappings.ahtml">mappings</a>.</p>
+</li>
+<li>
+<p>Define <a href="../framework/processors.ahtml">response processors</a>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The descriptor must be placed in your project as: <code>src/main/resources/site/site.xml</code></p>
+<p>The descriptor must be placed in your app as: <code>src/main/resources/site/site.xml</code></p>
 </div>
 <div class="listingblock">
 <div class="title">Minimal site.xml example</div>
@@ -497,28 +571,28 @@ This is done via the descriptor file called site.xml</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Site.xml with all options enabled</div>
+<div class="title">Site.xml with all options in use</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;processors&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-    &lt;response-processor name="tracker" order="10"/&gt; <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;/processors&gt;
-  &lt;mappings&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-     &lt;mapping controller="/site/foobar/api.js" order="10"&gt;
-       &lt;pattern&gt;/api/v\d+/.*&lt;/pattern&gt;
-     &lt;/mapping&gt;
-     &lt;mapping controller="/site/pages/default/default.js"&gt;
-       &lt;match&gt;type:'portal:fragment'&lt;/match&gt;
-     &lt;/mapping&gt;
-   &lt;/mappings&gt;
-   &lt;x-data name="seo-settings"/&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
-   &lt;form&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
+  &lt;form&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
     &lt;input type="TextLine" name="company"&gt;
       &lt;label&gt;Company&lt;/label&gt;
       &lt;occurrences minimum="1" maximum="1"/&gt;
     &lt;/input&gt;
     &lt;mixin name="address"/&gt;
   &lt;/form&gt;
+  &lt;x-data name="seo-settings"/&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;mappings&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
+    &lt;mapping controller="/site/foobar/api.js" order="10"&gt;
+      &lt;pattern&gt;/api/v\d+/.*&lt;/pattern&gt;
+    &lt;/mapping&gt;
+    &lt;mapping controller="/site/pages/default/default.js"&gt;
+      &lt;match&gt;type:'portal:fragment'&lt;/match&gt;
+    &lt;/mapping&gt;
+  &lt;/mappings&gt;
+  &lt;processors&gt;
+    &lt;response-processor name="tracker" order="10"/&gt; <i class="conum" data-value="4"></i><b>(4)</b> <i class="conum" data-value="5"></i><b>(5)</b>
+  &lt;/processors&gt;
 &lt;/site&gt;</code></pre>
 </div>
 </div>
@@ -526,19 +600,23 @@ This is done via the descriptor file called site.xml</p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Commonly used to add <a href="contributions.ahtml">page contributions</a> to the response</td>
+<td>Define a <a href="schemas.ahtml#forms">form</a> for this app. The form is used to create site specific configuration for the app.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Controller and filter <a href="mappings.ahtml">mappings</a> definitions</td>
+<td>Specify <a href="x-data.ahtml">X-data</a> fields to use within the site scope.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Specify <a href="x-data.ahtml">X-data</a> fields to add across content types within the site</td>
+<td>Controller and filter <a href="mappings.ahtml">mappings</a> definitions</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Define a <a href="./schemas.ahtml#forms">form</a> for this app. Used to add site specific configuration of the app</td>
+<td>Commonly used to add <a href="contributions.ahtml">page contributions</a> to the response</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The order is used to decide execution order if multiple applications and processors are added to a single site.</td>
 </tr>
 </table>
 </div>
@@ -547,7 +625,7 @@ This is done via the descriptor file called site.xml</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

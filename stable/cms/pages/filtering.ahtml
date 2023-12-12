@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Build system</title>
+<title>Component filtering</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,24 +436,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Build system</h1>
+<h1>Component filtering</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#gradle">Gradle</a>
-<ul class="sectlevel2">
-<li><a href="#dependencies">Dependencies</a></li>
-</ul>
-</li>
-<li><a href="#environment_variables">Environment variables</a></li>
-<li><a href="#gradle_wrapper">Gradle Wrapper</a>
-<ul class="sectlevel2">
-<li><a href="#building">Building</a></li>
-<li><a href="#deploying">Deploying</a></li>
-<li><a href="#development_mode">Development Mode</a></li>
-<li><a href="#continuous_building">Continuous building</a></li>
-</ul>
-</li>
+<li><a href="#usage">Usage</a></li>
 </ul>
 </div>
 </div>
@@ -461,170 +448,43 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Detailed insight in the standard XP build system</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-We recommend using <a href="https://developer.enonic.com/docs/enonic-cli">Enonic CLI</a> to control your builds by default.
-</td>
-</tr>
-</table>
+<p>Optionally limit which pages a component can be placed on.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="gradle"><a class="link" href="#gradle">Gradle</a></h2>
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, XP projects use <a href="https://gradle.org/">Gradle</a> as the main build tool. This is a highly flexible Java-based utility that builds on the popular Maven project tools and code repository structures.
-Enonic provides a Gradle plugin that greatly simplifies the build process. If you used the starter-vanilla project to initialize your project, you will have all the basic tools you need to get going.</p>
+<p>Some components are only relevant for selected content types. To limit which pages a component may be placed on, add an allow configuration to it:</p>
 </div>
-<div class="sect2">
-<h3 id="dependencies"><a class="link" href="#dependencies">Dependencies</a></h3>
-<div class="paragraph">
-<p>The <code>build.gradle</code> file located at your project root defines all the dependencies to other libraries.</p>
-</div>
-<div class="paragraph">
-<p>There are three standard scopes (keywords) used in the dependency list</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Compile (default gradle scope, compiles library and adds it to class path - standard for pure Java libraries)</p>
-</li>
-<li>
-<p>Include (XP custom scope that merges the content of the library and its dependencies with your project - any code in your project overwrites the library files)</p>
-</li>
-<li>
-<p>Webjar (Extracts the content of the specified Webjar - <a href="https://www.webjars.org/" class="bare">https://www.webjars.org/</a> - placing it into the assets folder, using the version number as root folder)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="environment_variables"><a class="link" href="#environment_variables">Environment variables</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The XP Home folder contains directories specific to a single XP instance.
-The home folder can be copied to multiple locations for developers working on multiple isolated projects.
-Enonic XP uses, by default, the <code>home</code> folder within your distribution as XP Home.</p>
-</div>
-<div class="paragraph">
-<p>Enonic XP uses, by default, the JDK/JRE within your distribution or the location of your Java installation is used as Java Home.
-Gradel uses, by default, the location of your Java installation is used as Java Home</p>
-</div>
-<div class="paragraph">
-<p>If you wish to change this behaviour, the following environment variables can be defined:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">XP_HOME</dt>
-<dd>
-<p>Defines the location of the home folder</p>
-</dd>
-<dt class="hdlist1">JAVA_HOME</dt>
-<dd>
-<p>Defines the location of Java</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>To set these variables use one of the following approaches:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Linux/MacOS</dt>
-</dl>
-</div>
-<div class="literalblock">
+<div class="listingblock">
+<div class="title">Limit part to specific content types</div>
 <div class="content">
-<pre>export XP_HOME=/path/to/home
-export JAVA_HOME=/path/to/xp-distro/jdk</pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;part&gt;
+  &lt;display-name&gt;My article part&lt;/display-name&gt;
+  &lt;form&gt;&lt;/form&gt;
+  &lt;config&gt;
+    &lt;allow-on-content-type&gt;my.cool.app:my-cool-type&lt;/allow-on-content-type&gt;
+    &lt;allow-on-content-type&gt;${app}:article*&lt;/allow-on-content-type&gt;
+  &lt;/config&gt;
+&lt;/part&gt;</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Windows</dt>
-</dl>
+<div class="paragraph">
+<p>You may also use regular expressions:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
+<div class="title">Advanced example using regular expression</div>
 <div class="content">
-<pre>set XP_HOME=c:\path\to\home
-set JAVA_HOME=c:\path\to\xp-distro\jdk</pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;part&gt;
+  &lt;display-name&gt;My article part&lt;/display-name&gt;
+  &lt;form&gt;&lt;/form&gt;
+  &lt;config&gt;
+    &lt;allow-on-content-type&gt;^(?!.*[:]post$).*$&lt;/allow-on-content-type&gt;
+  &lt;/config&gt;
+&lt;/part&gt;</code></pre>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="gradle_wrapper"><a class="link" href="#gradle_wrapper">Gradle Wrapper</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Gradle Wrapper is a file located in your projects root: <code>gradlew</code> for Linux/MacOS and <code>gradle.bat</code> for Windows.</p>
-</div>
-<div class="paragraph">
-<p>The wrapper will download all necessary files to run Gradle and execute project specific build commands.</p>
-</div>
-<div class="sect2">
-<h3 id="building"><a class="link" href="#building">Building</a></h3>
-<div class="paragraph">
-<p>Enonic CLI&#8217;s <code>enonic project build</code> command automatically wraps and invokes the Gradle Wrapper.</p>
-</div>
-<div class="paragraph">
-<p>With environment variables set, you may use Gradle directly to get the job done:</p>
-</div>
-<div class="paragraph">
-<p>From your project folder root execute the following command:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Enonic CLI</dt>
-<dd>
-<p><code>enonic project build</code></p>
-</dd>
-<dt class="hdlist1">OSX/Linux</dt>
-<dd>
-<p><code>./gradlew build</code></p>
-</dd>
-<dt class="hdlist1">Windows</dt>
-<dd>
-<p><code>gradlew.bat build</code></p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>The build will place any output artifacts in the project&#8217;s build/libs/ folder.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deploying"><a class="link" href="#deploying">Deploying</a></h3>
-<div class="paragraph">
-<p>To builds and deploy an app to your XP Home, make sure XP_HOME is defined and execute the following command</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Enonic CLI</dt>
-<dd>
-<p><code>enonic project deploy</code></p>
-</dd>
-<dt class="hdlist1">Linux/MacOS</dt>
-<dd>
-<p><code>./gradlew deploy</code></p>
-</dd>
-<dt class="hdlist1">Windows</dt>
-<dd>
-<p><code>gradlew.bat deploy</code></p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>The artifact is copied into the following location: <code>$XP_HOME/deploy</code>, where XP will automatically pick it up.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -633,117 +493,17 @@ set JAVA_HOME=c:\path\to\xp-distro\jdk</pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-XP apps deployed via file (locally) are presented with a small blue icon in the Applications tool in XP Admin.
+This restriction is only implemented in Content Studio, and will not be enforced by the API.
 </td>
 </tr>
 </table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="development_mode"><a class="link" href="#development_mode">Development Mode</a></h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>As the name implies, development mode is intended only for development use and should <em>not</em> be used in production. Doing so would cause both security and performance issues.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Enonic XP can be run in a special mode known as <em>development mode</em>. In this mode, XP will try to detect changes to your project source files, including JavaScript controllers and registered XML schemas. It does this by reading these files directly from their source locations instead of from the application <code>.jar</code> file.</p>
-</div>
-<div class="paragraph">
-<p>Because of the way XP reads source files directly in development mode, it has a few limitations:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Files that require any sort of compilation (including transpilation) are not detected unless you run a build process on the side. For instance, if you use TypeScript or JavaScript features that XP doesn&#8217;t support, these files won&#8217;t be picked up by default. To have XP detect them, run a separate build process on the side, such as either a <a href="#_continuous_building">continuous build</a> or a webpack build.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-XP uses the  Nashorn JavaScript engine for executing JavaScript. For an overview over what JavaScript features Nashorn supports, see <a href="https://kangax.github.io/compat-table/es6/#nashorn1_8">this feature table</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>If development mode does not work for you, try using <a href="#_continuous_building">continuous build mode</a> instead.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Development mode also disables some of XP&#8217;s caching mechanisms. To make the development workflow as smooth as possible, XP tries to invalidate caches for your static assets. This is to prevent you from getting stale resources so that what you see in the browser is always as up to date as possible.</p>
-</div>
-<div class="paragraph">
-<p>To activate development mode, use one of the following commands to start your sandbox:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Enonic CLI</dt>
-<dd>
-<p><code>enonic sandbox start --dev</code></p>
-</dd>
-<dt class="hdlist1">Linux/MacOS</dt>
-<dd>
-<p><code>$XP_INSTALL/bin/server.sh dev</code></p>
-</dd>
-<dt class="hdlist1">Windows</dt>
-<dd>
-<p><code>$XP_INSTALL/bin/server.sh dev</code></p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect2">
-<h3 id="continuous_building"><a class="link" href="#continuous_building">Continuous building</a></h3>
-<div class="paragraph">
-<p>Gradle also supports a <a href="https://docs.gradle.org/current/userguide/command_line_interface.html#sec:continuous_build">continuous build mode</a>.
-In continuous build mode, Gradle will monitor your project assets for changes and run a task you specify when something changes.</p>
-</div>
-<div class="paragraph">
-<p>Continuous builds come in handy when the changes you&#8217;re working on require a full compile and redeploy, such as when you&#8217;re working with Java or need to build/compile client-side assets with an external build tool (such as webpack).</p>
-</div>
-<div class="paragraph">
-<p>If you don&#8217;t need a full compile or don&#8217;t need to run external build tools, you may be better served by using <a href="#_development_mode">XP&#8217;s development mode</a>.</p>
-</div>
-<div class="paragraph">
-<p>To use continuous Gradle tasks, specify your task and pass the <code>--continuous</code> option. The following examples use the <code>deploy</code> task, but you can also use any other defined Gradle tasks:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Enonic CLI</dt>
-<dd>
-<p><code>enonic project gradle deploy --continuous</code></p>
-</dd>
-<dt class="hdlist1">Linux/MacOS</dt>
-<dd>
-<p><code>./gradlew deploy --continuous</code></p>
-</dd>
-<dt class="hdlist1">Windows</dt>
-<dd>
-<p><code>gradlew.bat deploy --continuous</code></p>
-</dd>
-</dl>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

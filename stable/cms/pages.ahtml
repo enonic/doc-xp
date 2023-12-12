@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Development and projects</title>
+<title>Pages and components</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,11 +436,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Development and projects</h1>
+<h1>Pages and components</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#project_structure">Project structure</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#page_component">Page component</a>
+<ul class="sectlevel2">
+<li><a href="#usage">Usage</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -448,178 +453,123 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>How are applications and libraries put together built and delivered</p>
+<p>Pages allow you to create rich visually oriented content.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="project_structure"><a class="link" href="#project_structure">Project structure</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The XP project structure is based on the <a href="https://maven.apache.org/">Maven</a> project structure.</p>
+<p>Pages and components are only available within sites.</p>
 </div>
 <div class="paragraph">
-<p>Below is an extensive version of a project structure, listing all standard folders and files that can be used</p>
+<p>Within a site, any content item (and thus any content type) may also be a page. Similar to how you may add <a href="x-data.ahtml">X-data</a> to any content.</p>
+</div>
+<div class="paragraph">
+<p>Pages are made up from from one or more components.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the page component, there are other component types such as <a href="pages/parts.ahtml">parts</a>, <a href="pages/layouts.ahtml">layouts</a>, <a href="pages/fragments.ahtml">fragments</a> and <a href="pages/text.ahtml">text</a>.</p>
+</div>
+<div class="paragraph">
+<p>Regions enable editors to create hierarchical components structures.</p>
+</div>
+<div class="paragraph">
+<p>Seen from Content Studio, a page, and it&#8217;s component structure might look like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/page-components.png" alt="Component editor" width="1440px">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="page_component"><a class="link" href="#page_component">Page component</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>At the root of every page, you will find the page component. Most sites only need a single page component, as this can be reused across all pages.</p>
+</div>
+<div class="paragraph">
+<p>In order to create pages, at least one page component must be defined for your site.</p>
+</div>
+<div class="paragraph">
+<p>To create a page component, add a component descriptor file to your project <code>src/main/resources/site/pages/&lt;page-name&gt;/&lt;page-name.xml&gt;</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The name you choose for a component will be used in the underlying data of the stored page. So choose your name wisely.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="usage"><a class="link" href="#usage">Usage</a></h3>
+<div class="paragraph">
+<p>To create a page component, place a descriptor file in your project: `src/main/resources/site/pages/&lt;page-name&gt;/&lt;page-name&gt;.xml.</p>
 </div>
 <div class="listingblock">
+<div class="title">Sample page descriptor</div>
 <div class="content">
-<pre class="highlight"><code class="language-files" data-lang="files">sample-project/
-  build.gradle
-  gradle.properties
-  gradlew
-  gradlew.bat
-  settings.gradle
-  src/
-    test/
-      java/
-    main/
-      java/
-      resources/
-        admin/
-          widgets/
-          tools/
-        application.svg
-        application.xml
-        assets/
-        error/
-        i18n/
-        idprovider/
-        main.js
-        services/
-        tasks/
-        site/
-          content-types/
-          layouts/
-          mixins/
-          pages/
-          parts/
-          processors/
-          x-data/
-          site.xml
-        webapp/</code></pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;page&gt;
+  &lt;display-name i18n="component.page.name"&gt;My first page&lt;/display-name&gt; <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;description&gt;Front page of our site&lt;/description&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
+  &lt;form/&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
+  &lt;regions&gt;
+    &lt;region name="main"/&gt;  <i class="conum" data-value="5"></i><b>(5)</b>
+  &lt;/regions&gt;
+&lt;/page&gt;</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Every file and folder has a specific function and purpose as described below:</p>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>display-name</strong> provides a display name used by the editorial interface</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>display-name/i18n</strong> optionally specify localization key</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>description</strong> Description field shown when creating a part in content studio</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>form</strong> allows the definition of a configuration form based on the <a href="schemas.ahtml">schema system</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><strong>region</strong> optionally specify <a href="pages/regions.ahtml">regions</a> for the page.
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A page component may define zero, to many regions. Conventionally, a page should at least define a single region called <code>main</code>.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">build.gradle</dt>
-<dd>
-<p><a href="https://gradle.org/">Gradle</a> script used by the <a href="build-system.ahtml">Build system</a> for building the application or library.</p>
-</dd>
-<dt class="hdlist1">gradle.properties</dt>
-<dd>
-<p>Build properties</p>
-</dd>
-<dt class="hdlist1">gradlew | gradlew.bat</dt>
-<dd>
-<p>Gradle wrapper file. Downloads and runs Gradle without having to install it manually.</p>
-</dd>
-<dt class="hdlist1">settings.gradle</dt>
-<dd>
-<p>Mandatory gradle file to boostrap the build process</p>
-</dd>
-<dt class="hdlist1">src/main/java/</dt>
-<dd>
-<p>Optional folder where you place Java code that might be included directly in the project.</p>
-</dd>
-<dt class="hdlist1">src/test/java/</dt>
-<dd>
-<p>Optional folder where you place Java test code.</p>
-</dd>
-<dt class="hdlist1">src/main/resources/</dt>
-<dd>
-<p>Non-Java files. The majority of XP project code goes here,</p>
-</dd>
-<dt class="hdlist1">admin/tools/</dt>
-<dd>
-<p>Admin tools are defined here. Tools are administrative apps listed in the admin console menu.</p>
-</dd>
-<dt class="hdlist1">admin/widgets/</dt>
-<dd>
-<p>Admin widgets are essentially user interface components that can be embedded within other admin tools.</p>
-</dd>
-<dt class="hdlist1">application.svg</dt>
-<dd>
-<p>Application icon in SVG format.</p>
-</dd>
-<dt class="hdlist1">application.xml</dt>
-<dd>
-<p>Application information in XML format.</p>
-</dd>
-<dt class="hdlist1">assets/</dt>
-<dd>
-<p>Publicly available static assets such as css and javascript. Assets are served by the <a href="../runtime/engines/asset-service.ahtml">asset service</a>.</p>
-</dd>
-<dt class="hdlist1">error/error.js</dt>
-<dd>
-<p>The application&#8217;s error handler</p>
-</dd>
-<dt class="hdlist1">main.js</dt>
-<dd>
-<p>Main controller executed every time an app is started.</p>
-</dd>
-<dt class="hdlist1">services/</dt>
-<dd>
-<p>Contains <a href="../runtime/engines/http-service.ahtml">Http services controllers</a></p>
-</dd>
-<dt class="hdlist1">i18n/</dt>
-<dd>
-<p>Short for internationalization, this folder contains <a href="../api/lib-i18n.ahtml">app localization files</a></p>
-</dd>
-<dt class="hdlist1">idprovider/</dt>
-<dd>
-<p><a href="../framework/idprovider.ahtml#part">ID Providers</a> application files are placed her</p>
-</dd>
-<dt class="hdlist1">tasks/</dt>
-<dd>
-<p>Contains <a href="../api/lib-task.ahtml">task controller</a> for running asynchronous jobs.</p>
-</dd>
-<dt class="hdlist1">site/site.xml</dt>
-<dd>
-<p>Contains <a href="../cms/sites.ahtml#site_xml">site configuration schema</a> and declares that the app can be added to sites</p>
-</dd>
-<dt class="hdlist1">site/content-types/</dt>
-<dd>
-<p><a href="../cms/content-types.ahtml">Content type</a> definition files.</p>
-</dd>
-<dt class="hdlist1">site/processors/</dt>
-<dd>
-<p>For post processing of HTML from pages.</p>
-</dd>
-<dt class="hdlist1">site/layouts/</dt>
-<dd>
-<p><a href="../cms/components.ahtml#layout">Layout controllers</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/mixins/</dt>
-<dd>
-<p><a href="../cms/schemas/mixins.ahtml">Reusable schemas</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/pages/</dt>
-<dd>
-<p><a href="../cms/components.ahtml#pages">Page controllers</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/parts/</dt>
-<dd>
-<p><a href="../cms/components.ahtml#part">Part controllers</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/x-data/</dt>
-<dd>
-<p><a href="../cms/x-data.ahtml">eXtra data</a> schemas.</p>
-</dd>
-<dt class="hdlist1">webapp/webapp.js</dt>
-<dd>
-<p>The <a href="../runtime.ahtml#webapp_js">Webapp</a> controller file</p>
-</dd>
-</dl>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>

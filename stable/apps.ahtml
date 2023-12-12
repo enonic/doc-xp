@@ -444,21 +444,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#enonic_market">Enonic Market</a></li>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#life_cycle">Life Cycle</a></li>
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#development">Development</a></li>
-<li><a href="#virtual_applications">Virtual Applications</a>
-<ul class="sectlevel2">
-<li><a href="#languages">Languages</a></li>
-<li><a href="#build_system">Build system</a></li>
-</ul>
-</li>
-<li><a href="#libraries">Libraries</a></li>
 <li><a href="#use_cases">Use cases</a>
 <ul class="sectlevel2">
-<li><a href="#web_apps">Web apps</a></li>
 <li><a href="#sites">Sites</a></li>
 <li><a href="#id_providers">ID providers</a></li>
 <li><a href="#tasks">Tasks</a></li>
+<li><a href="#web_apps">Web apps</a></li>
 <li><a href="#admin_tools">Admin tools</a></li>
 </ul>
 </li>
@@ -469,7 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Similar to an Operating System, Enonic XP supports development and deployment of applications.</p>
+<p>Schemas, code, and functionality is added to XP via applications.</p>
 </div>
 </div>
 </div>
@@ -477,12 +468,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Applications are standalone software executables that can be installed and run on top of Enonic XP.
-Applications are powered by the XP runtime, which also supports multiple applications running in the same instance.
-Once started, applications get access to the platform services, such as the NoSQL storage.</p>
+<p>Enonic apps are standalone software packages that can be installed and started on Enonic XP.</p>
 </div>
 <div class="paragraph">
-<p>A single application may offer many different capabilities, from web apps and cms specific functionality to low level OSGi services that can be used by other apps.</p>
+<p>Applications are powered by the <a href="runtime.ahtml">XP runtime</a>. This also means XP is capable of running multiple applications in a single instance.</p>
+</div>
+<div class="paragraph">
+<p>Once an application has started, it has access to all platform services, such as the <a href="storage.ahtml">NoSQL storage</a>.</p>
+</div>
+<div class="paragraph">
+<p>A single application may offer many different capabilities, from CMS schemas, to low level features like exposing services to other apps.</p>
+</div>
+<div class="paragraph">
+<p>Fundamentally, most of XP&#8217;s core software components are built like applications.</p>
 </div>
 </div>
 </div>
@@ -499,38 +497,26 @@ The marketplace also offers starter kits and software libraries that help you cr
 <h2 id="installation"><a class="link" href="#installation">Installation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are four ways, by default, to get your applications running on Enonic XP:</p>
+<p>There are four ways to get your applications running on Enonic XP:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Via Admin Interface</dt>
 <dd>
-<p>Applications can be manually installed through the admin tool "Applications", packaged with Enonic XP. The applications will be available for all nodes in an XP cluster.</p>
+<p>Applications can be manually installed through the admin tool "Applications", included with Enonic XP. Once installed, the applications will be available for all nodes in an XP cluster.</p>
 </dd>
 <dt class="hdlist1">Via Management API</dt>
 <dd>
-<p>Applications can be installed, in an automated way, through the Management API. The applications will be available for all nodes in an XP cluster.</p>
+<p>Applications can be installed through the Management API. The applications will be available for all nodes in an XP cluster. This approach is commonly used in a CI/CD setup.</p>
 </dd>
 <dt class="hdlist1">Via File system</dt>
 <dd>
-<p>File system deployment is most commonly used in development phases, but it can also be applied for specialized deployments scenarios. These applications will only be available on the local node and overrides already existing applications</p>
+<p>File system deployment is most commonly used during development, but it can also be applied for specialized deployment scenarios. Applications deployed on file will only be available on the local node, and overrides applications installed via other alternatives.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.11.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.11.0</text></g></svg></span></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Via API</dt>
-<dd>
-<p>Virtual applications can be created with <a href="#api/lib-app">applications API</a>. A virtual application can co-exist with a bundled application with the same key (<code>AUGMENTED</code> mode) or be stand-alone. For more details, check out the <a href="apps/virtual-applications.ahtml">virtual applications documentation</a>.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Consider a microservice style highly isolated and controlled deployment,
-you will bundle your app(s) together with the XP runtime and launch it as a separate instance.</p>
+<p>Consider a microservice style highly controlled setup where you bundle your app(s) together with the XP runtime and launch it as a separate instance.</p>
 </div>
 </div>
 </div>
@@ -539,19 +525,17 @@ you will bundle your app(s) together with the XP runtime and launch it as a sepa
 <div class="sectionbody">
 <div class="paragraph">
 <p>In addition to installing and uninstalling, XP applications may be started and stopped.
-This is referred to as the life cycle of the application.
-During the stop and start phases, applications themselves may execute custom code.</p>
+This is referred to as the life cycle of the application. During the stop and start phases, applications themselves may execute custom code.</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Starting</dt>
 <dd>
-<p>Once installed, applications are automatically started on all nodes.
-During the startup, if it exists, the application&#8217;s main.js script will be executed.</p>
+<p>Once installed, applications are automatically started on all nodes. During the startup, if it exists, the application&#8217;s main.js script will be executed.</p>
 </dd>
 <dt class="hdlist1">Stopping</dt>
 <dd>
-<p>Before uninstalled, applications are automatically stopped on all nodes.
+<p>Before uninstalling, applications are automatically stopped on all nodes.
 During the stopping, if it exists, the disposer of the application&#8217;s main.js script will be executed.</p>
 </dd>
 </dl>
@@ -559,102 +543,13 @@ During the stopping, if it exists, the disposer of the application&#8217;s main.
 </div>
 </div>
 <div class="sect1">
-<h2 id="configuration"><a class="link" href="#configuration">Configuration</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Applications can be configured with deployment specific settings per node in the cluster.
-The configuration will automatically be injected when the applications starts.</p>
-</div>
-<div class="paragraph">
-<p>Configuration files may be updated and will be accessible by the application, without restarting the XP nodes or even the applications.</p>
-</div>
-<div class="paragraph">
-<p>More info can be found under <code>Application configuration</code> in <a href="deployment/config.ahtml">Configuration Files</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="development"><a class="link" href="#development">Development</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To create an application you need to setup a project.
-Projects contain all code and configuration required to build the application.</p>
-</div>
-<div class="paragraph">
-<p>For more details, check out the <a href="apps/projects.ahtml">project reference documentation</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="virtual_applications"><a class="link" href="#virtual_applications">Virtual Applications</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.11.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.11.0</text></g></svg></span></p>
-</div>
-<div class="paragraph">
-<p>For more details, check out the <a href="apps/virtual-applications.ahtml">virtual applications documentation</a>.</p>
-</div>
-<div class="sect2">
-<h3 id="languages"><a class="link" href="#languages">Languages</a></h3>
-<div class="paragraph">
-<p>XP apps are powered by the <a href="runtime.ahtml">XP runtime</a>.</p>
-</div>
-<div class="paragraph">
-<p>Applications are primarily created with JavaScript.
-Server-side Javascript is made possible through our CommonJS based <a href="framework.ahtml">Javascript Framework</a></p>
-</div>
-<div class="paragraph">
-<p>XP applications can also make use of Java.
-Developers with special requirements may take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same instance.
-Learn more about <a href="./framework/java-bridge.ahtml">using Java in XP apps</a></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="build_system"><a class="link" href="#build_system">Build system</a></h3>
-<div class="paragraph">
-<p>By default, XP projects use the <a href="https://gradle.org">Gradle build system</a>.
-A range of XP specific libraries are also available on <a href="#enonic_market">Enonic Market</a>, in addition to the <a href="api.ahtml">standard libraries</a>, included in the release of Enonic XP.
-Front-end developers often make use of JavaScript specific build systems such as Webpack.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="libraries"><a class="link" href="#libraries">Libraries</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Enonic XP provides the concept of libraries in order to speed up development and re-use of functionality and code.
-Technically, libraries are very similar to applications, but the main difference is that a library cannot be installed and started by itself.
-So, a library may consist of all the same objects you find in applications - such as Assets, Content Types and HTTP Controllers - things you may need in an application.</p>
-</div>
-<div class="paragraph">
-<p>A number of standard libraries are available with the core XP release, check out: <a href="api.ahtml">Standard Libraries</a>. You will also find a wide range of libraries on the <a href="https://market.enonic.com/libraries">Enonic Market</a></p>
-</div>
-<div class="paragraph">
-<p>Libraries are added to your application by simply referring to them in your build script. Read more about this on our <a href="apps/build-system.ahtml">Build system</a> documentation.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="use_cases"><a class="link" href="#use_cases">Use cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are endless use cases for the XP platform, but the typical scenarios are listed below:</p>
-</div>
-<div class="sect2">
-<h3 id="web_apps"><a class="link" href="#web_apps">Web apps</a></h3>
-<div class="paragraph">
-<p>The JavaScript framework offers an easy way to build and to serve web applications.</p>
-</div>
-<div class="paragraph">
-<p>Read more about <a href="runtime.ahtml#webapp-engine">webapps and the webapp engine</a></p>
-</div>
+<p>There are endless use cases for the XP platform, but the most common scenarios are listed below:</p>
 </div>
 <div class="sect2">
 <h3 id="sites"><a class="link" href="#sites">Sites</a></h3>
-<div class="paragraph">
-<p>A unique feature of XP is the embedded Content Management capabilities.</p>
-</div>
 <div class="paragraph">
 <p>You may build applications that go from serving content from an API (Headless CMS)
 via traditional web sites to Hybrid CMS - offering the best of both worlds.</p>
@@ -682,10 +577,11 @@ via traditional web sites to Hybrid CMS - offering the best of both worlds.</p>
 <div class="sect2">
 <h3 id="id_providers"><a class="link" href="#id_providers">ID providers</a></h3>
 <div class="paragraph">
-<p>XP apps may also be used by ID providers.
-Once installed and configured, an ID provider application can join the request pipeline of other sites and applications,
-dynamically providing authentication and authorization when needed.
-There are multiple standard ID providers available on Enonic Market.</p>
+<p>XP apps may also be ID providers.
+Once installed and configured, an ID provider can join the request pipeline of other sites and applications, dynamically providing authentication and authorization as needed.</p>
+</div>
+<div class="paragraph">
+<p>There are multiple standard ID providers available on Enonic Market.</p>
 </div>
 <div class="paragraph">
 <p>Learn more about the <a href="iam.ahtml">identity and access management</a></p>
@@ -700,7 +596,16 @@ Tasks can be started and monitored via the the task API
 Tasks are made by adding one or more JavaScript controllers to your project.</p>
 </div>
 <div class="paragraph">
-<p>Read more about <a href="runtime.ahtml#task-engine">tasks and the task engine</a></p>
+<p>Read more about <a href="runtime/engines/task-engine.ahtml">tasks and the task engine</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="web_apps"><a class="link" href="#web_apps">Web apps</a></h3>
+<div class="paragraph">
+<p>The JavaScript framework offers an easy way to build and to serve web applications.</p>
+</div>
+<div class="paragraph">
+<p>Read more about <a href="runtime/engines/webapp-engine.ahtml">webapps and the webapp engine</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -719,7 +624,7 @@ Admin tools are created by adding one or more JavaScript controllers to your pro
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-07 15:45:51 UTC
+Last updated 2023-12-12 19:27:43 UTC
 </div>
 </div>
 </body>
