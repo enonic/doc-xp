@@ -23,29 +23,8 @@
           "document": "apps/virtual"
         }
       ]
-    },
+    },    
     {
-      "title": "Development",
-      "document": "dev",
-      "menuItems": [
-        {
-          "title": "Sandboxes",
-          "document": "dev/sandboxes"
-        },
-        {
-          "title": "Code",
-          "document": "dev/code"
-        },
-        {
-          "title": "Building",
-          "document": "dev/build"
-        },
-        {
-          "title": "Configuration",
-          "document": "dev/config"
-        }
-      ]
-    },    {
       "title": "CMS",
       "document": "cms",
       "menuItems": [
@@ -226,6 +205,28 @@
         {
           "title": "Page templates",
           "document": "cms/page-templates"
+        }
+      ]
+    },
+    {
+      "title": "Development",
+      "document": "dev",
+      "menuItems": [
+        {
+          "title": "Sandboxes",
+          "document": "dev/sandboxes"
+        },
+        {
+          "title": "Code",
+          "document": "dev/code"
+        },
+        {
+          "title": "Building",
+          "document": "dev/build"
+        },
+        {
+          "title": "Configuration",
+          "document": "dev/config"
         }
       ]
     },
