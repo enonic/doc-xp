@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Application development</title>
+<title>Sandboxes</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,19 +436,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Application development</h1>
+<h1>Sandboxes</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#languages">Languages</a></li>
-<li><a href="#project_structure">Project structure</a>
-<ul class="sectlevel2">
-<li><a href="#build_files">Build files</a></li>
-<li><a href="#general_resources">General resources</a></li>
-<li><a href="#java">Java</a></li>
-</ul>
-</li>
-<li><a href="#libraries">Libraries</a></li>
+<li><a href="#download_distro">Download distro</a></li>
+<li><a href="#starting_sandbox">Starting sandbox</a></li>
+<li><a href="#multiple_sandboxes">Multiple sandboxes</a></li>
 </ul>
 </div>
 </div>
@@ -456,16 +450,42 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Details on the project and code structure in Enonic apps and libraries</p>
+<p>Sandboxes are independent Enonic XP development environments</p>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Get started running. Use one of our <a href="https://market.enonic.com/starters">starters</a> to bootstrap your development project.
+Using CLI, and sandbox may be created and started with the following commands: <code>enonic sandbox create</code>, <code>enonic sandbox sttart</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Below, we dive into details of manually setting up and starting sandboxes:</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="download_distro"><a class="link" href="#download_distro">Download distro</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Start by downloading an <a href="../deployment/distro.ahtml">Enonic XP distribution file</a>. This is essentially the software version of the Enonic XP platform.</p>
+</div>
+<div class="paragraph">
+<p>Distros for your architecture can be downloaded from <a href="https://repo.enonic.com/service/rest/repository/browse/public/com/enonic/xp/">the Enonic repo</a>. Look for folders named <code>enonic-xp-&lt;architecture&gt;-sdk</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only distros ending with <code>sdk</code> are suitable for development purposes
 </td>
 </tr>
 </table>
@@ -473,247 +493,64 @@ Get started running. Use one of our <a href="https://market.enonic.com/starters"
 </div>
 </div>
 <div class="sect1">
-<h2 id="languages"><a class="link" href="#languages">Languages</a></h2>
+<h2 id="starting_sandbox"><a class="link" href="#starting_sandbox">Starting sandbox</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP apps are powered by the <a href="runtime.ahtml">XP runtime</a>.</p>
+<p>After downloading and unzipping the distro, Enonic XP can be started on your local machine with the following command:</p>
 </div>
-<div class="paragraph">
-<p>Enonic apps may consist of both server.-side and client-side code. They are primarily written in JavaScript/TypeScript.</p>
-</div>
-<div class="paragraph">
-<p>Server-side JavaScript must uses XP&#8217;s <a href="framework.ahtml">Javascript Framework</a></p>
-</div>
-<div class="paragraph">
-<p>Applications may also use of Java.
-Developers with special requirements can take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same platform instance.</p>
-</div>
-<div class="paragraph">
-<p>Learn more about <a href="./framework/java-bridge.ahtml">using Java in XP apps</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project_structure"><a class="link" href="#project_structure">Project structure</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The example structure below includes the standard files and folders for an Enonic application (or library).</p>
-</div>
-<div class="listingblock">
+<div class="literalblock">
 <div class="content">
-<pre class="highlight"><code class="language-files" data-lang="files">sample-project/
-  build.gradle
-  gradle.properties
-  gradlew
-  gradlew.bat
-  settings.gradle
-  src/
-    main/
-      java/
-      resources/
-        application.svg
-        application.xml
-        admin/
-          tools/
-          widgets/
-        assets/
-        error/
-        i18n/
-        idprovider/
-        main.js
-        services/
-        site/
-          site.xml
-          content-types/
-          layouts/
-          macros/
-          mixins/
-          pages/
-          parts/
-          processors/
-          x-data/
-        webapp/
-        tasks/
-    test/
-      java/</code></pre>
+<pre>enonic-xp-&lt;architecture&gt;-sdk-&lt;version&gt;/bin/server.sh</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Every file and folder has a specific function and purpose as described below:</p>
-</div>
-<div class="sect2">
-<h3 id="build_files"><a class="link" href="#build_files">Build files</a></h3>
-<div class="paragraph">
-<p>Enonic supports JS/TS based build tools like <a href="https://market.enonic.com/vendors/enonic/tsup-starter">TSUP</a> and <a href="https://market.enonic.com/vendors/enonic/webpack-starter">Webpack</a>, but relies on <a href="https://gradle.org/">Gradle</a> as the main builder.</p>
-</div>
-<div class="paragraph">
-<p>Visit the <a href="build.ahtml">build system section</a> for more details.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">build.gradle</dt>
-<dd>
-<p>Main build file</p>
-</dd>
-<dt class="hdlist1">gradle.properties</dt>
-<dd>
-<p>Build properties</p>
-</dd>
-<dt class="hdlist1">gradlew | /gradlew.bat</dt>
-<dd>
-<p>Gradle wrapper file. Downloads and runs Gradle without having to install it manually.</p>
-</dd>
-<dt class="hdlist1">settings.gradle</dt>
-<dd>
-<p>Mandatory file to boostrap the build process</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect2">
-<h3 id="general_resources"><a class="link" href="#general_resources">General resources</a></h3>
-<div class="paragraph">
-<p>The majority of Enonic specific code is placed within <code>src/main/resources/</code>:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">admin/tools/</dt>
-<dd>
-<p>Admin tools are defined here. Tools are administrative apps listed in the admin console menu.</p>
-</dd>
-<dt class="hdlist1">admin/widgets/</dt>
-<dd>
-<p>Admin widgets are essentially user interface components that can be embedded within other admin tools.</p>
-</dd>
-<dt class="hdlist1">application.svg</dt>
-<dd>
-<p>Application icon in SVG format. Should be in a square format.</p>
-</dd>
-<dt class="hdlist1">application.xml</dt>
-<dd>
-<p>Application information in XML format.</p>
-</dd>
-<dt class="hdlist1">assets/</dt>
-<dd>
-<p>Standard folder for serving of static assets, such as css and javascript. Assets are served by the <a href="../runtime/engines/asset-service.ahtml">asset service</a>.</p>
-</dd>
-<dt class="hdlist1">error/error.js</dt>
-<dd>
-<p>The <a href="../framework/error.ahtml">HTTP error handler</a></p>
-</dd>
-<dt class="hdlist1">main.js</dt>
-<dd>
-<p>The application&#8217;s <a href="../framework/main.ahtml">main controller</a>. Executed when an application starts and stops.</p>
-</dd>
-<dt class="hdlist1">services/</dt>
-<dd>
-<p>Contains <a href="../runtime/engines/http-service.ahtml">Http service controllers</a></p>
-</dd>
-<dt class="hdlist1">i18n/</dt>
-<dd>
-<p>Short for internationalization, this folder contains <a href="../api/lib-i18n.ahtml">app localization files</a></p>
-</dd>
-<dt class="hdlist1">idprovider/</dt>
-<dd>
-<p>The application may implement an <a href="../framework/idprovider.ahtml#part">ID Provider</a> here.</p>
-</dd>
-<dt class="hdlist1">tasks/</dt>
-<dd>
-<p>May contain <a href="../api/lib-task.ahtml">task controllers</a> for running asynchronous and background processing.</p>
-</dd>
-<dt class="hdlist1">site/site.xml</dt>
-<dd>
-<p>Contains <a href="../cms/sites.ahtml#site_xml">site configuration schema</a>, and declaring that the app can be added to projects and sites</p>
-</dd>
-<dt class="hdlist1">site/content-types/</dt>
-<dd>
-<p>Contains <a href="../cms/content-types.ahtml">Content type</a> definitions.</p>
-</dd>
-<dt class="hdlist1">site/processors/</dt>
-<dd>
-<p>For post processing of HTML response from pages built with the <a href="../framework.ahtml">Enonic JS framework</a>.</p>
-</dd>
-<dt class="hdlist1">site/layouts/</dt>
-<dd>
-<p><a href="../cms/sites/layouts.ahtml">Layout components</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/mixins/</dt>
-<dd>
-<p><a href="../cms/schemas/mixins.ahtml">Reusable schemas</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/macros/</dt>
-<dd>
-<p><a href="../cms/macros.ahtml">Rich text Macro components</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/pages/</dt>
-<dd>
-<p><a href="../cms/components.ahtml#pages">Page components</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/parts/</dt>
-<dd>
-<p><a href="../cms/components.ahtml#part">Part components</a> are placed here.</p>
-</dd>
-<dt class="hdlist1">site/x-data/</dt>
-<dd>
-<p><a href="../cms/x-data.ahtml">X-data schemas</a> are defined here</p>
-</dd>
-<dt class="hdlist1">webapp/webapp.js</dt>
-<dd>
-<p><a href="../runtime.ahtml#webapp_js">Webapp</a> based on the Enonic JS framework are placed here.</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect2">
-<h3 id="java"><a class="link" href="#java">Java</a></h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">/src/main/java/</dt>
-<dd>
-<p>Optionally place Java code here.</p>
-</dd>
-<dt class="hdlist1">/src/test/java/</dt>
-<dd>
-<p>Optionally place Java tests here.</p>
-</dd>
-</dl>
-</div>
+<p>Where &lt;architecture&gt; and &lt;version&gt; match the distro you downloaded.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="libraries"><a class="link" href="#libraries">Libraries</a></h2>
+<h2 id="multiple_sandboxes"><a class="link" href="#multiple_sandboxes">Multiple sandboxes</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic libraries are similar to applications, the main difference being that a library cannot be installed and started by itself.</p>
+<p>If you wish to run multiple Sandboxes, this can be done by copying the <code>home</code> folder (located within your distro) to a new location. Then, use the <code>XP_HOME</code> environment variable to let XP know where to find it.</p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Check out <a href="https://market.enonic.com/vendors/enonic/library-starter">the library starter</a> if you are planning to build your own library.
-</td>
-</tr>
-</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">XP_HOME</dt>
+<dd>
+<p>Defaults to the <code>$DISTRO_FOLDER/home/</code> folder</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>A library may consist of the same files and functionality you would find in an application - such as Assets, Content Types and JS controllers.</p>
+<p>To set these variables use one of the following approaches:</p>
 </div>
-<div class="paragraph">
-<p>Enonic libraries are added to your application by declaring a dependency in the <a href="apps/build.ahtml">build</a>.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Linux/MacOS</dt>
+</dl>
 </div>
-<div class="paragraph">
-<p>The core functionality of XP is exposed via standard libraries. Check out the <a href="../api.ahtml">Standard Libraries documentation</a>. You will also find additional libraries on <a href="https://market.enonic.com/libraries">Enonic Market</a></p>
+<div class="literalblock">
+<div class="content">
+<pre>export XP_HOME=/path/to/home</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Windows</dt>
+</dl>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>set XP_HOME=c:\path\to\home</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 23:07:48 UTC
+Last updated 2023-12-13 08:25:51 UTC
 </div>
 </div>
 </body>

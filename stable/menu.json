@@ -19,28 +19,33 @@
       "document": "apps",
       "menuItems": [
         {
-          "title": "Sandboxes",
-          "document": "apps/sandboxes"
-        },
-        {
-          "title": "Code",
-          "document": "apps/code"
-        },
-        {
-          "title": "Building",
-          "document": "apps/build"
-        },
-        {
-          "title": "Configuration",
-          "document": "apps/config"
-        },
-        {
           "title": "Virtual apps",
           "document": "apps/virtual"
         }
       ]
     },
     {
+      "title": "Development",
+      "document": "dev",
+      "menuItems": [
+        {
+          "title": "Sandboxes",
+          "document": "dev/sandboxes"
+        },
+        {
+          "title": "Code",
+          "document": "dev/code"
+        },
+        {
+          "title": "Building",
+          "document": "dev/build"
+        },
+        {
+          "title": "Configuration",
+          "document": "dev/config"
+        }
+      ]
+    },    {
       "title": "CMS",
       "document": "cms",
       "menuItems": [
