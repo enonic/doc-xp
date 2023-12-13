@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>API and core libraries</title>
+<meta name="author" content="This section offers detailed documentation on our APIs.">
+<title>Core API and libraries</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,17 +437,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>API and core libraries</h1>
+<h1>Core API and libraries</h1>
+<div class="details">
+<span id="author" class="author">This section offers detailed documentation on our APIs.</span><br>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#introduction">Introduction</a></li>
 <li><a href="#endpoints">Endpoints</a></li>
-<li><a href="#javascript_libraries">JavaScript libraries</a></li>
+<li><a href="#javascript_api">JavaScript API</a></li>
 <li><a href="#typescript_definitions">TypeScript definitions</a>
 <ul class="sectlevel2">
 <li><a href="#install">Install</a></li>
-<li><a href="#use">Use</a></li>
+<li><a href="#libraries">Libraries</a></li>
+<li><a href="#usage">Usage</a></li>
 <li><a href="#configuration">Configuration</a></li>
+<li><a href="#beans">Beans</a></li>
 </ul>
 </li>
 <li><a href="#javadoc">JavaDoc</a></li>
@@ -454,11 +461,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP provides multiple interfaces, from web endpoints, via Javascript libraries to the core Java API.
-This section offers detailed documentation on all our APIs.</p>
+<p>Enonic XP provides multiple APIs, from web endpoints, via Core Javascript libraries to the Java API.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -467,7 +474,7 @@ This section offers detailed documentation on all our APIs.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Looking for our <strong>Headless CMS GraphQL API?</strong> It is available as an <a href="https://developer.enonic.com/docs/guillotine/stable">application library</a>. To give it a quick spin, launch a cloud trial or check out the <a href="https://developer.enonic.com/guides/headless-cms-intro">headless CMS introduction guide</a>
+Looking for our <strong>Headless CMS GraphQL API?</strong> To give it a quick spin, <a href="https://www.enonic.com/sign-up">sign up for a Free Plan</a> or visit the <a href="https://developer.enonic.com/start">Developer quickstart</a>.
 </td>
 </tr>
 </table>
@@ -478,18 +485,18 @@ Looking for our <strong>Headless CMS GraphQL API?</strong> It is available as an
 <h2 id="endpoints"><a class="link" href="#endpoints">Endpoints</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are two endpoints for calling REST-methods: Management and Statistics.
-These provide many options for querying the server and executing commands to manage the data.</p>
+<p>The <a href="#Runtime">[Runtime]</a> provides access to various <a href="runtime/engines.ahtml">HTTP engines and services</a>, including the <a href="runtime/management.ahtml">Management API</a> and the <a href="runtime/statistics.ahtml">statistics API</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="javascript_libraries"><a class="link" href="#javascript_libraries">JavaScript libraries</a></h2>
+<h2 id="javascript_api"><a class="link" href="#javascript_api">JavaScript API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP comes with a large number of build in JavaScript libraries for developing websites.
-Some are straight helper classes, other provide interaction with the data in the site.
-Please check out all of them in the submenu.</p>
+<p>XP ships with a large number of build in JavaScript libraries that can be accessed when <a href="dev.ahtml">developing Enonic apps</a>. These are listed below this page in the documentation menu.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively browse our <a href="https://developer.enonic.com/jsdoc">JSDocs</a>.</p>
 </div>
 </div>
 </div>
@@ -501,8 +508,9 @@ Please check out all of them in the submenu.</p>
 <div class="paragraph">
 <p>To add types for corresponding library use NPM (or similar package manager) and install them as any other dependency. All types can be found under <a href="https://www.npmjs.com/org/enonic-types">@enonic-types</a> organisation on NPM.</p>
 </div>
-<div class="sect3">
-<h4 id="libraries"><a class="link" href="#libraries">Libraries</a></h4>
+</div>
+<div class="sect2">
+<h3 id="libraries"><a class="link" href="#libraries">Libraries</a></h3>
 <div class="paragraph">
 <p>For example, you have a <code>lib-auth</code> gradle dependency:</p>
 </div>
@@ -519,7 +527,6 @@ Please check out all of them in the submenu.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">npm i --save-dev @enonic-types/lib-auth</code></pre>
-</div>
 </div>
 </div>
 <div class="sect3">
@@ -568,8 +575,9 @@ Please check out all of them in the submenu.</p>
 <pre class="highlight"><code class="language-bash" data-lang="bash">import type {Content} from '@enonic-types/core';</code></pre>
 </div>
 </div>
-<div class="sect4">
-<h5 id="content"><a class="link" href="#content">Content</a></h5>
+</div>
+<div class="sect3">
+<h4 id="content"><a class="link" href="#content">Content</a></h4>
 <div class="paragraph">
 <p><code>Content</code> contains the <code>x</code> property that has a very special <code>XpXData</code> type.</p>
 </div>
@@ -591,8 +599,8 @@ Please check out all of them in the submenu.</p>
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="additional_types"><a class="link" href="#additional_types">Additional types</a></h5>
+<div class="sect3">
+<h4 id="additional_types"><a class="link" href="#additional_types">Additional types</a></h4>
 <div class="paragraph">
 <p><code>Content</code> is a complex type that contains unions and maps that are not exported but may be needed during the development. Actually, these types can easily be retrieved from the <code>Content</code> itself:</p>
 </div>
@@ -609,9 +617,8 @@ type Workflow = Content['workflow'];</code></pre>
 </div>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="use"><a class="link" href="#use">Use</a></h3>
+<h3 id="usage"><a class="link" href="#usage">Usage</a></h3>
 <div class="sect3">
 <h4 id="require"><a class="link" href="#require">require</a></h4>
 <div class="paragraph">
@@ -669,8 +676,9 @@ type Workflow = Content['workflow'];</code></pre>
 }</code></pre>
 </div>
 </div>
-<div class="sect4">
-<h5 id="other_imports"><a class="link" href="#other_imports">Other imports</a></h5>
+</div>
+<div class="sect3">
+<h4 id="other_imports"><a class="link" href="#other_imports">Other imports</a></h4>
 <div class="paragraph">
 <p>If you want to use custom import functions, like <code><em>non_webpack_require</em></code> with Webpack, just use <code>XpRequire</code> from <code>global</code> types for this:</p>
 </div>
@@ -681,8 +689,8 @@ type Workflow = Content['workflow'];</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="beans"><a class="link" href="#beans">Beans</a></h4>
+<div class="sect2">
+<h3 id="beans"><a class="link" href="#beans">Beans</a></h3>
 <div class="paragraph">
 <p>To create a new Java bean, the <code>__.newBean()</code> function must be used. Making it return a proper type can be done in two ways. Let&#8217;s say, you have created an interface for that bean somewhere in your project:</p>
 </div>
@@ -693,8 +701,8 @@ type Workflow = Content['workflow'];</code></pre>
 }</code></pre>
 </div>
 </div>
-<div class="sect4">
-<h5 id="option_1"><a class="link" href="#option_1">Option 1</a></h5>
+<div class="sect3">
+<h4 id="option_1"><a class="link" href="#option_1">Option 1</a></h4>
 <div class="paragraph">
 <p>You can pass the type argument explicitly. This option is a bit cleaner.</p>
 </div>
@@ -704,8 +712,8 @@ type Workflow = Content['workflow'];</code></pre>
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="option_2"><a class="link" href="#option_2">Option 2</a></h5>
+<div class="sect3">
+<h4 id="option_2"><a class="link" href="#option_2">Option 2</a></h4>
 <div class="paragraph">
 <p>Or you can map the bean name to bean interface. It may be a preferable way to do it, if the bean is used across multiple files:</p>
 </div>
@@ -724,7 +732,6 @@ const helper = __.newBean('com.me.project.SomeHelper');</code></pre>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
 <h2 id="javadoc"><a class="link" href="#javadoc">JavaDoc</a></h2>
 <div class="sectionbody">
@@ -736,7 +743,7 @@ const helper = __.newBean('com.me.project.SomeHelper');</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-13 08:36:12 UTC
+Last updated 2023-12-13 08:57:22 UTC
 </div>
 </div>
 </body>
