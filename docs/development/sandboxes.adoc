@@ -16,17 +16,20 @@ Distros for your architecture can be downloaded from https://repo.enonic.com/ser
 
 NOTE: Only distros ending with `sdk` are suitable for development purposes
 
+
+== Starting sandbox
+
 After downloading and unzipping the distro, Enonic XP can be started on your local machine with the following command:
 
     enonic-xp-<architecture>-sdk-<version>/bin/server.sh
 
-Where <architecture> and <version> must match the distro you downloaded.
+Where <architecture> and <version> match the distro you downloaded.
 
-== Environment variables
+== Multiple sandboxes
 
 If you wish to run multiple Sandboxes, this can be done by copying the `home` folder (located within your distro) to a new location. Then, use the `XP_HOME` environment variable to let XP know where to find it.
 
-XP_HOME:: Defaults to the `home/` folder within the distro
+XP_HOME:: Defaults to the `$DISTRO_FOLDER/home/` folder
 
 To set these variables use one of the following approaches:
 
@@ -39,3 +42,5 @@ Windows::
 ....
 set XP_HOME=c:\path\to\home
 ....
+
+
