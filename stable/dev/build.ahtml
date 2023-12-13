@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Application config</title>
+<title>Building apps</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,13 +436,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Application config</h1>
+<h1>Building apps</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#config_folder">Config folder</a></li>
-<li><a href="#config_file">Config file</a></li>
-<li><a href="#accessing_config">Accessing config</a></li>
+<li><a href="#main_builder">Main builder</a>
+<ul class="sectlevel2">
+<li><a href="#gradle_properties">gradle.properties</a></li>
+<li><a href="#build_gradle">build.gradle</a></li>
+</ul>
+</li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#compiler">Compiler</a></li>
+<li><a href="#building">Building</a></li>
+<li><a href="#deploying">Deploying</a></li>
+<li><a href="#dev_mode">Dev Mode</a></li>
 </ul>
 </div>
 </div>
@@ -450,15 +458,287 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Applications may be configured via file.</p>
+<p>This section explains the details of the Enonic XP build system</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="config_folder"><a class="link" href="#config_folder">Config folder</a></h2>
+<h2 id="main_builder"><a class="link" href="#main_builder">Main builder</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Your development environment (aka sandbox), can read application-specific configurations files and provision this to each app. By default, it will scan the folder located in <code>$XP_HOME/config/</code></p>
+<p>As explained in the <a href="code.ahtml">code section</a>, Enonic development projects use <a href="https://gradle.org/">Gradle</a> as the main build tool.</p>
+</div>
+<div class="paragraph">
+<p>Gradle is built around the popular Maven ecosystem. Gradle is used because Enonic apps are packaged and deployed as .jar (Java) files in the end.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Enonic supports popular TypeScript/JavaScript tooling such as TSUP, NPM and webpack to run on top of Gradle. <a href="https://market.enonic.com/starters">Try one or our Starters</a> to see it in action.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The Gradle build files are described below</p>
+</div>
+<div class="sect2">
+<h3 id="gradle_properties"><a class="link" href="#gradle_properties">gradle.properties</a></h3>
+<div class="paragraph">
+<p>This file specifies common properties for any Enonic project:</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample gradle.properties file</div>
+<div class="content">
+<pre class="highlight"><code class="language-files" data-lang="files"># Gradle Project settings
+projectName = vanilla <i class="conum" data-value="1"></i><b>(1)</b>
+version = 1.0.0-SNAPSHOT <i class="conum" data-value="2"></i><b>(2)</b>
+
+# XP App values
+appDisplayName = Vanilla Example <i class="conum" data-value="3"></i><b>(3)</b>
+appName = com.acme.example.vanilla <i class="conum" data-value="4"></i><b>(4)</b>
+vendorName = Acme Inc
+vendorUrl = http://example.com
+xpVersion = 7.13.3 <i class="conum" data-value="5"></i><b>(5)</b>
+
+# Settings for publishing to a Maven repo
+group = com.acme.example <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Project name is used for the output file i.e. this will produce an app file called vanilla-&lt;version&gt;.jar</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Version is important metadata, used to identify different releases of an app.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>appDisplayName is used when listing the applications in UI</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>appName must be unique across all apps, this is also stored in CMS content is created, used as a namespace</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Minimum version of XP required for the app. This property is typically also used to determine which xp core libraries to use by <code>build.gradle</code></td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="build_gradle"><a class="link" href="#build_gradle">build.gradle</a></h3>
+<div class="paragraph">
+<p>This is the main build file. It controls available build settings, dependencies and more.</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample gradle.properties file</div>
+<div class="content">
+<pre class="highlight"><code class="language-files" data-lang="files">plugins { <i class="conum" data-value="1"></i><b>(1)</b>
+    id 'com.enonic.xp.app' version '3.4.0'
+}
+
+app { <i class="conum" data-value="2"></i><b>(2)</b>
+    name = "${appName}"
+    displayName = "${appDisplayName}"
+    vendorName = "${vendorName}"
+    vendorUrl = "${vendorUrl}"
+    systemVersion = "${xpVersion}"
+}
+
+dependencies { <i class="conum" data-value="3"></i><b>(3)</b>
+    implementation "com.enonic.xp:core-api:${xpVersion}"
+    implementation "com.enonic.xp:portal-api:${xpVersion}"
+    include "com.enonic.xp:lib-content:${xpVersion}"
+    include "com.enonic.xp:lib-portal:${xpVersion}"
+}
+
+tasks.register('dev', Exec) { <i class="conum" data-value="4"></i><b>(4)</b>
+    commandLine './gradlew', 'deploy', '-t'
+}
+
+repositories { <i class="conum" data-value="5"></i><b>(5)</b>
+    mavenLocal()
+    mavenCentral()
+    xp.enonicRepo()
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Enonic provides a <a href="https://developer.enonic.com/docs/enonic-gradle-plugins">Gradle plugin</a> to simplify the build setup.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Applies values from gradle.properties.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Define dependencies to libraries, notice the {xpVersion} which uses the value from gradle.properties.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Enables <code>dev</code> mode for the project</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Defines Maven repos where Gradle will look for dependencies.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dependencies"><a class="link" href="#dependencies">Dependencies</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Easily include Enonic libraries or Java dependencies in your app via the dependencies section.</p>
+</div>
+<div class="paragraph">
+<p>Each dependency must be prefixed with a scope for specific building instructions. The available scopes are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Include</dt>
+<dd>
+<p>Standard scope when adding Enonic libraries to your project. Resource files in the library are merged into your app. Files in your app overwrites files with the same name in the library. Dependencies of the library are transitively included.</p>
+</dd>
+<dt class="hdlist1">Implementation</dt>
+<dd>
+<p>Typically used for Java dependenceis. Does not automatically include transitive dependencies, meaning you must explicitly declare transitive dependencies.</p>
+</dd>
+<dt class="hdlist1">Webjar</dt>
+<dd>
+<p>Custom Enonicwq scope that extracts the content of the specified Webjar - <a href="https://www.webjars.org/" class="bare">https://www.webjars.org/</a> - placing it into the assets folder, using the version number as root folder</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="compiler"><a class="link" href="#compiler">Compiler</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Enonic XP SDK distros bundles the Java Development Kit (JDK), which includes the compiler needed to build Enonic apps.</p>
+</div>
+<div class="paragraph">
+<p>When building applications without using Enonic CLI, you must tell Gradle which compiler (Enonic XP distro) to use. This is done by setting the <code>JAVA_HOME</code> environment variable.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">JAVA_HOME</dt>
+<dd>
+<p>Defines the location of the Java compiler.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>To set the environment variable, use one of the following approaches:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Linux/MacOS</dt>
+</dl>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>export JAVA_HOME=/path/to/xp-distro/jdk</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Windows</dt>
+</dl>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>set JAVA_HOME=c:\path\to\xp-distro\jdk</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="building"><a class="link" href="#building">Building</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Builds are initialized via the Gradle Wrapper. This is a file located in your projects root: <code>gradlew</code> for Linux/MacOS and <code>gradle.bat</code> for Windows.</p>
+</div>
+<div class="paragraph">
+<p>The wrapper will download all necessary files to execute your build.</p>
+</div>
+<div class="paragraph">
+<p>Using Enonic CLI, simply run the following command from your project folder:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enonic CLI</dt>
+<dd>
+<p>enonic project build</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>To manually trigger Gradle builds, make sure <code>JAVA_HOME</code> is defined, and run the following command:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">OSX/Linux</dt>
+<dd>
+<p><code>./gradlew build</code></p>
+</dd>
+<dt class="hdlist1">Windows</dt>
+<dd>
+<p><code>gradlew.bat build</code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The build will place any output artifacts (app or library files) into your project&#8217;s <code>build/libs/</code> folder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploying"><a class="link" href="#deploying">Deploying</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To deploy an app to your sandbox:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enonic CLI</dt>
+<dd>
+<p><code>enonic project deploy</code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>To do this manually, make sure XP_HOME is defined and execute the following command</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Linux/MacOS</dt>
+<dd>
+<p><code>./gradlew deploy</code></p>
+</dd>
+<dt class="hdlist1">Windows</dt>
+<dd>
+<p><code>gradlew.bat deploy</code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>This command copies the artifact (application file) into your sandbox' <code>$XP_HOME/deploy</code> folder. XP will then automatically install and start it.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -467,7 +747,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The config folder also contains the <a href="../deployment/config.ahtml">standard XP configuration files</a>.
+XP apps deployed via file are presented with a small blue icon in the <code>Applications</code> admin tool.
 </td>
 </tr>
 </table>
@@ -475,13 +755,84 @@ The config folder also contains the <a href="../deployment/config.ahtml">standar
 </div>
 </div>
 <div class="sect1">
-<h2 id="config_file"><a class="link" href="#config_file">Config file</a></h2>
+<h2 id="dev_mode"><a class="link" href="#dev_mode">Dev Mode</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Simply adding or updating a file called <code>&lt;appname&gt;.cfg</code> in the config folder will automatically restart your application, and provision the new configuration values.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Using dev mode is generally recommended, as it saves time by providing real-time updates of your app
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>This is a hot restart, and will typically be very fast. XP itself does not need to be restarted.</p>
+<p>By running your sandbox in <code>dev</code> mode, it will automatically detect and load changes to your application source files, including JavaScript controllers and schemas. It does this by reading the files directly from the application project folder instead of using the compiled application file.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enonic CLI</dt>
+<dd>
+<p><code>enonic sandbox start --dev</code></p>
+</dd>
+<dt class="hdlist1">Linux/MacOS</dt>
+<dd>
+<p><code>$XP_INSTALL/bin/server.sh dev</code></p>
+</dd>
+<dt class="hdlist1">Windows</dt>
+<dd>
+<p><code>$XP_INSTALL/bin/server.sh dev</code></p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Dev mode should never be used in production. Doing so may cause both security and performance issues.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In addition to running XP in dev mode, your application may contain files that require compilation (including transpilation). This means that must build the files for every change. For instance, if you use TypeScript, these files won&#8217;t be picked up by default.</p>
+</div>
+<div class="paragraph">
+<p>Modern XP projects support this out of the box, simply replace the build and deploy command with this:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enonic CLI</dt>
+<dd>
+<p><code>enonic project dev</code></p>
+</dd>
+<dt class="hdlist1">Linux/MacOS</dt>
+<dd>
+<p><code>./gradlew dev</code></p>
+</dd>
+<dt class="hdlist1">Windows</dt>
+<dd>
+<p><code>gradlew.bat dev</code></p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Development mode also disables some of XP&#8217;s caching mechanisms. To make the development workflow as smooth as possible, XP tries to invalidate caches for your static assets. This is to prevent you from getting stale resources so that what you see in the browser is always as up to date as possible.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -490,45 +841,17 @@ The config folder also contains the <a href="../deployment/config.ahtml">standar
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you&#8217;re operating an XP cluster, the configuration file should be copied to every server node - this is because XP by default will run all applications on every node in the cluster.
+XP 7.x defaults to the Nashorn JavaScript engine for executing JavaScript. For an overview over what JavaScript features Nashorn supports, see <a href="https://kangax.github.io/compat-table/es6/#nashorn1_8">this feature table</a>.
 </td>
 </tr>
 </table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="accessing_config"><a class="link" href="#accessing_config">Accessing config</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Developers can easily access the application&#8217;s config via the JavaScript controllers.</p>
-</div>
-<div class="paragraph">
-<p>Given the following configuration file:</p>
-</div>
-<div class="paragraph">
-<p>&lt;appname&gt;.cfg</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">secretkey = 123456789</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The value can be optained using a single line of code:</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample JS controller</div>
-<div class="content">
-<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">var myKey = app.config.secretkey;</code></pre>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-13 08:25:51 UTC
+Last updated 2023-12-13 08:29:30 UTC
 </div>
 </div>
 </body>

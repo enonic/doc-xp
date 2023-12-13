@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Sandboxes</title>
+<meta name="author" content="Application development and the Software Development Kit (SDK)">
+<title>Development and the SDK</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,56 +437,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Sandboxes</h1>
+<h1>Development and the SDK</h1>
+<div class="details">
+<span id="author" class="author">Application development and the Software Development Kit (SDK)</span><br>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#download_distro">Download distro</a></li>
-<li><a href="#starting_sandbox">Starting sandbox</a></li>
-<li><a href="#multiple_sandboxes">Multiple sandboxes</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#sdk">SDK</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>Sandboxes are independent Enonic XP development environments</p>
-</div>
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Using CLI, and sandbox may be created and started with the following commands: <code>enonic sandbox create</code>, <code>enonic sandbox sttart</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Below, we dive into details of manually setting up and starting sandboxes:</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="download_distro"><a class="link" href="#download_distro">Download distro</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Start by downloading an <a href="../deployment/distro.ahtml">Enonic XP distribution file</a>. This is essentially the software version of the Enonic XP platform.</p>
-</div>
-<div class="paragraph">
-<p>Distros for your architecture can be downloaded from <a href="https://repo.enonic.com/service/rest/repository/browse/public/com/enonic/xp/">the Enonic repo</a>. Look for folders named <code>enonic-xp-&lt;architecture&gt;-sdk</code>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Only distros ending with <code>sdk</code> are suitable for development purposes
+For hands on introduction to development and the SDK, visit the <a href="https://developer.enonic.com/start">quickstart</a>, <a href="https://developer.enonic.com/docs/developer-101">Developer 101</a>, or <a href="https://developer.enonic.com/docs/my-first-site">My first site</a> tutorials.
 </td>
 </tr>
 </table>
@@ -493,64 +467,56 @@ Only distros ending with <code>sdk</code> are suitable for development purposes
 </div>
 </div>
 <div class="sect1">
-<h2 id="starting_sandbox"><a class="link" href="#starting_sandbox">Starting sandbox</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After downloading and unzipping the distro, Enonic XP can be started on your local machine with the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>enonic-xp-&lt;architecture&gt;-sdk-&lt;version&gt;/bin/server.sh</pre>
-</div>
+<p>The majority of functionality and customizations in Enonic XP is implemented and delivered via <a href="apps.ahtml">applications</a>, including customer specific schemas and content modelling.</p>
 </div>
 <div class="paragraph">
-<p>Where &lt;architecture&gt; and &lt;version&gt; match the distro you downloaded.</p>
+<p>To facilitate and ease development, Enonic provides a purpose-specific SDK, libraries, starters and other tools to assist developers in their work.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="multiple_sandboxes"><a class="link" href="#multiple_sandboxes">Multiple sandboxes</a></h2>
+<h2 id="sdk"><a class="link" href="#sdk">SDK</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you wish to run multiple Sandboxes, this can be done by copying the <code>home</code> folder (located within your distro) to a new location. Then, use the <code>XP_HOME</code> environment variable to let XP know where to find it.</p>
+<p>The Enonic SDK consists of several independent tools:</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">XP_HOME</dt>
-<dd>
-<p>Defaults to the <code>$DISTRO_FOLDER/home/</code> folder</p>
-</dd>
-</dl>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/enonic/cli-enonic">Enonic CLI</a></p>
+</li>
+<li>
+<p>SDK versions of the <a href="deployment/distro.ahtml">Enonic XP distro</a></p>
+</li>
+<li>
+<p><a href="dev/sandboxes.ahtml">Sandboxes</a></p>
+</li>
+<li>
+<p><a href="dev/build.ahtml">Build system</a></p>
+</li>
+<li>
+<p><a href="https://market.enonic.com/starters">Starters</a></p>
+</li>
+<li>
+<p><a href="api.ahtml">Platform libraries and APIs</a></p>
+</li>
+<li>
+<p><a href="https://github.com/enonic/cli-enonic">Other libraries</a></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>To set these variables use one of the following approaches:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Linux/MacOS</dt>
-</dl>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>export XP_HOME=/path/to/home</pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Windows</dt>
-</dl>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>set XP_HOME=c:\path\to\home</pre>
-</div>
+<p>The CLI plays a central role in orhchestrating development activities, including downloading distros, setting up new development projects, building and even deploying to productin servers.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-13 08:25:51 UTC
+Last updated 2023-12-13 08:29:30 UTC
 </div>
 </div>
 </body>
