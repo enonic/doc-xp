@@ -7,7 +7,7 @@ IMPORTANT: For hands on introduction to development and the SDK, visit the https
 
 == Introduction
 
-The majority of functionality and customizations in Enonic XP is implemented and delivered via <<apps#, applications>>, including customer specific schemas and content modelling.
+The majority of functionality and customizations in Enonic XP is implemented and delivered via <<apps#, applications>>. Application development mainly relates to defining customer specific <<cms#,schemas and content models>> as well as coding based on <<framework#, Enonic's JavaScript Framework>>
 
 To facilitate and ease development, Enonic provides a purpose-specific SDK, libraries, starters and other tools to assist developers in their work.
 
@@ -21,6 +21,6 @@ The Enonic SDK consists of several independent tools:
 * <<dev/build#, Build system>>
 * https://market.enonic.com/starters[Starters]
 * <<api#, Platform libraries and APIs>>
-* https://github.com/enonic/cli-enonic[Other libraries]
+* https://market.enonic.com/libraries[Other libraries]
 
 The CLI plays a central role in orhchestrating development activities, including downloading distros, setting up new development projects, building and even deploying to productin servers.
