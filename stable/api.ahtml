@@ -485,7 +485,7 @@ Looking for our <strong>Headless CMS GraphQL API?</strong> To give it a quick sp
 <h2 id="endpoints"><a class="link" href="#endpoints">Endpoints</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <a href="#Runtime">[Runtime]</a> provides access to various <a href="runtime/engines.ahtml">HTTP engines and services</a>, including the <a href="runtime/management.ahtml">Management API</a> and the <a href="runtime/statistics.ahtml">statistics API</a>.</p>
+<p>The <a href="runtime.ahtml">XP Runtime</a> provides access to various <a href="runtime/engines.ahtml">Engines and services</a>, including the REST-style <a href="runtime/management.ahtml">Management</a> and <a href="runtime/statistics.ahtml">Statistics API</a>s.</p>
 </div>
 </div>
 </div>
@@ -743,7 +743,7 @@ const helper = __.newBean('com.me.project.SomeHelper');</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-13 08:57:22 UTC
+Last updated 2023-12-13 09:00:01 UTC
 </div>
 </div>
 </body>
