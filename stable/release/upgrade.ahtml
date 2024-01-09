@@ -699,11 +699,8 @@ This may cause broken text on pages with page templates which specify content me
 Make sure all your page templates use UTF-8. it is also recommended to use <code>&lt;meta charset="utf-8"&gt;</code> tag on all pages.</p>
 </li>
 <li>
-<p>As of this version, all Enonic libraries are completely rewritten in TypeScript. If you have been using TypesScript in your application, it may no longer be compiling. Importing <code>default</code> exports are no longer supported, and depending on your build-setup and code, you may need to change your import statements.
+<p>TypeScript imports. As of this version, all Enonic libraries are completely rewritten in TypeScript. If you have been using TypesScript in your application, it may no longer be compiling. Importing <code>default</code> exports are no longer supported, and depending on your build-setup and code, you may need to change your import statements.
 For example:</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="title">Old approach</div>
 <div class="content">
@@ -715,6 +712,9 @@ For example:</p>
 <div class="content">
 <pre class="highlight"><code class="language-Javascript" data-lang="Javascript">import * as nodeLib from '/lib/xp/node';</code></pre>
 </div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1309,7 +1309,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-09 11:35:21 UTC
+Last updated 2024-01-09 11:37:38 UTC
 </div>
 </div>
 </body>
