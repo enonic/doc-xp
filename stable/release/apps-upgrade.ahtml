@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Enonic XP 7.0 - Application upgrade</title>
+<title>Upgrading applications from XP6 to XP7</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,7 +436,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Enonic XP 7.0 - Application upgrade</h1>
+<h1>Upgrading applications from XP6 to XP7</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -513,6 +513,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes the steps required to upgrade an XP application from 6.x to 7.0</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This section is only relevant when upgrading from XP6 to XP7.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1886,7 +1898,7 @@ The new sandbox will have Java 11 bundled inside the package and you don&#8217;t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 08:53:09 UTC
+Last updated 2024-01-09 11:35:21 UTC
 </div>
 </div>
 </body>

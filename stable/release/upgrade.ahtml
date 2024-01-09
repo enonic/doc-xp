@@ -699,19 +699,19 @@ This may cause broken text on pages with page templates which specify content me
 Make sure all your page templates use UTF-8. it is also recommended to use <code>&lt;meta charset="utf-8"&gt;</code> tag on all pages.</p>
 </li>
 <li>
-<p>Importing default exports from Javascript API no longer works, you have to specify name of an export or use an alias (<code>import * as&#8230;&#8203;</code>). So if you imported an entire JS lib like this:</p>
+<p>As of this version, all Enonic libraries are completely rewritten in TypeScript. If you have been using TypesScript in your application, it may no longer be compiling. Importing <code>default</code> exports are no longer supported, and depending on your build-setup and code, you may need to change your import statements.
+For example:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock">
+<div class="title">Old approach</div>
 <div class="content">
 <pre class="highlight"><code class="language-Javascript" data-lang="Javascript">import nodeLib from '/lib/xp/node';</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>then you have to change the import to this:</p>
-</div>
 <div class="listingblock">
+<div class="title">New approach</div>
 <div class="content">
 <pre class="highlight"><code class="language-Javascript" data-lang="Javascript">import * as nodeLib from '/lib/xp/node';</code></pre>
 </div>
@@ -724,9 +724,9 @@ Make sure all your page templates use UTF-8. it is also recommended to use <code
 <div class="ulist">
 <ul>
 <li>
-<p>XP now bundled with GraalVM based JDK.
-We do not support running XP on other JDK except for the one bundled in distributive.
-Note that JavaScript Engine is still Nashorn.</p>
+<p>XP now bundles the GraalVM based JDK.
+We do not support running XP on other JDK except for the one bundled in the distro.
+Note that the default JavaScript Engine is still Nashorn.</p>
 </li>
 <li>
 <p>Experimental support of arm64 (aarch64) based CPUs is added.
@@ -1309,7 +1309,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 08:53:09 UTC
+Last updated 2024-01-09 11:35:21 UTC
 </div>
 </div>
 </body>
