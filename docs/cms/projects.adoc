@@ -47,7 +47,7 @@ image:xp-7120.svg[XP 7.12.0,opts=inline]
 
 Applications can be assigned directly to a content project. Most functionality, schemas (content types, mixins, x-data) as well as controller mappings be available within the scope of the project, until a site item appears.
 
-Unlike sites, content at project level does not support pages, fragments and page page templates, so content preview and rendring must be done directly via <<cms/mappings#_mappings, Mappings>>.
+Unlike sites, content at project level does not support pages, fragments and page page templates, so content preview and rendring must be done directly via <<../framework/mappings#, Mappings>>.
 
 It is also worth noting that configurations of applications assigned to a project will be published instantly - unlike changes to a site.
 
