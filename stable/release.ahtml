@@ -440,13 +440,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#xp7_update_14">XP7 Update 14</a>
+<ul class="sectlevel2">
+<li><a href="#sdk">SDK</a></li>
+</ul>
+</li>
 <li><a href="#xp7_update_13">XP7 Update 13</a>
 <ul class="sectlevel2">
 <li><a href="#java_17">Java 17</a></li>
 <li><a href="#management_api">Management API</a></li>
 <li><a href="#statistics_api">Statistics API</a></li>
 <li><a href="#task_api">Task API</a></li>
-<li><a href="#sdk">SDK</a></li>
+<li><a href="#sdk_2">SDK</a></li>
 <li><a href="#other_changes">Other Changes</a></li>
 </ul>
 </li>
@@ -562,6 +567,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
+<h2 id="xp7_update_14"><a class="link" href="#xp7_update_14">XP7 Update 14</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="sdk"><a class="link" href="#sdk">SDK</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>When a new XP sandbox is created using Enonic CLI 2.8 (or newer) and a template is chosen, the applications bundled with the chosen template are automatically installed during the sandbox&#8217;s initial launch. This significantly streamlines the setup process, enabling developers to bypass the usual time-consuming application installation and dive straight into their work.</p>
+</li>
+<li>
+<p>Welcome page (available at <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> in SDK version) displays the list of configuration files with an option to quickly copy their paths to the clipboard, enabling developers to quickly open the configuration files for modification in the Terminal.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="release/images/714-sdk-welcome.png" alt="SDK Welcome page" width="75%"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="xp7_update_13"><a class="link" href="#xp7_update_13">XP7 Update 13</a></h2>
 <div class="sectionbody">
 <div class="admonitionblock note">
@@ -571,7 +597,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Enonic XP 7.13.0 requires Content Studio 5.0.0
+Earlier versions of Content Studio (before 5.0) are not compatible with Enonic XP 7.13.0 (and newer), so make sure to upgrade to Content Studio 5.0.0 or newer.
 </td>
 </tr>
 </table>
@@ -623,7 +649,7 @@ Enonic XP 7.13.0 requires Content Studio 5.0.0
 </div>
 </div>
 <div class="sect2">
-<h3 id="sdk"><a class="link" href="#sdk">SDK</a></h3>
+<h3 id="sdk_2"><a class="link" href="#sdk_2">SDK</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1848,7 +1874,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-18 12:27:10 UTC
+Last updated 2024-01-18 14:11:55 UTC
 </div>
 </div>
 </body>
