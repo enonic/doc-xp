@@ -9,7 +9,7 @@ include::.variables.adoc[]
 === SDK
 
 * When a new XP sandbox is created using Enonic CLI 2.8 (or newer) and a template is chosen, the applications bundled with the chosen template are automatically installed during the sandbox's initial launch. This significantly streamlines the setup process, enabling developers to bypass the usual time-consuming application installation and dive straight into their work.
-* Welcome page (available at http://localhost:8080 in SDK version) displays the list of configuration files with an option to quickly copy their paths to the clipboard, enabling developers to quickly open the configuration files for modification in the Terminal.
+* Welcome page (available at http://localhost:8080/ in SDK version) displays the list of configuration files with an option to quickly copy their paths to the clipboard, enabling developers to quickly open the configuration files for modification in the Terminal.
 
 image:714-sdk-welcome.png["SDK Welcome page", 75%]
 
