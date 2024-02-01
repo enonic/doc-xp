@@ -45,6 +45,10 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market.
 We generally always recommend updating your apps to the latest version!
 
+== v7.14 notes
+
+* Content Project root no longer returns 403. It now returns 404 instead. This may affect your availability if it relies on 403 status code.
+
 == v7.13 notes
 
 * Content Studio has to be upgraded to version 5+ to be compatible with XP 7.13. If you are using Content Studio 4.x with XP 7.13, you may experience disappearing layouts inside Page Editor.
