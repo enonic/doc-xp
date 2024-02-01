@@ -1,0 +1,44 @@
+= Part components
+:toc: right
+:imagesdir: media
+
+Part components are similar to layout and page components, but do not support regions.
+
+== Introduction
+
+Parts are leaf-nodes in the component structure. Parts are typically used in combination with forms, and have a vast range of application areas.
+
+== Usage
+
+Like pages and layouts, parts needs a descriptor. Place the descriptor in your project as follows: `src/main/resources/site/parts/<part-name>/<part-name>.xml``.
+
+Each part may also declare a form using the schema system. The form data will be stored together with each component instance.
+
+.Example part descriptor
+[source,xml]
+----
+<part>
+  <display-name>Content List</display-name>
+  <form />
+</part>
+----
+
+== Custom icon
+image:xp-720.svg[XP 7.2.0,opts=inline]
+
+Parts support the definition of custom icon. The icon replaces the standard part icon when working in Content Studio. Simply place an icon (in either PNG or SVG format) in the part folder.
+
+For example, if folder/part is called _mypart_ then part descriptor is called _mypart.xml_ and the icon file should be called either _mypart.svg_ or _mypart.png_.
+In the screenshots below parts "_HTML Area Example_" and "_Image filters test_" are using custom icons.
+
+Below are examples of what custom icons may look like in Content Studio.
+
+image::part-selector.png[Custom icon as seen in the part selector, 289]
+image::component-tree.png[Custom icons in the page components tree, 422]
+
+
+== Rendering
+
+Parts can be rendered using your favorite front-end framework. 
+
+Visit the <<../../framework/components#, component rendering>> section for details on rendering parts with the Enonic Framework.

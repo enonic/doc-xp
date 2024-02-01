@@ -1,0 +1,150 @@
+= Application development
+:toc: right
+:imagesdir: images
+
+Details on the project and code structure in Enonic apps and libraries
+
+TIP: Get started running. Use one of our https://market.enonic.com/starters[starters] to bootstrap your development project.
+
+== Languages
+
+XP apps are powered by the <<runtime#,XP runtime>>.
+
+Enonic apps may consist of both server.-side and client-side code. They are primarily written in JavaScript/TypeScript. 
+
+Server-side JavaScript must uses XP's <<framework#,Javascript Framework>>
+
+Applications may also use of Java.
+Developers with special requirements can take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same platform instance.
+
+Learn more about <<./framework/java-bridge#,using Java in XP apps>>
+
+== Project structure
+
+The example structure below includes the standard files and folders for an Enonic application (or library). 
+
+[source,files]
+----
+sample-project/
+  build.gradle
+  gradle.properties
+  gradlew
+  gradlew.bat
+  settings.gradle
+  src/
+    main/
+      java/
+      resources/
+        application.svg
+        application.xml
+        admin/
+          tools/
+          widgets/
+        assets/
+        error/
+        i18n/
+        idprovider/
+        main.js
+        services/
+        site/
+          site.xml
+          content-types/
+          layouts/
+          macros/
+          mixins/
+          pages/
+          parts/
+          processors/
+          x-data/
+        webapp/
+        tasks/
+    test/
+      java/
+
+----
+
+Every file and folder has a specific function and purpose as described below:
+
+=== Build files
+
+Enonic supports JS/TS based build tools like https://market.enonic.com/vendors/enonic/tsup-starter[TSUP] and https://market.enonic.com/vendors/enonic/webpack-starter[Webpack], but relies on https://gradle.org/[Gradle] as the main builder.
+
+Visit the <<build#, build system section>> for more details.
+
+
+build.gradle:: Main build file
+
+gradle.properties:: Build properties
+
+gradlew | /gradlew.bat:: Gradle wrapper file. Downloads and runs Gradle without having to install it manually.
+
+settings.gradle:: Mandatory file to boostrap the build process
+
+
+=== General resources
+
+The majority of Enonic specific code is placed within `src/main/resources/`:
+
+admin/tools/:: Admin tools are defined here. Tools are administrative apps listed in the admin console menu.
+
+admin/widgets/:: Admin widgets are essentially user interface components that can be embedded within other admin tools.
+
+application.svg:: Application icon in SVG format. Should be in a square format.
+
+application.xml:: Application information in XML format.
+
+assets/:: Standard folder for serving of static assets, such as css and javascript. Assets are served by the <<../runtime/engines/asset-service#, asset service>>.
+
+error/error.js:: The <<../framework/error#, HTTP error handler>>
+
+main.js:: The application's <<../framework/main#, main controller>>. Executed when an application starts and stops.
+
+services/:: Contains <<../runtime/engines/http-service#, Http service controllers>>
+
+i18n/:: Short for internationalization, this folder contains <<../api/lib-i18n#,app localization files>>
+
+idprovider/:: The application may implement an <<../framework/idprovider#part,ID Provider>> here.
+
+tasks/:: May contain <<../api/lib-task#, task controllers>> for running asynchronous and background processing.
+
+site/site.xml:: Contains <<../cms/sites#site_xml, site configuration schema>>, and declaring that the app can be added to projects and sites
+
+site/content-types/::  Contains <<../cms/content-types#,Content type>> definitions.
+
+site/processors/:: For post processing of HTML response from pages built with the <<../framework#, Enonic JS framework>>.
+
+site/layouts/:: <<../cms/sites/layouts#,Layout components>> are placed here.
+
+site/mixins/:: <<../cms/schemas/mixins#, Reusable schemas>> are placed here.
+
+site/macros/:: <<../cms/macros#, Rich text Macro components>> are placed here.
+
+site/pages/:: <<../cms/components#pages, Page components>> are placed here.
+
+site/parts/:: <<../cms/components#part,Part components>> are placed here.
+
+site/x-data/:: <<../cms/x-data#, X-data schemas>> are defined here
+
+webapp/webapp.js:: <<../runtime#webapp_js, Webapp>> based on the Enonic JS framework are placed here.
+
+
+=== Java
+
+/src/main/java/:: Optionally place Java code here.
+
+/src/test/java/:: Optionally place Java tests here.
+
+
+== Libraries
+
+Enonic libraries are similar to applications, the main difference being that a library cannot be installed and started by itself.
+
+TIP: Check out https://market.enonic.com/vendors/enonic/library-starter[the library starter] if you are planning to build your own library.
+
+A library may consist of the same files and functionality you would find in an application - such as Assets, Content Types and JS controllers.
+
+Enonic libraries are added to your application by declaring a dependency in the <<apps/build#,build>>.
+
+The core functionality of XP is exposed via standard libraries. Check out the <<../api#,Standard Libraries documentation>>. You will also find additional libraries on https://market.enonic.com/libraries[Enonic Market]
+
+

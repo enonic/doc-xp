@@ -1,24 +1,232 @@
 {
   "menuItems": [
     {
-      "title": "Manifesto",
-      "document": "manifesto"
+      "title": "Admin",
+      "document": "admin",
+      "menuItems": [
+        {
+          "title": "Widgets",
+          "document": "admin/widgets"
+        }
+      ]
+    },
+    {
+      "title": "IAM",
+      "document": "iam"
     },
     {
       "title": "Applications",
       "document": "apps",
       "menuItems": [
         {
+          "title": "Virtual apps",
+          "document": "apps/virtual"
+        }
+      ]
+    },    
+    {
+      "title": "CMS",
+      "document": "cms",
+      "menuItems": [
+        {
           "title": "Projects",
-          "document": "apps/projects"
+          "document": "cms/projects"
         },
         {
-          "title": "Build System",
-          "document": "apps/build-system"
+          "title": "Layers",
+          "document": "cms/layers"
         },
         {
-          "title": "Virtual Applications",
-          "document": "apps/virtual-applications"
+          "title": "Schemas",
+          "document": "cms/schemas",
+          "menuItems": [
+            {
+              "title": "Input Types",
+              "document": "cms/schemas/input-types",
+              "menuItems": [
+                {
+                  "title": "AttachmentUploader",
+                  "document": "cms/schemas/input-types/attachmentuploader"
+                },
+                {
+                  "title": "Checkbox",
+                  "document": "cms/schemas/input-types/checkbox"
+                },
+                {
+                  "title": "Combobox",
+                  "document": "cms/schemas/input-types/combobox"
+                },
+                {
+                  "title": "ContentSelector",
+                  "document": "cms/schemas/input-types/contentselector"
+                },
+                {
+                  "title": "ContentTypeFilter",
+                  "document": "cms/schemas/input-types/contenttypefilter"
+                },
+                {
+                  "title": "CustomSelector",
+                  "document": "cms/schemas/input-types/customselector"
+                },
+                {
+                  "title": "Date",
+                  "document": "cms/schemas/input-types/date"
+                },
+                {
+                  "title": "DateTime",
+                  "document": "cms/schemas/input-types/datetime"
+                },
+                {
+                  "title": "Double",
+                  "document": "cms/schemas/input-types/double"
+                },
+                {
+                  "title": "GeoPoint",
+                  "document": "cms/schemas/input-types/geopoint"
+                },
+                {
+                  "title": "HtmlArea",
+                  "document": "cms/schemas/input-types/htmlarea"
+                },
+                {
+                  "title": "ImageSelector",
+                  "document": "cms/schemas/input-types/imageselector"
+                },
+                {
+                  "title": "Long",
+                  "document": "cms/schemas/input-types/long"
+                },
+                {
+                  "title": "MediaSelector",
+                  "document": "cms/schemas/input-types/mediaselector"
+                },
+                {
+                  "title": "Radiobutton",
+                  "document": "cms/schemas/input-types/radiobutton"
+                },
+                {
+                  "title": "Tag",
+                  "document": "cms/schemas/input-types/tag"
+                },
+                {
+                  "title": "TextArea",
+                  "document": "cms/schemas/input-types/textarea"
+                },
+                {
+                  "title": "TextLine",
+                  "document": "cms/schemas/input-types/textline"
+                },
+                {
+                  "title": "Time",
+                  "document": "cms/schemas/input-types/time"
+                }
+              ]
+            },
+            {
+              "title": "Field set",
+              "document": "cms/schemas/field-set"
+            },
+            {
+              "title": "Item set",
+              "document": "cms/schemas/item-set"
+            },
+            {
+              "title": "Option set",
+              "document": "cms/schemas/option-set"
+            },
+            {
+              "title": "Mixins",
+              "document": "cms/schemas/mixins"
+            },
+            {
+              "title": "Localization",
+              "document": "cms/schemas/localization"
+            }
+          ]
+        },
+        {
+          "title": "Content Types",
+          "document": "cms/content-types"
+        },
+        {
+          "title": "X-data",
+          "document": "cms/x-data"
+        },
+        {
+          "title": "Macros",
+          "document": "cms/macros"
+        },
+        {
+          "title": "Custom styles",
+          "document": "cms/styles"
+        },
+        {
+          "title": "Sites",
+          "document": "cms/sites"
+        },
+        {
+          "title": "Pages",
+          "document": "cms/pages",
+          "menuItems": [
+            {
+              "title": "Regions",
+              "document": "cms/pages/regions"
+            },
+            {
+              "title": "Part component",
+              "document": "cms/pages/parts"
+            },
+            {
+              "title": "Layout component",
+              "document": "cms/pages/layouts"
+            },
+            {
+              "title": "Text component",
+              "document": "cms/pages/text"
+            },
+            {
+              "title": "Fragments",
+              "document": "cms/pages/fragments"
+            },
+            {
+              "title": "Filtering",
+              "document": "cms/pages/filtering"
+            },
+            {
+              "title": "Component indexing",
+              "document": "cms/pages/indexing"
+            },
+            {
+              "title": "Visual editor",
+              "document": "cms/pages/editor"
+            }         
+          ]
+        },
+        {
+          "title": "Page templates",
+          "document": "cms/page-templates"
+        }
+      ]
+    },
+    {
+      "title": "Development",
+      "document": "development",
+      "menuItems": [
+        {
+          "title": "Sandboxes",
+          "document": "development/sandboxes"
+        },
+        {
+          "title": "Code",
+          "document": "development/code"
+        },
+        {
+          "title": "Building",
+          "document": "development/build"
+        },
+        {
+          "title": "Configuration",
+          "document": "development/config"
         }
       ]
     },
@@ -65,6 +273,30 @@
         {
           "title": "Localization",
           "document": "framework/i18n"
+        },
+        {
+          "title": "Mappings",
+          "document": "framework/mappings"
+        },
+        {
+          "title": "Components",
+          "document": "framework/components"
+        },
+        {
+          "title": "Processors",
+          "document": "framework/processors"
+        },
+        {
+          "title": "Contributions",
+          "document": "framework/contributions"
+        },
+        {
+          "title": "Templating",
+          "document": "framework/templating"
+        },
+        {
+          "title": "Main controller",
+          "document": "framework/main"
         },
         {
           "title": "Java bridge",
@@ -177,87 +409,7 @@
       ]
     },
     {
-      "title": "IAM",
-      "document": "iam"
-    },
-    {
-      "title": "Admin",
-      "document": "admin",
-      "menuItems": [
-        {
-          "title": "Widgets",
-          "document": "admin/widgets"
-        }
-      ]
-    },
-    {
-      "title": "CMS",
-      "document": "cms",
-      "menuItems": [
-        {
-          "title": "Projects",
-          "document": "cms/projects"
-        },
-        {
-          "title": "Layers",
-          "document": "cms/layers"
-        },
-        {
-          "title": "Schemas",
-          "document": "cms/schemas"
-        },
-        {
-          "title": "Mixins",
-          "document": "cms/mixins"
-        },
-        {
-          "title": "Input Types",
-          "document": "cms/input-types"
-        },
-        {
-          "title": "Sets",
-          "document": "cms/sets"
-        },
-        {
-          "title": "Content Types",
-          "document": "cms/content-types"
-        },
-        {
-          "title": "X-data",
-          "document": "cms/x-data"
-        },
-        {
-          "title": "Macros",
-          "document": "cms/macros"
-        },
-        {
-          "title": "Custom styles",
-          "document": "cms/styles"
-        },
-        {
-          "title": "Sites",
-          "document": "cms/sites"
-        },
-        {
-          "title": "Page Components",
-          "document": "cms/components"
-        },
-        {
-          "title": "Contributions",
-          "document": "cms/contributions"
-        },
-        {
-          "title": "Mappings",
-          "document": "cms/mappings"
-        },
-        {
-          "title": "Response Processors",
-          "document": "cms/response-processors"
-        }
-      ]
-    },
-    {
-      "title": "Deployment",
+      "title": "Hosting",
       "document": "deployment",
       "menuItems": [
         {
@@ -295,7 +447,7 @@
       ]
     },
     {
-      "title": "API Reference",
+      "title": "Platform APIs",
       "document": "api",
       "menuItems": [
         {
@@ -402,11 +554,11 @@
     },
     {
       "title": "Release Notes",
-      "document" : "release",
-      "menuItems" : [
+      "document": "release",
+      "menuItems": [
         {
           "title": "Upgrade Notes",
-          "document" : "release/upgrade"
+          "document": "release/upgrade"
         },
         {
           "title": "Upgrading Apps",

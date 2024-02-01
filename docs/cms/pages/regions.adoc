@@ -1,0 +1,82 @@
+= Regions
+:toc: right
+:imagesdir: media
+Use regions to create a hierarchy of components.
+
+== Introduction
+
+Regions enable editors to create complex component structures, such as pages. Only <<../pages#, page>> and <<layouts#, layout>> component types can define regions. Each region must have a unique name within the component.
+
+== Usage
+
+Regions are declared statically within other components. Below is a sample definition of a page component with a single region `main`:
+
+.Example - page component with a single region
+[source,XML]
+----
+<page>
+  <display-name>The main page</display-name>
+  <form/>
+  <regions>
+    <region name="main"/>
+  </regions>
+</page>
+----
+
+And here is a layout defining three regions:
+
+.Sample layout with three regions
+[source,XML]
+----
+<layout>
+  <display-name>The main page</display-name>
+  <form/>
+  <regions>
+    <region name="left"/>
+    <region name="middle"/>
+    <region name="right"/>
+  </regions>
+</layout>
+----
+
+From Content Studio, this is what regions look like in the page form:
+
+image::component-input-type.png[Component editor, 527px]
+
+And here is what the the exact same structure might look like in the visual page editor. 
+
+NOTE: Ther dropzones are empty regions. 
+
+image::3-region-layout.png[Layout with three empty regions, 1012px]
+
+
+== Output
+
+Using the Content API, you may access a JSON version containing the hierarchical structure of components and regions on the page.
+
+.Sample JSON from the Content api
+[source,JSON]
+----
+"page": {
+    "type": "page",
+    "path": "/",
+    "descriptor": "com.enonic.app.superhero:default",
+    "regions": {
+      "main": {
+        "components": [
+          {
+            "path": "/main/0",
+            "type": "layout",
+            "descriptor": "com.enonic.app.superhero:three-column",
+            "config": {},
+            "regions": {}
+          }
+        ],
+        "name": "main"
+      }
+    }
+  }
+----
+
+NOTE: Empty regions are never persisted. Region names are only determined from the component path.
+

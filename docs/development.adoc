@@ -1,7 +1,26 @@
-= Development
+= Development and the SDK
 :toc: right
 :imagesdir: development/images
+Application development and the Software Development Kit (SDK)
 
+IMPORTANT: For hands on introduction to development and the SDK, visit the https://developer.enonic.com/start[quickstart], https://developer.enonic.com/docs/developer-101[Developer 101], or https://developer.enonic.com/docs/my-first-site[My first site] tutorials.
 
+== Introduction
 
-== Building projects
+The majority of functionality and customizations in Enonic XP is implemented and delivered via <<apps#, applications>>. Application development mainly relates to defining customer specific <<cms#,schemas and content models>> as well as coding based on <<framework#, Enonic's JavaScript Framework>>
+
+To facilitate and ease development, Enonic provides a purpose-specific SDK, libraries, starters and other tools to assist developers in their work.
+
+== SDK
+
+The Enonic SDK consists of several independent tools:
+
+* https://github.com/enonic/cli-enonic[Enonic CLI]
+* SDK versions of the <<deployment/distro#, Enonic XP distro>>
+* <<development/sandboxes#, Sandboxes>>
+* <<development/build#, Build system>>
+* https://market.enonic.com/starters[Starters]
+* <<api#, Platform libraries and APIs>>
+* https://market.enonic.com/libraries[Other libraries]
+
+The CLI plays a central role in orhchestrating development activities, including downloading distros, setting up new development projects, building and even deploying to productin servers.

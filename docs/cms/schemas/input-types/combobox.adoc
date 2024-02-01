@@ -1,0 +1,32 @@
+= ComboBox input type
+
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+Combobox allows you to select one or more options from a statically defined list.
+
+== Appearance
+
+The example below demonstrates use of combobox with two options, where both may be selected.
+
+image::Combobox.png[two options, both can be selected via checkboxes, 700]
+
+== Usage
+
+[source,xml]
+----
+<input name="mycombobox" type="ComboBox">
+  <label>My Combobox</label>
+  <occurrences minimum="1" maximum="2"/>
+  <config>
+    <option value="one">Option One</option>  // <1>
+    <option value="two">Option Two</option>
+  </config>
+  <default>one</default>  // <2>
+</input>
+----
+<1> *option* elements and the `@value` attribute defines the actual value to store when the option is selected. Multiple `option` elements are allowed and ordered.
+<2> *default* is optional, and may be equal to _one_ of the option values.
+

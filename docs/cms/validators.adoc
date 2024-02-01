@@ -53,7 +53,7 @@ There are three types of validation errors:
 - `AttachmentValidationError` - an error connected to content attachment
 
 Here is an example of a general message builder:
-[source,java]
+[source,Java]
 ----
     ValidationError
         .generalError( ValidationErrorCode.from( ApplicationKey.from( "my.app" ), "custom.invalid" ) )

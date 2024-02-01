@@ -1,26 +1,26 @@
-= API and core libraries
+= Platform APIs and libraries
 include::.variables.adoc[]
 :toc: right
 :imagesdir: images
+This section offers detailed documentation on our APIs.
 
 
-Enonic XP provides multiple interfaces, from web endpoints, via Javascript libraries to the core Java API.
-This section offers detailed documentation on all our APIs.
+== Introduction
 
-TIP: Looking for our *Headless CMS GraphQL API?* It is available as an https://developer.enonic.com/docs/guillotine/stable[application library]. To give it a quick spin, launch a cloud trial or check out the https://developer.enonic.com/guides/headless-cms-intro[headless CMS introduction guide]
+Enonic XP provides multiple APIs, from web endpoints, via Core Javascript libraries to the Java API.
 
-
+TIP: Looking for our *Headless CMS GraphQL API?* To give it a quick spin, https://www.enonic.com/sign-up[sign up for a Free Plan] or visit the https://developer.enonic.com/start[Developer quickstart].
 
 == Endpoints
 
-There are two endpoints for calling REST-methods: Management and Statistics.
-These provide many options for querying the server and executing commands to manage the data.
+The <<runtime#, XP Runtime>> provides access to various <<runtime/engines#, Engines and services>>, including the REST-style <<runtime/management#, Management>> and <<runtime/statistics#, Statistics API>>s. 
 
-== JavaScript libraries
+== JavaScript API
 
-Enonic XP comes with a large number of build in JavaScript libraries for developing websites.
-Some are straight helper classes, other provide interaction with the data in the site.
-Please check out all of them in the submenu.
+XP ships with a large number of build in JavaScript libraries that can be accessed when <<development#, developing Enonic apps>>. These are listed below this page in the documentation menu.
+
+Alternatively browse our https://developer.enonic.com/jsdoc[JSDocs].
+
 
 == TypeScript definitions
 
@@ -28,7 +28,7 @@ Please check out all of them in the submenu.
 
 To add types for corresponding library use NPM (or similar package manager) and install them as any other dependency. All types can be found under https://www.npmjs.com/org/enonic-types[@enonic-types] organisation on NPM.
 
-==== Libraries
+=== Libraries
 
 For example, you have a `lib-auth` gradle dependency:
 
@@ -80,7 +80,7 @@ and then import them in your TypeScript code:
 import type {Content} from '@enonic-types/core';
 ```
 
-===== Content
+==== Content
 
 `Content` contains the `x` property that has a very special `XpXData` type.
 
@@ -99,7 +99,7 @@ declare global {
 }
 ```
 
-===== Additional types
+==== Additional types
 
 `Content` is a complex type that contains unions and maps that are not exported but may be needed during the development. Actually, these types can easily be retrieved from the `Content` itself:
 
@@ -114,7 +114,7 @@ type Workflow = Content['workflow'];
 ```
 
 
-=== Use
+=== Usage
 
 ==== require
 
@@ -161,7 +161,7 @@ declare global {
 }
 ```
 
-===== Other imports
+==== Other imports
 
 If you want to use custom import functions, like `__non_webpack_require__` with Webpack, just use `XpRequire` from `global` types for this:
 
@@ -169,7 +169,7 @@ If you want to use custom import functions, like `__non_webpack_require__` with 
 declare const __non_webpack_require__: XpRequire;
 ```
 
-==== Beans
+=== Beans
 
 To create a new Java bean, the `__.newBean()` function must be used. Making it return a proper type can be done in two ways. Let's say, you have created an interface for that bean somewhere in your project:
 
@@ -179,7 +179,7 @@ interface SomeHelper {
 }
 ```
 
-===== Option 1
+==== Option 1
 
 You can pass the type argument explicitly. This option is a bit cleaner.
 
@@ -187,7 +187,7 @@ You can pass the type argument explicitly. This option is a bit cleaner.
 const helper = __.newBean<SomeHelper>('com.me.project.SomeHelper');
 ```
 
-===== Option 2
+==== Option 2
 
 Or you can map the bean name to bean interface. It may be a preferable way to do it, if the bean is used across multiple files:
 

@@ -1,0 +1,29 @@
+= ImageSelector input type
+
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+The ImageSelector is a specialized version of the <<contentselector#, ContentSelector>> that is limited to selecting images (content of type "media:image"), but also upload new images.
+
+== Appearance
+
+image::Image-selector.png[Input box with a grid of images to select below it, 500]
+
+== Usage
+
+[source,xml]
+----
+<input name="myimage" type="ImageSelector">
+  <label>My Image</label>
+  <occurrences minimum="0" maximum="1"/>
+  <config>  // <1>
+    <allowPath>${site}/*</allowPath>  // <2>
+    <treeMode>true</treeMode>
+    <hideToggleIcon>true</hideToggleIcon>
+  </config>
+</input>
+----
+<1> With the exception of `<allowContentType>` (which is not supported here) and `<allowPath>`, ImageSelector supports the same configuration options as <<contentselector#, ContentSelector>>.
+<2> By default, Image Selector displays all images from the root. If you want to limit images to the same site, use `<allowPath>${site}/*</allowPath>`

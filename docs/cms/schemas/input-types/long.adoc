@@ -1,0 +1,33 @@
+= Long input type
+
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+A simple input for storing integer numbers.
+
+== Appearance
+
+image::Long.png[Number input showing a large number, 700]
+
+== Usage
+
+[source,xml]
+----
+<input name="mylong" type="Long">
+  <label>My Long</label>
+  <default>42</default>  // <1>
+</input>
+
+<input name="degrees" type="Long">
+  <label>Degrees</label>
+  <config>
+    <min>0</min>  // <2>
+    <max>360</max>  // <3>
+  </config>
+</input>
+----
+<1> *default* can be any Integer number
+<2> *config/min* optionally specifies the minimum allowed value
+<3> *config/max* optionally specifies the maximum allowed value

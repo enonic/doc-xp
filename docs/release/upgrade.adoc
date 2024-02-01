@@ -79,8 +79,8 @@ IMPORTANT: In `7.13.1` you can bring back the old deprecated behaviour making Co
 * Content API does not allow to create/modify/delete content directly on `master` branch or to publish to any other branch than `master`.
 * Content `PENDING_DELETE` state is no longer in use. Content deletion no longer happens during unpublishing. Instead, content deletion forces content to be unpublished immediately.
 * Node state has been deprecated and is no longer in use, as it was only used for content's `PENDING_DELETE` status.
-* Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<deployment/config#_content, content config>>.
-* `draft` branch is now restricted for unauthenticated access. By default, only `system.admin.login` role has access. Additional principles can be configured in <<deployment/config#_portal, portal config>> via `draftBranchAllowedFor` setting. Note that `system.admin` role always has access, regardless of the config.
+* Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<../deployment/config#content_config, content config>>.
+* `draft` branch is now restricted for unauthenticated access. By default, only `system.admin.login` role has access. Additional principles can be configured in <<../deployment/config#portal, portal config>> via `draftBranchAllowedFor` setting. Note that `system.admin` role always has access, regardless of the config.
 * Bundled GraalVM has been updated to version 22.3.1. Other JVM versions are not supported, although they may also work.
 
 == v7.11 notes
@@ -89,7 +89,7 @@ WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (H
 A full restart is required in order to prevent loss of data or state.
 
 * Virtual application schemas may now override schema present in any installed (real) application.
-To prevent virtual applications from overriding schemas use <<deployment/config#_application, application config>> `virtual.schema.override = false`
+To prevent virtual applications from overriding schemas use <<../deployment/config#application, application config>> `virtual.schema.override = false`
 or disable virtual applications completely `virtual.enabled = false`
 
 * OSGi Compendium r8 is now provided as API dependency for Java Core API. (Component, Component Annotations and CM only)
@@ -99,15 +99,16 @@ This may cause some compilation errors when XP application dependency version is
 This may cause broken text on pages with page templates which specify content meta tag value other than `utf-8`.
 Make sure all your page templates use UTF-8. it is also recommended to use `<meta charset="utf-8">` tag on all pages.
 
-* Importing default exports from Javascript API no longer works, you have to specify name of an export or use an alias (`import * as...`). So if you imported an entire JS lib like this:
-
+* TypeScript imports. As of this version, all Enonic libraries are completely rewritten in TypeScript. If you have been using TypesScript in your application, it may no longer be compiling. Importing `default` exports are no longer supported, and depending on your build-setup and code, you may need to change your import statements. 
+For example:
++
+.Old approach
 [source,Javascript]
 ----
 import nodeLib from '/lib/xp/node';
 ----
-
-then you have to change the import to this:
-
++
+.New approach
 [source,Javascript]
 ----
 import * as nodeLib from '/lib/xp/node';
@@ -115,9 +116,9 @@ import * as nodeLib from '/lib/xp/node';
 
 == v7.10 notes
 
-* XP now bundled with GraalVM based JDK.
-We do not support running XP on other JDK except for the one bundled in distributive.
-Note that JavaScript Engine is still Nashorn.
+* XP now bundles the GraalVM based JDK.
+We do not support running XP on other JDK except for the one bundled in the distro.
+Note that the default JavaScript Engine is still Nashorn.
 
 * Experimental support of arm64 (aarch64) based CPUs is added.
 You may see a WARNING message on XP startup `java.lang.UnsatisfiedLinkError: Can’t load library ...`. It does not affect XP operations and can be ignored.
@@ -125,17 +126,17 @@ You may see a WARNING message on XP startup `java.lang.UnsatisfiedLinkError: Can
 
 == v7.9 notes
 
-* <<deployment/config#_portal, Portal config>> now specifies default `Content-Security-Policy` for attachments and images.
+* <<../deployment/config#portal, Portal config>> now specifies default `Content-Security-Policy` for attachments and images.
 It is possible to configure the header via `media.contentSecurityPolicy` and `media.contentSecurityPolicy.svg` values. Empty value disables `Content-Security-Policy` for attachments and images.
 Default value is crafted to prevent common Persistent XSS attacks.
 
-* <<deployment/config#_admin, Admin config>> now specifies default Content-Security-Policy for page `preview` and `inline` mode (used by Content Studio).
+* <<../deployment/config#admin, Admin config>> now specifies default Content-Security-Policy for page `preview` and `inline` mode (used by Content Studio).
 It is possible to configure the header via `site.preview.contentSecurityPolicy` value or go back to previous behavior by setting `site.preview.contentSecurityPolicy` to an empty value.
 Default value is crafted to prevent common Persistent XSS attacks in Content Studio.
 
-* Certain Security headers are now specified in <<deployment/config#_header_filter, header filter config>> by default.
+* Certain Security headers are now specified in <<../deployment/config#header_filter, header filter config>> by default.
 Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from an IFrame.
-You can customize default headers in <<deployment/config#_header_filter, header filter config>> `headerConfig` value to get back to previous behaviour.
+You can customize default headers in <<../deployment/config#header_filter, header filter config>> `headerConfig` value to get back to previous behaviour.
 
 == v7.8 notes
 
@@ -153,7 +154,7 @@ It was never documented or supported for external use. We recommend implementing
 
 * JaxRS API backend was updated to the next major release. We didn't observe any incompatibilities, but if your application uses XP JaxRS API make sure you thoroughly test it.
 
-* Image Service now has memory usage constraints  configured by `memoryLimit` parameter in <<../deployment/config#_image, Configuration Files / Image>>.
+* Image Service now has memory usage constraints  configured by `memoryLimit` parameter in <<../deployment/config#image, Configuration Files / Image>>.
 This may cause `429 Too Many Requests` HTTP responses for images, if they are not yet scaled at least once and put into disk cache.
 
 * XP 7.8 fixed a bug when `lib-portal.getContent()` would return a non-empty value in a context where no content should be returned, for example
@@ -207,23 +208,23 @@ versions (where this bug has been mitigated) before upgrading to XP 7.8.
 WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (Hazelcast) has been updated in this release. A full restart is required in order to prevent loss of data or state.
 
 * Session cookie specifies `SameSite=Lax` by default. It is similar to modern browsers default value except for "Lax + POST mitigation".
-You can revert to previous behavior by setting `session.cookieSameSite =` in <<../deployment/config#_jetty, Configuration Files / Jetty>>
+You can revert to previous behavior by setting `session.cookieSameSite =` in <<../deployment/config#jetty, Configuration Files / Jetty>>
 
 * Native Java primitive arrays are now converted to JavaScript arrays. You may have to adapt your application to the new behaviour if your code was using workarounds.
 
-* Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <<../deployment/config#_image, Configuration Files / Image>>
+* Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <<../deployment/config#image, Configuration Files / Image>>
 
 * Image Service has more eager validation of scale, filters, background and quality parameter values. Make sure the requests to Image Service use only correct/supported values.
 
 * Built-in Embed Macro now requires body part to be HTML escaped. In general, it should not cause issues because ContentStudio HTML editor always escapes macro body.
 
 * Content attachment file names can no longer contain suspicious characters.
-You can revert to previous behavior by setting `attachments.allowUnsafeNames = true` in <<../deployment/config#_content, Configuration Files / Content>>
+You can revert to previous behavior by setting `attachments.allowUnsafeNames = true` in <<../deployment/config#content, Configuration Files / Content>>
 
 * Assets Service URL fingerprint part now uses application's "build time" instead of application's startup time. Make sure "build time" always changes for new versions of an application (this happens automatically if you use the standard xp build system)
 
 * Default Cache-Control headers for Assets Service and Portal Media Attachments have been changed.
-You can change default settings in <<../deployment/config#_portal, Configuration Files / Portal>>
+You can change default settings in <<../deployment/config#portal, Configuration Files / Portal>>
 
 * ResourceService no longer considers directories in jar as existing resources.
 If application code relies on checking directory existence in jar, consider checking existence of a file inside that directory instead.
@@ -238,7 +239,7 @@ You can switch back to legacy mode by setting `contentTypePatternMode = LEGACY` 
 
 == v7.6 notes
 * Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <<../framework/tasks#_distributable, Tasks / Distributable>> for more information.
-* XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to https://market.enonic.com. URL can be changed in <<../deployment/config#_market, Configuration Files / Market>>.
+* XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to https://market.enonic.com. URL can be changed in <<../deployment/config#market, Configuration Files / Market>>.
 
 == v7.5 notes
 v7.5 is backward compatible with earlier versions

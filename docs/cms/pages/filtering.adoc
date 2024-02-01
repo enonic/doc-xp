@@ -1,0 +1,38 @@
+= Component filtering
+:toc: right
+:imagesdir: media
+
+Optionally limit which pages a component can be placed on.
+
+== Usage
+
+Some components are only relevant for selected content types. To limit which pages a component may be placed on, add an allow configuration to it:
+
+.Limit part to specific content types
+[source,xml]
+----
+<part>
+  <display-name>My article part</display-name>
+  <form></form>
+  <config>
+    <allow-on-content-type>my.cool.app:my-cool-type</allow-on-content-type>
+    <allow-on-content-type>${app}:article*</allow-on-content-type>
+  </config>
+</part>
+----
+
+You may also use regular expressions:
+
+.Advanced example using regular expression
+[source,xml]
+----
+<part>
+  <display-name>My article part</display-name>
+  <form></form>
+  <config>
+    <allow-on-content-type>^(?!.*[:]post$).*$</allow-on-content-type>
+  </config>
+</part>
+----
+
+NOTE: This restriction is only implemented in Content Studio, and will not be enforced by the API.

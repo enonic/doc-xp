@@ -1,0 +1,33 @@
+= Field Set
+:toc: right
+:imagesdir: images
+
+A field set may be used to group items visually under a common label and distinguish this group from the rest of the form.
+
+== Appearance
+
+Field sets seen in Content Studio.
+
+image::fieldset-1.png[Example of a fieldset, 689]
+
+== Usage
+
+.Sample field-set definition containing a single input-type
+[source,xml]
+----
+<field-set>  // <1>
+  <label i18n="metadata.label">Metadata</label>
+  <items>  // <2>
+    <input name="tags" type="Tag">
+      <label>Tags for tag cloud</label>
+      <occurrences minimum="0" maximum="5"/>
+    </input>
+  </items>
+</field-set>
+----
+<1> *field-set* does not need a name since it is only visual, and does not affect the data model
+<2> *items* allow placement of form items to be contained within it
+
+== Output
+
+Field sets do not affect the output of a schema.

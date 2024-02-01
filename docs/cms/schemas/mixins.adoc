@@ -1,0 +1,57 @@
+= Mixin schemas
+:toc: right
+:imagesdir: images
+
+If you need to repeat the exact same form structure across several different schemas, consider using a mixin.
+
+== Usage
+
+Like other schemas, mixins schema must be placed in a special folder structure `site/mixins/[name]/[name].xml`. I.e. `src/main/resources/site/mixins/address/address.xml`.
+
+.Sample mixin
+[source,xml]
+----
+<mixin>
+  <display-name>Full address</display-name>
+  <form>
+    <input type="TextLine" name="addressLine">
+      <label>Street address</label>
+      <occurrences minimum="0" maximum="2"/>
+    </input>
+    <input type="TextLine" name="city">
+      <label>City</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="zipCode">
+      <label>Zip code</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="country">
+      <label>Country</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+</mixin>
+----
+
+Below is an example of a simple content type that references the address mixin above.
+
+The mixin fields will simply be merged into the content type schema. 
+
+[source,xml]
+----
+<content-type>
+  <display-name>Using mixins</display-name>
+  <form>
+    <input type="TextLine" name="firstName">
+      <label>First Name</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="lastName">
+      <label>Last Name</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <mixin name="address"/>
+  </form>
+</content-type>
+----

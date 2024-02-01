@@ -1,0 +1,93 @@
+= Item Set
+:toc: right
+:imagesdir: images
+
+Item sets provide a special capability that allows you to nest form items.
+
+Item sets are both visually and semantically grouped as the name of the item set is used in the persisted property structure. An item set actually produces a property set.
+
+A new or a single occurrence of an item set is by default expanded and can be collapsed by a click anywhere inside the item set header.
+
+Multiple occurrences of an item set will be collapsed by default to ensure better readability of a form containing several occurrences of complex item sets.
+
+== Appearance
+
+Below: A single instance of an itemset for "Contact info".
+
+image::itemset-1.png[Single expanded item-set, 673]
+
+Below: The label of an item set will dynamically adapt to reflect  content inside of it.
+
+image::itemset-2.png[Two collapsed item sets, where the label reflects the text inside, 663]
+
+Below: Collapse item sets to get an overview and easily organize the list of items.
+
+image::itemset-3.png[Context menu allows to add or remove new items within the list, 665]
+
+Below: Easily add new items within a list of item sets.
+
+image::itemset-4.png[Item-set with context menu, 690]
+
+Below: Item sets may be nested to support complex content models.
+
+image::itemset-5.png[Nested item-sets, 670]
+
+
+== Usage
+
+The definition below will allow for multiple entries of phone numbers with labels:
+
+.Item Set example with two inputs
+[source,xml]
+----
+<item-set name="contact_info">  // <1>
+  <label i18n="contact_info.label">Contact Info</label>  // <2>
+  <occurrences minimum="0" maximum="0"/>  // <3>
+  <items>
+    <input name="label" type="TextLine">
+      <label>Label</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input name="phone_number" type="TextLine">
+      <label>Phone Number</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </items>
+</item-set>
+----
+<1> *name* defines the mapping to the property name
+<2> *label* - The displayed identfier of the input.
+<3> *occurences* control the minimum and maximum instances of the ItemSet that may be created
+
+TIP: It is also possible to nest item sets inside each other
+
+== Output
+
+The above definition would produce a property format like this:
+
+.Example with a single item
+[source,JSON]
+----
+{ 
+  contact_info: {
+    label: "home",
+    phone_number: "+4712345678"  
+  }
+}
+----
+
+.Example with multipe items
+[source,JSON]
+----
+{ 
+  contact_info: [{
+    label: "home",
+    phone_number: "+4712345678"  
+  },{
+    label: "office",
+     dphone_number: "+123456789"
+  }]
+}
+----
+
+NOTE: Arrays are added based on the actual number of items created, not the schema definition.

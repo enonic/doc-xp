@@ -1,0 +1,74 @@
+= Page Contributions
+:toc: right
+:imagesdir: images
+
+Lets components, macros, and processors contribute content to the response HTML header and/or footer.
+
+NOTE: Only available in the <<../runtime/engines/site-engine#, Site Engine>>
+
+== Introduction
+
+Some pages and applications require specific scripts to be available within the HTML response of a page, typically placed within a specific location of the markup such as in the <head> section, or close to the body end tag.
+
+Example use cases are:
+
+* Let a part contribute JavaScript to the page's ``<head>`` section.
+* Let a part contribute custom CSS to the ``<head>`` of that page.
+* A layout might add a JavaScript tracker to the end of the ``<body>`` of the page.
+
+NOTE: Page contributions will only be triggered if the response type is `text/html` (which is the default)
+
+There are four positions in the result HTML where contributed content can be inserted:
+
+headBegin:: After the `<head>` opening tag.
+headEnd:: Before the `</head>` closing tag.
+bodyBegin:: After the `<body>` opening tag.
+bodyEnd:: Before the `</body>` closing tag.
+
+== Usage
+
+The component or controller must add a `pageContributions` property in the <<../../framework/http#http-response,HTTP response object>>.
+
+Sample controller return adding a script element to `headEnd`.
+
+[source,js]
+----
+return {
+  body: '<p>Some markup</p>',
+  pageContributions: {
+    headEnd: [
+      "<script>My script</script>"
+    ]
+  }
+};
+----
+
+Changing the `headEnd` to one of the other possible positions will affect where the code you contributed is merged in the response markup.
+
+.Sample with multiple contributions
+[source,js]
+----
+return {
+  "body": "<div>...</div>",
+  "pageContributions": {
+    "headEnd": "value",
+    "bodyEnd": [
+      "value1", "value2"
+    ]
+  }
+};
+
+----
+
+* Page Contributions are optional.
+* Contribution values are treated as plain text.
+* Values must be unique within each injection point, duplicates will be truncated.
+* If the target tag does not exist in the response body, the contribution will be ignored. I.e. if there is no `<head>` tag, the contributions to `headBegin` and  `headEnd` will be ignored.
+* For consistency, all positions are automatically treated arrays in the aggregated response object, even if there is only a single value.
+
+== Contribution merging
+
+Page contributions are merged into the response markup during a specific step in the <<../../runtime/engines/site-engine#, site engine>>, called `Contributions filter`. It occurs after <<processors#, page processors>> and before <<mappings#, the site filters>>.
+
+
+NOTE: Duplicate page contributions will automatically be removed, so developers do not have to worry about this.

@@ -1,0 +1,40 @@
+= Layout components
+:toc: right
+:imagesdir: media
+
+Use layouts to organize components in columns or for other appearance effects.
+
+== Introduction
+
+Layouts are primarily used to visually organize or format your page. Layouts should always contain regions, and may optionally be used in combination with forms.
+
+== Usage
+
+Create a layout by placing a descriptor file in your project, like this: `src/main/resources/site/layouts/<layout-name>/<layout-name>.xml.
+
+Similar to the page descriptor, the layout descriptor supports both schema forms and <<regions#, regions>>. 
+
+.Sample layout with three regions
+[source,xml]
+----
+<layout>
+  <display-name>3 regions</display-name>
+  <form />
+  <regions>
+    <region name="left"/>
+    <region name="main"/>
+    <region name="right"/>
+  </regions>
+</layout>
+----
+
+Here is what an empty layout with tree regions might look like in Content Studio's visual page editor:
+
+image::3-region-layout-wrapped.png[Layout selected in the page editor, 1012px]
+
+
+== Rendering
+
+Layouts can be rendered using your favorite front-end framework. 
+
+Visit the <<../../framework/components#, component rendering>> section for details on rendering layouts with the Enonic Framework.

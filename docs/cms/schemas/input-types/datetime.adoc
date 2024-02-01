@@ -1,0 +1,89 @@
+= DateTime input type
+
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+A simple field for dates with time.  A pop-up box with a calendar and time selector allows easy editing.
+
+== Appearance
+
+The user format is `yyyy-MM-dd hh:mm` for example, `2015-02-09 09:00`. The date-time could be of type
+`local` (no timezone) or with a timezone. This is done using configuration:
+
+image::Datetime-selector.png[Input field with both a calander and time selection above, 500]
+
+
+== Usage
+
+[source,xml]
+----
+<input name="mydatetime" type="DateTime">
+  <label>My DateTime</label>
+  <config>
+    <timezone>true</timezone>  // <1>
+  </config>
+  <default>2011-09-12</default>  // <2>
+</input>
+----
+<1> *timezone* set to `true` if timezone information should be used. Default is `false`.
+<2> *default* date value to be used. The format for the default date value can be:
+
+====
+* Combined date and time in ISO 8601 format, with timezone: ``yyyy-MM-ddThh:mm±hh:mm``  (e.g. "2016-12-31T23:59+01:00")
+* Combined date and time in ISO 8601 format, without timezone: ``yyyy-MM-ddThh:mm``  (e.g. "2016-12-31T23:59")
+* Relative datetime expression (e.g. "+1year -12hours")
+
+Note that the ISO8601 format consists of concatenating a complete date expression, the letter ``T`` as a delimiter, and a valid time expression.
+
+The timezone offset is a plus or minus sign, followed by an hour offset, followed by a colon, followed by a minute offset.
+A timezone offset of zero can also be represented as 'Z', meaning UTC or Zulu time. It is equivalent to offset `+00:00`.
+
+A relative date expression is a sequence of one or more datetime offsets.
+An offset consists of: a plus or minus sign, followed by an integer, followed by a date/time unit string (e.g. "+3 days")
+
+.Unit strings
+|===
+| Singular | Plural | initial letter
+
+| "year" | "years" | "y"
+| "month"| "months"| "M"
+| "week" | "weeks" | "w"
+| "day"  | "days"  | "d"
+| "hour" | "hours" | "h"
+| "minute" | "minutes" | "m"
+|===
+
+An offset can also be the string ``now``, which means current date and time.
+====
+
+If `<default>` value is set for an input, the Date/Time picker will display "*Set default*" button for setting the default value with one click.
+
+Examples:
+
+[source,xml]
+----
+<input name="dateTimeDefaultTz" type="DateTime">
+  <label>DateTime (with tz and default value)</label>
+  <config>
+    <timezone>true</timezone>
+  </config>
+  <default>2000-01-01T12:30+01:00</default>
+</input>
+
+<input name="dateTimeDefaultNoTz" type="DateTime">
+  <label>DateTime (without tz and default value)</label>
+  <default>2000-01-01T12:30</default>
+</input>
+
+<input name="dateTimeRelative" type="DateTime">
+  <label>DateTime (relative default value)</label>
+  <default>+1year -12hours</default>
+</input>
+
+<input name="dateTimeNow" type="DateTime">
+  <label>DateTime (current time as default value)</label>
+  <default>now</default>
+</input>
+----

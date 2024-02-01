@@ -5,7 +5,7 @@
 X-data (short for _eXtra data_) makes it possible to dynamically extend existing content types with a new form.
 When editing content, X-data fields will be displayed inside a separate step in the content form.
 
-TIP: If you want to inject fields inside content type's form rather than appending a form, consider using <<mixins.adoc#,a mixin>>
+TIP: If you want to inject fields inside content type's form rather than appending a form, consider using <<schemas/mixins.adoc#,a mixin>>
 
 == Definition
 
@@ -36,36 +36,27 @@ The file with X-data schema must be placed in the folder `site/x-data/[name]` an
 </x-data>
 ----
 
-=== Usage
+== Usage
 
-Below is an example of `site.xml` which injects X-data inside all content types.
+To activate X-data for your project or site, it must be referenced in the application's `site.xml`. The example below adds the `address` X-data to all content types within its scope.
 
+./src/main/resource/site/site.xml
 [source,xml]
 ----
 <site>
   <x-data name="address"/>
-  <form>
-    <input type="TextLine" name="company">
-      <label>Company</label>
-      <occurrences minimum="1" maximum="1"/>
-    </input>
-    <input type="TextArea" name="description">
-      <label>Description</label>
-      <occurrences minimum="1" maximum="1"/>
-    </input>
-  </form>
+  <form/>
 </site>
 ----
 
 == Configuration
 
-It's possible to restrict X-data for specific content types using regular expressions. This is especially convenient when you apply X-data
-to all content types via `site.xml` but want to exclude some content types.
+It's possible to restrict X-data for specific content types using regular expressions. This is especially convenient when you apply X-data to all content types via `site.xml` but want to exclude some content types.
 
 Use regular expressions in the `allowContentTypes` attribute of the `<x-data/>` field inside `site.xml` to enable or disable it for specific content type(s).
 By default x-data will be added to content items of all types with no option to remove it but you can make it optional by setting `optional` attribute to _true_. Optional x-data has to be manually enabled inside Content Wizard to be added to the content data.
 
-If `allowContentTypes` and `optional` attributes are not set, the x-data will automatically be enabled for all content types. See <<input-types#allowContentType, modes>> of content type filtering.
+If `allowContentTypes` and `optional` attributes are not set, the x-data will automatically be enabled for all content types. See <<input-types/contentselector#allowContentType, modes>> of content type filtering.
 
 [source,xml]
 ----
@@ -73,16 +64,7 @@ If `allowContentTypes` and `optional` attributes are not set, the x-data will au
   <x-data name="my-x-data-1" />
   <x-data name="my-x-data-2" allowContentTypes="^(?!base:folder$).*" />
   <x-data name="my-x-data-3" allowContentTypes="portal:site" optional="true" />
-  <form>
-    <input type="TextLine" name="company">
-      <label>Company</label>
-      <occurrences minimum="1" maximum="1"/>
-    </input>
-    <input type="TextArea" name="description">
-      <label>Description</label>
-      <occurrences minimum="1" maximum="1"/>
-    </input>
-  </form>
+  <form/>
 </site>
 ----
 

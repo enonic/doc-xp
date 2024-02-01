@@ -1,0 +1,45 @@
+= RadioButton input type
+
+:imagesdir: images
+:toc: right
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+
+An input type for selecting _one_ of the available options defined in the `config` element.
+
+
+== Appearance
+image::Radio-buttons.png[two button where one of them is selected, 200]
+
+
+== Usage
+
+[source,xml]
+----
+<input name="myradiobutton" type="RadioButton">
+  <label>My RadioButton</label>
+  <occurrences minimum="1" maximum="1"/>  // <1>
+  <config>
+    <option value="one" i18n="option_one.label">Option One</option>  // <2>
+    <option value="two" i18n="option_two.label">Option Two</option>
+  </config>
+  <default>one</default>  // <3>
+</input>
+----
+<1> *occurences* only make supports minumum=1 or 0 - maximum will always be 1.
+<2> *option* elements and the `@value` attribute defines the actual value to store when the option is selected.
+Multiple ``option`` elements are allowed and ordered. Optional `i18n` attribute can be used to localise the option label.
+<3> *default* is optional, and may be equal to one of the option values.
+
+[#tag]
+== Tag
+
+A simple input for adding free-text tags. Tags will be autocompleted based on tags in other items with the same property name.
+
+[source,xml]
+----
+<input name="mytag" type="Tag">
+  <label>My Tag</label>
+  <occurrences minimum="0" maximum="0"/>
+</input>
+----

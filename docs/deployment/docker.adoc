@@ -1,4 +1,5 @@
 = Docker image
+include::../.variables.adoc[]
 :toc: right
 
 This section describes the official Enonic XP docker image as well how to configure and run it.
@@ -11,9 +12,9 @@ If you just want to try out the image, with no data persistence, you can run thi
 
 NOTE: Running this command requires you to have docker installed.
 
-[source,bash]
+[source,bash,subs="attributes"]
 ----
-docker run -it --rm -p 8080:8080 enonic/xp:7.12.2-ubuntu
+docker run -it --rm -p 8080:8080 enonic/xp:{version}-ubuntu
 ----
 
 == Image description
@@ -31,7 +32,7 @@ The goals of this docker image is to:
 
 === Base image
 
-Every time the Enonic XP image is built it will be based off the latest `enonic/graalvm` docker image. This ensures the latest updates to the JVM and OS.
+Every time the Enonic XP image is built it will be based off the latest https://hub.docker.com/r/enonic/graalvm[enonic/graalvm] docker image. This ensures the latest updates to the JVM and OS.
 
 === Enforced best practices
 
@@ -86,7 +87,7 @@ $XP_HOME/work:: Various cached files used by Enonic XP, e.g. resized images.
 [#java-heap-memory]
 === Java heap memory
 
-Since this image uses Java 11 it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:
+Since this image uses a modern Java VM, it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:
 
 * set the Java heap size to `30%` of the available memory to the container
 * if the Enonic XP node is a pure master node, set the Java heap size to `75%` of the available memory to the container
@@ -99,16 +100,16 @@ Parameters to achive this are described under the <<xp-opts>> section.
 
 The image does contain the standard configuration that comes with all Enonic XP distribution. Depending on how you mount volumes into the container you might override that directory. Consider this command:
 
-[source,bash]
+[source,bash,subs="attributes"]
 ----
-docker run -it --rm -v $(pwd)/host_config_dir:/enonic-xp/home/config enonic/xp:7.4.1-ubuntu
+docker run -it --rm -v $(pwd)/host_config_dir:/enonic-xp/home/config enonic/xp:{version}-ubuntu
 ----
 
 This will override the standard configuration directory with the host directory that might be empty, hence no configuration will be present for Enonic XP. This is probably not what you want. We recommend when you are mounting your configuration directory to the container, that you base it on the standard configuration directory provided in the docker image. To get a copy of the standard configuration run:
 
-[source,bash]
+[source,bash,subs="attributes"]
 ----
-docker create --name=tmp enonic/xp:7.4.1-ubuntu
+docker create --name=tmp enonic/xp:{version}-ubuntu
 docker cp tmp:/enonic-xp/home/config config
 docker rm tmp
 ----
@@ -140,7 +141,7 @@ In this subection we list some `XP_OPTS` parameters that are useful when running
 
 ===== Memory
 
-Like described in the <<java-heap-memory>> section, you should set the java heap memory limits. If your machine has 4GB of memory and you want to allocate 75% of that to heap memory, do that by adding to `XP_OPTS`. 
+Like described in the <<java-heap-memory>> section, you should set the java heap memory limits. If your machine has 4GB of memory, and you want to allocate 75% of that to heap memory, do that by adding to `XP_OPTS`.
 
 [source,bash]
 ----
@@ -229,9 +230,9 @@ NOTE: Running commands this section requires you to have docker and docker-compo
 
 First create a directory called `demo`. Lets get our base configuration, so inside the `demo` directory run the command:
 
-[source,bash]
+[source,bash,subs="attributes"]
 ----
-docker create --name=tmp enonic/xp:7.4.1-ubuntu
+docker create --name=tmp enonic/xp:{version}-ubuntu
 docker cp tmp:/enonic-xp/home/config config
 docker rm tmp
 ----
@@ -254,12 +255,12 @@ app.sh add https://repo.enonic.com/public/com/enonic/app/snapshotter/3.0.2/snaps
 Now we are almost ready. Lastly create a file called `docker-compose.yaml` inside the `demo` directory and paste the following into that file.
 
 .docker-compose.yaml
-[source,yaml]
+[source,yaml,subs="attributes"]
 ----
 version: '3'
 services:
   xp:
-    image: enonic/xp:7.4.1-ubuntu
+    image: enonic/xp:{version}-ubuntu
     restart: always
     environment:
       # Assuming this computer has 4 GB of RAM, set JVM heap to 30% of available heap or 1230 MB. Also enable JVM OOME heap dump

@@ -1,0 +1,46 @@
+= Sandboxes
+:toc: right
+:imagesdir: images
+
+Sandboxes are independent Enonic XP development environments
+
+NOTE: Using CLI, and sandbox may be created and started with the following commands: `enonic sandbox create`, `enonic sandbox sttart`.
+
+Below, we dive into details of manually setting up and starting sandboxes:
+
+== Download distro
+
+Start by downloading an <<../deployment/distro#, Enonic XP distribution file>>. This is essentially the software version of the Enonic XP platform.
+
+Distros for your architecture can be downloaded from https://repo.enonic.com/service/rest/repository/browse/public/com/enonic/xp/[the Enonic repo]. Look for folders named `enonic-xp-<architecture>-sdk`.
+
+NOTE: Only distros ending with `sdk` are suitable for development purposes
+
+
+== Starting sandbox
+
+After downloading and unzipping the distro, Enonic XP can be started on your local machine with the following command:
+
+    enonic-xp-<architecture>-sdk-<version>/bin/server.sh
+
+Where <architecture> and <version> match the distro you downloaded.
+
+== Multiple sandboxes
+
+If you wish to run multiple Sandboxes, this can be done by copying the `home` folder (located within your distro) to a new location. Then, use the `XP_HOME` environment variable to let XP know where to find it.
+
+XP_HOME:: Defaults to the `$DISTRO_FOLDER/home/` folder
+
+To set these variables use one of the following approaches:
+
+Linux/MacOS::
+....
+export XP_HOME=/path/to/home
+....
+
+Windows::
+....
+set XP_HOME=c:\path\to\home
+....
+
+
