@@ -448,6 +448,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#rolling_cluster_upgrade">Rolling Cluster upgrade</a></li>
 <li><a href="#full_restart_cluster_upgrade">Full restart Cluster upgrade</a></li>
 <li><a href="#applications">Applications</a></li>
+<li><a href="#v7_14_notes">v7.14 notes</a></li>
 <li><a href="#v7_13_notes">v7.13 notes</a></li>
 <li><a href="#v7_12_notes">v7.12 notes</a></li>
 <li><a href="#v7_11_notes">v7.11 notes</a></li>
@@ -579,6 +580,18 @@ It is important to start the nodes at the same time to avoid timeouts, should an
 <div class="paragraph">
 <p>After upgrading XP, check for new versions of your installed applications from Enonic market.
 We generally always recommend updating your apps to the latest version!</p>
+</div>
+</div>
+<div class="sect1">
+<h2 id="v7_14_notes"><a class="link" href="#v7_14_notes">v7.14 notes</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Content Project root no longer returns 403. It now returns 404 instead. This may affect your availability if it relies on 403 status code.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1309,7 +1322,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-18 14:11:55 UTC
+Last updated 2024-02-01 14:15:37 UTC
 </div>
 </div>
 </body>
