@@ -54,8 +54,8 @@ The localization key must then be declared and localised in the resource bundle.
 <7> *is-built-in* (optional; default: false) Only specified by built-in content types.
 <8> *allow-child-content* (optional; default: true) If false, no content will be allowed to be created or moved under content of this content type
 (e.g. prevents child content under media)
-<9> *allow-child-content-type* (optional) If specified, only content of content types matching specified criteria will be allowed to be created or moved under content of this content type. The pattern matching used is the same as the one described in <<input-types/contentselector#allowContentType, MATCH>>. image:xp-770.svg[XP 7.7.0,opts=inline]
-<10> *form* (required) The custom <<../schemas#forms,Form>> definition for your content type.
+<9> *allow-child-content-type* (optional) If specified, only content of content types matching specified criteria will be allowed to be created or moved under content of this content type. The pattern matching used is the same as the one described in <<./schemas/input-types/contentselector#allowContentType, MATCH>>. image:xp-770.svg[XP 7.7.0,opts=inline]
+<10> *form* (required) The custom <<schemas#forms,Form>> definition for your content type.
 
 NOTE: `allow-child-content-type` will not have effect if `allow-child-content` is set to `false`
 
@@ -238,7 +238,7 @@ To create a content of type `portal:fragment` edit an existing page with Page Ed
 
 A Fragment content can be edited with Page Editor and the changes applied to the component will immediately be available in the pages that include the fragment. When a page containing fragment a component is rendered, the components of the portal:fragment content pointed by the fragment component are rendered in the place of the fragment component.
 
-There is a default page for rendering and edit fragments. The default page does not have any styles defined, but it is possible to render it with the application theme and styles by defining a controller <<./mappings.adoc#,mapping>> with `<match>type:'portal:fragment'</match>`
+There is a default page for rendering and edit fragments. The default page does not have any styles defined, but it is possible to render it with the application theme and styles by defining a controller <<../framework/mappings.adoc#,mapping>> with `<match>type:'portal:fragment'</match>`
 
 === Unstructured (base:unstructured)
 
