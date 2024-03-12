@@ -557,24 +557,6 @@ var result = repo.duplicate({
 });
 ----
 
-== Source
-
-A source definition of repositories:
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Kind | Details
-| repoId | object | Repository ID
-| branch | object | Branch ID
-| user | <<User>> | Optional user to execute the callback with - Default is the default user
-| principals | Array.<string> | Additional principals to execute the callback with
-|===
-
 === exists
 
 Checks if a node exists for the current context.
@@ -1474,6 +1456,24 @@ var result = repo.setRootPermissions({
     _inheritsPermissions: true
 });
 ----
+
+== Source
+
+A source definition of repositories:
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| repoId | object | Repository ID
+| branch | object | Branch ID
+| user | <<User>> | Optional user to execute the callback with - Default is the default user
+| principals | Array.<string> | Additional principals to execute the callback with
+|===
 
 == User
 
