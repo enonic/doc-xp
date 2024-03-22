@@ -36,7 +36,7 @@ image::Html-area-editor.png[Input field with a toolbar at the top. Source and fu
 
 
 TIP: If you are manually outputting contents of an HtmlArea input in your template, you might have to use
-<<../api/lib-portal#processhtml,processHtml()>> function which will process macros and generate correct links inside the HTML content.
+<<../../../api/lib-portal#processhtml,processHtml()>> function which will process macros and generate correct links inside the HTML content.
 
 TIP: HTML Area is configured with default set of tools but the toolbar can be customized. Using the config setting you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. Complete list of supported tools can be found below.
 

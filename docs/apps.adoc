@@ -43,22 +43,27 @@ Starting:: Once installed, applications are automatically started on all nodes. 
 Stopping:: Before uninstalling, applications are automatically stopped on all nodes.
 During the stopping, if it exists, the disposer of the application's main.js script will be executed.
 
+== Configuration
+
+Applications can be configured by adding a <<deployment/config#, custom configuration file>> `<app-name>.cfg` i.e. `my.custom.app.cfg` to your Enonic instance
+
+
 == Use cases
 
 There are endless use cases for the XP platform, but the most common scenarios are listed below:
 
 === Sites
 
-You may build applications that go from serving content from an API (Headless CMS)
-via traditional web sites to Hybrid CMS - offering the best of both worlds.
+You may build applications that go from serving content via a standard GraphQL API, to rendered with the <<framework#, Enonic Framework>>, building your own API or a combination of all of these.
 
 The CMS offering essentially consist of three parts:
 
-* Content Studio - Editorial admin interface, available as an app on Enonic Market
-* Content API - Built on top of the NoSQL Storage
-* Site Engine - Built on top of the HTTP engine
+* Content Studio - Editorial admin interface, available as an app on https://market.enonic.com/vendors/enonic/content-studio[Enonic Market]
+* Content API - Low level API built on top of the NoSQL Storage
+* GraphQL API - The built on top of the Content API, available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market]
+* Site Engine - Content driven rendering engine, based on the HTTP engine
 
-Learn more about the <<cms#,Content Management System>> and the <<runtime#site-engine, site engine>>.
+Learn more about the <<cms#,Content Management System>> and the <<runtime/engines/site-engine, site engine>>.
 
 
 === ID providers
@@ -77,7 +82,7 @@ Unlike sites and web-applications, tasks are not exposed as an end-point.
 Tasks can be started and monitored via the the task API
 Tasks are made by adding one or more JavaScript controllers to your project.
 
-Read more about <<runtime/engines/task-engine#, tasks and the task engine>>
+Read more about <<runtime/task-engine#, tasks and the task engine>>
 
 === Web apps
 

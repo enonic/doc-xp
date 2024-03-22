@@ -277,7 +277,7 @@ Update schemas using fieldsets by removing the `name` attribute.
 
 === Content scope
 
-For all schemas in XP 6, the input types <<../cms/input-types#contentselector,contentSelectors>> and <<../cms/input-types#tag,tag>> defaulted to selecting content across the entire repository.
+For all schemas in XP 6, the input types <<../cms/schemas/input-types/contentselector,contentSelectors>> and <<../cms/schemas/input-types/tag,tag>> defaulted to selecting content across the entire repository.
 The default scope is now reduced to the parent site.
 
 NOTE: mediaSelectors and contentSelector in rich text area still allows selection of content across the entire repository
@@ -491,7 +491,7 @@ include::code/styles.xml[]
 
 Image styles also introduce the ability to use image service filters, and client side CSS styles that are used by the editor.
 
-Read more about Image styles https://developer.enonic.com/docs/content-studio/master/editor/rich-text-editor[here]
+Read more about Image styles https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[here]
 
 
 === Editor XSS

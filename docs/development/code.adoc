@@ -8,16 +8,16 @@ TIP: Get started running. Use one of our https://market.enonic.com/starters[star
 
 == Languages
 
-XP apps are powered by the <<runtime#,XP runtime>>.
+XP apps are powered by the <<../runtime#,XP runtime>>.
 
 Enonic apps may consist of both server.-side and client-side code. They are primarily written in JavaScript/TypeScript. 
 
-Server-side JavaScript must uses XP's <<framework#,Javascript Framework>>
+Server-side JavaScript must uses XP's <<../framework#,Javascript Framework>>
 
 Applications may also use of Java.
 Developers with special requirements can take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same platform instance.
 
-Learn more about <<./framework/java-bridge#,using Java in XP apps>>
+Learn more about <<../framework/java-bridge#,using Java in XP apps>>
 
 == Project structure
 
@@ -113,15 +113,15 @@ site/content-types/::  Contains <<../cms/content-types#,Content type>> definitio
 
 site/processors/:: For post processing of HTML response from pages built with the <<../framework#, Enonic JS framework>>.
 
-site/layouts/:: <<../cms/sites/layouts#,Layout components>> are placed here.
+site/layouts/:: <<../cms/pages/layouts#,Layout components>> are placed here.
 
 site/mixins/:: <<../cms/schemas/mixins#, Reusable schemas>> are placed here.
 
 site/macros/:: <<../cms/macros#, Rich text Macro components>> are placed here.
 
-site/pages/:: <<../cms/components#pages, Page components>> are placed here.
+site/pages/:: <<../cms/pages#, Page components>> are placed here.
 
-site/parts/:: <<../cms/components#part,Part components>> are placed here.
+site/parts/:: <<../cms/pages/parts#,Part components>> are placed here.
 
 site/x-data/:: <<../cms/x-data#, X-data schemas>> are defined here
 
@@ -143,7 +143,7 @@ TIP: Check out https://market.enonic.com/vendors/enonic/library-starter[the libr
 
 A library may consist of the same files and functionality you would find in an application - such as Assets, Content Types and JS controllers.
 
-Enonic libraries are added to your application by declaring a dependency in the <<apps/build#,build>>.
+Enonic libraries are added to your application by declaring a dependency in the <<build#build.gradle, build file>>.
 
 The core functionality of XP is exposed via standard libraries. Check out the <<../api#,Standard Libraries documentation>>. You will also find additional libraries on https://market.enonic.com/libraries[Enonic Market]
 

@@ -117,7 +117,7 @@ exports.get = function (req) {
 
 Component hierarcies are created via <<../cms/pages/regions#, regions>>. Rendering a region essentially boils down to rendering the components of that region.
 
-To render a component, simply leave a component placeholder in your page or layout's response markup. Component placeholders are then identified and rendered by the <<../../runtime/sites/site-engine#, component rendering>> step of the site engine. 
+To render a component, simply leave a component placeholder in your page or layout's response markup. Component placeholders are then identified and rendered by the <<../runtime/engines/site-engine#, component rendering>> step of the site engine. 
 
 As components may contain new regions, with new placeholders, this process will be repeated until there are no more placeholders left in the response.
 
