@@ -285,7 +285,7 @@ fulltext("myData.myProperties.*", "cheese fish cake onion", "OR")
 .Match if "myField" contains any of the given words and "myCategory" = "soup".
 [source,javascript]
 ----
-myCategory = "'soup" AND fulltext("myField", "cheese fish cake onion", "OR")
+myCategory = '"soup" AND fulltext("myField", "cheese fish cake onion", "OR")'
 ----
 
 .Match if "myField" contains all the given words.
@@ -372,7 +372,7 @@ stemmed("_alltext", "fish cake", "OR", "en")
 
 An n-gram is a sequence of n letters from a term. During ngram indexing, the term "foxy" is also indexed as: "f", "fo", and "fox".
 
-When using the nGram search function, we are able get matches, even if the search only contains parts of a term. 
+When using the nGram search function, we are able get matches, even if the search only contains parts of a term.
 This is for instance useful when createing autocomplete functionality.
 The max limit of the ngram tokenizer is 25 characters, meaning that search strings over 25 characters will not match. As such, ngram queries may successfully be combined with the fulltext search function or other query expressions, to both match fragments of words as well as full phrases.
 
@@ -465,6 +465,7 @@ range('publishTo', '', instant('2015-08-01T09:00:00Z'))
 ----
 
 ==== pathMatch()
+[#pathMatch]
 
 The path-match matches a path in a same branch, scoring the paths closest to the given query path first.
 Also, a number of minimum matching elements that must match could be set.
@@ -634,7 +635,7 @@ All nodes have three system-properties concerning the node placement in a branch
 * `_parentPath`: The parent node path.
 * `_path`: The full path of the node.
 
-See the <<pathMatch()>> query function for advanced path matching
+See the <<pathMatch,pathMatch()>> query function for advanced path matching
 
 [NOTE]
 ====
@@ -675,13 +676,13 @@ _parentPath = '/content/mySite/myCategory'
 From time to time, it is also interesting to search for nodes with or without a value:
 
 .Sample query where property myValue "exists"
-[source,json]
+[source]
 ----
 myValue LIKE "*"
 ----
 
 .Sample query where "publish.first" does NOT exists
-[source,json]
+[source]
 ----
 publish.first NOT LIKE "*"
 ----
