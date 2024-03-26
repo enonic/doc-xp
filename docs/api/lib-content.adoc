@@ -336,9 +336,9 @@ An object with the following keys and their values:
 | focalX | number | <optional> | | Focal point for X axis (if content is an image)
 | focalY | number | <optional> | | Focal point for Y axis (if content is an image)
 | caption | string | <optional> | | Caption
-| artist | string \| Array.<string>  | <optional> | | Artist
+| artist | string \| string[]  | <optional> | | Artist
 | copyright | string | <optional> | | Copyright
-| tags | string \| Array.<string> | <optional> | | Tags
+| tags | string \| string[] | <optional> | | Tags
 | workflowInfo | object | <optional> | | Workflow state (default: READY).
 
 |===
@@ -810,7 +810,7 @@ An object with the following properties:
 [.lead]
 Returns
 
-*Array.<string>* : List with ids of dependent content items
+*string[]* : List with ids of dependent content items
 
 
 [.lead]
@@ -1128,7 +1128,7 @@ Returns the list of all the content types currently registered in the system
 [.lead]
 Returns
 
-*Array.<<<ContentType>>>* : Array with all the content types found. See ContentType type definition below
+*<<ContentType>>[]* : Array with all the content types found. See ContentType type definition below
 
 [.lead]
 Examples
@@ -1337,11 +1337,11 @@ An object with the following keys and their values:
 [grid="none"]
 |===
 | Name | Type | Attributes| Default| Description
-| keys | Array.<string> | | | List of all content keys(path or id) that should be published
+| keys | string[] | | | List of all content keys(path or id) that should be published
 | sourceBranch | string | | | _Not in use from_ image:xp-7120.svg[XP 7.12.0,opts=inline]. The branch where the content to be published is stored.
 | targetBranch | string | | | _Not in use since_ image:xp-7120.svg[XP 7.12.0,opts=inline]. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master
 | schedule | <<ScheduleParams>> | <optional> | | Schedule the publish
-| excludeChildrenIds | Array.<string> | <optional> | | List of content keys whose descendants should be excluded from publishing
+| excludeChildrenIds | string[] | <optional> | | List of content keys whose descendants should be excluded from publishing
 | includeDependencies | boolean | <optional> | true | Whether all related content should be included when publishing content
 |===
 
@@ -1423,7 +1423,7 @@ An object with the following keys and their values:
 | filters | object | <optional> | | Filters to apply to query result
 | sort | string/object | <optional> | | Sorting string or <<../storage/dsl#sort, DSL>> expression
 | aggregations | string | <optional> | | Aggregations expression
-| contentTypes | Array.<string> | <optional> | | Content types to filter on
+| contentTypes | string[] | <optional> | | Content types to filter on
 |===
 
 [.lead]
@@ -1682,7 +1682,7 @@ An object with the following keys and their values:
 |===
 | Name | Type | Description
 | key | string | Path or id to the content
-| name | string \| Array.<string> | Attachment name, or array of names
+| name | string \| string[] | Attachment name, or array of names
 |===
 
 [.lead]
@@ -1715,7 +1715,7 @@ An object with the following keys and their values:
 | Name | Type | Description
 | key | string | Path or id to the content
 | projectName | string | A unique id of a Content Layer in which the inherited content item should be reset
-| inherit | Array.<<string>> | Array of inheritance flags (case-sensitive, all upper-case).
+| inherit | string[] | Array of inheritance flags (case-sensitive, all upper-case).
 Supported values are: `CONTENT` (resets any customized content data), `PARENT` (resets item moved under a different parent),
 `NAME` (resets renamed item), `SORT` (resets custom sorting).
 
@@ -1800,7 +1800,7 @@ An object with the following keys and their values:
 | key | string | | Path or id of the content
 | inheritPermissions | boolean | <optional> | Set to true if the content must inherit permissions. Default to false
 | overwriteChildPermissions | boolean | <optional> | Set to true to overwrite child permissions. Default to false
-| permissions | Array.<<PermissionsParams>> | <optional> | Array of permissions
+| permissions | <<PermissionsParams>>[] | <optional> | Array of permissions
 |===
 
 ==== PermissionsParams
@@ -1811,8 +1811,8 @@ An object with the following keys and their values:
 |===
 | Name | Type | Description
 | principal | string | Principal key
-| allow | Array.<string> | Allowed permissions
-| deny | Array.<string> | Denied permissions
+| allow | string[] | Allowed permissions
+| deny | string[] | Denied permissions
 |===
 
 
@@ -1858,13 +1858,13 @@ An object with the following keys and their values:
 [grid="none"]
 |===
 | Name | Type | Description
-| keys | Array.<string> | List of all content keys(path or id) that should be unpublished
+| keys | string[] | List of all content keys(path or id) that should be unpublished
 |===
 
 [.lead]
 Returns
 
-*Array.<string>* : List with ids of the content that were unpublished
+*string[]* : List with ids of the content that were unpublished
 
 [.lead]
 Examples
@@ -1907,7 +1907,7 @@ Fields
 | allowChildContent | boolean | | Whether or not allow creating child items on content of this type
 | displayNameExpression | string | | ES6 string template for generating the content name based on values in the content form
 | icon | <<IconType>> | <optional> | Icon of the content type
-| form | Array.<object> | | Form schema represented as an array of form items: Input, ItemSet, Layout, OptionSet
+| form | object[] | | Form schema represented as an array of form items: Input, ItemSet, Layout, OptionSet
 |===
 
 === IconType

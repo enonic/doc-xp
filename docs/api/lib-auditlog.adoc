@@ -123,7 +123,7 @@ Parameters
 | time | string | <optional> | Log entry timestamp. Defaults to now.
 | source | string | <optional> | Log entry source. Defaults to the application ID.
 | user | string | <optional> | Log entry user. Defaults to the user of current context.
-| objects | array | <optional> | URIs to objects that relate to this log entry. Defaults to empty array.
+| objects | string[] | <optional> | URIs to objects that relate to this log entry. Defaults to empty array.
 | data | object | <optional> | Custom extra data for the this log entry. Defaults to empty object.
 |===
 

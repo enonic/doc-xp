@@ -53,9 +53,9 @@ An object with the following parameters:
 |===
 | Name | Kind | Details
 | from | string | E-mail address and optionally name of message sender
-| to | string \| Array.<string> | E-mail address(es) and optionally name(s) of the message’s recipient(s)
-| cc | string \| Array.<string> | Optional list of carbon copy e-mail address(es)
-| bcc | string \| Array.<string> | Optional list of blind carbon copy e-mail address(es)
+| to | string \| string[] | E-mail address(es) and optionally name(s) of the message’s recipient(s)
+| cc | string \| string[] | Optional list of carbon copy e-mail address(es)
+| bcc | string \| string[] | Optional list of blind carbon copy e-mail address(es)
 | replyTo | string | Optional alternative e-mail address for replies
 | subject | string | Subject line of the message
 | body | string | Text content of the message

@@ -767,7 +767,7 @@ Parameters
 ! Name  ! Type   ! Attributes ! Default ! Description
 ! value ! string !            !         ! Html value string to process.
 ! type  ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
-! image:xp-770.svg[XP 7.7.0,opts=inline] imageWidths  ! Array.<number> ! <optional> ! ! A comma-separated list of image widths. If this parameter is provided, all `<img>` tags will have an additional `srcset` attribute with image URLs generated for specified widths.
+! image:xp-770.svg[XP 7.7.0,opts=inline] imageWidths  ! number[] ! <optional> ! ! A comma-separated list of image widths. If this parameter is provided, all `<img>` tags will have an additional `srcset` attribute with image URLs generated for specified widths.
 ! image:xp-780.svg[XP 7.8.0,opts=inline] imageSizes  ! string ! <optional> !! Specifies the width for an image depending on browser dimensions. The value has the following format: `(media-condition) width`. Multiple sizes are comma-separated.
 !===
 

@@ -22,7 +22,7 @@ Bucket aggregations:: A bucket aggregation places documents matching the query i
 Metrics aggeregations:: A metric aggeregation computes metrics over a set of documents.
 
 Typically, you will divide data into buckets and then use metric aggregations to calculate e.g average values,
-sum, etc for each bucket, if necessary.
+sum, etc. for each bucket, if necessary.
 
 == Aggregations
 
@@ -175,7 +175,7 @@ Parameters
 | field | string | The property path
 | origin | <<origin,Origin>> | The GeoPoint from which the distance is measured.
 | ranges | <<numeric_range,Numeric range>>[] | The range-buckets to create.
-| unit | string | The meassurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).
+| unit | string | The measurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).
 |===
 
 .Sample geoDistance aggregation
@@ -201,7 +201,7 @@ In a future version, there will easier ways of doing this.
 === dateRange
 
 The dateRange aggregation query defines a set of date-ranges that represents a bucket. Only
-documents with properties of type 'DateTime' will considered in the ``dateRange`` aggregation buckets.
+documents with properties of type 'DateTime' will be considered in the ``dateRange`` aggregation buckets.
 
 [.lead]
 Parameters
@@ -232,6 +232,7 @@ include::code/date-range-result.json[]
 
 
 ==== Date-math expression
+[#date_math_expression]
 
 The range fields accepts a date-math expression to calculate the time-spans.
 
@@ -341,6 +342,26 @@ The bucket will contain
 <1> The bucket will contain 100 unto infinity
 
 
+
+== Objects
+
+[#numeric_range]
+=== NumericRange
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Details
+| from | number | <optional> | Range from
+| to | number | <optional> | Range to
+| key | string | <optional> | Identifier
+|===
+
+[#origin]
 === Origin
 
 The GeoPoint from which the distance is measured.
@@ -355,4 +376,20 @@ Fields
 | Name | Type | Details
 | lat | number | Latitude
 | lon | number | Longitude
+|===
+
+[#date_range]
+=== Date range
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Details
+| from | string | <optional> | Range from
+| to | string | <optional> | Range to
+| key | string | <optional> | Identifier
 |===
