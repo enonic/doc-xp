@@ -465,7 +465,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Unlike most applications platforms, Enonic XP ships with an embedded hybrid CMS.</p>
+<p>The pinnacle of Enonic XP is the Content Management API and related tools</p>
 </div>
 </div>
 </div>
@@ -527,7 +527,7 @@ Schemas enable developers to easily define various types of forms used throughou
 For instance, a text input called "title", is mapped to a property called "title" in the underlying document structure.</p>
 </div>
 <div class="paragraph">
-<p>The schema system provides a range of standard <a href="cms/input-types.ahtml">Input types</a>, such as TextLine and ContentSelector.
+<p>The schema system provides a range of standard <a href="cms/schemas/input-types.ahtml">Input types</a>, such as TextLine and ContentSelector.
 It also offers advanced form components such as ItemSets and OptionSets for creating nested sets of data and optional sets of data.</p>
 </div>
 </div>
@@ -571,10 +571,10 @@ It also offers advanced form components such as ItemSets and OptionSets for crea
 </div>
 <div class="paragraph">
 <p>Pages, layouts and parts are all fully customizable through custom controllers and corresponding schemas.
-Get all the details in the <a href="cms/components.ahtml">components section</a></p>
+Get all the details in the <a href="cms/pages.ahtml">pages section</a></p>
 </div>
 <div class="paragraph">
-<p>Available components depends on the application that have been added to your <a href="#sites">Sites</a>.</p>
+<p>Component availability depends on the application that have been added to your <a href="cms/sites.ahtml">site</a>.</p>
 </div>
 </div>
 </div>
@@ -824,7 +824,7 @@ The Web engine requires the name of the app that will handle the request, where 
 </div>
 <div class="paragraph">
 <p>As such, what happens at a specific url is primarily controlled by the editor, rather than the developer directly.
-Developers can still take control over URLs when required, through the use of <a href="framework/filters.ahtml">Filters</a> and <a href="cms/mappings.ahtml">Mappings</a>.</p>
+Developers can still take control over URLs when required, through the use of <a href="framework/filters.ahtml">Filters</a> and <a href="framework/mappings.ahtml">Mappings</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -865,7 +865,7 @@ It also enables developers to instantly make use of the powerful search capabili
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-19 12:06:40 UTC
+Last updated 2024-03-26 09:57:17 UTC
 </div>
 </div>
 </body>

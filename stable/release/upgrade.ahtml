@@ -927,7 +927,7 @@ If application code relies on checking directory existence in jar, consider chec
 <p><code>page-template</code> content now accepts child content, but only <code>fragment</code> and <code>media:*</code>. Attachments are no longer redirected to the nearest template&#8217;s site.</p>
 </li>
 <li>
-<p>input-type&#8217;s <code>allow-content-type</code>, x-data <code>allow-content-types</code> and newest content-type&#8217;s <code>allow-child-content-type</code> share the same <a href="../cms/input-types.ahtml#allowContentType">pattern matching</a>, that is stricter than before.
+<p>input-type&#8217;s <code>allow-content-type</code>, x-data <code>allow-content-types</code> and newest content-type&#8217;s <code>allow-child-content-type</code> share the same <a href="../cms/schemas/input-types/contentselector/.ahtml#allowContentType">pattern matching</a>, that is stricter than before.
 You can switch back to legacy mode by setting <code>contentTypePatternMode = LEGACY</code> in  <a href="../deployment/config.ahtml#admin_rest">Configuration Files / Admin</a> for <code>allow-content-type</code> and <code>allow-content-types</code>, but it won&#8217;t affect <code>allow-child-content-type</code> pattern matching.</p>
 </li>
 </ul>
@@ -1281,7 +1281,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 <div class="paragraph">
 <p>Content Studio is no longer part of the XP core distribution.
 Content Studio is now available as an <a href="https://market.enonic.com/vendors/enonic/content-studio">application on Enonic Market</a>.
-Documentation for Content Studio can be found <a href="https://developer.enonic.com/docs/content-studio/master">here</a>.</p>
+Documentation for Content Studio can be found <a href="https://developer.enonic.com/docs/content-studio">here</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1322,7 +1322,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-19 12:06:40 UTC
+Last updated 2024-03-26 09:57:17 UTC
 </div>
 </div>
 </body>

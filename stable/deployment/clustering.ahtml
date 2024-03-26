@@ -789,7 +789,7 @@ The pre-installed apps can be placed on distinct nodes, but for instance in the 
 <div class="sect2">
 <h3 id="shard_replication"><a class="link" href="#shard_replication">Shard replication</a></h3>
 <div class="paragraph">
-<p>Once your cluster has started you will have to set the number of shard replicas you want the data nodes to store. In this case we have 2 data nodes, so we want 2 copies of each shard in the cluster (1 per data node). To do that we should set the number of replicas to 1. Setting that number to 1 means that the cluster will have 1 primary shard, and 1 replica shard, totalling 2 copies. We can do this with the <a href="https://developer.enonic.com/docs/enonic-cli/master">Enonic CLI</a>:</p>
+<p>Once your cluster has started you will have to set the number of shard replicas you want the data nodes to store. In this case we have 2 data nodes, so we want 2 copies of each shard in the cluster (1 per data node). To do that we should set the number of replicas to 1. Setting that number to 1 means that the cluster will have 1 primary shard, and 1 replica shard, totalling 2 copies. We can do this with the <a href="https://developer.enonic.com/docs/enonic-cli">Enonic CLI</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -938,7 +938,7 @@ If heavy tasks must execute on master nodes (i.e. they have <code>isMaster</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-19 12:06:40 UTC
+Last updated 2024-03-26 09:57:17 UTC
 </div>
 </div>
 </body>

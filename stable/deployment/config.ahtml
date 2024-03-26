@@ -556,7 +556,7 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 <p>Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.</p>
 </div>
 <div class="paragraph">
-<p>For more details visit the <a href="../apps/config.ahtml">application config section</a>.</p>
+<p>This configuration is instantly available for developers via the <a href="../framework/globals.ahtml#App">global <code>app</code> object</a>.</p>
 </div>
 </div>
 </div>
@@ -2439,7 +2439,7 @@ The value is set in percentage of total Java Heap, or in memory units (<code>mb<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-19 12:06:40 UTC
+Last updated 2024-03-26 09:57:17 UTC
 </div>
 </div>
 </body>

@@ -476,20 +476,20 @@ Get started running. Use one of our <a href="https://market.enonic.com/starters"
 <h2 id="languages"><a class="link" href="#languages">Languages</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP apps are powered by the <a href="runtime.ahtml">XP runtime</a>.</p>
+<p>XP apps are powered by the <a href="../runtime.ahtml">XP runtime</a>.</p>
 </div>
 <div class="paragraph">
 <p>Enonic apps may consist of both server.-side and client-side code. They are primarily written in JavaScript/TypeScript.</p>
 </div>
 <div class="paragraph">
-<p>Server-side JavaScript must uses XP&#8217;s <a href="framework.ahtml">Javascript Framework</a></p>
+<p>Server-side JavaScript must uses XP&#8217;s <a href="../framework.ahtml">Javascript Framework</a></p>
 </div>
 <div class="paragraph">
 <p>Applications may also use of Java.
 Developers with special requirements can take advantage of advanced platform capabilities such as exposing and consuming services from other applications within the same platform instance.</p>
 </div>
 <div class="paragraph">
-<p>Learn more about <a href="./framework/java-bridge.ahtml">using Java in XP apps</a></p>
+<p>Learn more about <a href="../framework/java-bridge.ahtml">using Java in XP apps</a></p>
 </div>
 </div>
 </div>
@@ -635,7 +635,7 @@ Developers with special requirements can take advantage of advanced platform cap
 </dd>
 <dt class="hdlist1">site/layouts/</dt>
 <dd>
-<p><a href="../cms/sites/layouts.ahtml">Layout components</a> are placed here.</p>
+<p><a href="../cms/pages/layouts.ahtml">Layout components</a> are placed here.</p>
 </dd>
 <dt class="hdlist1">site/mixins/</dt>
 <dd>
@@ -647,11 +647,11 @@ Developers with special requirements can take advantage of advanced platform cap
 </dd>
 <dt class="hdlist1">site/pages/</dt>
 <dd>
-<p><a href="../cms/components.ahtml#pages">Page components</a> are placed here.</p>
+<p><a href="../cms/pages.ahtml">Page components</a> are placed here.</p>
 </dd>
 <dt class="hdlist1">site/parts/</dt>
 <dd>
-<p><a href="../cms/components.ahtml#part">Part components</a> are placed here.</p>
+<p><a href="../cms/pages/parts.ahtml">Part components</a> are placed here.</p>
 </dd>
 <dt class="hdlist1">site/x-data/</dt>
 <dd>
@@ -703,7 +703,7 @@ Check out <a href="https://market.enonic.com/vendors/enonic/library-starter">the
 <p>A library may consist of the same files and functionality you would find in an application - such as Assets, Content Types and JS controllers.</p>
 </div>
 <div class="paragraph">
-<p>Enonic libraries are added to your application by declaring a dependency in the <a href="apps/build.ahtml">build</a>.</p>
+<p>Enonic libraries are added to your application by declaring a dependency in the <a href="build.ahtml#build.gradle">build file</a>.</p>
 </div>
 <div class="paragraph">
 <p>The core functionality of XP is exposed via standard libraries. Check out the <a href="../api.ahtml">Standard Libraries documentation</a>. You will also find additional libraries on <a href="https://market.enonic.com/libraries">Enonic Market</a></p>
@@ -713,7 +713,7 @@ Check out <a href="https://market.enonic.com/vendors/enonic/library-starter">the
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-19 12:06:40 UTC
+Last updated 2024-03-26 09:57:17 UTC
 </div>
 </div>
 </body>

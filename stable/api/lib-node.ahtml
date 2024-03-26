@@ -460,10 +460,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#delete">delete</a></li>
 <li><a href="#diff">diff</a></li>
 <li><a href="#duplicate">duplicate</a></li>
-</ul>
-</li>
-<li><a href="#source">Source</a>
-<ul class="sectlevel2">
 <li><a href="#exists">exists</a></li>
 <li><a href="#findchildren">findChildren</a></li>
 <li><a href="#findversions">findVersions</a></li>
@@ -481,6 +477,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#setrootpermission">setRootPermission</a></li>
 </ul>
 </li>
+<li><a href="#source">Source</a></li>
 <li><a href="#user">User</a></li>
 </ul>
 </div>
@@ -1402,61 +1399,6 @@ skip the name parameter and specify a displayName.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="source"><a class="link" href="#source">Source</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A source definition of repositories:</p>
-</div>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Kind</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repoId</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Repository ID</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">branch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Branch ID</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#user">User</a></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional user to execute the callback with - Default is the default user</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">principals</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Additional principals to execute the callback with</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <div class="sect2">
 <h3 id="exists"><a class="link" href="#exists">exists</a></h3>
 <div class="paragraph">
@@ -2874,6 +2816,61 @@ var result = repo.setActiveVersion({
 </div>
 </div>
 <div class="sect1">
+<h2 id="source"><a class="link" href="#source">Source</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A source definition of repositories:</p>
+</div>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 98%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repoId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Repository ID</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">branch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Branch ID</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#user">User</a></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Optional user to execute the callback with - Default is the default user</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">principals</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Additional principals to execute the callback with</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
 <h2 id="user"><a class="link" href="#user">User</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2917,7 +2914,7 @@ var result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-19 12:06:40 UTC
+Last updated 2024-03-26 09:57:17 UTC
 </div>
 </div>
 </body>

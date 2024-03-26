@@ -643,7 +643,7 @@ exports.get = function (req) {
 <p>Component hierarcies are created via <a href="../cms/pages/regions.ahtml">regions</a>. Rendering a region essentially boils down to rendering the components of that region.</p>
 </div>
 <div class="paragraph">
-<p>To render a component, simply leave a component placeholder in your page or layout&#8217;s response markup. Component placeholders are then identified and rendered by the <a href="../../runtime/sites/site-engine.ahtml">component rendering</a> step of the site engine.</p>
+<p>To render a component, simply leave a component placeholder in your page or layout&#8217;s response markup. Component placeholders are then identified and rendered by the <a href="../runtime/engines/site-engine.ahtml">component rendering</a> step of the site engine.</p>
 </div>
 <div class="paragraph">
 <p>As components may contain new regions, with new placeholders, this process will be repeated until there are no more placeholders left in the response.</p>
@@ -810,7 +810,7 @@ Optionally bypass the built-in controller by running your own code rather than c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-19 12:06:40 UTC
+Last updated 2024-03-26 09:57:17 UTC
 </div>
 </div>
 </body>

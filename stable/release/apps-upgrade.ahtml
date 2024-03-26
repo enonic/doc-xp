@@ -973,7 +973,7 @@ Update schemas using fieldsets by removing the <code>name</code> attribute.</p>
 <div class="sect2">
 <h3 id="content_scope"><a class="link" href="#content_scope">Content scope</a></h3>
 <div class="paragraph">
-<p>For all schemas in XP 6, the input types <a href="../cms/input-types.ahtml#contentselector">contentSelectors</a> and <a href="../cms/input-types.ahtml#tag">tag</a> defaulted to selecting content across the entire repository.
+<p>For all schemas in XP 6, the input types <a href="#../cms/schemas/input-types/contentselector">contentSelectors</a> and <a href="#../cms/schemas/input-types/tag">tag</a> defaulted to selecting content across the entire repository.
 The default scope is now reduced to the parent site.</p>
 </div>
 <div class="admonitionblock note">
@@ -1288,7 +1288,7 @@ However, to support inserting new images with the same style formats, add this f
 <p>Image styles also introduce the ability to use image service filters, and client side CSS styles that are used by the editor.</p>
 </div>
 <div class="paragraph">
-<p>Read more about Image styles <a href="https://developer.enonic.com/docs/content-studio/master/editor/rich-text-editor">here</a></p>
+<p>Read more about Image styles <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">here</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1898,7 +1898,7 @@ The new sandbox will have Java 11 bundled inside the package and you don&#8217;t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-19 12:06:40 UTC
+Last updated 2024-03-26 09:57:17 UTC
 </div>
 </div>
 </body>
