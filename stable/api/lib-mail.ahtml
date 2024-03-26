@@ -551,21 +551,21 @@ email will be enclosed with angle brackets (e.g. ‘Some Name &lt;<a href="mailt
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>E-mail address(es) and optionally name(s) of the message’s recipient(s)</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">cc</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional list of carbon copy e-mail address(es)</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">bcc</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional list of blind carbon copy e-mail address(es)</p>
 </div></div></td>
@@ -730,7 +730,7 @@ email will be enclosed with angle brackets (e.g. ‘Some Name &lt;<a href="mailt
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 10:12:34 UTC
+Last updated 2024-03-26 13:36:27 UTC
 </div>
 </div>
 </body>

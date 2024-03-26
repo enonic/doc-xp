@@ -1161,7 +1161,7 @@ const expected = {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">artist</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1179,7 +1179,7 @@ const expected = {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tags</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1937,7 +1937,7 @@ This function was first introduced in v7.2
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>Array.&lt;string&gt;</strong> : List with ids of dependent content items</p>
+<p><strong>string[]</strong> : List with ids of dependent content items</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -2353,7 +2353,7 @@ return {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>Array.&lt;<a href="#contenttype">ContentType</a>&gt;</strong> : Array with all the content types found. See ContentType type definition below</p>
+<p><strong><a href="#contenttype">ContentType</a>[]</strong> : Array with all the content types found. See ContentType type definition below</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -2669,7 +2669,7 @@ try {
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -2705,7 +2705,7 @@ try {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">excludeChildrenIds</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -2896,7 +2896,7 @@ const expected = {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">contentTypes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -3186,7 +3186,7 @@ const expected = {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Attachment name, or array of names</p>
 </div></div></td>
@@ -3254,7 +3254,7 @@ will reset specified changes made inside a specified layer.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">inherit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.<a href="#string">[string]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Array of inheritance flags (case-sensitive, all upper-case).
 Supported values are: <code>CONTENT</code> (resets any customized content data), <code>PARENT</code> (resets item moved under a different parent),
@@ -3411,7 +3411,7 @@ log.info('Restored content ids: ' + result3.join(','));</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">permissions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.<a href="#permissionsparams">PermissionsParams</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#permissionsparams">PermissionsParams</a>[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Array of permissions</p>
@@ -3444,14 +3444,14 @@ log.info('Restored content ids: ' + result3.join(','));</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">allow</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Allowed permissions</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">deny</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Denied permissions</p>
 </div></div></td>
@@ -3517,7 +3517,7 @@ if (flag) {
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>List of all content keys(path or id) that should be unpublished</p>
 </div></div></td>
@@ -3528,7 +3528,7 @@ if (flag) {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>Array.&lt;string&gt;</strong> : List with ids of the content that were unpublished</p>
+<p><strong>string[]</strong> : List with ids of the content that were unpublished</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -3654,7 +3654,7 @@ const expected = [
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">form</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;object&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object[]</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Form schema represented as an array of form items: Input, ItemSet, Layout, OptionSet</p>
@@ -3716,7 +3716,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 10:12:34 UTC
+Last updated 2024-03-26 13:36:27 UTC
 </div>
 </div>
 </body>

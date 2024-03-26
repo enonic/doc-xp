@@ -553,7 +553,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">members</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A list of the new memebers that should be added to the principal</p>
 </div></div></td>
@@ -1214,7 +1214,7 @@ If you want to find a user by key, you have to use <code>_id</code> field in the
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>Array.&lt;object&gt;</strong> : A list of objects for each member of the principal or empty array if none.</p>
+<p><strong>object[]</strong> : A list of objects for each member of the principal or empty array if none.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1276,7 +1276,7 @@ If you want to find a user by key, you have to use <code>_id</code> field in the
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>Array.&lt;string&gt;</strong> : A list of the principals that the specified principal is a member of</p>
+<p><strong>string[]</strong> : A list of the principals that the specified principal is a member of</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1997,7 +1997,7 @@ var theUser = authLib.modifyUser({
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">members</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal keys to remove as members</p>
 </div></div></td>
@@ -2022,7 +2022,7 @@ var theUser = authLib.modifyUser({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 10:12:34 UTC
+Last updated 2024-03-26 13:36:27 UTC
 </div>
 </div>
 </body>

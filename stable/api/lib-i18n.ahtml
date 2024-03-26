@@ -545,14 +545,14 @@ notify.process.failed=Error al procesar: {0}.</code></pre>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A string-representation of a locale, or an array of locales in preferred order.  Pass in an empty array for default locale.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">bundles</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Required list of bundle names. Bundle names are specified as paths, relative to the <code>src/main/resources</code> folder.</p>
 </div></div></td>
@@ -608,7 +608,7 @@ notify.process.failed=Error al procesar: {0}.</code></pre>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">bundles</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Required list of bundle names. Bundle names are specified as paths, relative to the <code>src/main/resources</code> folder.</p>
 </div></div></td>
@@ -670,21 +670,21 @@ into the phrase.  These must be provided in the function call for those phrases.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A string-representation of a locale, or an array of locales in preferred order. If the locale is not set, the site language is used.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">values</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional placeholder values</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">bundles</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional list of bundle names</p>
 </div></div></td>
@@ -729,7 +729,7 @@ into the phrase.  These must be provided in the function call for those phrases.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 10:12:34 UTC
+Last updated 2024-03-26 13:36:27 UTC
 </div>
 </div>
 </body>

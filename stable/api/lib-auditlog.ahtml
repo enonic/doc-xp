@@ -745,7 +745,7 @@ var log = auditlogLib.get({
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">objects</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>URIs to objects that relate to this log entry. Defaults to empty array.</p>
@@ -802,7 +802,7 @@ var log2 = auditlogLib.log({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 10:12:34 UTC
+Last updated 2024-03-26 13:36:27 UTC
 </div>
 </div>
 </body>

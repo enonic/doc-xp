@@ -458,7 +458,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#date_range">Date range</a></li>
 <li><a href="#numeric_range">Numeric range</a></li>
+</ul>
+</li>
+<li><a href="#objects">Objects</a>
+<ul class="sectlevel2">
+<li><a href="#numeric_range">NumericRange</a></li>
 <li><a href="#origin">Origin</a></li>
+<li><a href="#date_range">Date range</a></li>
 </ul>
 </li>
 </ul>
@@ -511,7 +517,7 @@ Aggregations can be used for anything from data visualization to creating naviga
 </div>
 <div class="paragraph">
 <p>Typically, you will divide data into buckets and then use metric aggregations to calculate e.g average values,
-sum, etc for each bucket, if necessary.</p>
+sum, etc. for each bucket, if necessary.</p>
 </div>
 </div>
 </div>
@@ -940,7 +946,7 @@ Only documents with properties of type 'GeoPoint' will be considered in the <cod
 <td class="tableblock halign-left valign-top"><p class="tableblock">unit</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The meassurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).</p>
+<p>The measurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1031,7 +1037,7 @@ In a future version, there will easier ways of doing this.</p>
 <h3 id="daterange"><a class="link" href="#daterange">dateRange</a></h3>
 <div class="paragraph">
 <p>The dateRange aggregation query defines a set of date-ranges that represents a bucket. Only
-documents with properties of type 'DateTime' will considered in the <code>dateRange</code> aggregation buckets.</p>
+documents with properties of type 'DateTime' will be considered in the <code>dateRange</code> aggregation buckets.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1117,7 +1123,7 @@ documents with properties of type 'DateTime' will considered in the <code>dateRa
 </div>
 <div class="sect3">
 <h4 id="date_math_expression"><a class="link" href="#date_math_expression">Date-math expression</a></h4>
-<div class="paragraph">
+<div id="date_math_expression" class="paragraph">
 <p>The range fields accepts a date-math expression to calculate the time-spans.</p>
 </div>
 <div class="ulist">
@@ -1366,6 +1372,59 @@ Values in <code>from</code> and <code>to</code> follow a special <a href="#date_
 </table>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="objects"><a class="link" href="#objects">Objects</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="numeric_range"><a class="link" href="#numeric_range">NumericRange</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">from</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Range from</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Range to</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Identifier</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="sect2">
 <h3 id="origin"><a class="link" href="#origin">Origin</a></h3>
 <div class="paragraph">
@@ -1405,12 +1464,60 @@ Values in <code>from</code> and <code>to</code> follow a special <a href="#date_
 </tbody>
 </table>
 </div>
+<div class="sect2">
+<h3 id="date_range"><a class="link" href="#date_range">Date range</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">from</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Range from</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Range to</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Identifier</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 10:12:34 UTC
+Last updated 2024-03-26 13:36:27 UTC
 </div>
 </div>
 </body>

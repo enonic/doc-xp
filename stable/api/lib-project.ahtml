@@ -547,7 +547,7 @@ You can read about project permissions in the dedicated <a href="https://develop
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">permissions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Object.&lt;string, Array.&lt;string&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object.&lt;string, string[]&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Project permissions to add. 1 to 5 properties where key is role id and value is an array of principals.</p>
 </div></div></td>
@@ -661,7 +661,7 @@ var currentPermissions = projectLib.addPermissions({
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">siteConfig</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;Object.&lt;string, Object&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object.&lt;string, Object&gt;[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Applications (with optional configurations) to be assigned to the project</p>
@@ -693,7 +693,7 @@ var currentPermissions = projectLib.addPermissions({
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">permissions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Object.&lt;string, Array.&lt;string&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object.&lt;string, string[]&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Project permissions. 1 to 5 properties where key is role id and value is an array of principals.</p>
@@ -717,7 +717,7 @@ var currentPermissions = projectLib.addPermissions({
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">principals</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Array of principals.</p></td>
 </tr>
 </tbody>
@@ -1014,7 +1014,7 @@ Users with <code>system.admin</code> or <code>cms.admin</code> roles will get th
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>Array.&lt;Object&gt;</strong> : Array of Content Project objects.</p>
+<p><strong>Object[]</strong> : Array of Content Project objects.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1105,7 +1105,7 @@ To modify a project, user must have <code>Owner</code> permissions for this proj
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">siteConfig</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;Object.&lt;string, Object&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object.&lt;string, Object&gt;[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Applications (with optional configurations) to be assigned to the project.</p>
@@ -1327,7 +1327,7 @@ To remove permissions, user must have <code>Owner</code> permissions for the pro
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">permissions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Object.&lt;string, Array.&lt;string&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object.&lt;string, string[]&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Project permissions to delete. 1 to 5 properties where key is role id and value is an array of principals.</p>
 </div>
@@ -1350,7 +1350,7 @@ To remove permissions, user must have <code>Owner</code> permissions for the pro
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">principals</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Array of principals to delete from this project role.</p></td>
 </tr>
 </tbody>
@@ -1467,7 +1467,7 @@ var project = projectLib.getAvailableApplications({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 10:12:34 UTC
+Last updated 2024-03-26 13:36:27 UTC
 </div>
 </div>
 </body>

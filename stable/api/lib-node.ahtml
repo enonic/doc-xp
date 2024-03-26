@@ -657,7 +657,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sources</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.<a href="#source">Source</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#source">Source</a>[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>array of repository source objects</p>
 </div></div></td>
@@ -907,7 +907,7 @@ The repo connection can be created like this:</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Node keys to commit. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.</p>
 </div></div></td>
@@ -1162,7 +1162,7 @@ skip the name parameter and specify a displayName.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Node keys to delete. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.</p>
 </div></div></td>
@@ -1173,7 +1173,7 @@ skip the name parameter and specify a displayName.</p>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>Array.&lt;string&gt;</strong> : The list of keys that were actually deleted.</p>
+<p><strong>string[]</strong> : The list of keys that were actually deleted.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1696,7 +1696,7 @@ if (result) {
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">params</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string | Array.&lt;string&gt;|object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | string[]|object</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>One or multiple strings, or one or multiple arrays of strings, or an object with the following properties:</p>
 </div>
@@ -2167,7 +2167,7 @@ if (result) {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Array of ids or paths to the nodes</p>
 </div></div></td>
@@ -2195,7 +2195,7 @@ if (result) {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">exclude</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional array of ids or paths to nodes not to be pushed.  If using this, be aware that nodes need to maintain data integrity (e.g parents must be present in target).  If data integrity is not maintained with excluded nodes, they will be pushed anyway.</p>
 </div></div></td>
@@ -2861,7 +2861,7 @@ var result = repo.setActiveVersion({
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">principals</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array.&lt;string&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Additional principals to execute the callback with</p>
 </div></div></td>
@@ -2914,7 +2914,7 @@ var result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 10:12:34 UTC
+Last updated 2024-03-26 13:36:27 UTC
 </div>
 </div>
 </body>
