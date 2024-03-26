@@ -1373,7 +1373,7 @@ Properties
 | resource                  | string             | Schema resource value
 | type                      | string             | Schema type(`CONTENT_TYPE`, `MIXIN`, `XDATA`)
 | form                      | object[]           | Schema form
-| icon                      | <<#icon,Icon>>   | Schema icon
+| icon                      | <<icon,Icon>>   | Schema icon
 
 
 
@@ -1508,7 +1508,7 @@ Properties
 [grid="none"]
 |===
 | Name                      | Type                      | Description
-| icon                      | <<#icon,Icon>>          | Part icon
+| icon                      | <<icon,Icon>>          | Part icon
 
 |===
 
@@ -1532,7 +1532,7 @@ Properties
 | modifiedTime              | string                            | Site zulu modified time
 | resource                  | string                            | Site xml resource value
 | form                      | object[]                          | Site descriptor form
-| xDataMappings             | <<#xDataMapping,XDataMapping[]>>| XData mappings
+| xDataMappings             | <<xDataMapping,XDataMapping[]>>| XData mappings
 
 |===
 
@@ -1556,7 +1556,7 @@ Properties
 | cssPath                   | string                            | CSS path
 | modifiedTime              | string                            | Styles zulu modified time
 | resource                  | string                            | Styles xml resource value
-| elements                  | <<#element,StyleElement[]>>     | style elements
+| elements                  | <<element,StyleElement[]>>     | style elements
 
 |===
 

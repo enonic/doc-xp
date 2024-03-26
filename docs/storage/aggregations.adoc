@@ -213,7 +213,7 @@ Parameters
 | Name | Type | Details
 | field | string | The property path
 | format | string | The date-format of which the buckets will be formatted to on return. Defaults to ``yyyy-MM-dd'T'HH:mm:ss.SSSZ``.
-| ranges | <<date_range,Date range>>[] | The range-buckets to create. Follows a special <<date_math_expression, Date-math expression>>.
+| ranges | <<date_range,DateRange>>[] | The range-buckets to create. Follows a special <<date_math_expression, Date-math expression>>.
 |===
 
 
