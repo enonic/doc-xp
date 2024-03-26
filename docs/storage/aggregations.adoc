@@ -143,7 +143,7 @@ Parameters
 |===
 | Name | Type | Details
 | field | string | The property path
-| ranges | <<numeric_range,Numeric range>>[] | The range-buckets to create
+| ranges | <<numeric_range,NumericRange>>[] | The range-buckets to create
 |===
 
 .Sample range aggregation
@@ -174,7 +174,7 @@ Parameters
 | Name | Type | Details
 | field | string | The property path
 | origin | <<origin,Origin>> | The GeoPoint from which the distance is measured.
-| ranges | <<numeric_range,Numeric range>>[] | The range-buckets to create.
+| ranges | <<numeric_range,NumericRange>>[] | The range-buckets to create.
 | unit | string | The measurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).
 |===
 
@@ -278,6 +278,7 @@ include::code/date-histogram-result.json[]
 == Types
 
 === Date range
+[#date_range]
 
 Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
 Values in `from` and `to` follow a special <<date_math_expression, Date-math expression>>.
@@ -296,6 +297,7 @@ Fields
 
 
 === Numeric range
+[#numeric_range]
 
 Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
 
@@ -341,28 +343,8 @@ The bucket will contain
 ----
 <1> The bucket will contain 100 unto infinity
 
-
-
-== Objects
-
-[#numeric_range]
-=== NumericRange
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Details
-| from | number | <optional> | Range from
-| to | number | <optional> | Range to
-| key | string | <optional> | Identifier
-|===
-
-[#origin]
 === Origin
+[#origin]
 
 The GeoPoint from which the distance is measured.
 
@@ -378,18 +360,3 @@ Fields
 | lon | number | Longitude
 |===
 
-[#date_range]
-=== Date range
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Details
-| from | string | <optional> | Range from
-| to | string | <optional> | Range to
-| key | string | <optional> | Identifier
-|===
