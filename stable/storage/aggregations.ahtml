@@ -458,13 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#date_range">Date range</a></li>
 <li><a href="#numeric_range">Numeric range</a></li>
-</ul>
-</li>
-<li><a href="#objects">Objects</a>
-<ul class="sectlevel2">
-<li><a href="#numeric_range">NumericRange</a></li>
 <li><a href="#origin">Origin</a></li>
-<li><a href="#date_range">Date range</a></li>
 </ul>
 </li>
 </ul>
@@ -839,7 +833,7 @@ get its own bucket. Here&#8217;s a list of properties:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ranges</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#numeric_range">Numeric range</a>[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#numeric_range">NumericRange</a>[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The range-buckets to create</p>
 </div></div></td>
@@ -937,7 +931,7 @@ Only documents with properties of type 'GeoPoint' will be considered in the <cod
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ranges</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#numeric_range">Numeric range</a>[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#numeric_range">NumericRange</a>[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The range-buckets to create.</p>
 </div></div></td>
@@ -1239,7 +1233,7 @@ event into a bucket for each hour in the time-span of the matching events. Here&
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="date_range"><a class="link" href="#date_range">Date range</a></h3>
-<div class="paragraph">
+<div id="date_range" class="paragraph">
 <p>Defines a range to create a bucket for. <code>from</code> value will be included in the bucket, <code>to</code> will be excluded.
 Values in <code>from</code> and <code>to</code> follow a special <a href="#date_math_expression">Date-math expression</a>.</p>
 </div>
@@ -1279,7 +1273,7 @@ Values in <code>from</code> and <code>to</code> follow a special <a href="#date_
 </div>
 <div class="sect2">
 <h3 id="numeric_range"><a class="link" href="#numeric_range">Numeric range</a></h3>
-<div class="paragraph">
+<div id="numeric_range" class="paragraph">
 <p>Defines a range to create a bucket for. <code>from</code> value will be included in the bucket, <code>to</code> will be excluded.</p>
 </div>
 <div class="paragraph lead">
@@ -1372,62 +1366,9 @@ Values in <code>from</code> and <code>to</code> follow a special <a href="#date_
 </table>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="objects"><a class="link" href="#objects">Objects</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="numeric_range"><a class="link" href="#numeric_range">NumericRange</a></h3>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 97.03%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Attributes</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">from</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Range from</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Range to</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Identifier</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="sect2">
 <h3 id="origin"><a class="link" href="#origin">Origin</a></h3>
-<div class="paragraph">
+<div id="origin" class="paragraph">
 <p>The GeoPoint from which the distance is measured.</p>
 </div>
 <div class="paragraph lead">
@@ -1464,60 +1405,12 @@ Values in <code>from</code> and <code>to</code> follow a special <a href="#date_
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="date_range"><a class="link" href="#date_range">Date range</a></h3>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 97.03%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Attributes</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">from</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Range from</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Range to</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Identifier</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 13:36:27 UTC
+Last updated 2024-03-26 13:41:30 UTC
 </div>
 </div>
 </body>
