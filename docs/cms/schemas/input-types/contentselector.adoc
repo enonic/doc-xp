@@ -59,7 +59,7 @@ The pattern will be prefixed by the current application name unless:
 - the pattern starts with `${app}`.
 
 ==== Match +
-The pattern will be treated as a Java Regular Expression (with <<#regex-differences, a few notable exceptions>>) and the whole content type name must match it to be accepted.
+The pattern will be treated as a Java Regular Expression (with <<regex-differences, a few notable exceptions>>) and the whole content type name must match it to be accepted.
 The pattern will be prefixed by the current application name if it does _not_ contain any of the following characters: `\^$.|?*+()[{:`.
 
 [#regex-differences]

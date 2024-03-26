@@ -55,7 +55,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#Application,`Application`>>) Property object of an installed application with the specified key, or `null` if the application was not found.
+*object* : (<<application,`Application`>>) Property object of an installed application with the specified key, or `null` if the application was not found.
 
 [.lead]
 Example
@@ -95,7 +95,7 @@ Fetches all installed applications. If a local and a virtual app are both instal
 [.lead]
 Returns
 
-*object[]* : (<<#Application,`Application[]`>>) Array of applications' property objects, or an empty array if there are no installed applications.
+*object[]* : (<<application,`Application[]`>>) Array of applications' property objects, or an empty array if there are no installed applications.
 
 [.lead]
 Example
@@ -166,7 +166,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#ApplicationDescriptor,`ApplicationDescriptor`>>) Application descriptor.
+*object* : (<<applicationDescriptor,`ApplicationDescriptor`>>) Application descriptor.
 
 [.lead]
 Example
@@ -218,7 +218,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#Application,`Application`>>) Property object of the created application.
+*object* : (<<application,`Application`>>) Property object of the created application.
 
 [.lead]
 Example

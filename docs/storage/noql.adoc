@@ -8,12 +8,12 @@ The Node Query Language, or NoQL for short, is inspired by traditional SQL.
 As with other NoSQL solutions, it has special capabilities and limitations.
 
 Selectors, joins and update statements are essentially _not_ supported.
-However, NoQL adds cool features like <<#relevance_sorting, relevance sorting>> and <<aggregations#, aggregations>>.
+However, NoQL adds cool features like <<relevance_sorting, relevance sorting>> and <<aggregations#, aggregations>>.
 
 Selectors are currently not supported, and the only result of a query will only be identifiers for the matching nodes.
 Developers must then get the desired nodes (with their data) through a separate request.
 
-A NoQL statement is essentially composed from two parts: <<#query, query>>, and <<#sort, sorting>>.
+A NoQL statement is essentially composed from two parts: <<query, query>>, and <<sort, sorting>>.
 
 
 [#query]
@@ -180,6 +180,7 @@ myCategory IN ('article', 'document') AND ngram('title', 'fish', 'AND')
 
 
 ==== propertyPath
+[[propertyPath]]
 
 .Grammar
 [source,ebnf]
@@ -327,7 +328,7 @@ fulltext('data.*', '"gone fishing today"~2', "AND")
 [#stemmed]
 ==== stemmed()
 
-The stemmed function is similar to <<#fulltext,fulltext()>> except that it searches language optimized tokens instead of a source text. E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
+The stemmed function is similar to <<fulltext,fulltext()>> except that it searches language optimized tokens instead of a source text. E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
 
 NOTE: Stemming is language-dependent, so <<indexing#languages,language>> must be set either on the content or directly in the node indices via indexConfig.
 

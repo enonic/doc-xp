@@ -817,7 +817,7 @@ auditlog.enabled = true
 ----
 
 auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
-IMPORTANT: Audit log can be disabled by common `<<#audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
+IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
 
 
 auditlog.filter:: image:xp-7120.svg[XP 7.12.0,opts=inline] Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `!system.content.update,*` (allow everything except "content update" event).
@@ -856,8 +856,8 @@ attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in c
 
 resolveEmptyRegions:: image:xp-7131.svg[XP 7.13.1,opts=inline] Set to `true` to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: `false`.
 
-WARNING: Setting `resolveEmptyRegions` to `true` can adversely impact system performance. 
-By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required. 
+WARNING: Setting `resolveEmptyRegions` to `true` can adversely impact system performance.
+By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required.
 As such, it may lead to slower system response and reduced efficiency. Importantly, this functionality is deprecated and will be removed in future versions of Enonic XP. It is advisable to adapt your workflows to operate without this feature to ensure future compatibility.
 
 [#vacuum]

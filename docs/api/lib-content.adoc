@@ -1149,7 +1149,7 @@ contentTypes.forEach(function (ct) {
 
 Modifies properties of a content
 
-NOTE: Properties starting with `_` may not be modified using this function. To rename or move a content (i.e to change the _name property), use the <<#move, move function>> instead.
+NOTE: Properties starting with `_` may not be modified using this function. To rename or move a content (i.e to change the _name property), use the <<move, move function>> instead.
 
 [.lead]
 *Parameters:*
@@ -1245,6 +1245,7 @@ const expected = {
 ```
 
 === move
+[[move]]
 
 Rename a content or move it to a new path
 
