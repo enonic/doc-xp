@@ -622,7 +622,7 @@ NOTE: Read about authorization <<authorization, here>>
             "State": "started",
             "Url": "",
             "VendorName": "Enonic AS",
-            "VendorUrl": "http://enonic.com",
+            "VendorUrl": "https://enonic.com",
             "Version": "1.0.0.SNAPSHOT"
         }
     },
@@ -672,7 +672,7 @@ NOTE: Read about authorization <<authorization, here>>
             "State": "started",
             "Url": "",
             "VendorName": "Enonic AS",
-            "VendorUrl": "http://enonic.com",
+            "VendorUrl": "https://enonic.com",
             "Version": "2.0.0"
         }
     },
@@ -782,7 +782,7 @@ Once a client is subscribed, he will receive the first event `list`.
 ----
 event: list
 id: b0d64cac-811d-4f6b-9aff-50fd4d4a5ae9
-data: {"applications":[{"displayName":"Content Studio","key":"com.enonic.app.contentstudio","local":false,"maxSystemVersion":"8.0.0","minSystemVersion":"7.6.0","modifiedTime":"2020-11-11T08:22:14.080Z","state":"started","url": "", "vendorName": "Enonic AS", "vendorUrl": "http://enonic.com", "version": "2.0.0"}]}
+data: {"applications":[{"displayName":"Content Studio","key":"com.enonic.app.contentstudio","local":false,"maxSystemVersion":"8.0.0","minSystemVersion":"7.6.0","modifiedTime":"2020-11-11T08:22:14.080Z","state":"started","url": "", "vendorName": "Enonic AS", "vendorUrl": "https://enonic.com", "version": "2.0.0"}]}
 ----
 
 .Response of the `installed` or `state` events
@@ -790,7 +790,7 @@ data: {"applications":[{"displayName":"Content Studio","key":"com.enonic.app.con
 ----
 event: installed | state
 id: f84d11ba-88cd-4cd2-9cb3-39dd181eb7e2
-data: {"displayName":"Content Studio","key":"com.enonic.app.contentstudio","local":false,"maxSystemVersion":"8.0.0","minSystemVersion":"7.6.0","modifiedTime":"2020-11-11T08:22:14.080Z","state":"started","url": "", "vendorName": "Enonic AS", "vendorUrl": "http://enonic.com", "version": "2.0.0"}
+data: {"displayName":"Content Studio","key":"com.enonic.app.contentstudio","local":false,"maxSystemVersion":"8.0.0","minSystemVersion":"7.6.0","modifiedTime":"2020-11-11T08:22:14.080Z","state":"started","url": "", "vendorName": "Enonic AS", "vendorUrl": "https://enonic.com", "version": "2.0.0"}
 ----
 
 .Response of the `uninstalled` event

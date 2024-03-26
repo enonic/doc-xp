@@ -8,11 +8,11 @@ NOTE: Component controllers are only used in context of the <<../runtime/engines
 
 == Introduction
 
-TIP: For a hands on introduction to rendering pages with the Enonic framework, visit the https://developer.enonic.com/docs/my-first-site[My first site tutorial].
+TIP: For a hands on introduction to rendering pages with the Enonic framework, visit the link:https://developer.enonic.com/docs/my-first-site[My first site tutorial].
 
 Component controllers are 1:1 aligned with their respective <<../cms/pages#, page component definitions>> and must also be placed in specific locations within the code structure.
 
-They have the same capabilities as regular <<controllers#, controller>>, you may take advantage of <<contributions#, page contributions>>, and the fact that they are always executed in the context of a content item. 
+They have the same capabilities as regular <<controllers#, controller>>, you may take advantage of <<contributions#, page contributions>>, and the fact that they are always executed in the context of a content item.
 
 IMPORTANT: Markup response from a component must have a single root element.
 
@@ -23,7 +23,7 @@ Component rendering is initiated by the <<../runtime/engines/site-engine#, Site 
 
 `HTTP request` -> `/site/<project>/<branch>/path/to/content` -> `resolve component` -> `execute controller`.
 
-This means you will always have a specific content item in your context. 
+This means you will always have a specific content item in your context.
 
 API functions such as <<../api/lib-portal#getContent, portalLib.getContent()>>, and <<../api/lib-portal#getComponent, portalLib.getComponent()>> will automatically return values based on the context.
 
@@ -117,7 +117,7 @@ exports.get = function (req) {
 
 Component hierarcies are created via <<../cms/pages/regions#, regions>>. Rendering a region essentially boils down to rendering the components of that region.
 
-To render a component, simply leave a component placeholder in your page or layout's response markup. Component placeholders are then identified and rendered by the <<../runtime/engines/site-engine#, component rendering>> step of the site engine. 
+To render a component, simply leave a component placeholder in your page or layout's response markup. Component placeholders are then identified and rendered by the <<../runtime/engines/site-engine#, component rendering>> step of the site engine.
 
 As components may contain new regions, with new placeholders, this process will be repeated until there are no more placeholders left in the response.
 
@@ -127,7 +127,7 @@ Placeholders are formatted as HTML comments - and includes the component path. L
 
 `<!--# COMPONENT /main/0/left/1 -\->`
 
-For `text/html` responses, the site engine will look for component placeholders. For each placeholder, the component's controller is executed and the output merged into the response. 
+For `text/html` responses, the site engine will look for component placeholders. For each placeholder, the component's controller is executed and the output merged into the response.
 
 
 === JavaScript example

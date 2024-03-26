@@ -819,14 +819,14 @@ Example
 
 .Sanitizes unsafe HTML:
 ```js
-var unsafeHtml = '<p><a href="http://example.com/" onclick="stealCookies()">Link</a></p>' +
+var unsafeHtml = '<p><a href="https://example.com/" onclick="stealCookies()">Link</a></p>' +
                  '<iframe src="javascript:alert(\'XSS\');"></iframe>';
 var sanitizedHtml = portalLib.sanitizeHtml(unsafeHtml);
 ```
 
 .Return value:
 ```js
-var expected = '<p><a href="http://example.com/">Link</a></p>';
+var expected = '<p><a href="https://example.com/">Link</a></p>';
 ```
 
 === serviceUrl

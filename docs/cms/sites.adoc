@@ -4,7 +4,7 @@
 
 Sites add support for building building pages, in addition to form-based content.
 
-NOTE: For a hands on introduction to sites and the concepts described here, visit the https://developer.enonic.com/docs/my-first-site[My first site tutorial].
+NOTE: For a hands on introduction to sites and the concepts described here, visit the link:https://developer.enonic.com/docs/my-first-site[My first site tutorial].
 
 == Introduction
 
@@ -12,13 +12,13 @@ Sites unlock powerful functionality for managing websites and creating visually 
 
 Similar to content projects, you may add applications to a site. For sites however, purpose-specific applications like sitemap.xml, robots.txt, Google Analytics, SEO Metafields, and Siteimprove introduce features and management capabilities beyond that of basic content.
 
-== Site content type 
+== Site content type
 
 `Site` is a built-in content type, which means a site can easily be created anywhere in your content structure.
 
 Site content items are special in the way that you may add applications to them. Similar to projects, functionality and schemas from the app will be available in the scope of the site.
 
-NOTE: Apps added to <<projects#, a project>> will not apply to a site, unless explicitly added there as well. 
+NOTE: Apps added to <<projects#, a project>> will not apply to a site, unless explicitly added there as well.
 
 == The site engine
 

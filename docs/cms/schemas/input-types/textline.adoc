@@ -39,7 +39,7 @@ image::TextLine.png[Text Line with various settings, 700]
 <3> *show-counter* specifies whether text length counter should be shown (default: hidden)
 <4> *regexp* supports validation by defining regular expressions
 +
-NOTE: Regex validation is performed by the browser's https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test[regex testing function]. Visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation on regexes] for more information on the supported expressions and character classes.
+NOTE: Regex validation is performed by the browser's link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test[regex testing function]. Visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation on regexes] for more information on the supported expressions and character classes.
 
 [#spellcheck]
 == Spell checking

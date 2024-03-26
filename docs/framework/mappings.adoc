@@ -8,7 +8,7 @@ NOTE: Mappings are only available when using the <<../runtime/engines/site-engin
 
 == Introduction
 
-Mappings are the first processing step in the <<../runtime/engines/site-engine#, site engine>> - and happens before page rendering starts. You may define mappings for both <<controllers#, controllers>> and <<filters#,filters>>. The use cases are vast. 
+Mappings are the first processing step in the <<../runtime/engines/site-engine#, site engine>> - and happens before page rendering starts. You may define mappings for both <<controllers#, controllers>> and <<filters#,filters>>. The use cases are vast.
 
 == Usage
 
@@ -87,7 +87,7 @@ Another alternative to XML-escape is to wrap the string in a CDATA block, as in 
 
 A pattern element may also contain an *@invert* attribute to indicate that the result of evaluating the regular expression should be negated i.e.: `<pattern invert="true">`
 
-The pattern string must be a valid https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[Java regular expression].
+The pattern string must be a valid link:https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[Java regular expression].
 
 Examples:
 

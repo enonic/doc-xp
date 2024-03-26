@@ -4,13 +4,13 @@
 
 Details on the project and code structure in Enonic apps and libraries
 
-TIP: Get started running. Use one of our https://market.enonic.com/starters[starters] to bootstrap your development project.
+TIP: Get started running. Use one of our link:https://market.enonic.com/starters[starters] to bootstrap your development project.
 
 == Languages
 
 XP apps are powered by the <<../runtime#,XP runtime>>.
 
-Enonic apps may consist of both server.-side and client-side code. They are primarily written in JavaScript/TypeScript. 
+Enonic apps may consist of both server.-side and client-side code. They are primarily written in JavaScript/TypeScript.
 
 Server-side JavaScript must uses XP's <<../framework#,Javascript Framework>>
 
@@ -21,7 +21,7 @@ Learn more about <<../framework/java-bridge#,using Java in XP apps>>
 
 == Project structure
 
-The example structure below includes the standard files and folders for an Enonic application (or library). 
+The example structure below includes the standard files and folders for an Enonic application (or library).
 
 [source,files]
 ----
@@ -67,7 +67,7 @@ Every file and folder has a specific function and purpose as described below:
 
 === Build files
 
-Enonic supports JS/TS based build tools like https://market.enonic.com/vendors/enonic/tsup-starter[TSUP] and https://market.enonic.com/vendors/enonic/webpack-starter[Webpack], but relies on https://gradle.org/[Gradle] as the main builder.
+Enonic supports JS/TS based build tools like link:https://market.enonic.com/vendors/enonic/tsup-starter[TSUP] and https://market.enonic.com/vendors/enonic/webpack-starter[Webpack], but relies on https://gradle.org/[Gradle] as the main builder.
 
 Visit the <<build#, build system section>> for more details.
 
@@ -139,12 +139,12 @@ webapp/webapp.js:: <<../runtime#webapp_js, Webapp>> based on the Enonic JS frame
 
 Enonic libraries are similar to applications, the main difference being that a library cannot be installed and started by itself.
 
-TIP: Check out https://market.enonic.com/vendors/enonic/library-starter[the library starter] if you are planning to build your own library.
+TIP: Check out link:https://market.enonic.com/vendors/enonic/library-starter[the library starter] if you are planning to build your own library.
 
 A library may consist of the same files and functionality you would find in an application - such as Assets, Content Types and JS controllers.
 
 Enonic libraries are added to your application by declaring a dependency in the <<build#build.gradle, build file>>.
 
-The core functionality of XP is exposed via standard libraries. Check out the <<../api#,Standard Libraries documentation>>. You will also find additional libraries on https://market.enonic.com/libraries[Enonic Market]
+The core functionality of XP is exposed via standard libraries. Check out the <<../api#,Standard Libraries documentation>>. You will also find additional libraries on link:https://market.enonic.com/libraries[Enonic Market]
 
 

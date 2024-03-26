@@ -4,7 +4,7 @@
 :y: icon:check[role="green"]
 :n: icon:times[role="red"]
 
-Define forms for management of structured content 
+Define forms for management of structured content
 
 == Introduction
 
@@ -15,7 +15,7 @@ Each schema will produce a deterministic set of properties with valid values and
 [#forms]
 == Forms
 
-First and foremost, schemas define forms that can be edited through an administrative interface, typically https://developer.enonic.com/docs/content-studio[Content Studio].
+First and foremost, schemas define forms that can be edited through an administrative interface, typically link:https://developer.enonic.com/docs/content-studio[Content Studio].
 
 In addition to the user interface, schemas also have a back-end equivalent that can be used programmatically, for instance through the content API.
 
@@ -62,7 +62,7 @@ Use form items like <<schemas/field-set#, Field sets>> (decorative only), <<sche
 
 To simplify editing, an XSD is available.
 
-Addf the following attributes to the first element of your XML file in order to enjoy validation while typing: 
+Addf the following attributes to the first element of your XML file in order to enjoy validation while typing:
 
 NOTE: Not all editors support XSD validation
 

@@ -71,7 +71,7 @@ XP's patterns have a few cases where they differ from normal Java Regular Expres
 Most content type names start with the name of the application where they are stored. It may be quite messy and hard to maintain the whole application name in every pattern, so the `${app}` template expression can be used to replace it.
 
 .The '*' character
-In most regex engines, the `*` character means "0 or more of the preceding token". However, XP treats it differently and interprets it as "0 or more of any character(s) except for line breaks". In that way, it's similar to https://en.wikipedia.org/wiki/Glob_%28programming%29[glob patterns].
+In most regex engines, the `*` character means "0 or more of the preceding token". However, XP treats it differently and interprets it as "0 or more of any character(s) except for line breaks". In that way, it's similar to link:https://en.wikipedia.org/wiki/Glob_%28programming%29[glob patterns].
 
 To further clarify, in XP:
 

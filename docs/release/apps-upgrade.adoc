@@ -11,7 +11,7 @@ NOTE: This section is only relevant when upgrading from XP6 to XP7.
 
 Before you start the upgrade procedure:
 
-* Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
+* Make sure you have link:https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
 * Check out the project source code to a local folder i.e. myapp/
 
 == 1. Create a sandbox
@@ -55,7 +55,7 @@ This will install or update your project with a new Gradle wrapper.
 ==== Application upgrade
 
 If you are upgrading *an application*, you need to use version greater or equal to '2.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
-It supports Gradle 5, Java 11 and building for XP 7. 
+It supports Gradle 5, Java 11 and building for XP 7.
 Gradle plugin '3.4.0' supports Gradle 8.3 and Java 17 - recommended to build apps for XP versions 7.13 and greater
 
 This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
@@ -105,7 +105,7 @@ version = 1.0.0-SNAPSHOT
 appDisplayName = My Cool App
 appName = com.acme.something.myproject
 vendorName = Acme Inc
-vendorUrl = http://example.com
+vendorUrl = https://example.com
 xpVersion = 7.0.0
 
 # Settings for publishing to a Maven repo
@@ -154,10 +154,10 @@ version=1.0.0-SNAPSHOT
 
 The following libraries have been take out of XP core, and are now released and versioned separately:
 
-* https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf]
-* https://market.enonic.com/vendors/enonic/xslt-lib[XSLT]
-* https://market.enonic.com/vendors/enonic/mustache-lib[Mustache]
-* https://market.enonic.com/vendors/enonic/http-client-lib[HTTP client]
+* link:https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf]
+* link:https://market.enonic.com/vendors/enonic/xslt-lib[XSLT]
+* link:https://market.enonic.com/vendors/enonic/mustache-lib[Mustache]
+* link:https://market.enonic.com/vendors/enonic/http-client-lib[HTTP client]
 
 If your project used the bundled libraries,
 update you `build.gradle` dependencies to use the new libraries
@@ -491,7 +491,7 @@ include::code/styles.xml[]
 
 Image styles also introduce the ability to use image service filters, and client side CSS styles that are used by the editor.
 
-Read more about Image styles https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[here]
+Read more about Image styles link:https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[here]
 
 
 === Editor XSS

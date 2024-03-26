@@ -53,9 +53,9 @@ We generally always recommend updating your apps to the latest version!
 
 * Content Studio has to be upgraded to version 5+ to be compatible with XP 7.13. If you are using Content Studio 4.x with XP 7.13, you may experience disappearing layouts inside Page Editor.
 
-* Bundled Java version was upgraded to Java 17 Our internal testing didn't show any significant issues with this upgrade (except Nashorn engine removal), but we recommend testing your applications before upgrading to this version as always. Consult with https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html[Oracle JDK Migration Guide] for more information about migrating from Java 11 to Java 17 in case you experience any issues.
+* Bundled Java version was upgraded to Java 17 Our internal testing didn't show any significant issues with this upgrade (except Nashorn engine removal), but we recommend testing your applications before upgrading to this version as always. Consult with link:https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html[Oracle JDK Migration Guide] for more information about migrating from Java 11 to Java 17 in case you experience any issues.
 
-* When building applications it is recommended to specify `options.release = 11` for `compileJava` task https://docs.gradle.org/current/userguide/building_java_projects.html#sec:compiling_with_release[in Gradle build file] to preserve compatibility with XP versions lower than 7.13.
+* When building applications it is recommended to specify `options.release = 11` for `compileJava` task link:https://docs.gradle.org/current/userguide/building_java_projects.html#sec:compiling_with_release[in Gradle build file] to preserve compatibility with XP versions lower than 7.13.
 XP Gradle plugin `com.enonic.xp.app` version `3.4.0` does this automatically for you when `systemVersion` is set to `7.12.x` or lower.
 
 * Ensure you are using the latest version of the Test Framework `com.enonic.xp:testing` in your Gradle project. For example, if your Test Framework dependency is defined as `testImplementation "com.enonic.xp:testing:$\{xpVersion}"` you might need to change it to `testImplementation "com.enonic.xp:testing:7.13.0"`. Older versions may not work with Java 17 and will cause tests to fail with `java.lang.NoClassDefFoundError: jdk/nashorn/api/scripting/NashornScriptEngineFactory`.
@@ -99,7 +99,7 @@ This may cause some compilation errors when XP application dependency version is
 This may cause broken text on pages with page templates which specify content meta tag value other than `utf-8`.
 Make sure all your page templates use UTF-8. it is also recommended to use `<meta charset="utf-8">` tag on all pages.
 
-* TypeScript imports. As of this version, all Enonic libraries are completely rewritten in TypeScript. If you have been using TypesScript in your application, it may no longer be compiling. Importing `default` exports are no longer supported, and depending on your build-setup and code, you may need to change your import statements. 
+* TypeScript imports. As of this version, all Enonic libraries are completely rewritten in TypeScript. If you have been using TypesScript in your application, it may no longer be compiling. Importing `default` exports are no longer supported, and depending on your build-setup and code, you may need to change your import statements.
 For example:
 +
 .Old approach
@@ -198,9 +198,9 @@ exports.responseProcessor = function (req, res) {
 }
 ----
 
-IMPORTANT: If you are using https://market.enonic.com/vendors/enonic/siteimprove[Siteimprove],
-https://market.enonic.com/vendors/enonic/google-analytics[Google Analytics]
-or https://market.enonic.com/vendors/enonic/com.enonic.app.metafields[SEO Meta Fields] applications, we recommend upgrading them to the latest
+IMPORTANT: If you are using link:https://market.enonic.com/vendors/enonic/siteimprove[Siteimprove],
+link:https://market.enonic.com/vendors/enonic/google-analytics[Google Analytics]
+or link:https://market.enonic.com/vendors/enonic/com.enonic.app.metafields[SEO Meta Fields] applications, we recommend upgrading them to the latest
 versions (where this bug has been mitigated) before upgrading to XP 7.8.
 
 == v7.7 notes
@@ -296,7 +296,7 @@ Before starting the upgrade process, ensure the following requirements are in pl
 XP Version:: You need to be running at least Enonic XP 6.15.x (if you are running an older version, upgrade to 6.15.x first)
 QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
 Toolbox:: Ensure you have 6.15 Toolbox available
-Enonic CLI:: Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
+Enonic CLI:: Make sure you have link:https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
 Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
 3rd party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 7.
 Custom apps:: Make sure all custom built applications have been upgraded to support XP 7, as described in <<apps-upgrade#,Upgrading Applications>>
@@ -392,8 +392,8 @@ NOTE: Don't worry about the command losing connection, this is only related to t
 === 4. Install Content studio
 
 Content Studio is no longer part of the XP core distribution.
-Content Studio is now available as an https://market.enonic.com/vendors/enonic/content-studio[application on Enonic Market].
-Documentation for Content Studio can be found https://developer.enonic.com/docs/content-studio[here].
+Content Studio is now available as an link:https://market.enonic.com/vendors/enonic/content-studio[application on Enonic Market].
+Documentation for Content Studio can be found link:https://developer.enonic.com/docs/content-studio[here].
 
 === 5. Update apps
 

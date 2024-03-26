@@ -464,7 +464,7 @@ Support the set of <<query_operators,operators>>.
 * ``*`` at the end of a term signifies a prefix query.
 * ``(`` and ``)`` signify precedence.
 * ``"`` and ``"`` wraps a number of tokens to signify a phrase for searching
-* ``~N`` after a word signifies edit distance (fuzziness) with a number representing https://en.wikipedia.org/wiki/Levenshtein_distance[Levenshtein distance].
+* ``~N`` after a word signifies edit distance (fuzziness) with a number representing link:https://en.wikipedia.org/wiki/Levenshtein_distance[Levenshtein distance].
 * ``~N`` after a phrase signifies slop amount (how far apart terms in phrase are allowed)
 
 To use one of these characters literally, escape it with a preceding backslash (\).

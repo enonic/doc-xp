@@ -53,7 +53,7 @@ Calendar object describes when and how the task should be run. There are two pos
 
 [#one-time]
 .one-time
-The task will be run only once. If the time value is passed at the moment of scheduling, then the task will be run immediately. Value format is https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_INSTANT[ZULU] time, documented in ISO 8601.
+The task will be run only once. If the time value is passed at the moment of scheduling, then the task will be run immediately. Value format is link:https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_INSTANT[ZULU] time, documented in ISO 8601.
 
 .Example of a one-time calendar
 [source,javascript]
@@ -63,7 +63,7 @@ The task will be run only once. If the time value is passed at the moment of sch
 
 [#cron]
 .cron
-Should be used for repeatable tasks. https://www.unix.com/man-page/linux/5/crontab[UNIX] cron lib format is expected. Also, a timezone must be specified to run the job at a particular time of the day.
+Should be used for repeatable tasks. link:https://www.unix.com/man-page/linux/5/crontab[UNIX] cron lib format is expected. Also, a timezone must be specified to run the job at a particular time of the day.
 
 .Example of a cron calendar
 [source,javascript]

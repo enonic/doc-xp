@@ -32,7 +32,7 @@ The goals of this docker image is to:
 
 === Base image
 
-Every time the Enonic XP image is built it will be based off the latest https://hub.docker.com/r/enonic/graalvm[enonic/graalvm] docker image. This ensures the latest updates to the JVM and OS.
+Every time the Enonic XP image is built it will be based off the latest link:https://hub.docker.com/r/enonic/graalvm[enonic/graalvm] docker image. This ensures the latest updates to the JVM and OS.
 
 === Enforced best practices
 
@@ -46,13 +46,13 @@ File permission:: The image is designed to run on multiple orchestration framewo
 
 To help with _day 2 operations_, the image comes with some useful preinstalled tools.
 
-app.sh:: Script to add/remove jars from the Enonic XP deploy folder. An example usage would be `app.sh add <PUBLIC_URL_TO_JAR>`. Description and source https://github.com/enonic/docker-xp7/blob/master/bin/app.sh[here].
+app.sh:: Script to add/remove jars from the Enonic XP deploy folder. An example usage would be `app.sh add <PUBLIC_URL_TO_JAR>`. Description and source link:https://github.com/enonic/docker-xp7/blob/master/bin/app.sh[here].
 
-backups.sh:: Convenient script for pre backup hooks to check the age of index snapshots created by the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter] app. Description and source available https://github.com/enonic/docker-xp7/blob/master/bin/backup.sh[here].
+backups.sh:: Convenient script for pre backup hooks to check the age of index snapshots created by the link:https://market.enonic.com/vendors/enonic/snapshotter[snapshotter] app. Description and source available https://github.com/enonic/docker-xp7/blob/master/bin/backup.sh[here].
 
-dump.sh:: Easily create JVM heap and thread dump. Description and source available https://github.com/enonic/docker-xp7/blob/master/bin/dump.sh[here].
+dump.sh:: Easily create JVM heap and thread dump. Description and source available link:https://github.com/enonic/docker-xp7/blob/master/bin/dump.sh[here].
 
-jattach:: A tiny tool to enable creating thread and heap dumps without the full JDK in the image. Description and source available https://github.com/apangin/jattach[here].
+jattach:: A tiny tool to enable creating thread and heap dumps without the full JDK in the image. Description and source available link:https://github.com/apangin/jattach[here].
 
 == Persisting data
 
@@ -70,7 +70,7 @@ $XP_HOME/repo/blob:: Enonic XP blobstore.
 
 $XP_HOME/repo/index:: Elasticsearch index.
 
-$XP_HOME/snapshots:: Index snapshots created by the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter] app.
+$XP_HOME/snapshots:: Index snapshots created by the link:https://market.enonic.com/vendors/enonic/snapshotter[snapshotter] app.
 
 === Other directories
 
@@ -377,4 +377,4 @@ The directory `$XP_ROOT/home.org` is now simply called `$XP_ROOT/home`. If you a
 
 == Image source code
 
-The source code for the `Dockerfile` and all related scripts is open source and can be viewed https://github.com/enonic/docker-xp7[here].
+The source code for the `Dockerfile` and all related scripts is open source and can be viewed link:https://github.com/enonic/docker-xp7[here].
