@@ -1963,7 +1963,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 </div>
 <div class="sect2">
 <h3 id="processhtml"><a class="link" href="#processhtml">processHtml</a></h3>
-<div class="paragraph">
+<div id="processHtml" class="paragraph">
 <p>This function replaces abstract internal links to images and internal content items contained in an HTML text with full URLs.
 It will also render embedded macros.</p>
 </div>
@@ -2347,7 +2347,7 @@ var sanitizedHtml = portalLib.sanitizeHtml(unsafeHtml);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-26 14:40:13 UTC
+Last updated 2024-03-27 08:12:17 UTC
 </div>
 </div>
 </body>
