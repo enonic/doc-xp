@@ -6,11 +6,11 @@ This section explains the details of the Enonic XP build system
 
 == Main builder
 
-As explained in the <<code#, code section>>, Enonic development projects use link:https://gradle.org/[Gradle] as the main build tool.
+As explained in the <<code#, code section>>, Enonic development projects use https://gradle.org/[Gradle] as the main build tool.
 
 Gradle is built around the popular Maven ecosystem. Gradle is used because Enonic apps are packaged and deployed as .jar (Java) files in the end.
 
-TIP: Enonic supports popular TypeScript/JavaScript tooling such as TSUP, NPM and webpack to run on top of Gradle. link:https://market.enonic.com/starters[Try one or our Starters] to see it in action.
+TIP: Enonic supports popular TypeScript/JavaScript tooling such as TSUP, NPM and webpack to run on top of Gradle. https://market.enonic.com/starters[Try one or our Starters] to see it in action.
 
 
 The Gradle build files are described below
@@ -80,7 +80,7 @@ repositories { // <5>
 }
 ----
 
-<1> Enonic provides a link:https://developer.enonic.com/docs/enonic-gradle-plugins[Gradle plugin] to simplify the build setup.
+<1> Enonic provides a https://developer.enonic.com/docs/enonic-gradle-plugins[Gradle plugin] to simplify the build setup.
 <2> Applies values from gradle.properties.
 <3> Define dependencies to libraries, notice the {xpVersion} which uses the value from gradle.properties.
 <4> Enables `dev` mode for the project
@@ -179,6 +179,6 @@ Windows:: `gradlew.bat dev`
 TIP: Development mode also disables some of XP's caching mechanisms. To make the development workflow as smooth as possible, XP tries to invalidate caches for your static assets. This is to prevent you from getting stale resources so that what you see in the browser is always as up to date as possible.
 
 
-NOTE: XP 7.x defaults to the Nashorn JavaScript engine for executing JavaScript. For an overview over what JavaScript features Nashorn supports, see link:https://kangax.github.io/compat-table/es6/#nashorn1_8[this feature table].
+NOTE: XP 7.x defaults to the Nashorn JavaScript engine for executing JavaScript. For an overview over what JavaScript features Nashorn supports, see https://kangax.github.io/compat-table/es6/#nashorn1_8[this feature table].
 
 

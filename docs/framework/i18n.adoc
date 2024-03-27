@@ -61,8 +61,8 @@ The string-representation of a locale is::
 
 where
 
-* `la`= two letter language code as specified by link:https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes[ISO-639]
-* `CO` = optional two-letter country code as specified by link:https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes[ISO-3166]
+* `la`= two letter language code as specified by https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes[ISO-639]
+* `CO` = optional two-letter country code as specified by https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes[ISO-3166]
 * `VA` = two letter rarely used variant-code.
 
 A sample locale including vendor specific variant:
@@ -126,7 +126,7 @@ message_placeholder = Hello, my name is {0}.
 Placeholders are marked with ``{<number>}``.
 The given number corresponds with the function argument named ``values`` and the position of the parameter.
 
-See Java documentation for link:https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/MessageFormat.html[MessageFormat] for advanced use of placeholders.
+See Java documentation for https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/MessageFormat.html[MessageFormat] for advanced use of placeholders.
 The only difference with Java MessageFormat implementation is that DateFormat timezone is `UTC`.
 
 NOTE: image:xp-780.svg[XP 7.8.0,opts=inline] Placeholders get formatted according to requested locale

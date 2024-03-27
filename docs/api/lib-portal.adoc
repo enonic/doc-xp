@@ -742,6 +742,7 @@ var url = portalLib.pageUrl({
 ```
 
 === processHtml
+[#processHtml]
 
 This function replaces abstract internal links to images and internal content items contained in an HTML text with full URLs.
 It will also render embedded macros.

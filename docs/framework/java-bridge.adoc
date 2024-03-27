@@ -171,7 +171,7 @@ public final class ExampleObjectMapper
 }
 ----
 
-Finally, for returning values of type binary stream from Java, it should be wrapped on a link:https://google.github.io/guava/releases/19.0/api/docs/com/google/common/io/ByteSource.html[ByteSource] object.
+Finally, for returning values of type binary stream from Java, it should be wrapped on a https://google.github.io/guava/releases/19.0/api/docs/com/google/common/io/ByteSource.html[ByteSource] object.
 This is required by XP to allow returning it from an HTTP request, or add it as a content attachment.
 
 

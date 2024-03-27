@@ -10,7 +10,7 @@ The <<./distro#xp_home,XP_HOME/config/>> folder contains all instance specific c
 
 == Format
 
-All configuration files (both .cfg and .properties) use the link:https://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29[Java properties] format.
+All configuration files (both .cfg and .properties) use the https://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29[Java properties] format.
 This is a simple key = value format.
 
 .Sample config file
@@ -423,7 +423,7 @@ hazelcast.wait.seconds.before.join:: Wait time in seconds before join operation.
 hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before join operation Default: `20`.
 
 NOTE: In case of using Kubernetes API discovery each node makes a call to Kubernetes Master in order to discover PODs.
-It also requires granting certain permissions. You can find more information in the documentation of link:https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes].
+It also requires granting certain permissions. You can find more information in the documentation of https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes].
 
 === Admin
 
@@ -767,18 +767,18 @@ If no unit of time is specified, milisceonds will be used.
 +
 Possible classes:
 +
-*ConsoleAppender*: "ch.qos.logback.core.ConsoleAppender" link:https://logback.qos.ch/manual/appenders.html#ConsoleAppender[ConsoleAppender] +
-*FileAppender*: "ch.qos.logback.core.FileAppender" link:https://logback.qos.ch/manual/appenders.html#FileAppender[FileAppender] +
-*RollingFileAppender*: "ch.qos.logback.core.rolling.RollingFileAppender" link:https://logback.qos.ch/manual/appenders.html#RollingFileAppender[RollingFileAppender]
+*ConsoleAppender*: "ch.qos.logback.core.ConsoleAppender" https://logback.qos.ch/manual/appenders.html#ConsoleAppender[ConsoleAppender] +
+*FileAppender*: "ch.qos.logback.core.FileAppender" https://logback.qos.ch/manual/appenders.html#FileAppender[FileAppender] +
+*RollingFileAppender*: "ch.qos.logback.core.rolling.RollingFileAppender" https://logback.qos.ch/manual/appenders.html#RollingFileAppender[RollingFileAppender]
 
 <3> *Root* Configuring the root logger.
 +
 *level* Can be set on <logger> and <root> to specify the importance of the message logged.
 +
 *values*: "DEBUG", "INFO", "WARN", "ERROR", "ALL", "OFF" or "TRACE"
-See: link:https://logback.qos.ch/manual/configuration.html#loggerElement[Logger], link:https://logback.qos.ch/manual/configuration.html#rootElement[Root] for additional iformation
+See: https://logback.qos.ch/manual/configuration.html#loggerElement[Logger], https://logback.qos.ch/manual/configuration.html#rootElement[Root] for additional information
 
-Additional information can be found here: link:https://logback.qos.ch/manual/configuration.html[Logback documentation]
+Additional information can be found here: https://logback.qos.ch/manual/configuration.html[Logback documentation]
 
 === Audit
 
@@ -973,11 +973,11 @@ Properties prefixed with `init-job.<my-job-name>` will describe properties of a 
 
 |`init-job.<my-job-name>.cron`
 |required
-|Cron value describes how often the described task should be run. See string link:https://www.unix.com/man-page/linux/5/crontab[format].
+|Cron value describes how often the described task should be run. See string https://www.unix.com/man-page/linux/5/crontab[format].
 
 |`init-job.<my-job-name>.timezone`
 |optional
-|Timezone used for cron. See string link:https://docs.oracle.com/en/java/javase/11/docs/api/java[format]. JVM value will be used if nothing is set.
+|Timezone used for cron. See string https://docs.oracle.com/en/java/javase/11/docs/api/java[format]. JVM value will be used if nothing is set.
 
 |`init-job.<my-job-name>.descriptor`
 |required

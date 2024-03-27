@@ -26,7 +26,7 @@ image::Radio-buttons.png[two button where one of them is selected, 200]
   <default>one</default>  // <3>
 </input>
 ----
-<1> *occurences* only make supports minumum=1 or 0 - maximum will always be 1.
+<1> *occurrences* only make supports minimum=1 or 0 - maximum will always be 1.
 <2> *option* elements and the `@value` attribute defines the actual value to store when the option is selected.
 Multiple ``option`` elements are allowed and ordered. Optional `i18n` attribute can be used to localise the option label.
 <3> *default* is optional, and may be equal to one of the option values.

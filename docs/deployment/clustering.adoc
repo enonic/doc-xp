@@ -54,7 +54,7 @@ A combined node running XP should minimum have 4GB of memory and 2vCPU. A genera
 
 Master nodes can be configured with less memory and capacity as they are generally not processing requests or queries.
 
-Since Elasticsearch is embedded in XP, be sure also to setup virtual memory, file descriptors and swap setting correctly for __elasticsearch__. Read more about that in the link:https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html[elasticsearch documentation].
+Since Elasticsearch is embedded in XP, be sure also to setup virtual memory, file descriptors and swap setting correctly for __elasticsearch__. Read more about that in the https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html[elasticsearch documentation].
 
 == XP node setup
 
@@ -152,13 +152,13 @@ NOTE: If you decide to change location of `$XP_HOME/snapshots` from default you 
 
 === Pre-installed apps
 
-You can pre-install apps in XP by placing the jars of those apps to `$XP_HOME/deploy`. We recommend placing the link:https://market.enonic.com/vendors/enonic/snapshotter[snapshotter app] there to enable automatic snapshots.
+You can pre-install apps in XP by placing the jars of those apps to `$XP_HOME/deploy`. We recommend placing the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter app] there to enable automatic snapshots.
 
 NOTE: The pre-installed apps can be placed on distinct nodes, but for instance in the case of the snapshotter app, it should simply be placed on all nodes.
 
 === Shard replication
 
-Once your cluster has started you will have to set the number of shard replicas you want the data nodes to store. In this case we have 2 data nodes, so we want 2 copies of each shard in the cluster (1 per data node). To do that we should set the number of replicas to 1. Setting that number to 1 means that the cluster will have 1 primary shard, and 1 replica shard, totalling 2 copies. We can do this with the link:https://developer.enonic.com/docs/enonic-cli[Enonic CLI]:
+Once your cluster has started you will have to set the number of shard replicas you want the data nodes to store. In this case we have 2 data nodes, so we want 2 copies of each shard in the cluster (1 per data node). To do that we should set the number of replicas to 1. Setting that number to 1 means that the cluster will have 1 primary shard, and 1 replica shard, totalling 2 copies. We can do this with the https://developer.enonic.com/docs/enonic-cli[Enonic CLI]:
 
 [source,bash]
 ----
@@ -186,7 +186,7 @@ When running XP in a cluster, we generally recommend using sticky sessions. Stic
 . Any kind of node-local file handling will ONLY work across requests if the request is handled by the same node.
 . Performance is generally better and more consistent for users
 
-For session-based logins, XP now supports link:https://developer.enonic.com/docs/xp/stable/deployment/config#sessionstore[session replication] between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.
+For session-based logins, XP now supports https://developer.enonic.com/docs/xp/stable/deployment/config#sessionstore[session replication] between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.
 
 
 == Backup and restore

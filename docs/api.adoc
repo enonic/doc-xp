@@ -9,7 +9,7 @@ This section offers detailed documentation on our APIs.
 
 Enonic XP provides multiple APIs, from web endpoints, via Core Javascript libraries to the Java API.
 
-TIP: Looking for our *Headless CMS GraphQL API?* To give it a quick spin, link:https://www.enonic.com/sign-up[sign up for a Free Plan] or visit the https://developer.enonic.com/start[Developer quickstart].
+TIP: Looking for our *Headless CMS GraphQL API?* To give it a quick spin, https://www.enonic.com/sign-up[sign up for a Free Plan] or visit the https://developer.enonic.com/start[Developer quickstart].
 
 == Endpoints
 
@@ -19,14 +19,14 @@ The <<runtime#, XP Runtime>> provides access to various <<runtime/engines#, Engi
 
 XP ships with a large number of build in JavaScript libraries that can be accessed when <<development#, developing Enonic apps>>. These are listed below this page in the documentation menu.
 
-Alternatively browse our link:https://developer.enonic.com/jsdoc[JSDocs].
+Alternatively browse our https://developer.enonic.com/jsdoc[JSDocs].
 
 
 == TypeScript definitions
 
 === Install
 
-To add types for corresponding library use NPM (or similar package manager) and install them as any other dependency. All types can be found under link:https://www.npmjs.com/org/enonic-types[@enonic-types] organisation on NPM.
+To add types for corresponding library use NPM (or similar package manager) and install them as any other dependency. All types can be found under https://www.npmjs.com/org/enonic-types[@enonic-types] organisation on NPM.
 
 === Libraries
 
@@ -84,7 +84,7 @@ import type {Content} from '@enonic-types/core';
 
 `Content` contains the `x` property that has a very special `XpXData` type.
 
-`XpXData` is an interface that is added to the global scope, so it can be modified using the link:https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces[declaration merging]. This allows you to set the shape of the XData in your project, simply by declaring the `XpXData` like this:
+`XpXData` is an interface that is added to the global scope, so it can be modified using the https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces[declaration merging]. This allows you to set the shape of the XData in your project, simply by declaring the `XpXData` like this:
 
 ```ts
 declare global {
@@ -203,4 +203,4 @@ const helper = __.newBean('com.me.project.SomeHelper');
 
 == JavaDoc
 
-Java developers or anyone interested in the Platform core may check out our JavaDoc (link:https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-javadoc.zip[zipfile download]).
+Java developers or anyone interested in the Platform core may check out our JavaDoc (https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-javadoc.zip[zipfile download]).

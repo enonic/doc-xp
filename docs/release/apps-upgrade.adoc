@@ -11,7 +11,7 @@ NOTE: This section is only relevant when upgrading from XP6 to XP7.
 
 Before you start the upgrade procedure:
 
-* Make sure you have link:https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
+* Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
 * Check out the project source code to a local folder i.e. myapp/
 
 == 1. Create a sandbox
@@ -154,10 +154,10 @@ version=1.0.0-SNAPSHOT
 
 The following libraries have been take out of XP core, and are now released and versioned separately:
 
-* link:https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf]
-* link:https://market.enonic.com/vendors/enonic/xslt-lib[XSLT]
-* link:https://market.enonic.com/vendors/enonic/mustache-lib[Mustache]
-* link:https://market.enonic.com/vendors/enonic/http-client-lib[HTTP client]
+* https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf]
+* https://market.enonic.com/vendors/enonic/xslt-lib[XSLT]
+* https://market.enonic.com/vendors/enonic/mustache-lib[Mustache]
+* https://market.enonic.com/vendors/enonic/http-client-lib[HTTP client]
 
 If your project used the bundled libraries,
 update you `build.gradle` dependencies to use the new libraries
@@ -491,7 +491,7 @@ include::code/styles.xml[]
 
 Image styles also introduce the ability to use image service filters, and client side CSS styles that are used by the editor.
 
-Read more about Image styles link:https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[here]
+Read more about Image styles https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[here]
 
 
 === Editor XSS

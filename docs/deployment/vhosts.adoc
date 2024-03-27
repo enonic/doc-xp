@@ -35,7 +35,7 @@ NOTE: Vhosts only apply to XP service port (defaults to 8080), not the monitorin
 
 VHost matches the request if `host` value matches the requested host _AND_ request-uri matches `source`.
 
-image:xp-780.svg[XP 7.8.0,opts=inline] Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at link:https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[Pattern JavaDoc]
+image:xp-780.svg[XP 7.8.0,opts=inline] Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[Pattern JavaDoc]
 Host matching is case-insensitive in both cases.
 
 NOTE: For backwards compatibility with old versions of XP root domain is not normalized in host.
