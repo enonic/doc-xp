@@ -1,8 +1,8 @@
 = Mail Library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
-This library contains one function to send an e-mail.
+This library includes a function for sending emails, as well as a function for retrieving the `defaultFromEmail` address from the configuration.
 
 == Usage
 
@@ -114,6 +114,20 @@ var flag2 = mailLib.send({
     ]
 });
 ----
+
+=== getDefaultFromEmail
+
+image:xp-7141.svg[XP 7.14.1,opts=inline] This function returns the default from email address configured in the XP mail configuration.
+
+[.lead]
+Example
+
+.Get a defaultFromEmail
+[source,js]
+----
+var defaultFromEmail = mailLib.getDefaultFromEmail();
+----
+
 
 == Objects
 

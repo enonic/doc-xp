@@ -149,6 +149,7 @@ smtpAuth=true
 smtpUser=user
 smtpPassword=secret
 smtpTLS=true
+defaultFromEmail=noreply@domain.com
 ----
 
 smtpHost:: Host name of the SMTP server. Default: `localhost`.
@@ -157,6 +158,7 @@ smtpAuth:: Enable authentication with SMTP server. Default: `false`
 smtpUser:: User to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
 smtpPassword:: Password to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
 smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required. Default: `false`.
+defaultFromEmail:: Default email address to use as sender for all emails sent from XP if sender is not explicitly specified.
 
 [#repo]
 === Repo
