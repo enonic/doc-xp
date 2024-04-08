@@ -38,7 +38,7 @@ This function sends an email message using the mail server configured.
 The address values can be either a simple email address (e.g. ‘name@domain.org’ ) or an address with a display name. In the latter case the
 email will be enclosed with angle brackets (e.g. ‘Some Name <name@domain.org>’ ).
 
-The `from` parameter supports the <<getDefaultFromEmail,default _from_ email>>.
+The `from` parameter supports the <<getDefaultFromEmail,default _from_ email>> substitution.
 If the email address is not specified in brackets (e.g., `Some Name <name@domain.org>` or `<>`), the default _from_ email address is used. 
 However, an error is thrown if the default _from_ email is not set.
 
