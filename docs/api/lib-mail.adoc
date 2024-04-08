@@ -39,7 +39,7 @@ The address values can be either a simple email address (e.g. ‘name@domain.org
 email will be enclosed with angle brackets (e.g. ‘Some Name <name@domain.org>’ ).
 
 The `from` parameter supports the <<getDefaultFromEmail,default _from_ email>> substitution.
-If the email address is not specified in angle brackets (e.g., `Some Name <>` or `<>`), the default _from_ email address is used. 
+If the email address is not specified in angle brackets (e.g., `Some Name <>` or `<>`), the default _from_ email address is used.
 However, an error is thrown if the default _from_ email is not set.
 
 The parameters `to`, `cc` and `bcc` can be passed as a single string or as an array of strings, if there are multiple addresses to specify.
@@ -122,7 +122,7 @@ var flag2 = mailLib.send({
 === getDefaultFromEmail
 [[getDefaultFromEmail]]
 
-image:xp-7141.svg[XP 7.14.1,opts=inline] This function returns the default _from_ email address configured in the XP mail configuration.
+image:xp-7141.svg[XP 7.14.1,opts=inline] This function returns the default _from_ email address configured in the <<../deployment/config#mail, XP mail configuration>>.
 
 [.lead]
 Example
