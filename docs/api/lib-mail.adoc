@@ -38,6 +38,10 @@ This function sends an email message using the mail server configured.
 The address values can be either a simple email address (e.g. ‘name@domain.org’ ) or an address with a display name. In the latter case the
 email will be enclosed with angle brackets (e.g. ‘Some Name <name@domain.org>’ ).
 
+The `from` parameter supports the <<getDefaultFromEmail,default _from_ email>>.
+If the email address is not specified in brackets (e.g., `Some Name <name@domain.org>` or `<>`), the default _from_ email address is used. 
+However, an error is thrown if the default _from_ email is not set.
+
 The parameters `to`, `cc` and `bcc` can be passed as a single string or as an array of strings, if there are multiple addresses to specify.
 
 The content-type of the email can be specified by using the `contentType` parameter. See example below for sending a message with an HTML body.
@@ -116,8 +120,9 @@ var flag2 = mailLib.send({
 ----
 
 === getDefaultFromEmail
+[[getDefaultFromEmail]]
 
-image:xp-7141.svg[XP 7.14.1,opts=inline] This function returns the default from email address configured in the XP mail configuration.
+image:xp-7141.svg[XP 7.14.1,opts=inline] This function returns the default _from_ email address configured in the XP mail configuration.
 
 [.lead]
 Example
