@@ -445,6 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#functions">Functions</a>
 <ul class="sectlevel2">
 <li><a href="#send">send</a></li>
+<li><a href="#getdefaultfromemail">getDefaultFromEmail</a></li>
 </ul>
 </li>
 <li><a href="#objects">Objects</a>
@@ -459,7 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains one function to send an e-mail.</p>
+<p>This library contains functions that are used for sending emails.</p>
 </div>
 </div>
 </div>
@@ -516,6 +517,11 @@ You also need to configure your smtp-server before you can send out email. For d
 <div class="paragraph">
 <p>The address values can be either a simple email address (e.g. ‘<a href="mailto:name@domain.org">name@domain.org</a>’ ) or an address with a display name. In the latter case the
 email will be enclosed with angle brackets (e.g. ‘Some Name &lt;<a href="mailto:name@domain.org">name@domain.org</a>&gt;’ ).</p>
+</div>
+<div class="paragraph">
+<p>The <code>from</code> parameter supports the <a href="#getDefaultFromEmail">default <em>from</em> email</a> substitution.
+If the email address is not specified in angle brackets (e.g., <code>Some Name &lt;&gt;</code> or <code>&lt;&gt;</code>), the default <em>from</em> email address is used.
+However, an error is thrown if the default <em>from</em> email is not set.</p>
 </div>
 <div class="paragraph">
 <p>The parameters <code>to</code>, <code>cc</code> and <code>bcc</code> can be passed as a single string or as an array of strings, if there are multiple addresses to specify.</p>
@@ -668,6 +674,41 @@ email will be enclosed with angle brackets (e.g. ‘Some Name &lt;<a href="mailt
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="getdefaultfromemail"><a class="link" href="#getdefaultfromemail">getDefaultFromEmail</a></h3>
+<div id="getDefaultFromEmail" class="paragraph">
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="r">
+    <rect width="64" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#r)">
+    <rect width="25" height="20" fill="#555"/>
+    <rect x="25" width="39" height="20" fill="#007ec6"/>
+    <rect width="64" height="20" fill="url(#s)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
+     font-size="110">
+    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
+    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
+    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.14.1</text>
+    <text x="435" y="140" transform="scale(.1)" textLength="290">7.14.1</text>
+  </g>
+</svg></span> This function returns the default <em>from</em> email address configured in the <a href="../deployment/config.ahtml#mail">XP mail configuration</a>.</p>
+</div>
+<div class="paragraph lead">
+<p>Example</p>
+</div>
+<div class="listingblock">
+<div class="title">Get a defaultFromEmail</div>
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">var defaultFromEmail = mailLib.getDefaultFromEmail();</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -731,7 +772,7 @@ email will be enclosed with angle brackets (e.g. ‘Some Name &lt;<a href="mailt
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-27 08:12:17 UTC
+Last updated 2024-04-08 09:15:36 UTC
 </div>
 </div>
 </body>

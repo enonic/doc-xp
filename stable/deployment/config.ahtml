@@ -708,7 +708,8 @@ smtpPort=25
 smtpAuth=true
 smtpUser=user
 smtpPassword=secret
-smtpTLS=true</code></pre>
+smtpTLS=true
+defaultFromEmail=noreply@domain.com</code></pre>
 </div>
 </div>
 <div class="dlist">
@@ -736,6 +737,10 @@ smtpTLS=true</code></pre>
 <dt class="hdlist1">smtpTLS</dt>
 <dd>
 <p>Turns on Transport Layer Security (TLS) security for SMTP if required. Default: <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">defaultFromEmail</dt>
+<dd>
+<p>Default email address to use as sender for all emails sent from XP if sender is not explicitly specified.</p>
 </dd>
 </dl>
 </div>
@@ -2440,7 +2445,7 @@ The value is set in percentage of total Java Heap, or in memory units (<code>mb<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-27 08:12:17 UTC
+Last updated 2024-04-08 09:15:36 UTC
 </div>
 </div>
 </body>
