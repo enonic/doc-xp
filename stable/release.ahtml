@@ -731,7 +731,7 @@ Read more about implementation details <a href="admin/widgets.ahtml#dashboard_wi
 <div class="sect2">
 <h3 id="site_mapping_for_services"><a class="link" href="#site_mapping_for_services">Site mapping for services</a></h3>
 <div class="paragraph">
-<p>Site Mappings can now be used to customize the behavior of Image, Attachment and Component services <a href="cms/mappings.ahtml#services">Services</a>.</p>
+<p>Site Mappings can now be used to customize the behavior of Image, Attachment and Component services <a href="framework/mappings.ahtml#service_mappings">Services</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1428,18 +1428,6 @@ and dropdowns with part descriptors. Just place an icon (in either PNG or SVG fo
 into the same folder. For example, if part/folder is called <em>mypart</em> then part descriptor is called <em>mypart.xml</em> and the icon file should be called
 either <em>mypart.svg</em> or <em>mypart.png</em>.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This feature requires <a href="https://developer.enonic.com/docs/content-studio/release#2_3_0">Content Studio v2.3</a>.
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="header_filter"><a class="link" href="#header_filter">Header filter</a></h3>
@@ -1875,7 +1863,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-04-08 14:50:33 UTC
+Last updated 2024-04-09 14:53:38 UTC
 </div>
 </div>
 </body>
