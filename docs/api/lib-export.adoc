@@ -96,6 +96,9 @@ Import nodes from a nodes-export.
 Could be used to import node-export from <<../deployment/config#_export, exports>> directory or from application resource files.
 Optionally pre-transforms node XML node files with XSLT before import.
 
+NOTE: During node export, current permissions are included in the export file. But when importing, you may need to apply permissions according to your new environment/parent permissions. `includePermissions` parameter is used to control this behavior.
+
+
 [.lead]
 Parameters
 
@@ -111,8 +114,8 @@ An object with the following keys and their values:
 | targetNodePath | string | | | Target path for imported nodes
 | xslt | string or object  | <optional>| true | XSLT file name in exports directory or application resource key. Used for XSLT transformation
 | xsltParams | object  | <optional>| | Parameters used in XSLT transformation
-| includeNodeIds | boolean | <optional>| false | Set to true to use node IDs from the import, false to generate new node IDs
-| includePermissions | boolean | <optional>| false | Set to true to use Node permissions from the import, false to use target node permissions
+| includeNodeIds | boolean | <optional>| false | Set to `true` to use node IDs from the import, `false` to generate new node IDs
+| includePermissions | boolean | <optional>| false | Set to `true` to overwrite Node permissions with permissions from the import, `false` to merge permissions with new parent permissions
 | nodeResolved | function | <optional>| | A function to be called during import with number of nodes imported since last call
 | nodeImported | function | <optional>| | A function to be called during import with number of nodes imported since last call
 |===

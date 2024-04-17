@@ -861,7 +861,7 @@ const result = contentLib.getPermissions({
 });
 
 if (result) {
-    log.info('Content inherits permissions: ' + result.inheritPermissions);
+    log.info('Content permissions: ' + JSON.stringify(result));
 } else {
     log.info('Content not found');
 }
@@ -869,7 +869,6 @@ if (result) {
 ```js
 // Permissions returned.
 const expected = {
-    "inheritsPermissions": false,
     "permissions": [
         {
             "principal": "user:system:anonymous",
@@ -1784,10 +1783,11 @@ const result3 = contentLib.restore({
 log.info('Restored content ids: ' + result3.join(','));
 ```
 
-=== setPermissions
+=== applyPermissions
 
-Sets permissions on a content
+Applies permissions on a content.
 
+NOTE: If the content is published, the permissions will be applied to the content there as well without a need to republish content.
 [.lead]
 *Parameters:*
 
@@ -1797,12 +1797,108 @@ An object with the following keys and their values:
 [frame="none"]
 [grid="none"]
 |===
-| Name | Type | Attributes| Description
+| Name | Type | Attributes | Description
 | key | string | | Path or id of the content
-| inheritPermissions | boolean | <optional> | Set to true if the content must inherit permissions. Default to false
-| overwriteChildPermissions | boolean | <optional> | Set to true to overwrite child permissions. Default to false
-| permissions | <<PermissionsParams>>[] | <optional> | Array of permissions
+| permissions | <<PermissionsParams>>[] | <optional> | Array of permissions to overwrite current permissions. Cannot be used with 'addPermissions' or 'removePermissions'
+| addPermissions | <<PermissionsParams>>[] | <optional> | Array of permissions to add. Cannot be used simultaneously with 'permissions'
+| removePermissions | <<PermissionsParams>>[] | <optional> | Array of permissions to remove. Cannot be used simultaneously with 'permissions'
+| scope | string ('SINGLE' \| 'TREE' \| 'CHILDREN') | <optional>  | scope of applying permissions. Scope 'SINGLE' applies permissions only to the content itself. 'TREE' applies permissions to the content and its descendants. 'CHILDREN' applies permissions only to the content's descendants. Default is 'SINGLE'.
 |===
+
+[.lead]
+Examples
+
+.1) Applying permissions to a content by overwriting the current permissions.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-content',
+    permissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['READ']
+        },
+        {
+            principal: 'user:system:my-user',
+            allow: ['READ', 'CREATE', 'MODIFY', 'DELETE']
+        }
+    ]
+});
+----
+
+.2) Adding permissions to a content.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-content',
+    addPermissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['CREATE', 'MODIFY']  // 'READ' permission is already set and will be kept.
+        },
+        {
+            principal: 'user:system:my-new-user',
+            allow: ['READ', 'CREATE', 'MODIFY', 'DELETE'] // New user will have all permissions.
+        }
+    ]
+});
+----
+
+.3) Removing permissions from a content.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-content',
+    removePermissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['CREATE', 'MODIFY']  // 'READ' permission will be kept.
+        },
+        {
+            principal: 'user:system:my-user',
+            allow: ['DELETE'] // 'DELETE' permission will be removed. All other permissions will be kept.
+        },
+        {
+            principal: 'user:system:my-new-user' // All permissions for this principal will be removed.
+        }
+    ]
+});
+----
+
+.Applying permissions to a content and its descendants.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-content',
+    permissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['READ']
+        }
+    ],
+    scope: 'TREE'
+});
+----
+
+.Applying permissions to a content's descendants only.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-content',
+    permissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['READ']
+        }
+    ],
+    scope: 'CHILDREN'
+});
+----
 
 ==== PermissionsParams
 
@@ -1815,35 +1911,6 @@ An object with the following keys and their values:
 | allow | string[] | Allowed permissions
 | deny | string[] | Denied permissions
 |===
-
-
-[.lead]
-Returns
-
-*boolean* : True if successful, false otherwise
-
-[.lead]
-Examples
-
-```js
-// Set permissions for content by path.
-const flag = contentLib.setPermissions({
-    key: '/features/js-libraries/mycontent',
-    inheritPermissions: false,
-    overwriteChildPermissions: true,
-    permissions: [{
-        principal: 'user:system:anonymous',
-        allow: ['READ'],
-        deny: ['DELETE']
-    }]
-});
-
-if (flag) {
-    log.info('Permissions set');
-} else {
-    log.info('Content not found');
-}
-```
 
 === unpublish
 
