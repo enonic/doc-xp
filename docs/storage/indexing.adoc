@@ -227,7 +227,7 @@ A basic index config might look something like this:
 <3> *path* specifies the propertyPath the config applies to
 <4> *config* is the specific overriding config
 <5> *mySet.*** applies to all sub properties of "mySet"
-<6> *languages* stemmed <<#languages, language>> indices will be generated for all matched properties
+<6> *languages* stemmed <<languages, language>> indices will be generated for all matched properties
 
 === Property paths
 

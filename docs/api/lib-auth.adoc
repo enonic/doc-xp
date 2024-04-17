@@ -44,7 +44,7 @@ Parameters
 |===
 | Name | Kind | Details
 | principalKey | string | Key of the principal to add members to
-| members | Array.<string> | A list of the new memebers that should be added to the principal
+| members | string[] | A list of the new memebers that should be added to the principal
 |===
 
 [.lead]
@@ -431,7 +431,7 @@ Parameters
 [.lead]
 Returns
 
-*Array.<object>* : A list of objects for each member of the principal or empty array if none.
+*object[]* : A list of objects for each member of the principal or empty array if none.
 
 [.lead]
 Example
@@ -469,7 +469,7 @@ Parameters
 [.lead]
 Returns
 
-*Array.<string>* : A list of the principals that the specified principal is a member of
+*string[]* : A list of the principals that the specified principal is a member of
 
 [.lead]
 Example
@@ -948,7 +948,7 @@ Parameters
 |===
 | Name | Kind | Details
 | principalKey | string | The principal key of a group or a role to remove members from
-| members | Array.<string> | Principal keys to remove as members
+| members | string[] | Principal keys to remove as members
 |===
 
 [.lead]

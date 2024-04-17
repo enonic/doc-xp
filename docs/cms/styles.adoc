@@ -36,7 +36,7 @@ Example style definition:
 
 <1> The optional `css` attribute references a file in your app's `/src/main/resources/assets/` folder. The CSS declared in this file will be loaded into Content Studio's rich text editor to provide client-side styling.
 
-<2> Each `<image>` element declares a custom style that can be applied to images inserted in the rich text editor. 
+<2> Each `<image>` element declares a custom style that can be applied to images inserted in the rich text editor.
 +
 NOTE: As of now, `aspect-ratio` and `filter` are the only options available for server-side image processing.
 
@@ -88,6 +88,6 @@ When looking at the two styles defined, only  `editor-image-sepia` is declared i
 
 == Built-in styles
 
-By default, XP comes with a built-in image style called `Original (no image processing)`. 
+By default, XP comes with a built-in image style called `Original (no image processing)`.
 
 By applying this style to an image, the original image file will be served, without any processing.

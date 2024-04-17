@@ -55,7 +55,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#scheduled_job,`ScheduledJob`>>) Detail information for the job.
+*object* : (<<scheduled_job,`ScheduledJob`>>) Detail information for the job.
 Or null if the job could not be found.
 
 [.lead]
@@ -111,7 +111,7 @@ Returns the list of scheduled jobs.
 [.lead]
 Returns
 
-*Array* : (<<#scheduled_job,`ScheduledJob[]`>>) List of all scheduled jobs.
+*Array* : (<<scheduled_job,`ScheduledJob[]`>>) List of all scheduled jobs.
 
 [.lead]
 Example
@@ -205,7 +205,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#scheduled_job,`ScheduledJob`>>) Detail information for the created job.
+*object* : (<<scheduled_job,`ScheduledJob`>>) Detail information for the created job.
 
 [.lead]
 Example
@@ -319,7 +319,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : (<<#scheduled_job,`ScheduledJob`>>) Detail information for the modified job.
+*object* : (<<scheduled_job,`ScheduledJob`>>) Detail information for the modified job.
 
 [.lead]
 Example

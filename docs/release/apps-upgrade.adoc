@@ -1,8 +1,11 @@
-= Enonic XP 7.0 - Application upgrade
+= Upgrading applications from XP6 to XP7
 :toc: right
 :imagesdir: images
 
 This section describes the steps required to upgrade an XP application from 6.x to 7.0
+
+NOTE: This section is only relevant when upgrading from XP6 to XP7.
+
 
 == Preparations
 
@@ -52,7 +55,7 @@ This will install or update your project with a new Gradle wrapper.
 ==== Application upgrade
 
 If you are upgrading *an application*, you need to use version greater or equal to '2.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
-It supports Gradle 5, Java 11 and building for XP 7. 
+It supports Gradle 5, Java 11 and building for XP 7.
 Gradle plugin '3.4.0' supports Gradle 8.3 and Java 17 - recommended to build apps for XP versions 7.13 and greater
 
 This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
@@ -102,7 +105,7 @@ version = 1.0.0-SNAPSHOT
 appDisplayName = My Cool App
 appName = com.acme.something.myproject
 vendorName = Acme Inc
-vendorUrl = http://example.com
+vendorUrl = https://example.com
 xpVersion = 7.0.0
 
 # Settings for publishing to a Maven repo
@@ -274,7 +277,7 @@ Update schemas using fieldsets by removing the `name` attribute.
 
 === Content scope
 
-For all schemas in XP 6, the input types <<../cms/input-types#contentselector,contentSelectors>> and <<../cms/input-types#tag,tag>> defaulted to selecting content across the entire repository.
+For all schemas in XP 6, the input types <<../cms/schemas/input-types/contentselector,contentSelectors>> and <<../cms/schemas/input-types/tag,tag>> defaulted to selecting content across the entire repository.
 The default scope is now reduced to the parent site.
 
 NOTE: mediaSelectors and contentSelector in rich text area still allows selection of content across the entire repository
@@ -488,7 +491,7 @@ include::code/styles.xml[]
 
 Image styles also introduce the ability to use image service filters, and client side CSS styles that are used by the editor.
 
-Read more about Image styles https://developer.enonic.com/docs/content-studio/master/editor/rich-text-editor[here]
+Read more about Image styles https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[here]
 
 
 === Editor XSS

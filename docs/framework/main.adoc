@@ -11,7 +11,7 @@ Enonic apps may contain a special controller known as the Application controller
 
 The `main.js` execution should complete as quickly as possible to prevent application stalling. Never call remote endpoints or wait in loops for events inside `main.js` global scope.
 
-TIP: If you need to perform time consuming work in the main controller, consider implementing it as a <<task#, task>>.
+TIP: If you need to perform time consuming work in the main controller, consider implementing it as a <<tasks#, task>>.
 
 Running code when the application starts:
 

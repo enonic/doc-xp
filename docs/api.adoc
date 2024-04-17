@@ -13,7 +13,7 @@ TIP: Looking for our *Headless CMS GraphQL API?* To give it a quick spin, https:
 
 == Endpoints
 
-The <<runtime#, XP Runtime>> provides access to various <<runtime/engines#, Engines and services>>, including the REST-style <<runtime/management#, Management>> and <<runtime/statistics#, Statistics API>>s. 
+The <<runtime#, XP Runtime>> provides access to various <<runtime/engines#, Engines and services>>, including the REST-style <<runtime/management#, Management>> and <<runtime/statistics#, Statistics API>>s.
 
 == JavaScript API
 
@@ -84,7 +84,7 @@ import type {Content} from '@enonic-types/core';
 
 `Content` contains the `x` property that has a very special `XpXData` type.
 
-`XpXData` is an interface that is added to the global scope, so it can be modified using the [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces). This allows you to set the shape of the XData in your project, simply by declaring the `XpXData` like this:
+`XpXData` is an interface that is added to the global scope, so it can be modified using the https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces[declaration merging]. This allows you to set the shape of the XData in your project, simply by declaring the `XpXData` like this:
 
 ```ts
 declare global {

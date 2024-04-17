@@ -50,7 +50,7 @@ simply place a file with the name `<app-name>.cfg` i.e. `my.custom.app.cfg`. in 
 
 Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.
 
-For more details visit the <<../apps/config#, application config section>>.
+This configuration is instantly available for developers via the <<../framework/globals#App, global `app` object>>.
 
 == Standard config files
 
@@ -134,6 +134,7 @@ mapping.admin.target = /admin
 mapping.admin.idProvider.system = default
 ----
 
+[#mail]
 === Mail
 
 `XP_HOME/config/com.enonic.xp.mail.cfg`
@@ -149,6 +150,7 @@ smtpAuth=true
 smtpUser=user
 smtpPassword=secret
 smtpTLS=true
+defaultFromEmail=noreply@domain.com
 ----
 
 smtpHost:: Host name of the SMTP server. Default: `localhost`.
@@ -157,6 +159,7 @@ smtpAuth:: Enable authentication with SMTP server. Default: `false`
 smtpUser:: User to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
 smtpPassword:: Password to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
 smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required. Default: `false`.
+defaultFromEmail:: Default email address to use as sender for all emails sent from XP if sender is not explicitly specified.
 
 [#repo]
 === Repo
@@ -773,18 +776,18 @@ If no unit of time is specified, milisceonds will be used.
 +
 Possible classes:
 +
-*ConsoleAppender*: "ch.qos.logback.core.ConsoleAppender" link:http://logback.qos.ch/manual/appenders.html#ConsoleAppender[ConsoleAppender] +
-*FileAppender*: "ch.qos.logback.core.FileAppender" link:http://logback.qos.ch/manual/appenders.html#FileAppender[FileAppender] +
-*RollingFileAppender*: "ch.qos.logback.core.rolling.RollingFileAppender" link:http://logback.qos.ch/manual/appenders.html#RollingFileAppender[RollingFileAppender]
+*ConsoleAppender*: "ch.qos.logback.core.ConsoleAppender" https://logback.qos.ch/manual/appenders.html#ConsoleAppender[ConsoleAppender] +
+*FileAppender*: "ch.qos.logback.core.FileAppender" https://logback.qos.ch/manual/appenders.html#FileAppender[FileAppender] +
+*RollingFileAppender*: "ch.qos.logback.core.rolling.RollingFileAppender" https://logback.qos.ch/manual/appenders.html#RollingFileAppender[RollingFileAppender]
 
 <3> *Root* Configuring the root logger.
 +
 *level* Can be set on <logger> and <root> to specify the importance of the message logged.
 +
 *values*: "DEBUG", "INFO", "WARN", "ERROR", "ALL", "OFF" or "TRACE"
-See: link:http://logback.qos.ch/manual/configuration.html#loggerElement[Logger], link:http://logback.qos.ch/manual/configuration.html#rootElement[Root] for additional iformation
+See: https://logback.qos.ch/manual/configuration.html#loggerElement[Logger], https://logback.qos.ch/manual/configuration.html#rootElement[Root] for additional information
 
-Additional information can be found here: link:http://logback.qos.ch/manual/configuration.html[Logback documentation]
+Additional information can be found here: https://logback.qos.ch/manual/configuration.html[Logback documentation]
 
 === Audit
 
@@ -823,7 +826,7 @@ auditlog.enabled = true
 ----
 
 auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
-IMPORTANT: Audit log can be disabled by common `<<#audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
+IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
 
 
 auditlog.filter:: image:xp-7120.svg[XP 7.12.0,opts=inline] Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `!system.content.update,*` (allow everything except "content update" event).
@@ -862,8 +865,8 @@ attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in c
 
 resolveEmptyRegions:: image:xp-7131.svg[XP 7.13.1,opts=inline] Set to `true` to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: `false`.
 
-WARNING: Setting `resolveEmptyRegions` to `true` can adversely impact system performance. 
-By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required. 
+WARNING: Setting `resolveEmptyRegions` to `true` can adversely impact system performance.
+By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required.
 As such, it may lead to slower system response and reduced efficiency. Importantly, this functionality is deprecated and will be removed in future versions of Enonic XP. It is advisable to adapt your workflows to operate without this feature to ensure future compatibility.
 
 [#vacuum]
@@ -979,11 +982,11 @@ Properties prefixed with `init-job.<my-job-name>` will describe properties of a 
 
 |`init-job.<my-job-name>.cron`
 |required
-|Cron value describes how often the described task should be run. See string <<https://www.unix.com/man-page/linux/5/crontab, format>>.
+|Cron value describes how often the described task should be run. See string https://www.unix.com/man-page/linux/5/crontab[format].
 
 |`init-job.<my-job-name>.timezone`
 |optional
-|Timezone used for cron. See string <<https://docs.oracle.com/en/java/javase/11/docs/api/java, format>>. JVM value will be used if nothing is set.
+|Timezone used for cron. See string https://docs.oracle.com/en/java/javase/11/docs/api/java[format]. JVM value will be used if nothing is set.
 
 |`init-job.<my-job-name>.descriptor`
 |required

@@ -43,7 +43,7 @@ Parameters
 |===
 | Name | Kind | Details
 | id | string | Unique project id to identify the project.
-| permissions | Object.<string, Array.<string>> | Project permissions to add. 1 to 5 properties where key is role id and value is an array of principals.
+| permissions | Object.<string, string[]> | Project permissions to add. 1 to 5 properties where key is role id and value is an array of principals.
 |===
 
 [.lead]
@@ -105,19 +105,19 @@ Parameters
 
 | description | string | <optional> | Project description.
 | language | string | <optional> | Default project language.
-| siteConfig | Array.<Object.<string, Object>> | <optional> | Applications (with optional configurations) to be assigned to the project
+| siteConfig | Object.<string, Object>[] | <optional> | Applications (with optional configurations) to be assigned to the project
 [stripes=none,cols="1,49,50"]
 !===
 ! Name ! Type ! Description
 ! applicationKey ! string ! Application key
 ! config ! Object ! Application config json
 !===
-| permissions | Object.<string, Array.<string>> | <optional> | Project permissions. 1 to 5 properties where key is role id and value is an array of principals.
+| permissions | Object.<string, string[]> | <optional> | Project permissions. 1 to 5 properties where key is role id and value is an array of principals.
 [stripes=none,cols="1,49,50"]
 !===
 ! Name ! Type ! Description
 ! role ! string ! Role id (one of `owner`, `editor`, `author`, `contributor`, `viewer`).
-! principals ! Array.<string> ! Array of principals.
+! principals ! string[] ! Array of principals.
 !===
 | readAccess | Object.<string, boolean> | | Read access settings.
 [stripes=none,cols="1,1,98"]
@@ -352,7 +352,7 @@ Users with `system.admin` or `cms.admin` roles will get the list of all projects
 [.lead]
 Returns
 
-*Array.<Object>* : Array of Content Project objects.
+*Object[]* : Array of Content Project objects.
 
 
 [.lead]
@@ -401,7 +401,7 @@ Parameters
 | displayName | string | <optional> | Project display name.
 | description | string | <optional> | Project description.
 | language | string | <optional> | Default project language.
-| siteConfig | Array.<Object.<string, Object>> | <optional> | Applications (with optional configurations) to be assigned to the project.
+| siteConfig | Object.<string, Object>[] | <optional> | Applications (with optional configurations) to be assigned to the project.
 [stripes=none,cols="1,49,50"]
 !===
 ! Name ! Type ! Description
@@ -545,12 +545,12 @@ Parameters
 |===
 | Name | Type | Description
 | id | string | Unique project id (alpha-numeric characters and hyphens allowed).
-| permissions | Object.<string, Array.<string>> | Project permissions to delete. 1 to 5 properties where key is role id and value is an array of principals.
+| permissions | Object.<string, string[]> | Project permissions to delete. 1 to 5 properties where key is role id and value is an array of principals.
 [stripes=none,cols="1,49,50"]
 !===
 ! Name ! Type ! Description
 ! role ! string ! Role id (one of `owner`, `editor`, `author`, `contributor`, `viewer`).
-! principals ! Array.<string> ! Array of principals to delete from this project role.
+! principals ! string[] ! Array of principals to delete from this project role.
 !===
 
 |===

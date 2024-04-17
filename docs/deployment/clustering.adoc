@@ -12,7 +12,7 @@ Enonic XP clusters have basic infrastructure requirements, you will at least nee
 * Local storage (Volumes)
 * A Distributed (or shared) filesystem
 * A Load balancer - to make sure traffic is routed to different nodes
- 
+
 These components are standard ingredients in most cloud services, or available as software components. An XP cluster can be launched using containers (including Kubernetes), traditional VMs, or even be running on your local computer.
 
 == Basic cluster
@@ -21,7 +21,7 @@ In a cluster, each XP node can serve different purposes. In general, these are:
 
 Master node:: Node that helps manage the cluster, and prevent split-brain scenarios
 Back-end node:: Node that stores data, but does not handle incoming traffic
-Front-end node:: Node that handles incoming traffic, but does not store data 
+Front-end node:: Node that handles incoming traffic, but does not store data
 Combined node:: Node that both stores data, and handles incoming traffic
 
 Throughout this guide, we will describe how to setup a <<./strategies#basic_cluster,basic cluster>>, but with little more effort you could create any type of cluster. A __basic cluster__ consists of 3 dedicated XP _master_ nodes and 2 XP _combined_ nodes.
@@ -43,7 +43,7 @@ To deploy a _basic cluster_, we need a total of 5 nodes for XP. You need to ensu
 
 == Storage
 
-You will also need access to a shared file system for the servers. Read more about that in the <<dirs>> section. If you are using _NFS_ as your shared file system you should also ensure that all XP nodes can communicate to the NFS server (typically on port `2049`). 
+You will also need access to a shared file system for the servers. Read more about that in the <<dirs>> section. If you are using _NFS_ as your shared file system you should also ensure that all XP nodes can communicate to the NFS server (typically on port `2049`).
 
 NOTE: Using _NFS_ introduces a single point of failure to the cluster, but has generally proven highly reliable.
 
@@ -52,7 +52,7 @@ NOTE: Using _NFS_ introduces a single point of failure to the cluster, but has g
 
 A combined node running XP should minimum have 4GB of memory and 2vCPU. A general recommendation would be 16GB memory and 4vCPU compute power.
 
-Master nodes can be configured with less memory and capacity as they are generally not processing requests or queries. 
+Master nodes can be configured with less memory and capacity as they are generally not processing requests or queries.
 
 Since Elasticsearch is embedded in XP, be sure also to setup virtual memory, file descriptors and swap setting correctly for __elasticsearch__. Read more about that in the https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html[elasticsearch documentation].
 
@@ -158,7 +158,7 @@ NOTE: The pre-installed apps can be placed on distinct nodes, but for instance i
 
 === Shard replication
 
-Once your cluster has started you will have to set the number of shard replicas you want the data nodes to store. In this case we have 2 data nodes, so we want 2 copies of each shard in the cluster (1 per data node). To do that we should set the number of replicas to 1. Setting that number to 1 means that the cluster will have 1 primary shard, and 1 replica shard, totalling 2 copies. We can do this with the https://developer.enonic.com/docs/enonic-cli/master[Enonic CLI]:
+Once your cluster has started you will have to set the number of shard replicas you want the data nodes to store. In this case we have 2 data nodes, so we want 2 copies of each shard in the cluster (1 per data node). To do that we should set the number of replicas to 1. Setting that number to 1 means that the cluster will have 1 primary shard, and 1 replica shard, totalling 2 copies. We can do this with the https://developer.enonic.com/docs/enonic-cli[Enonic CLI]:
 
 [source,bash]
 ----
@@ -198,7 +198,7 @@ Like described in the <<dirs>> section, we have 3 directories that are shared be
 
 With those 2 directories backed up, you can restore the files and indexes from your backups in case of a disaster.
 
-For more details, check out the <<backup-restore#, Backup and restore section>>. 
+For more details, check out the <<backup-restore#, Backup and restore section>>.
 
 
 == Summary

@@ -1,6 +1,6 @@
 = Templating
 
-Templates engines may be used to simplify output generation from controllers. 
+Templates engines may be used to simplify output generation from controllers.
 
 == Introduction
 
@@ -16,7 +16,7 @@ Enonic offers a solution for server-side rendering with JSX React templates. Det
 
 == Thymeleaf
 
-Here we will demonstrate templating using the https://www.thymeleaf.org/documentation.html[Thymeleaf] templating engine. Thymeleaf is available as an https://market.enonic.com/vendors/enonic/thymeleaf-lib[Enonic library]. 
+Here we will demonstrate templating using the https://www.thymeleaf.org/documentation.html[Thymeleaf] templating engine. Thymeleaf is available as an https://market.enonic.com/vendors/enonic/thymeleaf-lib[Enonic library].
 
 TIP: For a more extensive tutorial using Thymeleaf, visit the https://developer.enonic.com/docs/my-first-site[My first site tutorial]
 
@@ -26,8 +26,8 @@ Start by including the library in your app:
 .build.gradle
 [source, gradle]
 ----
-dependencies { 
-   include 'com.enonic.lib:lib-thymeleaf:<version>' 
+dependencies {
+   include 'com.enonic.lib:lib-thymeleaf:<version>'
 }
 ----
 

@@ -21,7 +21,7 @@ controller.
   "host": "enonic.com",  // <3>
   "port": "80",  // <4>
   "path": "/my/page",  // <5>
-  "url": "http://enonic.com/my/page?debug=true",  // <6>
+  "url": "https://enonic.com/my/page?debug=true",  // <6>
   "remoteAddress": "10.0.0.1",  // <7>
   "mode": "edit",  // <8>
   "branch": "master",  // <9>
@@ -88,8 +88,8 @@ The ``response`` object is the value returned by an HTTP controller - as a respo
 <5> HTTP cookies to be added to the response. Will be described in a later section.
 <6> URI to redirect to. If specified, the value will be set in the "Location" header and the status will be set to 303.
 <7> Site engine only: If enabled the response body from a page render is processed to find and render any component tags found. (default is ``true``). Set to false to skip post processing of tags.
-<8> Site engine only: Use to contribute html to the resulting response markup. See <<../cms/contributions#, page contributions>> for more information.
-<9> Site engine only: If enabled, any defined <<../cms/response-processors#, response processors>> in the pipeline will be executed.
+<8> Site engine only: Use to contribute html to the resulting response markup. See <<contributions#, page contributions>> for more information.
+<9> Site engine only: If enabled, any defined <<response-processors#, response processors>> in the pipeline will be executed.
 
 [#http-cookies]
 == HTTP Cookies

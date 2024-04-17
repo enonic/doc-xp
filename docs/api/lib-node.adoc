@@ -113,7 +113,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| sources | Array.<<Source>> | array of repository source objects
+| sources | <<Source>>[] | array of repository source objects
 |===
 
 [.lead]
@@ -266,7 +266,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| keys | string \| Array.<string> | Node keys to commit. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
+| keys | string \| string[] | Node keys to commit. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
 | message | string | Optional commit message
 |===
 
@@ -434,13 +434,13 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| keys | string \| Array.<string> | Node keys to delete. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
+| keys | string \| string[] | Node keys to delete. Each argument could be an id, a path or an array of the two. Prefer the usage of ID rather than paths.
 |===
 
 [.lead]
 Returns
 
-*Array.<string>* : The list of keys that were actually deleted.
+*string[]* : The list of keys that were actually deleted.
 
 [.lead]
 Example
@@ -556,24 +556,6 @@ var result = repo.duplicate({
     refresh: 'SEARCH'
 });
 ----
-
-== Source
-
-A source definition of repositories:
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Kind | Details
-| repoId | object | Repository ID
-| branch | object | Branch ID
-| user | <<User>> | Optional user to execute the callback with - Default is the default user
-| principals | Array.<string> | Additional principals to execute the callback with
-|===
 
 === exists
 
@@ -750,7 +732,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| params | string \| Array.<string>\|object | One or multiple strings, or one or multiple arrays of strings, or an object with the following properties:
+| params | string \| string[]\|object | One or multiple strings, or one or multiple arrays of strings, or an object with the following properties:
 
 [%header,cols="1%,1%,1%,1%,96%a"]
 [frame="topbot"]
@@ -1021,11 +1003,11 @@ An object with the following keys and their values:
 |===
 | Name | Kind | Details
 | key | string | Id or path to the nodes
-| keys | Array.<string> | Array of ids or paths to the nodes
+| keys | string[] | Array of ids or paths to the nodes
 | target | string | Branch to push to
 | includeChildren | boolean | Also push children of given nodes.  Default is `false`.
 | resolve | boolean | Resolve dependencies before pushing, meaning that references will also be pushed.  Default is `true`.
-| exclude | Array.<string> | Optional array of ids or paths to nodes not to be pushed.  If using this, be aware that nodes need to maintain data integrity (e.g parents must be present in target).  If data integrity is not maintained with excluded nodes, they will be pushed anyway.
+| exclude | string[] | Optional array of ids or paths to nodes not to be pushed.  If using this, be aware that nodes need to maintain data integrity (e.g parents must be present in target).  If data integrity is not maintained with excluded nodes, they will be pushed anyway.
 |===
 
 [.lead]
@@ -1474,6 +1456,24 @@ var result = repo.setRootPermissions({
     _inheritsPermissions: true
 });
 ----
+
+== Source
+
+A source definition of repositories:
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| repoId | object | Repository ID
+| branch | object | Branch ID
+| user | <<User>> | Optional user to execute the callback with - Default is the default user
+| principals | string[] | Additional principals to execute the callback with
+|===
 
 == User
 

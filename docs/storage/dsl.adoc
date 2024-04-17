@@ -472,6 +472,7 @@ To use one of these characters literally, escape it with a preceding backslash (
 NOTE: You can boost - thus increasing or decreasing hit-score per field basis. By providing more than one field to the query by appending a weight-factor: ^N
 
 ===== fulltext
+[#fulltext]
 
 The fulltext expression is searching for words in a field, and calculates relevance scores based on a set of rules (e.g number of occurences, field-length, etc).
 
@@ -550,7 +551,7 @@ This includes, by default, all text-based fields in the content domain.
 
 ===== stemmed
 
-The stemmed expression is similar to <<#fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
+The stemmed expression is similar to <<fulltext,Fulltext>> except that it searches language optimized tokens instead of a source text.
 E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
 
 NOTE: Stemming is language-dependent, so <<indexing#languages,language>> must be set either on the content or directly in the node indices via indexConfig.
@@ -612,6 +613,7 @@ All sub-expressions can contain a single expression or an array.
 ----
 
 ===== must
+[[must]]
 
 All expressions must evaluate to true to include a node in the result.
 
@@ -713,7 +715,7 @@ All expressions in the mustNot must evaluate to false for nodes to match.
 image:xp-7110.svg[XP 7.11.0,opts=inline]
 
 ===== filter
-All expressions must evaluate to true to include a node in the result (similar to <<#_must>>), but they will not affect the score for matching nodes.
+All expressions must evaluate to true to include a node in the result (similar to <<must>>), but they will not affect the score for matching nodes.
 
 .'date_field' must be greater that the specified date and 'displayName' must start with 'my'
 [source,json]

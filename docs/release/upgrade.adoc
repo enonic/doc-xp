@@ -45,6 +45,10 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market.
 We generally always recommend updating your apps to the latest version!
 
+== v7.14 notes
+
+* Content Project root no longer returns 403. It now returns 404 instead. This may affect your availability if it relies on 403 status code.
+
 == v7.13 notes
 
 * Content Studio has to be upgraded to version 5+ to be compatible with XP 7.13. If you are using Content Studio 4.x with XP 7.13, you may experience disappearing layouts inside Page Editor.
@@ -95,15 +99,16 @@ This may cause some compilation errors when XP application dependency version is
 This may cause broken text on pages with page templates which specify content meta tag value other than `utf-8`.
 Make sure all your page templates use UTF-8. it is also recommended to use `<meta charset="utf-8">` tag on all pages.
 
-* Importing default exports from Javascript API no longer works, you have to specify name of an export or use an alias (`import * as...`). So if you imported an entire JS lib like this:
-
+* TypeScript imports. As of this version, all Enonic libraries are completely rewritten in TypeScript. If you have been using TypesScript in your application, it may no longer be compiling. Importing `default` exports are no longer supported, and depending on your build-setup and code, you may need to change your import statements.
+For example:
++
+.Old approach
 [source,Javascript]
 ----
 import nodeLib from '/lib/xp/node';
 ----
-
-then you have to change the import to this:
-
++
+.New approach
 [source,Javascript]
 ----
 import * as nodeLib from '/lib/xp/node';
@@ -111,9 +116,9 @@ import * as nodeLib from '/lib/xp/node';
 
 == v7.10 notes
 
-* XP now bundled with GraalVM based JDK.
-We do not support running XP on other JDK except for the one bundled in distributive.
-Note that JavaScript Engine is still Nashorn.
+* XP now bundles the GraalVM based JDK.
+We do not support running XP on other JDK except for the one bundled in the distro.
+Note that the default JavaScript Engine is still Nashorn.
 
 * Experimental support of arm64 (aarch64) based CPUs is added.
 You may see a WARNING message on XP startup `java.lang.UnsatisfiedLinkError: Can’t load library ...`. It does not affect XP operations and can be ignored.
@@ -228,7 +233,7 @@ If application code relies on checking directory existence in jar, consider chec
 
 * `page-template` content now accepts child content, but only `fragment` and `media:*`. Attachments are no longer redirected to the nearest template's site.
 
-* input-type's `allow-content-type`, x-data `allow-content-types` and newest content-type's `allow-child-content-type` share the same <<../cms/input-types#allowContentType, pattern matching>>, that is stricter than before.
+* input-type's `allow-content-type`, x-data `allow-content-types` and newest content-type's `allow-child-content-type` share the same <<../cms/schemas/input-types/contentselector/#allowContentType, pattern matching>>, that is stricter than before.
 You can switch back to legacy mode by setting `contentTypePatternMode = LEGACY` in  <<../deployment/config#admin_rest, Configuration Files / Admin>> for `allow-content-type` and `allow-content-types`, but it won't affect `allow-child-content-type` pattern matching.
 
 
@@ -388,7 +393,7 @@ NOTE: Don't worry about the command losing connection, this is only related to t
 
 Content Studio is no longer part of the XP core distribution.
 Content Studio is now available as an https://market.enonic.com/vendors/enonic/content-studio[application on Enonic Market].
-Documentation for Content Studio can be found https://developer.enonic.com/docs/content-studio/master[here].
+Documentation for Content Studio can be found https://developer.enonic.com/docs/content-studio[here].
 
 === 5. Update apps
 

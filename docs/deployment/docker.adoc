@@ -40,7 +40,7 @@ Entrypoint:: The image uses a custom docker entrypoint that is designed to setup
 
 Builder pattern:: During the build process, all tools used for building the final image are dropped to make the image as light as possible.
 
-File permission:: The image is designed to run on multiple orchestration frameworks and thus supports easly running Enonic XP as an arbitrary user.
+File permission:: The image is designed to run on multiple orchestration frameworks and thus supports easily running Enonic XP as an arbitrary user.
 
 === Preinstalled tools
 

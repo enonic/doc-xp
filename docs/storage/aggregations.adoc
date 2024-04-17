@@ -22,7 +22,7 @@ Bucket aggregations:: A bucket aggregation places documents matching the query i
 Metrics aggeregations:: A metric aggeregation computes metrics over a set of documents.
 
 Typically, you will divide data into buckets and then use metric aggregations to calculate e.g average values,
-sum, etc for each bucket, if necessary.
+sum, etc. for each bucket, if necessary.
 
 == Aggregations
 
@@ -143,7 +143,7 @@ Parameters
 |===
 | Name | Type | Details
 | field | string | The property path
-| ranges | <<numeric_range,Numeric range>>[] | The range-buckets to create
+| ranges | <<numeric_range,NumericRange>>[] | The range-buckets to create
 |===
 
 .Sample range aggregation
@@ -174,8 +174,8 @@ Parameters
 | Name | Type | Details
 | field | string | The property path
 | origin | <<origin,Origin>> | The GeoPoint from which the distance is measured.
-| ranges | <<numeric_range,Numeric range>>[] | The range-buckets to create.
-| unit | string | The meassurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).
+| ranges | <<numeric_range,NumericRange>>[] | The range-buckets to create.
+| unit | string | The measurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).
 |===
 
 .Sample geoDistance aggregation
@@ -201,7 +201,7 @@ In a future version, there will easier ways of doing this.
 === dateRange
 
 The dateRange aggregation query defines a set of date-ranges that represents a bucket. Only
-documents with properties of type 'DateTime' will considered in the ``dateRange`` aggregation buckets.
+documents with properties of type 'DateTime' will be considered in the ``dateRange`` aggregation buckets.
 
 [.lead]
 Parameters
@@ -213,7 +213,7 @@ Parameters
 | Name | Type | Details
 | field | string | The property path
 | format | string | The date-format of which the buckets will be formatted to on return. Defaults to ``yyyy-MM-dd'T'HH:mm:ss.SSSZ``.
-| ranges | <<date_range,Date range>>[] | The range-buckets to create. Follows a special <<date_math_expression, Date-math expression>>.
+| ranges | <<date_range,DateRange>>[] | The range-buckets to create. Follows a special <<date_math_expression, Date-math expression>>.
 |===
 
 
@@ -232,6 +232,7 @@ include::code/date-range-result.json[]
 
 
 ==== Date-math expression
+[#date_math_expression]
 
 The range fields accepts a date-math expression to calculate the time-spans.
 
@@ -277,6 +278,7 @@ include::code/date-histogram-result.json[]
 == Types
 
 === Date range
+[#date_range]
 
 Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
 Values in `from` and `to` follow a special <<date_math_expression, Date-math expression>>.
@@ -295,6 +297,7 @@ Fields
 
 
 === Numeric range
+[#numeric_range]
 
 Defines a range to create a bucket for. `from` value will be included in the bucket, `to` will be excluded.
 
@@ -340,8 +343,8 @@ The bucket will contain
 ----
 <1> The bucket will contain 100 unto infinity
 
-
 === Origin
+[#origin]
 
 The GeoPoint from which the distance is measured.
 
@@ -356,3 +359,4 @@ Fields
 | lat | number | Latitude
 | lon | number | Longitude
 |===
+

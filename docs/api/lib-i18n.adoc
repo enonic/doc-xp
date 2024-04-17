@@ -62,8 +62,8 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| locale | string \| Array.<string> | A string-representation of a locale, or an array of locales in preferred order.  Pass in an empty array for default locale.
-| bundles | Array.<string> | Required list of bundle names. Bundle names are specified as paths, relative to the `src/main/resources` folder.
+| locale | string \| string[] | A string-representation of a locale, or an array of locales in preferred order.  Pass in an empty array for default locale.
+| bundles | string[] | Required list of bundle names. Bundle names are specified as paths, relative to the `src/main/resources` folder.
 |===
 
 [.lead]
@@ -101,7 +101,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| bundles | Array.<string> | Required list of bundle names. Bundle names are specified as paths, relative to the `src/main/resources` folder.
+| bundles | string[] | Required list of bundle names. Bundle names are specified as paths, relative to the `src/main/resources` folder.
 |===
 
 [.lead]
@@ -139,9 +139,9 @@ Parameters
 |===
 | Name | Kind | Details
 | key | string | The phrase key
-| locale | string \| Array.<string> | A string-representation of a locale, or an array of locales in preferred order. If the locale is not set, the site language is used.
-| values | Array.<string> | Optional placeholder values
-| bundles | Array.<string> | Optional list of bundle names
+| locale | string \| string[] | A string-representation of a locale, or an array of locales in preferred order. If the locale is not set, the site language is used.
+| values | string[] | Optional placeholder values
+| bundles | string[] | Optional list of bundle names
 | application | string | Application key where to find resource bundles. Defaults to current application
 |===
 

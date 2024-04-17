@@ -1,8 +1,8 @@
 = Mail Library
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
-This library contains one function to send an e-mail.
+This library contains functions that are used for sending emails.
 
 == Usage
 
@@ -38,6 +38,10 @@ This function sends an email message using the mail server configured.
 The address values can be either a simple email address (e.g. ‘name@domain.org’ ) or an address with a display name. In the latter case the
 email will be enclosed with angle brackets (e.g. ‘Some Name <name@domain.org>’ ).
 
+The `from` parameter supports the <<getDefaultFromEmail,default _from_ email>> substitution.
+If the email address is not specified in angle brackets (e.g., `Some Name <>` or `<>`), the default _from_ email address is used.
+However, an error is thrown if the default _from_ email is not set.
+
 The parameters `to`, `cc` and `bcc` can be passed as a single string or as an array of strings, if there are multiple addresses to specify.
 
 The content-type of the email can be specified by using the `contentType` parameter. See example below for sending a message with an HTML body.
@@ -53,15 +57,15 @@ An object with the following parameters:
 |===
 | Name | Kind | Details
 | from | string | E-mail address and optionally name of message sender
-| to | string \| Array.<string> | E-mail address(es) and optionally name(s) of the message’s recipient(s)
-| cc | string \| Array.<string> | Optional list of carbon copy e-mail address(es)
-| bcc | string \| Array.<string> | Optional list of blind carbon copy e-mail address(es)
+| to | string \| string[] | E-mail address(es) and optionally name(s) of the message’s recipient(s)
+| cc | string \| string[] | Optional list of carbon copy e-mail address(es)
+| bcc | string \| string[] | Optional list of blind carbon copy e-mail address(es)
 | replyTo | string | Optional alternative e-mail address for replies
 | subject | string | Subject line of the message
 | body | string | Text content of the message
 | contentType | string | Optional content type of the message body
 | headers | string | Optional custom headers in the form of name-value pairs
-| attachments | Array | Optional <<#attachments,attachments>> to include in the e-mail
+| attachments | Array | Optional <<attachments,attachments>> to include in the e-mail
 |===
 
 [.lead]
@@ -114,6 +118,21 @@ var flag2 = mailLib.send({
     ]
 });
 ----
+
+=== getDefaultFromEmail
+[[getDefaultFromEmail]]
+
+image:xp-7141.svg[XP 7.14.1,opts=inline] This function returns the default _from_ email address configured in the <<../deployment/config#mail, XP mail configuration>>.
+
+[.lead]
+Example
+
+.Get a defaultFromEmail
+[source,js]
+----
+var defaultFromEmail = mailLib.getDefaultFromEmail();
+----
+
 
 == Objects
 

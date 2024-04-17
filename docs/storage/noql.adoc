@@ -8,12 +8,12 @@ The Node Query Language, or NoQL for short, is inspired by traditional SQL.
 As with other NoSQL solutions, it has special capabilities and limitations.
 
 Selectors, joins and update statements are essentially _not_ supported.
-However, NoQL adds cool features like <<#relevance_sorting, relevance sorting>> and <<aggregations#, aggregations>>.
+However, NoQL adds cool features like <<relevance_sorting, relevance sorting>> and <<aggregations#, aggregations>>.
 
 Selectors are currently not supported, and the only result of a query will only be identifiers for the matching nodes.
 Developers must then get the desired nodes (with their data) through a separate request.
 
-A NoQL statement is essentially composed from two parts: <<#query, query>>, and <<#sort, sorting>>.
+A NoQL statement is essentially composed from two parts: <<query, query>>, and <<sort, sorting>>.
 
 
 [#query]
@@ -180,6 +180,7 @@ myCategory IN ('article', 'document') AND ngram('title', 'fish', 'AND')
 
 
 ==== propertyPath
+[[propertyPath]]
 
 .Grammar
 [source,ebnf]
@@ -285,7 +286,7 @@ fulltext("myData.myProperties.*", "cheese fish cake onion", "OR")
 .Match if "myField" contains any of the given words and "myCategory" = "soup".
 [source,javascript]
 ----
-myCategory = "'soup" AND fulltext("myField", "cheese fish cake onion", "OR")
+myCategory = '"soup" AND fulltext("myField", "cheese fish cake onion", "OR")'
 ----
 
 .Match if "myField" contains all the given words.
@@ -327,7 +328,7 @@ fulltext('data.*', '"gone fishing today"~2', "AND")
 [#stemmed]
 ==== stemmed()
 
-The stemmed function is similar to <<#fulltext,fulltext()>> except that it searches language optimized tokens instead of a source text. E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
+The stemmed function is similar to <<fulltext,fulltext()>> except that it searches language optimized tokens instead of a source text. E.g. source text `The monkey loved bananas` will be transformed to `the`, `monkey`, `love`, `banana` tokens and they will be used for search.
 
 NOTE: Stemming is language-dependent, so <<indexing#languages,language>> must be set either on the content or directly in the node indices via indexConfig.
 
@@ -372,7 +373,7 @@ stemmed("_alltext", "fish cake", "OR", "en")
 
 An n-gram is a sequence of n letters from a term. During ngram indexing, the term "foxy" is also indexed as: "f", "fo", and "fox".
 
-When using the nGram search function, we are able get matches, even if the search only contains parts of a term. 
+When using the nGram search function, we are able get matches, even if the search only contains parts of a term.
 This is for instance useful when createing autocomplete functionality.
 The max limit of the ngram tokenizer is 25 characters, meaning that search strings over 25 characters will not match. As such, ngram queries may successfully be combined with the fulltext search function or other query expressions, to both match fragments of words as well as full phrases.
 
@@ -465,6 +466,7 @@ range('publishTo', '', instant('2015-08-01T09:00:00Z'))
 ----
 
 ==== pathMatch()
+[#pathMatch]
 
 The path-match matches a path in a same branch, scoring the paths closest to the given query path first.
 Also, a number of minimum matching elements that must match could be set.
@@ -634,7 +636,7 @@ All nodes have three system-properties concerning the node placement in a branch
 * `_parentPath`: The parent node path.
 * `_path`: The full path of the node.
 
-See the <<pathMatch()>> query function for advanced path matching
+See the <<pathMatch,pathMatch()>> query function for advanced path matching
 
 [NOTE]
 ====
@@ -675,13 +677,13 @@ _parentPath = '/content/mySite/myCategory'
 From time to time, it is also interesting to search for nodes with or without a value:
 
 .Sample query where property myValue "exists"
-[source,json]
+[source]
 ----
 myValue LIKE "*"
 ----
 
 .Sample query where "publish.first" does NOT exists
-[source,json]
+[source]
 ----
 publish.first NOT LIKE "*"
 ----

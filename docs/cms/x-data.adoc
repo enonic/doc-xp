@@ -56,7 +56,7 @@ It's possible to restrict X-data for specific content types using regular expres
 Use regular expressions in the `allowContentTypes` attribute of the `<x-data/>` field inside `site.xml` to enable or disable it for specific content type(s).
 By default x-data will be added to content items of all types with no option to remove it but you can make it optional by setting `optional` attribute to _true_. Optional x-data has to be manually enabled inside Content Wizard to be added to the content data.
 
-If `allowContentTypes` and `optional` attributes are not set, the x-data will automatically be enabled for all content types. See <<input-types/contentselector#allowContentType, modes>> of content type filtering.
+If `allowContentTypes` and `optional` attributes are not set, the x-data will automatically be enabled for all content types. See <<schemas/input-types/contentselector#allowContentType, modes>> of content type filtering.
 
 [source,xml]
 ----
