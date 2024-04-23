@@ -1787,7 +1787,7 @@ log.info('Restored content ids: ' + result3.join(','));
 
 Applies permissions on a content.
 
-NOTE: If the content is published, the permissions will be applied to the content there as well without a need to republish content.
+NOTE: If the content is published, the permissions will be applied to the published content as well without a need to republish it.
 [.lead]
 *Parameters:*
 
