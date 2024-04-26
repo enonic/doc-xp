@@ -1412,52 +1412,137 @@ repo.setChildOrder({
 });
 ----
 
-=== setRootPermissions
+=== applyPermissions
 
-Sets the root node's permissions and inheritance.
+Applies permissions on a node.
 
 [.lead]
-Parameters
+*Parameters:*
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| _permissions | object | The permissions
-| _inheritPermissions | boolean | `true` if the permissions should be inherited to children
+| Name | Type | Attributes | Description
+| key | string | | Path or id of the node.
+| permissions | <<PermissionsParams>>[] | <optional> | Array of permissions to overwrite current permissions. Cannot be used with 'addPermissions' or 'removePermissions'.
+| addPermissions | <<PermissionsParams>>[] | <optional> | Array of permissions to add. Cannot be used with 'permissions'.
+| removePermissions | <<PermissionsParams>>[] | <optional> | Array of permissions to remove. Cannot be used with 'permissions'.
+| scope | string ('SINGLE' \| 'TREE' \| 'CHILDREN') | <optional>  | scope of applying permissions. Scope 'SINGLE' applies permissions only to the node itself. 'TREE' applies permissions to the node and its descendants. 'CHILDREN' applies permissions only to the node's descendants. Default is 'SINGLE'.
+| branches | string[] | <optional> | Array of additional branches to apply permissions to. Current context branch should not be included.
 |===
 
 [.lead]
-Returns
+Examples
 
-*object* : The updated root-node
+.1) Applying permissions to a node by overwriting the current permissions.
 
-[.lead]
-Example
-
-.Setting example permissions
-[source,typescript]
+[source,js]
 ----
-const result = repo.setRootPermissions({
-    _permissions: [
+repo.applyPermissions({
+    key: '/my-node',
+    permissions: [
         {
-            principal: "role:system.admin",
-            allow: [
-                "READ",
-                "CREATE",
-                "MODIFY",
-                "DELETE",
-                "PUBLISH",
-                "READ_PERMISSIONS",
-                "WRITE_PERMISSIONS"
-            ],
-            deny: []
+            principal: 'role:system.everyone',
+            allow: ['READ']
+        },
+        {
+            principal: 'user:system:my-user',
+            allow: ['READ', 'CREATE', 'MODIFY', 'DELETE']
+        }
+    ]
+});
+----
+
+.2) Adding permissions to a node.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-node',
+    addPermissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['CREATE', 'MODIFY']  // 'READ' permission is already set and will be kept.
+        },
+        {
+            principal: 'user:system:my-new-user',
+            allow: ['READ', 'CREATE', 'MODIFY', 'DELETE'] // New user will have all permissions.
+        }
+    ]
+});
+----
+
+.3) Removing permissions from a node.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-node',
+    removePermissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['CREATE', 'MODIFY']  // 'READ' permission will be kept.
+        },
+        {
+            principal: 'user:system:my-user',
+            allow: ['DELETE'] // 'DELETE' permission will be removed. All other permissions will be kept.
+        },
+        {
+            principal: 'user:system:my-new-user' // All permissions for this principal will be removed.
+        }
+    ]
+});
+----
+
+.Applying permissions to a node and its descendants.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-node',
+    permissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['READ']
         }
     ],
-    _inheritsPermissions: true
+    scope: 'TREE'
+});
+----
+
+.Applying permissions to a node's descendants only.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-node',
+    permissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['READ']
+        }
+    ],
+    scope: 'CHILDREN'
+});
+----
+
+.Applying permissions to a node and its descendants in multiple branches.
+
+[source,js]
+----
+repo.applyPermissions({
+    key: '/my-node',
+    permissions: [
+        {
+            principal: 'role:system.everyone',
+            allow: ['READ']
+        }
+    ],
+    scope: 'TREE',
+    branches: ['branch1', 'branch2']
 });
 ----
 
