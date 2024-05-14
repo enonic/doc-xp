@@ -475,7 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#refresh">refresh</a></li>
 <li><a href="#setactiveversion">setActiveVersion</a></li>
 <li><a href="#setchildorder">setChildOrder</a></li>
-<li><a href="#setrootpermission">setRootPermission</a></li>
+<li><a href="#setrootpermissions">setRootPermissions</a></li>
 </ul>
 </li>
 <li><a href="#source">Source</a></li>
@@ -2741,7 +2741,7 @@ var result = repo.setActiveVersion({
 </div>
 </div>
 <div class="sect2">
-<h3 id="setrootpermission"><a class="link" href="#setrootpermission">setRootPermission</a></h3>
+<h3 id="setrootpermissions"><a class="link" href="#setrootpermissions">setRootPermissions</a></h3>
 <div class="paragraph">
 <p>Set the root node permissions and inheritance.</p>
 </div>
@@ -2915,7 +2915,7 @@ var result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-04-09 14:53:38 UTC
+Last updated 2024-05-14 08:57:04 UTC
 </div>
 </div>
 </body>
