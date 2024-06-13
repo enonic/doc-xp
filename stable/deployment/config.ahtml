@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.22">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <title>Configuration files</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -587,6 +587,7 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 
 # Initialization settings
 # xp.init.adminUserCreation = true
+# xp.init.maxTries = 300
 
 # Configuration FileMonitor properties
 # felix.fileinstall.poll = 1000
@@ -605,6 +606,10 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 <dt class="hdlist1">xp.suPassword</dt>
 <dd>
 <p>override su user&#8217;s password in database, if any. Can also be used with hashing, the following are supported: <code>sha1</code>, <code>sha256</code>, <code>sha512</code> and <code>md5</code>.</p>
+</dd>
+<dt class="hdlist1">xp.init.maxTries</dt>
+<dd>
+<p>Number of attampts system initializers will do to check if initialization is done. Default is 300 (which equals to 5 minutes)</p>
 </dd>
 <dt class="hdlist1">felix.fileinstall.poll</dt>
 <dd>
@@ -2445,7 +2450,7 @@ The value is set in percentage of total Java Heap, or in memory units (<code>mb<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-05-22 07:23:50 UTC
+Last updated 2024-06-13 07:42:19 UTC
 </div>
 </div>
 </body>
