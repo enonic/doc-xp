@@ -44,7 +44,7 @@ You can choose different handling based on the type of error. A 404 might for in
 == The Error object
 
 The input parameter for handler functions is an error JSON object.
-The object contains the status code, error message, Java Exception object, and the original <<http#http-request, HTTP request>> object:
+The object contains the status code, error message, Exception object, and the original <<http#http-request, HTTP request>> object:
 
 .Sample error object
 [source,javascript]

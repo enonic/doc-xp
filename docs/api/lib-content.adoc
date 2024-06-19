@@ -27,7 +27,7 @@ You are now ready to use the library functionality.
 == Constants
 
 === CONTENT_ROOT_PATH
-Variable of NodePath java type describing content node root path.
+Variable of type NodePath describing content node root path.
 [.lead]
 Usage
 
@@ -36,7 +36,7 @@ const myRoot = contentLib.CONTENT_ROOT_PATH; // NodePath.create( "/content" ).bu
 ```
 
 === ARCHIVE_ROOT_PATH
-Variable of NodePath java type describing archive node root path.
+Variable of type NodePath describing archive node root path.
 
 
 [.lead]

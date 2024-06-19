@@ -16,7 +16,7 @@ Before you start the upgrade procedure:
 
 == 1. Create a sandbox
 
-NOTE: With XP 7 you no longer need to install Java separately - it comes bundled with XP.
+NOTE: With XP 7 you no longer need to install JDK separately - it comes bundled with XP.
 
 To create the sandbox, go to your project folder and run the following command:
 
@@ -55,7 +55,7 @@ This will install or update your project with a new Gradle wrapper.
 ==== Application upgrade
 
 If you are upgrading *an application*, you need to use version greater or equal to '2.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
-It supports Gradle 5, Java 11 and building for XP 7.
+It supports Gradle 5, JDK 11 and building for XP 7.
 Gradle plugin '3.4.0' supports Gradle 8.3 and Java 17 - recommended to build apps for XP versions 7.13 and greater
 
 This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
@@ -933,7 +933,7 @@ function handleGet(req) {
 }
 ----
 
-== 11. Java
+== 11. JDK
 
 Where XP 6.x depends on Java 8 to be installed, XP 7 bundles Java 11 in the distro package.
 

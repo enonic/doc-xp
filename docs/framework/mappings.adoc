@@ -87,7 +87,7 @@ Another alternative to XML-escape is to wrap the string in a CDATA block, as in 
 
 A pattern element may also contain an *@invert* attribute to indicate that the result of evaluating the regular expression should be negated i.e.: `<pattern invert="true">`
 
-The pattern string must be a valid https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[Java regular expression].
+The pattern string must be a valid https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[regular expression].
 
 Examples:
 

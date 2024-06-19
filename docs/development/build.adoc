@@ -88,23 +88,23 @@ repositories { // <5>
 
 == Dependencies
 
-Easily include Enonic libraries or Java dependencies in your app via the dependencies section.
+Easily include standard Enonic libraries or 3rd party dependencies in your app via the dependencies section.
 
 Each dependency must be prefixed with a scope for specific building instructions. The available scopes are:
 
 Include:: Standard scope when adding Enonic libraries to your project. Resource files in the library are merged into your app. Files in your app overwrites files with the same name in the library. Dependencies of the library are transitively included.
 
-Implementation:: Typically used for Java dependenceis. Does not automatically include transitive dependencies, meaning you must explicitly declare transitive dependencies.
+Implementation:: Typically used for Java dependencies. Does not automatically include transitive dependencies, meaning you must explicitly declare transitive dependencies.
 
-Webjar:: Custom Enonicwq scope that extracts the content of the specified Webjar - https://www.webjars.org/ - placing it into the assets folder, using the version number as root folder
+Webjar:: Custom Enonic scope that extracts the content of the specified Webjar - https://www.webjars.org/ - placing it into the assets folder, using the version number as root folder
 
 == Compiler
 
-The Enonic XP SDK distros bundles the Java Development Kit (JDK), which includes the compiler needed to build Enonic apps.
+The Enonic XP SDK includes the compiler needed to build Enonic apps.
 
 When building applications without using Enonic CLI, you must tell Gradle which compiler (Enonic XP distro) to use. This is done by setting the `JAVA_HOME` environment variable.
 
-JAVA_HOME:: Defines the location of the Java compiler.
+JAVA_HOME:: Defines the location of the JDK.
 
 To set the environment variable, use one of the following approaches:
 

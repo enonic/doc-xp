@@ -10,7 +10,7 @@ The <<./distro#xp_home,XP_HOME/config/>> folder contains all instance specific c
 
 == Format
 
-All configuration files (both .cfg and .properties) use the https://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29[Java properties] format.
+All configuration files (both .cfg and .properties) use the https://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29[properties] format.
 This is a simple key = value format.
 
 .Sample config file
@@ -1078,8 +1078,8 @@ memoryLimit = 100mb
 
 scale.maxDimension:: Defines maximum dimension size (both height and width) when scaling is done. Default: `8000`
 filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
-memoryLimit:: image:xp-780.svg[XP 7.8.0,opts=inline] Defines Java Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP `429 Too Many Requests` status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
-The value is set in percentage of total Java Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
+memoryLimit:: image:xp-780.svg[XP 7.8.0,opts=inline] Defines Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP `429 Too Many Requests` status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
+The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
 
 === Export
 

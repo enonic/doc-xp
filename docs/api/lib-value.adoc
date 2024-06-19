@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-Functions to pass java-types in JSON, typically usage is to type e.g a Geo-point value when creating nodes in node-lib.
+Assign a specific value type using JSON, e.g a specify Geo-point value type for a property when creating nodes in node-lib. This ensures validation, and proper indexing storage time
 
 == Usage
 
@@ -27,7 +27,7 @@ You are now ready to use the library functionality.
 
 === binary
 
-Creates a BinaryAttachment java-type.
+Creates a BinaryAttachment
 
 [.lead]
 Parameters
@@ -44,11 +44,11 @@ Parameters
 [.lead]
 Returns
 
-*object* : BinaryAttachment java-type
+*object* : BinaryAttachment
 
 === geoPoint
 
-Creates a GeoPoint java-type.
+Creates a GeoPoint
 
 [.lead]
 Parameters
@@ -65,11 +65,11 @@ Parameters
 [.lead]
 Returns
 
-*object* : GeoPoint java-type
+*object* : GeoPoint
 
 === geoPointString
 
-Creates a GeoPoint java-type.
+Creates a GeoPoint
 
 [.lead]
 Parameters
@@ -85,11 +85,11 @@ Parameters
 [.lead]
 Returns
 
-*object* : GeoPoint java-type
+*object* : GeoPoint
 
 === instant
 
-Creates a Instant java-type.
+Creates an Instant
 
 [.lead]
 Parameters
@@ -105,11 +105,11 @@ Parameters
 [.lead]
 Returns
 
-*object* : Instant java-type
+*object* : Instant
 
 === localDate
 
-Creates a LocalDate java-type.
+Creates a LocalDate.
 
 [.lead]
 Parameters
@@ -125,11 +125,11 @@ Parameters
 [.lead]
 Returns
 
-*object* : LocalDate java-type
+*object* : LocalDate
 
 === localDateTime
 
-Creates a LocalDateTime java-type.
+Creates a LocalDateTime
 
 [.lead]
 Parameters
@@ -145,11 +145,11 @@ Parameters
 [.lead]
 Returns
 
-*object* : LocalDateTime java-type
+*object* : LocalDateTime
 
 === localTime
 
-Creates a LocalTime java-type.
+Creates a LocalTime
 
 [.lead]
 Parameters
@@ -165,11 +165,11 @@ Parameters
 [.lead]
 Returns
 
-*object* : LocalTime java-type
+*object* : LocalTime
 
 === reference
 
-Creates a Reference java-type.
+Creates a Reference
 
 [.lead]
 Parameters
@@ -185,4 +185,4 @@ Parameters
 [.lead]
 Returns
 
-*object* : Reference java-type
+*object* : Reference

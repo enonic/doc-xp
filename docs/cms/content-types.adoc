@@ -254,7 +254,7 @@ allow-child-content:: true
 
 
 == Custom Content Types
-Custom Content Types can be created using Java or simple XML files. They are managed and deployed via applications.
+Custom Content Types can be created using simple XML files. They are managed and deployed via applications.
 
 Using XML, each content type must have a separate directory in the application resource structure: `/src/main/resources/site/content-types/my-content-type`
 

@@ -17,9 +17,9 @@ image:714-sdk-welcome.png["SDK Welcome page", 75%]
 
 NOTE: Earlier versions of Content Studio (before 5.0) are not compatible with Enonic XP 7.13.0 (and newer), so make sure to upgrade to Content Studio 5.0.0 or newer.
 
-=== Java 17
+=== GraalVM for JDK 17
 
-* XP now runs on Java 17 GraalVM based version - latest LTS version of Java.
+* XP is now powered by GraalVM for JDK 17 - latest LTS version
 
 === Management API
 
@@ -66,7 +66,7 @@ Read more about implementation details <<admin/widgets#dashboard_widgets, here>>
 === Content Variants
 
 * Content Duplicate API was extended to support Content Variants, useful for A/B testing
-* Added `name` and `parent` to `duplicate` Java API
+* Added `name` and `parent` to `duplicate` low level Java API
 * Added `duplicate` method to the JS lib-content and lib-node APIs
 
 === Site mapping for services
@@ -132,7 +132,7 @@ Virtual application behavior can be configured in <<deployment/config#applicatio
 
 Shared Map framework is now part of XP.
 Shared Map сan be used to share transient data between nodes in cluster and/or applications.
-Both <<api/lib-grid#_grid_library, JavaScript>> and Java APIs are available.
+Both <<api/lib-grid#_grid_library, JavaScript>> and low level Java APIs are available.
 
 === Other improvements
 
@@ -194,7 +194,7 @@ IMPORTANT: Versions of Content Studio before 4.0.0 will not run on XP 7.8.0 or l
 
 === Custom content validators
 
-It's now possible to implement custom content validators via <<cms/validators#_content_validators, Content Validators Java API>>. Custom error messages
+It's now possible to implement custom content validators via <<cms/validators#_content_validators, Content Validators low level Java API>>. Custom error messages
 can be i18n-localised and will be displayed in Content Studio.
 
 === Other improvements
@@ -343,7 +343,7 @@ NOTE: For backward compatibility, using compression requres a setting a flag whe
 
 The updated auth API now supports request scoped logins, without having to manually modify the request context.
 
-This is in particulary useful for handling modern stateful clients (i.e. using Java Web Tokens), meaning that a server session is no longer created when logging in. Getting rid of sessions provide more scalability and reliability from a server side perspective.
+This is in particulary useful for handling modern stateful clients (i.e. using JSON Web Tokens), meaning that a server session is no longer created when logging in. Getting rid of sessions provide more scalability and reliability from a server side perspective.
 
 Details are available in the <<api/lib-auth#, auth API documentation>>.
 
@@ -514,7 +514,7 @@ The biggest highlights of XP 7 is not the core platform, but all the changes aro
 * New documentation - The documentation you are reading was created from scratch for XP 7
 * <<Developer portal>> - All XP related developer resources and docs in one place
 * <<Enonic CLI>> - For managing XP development project, also replaces the toolbox shell script
-* <<Native distributions>>. The Java Virtual Machine is now bundled with XP
+* <<Native distributions>>. The JVM runtime is now bundled with XP
 * Content Studio - Is now available as an app to download from https://market.enonic.com/vendors/enonic/content-studio[Enonic Market].
 
 === Developer portal
@@ -556,19 +556,19 @@ The CLI is available for Mac, Linux and Windows. For more information, check out
 
 === Native distributions
 
-The biggest conceptual change to XP is that Java (the JVM) is no longer required in order to run XP.
-XP 7 ships with Java 11 embedded. As such, we now release native distributions of XP for the three major platforms, Mac, Windows and Linux.
-Expect future versions of XP to make more use of native capabilities and non-Java based functionality.
+The biggest conceptual change to XP is that the JVM is no longer required in order to run XP.
+XP 7 ships with JVM 11 embedded. As such, we now release native distributions of XP for the three major platforms, Mac, Windows and Linux.
+Expect future versions of XP to make more use of server native capabilities beyond the JVM.
 As always, you will never have to worry about portability when writing XP apps.
 
 There are several reasons for this move:
 
 * Developers no longer need to install or juggle with different versions of the JVM
 * Installation of XP is faster and sleeker than ever
-* We can take advantage of native/non-Java functionality when required
+* We can take advantage of OS native functionality when required
 
 With this change, XP is now available in SDK and Server version.
-The SDK includes the full Java Development Kit,
+The SDK includes the full JDK,
 whereas the server edition uses a slimmed down version of the JVM, and may be further optimized for production use.
 
 

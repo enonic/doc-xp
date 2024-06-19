@@ -23,7 +23,7 @@ enonic-xp-<OS>-<type>-<version>  // <1>
 <1> The root folder is simply referred to as XP_INSTALL.
 <2> `bin/*` contains the scripts for starting and stopping Enonic XP and setting environment variables.
 <3> `home/` also known as <<xp_home,XP_HOME>>
-<4> `java/` contains the embedded Java distro, contents vary with distro
+<4> `java/` contains the embedded JVM distro, contents vary with distro
 <5> `lib/` contains the bootstrap code used to launch Enonic XP.
 <6> `service/` contains install script for Linux to make Enonic XP run as a service
 <7> `system/` Default OSGi bundles are placed here.

@@ -85,12 +85,12 @@ $XP_HOME/work:: Various cached files used by Enonic XP, e.g. resized images.
 == Configuration
 
 [#java-heap-memory]
-=== Java heap memory
+=== Heap memory
 
-Since this image uses a modern Java VM, it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:
+Since this image uses a modern JVM, it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:
 
-* set the Java heap size to `30%` of the available memory to the container
-* if the Enonic XP node is a pure master node, set the Java heap size to `75%` of the available memory to the container
+* set the heap size to `30%` of the available memory to the container
+* if the Enonic XP node is a pure master node, set the heap size to `75%` of the available memory to the container
 * set minimum and maximum heap size to the same value
 * never set heap size over `26 GB`
 
@@ -141,7 +141,7 @@ In this subection we list some `XP_OPTS` parameters that are useful when running
 
 ===== Memory
 
-Like described in the <<java-heap-memory>> section, you should set the java heap memory limits. If your machine has 4GB of memory, and you want to allocate 75% of that to heap memory, do that by adding to `XP_OPTS`.
+Like described in the <<java-heap-memory>> section, you should set the heap memory limits. If your machine has 4GB of memory, and you want to allocate 75% of that to heap memory, do that by adding to `XP_OPTS`.
 
 [source,bash]
 ----

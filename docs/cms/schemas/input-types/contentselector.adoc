@@ -59,13 +59,13 @@ The pattern will be prefixed by the current application name unless:
 - the pattern starts with `${app}`.
 
 ==== Match +
-The pattern will be treated as a Java Regular Expression (with <<regex-differences, a few notable exceptions>>) and the whole content type name must match it to be accepted.
+The pattern will be treated as a Regular Expression (with <<regex-differences, a few notable exceptions>>) and the whole content type name must match it to be accepted.
 The pattern will be prefixed by the current application name if it does _not_ contain any of the following characters: `\^$.|?*+()[{:`.
 
 [#regex-differences]
 ==== XP patterns: special cases
 
-XP's patterns have a few cases where they differ from normal Java Regular Expression syntax:
+XP's patterns have a few cases where they differ from normal Regular Expression syntax:
 
 .`${app}` template expression
 Most content type names start with the name of the application where they are stored. It may be quite messy and hard to maintain the whole application name in every pattern, so the `${app}` template expression can be used to replace it.

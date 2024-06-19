@@ -118,7 +118,7 @@ discovery.zen.minimum_master_nodes=2
 system.hazelcast.initial.min.cluster.size=3
 ----
 
-=== Java heap
+=== Heap
 
 Since XP is using __elasticsearch__ for storage, we have to consider that __elasticsearch__ uses off heap memory buffers. For that reason we cannot allocate all available memory to heap. In general you should:
 
@@ -128,9 +128,9 @@ Since XP is using __elasticsearch__ for storage, we have to consider that __elas
 
 You should set the heap memory with the `XP_OPTS` environmental variable. For example, if you want to give XP `512MB` of heap you set `XP_OPTS` to `-Xms512M -Xmx512M`.
 
-=== Java options
+=== Options
 
-You might want to pass options to the Java virtual machine. Our distributions set the `JAVA_OPTS` variable with defaults for XP to run smoothly. For that reason you should avoid overwriting `JAVA_OPTS` and instead you should use `XP_OPTS` to pass your options.
+You might want to pass options to the JVM. Our distributions set the `JAVA_OPTS` variable with defaults for XP to run smoothly. For that reason you should avoid overwriting `JAVA_OPTS` and instead you should use `XP_OPTS` to pass your options.
 
 [#dirs]
 === Directories

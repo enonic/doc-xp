@@ -10,7 +10,7 @@ Developers commonly need to choose a particular runtime, programming language, a
 
 == Overview
 
-The XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components. Still, XP apps are primarily developed using JavaScript - thanks to the embedded JavaScript engine and framework. However, due to running on the JVM, XP apps may also run other JVM compatible code and libraries.
+The XP runtime is built on top of the JVM, and a series of open source components. Still, XP apps are primarily developed using JavaScript - thanks to the embedded JavaScript engine and framework. However, due to running on the JVM, XP apps may also run other JVM compatible code and libraries.
 
 The runtime uses the OSGi module system to isolate each module (aka bundles) - and controlling the ability to communicate between them. <<apps#, XP Applications>> essentially work like any other system modules - with their own life cycle and ability to install, start, stop and uninstall.
 
@@ -26,7 +26,7 @@ The XP runtime also enables you to run multiple applications in a single runtime
 
 == Optimised
 
-XP apps can benefit from the highly optimised Java VM, but also optimisations in XP's JavaScript framework. Also, the highly performance NoSQL storage enable access to large datasets with minimal latency.
+XP apps can benefit from the highly optimised JVM, but also optimisations in XP's JavaScript framework. Also, the highly performance NoSQL storage enable access to large datasets with minimal latency.
 
 == Stateful and stateless
 
