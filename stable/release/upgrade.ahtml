@@ -604,17 +604,17 @@ We generally always recommend updating your apps to the latest version!</p>
 <p>Content Studio has to be upgraded to version 5+ to be compatible with XP 7.13. If you are using Content Studio 4.x with XP 7.13, you may experience disappearing layouts inside Page Editor.</p>
 </li>
 <li>
-<p>Bundled Java version was upgraded to Java 17 Our internal testing didn&#8217;t show any significant issues with this upgrade (except Nashorn engine removal), but we recommend testing your applications before upgrading to this version as always. Consult with <a href="https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html">Oracle JDK Migration Guide</a> for more information about migrating from Java 11 to Java 17 in case you experience any issues.</p>
+<p>Bundled JVM was upgraded to version 17. Our internal testing didn&#8217;t show any significant issues with this upgrade (except Nashorn engine removal), but we recommend testing your applications before upgrading to this version as always. Consult with <a href="https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html">JDK Migration Guide</a> for more information about migrating from JDK 11 to JDK 17 in case you experience any issues.</p>
 </li>
 <li>
 <p>When building applications it is recommended to specify <code>options.release = 11</code> for <code>compileJava</code> task <a href="https://docs.gradle.org/current/userguide/building_java_projects.html#sec:compiling_with_release">in Gradle build file</a> to preserve compatibility with XP versions lower than 7.13.
 XP Gradle plugin <code>com.enonic.xp.app</code> version <code>3.4.0</code> does this automatically for you when <code>systemVersion</code> is set to <code>7.12.x</code> or lower.</p>
 </li>
 <li>
-<p>Ensure you are using the latest version of the Test Framework <code>com.enonic.xp:testing</code> in your Gradle project. For example, if your Test Framework dependency is defined as <code>testImplementation "com.enonic.xp:testing:${xpVersion}"</code> you might need to change it to <code>testImplementation "com.enonic.xp:testing:7.13.0"</code>. Older versions may not work with Java 17 and will cause tests to fail with <code>java.lang.NoClassDefFoundError: jdk/nashorn/api/scripting/NashornScriptEngineFactory</code>.</p>
+<p>Ensure you are using the latest version of the Test Framework <code>com.enonic.xp:testing</code> in your Gradle project. For example, if your Test Framework dependency is defined as <code>testImplementation "com.enonic.xp:testing:${xpVersion}"</code> you might need to change it to <code>testImplementation "com.enonic.xp:testing:7.13.0"</code>. Older versions may not work with JDK 17 and will cause tests to fail with <code>java.lang.NoClassDefFoundError: jdk/nashorn/api/scripting/NashornScriptEngineFactory</code>.</p>
 </li>
 <li>
-<p>Usage of Java 11 Nashorn engine is now deprecated and will be removed in future XP versions. Currently warning is issued for each usage: <code>Class x.y.Z uses unsupported jdk.nashorn. Application may stop working in future XP versions.</code> Applications must not use Nashorn engine directly, but instead use XP&#8217;s Javascript API.</p>
+<p>Usage of JDK 11 Nashorn engine is now deprecated and will be removed in future XP versions. Currently warning is issued for each usage: <code>Class x.y.Z uses unsupported jdk.nashorn. Application may stop working in future XP versions.</code> Applications must not use Nashorn engine directly, but instead use XP&#8217;s Javascript API.</p>
 </li>
 <li>
 <p><code>base:media</code> content type is now abstract - it can no longer be created directly. It was documented as abstract, but was not enforced in previous versions.</p>
@@ -641,7 +641,7 @@ In <code>7.13.1</code> you can bring back the old deprecated behaviour making Co
 <div class="ulist">
 <ul>
 <li>
-<p>Server Distro Mac ARM64 bundles GraalVM 22.3.1 Java 17 due to lack of GraalVM 22.3.2 image for Mac ARM64. Other distros are based on GraalVM 22.3.2 Java 17</p>
+<p>Server Distro Mac ARM64 bundles GraalVM 22.3.1 JDK 17 due to lack of GraalVM 22.3.2 image for Mac ARM64. Other distros are based on GraalVM 22.3.2 JDK 17</p>
 </li>
 </ul>
 </div>
@@ -1323,7 +1323,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

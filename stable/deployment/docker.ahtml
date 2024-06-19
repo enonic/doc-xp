@@ -458,7 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#configuration">Configuration</a>
 <ul class="sectlevel2">
-<li><a href="#java-heap-memory">Java heap memory</a></li>
+<li><a href="#java-heap-memory">Heap memory</a></li>
 <li><a href="#mounting_configuration">Mounting configuration</a></li>
 <li><a href="#using_setenv_sh">Using setenv.sh</a></li>
 <li><a href="#environmental_variables">Environmental variables</a></li>
@@ -684,17 +684,17 @@ Running this command requires you to have docker installed.
 <h2 id="configuration"><a class="link" href="#configuration">Configuration</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="java-heap-memory"><a class="link" href="#java-heap-memory">Java heap memory</a></h3>
+<h3 id="java-heap-memory"><a class="link" href="#java-heap-memory">Heap memory</a></h3>
 <div class="paragraph">
-<p>Since this image uses a modern Java VM, it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:</p>
+<p>Since this image uses a modern JVM, it will respect the container memory limits set by the docker daemon. There are some pitfalls though. Elasticsearch uses off-heap buffers, that can lead to the container running out of memory. For that reason, as a general rule, you should:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>set the Java heap size to <code>30%</code> of the available memory to the container</p>
+<p>set the heap size to <code>30%</code> of the available memory to the container</p>
 </li>
 <li>
-<p>if the Enonic XP node is a pure master node, set the Java heap size to <code>75%</code> of the available memory to the container</p>
+<p>if the Enonic XP node is a pure master node, set the heap size to <code>75%</code> of the available memory to the container</p>
 </li>
 <li>
 <p>set minimum and maximum heap size to the same value</p>
@@ -772,7 +772,7 @@ docker rm tmp</code></pre>
 <div class="sect4">
 <h5 id="memory"><a class="link" href="#memory">Memory</a></h5>
 <div class="paragraph">
-<p>Like described in the <a href="#java-heap-memory">Java heap memory</a> section, you should set the java heap memory limits. If your machine has 4GB of memory, and you want to allocate 75% of that to heap memory, do that by adding to <code>XP_OPTS</code>.</p>
+<p>Like described in the <a href="#java-heap-memory">Heap memory</a> section, you should set the heap memory limits. If your machine has 4GB of memory, and you want to allocate 75% of that to heap memory, do that by adding to <code>XP_OPTS</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1121,7 +1121,7 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

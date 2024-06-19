@@ -604,7 +604,7 @@ repositories { <i class="conum" data-value="5"></i><b>(5)</b>
 <h2 id="dependencies"><a class="link" href="#dependencies">Dependencies</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Easily include Enonic libraries or Java dependencies in your app via the dependencies section.</p>
+<p>Easily include standard Enonic libraries or 3rd party dependencies in your app via the dependencies section.</p>
 </div>
 <div class="paragraph">
 <p>Each dependency must be prefixed with a scope for specific building instructions. The available scopes are:</p>
@@ -617,11 +617,11 @@ repositories { <i class="conum" data-value="5"></i><b>(5)</b>
 </dd>
 <dt class="hdlist1">Implementation</dt>
 <dd>
-<p>Typically used for Java dependenceis. Does not automatically include transitive dependencies, meaning you must explicitly declare transitive dependencies.</p>
+<p>Typically used for Java dependencies. Does not automatically include transitive dependencies, meaning you must explicitly declare transitive dependencies.</p>
 </dd>
 <dt class="hdlist1">Webjar</dt>
 <dd>
-<p>Custom Enonicwq scope that extracts the content of the specified Webjar - <a href="https://www.webjars.org/" class="bare">https://www.webjars.org/</a> - placing it into the assets folder, using the version number as root folder</p>
+<p>Custom Enonic scope that extracts the content of the specified Webjar - <a href="https://www.webjars.org/" class="bare">https://www.webjars.org/</a> - placing it into the assets folder, using the version number as root folder</p>
 </dd>
 </dl>
 </div>
@@ -631,7 +631,7 @@ repositories { <i class="conum" data-value="5"></i><b>(5)</b>
 <h2 id="compiler"><a class="link" href="#compiler">Compiler</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Enonic XP SDK distros bundles the Java Development Kit (JDK), which includes the compiler needed to build Enonic apps.</p>
+<p>The Enonic XP SDK includes the compiler needed to build Enonic apps.</p>
 </div>
 <div class="paragraph">
 <p>When building applications without using Enonic CLI, you must tell Gradle which compiler (Enonic XP distro) to use. This is done by setting the <code>JAVA_HOME</code> environment variable.</p>
@@ -640,7 +640,7 @@ repositories { <i class="conum" data-value="5"></i><b>(5)</b>
 <dl>
 <dt class="hdlist1">JAVA_HOME</dt>
 <dd>
-<p>Defines the location of the Java compiler.</p>
+<p>Defines the location of the JDK.</p>
 </dd>
 </dl>
 </div>
@@ -852,7 +852,7 @@ XP 7.x defaults to the Nashorn JavaScript engine for executing JavaScript. For a
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

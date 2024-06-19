@@ -461,7 +461,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Functions to pass java-types in JSON, typically usage is to type e.g a Geo-point value when creating nodes in node-lib.</p>
+<p>Assign a specific value type using JSON, e.g a specify Geo-point value type for a property when creating nodes in node-lib. This ensures validation, and proper indexing storage time</p>
 </div>
 </div>
 </div>
@@ -497,7 +497,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="binary"><a class="link" href="#binary">binary</a></h3>
 <div class="paragraph">
-<p>Creates a BinaryAttachment java-type.</p>
+<p>Creates a BinaryAttachment</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -536,13 +536,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : BinaryAttachment java-type</p>
+<p><strong>object</strong> : BinaryAttachment</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="geopoint"><a class="link" href="#geopoint">geoPoint</a></h3>
 <div class="paragraph">
-<p>Creates a GeoPoint java-type.</p>
+<p>Creates a GeoPoint</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -581,13 +581,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : GeoPoint java-type</p>
+<p><strong>object</strong> : GeoPoint</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="geopointstring"><a class="link" href="#geopointstring">geoPointString</a></h3>
 <div class="paragraph">
-<p>Creates a GeoPoint java-type.</p>
+<p>Creates a GeoPoint</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -619,13 +619,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : GeoPoint java-type</p>
+<p><strong>object</strong> : GeoPoint</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="instant"><a class="link" href="#instant">instant</a></h3>
 <div class="paragraph">
-<p>Creates a Instant java-type.</p>
+<p>Creates an Instant</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -657,13 +657,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Instant java-type</p>
+<p><strong>object</strong> : Instant</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="localdate"><a class="link" href="#localdate">localDate</a></h3>
 <div class="paragraph">
-<p>Creates a LocalDate java-type.</p>
+<p>Creates a LocalDate.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -695,13 +695,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : LocalDate java-type</p>
+<p><strong>object</strong> : LocalDate</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="localdatetime"><a class="link" href="#localdatetime">localDateTime</a></h3>
 <div class="paragraph">
-<p>Creates a LocalDateTime java-type.</p>
+<p>Creates a LocalDateTime</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -733,13 +733,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : LocalDateTime java-type</p>
+<p><strong>object</strong> : LocalDateTime</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="localtime"><a class="link" href="#localtime">localTime</a></h3>
 <div class="paragraph">
-<p>Creates a LocalTime java-type.</p>
+<p>Creates a LocalTime</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -771,13 +771,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : LocalTime java-type</p>
+<p><strong>object</strong> : LocalTime</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="reference"><a class="link" href="#reference">reference</a></h3>
 <div class="paragraph">
-<p>Creates a Reference java-type.</p>
+<p>Creates a Reference</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -809,7 +809,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Reference java-type</p>
+<p><strong>object</strong> : Reference</p>
 </div>
 </div>
 </div>
@@ -817,7 +817,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

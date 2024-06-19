@@ -555,14 +555,14 @@ The pattern will be prefixed by the current application name unless:</p>
 <div class="sect3">
 <h4 id="match"><a class="link" href="#match">Match<br></a></h4>
 <div class="paragraph">
-<p>The pattern will be treated as a Java Regular Expression (with <a href="#regex-differences">a few notable exceptions</a>) and the whole content type name must match it to be accepted.
+<p>The pattern will be treated as a Regular Expression (with <a href="#regex-differences">a few notable exceptions</a>) and the whole content type name must match it to be accepted.
 The pattern will be prefixed by the current application name if it does <em>not</em> contain any of the following characters: <code>\^$.|?*+()[{:</code>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="regex-differences"><a class="link" href="#regex-differences">XP patterns: special cases</a></h4>
 <div class="paragraph">
-<p>XP&#8217;s patterns have a few cases where they differ from normal Java Regular Expression syntax:</p>
+<p>XP&#8217;s patterns have a few cases where they differ from normal Regular Expression syntax:</p>
 </div>
 <div class="paragraph">
 <div class="title"><code>${app}</code> template expression</div>
@@ -712,7 +712,7 @@ The pattern will be prefixed by the current application name if it does <em>not<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

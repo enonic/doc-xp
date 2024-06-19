@@ -629,7 +629,7 @@ Another alternative to XML-escape is to wrap the string in a CDATA block, as in 
 <p>A pattern element may also contain an <strong>@invert</strong> attribute to indicate that the result of evaluating the regular expression should be negated i.e.: <code>&lt;pattern invert="true"&gt;</code></p>
 </div>
 <div class="paragraph">
-<p>The pattern string must be a valid <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Java regular expression</a>.</p>
+<p>The pattern string must be a valid <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">regular expression</a>.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -766,7 +766,7 @@ Don&#8217;t specify <code>&lt;match&gt;</code> if you need to map controller/fil
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

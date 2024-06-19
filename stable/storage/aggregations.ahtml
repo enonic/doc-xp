@@ -477,7 +477,7 @@ Aggregations can be used for anything from data visualization to creating naviga
 <p>Consider a query returning all nodes that have a property "price" less than, say, $100. Now, we want to divide the result nodes into ranges, say 0-$25, $25-$50 and so on. We also would like to know the average price for each category. This could be done by doing multiple separate queries and calculating the average manually, but this would be very inefficient and cumbersome. Luckily, aggregations solve these types of problems easily.</p>
 </div>
 <div class="paragraph">
-<p>In some API functions it is possible to send in an aggregations expression object. This object is either in Java or a JSON like the following:</p>
+<p>In some API functions it is possible to send in an aggregations expression object like the following:</p>
 </div>
 <div class="listingblock">
 <div class="title">Basic aggregation DSL</div>
@@ -1411,7 +1411,7 @@ Values in <code>from</code> and <code>to</code> follow a special <a href="#date_
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

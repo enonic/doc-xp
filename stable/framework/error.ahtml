@@ -563,7 +563,7 @@ You can choose different handling based on the type of error. A 404 might for in
 <div class="sectionbody">
 <div class="paragraph">
 <p>The input parameter for handler functions is an error JSON object.
-The object contains the status code, error message, Java Exception object, and the original <a href="http.ahtml#http-request">HTTP request</a> object:</p>
+The object contains the status code, error message, Exception object, and the original <a href="http.ahtml#http-request">HTTP request</a> object:</p>
 </div>
 <div class="listingblock">
 <div class="title">Sample error object</div>
@@ -581,7 +581,7 @@ The object contains the status code, error message, Java Exception object, and t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

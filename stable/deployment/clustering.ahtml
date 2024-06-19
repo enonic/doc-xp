@@ -449,8 +449,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#xp_node_setup">XP node setup</a>
 <ul class="sectlevel2">
 <li><a href="#cluster_config">Cluster config</a></li>
-<li><a href="#java_heap">Java heap</a></li>
-<li><a href="#java_options">Java options</a></li>
+<li><a href="#heap">Heap</a></li>
+<li><a href="#options">Options</a></li>
 <li><a href="#dirs">Directories</a></li>
 <li><a href="#pre_installed_apps">Pre-installed apps</a></li>
 <li><a href="#shard_replication">Shard replication</a></li>
@@ -693,7 +693,7 @@ system.hazelcast.initial.min.cluster.size=3</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="java_heap"><a class="link" href="#java_heap">Java heap</a></h3>
+<h3 id="heap"><a class="link" href="#heap">Heap</a></h3>
 <div class="paragraph">
 <p>Since XP is using <em>elasticsearch</em> for storage, we have to consider that <em>elasticsearch</em> uses off heap memory buffers. For that reason we cannot allocate all available memory to heap. In general you should:</p>
 </div>
@@ -715,9 +715,9 @@ system.hazelcast.initial.min.cluster.size=3</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="java_options"><a class="link" href="#java_options">Java options</a></h3>
+<h3 id="options"><a class="link" href="#options">Options</a></h3>
 <div class="paragraph">
-<p>You might want to pass options to the Java virtual machine. Our distributions set the <code>JAVA_OPTS</code> variable with defaults for XP to run smoothly. For that reason you should avoid overwriting <code>JAVA_OPTS</code> and instead you should use <code>XP_OPTS</code> to pass your options.</p>
+<p>You might want to pass options to the JVM. Our distributions set the <code>JAVA_OPTS</code> variable with defaults for XP to run smoothly. For that reason you should avoid overwriting <code>JAVA_OPTS</code> and instead you should use <code>XP_OPTS</code> to pass your options.</p>
 </div>
 </div>
 <div class="sect2">
@@ -939,7 +939,7 @@ If heavy tasks must execute on master nodes (i.e. they have <code>isMaster</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>

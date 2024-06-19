@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The XP runtime is built on top of the Java Virtual Machine, and a series of open source Java components. Still, XP apps are primarily developed using JavaScript - thanks to the embedded JavaScript engine and framework. However, due to running on the JVM, XP apps may also run other JVM compatible code and libraries.</p>
+<p>The XP runtime is built on top of the JVM, and a series of open source components. Still, XP apps are primarily developed using JavaScript - thanks to the embedded JavaScript engine and framework. However, due to running on the JVM, XP apps may also run other JVM compatible code and libraries.</p>
 </div>
 <div class="paragraph">
 <p>The runtime uses the OSGi module system to isolate each module (aka bundles) - and controlling the ability to communicate between them. <a href="apps.ahtml">XP Applications</a> essentially work like any other system modules - with their own life cycle and ability to install, start, stop and uninstall.</p>
@@ -507,7 +507,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="optimised"><a class="link" href="#optimised">Optimised</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP apps can benefit from the highly optimised Java VM, but also optimisations in XP&#8217;s JavaScript framework. Also, the highly performance NoSQL storage enable access to large datasets with minimal latency.</p>
+<p>XP apps can benefit from the highly optimised JVM, but also optimisations in XP&#8217;s JavaScript framework. Also, the highly performance NoSQL storage enable access to large datasets with minimal latency.</p>
 </div>
 </div>
 </div>
@@ -542,7 +542,7 @@ It can run in virtually any infrastructure, and also be managed by Kubernetes or
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-13 07:42:19 UTC
+Last updated 2024-06-19 13:44:57 UTC
 </div>
 </div>
 </body>
