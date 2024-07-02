@@ -611,6 +611,10 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 <dd>
 <p>Number of attampts system initializers will do to check if initialization is done. Default is <code>300</code> (which equals to 5 minutes) - before XP 7.14.3 and 900 (which equals to 5 minutes) after.</p>
 </dd>
+<dt class="hdlist1">stop.gracePeriod</dt>
+<dd>
+<p>Time in milliseconds XP waits for all services to stop. Default is <code>600000</code> (10 minutes). Before XP 7.14.3 value was 10000 (10 seconds) and not configurable.</p>
+</dd>
 <dt class="hdlist1">felix.fileinstall.poll</dt>
 <dd>
 <p>Frequency in ms for how often the configuration folders are scanned for changes</p>
@@ -2450,7 +2454,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-07-02 08:38:49 UTC
+Last updated 2024-07-02 08:42:13 UTC
 </div>
 </div>
 </body>
