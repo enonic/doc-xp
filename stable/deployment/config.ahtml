@@ -587,7 +587,7 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 
 # Initialization settings
 # xp.init.adminUserCreation = true
-# xp.init.maxTries = 300
+# xp.init.maxTries = 900
 
 # Configuration FileMonitor properties
 # felix.fileinstall.poll = 1000
@@ -609,7 +609,7 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 </dd>
 <dt class="hdlist1">xp.init.maxTries</dt>
 <dd>
-<p>Number of attampts system initializers will do to check if initialization is done. Default is 300 (which equals to 5 minutes)</p>
+<p>Number of attampts system initializers will do to check if initialization is done. Default is <code>300</code> (which equals to 5 minutes) - before XP 7.14.3 and 900 (which equals to 5 minutes) after.</p>
 </dd>
 <dt class="hdlist1">felix.fileinstall.poll</dt>
 <dd>
@@ -2450,7 +2450,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-07-01 09:41:12 UTC
+Last updated 2024-07-02 08:38:49 UTC
 </div>
 </div>
 </body>
