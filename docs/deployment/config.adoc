@@ -88,6 +88,7 @@ xp.name:: sets the name displayed to users from the admin console main menu, use
 xp.suPassword:: override su user's password in database, if any. Can also be used with hashing, the following are supported: `sha1`, `sha256`, `sha512` and `md5`.
 // xp.init.adminUserCreation:: TODO
 xp.init.maxTries:: Number of attampts system initializers will do to check if initialization is done. Default is `300` (which equals to 5 minutes) - before XP 7.14.3 and 900 (which equals to 5 minutes) after.
+stop.gracePeriod:: Time in milliseconds XP waits for all services to stop. Default is `600000` (10 minutes). Before XP 7.14.3 value was 10000 (10 seconds) and not configurable.
 felix.fileinstall.poll:: Frequency in ms for how often the configuration folders are scanned for changes
 // felix.fileinstall.noInitialDelay:: TODO
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
