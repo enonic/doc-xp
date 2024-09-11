@@ -312,7 +312,7 @@ const taskId = executeFunction({
 
     progress({info: 'Initializing task'});
 
-    for (let i = 0; i < 10; i++) {
+    for (const i of Array(10).keys()) {
       progress({
         info: 'Processing item ' + (i + 1),
         current: i,
