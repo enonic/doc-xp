@@ -198,8 +198,8 @@ const result1 = create({
             }
         }
     },
-    "attachments": {},
-    "publish": {}
+    attachments: {},
+    publish: {}
 });
 
 log.info('Content created with id ' + result1._id);
@@ -232,40 +232,40 @@ try {
 ```typescript
 // Content created.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/a/b/mycontent",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "test:myContentType",
-    "displayName": "My Content",
-    "hasChildren": false,
-    "language": "es",
-    "valid": false,
-    "data": {
-        "a": 1,
-        "b": 2,
-        "c": [
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/a/b/mycontent",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "test:myContentType",
+    displayName: "My Content",
+    hasChildren: false,
+    language: "es",
+    valid: false,
+    data: {
+        a: 1,
+        b: 2,
+        c: [
             "1",
             "2"
         ],
-        "d": {
-            "e": {
-                "f": 3.6,
-                "g": true
+        d: {
+            e: {
+                f: 3.6,
+                g: true
             }
         }
     },
-    "x": {
+    x: {
         "com-enonic-myapplication": {
-            "myschema": {
-                "a": 1
+            myschema: {
+                a: 1
             }
         }
     },
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    page: {},
+    attachments: {},
+    publish: {}
 };
 ```
 
@@ -314,19 +314,19 @@ const result = createMedia({
 ```typescript
 // Media created.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/a/b/mycontent",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {},
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/a/b/mycontent",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {},
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {}
 };
 ```
 
@@ -385,34 +385,34 @@ const result = modifyMedia({
 ```typescript
 // Modified media.
 const expected = {
-    "_id": "123456",
-    "_name": "myMedia",
-    "_path": "/a/b/myMedia",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {
-        "caption": "Caption",
-        "artist": [
+    _id: "123456",
+    _name: "myMedia",
+    _path: "/a/b/myMedia",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {
+        caption: "Caption",
+        artist: [
             "Artist 1",
             "Artist 2"
         ],
-        "copyright": "Copyright",
-        "mimeType": "text/plan",
-        "tags": [
+        copyright: "Copyright",
+        mimeType: "text/plan",
+        tags: [
             "tag1",
             "tag2"
         ]
     },
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {},
-    "workflow": {
-        "state": "READY",
-        "checks": {}
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {},
+    workflow: {
+        state: "READY",
+        checks: {}
     }
 };
 ```
@@ -473,8 +473,8 @@ An object with the following keys and their values:
 | Name | Type | Attributes| Default | Description
 | contentId | string | | | Id of the content.
 | workflow | Object | <optional> | ```{
-"state": "READY",
-"checks": {}
+state: "READY",
+checks: {}
 }``` | Workflow state.
 | includeChildren |  boolean | <optional> | true | Indicates that children contents must be duplicated, too. Ignored if `variant=true`.
 | variant | boolean | <optional> | false | Indicates that duplicated content is a variant.
@@ -502,9 +502,9 @@ const result = duplicate({
 
 // Summary of the duplicated content.
 const expected = {
-    "contentName": "sourcecontentname-copy",
-    "sourceContentPath": "/path/to/duplicated-content",
-    "duplicatedContents": [
+    contentName: "sourcecontentname-copy",
+    sourceContentPath: "/path/to/duplicated-content",
+    duplicatedContents: [
         "duplicated-content-id"
     ]
 };
@@ -522,9 +522,9 @@ const result = duplicate({
 });
 
 const expected = {
-    "contentName": "variant-name",
-    "sourceContentPath": "/path/to/variant-name",
-    "duplicatedContents": [
+    contentName: "variant-name",
+    sourceContentPath: "/path/to/variant-name",
+    duplicatedContents: [
         "variant-content-id"
     ]
 }
@@ -615,38 +615,38 @@ if (result) {
 ```typescript
 // Content as it is returned.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/path/to/mycontent",
-    "creator": "user:system:admin",
-    "modifier": "user:system:admin",
-    "createdTime": "1970-01-01T00:00:00Z",
-    "modifiedTime": "1970-01-01T00:00:00Z",
-    "type": "base:unstructured",
-    "displayName": "My Content",
-    "hasChildren": false,
-    "language": "en",
-    "valid": true,
-    "childOrder": "_ts DESC, _name ASC",
-    "data": {
-        "myfield": "Hello World"
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/path/to/mycontent",
+    creator: "user:system:admin",
+    modifier: "user:system:admin",
+    createdTime: "1970-01-01T00:00:00Z",
+    modifiedTime: "1970-01-01T00:00:00Z",
+    type: "base:unstructured",
+    displayName: "My Content",
+    hasChildren: false,
+    language: "en",
+    valid: true,
+    childOrder: "_ts DESC, _name ASC",
+    data: {
+        myfield: "Hello World"
     },
-    "x": {},
-    "page": {},
-    "attachments": {
+    x: {},
+    page: {},
+    attachments: {
         "logo.png": {
-            "name": "logo.png",
-            "label": "small",
-            "size": 6789,
-            "mimeType": "image/png"
+            name: "logo.png",
+            label: "small",
+            size: 6789,
+            mimeType: "image/png"
         },
         "document.pdf": {
-            "name": "document.pdf",
-            "size": 12345,
-            "mimeType": "application/pdf"
+            name: "document.pdf",
+            size: 12345,
+            mimeType: "application/pdf"
         }
     },
-    "publish": {}
+    publish: {}
 };
 ```
 
@@ -677,15 +677,15 @@ Examples
 // Attachments returned.
 const expected = {
     "logo.png": {
-        "name": "logo.png",
-        "label": "small",
-        "size": 6789,
-        "mimeType": "image/png"
+        name: "logo.png",
+        label: "small",
+        size: 6789,
+        mimeType: "image/png"
     },
     "document.pdf": {
-        "name": "document.pdf",
-        "size": 12345,
-        "mimeType": "application/pdf"
+        name: "document.pdf",
+        size: 12345,
+        mimeType: "application/pdf"
     }
 };
 ```
@@ -776,44 +776,44 @@ for (let i = 0; i < result.hits.length; i++) {
 ```typescript
 // Result set returned.
 const expected = {
-    "total": 20,
-    "count": 2,
-    "hits": [
+    total: 20,
+    count: 2,
+    hits: [
         {
-            "_id": "id1",
-            "_name": "name1",
-            "_path": "/a/b/name1",
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 1",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id1",
+            _name: "name1",
+            _path: "/a/b/name1",
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 1",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         },
         {
-            "_id": "id2",
-            "_name": "name2",
-            "_path": "/a/b/name2",
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 2",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id2",
+            _name: "name2",
+            _path: "/a/b/name2",
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 2",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         }
     ]
 };
@@ -907,14 +907,14 @@ if (result) {
 ```typescript
 // Permissions returned.
 const expected = {
-    "inheritsPermissions": false,
-    "permissions": [
+    inheritsPermissions: false,
+    permissions: [
         {
-            "principal": "user:system:anonymous",
-            "allow": [
+            principal: "user:system:anonymous",
+            allow: [
                 "READ"
             ],
-            "deny": []
+            deny: []
         }
     ]
 };
@@ -958,24 +958,24 @@ log.info('Site name = %s', result._name);
 ```typescript
 // Site data returned.
 const expected = {
-    "_id": "100123",
-    "_name": "my-content",
-    "_path": "/my-content",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {
-        "siteConfig": {
-            "applicationKey": "myapplication",
-            "config": {
-                "Field": 42
+    _id: "100123",
+    _name: "my-content",
+    _path: "/my-content",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {
+        siteConfig: {
+            applicationKey: "myapplication",
+            config: {
+                Field: 42
             }
         }
     },
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {}
 };
 ```
 
@@ -1019,7 +1019,7 @@ log.info('Field value for the site config = %s', result.Field);
 ```typescript
 // Site config returned.
 const expected = {
-    "Field": 42
+    Field: 42
 };
 ```
 
@@ -1056,101 +1056,101 @@ const contentType = getType('com.enonic.myapp:person');
 ```typescript
 // Content type returned:
 const expected = {
-    "name": "com.enonic.myapp:person",
-    "displayName": "Person",
-    "description": "Person content type",
-    "superType": "base:structured",
-    "abstract": false,
-    "final": true,
-    "allowChildContent": true,
-    "displayNameExpression": "${name}",
-    "icon": {
-        "mimeType": "image/png",
-        "modifiedTime": "2016-01-01T12:00:00Z"
+    name: "com.enonic.myapp:person",
+    displayName: "Person",
+    description: "Person content type",
+    superType: "base:structured",
+    abstract: false,
+    final: true,
+    allowChildContent: true,
+    displayNameExpression: "${name}",
+    icon: {
+        mimeType: "image/png",
+        modifiedTime: "2016-01-01T12:00:00Z"
     },
-    "form": [
+    form: [
         {
-            "formItemType": "Input",
-            "name": "name",
-            "label": "Full name",
-            "maximize": true,
-            "inputType": "TextLine",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "name",
+            label: "Full name",
+            maximize: true,
+            inputType: "TextLine",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "title",
-            "label": "Photo",
-            "helpText": "Person photo",
-            "maximize": true,
-            "inputType": "ImageSelector",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "title",
+            label: "Photo",
+            helpText: "Person photo",
+            maximize: true,
+            inputType: "ImageSelector",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "bio",
-            "label": "Bio",
-            "maximize": true,
-            "inputType": "HtmlArea",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "bio",
+            label: "Bio",
+            maximize: true,
+            inputType: "HtmlArea",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "birthdate",
-            "label": "Birth date",
-            "maximize": true,
-            "inputType": "Date",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 0
+            formItemType: "Input",
+            name: "birthdate",
+            label: "Birth date",
+            maximize: true,
+            inputType: "Date",
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "email",
-            "label": "Email",
-            "helpText": "Email address",
-            "maximize": true,
-            "inputType": "TextLine",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "email",
+            label: "Email",
+            helpText: "Email address",
+            maximize: true,
+            inputType: "TextLine",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {
-                "regexp": [
+            config: {
+                regexp: [
                     {
-                        "value": "^[^@]+@[^@]+\\.[^@]+$"
+                        value: "^[^@]+@[^@]+\\.[^@]+$"
                     }
                 ]
             }
         },
         {
-            "formItemType": "Input",
-            "name": "nationality",
-            "label": "Nationality",
-            "maximize": true,
-            "inputType": "ContentSelector",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 0
+            formItemType: "Input",
+            name: "nationality",
+            label: "Nationality",
+            maximize: true,
+            inputType: "ContentSelector",
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            "config": {
-                "allowContentType": [
+            config: {
+                allowContentType: [
                     {
-                        "value": "com.enonic.myapp:country"
+                        value: "com.enonic.myapp:country"
                     }
                 ]
             }
@@ -1256,45 +1256,45 @@ if (result) {
 ```typescript
 // Content modified.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/path/to/mycontent",
-    "creator": "user:system:admin",
-    "modifier": "user:system:admin",
-    "createdTime": "1970-01-01T00:00:00Z",
-    "modifiedTime": "1970-01-01T00:00:00Z",
-    "type": "base:unstructured",
-    "displayName": "Modified",
-    "hasChildren": false,
-    "language": "en",
-    "valid": true,
-    "childOrder": "_ts DESC, _name ASC",
-    "data": {
-        "myfield": "Hello World",
-        "myCheckbox": "false",
-        "myTime": "11:00"
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/path/to/mycontent",
+    creator: "user:system:admin",
+    modifier: "user:system:admin",
+    createdTime: "1970-01-01T00:00:00Z",
+    modifiedTime: "1970-01-01T00:00:00Z",
+    type: "base:unstructured",
+    displayName: "Modified",
+    hasChildren: false,
+    language: "en",
+    valid: true,
+    childOrder: "_ts DESC, _name ASC",
+    data: {
+        myfield: "Hello World",
+        myCheckbox: "false",
+        myTime: "11:00"
     },
-    "x": {},
-    "page": {},
-    "attachments": {
+    x: {},
+    page: {},
+    attachments: {
         "logo.png": {
-            "name": "logo.png",
-            "label": "small",
-            "size": 6789,
-            "mimeType": "image/png"
+            name: "logo.png",
+            label: "small",
+            size: 6789,
+            mimeType: "image/png"
         },
         "document.pdf": {
-            "name": "document.pdf",
-            "size": 12345,
-            "mimeType": "application/pdf"
+            name: "document.pdf",
+            size: 12345,
+            mimeType: "application/pdf"
         }
     },
-    "publish": {
-        "from": "2016-11-03T10:01:34Z"
+    publish: {
+        from: "2016-11-03T10:01:34Z"
     },
-    "workflow": {
-        "state": "READY",
-        "checks": {}
+    workflow: {
+        state: "READY",
+        checks: {}
     }
 };
 ```
@@ -1462,15 +1462,15 @@ if (result) {
 ```typescript
 // Content published.
 const expected = {
-    "pushedContents": [
+    pushedContents: [
         "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
         "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
         "e1f57280-d672-4cd8-b674-98e26e5b69ae"
     ],
-    "deletedContents": [ // Removed from 7.12.0
+    deletedContents: [ // Removed from 7.12.0
         "45d67001-7f2b-4093-99ae-639be9fdd1f6"
     ],
-    "failedContents": [
+    failedContents: [
         "79e21db0-5b43-45ce-b58c-6e1c420b22bd"
     ]
 };
@@ -1621,123 +1621,123 @@ for (let i = 0; i < result.hits.length; i++) {
 ```typescript
 // Result set returned.
 const expected = {
-    "total": 20,
-    "count": 2,
-    "hits": [
+    total: 20,
+    count: 2,
+    hits: [
         {
-            "_id": "id1",
-            "_name": "name1",
-            "_path": "/a/b/name1",
-            "_sort": ["1970-01-01T00:00:00Z", 9279.647306690395],
-            "_score": null,
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 1",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id1",
+            _name: "name1",
+            _path: "/a/b/name1",
+            _sort: ["1970-01-01T00:00:00Z", 9279.647306690395],
+            _score: null,
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 1",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         },
         {
-            "_id": "id2",
-            "_name": "name2",
-            "_path": "/a/b/name2",
-            "_sort": [ "1970-01-01T00:00:00Z", 15964.050071707446],
-            "_score": null,
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 2",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id2",
+            _name: "name2",
+            _path: "/a/b/name2",
+            _sort: [ "1970-01-01T00:00:00Z", 15964.050071707446],
+            _score: null,
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 2",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         }
     ],
-    "aggregations": {
-        "genders": {
-            "buckets": [
+    aggregations: {
+        genders: {
+            buckets: [
                 {
-                    "key": "male",
-                    "docCount": 10
+                    key: "male",
+                    docCount: 10
                 },
                 {
-                    "key": "female",
-                    "docCount": 12
+                    key: "female",
+                    docCount: 12
                 }
             ]
         },
-        "by_month": {
-            "buckets": [
+        by_month: {
+            buckets: [
                 {
-                    "key": "2014-01",
-                    "docCount": 8
+                    key: "2014-01",
+                    docCount: 8
                 },
                 {
-                    "key": "2014-02",
-                    "docCount": 10
+                    key: "2014-02",
+                    docCount: 10
                 },
                 {
-                    "key": "2014-03",
-                    "docCount": 12
+                    key: "2014-03",
+                    docCount: 12
                 }
             ]
         },
-        "price_ranges": {
-            "buckets": [
+        price_ranges: {
+            buckets: [
                 {
-                    "key": "a",
-                    "docCount": 2,
-                    "to": 50
+                    key: "a",
+                    docCount: 2,
+                    to: 50
                 },
                 {
-                    "key": "b",
-                    "docCount": 4,
-                    "from": 50,
-                    "to": 100
+                    key: "b",
+                    docCount: 4,
+                    from: 50,
+                    to: 100
                 },
                 {
-                    "key": "c",
-                    "docCount": 4,
-                    "from": 100
+                    key: "c",
+                    docCount: 4,
+                    from: 100
                 }
             ]
         },
-        "my_date_range": {
-            "buckets": [
+        my_date_range: {
+            buckets: [
                 {
-                    "key": "date range bucket key",
-                    "docCount": 2,
-                    "from": "2014-09-01T00:00:00Z"
+                    key: "date range bucket key",
+                    docCount: 2,
+                    from: "2014-09-01T00:00:00Z"
                 },
                 {
-                    "docCount": 5,
-                    "from": "2014-10-01T00:00:00Z",
-                    "to": "2014-09-01T00:00:00Z"
+                    docCount: 5,
+                    from: "2014-10-01T00:00:00Z",
+                    to: "2014-09-01T00:00:00Z"
                 },
                 {
-                    "docCount": 7,
-                    "to": "2014-11-01T00:00:00Z"
+                    docCount: 7,
+                    to: "2014-11-01T00:00:00Z"
                 }
             ]
         },
-        "item_count": {
-            "count": 5,
-            "min": 1,
-            "max": 5,
-            "avg": 3,
-            "sum": 15
+        item_count: {
+            count: 5,
+            min: 1,
+            max: 5,
+            avg: 3,
+            sum: 15
         }
     }
 };

@@ -504,9 +504,9 @@ const result = getMemberships('user:system:user1');
 [source,typescript]
 ----
 [{
-    "type": "role",
-    "key": "role:system.admin",
-    "displayName":"Administrator"
+    type: "role",
+    key: "role:system.admin",
+    displayName:"Administrator"
 }]
 ----
 

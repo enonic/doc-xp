@@ -74,34 +74,34 @@ const result = getSchema({
 .Return value:
 ```typescript
 const expected = {
-  "name": "myapp:mytype",
-  "displayName": "Tag",
-  "displayNameI18nKey": "",
-  "createdTime": "2021-09-25T10:00:00Z",
-  "creator": "user:system:anonymous",
-  "modifiedTime": "2021-09-25T10:00:00Z",
+  name: "myapp:mytype",
+  displayName: "Tag",
+  displayNameI18nKey: "",
+  createdTime: "2021-09-25T10:00:00Z",
+  creator: "user:system:anonymous",
+  modifiedTime: "2021-09-25T10:00:00Z",
   "resource" : <!-- resource string value -->,
-  "type": "CONTENT_TYPE",
-  "icon": {
-    "data": {},
-    "mimeType": "image/png",
-    "modifiedTime": "2016-01-01T12:00:00Z"
+  type: "CONTENT_TYPE",
+  icon: {
+    data: {},
+    mimeType: "image/png",
+    modifiedTime: "2016-01-01T12:00:00Z"
   },
-  "form": [
+  form: [
     {
-      "formItemType": "Input",
-      "name": "tag",
-      "label": "Tag, unlimited occurrences",
-      "maximize": true,
-      "inputType": "Tag",
-      "occurrences": {
-        "maximum": 0,
-        "minimum": 0
+      formItemType: "Input",
+      name: "tag",
+      label: "Tag, unlimited occurrences",
+      maximize: true,
+      inputType: "Tag",
+      occurrences: {
+        maximum: 0,
+        minimum: 0
       },
-      "config": {}
+      config: {}
     }
   ],
-  "config": {}
+  config: {}
 };
 ```
 
@@ -162,29 +162,29 @@ const expected = {
     type: 'CONTENT_TYPE',
     form: [
         {
-            'formItemType': 'Layout',
-            'name': 'myLayout',
-            'label': 'My layout',
-            'items': [
+            formItemType: 'Layout',
+            name: 'myLayout',
+            label: 'My layout',
+            items: [
                 {
-                    'formItemType': 'ItemSet',
-                    'name': 'mySet',
-                    'occurrences': {
-                        'maximum': 1,
-                        'minimum': 1
+                    formItemType: 'ItemSet',
+                    name: 'mySet',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 1
                     },
-                    'items': [
+                    items: [
                         {
-                            'formItemType': 'Input',
-                            'name': 'myInput',
-                            'label': 'Input',
-                            'maximize': true,
-                            'inputType': 'TextLine',
-                            'occurrences': {
-                                'maximum': 1,
-                                'minimum': 0
+                            formItemType: 'Input',
+                            name: 'myInput',
+                            label: 'Input',
+                            maximize: true,
+                            inputType: 'TextLine',
+                            occurrences: {
+                                maximum: 1,
+                                minimum: 0
                             },
-                            'config': {}
+                            config: {}
                         }
                     ]
                 }
@@ -268,34 +268,34 @@ const result = createSchema({
 .Return value:
 ```typescript
 const expected = {
-  "name": "myapp:mytype",
-  "displayName": "Tag",
-  "displayNameI18nKey": "",
-  "createdTime": "2021-09-25T10:00:00Z",
-  "creator": "user:system:anonymous",
-  "modifiedTime": "2021-09-25T10:00:00Z",
+  name: "myapp:mytype",
+  displayName: "Tag",
+  displayNameI18nKey: "",
+  createdTime: "2021-09-25T10:00:00Z",
+  creator: "user:system:anonymous",
+  modifiedTime: "2021-09-25T10:00:00Z",
   "resource" : <!-- resource string value -->,
-  "type": "CONTENT_TYPE",
-  "icon": {
-    "data": {},
-    "mimeType": "image/png",
-    "modifiedTime": "2016-01-01T12:00:00Z"
+  type: "CONTENT_TYPE",
+  icon: {
+    data: {},
+    mimeType: "image/png",
+    modifiedTime: "2016-01-01T12:00:00Z"
   },
-  "form": [
+  form: [
     {
-      "formItemType": "Input",
-      "name": "tag",
-      "label": "Tag, unlimited occurrences",
-      "maximize": true,
-      "inputType": "Tag",
-      "occurrences": {
-        "maximum": 0,
-        "minimum": 0
+      formItemType: "Input",
+      name: "tag",
+      label: "Tag, unlimited occurrences",
+      maximize: true,
+      inputType: "Tag",
+      occurrences: {
+        maximum: 0,
+        minimum: 0
       },
-      "config": {}
+      config: {}
     }
   ],
-  "config": {}
+  config: {}
 };
 ```
 
@@ -373,20 +373,20 @@ const expected = {
     type: 'MIXIN',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'text2',
-            'label': 'Text 2',
-            'maximize': true,
-            'inputType': 'TextLine',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'text2',
+            label: 'Text 2',
+            maximize: true,
+            inputType: 'TextLine',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'InlineMixin',
-            'name': 'myapplication:inline'
+            formItemType: 'InlineMixin',
+            name: 'myapplication:inline'
         }
     ]
 };
@@ -502,16 +502,16 @@ const expected = {
     type: 'PAGE',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'width',
-            'label': 'width',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'width',
+            label: 'width',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     config: {},
@@ -581,16 +581,16 @@ const expected = [
         type: 'PART',
         form: [
             {
-                'formItemType': 'Input',
-                'name': 'width',
-                'label': 'width',
-                'maximize': true,
-                'inputType': 'Double',
-                'occurrences': {
-                    'maximum': 1,
-                    'minimum': 0
+                formItemType: 'Input',
+                name: 'width',
+                label: 'width',
+                maximize: true,
+                inputType: 'Double',
+                occurrences: {
+                    maximum: 1,
+                    minimum: 0
                 },
-                'config': {}
+                config: {}
             }
         ],
         config: {}
@@ -682,27 +682,27 @@ const expected = {
     type: 'PART',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'width',
-            'label': 'Column width',
-            'helpText': 'key.help-text',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'width',
+            label: 'Column width',
+            helpText: 'key.help-text',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'InlineMixin',
-            'name': 'myapplication:link-urls'
+            formItemType: 'InlineMixin',
+            name: 'myapplication:link-urls'
         }
     ],
 
     config: {
-        'input': [{
-            'value': '', '@name': 'width', '@type': 'Double'
+        input: [{
+            value: '', '@name': 'width', '@type': 'Double'
         }]
     }
 };
@@ -808,50 +808,50 @@ const expected = {
     type: 'LAYOUT',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'pause',
-            'label': 'Pause parameter',
-            'helpText': 'key1.help-text',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'pause',
+            label: 'Pause parameter',
+            helpText: 'key1.help-text',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'ItemSet',
-            'name': 'myFormItemSet',
-            'label': 'My form item set',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'ItemSet',
+            name: 'myFormItemSet',
+            label: 'My form item set',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'items': [
+            items: [
                 {
-                    'formItemType': 'Input',
-                    'name': 'myTextLine',
-                    'label': 'My text line',
-                    'maximize': true,
-                    'inputType': 'TextLine',
-                    'occurrences': {
-                        'maximum': 1,
-                        'minimum': 1
+                    formItemType: 'Input',
+                    name: 'myTextLine',
+                    label: 'My text line',
+                    maximize: true,
+                    inputType: 'TextLine',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 1
                     },
-                    'config': {}
+                    config: {}
                 },
                 {
-                    'formItemType': 'Input',
-                    'name': 'myCustomInput',
-                    'label': 'My custom input',
-                    'maximize': true,
-                    'inputType': 'TextLine',
-                    'occurrences': {
-                        'maximum': 1,
-                        'minimum': 0
+                    formItemType: 'Input',
+                    name: 'myCustomInput',
+                    label: 'My custom input',
+                    maximize: true,
+                    inputType: 'TextLine',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 0
                     },
-                    'config': {}
+                    config: {}
                 }
             ]
         }
@@ -1250,22 +1250,22 @@ const expected = {
     modifiedTime: '2021-02-25T10:44:33.170079900Z',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'input',
-            'label': 'Input',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'input',
+            label: 'Input',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     xDataMappings: [
         {
-            'name': 'myapplication:my',
-            'optional': false
+            name: 'myapplication:my',
+            optional: false
         }
     ]
 };
@@ -1356,29 +1356,29 @@ const expected = {
     resource: <!-- resource string value -->,
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'some-name',
-            'label': 'Textline',
-            'customText': '',
-            'maximize': true,
-            'inputType': 'TextLine',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'some-name',
+            label: 'Textline',
+            customText: '',
+            maximize: true,
+            inputType: 'TextLine',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     xDataMappings: [
         {
-            'name': 'myapp1:menu-item',
-            'optional': false,
-            'allowContentTypes': ''
+            name: 'myapp1:menu-item',
+            optional: false,
+            allowContentTypes: ''
         },
         {
-            'name': 'myapp2:my-meta-mixin',
-            'optional': false,
-            'allowContentTypes': ''
+            name: 'myapp2:my-meta-mixin',
+            optional: false,
+            allowContentTypes: ''
         }
     ]
 };

@@ -77,31 +77,31 @@ if (job) {
 .Return value:
 ```typescript
 const expected = {
-    'name': 'myjob',
-    'descriptor': 'com.enonic.app.myapp:mytask',
-    'description': 'cron job description',
-    'enabled': true,
-    'config': {
-        'a': 1,
-        'b': 'value',
-        'c': {
-            'd': {
-                'e': 3.6,
-                'f': true
+    name: 'myjob',
+    descriptor: 'com.enonic.app.myapp:mytask',
+    description: 'cron job description',
+    enabled: true,
+    config: {
+        a: 1,
+        b: 'value',
+        c: {
+            d: {
+                e: 3.6,
+                f: true
             }
         }
     },
-    'user': 'user:system:user',
-    'creator': 'user:system:creator',
-    'modifier': 'user:system:creator',
-    'createdTime': '2016-11-02T10:36:00Z',
-    'modifiedTime': '2016-11-02T10:36:00Z',
-    'lastRun': '2021-02-25T10:44:33.170079900Z',
-    'lastTaskId': 'task-id',
-    'schedule': {
-        'value': '* * * * *',
-        'type': 'CRON',
-        'timeZone': 'GMT+2:00'
+    user: 'user:system:user',
+    creator: 'user:system:creator',
+    modifier: 'user:system:creator',
+    createdTime: '2016-11-02T10:36:00Z',
+    modifiedTime: '2016-11-02T10:36:00Z',
+    lastRun: '2021-02-25T10:44:33.170079900Z',
+    lastTaskId: 'task-id',
+    schedule: {
+        value: '* * * * *',
+        type: 'CRON',
+        timeZone: 'GMT+2:00'
     }
 };
 ```
@@ -129,40 +129,40 @@ const jobs = list();
 ```typescript
 const expected = [
   {
-        'name': 'job1',
-        'descriptor': 'appKey:task',
-        'description': 'job description',
-        'enabled': true,
-        'config': {
-            'a': 1
+        name: 'job1',
+        descriptor: 'appKey:task',
+        description: 'job description',
+        enabled: true,
+        config: {
+            a: 1
         },
-        'user': 'user:system:user',
-        'creator': 'user:system:creator',
-        'modifier': 'user:system:creator',
-        'createdTime': '2016-11-02T10:36:00Z',
-        'modifiedTime': '2016-11-02T10:36:00Z',
-        'lastRun': '2021-02-25T10:44:00.170079900Z',
-        'lastTaskId': 'task-id',
-        'schedule': {
-            'value': '* * * * *',
-            'timeZone': 'GMT+05:30',
-            'type': 'CRON'
+        user: 'user:system:user',
+        creator: 'user:system:creator',
+        modifier: 'user:system:creator',
+        createdTime: '2016-11-02T10:36:00Z',
+        modifiedTime: '2016-11-02T10:36:00Z',
+        lastRun: '2021-02-25T10:44:00.170079900Z',
+        lastTaskId: 'task-id',
+        schedule: {
+            value: '* * * * *',
+            timeZone: 'GMT+05:30',
+            type: 'CRON'
         }
     },
     {
-        'name': 'job2',
-        'descriptor': 'appKey:task',
-        'description': 'job description',
-        'enabled': false,
-        'config': { },
-        'user': 'user:system:user',
-        'creator': 'user:system:creator',
-        'modifier': 'user:system:creator',
-        'createdTime': '2021-02-02T10:36:00Z',
-        'modifiedTime': '2021-02-02T10:36:00Z',
-        'schedule': {
-            'value': '2012-01-01T00:00:00Z',
-            'type': 'ONE_TIME'
+        name: 'job2',
+        descriptor: 'appKey:task',
+        description: 'job description',
+        enabled: false,
+        config: { },
+        user: 'user:system:user',
+        creator: 'user:system:creator',
+        modifier: 'user:system:creator',
+        createdTime: '2021-02-02T10:36:00Z',
+        modifiedTime: '2021-02-02T10:36:00Z',
+        schedule: {
+            value: '2012-01-01T00:00:00Z',
+            type: 'ONE_TIME'
         }
     }
 ];
@@ -247,48 +247,48 @@ const extendedCronJob = create({
 .Return value:
 ```typescript
 const expectedSimpleOneTimeJob = {
-    'name': 'my-project',
-    'descriptor': 'appKey:task',
-    'enabled': true,
-    'config': {},
-    'creator': 'user:system:creator',
-    'modifier': 'user:system:creator',
-    'createdTime': '2016-11-02T10:36:00Z',
-    'modifiedTime': '2016-11-02T10:36:00Z',
-    'schedule': {
-        'value': '2012-01-01T00:00:00Z',
-        'type': 'ONE_TIME'
+    name: 'my-project',
+    descriptor: 'appKey:task',
+    enabled: true,
+    config: {},
+    creator: 'user:system:creator',
+    modifier: 'user:system:creator',
+    createdTime: '2016-11-02T10:36:00Z',
+    modifiedTime: '2016-11-02T10:36:00Z',
+    schedule: {
+        value: '2012-01-01T00:00:00Z',
+        type: 'ONE_TIME'
     }
 }
 
 const expectedExtendedCronJob = {
-    'name': 'myjob',
-    'descriptor': 'appKey:task',
-    'description': 'job description',
-    'enabled': true,
-    'config': {
-        'a': 1,
-        'b': 2,
-        'c': {
-            '0': '1',
-            '1': '2'
+    name: 'myjob',
+    descriptor: 'appKey:task',
+    description: 'job description',
+    enabled: true,
+    config: {
+        a: 1,
+        b: 2,
+        c: {
+            0: '1',
+            1: '2'
         },
-        'd': {
-            'e': {
-                'f': 3.6,
-                'g': true
+        d: {
+            e: {
+                f: 3.6,
+                g: true
             }
         }
     },
-    'user': 'user:system:user',
-    'creator': 'user:system:creator',
-    'modifier': 'user:system:creator',
-    'createdTime': '2021-01-01T10:36:00Z',
-    'modifiedTime': '2016-01-01T10:36:00Z',
-    'schedule': {
-        'value': '* * * * 5',
-        'timeZone': 'GMT-02:00',
-        'type': 'CRON'
+    user: 'user:system:user',
+    creator: 'user:system:creator',
+    modifier: 'user:system:creator',
+    createdTime: '2021-01-01T10:36:00Z',
+    modifiedTime: '2016-01-01T10:36:00Z',
+    schedule: {
+        value: '* * * * 5',
+        timeZone: 'GMT-02:00',
+        type: 'CRON'
     }
 }
 ```
@@ -352,22 +352,22 @@ const result = modify({
 .Return value:
 ```typescript
 const resultExpected = {
-    'name': 'myjob',
-    'descriptor': 'appKey:new-task',
-    'description': 'new job description',
-    'enabled': false,
-    'config': {
-        'a1': 3
+    name: 'myjob',
+    descriptor: 'appKey:new-task',
+    description: 'new job description',
+    enabled: false,
+    config: {
+        a1: 3
     },
-    'user': 'user:system:new-user',
-    'creator': 'user:system:creator',
-    'modifier': 'user:system:modifier',
-    'createdTime': '2016-11-02T10:36:00Z',
-    'modifiedTime': '2021-02-25T10:44:33.170079900Z',
-    'schedule': {
-        'value': '* * * * *',
-        'timeZone': 'GMT+05:30',
-        'type': 'CRON'
+    user: 'user:system:new-user',
+    creator: 'user:system:creator',
+    modifier: 'user:system:modifier',
+    createdTime: '2016-11-02T10:36:00Z',
+    modifiedTime: '2021-02-25T10:44:33.170079900Z',
+    schedule: {
+        value: '* * * * *',
+        timeZone: 'GMT+05:30',
+        type: 'CRON'
     }
 }
 ```

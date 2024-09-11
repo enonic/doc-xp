@@ -81,13 +81,13 @@ const exportNodes = exportNodes({
 ```typescript
 // Information about exported nodes.
 const expected = {
-    'exportedNodes': [
+    exportedNodes: [
         '/content'
     ],
-    'exportedBinaries': [
+    exportedBinaries: [
         'binaryPath [ref]'
     ],
-    'exportErrors': [
+    exportErrors: [
         'some error'
     ]
 };
@@ -136,7 +136,7 @@ const importedNodes = importNodes({
     source: resolve('/import'),
     targetNodePath: '/content',
     xslt: 'transform.xslt',
-    xsltParams: {'k': 'v'},
+    xsltParams: {k: 'v'},
     includeNodeIds: true,
     includePermissions: true,
     nodeImported: (i) => {
@@ -159,20 +159,20 @@ const importedNodes = importNodes({
 ```typescript
 // Information about imported nodes.
 const expected = {
-    'addedNodes': [
+    addedNodes: [
         '/added'
     ],
-    'updatedNodes': [
+    updatedNodes: [
         '/updated'
     ],
-    'importedBinaries': [
+    importedBinaries: [
         'binaryPath [ref]'
     ],
-    'importErrors': [
+    importErrors: [
         {
-            'exception': 'com.enonic.xp.lib.export.ImportHandlerTest$NoStacktraceException',
-            'message': 'error',
-            'stacktrace': []
+            exception: 'com.enonic.xp.lib.export.ImportHandlerTest$NoStacktraceException',
+            message: 'error',
+            stacktrace: []
         }
     ]
 };

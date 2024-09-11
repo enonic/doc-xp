@@ -159,8 +159,8 @@ const log2 = logAuditEntry({
         'some:resource:uri'
     ],
     data: {
-        'custom': 'string',
-        'somevalue': 2.5
+        custom: 'string',
+        somevalue: 2.5
     }
 });
 ```

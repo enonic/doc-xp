@@ -195,25 +195,25 @@ log.info('Current component name = %s', result.name);
 .Return value:
 ```typescript
 const expected = {
-  "path": "/main/0",
-  "type": "layout",
-  "descriptor": "myapplication:mylayout",
-  "config": {
-    "a": "1"
+  path: "/main/0",
+  type: "layout",
+  descriptor: "myapplication:mylayout",
+  config: {
+    a: "1"
   },
-  "regions": {
-    "bottom": {
-      "components": [
+  regions: {
+    bottom: {
+      components: [
         {
-          "path": "/main/0/bottom/0",
-          "type": "part",
-          "descriptor": "myapplication:mypart",
-          "config": {
-            "a": "1"
+          path: "/main/0/bottom/0",
+          type: "part",
+          descriptor: "myapplication:mypart",
+          config: {
+            a: "1"
           }
         }
       ],
-      "name": "bottom"
+      name: "bottom"
     }
   }
 };
@@ -242,25 +242,25 @@ log.info('Current content path = %s', result._path);
 .Return value:
 ```typescript
 const expected = {
-  "_id": "123456",
-  "_name": "mycontent",
-  "_path": "/a/b/mycontent",
-  "creator": "user:system:admin",
-  "modifier": "user:system:admin",
-  "createdTime": "1970-01-01T00:00:00Z",
-  "modifiedTime": "1970-01-01T00:00:00Z",
-  "type": "base:unstructured",
-  "displayName": "My Content",
-  "hasChildren": false,
-  "language": "en",
-  "valid": false,
-  "data": {
-    "a": "1"
+  _id: "123456",
+  _name: "mycontent",
+  _path: "/a/b/mycontent",
+  creator: "user:system:admin",
+  modifier: "user:system:admin",
+  createdTime: "1970-01-01T00:00:00Z",
+  modifiedTime: "1970-01-01T00:00:00Z",
+  type: "base:unstructured",
+  displayName: "My Content",
+  hasChildren: false,
+  language: "en",
+  valid: false,
+  data: {
+    a: "1"
   },
-  "x": {},
-  "page": {},
-  "attachments": {},
-  "publish": {}
+  x: {},
+  page: {},
+  attachments: {},
+  publish: {}
 };
 ```
 
@@ -315,24 +315,24 @@ log.info('Multipart form %s', result);
 .Return value:
 ```typescript
 const expected = {
-  "item1": {
-    "name": "item1",
-    "fileName": "item1.jpg",
-    "contentType": "image/png",
-    "size": 10
+  item1: {
+    name: "item1",
+    fileName: "item1.jpg",
+    contentType: "image/png",
+    size: 10
   },
-  "item2": [
+  item2: [
     {
-      "name": "item2",
-      "fileName": "image1.png",
-      "contentType": "image/png",
-      "size": 123
+      name: "item2",
+      fileName: "image1.png",
+      contentType: "image/png",
+      size: 123
     },
     {
-      "name": "item2",
-      "fileName": "image2.jpg",
-      "contentType": "image/jpeg",
-      "size": 456
+      name: "item2",
+      fileName: "image2.jpg",
+      contentType: "image/jpeg",
+      size: 456
     }
   ]
 };
@@ -374,10 +374,10 @@ log.info('Multipart item %s', result);
 .Return value:
 ```typescript
 const expected = {
-  "name": "item1",
-  "fileName": "item1.jpg",
-  "contentType": "image/png",
-  "size": 10
+  name: "item1",
+  fileName: "item1.jpg",
+  contentType: "image/png",
+  size: 10
 };
 ```
 
@@ -467,24 +467,24 @@ log.info('Current site name = %s', result._name);
 .Return value:
 ```typescript
 const expected = {
-  "_id": "100123",
-  "_name": "my-content",
-  "_path": "/my-content",
-  "type": "base:unstructured",
-  "hasChildren": false,
-  "valid": false,
-  "data": {
-    "siteConfig": {
-      "applicationKey": "myapplication",
-      "config": {
-        "Field": 42
+  _id: "100123",
+  _name: "my-content",
+  _path: "/my-content",
+  type: "base:unstructured",
+  hasChildren: false,
+  valid: false,
+  data: {
+    siteConfig: {
+      applicationKey: "myapplication",
+      config: {
+        Field: 42
       }
     }
   },
-  "x": {},
-  "page": {},
-  "attachments": {},
-  "publish": {}
+  x: {},
+  page: {},
+  attachments: {},
+  publish: {}
 };
 ```
 
@@ -511,7 +511,7 @@ log.info('Field value for the current site config = %s', result.Field);
 .Return value:
 ```typescript
 const expected = {
-  "Field": 42
+  Field: 42
 };
 ```
 
