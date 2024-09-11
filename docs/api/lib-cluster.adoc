@@ -62,7 +62,7 @@ import {submit} from '/lib/xp/task';
 if (isMaster() {
     const taskId = submit({
         description: 'Master only task',
-        task: function () {
+        task: () => {
           longRunningTask();
         }
     });
@@ -78,9 +78,9 @@ import {listener} from '/lib/xp/event';
 listener({
     type: 'node.pushed',
     localOnly: false,
-    callback: function (event) {
+    callback: (event) => {
         if(isMaster()) {
-            log.info(JSON.stringify(event));
+            log.info('event: %s', JSON.stringify(event));
         }
     }
 });

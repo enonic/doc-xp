@@ -70,7 +70,7 @@ import {get as getJob} from '/lib/xp/scheduler';
 const job = getJob({ name: 'myjob' });
 
 if (job) {
-  log.info('Job is found: ' + JSON.stringify(job));
+  log.info('Job is found: %s', JSON.stringify(job, null, 4));
 } else {
   log.info('Job not found');
 }

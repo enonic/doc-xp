@@ -163,7 +163,7 @@ const sharedMap = gridLib.getMap('mapId');
 
 let newValue = sharedMap.modify({
   key: 'key',
-  func: function (oldValue) {
+  func: (oldValue) =>{
       return oldValue + 1;
   },
   ttlSeconds: 2 * 60 * 1000

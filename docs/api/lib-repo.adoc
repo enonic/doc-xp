@@ -86,7 +86,7 @@ const result1 = create({
     id: 'test-repo'
 });
 
-log.info('Repository created with id ' + result1.id);
+log.info('Repository created with id %s', result1.id);
 ----
 
 [source,typescript]
@@ -114,7 +114,7 @@ const result2 = create({
     rootChildOrder: "_ts DESC"
 });
 
-log.info('Repository created with id ' + result2.id);
+log.info('Repository created with id %s', result2.id);
 ----
 
 [source,typescript]
@@ -162,12 +162,12 @@ try {
         branchId: 'test-branch',
         repoId: 'my-repo'
     });
-    log.info('Branch [' + result.id + '] created');
+    log.info('Branch [%s] created', result.id);
 } catch (e) {
     if (e.code == 'branchAlreadyExists') {
         log.error('Branch [features-branch] already exist');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }
 ----
@@ -242,12 +242,12 @@ try {
         branchId: 'test-branch',
         repoId: 'my-repo'
     });
-    log.info('Branch [' + result.id + '] deleted');
+    log.info('Branch [%s] deleted', result.id);
 } catch (e) {
     if (e.code == 'branchNotFound') {
         log.error('Branch [test-branch] does not exist');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }
 ----
@@ -319,7 +319,7 @@ import {list} from '/lib/xp/repo';
 
 // Retrieves the list of repositories
 const result = list();
-log.info(result.length + ' repositories found');
+log.info('%s repositories found', result.length);
 ----
 
 [source,typescript]

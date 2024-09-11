@@ -192,7 +192,7 @@ import {processLines} from '/lib/xp/io';
 let num = 0;
 
 // Process lines from stream.
-processLines(stream, function (line) {
+processLines(stream, (line) => {
     num++;
     log.info('Line %s: %s', num, line);
 });
