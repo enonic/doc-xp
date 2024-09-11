@@ -17,9 +17,10 @@ dependencies {
 
 in your controller, add an import statement:
 
-```typescript
+[source,typescript]
+----
 import schemaLib from '/lib/xp/schema';
-```
+----
 
 You are now ready to use the library functionality.
 
@@ -61,7 +62,8 @@ Returns
 Example
 
 .Fetches a content type schema:
-```typescript
+[source,typescript]
+----
 import {getSchema} from '/lib/xp/schema';
 
 const result = getSchema({
@@ -69,10 +71,11 @@ const result = getSchema({
     type: 'CONTENT_TYPE'
 
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   name: "myapp:mytype",
   displayName: "Tag",
@@ -103,7 +106,7 @@ const expected = {
   ],
   config: {}
 };
-```
+----
 
 === listSchemas
 
@@ -141,7 +144,8 @@ Returns
 Example
 
 .Fetches application's content type schemas:
-```typescript
+[source,typescript]
+----
 import {listSchemas} from '/lib/xp/schema';
 
 const result = listSchemas({
@@ -149,10 +153,11 @@ const result = listSchemas({
     type: 'CONTENT_TYPE'
 
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     name: 'myapp:type1',
     displayName: 'My type display name',
@@ -203,7 +208,7 @@ const expected = {
     form: [],
     config: {}
 };
-```
+----
 
 === createSchema
 
@@ -242,7 +247,8 @@ Returns
 Example
 
 .Creates a content type schema:
-```typescript
+[source,typescript]
+----
 import {createSchema} from '/lib/xp/schema';
 
 const resource = `<?xml version='1.0' encoding='UTF-8'?>
@@ -263,10 +269,11 @@ const result = createSchema({
     type: 'CONTENT_TYPE',
     resource
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   name: "myapp:mytype",
   displayName: "Tag",
@@ -297,7 +304,7 @@ const expected = {
   ],
   config: {}
 };
-```
+----
 
 === updateSchema
 
@@ -336,7 +343,8 @@ Returns
 Example
 
 .Updates a mixin schema:
-```typescript
+[source,typescript]
+----
 import {updateSchema} from '/lib/xp/schema';
 
 const resource = `<?xml version='1.0' encoding='UTF-8'?>
@@ -358,9 +366,10 @@ const result = updateSchema({
     resource
 
 });
-```
+----
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     name: 'myapp:mytype',
     displayName: 'Virtual Mixin',
@@ -390,7 +399,7 @@ const expected = {
         }
     ]
 };
-```
+----
 
 === deleteSchema
 
@@ -428,7 +437,8 @@ Returns
 Example
 
 .Updates a mixin schema:
-```typescript
+[source,typescript]
+----
 import {deleteSchema} from '/lib/xp/schema';
 
 const result = deleteSchema({
@@ -441,7 +451,7 @@ if (result) {
 } else {
     log.info('X-data deletion failed: [myapp:mytype]');
 }
-```
+----
 
 === getComponent
 
@@ -479,7 +489,8 @@ Returns
 Example
 
 .Fetches a page component:
-```typescript
+[source,typescript]
+----
 import {getComponent} from '/lib/xp/schema';
 
 const result = getComponent({
@@ -487,10 +498,11 @@ const result = getComponent({
     type: 'PAGE'
 
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     key: 'myapp:mypage',
     displayName: 'News page',
@@ -519,7 +531,7 @@ const expected = {
         'region-one'
     ]
 };
-```
+----
 
 === listComponents
 
@@ -557,7 +569,8 @@ Returns
 Example
 
 .Fetches application's part components:
-```typescript
+[source,typescript]
+----
 import {listComponents} from '/lib/xp/schema';
 
 const result = listComponents({
@@ -565,10 +578,11 @@ const result = listComponents({
     type: 'PART'
 
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = [
     {
         key: 'myapp:part1',
@@ -606,7 +620,7 @@ const expected = [
         config: {}
     }
 ];
-```
+----
 
 === createComponent
 
@@ -645,7 +659,8 @@ Returns
 Example
 
 .Creates a part type component:
-```typescript
+[source,typescript]
+----
 import {createComponent} from '/lib/xp/schema';
 
 const resource = `<?xml version='1.0' encoding='UTF-8'?>
@@ -666,10 +681,11 @@ const result = createComponent({
     type: 'PART',
     resource
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     key: 'myapp:mypart',
     displayName: 'Virtual Part',
@@ -706,7 +722,7 @@ const expected = {
         }]
     }
 };
-```
+----
 
 === updateComponent
 
@@ -745,7 +761,8 @@ Returns
 Example
 
 .Updates a layout component:
-```typescript
+[source,typescript]
+----
 import {updateComponent} from '/lib/xp/schema';
 
 const resource = `<?xml version='1.0' encoding='UTF-8'?>
@@ -792,10 +809,11 @@ const result = updateComponent({
     type: 'LAYOUT',
     resource
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     key: 'myapp:mylayout',
     displayName: 'Virtual Layout',
@@ -863,7 +881,7 @@ const expected = {
         'footer'
     ]
 };
-```
+----
 
 === deleteComponent
 
@@ -901,7 +919,8 @@ Returns
 Example
 
 .Removes a layout component:
-```typescript
+[source,typescript]
+----
 import {deleteComponent} from '/lib/xp/schema';
 
 const result = deleteComponent({
@@ -914,7 +933,7 @@ if (result) {
 } else {
     log.info('Layout deletion failed: [myapp:mylayout]');
 }
-```
+----
 
 === getStyles
 
@@ -951,16 +970,18 @@ Returns
 Example
 
 .Fetch application styles:
-```typescript
+[source,typescript]
+----
 import {getStyles} from '/lib/xp/schema';
 
 const result = getStyles({
     application: 'myapp'
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
@@ -974,7 +995,7 @@ const expected = {
         }
     ]
 };
-```
+----
 
 === createStyles
 
@@ -1012,7 +1033,8 @@ Returns
 Example
 
 .Creates application styles:
-```typescript
+[source,typescript]
+----
 import {createStyles} from '/lib/xp/schema';
 
 const resource = '<?xml version="1.0" encoding="UTF-8"?>' +
@@ -1034,10 +1056,11 @@ const result = createStyles({
     application: 'myapp',
     resource
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
@@ -1061,7 +1084,7 @@ const expected = {
         }
     ]
 };
-```
+----
 
 === updateStyles
 
@@ -1099,7 +1122,8 @@ Returns
 Example
 
 .Updates application styles:
-```typescript
+[source,typescript]
+----
 import {updateStyles} from '/lib/xp/schema';
 
 const resource = '<?xml version="1.0" encoding="UTF-8"?>' +
@@ -1121,10 +1145,11 @@ const result = updateStyles({
     application: 'myapp',
     resource
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
@@ -1148,7 +1173,7 @@ const expected = {
         }
     ]
 };
-```
+----
 
 === deleteStyles
 
@@ -1185,7 +1210,8 @@ Returns
 Example
 
 .Removes an application styles:
-```typescript
+[source,typescript]
+----
 import {deleteStyles} from '/lib/xp/schema';
 
 const result = deleteStyles({
@@ -1197,7 +1223,7 @@ if (result) {
 } else {
     log.info('Styles deletion failed: [myapp]');
 }
-```
+----
 
 === getSite
 
@@ -1234,16 +1260,18 @@ Returns
 Example
 
 .Fetch application site descriptor:
-```typescript
+[source,typescript]
+----
 import {getSite} from '/lib/xp/schema';
 
 const result = getSite({
     application: 'myapp'
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     application: 'myapp',
     resource: <!-- resource string value -->,
@@ -1269,7 +1297,7 @@ const expected = {
         }
     ]
 };
-```
+----
 
 === updateSite
 
@@ -1307,7 +1335,8 @@ Returns
 Example
 
 .Updates application site descriptor:
-```typescript
+[source,typescript]
+----
 import {updateSite} from '/lib/xp/schema';
 
 const resource = `<?xml version='1.0' encoding='UTF-8'?>
@@ -1346,10 +1375,11 @@ const result = updateSite({
     application: 'myapp',
     resource
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     application: 'myapp',
     modifiedTime: '2021-09-25T10:00:00Z',
@@ -1382,7 +1412,7 @@ const expected = {
         }
     ]
 };
-```
+----
 
 == Type Definitions
 

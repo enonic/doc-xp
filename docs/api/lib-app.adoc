@@ -18,9 +18,10 @@ dependencies {
 
 in your controller, add an import statement:
 
-```typescript
+[source,typescript]
+----
 import appLib from '/lib/xp/app';
-```
+----
 
 You are now ready to use the library functionality.
 
@@ -61,7 +62,8 @@ Returns
 Example
 
 .Fetches an application:
-```typescript
+[source,typescript]
+----
 import {get as getApp} from '/lib/xp/app';
 
 const application = getApp({key: 'my-app-key'});
@@ -71,10 +73,11 @@ if (application) {
 } else {
   log.info('Application not found');
 }
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     key: 'my-app',
     displayName: 'app display name',
@@ -89,7 +92,7 @@ const expected = {
     started: true,
     system: false
 };
-```
+----
 
 === list
 
@@ -104,13 +107,15 @@ Returns
 Example
 
 .Fetching all applications:
-```typescript
+[source,typescript]
+----
 import {list} from '/lib/xp/app';
 const apps = list();
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = [
     {
         key: 'app1',
@@ -141,7 +146,7 @@ const expected = [
         system: true
     }
 ];
-```
+----
 
 === getDescriptor
 
@@ -177,13 +182,15 @@ Returns
 Example
 
 .Fetches application descriptor:
-```typescript
+[source,typescript]
+----
 import {getDescriptor} from '/lib/xp/app';
 const descriptor = getDescriptor({key: 'my-app-key'});
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
     key: 'my-app',
     description: 'my app description',
@@ -193,7 +200,7 @@ const expected = {
         modifiedTime: '2021-12-03T10:15:30Z'
     }
 };
-```
+----
 
 === createVirtualApplication
 
@@ -230,13 +237,14 @@ Returns
 Example
 
 .creates an app with `my-app-key` key:
-```typescript
+[source,typescript]
+----
 import {createVirtualApplication} from '/lib/xp/app';
 
 const app = createVirtualApplication({
     key:'my-app-key'
 });
-```
+----
 
 === deleteVirtualApplication
 
@@ -273,13 +281,14 @@ Returns
 Example
 
 .removes an app with `my-app-key` key:
-```typescript
+[source,typescript]
+----
 import {deleteVirtualApplication} from '/lib/xp/app';
 
 const result = deleteVirtualApplication({
     key:'my-app-key'
 });
-```
+----
 
 === getApplicationMode
 
@@ -322,13 +331,13 @@ NOTE: Installed but disabled bundled applications are considered missing.
 Example
 
 .fetches mode of an application with `my-app-key` key:
-```typescript
+[source,typescript]
+----
 import {getApplicationMode} from '/lib/xp/app';
 const result = getApplicationMode({
     key:'my-app-key'
 });
-```
-
+----
 
 == Type Definitions
 

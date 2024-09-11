@@ -17,9 +17,10 @@ dependencies {
 
 in your controller, add an import statement:
 
-```typescript
+[source,typescript]
+----
 import webSocketLib from '/lib/xp/websocket';
-```
+----
 
 You are now ready to use the library functionality.
 
@@ -49,11 +50,12 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {addToGroup} from '/lib/xp/websocket';
 
 addToGroup('people', session.id);
-```
+----
 
 === removeFromGroup
 
@@ -79,11 +81,12 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {removeFromGroup} from '/lib/xp/websocket';
 
 removeFromGroup('people', session.id);
-```
+----
 
 === send
 
@@ -109,11 +112,12 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {send} from '/lib/xp/websocket';
 
 send(session.id, 'You said - ' + message);
-```
+----
 
 === sendToGroup
 
@@ -139,11 +143,12 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {sendToGroup} from '/lib/xp/websocket';
 
 sendToGroup('people', 'Notice this message!');
-```
+----
 
 === getGroupSize
 
@@ -171,8 +176,9 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {getGroupSize} from '/lib/xp/websocket';
 
 getGroupSize('people');
-```
+----

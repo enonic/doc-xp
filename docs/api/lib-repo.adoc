@@ -17,9 +17,10 @@ dependencies {
 
 in your controller, add an import statement:
 
-```typescript
+[source,typescript]
+----
 import repoLib from '/lib/xp/repo';
-```
+----
 
 You are now ready to use the library functionality.
 
@@ -76,7 +77,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {create} from '/lib/xp/repo';
 
 // Creates a repository with default configuration
@@ -85,9 +87,10 @@ const result1 = create({
 });
 
 log.info('Repository created with id ' + result1.id);
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {create} from '/lib/xp/repo';
 
 // Creates a repository with specific settings
@@ -112,9 +115,10 @@ const result2 = create({
 });
 
 log.info('Repository created with id ' + result2.id);
-```
+----
 
-```typescript
+[source,typescript]
+----
 // First repository created.
 const expected1 = {
     id: "test-repo",
@@ -123,7 +127,7 @@ const expected1 = {
     ],
     settings: {}
 };
-```
+----
 
 === createBranch
 
@@ -148,7 +152,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {createBranch} from '/lib/xp/repo';
 
 // Creates a branch
@@ -165,7 +170,7 @@ try {
         log.error('Unexpected error: ' + e.message);
     }
 }
-```
+----
 
 === delete
 
@@ -190,7 +195,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {delete as deleteRepo} from '/lib/xp/repo';
 
 // Deletes a repository
@@ -201,7 +207,7 @@ if (result) {
 } else {
     log.info('Repository was not found');
 }
-```
+----
 
 === deleteBranch
 
@@ -226,7 +232,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {deleteBranch} from '/lib/xp/repo';
 
 // Deletes a branch
@@ -243,7 +250,7 @@ try {
         log.error('Unexpected error: ' + e.message);
     }
 }
-```
+----
 
 === get
 
@@ -268,7 +275,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {get as getRepo} from '/lib/xp/repo';
 
 // Retrieves a repository
@@ -279,9 +287,10 @@ if (result) {
 } else {
     log.info('Repository was not found');
 }
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Repository retrieved.
 const expected = {
     id: "test-repo",
@@ -290,7 +299,7 @@ const expected = {
     ],
     settings: {}
 };
-```
+----
 
 === list
 
@@ -304,15 +313,17 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {list} from '/lib/xp/repo';
 
 // Retrieves the list of repositories
 const result = list();
 log.info(result.length + ' repositories found');
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Repositories retrieved.
 const expected = [{
     id: "test-repo",
@@ -327,7 +338,7 @@ const expected = [{
     ],
     settings: {}
 }];
-```
+----
 
 === refresh
 
@@ -347,25 +358,28 @@ Parameters
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {refresh} from '/lib/xp/repo';
 
 // Refresh all for default repository
 refresh();
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Refresh storage for default repository
 refresh({mode: 'storage'});
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Refresh search for 'system-repo' repository
 refresh({
     mode: 'search',
     repo: 'system-repo'
 });
-```
+----
 
 == Objects
 

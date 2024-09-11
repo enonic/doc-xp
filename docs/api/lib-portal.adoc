@@ -17,9 +17,10 @@ dependencies {
 
 in your controller, add an import statement:
 
-```typescript
+[source,typescript]
+----
 import portalLib from '/lib/xp/portal';
-```
+----
 
 You are now ready to use the library functionality.
 
@@ -62,13 +63,14 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {assetUrl} from '/lib/xp/portal';
 
 const url = assetUrl({
   path: 'styles/main.css'
 });
-```
+----
 
 === attachmentUrl
 
@@ -111,14 +113,15 @@ Returns
 Example
 
 .Obtains list of active tasks:
-```typescript
+[source,typescript]
+----
 import {attachmentUrl} from '/lib/xp/portal';
 
 const url = attachmentUrl({
   id: '1234',
   download: true
 });
-```
+----
 
 === componentUrl
 
@@ -159,18 +162,20 @@ Returns
 Example
 
 .Obtains list of active tasks:
-```typescript
+[source,typescript]
+----
 import {componentUrl} from '/lib/xp/portal';
 
 const url = componentUrl({
   component: 'main/0'
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = 'ComponentUrlParams{type=server, params={}, component=main/0}'
-```
+----
 
 === getComponent
 
@@ -185,15 +190,17 @@ Returns
 Example
 
 .Obtains list of active tasks:
-```typescript
+[source,typescript]
+----
 import {getComponent} from '/lib/xp/portal';
 
 const result = getComponent();
 log.info('Current component name = %s', result.name);
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   path: "/main/0",
   type: "layout",
@@ -217,7 +224,7 @@ const expected = {
     }
   }
 };
-```
+----
 
 === getContent
 
@@ -232,15 +239,17 @@ Returns
 Example
 
 .Get content and log the result:
-```typescript
+[source,typescript]
+----
 import {getContent} from '/lib/xp/portal';
 
 const result = getContent();
 log.info('Current content path = %s', result._path);
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   _id: "123456",
   _name: "mycontent",
@@ -262,7 +271,7 @@ const expected = {
   attachments: {},
   publish: {}
 };
-```
+----
 
 === getIdProviderKey
 
@@ -277,7 +286,8 @@ Returns
 Example
 
 .Returns the current id provider:
-```typescript
+[source,typescript]
+----
 import {getIdProviderKey} from '/lib/xp/portal';
 
 const idProviderKey = getIdProviderKey();
@@ -285,12 +295,13 @@ const idProviderKey = getIdProviderKey();
 if (idProviderKey) {
     log.info('Id provider key: %s', idProviderKey);
 }
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = "myidprovider";
-```
+----
 
 === getMultipartForm
 
@@ -305,15 +316,17 @@ Returns
 Example
 
 .Get the form and log the result:
-```typescript
+[source,typescript]
+----
 import {getMultipartForm} from '/lib/xp/portal';
 
 const result = getMultipartForm();
 log.info('Multipart form %s', result);
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   item1: {
     name: "item1",
@@ -336,7 +349,7 @@ const expected = {
     }
   ]
 };
-```
+----
 
 === getMultipartItem
 
@@ -364,22 +377,24 @@ Returns
 Example
 
 .Get item and log the result:
-```typescript
+[source,typescript]
+----
 import {getMultipartItem} from '/lib/xp/portal';
 
 const result = getMultipartItem('item1');
 log.info('Multipart item %s', result);
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   name: "item1",
   fileName: "item1.jpg",
   contentType: "image/png",
   size: 10
 };
-```
+----
 
 === getMultipartStream
 
@@ -406,12 +421,13 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {getMultipartStream} from '/lib/xp/portal';
 
 const stream1 = getMultipartStream('item2');
 const stream2 = getMultipartStream('item2', 1);
-```
+----
 
 === getMultipartText
 
@@ -438,11 +454,12 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {getMultipartText} from '/lib/xp/portal';
 
 const text = getMultipartText('item1');
-```
+----
 
 === getSite
 
@@ -457,15 +474,17 @@ Returns
 Example
 
 .Get site and log the result:
-```typescript
+[source,typescript]
+----
 import {getSite} from '/lib/xp/portal';
 
 const result = getSite();
 log.info('Current site name = %s', result._name);
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   _id: "100123",
   _name: "my-content",
@@ -486,7 +505,7 @@ const expected = {
   attachments: {},
   publish: {}
 };
-```
+----
 
 === getSiteConfig
 
@@ -501,19 +520,21 @@ Returns
 Example
 
 .Get site and log the result:
-```typescript
+[source,typescript]
+----
 import {getSiteConfig} from '/lib/xp/portal';
 
 const result = getSiteConfig();
 log.info('Field value for the current site config = %s', result.Field);
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   Field: 42
 };
-```
+----
 
 === idProviderUrl
 
@@ -585,19 +606,21 @@ Returns
 Example
 
 .Obtains image encoded to base64:
-```typescript
+[source,typescript]
+----
 import {imagePlaceholder} from '/lib/xp/portal';
 
 const url = imagePlaceholder({
   width: 32,
   height: 24
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGUlEQVR42u3BAQEAAACCIP+vbkhAAQAA7wYMGAAB93LuRQAAAABJRU5ErkJggg==';
-```
+----
 
 === imageUrl
 
@@ -642,7 +665,8 @@ Returns
 Example
 
 .Obtains image url:
-```typescript
+[source,typescript]
+----
 import {imageUrl} from '/lib/xp/portal';
 
 const url = imageUrl({
@@ -650,7 +674,7 @@ const url = imageUrl({
   scale: 'block(1024,768)',
   filter: 'rounded(5);sharpen()'
 });
-```
+----
 
 === loginUrl
 
@@ -759,7 +783,8 @@ Returns
 Example
 
 .Obtains page url:
-```typescript
+[source,typescript]
+----
 import {pageUrl} from '/lib/xp/portal';
 
 const url = pageUrl({
@@ -769,7 +794,7 @@ const url = pageUrl({
     b: [1, 2]
   }
 });
-```
+----
 
 === processHtml
 [#processHtml]
@@ -813,7 +838,8 @@ Returns
 Example
 
 .Process HTML:
-```typescript
+[source,typescript]
+----
 import {processHtml} from '/lib/xp/portal';
 
 const html = processHtml({
@@ -823,7 +849,7 @@ const html = processHtml({
          '<img src="image://123"/>',
   imageWidths: [32, 480, 800]
 });
-```
+----
 
 === sanitizeHtml
 
@@ -851,18 +877,20 @@ Returns
 Example
 
 .Sanitizes unsafe HTML:
-```typescript
+[source,typescript]
+----
 import {sanitizeHtml} from '/lib/xp/portal';
 
 const unsafeHtml = '<p><a href="https://example.com/" onclick="stealCookies()">Link</a></p>' +
                  '<iframe src="javascript:alert(\'XSS\');"></iframe>';
 const sanitizedHtml = sanitizeHtml(unsafeHtml);
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = '<p><a href="https://example.com/">Link</a></p>';
-```
+----
 
 === serviceUrl
 
@@ -901,7 +929,8 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {serviceUrl} from '/lib/xp/portal';
 
 const url = serviceUrl({
@@ -911,7 +940,7 @@ const url = serviceUrl({
     b: 2
   }
 });
-```
+----
 
 === url
 
@@ -949,7 +978,8 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {url as buildUrl} from '/lib/xp/portal';
 
 const url = buildUrl({
@@ -959,4 +989,4 @@ const url = buildUrl({
     b: 2
   }
 });
-```
+----

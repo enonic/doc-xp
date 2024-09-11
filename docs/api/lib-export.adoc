@@ -62,7 +62,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {exportNodes} from '/lib/xp/export';
 
 // Export content nodes.
@@ -76,9 +77,10 @@ const exportNodes = exportNodes({
     nodeResolved: (i) => {
     }
 });
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Information about exported nodes.
 const expected = {
     exportedNodes: [
@@ -91,7 +93,7 @@ const expected = {
         'some error'
     ]
 };
-```
+----
 === importNodes
 
 Import nodes from a nodes-export.
@@ -128,7 +130,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {importNodes} from '/lib/xp/export';
 
 // Import from application resource files
@@ -144,9 +147,10 @@ const importedNodes = importNodes({
     nodeResolved: (i) => {
     }
 });
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {importNodes} from '/lib/xp/export';
 
 // Import from an export in exports directory
@@ -154,9 +158,10 @@ const importedNodes = importNodes({
     source: 'export-1',
     targetNodePath: '/content'
 });
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Information about imported nodes.
 const expected = {
     addedNodes: [
@@ -176,4 +181,4 @@ const expected = {
         }
     ]
 };
-```
+----
