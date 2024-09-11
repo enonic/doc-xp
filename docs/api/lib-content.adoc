@@ -767,10 +767,9 @@ const result = getChildren({
 
 log.info('Found ' + result.total + ' number of contents');
 
-for (let i = 0; i < result.hits.length; i++) {
-    const content = result.hits[i];
-    log.info('Content ' + content._name + ' loaded');
-}
+result.hits.forEach((content) => {
+  log.info(`Content ${content._name} loaded`);
+});
 ```
 
 ```typescript
@@ -1612,10 +1611,9 @@ const result = query({
 
 log.info('Found ' + result.total + ' number of contents');
 
-for (let i = 0; i < result.hits.length; i++) {
-    const content = result.hits[i];
-    log.info('Content ' + content._name + ' found');
-}
+result.hits.forEach((content) => {
+  log.info(`Content ${content._name} found`);
+});
 ```
 
 ```typescript
