@@ -1,4 +1,4 @@
-= Value Library
+= Value API
 :toc: right
 :imagesdir: images
 
@@ -15,10 +15,10 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var valueLib = require('/lib/xp/value');
+```typescript
+import valueLib from '/lib/xp/value';
 ```
 
 You are now ready to use the library functionality.

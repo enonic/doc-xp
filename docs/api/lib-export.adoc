@@ -18,11 +18,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const exportLib = require('/lib/xp/export');
+import exportLib from '/lib/xp/export';
 ----
 
 You are now ready to use the library functionality.
@@ -62,9 +62,11 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {exportNodes} from '/lib/xp/export';
+
 // Export content nodes.
-let exportNodes = exportLib.exportNodes({
+const exportNodes = exportNodes({
     sourceNodePath: '/content',
     exportName: 'export-1',
     includeNodeIds: true,
@@ -76,9 +78,9 @@ let exportNodes = exportLib.exportNodes({
 });
 ```
 
-```js
+```typescript
 // Information about exported nodes.
-var expected = {
+const expected = {
     'exportedNodes': [
         '/content'
     ],
@@ -126,9 +128,11 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {importNodes} from '/lib/xp/export';
+
 // Import from application resource files
-let importNodes = exportLib.importNodes({
+const importedNodes = importNodes({
     source: resolve('/import'),
     targetNodePath: '/content',
     xslt: 'transform.xslt',
@@ -142,17 +146,19 @@ let importNodes = exportLib.importNodes({
 });
 ```
 
-```js
+```typescript
+import {importNodes} from '/lib/xp/export';
+
 // Import from an export in exports directory
-let importNodes = exportLib.importNodes({
+const importedNodes = importNodes({
     source: 'export-1',
     targetNodePath: '/content'
 });
 ```
 
-```js
+```typescript
 // Information about imported nodes.
-var expected = {
+const expected = {
     'addedNodes': [
         '/added'
     ],

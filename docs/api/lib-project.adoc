@@ -1,4 +1,4 @@
-= Content Project Library
+= Content Project API
 :toc: right
 :imagesdir: ../images
 
@@ -17,11 +17,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a `require` statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const projectLib = require('/lib/xp/project');
+import projectLib from '/lib/xp/project';
 ----
 
 == Functions
@@ -55,11 +55,11 @@ Returns
 Example
 
 .Add permissions to a project with id 'my-project'
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {addPermissions} from '/lib/xp/project';
 
-var currentPermissions = projectLib.addPermissions({
+const currentPermissions = addPermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user1', 'user:mystore:user2'],
@@ -138,12 +138,12 @@ Returns
 Example
 
 .Create a Content Project with minimal properties
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {create} from '/lib/xp/project';
 
 try {
-    var project = projectLib.create({
+    const project = create({
         id: 'my-project',
         displayName: 'My Content Project',
         readAccess: {
@@ -169,11 +169,11 @@ try {
 ----
 
 .Create a Content Project with extended properties
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {create} from '/lib/xp/project';
 
-var project = projectLib.create({
+const project = create({
     id: 'my-project',
     displayName: 'My Content Project',
     description: 'Some exciting content is stored here',
@@ -275,11 +275,11 @@ Returns
 Example
 
 .Delete an existing content project
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {delete as deleteProject} from '/lib/xp/project';
 
-var result = projectLib.delete({
+const result = deleteProject({
     id: 'my-project'
 });
 ----
@@ -315,11 +315,11 @@ Returns
 Example
 
 .Fetch an existing content project
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {get as getProject} from '/lib/xp/project';
 
-var project = projectLib.get({
+const project = getProject({
     id: 'my-project'
 });
 ----
@@ -359,11 +359,11 @@ Returns
 Example
 
 .Fetch the list of existing content projects
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {list} from '/lib/xp/project';
 
-var projects = projectLib.list();
+const projects = list();
 ----
 
 .Sample response
@@ -420,11 +420,11 @@ Returns
 Example
 
 .Modify an existing content project
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {modify} from '/lib/xp/project';
 
-var project = projectLib.modify({
+const project = modify({
     id: 'my-project',
     displayName: 'New project name',
     description: 'New project description',
@@ -508,11 +508,11 @@ Returns
 Example
 
 .Set content project as not available for public READ access
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {addPermissions} from '/lib/xp/project';
 
-var currentPermissions = projectLib.addPermissions({
+const currentPermissions = addPermissions({
     id: 'my-project',
     readAccess: {
         public: false
@@ -561,11 +561,11 @@ Returns
 *Object* : All current project permissions.
 
 .Adds and then removes permissions from an existing content project
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {addPermissions,removePermissions} from '/lib/xp/project';
 
-projectLib.addPermissions({
+addPermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user1', 'user:mystore:user2'],
@@ -573,7 +573,7 @@ projectLib.addPermissions({
     }
 });
 
-var currentPermissions = projectLib.removePermissions({
+const currentPermissions = removePermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user2']
@@ -623,11 +623,11 @@ Returns
 Example
 
 .Fetch available applications.
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {getAvailableApplications} from '/lib/xp/project';
 
-var project = projectLib.getAvailableApplications({
+const project = getAvailableApplications({
     id: 'my-project'
 });
 ----

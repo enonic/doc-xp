@@ -1,4 +1,4 @@
-= Virtual Host Library
+= Virtual Host API
 :toc: right
 :imagesdir: ../images
 
@@ -17,11 +17,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a `require` statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const vhostLib = require('/lib/xp/vhost');
+import vhostLib from '/lib/xp/vhost';
 ----
 
 == Functions
@@ -38,9 +38,9 @@ Returns
 [.lead]
 Example
 
-[source,js]
+[source,typescript]
 ----
-const vhostLib = require('/lib/xp/vhost');
+import vhostLib from '/lib/xp/vhost';
 
 const isEnabled = vhostLib.isEnabled();
 ----
@@ -58,9 +58,9 @@ Returns
 [.lead]
 Example
 
-[source,js]
+[source,typescript]
 ----
-const vhostLib = require('/lib/xp/vhost');
+import vhostLib from '/lib/xp/vhost';
 
 const vhostMappings = vhostLib.list();
 

@@ -1,4 +1,4 @@
-= Node Library
+= Node API
 include::../.variables.adoc[]
 :toc: right
 :imagesdir: ../images
@@ -16,11 +16,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const nodeLib = require('/lib/xp/node');
+import nodeLib from '/lib/xp/node';
 ----
 
 You are now ready to use the library functionality.
@@ -90,15 +90,15 @@ Returns
 [.lead]
 Example
 
-.A sample function that will return a RepoConnection:
-[source,js]
+.Connect to repo 'my-repo', branch 'master'.
+[source,typescript]
 ----
-var connect = function () {
-    return nodeLib.connect({
-        repoId: testRepoId,
-        branch: 'master'
-    });
-};
+import {connect} from '/lib/xp/node';
+
+const connection = connect({
+    repoId: 'my-repo',
+    branch: 'master'
+});
 ----
 
 === multiRepoConnect
@@ -124,10 +124,12 @@ Returns
 [.lead]
 Example
 
-.Connect to repo 'myRepo', branch 'master'.
-[source,js]
+.Connect to repos 'myRepo' and 'my-other-repo', both on branch 'master'.
+[source,typescript]
 ----
-var searchConnection = nodeLib.multiRepoConnect({
+import {multiRepoConnect} from '/lib/xp/node';
+
+const searchConnection = multiRepoConnect({
     sources: [
         {
             repoId: 'my-repo',
@@ -180,9 +182,9 @@ Returns
 Example
 
 .Query multi-repo connection
-[source,js]
+[source,typescript]
 ----
-var result = multiRepoConnection.query({
+const result = multiRepoConnection.query({
     start: 0,
     count: 2,
     query: "startTime > instant('2016-10-11T14:38:54.454Z')",
@@ -215,7 +217,7 @@ var result = multiRepoConnection.query({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     total: 12902,
@@ -246,9 +248,11 @@ All the examples below are using a repo connection to execute the functions.
 The repo connection can be created like this:
 
 .Connecting to a repo.
-[source,js]
+[source,typescript]
 ----
-var repo = nodeLib.connect({
+import {connect} from '/lib/xp/node';
+
+const repo = connect({
     repoId: "com.enonic.cms.default",
     branch: "master"
 });
@@ -279,13 +283,13 @@ Returns
 Example
 
 .Committing a node.
-[source,js]
+[source,typescript]
 ----
-var result1 = repo.commit({keys: 'nodeId'});
+const result1 = repo.commit({keys: 'nodeId'});
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
@@ -296,16 +300,16 @@ var result1 = repo.commit({keys: 'nodeId'});
 ----
 
 .Committing nodes.
-[source,js]
+[source,typescript]
 ----
-var result2 = repo.commit({
+const result2 = repo.commit({
     keys: ['nodeId', 'nodeId2'],
     message: 'Commit message'
 });
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     {
@@ -358,9 +362,9 @@ Returns
 Example
 
 .Create a node on a `repo` connection:
-[source,js]
+[source,typescript]
 ----
-var result1 = repo.create({
+const result1 = repo.create({
     _name: 'nerd',
     displayName: 'Carpenter and IT expert',
     likes: 'Plywood',
@@ -369,7 +373,7 @@ var result1 = repo.create({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
   "_id": "2f0d5c09-39fe-4746-9754-74491d75a185",
@@ -446,13 +450,13 @@ Returns
 Example
 
 .Deleting nodes
-[source,js]
+[source,typescript]
 ----
-var result = repo.delete('nodeId', '/node2-path', 'missingNodeId');
+const result = repo.delete('nodeId', '/node2-path', 'missingNodeId');
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 [
     "7b175b63-b012-4f20-b31d-b8f78420d7f1",
@@ -488,17 +492,17 @@ Returns
 Example
 
 .Comparing draft and master branch
-[source,js]
+[source,typescript]
 ----
-var result = repo.diff({
-                     key: '/my-name',
-                     target: 'draft',
-                     includeChildren: true
-                 });
+const result = repo.diff({
+    key: '/my-name',
+    target: 'draft',
+    includeChildren: true
+});
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     diff: [
@@ -542,9 +546,9 @@ Returns duplicated node.
 Example
 
 .Duplicate a node
-[source,js]
+[source,typescript]
 ----
-var result = repo.duplicate({
+const result = repo.duplicate({
     nodeId: 'nodeId',
     name: 'duplicated-node',
     includeChildren: false,
@@ -581,7 +585,7 @@ Returns
 Examples
 
 .Check for existing node by path
-[source,js]
+[source,typescript]
 ----
 // Checking if a node exists by path
 const result = repo.exists('/path/to/mynode');
@@ -594,7 +598,7 @@ if (result) {
 ----
 
 .Check for existing node by id
-[source,js]
+[source,typescript]
 ----
 // Checking if a node exists by id
 const result = repo.exists('77963d9e-b3c8-4a53-85a9-20c375a92742');
@@ -637,15 +641,15 @@ Returns
 Example
 
 .Find child nodes under a given parent path
-[source,js]
+[source,typescript]
 ----
-var result = repo.findChildren({
-                     parentKey: "/my-name"
-                 });
+const result = repo.findChildren({
+    parentKey: "/my-name"
+});
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "total": 2,
@@ -689,16 +693,16 @@ Returns
 Example
 
 .Fetch all versions of a content with a given path
-[source,js]
+[source,typescript]
 ----
-var result = repo.findVersions({
+const result = repo.findVersions({
     key: '/my-name'
 });
 
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "total": 2,
@@ -757,27 +761,27 @@ Returns
 Example
 
 .Fetch a single node using id as a string.
-[source,js]
+[source,typescript]
 ----
-var node = repo.get('nodeId');
+const node = repo.get('nodeId');
 ----
 
 .Fetch several nodes using a sequence of nodeIds.
-[source,js]
+[source,typescript]
 ----
-var nodes = repo.get('nodeId_1', 'nodeId_2');
+const nodes = repo.get('nodeId_1', 'nodeId_2');
 ----
 
 .Fetch several nodes using an array of nodeIds.
-[source,js]
+[source,typescript]
 ----
-var nodes = repo.get(['nodeId_1', 'nodeId_2']);
+const nodes = repo.get(['nodeId_1', 'nodeId_2']);
 ----
 
 .Fetch several nodes using mixed parameters.
-[source,js]
+[source,typescript]
 ----
-var nodes = repo.get([{
+const nodes = repo.get([{
     key: 'nodeId',
     versionId: 'versionKey'
 }, {
@@ -834,9 +838,9 @@ Returns
 Example
 
 .Fetching the binary of a node.
-[source,js]
+[source,typescript]
 ----
-var binaryStream = repo.getBinary({
+const binaryStream = repo.getBinary({
     key: "/myNode",
     binaryReference: "myBinaryReference"
 });
@@ -879,15 +883,15 @@ Returns
 Example
 
 .Fetching a commit version of a node.
-[source,js]
+[source,typescript]
 ----
-var commit = repo.getCommit({
+const commit = repo.getCommit({
     id: "aa1f76bf-4bb9-41be-b166-03561c1555b2"
 });
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
@@ -924,9 +928,9 @@ Returns
 Example
 
 .Modifying a node.
-[source,js]
+[source,typescript]
 ----
-var result = repo.modify({
+const result = repo.modify({
     key: key,
     editor: function (node) {
         node.someData.cars.push('peugeot');
@@ -962,30 +966,30 @@ Returns
 Examples
 
 .Changing the name of a node.
-[source,js]
+[source,typescript]
 ----
-var moved = repo.move({
-                source: '/my-name',
-                target: 'new-name'
-            });
+const moved = repo.move({
+    source: '/my-name',
+    target: 'new-name'
+});
 ----
 
 .Moving a node to a new location.
-[source,js]
+[source,typescript]
 ----
-var moved = repo.move({
-                source: '/my-name',
-                target: '/new-parent/'
-            });
+const moved = repo.move({
+    source: '/my-name',
+    target: '/new-parent/'
+});
 ----
 
 .Move and rename a node in the same operation.
-[source,js]
+[source,typescript]
 ----
-var moved = repo.move({
-                source: '/my-name',
-                target: '/content/my-site/folder/new-name'
-            });
+const moved = repo.move({
+    source: '/my-name',
+    target: '/content/my-site/folder/new-name'
+});
 ----
 
 === push
@@ -1019,9 +1023,9 @@ Returns
 Examples
 
 .Pushing nodes from current branch.
-[source,js]
+[source,typescript]
 ----
-var result = repo.push({
+const result = repo.push({
     keys: ['a'],
     target: 'otherBranch',
     resolve: false
@@ -1029,7 +1033,7 @@ var result = repo.push({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "success": [
@@ -1041,9 +1045,9 @@ var result = repo.push({
 ----
 
 .Pushing content with children where not all children are allowed.
-[source,js]
+[source,typescript]
 ----
-var result = repo.push({
+const result = repo.push({
     keys: ['a'],
     target: 'otherBranch',
     resolve: true,
@@ -1052,7 +1056,7 @@ var result = repo.push({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "success": [
@@ -1071,9 +1075,9 @@ var result = repo.push({
 ----
 
 .Pushing node with children, but excluding some of them.
-[source,js]
+[source,typescript]
 ----
-var result = repo.push({
+const result = repo.push({
     keys: ['/a'],
     target: 'otherBranch',
     resolve: true,
@@ -1083,7 +1087,7 @@ var result = repo.push({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "success": [
@@ -1130,15 +1134,15 @@ Returns
 Examples
 
 .A simple query using a the fulltext function
-[source,js]
+[source,typescript]
 ----
-var result = repo.query({
-        query: "fulltext('_name', '_name')"
-    });
+const result = repo.query({
+    query: "fulltext('_name', '_name')"
+});
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "total": 4,
@@ -1166,9 +1170,9 @@ var result = repo.query({
 ----
 
 .Query content using aggregations.
-[source,js]
+[source,typescript]
 ----
-var result = repo.query({
+const result = repo.query({
     start: 0,
     count: 2,
     query: "startTime > instant('2016-10-11T14:38:54.454Z')",
@@ -1235,7 +1239,7 @@ var result = repo.query({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     "total": 12902,
@@ -1323,13 +1327,13 @@ Returns
 Examples
 
 .Refreshing the full index
-[source,js]
+[source,typescript]
 ----
 repo.refresh();
 ----
 
 .Refreshing the serach index
-[source,js]
+[source,typescript]
 ----
 repo.refresh('SEARCH');
 ----
@@ -1361,13 +1365,13 @@ Returns
 Example
 
 .Setting the previous version active
-[source,js]
+[source,typescript]
 ----
-var findVersions = repo.findVersions({
+const findVersions = repo.findVersions({
     key: node._id
 });
 
-var result = repo.setActiveVersion({
+const result = repo.setActiveVersion({
     key: node._id,
     versionId: findVersions.hits[1].versionId
 });
@@ -1400,7 +1404,7 @@ Returns
 Example
 
 .Setting the children to be ordered in reverse alphabetical order by name
-[source,js]
+[source,typescript]
 ----
 repo.setChildOrder({
     key: '/name-list',
@@ -1435,9 +1439,9 @@ Returns
 Example
 
 .Setting example permissions
-[source,js]
+[source,typescript]
 ----
-var result = repo.setRootPermissions({
+const result = repo.setRootPermissions({
     _permissions: [
         {
             "principal": "role:system.admin",

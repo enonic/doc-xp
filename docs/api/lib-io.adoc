@@ -1,4 +1,4 @@
-= IO Library
+= IO API
 :toc: right
 :imagesdir: images
 
@@ -15,10 +15,10 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var ioLib = require('/lib/xp/io');
+```typescript
+import ioLib from '/lib/xp/io';
 ```
 
 You are now ready to use the library functionality.
@@ -48,9 +48,11 @@ Returns
 [.lead]
 Example
 
-```js
+```typescript
+import {getMimeType} from '/lib/xp/io';
+
 // Returns mime-type for a file name.
-var type = ioLib.getMimeType('myfile.txt');
+const type = getMimeType('myfile.txt');
 log.info('Mime type is %s', type);
 ```
 
@@ -77,16 +79,21 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {getResource} from '/lib/xp/io';
+
 // Returns a file by name.
-var res1 = ioLib.getResource('/lib/xp/examples/io/sample.txt');
-var exists = res1.exists();
-var size = res1.getSize();
-var stream = res1.getStream();
+const res1 = getResource('/lib/xp/examples/io/sample.txt');
+const exists = res1.exists();
+const size = res1.getSize();
+const stream = res1.getStream();
 ```
-```js
+
+```typescript
+import {getResource} from '/lib/xp/io';
+
 // Returns a file by reference.
-var res2 = ioLib.getResource(resolve('./sample.txt'));
+const res2 = getResource(resolve('./sample.txt'));
 if (res2.exists()) {
     log.info('Resource exists');
 }
@@ -115,9 +122,11 @@ Returns
 [.lead]
 Example
 
-```js
+```typescript
+import {getSize} from '/lib/xp/io';
+
 // Returns the size of a stream.
-var size = ioLib.getSize(stream);
+const size = getSize(stream);
 log.info('Stream size is %s bytes', size);
 ```
 
@@ -144,9 +153,11 @@ _*_ : A new stream.
 [.lead]
 Example
 
-```js
+```typescript
+import {newStream} from '/lib/xp/io';
+
 // Creates a new stream from a string.
-var stream = ioLib.newStream('Hello World');
+const stream = newStream('Hello World');
 ```
 
 === processLines
@@ -168,11 +179,13 @@ Parameters
 [.lead]
 Example
 
-```js
-var num = 0;
+```typescript
+import {processLines} from '/lib/xp/io';
+
+let num = 0;
 
 // Process lines from stream.
-ioLib.processLines(stream, function (line) {
+processLines(stream, function (line) {
     num++;
     log.info('Line %s: %s', num, line);
 });
@@ -201,9 +214,11 @@ Returns
 [.lead]
 Example
 
-```js
+```typescript
+import {readLines} from '/lib/xp/io';
+
 // Reads lines from stream.
-var lines = ioLib.readLines(stream);
+const lines = readLines(stream);
 log.info('Num lines: %s', lines.length);
 ```
 
@@ -230,8 +245,10 @@ Returns
 [.lead]
 Example
 
-```js
+```typescript
+import {readText} from '/lib/xp/io';
+
 // Reads text from stream.
-var text = ioLib.readText(stream);
+const text = readText(stream);
 log.info('Text: %s', text);
 ```

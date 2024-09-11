@@ -1,4 +1,4 @@
-= Task library
+= Task API
 :toc: right
 :imagesdir: ../images
 
@@ -15,10 +15,10 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var taskLib = require('/lib/xp/task');
+```typescript
+import taskLib from '/lib/xp/task';
 ```
 
 You are now ready to use the library functionality.
@@ -80,8 +80,10 @@ Returns
 Example
 
 .Obtains details for an active task:
-```js
-var taskInfo = taskLib.get('7ca603c1-3b88-4009-8f30-46ddbcc4bb19');
+```typescript
+import {get as getTask} from '/lib/xp/task';
+
+const taskInfo = getTask('7ca603c1-3b88-4009-8f30-46ddbcc4bb19');
 
 if (taskInfo) {
   log.info('Current task state = %s', taskInfo.state);
@@ -89,9 +91,10 @@ if (taskInfo) {
   log.info('Task not found');
 }
 ```
+
 .Return value:
-```js
-var expected = {
+```typescript
+const expected = {
   "description": "Long running task",
   "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
   "name": "task-7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
@@ -131,10 +134,10 @@ Returns
 Example
 
 .Check if a task is currently running:
-```js
-var isRunning = taskLib.isRunning('com.enonic.myapp:clean-up-task');
+```typescript
+import {isRunning} from '/lib/xp/task';
 
-if (!isRunning) {
+if (!isRunning('com.enonic.myapp:clean-up-task')) {
   log.info('Start task...');
 } else {
   log.info('Task already running');
@@ -179,13 +182,15 @@ Returns
 Example
 
 .1. Obtains list of active tasks:
-```js
-var tasks = taskLib.list();
+```typescript
+import {list} from '/lib/xp/task';
+
+const tasks = list();
 ```
 
 .Return value:
-```js
-var expected = [
+```typescript
+const expected = [
   {
     "description": "Long running task",
     "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
@@ -232,16 +237,18 @@ var expected = [
 ```
 
 .2. Obtains list of running tasks with a given name and state:
-```js
-var tasks = taskLib.list({
+```typescript
+import {list} from '/lib/xp/task';
+
+const tasks = list({
   name: "com.enonic.myapp:clean-up",
   state: "RUNNING"
 });
 ```
 
 .Return value:
-```js
-var expected = [
+```typescript
+const expected = [
   {
     "description": "Long running task",
     "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
@@ -296,15 +303,17 @@ Returns
 Example
 
 .Execute task and keep taskId for polling status:
-```js
-var taskId = taskLib.executeFunction({
+```typescript
+import {executeFunction, progress} from '/lib/xp/task';
+
+const taskId = executeFunction({
   description: 'Background task',
   func: function () {
 
-    taskLib.progress({info: 'Initializing task'});
+    progress({info: 'Initializing task'});
 
-    for (var i = 0; i < 10; i++) {
-      taskLib.progress({
+    for (let i = 0; i < 10; i++) {
+      progress({
         info: 'Processing item ' + (i + 1),
         current: i,
         total: 10
@@ -313,7 +322,7 @@ var taskId = taskLib.executeFunction({
       processItem(i);
     }
 
-    taskLib.progress({info: 'Task completed'});
+    progress({info: 'Task completed'});
   }
 });
 ```
@@ -342,13 +351,15 @@ Returns
 Example
 
 .Execute task and keep taskId for polling status:
-```js
-var retries = 3;
-var result = fetchRemoteData();
+```typescript
+import {sleep} from '/lib/xp/task';
+
+let retries = 3;
+let result = fetchRemoteData();
 
 while (!result && retries > 0) {
   // wait half a second before retrying
-  taskLib.sleep(500);
+  sleep(500);
   retries -= 1;
   result = fetchRemoteData();
 }
@@ -392,8 +403,10 @@ Returns
 Example
 
 .Execute task function and keep taskId for polling status:
-```js
-var taskId = taskLib.executeFunction({
+```typescript
+import {executeFunction} from '/lib/xp/task';
+
+const taskId = executeFunction({
   description: 'Background function',
   func: function () {
     longRunningFunction();
@@ -443,8 +456,10 @@ Returns
 Example
 
 .Execute task, located in the current app, by name:
-```js
-var taskId = taskLib.submitTask({
+```typescript
+import {submitTask} from '/lib/xp/task';
+
+const taskId = submitTask({
   descriptor: 'job42',
   config: {
     count: 123
@@ -453,8 +468,10 @@ var taskId = taskLib.submitTask({
 ```
 
 .Execute a task located in a different app:
-```js
-var taskId = taskLib.submitTask({
+```typescript
+import {submitTask} from '/lib/xp/task';
+
+const taskId = submitTask({
   descriptor: 'com.enonic.app.myapp:work',
   config: {}
 });

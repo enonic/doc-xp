@@ -1,4 +1,4 @@
-= Scheduler library
+= Scheduler API
 :toc: right
 :imagesdir: ../images
 
@@ -17,10 +17,10 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var schedulerLib = require('/lib/xp/scheduler');
+```typescript
+import schedulerLib from '/lib/xp/scheduler';
 ```
 
 == Functions
@@ -62,8 +62,10 @@ Or null if the job could not be found.
 Example
 
 .Obtains details of a scheduled job:
-```js
-var job = schedulerLib.get({ name: 'myjob' });
+```typescript
+import {get as getJob} from '/lib/xp/scheduler';
+
+const job = getJob({ name: 'myjob' });
 
 if (job) {
   log.info('Job is found: ' + JSON.stringify(job));
@@ -73,8 +75,8 @@ if (job) {
 ```
 
 .Return value:
-```js
-var expected = {
+```typescript
+const expected = {
     'name': 'myjob',
     'descriptor': 'com.enonic.app.myapp:mytask',
     'description': 'cron job description',
@@ -117,13 +119,15 @@ Returns
 Example
 
 .Obtains list of existing jobs:
-```js
-var jobs = schedulerLib.list();
+```typescript
+import {list} from '/lib/xp/scheduler';
+
+const jobs = list();
 ```
 
 .Return value:
-```js
-var expected = [
+```typescript
+const expected = [
   {
         'name': 'job1',
         'descriptor': 'appKey:task',
@@ -209,15 +213,17 @@ Returns
 
 [.lead]
 Example
-```js
-var simpleOneTimeJob = schedulerLib.create({
+```typescript
+import {create} from '/lib/xp/scheduler';
+
+const simpleOneTimeJob = create({
     name: 'my-project',
     descriptor: 'appKey:task',
     enabled: true,
     schedule: {type: 'ONE_TIME', value: '2021-01-01T00:00:00.00Z'}
 });
 
-var extendedCronJob = schedulerLib4.create({
+const extendedCronJob = create({
     name: 'myjob',
     descriptor: 'appKey:task',
     description: 'job description',
@@ -239,8 +245,8 @@ var extendedCronJob = schedulerLib4.create({
 ```
 
 .Return value:
-```js
-var expectedSimpleOneTimeJob = {
+```typescript
+const expectedSimpleOneTimeJob = {
     'name': 'my-project',
     'descriptor': 'appKey:task',
     'enabled': true,
@@ -255,7 +261,7 @@ var expectedSimpleOneTimeJob = {
     }
 }
 
-var expectedExtendedCronJob = {
+const expectedExtendedCronJob = {
     'name': 'myjob',
     'descriptor': 'appKey:task',
     'description': 'job description',
@@ -323,8 +329,10 @@ Returns
 
 [.lead]
 Example
-```js
-var result = schedulerLib.modify({
+```typescript
+import {modify} from '/lib/xp/scheduler';
+
+const result = modify({
     name: 'myjob',
     editor: (edit) => {
         edit.descriptor = 'appKey:new-task';
@@ -342,8 +350,8 @@ var result = schedulerLib.modify({
 ```
 
 .Return value:
-```js
-var resultExpected = {
+```typescript
+const resultExpected = {
     'name': 'myjob',
     'descriptor': 'appKey:new-task',
     'description': 'new job description',
@@ -398,8 +406,10 @@ Returns
 [.lead]
 Example
 
-```js
-var result = schedulerLib.delete({
+```typescript
+import {delete as deleteJob} from '/lib/xp/scheduler';
+
+const result = deleteJob({
     name: 'myjob'
 });
 
