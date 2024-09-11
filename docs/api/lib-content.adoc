@@ -126,14 +126,14 @@ const result1 = archive({
     content: '/path/to/mycontent',
 });
 
-log.info('Archived content ids: ' + result1.join(''));
+log.info('Archived content ids: %s', result1.join(','));
 
 // Archive content by id.
 const result2 = archive({
     content: 'my-content-id'
 });
 
-log.info('Archived content ids: ' + result2.join(','));
+log.info('Archived content ids: %s', result2.join(','));
 ----
 
 === create
@@ -207,7 +207,7 @@ const result1 = create({
     publish: {}
 });
 
-log.info('Content created with id ' + result1._id);
+log.info('Content created with id %s', result1._id);
 ----
 
 [source,typescript]
@@ -224,13 +224,13 @@ try {
         data: {}
     });
 
-    log.info('Content created with id ' + result2._id);
+    log.info('Content created with id %s', result2._id);
 
 } catch (e) {
     if (e.code == 'contentAlreadyExists') {
         log.error('There is already a content with that name');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }
 ----
@@ -622,7 +622,7 @@ const result = getContentByKey({
 });
 
 if (result) {
-    log.info('Display Name = ' + result.displayName);
+    log.info('Display Name = %s', result.displayName);
 } else {
     log.info('Content was not found');
 }
@@ -785,10 +785,10 @@ const result = getChildren({
     sort: '_modifiedTime ASC'
 });
 
-log.info('Found ' + result.total + ' number of contents');
+log.info('Found %s number of contents', result.total);
 
 result.hits.forEach((content) => {
-  log.info(`Content ${content._name} loaded`);
+  log.info('Content %s loaded', content._name);
 });
 ----
 
@@ -879,7 +879,7 @@ const result = getOutboundDependencies({
 });
 
 if (result) {
-    log.info('Outbound dependencies: ' + result);
+    log.info('Outbound dependencies: %s', JSON.stringify(result, null, 4));
 } else {
     log.info('Outbound dependencies were not found');
 }
@@ -920,7 +920,7 @@ const result = getPermissions({
 });
 
 if (result) {
-    log.info('Content inherits permissions: ' + result.inheritPermissions);
+    log.info('Content inherits permissions: %s', result.inheritPermissions);
 } else {
     log.info('Content not found');
 }
@@ -1220,10 +1220,10 @@ import {getTypes} from '/lib/xp/content';
 // Gets the list of all content types in the system
 const contentTypes = getTypes();
 
-log.info(contentTypes.length + ' content types found:');
-contentTypes.forEach(function (ct) {
-    if (ct.superType === 'base:structured') {
-        log.info(ct.name + ' - ' + ct.displayName);
+log.info('%s content types found:', contentTypes.length);
+contentTypes.forEach(({displayName,name,superType}) => {
+    if (superType === 'base:structured') {
+        log.info('%s - %s', name, displayName);
     }
 });
 ----
@@ -1279,7 +1279,7 @@ const result = modify({
 });
 
 if (result) {
-    log.info('Content modified. New title is ' + result.displayName);
+    log.info('Content modified. New title is %s', result.displayName);
 } else {
     log.info('Content not found');
 }
@@ -1369,7 +1369,7 @@ const content1 = move({
     target: 'new-name'
 });
 
-log.info('New path: ' + content1._path); // '/my-site/new-name'
+log.info('New path: %s', content1._path); // '/my-site/new-name'
 ----
 
 [source,typescript]
@@ -1382,7 +1382,7 @@ const content2 = move({
     target: '/my-site/folder/'
 });
 
-log.info('New path: ' + content2._path); // '/my-site/folder/my-content-name'
+log.info('New path: %s', content2._path); // '/my-site/folder/my-content-name'
 ----
 
 [source,typescript]
@@ -1395,7 +1395,7 @@ const content3 = move({
     target: '/my-site/folder/'
 });
 
-log.info('New path: ' + content3._path); // '/my-site/folder/my-content-name'
+log.info('New path: %s', content3._path); // '/my-site/folder/my-content-name'
 ----
 
 [source,typescript]
@@ -1408,7 +1408,7 @@ const content4 = move({
     target: '/my-site/folder/new-name'
 });
 
-log.info('New path: ' + content4._path); // '/my-site/folder/new-name'
+log.info('New path: %s', content4._path); // '/my-site/folder/new-name'
 ----
 
 [source,typescript]
@@ -1426,7 +1426,7 @@ try {
     if (e.code == 'contentAlreadyExists') {
         log.error('There is already a content in the target specified');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }
 ----
@@ -1490,9 +1490,9 @@ const result = publish({
 });
 
 if (result) {
-    log.info('Pushed ' + result.pushedContents.length + " content.");
-    log.info('Deleted ' + result.deletedContents.length + " content.");
-    log.info('Content that failed operation: ' + result.failedContents.length);
+    log.info('Pushed %s content.', result.pushedContents.length);
+    log.info('Deleted %s content.1, result.deletedContents.length);
+    log.info('Content that failed operation: %s', result.failedContents.length);
 } else {
     log.info('Operation failed.');
 }
@@ -1651,10 +1651,10 @@ const result = query({
     }
 });
 
-log.info('Found ' + result.total + ' number of contents');
+log.info('Found %s number of contents', result.total);
 
 result.hits.forEach((content) => {
-  log.info(`Content ${content._name} found`);
+  log.info('Content %s found', content._name);
 });
 ----
 
@@ -1899,14 +1899,14 @@ const result1 = restore({
     content: '/path/to/mycontent',
 });
 
-log.info('Restored content ids: ' + result1.join(','));
+log.info('Restored content ids: %s', result1.join(','));
 
 // Restore content by id.
 const result2 = restore({
     content: 'my-content-id'
 });
 
-log.info('Restored content ids: ' + result2.join(','));
+log.info('Restored content ids: %s', result2.join(','));
 
 // Restore content by id to custom path.
 const result3 = restore({
@@ -1914,7 +1914,7 @@ const result3 = restore({
     path: '/custom-parent'
 });
 
-log.info('Restored content ids: ' + result3.join(','));
+log.info('Restored content ids: %s', result3.join(','));
 ----
 
 === setPermissions
@@ -2015,7 +2015,7 @@ const result = unpublish({
     keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd']
 });
 
-log.info('Unpublished content ids: ' + result.join(','));
+log.info('Unpublished content ids: %s', result.join(','));
 ----
 
 [source,typescript]

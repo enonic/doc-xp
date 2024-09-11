@@ -24,8 +24,8 @@ import eventLib from '/lib/xp/event';
 
 You are now ready to use the library functionality.
 
-====
 [NOTE]
+====
 Several standard XP APIs already produce and publish events.
 For more details, check out the <<lib-node#events, node API>>, <<lib-repo#events, repository API>>, and <<lib-task#events, task API>>
 ====
@@ -65,8 +65,8 @@ Example
 eventLib.listener({
     type: 'node.*',
     localOnly: false,
-    callback: function (event) {
-        log.info(JSON.stringify(event));
+    callback: (event) => {
+        log.info('event: %s', JSON.stringify(event));
     }
 });
 ----
