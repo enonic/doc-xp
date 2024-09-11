@@ -246,17 +246,17 @@ Example
 import {createSchema} from '/lib/xp/schema';
 
 const resource = `<?xml version='1.0' encoding='UTF-8'?>
-                <content-type xmlns='urn:enonic:xp:model:1.0'>
-               <display-name>Tag</display-name>
-               <super-type>base:structured</super-type>
-               <form>
-                 <input name="tag" type="Tag">
-                   <label>Tag, unlimited occurrences</label>
-                   <occurrences minimum="0"
-                    maximum="0"/>
-                 </input>
-               </form>
-              </content-type>`;
+<content-type xmlns='urn:enonic:xp:model:1.0'>
+    <display-name>Tag</display-name>
+    <super-type>base:structured</super-type>
+    <form>
+        <input name="tag" type="Tag">
+        <label>Tag, unlimited occurrences</label>
+        <occurrences minimum="0"
+        maximum="0"/>
+        </input>
+    </form>
+</content-type>`;
 
 const result = createSchema({
     name: 'myapp:mytype',
