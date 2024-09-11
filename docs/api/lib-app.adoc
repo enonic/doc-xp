@@ -1,4 +1,4 @@
-= Application library
+= Application API
 :toc: right
 :imagesdir: ../images
 
@@ -16,10 +16,10 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var appLib = require('/lib/xp/app');
+```typescript
+import appLib from '/lib/xp/app';
 ```
 
 You are now ready to use the library functionality.
@@ -61,8 +61,10 @@ Returns
 Example
 
 .Fetches an application:
-```js
-var application = appLib.get({key: 'my-app-key'});
+```typescript
+import {get as getApp} from '/lib/xp/app';
+
+const application = getApp({key: 'my-app-key'});
 
 if (application) {
   log.info('Application name = %s', application.displayName);
@@ -70,9 +72,10 @@ if (application) {
   log.info('Application not found');
 }
 ```
+
 .Return value:
-```js
-var expected = {
+```typescript
+const expected = {
     'key': 'my-app',
     'displayName': 'app display name',
     'vendorName': 'vendor name',
@@ -101,12 +104,14 @@ Returns
 Example
 
 .Fetching all applications:
-```js
-var apps = appLib.list();
+```typescript
+import {list} from '/lib/xp/app';
+const apps = list();
 ```
+
 .Return value:
-```js
-var expected = [
+```typescript
+const expected = [
     {
         'key': 'app1',
         'displayName': 'app display name',
@@ -172,13 +177,14 @@ Returns
 Example
 
 .Fetches application descriptor:
-```js
-var descriptor = appLib.getDescriptor({key: 'my-app-key'});
+```typescript
+import {getDescriptor} from '/lib/xp/app';
+const descriptor = getDescriptor({key: 'my-app-key'});
 ```
 
 .Return value:
-```js
-var expected = {
+```typescript
+const expected = {
     'key': 'my-app',
     'description': 'my app description',
     'icon': {
@@ -224,8 +230,10 @@ Returns
 Example
 
 .creates an app with `my-app-key` key:
-```js
-var app = appLib.createVirtualApplication({
+```typescript
+import {createVirtualApplication} from '/lib/xp/app';
+
+const app = createVirtualApplication({
     'key':'my-app-key'
 });
 ```
@@ -265,8 +273,10 @@ Returns
 Example
 
 .removes an app with `my-app-key` key:
-```js
-var result = appLib.deleteVirtualApplication({
+```typescript
+import {deleteVirtualApplication} from '/lib/xp/app';
+
+const result = deleteVirtualApplication({
     'key':'my-app-key'
 });
 ```
@@ -312,8 +322,9 @@ NOTE: Installed but disabled bundled applications are considered missing.
 Example
 
 .fetches mode of an application with `my-app-key` key:
-```js
-var result = appLib.getApplicationMode({
+```typescript
+import {getApplicationMode} from '/lib/xp/app';
+const result = getApplicationMode({
     'key':'my-app-key'
 });
 ```

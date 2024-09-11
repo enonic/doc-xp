@@ -1,4 +1,4 @@
-= Authentication Library
+= Authentication API
 :toc: right
 :imagesdir: ../images
 
@@ -19,11 +19,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const authLib = require('/lib/xp/auth');
+import authLib from '/lib/xp/auth';
 ----
 
 You are now ready to use the library functionality.
@@ -105,9 +105,11 @@ Returns
 Example
 
 .Creating a group named "group-a"
-[source,js]
+[source,typescript]
 ----
-var group = authLib.createGroup({
+import {createGroup} from '/lib/xp/auth';
+
+const group = createGroup({
     idProvider: 'myIdProvider',
     name: 'group-a',
     displayName: 'Group A',
@@ -116,7 +118,7 @@ var group = authLib.createGroup({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "group",
@@ -154,9 +156,11 @@ Returns
 Example
 
 .Creating a role named "aRole"
-[source,js]
+[source,typescript]
 ----
-var role = authLib.createRole({
+import {createRole} from '/lib/xp/auth';
+
+const role = createRole({
     name: 'aRole',
     displayName: 'Role Display Name',
     description: 'description'
@@ -164,7 +168,7 @@ var role = authLib.createRole({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "role",
@@ -203,9 +207,11 @@ Returns
 Example
 
 .Creating a user named "userName"
-[source,js]
+[source,typescript]
 ----
-var user = authLib.createUser({
+import {createUser} from '/lib/xp/auth';
+
+const user = createUser({
     idProvider: 'myIdProvider',
     name: 'user1',
     displayName: 'The One And Only',
@@ -214,7 +220,7 @@ var user = authLib.createUser({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "user",
@@ -251,9 +257,11 @@ Returns
 Example
 
 .Deleting a user
-[source,js]
+[source,typescript]
 ----
-var deleted = authLib.deletePrincipal('user:myIdProvider:userId');
+import {deletePrincipal} from '/lib/xp/auth';
+
+const deleted = deletePrincipal('user:myIdProvider:userId');
 ----
 
 === findPrincipals
@@ -284,9 +292,11 @@ Returns
 Example
 
 .Searching for principals for 'user1'
-[source,js]
+[source,typescript]
 ----
-var result = authLib.findPrincipals({
+import {findPrincipals} from '/lib/xp/auth';
+
+const result = findPrincipals({
     idProvider: "user-store",
     start: 0,
     count: 10,
@@ -295,7 +305,7 @@ var result = authLib.findPrincipals({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "user",
@@ -336,16 +346,18 @@ Returns
 Example
 
 .Searching for the first person in the `Juve` family.
-[source,js]
+[source,typescript]
 ----
-var findUsersResult = auth.findUsers({
+import {findUsers} from '/lib/xp/auth';
+
+const findUsersResult = findUsers({
     count: 1,
     query: "displayName LIKE '*Juve'"
 });
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     total: 2,
@@ -367,9 +379,11 @@ var findUsersResult = auth.findUsers({
 NOTE: If you want to find a user by key, you have to use `_id` field in the `query` parameter.
 
 .Find a user by key.
-[source,js]
+[source,typescript]
 ----
-var findUsersResult = auth.findUsers({
+import {findUsers} from '/lib/xp/auth';
+
+const findUsersResult = findUsers({
     count: 1,
     query: "_id = 'user:system:jorgen-juve'"
 });
@@ -394,9 +408,11 @@ Returns
 Example
 
 .Generate a password and return the password string
-[source,js]
+[source,typescript]
 ----
-var pwd = authLib.generatePassword();
+import {generatePassword} from '/lib/xp/auth';
+
+const pwd = generatePassword();
 ----
 
 === getIdProviderConfig
@@ -437,13 +453,15 @@ Returns
 Example
 
 .Searching for members of the Content Manager group
-[source,js]
+[source,typescript]
 ----
-var result = authLib.getMembers('group:system:content-managers');
+import {getMembers} from '/lib/xp/auth';
+
+const result = getMembers('group:system:content-managers');
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 [{type:"user",key:"user:system:user1",displayName:"User 1",disabled:false,email:"user1@enonic.com",login:"user1",idProvider:"system"},
  {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system"
@@ -475,13 +493,15 @@ Returns
 Example
 
 .Searching for direct memberships of 'user1'
-[source,js]
+[source,typescript]
 ----
-var result = authLib.getMemberships('user:system:user1');
+import {getMemberships} from '/lib/xp/auth';
+
+const result = getMemberships('user:system:user1');
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 [{
     "type": "role",
@@ -491,13 +511,15 @@ var result = authLib.getMemberships('user:system:user1');
 ----
 
 .Searching for transitive memberships of 'user1'
-[source,js]
+[source,typescript]
 ----
-var result = authLib.getMemberships('user:system:user1', true);
+import {getMemberships} from '/lib/xp/auth';
+
+const result = getMemberships('user:system:user1', true);
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 [
     "role:system.admin.login",
@@ -528,13 +550,15 @@ Returns
 *object* : The principal as an object
 
 .Retrieving the full principal for 'user1'
-[source,js]
+[source,typescript]
 ----
-var result = authLib.getPrincipal('user:system:user1');
+import {getPrincipal} from '/lib/xp/auth';
+
+const result = getPrincipal('user:system:user1');
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "user",
@@ -574,13 +598,15 @@ Returns
 Example
 
 .Retrieving the profile of 'user1'
-[source,js]
+[source,typescript]
 ----
-var result = authLib.getProfile('user:system:user1');
+import {getProfile} from '/lib/xp/auth';
+
+const result = getProfile('user:system:user1');
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     nickName: "User Nick"
@@ -606,13 +632,15 @@ Returns
 Example
 
 .Retrieving the profile of 'user1'
-[source,js]
+[source,typescript]
 ----
-var result = authLib.getUser();
+import {getUser} from '/lib/xp/auth';
+
+const result = getUser();
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "user",
@@ -649,9 +677,11 @@ Returns
 Example
 
 .Checking a role
-[source,js]
+[source,typescript]
 ----
-var hasRole = auth.hasRole('system.admin');
+import {hasRole} from '/lib/xp/auth';
+
+const hasRole = hasRole('system.admin');
 ----
 
 === login
@@ -685,17 +715,19 @@ Returns
 Example
 
 .Logging in a user
-[source,js]
+[source,typescript]
 ----
-    var loginResult = authLib.login({
-        user: 'user1',
-        password: 'myPwd1',
-        idProvider: 'myIdProvider'
-    });
+import {login} from '/lib/xp/auth';
+
+const loginResult = login({
+    user: 'user1',
+    password: 'myPwd1',
+    idProvider: 'myIdProvider'
+});
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     authenticated:true,
@@ -752,8 +784,10 @@ Returns
 Example
 
 .Changing a group
-[source,js]
+[source,typescript]
 ----
+import {modifyGroup} from '/lib/xp/auth';
+
 // Callback to edit the group.
 function groupEditor(c) {
     c.displayName = 'Modified display name';
@@ -762,14 +796,14 @@ function groupEditor(c) {
 }
 
 // Modify group with specified key.
-var group = authLib.modifyGroup({
+const group = modifyGroup({
     key: 'group:system:group-a',
     editor: groupEditor
 });
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "group",
@@ -804,8 +838,10 @@ Returns
 *object* : The updated profile
 
 .Changing a profile
-[source,js]
+[source,typescript]
 ----
+import {modifyProfile} from '/lib/xp/auth';
+
 // Callback to edit the profile.
 function profileEditor(c) {
     if (!c) {
@@ -816,14 +852,14 @@ function profileEditor(c) {
 }
 
 // Modify profile with specified key.
-var profileModified = authLib.modifyProfile({
+const profileModified = modifyProfile({
     key: 'user:system:user1',
     editor: profileEditor
 });
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     nickName: "User Nick"
@@ -854,8 +890,10 @@ Returns
 *object* : The updated role
 
 .Changing a role
-[source,js]
+[source,typescript]
 ----
+import {modifyRole} from '/lib/xp/auth';
+
 // Callback to edit the profile.
 function roleEditor(c) {
     c.displayName = 'Nothing Role';
@@ -864,14 +902,14 @@ function roleEditor(c) {
 }
 
 // Modify role with specified key.
-var theRole = authLib.modifyRole({
+const theRole = modifyRole({
     key: 'role:aRole',
     editor: roleEditor
 });
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "role",
@@ -905,8 +943,10 @@ Returns
 *object* : The updated user
 
 .Changing a user
-[source,js]
+[source,typescript]
 ----
+import {modifyUser} from '/lib/xp/auth';
+
 // Callback to edit the profile.
 function userEditor(c) {
     c.displayName = 'User 1-A';
@@ -915,14 +955,14 @@ function userEditor(c) {
 }
 
 // Modify user with specified key.
-var theUser = authLib.modifyUser({
+const theUser = modifyUser({
     key: 'user:system:user1',
     editor: userEditor
 });
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
     type: "user",
@@ -957,7 +997,7 @@ Returns
 *void*
 
 .Remove members from specified principal.
-[source,js]
+[source,typescript]
 ----
 authLib.removeMembers('role:roleId', ['user:system:user1', 'group:system:group-a']);
 ----

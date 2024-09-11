@@ -1,4 +1,4 @@
-= Context Library
+= Context API
 :toc: right
 :imagesdir: ../images
 
@@ -15,11 +15,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const contextLib = require('/lib/xp/context');
+import contextLib from '/lib/xp/context';
 ----
 
 You are now ready to use the library functionality.
@@ -45,13 +45,13 @@ Returns
 Example
 
 .Getting the current context
-[source,js]
+[source,typescript]
 ----
 const context = contextLib.get();
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
   branch: "draft",
@@ -109,7 +109,7 @@ Returns
 Example
 
 .Run a simple function in a different context
-[source,js]
+[source,typescript]
 ----
 // Define the callback to be executed.
 function callback() {
@@ -121,7 +121,7 @@ const result = contextLib.run(context, callback);
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 "Hello from context"
 ----
@@ -133,7 +133,7 @@ const result = contextLib.run(context, callback);
 The context object is always available within the scope of a request
 
 .Sample context object
-[source,js]
+[source,typescript]
 ----
 {
   repository: "some.repo.name", <1>
@@ -162,7 +162,7 @@ The context object is always available within the scope of a request
 The context object is always available within the scope of a request
 
 .Sample context object
-[source,js]
+[source,typescript]
 ----
 {
   repository: "some.repo.name", <1>

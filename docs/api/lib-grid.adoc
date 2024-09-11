@@ -1,4 +1,4 @@
-= Grid Library
+= Grid API
 
 :toc: right
 :imagesdir: ../images
@@ -18,11 +18,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a `require` statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const gridLib = require('/lib/xp/grid');
+import gridLib from '/lib/xp/grid';
 ----
 
 You are now ready to use the library functionality.
@@ -50,11 +50,11 @@ Returns
 *SharedMap* :
 JS object.
 
-[source,js]
+[source,typescript]
 ----
-const gridLib = require('/lib/xp/grid');
+import {getMap} from '/lib/xp/grid';
 
-var sharedMap = gridLib.getMap('mapId');
+const sharedMap = getMap('mapId');
 ----
 
 == SharedMap API
@@ -76,9 +76,9 @@ Parameters
 | ttlSeconds | number    | Maximum time (in seconds) for this entry to remain in the map. 0 means infinite, a negative value means default TTL setting of the map provider (for instance, Hazelcast) or infinite if map provider doesn't have own TTL setting.
 |===
 
-[source,js]
+[source,typescript]
 ----
-const gridLib = require('/lib/xp/grid');
+import gridLib from '/lib/xp/grid';
 
 const sharedMap = gridLib.getMap('mapId');
 
@@ -105,9 +105,9 @@ Parameters
 | key  | string | The key for a value to be returned
 |===
 
-[source,js]
+[source,typescript]
 ----
-const gridLib = require('/lib/xp/grid');
+import gridLib from '/lib/xp/grid';
 
 const sharedMap = gridLib.getMap('mapId');
 
@@ -129,9 +129,9 @@ Parameters
 | key  | string | The key for a value to be removed
 |===
 
-[source,js]
+[source,typescript]
 ----
-const gridLib = require('/lib/xp/grid');
+import gridLib from '/lib/xp/grid';
 
 const sharedMap = gridLib.getMap('mapId');
 
@@ -155,9 +155,9 @@ Parameters
 | ttlSeconds | number    | Maximum time (in seconds) for this entry to remain in the map. 0 means infinite, a negative value means default TTL setting of the map provider (for instance, Hazelcast) or infinite if map provider doesn't have own TTL setting.
 |===
 
-[source,js]
+[source,typescript]
 ----
-const gridLib = require('/lib/xp/grid');
+import gridLib from '/lib/xp/grid';
 
 const sharedMap = gridLib.getMap('mapId');
 

@@ -1,4 +1,4 @@
-= Auditlog Library
+= Auditlog API
 
 :toc: right
 :imagesdir: ../images
@@ -18,11 +18,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const auditlogLib = require('/lib/xp/auditlog');
+import auditlogLib from '/lib/xp/auditlog';
 ----
 
 You are now ready to use the library functionality.
@@ -65,9 +65,11 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {find} from '/lib/xp/auditlog';
+
 // Find first audit log by ids
-var result = auditlogLib.find({
+const result = find({
     start: 0,
     count: 1,
     ids: [
@@ -100,9 +102,11 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {get as getAuditEntry} from '/lib/xp/auditlog';
+
 // Gets an audit log by id.
-var log = auditlogLib.get({
+const log = getAuditEntry({
     id: '90b976f7-55ab-48ef-acb8-e7c6f0744442'
 });
 ```
@@ -135,16 +139,18 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {log as logAuditEntry} from '/lib/xp/auditlog';
+
 // Creates an audit log.
-var log1 = auditlogLib.log({
+const log1 = logAuditEntry({
     type: 'testlog'
 });
 ```
 
-```js
+```typescript
 // Creates an audit log with more custom parameters.
-var log2 = auditlogLib.log({
+const log2 = logAuditEntry({
     type: 'testlog',
     time: '2019-08-12T08:44:02.767Z',
     source: 'unittests',

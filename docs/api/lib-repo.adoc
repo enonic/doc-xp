@@ -1,4 +1,4 @@
-= Repo Library
+= Repo API
 :toc: right
 :imagesdir: images
 
@@ -15,10 +15,10 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var repoLib  = require('/lib/xp/repo');
+```typescript
+import repoLib from '/lib/xp/repo';
 ```
 
 You are now ready to use the library functionality.
@@ -76,17 +76,22 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {create} from '/lib/xp/repo';
+
 // Creates a repository with default configuration
-var result1 = repoLib.create({
+const result1 = create({
     id: 'test-repo'
 });
 
 log.info('Repository created with id ' + result1.id);
 ```
-```js
+
+```typescript
+import {create} from '/lib/xp/repo';
+
 // Creates a repository with specific settings
-var result2 = repoLib.create({
+const result2 = create({
     id: 'test-repo2',
     rootPermissions: [
         {
@@ -108,9 +113,10 @@ var result2 = repoLib.create({
 
 log.info('Repository created with id ' + result2.id);
 ```
-```js
+
+```typescript
 // First repository created.
-var expected1 = {
+const expected1 = {
     "id": "test-repo",
     "branches": [
         "master"
@@ -142,10 +148,12 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {createBranch} from '/lib/xp/repo';
+
 // Creates a branch
 try {
-    var result = repoLib.createBranch({
+    const result = createBranch({
         branchId: 'test-branch',
         repoId: 'my-repo'
     });
@@ -182,9 +190,11 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {delete as deleteRepo} from '/lib/xp/repo';
+
 // Deletes a repository
-var result = repoLib.delete('test-repo');
+const result = deleteRepo('test-repo');
 
 if (result) {
     log.info('Repository deleted');
@@ -216,10 +226,12 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {deleteBranch} from '/lib/xp/repo';
+
 // Deletes a branch
 try {
-    var result = repoLib.deleteBranch({
+    const result = deleteBranch({
         branchId: 'test-branch',
         repoId: 'my-repo'
     });
@@ -256,9 +268,11 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {get as getRepo} from '/lib/xp/repo';
+
 // Retrieves a repository
-var result = repoLib.get('test-repo');
+const result = getRepo('test-repo');
 
 if (result) {
     log.info('Repository found');
@@ -266,9 +280,10 @@ if (result) {
     log.info('Repository was not found');
 }
 ```
-```js
+
+```typescript
 // Repository retrieved.
-var expected = {
+const expected = {
     "id": "test-repo",
     "branches": [
         "master"
@@ -289,14 +304,17 @@ Returns
 [.lead]
 Examples
 
-```js
+```typescript
+import {list} from '/lib/xp/repo';
+
 // Retrieves the list of repositories
-var result = repoLib.list();
+const result = list();
 log.info(result.length + ' repositories found');
 ```
-```js
+
+```typescript
 // Repositories retrieved.
-var expected = [{
+const expected = [{
     "id": "test-repo",
     "branches": [
         "master"
@@ -310,6 +328,7 @@ var expected = [{
     settings: {}
 }];
 ```
+
 === refresh
 
 Refresh the data for the given index-type in the current repository
@@ -328,17 +347,21 @@ Parameters
 [.lead]
 Examples
 
-```js
+```typescript
+import {refresh} from '/lib/xp/repo';
+
 // Refresh all for default repository
-repoLib.refresh();
+refresh();
 ```
-```js
+
+```typescript
 // Refresh storage for default repository
-repoLib.refresh({mode: 'storage'});
+refresh({mode: 'storage'});
 ```
-```js
+
+```typescript
 // Refresh search for 'system-repo' repository
-repoLib.refresh({
+refresh({
     mode: 'search',
     repo: 'system-repo'
 });

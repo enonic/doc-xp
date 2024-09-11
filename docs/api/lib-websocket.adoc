@@ -1,4 +1,4 @@
-= Websocket Library
+= Websocket API
 :toc: right
 :imagesdir: ../images
 
@@ -15,10 +15,10 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var webSocketLib = require('/lib/xp/websocket');
+```typescript
+import webSocketLib from '/lib/xp/websocket';
 ```
 
 You are now ready to use the library functionality.
@@ -49,8 +49,10 @@ Returns
 [.lead]
 Example
 
-```js
-webSocketLib.addToGroup('people', session.id);
+```typescript
+import {addToGroup} from '/lib/xp/websocket';
+
+addToGroup('people', session.id);
 ```
 
 === removeFromGroup
@@ -77,8 +79,10 @@ Returns
 [.lead]
 Example
 
-```js
-webSocketLib.removeFromGroup('people', session.id);
+```typescript
+import {removeFromGroup} from '/lib/xp/websocket';
+
+removeFromGroup('people', session.id);
 ```
 
 === send
@@ -105,8 +109,10 @@ Returns
 [.lead]
 Example
 
-```js
-webSocketLib.send(session.id, 'You said - ' + message);
+```typescript
+import {send} from '/lib/xp/websocket';
+
+send(session.id, 'You said - ' + message);
 ```
 
 === sendToGroup
@@ -133,8 +139,10 @@ Returns
 [.lead]
 Example
 
-```js
-webSocketLib.sendToGroup('people', 'Notice this message!');
+```typescript
+import {sendToGroup} from '/lib/xp/websocket';
+
+sendToGroup('people', 'Notice this message!');
 ```
 
 === getGroupSize
@@ -163,6 +171,8 @@ Returns
 [.lead]
 Example
 
-```js
-webSocketLib.getGroupSize('people');
+```typescript
+import {getGroupSize} from '/lib/xp/websocket';
+
+getGroupSize('people');
 ```

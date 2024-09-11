@@ -1,4 +1,4 @@
-= Cluster Library
+= Cluster API
 :toc: right
 :imagesdir: images
 
@@ -15,11 +15,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const clusterLib = require('/lib/xp/cluster');
+import clusterLib from '/lib/xp/cluster';
 ----
 
 You are now ready to use the library functionality.
@@ -45,20 +45,22 @@ Returns
 Examples
 
 .Initialize data only on the master node
-[source,js]
+[source,typescript]
 ----
-if (clusterLib.isMaster()) {
+import {isMaster} from '/lib/xp/cluster';
+if (isMaster()) {
     initializeRepo();
 }
 ----
 
 .Run task only on master
-[source,js]
+[source,typescript]
 ----
-let tasklib = require('/lib/xp/task');
+import {isMaster} from '/lib/xp/cluster';
+import {submit} from '/lib/xp/task';
 
-if (clusterLib.isMaster() {
-    let taskId = taskLib.submit({
+if (isMaster() {
+    const taskId = submit({
         description: 'Master only task',
         task: function () {
           longRunningTask();
@@ -68,15 +70,16 @@ if (clusterLib.isMaster() {
 ----
 
 .Catch event and execute something only on master
-[source,js]
+[source,typescript]
 ----
-let eventLib = require('/lib/xp/event');
+import {isMaster} from '/lib/xp/cluster';
+import {listener} from '/lib/xp/event';
 
-eventLib.listener({
+listener({
     type: 'node.pushed',
     localOnly: false,
     callback: function (event) {
-        if(clusterLib.isMaster()) {
+        if(isMaster()) {
             log.info(JSON.stringify(event));
         }
     }

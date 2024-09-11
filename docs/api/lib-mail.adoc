@@ -1,4 +1,4 @@
-= Mail Library
+= Mail API
 :toc: right
 :imagesdir: ../images
 
@@ -15,11 +15,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const mailLib = require('/lib/xp/mail');
+import mailLib from '/lib/xp/mail';
 ----
 
 You are now ready to use the library functionality.
@@ -77,9 +77,11 @@ Returns
 Example
 
 .Send a simple HTML e-mail
-[source,js]
+[source,typescript]
 ----
-var flag1 = mailLib.send({
+import {send} from '/lib/xp/mail';
+
+const flag1 = send({
     from: 'me@enonic.com',
     to: 'user@somewhere.org',
     subject: 'HTML email test',
@@ -89,9 +91,11 @@ var flag1 = mailLib.send({
 ----
 
 .Send an e-mail with attachments
-[source,js]
+[source,typescript]
 ----
-var flag2 = mailLib.send({
+import {send} from '/lib/xp/mail';
+
+const flag2 = send({
     from: 'Sales Department <sales@enonic.com>',
     to: 'user@somewhere.org',
     subject: 'Email Test from Enonic XP',
@@ -128,9 +132,11 @@ image:xp-7141.svg[XP 7.14.1,opts=inline] This function returns the default _from
 Example
 
 .Get a defaultFromEmail
-[source,js]
+[source,typescript]
 ----
-var defaultFromEmail = mailLib.getDefaultFromEmail();
+import {getDefaultFromEmail} from '/lib/xp/mail';
+
+const defaultFromEmail = getDefaultFromEmail();
 ----
 
 
