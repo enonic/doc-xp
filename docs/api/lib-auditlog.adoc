@@ -65,7 +65,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {find} from '/lib/xp/auditlog';
 
 // Find first audit log by ids
@@ -77,7 +78,7 @@ const result = find({
         '00c4e51d-ee39-4f0e-9075-5af00b5830c4'
     ]
 });
-```
+----
 
 === get
 
@@ -102,14 +103,15 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {get as getAuditEntry} from '/lib/xp/auditlog';
 
 // Gets an audit log by id.
 const log = getAuditEntry({
     id: '90b976f7-55ab-48ef-acb8-e7c6f0744442'
 });
-```
+----
 
 === log
 
@@ -139,16 +141,18 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {log as logAuditEntry} from '/lib/xp/auditlog';
 
 // Creates an audit log.
 const log1 = logAuditEntry({
     type: 'testlog'
 });
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Creates an audit log with more custom parameters.
 const log2 = logAuditEntry({
     type: 'testlog',
@@ -163,4 +167,4 @@ const log2 = logAuditEntry({
         somevalue: 2.5
     }
 });
-```
+----

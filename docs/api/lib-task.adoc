@@ -17,9 +17,10 @@ dependencies {
 
 in your controller, add an import statement:
 
-```typescript
+[source,typescript]
+----
 import taskLib from '/lib/xp/task';
-```
+----
 
 You are now ready to use the library functionality.
 
@@ -80,7 +81,8 @@ Returns
 Example
 
 .Obtains details for an active task:
-```typescript
+[source,typescript]
+----
 import {get as getTask} from '/lib/xp/task';
 
 const taskInfo = getTask('7ca603c1-3b88-4009-8f30-46ddbcc4bb19');
@@ -90,10 +92,11 @@ if (taskInfo) {
 } else {
   log.info('Task not found');
 }
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = {
   description: "Long running task",
   id: "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
@@ -108,7 +111,7 @@ const expected = {
     total: 42
   }
 };
-```
+----
 
 === isRunning
 
@@ -134,7 +137,8 @@ Returns
 Example
 
 .Check if a task is currently running:
-```typescript
+[source,typescript]
+----
 import {isRunning} from '/lib/xp/task';
 
 if (!isRunning('com.enonic.myapp:clean-up-task')) {
@@ -142,7 +146,7 @@ if (!isRunning('com.enonic.myapp:clean-up-task')) {
 } else {
   log.info('Task already running');
 }
-```
+----
 
 [#list]
 === list
@@ -182,14 +186,16 @@ Returns
 Example
 
 .1. Obtains list of active tasks:
-```typescript
+[source,typescript]
+----
 import {list} from '/lib/xp/task';
 
 const tasks = list();
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = [
   {
     description: "Long running task",
@@ -234,20 +240,22 @@ const expected = [
     }
   }
 ];
-```
+----
 
 .2. Obtains list of running tasks with a given name and state:
-```typescript
+[source,typescript]
+----
 import {list} from '/lib/xp/task';
 
 const tasks = list({
   name: "com.enonic.myapp:clean-up",
   state: "RUNNING"
 });
-```
+----
 
 .Return value:
-```typescript
+[source,typescript]
+----
 const expected = [
   {
     description: "Long running task",
@@ -264,7 +272,7 @@ const expected = [
     }
   }
 ];
-```
+----
 
 === progress
 
@@ -303,7 +311,8 @@ Returns
 Example
 
 .Execute task and keep taskId for polling status:
-```typescript
+[source,typescript]
+----
 import {executeFunction, progress} from '/lib/xp/task';
 
 const taskId = executeFunction({
@@ -325,7 +334,7 @@ const taskId = executeFunction({
     progress({info: 'Task completed'});
   }
 });
-```
+----
 
 === sleep
 
@@ -351,7 +360,8 @@ Returns
 Example
 
 .Execute task and keep taskId for polling status:
-```typescript
+[source,typescript]
+----
 import {sleep} from '/lib/xp/task';
 
 let retries = 3;
@@ -363,7 +373,7 @@ while (!result && retries > 0) {
   retries -= 1;
   result = fetchRemoteData();
 }
-```
+----
 
 === executeFunction
 
@@ -403,7 +413,8 @@ Returns
 Example
 
 .Execute task function and keep taskId for polling status:
-```typescript
+[source,typescript]
+----
 import {executeFunction} from '/lib/xp/task';
 
 const taskId = executeFunction({
@@ -412,7 +423,7 @@ const taskId = executeFunction({
     longRunningFunction();
   }
 });
-```
+----
 
 === submitTask
 
@@ -456,7 +467,8 @@ Returns
 Example
 
 .Execute task, located in the current app, by name:
-```typescript
+[source,typescript]
+----
 import {submitTask} from '/lib/xp/task';
 
 const taskId = submitTask({
@@ -465,17 +477,18 @@ const taskId = submitTask({
     count: 123
   }
 });
-```
+----
 
 .Execute a task located in a different app:
-```typescript
+[source,typescript]
+----
 import {submitTask} from '/lib/xp/task';
 
 const taskId = submitTask({
   descriptor: 'com.enonic.app.myapp:work',
   config: {}
 });
-```
+----
 
 === submit
 _Deprecated from_ image:xp-770.svg[XP 7.7.0,opts=inline] +

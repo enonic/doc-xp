@@ -31,11 +31,12 @@ Variable of type NodePath describing content node root path.
 [.lead]
 Usage
 
-```typescript
+[source,typescript]
+----
 import {CONTENT_ROOT_PATH} from '/lib/xp/content';
 
 const myRoot = CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()
-```
+----
 
 === ARCHIVE_ROOT_PATH
 Variable of type NodePath describing archive node root path.
@@ -44,11 +45,12 @@ Variable of type NodePath describing archive node root path.
 [.lead]
 Usage
 
-```typescript
+[source,typescript]
+----
 import {ARCHIVE_ROOT_PATH} from '/lib/xp/content';
 
 const myRoot = ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()
-```
+----
 
 == Functions
 
@@ -76,7 +78,8 @@ An object with the following keys and their values:
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {addAttachment} from '/lib/xp/content';
 
 // Adds an attachment.
@@ -87,7 +90,7 @@ addAttachment({
     label: 'photo',
     data: dataStream
 });
-```
+----
 
 === archive
 image:xp-780.svg[XP 7.8.0,opts=inline]
@@ -114,7 +117,8 @@ Returns
 
 [.lead]
 Examples
-```typescript
+[source,typescript]
+----
 import {archive} from '/lib/xp/content';
 
 // Archive content by path.
@@ -130,7 +134,7 @@ const result2 = archive({
 });
 
 log.info('Archived content ids: ' + result2.join(','));
-```
+----
 
 === create
 
@@ -170,7 +174,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {create} from '/lib/xp/content';
 
 // Creates a content.
@@ -203,9 +208,10 @@ const result1 = create({
 });
 
 log.info('Content created with id ' + result1._id);
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {create} from '/lib/xp/content';
 
 // Check if content already exists.
@@ -227,9 +233,10 @@ try {
         log.error('Unexpected error: ' + e.message);
     }
 }
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Content created.
 const expected = {
     _id: "123456",
@@ -267,7 +274,7 @@ const expected = {
     attachments: {},
     publish: {}
 };
-```
+----
 
 === createMedia
 
@@ -299,7 +306,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {createMedia} from '/lib/xp/content';
 
 // Creates a media.
@@ -309,9 +317,10 @@ const result = createMedia({
     mimeType: 'text/plain',
     data: stream
 });
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Media created.
 const expected = {
     _id: "123456",
@@ -328,7 +337,7 @@ const expected = {
     attachments: {},
     publish: {}
 };
-```
+----
 
 === modifyMedia
 
@@ -366,7 +375,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {modifyMedia} from '/lib/xp/content';
 
 // Modifies a media.
@@ -380,9 +390,10 @@ const result = modifyMedia({
     mimeType: 'text/plan',
     tags: ['tag1', 'tag2']
 });
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Modified media.
 const expected = {
     _id: "123456",
@@ -415,7 +426,7 @@ const expected = {
         checks: {}
     }
 };
-```
+----
 
 === delete
 
@@ -442,7 +453,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {delete as deleteContent} from '/lib/xp/content';
 
 // Deletes a content by path.
@@ -455,7 +467,7 @@ if (result) {
 } else {
     log.info('Content was not found');
 }
-```
+----
 
 === duplicate
 
@@ -491,7 +503,8 @@ Returns summary about duplicated content.
 Examples
 
 Duplicate content
-```typescript
+[source,typescript]
+----
 import {duplicate} from '/lib/xp/content';
 
 // Duplicate content by id
@@ -508,10 +521,11 @@ const expected = {
         "duplicated-content-id"
     ]
 };
-```
+----
 
 Create variant
-```typescript
+[source,typescript]
+----
 import {duplicate} from '/lib/xp/content';
 
 // Create a variant of the content
@@ -528,7 +542,7 @@ const expected = {
         "variant-content-id"
     ]
 }
-```
+----
 
 === exists
 
@@ -555,7 +569,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {exists} from '/lib/xp/content';
 
 // Checking if a content exists
@@ -568,7 +583,7 @@ if (result) {
 } else {
     log.info('Content does not exist');
 }
-```
+----
 
 
 === get
@@ -597,7 +612,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {get as getContentByKey} from '/lib/xp/content';
 
 // Gets a single content by path.
@@ -610,9 +626,10 @@ if (result) {
 } else {
     log.info('Content was not found');
 }
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Content as it is returned.
 const expected = {
     _id: "123456",
@@ -648,7 +665,7 @@ const expected = {
     },
     publish: {}
 };
-```
+----
 
 === getAttachments
 
@@ -673,7 +690,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 // Attachments returned.
 const expected = {
     "logo.png": {
@@ -688,7 +706,7 @@ const expected = {
         mimeType: "application/pdf"
     }
 };
-```
+----
 
 === getAttachmentStream
 
@@ -716,7 +734,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getAttachmentStream} from '/lib/xp/content';
 
 // Get stream for attachment.
@@ -724,7 +743,7 @@ const stream = getAttachmentStream({
     key: '/a/b/mycontent',
     name: 'document.pdf'
 });
-```
+----
 
 === getChildren
 
@@ -754,7 +773,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getChildren} from '/lib/xp/content';
 
 // Returns the children of specified path.
@@ -770,9 +790,10 @@ log.info('Found ' + result.total + ' number of contents');
 result.hits.forEach((content) => {
   log.info(`Content ${content._name} loaded`);
 });
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Result set returned.
 const expected = {
     total: 20,
@@ -816,7 +837,7 @@ const expected = {
         }
     ]
 };
-```
+----
 
 
 
@@ -848,7 +869,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getOutboundDependencies} from '/lib/xp/content';
 
 // Gets outbound dependencies of content by its Id.
@@ -861,7 +883,7 @@ if (result) {
 } else {
     log.info('Outbound dependencies were not found');
 }
-```
+----
 
 === getPermissions
 
@@ -888,7 +910,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getPermissions} from '/lib/xp/content';
 
 // Return permissions for content by path.
@@ -901,9 +924,10 @@ if (result) {
 } else {
     log.info('Content not found');
 }
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Permissions returned.
 const expected = {
     inheritsPermissions: false,
@@ -917,7 +941,7 @@ const expected = {
         }
     ]
 };
-```
+----
 
 === getSite
 
@@ -944,7 +968,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getSite} from '/lib/xp/content';
 
 // Returns content's parent site
@@ -952,9 +977,10 @@ const result = getSite({
     key: '/path/to/mycontent'
 });
 log.info('Site name = %s', result._name);
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Site data returned.
 const expected = {
     _id: "100123",
@@ -976,7 +1002,7 @@ const expected = {
     attachments: {},
     publish: {}
 };
-```
+----
 
 === getSiteConfig
 
@@ -1004,7 +1030,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getSiteConfig} from '/lib/xp/content';
 
 // Returns config of the content's parent site
@@ -1013,14 +1040,15 @@ const result = getSiteConfig({
     applicationKey: app.name
 });
 log.info('Field value for the site config = %s', result.Field);
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Site config returned.
 const expected = {
     Field: 42
 };
-```
+----
 
 === getType
 
@@ -1045,14 +1073,16 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getType} from '/lib/xp/content';
 
 // Get a content type by name
 const contentType = getType('com.enonic.myapp:person');
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Content type returned:
 const expected = {
     name: "com.enonic.myapp:person",
@@ -1156,9 +1186,10 @@ const expected = {
         }
     ]
 };
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {getType} from '/lib/xp/content';
 
 // Get a content type icon
@@ -1168,7 +1199,7 @@ return {
     body: icon.data,
     contentType: icon.mimeType
 };
-```
+----
 
 === getTypes
 
@@ -1182,7 +1213,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getTypes} from '/lib/xp/content';
 
 // Gets the list of all content types in the system
@@ -1194,7 +1226,7 @@ contentTypes.forEach(function (ct) {
         log.info(ct.name + ' - ' + ct.displayName);
     }
 });
-```
+----
 
 === modify
 
@@ -1225,7 +1257,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {modify} from '/lib/xp/content';
 
 // Editor to call for content.
@@ -1250,9 +1283,10 @@ if (result) {
 } else {
     log.info('Content not found');
 }
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Content modified.
 const expected = {
     _id: "123456",
@@ -1296,7 +1330,7 @@ const expected = {
         checks: {}
     }
 };
-```
+----
 
 === move
 [[move]]
@@ -1325,7 +1359,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {move} from '/lib/xp/content';
 
 // Rename content by path. Keeps same parent.
@@ -1335,9 +1370,10 @@ const content1 = move({
 });
 
 log.info('New path: ' + content1._path); // '/my-site/new-name'
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {move} from '/lib/xp/content';
 
 // Move content by path. New parent path, keeps same name.
@@ -1347,9 +1383,10 @@ const content2 = move({
 });
 
 log.info('New path: ' + content2._path); // '/my-site/folder/my-content-name'
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {move} from '/lib/xp/content';
 
 // Move content by id to new path. New parent path, keeps same name.
@@ -1359,9 +1396,10 @@ const content3 = move({
 });
 
 log.info('New path: ' + content3._path); // '/my-site/folder/my-content-name'
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {move} from '/lib/xp/content';
 
 // Move and rename content.
@@ -1371,9 +1409,10 @@ const content4 = move({
 });
 
 log.info('New path: ' + content4._path); // '/my-site/folder/new-name'
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {move} from '/lib/xp/content';
 
 // Handle error if target already exists.
@@ -1390,7 +1429,7 @@ try {
         log.error('Unexpected error: ' + e.message);
     }
 }
-```
+----
 
 === publish
 
@@ -1434,7 +1473,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {publish} from '/lib/xp/content';
 
 // Publish content by path or key
@@ -1456,9 +1496,10 @@ if (result) {
 } else {
     log.info('Operation failed.');
 }
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Content published.
 const expected = {
     pushedContents: [
@@ -1473,7 +1514,7 @@ const expected = {
         "79e21db0-5b43-45ce-b58c-6e1c420b22bd"
     ]
 };
-```
+----
 
 === query
 
@@ -1509,7 +1550,8 @@ image:xp-750.svg[XP 7.5.0,opts=inline] If `sort` was specified, results will con
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {query} from '/lib/xp/content';
 
 // Query content using aggregations.
@@ -1614,9 +1656,10 @@ log.info('Found ' + result.total + ' number of contents');
 result.hits.forEach((content) => {
   log.info(`Content ${content._name} found`);
 });
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Result set returned.
 const expected = {
     total: 20,
@@ -1739,7 +1782,7 @@ const expected = {
         }
     }
 };
-```
+----
 
 === removeAttachment
 
@@ -1762,19 +1805,21 @@ An object with the following keys and their values:
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {removeAttachment} from '/lib/xp/content';
 
 // Removes an attachment, by content path.
 removeAttachment({key: '/mySite/mycontent', name: 'document'});
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {removeAttachment} from '/lib/xp/content';
 
 // Removes multiple attachments, by content id.
 removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document', 'image']});
-```
+----
 
 === resetInheritance
 image:xp-760.svg[XP 7.6.0,opts=inline]
@@ -1803,19 +1848,21 @@ Supported values are: `CONTENT` (resets any customized content data), `PARENT` (
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {resetInheritance} from '/lib/xp/content';
 
 // Resets all custom changes made to inherited item '/mySite/mycontent' in the layer 'layer-no'
 resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['CONTENT', 'PARENT', 'NAME', 'SORT']});
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {resetInheritance} from '/lib/xp/content';
 
 // Resets custom sorting of inherited item '/mySite/mycontent' in the layer 'layer-no', but preserves any other changes
 resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['SORT']});
-```
+----
 
 === restore
 image:xp-780.svg[XP 7.8.0,opts=inline]
@@ -1843,7 +1890,8 @@ Returns
 
 [.lead]
 Examples
-```typescript
+[source,typescript]
+----
 import {restore} from '/lib/xp/content';
 
 // Restore content by path.
@@ -1867,7 +1915,7 @@ const result3 = restore({
 });
 
 log.info('Restored content ids: ' + result3.join(','));
-```
+----
 
 === setPermissions
 
@@ -1910,7 +1958,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {setPermissions} from '/lib/xp/content';
 
 // Set permissions for content by path.
@@ -1930,7 +1979,7 @@ if (flag) {
 } else {
     log.info('Content not found');
 }
-```
+----
 
 === unpublish
 
@@ -1957,7 +2006,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {unpublish} from '/lib/xp/content';
 
 // Unpublish content by path or key
@@ -1966,16 +2016,17 @@ const result = unpublish({
 });
 
 log.info('Unpublished content ids: ' + result.join(','));
-```
+----
 
-```typescript
+[source,typescript]
+----
 // Content unpublished.
 const expected = [
     "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
     "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
     "e1f57280-d672-4cd8-b674-98e26e5b69ae"
 ];
-```
+----
 
 == Objects
 

@@ -17,9 +17,10 @@ dependencies {
 
 in your controller, add an import statement:
 
-```typescript
+[source,typescript]
+----
 import ioLib from '/lib/xp/io';
-```
+----
 
 You are now ready to use the library functionality.
 
@@ -48,13 +49,14 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {getMimeType} from '/lib/xp/io';
 
 // Returns mime-type for a file name.
 const type = getMimeType('myfile.txt');
 log.info('Mime type is %s', type);
-```
+----
 
 === getResource
 
@@ -79,7 +81,8 @@ Returns
 [.lead]
 Examples
 
-```typescript
+[source,typescript]
+----
 import {getResource} from '/lib/xp/io';
 
 // Returns a file by name.
@@ -87,9 +90,10 @@ const res1 = getResource('/lib/xp/examples/io/sample.txt');
 const exists = res1.exists();
 const size = res1.getSize();
 const stream = res1.getStream();
-```
+----
 
-```typescript
+[source,typescript]
+----
 import {getResource} from '/lib/xp/io';
 
 // Returns a file by reference.
@@ -97,7 +101,7 @@ const res2 = getResource(resolve('./sample.txt'));
 if (res2.exists()) {
     log.info('Resource exists');
 }
-```
+----
 
 === getSize
 
@@ -122,13 +126,14 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {getSize} from '/lib/xp/io';
 
 // Returns the size of a stream.
 const size = getSize(stream);
 log.info('Stream size is %s bytes', size);
-```
+----
 
 === newStream
 
@@ -153,12 +158,13 @@ _*_ : A new stream.
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {newStream} from '/lib/xp/io';
 
 // Creates a new stream from a string.
 const stream = newStream('Hello World');
-```
+----
 
 === processLines
 
@@ -179,7 +185,8 @@ Parameters
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {processLines} from '/lib/xp/io';
 
 let num = 0;
@@ -189,7 +196,7 @@ processLines(stream, function (line) {
     num++;
     log.info('Line %s: %s', num, line);
 });
-```
+----
 
 === readLines
 
@@ -214,13 +221,14 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {readLines} from '/lib/xp/io';
 
 // Reads lines from stream.
 const lines = readLines(stream);
 log.info('Num lines: %s', lines.length);
-```
+----
 
 === readText
 
@@ -245,10 +253,11 @@ Returns
 [.lead]
 Example
 
-```typescript
+[source,typescript]
+----
 import {readText} from '/lib/xp/io';
 
 // Reads text from stream.
 const text = readText(stream);
 log.info('Text: %s', text);
-```
+----
