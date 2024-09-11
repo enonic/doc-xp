@@ -219,7 +219,7 @@ const result = multiRepoConnection.query({
 .Sample response
 [source,typescript]
 ----
-{
+const expected = {
     total: 12902,
     count: 2,
     hits: [
@@ -291,11 +291,11 @@ const result1 = repo.commit({keys: 'nodeId'});
 .Sample response
 [source,typescript]
 ----
-{
-    "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
-    "message": "",
-    "committer": "user:system:anonymous",
-    "timestamp": "2019-01-24T15:16:36.260799Z"
+const expected = {
+    id: "aa1f76bf-4bb9-41be-b166-03561c1555b2",
+    message: "",
+    committer: "user:system:anonymous",
+    timestamp: "2019-01-24T15:16:36.260799Z"
 }
 ----
 
@@ -311,7 +311,7 @@ const result2 = repo.commit({
 .Sample response
 [source,typescript]
 ----
-{
+const expected = {
     {
         id: "aa1f76bf-4bb9-41be-b166-03561c1555b2",
         message: "Commit message",
@@ -375,29 +375,29 @@ const result1 = repo.create({
 .Sample response
 [source,typescript]
 ----
-{
-  "_id": "2f0d5c09-39fe-4746-9754-74491d75a185",
-  "_name": "nerd",
-  "_path": "/nerd",
-  "_childOrder": "_ts DESC",
-  "_indexConfig": {
-    "default": {
-      "decideByType": true,
-      "enabled": true,
-      "nGram": false,
-      "fulltext": false,
-      "includeInAllText": false,
-      "path": false,
-      "indexValueProcessors": [],
-      "languages": []
+const expected = {
+  _id: "2f0d5c09-39fe-4746-9754-74491d75a185",
+  _name: "nerd",
+  _path: "/nerd",
+  _childOrder: "_ts DESC",
+  _indexConfig: {
+    default: {
+      decideByType: true,
+      enabled: true,
+      nGram: false,
+      fulltext: false,
+      includeInAllText: false,
+      path: false,
+      indexValueProcessors: [],
+      languages: []
     },
-    "configs": []
+    configs: []
   },
-  "_inheritsPermissions": false,
-  "_permissions": [
+  _inheritsPermissions: false,
+  _permissions: [
     {
-      "principal": "role:system.admin",
-      "allow": [
+      principal: "role:system.admin",
+      allow: [
         "READ",
         "CREATE",
         "MODIFY",
@@ -406,23 +406,23 @@ const result1 = repo.create({
         "READ_PERMISSIONS",
         "WRITE_PERMISSIONS"
       ],
-      "deny": []
+      deny: []
     },
     {
-      "principal": "role:system.everyone",
-      "allow": [
+      principal: "role:system.everyone",
+      allow: [
         "READ"
       ],
-      "deny": []
+      deny: []
     }
   ],
-  "_state": "DEFAULT",
-  "_nodeType": "default",
-  "_versionKey": "aa95ae7e-b975-4879-a19c-cce3b1fc3742",
-  "_ts": "2021-05-15T08:46:37.227Z",
-  "displayName": "Carpenter and IT expert",
-  "likes": "Plywood",
-  "numberOfUselessGadgets": 123
+  _state: "DEFAULT",
+  _nodeType: "default",
+  _versionKey: "aa95ae7e-b975-4879-a19c-cce3b1fc3742",
+  _ts: "2021-05-15T08:46:37.227Z",
+  displayName: "Carpenter and IT expert",
+  likes: "Plywood",
+  numberOfUselessGadgets: 123
 }
 ----
 
@@ -651,15 +651,15 @@ const result = repo.findChildren({
 .Sample response
 [source,typescript]
 ----
-{
-    "total": 2,
-    "count": 10,
-    "hits": [
+const expected = {
+    total: 2,
+    count: 10,
+    hits: [
         {
-            "id": "c8121875-a9b7-42e4-acf2-75cb52687ddb"
+            id: "c8121875-a9b7-42e4-acf2-75cb52687ddb"
         },
         {
-            "id": "636a616b-c8e4-480c-afa9-be88a737cf52"
+            id: "636a616b-c8e4-480c-afa9-be88a737cf52"
         }
     ]
 }
@@ -704,21 +704,21 @@ const result = repo.findVersions({
 .Sample response
 [source,typescript]
 ----
-{
-    "total": 2,
-    "count": 2,
-    "hits": [
+const expected = {
+    total: 2,
+    count: 2,
+    hits: [
         {
-            "versionId": "72dcd8c1-9d70-444d-ad7a-508d8c1865a0",
-            "nodeId": "ddd1c933-0725-45e8-9a54-a3dd87193f60",
-            "nodePath": "/my-name",
-            "timestamp": "2019-05-13T15:56:17.018Z"
+            versionId: "72dcd8c1-9d70-444d-ad7a-508d8c1865a0",
+            nodeId: "ddd1c933-0725-45e8-9a54-a3dd87193f60",
+            nodePath: "/my-name",
+            timestamp: "2019-05-13T15:56:17.018Z"
         },
         {
-            "versionId": "04c6b8d7-3c56-458f-80c9-c6ee551fc21d",
-            "nodeId": "ddd1c933-0725-45e8-9a54-a3dd87193f60",
-            "nodePath": "/my-name",
-            "timestamp": "2019-05-13T15:56:16.995Z"
+            versionId: "04c6b8d7-3c56-458f-80c9-c6ee551fc21d",
+            nodeId: "ddd1c933-0725-45e8-9a54-a3dd87193f60",
+            nodePath: "/my-name",
+            timestamp: "2019-05-13T15:56:16.995Z"
         }
     ]
 }
@@ -893,11 +893,11 @@ const commit = repo.getCommit({
 .Sample response
 [source,typescript]
 ----
-{
-    "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
-    "message": "",
-    "committer": "user:system:anonymous",
-    "timestamp": "2019-01-24T15:16:36.260799Z"
+const expected = {
+    id: "aa1f76bf-4bb9-41be-b166-03561c1555b2",
+    message: "",
+    committer: "user:system:anonymous",
+    timestamp: "2019-01-24T15:16:36.260799Z"
 }
 ----
 
@@ -1035,12 +1035,12 @@ const result = repo.push({
 .Sample response
 [source,typescript]
 ----
-{
-    "success": [
+const expected = {
+    success: [
         "a"
     ],
-    "failed": [],
-    "deleted": []
+    failed: [],
+    deleted: []
 }
 ----
 
@@ -1058,19 +1058,19 @@ const result = repo.push({
 .Sample response
 [source,typescript]
 ----
-{
-    "success": [
+const expected ={
+    success: [
         "a",
         "b",
         "c"
     ],
-    "failed": [
+    failed: [
         {
-            "id": "d",
-            "reason": "ACCESS_DENIED"
+            id: "d",
+            reason: "ACCESS_DENIED"
         }
     ],
-    "deleted": []
+    deleted: []
 }
 ----
 
@@ -1089,13 +1089,13 @@ const result = repo.push({
 .Sample response
 [source,typescript]
 ----
-{
-    "success": [
+const expected = {
+    success: [
         "a",
         "d"
     ],
-    "failed": [],
-    "deleted": []
+    failed: [],
+    deleted: []
 }
 ----
 
@@ -1144,28 +1144,28 @@ const result = repo.query({
 .Sample response
 [source,typescript]
 ----
-{
-    "total": 4,
-    "count": 4,
-    "hits": [
+const expected = {
+    total: 4,
+    count: 4,
+    hits: [
         {
-            "id": "5be12847-cbad-4e61-a36c-e94ffb597afb",
-            "score": 0.7071067690849304
+            id: "5be12847-cbad-4e61-a36c-e94ffb597afb",
+            score: 0.7071067690849304
         },
         {
-            "id": "3928476f-915d-4a6a-97cc-f1c8a905f71a",
-            "score": 0.625
+            id: "3928476f-915d-4a6a-97cc-f1c8a905f71a",
+            score: 0.625
         },
         {
-            "id": "a2e38aab-6efb-4f20-862c-e23ef24b3fc3",
-            "score": 0.5
+            id: "a2e38aab-6efb-4f20-862c-e23ef24b3fc3",
+            score: 0.5
         },
         {
-            "id": "3a842eff-ef49-4781-8c1a-dcfcf515db51",
-            "score": 0.5
+            id: "3a842eff-ef49-4781-8c1a-dcfcf515db51",
+            score: 0.5
         }
     ],
-    "aggregations": {}
+    aggregations: {}
 }
 ----
 
@@ -1241,58 +1241,58 @@ const result = repo.query({
 .Sample response
 [source,typescript]
 ----
-{
-    "total": 12902,
-    "count": 2,
-    "hits": [
+const expected = {
+    total: 12902,
+    count: 2,
+    hits: [
         {
-            "id": "b186d24f-ac38-42ca-a6db-1c1bda6c6c26",
-            "score": 1.2300000190734863
+            id: "b186d24f-ac38-42ca-a6db-1c1bda6c6c26",
+            score: 1.2300000190734863
         },
         {
-            "id": "350ba4a6-589c-498b-8af0-f183850e1120",
-            "score": 1.399999976158142
+            id: "350ba4a6-589c-498b-8af0-f183850e1120",
+            score: 1.399999976158142
         }
     ],
-    "aggregations": {
-        "urls": {
-            "buckets": [
+    aggregations: {
+        urls: {
+            buckets: [
                 {
-                    "key": "/site/draft/superhero/search",
-                    "docCount": 6762,
-                    "duration": {
-                        "buckets": [
+                    key: "/site/draft/superhero/search",
+                    docCount: 6762,
+                    duration: {
+                        buckets: [
                             {
-                                "key": "1600",
-                                "docCount": 2
+                                key: "1600",
+                                docCount: 2
                             },
                             {
-                                "key": "1400",
-                                "docCount": 1
+                                key: "1400",
+                                docCount: 1
                             },
                             {
-                                "key": "1300",
-                                "docCount": 5
+                                key: "1300",
+                                docCount: 5
                             }
                         ]
                     }
                 },
                 {
-                    "key": "/site/draft/superhero",
-                    "docCount": 1245,
-                    "duration": {
-                        "buckets": [
+                    key: "/site/draft/superhero",
+                    docCount: 1245,
+                    duration: {
+                        buckets: [
                             {
-                                "key": "1600",
-                                "docCount": 2
+                                key: "1600",
+                                docCount: 2
                             },
                             {
-                                "key": "1400",
-                                "docCount": 1
+                                key: "1400",
+                                docCount: 1
                             },
                             {
-                                "key": "1300",
-                                "docCount": 5
+                                key: "1300",
+                                docCount: 5
                             }
                         ]
                     }
@@ -1444,8 +1444,8 @@ Example
 const result = repo.setRootPermissions({
     _permissions: [
         {
-            "principal": "role:system.admin",
-            "allow": [
+            principal: "role:system.admin",
+            allow: [
                 "READ",
                 "CREATE",
                 "MODIFY",
@@ -1454,7 +1454,7 @@ const result = repo.setRootPermissions({
                 "READ_PERMISSIONS",
                 "WRITE_PERMISSIONS"
             ],
-            "deny": []
+            deny: []
         }
     ],
     _inheritsPermissions: true

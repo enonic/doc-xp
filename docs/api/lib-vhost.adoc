@@ -83,31 +83,31 @@ mapping.admintool.idProvider.system = default
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-  "vhosts": [
+const expected = {
+  vhosts: [
     {
-      "name": "admin",
-      "source": "/admin",
-      "target": "/admin",
-      "host": "localhost",
-      "defaultIdProviderKey": "system",
-      "idProviderKeys": [
+      name: "admin",
+      source: "/admin",
+      target: "/admin",
+      host: "localhost",
+      defaultIdProviderKey: "system",
+      idProviderKeys: [
         {
-          "idProviderKey": "system"
+          idProviderKey: "system"
         }
       ]
     },
     {
-      "name": "admintool",
-      "source": "/admin",
-      "target": "/admin",
-      "host": "localhost",
-      "defaultIdProviderKey": "system",
-      "idProviderKeys": [
+      name: "admintool",
+      source: "/admin",
+      target: "/admin",
+      host: "localhost",
+      defaultIdProviderKey: "system",
+      idProviderKeys: [
         {
-          "idProviderKey": "system"
+          idProviderKey: "system"
         }
       ]
     }

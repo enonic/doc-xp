@@ -69,16 +69,16 @@ const currentPermissions = addPermissions({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-  'id': 'my-project',
-  'permissions': {
-        'owner': [
+const expected = {
+  id: 'my-project',
+  permissions: {
+        owner: [
             'user:mystore:user1',
             'user:mystore:user2'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user3'
         ]
     }
@@ -156,14 +156,14 @@ try {
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-  'id': 'my-project',
-  'displayName': 'My Content Project',
-  'permissions': [],
-  'readAccess': {
-    'public': true
+const expected = {
+  id: 'my-project',
+  displayName: 'My Content Project',
+  permissions: [],
+  readAccess: {
+    public: true
   }
 }
 ----
@@ -204,47 +204,47 @@ const project = create({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-  'id': 'my-project',
-  'displayName': 'My Content Project',
-  'description': 'Some exciting content is stored here',
-  'language': 'no',
-  'siteConfig': [
+const expected = {
+  id: 'my-project',
+  displayName: 'My Content Project',
+  description: 'Some exciting content is stored here',
+  language: 'no',
+  siteConfig: [
         {
-            'applicationKey': 'app1',
-            'config': {
-                'a': 'b'
+            applicationKey: 'app1',
+            config: {
+                a: 'b'
             }
         },
         {
-            'applicationKey': 'app2',
-            'config': {
-                'a': true,
-                'b': 3.4
+            applicationKey: 'app2',
+            config: {
+                a: true,
+                b: 3.4
             }
         }
     ],
-  'permissions': {
-    'owner': [
+  permissions: {
+    owner: [
         'user:mystore:user1'
     ],
-    'editor': [
+    editor: [
         'user:mystore:user2'
     ],
-    'author': [
+    author: [
         'user:mystore:user3'
     ],
-    'contributor': [
+    contributor: [
         'user:mystore:user4'
     ],
-    'viewer': [
+    viewer: [
         'user:mystore:user5'
     ]
   },
-  'readAccess': {
-    'public': false
+  readAccess: {
+    public: false
   }
 }
 ----
@@ -285,9 +285,9 @@ const result = deleteProject({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-true
+const expected = true;
 ----
 
 === get
@@ -325,21 +325,21 @@ const project = getProject({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-    'id': 'my-project',
-    'displayName': 'My Content Project',
-    'permissions': {
-        'owner': [
+const expected = {
+    id: 'my-project',
+    displayName: 'My Content Project',
+    permissions: {
+        owner: [
             'user:mystore:user1'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user2'
         ]
     },
-    'readAccess': {
-        'public': true
+    readAccess: {
+        public: true
     }
 }
 ----
@@ -367,19 +367,19 @@ const projects = list();
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-[{
-    'id': 'default',
-    'displayName': 'Default',
-    'description': 'Default project'
+const expected = [{
+    id: 'default',
+    displayName: 'Default',
+    description: 'Default project'
 },
 {
-    'id': 'my-project',
-    'displayName': 'My Content Project',
-    'permissions': [],
-    'readAccess': {
-        'public': true
+    id: 'my-project',
+    displayName: 'My Content Project',
+    permissions: [],
+    readAccess: {
+        public: true
     }
 }]
 ----
@@ -445,31 +445,31 @@ const project = modify({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-    'id': 'my-project',
-    'displayName': 'New project name',
-    'description': 'New project description',
-    'language': 'en',
-    'siteConfig': [
+const expected = {
+    id: 'my-project',
+    displayName: 'New project name',
+    description: 'New project description',
+    language: 'en',
+    siteConfig: [
         {
-            'applicationKey': 'app1',
-            'config': {
-                'a': 'b'
+            applicationKey: 'app1',
+            config: {
+                a: 'b'
             }
         },
         {
-            'applicationKey': 'app2',
-            'config': {
-                'a': true,
-                'b': 3.4
+            applicationKey: 'app2',
+            config: {
+                a: true,
+                b: 3.4
             }
         }
     ],
-    'permissions': {},
-    'readAccess': {
-        'public': true
+    permissions: {},
+    readAccess: {
+        public: true
     }
 }
 ----
@@ -521,12 +521,12 @@ const currentPermissions = addPermissions({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-    'id': 'my-project',
-    'readAccess': {
-        'public': false
+const expected = {
+    id: 'my-project',
+    readAccess: {
+        public: false
     }
 }
 ----
@@ -582,15 +582,15 @@ const currentPermissions = removePermissions({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-    'id': 'my-project',
-    'permissions': {
-        'owner': [
+const expected = {
+    id: 'my-project',
+    permissions: {
+        owner: [
             'user:mystore:user1'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user3'
         ]
     }
@@ -633,7 +633,7 @@ const project = getAvailableApplications({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-['app1', 'app2']
+const expected = ['app1', 'app2']
 ----

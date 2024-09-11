@@ -95,8 +95,8 @@ const result2 = create({
     id: 'test-repo2',
     rootPermissions: [
         {
-            "principal": "role:admin",
-            "allow": [
+            principal: "role:admin",
+            allow: [
                 "READ",
                 "CREATE",
                 "MODIFY",
@@ -105,7 +105,7 @@ const result2 = create({
                 "READ_PERMISSIONS",
                 "WRITE_PERMISSIONS"
             ],
-            "deny": []
+            deny: []
         }
     ],
     rootChildOrder: "_ts DESC"
@@ -117,8 +117,8 @@ log.info('Repository created with id ' + result2.id);
 ```typescript
 // First repository created.
 const expected1 = {
-    "id": "test-repo",
-    "branches": [
+    id: "test-repo",
+    branches: [
         "master"
     ],
     settings: {}
@@ -284,8 +284,8 @@ if (result) {
 ```typescript
 // Repository retrieved.
 const expected = {
-    "id": "test-repo",
-    "branches": [
+    id: "test-repo",
+    branches: [
         "master"
     ],
     settings: {}
@@ -315,14 +315,14 @@ log.info(result.length + ' repositories found');
 ```typescript
 // Repositories retrieved.
 const expected = [{
-    "id": "test-repo",
-    "branches": [
+    id: "test-repo",
+    branches: [
         "master"
     ],
     settings: {}
 }, {
-    "id": "another-repo",
-    "branches": [
+    id: "another-repo",
+    branches: [
         "master"
     ],
     settings: {}

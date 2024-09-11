@@ -76,18 +76,18 @@ if (application) {
 .Return value:
 ```typescript
 const expected = {
-    'key': 'my-app',
-    'displayName': 'app display name',
-    'vendorName': 'vendor name',
-    'vendorUrl': 'https://vendor.url',
-    'url': 'https://myapp.url',
-    'version': '1.0.0',
-    'systemVersion': '4.2.3-SNAPSHOT',
-    'minSystemVersion': '2.0.0',
-    'maxSystemVersion': '3.0.0',
-    'modifiedTime': '2020-09-25T10:00:00Z',
-    'started': true,
-    'system': false
+    key: 'my-app',
+    displayName: 'app display name',
+    vendorName: 'vendor name',
+    vendorUrl: 'https://vendor.url',
+    url: 'https://myapp.url',
+    version: '1.0.0',
+    systemVersion: '4.2.3-SNAPSHOT',
+    minSystemVersion: '2.0.0',
+    maxSystemVersion: '3.0.0',
+    modifiedTime: '2020-09-25T10:00:00Z',
+    started: true,
+    system: false
 };
 ```
 
@@ -113,32 +113,32 @@ const apps = list();
 ```typescript
 const expected = [
     {
-        'key': 'app1',
-        'displayName': 'app display name',
-        'vendorName': 'vendor name',
-        'vendorUrl': 'https://vendor.url',
-        'url': 'https://myapp.url',
-        'version': '1.0.0',
-        'systemVersion': '1.21.3',
-        'minSystemVersion': '2.0.0',
-        'maxSystemVersion': '3.0.0',
-        'modifiedTime': '2020-09-25T10:00:00Z',
-        'started': true,
-        'system': false
+        key: 'app1',
+        displayName: 'app display name',
+        vendorName: 'vendor name',
+        vendorUrl: 'https://vendor.url',
+        url: 'https://myapp.url',
+        version: '1.0.0',
+        systemVersion: '1.21.3',
+        minSystemVersion: '2.0.0',
+        maxSystemVersion: '3.0.0',
+        modifiedTime: '2020-09-25T10:00:00Z',
+        started: true,
+        system: false
     },
     {
-        'key': 'app2',
-        'displayName': 'app display name 2',
-        'vendorName': 'vendor name 2',
-        'vendorUrl': 'https://vendor2.url',
-        'url': 'https://myapp2.url',
-        'version': '4.1.2',
-        'systemVersion': '1.2.33-SNAPSHOT',
-        'minSystemVersion': '5.3.11',
-        'maxSystemVersion': '3.0.6',
-        'modifiedTime': '2021-09-25T10:00:00Z',
-        'started': false,
-        'system': true
+        key: 'app2',
+        displayName: 'app display name 2',
+        vendorName: 'vendor name 2',
+        vendorUrl: 'https://vendor2.url',
+        url: 'https://myapp2.url',
+        version: '4.1.2',
+        systemVersion: '1.2.33-SNAPSHOT',
+        minSystemVersion: '5.3.11',
+        maxSystemVersion: '3.0.6',
+        modifiedTime: '2021-09-25T10:00:00Z',
+        started: false,
+        system: true
     }
 ];
 ```
@@ -185,12 +185,12 @@ const descriptor = getDescriptor({key: 'my-app-key'});
 .Return value:
 ```typescript
 const expected = {
-    'key': 'my-app',
-    'description': 'my app description',
-    'icon': {
-        'data': {},
-        'mimeType': 'image/png',
-        'modifiedTime': '2021-12-03T10:15:30Z'
+    key: 'my-app',
+    description: 'my app description',
+    icon: {
+        data: {},
+        mimeType: 'image/png',
+        modifiedTime: '2021-12-03T10:15:30Z'
     }
 };
 ```
@@ -234,7 +234,7 @@ Example
 import {createVirtualApplication} from '/lib/xp/app';
 
 const app = createVirtualApplication({
-    'key':'my-app-key'
+    key:'my-app-key'
 });
 ```
 
@@ -277,7 +277,7 @@ Example
 import {deleteVirtualApplication} from '/lib/xp/app';
 
 const result = deleteVirtualApplication({
-    'key':'my-app-key'
+    key:'my-app-key'
 });
 ```
 
@@ -325,7 +325,7 @@ Example
 ```typescript
 import {getApplicationMode} from '/lib/xp/app';
 const result = getApplicationMode({
-    'key':'my-app-key'
+    key:'my-app-key'
 });
 ```
 
