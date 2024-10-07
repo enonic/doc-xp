@@ -1,4 +1,4 @@
-= Task library
+= Task API
 :toc: right
 :imagesdir: ../images
 
@@ -15,11 +15,12 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var taskLib = require('/lib/xp/task');
-```
+[source,typescript]
+----
+import taskLib from '/lib/xp/task';
+----
 
 You are now ready to use the library functionality.
 
@@ -80,32 +81,37 @@ Returns
 Example
 
 .Obtains details for an active task:
-```js
-var taskInfo = taskLib.get('7ca603c1-3b88-4009-8f30-46ddbcc4bb19');
+[source,typescript]
+----
+import {get as getTask} from '/lib/xp/task';
+
+const taskInfo = getTask('7ca603c1-3b88-4009-8f30-46ddbcc4bb19');
 
 if (taskInfo) {
   log.info('Current task state = %s', taskInfo.state);
 } else {
   log.info('Task not found');
 }
-```
+----
+
 .Return value:
-```js
-var expected = {
-  "description": "Long running task",
-  "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
-  "name": "task-7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
-  "state": "RUNNING",
-  "application": "com.enonic.myapp",
-  "user": "user:store:me",
-  "startTime": "2017-10-01T09:00:00Z",
-  "progress": {
-    "info": "Processing item 33",
-    "current": 33,
-    "total": 42
+[source,typescript]
+----
+const expected = {
+  description: "Long running task",
+  id: "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+  name: "task-7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+  state: "RUNNING",
+  application: "com.enonic.myapp",
+  user: "user:store:me",
+  startTime: "2017-10-01T09:00:00Z",
+  progress: {
+    info: "Processing item 33",
+    current: 33,
+    total: 42
   }
 };
-```
+----
 
 === isRunning
 
@@ -131,15 +137,16 @@ Returns
 Example
 
 .Check if a task is currently running:
-```js
-var isRunning = taskLib.isRunning('com.enonic.myapp:clean-up-task');
+[source,typescript]
+----
+import {isRunning} from '/lib/xp/task';
 
-if (!isRunning) {
+if (!isRunning('com.enonic.myapp:clean-up-task')) {
   log.info('Start task...');
 } else {
   log.info('Task already running');
 }
-```
+----
 
 [#list]
 === list
@@ -179,85 +186,93 @@ Returns
 Example
 
 .1. Obtains list of active tasks:
-```js
-var tasks = taskLib.list();
-```
+[source,typescript]
+----
+import {list} from '/lib/xp/task';
+
+const tasks = list();
+----
 
 .Return value:
-```js
-var expected = [
+[source,typescript]
+----
+const expected = [
   {
-    "description": "Long running task",
-    "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
-    "name": "task-7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
-    "state": "RUNNING",
-    "application": "com.enonic.app1",
-    "user": "user:store:user1",
-    "startTime": "2017-10-01T09:00:00Z",
-    "progress": {
-      "info": "Processing item 33",
-      "current": 33,
-      "total": 42
+    description: "Long running task",
+    id: "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+    name: "task-7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+    state: "RUNNING",
+    application: "com.enonic.app1",
+    user: "user:store:user1",
+    startTime: "2017-10-01T09:00:00Z",
+    progress: {
+      info: "Processing item 33",
+      current: 33,
+      total: 42
     }
   },
   {
-    "description": "Update statistics",
-    "id": "b6173bcb-bf54-409b-aa6b-96ae6fcec263",
-    "name": "task-b6173bcb-bf54-409b-aa6b-96ae6fcec263",
-    "state": "FINISHED",
-    "application": "com.enonic.app2",
-    "user": "user:store:user2",
-    "startTime": "2017-10-02T09:00:00Z",
-    "progress": {
-      "info": "Work completed",
-      "current": 0,
-      "total": 0
+    description: "Update statistics",
+    id: "b6173bcb-bf54-409b-aa6b-96ae6fcec263",
+    name: "task-b6173bcb-bf54-409b-aa6b-96ae6fcec263",
+    state: "FINISHED",
+    application: "com.enonic.app2",
+    user: "user:store:user2",
+    startTime: "2017-10-02T09:00:00Z",
+    progress: {
+      info: "Work completed",
+      current: 0,
+      total: 0
     }
   },
   {
-    "description": "Import remote data",
-    "id": "e1f57280-d672-4cd8-b674-98e26e5b69ae",
-    "name": "task-e1f57280-d672-4cd8-b674-98e26e5b69ae",
-    "state": "FAILED",
-    "application": "com.enonic.app3",
-    "user": "user:store:user3",
-    "startTime": "2017-10-03T09:00:00Z",
-    "progress": {
-      "info": "Fetching data",
-      "current": 33,
-      "total": 100
+    description: "Import remote data",
+    id: "e1f57280-d672-4cd8-b674-98e26e5b69ae",
+    name: "task-e1f57280-d672-4cd8-b674-98e26e5b69ae",
+    state: "FAILED",
+    application: "com.enonic.app3",
+    user: "user:store:user3",
+    startTime: "2017-10-03T09:00:00Z",
+    progress: {
+      info: "Fetching data",
+      current: 33,
+      total: 100
     }
   }
 ];
-```
+----
 
 .2. Obtains list of running tasks with a given name and state:
-```js
-var tasks = taskLib.list({
+[source,typescript]
+----
+import {list} from '/lib/xp/task';
+
+const tasks = list({
   name: "com.enonic.myapp:clean-up",
   state: "RUNNING"
 });
-```
+----
 
 .Return value:
-```js
-var expected = [
+[source,typescript]
+----
+const expected = [
   {
-    "description": "Long running task",
-    "id": "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
-    "name": "com.enonic.myapp:clean-up",
-    "state": "RUNNING",
-    "application": "com.enonic.myapp",
-    "user": "user:store:user",
-    "startTime": "2017-10-01T09:00:00Z",
-    "progress": {
-      "info": "Processing item 33",
-      "current": 33,
-      "total": 42
+    description: "Long running task",
+    id: "7ca603c1-3b88-4009-8f30-46ddbcc4bb19",
+    name: "com.enonic.myapp:clean-up",
+    state: "RUNNING",
+    application: "com.enonic.myapp",
+    user: "user:store:user",
+    startTime: "2017-10-01T09:00:00Z",
+    progress: {
+      info: "Processing item 33",
+      current: 33,
+      total: 42
     }
   }
 ];
-```
+----
 
 === progress
 
@@ -296,15 +311,18 @@ Returns
 Example
 
 .Execute task and keep taskId for polling status:
-```js
-var taskId = taskLib.executeFunction({
+[source,typescript]
+----
+import {executeFunction, progress} from '/lib/xp/task';
+
+const taskId = executeFunction({
   description: 'Background task',
-  func: function () {
+  func: () => {
 
-    taskLib.progress({info: 'Initializing task'});
+    progress({info: 'Initializing task'});
 
-    for (var i = 0; i < 10; i++) {
-      taskLib.progress({
+    for (const i of Array(10).keys()) {
+      progress({
         info: 'Processing item ' + (i + 1),
         current: i,
         total: 10
@@ -313,10 +331,10 @@ var taskId = taskLib.executeFunction({
       processItem(i);
     }
 
-    taskLib.progress({info: 'Task completed'});
+    progress({info: 'Task completed'});
   }
 });
-```
+----
 
 === sleep
 
@@ -342,17 +360,20 @@ Returns
 Example
 
 .Execute task and keep taskId for polling status:
-```js
-var retries = 3;
-var result = fetchRemoteData();
+[source,typescript]
+----
+import {sleep} from '/lib/xp/task';
+
+let retries = 3;
+let result = fetchRemoteData();
 
 while (!result && retries > 0) {
   // wait half a second before retrying
-  taskLib.sleep(500);
+  sleep(500);
   retries -= 1;
   result = fetchRemoteData();
 }
-```
+----
 
 === executeFunction
 
@@ -392,14 +413,17 @@ Returns
 Example
 
 .Execute task function and keep taskId for polling status:
-```js
-var taskId = taskLib.executeFunction({
+[source,typescript]
+----
+import {executeFunction} from '/lib/xp/task';
+
+const taskId = executeFunction({
   description: 'Background function',
-  func: function () {
+  func: () => {
     longRunningFunction();
   }
 });
-```
+----
 
 === submitTask
 
@@ -443,22 +467,28 @@ Returns
 Example
 
 .Execute task, located in the current app, by name:
-```js
-var taskId = taskLib.submitTask({
+[source,typescript]
+----
+import {submitTask} from '/lib/xp/task';
+
+const taskId = submitTask({
   descriptor: 'job42',
   config: {
     count: 123
   }
 });
-```
+----
 
 .Execute a task located in a different app:
-```js
-var taskId = taskLib.submitTask({
+[source,typescript]
+----
+import {submitTask} from '/lib/xp/task';
+
+const taskId = submitTask({
   descriptor: 'com.enonic.app.myapp:work',
   config: {}
 });
-```
+----
 
 === submit
 _Deprecated from_ image:xp-770.svg[XP 7.7.0,opts=inline] +

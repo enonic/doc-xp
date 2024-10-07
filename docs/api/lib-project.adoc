@@ -1,4 +1,4 @@
-= Content Project Library
+= Content Project API
 :toc: right
 :imagesdir: ../images
 
@@ -17,11 +17,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a `require` statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const projectLib = require('/lib/xp/project');
+import projectLib from '/lib/xp/project';
 ----
 
 == Functions
@@ -55,11 +55,11 @@ Returns
 Example
 
 .Add permissions to a project with id 'my-project'
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {addPermissions} from '/lib/xp/project';
 
-var currentPermissions = projectLib.addPermissions({
+const currentPermissions = addPermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user1', 'user:mystore:user2'],
@@ -69,16 +69,16 @@ var currentPermissions = projectLib.addPermissions({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-  'id': 'my-project',
-  'permissions': {
-        'owner': [
+const expected = {
+  id: 'my-project',
+  permissions: {
+        owner: [
             'user:mystore:user1',
             'user:mystore:user2'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user3'
         ]
     }
@@ -138,12 +138,12 @@ Returns
 Example
 
 .Create a Content Project with minimal properties
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {create} from '/lib/xp/project';
 
 try {
-    var project = projectLib.create({
+    const project = create({
         id: 'my-project',
         displayName: 'My Content Project',
         readAccess: {
@@ -151,29 +151,29 @@ try {
         }
     });
 } catch (e) {
-    log.error('Failed to create a project: ' + e);
+    log.error('Failed to create a project: %s', e.message);
 }
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-  'id': 'my-project',
-  'displayName': 'My Content Project',
-  'permissions': [],
-  'readAccess': {
-    'public': true
+const expected = {
+  id: 'my-project',
+  displayName: 'My Content Project',
+  permissions: [],
+  readAccess: {
+    public: true
   }
 }
 ----
 
 .Create a Content Project with extended properties
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {create} from '/lib/xp/project';
 
-var project = projectLib.create({
+const project = create({
     id: 'my-project',
     displayName: 'My Content Project',
     description: 'Some exciting content is stored here',
@@ -204,47 +204,47 @@ var project = projectLib.create({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-  'id': 'my-project',
-  'displayName': 'My Content Project',
-  'description': 'Some exciting content is stored here',
-  'language': 'no',
-  'siteConfig': [
+const expected = {
+  id: 'my-project',
+  displayName: 'My Content Project',
+  description: 'Some exciting content is stored here',
+  language: 'no',
+  siteConfig: [
         {
-            'applicationKey': 'app1',
-            'config': {
-                'a': 'b'
+            applicationKey: 'app1',
+            config: {
+                a: 'b'
             }
         },
         {
-            'applicationKey': 'app2',
-            'config': {
-                'a': true,
-                'b': 3.4
+            applicationKey: 'app2',
+            config: {
+                a: true,
+                b: 3.4
             }
         }
     ],
-  'permissions': {
-    'owner': [
+  permissions: {
+    owner: [
         'user:mystore:user1'
     ],
-    'editor': [
+    editor: [
         'user:mystore:user2'
     ],
-    'author': [
+    author: [
         'user:mystore:user3'
     ],
-    'contributor': [
+    contributor: [
         'user:mystore:user4'
     ],
-    'viewer': [
+    viewer: [
         'user:mystore:user5'
     ]
   },
-  'readAccess': {
-    'public': false
+  readAccess: {
+    public: false
   }
 }
 ----
@@ -275,19 +275,19 @@ Returns
 Example
 
 .Delete an existing content project
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {delete as deleteProject} from '/lib/xp/project';
 
-var result = projectLib.delete({
+const result = deleteProject({
     id: 'my-project'
 });
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-true
+const expected = true;
 ----
 
 === get
@@ -315,31 +315,31 @@ Returns
 Example
 
 .Fetch an existing content project
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {get as getProject} from '/lib/xp/project';
 
-var project = projectLib.get({
+const project = getProject({
     id: 'my-project'
 });
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-    'id': 'my-project',
-    'displayName': 'My Content Project',
-    'permissions': {
-        'owner': [
+const expected = {
+    id: 'my-project',
+    displayName: 'My Content Project',
+    permissions: {
+        owner: [
             'user:mystore:user1'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user2'
         ]
     },
-    'readAccess': {
-        'public': true
+    readAccess: {
+        public: true
     }
 }
 ----
@@ -359,27 +359,27 @@ Returns
 Example
 
 .Fetch the list of existing content projects
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {list} from '/lib/xp/project';
 
-var projects = projectLib.list();
+const projects = list();
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-[{
-    'id': 'default',
-    'displayName': 'Default',
-    'description': 'Default project'
+const expected = [{
+    id: 'default',
+    displayName: 'Default',
+    description: 'Default project'
 },
 {
-    'id': 'my-project',
-    'displayName': 'My Content Project',
-    'permissions': [],
-    'readAccess': {
-        'public': true
+    id: 'my-project',
+    displayName: 'My Content Project',
+    permissions: [],
+    readAccess: {
+        public: true
     }
 }]
 ----
@@ -420,11 +420,11 @@ Returns
 Example
 
 .Modify an existing content project
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {modify} from '/lib/xp/project';
 
-var project = projectLib.modify({
+const project = modify({
     id: 'my-project',
     displayName: 'New project name',
     description: 'New project description',
@@ -445,31 +445,31 @@ var project = projectLib.modify({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-    'id': 'my-project',
-    'displayName': 'New project name',
-    'description': 'New project description',
-    'language': 'en',
-    'siteConfig': [
+const expected = {
+    id: 'my-project',
+    displayName: 'New project name',
+    description: 'New project description',
+    language: 'en',
+    siteConfig: [
         {
-            'applicationKey': 'app1',
-            'config': {
-                'a': 'b'
+            applicationKey: 'app1',
+            config: {
+                a: 'b'
             }
         },
         {
-            'applicationKey': 'app2',
-            'config': {
-                'a': true,
-                'b': 3.4
+            applicationKey: 'app2',
+            config: {
+                a: true,
+                b: 3.4
             }
         }
     ],
-    'permissions': {},
-    'readAccess': {
-        'public': true
+    permissions: {},
+    readAccess: {
+        public: true
     }
 }
 ----
@@ -508,11 +508,11 @@ Returns
 Example
 
 .Set content project as not available for public READ access
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {addPermissions} from '/lib/xp/project';
 
-var currentPermissions = projectLib.addPermissions({
+const currentPermissions = addPermissions({
     id: 'my-project',
     readAccess: {
         public: false
@@ -521,12 +521,12 @@ var currentPermissions = projectLib.addPermissions({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-    'id': 'my-project',
-    'readAccess': {
-        'public': false
+const expected = {
+    id: 'my-project',
+    readAccess: {
+        public: false
     }
 }
 ----
@@ -561,11 +561,11 @@ Returns
 *Object* : All current project permissions.
 
 .Adds and then removes permissions from an existing content project
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {addPermissions,removePermissions} from '/lib/xp/project';
 
-projectLib.addPermissions({
+addPermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user1', 'user:mystore:user2'],
@@ -573,7 +573,7 @@ projectLib.addPermissions({
     }
 });
 
-var currentPermissions = projectLib.removePermissions({
+const currentPermissions = removePermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user2']
@@ -582,15 +582,15 @@ var currentPermissions = projectLib.removePermissions({
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-{
-    'id': 'my-project',
-    'permissions': {
-        'owner': [
+const expected = {
+    id: 'my-project',
+    permissions: {
+        owner: [
             'user:mystore:user1'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user3'
         ]
     }
@@ -623,17 +623,17 @@ Returns
 Example
 
 .Fetch available applications.
-[source,js]
+[source,typescript]
 ----
-var projectLib = require('/lib/xp/project');
+import {getAvailableApplications} from '/lib/xp/project';
 
-var project = projectLib.getAvailableApplications({
+const project = getAvailableApplications({
     id: 'my-project'
 });
 ----
 
 .Sample response
-[source,JSON]
+[source,typescript]
 ----
-['app1', 'app2']
+const expected = ['app1', 'app2']
 ----

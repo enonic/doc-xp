@@ -1,4 +1,4 @@
-= Admin Library
+= Admin API
 :toc: right
 :imagesdir: images
 
@@ -15,11 +15,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const adminLib = require('/lib/xp/admin');
+import adminLib from '/lib/xp/admin';
 ----
 
 You are now ready to use the library functionality.

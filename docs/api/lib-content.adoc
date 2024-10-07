@@ -1,4 +1,4 @@
-= Content library
+= Content API
 :toc: right
 :imagesdir: ../images
 
@@ -15,11 +15,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const contentLib = require('/lib/xp/content');
+import contentLib from '/lib/xp/content';
 ----
 
 You are now ready to use the library functionality.
@@ -31,9 +31,12 @@ Variable of type NodePath describing content node root path.
 [.lead]
 Usage
 
-```js
-const myRoot = contentLib.CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()
-```
+[source,typescript]
+----
+import {CONTENT_ROOT_PATH} from '/lib/xp/content';
+
+const myRoot = CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()
+----
 
 === ARCHIVE_ROOT_PATH
 Variable of type NodePath describing archive node root path.
@@ -42,9 +45,12 @@ Variable of type NodePath describing archive node root path.
 [.lead]
 Usage
 
-```js
-const myRoot = contentLib.ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()
-```
+[source,typescript]
+----
+import {ARCHIVE_ROOT_PATH} from '/lib/xp/content';
+
+const myRoot = ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()
+----
 
 == Functions
 
@@ -72,16 +78,19 @@ An object with the following keys and their values:
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {addAttachment} from '/lib/xp/content';
+
 // Adds an attachment.
-contentLib.addAttachment({
+addAttachment({
     key: '/mySite/mycontent',
     name: 'image',
     mimeType: 'image/png',
     label: 'photo',
     data: dataStream
 });
-```
+----
 
 === archive
 image:xp-780.svg[XP 7.8.0,opts=inline]
@@ -108,23 +117,24 @@ Returns
 
 [.lead]
 Examples
-```js
+[source,typescript]
+----
+import {archive} from '/lib/xp/content';
 
 // Archive content by path.
-const result1 = contentLib.archive({
-content: '/path/to/mycontent',
+const result1 = archive({
+    content: '/path/to/mycontent',
 });
 
-log.info('Archived content ids: ' + result1.join(''));
+log.info('Archived content ids: %s', result1.join(','));
 
 // Archive content by id.
-const result2 = contentLib.archive({
-content: 'my-content-id'
+const result2 = archive({
+    content: 'my-content-id'
 });
 
-log.info('Archived content ids: ' + result2.join(','));
-
-```
+log.info('Archived content ids: %s', result2.join(','));
+----
 
 === create
 
@@ -164,9 +174,12 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {create} from '/lib/xp/content';
+
 // Creates a content.
-const result1 = contentLib.create({
+const result1 = create({
     name: 'mycontent',
     parentPath: '/a/b',
     displayName: 'My Content',
@@ -190,16 +203,20 @@ const result1 = contentLib.create({
             }
         }
     },
-    "attachments": {},
-    "publish": {}
+    attachments: {},
+    publish: {}
 });
 
-log.info('Content created with id ' + result1._id);
-```
-```js
+log.info('Content created with id %s', result1._id);
+----
+
+[source,typescript]
+----
+import {create} from '/lib/xp/content';
+
 // Check if content already exists.
 try {
-    const result2 = contentLib.create({
+    const result2 = create({
         name: 'mycontent',
         parentPath: '/a/b',
         displayName: 'My Content',
@@ -207,55 +224,57 @@ try {
         data: {}
     });
 
-    log.info('Content created with id ' + result2._id);
+    log.info('Content created with id %s', result2._id);
 
 } catch (e) {
     if (e.code == 'contentAlreadyExists') {
         log.error('There is already a content with that name');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }
-```
-```js
+----
+
+[source,typescript]
+----
 // Content created.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/a/b/mycontent",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "test:myContentType",
-    "displayName": "My Content",
-    "hasChildren": false,
-    "language": "es",
-    "valid": false,
-    "data": {
-        "a": 1,
-        "b": 2,
-        "c": [
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/a/b/mycontent",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "test:myContentType",
+    displayName: "My Content",
+    hasChildren: false,
+    language: "es",
+    valid: false,
+    data: {
+        a: 1,
+        b: 2,
+        c: [
             "1",
             "2"
         ],
-        "d": {
-            "e": {
-                "f": 3.6,
-                "g": true
+        d: {
+            e: {
+                f: 3.6,
+                g: true
             }
         }
     },
-    "x": {
+    x: {
         "com-enonic-myapplication": {
-            "myschema": {
-                "a": 1
+            myschema: {
+                a: 1
             }
         }
     },
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    page: {},
+    attachments: {},
+    publish: {}
 };
-```
+----
 
 === createMedia
 
@@ -287,33 +306,38 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {createMedia} from '/lib/xp/content';
+
 // Creates a media.
-const result = contentLib.createMedia({
+const result = createMedia({
     name: 'mycontent',
     parentPath: '/a/b',
     mimeType: 'text/plain',
     data: stream
 });
-```
-```js
+----
+
+[source,typescript]
+----
 // Media created.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/a/b/mycontent",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {},
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/a/b/mycontent",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {},
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {}
 };
-```
+----
 
 === modifyMedia
 
@@ -351,9 +375,12 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {modifyMedia} from '/lib/xp/content';
+
 // Modifies a media.
-const result = contentLib.modifyMedia({
+const result = modifyMedia({
     key: '/a/b/mycontent',
     name: 'mycontent',
     data: stream,
@@ -363,42 +390,43 @@ const result = contentLib.modifyMedia({
     mimeType: 'text/plan',
     tags: ['tag1', 'tag2']
 });
-```
+----
 
-```js
+[source,typescript]
+----
 // Modified media.
 const expected = {
-    "_id": "123456",
-    "_name": "myMedia",
-    "_path": "/a/b/myMedia",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {
-        "caption": "Caption",
-        "artist": [
+    _id: "123456",
+    _name: "myMedia",
+    _path: "/a/b/myMedia",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {
+        caption: "Caption",
+        artist: [
             "Artist 1",
             "Artist 2"
         ],
-        "copyright": "Copyright",
-        "mimeType": "text/plan",
-        "tags": [
+        copyright: "Copyright",
+        mimeType: "text/plan",
+        tags: [
             "tag1",
             "tag2"
         ]
     },
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {},
-    "workflow": {
-        "state": "READY",
-        "checks": {}
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {},
+    workflow: {
+        state: "READY",
+        checks: {}
     }
 };
-```
+----
 
 === delete
 
@@ -425,9 +453,12 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {delete as deleteContent} from '/lib/xp/content';
+
 // Deletes a content by path.
-const result = contentLib.delete({
+const result = deleteContent({
     key: '/features/js-libraries/mycontent'
 });
 
@@ -436,7 +467,7 @@ if (result) {
 } else {
     log.info('Content was not found');
 }
-```
+----
 
 === duplicate
 
@@ -454,8 +485,8 @@ An object with the following keys and their values:
 | Name | Type | Attributes| Default | Description
 | contentId | string | | | Id of the content.
 | workflow | Object | <optional> | ```{
-"state": "READY",
-"checks": {}
+state: "READY",
+checks: {}
 }``` | Workflow state.
 | includeChildren |  boolean | <optional> | true | Indicates that children contents must be duplicated, too. Ignored if `variant=true`.
 | variant | boolean | <optional> | false | Indicates that duplicated content is a variant.
@@ -472,40 +503,46 @@ Returns summary about duplicated content.
 Examples
 
 Duplicate content
-```js
+[source,typescript]
+----
+import {duplicate} from '/lib/xp/content';
+
 // Duplicate content by id
-var result = contentLib.duplicate({
+const result = duplicate({
     contentId: '79e21db0-5b43-45ce-b58c-6e1c420b22bd',
     includeChildren: false,
 });
 
 // Summary of the duplicated content.
-var expected = {
-    "contentName": "sourcecontentname-copy",
-    "sourceContentPath": "/path/to/duplicated-content",
-    "duplicatedContents": [
+const expected = {
+    contentName: "sourcecontentname-copy",
+    sourceContentPath: "/path/to/duplicated-content",
+    duplicatedContents: [
         "duplicated-content-id"
     ]
 };
-```
+----
 
 Create variant
-```js
+[source,typescript]
+----
+import {duplicate} from '/lib/xp/content';
+
 // Create a variant of the content
-var result = contentLib.duplicate({
+const result = duplicate({
     contentId: '79e21db0-5b43-45ce-b58c-6e1c420b22bd',
     variant: true,
     name: 'variant-name'
 });
 
-var expected = {
-    "contentName": "variant-name",
-    "sourceContentPath": "/path/to/variant-name",
-    "duplicatedContents": [
+const expected = {
+    contentName: "variant-name",
+    sourceContentPath: "/path/to/variant-name",
+    duplicatedContents: [
         "variant-content-id"
     ]
 }
-```
+----
 
 === exists
 
@@ -532,9 +569,12 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {exists} from '/lib/xp/content';
+
 // Checking if a content exists
-const result = contentLib.exists({
+const result = exists({
     key: '/path/to/mycontent'
 });
 
@@ -543,7 +583,7 @@ if (result) {
 } else {
     log.info('Content does not exist');
 }
-```
+----
 
 
 === get
@@ -572,55 +612,60 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {get as getContentByKey} from '/lib/xp/content';
+
 // Gets a single content by path.
-const result = contentLib.get({
+const result = getContentByKey({
     key: '/path/to/mycontent'
 });
 
 if (result) {
-    log.info('Display Name = ' + result.displayName);
+    log.info('Display Name = %s', result.displayName);
 } else {
     log.info('Content was not found');
 }
-```
-```js
+----
+
+[source,typescript]
+----
 // Content as it is returned.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/path/to/mycontent",
-    "creator": "user:system:admin",
-    "modifier": "user:system:admin",
-    "createdTime": "1970-01-01T00:00:00Z",
-    "modifiedTime": "1970-01-01T00:00:00Z",
-    "type": "base:unstructured",
-    "displayName": "My Content",
-    "hasChildren": false,
-    "language": "en",
-    "valid": true,
-    "childOrder": "_ts DESC, _name ASC",
-    "data": {
-        "myfield": "Hello World"
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/path/to/mycontent",
+    creator: "user:system:admin",
+    modifier: "user:system:admin",
+    createdTime: "1970-01-01T00:00:00Z",
+    modifiedTime: "1970-01-01T00:00:00Z",
+    type: "base:unstructured",
+    displayName: "My Content",
+    hasChildren: false,
+    language: "en",
+    valid: true,
+    childOrder: "_ts DESC, _name ASC",
+    data: {
+        myfield: "Hello World"
     },
-    "x": {},
-    "page": {},
-    "attachments": {
+    x: {},
+    page: {},
+    attachments: {
         "logo.png": {
-            "name": "logo.png",
-            "label": "small",
-            "size": 6789,
-            "mimeType": "image/png"
+            name: "logo.png",
+            label: "small",
+            size: 6789,
+            mimeType: "image/png"
         },
         "document.pdf": {
-            "name": "document.pdf",
-            "size": 12345,
-            "mimeType": "application/pdf"
+            name: "document.pdf",
+            size: 12345,
+            mimeType: "application/pdf"
         }
     },
-    "publish": {}
+    publish: {}
 };
-```
+----
 
 === getAttachments
 
@@ -645,22 +690,23 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
 // Attachments returned.
 const expected = {
     "logo.png": {
-        "name": "logo.png",
-        "label": "small",
-        "size": 6789,
-        "mimeType": "image/png"
+        name: "logo.png",
+        label: "small",
+        size: 6789,
+        mimeType: "image/png"
     },
     "document.pdf": {
-        "name": "document.pdf",
-        "size": 12345,
-        "mimeType": "application/pdf"
+        name: "document.pdf",
+        size: 12345,
+        mimeType: "application/pdf"
     }
 };
-```
+----
 
 === getAttachmentStream
 
@@ -688,13 +734,16 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {getAttachmentStream} from '/lib/xp/content';
+
 // Get stream for attachment.
-const stream = contentLib.getAttachmentStream({
+const stream = getAttachmentStream({
     key: '/a/b/mycontent',
     name: 'document.pdf'
 });
-```
+----
 
 === getChildren
 
@@ -724,67 +773,71 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {getChildren} from '/lib/xp/content';
+
 // Returns the children of specified path.
-const result = contentLib.getChildren({
+const result = getChildren({
     key: '/path/to',
     start: 0,
     count: 2,
     sort: '_modifiedTime ASC'
 });
 
-log.info('Found ' + result.total + ' number of contents');
+log.info('Found %s number of contents', result.total);
 
-for (let i = 0; i < result.hits.length; i++) {
-    const content = result.hits[i];
-    log.info('Content ' + content._name + ' loaded');
-}
-```
-```js
+result.hits.forEach((content) => {
+  log.info('Content %s loaded', content._name);
+});
+----
+
+[source,typescript]
+----
 // Result set returned.
 const expected = {
-    "total": 20,
-    "count": 2,
-    "hits": [
+    total: 20,
+    count: 2,
+    hits: [
         {
-            "_id": "id1",
-            "_name": "name1",
-            "_path": "/a/b/name1",
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 1",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id1",
+            _name: "name1",
+            _path: "/a/b/name1",
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 1",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         },
         {
-            "_id": "id2",
-            "_name": "name2",
-            "_path": "/a/b/name2",
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 2",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id2",
+            _name: "name2",
+            _path: "/a/b/name2",
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 2",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         }
     ]
 };
-```
+----
 
 
 
@@ -816,18 +869,21 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {getOutboundDependencies} from '/lib/xp/content';
+
 // Gets outbound dependencies of content by its Id.
-const result = contentLib.getOutboundDependencies({
+const result = getOutboundDependencies({
     key: '/features/js-libraries/mycontent'
 });
 
 if (result) {
-    log.info('Outbound dependencies: ' + result);
+    log.info('Outbound dependencies: %s', JSON.stringify(result, null, 4));
 } else {
     log.info('Outbound dependencies were not found');
 }
-```
+----
 
 === getPermissions
 
@@ -854,33 +910,38 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {getPermissions} from '/lib/xp/content';
+
 // Return permissions for content by path.
-const result = contentLib.getPermissions({
+const result = getPermissions({
     key: '/features/js-libraries/mycontent'
 });
 
 if (result) {
-    log.info('Content inherits permissions: ' + result.inheritPermissions);
+    log.info('Content inherits permissions: %s', result.inheritPermissions);
 } else {
     log.info('Content not found');
 }
-```
-```js
+----
+
+[source,typescript]
+----
 // Permissions returned.
 const expected = {
-    "inheritsPermissions": false,
-    "permissions": [
+    inheritsPermissions: false,
+    permissions: [
         {
-            "principal": "user:system:anonymous",
-            "allow": [
+            principal: "user:system:anonymous",
+            allow: [
                 "READ"
             ],
-            "deny": []
+            deny: []
         }
     ]
 };
-```
+----
 
 === getSite
 
@@ -907,36 +968,41 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {getSite} from '/lib/xp/content';
+
 // Returns content's parent site
-const result = contentLib.getSite({
+const result = getSite({
     key: '/path/to/mycontent'
 });
 log.info('Site name = %s', result._name);
-```
-```js
+----
+
+[source,typescript]
+----
 // Site data returned.
 const expected = {
-    "_id": "100123",
-    "_name": "my-content",
-    "_path": "/my-content",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {
-        "siteConfig": {
-            "applicationKey": "myapplication",
-            "config": {
-                "Field": 42
+    _id: "100123",
+    _name: "my-content",
+    _path: "/my-content",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {
+        siteConfig: {
+            applicationKey: "myapplication",
+            config: {
+                Field: 42
             }
         }
     },
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {}
 };
-```
+----
 
 === getSiteConfig
 
@@ -964,20 +1030,25 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {getSiteConfig} from '/lib/xp/content';
+
 // Returns config of the content's parent site
-const result = contentLib.getSiteConfig({
+const result = getSiteConfig({
     key: '/path/to/mycontent',
     applicationKey: app.name
 });
 log.info('Field value for the site config = %s', result.Field);
-```
-```js
+----
+
+[source,typescript]
+----
 // Site config returned.
 const expected = {
-    "Field": 42
+    Field: 42
 };
-```
+----
 
 === getType
 
@@ -1002,124 +1073,133 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {getType} from '/lib/xp/content';
+
 // Get a content type by name
-const contentType = contentLib.getType('com.enonic.myapp:person');
-```
-```js
+const contentType = getType('com.enonic.myapp:person');
+----
+
+[source,typescript]
+----
 // Content type returned:
 const expected = {
-    "name": "com.enonic.myapp:person",
-    "displayName": "Person",
-    "description": "Person content type",
-    "superType": "base:structured",
-    "abstract": false,
-    "final": true,
-    "allowChildContent": true,
-    "displayNameExpression": "${name}",
-    "icon": {
-        "mimeType": "image/png",
-        "modifiedTime": "2016-01-01T12:00:00Z"
+    name: "com.enonic.myapp:person",
+    displayName: "Person",
+    description: "Person content type",
+    superType: "base:structured",
+    abstract: false,
+    final: true,
+    allowChildContent: true,
+    displayNameExpression: "${name}",
+    icon: {
+        mimeType: "image/png",
+        modifiedTime: "2016-01-01T12:00:00Z"
     },
-    "form": [
+    form: [
         {
-            "formItemType": "Input",
-            "name": "name",
-            "label": "Full name",
-            "maximize": true,
-            "inputType": "TextLine",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "name",
+            label: "Full name",
+            maximize: true,
+            inputType: "TextLine",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "title",
-            "label": "Photo",
-            "helpText": "Person photo",
-            "maximize": true,
-            "inputType": "ImageSelector",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "title",
+            label: "Photo",
+            helpText: "Person photo",
+            maximize: true,
+            inputType: "ImageSelector",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "bio",
-            "label": "Bio",
-            "maximize": true,
-            "inputType": "HtmlArea",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "bio",
+            label: "Bio",
+            maximize: true,
+            inputType: "HtmlArea",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "birthdate",
-            "label": "Birth date",
-            "maximize": true,
-            "inputType": "Date",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 0
+            formItemType: "Input",
+            name: "birthdate",
+            label: "Birth date",
+            maximize: true,
+            inputType: "Date",
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "email",
-            "label": "Email",
-            "helpText": "Email address",
-            "maximize": true,
-            "inputType": "TextLine",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "email",
+            label: "Email",
+            helpText: "Email address",
+            maximize: true,
+            inputType: "TextLine",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {
-                "regexp": [
+            config: {
+                regexp: [
                     {
-                        "value": "^[^@]+@[^@]+\\.[^@]+$"
+                        value: "^[^@]+@[^@]+\\.[^@]+$"
                     }
                 ]
             }
         },
         {
-            "formItemType": "Input",
-            "name": "nationality",
-            "label": "Nationality",
-            "maximize": true,
-            "inputType": "ContentSelector",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 0
+            formItemType: "Input",
+            name: "nationality",
+            label: "Nationality",
+            maximize: true,
+            inputType: "ContentSelector",
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            "config": {
-                "allowContentType": [
+            config: {
+                allowContentType: [
                     {
-                        "value": "com.enonic.myapp:country"
+                        value: "com.enonic.myapp:country"
                     }
                 ]
             }
         }
     ]
 };
-```
-```js
+----
+
+[source,typescript]
+----
+import {getType} from '/lib/xp/content';
+
 // Get a content type icon
-const ct = contentLib.getType('com.enonic.myapp:person');
+const ct = getType('com.enonic.myapp:person');
 const icon = ct.icon;
 return {
     body: icon.data,
     contentType: icon.mimeType
 };
-```
+----
 
 === getTypes
 
@@ -1133,17 +1213,20 @@ Returns
 [.lead]
 Examples
 
-```js
-// Gets the list of all content types in the system
-const contentTypes = contentLib.getTypes();
+[source,typescript]
+----
+import {getTypes} from '/lib/xp/content';
 
-log.info(contentTypes.length + ' content types found:');
-contentTypes.forEach(function (ct) {
-    if (ct.superType === 'base:structured') {
-        log.info(ct.name + ' - ' + ct.displayName);
+// Gets the list of all content types in the system
+const contentTypes = getTypes();
+
+log.info('%s content types found:', contentTypes.length);
+contentTypes.forEach(({displayName,name,superType}) => {
+    if (superType === 'base:structured') {
+        log.info('%s - %s', name, displayName);
     }
 });
-```
+----
 
 === modify
 
@@ -1174,7 +1257,10 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {modify} from '/lib/xp/content';
+
 // Editor to call for content.
 function editor(c) {
     c.displayName = 'Modified';
@@ -1187,62 +1273,64 @@ function editor(c) {
 }
 
 // Modify content by path
-const result = contentLib.modify({
+const result = modify({
     key: '/a/b/mycontent',
     editor: editor
 });
 
 if (result) {
-    log.info('Content modified. New title is ' + result.displayName);
+    log.info('Content modified. New title is %s', result.displayName);
 } else {
     log.info('Content not found');
 }
-```
-```js
+----
+
+[source,typescript]
+----
 // Content modified.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/path/to/mycontent",
-    "creator": "user:system:admin",
-    "modifier": "user:system:admin",
-    "createdTime": "1970-01-01T00:00:00Z",
-    "modifiedTime": "1970-01-01T00:00:00Z",
-    "type": "base:unstructured",
-    "displayName": "Modified",
-    "hasChildren": false,
-    "language": "en",
-    "valid": true,
-    "childOrder": "_ts DESC, _name ASC",
-    "data": {
-        "myfield": "Hello World",
-        "myCheckbox": "false",
-        "myTime": "11:00"
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/path/to/mycontent",
+    creator: "user:system:admin",
+    modifier: "user:system:admin",
+    createdTime: "1970-01-01T00:00:00Z",
+    modifiedTime: "1970-01-01T00:00:00Z",
+    type: "base:unstructured",
+    displayName: "Modified",
+    hasChildren: false,
+    language: "en",
+    valid: true,
+    childOrder: "_ts DESC, _name ASC",
+    data: {
+        myfield: "Hello World",
+        myCheckbox: "false",
+        myTime: "11:00"
     },
-    "x": {},
-    "page": {},
-    "attachments": {
+    x: {},
+    page: {},
+    attachments: {
         "logo.png": {
-            "name": "logo.png",
-            "label": "small",
-            "size": 6789,
-            "mimeType": "image/png"
+            name: "logo.png",
+            label: "small",
+            size: 6789,
+            mimeType: "image/png"
         },
         "document.pdf": {
-            "name": "document.pdf",
-            "size": 12345,
-            "mimeType": "application/pdf"
+            name: "document.pdf",
+            size: 12345,
+            mimeType: "application/pdf"
         }
     },
-    "publish": {
-        "from": "2016-11-03T10:01:34Z"
+    publish: {
+        from: "2016-11-03T10:01:34Z"
     },
-    "workflow": {
-        "state": "READY",
-        "checks": {}
+    workflow: {
+        state: "READY",
+        checks: {}
     }
 };
-```
+----
 
 === move
 [[move]]
@@ -1271,46 +1359,65 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {move} from '/lib/xp/content';
+
 // Rename content by path. Keeps same parent.
-const content1 = contentLib.move({
+const content1 = move({
     source: '/my-site/my-content-name',
     target: 'new-name'
 });
 
-log.info('New path: ' + content1._path); // '/my-site/new-name'
-```
-```js
+log.info('New path: %s', content1._path); // '/my-site/new-name'
+----
+
+[source,typescript]
+----
+import {move} from '/lib/xp/content';
+
 // Move content by path. New parent path, keeps same name.
-const content2 = contentLib.move({
+const content2 = move({
     source: '/my-site/my-content-name',
     target: '/my-site/folder/'
 });
 
-log.info('New path: ' + content2._path); // '/my-site/folder/my-content-name'
-```
-```js
+log.info('New path: %s', content2._path); // '/my-site/folder/my-content-name'
+----
+
+[source,typescript]
+----
+import {move} from '/lib/xp/content';
+
 // Move content by id to new path. New parent path, keeps same name.
-const content3 = contentLib.move({
+const content3 = move({
     source: '8d933461-ede7-4dd5-80da-cb7de0cd7bba',
     target: '/my-site/folder/'
 });
 
-log.info('New path: ' + content3._path); // '/my-site/folder/my-content-name'
-```
-```js
+log.info('New path: %s', content3._path); // '/my-site/folder/my-content-name'
+----
+
+[source,typescript]
+----
+import {move} from '/lib/xp/content';
+
 // Move and rename content.
-const content4 = contentLib.move({
+const content4 = move({
     source: '/my-site/my-content-name',
     target: '/my-site/folder/new-name'
 });
 
-log.info('New path: ' + content4._path); // '/my-site/folder/new-name'
-```
-```js
+log.info('New path: %s', content4._path); // '/my-site/folder/new-name'
+----
+
+[source,typescript]
+----
+import {move} from '/lib/xp/content';
+
 // Handle error if target already exists.
 try {
-    const content5 = contentLib.move({
+    const content5 = move({
         source: '/my-site/my-content-name',
         target: '/my-site/folder/existing-content'
     });
@@ -1319,10 +1426,10 @@ try {
     if (e.code == 'contentAlreadyExists') {
         log.error('There is already a content in the target specified');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }
-```
+----
 
 === publish
 
@@ -1366,9 +1473,12 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {publish} from '/lib/xp/content';
+
 // Publish content by path or key
-const result = contentLib.publish({
+const result = publish({
     keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd'],
     sourceBranch: 'draft',
     targetBranch: 'master',
@@ -1380,29 +1490,31 @@ const result = contentLib.publish({
 });
 
 if (result) {
-    log.info('Pushed ' + result.pushedContents.length + " content.");
-    log.info('Deleted ' + result.deletedContents.length + " content.");
-    log.info('Content that failed operation: ' + result.failedContents.length);
+    log.info('Pushed %s content.', result.pushedContents.length);
+    log.info('Deleted %s content.1, result.deletedContents.length);
+    log.info('Content that failed operation: %s', result.failedContents.length);
 } else {
     log.info('Operation failed.');
 }
-```
-```js
+----
+
+[source,typescript]
+----
 // Content published.
 const expected = {
-    "pushedContents": [
+    pushedContents: [
         "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
         "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
         "e1f57280-d672-4cd8-b674-98e26e5b69ae"
     ],
-    "deletedContents": [ // Removed from 7.12.0
+    deletedContents: [ // Removed from 7.12.0
         "45d67001-7f2b-4093-99ae-639be9fdd1f6"
     ],
-    "failedContents": [
+    failedContents: [
         "79e21db0-5b43-45ce-b58c-6e1c420b22bd"
     ]
 };
-```
+----
 
 === query
 
@@ -1438,9 +1550,12 @@ image:xp-750.svg[XP 7.5.0,opts=inline] If `sort` was specified, results will con
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {query} from '/lib/xp/content';
+
 // Query content using aggregations.
-const result = contentLib.query({
+const result = query({
     start: 0,
     count: 2,
     sort: "modifiedTime DESC, geoDistance('data.location', '59.91,10.75', 'km')",
@@ -1536,137 +1651,138 @@ const result = contentLib.query({
     }
 });
 
-log.info('Found ' + result.total + ' number of contents');
+log.info('Found %s number of contents', result.total);
 
-for (let i = 0; i < result.hits.length; i++) {
-    const content = result.hits[i];
-    log.info('Content ' + content._name + ' found');
-}
-```
-```js
+result.hits.forEach((content) => {
+  log.info('Content %s found', content._name);
+});
+----
+
+[source,typescript]
+----
 // Result set returned.
 const expected = {
-    "total": 20,
-    "count": 2,
-    "hits": [
+    total: 20,
+    count: 2,
+    hits: [
         {
-            "_id": "id1",
-            "_name": "name1",
-            "_path": "/a/b/name1",
-            "_sort": ["1970-01-01T00:00:00Z", 9279.647306690395],
-            "_score": null,
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 1",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id1",
+            _name: "name1",
+            _path: "/a/b/name1",
+            _sort: ["1970-01-01T00:00:00Z", 9279.647306690395],
+            _score: null,
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 1",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         },
         {
-            "_id": "id2",
-            "_name": "name2",
-            "_path": "/a/b/name2",
-            "_sort": [ "1970-01-01T00:00:00Z", 15964.050071707446],
-            "_score": null,
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 2",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id2",
+            _name: "name2",
+            _path: "/a/b/name2",
+            _sort: [ "1970-01-01T00:00:00Z", 15964.050071707446],
+            _score: null,
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 2",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         }
     ],
-    "aggregations": {
-        "genders": {
-            "buckets": [
+    aggregations: {
+        genders: {
+            buckets: [
                 {
-                    "key": "male",
-                    "docCount": 10
+                    key: "male",
+                    docCount: 10
                 },
                 {
-                    "key": "female",
-                    "docCount": 12
+                    key: "female",
+                    docCount: 12
                 }
             ]
         },
-        "by_month": {
-            "buckets": [
+        by_month: {
+            buckets: [
                 {
-                    "key": "2014-01",
-                    "docCount": 8
+                    key: "2014-01",
+                    docCount: 8
                 },
                 {
-                    "key": "2014-02",
-                    "docCount": 10
+                    key: "2014-02",
+                    docCount: 10
                 },
                 {
-                    "key": "2014-03",
-                    "docCount": 12
+                    key: "2014-03",
+                    docCount: 12
                 }
             ]
         },
-        "price_ranges": {
-            "buckets": [
+        price_ranges: {
+            buckets: [
                 {
-                    "key": "a",
-                    "docCount": 2,
-                    "to": 50
+                    key: "a",
+                    docCount: 2,
+                    to: 50
                 },
                 {
-                    "key": "b",
-                    "docCount": 4,
-                    "from": 50,
-                    "to": 100
+                    key: "b",
+                    docCount: 4,
+                    from: 50,
+                    to: 100
                 },
                 {
-                    "key": "c",
-                    "docCount": 4,
-                    "from": 100
+                    key: "c",
+                    docCount: 4,
+                    from: 100
                 }
             ]
         },
-        "my_date_range": {
-            "buckets": [
+        my_date_range: {
+            buckets: [
                 {
-                    "key": "date range bucket key",
-                    "docCount": 2,
-                    "from": "2014-09-01T00:00:00Z"
+                    key: "date range bucket key",
+                    docCount: 2,
+                    from: "2014-09-01T00:00:00Z"
                 },
                 {
-                    "docCount": 5,
-                    "from": "2014-10-01T00:00:00Z",
-                    "to": "2014-09-01T00:00:00Z"
+                    docCount: 5,
+                    from: "2014-10-01T00:00:00Z",
+                    to: "2014-09-01T00:00:00Z"
                 },
                 {
-                    "docCount": 7,
-                    "to": "2014-11-01T00:00:00Z"
+                    docCount: 7,
+                    to: "2014-11-01T00:00:00Z"
                 }
             ]
         },
-        "item_count": {
-            "count": 5,
-            "min": 1,
-            "max": 5,
-            "avg": 3,
-            "sum": 15
+        item_count: {
+            count: 5,
+            min: 1,
+            max: 5,
+            avg: 3,
+            sum: 15
         }
     }
 };
-```
+----
 
 === removeAttachment
 
@@ -1689,14 +1805,21 @@ An object with the following keys and their values:
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {removeAttachment} from '/lib/xp/content';
+
 // Removes an attachment, by content path.
-contentLib.removeAttachment({key: '/mySite/mycontent', name: 'document'});
-```
-```js
+removeAttachment({key: '/mySite/mycontent', name: 'document'});
+----
+
+[source,typescript]
+----
+import {removeAttachment} from '/lib/xp/content';
+
 // Removes multiple attachments, by content id.
-contentLib.removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document', 'image']});
-```
+removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document', 'image']});
+----
 
 === resetInheritance
 image:xp-760.svg[XP 7.6.0,opts=inline]
@@ -1725,14 +1848,21 @@ Supported values are: `CONTENT` (resets any customized content data), `PARENT` (
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {resetInheritance} from '/lib/xp/content';
+
 // Resets all custom changes made to inherited item '/mySite/mycontent' in the layer 'layer-no'
-contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['CONTENT', 'PARENT', 'NAME', 'SORT']});
-```
-```js
+resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['CONTENT', 'PARENT', 'NAME', 'SORT']});
+----
+
+[source,typescript]
+----
+import {resetInheritance} from '/lib/xp/content';
+
 // Resets custom sorting of inherited item '/mySite/mycontent' in the layer 'layer-no', but preserves any other changes
-contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['SORT']});
-```
+resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['SORT']});
+----
 
 === restore
 image:xp-780.svg[XP 7.8.0,opts=inline]
@@ -1760,29 +1890,32 @@ Returns
 
 [.lead]
 Examples
-```js
+[source,typescript]
+----
+import {restore} from '/lib/xp/content';
+
 // Restore content by path.
-const result1 = contentLib.restore({
+const result1 = restore({
     content: '/path/to/mycontent',
 });
 
-log.info('Restored content ids: ' + result1.join(','));
+log.info('Restored content ids: %s', result1.join(','));
 
 // Restore content by id.
-const result2 = contentLib.restore({
+const result2 = restore({
     content: 'my-content-id'
 });
 
-log.info('Restored content ids: ' + result2.join(','));
+log.info('Restored content ids: %s', result2.join(','));
 
 // Restore content by id to custom path.
-const result3 = contentLib.restore({
+const result3 = restore({
     content: 'my-content-id',
     path: '/custom-parent'
 });
 
-log.info('Restored content ids: ' + result3.join(','));
-```
+log.info('Restored content ids: %s', result3.join(','));
+----
 
 === setPermissions
 
@@ -1825,9 +1958,12 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {setPermissions} from '/lib/xp/content';
+
 // Set permissions for content by path.
-const flag = contentLib.setPermissions({
+const flag = setPermissions({
     key: '/features/js-libraries/mycontent',
     inheritPermissions: false,
     overwriteChildPermissions: true,
@@ -1843,7 +1979,7 @@ if (flag) {
 } else {
     log.info('Content not found');
 }
-```
+----
 
 === unpublish
 
@@ -1870,22 +2006,27 @@ Returns
 [.lead]
 Examples
 
-```js
+[source,typescript]
+----
+import {unpublish} from '/lib/xp/content';
+
 // Unpublish content by path or key
-const result = contentLib.unpublish({
+const result = unpublish({
     keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd']
 });
 
-log.info('Unpublished content ids: ' + result.join(','));
-```
-```js
+log.info('Unpublished content ids: %s', result.join(','));
+----
+
+[source,typescript]
+----
 // Content unpublished.
 const expected = [
     "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
     "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
     "e1f57280-d672-4cd8-b674-98e26e5b69ae"
 ];
-```
+----
 
 == Objects
 

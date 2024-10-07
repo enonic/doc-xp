@@ -1,4 +1,4 @@
-= Portal Library
+= Portal API
 :toc: right
 :imagesdir: ../images
 
@@ -15,11 +15,12 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var portalLib = require('/lib/xp/portal');
-```
+[source,typescript]
+----
+import portalLib from '/lib/xp/portal';
+----
 
 You are now ready to use the library functionality.
 
@@ -62,11 +63,14 @@ Returns
 [.lead]
 Example
 
-```js
-var url = portalLib.assetUrl({
+[source,typescript]
+----
+import {assetUrl} from '/lib/xp/portal';
+
+const url = assetUrl({
   path: 'styles/main.css'
 });
-```
+----
 
 === attachmentUrl
 
@@ -109,12 +113,15 @@ Returns
 Example
 
 .Obtains list of active tasks:
-```js
-var url = portalLib.attachmentUrl({
+[source,typescript]
+----
+import {attachmentUrl} from '/lib/xp/portal';
+
+const url = attachmentUrl({
   id: '1234',
   download: true
 });
-```
+----
 
 === componentUrl
 
@@ -155,16 +162,20 @@ Returns
 Example
 
 .Obtains list of active tasks:
-```js
-var url = portalLib.componentUrl({
+[source,typescript]
+----
+import {componentUrl} from '/lib/xp/portal';
+
+const url = componentUrl({
   component: 'main/0'
 });
-```
+----
 
 .Return value:
-```js
-var expected = 'ComponentUrlParams{type=server, params={}, component=main/0}'
-```
+[source,typescript]
+----
+const expected = 'ComponentUrlParams{type=server, params={}, component=main/0}'
+----
 
 === getComponent
 
@@ -179,37 +190,41 @@ Returns
 Example
 
 .Obtains list of active tasks:
-```js
-var result = portalLib.getComponent();
+[source,typescript]
+----
+import {getComponent} from '/lib/xp/portal';
+
+const result = getComponent();
 log.info('Current component name = %s', result.name);
-```
+----
 
 .Return value:
-```js
-var expected = {
-  "path": "/main/0",
-  "type": "layout",
-  "descriptor": "myapplication:mylayout",
-  "config": {
-    "a": "1"
+[source,typescript]
+----
+const expected = {
+  path: "/main/0",
+  type: "layout",
+  descriptor: "myapplication:mylayout",
+  config: {
+    a: "1"
   },
-  "regions": {
-    "bottom": {
-      "components": [
+  regions: {
+    bottom: {
+      components: [
         {
-          "path": "/main/0/bottom/0",
-          "type": "part",
-          "descriptor": "myapplication:mypart",
-          "config": {
-            "a": "1"
+          path: "/main/0/bottom/0",
+          type: "part",
+          descriptor: "myapplication:mypart",
+          config: {
+            a: "1"
           }
         }
       ],
-      "name": "bottom"
+      name: "bottom"
     }
   }
 };
-```
+----
 
 === getContent
 
@@ -224,35 +239,39 @@ Returns
 Example
 
 .Get content and log the result:
-```js
-var result = portalLib.getContent();
+[source,typescript]
+----
+import {getContent} from '/lib/xp/portal';
+
+const result = getContent();
 log.info('Current content path = %s', result._path);
-```
+----
 
 .Return value:
-```js
-var expected = {
-  "_id": "123456",
-  "_name": "mycontent",
-  "_path": "/a/b/mycontent",
-  "creator": "user:system:admin",
-  "modifier": "user:system:admin",
-  "createdTime": "1970-01-01T00:00:00Z",
-  "modifiedTime": "1970-01-01T00:00:00Z",
-  "type": "base:unstructured",
-  "displayName": "My Content",
-  "hasChildren": false,
-  "language": "en",
-  "valid": false,
-  "data": {
-    "a": "1"
+[source,typescript]
+----
+const expected = {
+  _id: "123456",
+  _name: "mycontent",
+  _path: "/a/b/mycontent",
+  creator: "user:system:admin",
+  modifier: "user:system:admin",
+  createdTime: "1970-01-01T00:00:00Z",
+  modifiedTime: "1970-01-01T00:00:00Z",
+  type: "base:unstructured",
+  displayName: "My Content",
+  hasChildren: false,
+  language: "en",
+  valid: false,
+  data: {
+    a: "1"
   },
-  "x": {},
-  "page": {},
-  "attachments": {},
-  "publish": {}
+  x: {},
+  page: {},
+  attachments: {},
+  publish: {}
 };
-```
+----
 
 === getIdProviderKey
 
@@ -267,18 +286,22 @@ Returns
 Example
 
 .Returns the current id provider:
-```js
-var idProviderKey = portalLib.getIdProviderKey();
+[source,typescript]
+----
+import {getIdProviderKey} from '/lib/xp/portal';
+
+const idProviderKey = getIdProviderKey();
 
 if (idProviderKey) {
     log.info('Id provider key: %s', idProviderKey);
 }
-```
+----
 
 .Return value:
-```js
-var expected = "myidprovider";
-```
+[source,typescript]
+----
+const expected = "myidprovider";
+----
 
 === getMultipartForm
 
@@ -293,36 +316,40 @@ Returns
 Example
 
 .Get the form and log the result:
-```js
-var result = portalLib.getMultipartForm();
+[source,typescript]
+----
+import {getMultipartForm} from '/lib/xp/portal';
+
+const result = getMultipartForm();
 log.info('Multipart form %s', result);
-```
+----
 
 .Return value:
-```js
-var expected = {
-  "item1": {
-    "name": "item1",
-    "fileName": "item1.jpg",
-    "contentType": "image/png",
-    "size": 10
+[source,typescript]
+----
+const expected = {
+  item1: {
+    name: "item1",
+    fileName: "item1.jpg",
+    contentType: "image/png",
+    size: 10
   },
-  "item2": [
+  item2: [
     {
-      "name": "item2",
-      "fileName": "image1.png",
-      "contentType": "image/png",
-      "size": 123
+      name: "item2",
+      fileName: "image1.png",
+      contentType: "image/png",
+      size: 123
     },
     {
-      "name": "item2",
-      "fileName": "image2.jpg",
-      "contentType": "image/jpeg",
-      "size": 456
+      name: "item2",
+      fileName: "image2.jpg",
+      contentType: "image/jpeg",
+      size: 456
     }
   ]
 };
-```
+----
 
 === getMultipartItem
 
@@ -350,20 +377,24 @@ Returns
 Example
 
 .Get item and log the result:
-```js
-var result = portalLib.getMultipartItem('item1');
+[source,typescript]
+----
+import {getMultipartItem} from '/lib/xp/portal';
+
+const result = getMultipartItem('item1');
 log.info('Multipart item %s', result);
-```
+----
 
 .Return value:
-```js
-var expected = {
-  "name": "item1",
-  "fileName": "item1.jpg",
-  "contentType": "image/png",
-  "size": 10
+[source,typescript]
+----
+const expected = {
+  name: "item1",
+  fileName: "item1.jpg",
+  contentType: "image/png",
+  size: 10
 };
-```
+----
 
 === getMultipartStream
 
@@ -390,10 +421,13 @@ Returns
 [.lead]
 Example
 
-```js
-var stream1 = portalLib.getMultipartStream('item2');
-var stream2 = portalLib.getMultipartStream('item2', 1);
-```
+[source,typescript]
+----
+import {getMultipartStream} from '/lib/xp/portal';
+
+const stream1 = getMultipartStream('item2');
+const stream2 = getMultipartStream('item2', 1);
+----
 
 === getMultipartText
 
@@ -420,9 +454,12 @@ Returns
 [.lead]
 Example
 
-```js
-var text = portalLib.getMultipartText('item1');
-```
+[source,typescript]
+----
+import {getMultipartText} from '/lib/xp/portal';
+
+const text = getMultipartText('item1');
+----
 
 === getSite
 
@@ -437,34 +474,38 @@ Returns
 Example
 
 .Get site and log the result:
-```js
-var result = portalLib.getSite();
+[source,typescript]
+----
+import {getSite} from '/lib/xp/portal';
+
+const result = getSite();
 log.info('Current site name = %s', result._name);
-```
+----
 
 .Return value:
-```js
-var expected = {
-  "_id": "100123",
-  "_name": "my-content",
-  "_path": "/my-content",
-  "type": "base:unstructured",
-  "hasChildren": false,
-  "valid": false,
-  "data": {
-    "siteConfig": {
-      "applicationKey": "myapplication",
-      "config": {
-        "Field": 42
+[source,typescript]
+----
+const expected = {
+  _id: "100123",
+  _name: "my-content",
+  _path: "/my-content",
+  type: "base:unstructured",
+  hasChildren: false,
+  valid: false,
+  data: {
+    siteConfig: {
+      applicationKey: "myapplication",
+      config: {
+        Field: 42
       }
     }
   },
-  "x": {},
-  "page": {},
-  "attachments": {},
-  "publish": {}
+  x: {},
+  page: {},
+  attachments: {},
+  publish: {}
 };
-```
+----
 
 === getSiteConfig
 
@@ -479,17 +520,21 @@ Returns
 Example
 
 .Get site and log the result:
-```js
-var result = portalLib.getSiteConfig();
+[source,typescript]
+----
+import {getSiteConfig} from '/lib/xp/portal';
+
+const result = getSiteConfig();
 log.info('Field value for the current site config = %s', result.Field);
-```
+----
 
 .Return value:
-```js
-var expected = {
-  "Field": 42
+[source,typescript]
+----
+const expected = {
+  Field: 42
 };
-```
+----
 
 === idProviderUrl
 
@@ -561,17 +606,21 @@ Returns
 Example
 
 .Obtains image encoded to base64:
-```js
-var url = portalLib.imagePlaceholder({
+[source,typescript]
+----
+import {imagePlaceholder} from '/lib/xp/portal';
+
+const url = imagePlaceholder({
   width: 32,
   height: 24
 });
-```
+----
 
 .Return value:
-```js
-var expected = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGUlEQVR42u3BAQEAAACCIP+vbkhAAQAA7wYMGAAB93LuRQAAAABJRU5ErkJggg==';
-```
+[source,typescript]
+----
+const expected = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGUlEQVR42u3BAQEAAACCIP+vbkhAAQAA7wYMGAAB93LuRQAAAABJRU5ErkJggg==';
+----
 
 === imageUrl
 
@@ -616,13 +665,16 @@ Returns
 Example
 
 .Obtains image url:
-```js
-var url = portalLib.imageUrl({
+[source,typescript]
+----
+import {imageUrl} from '/lib/xp/portal';
+
+const url = imageUrl({
   id: '1234',
   scale: 'block(1024,768)',
   filter: 'rounded(5);sharpen()'
 });
-```
+----
 
 === loginUrl
 
@@ -731,15 +783,18 @@ Returns
 Example
 
 .Obtains page url:
-```js
-var url = portalLib.pageUrl({
+[source,typescript]
+----
+import {pageUrl} from '/lib/xp/portal';
+
+const url = pageUrl({
   path: '/my/page',
   params: {
     a: 1,
     b: [1, 2]
   }
 });
-```
+----
 
 === processHtml
 [#processHtml]
@@ -783,15 +838,18 @@ Returns
 Example
 
 .Process HTML:
-```js
-var html = portalLib.processHtml({
+[source,typescript]
+----
+import {processHtml} from '/lib/xp/portal';
+
+const html = processHtml({
   value: '<a href="content://123" target="">Content</a>' +
          '<a href="media://inline/123" target="">Inline</a>' +
          '<a href="media://download/123" target="">Download</a>' +
          '<img src="image://123"/>',
   imageWidths: [32, 480, 800]
 });
-```
+----
 
 === sanitizeHtml
 
@@ -819,16 +877,20 @@ Returns
 Example
 
 .Sanitizes unsafe HTML:
-```js
-var unsafeHtml = '<p><a href="https://example.com/" onclick="stealCookies()">Link</a></p>' +
+[source,typescript]
+----
+import {sanitizeHtml} from '/lib/xp/portal';
+
+const unsafeHtml = '<p><a href="https://example.com/" onclick="stealCookies()">Link</a></p>' +
                  '<iframe src="javascript:alert(\'XSS\');"></iframe>';
-var sanitizedHtml = portalLib.sanitizeHtml(unsafeHtml);
-```
+const sanitizedHtml = sanitizeHtml(unsafeHtml);
+----
 
 .Return value:
-```js
-var expected = '<p><a href="https://example.com/">Link</a></p>';
-```
+[source,typescript]
+----
+const expected = '<p><a href="https://example.com/">Link</a></p>';
+----
 
 === serviceUrl
 
@@ -867,15 +929,18 @@ Returns
 [.lead]
 Example
 
-```js
-var url = portalLib.serviceUrl({
+[source,typescript]
+----
+import {serviceUrl} from '/lib/xp/portal';
+
+const url = serviceUrl({
   service: 'myservice',
   params: {
     a: 1,
     b: 2
   }
 });
-```
+----
 
 === url
 
@@ -913,12 +978,15 @@ Returns
 [.lead]
 Example
 
-```js
-var url = portalLib.url({
+[source,typescript]
+----
+import {url as buildUrl} from '/lib/xp/portal';
+
+const url = buildUrl({
   path: '/site/master/mysite',
   params: {
     a: 1,
     b: 2
   }
 });
-```
+----

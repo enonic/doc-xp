@@ -1,4 +1,4 @@
-= I18N Library
+= I18N API
 :toc: right
 :imagesdir: images
 
@@ -18,11 +18,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const i18nLib = require('/lib/xp/i18n');
+import i18nLib from '/lib/xp/i18n';
 ----
 
 Then, you need to create files with original phrases and their translations.  These files should be placed in your app,
@@ -75,13 +75,13 @@ An object with all phrases
 Example
 
 .Getting the current context
-[source,js]
+[source,typescript]
 ----
 const phrasesEs = i18nLib.getPhrases('es', ['site/i18n/phrases'])
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 {
   action.preview:"Vista Previa",
@@ -113,13 +113,13 @@ An array with all locales
 Example
 
 .Getting the current context
-[source,js]
+[source,typescript]
 ----
 const locales = i18nLib.getSupportedLocales(['site/i18n/phrases'])
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 ["es"]
 ----
@@ -154,9 +154,11 @@ The localized string
 Example
 
 .Localize a message with a placeholder.
-[source,js]
+[source,typescript]
 ----
-var message2 = i18nLib.localize({
+import {localize} from '/lib/xp/i18n';
+
+const message2 = localize({
     key: 'notify.process.failed',
     locale: 'es',
     values: ["StaleConnectionException"]
@@ -164,7 +166,7 @@ var message2 = i18nLib.localize({
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 Error al procesar: "StaleConnectionException".
 ----

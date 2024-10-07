@@ -1,4 +1,4 @@
-= Common Library
+= Common API
 :toc: right
 :imagesdir: images
 
@@ -15,11 +15,11 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const commonLib = require('/lib/xp/common');
+import commonLib from '/lib/xp/common';
 ----
 
 You are now ready to use the library functionality.
@@ -63,13 +63,15 @@ Returns
 Example
 
 .Sanitize string
-[source,js]
+[source,typescript]
 ----
-var sanitizedText = commonLib.sanitize("Piña CØLADÆ <script>alert('hi!');</script>");
+import {sanitize} from '/lib/xp/common';
+
+const sanitizedText = sanitize("Piña CØLADÆ <script>alert('hi!');</script>");
 ----
 
 .Sample response
-[source,js]
+[source,typescript]
 ----
 "pina-coladae-script-alerthi-script"
 ----

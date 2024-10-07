@@ -1,4 +1,4 @@
-= Dynamic schema library
+= Dynamic schema API
 :toc: right
 :imagesdir: ../images
 
@@ -15,11 +15,12 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-```js
-var schemaLib = require('/lib/xp/schema');
-```
+[source,typescript]
+----
+import schemaLib from '/lib/xp/schema';
+----
 
 You are now ready to use the library functionality.
 
@@ -61,46 +62,51 @@ Returns
 Example
 
 .Fetches a content type schema:
-```js
-var result = schemaLib.getSchema({
+[source,typescript]
+----
+import {getSchema} from '/lib/xp/schema';
+
+const result = getSchema({
     name: 'myapp:mytype',
     type: 'CONTENT_TYPE'
 
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
-  "name": "myapp:mytype",
-  "displayName": "Tag",
-  "displayNameI18nKey": "",
-  "createdTime": "2021-09-25T10:00:00Z",
-  "creator": "user:system:anonymous",
-  "modifiedTime": "2021-09-25T10:00:00Z",
+[source,typescript]
+----
+const expected = {
+  name: "myapp:mytype",
+  displayName: "Tag",
+  displayNameI18nKey: "",
+  createdTime: "2021-09-25T10:00:00Z",
+  creator: "user:system:anonymous",
+  modifiedTime: "2021-09-25T10:00:00Z",
   "resource" : <!-- resource string value -->,
-  "type": "CONTENT_TYPE",
-  "icon": {
-    "data": {},
-    "mimeType": "image/png",
-    "modifiedTime": "2016-01-01T12:00:00Z"
+  type: "CONTENT_TYPE",
+  icon: {
+    data: {},
+    mimeType: "image/png",
+    modifiedTime: "2016-01-01T12:00:00Z"
   },
-  "form": [
+  form: [
     {
-      "formItemType": "Input",
-      "name": "tag",
-      "label": "Tag, unlimited occurrences",
-      "maximize": true,
-      "inputType": "Tag",
-      "occurrences": {
-        "maximum": 0,
-        "minimum": 0
+      formItemType: "Input",
+      name: "tag",
+      label: "Tag, unlimited occurrences",
+      maximize: true,
+      inputType: "Tag",
+      occurrences: {
+        maximum: 0,
+        minimum: 0
       },
-      "config": {}
+      config: {}
     }
   ],
-  "config": {}
+  config: {}
 };
-```
+----
 
 === listSchemas
 
@@ -138,66 +144,71 @@ Returns
 Example
 
 .Fetches application's content type schemas:
-```js
-var result = schemaLib.listSchemas({
+[source,typescript]
+----
+import {listSchemas} from '/lib/xp/schema';
+
+const result = listSchemas({
     application: 'myapp',
     type: 'CONTENT_TYPE'
 
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
-        name: 'myapp:type1',
-        displayName: 'My type display name',
-        description: 'My type description',
-        modifiedTime: '2010-01-01T10:00:00Z',
-        resource: '<content-type><some-data></some-data></content-type>',
-        type: 'CONTENT_TYPE',
-        form: [
-            {
-                'formItemType': 'Layout',
-                'name': 'myLayout',
-                'label': 'My layout',
-                'items': [
-                    {
-                        'formItemType': 'ItemSet',
-                        'name': 'mySet',
-                        'occurrences': {
-                            'maximum': 1,
-                            'minimum': 1
-                        },
-                        'items': [
-                            {
-                                'formItemType': 'Input',
-                                'name': 'myInput',
-                                'label': 'Input',
-                                'maximize': true,
-                                'inputType': 'TextLine',
-                                'occurrences': {
-                                    'maximum': 1,
-                                    'minimum': 0
-                                },
-                                'config': {}
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        config: {}
-    },
-    {
-        name: 'myapp:type2',
-        displayName: 'My type display name 2',
-        description: 'My type description 2',
-        modifiedTime: '2012-01-01T10:00:00Z',
-        resource: '<content-type><some-other-data></some-other-data></content-type>',
-        type: 'CONTENT_TYPE',
-        form: [],
-        config: {}
-    };
-```
+[source,typescript]
+----
+const expected = {
+    name: 'myapp:type1',
+    displayName: 'My type display name',
+    description: 'My type description',
+    modifiedTime: '2010-01-01T10:00:00Z',
+    resource: '<content-type><some-data></some-data></content-type>',
+    type: 'CONTENT_TYPE',
+    form: [
+        {
+            formItemType: 'Layout',
+            name: 'myLayout',
+            label: 'My layout',
+            items: [
+                {
+                    formItemType: 'ItemSet',
+                    name: 'mySet',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 1
+                    },
+                    items: [
+                        {
+                            formItemType: 'Input',
+                            name: 'myInput',
+                            label: 'Input',
+                            maximize: true,
+                            inputType: 'TextLine',
+                            occurrences: {
+                                maximum: 1,
+                                minimum: 0
+                            },
+                            config: {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    config: {}
+},
+{
+    name: 'myapp:type2',
+    displayName: 'My type display name 2',
+    description: 'My type description 2',
+    modifiedTime: '2012-01-01T10:00:00Z',
+    resource: '<content-type><some-other-data></some-other-data></content-type>',
+    type: 'CONTENT_TYPE',
+    form: [],
+    config: {}
+};
+----
 
 === createSchema
 
@@ -236,60 +247,64 @@ Returns
 Example
 
 .Creates a content type schema:
-```js
-var resource = `<?xml version='1.0' encoding='UTF-8'?>
-                <content-type xmlns='urn:enonic:xp:model:1.0'>
-               <display-name>Tag</display-name>
-               <super-type>base:structured</super-type>
-               <form>
-                 <input name="tag" type="Tag">
-                   <label>Tag, unlimited occurrences</label>
-                   <occurrences minimum="0"
-                    maximum="0"/>
-                 </input>
-               </form>
-              </content-type>`;
+[source,typescript]
+----
+import {createSchema} from '/lib/xp/schema';
 
-var result = schemaLib.createSchema({
+const resource = `<?xml version='1.0' encoding='UTF-8'?>
+<content-type xmlns='urn:enonic:xp:model:1.0'>
+    <display-name>Tag</display-name>
+    <super-type>base:structured</super-type>
+    <form>
+        <input name="tag" type="Tag">
+        <label>Tag, unlimited occurrences</label>
+        <occurrences minimum="0"
+        maximum="0"/>
+        </input>
+    </form>
+</content-type>`;
+
+const result = createSchema({
     name: 'myapp:mytype',
     type: 'CONTENT_TYPE',
     resource
-
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
-  "name": "myapp:mytype",
-  "displayName": "Tag",
-  "displayNameI18nKey": "",
-  "createdTime": "2021-09-25T10:00:00Z",
-  "creator": "user:system:anonymous",
-  "modifiedTime": "2021-09-25T10:00:00Z",
+[source,typescript]
+----
+const expected = {
+  name: "myapp:mytype",
+  displayName: "Tag",
+  displayNameI18nKey: "",
+  createdTime: "2021-09-25T10:00:00Z",
+  creator: "user:system:anonymous",
+  modifiedTime: "2021-09-25T10:00:00Z",
   "resource" : <!-- resource string value -->,
-  "type": "CONTENT_TYPE",
-  "icon": {
-    "data": {},
-    "mimeType": "image/png",
-    "modifiedTime": "2016-01-01T12:00:00Z"
+  type: "CONTENT_TYPE",
+  icon: {
+    data: {},
+    mimeType: "image/png",
+    modifiedTime: "2016-01-01T12:00:00Z"
   },
-  "form": [
+  form: [
     {
-      "formItemType": "Input",
-      "name": "tag",
-      "label": "Tag, unlimited occurrences",
-      "maximize": true,
-      "inputType": "Tag",
-      "occurrences": {
-        "maximum": 0,
-        "minimum": 0
+      formItemType: "Input",
+      name: "tag",
+      label: "Tag, unlimited occurrences",
+      maximize: true,
+      inputType: "Tag",
+      occurrences: {
+        maximum: 0,
+        minimum: 0
       },
-      "config": {}
+      config: {}
     }
   ],
-  "config": {}
+  config: {}
 };
-```
+----
 
 === updateSchema
 
@@ -328,8 +343,11 @@ Returns
 Example
 
 .Updates a mixin schema:
-```js
-let resource = `<?xml version='1.0' encoding='UTF-8'?>
+[source,typescript]
+----
+import {updateSchema} from '/lib/xp/schema';
+
+const resource = `<?xml version='1.0' encoding='UTF-8'?>
        <mixin xmlns='urn:enonic:xp:model:1.0'>
           <display-name>Virtual Mixin</display-name>
           <description>Mixin description</description>
@@ -342,16 +360,17 @@ let resource = `<?xml version='1.0' encoding='UTF-8'?>
           </form>
         </mixin>`;
 
-var result = schemaLib.updateSchema({
+const result = updateSchema({
     name: 'myapp:mytype',
     type: 'MIXIN',
     resource
 
 });
-```
+----
 .Return value:
-```js
-var expected = {
+[source,typescript]
+----
+const expected = {
     name: 'myapp:mytype',
     displayName: 'Virtual Mixin',
     displayNameI18nKey: '',
@@ -363,24 +382,24 @@ var expected = {
     type: 'MIXIN',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'text2',
-            'label': 'Text 2',
-            'maximize': true,
-            'inputType': 'TextLine',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'text2',
+            label: 'Text 2',
+            maximize: true,
+            inputType: 'TextLine',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'InlineMixin',
-            'name': 'myapplication:inline'
+            formItemType: 'InlineMixin',
+            name: 'myapplication:inline'
         }
     ]
 };
-```
+----
 
 === deleteSchema
 
@@ -418,8 +437,11 @@ Returns
 Example
 
 .Updates a mixin schema:
-```js
-var result = schemaLib.deleteSchema({
+[source,typescript]
+----
+import {deleteSchema} from '/lib/xp/schema';
+
+const result = deleteSchema({
     name: 'myapp:mytype',
     type: 'XDATA'
 });
@@ -429,7 +451,7 @@ if (result) {
 } else {
     log.info('X-data deletion failed: [myapp:mytype]');
 }
-```
+----
 
 === getComponent
 
@@ -467,16 +489,21 @@ Returns
 Example
 
 .Fetches a page component:
-```js
-var result = schemaLib.getComponent({
+[source,typescript]
+----
+import {getComponent} from '/lib/xp/schema';
+
+const result = getComponent({
     key: 'myapp:mypage',
     type: 'PAGE'
 
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
+[source,typescript]
+----
+const expected = {
     key: 'myapp:mypage',
     displayName: 'News page',
     description: 'My news page',
@@ -487,16 +514,16 @@ var expected = {
     type: 'PAGE',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'width',
-            'label': 'width',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'width',
+            label: 'width',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     config: {},
@@ -504,7 +531,7 @@ var expected = {
         'region-one'
     ]
 };
-```
+----
 
 === listComponents
 
@@ -542,16 +569,21 @@ Returns
 Example
 
 .Fetches application's part components:
-```js
-var result = schemaLib.listComponents({
+[source,typescript]
+----
+import {listComponents} from '/lib/xp/schema';
+
+const result = listComponents({
     application: 'myapp',
     type: 'PART'
 
 });
-```
+----
+
 .Return value:
-```js
-var expected = [
+[source,typescript]
+----
+const expected = [
     {
         key: 'myapp:part1',
         displayName: 'News part',
@@ -563,16 +595,16 @@ var expected = [
         type: 'PART',
         form: [
             {
-                'formItemType': 'Input',
-                'name': 'width',
-                'label': 'width',
-                'maximize': true,
-                'inputType': 'Double',
-                'occurrences': {
-                    'maximum': 1,
-                    'minimum': 0
+                formItemType: 'Input',
+                name: 'width',
+                label: 'width',
+                maximize: true,
+                inputType: 'Double',
+                occurrences: {
+                    maximum: 1,
+                    minimum: 0
                 },
-                'config': {}
+                config: {}
             }
         ],
         config: {}
@@ -588,7 +620,7 @@ var expected = [
         config: {}
     }
 ];
-```
+----
 
 === createComponent
 
@@ -627,8 +659,11 @@ Returns
 Example
 
 .Creates a part type component:
-```js
-var resource = `<?xml version='1.0' encoding='UTF-8'?>
+[source,typescript]
+----
+import {createComponent} from '/lib/xp/schema';
+
+const resource = `<?xml version='1.0' encoding='UTF-8'?>
                 <content-type xmlns='urn:enonic:xp:model:1.0'>
                <display-name>Tag</display-name>
                <super-type>base:structured</super-type>
@@ -641,15 +676,17 @@ var resource = `<?xml version='1.0' encoding='UTF-8'?>
                </form>
               </content-type>`;
 
-var result = schemaLib.createComponent({
+const result = createComponent({
     key: 'myapp:mypart',
     type: 'PART',
     resource
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
+[source,typescript]
+----
+const expected = {
     key: 'myapp:mypart',
     displayName: 'Virtual Part',
     displayNameI18nKey: 'key.display-name',
@@ -661,31 +698,31 @@ var expected = {
     type: 'PART',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'width',
-            'label': 'Column width',
-            'helpText': 'key.help-text',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'width',
+            label: 'Column width',
+            helpText: 'key.help-text',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'InlineMixin',
-            'name': 'myapplication:link-urls'
+            formItemType: 'InlineMixin',
+            name: 'myapplication:link-urls'
         }
     ],
 
     config: {
-        'input': [{
-            'value': '', '@name': 'width', '@type': 'Double'
+        input: [{
+            value: '', '@name': 'width', '@type': 'Double'
         }]
     }
 };
-```
+----
 
 === updateComponent
 
@@ -724,56 +761,60 @@ Returns
 Example
 
 .Updates a layout component:
-```js
-let resource = `<?xml version='1.0' encoding='UTF-8'?>
-                <layout xmlns='urn:enonic:xp:model:1.0'>
-                  <display-name i18n='key.display-name'>Virtual Layout</display-name>
-                  <description i18n='key.description'>My Layout Description</description>
-                  <form>
-                    <input type='Double' name='pause'>
-                      <label i18n='key1.label'>Pause parameter</label>
-                      <immutable>false</immutable>
-                      <indexed>false</indexed>
-                      <help-text i18n='key1.help-text'/>
-                      <occurrences minimum='0' maximum='1'/>
-                    </input>
-                    <item-set name='myFormItemSet'>
-                      <label>My form item set</label>
-                      <immutable>false</immutable>
-                      <occurrences minimum='0' maximum='1'/>
-                      <items>
-                        <input type='TextLine' name='myTextLine'>
-                          <label>My text line</label>
-                          <immutable>false</immutable>
-                          <indexed>false</indexed>
-                          <occurrences minimum='1' maximum='1'/>
-                        </input>
-                        <input type='TextLine' name='myCustomInput'>
-                          <label>My custom input</label>
-                          <immutable>false</immutable>
-                          <indexed>false</indexed>
-                          <occurrences minimum='0' maximum='1'/>
-                        </input>
-                      </items>
-                    </item-set>
-                  </form>
-                  <regions>
-                    <region name='header'/>
-                    <region name='main'/>
-                    <region name='footer'/>
-                  </regions>
-                </layout>
-                `;
+[source,typescript]
+----
+import {updateComponent} from '/lib/xp/schema';
 
-var result = schemaLib.updateComponent({
+const resource = `<?xml version='1.0' encoding='UTF-8'?>
+<layout xmlns='urn:enonic:xp:model:1.0'>
+    <display-name i18n='key.display-name'>Virtual Layout</display-name>
+    <description i18n='key.description'>My Layout Description</description>
+    <form>
+    <input type='Double' name='pause'>
+        <label i18n='key1.label'>Pause parameter</label>
+        <immutable>false</immutable>
+        <indexed>false</indexed>
+        <help-text i18n='key1.help-text'/>
+        <occurrences minimum='0' maximum='1'/>
+    </input>
+    <item-set name='myFormItemSet'>
+        <label>My form item set</label>
+        <immutable>false</immutable>
+        <occurrences minimum='0' maximum='1'/>
+        <items>
+        <input type='TextLine' name='myTextLine'>
+            <label>My text line</label>
+            <immutable>false</immutable>
+            <indexed>false</indexed>
+            <occurrences minimum='1' maximum='1'/>
+        </input>
+        <input type='TextLine' name='myCustomInput'>
+            <label>My custom input</label>
+            <immutable>false</immutable>
+            <indexed>false</indexed>
+            <occurrences minimum='0' maximum='1'/>
+        </input>
+        </items>
+    </item-set>
+    </form>
+    <regions>
+    <region name='header'/>
+    <region name='main'/>
+    <region name='footer'/>
+    </regions>
+</layout>`;
+
+const result = updateComponent({
     key: 'myapp:mylayout',
     type: 'LAYOUT',
     resource
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
+[source,typescript]
+----
+const expected = {
     key: 'myapp:mylayout',
     displayName: 'Virtual Layout',
     displayNameI18nKey: 'key.display-name',
@@ -785,50 +826,50 @@ var expected = {
     type: 'LAYOUT',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'pause',
-            'label': 'Pause parameter',
-            'helpText': 'key1.help-text',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'pause',
+            label: 'Pause parameter',
+            helpText: 'key1.help-text',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'ItemSet',
-            'name': 'myFormItemSet',
-            'label': 'My form item set',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'ItemSet',
+            name: 'myFormItemSet',
+            label: 'My form item set',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'items': [
+            items: [
                 {
-                    'formItemType': 'Input',
-                    'name': 'myTextLine',
-                    'label': 'My text line',
-                    'maximize': true,
-                    'inputType': 'TextLine',
-                    'occurrences': {
-                        'maximum': 1,
-                        'minimum': 1
+                    formItemType: 'Input',
+                    name: 'myTextLine',
+                    label: 'My text line',
+                    maximize: true,
+                    inputType: 'TextLine',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 1
                     },
-                    'config': {}
+                    config: {}
                 },
                 {
-                    'formItemType': 'Input',
-                    'name': 'myCustomInput',
-                    'label': 'My custom input',
-                    'maximize': true,
-                    'inputType': 'TextLine',
-                    'occurrences': {
-                        'maximum': 1,
-                        'minimum': 0
+                    formItemType: 'Input',
+                    name: 'myCustomInput',
+                    label: 'My custom input',
+                    maximize: true,
+                    inputType: 'TextLine',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 0
                     },
-                    'config': {}
+                    config: {}
                 }
             ]
         }
@@ -840,7 +881,7 @@ var expected = {
         'footer'
     ]
 };
-```
+----
 
 === deleteComponent
 
@@ -878,8 +919,11 @@ Returns
 Example
 
 .Removes a layout component:
-```js
-var result = schemaLib.deleteComponent({
+[source,typescript]
+----
+import {deleteComponent} from '/lib/xp/schema';
+
+const result = deleteComponent({
     key: 'myapp:mylayout',
     type: 'LAYOUT'
 });
@@ -889,7 +933,7 @@ if (result) {
 } else {
     log.info('Layout deletion failed: [myapp:mylayout]');
 }
-```
+----
 
 === getStyles
 
@@ -926,14 +970,19 @@ Returns
 Example
 
 .Fetch application styles:
-```js
-var result = schemaLib.getStyles({
+[source,typescript]
+----
+import {getStyles} from '/lib/xp/schema';
+
+const result = getStyles({
     application: 'myapp'
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
+[source,typescript]
+----
+const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
     modifiedTime: '2021-02-25T10:44:33.170079900Z',
@@ -946,7 +995,7 @@ var expected = {
         }
     ]
 };
-```
+----
 
 === createStyles
 
@@ -984,30 +1033,35 @@ Returns
 Example
 
 .Creates application styles:
-```js
-var resource = '<?xml version="1.0" encoding="UTF-8"?>' +
-               '<styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0">' +
-               '<style name="warning">' +
-               '<display-name i18n="warning.displayName">Warning</display-name>' +
-               '</style>' +
-               '<image name="editor-width-auto">' +
-               '<display-name i18n="editor-width-auto-text">Override ${width}</display-name>' +
-               '</image>' +
-               '<image name="editor-style-cinema">' +
-               '<display-name i18n="editor-style-cinema-text">Cinema</display-name>' +
-               '<aspect-ratio>21:9</aspect-ratio>' +
-               '<filter>pixelate(10)</filter>' +
-               '</image>' +
-               '</styles>';
+[source,typescript]
+----
+import {createStyles} from '/lib/xp/schema';
 
-var result = schemaLib.createStyles({
+const resource = '<?xml version="1.0" encoding="UTF-8"?>' +
+    '<styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0">' +
+    '<style name="warning">' +
+    '<display-name i18n="warning.displayName">Warning</display-name>' +
+    '</style>' +
+    '<image name="editor-width-auto">' +
+    '<display-name i18n="editor-width-auto-text">Override ${width}</display-name>' +
+    '</image>' +
+    '<image name="editor-style-cinema">' +
+    '<display-name i18n="editor-style-cinema-text">Cinema</display-name>' +
+    '<aspect-ratio>21:9</aspect-ratio>' +
+    '<filter>pixelate(10)</filter>' +
+    '</image>' +
+    '</styles>';
+
+const result = createStyles({
     application: 'myapp',
     resource
 });
-```
+----
+
 .Return value:
-```js
-var expected =
+[source,typescript]
+----
+const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
     modifiedTime: '2021-09-25T10:00:00Z',
@@ -1030,7 +1084,7 @@ var expected =
         }
     ]
 };
-```
+----
 
 === updateStyles
 
@@ -1068,30 +1122,35 @@ Returns
 Example
 
 .Updates application styles:
-```js
-let resource = '<?xml version="1.0" encoding="UTF-8"?>' +
-               '<styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0">' +
-               '<style name="warning">' +
-               '<display-name i18n="warning.displayName">Warning</display-name>' +
-               '</style>' +
-               '<image name="editor-width-auto">' +
-               '<display-name i18n="editor-width-auto-text">Override ${width}</display-name>' +
-               '</image>' +
-               '<image name="editor-style-cinema">' +
-               '<display-name i18n="editor-style-cinema-text">Cinema</display-name>' +
-               '<aspect-ratio>21:9</aspect-ratio>' +
-               '<filter>pixelate(10)</filter>' +
-               '</image>' +
-               '</styles>';
+[source,typescript]
+----
+import {updateStyles} from '/lib/xp/schema';
 
-var result = schemaLib.updateStyles({
+const resource = '<?xml version="1.0" encoding="UTF-8"?>' +
+    '<styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0">' +
+    '<style name="warning">' +
+    '<display-name i18n="warning.displayName">Warning</display-name>' +
+    '</style>' +
+    '<image name="editor-width-auto">' +
+    '<display-name i18n="editor-width-auto-text">Override ${width}</display-name>' +
+    '</image>' +
+    '<image name="editor-style-cinema">' +
+    '<display-name i18n="editor-style-cinema-text">Cinema</display-name>' +
+    '<aspect-ratio>21:9</aspect-ratio>' +
+    '<filter>pixelate(10)</filter>' +
+    '</image>' +
+    '</styles>';
+
+const result = updateStyles({
     application: 'myapp',
     resource
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
+[source,typescript]
+----
+const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
     modifiedTime: '2021-09-25T10:00:00Z',
@@ -1114,7 +1173,7 @@ var expected = {
         }
     ]
 };
-```
+----
 
 === deleteStyles
 
@@ -1151,8 +1210,11 @@ Returns
 Example
 
 .Removes an application styles:
-```js
-var result = schemaLib.deleteStyles({
+[source,typescript]
+----
+import {deleteStyles} from '/lib/xp/schema';
+
+const result = deleteStyles({
     application: 'myapp'
 });
 
@@ -1161,7 +1223,7 @@ if (result) {
 } else {
     log.info('Styles deletion failed: [myapp]');
 }
-```
+----
 
 === getSite
 
@@ -1198,39 +1260,44 @@ Returns
 Example
 
 .Fetch application site descriptor:
-```js
-var result = schemaLib.getSite({
+[source,typescript]
+----
+import {getSite} from '/lib/xp/schema';
+
+const result = getSite({
     application: 'myapp'
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
+[source,typescript]
+----
+const expected = {
     application: 'myapp',
     resource: <!-- resource string value -->,
     modifiedTime: '2021-02-25T10:44:33.170079900Z',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'input',
-            'label': 'Input',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'input',
+            label: 'Input',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     xDataMappings: [
         {
-            'name': 'myapplication:my',
-            'optional': false
+            name: 'myapplication:my',
+            optional: false
         }
     ]
 };
-```
+----
 
 === updateSite
 
@@ -1268,79 +1335,84 @@ Returns
 Example
 
 .Updates application site descriptor:
-```js
-let resource = `<?xml version='1.0' encoding='UTF-8'?>
-                <site xmlns='urn:enonic:xp:model:1.0'>
-                  <x-data name='myapp1:menu-item'/>
-                  <x-data name='myapp2:my-meta-mixin'/>
-                  <form>
-                    <input type='TextLine' name='some-name'>
-                      <label>Textline</label>
-                      <immutable>false</immutable>
-                      <indexed>false</indexed>
-                      <custom-text/>
-                      <help-text/>
-                      <occurrences minimum='0' maximum='1'/>
-                    </input>
-                  </form>
-                  <processors>
-                    <response-processor name='filter1' order='10'/>
-                    <response-processor name='filter2' order='20'/>
-                  </processors>
-                  <mappings>
-                    <mapping controller='/site/page/person/person.js' order='10'>
-                      <pattern>/person/*</pattern>
-                    </mapping>
-                    <mapping controller='controller1.js'>
-                      <match>_path:'/*/fisk'</match>
-                    </mapping>
-                    <mapping controller='controller2.js' order='5'>
-                      <pattern invert='true'>/.*</pattern>
-                      <match>type:'portal:fragment'</match>
-                    </mapping>
-                  </mappings>
-                </site>`;
+[source,typescript]
+----
+import {updateSite} from '/lib/xp/schema';
 
-var result = schemaLib.updateSite({
+const resource = `<?xml version='1.0' encoding='UTF-8'?>
+<site xmlns='urn:enonic:xp:model:1.0'>
+    <x-data name='myapp1:menu-item'/>
+    <x-data name='myapp2:my-meta-mixin'/>
+    <form>
+    <input type='TextLine' name='some-name'>
+        <label>Textline</label>
+        <immutable>false</immutable>
+        <indexed>false</indexed>
+        <custom-text/>
+        <help-text/>
+        <occurrences minimum='0' maximum='1'/>
+    </input>
+    </form>
+    <processors>
+    <response-processor name='filter1' order='10'/>
+    <response-processor name='filter2' order='20'/>
+    </processors>
+    <mappings>
+    <mapping controller='/site/page/person/person.js' order='10'>
+        <pattern>/person/*</pattern>
+    </mapping>
+    <mapping controller='controller1.js'>
+        <match>_path:'/*/fisk'</match>
+    </mapping>
+    <mapping controller='controller2.js' order='5'>
+        <pattern invert='true'>/.*</pattern>
+        <match>type:'portal:fragment'</match>
+    </mapping>
+    </mappings>
+</site>`;
+
+const result = updateSite({
     application: 'myapp',
     resource
 });
-```
+----
+
 .Return value:
-```js
-var expected = {
+[source,typescript]
+----
+const expected = {
     application: 'myapp',
     modifiedTime: '2021-09-25T10:00:00Z',
     resource: <!-- resource string value -->,
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'some-name',
-            'label': 'Textline',
-            'customText': '',
-            'maximize': true,
-            'inputType': 'TextLine',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'some-name',
+            label: 'Textline',
+            customText: '',
+            maximize: true,
+            inputType: 'TextLine',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     xDataMappings: [
         {
-            'name': 'myapp1:menu-item',
-            'optional': false,
-            'allowContentTypes': ''
+            name: 'myapp1:menu-item',
+            optional: false,
+            allowContentTypes: ''
         },
         {
-            'name': 'myapp2:my-meta-mixin',
-            'optional': false,
-            'allowContentTypes': ''
+            name: 'myapp2:my-meta-mixin',
+            optional: false,
+            allowContentTypes: ''
         }
     ]
 };
-```
+----
 
 == Type Definitions
 

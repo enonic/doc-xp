@@ -1,4 +1,4 @@
-= Event Library
+= Event API
 :toc: right
 :imagesdir: images
 
@@ -15,17 +15,17 @@ dependencies {
 }
 ----
 
-In your JavaScript controller, add a require statement:
+in your controller, add an import statement:
 
-[source,js]
+[source,typescript]
 ----
-const eventLib = require('/lib/xp/event');
+import eventLib from '/lib/xp/event';
 ----
 
 You are now ready to use the library functionality.
 
-====
 [NOTE]
+====
 Several standard XP APIs already produce and publish events.
 For more details, check out the <<lib-node#events, node API>>, <<lib-repo#events, repository API>>, and <<lib-task#events, task API>>
 ====
@@ -60,13 +60,13 @@ Returns
 Example
 
 .Adding a listener that logs the event
-[source,js]
+[source,typescript]
 ----
 eventLib.listener({
     type: 'node.*',
     localOnly: false,
-    callback: function (event) {
-        log.info(JSON.stringify(event));
+    callback: (event) => {
+        log.info('event: %s', JSON.stringify(event));
     }
 });
 ----
@@ -99,7 +99,7 @@ Returns
 Example
 
 .Send a custom event into the system
-[source,js]
+[source,typescript]
 ----
 eventLib.send({
     type: 'myEvent',
