@@ -442,6 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#xp_homeconfig">XP_HOME/config</a></li>
+<li><a href="#xp_homelicense">XP_HOME/license</a></li>
 <li><a href="#format">Format</a></li>
 <li><a href="#variables">Variables</a></li>
 <li><a href="#properties_vs_cfg">.properties vs .cfg</a></li>
@@ -498,6 +499,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <a href="./distro.ahtml#xp_home">XP_HOME/config/</a> folder contains all instance specific configuration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="xp_homelicense"><a class="link" href="#xp_homelicense">XP_HOME/license</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The XP_HOME/license folder is where the system looks for the licenses that some apps require to function.  The Enonic apps, Content Studio+, Live Trace and Booster, all require an XP license to run.  It may be uploaded directly in the apps or placed in this folder with the name <code>enonic.platform.subscription.lic</code>.</p>
 </div>
 </div>
 </div>
@@ -2454,7 +2463,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-02 13:08:37 UTC
+Last updated 2024-10-09 16:35:21 UTC
 </div>
 </div>
 </body>
