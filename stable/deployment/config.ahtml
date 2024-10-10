@@ -506,7 +506,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="xp_homelicense"><a class="link" href="#xp_homelicense">XP_HOME/license</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The XP_HOME/license folder is where the system looks for the licenses that some apps require to function.  The Enonic apps, Content Studio+, Live Trace and Booster, all require an XP license to run.  It may be uploaded directly in the apps or placed in this folder with the name <code>enonic.platform.subscription.lic</code>.</p>
+<p>Some apps require a license to work.  The <code>XP_HOME/license</code> folder is where the system looks for the licenses.  The license should be named <code>&lt;appKey&gt;.lic</code>.  If you are running an app with a license, please ask the supplier for the app key.</p>
+</div>
+<div class="paragraph">
+<p>The Enonic apps, Content Studio+, Live Trace and Booster, all require an XP license to run.  The app key for XP is "enonic.platform.subscription", so the license should be named <code>enonic.platform.subscription.lic</code>.</p>
 </div>
 </div>
 </div>
@@ -2463,7 +2466,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-09 16:35:21 UTC
+Last updated 2024-10-10 10:37:49 UTC
 </div>
 </div>
 </body>
