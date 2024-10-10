@@ -10,7 +10,9 @@ The <<./distro#xp_home,XP_HOME/config/>> folder contains all instance specific c
 
 == XP_HOME/license
 
-The XP_HOME/license folder is where the system looks for the licenses that some apps require to function.  The Enonic apps, Content Studio+, Live Trace and Booster, all require an XP license to run.  It may be uploaded directly in the apps or placed in this folder with the name `enonic.platform.subscription.lic`.
+Some apps require a license to work.  The `XP_HOME/license` folder is where the system looks for the licenses.  The license should be named `<appKey>.lic`.  If you are running an app with a license, please ask the supplier for the app key.
+
+The Enonic apps, Content Studio+, Live Trace and Booster, all require an XP license to run.  The app key for XP is "enonic.platform.subscription", so the license should be named `enonic.platform.subscription.lic`.
 
 == Format
 
