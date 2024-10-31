@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-This library contains admin related functions.
+This API provides admin-related functions.
 
 == Usage
 
@@ -15,14 +15,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import adminLib from '/lib/xp/admin';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 
 == Functions
@@ -89,11 +89,11 @@ None
 [.lead]
 Returns
 
-*string* : The installation Name
+*string* : The installation name
 
 === getLauncherPath
 
-Returns the URL for launcher javascript.
+Returns URL to JS script for embedding XP Launcher panel.
 
 [.lead]
 Parameters
@@ -103,11 +103,11 @@ None
 [.lead]
 Returns
 
-*string* : The URL for the launcher javascript
+*string* : URL of the Launcher JS script
 
 === getLauncherUrl
 
-Returns the URL for the launcher panel.
+Returns URL of the Launcher panel.
 
 [.lead]
 Parameters
@@ -117,12 +117,12 @@ None
 [.lead]
 Returns
 
-*string* : The URL for the launcher panel
+*string* : URL of the Launcher panel
 
 
 === getLocale
 
-Returns the preferred locale based on the current HTTP request, or the server default locale if none is specified.
+Returns the preferred locale based on current HTTP request, or the default server locale if none is specified.
 
 [.lead]
 Parameters
@@ -136,7 +136,7 @@ Returns
 
 === getLocales
 
-Returns the list of preferred locales based on the current HTTP request, or the server default locale if none is specified.
+Returns the list of preferred locales based on current HTTP request, or the default server locale if none is specified.
 
 [.lead]
 Parameters
@@ -164,7 +164,7 @@ Returns
 
 === getToolUrl
 
-Returns the URL for an admin tool of specific application.
+Returns URL of an admin tool in an application.
 
 [.lead]
 Parameters
@@ -181,7 +181,7 @@ Parameters
 [.lead]
 Returns
 
-*string* : The URL to the requested tool.
+*string* : URL of the requested admin tool.
 
 === getVersion
 

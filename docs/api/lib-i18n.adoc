@@ -2,12 +2,12 @@
 :toc: right
 :imagesdir: images
 
-This library contains functions for localization of text phrases.
+This API provides functionality for localization of text phrases.
 
 
 == Usage
 
-NOTE: This API uses standard framework functionality. Please consult the <<../framework/i18n#, framework localization docs>> before using this API.
+NOTE: This API uses standard framework functionality. Please read the <<../framework/i18n#, framework localization docs>> before using this API.
 
 Add the following to your `build.gradle` file:
 
@@ -18,17 +18,16 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import i18nLib from '/lib/xp/i18n';
 ----
 
-Then, you need to create files with original phrases and their translations.  These files should be placed in your app,
-in the `src/main/resources/site/i18n` folder.  There must be a file named `phrases.properties` that contain all the phrases
-and the default text.  Additonal files with translations, named `phrases_<locale>.properties` should contain the same phrases
-with the translated text.  If a phrase is missing from the translation file, the defult will be used.  This is what a couple
+Then you need to create files with original phrases and their translations.  These files should be placed
+in the `src/main/resources/site/i18n` folder of your application.  There must be a file named `phrases.properties` that contains all the default phrases.  Additional files with translations named `phrases_<locale>.properties` should contain the same phrases
+with texts localised to `<locale>` language.  If a phrase is missing from the locale-specific file, the default file will be used. This is what a couple
 of such files could look like:
 
 .phrases.properties
@@ -45,7 +44,7 @@ action.preview=Vista Previa
 notify.process.failed=Error al procesar: {0}.
 ----
 
-With these basics in place, you are ready to invoke to use the library functionality.
+You are now ready to use the API.
 
 
 == Functions
@@ -126,8 +125,8 @@ const locales = i18nLib.getSupportedLocales(['site/i18n/phrases'])
 
 === localize
 
-Localizes a phrase searching through the list of passed in locales in the given order, to find a translation for the phrase-key.
-If no translation is found, the default phrase will be used.  Some phrases will have placeholders for values that may be inserted
+Localizes a phrase by searching through the list of passed in locales in the given order, to find a translation for the phrase-key.
+If no translation is found, the default phrase will be used. Some phrases will have placeholders (`{0}`, `{1}` etc) for values that may be inserted
 into the phrase.  These must be provided in the function call for those phrases.
 
 [.lead]

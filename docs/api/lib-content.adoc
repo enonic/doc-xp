@@ -15,14 +15,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import contentLib from '/lib/xp/content';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Constants
 
@@ -95,7 +95,7 @@ addAttachment({
 === archive
 image:xp-780.svg[XP 7.8.0,opts=inline]
 
-Archive a content
+Archives a content
 
 [.lead]
 *Parameters:*
@@ -138,11 +138,11 @@ log.info('Archived content ids: %s', result2.join(','));
 
 === create
 
-This function creates a content.
+Creates a content.
 
-The parameter name is optional, but if it is not set then displayName must be specified. When name is not set, the system will auto-generate a name based on the displayName, by lower-casing and replacing certain characters. If there is already a content with the auto-generated name, a suffix will be added to the name in order to make it unique.
+Either `name` or `displayName` (or both) must be specified. When `name` is not set, the system will auto-generate a name based on the `displayName`, by lower-casing and replacing certain characters. If there is already a content with the auto-generated name, a suffix will be added to `name` in order to make it unique.
 
-To create a content where the name is not important and there could be multiple instances under the same parent content, skip the name parameter and specify a displayName
+To create a content where `name` is not important and there could be multiple instances under the same parent content, skip the `name` parameter and specify a `displayName` instead.
 
 [.lead]
 *Parameters:*
@@ -430,7 +430,7 @@ const expected = {
 
 === delete
 
-This function deletes a content
+Deletes a content
 
 [.lead]
 *Parameters:*
@@ -448,7 +448,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*boolean* : True if deleted, false otherwise
+*boolean* : `true` if deleted, `false` otherwise
 
 [.lead]
 Examples
@@ -471,7 +471,7 @@ if (result) {
 
 === duplicate
 
-image:xp-7120.svg[XP 7.12.0,opts=inline] This function duplicates a content.
+image:xp-7120.svg[XP 7.12.0,opts=inline] Duplicates a content.
 
 [.lead]
 *Parameters:*
@@ -495,14 +495,14 @@ checks: {}
 |===
 
 [.lead]
-Returns summary about duplicated content.
+Returns summary of the content duplicate.
 
-*object* : Summary about duplicated content.
+*object* : Summary of the content duplicate.
 
 [.lead]
 Examples
 
-Duplicate content
+Duplicate a content
 [source,typescript]
 ----
 import {duplicate} from '/lib/xp/content';
@@ -523,7 +523,7 @@ const expected = {
 };
 ----
 
-Create variant
+Create a variant
 [source,typescript]
 ----
 import {duplicate} from '/lib/xp/content';
@@ -546,7 +546,7 @@ const expected = {
 
 === exists
 
-This function checks if a content exists for the current context.
+Checks if a content exists in the current context.
 
 [.lead]
 *Parameters:*
@@ -564,7 +564,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*boolean* : True if exists, false otherwise
+*boolean* : `true` if exists, `false` otherwise
 
 [.lead]
 Examples
@@ -588,7 +588,7 @@ if (result) {
 
 === get
 
-This function fetches a content
+Returns a content
 
 [.lead]
 *Parameters:*
@@ -685,7 +685,7 @@ This function returns a content attachments
 [.lead]
 Returns
 
-*object* : An object with all the attachments that belong to the content, where the key is the attachment name. Or null if the content cannot be found
+*object* : An object with all the attachments stored in the content, where the key is the attachment name. Or null if the content was not found.
 
 [.lead]
 Examples
@@ -729,7 +729,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-* : Stream of the attachment data
+*object* : Stream of the attachment data
 
 [.lead]
 Examples
@@ -747,7 +747,7 @@ const stream = getAttachmentStream({
 
 === getChildren
 
-This function fetches children of a content
+Fetches children of a content
 
 [.lead]
 *Parameters:*
@@ -768,7 +768,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : Result (of content) fetched from the repository
+*object* : An array of child items (as JSON) fetched from the repository
 
 [.lead]
 Examples
@@ -843,9 +843,9 @@ const expected = {
 
 === getOutboundDependencies
 
-NOTE: This function was first introduced in v7.2
+image:xp-720.svg[XP 7.2.0,opts=inline]
 
-This function returns the list of content items that are outbound dependencies of specified content.
+Returns the list of content items that are outbound dependencies of specified content.
 
 [.lead]
 *Parameters:*
@@ -887,7 +887,7 @@ if (result) {
 
 === getPermissions
 
-Gets permissions on a content
+Returns content permissions
 
 [.lead]
 *Parameters:*
@@ -945,7 +945,7 @@ const expected = {
 
 === getSite
 
-This function returns the parent site of a content
+Returns the parent site of a content
 
 [.lead]
 *Parameters:*
@@ -1006,7 +1006,7 @@ const expected = {
 
 === getSiteConfig
 
-This function returns the site configuration for this app in the parent site of a content
+Returns configuration of a specified application assigned to the site of a content
 
 [.lead]
 *Parameters:*
@@ -1025,7 +1025,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The site configuration for current application as JSON
+*object* : App config (as JSON)
 
 [.lead]
 Examples
@@ -1052,7 +1052,7 @@ const expected = {
 
 === getType
 
-Returns the properties and icon of the specified content type
+Returns properties and icon of the specified content type
 
 [.lead]
 *Parameters:*
@@ -1068,7 +1068,7 @@ Returns the properties and icon of the specified content type
 [.lead]
 Returns
 
-*<<ContentType>>* : The content type object if found, or null otherwise. See ContentType type definition below
+*<<ContentType>>* : The content type object if found, or `null` otherwise. See ContentType type definition below
 
 [.lead]
 Examples
@@ -1230,9 +1230,9 @@ contentTypes.forEach(({displayName,name,superType}) => {
 
 === modify
 
-Modifies properties of a content
+Modifies a content
 
-NOTE: Properties starting with `_` may not be modified using this function. To rename or move a content (i.e to change the _name property), use the <<move, move function>> instead.
+NOTE: Properties starting with `_` may not be modified using this function. To rename or move a content (ie to change the `_name` property), use the <<move, move function>> instead.
 
 [.lead]
 *Parameters:*
@@ -1246,7 +1246,7 @@ An object with the following keys and their values:
 | Name | Type | Attributes| Default| Description
 | key | string | | | Path or id to the content
 | editor | function | | | Editor callback function
-| requireValid | boolean | <optional> | true | The content has to be valid, according to the content type, to be updated. If requireValid=true and the content is not strictly valid, an error will be thrown
+| requireValid | boolean | <optional> | true | The content has to be valid (according to the content type) to be updated. If `requireValid=true` and the content is not strictly valid, an error will be thrown
 |===
 
 [.lead]
@@ -1335,7 +1335,7 @@ const expected = {
 === move
 [[move]]
 
-Rename a content or move it to a new path
+Renames a content or moves it to a new path
 
 [.lead]
 *Parameters:*
@@ -1433,7 +1433,7 @@ try {
 
 === publish
 
-This function publishes content to the master branch
+Publishes content to the master branch
 
 [.lead]
 *Parameters:*
@@ -1446,11 +1446,11 @@ An object with the following keys and their values:
 |===
 | Name | Type | Attributes| Default| Description
 | keys | string[] | | | List of all content keys(path or id) that should be published
-| sourceBranch | string | | | _Not in use from_ image:xp-7120.svg[XP 7.12.0,opts=inline]. The branch where the content to be published is stored.
-| targetBranch | string | | | _Not in use since_ image:xp-7120.svg[XP 7.12.0,opts=inline]. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master
-| schedule | <<ScheduleParams>> | <optional> | | Schedule the publish
+| schedule | <<ScheduleParams>> | <optional> | | Schedule publishing
 | excludeChildrenIds | string[] | <optional> | | List of content keys whose descendants should be excluded from publishing
 | includeDependencies | boolean | <optional> | true | Whether all related content should be included when publishing content
+| sourceBranch | string | | | _Not in use from_ image:xp-7120.svg[XP 7.12.0,opts=inline]. The branch where the content to be published is stored.
+| targetBranch | string | | | _Not in use since_ image:xp-7120.svg[XP 7.12.0,opts=inline]. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master
 |===
 
 ==== ScheduleParams
@@ -1460,7 +1460,7 @@ An object with the following keys and their values:
 [grid="none"]
 |===
 | Name | Type | Attributes| Description
-| from | string | <optional> | Time from which the content is considered published. Defaults to the time of the publish
+| from | string | <optional> | Time from which the content is considered published. Defaults to the time of publishing
 | to | string | <optional> | Time until which the content is considered published
 |===
 
@@ -1468,7 +1468,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : Status of the publish operation in JSON
+*object* : Status of the publish operation as JSON
 
 [.lead]
 Examples
@@ -1518,7 +1518,7 @@ const expected = {
 
 === query
 
-This command queries content
+Retrieves content using a query
 
 [.lead]
 *Parameters:*
@@ -1867,7 +1867,7 @@ resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['
 === restore
 image:xp-780.svg[XP 7.8.0,opts=inline]
 
-Restore a content from the archive
+Restores a content from the archive
 
 [.lead]
 *Parameters:*
@@ -1932,7 +1932,7 @@ An object with the following keys and their values:
 |===
 | Name | Type | Attributes| Description
 | key | string | | Path or id of the content
-| inheritPermissions | boolean | <optional> | Set to true if the content must inherit permissions. Default to false
+| inheritPermissions | boolean | <optional> | Set to `true` if the content must inherit permissions. Default to false
 | overwriteChildPermissions | boolean | <optional> | Set to true to overwrite child permissions. Default to false
 | permissions | <<PermissionsParams>>[] | <optional> | Array of permissions
 |===
@@ -1953,7 +1953,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*boolean* : True if successful, false otherwise
+*boolean* : `true` if successful, `false` otherwise
 
 [.lead]
 Examples
@@ -1983,7 +1983,7 @@ if (flag) {
 
 === unpublish
 
-This function unpublishes content that had been published to the master branch
+Unpublishes content that had been published to the master branch
 
 [.lead]
 *Parameters:*

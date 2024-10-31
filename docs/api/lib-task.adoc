@@ -15,14 +15,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import taskLib from '/lib/xp/task';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 
 == Events
@@ -34,19 +34,19 @@ Usage of this API produces the following events:
 |Event |Occurs when
 
 |task.submitted
-|task is submitted
+|a task is submitted
 
 |task.updated
-|task gets updated
+|a task is updated
 
 |task.removed
-|task is removed
+|a task is removed
 
 |task.finished
-|task completes
+|a task completes
 
 |task.failed
-|task failed
+|a task fails
 |===
 
 For more information on events, check out the <<lib-event#, event API>>
@@ -276,7 +276,7 @@ const expected = [
 
 === progress
 
-Reports progress information from an executing task. This function may only be called within the context of a task function, otherwise it will fail and throw an exception.
+Reports progress information from an executing task. This function can only be called within the context of a task function, otherwise it will fail and throw an exception.
 
 [.lead]
 Parameters
@@ -429,9 +429,9 @@ const taskId = executeFunction({
 
 Submits a named task to be executed in the background and returns an id representing the task.
 
-This function returns immediately. The callback function will be executed asynchronously.
+NOTE: This function returns immediately. The callback function will be executed asynchronously.
 
-NOTE: lib-task prior version 7.6 does not submit distributable named tasks, instead task always gets executed locally.
+TIP: lib-task prior version 7.6 does not submit distributable named tasks, instead task always gets executed locally.
 Recompile your application with the newer library version in order for tasks to be distributable.
 
 [.lead]

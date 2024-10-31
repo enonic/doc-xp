@@ -2,9 +2,9 @@
 :toc: right
 :imagesdir: ../images
 
-NOTE: This library has been introduced in XP 7.6.0.
+image:xp-760.svg[XP 7.6.0,opts=inline]
 
-This library contains functions for retrieving information about existing virtual host mappings.
+This API provides functions for retrieving information about existing virtual host mappings.
 
 == Usage
 
@@ -17,12 +17,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import vhostLib from '/lib/xp/vhost';
 ----
+
+You are now ready to use the API.
 
 == Functions
 

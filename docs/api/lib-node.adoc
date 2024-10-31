@@ -3,7 +3,7 @@ include::../.variables.adoc[]
 :toc: right
 :imagesdir: ../images
 
-This library contains functions to get, query and manipulate nodes.
+This API provides functions to get, query and manipulate nodes.
 
 == Usage
 
@@ -16,14 +16,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import nodeLib from '/lib/xp/node';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Events
 
@@ -34,31 +34,31 @@ Usage of this API produces the following events:
 |Event |Occurs when
 
 |node.created
-|node is created
+|a node is created
 
 |node.deleted
-|node is deleted
+|a node is deleted
 
 |node.pushed
-|node is pushed to a different branch
+|a node is pushed to a different branch
 
 |node.duplicated
-|node is duplicated
+|a node is duplicated
 
 |node.updated
-|node is updated
+|a node is updated
 
 |node.moved
-|node is moved in the tree structure
+|a node is moved in the tree structure
 
 |node.renamed
-|node is renamed
+|a node is renamed
 
 |node.sorted
-|node is sorted
+|a node is sorted
 
 |node.stateUpdated
-|node state is updated
+|a node state is updated
 
 |===
 
@@ -147,11 +147,11 @@ const searchConnection = multiRepoConnect({
 
 == MultiRepoConnection
 
-A MultiRepoConnection makes it possible to search across multiple repositories.  The object has only one method: query.
+A MultiRepoConnection makes it possible to search across multiple repositories.  The object has only one method: `query`.
 
 === query
 
-This command queries nodes in a multi-repo connection.
+Queries nodes in a multi-repo connection.
 
 [.lead]
 Parameters
@@ -242,7 +242,7 @@ const expected = {
 
 == RepoConnection
 
-A single repo connections with lots of methods to work on the repo:
+A single-repo connection with various methods for working in a single repo.
 
 All the examples below are using a repo connection to execute the functions.
 The repo connection can be created like this:
@@ -330,8 +330,8 @@ const expected = {
 [#create]
 === create
 
-Creating a node.  To create a content where the name is not important and there could be multiple instances under the same parent content,
-skip the name parameter and specify a displayName.
+Creates a node. To create a content where the name is not important and there could be multiple instances under the same parent content,
+skip the `name` parameter and specify a `displayName`.
 
 [.lead]
 Parameters
@@ -428,7 +428,7 @@ const expected = {
 
 === delete
 
-Deleting a node or nodes.
+Deletes a node or nodes.
 
 [.lead]
 Parameters
@@ -466,7 +466,7 @@ const result = repo.delete('nodeId', '/node2-path', 'missingNodeId');
 
 === diff
 
-Resolves the differences for a node between current and given branch.
+Resolves the differences for a node between the branch in the current context and a `target` branch.
 
 [.lead]
 Parameters
@@ -517,7 +517,7 @@ const result = repo.diff({
 
 === duplicate
 
-image:xp-7120.svg[XP 7.12.0,opts=inline] This function duplicates a node.
+image:xp-7120.svg[XP 7.12.0,opts=inline] Duplicates a node.
 
 [.lead]
 Parameters
@@ -563,7 +563,7 @@ const result = repo.duplicate({
 
 === exists
 
-Checks if a node exists for the current context.
+Checks if a node exists in the current context.
 
 [.lead]
 Parameters
@@ -579,7 +579,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : true if exists, false otherwise
+*boolean* : `true` if exists, `false` otherwise
 
 [.lead]
 Examples
@@ -612,7 +612,7 @@ if (result) {
 
 === findChildren
 
-Fetch the children of a node.
+Fetches children of a node.
 
 [.lead]
 Parameters
@@ -667,7 +667,7 @@ const expected = {
 
 === findVersions
 
-Fetch the versions of a node.
+Fetches versions of a node.
 
 [.lead]
 Parameters
@@ -726,7 +726,7 @@ const expected = {
 
 === get
 
-Fetches specific nodes by path or ID.
+Fetches a specific node or nodes by path or ID.
 
 [.lead]
 Parameters
@@ -941,7 +941,7 @@ const result = repo.modify({
 
 === move
 
-Rename a node or move it do a new path.
+Renames a node or moves it to a new path.
 
 [.lead]
 Parameters
@@ -1133,7 +1133,7 @@ Returns
 [.lead]
 Examples
 
-.A simple query using a the fulltext function
+.A simple query using the fulltext function
 [source,typescript]
 ----
 const result = repo.query({
@@ -1305,7 +1305,7 @@ const expected = {
 
 === refresh
 
-Refresh the index for the current repoConnection.  The index has two parts, search and storage.  It is possible to index both or just one of them.
+Refreshes indices for the current repoConnection.  The index has two parts: search and storage.  It is possible to index both or just one of them.
 
 [.lead]
 Parameters
@@ -1315,7 +1315,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| mode | string | ALL for both indexes, SEARCH for search-index or STORAGE for storage-index.  Default is ALL.
+| mode | string | ALL for both indices, SEARCH for search-index or STORAGE for storage-index.  Default is ALL.
 |===
 
 [.lead]
@@ -1340,7 +1340,7 @@ repo.refresh('SEARCH');
 
 === setActiveVersion
 
-Set the active version of a node.
+Sets the active version of a node.
 
 [.lead]
 Parameters
@@ -1379,7 +1379,7 @@ const result = repo.setActiveVersion({
 
 === setChildOrder
 
-Set the order of the node's children.
+Sets the order of a node's children.
 
 [.lead]
 Parameters
@@ -1414,7 +1414,7 @@ repo.setChildOrder({
 
 === setRootPermissions
 
-Set the root node permissions and inheritance.
+Sets the root node's permissions and inheritance.
 
 [.lead]
 Parameters

@@ -5,7 +5,7 @@
 
 image:xp-720.svg[XP 7.2.0,opts=inline]
 
-This library provides functions for audit log management.
+This API provides functions for audit log management.
 
 == Usage
 
@@ -18,14 +18,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import auditlogLib from '/lib/xp/auditlog';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 
 == Functions

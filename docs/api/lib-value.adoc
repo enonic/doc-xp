@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-Assign a specific value type using JSON, e.g a specify Geo-point value type for a property when creating nodes in node-lib. This ensures validation, and proper indexing storage time
+Helper functions for various value types.
 
 == Usage
 
@@ -15,20 +15,20 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import valueLib from '/lib/xp/value';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Functions
 
 === binary
 
-Creates a BinaryAttachment
+Creates a BinaryAttachment value.
 
 [.lead]
 Parameters
@@ -49,7 +49,7 @@ Returns
 
 === geoPoint
 
-Creates a GeoPoint
+Creates a GeoPoint value.
 
 [.lead]
 Parameters
@@ -70,7 +70,7 @@ Returns
 
 === geoPointString
 
-Creates a GeoPoint
+Creates a GeoPoint value as a string.
 
 [.lead]
 Parameters
@@ -90,7 +90,7 @@ Returns
 
 === instant
 
-Creates an Instant
+Creates an Instant value.
 
 [.lead]
 Parameters
@@ -100,7 +100,7 @@ Parameters
 [grid="none"]
 |===
 | Name  | Type           | Description
-| value | string \| Date | An ISO-8601-formatted instant (e.g '2011-12-03T10:15:30Z') or a Date object
+| value | string \| Date | An ISO-8601-formatted instant (f.ex. `2011-12-03T10:15:30Z`) or a Date object
 |===
 
 [.lead]
@@ -110,7 +110,7 @@ Returns
 
 === localDate
 
-Creates a LocalDate.
+Creates a LocalDate value.
 
 [.lead]
 Parameters
@@ -130,7 +130,7 @@ Returns
 
 === localDateTime
 
-Creates a LocalDateTime
+Creates a LocalDateTime value.
 
 [.lead]
 Parameters
@@ -150,7 +150,7 @@ Returns
 
 === localTime
 
-Creates a LocalTime
+Creates a LocalTime value.
 
 [.lead]
 Parameters
@@ -170,7 +170,7 @@ Returns
 
 === reference
 
-Creates a Reference
+Creates a Reference value.
 
 [.lead]
 Parameters

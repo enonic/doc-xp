@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: ../images
 
-Functions to access portal functionality.
+API to access functions related to rendering.
 
 == Usage
 
@@ -15,20 +15,20 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import portalLib from '/lib/xp/portal';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Functions
 
 === assetUrl
 
-This function generates a URL pointing to a static file.
+Generates URL to a static file.
 
 [.lead]
 Parameters
@@ -49,7 +49,7 @@ Parameters
 ! Name        ! Type   ! Attributes ! Default ! Description
 ! path        ! string !            !         ! Path to the asset
 ! application ! string ! <optional> !         ! Other application to reference to. Defaults to current application
-! type        ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute
+! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`
 ! params      ! object ! <optional> !         ! Custom parameters to append to the url
 !===
 
@@ -74,7 +74,7 @@ const url = assetUrl({
 
 === attachmentUrl
 
-This function generates a URL pointing to an attachment.
+Generates URL to an attachment.
 
 [.lead]
 Parameters
@@ -97,8 +97,8 @@ Parameters
 ! path     ! string  ! <optional> !         ! Path to the content holding the attachment.
 ! name     ! string  ! <optional> !         ! Name to the attachment.
 ! label    ! string  ! <optional> ! source  ! Label of the attachment.
-! download ! boolean ! <optional> ! false   ! Set to true if the disposition header should be set to attachment.
-! type     ! string  ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! download ! boolean ! <optional> ! false   ! Set to `true` if the disposition header should be set to attachment.
+! type     ! string  ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
 ! params   ! object  ! <optional> !         ! Custom parameters to append to the url.
 !===
 
@@ -125,7 +125,7 @@ const url = attachmentUrl({
 
 === componentUrl
 
-This function generates a URL pointing to a component.
+Generates URL to a page component.
 
 [.lead]
 Parameters
@@ -147,7 +147,7 @@ Parameters
 ! id        ! string ! <optional> !         ! Id to the page.
 ! path      ! string ! <optional> !         ! Path to the page.
 ! component ! string ! <optional> !         ! Path to the component. If not set, the current path is set.
-! type      ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! type      ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
 ! params    ! object ! <optional> !         ! Custom parameters to append to the url.
 !===
 
@@ -179,7 +179,7 @@ const expected = 'ComponentUrlParams{type=server, params={}, component=main/0}'
 
 === getComponent
 
-This function returns the component corresponding to the current execution context. It is meant to be called from a layout or part controller.
+Returns component in the current execution context. It is meant to be called from a layout or a part controller.
 
 [.lead]
 Returns
@@ -189,7 +189,7 @@ Returns
 [.lead]
 Example
 
-.Obtains list of active tasks:
+.Returns component in the current context:
 [source,typescript]
 ----
 import {getComponent} from '/lib/xp/portal';
@@ -228,7 +228,7 @@ const expected = {
 
 === getContent
 
-This function returns the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.
+Returns content in the current execution context. It is meant to be called from a page, a layout or a part controller.
 
 [.lead]
 Returns
@@ -275,17 +275,17 @@ const expected = {
 
 === getIdProviderKey
 
-This function returns the id provider key corresponding to the current execution context.
+Returns the key of ID provider in the current execution context.
 
 [.lead]
 Returns
 
-*object* : The current id provider as JSON.
+*object* : The current ID provider as JSON.
 
 [.lead]
 Example
 
-.Returns the current id provider:
+.Returns the current ID provider:
 [source,typescript]
 ----
 import {getIdProviderKey} from '/lib/xp/portal';
@@ -305,7 +305,7 @@ const expected = "myidprovider";
 
 === getMultipartForm
 
-This function returns a JSON containing multipart items. If not a multipart request, then this function returns `undefined`.
+Returns a JSON containing multipart items. If not a multipart request, then this function returns `undefined`.
 
 [.lead]
 Returns
@@ -353,7 +353,7 @@ const expected = {
 
 === getMultipartItem
 
-This function returns a JSON containing a named multipart item. If the item does not exists, it returns `undefined`.
+Returns a JSON containing a named multipart item. If the item does not exist, it returns `undefined`.
 
 [.lead]
 Parameters
@@ -398,7 +398,7 @@ const expected = {
 
 === getMultipartStream
 
-This function returns a data-stream for a named multipart item.
+Returns a data stream for a named multipart item.
 
 [.lead]
 Parameters
@@ -431,7 +431,7 @@ const stream2 = getMultipartStream('item2', 1);
 
 === getMultipartText
 
-This function returns the multipart item data as text.
+Returns the multipart item data as text.
 
 [.lead]
 Parameters
@@ -463,7 +463,7 @@ const text = getMultipartText('item1');
 
 === getSite
 
-This function returns the parent site of the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.
+Returns the parent site of a content in the current execution context. It is meant to be called from a page, a layout or a part controller.
 
 [.lead]
 Returns
@@ -509,7 +509,7 @@ const expected = {
 
 === getSiteConfig
 
-This function returns the site configuration for this app in the parent site of the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.
+Returns configuration of the parent site for a content in the current execution context. It is meant to be called from a page, a layout or a part controller.
 
 [.lead]
 Returns
@@ -538,7 +538,7 @@ const expected = {
 
 === idProviderUrl
 
-This function generates a URL pointing to an ID provider.
+Generates URL to an ID provider.
 
 [.lead]
 Parameters
@@ -559,7 +559,7 @@ Parameters
 ! Name        ! Type   ! Attributes ! Default ! Description
 ! idProvider  ! string ! <optional> !         ! Key of an ID provider. If idProvider is not set, then the id provider corresponding to the current execution context will be used.
 ! contextPath ! string ! <optional> ! vhost   ! Context path. Either vhost (using vhost target path) or relative to the current path.
-! type        ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
 ! params      ! object ! <optional> !         ! Custom parameters to append to the url.
 !===
 
@@ -572,7 +572,7 @@ Returns
 
 === imagePlaceholder
 
-This function generates a URL to an image placeholder.
+Generates URL of an image placeholder with a specified size.
 
 [.lead]
 Parameters
@@ -624,7 +624,7 @@ const expected = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACb
 
 === imageUrl
 
-This function generates a URL pointing to an image.
+Generates URL to an image.
 
 [.lead]
 Parameters
@@ -650,7 +650,7 @@ Parameters
 ! background ! string ! <optional> !         ! Background color.
 ! format     ! string ! <optional> !         ! Format of the image.
 ! filter     ! string ! <optional> !         ! A number of filters are available to alter the image appearance, for example, blur(3), grayscale(), rounded(5), etc.
-! type       ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! type       ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
 ! params     ! object ! <optional> !         ! Custom parameters to append to the url.
 !===
 
@@ -678,7 +678,7 @@ const url = imageUrl({
 
 === loginUrl
 
-This function generates a URL pointing to the login function of an ID provider.
+Generates URL to the login endpoint of an ID provider.
 
 [.lead]
 Parameters
@@ -697,10 +697,10 @@ Parameters
 .Properties
 !===
 ! Name        ! Type   ! Attributes ! Default ! Description
-! idProvider  ! string ! <optional> !         ! Key of a id provider using an application. If idProvider is not set, then the id provider corresponding to the current execution context will be used.
+! idProvider  ! string ! <optional> !         ! Id provider key. If idProvider is not set, then the id provider corresponding to the current execution context will be used.
 ! redirect    ! string ! <optional> !         ! The URL to redirect to after the login.
 ! contextPath ! string ! <optional> ! vhost   ! Context path. Either vhost (using vhost target path) or relative to the current path.
-! type        ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
 ! params      ! object ! <optional> !         ! Custom parameters to append to the url.
 !===
 
@@ -713,7 +713,7 @@ Returns
 
 === logoutUrl
 
-This function generates a URL pointing to the logout function of the application corresponding to the current user.
+Generates URL to the logout endpoint of ID provider in the current context.
 
 [.lead]
 Parameters
@@ -734,7 +734,7 @@ Parameters
 ! Name        ! Type   ! Attributes ! Default ! Description
 ! redirect    ! string ! <optional> !         ! The URL to redirect to after the logout.
 ! contextPath ! string ! <optional> ! vhost   ! Context path. Either vhost (using vhost target path) or relative to the current path.
-! type        ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
 ! params      ! object ! <optional> !         ! Custom parameters to append to the url.
 !===
 
@@ -747,7 +747,7 @@ Returns
 
 === pageUrl
 
-This function generates a URL pointing to a page.
+Generates URL to a content page.
 
 [.lead]
 Parameters
@@ -766,9 +766,9 @@ Parameters
 .Properties
 !===
 ! Name   ! Type   ! Attributes ! Default ! Description
-! id     ! string ! <optional> !         ! Id to the page. If id is set, then path is not used.
-! path   ! string ! <optional> !         ! Path to the page. Relative paths is resolved using the context page.
-! type   ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! id     ! string ! <optional> !         ! Id of a content. If id is set, then path is not used.
+! path   ! string ! <optional> !         ! Path of a content. Relative paths are resolved based on the current context.
+! type   ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
 ! params ! object ! <optional> !         ! Custom parameters to append to the url.
 !===
 
@@ -799,10 +799,10 @@ const url = pageUrl({
 === processHtml
 [#processHtml]
 
-This function replaces abstract internal links to images and internal content items contained in an HTML text with full URLs.
-It will also render embedded macros.
+Resolves internal links to images and internal content items contained in an HTML text and replaces them with correct URLs.
+It will also process embedded macros.
 
-When outputting processed HTML in Thymeleaf, use attribute `data-th-utext="${processedHtml}"`.
+TIP: When outputting processed HTML in Thymeleaf, use attribute `data-th-utext="${processedHtml}"`.
 
 [.lead]
 Parameters
@@ -822,7 +822,7 @@ Parameters
 !===
 ! Name  ! Type   ! Attributes ! Default ! Description
 ! value ! string !            !         ! Html value string to process.
-! type  ! string ! <optional> ! server  ! URL type. Either server (server-relative URL) or absolute.
+! type  ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
 ! image:xp-770.svg[XP 7.7.0,opts=inline] imageWidths  ! number[] ! <optional> ! ! A comma-separated list of image widths. If this parameter is provided, all `<img>` tags will have an additional `srcset` attribute with image URLs generated for specified widths.
 ! image:xp-780.svg[XP 7.8.0,opts=inline] imageSizes  ! string ! <optional> !! Specifies the width for an image depending on browser dimensions. The value has the following format: `(media-condition) width`. Multiple sizes are comma-separated.
 !===
@@ -853,9 +853,9 @@ const html = processHtml({
 
 === sanitizeHtml
 
-This function sanitizes an HTML string by stripping all potentially unsafe tags and attributes.
+Sanitizes an HTML string by stripping all potentially unsafe tags and attributes.
 
-HTML sanitization can be used to protect against cross-site scripting (XSS) attacks by sanitizing any HTML code submitted by a user.
+TIP: HTML sanitization can be used to protect against cross-site scripting (XSS) attacks by sanitizing any HTML code submitted by a user.
 
 [.lead]
 Parameters
@@ -894,7 +894,7 @@ const expected = '<p><a href="https://example.com/">Link</a></p>';
 
 === serviceUrl
 
-This function generates a URL pointing to a service.
+Generates URL to a service.
 
 [.lead]
 Parameters
@@ -944,7 +944,7 @@ const url = serviceUrl({
 
 === url
 
-This function generates a URL.
+Generates URL to a resource.
 
 [.lead]
 Parameters

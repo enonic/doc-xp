@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: ../images
 
-This library contains functions to access and use the current context.  It comes bundled with the XP runtime, so it should always use the same version as XP.
+This API provides functions to access and use the current context.
 
 == Usage
 
@@ -15,14 +15,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import contextLib from '/lib/xp/context';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 
 == Functions
@@ -80,11 +80,11 @@ const context = contextLib.get();
 }
 ----
 
-<1> The user node will not be returned unless there is a logged in user.
+<1> The user node will not be returned unless there is a logged-in user.
 
 === run
 
-Runs a function within a custom context, for instance the one returned by the `get()` function call.
+Runs a function inside a custom context, for instance the one returned by the `get()` function call.
 Commonly used when accessing repositories, or to override current users permissions.
 
 [.lead]
@@ -153,7 +153,7 @@ The context object is always available within the scope of a request
 
 <1> *repository* (_string_) Repository context.
 <2> *branch* (_string_) Branch context.
-<3> *user* (_object_) Specify a valid user/idprovider combination
+<3> *user* (_object_) Specify a valid user/ID provider combination
 <4> *principals* (_object_) Roles or group principals applicable for current user
 <5> *attributes* (_object_) custom attributes image:xp-780.svg[XP 7.8.0,opts=inline]
 

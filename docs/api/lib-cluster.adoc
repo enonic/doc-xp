@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-This library contains cluster related functions.
+This API provides cluster related functions.
 
 == Usage
 
@@ -15,21 +15,21 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import clusterLib from '/lib/xp/cluster';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 
 == Functions
 
 === isMaster
 
-Tests whether the current node is the master node in the cluster. Cluster with multiple master nodes will only return true on the elected node.
+Tests whether the current node is the master node in a cluster. A cluster with multiple master nodes will only return true on the elected node.
 
 [.lead]
 Parameters
@@ -39,7 +39,7 @@ None
 [.lead]
 Returns
 
-*boolean* : true if the current node is master; false otherwise.
+*boolean* : `true` if the current node is master; `false` otherwise.
 
 [.lead]
 Examples

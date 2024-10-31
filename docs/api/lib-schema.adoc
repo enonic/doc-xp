@@ -15,14 +15,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import schemaLib from '/lib/xp/schema';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Functions
 
@@ -403,7 +403,7 @@ const expected = {
 
 === deleteSchema
 
-Removes dynamic schema from virtual application.
+Removes a schema from a virtual application.
 
 [.lead]
 Parameters
@@ -535,7 +535,7 @@ const expected = {
 
 === listComponents
 
-Fetches components of particular type from an application.
+Fetches components of a particular type from an application.
 
 [.lead]
 Parameters
@@ -937,7 +937,7 @@ if (result) {
 
 === getStyles
 
-Fetch styles from an application.
+Fetches styles (f.ex. image styles) from an application.
 
 [.lead]
 Parameters
@@ -999,7 +999,7 @@ const expected = {
 
 === createStyles
 
-Create styles in virtual application.
+Creates styles in a virtual application.
 
 [.lead]
 Parameters
@@ -1177,7 +1177,7 @@ const expected = {
 
 === deleteStyles
 
-Deletes dynamic styles from a virtual application.
+Deletes styles from a virtual application.
 
 [.lead]
 Parameters
@@ -1227,7 +1227,7 @@ if (result) {
 
 === getSite
 
-Fetch a site descriptor from an application.
+Fetches a site descriptor from an application.
 
 [.lead]
 Parameters

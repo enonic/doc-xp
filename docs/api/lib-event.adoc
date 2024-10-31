@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-This library contains functions to create and listen to instance local or cluster distributed events.
+This API provides functions to create and listen to instance local or cluster distributed events.
 
 == Usage
 
@@ -15,14 +15,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import eventLib from '/lib/xp/event';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 [NOTE]
 ====
@@ -34,7 +34,7 @@ For more details, check out the <<lib-node#events, node API>>, <<lib-repo#events
 
 === listener
 
-Adds an event listener to the system
+Creates an event listener
 
 [.lead]
 Parameters
@@ -73,7 +73,7 @@ eventLib.listener({
 
 === send
 
-Sends a custom event.  All custom events are prefixed with "custom.".
+Sends a custom event.  All custom events are prefixed with `custom.`.
 
 [.lead]
 Parameters
@@ -86,7 +86,7 @@ An object with the following keys and their values:
 |===
 | Name | Kind | Details
 | type | string | Event type
-| distributed | boolean | `True` if it should be distributed in cluster
+| distributed | boolean | `true` if it should be distributed in cluster
 | data| object | Additional data for event.
 |===
 
