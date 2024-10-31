@@ -454,7 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains cluster related functions.</p>
+<p>This API provides cluster related functions.</p>
 </div>
 </div>
 </div>
@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>in your controller, add an import statement:</p>
+<p>In your controller, add an import statement:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -480,7 +480,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -490,7 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="ismaster"><a class="link" href="#ismaster">isMaster</a></h3>
 <div class="paragraph">
-<p>Tests whether the current node is the master node in the cluster. Cluster with multiple master nodes will only return true on the elected node.</p>
+<p>Tests whether the current node is the master node in a cluster. A cluster with multiple master nodes will only return true on the elected node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -502,7 +502,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : true if the current node is master; false otherwise.</p>
+<p><strong>boolean</strong> : <code>true</code> if the current node is master; <code>false</code> otherwise.</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -555,7 +555,7 @@ listener({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 09:51:03 UTC
+Last updated 2024-10-31 15:53:43 UTC
 </div>
 </div>
 </body>

@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains functions to create and listen to instance local or cluster distributed events.</p>
+<p>This API provides functions to create and listen to instance local or cluster distributed events.</p>
 </div>
 </div>
 </div>
@@ -473,7 +473,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>in your controller, add an import statement:</p>
+<p>In your controller, add an import statement:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -481,7 +481,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -506,7 +506,7 @@ For more details, check out the <a href="lib-node.ahtml#events">node API</a>, <a
 <div class="sect2">
 <h3 id="listener"><a class="link" href="#listener">listener</a></h3>
 <div class="paragraph">
-<p>Adds an event listener to the system</p>
+<p>Creates an event listener</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -576,7 +576,7 @@ For more details, check out the <a href="lib-node.ahtml#events">node API</a>, <a
 <div class="sect2">
 <h3 id="send"><a class="link" href="#send">send</a></h3>
 <div class="paragraph">
-<p>Sends a custom event.  All custom events are prefixed with "custom.".</p>
+<p>Sends a custom event.  All custom events are prefixed with <code>custom.</code>.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -609,7 +609,7 @@ For more details, check out the <a href="lib-node.ahtml#events">node API</a>, <a
 <td class="tableblock halign-left valign-top"><p class="tableblock">distributed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>True</code> if it should be distributed in cluster</p>
+<p><code>true</code> if it should be distributed in cluster</p>
 </div></div></td>
 </tr>
 <tr>
@@ -649,7 +649,7 @@ For more details, check out the <a href="lib-node.ahtml#events">node API</a>, <a
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 09:51:03 UTC
+Last updated 2024-10-31 15:53:43 UTC
 </div>
 </div>
 </body>

@@ -476,7 +476,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains built-in authentication functions.</p>
+<p>This API provides built-in authentication functions.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -485,7 +485,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If, when using functions of this library, you are getting authentication errors like "<em>Access denied to user [unknown]</em>"
+If, while using this API, you are getting authentication errors like "<em>Access denied to user [unknown]</em>"
 it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
 In this case you must explicitly execute the function in the <a href="lib-context.ahtml#runcontext">context</a> of System Administrator role.
 </td>
@@ -508,7 +508,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 </div>
 </div>
 <div class="paragraph">
-<p>in your controller, add an import statement:</p>
+<p>In your controller, add an import statement:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -516,7 +516,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -556,7 +556,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <td class="tableblock halign-left valign-top"><p class="tableblock">members</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A list of the new memebers that should be added to the principal</p>
+<p>A list of the new members that should be added to the principal</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1560,7 +1560,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <div class="sect2">
 <h3 id="login"><a class="link" href="#login">login</a></h3>
 <div class="paragraph">
-<p>Login a user through the specified idProvider, with userName and password.</p>
+<p>Logs in a user through the specified idProvider, with username and password.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1630,7 +1630,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The logged in user</p>
+<p><strong>object</strong> : The logged-in user</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1668,7 +1668,7 @@ const loginResult = login({
 <div class="sect2">
 <h3 id="logout"><a class="link" href="#logout">logout</a></h3>
 <div class="paragraph">
-<p>Logout the currently logged-in user.</p>
+<p>Logs out the currently logged-in user.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1686,7 +1686,7 @@ const loginResult = login({
 <div class="sect2">
 <h3 id="modifygroup"><a class="link" href="#modifygroup">modifyGroup</a></h3>
 <div class="paragraph">
-<p>Retrieves the group specified and updates it with the changes applied.</p>
+<p>Updates an existing group.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1767,7 +1767,7 @@ const group = modifyGroup({
 <div class="sect2">
 <h3 id="modifyprofile"><a class="link" href="#modifyprofile">modifyProfile</a></h3>
 <div class="paragraph">
-<p>This function retrieves the profile of a user and updates it.</p>
+<p>Updates an existing user profile.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1851,7 +1851,7 @@ const profileModified = modifyProfile({
 <div class="sect2">
 <h3 id="modifyrole"><a class="link" href="#modifyrole">modifyRole</a></h3>
 <div class="paragraph">
-<p>Retrieves the role specified and updates it with the changes applied through an editor.</p>
+<p>Updates an existing role.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1929,7 +1929,7 @@ const theRole = modifyRole({
 <div class="sect2">
 <h3 id="modifyuser"><a class="link" href="#modifyuser">modifyUser</a></h3>
 <div class="paragraph">
-<p>Retrieves the user specified and updates it with the changes applied through the editor.</p>
+<p>Updates an existing user.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2063,7 +2063,7 @@ const theUser = modifyUser({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 09:51:03 UTC
+Last updated 2024-10-31 15:53:43 UTC
 </div>
 </div>
 </body>

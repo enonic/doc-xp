@@ -510,7 +510,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>in your controller, add an import statement:</p>
+<p>In your controller, add an import statement:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -518,7 +518,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -655,7 +655,7 @@ addAttachment({
 <p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>Archive a content</p>
+<p>Archives a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -718,13 +718,13 @@ log.info('Archived content ids: %s', result2.join(','));</code></pre>
 <div class="sect2">
 <h3 id="create"><a class="link" href="#create">create</a></h3>
 <div class="paragraph">
-<p>This function creates a content.</p>
+<p>Creates a content.</p>
 </div>
 <div class="paragraph">
-<p>The parameter name is optional, but if it is not set then displayName must be specified. When name is not set, the system will auto-generate a name based on the displayName, by lower-casing and replacing certain characters. If there is already a content with the auto-generated name, a suffix will be added to the name in order to make it unique.</p>
+<p>Either <code>name</code> or <code>displayName</code> (or both) must be specified. When <code>name</code> is not set, the system will auto-generate a name based on the <code>displayName</code>, by lower-casing and replacing certain characters. If there is already a content with the auto-generated name, a suffix will be added to <code>name</code> in order to make it unique.</p>
 </div>
 <div class="paragraph">
-<p>To create a content where the name is not important and there could be multiple instances under the same parent content, skip the name parameter and specify a displayName</p>
+<p>To create a content where <code>name</code> is not important and there could be multiple instances under the same parent content, skip the <code>name</code> parameter and specify a <code>displayName</code> instead.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1278,7 +1278,7 @@ const expected = {
 <div class="sect2">
 <h3 id="delete"><a class="link" href="#delete">delete</a></h3>
 <div class="paragraph">
-<p>This function deletes a content</p>
+<p>Deletes a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1313,7 +1313,7 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if deleted, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if deleted, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -1338,7 +1338,7 @@ if (result) {
 <div class="sect2">
 <h3 id="duplicate"><a class="link" href="#duplicate">duplicate</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> This function duplicates a content.</p>
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> Duplicates a content.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1424,16 +1424,16 @@ checks: {}
 </tbody>
 </table>
 <div class="paragraph lead">
-<p>Returns summary about duplicated content.</p>
+<p>Returns summary of the content duplicate.</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Summary about duplicated content.</p>
+<p><strong>object</strong> : Summary of the content duplicate.</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="paragraph">
-<p>Duplicate content</p>
+<p>Duplicate a content</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1456,7 +1456,7 @@ const expected = {
 </div>
 </div>
 <div class="paragraph">
-<p>Create variant</p>
+<p>Create a variant</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1482,7 +1482,7 @@ const expected = {
 <div class="sect2">
 <h3 id="exists"><a class="link" href="#exists">exists</a></h3>
 <div class="paragraph">
-<p>This function checks if a content exists for the current context.</p>
+<p>Checks if a content exists in the current context.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1517,7 +1517,7 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if exists, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if exists, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -1542,7 +1542,7 @@ if (result) {
 <div class="sect2">
 <h3 id="get"><a class="link" href="#get">get</a></h3>
 <div class="paragraph">
-<p>This function fetches a content</p>
+<p>Returns a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1684,7 +1684,7 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : An object with all the attachments that belong to the content, where the key is the attachment name. Or null if the content cannot be found</p>
+<p><strong>object</strong> : An object with all the attachments stored in the content, where the key is the attachment name. Or null if the content was not found.</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -1752,12 +1752,8 @@ const expected = {
 <div class="paragraph lead">
 <p>Returns</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>: Stream of the attachment data</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>object</strong> : Stream of the attachment data</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -1777,7 +1773,7 @@ const stream = getAttachmentStream({
 <div class="sect2">
 <h3 id="getchildren"><a class="link" href="#getchildren">getChildren</a></h3>
 <div class="paragraph">
-<p>This function fetches children of a content</p>
+<p>Fetches children of a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1845,7 +1841,7 @@ const stream = getAttachmentStream({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Result (of content) fetched from the repository</p>
+<p><strong>object</strong> : An array of child items (as JSON) fetched from the repository</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -1919,20 +1915,11 @@ const expected = {
 </div>
 <div class="sect2">
 <h3 id="getoutbounddependencies"><a class="link" href="#getoutbounddependencies">getOutboundDependencies</a></h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This function was first introduced in v7.2
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.2.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.2.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>This function returns the list of content items that are outbound dependencies of specified content.</p>
+<p>Returns the list of content items that are outbound dependencies of specified content.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1992,7 +1979,7 @@ if (result) {
 <div class="sect2">
 <h3 id="getpermissions"><a class="link" href="#getpermissions">getPermissions</a></h3>
 <div class="paragraph">
-<p>Gets permissions on a content</p>
+<p>Returns content permissions</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2069,7 +2056,7 @@ const expected = {
 <div class="sect2">
 <h3 id="getsite"><a class="link" href="#getsite">getSite</a></h3>
 <div class="paragraph">
-<p>This function returns the parent site of a content</p>
+<p>Returns the parent site of a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2149,7 +2136,7 @@ const expected = {
 <div class="sect2">
 <h3 id="getsiteconfig"><a class="link" href="#getsiteconfig">getSiteConfig</a></h3>
 <div class="paragraph">
-<p>This function returns the site configuration for this app in the parent site of a content</p>
+<p>Returns configuration of a specified application assigned to the site of a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2191,7 +2178,7 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The site configuration for current application as JSON</p>
+<p><strong>object</strong> : App config (as JSON)</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -2220,7 +2207,7 @@ const expected = {
 <div class="sect2">
 <h3 id="gettype"><a class="link" href="#gettype">getType</a></h3>
 <div class="paragraph">
-<p>Returns the properties and icon of the specified content type</p>
+<p>Returns properties and icon of the specified content type</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2252,7 +2239,7 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong><a href="#contenttype">ContentType</a></strong> : The content type object if found, or null otherwise. See ContentType type definition below</p>
+<p><strong><a href="#contenttype">ContentType</a></strong> : The content type object if found, or <code>null</code> otherwise. See ContentType type definition below</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -2419,7 +2406,7 @@ contentTypes.forEach(({displayName,name,superType}) =&gt; {
 <div class="sect2">
 <h3 id="modify"><a class="link" href="#modify">modify</a></h3>
 <div class="paragraph">
-<p>Modifies properties of a content</p>
+<p>Modifies a content</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2428,7 +2415,7 @@ contentTypes.forEach(({displayName,name,superType}) =&gt; {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Properties starting with <code>_</code> may not be modified using this function. To rename or move a content (i.e to change the _name property), use the <a href="#move">move function</a> instead.
+Properties starting with <code>_</code> may not be modified using this function. To rename or move a content (ie to change the <code>_name</code> property), use the <a href="#move">move function</a> instead.
 </td>
 </tr>
 </table>
@@ -2481,7 +2468,7 @@ Properties starting with <code>_</code> may not be modified using this function.
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The content has to be valid, according to the content type, to be updated. If requireValid=true and the content is not strictly valid, an error will be thrown</p>
+<p>The content has to be valid (according to the content type) to be updated. If <code>requireValid=true</code> and the content is not strictly valid, an error will be thrown</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2574,7 +2561,7 @@ const expected = {
 <div class="sect2">
 <h3 id="move"><a class="link" href="#move">move</a></h3>
 <div id="move" class="paragraph">
-<p>Rename a content or move it to a new path</p>
+<p>Renames a content or moves it to a new path</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2697,7 +2684,7 @@ try {
 <div class="sect2">
 <h3 id="publish"><a class="link" href="#publish">publish</a></h3>
 <div class="paragraph">
-<p>This function publishes content to the master branch</p>
+<p>Publishes content to the master branch</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2733,30 +2720,12 @@ try {
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sourceBranch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>Not in use from</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch where the content to be published is stored.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">targetBranch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>Not in use since</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master</p>
-</div></div></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">schedule</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#scheduleparams">ScheduleParams</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Schedule the publish</p>
+<p>Schedule publishing</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2775,6 +2744,24 @@ try {
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Whether all related content should be included when publishing content</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sourceBranch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>Not in use from</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch where the content to be published is stored.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">targetBranch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>Not in use since</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2802,7 +2789,7 @@ try {
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time from which the content is considered published. Defaults to the time of the publish</p>
+<p>Time from which the content is considered published. Defaults to the time of publishing</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2819,7 +2806,7 @@ try {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Status of the publish operation in JSON</p>
+<p><strong>object</strong> : Status of the publish operation as JSON</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -2872,7 +2859,7 @@ const expected = {
 <div class="sect2">
 <h3 id="query"><a class="link" href="#query">query</a></h3>
 <div class="paragraph">
-<p>This command queries content</p>
+<p>Retrieves content using a query</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -3352,7 +3339,7 @@ resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['
 <p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>Restore a content from the archive</p>
+<p>Restores a content from the archive</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -3531,7 +3518,7 @@ log.info('Restored content ids: %s', result3.join(','));</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if successful, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if successful, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -3564,7 +3551,7 @@ if (flag) {
 <div class="sect2">
 <h3 id="unpublish"><a class="link" href="#unpublish">unpublish</a></h3>
 <div class="paragraph">
-<p>This function unpublishes content that had been published to the master branch</p>
+<p>Unpublishes content that had been published to the master branch</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -3789,7 +3776,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 09:51:03 UTC
+Last updated 2024-10-31 15:53:43 UTC
 </div>
 </div>
 </body>

@@ -456,7 +456,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains functions for localization of text phrases.</p>
+<p>This API provides functionality for localization of text phrases.</p>
 </div>
 </div>
 </div>
@@ -486,7 +486,7 @@ This API uses standard framework functionality. Please consult the <a href="../f
 </div>
 </div>
 <div class="paragraph">
-<p>in your controller, add an import statement:</p>
+<p>In your controller, add an import statement:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -497,7 +497,7 @@ This API uses standard framework functionality. Please consult the <a href="../f
 <p>Then, you need to create files with original phrases and their translations.  These files should be placed in your app,
 in the <code>src/main/resources/site/i18n</code> folder.  There must be a file named <code>phrases.properties</code> that contain all the phrases
 and the default text.  Additonal files with translations, named <code>phrases_&lt;locale&gt;.properties</code> should contain the same phrases
-with the translated text.  If a phrase is missing from the translation file, the defult will be used.  This is what a couple
+with the translated text.  If a phrase is missing from the translation file, the default file will be used.  This is what a couple
 of such files could look like:</p>
 </div>
 <div class="listingblock">
@@ -515,7 +515,7 @@ notify.process.failed=Error al procesar: {0}.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>With these basics in place, you are ready to invoke to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -732,7 +732,7 @@ const message2 = localize({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 09:51:03 UTC
+Last updated 2024-10-31 15:53:43 UTC
 </div>
 </div>
 </body>
