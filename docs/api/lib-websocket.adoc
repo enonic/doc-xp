@@ -15,20 +15,20 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import webSocketLib from '/lib/xp/websocket';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Functions
 
 === addToGroup
 
-Add an id to a socket group.
+Adds an id to a socket group.
 
 [.lead]
 Parameters
@@ -59,7 +59,7 @@ addToGroup('people', session.id);
 
 === removeFromGroup
 
-Remove an id from a socket group.
+Removes an id from a socket group.
 
 [.lead]
 Parameters
@@ -90,7 +90,7 @@ removeFromGroup('people', session.id);
 
 === send
 
-Send message directly to a socket id.
+Sends a message directly to a socket id.
 
 [.lead]
 Parameters
@@ -121,7 +121,7 @@ send(session.id, 'You said - ' + message);
 
 === sendToGroup
 
-Send message to all sockets in group.
+Sends a message to all sockets in group.
 
 [.lead]
 Parameters
@@ -152,7 +152,7 @@ sendToGroup('people', 'Notice this message!');
 
 === getGroupSize
 
-image:xp-760.svg[XP 7.6.0,opts=inline] Get number of all sockets in group.
+image:xp-760.svg[XP 7.6.0,opts=inline] Gets number of all sockets in a group.
 
 NOTE: Calculating size of a group has a linear cost from total number of sockets.
 Consider using this method only if building a message is a resource consuming operation, otherwise it is better to simply `sendToGroup`.

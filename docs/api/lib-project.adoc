@@ -2,9 +2,9 @@
 :toc: right
 :imagesdir: ../images
 
-NOTE: This library has been introduced in XP 7.3.0.
+image:xp-730.svg[XP 7.3.0,opts=inline]
 
-This library contains functions for management of Content Projects.
+This API provides functions for management of Content Projects.
 
 == Usage
 
@@ -17,12 +17,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import projectLib from '/lib/xp/project';
 ----
+
+You are now ready to use the API.
 
 == Functions
 
@@ -30,7 +32,8 @@ import projectLib from '/lib/xp/project';
 === addPermissions
 
 Adds permissions to an existing Content Project.
-To modify permissions, user must have `Owner` permissions for the project, or either `system.admin` or `cms.admin` role.
+
+NOTE: To modify permissions, user must have `Owner` permissions for the project, or either `system.admin` or `cms.admin` role.
 
 TIP: You can read about project permissions in the dedicated https://developer.enonic.com/docs/content-studio/stable/projects#roles[Content Projects] section
 
@@ -88,8 +91,9 @@ const expected = {
 
 === create
 
-Creates a new Content Project. Only `system.admin` and `cms.admin` roles have permissions to create new projects.
+Creates a new Content Project.
 
+NOTE: Only `system.admin` and `cms.admin` roles have permissions to create new projects.
 
 [.lead]
 Parameters
@@ -99,7 +103,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Type | Attributes | Description
-| id | string | | Unique project id (alpha-numeric characters and hyphens allowed).
+| id | string | | Unique project id (alphanumeric characters and hyphens allowed).
 | displayName | string | | Project display name.
 | parent | string | <optional> | image:xp-760.svg[XP 7.6.0,opts=inline] Parent project id. If provided, the new project will be a Content Layer that automatically inherits changes from the parent project.
 
@@ -252,7 +256,8 @@ const expected = {
 === delete
 
 Deletes an existing Content Project and the project repository along with all the data inside.
-To delete a project, user must have either `system.admin` or `cms.admin` role.
+
+NOTE: To delete a project, user must have either `system.admin` or `cms.admin` role.
 
 [.lead]
 Parameters
@@ -293,7 +298,8 @@ const expected = true;
 === get
 
 Returns an existing Content Project.
-To get a project, user must have permissions for this project, or either `system.admin` or `cms.admin` role.
+
+NOTE: To access a project, user must have sufficient permissions for this project, or either `system.admin` or `cms.admin` role.
 
 [.lead]
 Parameters
@@ -347,7 +353,8 @@ const expected = {
 === list
 
 Returns all Content Projects that user in the current context has permissions for.
-Users with `system.admin` or `cms.admin` roles will get the list of all projects.
+
+NOTE: Users with `system.admin` or `cms.admin` roles will get the list of all projects.
 
 [.lead]
 Returns
@@ -387,7 +394,8 @@ const expected = [{
 === modify
 
 Modifies an existing Content Project.
-To modify a project, user must have `Owner` permissions for this project, or either `system.admin` or `cms.admin` role.
+
+NOTE: To modify a project, user must have `Owner` permissions for this project, or either `system.admin` or `cms.admin` role.
 
 [.lead]
 Parameters
@@ -476,9 +484,9 @@ const expected = {
 
 === modifyReadAccess
 
-Toggles public/private READ access for an existing Content Project. This will modify permissions on ALL the content items inside the project
-repository by adding or removing READ access for `system.everyone`.
-To modify READ access, user must have `Owner` permissions for the project, or either `system.admin` or `cms.admin` role.
+Toggles public/private READ access for an existing Content Project. This will modify permissions on ALL the content items inside the project repository by adding or removing READ access for `system.everyone`.
+
+NOTE: To modify READ access, user must have `Owner` permissions for the project, or either `system.admin` or `cms.admin` role.
 
 [.lead]
 Parameters
@@ -534,7 +542,8 @@ const expected = {
 === removePermissions
 
 Removes permissions from an existing Content Project.
-To remove permissions, user must have `Owner` permissions for the project, or either `system.admin` or `cms.admin` role.
+
+NOTE: To remove permissions, user must have `Owner` permissions for the project, or either `system.admin` or `cms.admin` role.
 
 [.lead]
 Parameters
@@ -599,7 +608,6 @@ const expected = {
 
 === getAvailableApplications
 image:xp-7110.svg[XP 7.11.0,opts=inline]
-
 
 Returns available applications of a specified project. The result contains active apps assigned to the project and all of its parents, if any.
 

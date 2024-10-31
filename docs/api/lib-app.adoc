@@ -16,14 +16,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import appLib from '/lib/xp/app';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Functions
 
@@ -361,14 +361,14 @@ Properties
 | displayName        | string  | Display name
 | vendorName         | string  | Vendor name
 | vendorUrl          | string  | Vendor url
-| url                | string  | Application url
-| version            | string  | Application version
+| url                | string  | Url
+| version            | string  | Version
 | systemVersion      | string  | System version
 | minSystemVersion   | string  | Min system version
 | maxSystemVersion   | string  | Max system version
-| modifiedTime       | object  | Application modified time
-| started            | boolean | `true` the application is started. Virtual applications are always started
-| system             | boolean | `true` the application is system
+| modifiedTime       | object  | Modified time
+| started            | boolean | `true` if the application is started. Virtual applications are always started
+| system             | boolean | `true` for a system application
 
 |===
 

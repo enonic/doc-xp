@@ -4,7 +4,7 @@
 
 image:xp-770.svg[XP 7.7.0,opts=inline]
 
-Functions for creating scheduled jobs.
+Functions for creating and managing scheduled jobs.
 
 == Usage
 
@@ -17,18 +17,20 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import schedulerLib from '/lib/xp/scheduler';
 ----
 
+You are now ready to use the API.
+
 == Functions
 
 === get
 
-Returns scheduled job with the specified name.
+Returns a scheduled job with the specified name.
 
 [.lead]
 Parameters
@@ -175,9 +177,9 @@ const expected = [
 
 === create
 
-Creates a scheduled job .
+Creates a scheduled job.
 
-This function returns immediately.
+NOTE: This function returns immediately.
 
 [.lead]
 Parameters
@@ -302,7 +304,9 @@ const expectedExtendedCronJob = {
 
 === modify
 
-Modifies a job. The previous task will be rescheduled, `lastRun` and `lastTaskId` properties will be cleaned.
+Modifies a job.
+
+NOTE: The previous task will be rescheduled, `lastRun` and `lastTaskId` properties will be cleaned.
 
 [.lead]
 Parameters
@@ -410,7 +414,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : True if deleted, false otherwise
+*boolean* : `true` if deleted, `false` otherwise
 
 [.lead]
 Example

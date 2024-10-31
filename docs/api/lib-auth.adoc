@@ -2,9 +2,9 @@
 :toc: right
 :imagesdir: ../images
 
-This library contains built-in authentication functions.
+This API provides built-in authentication functions.
 
-TIP: If, when using functions of this library, you are getting authentication errors like "_Access denied to user [unknown]_"
+TIP: If, while using this API, you are getting authentication errors like "_Access denied to user [unknown]_"
 it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
 In this case you must explicitly execute the function in the <<lib-context#runcontext, context>> of System Administrator role.
 
@@ -19,14 +19,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import authLib from '/lib/xp/auth';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 
 == Functions
@@ -44,7 +44,7 @@ Parameters
 |===
 | Name | Kind | Details
 | principalKey | string | Key of the principal to add members to
-| members | string[] | A list of the new memebers that should be added to the principal
+| members | string[] | A list of the new members that should be added to the principal
 |===
 
 [.lead]
@@ -686,7 +686,7 @@ const hasRole = hasRole('system.admin');
 
 === login
 
-Login a user through the specified idProvider, with userName and password.
+Logs in a user through the specified idProvider, with username and password.
 
 [.lead]
 Parameters
@@ -709,7 +709,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The logged in user
+*object* : The logged-in user
 
 [.lead]
 Example
@@ -745,7 +745,7 @@ const loginResult = login({
 
 === logout
 
-Logout the currently logged-in user.
+Logs out the currently logged-in user.
 
 [.lead]
 Parameters
@@ -759,7 +759,7 @@ Returns
 
 === modifyGroup
 
-Retrieves the group specified and updates it with the changes applied.
+Updates an existing group.
 
 [.lead]
 Parameters
@@ -815,7 +815,7 @@ const group = modifyGroup({
 
 === modifyProfile
 
-This function retrieves the profile of a user and updates it.
+Updates an existing user profile.
 
 [.lead]
 Parameters
@@ -868,7 +868,7 @@ const profileModified = modifyProfile({
 
 === modifyRole
 
-Retrieves the role specified and updates it with the changes applied through an editor.
+Updates an existing role.
 
 [.lead]
 Parameters
@@ -921,7 +921,7 @@ const theRole = modifyRole({
 
 === modifyUser
 
-Retrieves the user specified and updates it with the changes applied through the editor.
+Updates an existing user.
 
 [.lead]
 Parameters

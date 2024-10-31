@@ -3,9 +3,9 @@
 :toc: right
 :imagesdir: ../images
 
-image:xp-7100.svg[XP 7.10.0,opts=inline] This library contains functions that enable sharing data across all applications and cluster nodes.
+image:xp-7100.svg[XP 7.10.0,opts=inline] This API provides functions that enable sharing data across all applications and cluster nodes.
 
-NOTE: Due to distributed nature of `SharedMap` not all value types can be used. Strings, numbers, and pure JSON objects are supported. There is no runtime check for type compatibility due to performance reasons. Developer are themselves responsible for NOT modifying shared objects (keys and values) in place.
+NOTE: Due to distributed nature of `SharedMap` not all value types can be used. Strings, numbers, and pure JSON objects are supported. There is no runtime check for type compatibility due to performance reasons. Developers are themselves responsible for NOT modifying shared objects (keys and values) in place.
 
 == Usage
 
@@ -18,14 +18,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import gridLib from '/lib/xp/grid';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Functions
 
@@ -61,7 +61,7 @@ const sharedMap = getMap('mapId');
 
 === set
 
-Puts an entry into this map with a given time to live (TTL).
+Puts an entry into a SharedMap with a given time to live (TTL).
 
 [.lead]
 Parameters
@@ -92,7 +92,7 @@ sharedMap.set({
 
 === get
 
-Returns a value to which the specified key is mapped, or null if this map contains no mapping for the key.
+Returns a value to which the specified key is mapped, or `null` if this map contains no mapping for the key.
 
 [.lead]
 Parameters
@@ -111,7 +111,7 @@ import gridLib from '/lib/xp/grid';
 
 const sharedMap = gridLib.getMap('mapId');
 
-let value = sharedMap.get('key');
+const value = sharedMap.get('key');
 ----
 
 === delete

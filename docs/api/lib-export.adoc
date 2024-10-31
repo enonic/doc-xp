@@ -5,7 +5,7 @@
 
 image:xp-780.svg[XP 7.8.0,opts=inline]
 
-This library provides functions for creating and importing node-exports.
+This API provides functions for creating and importing node-exports.
 
 == Usage
 
@@ -18,21 +18,21 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import exportLib from '/lib/xp/export';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Functions
 
 === exportNodes
 
-Export nodes to a nodes-export.
-Export is created in <<../deployment/config#_export, exports>> directory.
+Creates a node export.
+Export will be created in <<../deployment/config#_export, exports>> directory.
 
 [.lead]
 Parameters
@@ -96,8 +96,7 @@ const expected = {
 ----
 === importNodes
 
-Import nodes from a nodes-export.
-Could be used to import node-export from <<../deployment/config#_export, exports>> directory or from application resource files.
+Imports nodes from a node export located in <<../deployment/config#_export, exports>> directory or from application resource files.
 Optionally pre-transforms node XML node files with XSLT before import.
 
 [.lead]

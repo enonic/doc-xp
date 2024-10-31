@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-Node repository related functions.
+Functions related to management of a node repository.
 
 == Usage
 
@@ -15,14 +15,14 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import repoLib from '/lib/xp/repo';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 == Events
 
@@ -33,19 +33,19 @@ Usage of this API produces the following events:
 |Event |Occurs when
 
 |repository.created
-|repository is created
+|a repository is created
 
 |repository.updated
-|repository is updated
+|a repository is updated
 
 |repository.deleted
-|repository is deleted
+|a repository is deleted
 
 |repository.restoreInitialized
-|repository restore begins
+|a repository restore begins
 
 |repository.restored
-|repository restore is completed
+|a repository restore is completed
 |===
 
 For more information on events, check out the <<lib-event#, event API>>
@@ -190,7 +190,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : true if deleted, false otherwise
+*boolean* : `true` if deleted, `false` otherwise
 
 [.lead]
 Examples
@@ -342,7 +342,7 @@ const expected = [{
 
 === refresh
 
-Refresh the data for the given index-type in the current repository
+Refreshes indices in the current repository
 
 [.lead]
 Parameters
@@ -385,7 +385,7 @@ refresh({
 
 === CreateRepoParams
 
-Object to pass to a create repo function.
+Object to pass to the `create` function.
 
 [.lead]
 Fields
@@ -402,7 +402,7 @@ Fields
 
 === RepoSettings
 
-Repository settings json to optionally pass to a create function
+Repository settings to optionally pass to the `create` function
 
 [.lead]
 Fields

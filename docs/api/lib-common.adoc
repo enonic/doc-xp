@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-This library contains common functions.
+This API provides helper functions.
 
 == Usage
 
@@ -15,23 +15,23 @@ dependencies {
 }
 ----
 
-in your controller, add an import statement:
+Add the `import` statement to your controller:
 
 [source,typescript]
 ----
 import commonLib from '/lib/xp/common';
 ----
 
-You are now ready to use the library functionality.
+You are now ready to use the API.
 
 
 == Functions
 
 === sanitize
 
-Transform a text string so that it can be safely used in cases where the range of accepted characters is restricted.
+Transforms a text string so that it can be safely used in cases where the range of accepted characters is restricted.
 
-Some usage examples are: as an XP content or node name, as a principal name, in a URL or in a filesystem path.
+Some usage examples for sanitizing are: content or node name, principal name, URL or a file system path etc.
 
 The following changes will be applied to the input text:
 
@@ -50,7 +50,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| text | string | The text to sanitize
+| text | string | Text to sanitize
 |===
 
 
