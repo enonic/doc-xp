@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Portal Library</title>
+<title>Portal API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Portal Library</h1>
+<h1>Portal API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -475,7 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Functions to access portal functionality.</p>
+<p>API to access functions related to rendering.</p>
 </div>
 </div>
 </div>
@@ -493,15 +493,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var portalLib = require('/lib/xp/portal');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import portalLib from '/lib/xp/portal';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -511,7 +511,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="asseturl"><a class="link" href="#asseturl">assetUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to a static file.</p>
+<p>Generates URL to a static file.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -579,7 +579,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -607,7 +607,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var url = portalLib.assetUrl({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {assetUrl} from '/lib/xp/portal';
+
+const url = assetUrl({
   path: 'styles/main.css'
 });</code></pre>
 </div>
@@ -616,7 +618,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="attachmenturl"><a class="link" href="#attachmenturl">attachmentUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to an attachment.</p>
+<p>Generates URL to an attachment.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -702,7 +704,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set to true if the disposition header should be set to attachment.</p>
+<p>Set to <code>true</code> if the disposition header should be set to attachment.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -711,7 +713,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -740,7 +742,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Obtains list of active tasks:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var url = portalLib.attachmentUrl({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {attachmentUrl} from '/lib/xp/portal';
+
+const url = attachmentUrl({
   id: '1234',
   download: true
 });</code></pre>
@@ -750,7 +754,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="componenturl"><a class="link" href="#componenturl">componentUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to a component.</p>
+<p>Generates URL to a page component.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -827,7 +831,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -856,7 +860,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Obtains list of active tasks:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var url = portalLib.componentUrl({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {componentUrl} from '/lib/xp/portal';
+
+const url = componentUrl({
   component: 'main/0'
 });</code></pre>
 </div>
@@ -864,14 +870,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = 'ComponentUrlParams{type=server, params={}, component=main/0}'</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = 'ComponentUrlParams{type=server, params={}, component=main/0}'</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="getcomponent"><a class="link" href="#getcomponent">getComponent</a></h3>
 <div class="paragraph">
-<p>This function returns the component corresponding to the current execution context. It is meant to be called from a layout or part controller.</p>
+<p>Returns component in the current execution context. It is meant to be called from a layout or a part controller.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -883,35 +889,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Example</p>
 </div>
 <div class="listingblock">
-<div class="title">Obtains list of active tasks:</div>
+<div class="title">Returns component in the current context:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = portalLib.getComponent();
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getComponent} from '/lib/xp/portal';
+
+const result = getComponent();
 log.info('Current component name = %s', result.name);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-  "path": "/main/0",
-  "type": "layout",
-  "descriptor": "myapplication:mylayout",
-  "config": {
-    "a": "1"
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  path: "/main/0",
+  type: "layout",
+  descriptor: "myapplication:mylayout",
+  config: {
+    a: "1"
   },
-  "regions": {
-    "bottom": {
-      "components": [
+  regions: {
+    bottom: {
+      components: [
         {
-          "path": "/main/0/bottom/0",
-          "type": "part",
-          "descriptor": "myapplication:mypart",
-          "config": {
-            "a": "1"
+          path: "/main/0/bottom/0",
+          type: "part",
+          descriptor: "myapplication:mypart",
+          config: {
+            a: "1"
           }
         }
       ],
-      "name": "bottom"
+      name: "bottom"
     }
   }
 };</code></pre>
@@ -921,7 +929,7 @@ log.info('Current component name = %s', result.name);</code></pre>
 <div class="sect2">
 <h3 id="getcontent"><a class="link" href="#getcontent">getContent</a></h3>
 <div class="paragraph">
-<p>This function returns the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.</p>
+<p>Returns content in the current execution context. It is meant to be called from a page, a layout or a part controller.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -935,33 +943,35 @@ log.info('Current component name = %s', result.name);</code></pre>
 <div class="listingblock">
 <div class="title">Get content and log the result:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = portalLib.getContent();
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getContent} from '/lib/xp/portal';
+
+const result = getContent();
 log.info('Current content path = %s', result._path);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-  "_id": "123456",
-  "_name": "mycontent",
-  "_path": "/a/b/mycontent",
-  "creator": "user:system:admin",
-  "modifier": "user:system:admin",
-  "createdTime": "1970-01-01T00:00:00Z",
-  "modifiedTime": "1970-01-01T00:00:00Z",
-  "type": "base:unstructured",
-  "displayName": "My Content",
-  "hasChildren": false,
-  "language": "en",
-  "valid": false,
-  "data": {
-    "a": "1"
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  _id: "123456",
+  _name: "mycontent",
+  _path: "/a/b/mycontent",
+  creator: "user:system:admin",
+  modifier: "user:system:admin",
+  createdTime: "1970-01-01T00:00:00Z",
+  modifiedTime: "1970-01-01T00:00:00Z",
+  type: "base:unstructured",
+  displayName: "My Content",
+  hasChildren: false,
+  language: "en",
+  valid: false,
+  data: {
+    a: "1"
   },
-  "x": {},
-  "page": {},
-  "attachments": {},
-  "publish": {}
+  x: {},
+  page: {},
+  attachments: {},
+  publish: {}
 };</code></pre>
 </div>
 </div>
@@ -969,21 +979,23 @@ log.info('Current content path = %s', result._path);</code></pre>
 <div class="sect2">
 <h3 id="getidproviderkey"><a class="link" href="#getidproviderkey">getIdProviderKey</a></h3>
 <div class="paragraph">
-<p>This function returns the id provider key corresponding to the current execution context.</p>
+<p>Returns the key of ID provider in the current execution context.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The current id provider as JSON.</p>
+<p><strong>object</strong> : The current ID provider as JSON.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
 </div>
 <div class="listingblock">
-<div class="title">Returns the current id provider:</div>
+<div class="title">Returns the current ID provider:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var idProviderKey = portalLib.getIdProviderKey();
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getIdProviderKey} from '/lib/xp/portal';
+
+const idProviderKey = getIdProviderKey();
 
 if (idProviderKey) {
     log.info('Id provider key: %s', idProviderKey);
@@ -993,14 +1005,14 @@ if (idProviderKey) {
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = "myidprovider";</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = "myidprovider";</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="getmultipartform"><a class="link" href="#getmultipartform">getMultipartForm</a></h3>
 <div class="paragraph">
-<p>This function returns a JSON containing multipart items. If not a multipart request, then this function returns <code>undefined</code>.</p>
+<p>Returns a JSON containing multipart items. If not a multipart request, then this function returns <code>undefined</code>.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -1014,32 +1026,34 @@ if (idProviderKey) {
 <div class="listingblock">
 <div class="title">Get the form and log the result:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = portalLib.getMultipartForm();
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getMultipartForm} from '/lib/xp/portal';
+
+const result = getMultipartForm();
 log.info('Multipart form %s', result);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-  "item1": {
-    "name": "item1",
-    "fileName": "item1.jpg",
-    "contentType": "image/png",
-    "size": 10
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  item1: {
+    name: "item1",
+    fileName: "item1.jpg",
+    contentType: "image/png",
+    size: 10
   },
-  "item2": [
+  item2: [
     {
-      "name": "item2",
-      "fileName": "image1.png",
-      "contentType": "image/png",
-      "size": 123
+      name: "item2",
+      fileName: "image1.png",
+      contentType: "image/png",
+      size: 123
     },
     {
-      "name": "item2",
-      "fileName": "image2.jpg",
-      "contentType": "image/jpeg",
-      "size": 456
+      name: "item2",
+      fileName: "image2.jpg",
+      contentType: "image/jpeg",
+      size: 456
     }
   ]
 };</code></pre>
@@ -1049,7 +1063,7 @@ log.info('Multipart form %s', result);</code></pre>
 <div class="sect2">
 <h3 id="getmultipartitem"><a class="link" href="#getmultipartitem">getMultipartItem</a></h3>
 <div class="paragraph">
-<p>This function returns a JSON containing a named multipart item. If the item does not exists, it returns <code>undefined</code>.</p>
+<p>Returns a JSON containing a named multipart item. If the item does not exist, it returns <code>undefined</code>.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1100,18 +1114,20 @@ log.info('Multipart form %s', result);</code></pre>
 <div class="listingblock">
 <div class="title">Get item and log the result:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = portalLib.getMultipartItem('item1');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getMultipartItem} from '/lib/xp/portal';
+
+const result = getMultipartItem('item1');
 log.info('Multipart item %s', result);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-  "name": "item1",
-  "fileName": "item1.jpg",
-  "contentType": "image/png",
-  "size": 10
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  name: "item1",
+  fileName: "item1.jpg",
+  contentType: "image/png",
+  size: 10
 };</code></pre>
 </div>
 </div>
@@ -1119,7 +1135,7 @@ log.info('Multipart item %s', result);</code></pre>
 <div class="sect2">
 <h3 id="getmultipartstream"><a class="link" href="#getmultipartstream">getMultipartStream</a></h3>
 <div class="paragraph">
-<p>This function returns a data-stream for a named multipart item.</p>
+<p>Returns a data stream for a named multipart item.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1169,15 +1185,17 @@ log.info('Multipart item %s', result);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var stream1 = portalLib.getMultipartStream('item2');
-var stream2 = portalLib.getMultipartStream('item2', 1);</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getMultipartStream} from '/lib/xp/portal';
+
+const stream1 = getMultipartStream('item2');
+const stream2 = getMultipartStream('item2', 1);</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="getmultiparttext"><a class="link" href="#getmultiparttext">getMultipartText</a></h3>
 <div class="paragraph">
-<p>This function returns the multipart item data as text.</p>
+<p>Returns the multipart item data as text.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1227,14 +1245,16 @@ var stream2 = portalLib.getMultipartStream('item2', 1);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var text = portalLib.getMultipartText('item1');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getMultipartText} from '/lib/xp/portal';
+
+const text = getMultipartText('item1');</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="getsite"><a class="link" href="#getsite">getSite</a></h3>
 <div class="paragraph">
-<p>This function returns the parent site of the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.</p>
+<p>Returns the parent site of a content in the current execution context. It is meant to be called from a page, a layout or a part controller.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -1248,32 +1268,34 @@ var stream2 = portalLib.getMultipartStream('item2', 1);</code></pre>
 <div class="listingblock">
 <div class="title">Get site and log the result:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = portalLib.getSite();
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getSite} from '/lib/xp/portal';
+
+const result = getSite();
 log.info('Current site name = %s', result._name);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-  "_id": "100123",
-  "_name": "my-content",
-  "_path": "/my-content",
-  "type": "base:unstructured",
-  "hasChildren": false,
-  "valid": false,
-  "data": {
-    "siteConfig": {
-      "applicationKey": "myapplication",
-      "config": {
-        "Field": 42
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  _id: "100123",
+  _name: "my-content",
+  _path: "/my-content",
+  type: "base:unstructured",
+  hasChildren: false,
+  valid: false,
+  data: {
+    siteConfig: {
+      applicationKey: "myapplication",
+      config: {
+        Field: 42
       }
     }
   },
-  "x": {},
-  "page": {},
-  "attachments": {},
-  "publish": {}
+  x: {},
+  page: {},
+  attachments: {},
+  publish: {}
 };</code></pre>
 </div>
 </div>
@@ -1281,7 +1303,7 @@ log.info('Current site name = %s', result._name);</code></pre>
 <div class="sect2">
 <h3 id="getsiteconfig"><a class="link" href="#getsiteconfig">getSiteConfig</a></h3>
 <div class="paragraph">
-<p>This function returns the site configuration for this app in the parent site of the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.</p>
+<p>Returns configuration of the parent site for a content in the current execution context. It is meant to be called from a page, a layout or a part controller.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -1295,15 +1317,17 @@ log.info('Current site name = %s', result._name);</code></pre>
 <div class="listingblock">
 <div class="title">Get site and log the result:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = portalLib.getSiteConfig();
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getSiteConfig} from '/lib/xp/portal';
+
+const result = getSiteConfig();
 log.info('Field value for the current site config = %s', result.Field);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-  "Field": 42
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  Field: 42
 };</code></pre>
 </div>
 </div>
@@ -1311,7 +1335,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="sect2">
 <h3 id="idproviderurl"><a class="link" href="#idproviderurl">idProviderUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to an ID provider.</p>
+<p>Generates URL to an ID provider.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1382,7 +1406,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1409,7 +1433,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="sect2">
 <h3 id="imageplaceholder"><a class="link" href="#imageplaceholder">imagePlaceholder</a></h3>
 <div class="paragraph">
-<p>This function generates a URL to an image placeholder.</p>
+<p>Generates URL of an image placeholder with a specified size.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1480,7 +1504,9 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="listingblock">
 <div class="title">Obtains image encoded to base64:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var url = portalLib.imagePlaceholder({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {imagePlaceholder} from '/lib/xp/portal';
+
+const url = imagePlaceholder({
   width: 32,
   height: 24
 });</code></pre>
@@ -1489,14 +1515,14 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGUlEQVR42u3BAQEAAACCIP+vbkhAAQAA7wYMGAAB93LuRQAAAABJRU5ErkJggg==';</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGUlEQVR42u3BAQEAAACCIP+vbkhAAQAA7wYMGAAB93LuRQAAAABJRU5ErkJggg==';</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="imageurl"><a class="link" href="#imageurl">imageUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to an image.</p>
+<p>Generates URL to an image.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1609,7 +1635,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1638,7 +1664,9 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="listingblock">
 <div class="title">Obtains image url:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var url = portalLib.imageUrl({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {imageUrl} from '/lib/xp/portal';
+
+const url = imageUrl({
   id: '1234',
   scale: 'block(1024,768)',
   filter: 'rounded(5);sharpen()'
@@ -1649,7 +1677,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="sect2">
 <h3 id="loginurl"><a class="link" href="#loginurl">loginUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to the login function of an ID provider.</p>
+<p>Generates URL to the login endpoint of an ID provider.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1702,7 +1730,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Key of a id provider using an application. If idProvider is not set, then the id provider corresponding to the current execution context will be used.</p>
+<p>Id provider key. If idProvider is not set, then the id provider corresponding to the current execution context will be used.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1729,7 +1757,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1756,7 +1784,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="sect2">
 <h3 id="logouturl"><a class="link" href="#logouturl">logoutUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to the logout function of the application corresponding to the current user.</p>
+<p>Generates URL to the logout endpoint of ID provider in the current context.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1827,7 +1855,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1854,7 +1882,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="sect2">
 <h3 id="pageurl"><a class="link" href="#pageurl">pageUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to a page.</p>
+<p>Generates URL to a content page.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1904,7 +1932,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Id to the page. If id is set, then path is not used.</p>
+<p>Id of a content. If id is set, then path is not used.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1913,7 +1941,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Path to the page. Relative paths is resolved using the context page.</p>
+<p>Path of a content. Relative paths are resolved based on the current context.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1922,7 +1950,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1951,7 +1979,9 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="listingblock">
 <div class="title">Obtains page url:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var url = portalLib.pageUrl({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {pageUrl} from '/lib/xp/portal';
+
+const url = pageUrl({
   path: '/my/page',
   params: {
     a: 1,
@@ -1964,11 +1994,20 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="sect2">
 <h3 id="processhtml"><a class="link" href="#processhtml">processHtml</a></h3>
 <div id="processHtml" class="paragraph">
-<p>This function replaces abstract internal links to images and internal content items contained in an HTML text with full URLs.
-It will also render embedded macros.</p>
+<p>Resolves internal links to images and internal content items contained in an HTML text and replaces them with correct URLs.
+It will also process embedded macros.</p>
 </div>
-<div class="paragraph">
-<p>When outputting processed HTML in Thymeleaf, use attribute <code>data-th-utext="${processedHtml}"</code>.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When outputting processed HTML in Thymeleaf, use attribute <code>data-th-utext="${processedHtml}"</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2027,7 +2066,7 @@ It will also render embedded macros.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2065,7 +2104,9 @@ It will also render embedded macros.</p>
 <div class="listingblock">
 <div class="title">Process HTML:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var html = portalLib.processHtml({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {processHtml} from '/lib/xp/portal';
+
+const html = processHtml({
   value: '&lt;a href="content://123" target=""&gt;Content&lt;/a&gt;' +
          '&lt;a href="media://inline/123" target=""&gt;Inline&lt;/a&gt;' +
          '&lt;a href="media://download/123" target=""&gt;Download&lt;/a&gt;' +
@@ -2078,10 +2119,19 @@ It will also render embedded macros.</p>
 <div class="sect2">
 <h3 id="sanitizehtml"><a class="link" href="#sanitizehtml">sanitizeHtml</a></h3>
 <div class="paragraph">
-<p>This function sanitizes an HTML string by stripping all potentially unsafe tags and attributes.</p>
+<p>Sanitizes an HTML string by stripping all potentially unsafe tags and attributes.</p>
 </div>
-<div class="paragraph">
-<p>HTML sanitization can be used to protect against cross-site scripting (XSS) attacks by sanitizing any HTML code submitted by a user.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+HTML sanitization can be used to protect against cross-site scripting (XSS) attacks by sanitizing any HTML code submitted by a user.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2121,22 +2171,24 @@ It will also render embedded macros.</p>
 <div class="listingblock">
 <div class="title">Sanitizes unsafe HTML:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var unsafeHtml = '&lt;p&gt;&lt;a href="https://example.com/" onclick="stealCookies()"&gt;Link&lt;/a&gt;&lt;/p&gt;' +
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {sanitizeHtml} from '/lib/xp/portal';
+
+const unsafeHtml = '&lt;p&gt;&lt;a href="https://example.com/" onclick="stealCookies()"&gt;Link&lt;/a&gt;&lt;/p&gt;' +
                  '&lt;iframe src="javascript:alert(\'XSS\');"&gt;&lt;/iframe&gt;';
-var sanitizedHtml = portalLib.sanitizeHtml(unsafeHtml);</code></pre>
+const sanitizedHtml = sanitizeHtml(unsafeHtml);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = '&lt;p&gt;&lt;a href="https://example.com/"&gt;Link&lt;/a&gt;&lt;/p&gt;';</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = '&lt;p&gt;&lt;a href="https://example.com/"&gt;Link&lt;/a&gt;&lt;/p&gt;';</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="serviceurl"><a class="link" href="#serviceurl">serviceUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to a service.</p>
+<p>Generates URL to a service.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2232,7 +2284,9 @@ var sanitizedHtml = portalLib.sanitizeHtml(unsafeHtml);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var url = portalLib.serviceUrl({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {serviceUrl} from '/lib/xp/portal';
+
+const url = serviceUrl({
   service: 'myservice',
   params: {
     a: 1,
@@ -2245,7 +2299,7 @@ var sanitizedHtml = portalLib.sanitizeHtml(unsafeHtml);</code></pre>
 <div class="sect2">
 <h3 id="url"><a class="link" href="#url">url</a></h3>
 <div class="paragraph">
-<p>This function generates a URL.</p>
+<p>Generates URL to a resource.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2332,7 +2386,9 @@ var sanitizedHtml = portalLib.sanitizeHtml(unsafeHtml);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var url = portalLib.url({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {url as buildUrl} from '/lib/xp/portal';
+
+const url = buildUrl({
   path: '/site/master/mysite',
   params: {
     a: 1,
@@ -2347,7 +2403,7 @@ var sanitizedHtml = portalLib.sanitizeHtml(unsafeHtml);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

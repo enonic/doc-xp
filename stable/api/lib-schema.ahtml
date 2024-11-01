@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Dynamic schema library</title>
+<title>Dynamic schema API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Dynamic schema library</h1>
+<h1>Dynamic schema API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -504,15 +504,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var schemaLib = require('/lib/xp/schema');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import schemaLib from '/lib/xp/schema';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -593,7 +593,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Fetches a content type schema:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.getSchema({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getSchema} from '/lib/xp/schema';
+
+const result = getSchema({
     name: 'myapp:mytype',
     type: 'CONTENT_TYPE'
 
@@ -603,35 +605,35 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-  "name": "myapp:mytype",
-  "displayName": "Tag",
-  "displayNameI18nKey": "",
-  "createdTime": "2021-09-25T10:00:00Z",
-  "creator": "user:system:anonymous",
-  "modifiedTime": "2021-09-25T10:00:00Z",
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  name: "myapp:mytype",
+  displayName: "Tag",
+  displayNameI18nKey: "",
+  createdTime: "2021-09-25T10:00:00Z",
+  creator: "user:system:anonymous",
+  modifiedTime: "2021-09-25T10:00:00Z",
   "resource" : &lt;!-- resource string value --&gt;,
-  "type": "CONTENT_TYPE",
-  "icon": {
-    "data": {},
-    "mimeType": "image/png",
-    "modifiedTime": "2016-01-01T12:00:00Z"
+  type: "CONTENT_TYPE",
+  icon: {
+    data: {},
+    mimeType: "image/png",
+    modifiedTime: "2016-01-01T12:00:00Z"
   },
-  "form": [
+  form: [
     {
-      "formItemType": "Input",
-      "name": "tag",
-      "label": "Tag, unlimited occurrences",
-      "maximize": true,
-      "inputType": "Tag",
-      "occurrences": {
-        "maximum": 0,
-        "minimum": 0
+      formItemType: "Input",
+      name: "tag",
+      label: "Tag, unlimited occurrences",
+      maximize: true,
+      inputType: "Tag",
+      occurrences: {
+        maximum: 0,
+        minimum: 0
       },
-      "config": {}
+      config: {}
     }
   ],
-  "config": {}
+  config: {}
 };</code></pre>
 </div>
 </div>
@@ -710,7 +712,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Fetches application&#8217;s content type schemas:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.listSchemas({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {listSchemas} from '/lib/xp/schema';
+
+const result = listSchemas({
     application: 'myapp',
     type: 'CONTENT_TYPE'
 
@@ -720,56 +724,56 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-        name: 'myapp:type1',
-        displayName: 'My type display name',
-        description: 'My type description',
-        modifiedTime: '2010-01-01T10:00:00Z',
-        resource: '&lt;content-type&gt;&lt;some-data&gt;&lt;/some-data&gt;&lt;/content-type&gt;',
-        type: 'CONTENT_TYPE',
-        form: [
-            {
-                'formItemType': 'Layout',
-                'name': 'myLayout',
-                'label': 'My layout',
-                'items': [
-                    {
-                        'formItemType': 'ItemSet',
-                        'name': 'mySet',
-                        'occurrences': {
-                            'maximum': 1,
-                            'minimum': 1
-                        },
-                        'items': [
-                            {
-                                'formItemType': 'Input',
-                                'name': 'myInput',
-                                'label': 'Input',
-                                'maximize': true,
-                                'inputType': 'TextLine',
-                                'occurrences': {
-                                    'maximum': 1,
-                                    'minimum': 0
-                                },
-                                'config': {}
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        config: {}
-    },
-    {
-        name: 'myapp:type2',
-        displayName: 'My type display name 2',
-        description: 'My type description 2',
-        modifiedTime: '2012-01-01T10:00:00Z',
-        resource: '&lt;content-type&gt;&lt;some-other-data&gt;&lt;/some-other-data&gt;&lt;/content-type&gt;',
-        type: 'CONTENT_TYPE',
-        form: [],
-        config: {}
-    };</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    name: 'myapp:type1',
+    displayName: 'My type display name',
+    description: 'My type description',
+    modifiedTime: '2010-01-01T10:00:00Z',
+    resource: '&lt;content-type&gt;&lt;some-data&gt;&lt;/some-data&gt;&lt;/content-type&gt;',
+    type: 'CONTENT_TYPE',
+    form: [
+        {
+            formItemType: 'Layout',
+            name: 'myLayout',
+            label: 'My layout',
+            items: [
+                {
+                    formItemType: 'ItemSet',
+                    name: 'mySet',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 1
+                    },
+                    items: [
+                        {
+                            formItemType: 'Input',
+                            name: 'myInput',
+                            label: 'Input',
+                            maximize: true,
+                            inputType: 'TextLine',
+                            occurrences: {
+                                maximum: 1,
+                                minimum: 0
+                            },
+                            config: {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    config: {}
+},
+{
+    name: 'myapp:type2',
+    displayName: 'My type display name 2',
+    description: 'My type description 2',
+    modifiedTime: '2012-01-01T10:00:00Z',
+    resource: '&lt;content-type&gt;&lt;some-other-data&gt;&lt;/some-other-data&gt;&lt;/content-type&gt;',
+    type: 'CONTENT_TYPE',
+    form: [],
+    config: {}
+};</code></pre>
 </div>
 </div>
 </div>
@@ -854,59 +858,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Creates a content type schema:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
-                &lt;content-type xmlns='urn:enonic:xp:model:1.0'&gt;
-               &lt;display-name&gt;Tag&lt;/display-name&gt;
-               &lt;super-type&gt;base:structured&lt;/super-type&gt;
-               &lt;form&gt;
-                 &lt;input name="tag" type="Tag"&gt;
-                   &lt;label&gt;Tag, unlimited occurrences&lt;/label&gt;
-                   &lt;occurrences minimum="0"
-                    maximum="0"/&gt;
-                 &lt;/input&gt;
-               &lt;/form&gt;
-              &lt;/content-type&gt;`;
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {createSchema} from '/lib/xp/schema';
 
-var result = schemaLib.createSchema({
+const resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;content-type xmlns='urn:enonic:xp:model:1.0'&gt;
+    &lt;display-name&gt;Tag&lt;/display-name&gt;
+    &lt;super-type&gt;base:structured&lt;/super-type&gt;
+    &lt;form&gt;
+        &lt;input name="tag" type="Tag"&gt;
+        &lt;label&gt;Tag, unlimited occurrences&lt;/label&gt;
+        &lt;occurrences minimum="0"
+        maximum="0"/&gt;
+        &lt;/input&gt;
+    &lt;/form&gt;
+&lt;/content-type&gt;`;
+
+const result = createSchema({
     name: 'myapp:mytype',
     type: 'CONTENT_TYPE',
     resource
-
 });</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-  "name": "myapp:mytype",
-  "displayName": "Tag",
-  "displayNameI18nKey": "",
-  "createdTime": "2021-09-25T10:00:00Z",
-  "creator": "user:system:anonymous",
-  "modifiedTime": "2021-09-25T10:00:00Z",
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  name: "myapp:mytype",
+  displayName: "Tag",
+  displayNameI18nKey: "",
+  createdTime: "2021-09-25T10:00:00Z",
+  creator: "user:system:anonymous",
+  modifiedTime: "2021-09-25T10:00:00Z",
   "resource" : &lt;!-- resource string value --&gt;,
-  "type": "CONTENT_TYPE",
-  "icon": {
-    "data": {},
-    "mimeType": "image/png",
-    "modifiedTime": "2016-01-01T12:00:00Z"
+  type: "CONTENT_TYPE",
+  icon: {
+    data: {},
+    mimeType: "image/png",
+    modifiedTime: "2016-01-01T12:00:00Z"
   },
-  "form": [
+  form: [
     {
-      "formItemType": "Input",
-      "name": "tag",
-      "label": "Tag, unlimited occurrences",
-      "maximize": true,
-      "inputType": "Tag",
-      "occurrences": {
-        "maximum": 0,
-        "minimum": 0
+      formItemType: "Input",
+      name: "tag",
+      label: "Tag, unlimited occurrences",
+      maximize: true,
+      inputType: "Tag",
+      occurrences: {
+        maximum: 0,
+        minimum: 0
       },
-      "config": {}
+      config: {}
     }
   ],
-  "config": {}
+  config: {}
 };</code></pre>
 </div>
 </div>
@@ -992,7 +997,9 @@ var result = schemaLib.createSchema({
 <div class="listingblock">
 <div class="title">Updates a mixin schema:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">let resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {updateSchema} from '/lib/xp/schema';
+
+const resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
        &lt;mixin xmlns='urn:enonic:xp:model:1.0'&gt;
           &lt;display-name&gt;Virtual Mixin&lt;/display-name&gt;
           &lt;description&gt;Mixin description&lt;/description&gt;
@@ -1005,7 +1012,7 @@ var result = schemaLib.createSchema({
           &lt;/form&gt;
         &lt;/mixin&gt;`;
 
-var result = schemaLib.updateSchema({
+const result = updateSchema({
     name: 'myapp:mytype',
     type: 'MIXIN',
     resource
@@ -1016,7 +1023,7 @@ var result = schemaLib.updateSchema({
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     name: 'myapp:mytype',
     displayName: 'Virtual Mixin',
     displayNameI18nKey: '',
@@ -1028,20 +1035,20 @@ var result = schemaLib.updateSchema({
     type: 'MIXIN',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'text2',
-            'label': 'Text 2',
-            'maximize': true,
-            'inputType': 'TextLine',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'text2',
+            label: 'Text 2',
+            maximize: true,
+            inputType: 'TextLine',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'InlineMixin',
-            'name': 'myapplication:inline'
+            formItemType: 'InlineMixin',
+            name: 'myapplication:inline'
         }
     ]
 };</code></pre>
@@ -1051,7 +1058,7 @@ var result = schemaLib.updateSchema({
 <div class="sect2">
 <h3 id="deleteschema"><a class="link" href="#deleteschema">deleteSchema</a></h3>
 <div class="paragraph">
-<p>Removes dynamic schema from virtual application.</p>
+<p>Removes a schema from a virtual application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1122,7 +1129,9 @@ var result = schemaLib.updateSchema({
 <div class="listingblock">
 <div class="title">Updates a mixin schema:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.deleteSchema({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteSchema} from '/lib/xp/schema';
+
+const result = deleteSchema({
     name: 'myapp:mytype',
     type: 'XDATA'
 });
@@ -1209,7 +1218,9 @@ if (result) {
 <div class="listingblock">
 <div class="title">Fetches a page component:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.getComponent({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getComponent} from '/lib/xp/schema';
+
+const result = getComponent({
     key: 'myapp:mypage',
     type: 'PAGE'
 
@@ -1219,7 +1230,7 @@ if (result) {
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     key: 'myapp:mypage',
     displayName: 'News page',
     description: 'My news page',
@@ -1230,16 +1241,16 @@ if (result) {
     type: 'PAGE',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'width',
-            'label': 'width',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'width',
+            label: 'width',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     config: {},
@@ -1253,7 +1264,7 @@ if (result) {
 <div class="sect2">
 <h3 id="listcomponents"><a class="link" href="#listcomponents">listComponents</a></h3>
 <div class="paragraph">
-<p>Fetches components of particular type from an application.</p>
+<p>Fetches components of a particular type from an application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1324,7 +1335,9 @@ if (result) {
 <div class="listingblock">
 <div class="title">Fetches application&#8217;s part components:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.listComponents({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {listComponents} from '/lib/xp/schema';
+
+const result = listComponents({
     application: 'myapp',
     type: 'PART'
 
@@ -1334,7 +1347,7 @@ if (result) {
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = [
     {
         key: 'myapp:part1',
         displayName: 'News part',
@@ -1346,16 +1359,16 @@ if (result) {
         type: 'PART',
         form: [
             {
-                'formItemType': 'Input',
-                'name': 'width',
-                'label': 'width',
-                'maximize': true,
-                'inputType': 'Double',
-                'occurrences': {
-                    'maximum': 1,
-                    'minimum': 0
+                formItemType: 'Input',
+                name: 'width',
+                label: 'width',
+                maximize: true,
+                inputType: 'Double',
+                occurrences: {
+                    maximum: 1,
+                    minimum: 0
                 },
-                'config': {}
+                config: {}
             }
         ],
         config: {}
@@ -1455,7 +1468,9 @@ if (result) {
 <div class="listingblock">
 <div class="title">Creates a part type component:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {createComponent} from '/lib/xp/schema';
+
+const resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
                 &lt;content-type xmlns='urn:enonic:xp:model:1.0'&gt;
                &lt;display-name&gt;Tag&lt;/display-name&gt;
                &lt;super-type&gt;base:structured&lt;/super-type&gt;
@@ -1468,7 +1483,7 @@ if (result) {
                &lt;/form&gt;
               &lt;/content-type&gt;`;
 
-var result = schemaLib.createComponent({
+const result = createComponent({
     key: 'myapp:mypart',
     type: 'PART',
     resource
@@ -1478,7 +1493,7 @@ var result = schemaLib.createComponent({
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     key: 'myapp:mypart',
     displayName: 'Virtual Part',
     displayNameI18nKey: 'key.display-name',
@@ -1490,27 +1505,27 @@ var result = schemaLib.createComponent({
     type: 'PART',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'width',
-            'label': 'Column width',
-            'helpText': 'key.help-text',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'width',
+            label: 'Column width',
+            helpText: 'key.help-text',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'InlineMixin',
-            'name': 'myapplication:link-urls'
+            formItemType: 'InlineMixin',
+            name: 'myapplication:link-urls'
         }
     ],
 
     config: {
-        'input': [{
-            'value': '', '@name': 'width', '@type': 'Double'
+        input: [{
+            value: '', '@name': 'width', '@type': 'Double'
         }]
     }
 };</code></pre>
@@ -1598,47 +1613,48 @@ var result = schemaLib.createComponent({
 <div class="listingblock">
 <div class="title">Updates a layout component:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">let resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
-                &lt;layout xmlns='urn:enonic:xp:model:1.0'&gt;
-                  &lt;display-name i18n='key.display-name'&gt;Virtual Layout&lt;/display-name&gt;
-                  &lt;description i18n='key.description'&gt;My Layout Description&lt;/description&gt;
-                  &lt;form&gt;
-                    &lt;input type='Double' name='pause'&gt;
-                      &lt;label i18n='key1.label'&gt;Pause parameter&lt;/label&gt;
-                      &lt;immutable&gt;false&lt;/immutable&gt;
-                      &lt;indexed&gt;false&lt;/indexed&gt;
-                      &lt;help-text i18n='key1.help-text'/&gt;
-                      &lt;occurrences minimum='0' maximum='1'/&gt;
-                    &lt;/input&gt;
-                    &lt;item-set name='myFormItemSet'&gt;
-                      &lt;label&gt;My form item set&lt;/label&gt;
-                      &lt;immutable&gt;false&lt;/immutable&gt;
-                      &lt;occurrences minimum='0' maximum='1'/&gt;
-                      &lt;items&gt;
-                        &lt;input type='TextLine' name='myTextLine'&gt;
-                          &lt;label&gt;My text line&lt;/label&gt;
-                          &lt;immutable&gt;false&lt;/immutable&gt;
-                          &lt;indexed&gt;false&lt;/indexed&gt;
-                          &lt;occurrences minimum='1' maximum='1'/&gt;
-                        &lt;/input&gt;
-                        &lt;input type='TextLine' name='myCustomInput'&gt;
-                          &lt;label&gt;My custom input&lt;/label&gt;
-                          &lt;immutable&gt;false&lt;/immutable&gt;
-                          &lt;indexed&gt;false&lt;/indexed&gt;
-                          &lt;occurrences minimum='0' maximum='1'/&gt;
-                        &lt;/input&gt;
-                      &lt;/items&gt;
-                    &lt;/item-set&gt;
-                  &lt;/form&gt;
-                  &lt;regions&gt;
-                    &lt;region name='header'/&gt;
-                    &lt;region name='main'/&gt;
-                    &lt;region name='footer'/&gt;
-                  &lt;/regions&gt;
-                &lt;/layout&gt;
-                `;
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {updateComponent} from '/lib/xp/schema';
 
-var result = schemaLib.updateComponent({
+const resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;layout xmlns='urn:enonic:xp:model:1.0'&gt;
+    &lt;display-name i18n='key.display-name'&gt;Virtual Layout&lt;/display-name&gt;
+    &lt;description i18n='key.description'&gt;My Layout Description&lt;/description&gt;
+    &lt;form&gt;
+    &lt;input type='Double' name='pause'&gt;
+        &lt;label i18n='key1.label'&gt;Pause parameter&lt;/label&gt;
+        &lt;immutable&gt;false&lt;/immutable&gt;
+        &lt;indexed&gt;false&lt;/indexed&gt;
+        &lt;help-text i18n='key1.help-text'/&gt;
+        &lt;occurrences minimum='0' maximum='1'/&gt;
+    &lt;/input&gt;
+    &lt;item-set name='myFormItemSet'&gt;
+        &lt;label&gt;My form item set&lt;/label&gt;
+        &lt;immutable&gt;false&lt;/immutable&gt;
+        &lt;occurrences minimum='0' maximum='1'/&gt;
+        &lt;items&gt;
+        &lt;input type='TextLine' name='myTextLine'&gt;
+            &lt;label&gt;My text line&lt;/label&gt;
+            &lt;immutable&gt;false&lt;/immutable&gt;
+            &lt;indexed&gt;false&lt;/indexed&gt;
+            &lt;occurrences minimum='1' maximum='1'/&gt;
+        &lt;/input&gt;
+        &lt;input type='TextLine' name='myCustomInput'&gt;
+            &lt;label&gt;My custom input&lt;/label&gt;
+            &lt;immutable&gt;false&lt;/immutable&gt;
+            &lt;indexed&gt;false&lt;/indexed&gt;
+            &lt;occurrences minimum='0' maximum='1'/&gt;
+        &lt;/input&gt;
+        &lt;/items&gt;
+    &lt;/item-set&gt;
+    &lt;/form&gt;
+    &lt;regions&gt;
+    &lt;region name='header'/&gt;
+    &lt;region name='main'/&gt;
+    &lt;region name='footer'/&gt;
+    &lt;/regions&gt;
+&lt;/layout&gt;`;
+
+const result = updateComponent({
     key: 'myapp:mylayout',
     type: 'LAYOUT',
     resource
@@ -1648,7 +1664,7 @@ var result = schemaLib.updateComponent({
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     key: 'myapp:mylayout',
     displayName: 'Virtual Layout',
     displayNameI18nKey: 'key.display-name',
@@ -1660,50 +1676,50 @@ var result = schemaLib.updateComponent({
     type: 'LAYOUT',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'pause',
-            'label': 'Pause parameter',
-            'helpText': 'key1.help-text',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'pause',
+            label: 'Pause parameter',
+            helpText: 'key1.help-text',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         },
         {
-            'formItemType': 'ItemSet',
-            'name': 'myFormItemSet',
-            'label': 'My form item set',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'ItemSet',
+            name: 'myFormItemSet',
+            label: 'My form item set',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'items': [
+            items: [
                 {
-                    'formItemType': 'Input',
-                    'name': 'myTextLine',
-                    'label': 'My text line',
-                    'maximize': true,
-                    'inputType': 'TextLine',
-                    'occurrences': {
-                        'maximum': 1,
-                        'minimum': 1
+                    formItemType: 'Input',
+                    name: 'myTextLine',
+                    label: 'My text line',
+                    maximize: true,
+                    inputType: 'TextLine',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 1
                     },
-                    'config': {}
+                    config: {}
                 },
                 {
-                    'formItemType': 'Input',
-                    'name': 'myCustomInput',
-                    'label': 'My custom input',
-                    'maximize': true,
-                    'inputType': 'TextLine',
-                    'occurrences': {
-                        'maximum': 1,
-                        'minimum': 0
+                    formItemType: 'Input',
+                    name: 'myCustomInput',
+                    label: 'My custom input',
+                    maximize: true,
+                    inputType: 'TextLine',
+                    occurrences: {
+                        maximum: 1,
+                        minimum: 0
                     },
-                    'config': {}
+                    config: {}
                 }
             ]
         }
@@ -1792,7 +1808,9 @@ var result = schemaLib.updateComponent({
 <div class="listingblock">
 <div class="title">Removes a layout component:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.deleteComponent({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteComponent} from '/lib/xp/schema';
+
+const result = deleteComponent({
     key: 'myapp:mylayout',
     type: 'LAYOUT'
 });
@@ -1808,7 +1826,7 @@ if (result) {
 <div class="sect2">
 <h3 id="getstyles"><a class="link" href="#getstyles">getStyles</a></h3>
 <div class="paragraph">
-<p>Fetch styles from an application.</p>
+<p>Fetches styles (f.ex. image styles) from an application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1872,7 +1890,9 @@ if (result) {
 <div class="listingblock">
 <div class="title">Fetch application styles:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.getStyles({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getStyles} from '/lib/xp/schema';
+
+const result = getStyles({
     application: 'myapp'
 });</code></pre>
 </div>
@@ -1880,7 +1900,7 @@ if (result) {
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
     modifiedTime: '2021-02-25T10:44:33.170079900Z',
@@ -1899,7 +1919,7 @@ if (result) {
 <div class="sect2">
 <h3 id="createstyles"><a class="link" href="#createstyles">createStyles</a></h3>
 <div class="paragraph">
-<p>Create styles in virtual application.</p>
+<p>Creates styles in a virtual application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1970,22 +1990,24 @@ if (result) {
 <div class="listingblock">
 <div class="title">Creates application styles:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var resource = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' +
-               '&lt;styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0"&gt;' +
-               '&lt;style name="warning"&gt;' +
-               '&lt;display-name i18n="warning.displayName"&gt;Warning&lt;/display-name&gt;' +
-               '&lt;/style&gt;' +
-               '&lt;image name="editor-width-auto"&gt;' +
-               '&lt;display-name i18n="editor-width-auto-text"&gt;Override ${width}&lt;/display-name&gt;' +
-               '&lt;/image&gt;' +
-               '&lt;image name="editor-style-cinema"&gt;' +
-               '&lt;display-name i18n="editor-style-cinema-text"&gt;Cinema&lt;/display-name&gt;' +
-               '&lt;aspect-ratio&gt;21:9&lt;/aspect-ratio&gt;' +
-               '&lt;filter&gt;pixelate(10)&lt;/filter&gt;' +
-               '&lt;/image&gt;' +
-               '&lt;/styles&gt;';
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {createStyles} from '/lib/xp/schema';
 
-var result = schemaLib.createStyles({
+const resource = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' +
+    '&lt;styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0"&gt;' +
+    '&lt;style name="warning"&gt;' +
+    '&lt;display-name i18n="warning.displayName"&gt;Warning&lt;/display-name&gt;' +
+    '&lt;/style&gt;' +
+    '&lt;image name="editor-width-auto"&gt;' +
+    '&lt;display-name i18n="editor-width-auto-text"&gt;Override ${width}&lt;/display-name&gt;' +
+    '&lt;/image&gt;' +
+    '&lt;image name="editor-style-cinema"&gt;' +
+    '&lt;display-name i18n="editor-style-cinema-text"&gt;Cinema&lt;/display-name&gt;' +
+    '&lt;aspect-ratio&gt;21:9&lt;/aspect-ratio&gt;' +
+    '&lt;filter&gt;pixelate(10)&lt;/filter&gt;' +
+    '&lt;/image&gt;' +
+    '&lt;/styles&gt;';
+
+const result = createStyles({
     application: 'myapp',
     resource
 });</code></pre>
@@ -1994,7 +2016,7 @@ var result = schemaLib.createStyles({
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected =
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
     modifiedTime: '2021-09-25T10:00:00Z',
@@ -2094,22 +2116,24 @@ var result = schemaLib.createStyles({
 <div class="listingblock">
 <div class="title">Updates application styles:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">let resource = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' +
-               '&lt;styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0"&gt;' +
-               '&lt;style name="warning"&gt;' +
-               '&lt;display-name i18n="warning.displayName"&gt;Warning&lt;/display-name&gt;' +
-               '&lt;/style&gt;' +
-               '&lt;image name="editor-width-auto"&gt;' +
-               '&lt;display-name i18n="editor-width-auto-text"&gt;Override ${width}&lt;/display-name&gt;' +
-               '&lt;/image&gt;' +
-               '&lt;image name="editor-style-cinema"&gt;' +
-               '&lt;display-name i18n="editor-style-cinema-text"&gt;Cinema&lt;/display-name&gt;' +
-               '&lt;aspect-ratio&gt;21:9&lt;/aspect-ratio&gt;' +
-               '&lt;filter&gt;pixelate(10)&lt;/filter&gt;' +
-               '&lt;/image&gt;' +
-               '&lt;/styles&gt;';
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {updateStyles} from '/lib/xp/schema';
 
-var result = schemaLib.updateStyles({
+const resource = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' +
+    '&lt;styles css="assets/styles.css" xmlns="urn:enonic:xp:model:1.0"&gt;' +
+    '&lt;style name="warning"&gt;' +
+    '&lt;display-name i18n="warning.displayName"&gt;Warning&lt;/display-name&gt;' +
+    '&lt;/style&gt;' +
+    '&lt;image name="editor-width-auto"&gt;' +
+    '&lt;display-name i18n="editor-width-auto-text"&gt;Override ${width}&lt;/display-name&gt;' +
+    '&lt;/image&gt;' +
+    '&lt;image name="editor-style-cinema"&gt;' +
+    '&lt;display-name i18n="editor-style-cinema-text"&gt;Cinema&lt;/display-name&gt;' +
+    '&lt;aspect-ratio&gt;21:9&lt;/aspect-ratio&gt;' +
+    '&lt;filter&gt;pixelate(10)&lt;/filter&gt;' +
+    '&lt;/image&gt;' +
+    '&lt;/styles&gt;';
+
+const result = updateStyles({
     application: 'myapp',
     resource
 });</code></pre>
@@ -2118,7 +2142,7 @@ var result = schemaLib.updateStyles({
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     application: 'myapp',
     cssPath: 'assets/styles.css',
     modifiedTime: '2021-09-25T10:00:00Z',
@@ -2147,7 +2171,7 @@ var result = schemaLib.updateStyles({
 <div class="sect2">
 <h3 id="deletestyles"><a class="link" href="#deletestyles">deleteStyles</a></h3>
 <div class="paragraph">
-<p>Deletes dynamic styles from a virtual application.</p>
+<p>Deletes styles from a virtual application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2211,7 +2235,9 @@ var result = schemaLib.updateStyles({
 <div class="listingblock">
 <div class="title">Removes an application styles:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.deleteStyles({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteStyles} from '/lib/xp/schema';
+
+const result = deleteStyles({
     application: 'myapp'
 });
 
@@ -2226,7 +2252,7 @@ if (result) {
 <div class="sect2">
 <h3 id="getsite"><a class="link" href="#getsite">getSite</a></h3>
 <div class="paragraph">
-<p>Fetch a site descriptor from an application.</p>
+<p>Fetches a site descriptor from an application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2290,7 +2316,9 @@ if (result) {
 <div class="listingblock">
 <div class="title">Fetch application site descriptor:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schemaLib.getSite({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getSite} from '/lib/xp/schema';
+
+const result = getSite({
     application: 'myapp'
 });</code></pre>
 </div>
@@ -2298,28 +2326,28 @@ if (result) {
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     application: 'myapp',
     resource: &lt;!-- resource string value --&gt;,
     modifiedTime: '2021-02-25T10:44:33.170079900Z',
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'input',
-            'label': 'Input',
-            'maximize': true,
-            'inputType': 'Double',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'input',
+            label: 'Input',
+            maximize: true,
+            inputType: 'Double',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     xDataMappings: [
         {
-            'name': 'myapplication:my',
-            'optional': false
+            name: 'myapplication:my',
+            optional: false
         }
     ]
 };</code></pre>
@@ -2400,39 +2428,41 @@ if (result) {
 <div class="listingblock">
 <div class="title">Updates application site descriptor:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">let resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
-                &lt;site xmlns='urn:enonic:xp:model:1.0'&gt;
-                  &lt;x-data name='myapp1:menu-item'/&gt;
-                  &lt;x-data name='myapp2:my-meta-mixin'/&gt;
-                  &lt;form&gt;
-                    &lt;input type='TextLine' name='some-name'&gt;
-                      &lt;label&gt;Textline&lt;/label&gt;
-                      &lt;immutable&gt;false&lt;/immutable&gt;
-                      &lt;indexed&gt;false&lt;/indexed&gt;
-                      &lt;custom-text/&gt;
-                      &lt;help-text/&gt;
-                      &lt;occurrences minimum='0' maximum='1'/&gt;
-                    &lt;/input&gt;
-                  &lt;/form&gt;
-                  &lt;processors&gt;
-                    &lt;response-processor name='filter1' order='10'/&gt;
-                    &lt;response-processor name='filter2' order='20'/&gt;
-                  &lt;/processors&gt;
-                  &lt;mappings&gt;
-                    &lt;mapping controller='/site/page/person/person.js' order='10'&gt;
-                      &lt;pattern&gt;/person/*&lt;/pattern&gt;
-                    &lt;/mapping&gt;
-                    &lt;mapping controller='controller1.js'&gt;
-                      &lt;match&gt;_path:'/*/fisk'&lt;/match&gt;
-                    &lt;/mapping&gt;
-                    &lt;mapping controller='controller2.js' order='5'&gt;
-                      &lt;pattern invert='true'&gt;/.*&lt;/pattern&gt;
-                      &lt;match&gt;type:'portal:fragment'&lt;/match&gt;
-                    &lt;/mapping&gt;
-                  &lt;/mappings&gt;
-                &lt;/site&gt;`;
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {updateSite} from '/lib/xp/schema';
 
-var result = schemaLib.updateSite({
+const resource = `&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;site xmlns='urn:enonic:xp:model:1.0'&gt;
+    &lt;x-data name='myapp1:menu-item'/&gt;
+    &lt;x-data name='myapp2:my-meta-mixin'/&gt;
+    &lt;form&gt;
+    &lt;input type='TextLine' name='some-name'&gt;
+        &lt;label&gt;Textline&lt;/label&gt;
+        &lt;immutable&gt;false&lt;/immutable&gt;
+        &lt;indexed&gt;false&lt;/indexed&gt;
+        &lt;custom-text/&gt;
+        &lt;help-text/&gt;
+        &lt;occurrences minimum='0' maximum='1'/&gt;
+    &lt;/input&gt;
+    &lt;/form&gt;
+    &lt;processors&gt;
+    &lt;response-processor name='filter1' order='10'/&gt;
+    &lt;response-processor name='filter2' order='20'/&gt;
+    &lt;/processors&gt;
+    &lt;mappings&gt;
+    &lt;mapping controller='/site/page/person/person.js' order='10'&gt;
+        &lt;pattern&gt;/person/*&lt;/pattern&gt;
+    &lt;/mapping&gt;
+    &lt;mapping controller='controller1.js'&gt;
+        &lt;match&gt;_path:'/*/fisk'&lt;/match&gt;
+    &lt;/mapping&gt;
+    &lt;mapping controller='controller2.js' order='5'&gt;
+        &lt;pattern invert='true'&gt;/.*&lt;/pattern&gt;
+        &lt;match&gt;type:'portal:fragment'&lt;/match&gt;
+    &lt;/mapping&gt;
+    &lt;/mappings&gt;
+&lt;/site&gt;`;
+
+const result = updateSite({
     application: 'myapp',
     resource
 });</code></pre>
@@ -2441,35 +2471,35 @@ var result = schemaLib.updateSite({
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     application: 'myapp',
     modifiedTime: '2021-09-25T10:00:00Z',
     resource: &lt;!-- resource string value --&gt;,
     form: [
         {
-            'formItemType': 'Input',
-            'name': 'some-name',
-            'label': 'Textline',
-            'customText': '',
-            'maximize': true,
-            'inputType': 'TextLine',
-            'occurrences': {
-                'maximum': 1,
-                'minimum': 0
+            formItemType: 'Input',
+            name: 'some-name',
+            label: 'Textline',
+            customText: '',
+            maximize: true,
+            inputType: 'TextLine',
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            'config': {}
+            config: {}
         }
     ],
     xDataMappings: [
         {
-            'name': 'myapp1:menu-item',
-            'optional': false,
-            'allowContentTypes': ''
+            name: 'myapp1:menu-item',
+            optional: false,
+            allowContentTypes: ''
         },
         {
-            'name': 'myapp2:my-meta-mixin',
-            'optional': false,
-            'allowContentTypes': ''
+            name: 'myapp2:my-meta-mixin',
+            optional: false,
+            allowContentTypes: ''
         }
     ]
 };</code></pre>
@@ -3172,7 +3202,7 @@ var result = schemaLib.updateSite({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

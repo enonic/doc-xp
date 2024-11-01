@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Scheduler library</title>
+<title>Scheduler API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Scheduler library</h1>
+<h1>Scheduler API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -466,7 +466,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.7.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.7.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>Functions for creating scheduled jobs.</p>
+<p>Functions for creating and managing scheduled jobs.</p>
 </div>
 </div>
 </div>
@@ -484,12 +484,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var schedulerLib = require('/lib/xp/scheduler');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import schedulerLib from '/lib/xp/scheduler';</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -499,7 +502,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="get"><a class="link" href="#get">get</a></h3>
 <div class="paragraph">
-<p>Returns scheduled job with the specified name.</p>
+<p>Returns a scheduled job with the specified name.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -567,10 +570,12 @@ Or null if the job could not be found.</p>
 <div class="listingblock">
 <div class="title">Obtains details of a scheduled job:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var job = schedulerLib.get({ name: 'myjob' });
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {get as getJob} from '/lib/xp/scheduler';
+
+const job = getJob({ name: 'myjob' });
 
 if (job) {
-  log.info('Job is found: ' + JSON.stringify(job));
+  log.info('Job is found: %s', JSON.stringify(job, null, 4));
 } else {
   log.info('Job not found');
 }</code></pre>
@@ -579,32 +584,32 @@ if (job) {
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = {
-    'name': 'myjob',
-    'descriptor': 'com.enonic.app.myapp:mytask',
-    'description': 'cron job description',
-    'enabled': true,
-    'config': {
-        'a': 1,
-        'b': 'value',
-        'c': {
-            'd': {
-                'e': 3.6,
-                'f': true
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    name: 'myjob',
+    descriptor: 'com.enonic.app.myapp:mytask',
+    description: 'cron job description',
+    enabled: true,
+    config: {
+        a: 1,
+        b: 'value',
+        c: {
+            d: {
+                e: 3.6,
+                f: true
             }
         }
     },
-    'user': 'user:system:user',
-    'creator': 'user:system:creator',
-    'modifier': 'user:system:creator',
-    'createdTime': '2016-11-02T10:36:00Z',
-    'modifiedTime': '2016-11-02T10:36:00Z',
-    'lastRun': '2021-02-25T10:44:33.170079900Z',
-    'lastTaskId': 'task-id',
-    'schedule': {
-        'value': '* * * * *',
-        'type': 'CRON',
-        'timeZone': 'GMT+2:00'
+    user: 'user:system:user',
+    creator: 'user:system:creator',
+    modifier: 'user:system:creator',
+    createdTime: '2016-11-02T10:36:00Z',
+    modifiedTime: '2016-11-02T10:36:00Z',
+    lastRun: '2021-02-25T10:44:33.170079900Z',
+    lastTaskId: 'task-id',
+    schedule: {
+        value: '* * * * *',
+        type: 'CRON',
+        timeZone: 'GMT+2:00'
     }
 };</code></pre>
 </div>
@@ -627,48 +632,50 @@ if (job) {
 <div class="listingblock">
 <div class="title">Obtains list of existing jobs:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var jobs = schedulerLib.list();</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {list} from '/lib/xp/scheduler';
+
+const jobs = list();</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expected = [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = [
   {
-        'name': 'job1',
-        'descriptor': 'appKey:task',
-        'description': 'job description',
-        'enabled': true,
-        'config': {
-            'a': 1
+        name: 'job1',
+        descriptor: 'appKey:task',
+        description: 'job description',
+        enabled: true,
+        config: {
+            a: 1
         },
-        'user': 'user:system:user',
-        'creator': 'user:system:creator',
-        'modifier': 'user:system:creator',
-        'createdTime': '2016-11-02T10:36:00Z',
-        'modifiedTime': '2016-11-02T10:36:00Z',
-        'lastRun': '2021-02-25T10:44:00.170079900Z',
-        'lastTaskId': 'task-id',
-        'schedule': {
-            'value': '* * * * *',
-            'timeZone': 'GMT+05:30',
-            'type': 'CRON'
+        user: 'user:system:user',
+        creator: 'user:system:creator',
+        modifier: 'user:system:creator',
+        createdTime: '2016-11-02T10:36:00Z',
+        modifiedTime: '2016-11-02T10:36:00Z',
+        lastRun: '2021-02-25T10:44:00.170079900Z',
+        lastTaskId: 'task-id',
+        schedule: {
+            value: '* * * * *',
+            timeZone: 'GMT+05:30',
+            type: 'CRON'
         }
     },
     {
-        'name': 'job2',
-        'descriptor': 'appKey:task',
-        'description': 'job description',
-        'enabled': false,
-        'config': { },
-        'user': 'user:system:user',
-        'creator': 'user:system:creator',
-        'modifier': 'user:system:creator',
-        'createdTime': '2021-02-02T10:36:00Z',
-        'modifiedTime': '2021-02-02T10:36:00Z',
-        'schedule': {
-            'value': '2012-01-01T00:00:00Z',
-            'type': 'ONE_TIME'
+        name: 'job2',
+        descriptor: 'appKey:task',
+        description: 'job description',
+        enabled: false,
+        config: { },
+        user: 'user:system:user',
+        creator: 'user:system:creator',
+        modifier: 'user:system:creator',
+        createdTime: '2021-02-02T10:36:00Z',
+        modifiedTime: '2021-02-02T10:36:00Z',
+        schedule: {
+            value: '2012-01-01T00:00:00Z',
+            type: 'ONE_TIME'
         }
     }
 ];</code></pre>
@@ -678,10 +685,19 @@ if (job) {
 <div class="sect2">
 <h3 id="create"><a class="link" href="#create">create</a></h3>
 <div class="paragraph">
-<p>Creates a scheduled job .</p>
+<p>Creates a scheduled job.</p>
 </div>
-<div class="paragraph">
-<p>This function returns immediately.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This function returns immediately.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -819,14 +835,16 @@ if (job) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var simpleOneTimeJob = schedulerLib.create({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {create} from '/lib/xp/scheduler';
+
+const simpleOneTimeJob = create({
     name: 'my-project',
     descriptor: 'appKey:task',
     enabled: true,
     schedule: {type: 'ONE_TIME', value: '2021-01-01T00:00:00.00Z'}
 });
 
-var extendedCronJob = schedulerLib4.create({
+const extendedCronJob = create({
     name: 'myjob',
     descriptor: 'appKey:task',
     description: 'job description',
@@ -850,49 +868,49 @@ var extendedCronJob = schedulerLib4.create({
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var expectedSimpleOneTimeJob = {
-    'name': 'my-project',
-    'descriptor': 'appKey:task',
-    'enabled': true,
-    'config': {},
-    'creator': 'user:system:creator',
-    'modifier': 'user:system:creator',
-    'createdTime': '2016-11-02T10:36:00Z',
-    'modifiedTime': '2016-11-02T10:36:00Z',
-    'schedule': {
-        'value': '2012-01-01T00:00:00Z',
-        'type': 'ONE_TIME'
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expectedSimpleOneTimeJob = {
+    name: 'my-project',
+    descriptor: 'appKey:task',
+    enabled: true,
+    config: {},
+    creator: 'user:system:creator',
+    modifier: 'user:system:creator',
+    createdTime: '2016-11-02T10:36:00Z',
+    modifiedTime: '2016-11-02T10:36:00Z',
+    schedule: {
+        value: '2012-01-01T00:00:00Z',
+        type: 'ONE_TIME'
     }
 }
 
-var expectedExtendedCronJob = {
-    'name': 'myjob',
-    'descriptor': 'appKey:task',
-    'description': 'job description',
-    'enabled': true,
-    'config': {
-        'a': 1,
-        'b': 2,
-        'c': {
-            '0': '1',
-            '1': '2'
+const expectedExtendedCronJob = {
+    name: 'myjob',
+    descriptor: 'appKey:task',
+    description: 'job description',
+    enabled: true,
+    config: {
+        a: 1,
+        b: 2,
+        c: {
+            0: '1',
+            1: '2'
         },
-        'd': {
-            'e': {
-                'f': 3.6,
-                'g': true
+        d: {
+            e: {
+                f: 3.6,
+                g: true
             }
         }
     },
-    'user': 'user:system:user',
-    'creator': 'user:system:creator',
-    'modifier': 'user:system:creator',
-    'createdTime': '2021-01-01T10:36:00Z',
-    'modifiedTime': '2016-01-01T10:36:00Z',
-    'schedule': {
-        'value': '* * * * 5',
-        'timeZone': 'GMT-02:00',
-        'type': 'CRON'
+    user: 'user:system:user',
+    creator: 'user:system:creator',
+    modifier: 'user:system:creator',
+    createdTime: '2021-01-01T10:36:00Z',
+    modifiedTime: '2016-01-01T10:36:00Z',
+    schedule: {
+        value: '* * * * 5',
+        timeZone: 'GMT-02:00',
+        type: 'CRON'
     }
 }</code></pre>
 </div>
@@ -901,7 +919,19 @@ var expectedExtendedCronJob = {
 <div class="sect2">
 <h3 id="modify"><a class="link" href="#modify">modify</a></h3>
 <div class="paragraph">
-<p>Modifies a job. The previous task will be rescheduled, <code>lastRun</code> and <code>lastTaskId</code> properties will be cleaned.</p>
+<p>Modifies a job.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The previous task will be rescheduled, <code>lastRun</code> and <code>lastTaskId</code> properties will be cleaned.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -975,7 +1005,9 @@ var expectedExtendedCronJob = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schedulerLib.modify({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {modify} from '/lib/xp/scheduler';
+
+const result = modify({
     name: 'myjob',
     editor: (edit) =&gt; {
         edit.descriptor = 'appKey:new-task';
@@ -995,23 +1027,23 @@ var expectedExtendedCronJob = {
 <div class="listingblock">
 <div class="title">Return value:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var resultExpected = {
-    'name': 'myjob',
-    'descriptor': 'appKey:new-task',
-    'description': 'new job description',
-    'enabled': false,
-    'config': {
-        'a1': 3
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const resultExpected = {
+    name: 'myjob',
+    descriptor: 'appKey:new-task',
+    description: 'new job description',
+    enabled: false,
+    config: {
+        a1: 3
     },
-    'user': 'user:system:new-user',
-    'creator': 'user:system:creator',
-    'modifier': 'user:system:modifier',
-    'createdTime': '2016-11-02T10:36:00Z',
-    'modifiedTime': '2021-02-25T10:44:33.170079900Z',
-    'schedule': {
-        'value': '* * * * *',
-        'timeZone': 'GMT+05:30',
-        'type': 'CRON'
+    user: 'user:system:new-user',
+    creator: 'user:system:creator',
+    modifier: 'user:system:modifier',
+    createdTime: '2016-11-02T10:36:00Z',
+    modifiedTime: '2021-02-25T10:44:33.170079900Z',
+    schedule: {
+        value: '* * * * *',
+        timeZone: 'GMT+05:30',
+        type: 'CRON'
     }
 }</code></pre>
 </div>
@@ -1079,14 +1111,16 @@ var expectedExtendedCronJob = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if deleted, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if deleted, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = schedulerLib.delete({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteJob} from '/lib/xp/scheduler';
+
+const result = deleteJob({
     name: 'myjob'
 });
 
@@ -1265,7 +1299,7 @@ if (result) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

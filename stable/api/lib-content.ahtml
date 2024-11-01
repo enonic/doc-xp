@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Content library</title>
+<title>Content API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Content library</h1>
+<h1>Content API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -510,15 +510,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const contentLib = require('/lib/xp/content');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import contentLib from '/lib/xp/content';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -535,7 +535,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const myRoot = contentLib.CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {CONTENT_ROOT_PATH} from '/lib/xp/content';
+
+const myRoot = CONTENT_ROOT_PATH; // NodePath.create( "/content" ).build()</code></pre>
 </div>
 </div>
 </div>
@@ -549,7 +551,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const myRoot = contentLib.ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {ARCHIVE_ROOT_PATH} from '/lib/xp/content';
+
+const myRoot = ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()</code></pre>
 </div>
 </div>
 </div>
@@ -632,8 +636,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Adds an attachment.
-contentLib.addAttachment({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {addAttachment} from '/lib/xp/content';
+
+// Adds an attachment.
+addAttachment({
     key: '/mySite/mycontent',
     name: 'image',
     mimeType: 'image/png',
@@ -649,7 +655,7 @@ contentLib.addAttachment({
 <p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>Archive a content</p>
+<p>Archives a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -691,32 +697,34 @@ contentLib.addAttachment({
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Archive content by path.
-const result1 = contentLib.archive({
-content: '/path/to/mycontent',
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {archive} from '/lib/xp/content';
+
+// Archive content by path.
+const result1 = archive({
+    content: '/path/to/mycontent',
 });
 
-log.info('Archived content ids: ' + result1.join(''));
+log.info('Archived content ids: %s', result1.join(','));
 
 // Archive content by id.
-const result2 = contentLib.archive({
-content: 'my-content-id'
+const result2 = archive({
+    content: 'my-content-id'
 });
 
-log.info('Archived content ids: ' + result2.join(','));</code></pre>
+log.info('Archived content ids: %s', result2.join(','));</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="create"><a class="link" href="#create">create</a></h3>
 <div class="paragraph">
-<p>This function creates a content.</p>
+<p>Creates a content.</p>
 </div>
 <div class="paragraph">
-<p>The parameter name is optional, but if it is not set then displayName must be specified. When name is not set, the system will auto-generate a name based on the displayName, by lower-casing and replacing certain characters. If there is already a content with the auto-generated name, a suffix will be added to the name in order to make it unique.</p>
+<p>Either <code>name</code> or <code>displayName</code> (or both) must be specified. When <code>name</code> is not set, the system will auto-generate a name based on the <code>displayName</code>, by lower-casing and replacing certain characters. If there is already a content with the auto-generated name, a suffix will be added to <code>name</code> in order to make it unique.</p>
 </div>
 <div class="paragraph">
-<p>To create a content where the name is not important and there could be multiple instances under the same parent content, skip the name parameter and specify a displayName</p>
+<p>To create a content where <code>name</code> is not important and there could be multiple instances under the same parent content, skip the <code>name</code> parameter and specify a <code>displayName</code> instead.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -845,8 +853,10 @@ log.info('Archived content ids: ' + result2.join(','));</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Creates a content.
-const result1 = contentLib.create({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {create} from '/lib/xp/content';
+
+// Creates a content.
+const result1 = create({
     name: 'mycontent',
     parentPath: '/a/b',
     displayName: 'My Content',
@@ -870,18 +880,20 @@ const result1 = contentLib.create({
             }
         }
     },
-    "attachments": {},
-    "publish": {}
+    attachments: {},
+    publish: {}
 });
 
-log.info('Content created with id ' + result1._id);</code></pre>
+log.info('Content created with id %s', result1._id);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Check if content already exists.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {create} from '/lib/xp/content';
+
+// Check if content already exists.
 try {
-    const result2 = contentLib.create({
+    const result2 = create({
         name: 'mycontent',
         parentPath: '/a/b',
         displayName: 'My Content',
@@ -889,55 +901,55 @@ try {
         data: {}
     });
 
-    log.info('Content created with id ' + result2._id);
+    log.info('Content created with id %s', result2._id);
 
 } catch (e) {
     if (e.code == 'contentAlreadyExists') {
         log.error('There is already a content with that name');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Content created.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Content created.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/a/b/mycontent",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "test:myContentType",
-    "displayName": "My Content",
-    "hasChildren": false,
-    "language": "es",
-    "valid": false,
-    "data": {
-        "a": 1,
-        "b": 2,
-        "c": [
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/a/b/mycontent",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "test:myContentType",
+    displayName: "My Content",
+    hasChildren: false,
+    language: "es",
+    valid: false,
+    data: {
+        a: 1,
+        b: 2,
+        c: [
             "1",
             "2"
         ],
-        "d": {
-            "e": {
-                "f": 3.6,
-                "g": true
+        d: {
+            e: {
+                f: 3.6,
+                g: true
             }
         }
     },
-    "x": {
+    x: {
         "com-enonic-myapplication": {
-            "myschema": {
-                "a": 1
+            myschema: {
+                a: 1
             }
         }
     },
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    page: {},
+    attachments: {},
+    publish: {}
 };</code></pre>
 </div>
 </div>
@@ -1038,8 +1050,10 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Creates a media.
-const result = contentLib.createMedia({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {createMedia} from '/lib/xp/content';
+
+// Creates a media.
+const result = createMedia({
     name: 'mycontent',
     parentPath: '/a/b',
     mimeType: 'text/plain',
@@ -1049,21 +1063,21 @@ const result = contentLib.createMedia({
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Media created.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Media created.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/a/b/mycontent",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {},
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/a/b/mycontent",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {},
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {}
 };</code></pre>
 </div>
 </div>
@@ -1209,8 +1223,10 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Modifies a media.
-const result = contentLib.modifyMedia({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {modifyMedia} from '/lib/xp/content';
+
+// Modifies a media.
+const result = modifyMedia({
     key: '/a/b/mycontent',
     name: 'mycontent',
     data: stream,
@@ -1224,36 +1240,36 @@ const result = contentLib.modifyMedia({
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Modified media.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Modified media.
 const expected = {
-    "_id": "123456",
-    "_name": "myMedia",
-    "_path": "/a/b/myMedia",
-    "creator": "user:system:anonymous",
-    "createdTime": "1975-01-08T00:00:00Z",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {
-        "caption": "Caption",
-        "artist": [
+    _id: "123456",
+    _name: "myMedia",
+    _path: "/a/b/myMedia",
+    creator: "user:system:anonymous",
+    createdTime: "1975-01-08T00:00:00Z",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {
+        caption: "Caption",
+        artist: [
             "Artist 1",
             "Artist 2"
         ],
-        "copyright": "Copyright",
-        "mimeType": "text/plan",
-        "tags": [
+        copyright: "Copyright",
+        mimeType: "text/plan",
+        tags: [
             "tag1",
             "tag2"
         ]
     },
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {},
-    "workflow": {
-        "state": "READY",
-        "checks": {}
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {},
+    workflow: {
+        state: "READY",
+        checks: {}
     }
 };</code></pre>
 </div>
@@ -1262,7 +1278,7 @@ const expected = {
 <div class="sect2">
 <h3 id="delete"><a class="link" href="#delete">delete</a></h3>
 <div class="paragraph">
-<p>This function deletes a content</p>
+<p>Deletes a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1297,15 +1313,17 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if deleted, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if deleted, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Deletes a content by path.
-const result = contentLib.delete({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteContent} from '/lib/xp/content';
+
+// Deletes a content by path.
+const result = deleteContent({
     key: '/features/js-libraries/mycontent'
 });
 
@@ -1320,7 +1338,7 @@ if (result) {
 <div class="sect2">
 <h3 id="duplicate"><a class="link" href="#duplicate">duplicate</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> This function duplicates a content.</p>
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> Duplicates a content.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1360,8 +1378,8 @@ if (result) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>{
-"state": "READY",
-"checks": {}
+state: "READY",
+checks: {}
 }</code></code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Workflow state.</p>
@@ -1406,51 +1424,55 @@ if (result) {
 </tbody>
 </table>
 <div class="paragraph lead">
-<p>Returns summary about duplicated content.</p>
+<p>Returns summary of the content duplicate.</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Summary about duplicated content.</p>
+<p><strong>object</strong> : Summary of the content duplicate.</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="paragraph">
-<p>Duplicate content</p>
+<p>Duplicate a content</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Duplicate content by id
-var result = contentLib.duplicate({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {duplicate} from '/lib/xp/content';
+
+// Duplicate content by id
+const result = duplicate({
     contentId: '79e21db0-5b43-45ce-b58c-6e1c420b22bd',
     includeChildren: false,
 });
 
 // Summary of the duplicated content.
-var expected = {
-    "contentName": "sourcecontentname-copy",
-    "sourceContentPath": "/path/to/duplicated-content",
-    "duplicatedContents": [
+const expected = {
+    contentName: "sourcecontentname-copy",
+    sourceContentPath: "/path/to/duplicated-content",
+    duplicatedContents: [
         "duplicated-content-id"
     ]
 };</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Create variant</p>
+<p>Create a variant</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Create a variant of the content
-var result = contentLib.duplicate({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {duplicate} from '/lib/xp/content';
+
+// Create a variant of the content
+const result = duplicate({
     contentId: '79e21db0-5b43-45ce-b58c-6e1c420b22bd',
     variant: true,
     name: 'variant-name'
 });
 
-var expected = {
-    "contentName": "variant-name",
-    "sourceContentPath": "/path/to/variant-name",
-    "duplicatedContents": [
+const expected = {
+    contentName: "variant-name",
+    sourceContentPath: "/path/to/variant-name",
+    duplicatedContents: [
         "variant-content-id"
     ]
 }</code></pre>
@@ -1460,7 +1482,7 @@ var expected = {
 <div class="sect2">
 <h3 id="exists"><a class="link" href="#exists">exists</a></h3>
 <div class="paragraph">
-<p>This function checks if a content exists for the current context.</p>
+<p>Checks if a content exists in the current context.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1495,15 +1517,17 @@ var expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if exists, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if exists, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Checking if a content exists
-const result = contentLib.exists({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {exists} from '/lib/xp/content';
+
+// Checking if a content exists
+const result = exists({
     key: '/path/to/mycontent'
 });
 
@@ -1518,7 +1542,7 @@ if (result) {
 <div class="sect2">
 <h3 id="get"><a class="link" href="#get">get</a></h3>
 <div class="paragraph">
-<p>This function fetches a content</p>
+<p>Returns a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1571,13 +1595,15 @@ if (result) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Gets a single content by path.
-const result = contentLib.get({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {get as getContentByKey} from '/lib/xp/content';
+
+// Gets a single content by path.
+const result = getContentByKey({
     key: '/path/to/mycontent'
 });
 
 if (result) {
-    log.info('Display Name = ' + result.displayName);
+    log.info('Display Name = %s', result.displayName);
 } else {
     log.info('Content was not found');
 }</code></pre>
@@ -1585,40 +1611,40 @@ if (result) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Content as it is returned.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Content as it is returned.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/path/to/mycontent",
-    "creator": "user:system:admin",
-    "modifier": "user:system:admin",
-    "createdTime": "1970-01-01T00:00:00Z",
-    "modifiedTime": "1970-01-01T00:00:00Z",
-    "type": "base:unstructured",
-    "displayName": "My Content",
-    "hasChildren": false,
-    "language": "en",
-    "valid": true,
-    "childOrder": "_ts DESC, _name ASC",
-    "data": {
-        "myfield": "Hello World"
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/path/to/mycontent",
+    creator: "user:system:admin",
+    modifier: "user:system:admin",
+    createdTime: "1970-01-01T00:00:00Z",
+    modifiedTime: "1970-01-01T00:00:00Z",
+    type: "base:unstructured",
+    displayName: "My Content",
+    hasChildren: false,
+    language: "en",
+    valid: true,
+    childOrder: "_ts DESC, _name ASC",
+    data: {
+        myfield: "Hello World"
     },
-    "x": {},
-    "page": {},
-    "attachments": {
+    x: {},
+    page: {},
+    attachments: {
         "logo.png": {
-            "name": "logo.png",
-            "label": "small",
-            "size": 6789,
-            "mimeType": "image/png"
+            name: "logo.png",
+            label: "small",
+            size: 6789,
+            mimeType: "image/png"
         },
         "document.pdf": {
-            "name": "document.pdf",
-            "size": 12345,
-            "mimeType": "application/pdf"
+            name: "document.pdf",
+            size: 12345,
+            mimeType: "application/pdf"
         }
     },
-    "publish": {}
+    publish: {}
 };</code></pre>
 </div>
 </div>
@@ -1658,25 +1684,25 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : An object with all the attachments that belong to the content, where the key is the attachment name. Or null if the content cannot be found</p>
+<p><strong>object</strong> : An object with all the attachments stored in the content, where the key is the attachment name. Or null if the content was not found.</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Attachments returned.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Attachments returned.
 const expected = {
     "logo.png": {
-        "name": "logo.png",
-        "label": "small",
-        "size": 6789,
-        "mimeType": "image/png"
+        name: "logo.png",
+        label: "small",
+        size: 6789,
+        mimeType: "image/png"
     },
     "document.pdf": {
-        "name": "document.pdf",
-        "size": 12345,
-        "mimeType": "application/pdf"
+        name: "document.pdf",
+        size: 12345,
+        mimeType: "application/pdf"
     }
 };</code></pre>
 </div>
@@ -1726,20 +1752,18 @@ const expected = {
 <div class="paragraph lead">
 <p>Returns</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>: Stream of the attachment data</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>object</strong> : Stream of the attachment data</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Get stream for attachment.
-const stream = contentLib.getAttachmentStream({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getAttachmentStream} from '/lib/xp/content';
+
+// Get stream for attachment.
+const stream = getAttachmentStream({
     key: '/a/b/mycontent',
     name: 'document.pdf'
 });</code></pre>
@@ -1749,7 +1773,7 @@ const stream = contentLib.getAttachmentStream({
 <div class="sect2">
 <h3 id="getchildren"><a class="link" href="#getchildren">getChildren</a></h3>
 <div class="paragraph">
-<p>This function fetches children of a content</p>
+<p>Fetches children of a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1817,71 +1841,72 @@ const stream = contentLib.getAttachmentStream({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Result (of content) fetched from the repository</p>
+<p><strong>object</strong> : An array of child items (as JSON) fetched from the repository</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Returns the children of specified path.
-const result = contentLib.getChildren({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getChildren} from '/lib/xp/content';
+
+// Returns the children of specified path.
+const result = getChildren({
     key: '/path/to',
     start: 0,
     count: 2,
     sort: '_modifiedTime ASC'
 });
 
-log.info('Found ' + result.total + ' number of contents');
+log.info('Found %s number of contents', result.total);
 
-for (let i = 0; i &lt; result.hits.length; i++) {
-    const content = result.hits[i];
-    log.info('Content ' + content._name + ' loaded');
-}</code></pre>
+result.hits.forEach((content) =&gt; {
+  log.info('Content %s loaded', content._name);
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Result set returned.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Result set returned.
 const expected = {
-    "total": 20,
-    "count": 2,
-    "hits": [
+    total: 20,
+    count: 2,
+    hits: [
         {
-            "_id": "id1",
-            "_name": "name1",
-            "_path": "/a/b/name1",
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 1",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id1",
+            _name: "name1",
+            _path: "/a/b/name1",
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 1",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         },
         {
-            "_id": "id2",
-            "_name": "name2",
-            "_path": "/a/b/name2",
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 2",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id2",
+            _name: "name2",
+            _path: "/a/b/name2",
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 2",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         }
     ]
 };</code></pre>
@@ -1890,20 +1915,11 @@ const expected = {
 </div>
 <div class="sect2">
 <h3 id="getoutbounddependencies"><a class="link" href="#getoutbounddependencies">getOutboundDependencies</a></h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This function was first introduced in v7.2
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.2.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.2.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>This function returns the list of content items that are outbound dependencies of specified content.</p>
+<p>Returns the list of content items that are outbound dependencies of specified content.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1945,13 +1961,15 @@ This function was first introduced in v7.2
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Gets outbound dependencies of content by its Id.
-const result = contentLib.getOutboundDependencies({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getOutboundDependencies} from '/lib/xp/content';
+
+// Gets outbound dependencies of content by its Id.
+const result = getOutboundDependencies({
     key: '/features/js-libraries/mycontent'
 });
 
 if (result) {
-    log.info('Outbound dependencies: ' + result);
+    log.info('Outbound dependencies: %s', JSON.stringify(result, null, 4));
 } else {
     log.info('Outbound dependencies were not found');
 }</code></pre>
@@ -1961,7 +1979,7 @@ if (result) {
 <div class="sect2">
 <h3 id="getpermissions"><a class="link" href="#getpermissions">getPermissions</a></h3>
 <div class="paragraph">
-<p>Gets permissions on a content</p>
+<p>Returns content permissions</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2003,13 +2021,15 @@ if (result) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Return permissions for content by path.
-const result = contentLib.getPermissions({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getPermissions} from '/lib/xp/content';
+
+// Return permissions for content by path.
+const result = getPermissions({
     key: '/features/js-libraries/mycontent'
 });
 
 if (result) {
-    log.info('Content inherits permissions: ' + result.inheritPermissions);
+    log.info('Content inherits permissions: %s', result.inheritPermissions);
 } else {
     log.info('Content not found');
 }</code></pre>
@@ -2017,16 +2037,16 @@ if (result) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Permissions returned.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Permissions returned.
 const expected = {
-    "inheritsPermissions": false,
-    "permissions": [
+    inheritsPermissions: false,
+    permissions: [
         {
-            "principal": "user:system:anonymous",
-            "allow": [
+            principal: "user:system:anonymous",
+            allow: [
                 "READ"
             ],
-            "deny": []
+            deny: []
         }
     ]
 };</code></pre>
@@ -2036,7 +2056,7 @@ const expected = {
 <div class="sect2">
 <h3 id="getsite"><a class="link" href="#getsite">getSite</a></h3>
 <div class="paragraph">
-<p>This function returns the parent site of a content</p>
+<p>Returns the parent site of a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2078,8 +2098,10 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Returns content's parent site
-const result = contentLib.getSite({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getSite} from '/lib/xp/content';
+
+// Returns content's parent site
+const result = getSite({
     key: '/path/to/mycontent'
 });
 log.info('Site name = %s', result._name);</code></pre>
@@ -2087,26 +2109,26 @@ log.info('Site name = %s', result._name);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Site data returned.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Site data returned.
 const expected = {
-    "_id": "100123",
-    "_name": "my-content",
-    "_path": "/my-content",
-    "type": "base:unstructured",
-    "hasChildren": false,
-    "valid": false,
-    "data": {
-        "siteConfig": {
-            "applicationKey": "myapplication",
-            "config": {
-                "Field": 42
+    _id: "100123",
+    _name: "my-content",
+    _path: "/my-content",
+    type: "base:unstructured",
+    hasChildren: false,
+    valid: false,
+    data: {
+        siteConfig: {
+            applicationKey: "myapplication",
+            config: {
+                Field: 42
             }
         }
     },
-    "x": {},
-    "page": {},
-    "attachments": {},
-    "publish": {}
+    x: {},
+    page: {},
+    attachments: {},
+    publish: {}
 };</code></pre>
 </div>
 </div>
@@ -2114,7 +2136,7 @@ const expected = {
 <div class="sect2">
 <h3 id="getsiteconfig"><a class="link" href="#getsiteconfig">getSiteConfig</a></h3>
 <div class="paragraph">
-<p>This function returns the site configuration for this app in the parent site of a content</p>
+<p>Returns configuration of a specified application assigned to the site of a content</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2156,15 +2178,17 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The site configuration for current application as JSON</p>
+<p><strong>object</strong> : App config (as JSON)</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Returns config of the content's parent site
-const result = contentLib.getSiteConfig({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getSiteConfig} from '/lib/xp/content';
+
+// Returns config of the content's parent site
+const result = getSiteConfig({
     key: '/path/to/mycontent',
     applicationKey: app.name
 });
@@ -2173,9 +2197,9 @@ log.info('Field value for the site config = %s', result.Field);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Site config returned.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Site config returned.
 const expected = {
-    "Field": 42
+    Field: 42
 };</code></pre>
 </div>
 </div>
@@ -2183,7 +2207,7 @@ const expected = {
 <div class="sect2">
 <h3 id="gettype"><a class="link" href="#gettype">getType</a></h3>
 <div class="paragraph">
-<p>Returns the properties and icon of the specified content type</p>
+<p>Returns properties and icon of the specified content type</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2215,116 +2239,118 @@ const expected = {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong><a href="#contenttype">ContentType</a></strong> : The content type object if found, or null otherwise. See ContentType type definition below</p>
+<p><strong><a href="#contenttype">ContentType</a></strong> : The content type object if found, or <code>null</code> otherwise. See ContentType type definition below</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Get a content type by name
-const contentType = contentLib.getType('com.enonic.myapp:person');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getType} from '/lib/xp/content';
+
+// Get a content type by name
+const contentType = getType('com.enonic.myapp:person');</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Content type returned:
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Content type returned:
 const expected = {
-    "name": "com.enonic.myapp:person",
-    "displayName": "Person",
-    "description": "Person content type",
-    "superType": "base:structured",
-    "abstract": false,
-    "final": true,
-    "allowChildContent": true,
-    "displayNameExpression": "${name}",
-    "icon": {
-        "mimeType": "image/png",
-        "modifiedTime": "2016-01-01T12:00:00Z"
+    name: "com.enonic.myapp:person",
+    displayName: "Person",
+    description: "Person content type",
+    superType: "base:structured",
+    abstract: false,
+    final: true,
+    allowChildContent: true,
+    displayNameExpression: "${name}",
+    icon: {
+        mimeType: "image/png",
+        modifiedTime: "2016-01-01T12:00:00Z"
     },
-    "form": [
+    form: [
         {
-            "formItemType": "Input",
-            "name": "name",
-            "label": "Full name",
-            "maximize": true,
-            "inputType": "TextLine",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "name",
+            label: "Full name",
+            maximize: true,
+            inputType: "TextLine",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "title",
-            "label": "Photo",
-            "helpText": "Person photo",
-            "maximize": true,
-            "inputType": "ImageSelector",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "title",
+            label: "Photo",
+            helpText: "Person photo",
+            maximize: true,
+            inputType: "ImageSelector",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "bio",
-            "label": "Bio",
-            "maximize": true,
-            "inputType": "HtmlArea",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "bio",
+            label: "Bio",
+            maximize: true,
+            inputType: "HtmlArea",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "birthdate",
-            "label": "Birth date",
-            "maximize": true,
-            "inputType": "Date",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 0
+            formItemType: "Input",
+            name: "birthdate",
+            label: "Birth date",
+            maximize: true,
+            inputType: "Date",
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            "config": {}
+            config: {}
         },
         {
-            "formItemType": "Input",
-            "name": "email",
-            "label": "Email",
-            "helpText": "Email address",
-            "maximize": true,
-            "inputType": "TextLine",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 1
+            formItemType: "Input",
+            name: "email",
+            label: "Email",
+            helpText: "Email address",
+            maximize: true,
+            inputType: "TextLine",
+            occurrences: {
+                maximum: 1,
+                minimum: 1
             },
-            "config": {
-                "regexp": [
+            config: {
+                regexp: [
                     {
-                        "value": "^[^@]+@[^@]+\\.[^@]+$"
+                        value: "^[^@]+@[^@]+\\.[^@]+$"
                     }
                 ]
             }
         },
         {
-            "formItemType": "Input",
-            "name": "nationality",
-            "label": "Nationality",
-            "maximize": true,
-            "inputType": "ContentSelector",
-            "occurrences": {
-                "maximum": 1,
-                "minimum": 0
+            formItemType: "Input",
+            name: "nationality",
+            label: "Nationality",
+            maximize: true,
+            inputType: "ContentSelector",
+            occurrences: {
+                maximum: 1,
+                minimum: 0
             },
-            "config": {
-                "allowContentType": [
+            config: {
+                allowContentType: [
                     {
-                        "value": "com.enonic.myapp:country"
+                        value: "com.enonic.myapp:country"
                     }
                 ]
             }
@@ -2335,8 +2361,10 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Get a content type icon
-const ct = contentLib.getType('com.enonic.myapp:person');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getType} from '/lib/xp/content';
+
+// Get a content type icon
+const ct = getType('com.enonic.myapp:person');
 const icon = ct.icon;
 return {
     body: icon.data,
@@ -2361,13 +2389,15 @@ return {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Gets the list of all content types in the system
-const contentTypes = contentLib.getTypes();
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getTypes} from '/lib/xp/content';
 
-log.info(contentTypes.length + ' content types found:');
-contentTypes.forEach(function (ct) {
-    if (ct.superType === 'base:structured') {
-        log.info(ct.name + ' - ' + ct.displayName);
+// Gets the list of all content types in the system
+const contentTypes = getTypes();
+
+log.info('%s content types found:', contentTypes.length);
+contentTypes.forEach(({displayName,name,superType}) =&gt; {
+    if (superType === 'base:structured') {
+        log.info('%s - %s', name, displayName);
     }
 });</code></pre>
 </div>
@@ -2376,7 +2406,7 @@ contentTypes.forEach(function (ct) {
 <div class="sect2">
 <h3 id="modify"><a class="link" href="#modify">modify</a></h3>
 <div class="paragraph">
-<p>Modifies properties of a content</p>
+<p>Modifies a content</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2385,7 +2415,7 @@ contentTypes.forEach(function (ct) {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Properties starting with <code>_</code> may not be modified using this function. To rename or move a content (i.e to change the _name property), use the <a href="#move">move function</a> instead.
+Properties starting with <code>_</code> may not be modified using this function. To rename or move a content (ie to change the <code>_name</code> property), use the <a href="#move">move function</a> instead.
 </td>
 </tr>
 </table>
@@ -2438,7 +2468,7 @@ Properties starting with <code>_</code> may not be modified using this function.
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The content has to be valid, according to the content type, to be updated. If requireValid=true and the content is not strictly valid, an error will be thrown</p>
+<p>The content has to be valid (according to the content type) to be updated. If <code>requireValid=true</code> and the content is not strictly valid, an error will be thrown</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2454,7 +2484,9 @@ Properties starting with <code>_</code> may not be modified using this function.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Editor to call for content.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {modify} from '/lib/xp/content';
+
+// Editor to call for content.
 function editor(c) {
     c.displayName = 'Modified';
     c.language = 'en';
@@ -2466,13 +2498,13 @@ function editor(c) {
 }
 
 // Modify content by path
-const result = contentLib.modify({
+const result = modify({
     key: '/a/b/mycontent',
     editor: editor
 });
 
 if (result) {
-    log.info('Content modified. New title is ' + result.displayName);
+    log.info('Content modified. New title is %s', result.displayName);
 } else {
     log.info('Content not found');
 }</code></pre>
@@ -2480,47 +2512,47 @@ if (result) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Content modified.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Content modified.
 const expected = {
-    "_id": "123456",
-    "_name": "mycontent",
-    "_path": "/path/to/mycontent",
-    "creator": "user:system:admin",
-    "modifier": "user:system:admin",
-    "createdTime": "1970-01-01T00:00:00Z",
-    "modifiedTime": "1970-01-01T00:00:00Z",
-    "type": "base:unstructured",
-    "displayName": "Modified",
-    "hasChildren": false,
-    "language": "en",
-    "valid": true,
-    "childOrder": "_ts DESC, _name ASC",
-    "data": {
-        "myfield": "Hello World",
-        "myCheckbox": "false",
-        "myTime": "11:00"
+    _id: "123456",
+    _name: "mycontent",
+    _path: "/path/to/mycontent",
+    creator: "user:system:admin",
+    modifier: "user:system:admin",
+    createdTime: "1970-01-01T00:00:00Z",
+    modifiedTime: "1970-01-01T00:00:00Z",
+    type: "base:unstructured",
+    displayName: "Modified",
+    hasChildren: false,
+    language: "en",
+    valid: true,
+    childOrder: "_ts DESC, _name ASC",
+    data: {
+        myfield: "Hello World",
+        myCheckbox: "false",
+        myTime: "11:00"
     },
-    "x": {},
-    "page": {},
-    "attachments": {
+    x: {},
+    page: {},
+    attachments: {
         "logo.png": {
-            "name": "logo.png",
-            "label": "small",
-            "size": 6789,
-            "mimeType": "image/png"
+            name: "logo.png",
+            label: "small",
+            size: 6789,
+            mimeType: "image/png"
         },
         "document.pdf": {
-            "name": "document.pdf",
-            "size": 12345,
-            "mimeType": "application/pdf"
+            name: "document.pdf",
+            size: 12345,
+            mimeType: "application/pdf"
         }
     },
-    "publish": {
-        "from": "2016-11-03T10:01:34Z"
+    publish: {
+        from: "2016-11-03T10:01:34Z"
     },
-    "workflow": {
-        "state": "READY",
-        "checks": {}
+    workflow: {
+        state: "READY",
+        checks: {}
     }
 };</code></pre>
 </div>
@@ -2529,7 +2561,7 @@ const expected = {
 <div class="sect2">
 <h3 id="move"><a class="link" href="#move">move</a></h3>
 <div id="move" class="paragraph">
-<p>Rename a content or move it to a new path</p>
+<p>Renames a content or moves it to a new path</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2578,53 +2610,63 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Rename content by path. Keeps same parent.
-const content1 = contentLib.move({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {move} from '/lib/xp/content';
+
+// Rename content by path. Keeps same parent.
+const content1 = move({
     source: '/my-site/my-content-name',
     target: 'new-name'
 });
 
-log.info('New path: ' + content1._path); // '/my-site/new-name'</code></pre>
+log.info('New path: %s', content1._path); // '/my-site/new-name'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Move content by path. New parent path, keeps same name.
-const content2 = contentLib.move({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {move} from '/lib/xp/content';
+
+// Move content by path. New parent path, keeps same name.
+const content2 = move({
     source: '/my-site/my-content-name',
     target: '/my-site/folder/'
 });
 
-log.info('New path: ' + content2._path); // '/my-site/folder/my-content-name'</code></pre>
+log.info('New path: %s', content2._path); // '/my-site/folder/my-content-name'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Move content by id to new path. New parent path, keeps same name.
-const content3 = contentLib.move({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {move} from '/lib/xp/content';
+
+// Move content by id to new path. New parent path, keeps same name.
+const content3 = move({
     source: '8d933461-ede7-4dd5-80da-cb7de0cd7bba',
     target: '/my-site/folder/'
 });
 
-log.info('New path: ' + content3._path); // '/my-site/folder/my-content-name'</code></pre>
+log.info('New path: %s', content3._path); // '/my-site/folder/my-content-name'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Move and rename content.
-const content4 = contentLib.move({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {move} from '/lib/xp/content';
+
+// Move and rename content.
+const content4 = move({
     source: '/my-site/my-content-name',
     target: '/my-site/folder/new-name'
 });
 
-log.info('New path: ' + content4._path); // '/my-site/folder/new-name'</code></pre>
+log.info('New path: %s', content4._path); // '/my-site/folder/new-name'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Handle error if target already exists.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {move} from '/lib/xp/content';
+
+// Handle error if target already exists.
 try {
-    const content5 = contentLib.move({
+    const content5 = move({
         source: '/my-site/my-content-name',
         target: '/my-site/folder/existing-content'
     });
@@ -2633,7 +2675,7 @@ try {
     if (e.code == 'contentAlreadyExists') {
         log.error('There is already a content in the target specified');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }</code></pre>
 </div>
@@ -2642,7 +2684,7 @@ try {
 <div class="sect2">
 <h3 id="publish"><a class="link" href="#publish">publish</a></h3>
 <div class="paragraph">
-<p>This function publishes content to the master branch</p>
+<p>Publishes content to the master branch</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2678,30 +2720,12 @@ try {
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sourceBranch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>Not in use from</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch where the content to be published is stored.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">targetBranch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>Not in use since</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master</p>
-</div></div></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">schedule</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#scheduleparams">ScheduleParams</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Schedule the publish</p>
+<p>Schedule publishing</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2720,6 +2744,24 @@ try {
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Whether all related content should be included when publishing content</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sourceBranch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>Not in use from</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch where the content to be published is stored.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">targetBranch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>Not in use since</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2747,7 +2789,7 @@ try {
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time from which the content is considered published. Defaults to the time of the publish</p>
+<p>Time from which the content is considered published. Defaults to the time of publishing</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2764,15 +2806,17 @@ try {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Status of the publish operation in JSON</p>
+<p><strong>object</strong> : Status of the publish operation as JSON</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Publish content by path or key
-const result = contentLib.publish({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {publish} from '/lib/xp/content';
+
+// Publish content by path or key
+const result = publish({
     keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd'],
     sourceBranch: 'draft',
     targetBranch: 'master',
@@ -2784,9 +2828,9 @@ const result = contentLib.publish({
 });
 
 if (result) {
-    log.info('Pushed ' + result.pushedContents.length + " content.");
-    log.info('Deleted ' + result.deletedContents.length + " content.");
-    log.info('Content that failed operation: ' + result.failedContents.length);
+    log.info('Pushed %s content.', result.pushedContents.length);
+    log.info('Deleted %s content.1, result.deletedContents.length);
+    log.info('Content that failed operation: %s', result.failedContents.length);
 } else {
     log.info('Operation failed.');
 }</code></pre>
@@ -2794,17 +2838,17 @@ if (result) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Content published.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Content published.
 const expected = {
-    "pushedContents": [
+    pushedContents: [
         "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
         "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
         "e1f57280-d672-4cd8-b674-98e26e5b69ae"
     ],
-    "deletedContents": [ // Removed from 7.12.0
+    deletedContents: [ // Removed from 7.12.0
         "45d67001-7f2b-4093-99ae-639be9fdd1f6"
     ],
-    "failedContents": [
+    failedContents: [
         "79e21db0-5b43-45ce-b58c-6e1c420b22bd"
     ]
 };</code></pre>
@@ -2815,7 +2859,7 @@ const expected = {
 <div class="sect2">
 <h3 id="query"><a class="link" href="#query">query</a></h3>
 <div class="paragraph">
-<p>This command queries content</p>
+<p>Retrieves content using a query</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2921,8 +2965,10 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Query content using aggregations.
-const result = contentLib.query({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {query} from '/lib/xp/content';
+
+// Query content using aggregations.
+const result = query({
     start: 0,
     count: 2,
     sort: "modifiedTime DESC, geoDistance('data.location', '59.91,10.75', 'km')",
@@ -3018,135 +3064,134 @@ const result = contentLib.query({
     }
 });
 
-log.info('Found ' + result.total + ' number of contents');
+log.info('Found %s number of contents', result.total);
 
-for (let i = 0; i &lt; result.hits.length; i++) {
-    const content = result.hits[i];
-    log.info('Content ' + content._name + ' found');
-}</code></pre>
+result.hits.forEach((content) =&gt; {
+  log.info('Content %s found', content._name);
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Result set returned.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Result set returned.
 const expected = {
-    "total": 20,
-    "count": 2,
-    "hits": [
+    total: 20,
+    count: 2,
+    hits: [
         {
-            "_id": "id1",
-            "_name": "name1",
-            "_path": "/a/b/name1",
-            "_sort": ["1970-01-01T00:00:00Z", 9279.647306690395],
-            "_score": null,
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 1",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id1",
+            _name: "name1",
+            _path: "/a/b/name1",
+            _sort: ["1970-01-01T00:00:00Z", 9279.647306690395],
+            _score: null,
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 1",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         },
         {
-            "_id": "id2",
-            "_name": "name2",
-            "_path": "/a/b/name2",
-            "_sort": [ "1970-01-01T00:00:00Z", 15964.050071707446],
-            "_score": null,
-            "creator": "user:system:admin",
-            "modifier": "user:system:admin",
-            "createdTime": "1970-01-01T00:00:00Z",
-            "modifiedTime": "1970-01-01T00:00:00Z",
-            "type": "base:unstructured",
-            "displayName": "My Content 2",
-            "hasChildren": false,
-            "valid": false,
-            "data": {},
-            "x": {},
-            "page": {},
-            "attachments": {},
-            "publish": {}
+            _id: "id2",
+            _name: "name2",
+            _path: "/a/b/name2",
+            _sort: [ "1970-01-01T00:00:00Z", 15964.050071707446],
+            _score: null,
+            creator: "user:system:admin",
+            modifier: "user:system:admin",
+            createdTime: "1970-01-01T00:00:00Z",
+            modifiedTime: "1970-01-01T00:00:00Z",
+            type: "base:unstructured",
+            displayName: "My Content 2",
+            hasChildren: false,
+            valid: false,
+            data: {},
+            x: {},
+            page: {},
+            attachments: {},
+            publish: {}
         }
     ],
-    "aggregations": {
-        "genders": {
-            "buckets": [
+    aggregations: {
+        genders: {
+            buckets: [
                 {
-                    "key": "male",
-                    "docCount": 10
+                    key: "male",
+                    docCount: 10
                 },
                 {
-                    "key": "female",
-                    "docCount": 12
+                    key: "female",
+                    docCount: 12
                 }
             ]
         },
-        "by_month": {
-            "buckets": [
+        by_month: {
+            buckets: [
                 {
-                    "key": "2014-01",
-                    "docCount": 8
+                    key: "2014-01",
+                    docCount: 8
                 },
                 {
-                    "key": "2014-02",
-                    "docCount": 10
+                    key: "2014-02",
+                    docCount: 10
                 },
                 {
-                    "key": "2014-03",
-                    "docCount": 12
+                    key: "2014-03",
+                    docCount: 12
                 }
             ]
         },
-        "price_ranges": {
-            "buckets": [
+        price_ranges: {
+            buckets: [
                 {
-                    "key": "a",
-                    "docCount": 2,
-                    "to": 50
+                    key: "a",
+                    docCount: 2,
+                    to: 50
                 },
                 {
-                    "key": "b",
-                    "docCount": 4,
-                    "from": 50,
-                    "to": 100
+                    key: "b",
+                    docCount: 4,
+                    from: 50,
+                    to: 100
                 },
                 {
-                    "key": "c",
-                    "docCount": 4,
-                    "from": 100
+                    key: "c",
+                    docCount: 4,
+                    from: 100
                 }
             ]
         },
-        "my_date_range": {
-            "buckets": [
+        my_date_range: {
+            buckets: [
                 {
-                    "key": "date range bucket key",
-                    "docCount": 2,
-                    "from": "2014-09-01T00:00:00Z"
+                    key: "date range bucket key",
+                    docCount: 2,
+                    from: "2014-09-01T00:00:00Z"
                 },
                 {
-                    "docCount": 5,
-                    "from": "2014-10-01T00:00:00Z",
-                    "to": "2014-09-01T00:00:00Z"
+                    docCount: 5,
+                    from: "2014-10-01T00:00:00Z",
+                    to: "2014-09-01T00:00:00Z"
                 },
                 {
-                    "docCount": 7,
-                    "to": "2014-11-01T00:00:00Z"
+                    docCount: 7,
+                    to: "2014-11-01T00:00:00Z"
                 }
             ]
         },
-        "item_count": {
-            "count": 5,
-            "min": 1,
-            "max": 5,
-            "avg": 3,
-            "sum": 15
+        item_count: {
+            count: 5,
+            min: 1,
+            max: 5,
+            avg: 3,
+            sum: 15
         }
     }
 };</code></pre>
@@ -3199,14 +3244,18 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Removes an attachment, by content path.
-contentLib.removeAttachment({key: '/mySite/mycontent', name: 'document'});</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {removeAttachment} from '/lib/xp/content';
+
+// Removes an attachment, by content path.
+removeAttachment({key: '/mySite/mycontent', name: 'document'});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Removes multiple attachments, by content id.
-contentLib.removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document', 'image']});</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {removeAttachment} from '/lib/xp/content';
+
+// Removes multiple attachments, by content id.
+removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document', 'image']});</code></pre>
 </div>
 </div>
 </div>
@@ -3269,14 +3318,18 @@ Supported values are: <code>CONTENT</code> (resets any customized content data),
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Resets all custom changes made to inherited item '/mySite/mycontent' in the layer 'layer-no'
-contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['CONTENT', 'PARENT', 'NAME', 'SORT']});</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {resetInheritance} from '/lib/xp/content';
+
+// Resets all custom changes made to inherited item '/mySite/mycontent' in the layer 'layer-no'
+resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['CONTENT', 'PARENT', 'NAME', 'SORT']});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Resets custom sorting of inherited item '/mySite/mycontent' in the layer 'layer-no', but preserves any other changes
-contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['SORT']});</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {resetInheritance} from '/lib/xp/content';
+
+// Resets custom sorting of inherited item '/mySite/mycontent' in the layer 'layer-no', but preserves any other changes
+resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['SORT']});</code></pre>
 </div>
 </div>
 </div>
@@ -3286,7 +3339,7 @@ contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', 
 <p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>Restore a content from the archive</p>
+<p>Restores a content from the archive</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -3335,27 +3388,29 @@ contentLib.resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Restore content by path.
-const result1 = contentLib.restore({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {restore} from '/lib/xp/content';
+
+// Restore content by path.
+const result1 = restore({
     content: '/path/to/mycontent',
 });
 
-log.info('Restored content ids: ' + result1.join(','));
+log.info('Restored content ids: %s', result1.join(','));
 
 // Restore content by id.
-const result2 = contentLib.restore({
+const result2 = restore({
     content: 'my-content-id'
 });
 
-log.info('Restored content ids: ' + result2.join(','));
+log.info('Restored content ids: %s', result2.join(','));
 
 // Restore content by id to custom path.
-const result3 = contentLib.restore({
+const result3 = restore({
     content: 'my-content-id',
     path: '/custom-parent'
 });
 
-log.info('Restored content ids: ' + result3.join(','));</code></pre>
+log.info('Restored content ids: %s', result3.join(','));</code></pre>
 </div>
 </div>
 </div>
@@ -3399,7 +3454,7 @@ log.info('Restored content ids: ' + result3.join(','));</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set to true if the content must inherit permissions. Default to false</p>
+<p>Set to <code>true</code> if the content must inherit permissions. Default to false</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3463,15 +3518,17 @@ log.info('Restored content ids: ' + result3.join(','));</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if successful, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if successful, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Set permissions for content by path.
-const flag = contentLib.setPermissions({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {setPermissions} from '/lib/xp/content';
+
+// Set permissions for content by path.
+const flag = setPermissions({
     key: '/features/js-libraries/mycontent',
     inheritPermissions: false,
     overwriteChildPermissions: true,
@@ -3494,7 +3551,7 @@ if (flag) {
 <div class="sect2">
 <h3 id="unpublish"><a class="link" href="#unpublish">unpublish</a></h3>
 <div class="paragraph">
-<p>This function unpublishes content that had been published to the master branch</p>
+<p>Unpublishes content that had been published to the master branch</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -3536,17 +3593,19 @@ if (flag) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Unpublish content by path or key
-const result = contentLib.unpublish({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {unpublish} from '/lib/xp/content';
+
+// Unpublish content by path or key
+const result = unpublish({
     keys: ['/mysite/somepage', '79e21db0-5b43-45ce-b58c-6e1c420b22bd']
 });
 
-log.info('Unpublished content ids: ' + result.join(','));</code></pre>
+log.info('Unpublished content ids: %s', result.join(','));</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Content unpublished.
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Content unpublished.
 const expected = [
     "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
     "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
@@ -3717,7 +3776,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

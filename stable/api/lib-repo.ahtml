@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Repo Library</title>
+<title>Repo API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Repo Library</h1>
+<h1>Repo API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Node repository related functions.</p>
+<p>Functions related to management of a node repository.</p>
 </div>
 </div>
 </div>
@@ -490,15 +490,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var repoLib  = require('/lib/xp/repo');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import repoLib from '/lib/xp/repo';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -523,23 +523,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.created</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository is created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository is created</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.updated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository is updated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository is updated</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.deleted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository is deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository is deleted</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.restoreInitialized</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository restore begins</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository restore begins</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.restored</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository restore is completed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository restore is completed</p></td>
 </tr>
 </tbody>
 </table>
@@ -593,23 +593,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Creates a repository with default configuration
-var result1 = repoLib.create({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {create} from '/lib/xp/repo';
+
+// Creates a repository with default configuration
+const result1 = create({
     id: 'test-repo'
 });
 
-log.info('Repository created with id ' + result1.id);</code></pre>
+log.info('Repository created with id %s', result1.id);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Creates a repository with specific settings
-var result2 = repoLib.create({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {create} from '/lib/xp/repo';
+
+// Creates a repository with specific settings
+const result2 = create({
     id: 'test-repo2',
     rootPermissions: [
         {
-            "principal": "role:admin",
-            "allow": [
+            principal: "role:admin",
+            allow: [
                 "READ",
                 "CREATE",
                 "MODIFY",
@@ -618,21 +622,21 @@ var result2 = repoLib.create({
                 "READ_PERMISSIONS",
                 "WRITE_PERMISSIONS"
             ],
-            "deny": []
+            deny: []
         }
     ],
     rootChildOrder: "_ts DESC"
 });
 
-log.info('Repository created with id ' + result2.id);</code></pre>
+log.info('Repository created with id %s', result2.id);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// First repository created.
-var expected1 = {
-    "id": "test-repo",
-    "branches": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// First repository created.
+const expected1 = {
+    id: "test-repo",
+    branches: [
         "master"
     ],
     settings: {}
@@ -682,18 +686,20 @@ var expected1 = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Creates a branch
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {createBranch} from '/lib/xp/repo';
+
+// Creates a branch
 try {
-    var result = repoLib.createBranch({
+    const result = createBranch({
         branchId: 'test-branch',
         repoId: 'my-repo'
     });
-    log.info('Branch [' + result.id + '] created');
+    log.info('Branch [%s] created', result.id);
 } catch (e) {
     if (e.code == 'branchAlreadyExists') {
         log.error('Branch [features-branch] already exist');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }</code></pre>
 </div>
@@ -734,15 +740,17 @@ try {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : true if deleted, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if deleted, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Deletes a repository
-var result = repoLib.delete('test-repo');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteRepo} from '/lib/xp/repo';
+
+// Deletes a repository
+const result = deleteRepo('test-repo');
 
 if (result) {
     log.info('Repository deleted');
@@ -794,18 +802,20 @@ if (result) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Deletes a branch
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteBranch} from '/lib/xp/repo';
+
+// Deletes a branch
 try {
-    var result = repoLib.deleteBranch({
+    const result = deleteBranch({
         branchId: 'test-branch',
         repoId: 'my-repo'
     });
-    log.info('Branch [' + result.id + '] deleted');
+    log.info('Branch [%s] deleted', result.id);
 } catch (e) {
     if (e.code == 'branchNotFound') {
         log.error('Branch [test-branch] does not exist');
     } else {
-        log.error('Unexpected error: ' + e.message);
+        log.error('Unexpected error: %s', e.message);
     }
 }</code></pre>
 </div>
@@ -853,8 +863,10 @@ try {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Retrieves a repository
-var result = repoLib.get('test-repo');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {get as getRepo} from '/lib/xp/repo';
+
+// Retrieves a repository
+const result = getRepo('test-repo');
 
 if (result) {
     log.info('Repository found');
@@ -865,10 +877,10 @@ if (result) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Repository retrieved.
-var expected = {
-    "id": "test-repo",
-    "branches": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Repository retrieved.
+const expected = {
+    id: "test-repo",
+    branches: [
         "master"
     ],
     settings: {}
@@ -892,23 +904,25 @@ var expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Retrieves the list of repositories
-var result = repoLib.list();
-log.info(result.length + ' repositories found');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {list} from '/lib/xp/repo';
+
+// Retrieves the list of repositories
+const result = list();
+log.info('%s repositories found', result.length);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Repositories retrieved.
-var expected = [{
-    "id": "test-repo",
-    "branches": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Repositories retrieved.
+const expected = [{
+    id: "test-repo",
+    branches: [
         "master"
     ],
     settings: {}
 }, {
-    "id": "another-repo",
-    "branches": [
+    id: "another-repo",
+    branches: [
         "master"
     ],
     settings: {}
@@ -919,7 +933,7 @@ var expected = [{
 <div class="sect2">
 <h3 id="refresh"><a class="link" href="#refresh">refresh</a></h3>
 <div class="paragraph">
-<p>Refresh the data for the given index-type in the current repository</p>
+<p>Refreshes indices in the current repository</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -955,20 +969,22 @@ var expected = [{
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Refresh all for default repository
-repoLib.refresh();</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {refresh} from '/lib/xp/repo';
+
+// Refresh all for default repository
+refresh();</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Refresh storage for default repository
-repoLib.refresh({mode: 'storage'});</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Refresh storage for default repository
+refresh({mode: 'storage'});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Refresh search for 'system-repo' repository
-repoLib.refresh({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Refresh search for 'system-repo' repository
+refresh({
     mode: 'search',
     repo: 'system-repo'
 });</code></pre>
@@ -983,7 +999,7 @@ repoLib.refresh({
 <div class="sect2">
 <h3 id="createrepoparams"><a class="link" href="#createrepoparams">CreateRepoParams</a></h3>
 <div class="paragraph">
-<p>Object to pass to a create repo function.</p>
+<p>Object to pass to the <code>create</code> function.</p>
 </div>
 <div class="paragraph lead">
 <p>Fields</p>
@@ -1034,7 +1050,7 @@ repoLib.refresh({
 <div class="sect2">
 <h3 id="reposettings"><a class="link" href="#reposettings">RepoSettings</a></h3>
 <div class="paragraph">
-<p>Repository settings json to optionally pass to a create function</p>
+<p>Repository settings to optionally pass to the <code>create</code> function</p>
 </div>
 <div class="paragraph lead">
 <p>Fields</p>
@@ -1296,7 +1312,7 @@ repoLib.refresh({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

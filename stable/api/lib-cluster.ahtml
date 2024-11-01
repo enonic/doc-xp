@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Cluster Library</title>
+<title>Cluster API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Cluster Library</h1>
+<h1>Cluster API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -454,7 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains cluster related functions.</p>
+<p>This API provides cluster related functions.</p>
 </div>
 </div>
 </div>
@@ -472,15 +472,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const clusterLib = require('/lib/xp/cluster');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import clusterLib from '/lib/xp/cluster';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -490,7 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="ismaster"><a class="link" href="#ismaster">isMaster</a></h3>
 <div class="paragraph">
-<p>Tests whether the current node is the master node in the cluster. Cluster with multiple master nodes will only return true on the elected node.</p>
+<p>Tests whether the current node is the master node in a cluster. A cluster with multiple master nodes will only return true on the elected node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -502,7 +502,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : true if the current node is master; false otherwise.</p>
+<p><strong>boolean</strong> : <code>true</code> if the current node is master; <code>false</code> otherwise.</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -510,7 +510,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Initialize data only on the master node</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">if (clusterLib.isMaster()) {
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {isMaster} from '/lib/xp/cluster';
+if (isMaster()) {
     initializeRepo();
 }</code></pre>
 </div>
@@ -518,12 +519,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Run task only on master</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">let tasklib = require('/lib/xp/task');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {isMaster} from '/lib/xp/cluster';
+import {submit} from '/lib/xp/task';
 
-if (clusterLib.isMaster() {
-    let taskId = taskLib.submit({
+if (isMaster() {
+    const taskId = submit({
         description: 'Master only task',
-        task: function () {
+        task: () =&gt; {
           longRunningTask();
         }
     });
@@ -533,14 +535,15 @@ if (clusterLib.isMaster() {
 <div class="listingblock">
 <div class="title">Catch event and execute something only on master</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">let eventLib = require('/lib/xp/event');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {isMaster} from '/lib/xp/cluster';
+import {listener} from '/lib/xp/event';
 
-eventLib.listener({
+listener({
     type: 'node.pushed',
     localOnly: false,
-    callback: function (event) {
-        if(clusterLib.isMaster()) {
-            log.info(JSON.stringify(event));
+    callback: (event) =&gt; {
+        if(isMaster()) {
+            log.info('event: %s', JSON.stringify(event));
         }
     }
 });</code></pre>
@@ -552,7 +555,7 @@ eventLib.listener({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

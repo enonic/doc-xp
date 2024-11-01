@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Content Project Library</title>
+<title>Content Project API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Content Project Library</h1>
+<h1>Content Project API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -461,20 +461,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This library has been introduced in XP 7.3.0.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.3.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.3.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>This library contains functions for management of Content Projects.</p>
+<p>This API provides functions for management of Content Projects.</p>
 </div>
 </div>
 </div>
@@ -492,12 +483,15 @@ This library has been introduced in XP 7.3.0.
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a <code>require</code> statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const projectLib = require('/lib/xp/project');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import projectLib from '/lib/xp/project';</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -507,8 +501,19 @@ This library has been introduced in XP 7.3.0.
 <div class="sect2">
 <h3 id="addpermissions"><a class="link" href="#addpermissions">addPermissions</a></h3>
 <div class="paragraph">
-<p>Adds permissions to an existing Content Project.
-To modify permissions, user must have <code>Owner</code> permissions for the project, or either <code>system.admin</code> or <code>cms.admin</code> role.</p>
+<p>Adds permissions to an existing Content Project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To modify permissions, user must have <code>Owner</code> permissions for the project, or either <code>system.admin</code> or <code>cms.admin</code> role.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -567,9 +572,9 @@ You can read about project permissions in the dedicated <a href="https://develop
 <div class="listingblock">
 <div class="title">Add permissions to a project with id 'my-project'</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {addPermissions} from '/lib/xp/project';
 
-var currentPermissions = projectLib.addPermissions({
+const currentPermissions = addPermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user1', 'user:mystore:user2'],
@@ -581,14 +586,14 @@ var currentPermissions = projectLib.addPermissions({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-  'id': 'my-project',
-  'permissions': {
-        'owner': [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  id: 'my-project',
+  permissions: {
+        owner: [
             'user:mystore:user1',
             'user:mystore:user2'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user3'
         ]
     }
@@ -599,7 +604,19 @@ var currentPermissions = projectLib.addPermissions({
 <div class="sect2">
 <h3 id="create"><a class="link" href="#create">create</a></h3>
 <div class="paragraph">
-<p>Creates a new Content Project. Only <code>system.admin</code> and <code>cms.admin</code> roles have permissions to create new projects.</p>
+<p>Creates a new Content Project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only <code>system.admin</code> and <code>cms.admin</code> roles have permissions to create new projects.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -625,7 +642,7 @@ var currentPermissions = projectLib.addPermissions({
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Unique project id (alpha-numeric characters and hyphens allowed).</p>
+<p>Unique project id (alphanumeric characters and hyphens allowed).</p>
 </div></div></td>
 </tr>
 <tr>
@@ -765,10 +782,10 @@ var currentPermissions = projectLib.addPermissions({
 <div class="listingblock">
 <div class="title">Create a Content Project with minimal properties</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {create} from '/lib/xp/project';
 
 try {
-    var project = projectLib.create({
+    const project = create({
         id: 'my-project',
         displayName: 'My Content Project',
         readAccess: {
@@ -776,19 +793,19 @@ try {
         }
     });
 } catch (e) {
-    log.error('Failed to create a project: ' + e);
+    log.error('Failed to create a project: %s', e.message);
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-  'id': 'my-project',
-  'displayName': 'My Content Project',
-  'permissions': [],
-  'readAccess': {
-    'public': true
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  id: 'my-project',
+  displayName: 'My Content Project',
+  permissions: [],
+  readAccess: {
+    public: true
   }
 }</code></pre>
 </div>
@@ -796,9 +813,9 @@ try {
 <div class="listingblock">
 <div class="title">Create a Content Project with extended properties</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {create} from '/lib/xp/project';
 
-var project = projectLib.create({
+const project = create({
     id: 'my-project',
     displayName: 'My Content Project',
     description: 'Some exciting content is stored here',
@@ -831,45 +848,45 @@ var project = projectLib.create({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-  'id': 'my-project',
-  'displayName': 'My Content Project',
-  'description': 'Some exciting content is stored here',
-  'language': 'no',
-  'siteConfig': [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  id: 'my-project',
+  displayName: 'My Content Project',
+  description: 'Some exciting content is stored here',
+  language: 'no',
+  siteConfig: [
         {
-            'applicationKey': 'app1',
-            'config': {
-                'a': 'b'
+            applicationKey: 'app1',
+            config: {
+                a: 'b'
             }
         },
         {
-            'applicationKey': 'app2',
-            'config': {
-                'a': true,
-                'b': 3.4
+            applicationKey: 'app2',
+            config: {
+                a: true,
+                b: 3.4
             }
         }
     ],
-  'permissions': {
-    'owner': [
+  permissions: {
+    owner: [
         'user:mystore:user1'
     ],
-    'editor': [
+    editor: [
         'user:mystore:user2'
     ],
-    'author': [
+    author: [
         'user:mystore:user3'
     ],
-    'contributor': [
+    contributor: [
         'user:mystore:user4'
     ],
-    'viewer': [
+    viewer: [
         'user:mystore:user5'
     ]
   },
-  'readAccess': {
-    'public': false
+  readAccess: {
+    public: false
   }
 }</code></pre>
 </div>
@@ -878,8 +895,19 @@ var project = projectLib.create({
 <div class="sect2">
 <h3 id="delete"><a class="link" href="#delete">delete</a></h3>
 <div class="paragraph">
-<p>Deletes an existing Content Project and the project repository along with all the data inside.
-To delete a project, user must have either <code>system.admin</code> or <code>cms.admin</code> role.</p>
+<p>Deletes an existing Content Project and the project repository along with all the data inside.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To delete a project, user must have either <code>system.admin</code> or <code>cms.admin</code> role.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -919,9 +947,9 @@ To delete a project, user must have either <code>system.admin</code> or <code>cm
 <div class="listingblock">
 <div class="title">Delete an existing content project</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteProject} from '/lib/xp/project';
 
-var result = projectLib.delete({
+const result = deleteProject({
     id: 'my-project'
 });</code></pre>
 </div>
@@ -929,15 +957,26 @@ var result = projectLib.delete({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">true</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = true;</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="get"><a class="link" href="#get">get</a></h3>
 <div class="paragraph">
-<p>Returns an existing Content Project.
-To get a project, user must have permissions for this project, or either <code>system.admin</code> or <code>cms.admin</code> role.</p>
+<p>Returns an existing Content Project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To access a project, user must have sufficient permissions for this project, or either <code>system.admin</code> or <code>cms.admin</code> role.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -977,9 +1016,9 @@ To get a project, user must have permissions for this project, or either <code>s
 <div class="listingblock">
 <div class="title">Fetch an existing content project</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {get as getProject} from '/lib/xp/project';
 
-var project = projectLib.get({
+const project = getProject({
     id: 'my-project'
 });</code></pre>
 </div>
@@ -987,19 +1026,19 @@ var project = projectLib.get({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-    'id': 'my-project',
-    'displayName': 'My Content Project',
-    'permissions': {
-        'owner': [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    id: 'my-project',
+    displayName: 'My Content Project',
+    permissions: {
+        owner: [
             'user:mystore:user1'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user2'
         ]
     },
-    'readAccess': {
-        'public': true
+    readAccess: {
+        public: true
     }
 }</code></pre>
 </div>
@@ -1008,8 +1047,19 @@ var project = projectLib.get({
 <div class="sect2">
 <h3 id="list"><a class="link" href="#list">list</a></h3>
 <div class="paragraph">
-<p>Returns all Content Projects that user in the current context has permissions for.
-Users with <code>system.admin</code> or <code>cms.admin</code> roles will get the list of all projects.</p>
+<p>Returns all Content Projects that user in the current context has permissions for.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Users with <code>system.admin</code> or <code>cms.admin</code> roles will get the list of all projects.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -1023,25 +1073,25 @@ Users with <code>system.admin</code> or <code>cms.admin</code> roles will get th
 <div class="listingblock">
 <div class="title">Fetch the list of existing content projects</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {list} from '/lib/xp/project';
 
-var projects = projectLib.list();</code></pre>
+const projects = list();</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">[{
-    'id': 'default',
-    'displayName': 'Default',
-    'description': 'Default project'
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = [{
+    id: 'default',
+    displayName: 'Default',
+    description: 'Default project'
 },
 {
-    'id': 'my-project',
-    'displayName': 'My Content Project',
-    'permissions': [],
-    'readAccess': {
-        'public': true
+    id: 'my-project',
+    displayName: 'My Content Project',
+    permissions: [],
+    readAccess: {
+        public: true
     }
 }]</code></pre>
 </div>
@@ -1050,8 +1100,19 @@ var projects = projectLib.list();</code></pre>
 <div class="sect2">
 <h3 id="modify"><a class="link" href="#modify">modify</a></h3>
 <div class="paragraph">
-<p>Modifies an existing Content Project.
-To modify a project, user must have <code>Owner</code> permissions for this project, or either <code>system.admin</code> or <code>cms.admin</code> role.</p>
+<p>Modifies an existing Content Project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To modify a project, user must have <code>Owner</code> permissions for this project, or either <code>system.admin</code> or <code>cms.admin</code> role.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1150,9 +1211,9 @@ To modify a project, user must have <code>Owner</code> permissions for this proj
 <div class="listingblock">
 <div class="title">Modify an existing content project</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {modify} from '/lib/xp/project';
 
-var project = projectLib.modify({
+const project = modify({
     id: 'my-project',
     displayName: 'New project name',
     description: 'New project description',
@@ -1175,29 +1236,29 @@ var project = projectLib.modify({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-    'id': 'my-project',
-    'displayName': 'New project name',
-    'description': 'New project description',
-    'language': 'en',
-    'siteConfig': [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    id: 'my-project',
+    displayName: 'New project name',
+    description: 'New project description',
+    language: 'en',
+    siteConfig: [
         {
-            'applicationKey': 'app1',
-            'config': {
-                'a': 'b'
+            applicationKey: 'app1',
+            config: {
+                a: 'b'
             }
         },
         {
-            'applicationKey': 'app2',
-            'config': {
-                'a': true,
-                'b': 3.4
+            applicationKey: 'app2',
+            config: {
+                a: true,
+                b: 3.4
             }
         }
     ],
-    'permissions': {},
-    'readAccess': {
-        'public': true
+    permissions: {},
+    readAccess: {
+        public: true
     }
 }</code></pre>
 </div>
@@ -1206,9 +1267,19 @@ var project = projectLib.modify({
 <div class="sect2">
 <h3 id="modifyreadaccess"><a class="link" href="#modifyreadaccess">modifyReadAccess</a></h3>
 <div class="paragraph">
-<p>Toggles public/private READ access for an existing Content Project. This will modify permissions on ALL the content items inside the project
-repository by adding or removing READ access for <code>system.everyone</code>.
-To modify READ access, user must have <code>Owner</code> permissions for the project, or either <code>system.admin</code> or <code>cms.admin</code> role.</p>
+<p>Toggles public/private READ access for an existing Content Project. This will modify permissions on ALL the content items inside the project repository by adding or removing READ access for <code>system.everyone</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To modify READ access, user must have <code>Owner</code> permissions for the project, or either <code>system.admin</code> or <code>cms.admin</code> role.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1274,9 +1345,9 @@ To modify READ access, user must have <code>Owner</code> permissions for the pro
 <div class="listingblock">
 <div class="title">Set content project as not available for public READ access</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {addPermissions} from '/lib/xp/project';
 
-var currentPermissions = projectLib.addPermissions({
+const currentPermissions = addPermissions({
     id: 'my-project',
     readAccess: {
         public: false
@@ -1287,10 +1358,10 @@ var currentPermissions = projectLib.addPermissions({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-    'id': 'my-project',
-    'readAccess': {
-        'public': false
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    id: 'my-project',
+    readAccess: {
+        public: false
     }
 }</code></pre>
 </div>
@@ -1299,8 +1370,19 @@ var currentPermissions = projectLib.addPermissions({
 <div class="sect2">
 <h3 id="removepermissions"><a class="link" href="#removepermissions">removePermissions</a></h3>
 <div class="paragraph">
-<p>Removes permissions from an existing Content Project.
-To remove permissions, user must have <code>Owner</code> permissions for the project, or either <code>system.admin</code> or <code>cms.admin</code> role.</p>
+<p>Removes permissions from an existing Content Project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To remove permissions, user must have <code>Owner</code> permissions for the project, or either <code>system.admin</code> or <code>cms.admin</code> role.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1368,9 +1450,9 @@ To remove permissions, user must have <code>Owner</code> permissions for the pro
 <div class="listingblock">
 <div class="title">Adds and then removes permissions from an existing content project</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {addPermissions,removePermissions} from '/lib/xp/project';
 
-projectLib.addPermissions({
+addPermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user1', 'user:mystore:user2'],
@@ -1378,7 +1460,7 @@ projectLib.addPermissions({
     }
 });
 
-var currentPermissions = projectLib.removePermissions({
+const currentPermissions = removePermissions({
     id: 'my-project',
     permissions: {
         owner: ['user:mystore:user2']
@@ -1389,13 +1471,13 @@ var currentPermissions = projectLib.removePermissions({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-    'id': 'my-project',
-    'permissions': {
-        'owner': [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    id: 'my-project',
+    permissions: {
+        owner: [
             'user:mystore:user1'
         ],
-        'editor': [
+        editor: [
             'user:mystore:user3'
         ]
     }
@@ -1449,9 +1531,9 @@ var currentPermissions = projectLib.removePermissions({
 <div class="listingblock">
 <div class="title">Fetch available applications.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var projectLib = require('/lib/xp/project');
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getAvailableApplications} from '/lib/xp/project';
 
-var project = projectLib.getAvailableApplications({
+const project = getAvailableApplications({
     id: 'my-project'
 });</code></pre>
 </div>
@@ -1459,7 +1541,7 @@ var project = projectLib.getAvailableApplications({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">['app1', 'app2']</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = ['app1', 'app2']</code></pre>
 </div>
 </div>
 </div>
@@ -1468,7 +1550,7 @@ var project = projectLib.getAvailableApplications({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Mail Library</title>
+<title>Mail API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Mail Library</h1>
+<h1>Mail API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -460,7 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains functions that are used for sending emails.</p>
+<p>This API provides functions that are used for sending emails.</p>
 </div>
 </div>
 </div>
@@ -478,18 +478,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const mailLib = require('/lib/xp/mail');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import mailLib from '/lib/xp/mail';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
-<div class="exampleblock">
-<div class="content">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -497,12 +495,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You also need to configure your smtp-server before you can send out email. For details, see <a href="../deployment/config.ahtml#mail">the configuration page</a>
+<div class="paragraph">
+<p>You also need to configure your smtp-server before you can send out email. For details, see <a href="../deployment/config.ahtml#mail">the configuration page</a></p>
+</div>
 </td>
 </tr>
 </table>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -512,11 +510,11 @@ You also need to configure your smtp-server before you can send out email. For d
 <div class="sect2">
 <h3 id="send"><a class="link" href="#send">send</a></h3>
 <div class="paragraph">
-<p>This function sends an email message using the mail server configured.</p>
+<p>Sends an email message using the mail server configured.</p>
 </div>
 <div class="paragraph">
-<p>The address values can be either a simple email address (e.g. ‘<a href="mailto:name@domain.org">name@domain.org</a>’ ) or an address with a display name. In the latter case the
-email will be enclosed with angle brackets (e.g. ‘Some Name &lt;<a href="mailto:name@domain.org">name@domain.org</a>&gt;’ ).</p>
+<p>The address values can be either a simple email address (e.g. <code>name@domain.org</code> ) or an address with a display name. In the latter case the
+email will be enclosed with angle brackets (e.g. <code>Some Name &lt;<a href="mailto:name@domain.org">name@domain.org</a>&gt;</code>).</p>
 </div>
 <div class="paragraph">
 <p>The <code>from</code> parameter supports the <a href="#getDefaultFromEmail">default <em>from</em> email</a> substitution.
@@ -625,7 +623,7 @@ However, an error is thrown if the default <em>from</em> email is not set.</p>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if message was successfully sent, false otherwise.</p>
+<p><strong>boolean</strong> : <code>true</code> if message was successfully sent, <code>false</code> otherwise.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -633,7 +631,9 @@ However, an error is thrown if the default <em>from</em> email is not set.</p>
 <div class="listingblock">
 <div class="title">Send a simple HTML e-mail</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var flag1 = mailLib.send({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {send} from '/lib/xp/mail';
+
+const flag1 = send({
     from: 'me@enonic.com',
     to: 'user@somewhere.org',
     subject: 'HTML email test',
@@ -645,7 +645,9 @@ However, an error is thrown if the default <em>from</em> email is not set.</p>
 <div class="listingblock">
 <div class="title">Send an e-mail with attachments</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var flag2 = mailLib.send({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {send} from '/lib/xp/mail';
+
+const flag2 = send({
     from: 'Sales Department &lt;sales@enonic.com&gt;',
     to: 'user@somewhere.org',
     subject: 'Email Test from Enonic XP',
@@ -697,7 +699,7 @@ However, an error is thrown if the default <em>from</em> email is not set.</p>
     <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.14.1</text>
     <text x="435" y="140" transform="scale(.1)" textLength="290">7.14.1</text>
   </g>
-</svg></span> This function returns the default <em>from</em> email address configured in the <a href="../deployment/config.ahtml#mail">XP mail configuration</a>.</p>
+</svg></span> Returns the default <em>from</em> email address configured in the <a href="../deployment/config.ahtml#mail">XP mail configuration</a>.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -705,7 +707,9 @@ However, an error is thrown if the default <em>from</em> email is not set.</p>
 <div class="listingblock">
 <div class="title">Get a defaultFromEmail</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var defaultFromEmail = mailLib.getDefaultFromEmail();</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getDefaultFromEmail} from '/lib/xp/mail';
+
+const defaultFromEmail = getDefaultFromEmail();</code></pre>
 </div>
 </div>
 </div>
@@ -772,7 +776,7 @@ However, an error is thrown if the default <em>from</em> email is not set.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

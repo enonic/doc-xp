@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Node Library</title>
+<title>Node API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Node Library</h1>
+<h1>Node API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -487,7 +487,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains functions to get, query and manipulate nodes.</p>
+<p>This API provides functions to get, query and manipulate nodes.</p>
 </div>
 </div>
 </div>
@@ -505,15 +505,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const nodeLib = require('/lib/xp/node');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import nodeLib from '/lib/xp/node';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -538,39 +538,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.created</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is created</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.deleted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is deleted</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.pushed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is pushed to a different branch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is pushed to a different branch</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.duplicated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is duplicated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is duplicated</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.updated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is updated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is updated</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.moved</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is moved in the tree structure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is moved in the tree structure</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.renamed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is renamed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is renamed</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.sorted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is sorted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is sorted</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.stateUpdated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node state is updated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node state is updated</p></td>
 </tr>
 </tbody>
 </table>
@@ -623,14 +623,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Example</p>
 </div>
 <div class="listingblock">
-<div class="title">A sample function that will return a RepoConnection:</div>
+<div class="title">Connect to repo 'my-repo', branch 'master'.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var connect = function () {
-    return nodeLib.connect({
-        repoId: testRepoId,
-        branch: 'master'
-    });
-};</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {connect} from '/lib/xp/node';
+
+const connection = connect({
+    repoId: 'my-repo',
+    branch: 'master'
+});</code></pre>
 </div>
 </div>
 </div>
@@ -675,9 +675,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Example</p>
 </div>
 <div class="listingblock">
-<div class="title">Connect to repo 'myRepo', branch 'master'.</div>
+<div class="title">Connect to repos 'myRepo' and 'my-other-repo', both on branch 'master'.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var searchConnection = nodeLib.multiRepoConnect({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {multiRepoConnect} from '/lib/xp/node';
+
+const searchConnection = multiRepoConnect({
     sources: [
         {
             repoId: 'my-repo',
@@ -700,12 +702,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="multirepoconnection"><a class="link" href="#multirepoconnection">MultiRepoConnection</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A MultiRepoConnection makes it possible to search across multiple repositories.  The object has only one method: query.</p>
+<p>A MultiRepoConnection makes it possible to search across multiple repositories.  The object has only one method: <code>query</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="query"><a class="link" href="#query">query</a></h3>
 <div class="paragraph">
-<p>This command queries nodes in a multi-repo connection.</p>
+<p>Queries nodes in a multi-repo connection.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -807,7 +809,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Query multi-repo connection</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = multiRepoConnection.query({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = multiRepoConnection.query({
     start: 0,
     count: 2,
     query: "startTime &gt; instant('2016-10-11T14:38:54.454Z')",
@@ -842,7 +844,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     total: 12902,
     count: 2,
     hits: [
@@ -869,7 +871,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="repoconnection"><a class="link" href="#repoconnection">RepoConnection</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A single repo connections with lots of methods to work on the repo:</p>
+<p>A single-repo connection with various methods for working in a single repo.</p>
 </div>
 <div class="paragraph">
 <p>All the examples below are using a repo connection to execute the functions.
@@ -878,7 +880,9 @@ The repo connection can be created like this:</p>
 <div class="listingblock">
 <div class="title">Connecting to a repo.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var repo = nodeLib.connect({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {connect} from '/lib/xp/node';
+
+const repo = connect({
     repoId: "com.enonic.cms.default",
     branch: "master"
 });</code></pre>
@@ -934,24 +938,24 @@ The repo connection can be created like this:</p>
 <div class="listingblock">
 <div class="title">Committing a node.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result1 = repo.commit({keys: 'nodeId'});</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result1 = repo.commit({keys: 'nodeId'});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
-    "message": "",
-    "committer": "user:system:anonymous",
-    "timestamp": "2019-01-24T15:16:36.260799Z"
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    id: "aa1f76bf-4bb9-41be-b166-03561c1555b2",
+    message: "",
+    committer: "user:system:anonymous",
+    timestamp: "2019-01-24T15:16:36.260799Z"
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Committing nodes.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result2 = repo.commit({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result2 = repo.commit({
     keys: ['nodeId', 'nodeId2'],
     message: 'Commit message'
 });</code></pre>
@@ -960,7 +964,7 @@ The repo connection can be created like this:</p>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
     {
         id: "aa1f76bf-4bb9-41be-b166-03561c1555b2",
         message: "Commit message",
@@ -980,8 +984,8 @@ The repo connection can be created like this:</p>
 <div class="sect2">
 <h3 id="create"><a class="link" href="#create">create</a></h3>
 <div class="paragraph">
-<p>Creating a node.  To create a content where the name is not important and there could be multiple instances under the same parent content,
-skip the name parameter and specify a displayName.</p>
+<p>Creates a node. To create a content where the name is not important and there could be multiple instances under the same parent content,
+skip the <code>name</code> parameter and specify a <code>displayName</code>.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1076,7 +1080,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="listingblock">
 <div class="title">Create a node on a <code>repo</code> connection:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result1 = repo.create({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result1 = repo.create({
     _name: 'nerd',
     displayName: 'Carpenter and IT expert',
     likes: 'Plywood',
@@ -1087,29 +1091,29 @@ skip the name parameter and specify a displayName.</p>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-  "_id": "2f0d5c09-39fe-4746-9754-74491d75a185",
-  "_name": "nerd",
-  "_path": "/nerd",
-  "_childOrder": "_ts DESC",
-  "_indexConfig": {
-    "default": {
-      "decideByType": true,
-      "enabled": true,
-      "nGram": false,
-      "fulltext": false,
-      "includeInAllText": false,
-      "path": false,
-      "indexValueProcessors": [],
-      "languages": []
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+  _id: "2f0d5c09-39fe-4746-9754-74491d75a185",
+  _name: "nerd",
+  _path: "/nerd",
+  _childOrder: "_ts DESC",
+  _indexConfig: {
+    default: {
+      decideByType: true,
+      enabled: true,
+      nGram: false,
+      fulltext: false,
+      includeInAllText: false,
+      path: false,
+      indexValueProcessors: [],
+      languages: []
     },
-    "configs": []
+    configs: []
   },
-  "_inheritsPermissions": false,
-  "_permissions": [
+  _inheritsPermissions: false,
+  _permissions: [
     {
-      "principal": "role:system.admin",
-      "allow": [
+      principal: "role:system.admin",
+      allow: [
         "READ",
         "CREATE",
         "MODIFY",
@@ -1118,23 +1122,23 @@ skip the name parameter and specify a displayName.</p>
         "READ_PERMISSIONS",
         "WRITE_PERMISSIONS"
       ],
-      "deny": []
+      deny: []
     },
     {
-      "principal": "role:system.everyone",
-      "allow": [
+      principal: "role:system.everyone",
+      allow: [
         "READ"
       ],
-      "deny": []
+      deny: []
     }
   ],
-  "_state": "DEFAULT",
-  "_nodeType": "default",
-  "_versionKey": "aa95ae7e-b975-4879-a19c-cce3b1fc3742",
-  "_ts": "2021-05-15T08:46:37.227Z",
-  "displayName": "Carpenter and IT expert",
-  "likes": "Plywood",
-  "numberOfUselessGadgets": 123
+  _state: "DEFAULT",
+  _nodeType: "default",
+  _versionKey: "aa95ae7e-b975-4879-a19c-cce3b1fc3742",
+  _ts: "2021-05-15T08:46:37.227Z",
+  displayName: "Carpenter and IT expert",
+  likes: "Plywood",
+  numberOfUselessGadgets: 123
 }</code></pre>
 </div>
 </div>
@@ -1142,7 +1146,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="delete"><a class="link" href="#delete">delete</a></h3>
 <div class="paragraph">
-<p>Deleting a node or nodes.</p>
+<p>Deletes a node or nodes.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1182,13 +1186,13 @@ skip the name parameter and specify a displayName.</p>
 <div class="listingblock">
 <div class="title">Deleting nodes</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.delete('nodeId', '/node2-path', 'missingNodeId');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.delete('nodeId', '/node2-path', 'missingNodeId');</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">[
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">[
     "7b175b63-b012-4f20-b31d-b8f78420d7f1",
     "69f225a1-e775-4845-89f0-29b808a9a659"
 ]</code></pre>
@@ -1198,7 +1202,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="diff"><a class="link" href="#diff">diff</a></h3>
 <div class="paragraph">
-<p>Resolves the differences for a node between current and given branch.</p>
+<p>Resolves the differences for a node between the branch in the current context and a <code>target</code> branch.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1260,17 +1264,17 @@ skip the name parameter and specify a displayName.</p>
 <div class="listingblock">
 <div class="title">Comparing draft and master branch</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.diff({
-                     key: '/my-name',
-                     target: 'draft',
-                     includeChildren: true
-                 });</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.diff({
+    key: '/my-name',
+    target: 'draft',
+    includeChildren: true
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
     diff: [
         {
             id: "c8121875-a9b7-42e4-acf2-75cb52687ddb", <i class="conum" data-value="1"></i><b>(1)</b>
@@ -1292,7 +1296,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="duplicate"><a class="link" href="#duplicate">duplicate</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> This function duplicates a node.</p>
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> Duplicates a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1386,11 +1390,11 @@ skip the name parameter and specify a displayName.</p>
 <div class="listingblock">
 <div class="title">Duplicate a node</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.duplicate({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.duplicate({
     nodeId: 'nodeId',
     name: 'duplicated-node',
     includeChildren: false,
-    dataProcessor: function (originalData) {
+    dataProcessor: (originalData) =&gt; {
         originalData.data.extraProp = 'extraPropValue';
         return originalData;
     },
@@ -1403,7 +1407,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="exists"><a class="link" href="#exists">exists</a></h3>
 <div class="paragraph">
-<p>Checks if a node exists for the current context.</p>
+<p>Checks if a node exists in the current context.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1435,7 +1439,7 @@ skip the name parameter and specify a displayName.</p>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : true if exists, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if exists, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -1443,7 +1447,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="listingblock">
 <div class="title">Check for existing node by path</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Checking if a node exists by path
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Checking if a node exists by path
 const result = repo.exists('/path/to/mynode');
 
 if (result) {
@@ -1456,7 +1460,7 @@ if (result) {
 <div class="listingblock">
 <div class="title">Check for existing node by id</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Checking if a node exists by id
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Checking if a node exists by id
 const result = repo.exists('77963d9e-b3c8-4a53-85a9-20c375a92742');
 
 if (result) {
@@ -1470,7 +1474,7 @@ if (result) {
 <div class="sect2">
 <h3 id="findchildren"><a class="link" href="#findchildren">findChildren</a></h3>
 <div class="paragraph">
-<p>Fetch the children of a node.</p>
+<p>Fetches children of a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1556,23 +1560,23 @@ if (result) {
 <div class="listingblock">
 <div class="title">Find child nodes under a given parent path</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.findChildren({
-                     parentKey: "/my-name"
-                 });</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.findChildren({
+    parentKey: "/my-name"
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "total": 2,
-    "count": 10,
-    "hits": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    total: 2,
+    count: 10,
+    hits: [
         {
-            "id": "c8121875-a9b7-42e4-acf2-75cb52687ddb"
+            id: "c8121875-a9b7-42e4-acf2-75cb52687ddb"
         },
         {
-            "id": "636a616b-c8e4-480c-afa9-be88a737cf52"
+            id: "636a616b-c8e4-480c-afa9-be88a737cf52"
         }
     ]
 }</code></pre>
@@ -1582,7 +1586,7 @@ if (result) {
 <div class="sect2">
 <h3 id="findversions"><a class="link" href="#findversions">findVersions</a></h3>
 <div class="paragraph">
-<p>Fetch the versions of a node.</p>
+<p>Fetches versions of a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1644,7 +1648,7 @@ if (result) {
 <div class="listingblock">
 <div class="title">Fetch all versions of a content with a given path</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.findVersions({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.findVersions({
     key: '/my-name'
 });</code></pre>
 </div>
@@ -1652,21 +1656,21 @@ if (result) {
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "total": 2,
-    "count": 2,
-    "hits": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    total: 2,
+    count: 2,
+    hits: [
         {
-            "versionId": "72dcd8c1-9d70-444d-ad7a-508d8c1865a0",
-            "nodeId": "ddd1c933-0725-45e8-9a54-a3dd87193f60",
-            "nodePath": "/my-name",
-            "timestamp": "2019-05-13T15:56:17.018Z"
+            versionId: "72dcd8c1-9d70-444d-ad7a-508d8c1865a0",
+            nodeId: "ddd1c933-0725-45e8-9a54-a3dd87193f60",
+            nodePath: "/my-name",
+            timestamp: "2019-05-13T15:56:17.018Z"
         },
         {
-            "versionId": "04c6b8d7-3c56-458f-80c9-c6ee551fc21d",
-            "nodeId": "ddd1c933-0725-45e8-9a54-a3dd87193f60",
-            "nodePath": "/my-name",
-            "timestamp": "2019-05-13T15:56:16.995Z"
+            versionId: "04c6b8d7-3c56-458f-80c9-c6ee551fc21d",
+            nodeId: "ddd1c933-0725-45e8-9a54-a3dd87193f60",
+            nodePath: "/my-name",
+            timestamp: "2019-05-13T15:56:16.995Z"
         }
     ]
 }</code></pre>
@@ -1676,7 +1680,7 @@ if (result) {
 <div class="sect2">
 <h3 id="get"><a class="link" href="#get">get</a></h3>
 <div class="paragraph">
-<p>Fetches specific nodes by path or ID.</p>
+<p>Fetches a specific node or nodes by path or ID.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1755,25 +1759,25 @@ if (result) {
 <div class="listingblock">
 <div class="title">Fetch a single node using id as a string.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var node = repo.get('nodeId');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const node = repo.get('nodeId');</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Fetch several nodes using a sequence of nodeIds.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var nodes = repo.get('nodeId_1', 'nodeId_2');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const nodes = repo.get('nodeId_1', 'nodeId_2');</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Fetch several nodes using an array of nodeIds.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var nodes = repo.get(['nodeId_1', 'nodeId_2']);</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const nodes = repo.get(['nodeId_1', 'nodeId_2']);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Fetch several nodes using mixed parameters.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var nodes = repo.get([{
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const nodes = repo.get([{
     key: 'nodeId',
     versionId: 'versionKey'
 }, {
@@ -1876,7 +1880,7 @@ if (result) {
 <div class="listingblock">
 <div class="title">Fetching the binary of a node.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var binaryStream = repo.getBinary({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const binaryStream = repo.getBinary({
     key: "/myNode",
     binaryReference: "myBinaryReference"
 });</code></pre>
@@ -1976,7 +1980,7 @@ if (result) {
 <div class="listingblock">
 <div class="title">Fetching a commit version of a node.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var commit = repo.getCommit({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const commit = repo.getCommit({
     id: "aa1f76bf-4bb9-41be-b166-03561c1555b2"
 });</code></pre>
 </div>
@@ -1984,11 +1988,11 @@ if (result) {
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "id": "aa1f76bf-4bb9-41be-b166-03561c1555b2",
-    "message": "",
-    "committer": "user:system:anonymous",
-    "timestamp": "2019-01-24T15:16:36.260799Z"
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    id: "aa1f76bf-4bb9-41be-b166-03561c1555b2",
+    message: "",
+    committer: "user:system:anonymous",
+    timestamp: "2019-01-24T15:16:36.260799Z"
 }</code></pre>
 </div>
 </div>
@@ -2046,9 +2050,9 @@ if (result) {
 <div class="listingblock">
 <div class="title">Modifying a node.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.modify({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.modify({
     key: key,
-    editor: function (node) {
+    editor: (node) =&gt; {
         node.someData.cars.push('peugeot');
         return node;
     }
@@ -2059,7 +2063,7 @@ if (result) {
 <div class="sect2">
 <h3 id="move"><a class="link" href="#move">move</a></h3>
 <div class="paragraph">
-<p>Rename a node or move it do a new path.</p>
+<p>Renames a node or moves it to a new path.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2109,28 +2113,28 @@ if (result) {
 <div class="listingblock">
 <div class="title">Changing the name of a node.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var moved = repo.move({
-                source: '/my-name',
-                target: 'new-name'
-            });</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const moved = repo.move({
+    source: '/my-name',
+    target: 'new-name'
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Moving a node to a new location.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var moved = repo.move({
-                source: '/my-name',
-                target: '/new-parent/'
-            });</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const moved = repo.move({
+    source: '/my-name',
+    target: '/new-parent/'
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Move and rename a node in the same operation.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var moved = repo.move({
-                source: '/my-name',
-                target: '/content/my-site/folder/new-name'
-            });</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const moved = repo.move({
+    source: '/my-name',
+    target: '/content/my-site/folder/new-name'
+});</code></pre>
 </div>
 </div>
 </div>
@@ -2215,7 +2219,7 @@ if (result) {
 <div class="listingblock">
 <div class="title">Pushing nodes from current branch.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.push({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.push({
     keys: ['a'],
     target: 'otherBranch',
     resolve: false
@@ -2225,19 +2229,19 @@ if (result) {
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "success": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    success: [
         "a"
     ],
-    "failed": [],
-    "deleted": []
+    failed: [],
+    deleted: []
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Pushing content with children where not all children are allowed.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.push({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.push({
     keys: ['a'],
     target: 'otherBranch',
     resolve: true,
@@ -2248,26 +2252,26 @@ if (result) {
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "success": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected ={
+    success: [
         "a",
         "b",
         "c"
     ],
-    "failed": [
+    failed: [
         {
-            "id": "d",
-            "reason": "ACCESS_DENIED"
+            id: "d",
+            reason: "ACCESS_DENIED"
         }
     ],
-    "deleted": []
+    deleted: []
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Pushing node with children, but excluding some of them.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.push({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.push({
     keys: ['/a'],
     target: 'otherBranch',
     resolve: true,
@@ -2279,13 +2283,13 @@ if (result) {
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "success": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    success: [
         "a",
         "d"
     ],
-    "failed": [],
-    "deleted": []
+    failed: [],
+    deleted: []
 }</code></pre>
 </div>
 </div>
@@ -2393,45 +2397,45 @@ if (result) {
 <p>Examples</p>
 </div>
 <div class="listingblock">
-<div class="title">A simple query using a the fulltext function</div>
+<div class="title">A simple query using the fulltext function</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.query({
-        query: "fulltext('_name', '_name')"
-    });</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.query({
+    query: "fulltext('_name', '_name')"
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "total": 4,
-    "count": 4,
-    "hits": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    total: 4,
+    count: 4,
+    hits: [
         {
-            "id": "5be12847-cbad-4e61-a36c-e94ffb597afb",
-            "score": 0.7071067690849304
+            id: "5be12847-cbad-4e61-a36c-e94ffb597afb",
+            score: 0.7071067690849304
         },
         {
-            "id": "3928476f-915d-4a6a-97cc-f1c8a905f71a",
-            "score": 0.625
+            id: "3928476f-915d-4a6a-97cc-f1c8a905f71a",
+            score: 0.625
         },
         {
-            "id": "a2e38aab-6efb-4f20-862c-e23ef24b3fc3",
-            "score": 0.5
+            id: "a2e38aab-6efb-4f20-862c-e23ef24b3fc3",
+            score: 0.5
         },
         {
-            "id": "3a842eff-ef49-4781-8c1a-dcfcf515db51",
-            "score": 0.5
+            id: "3a842eff-ef49-4781-8c1a-dcfcf515db51",
+            score: 0.5
         }
     ],
-    "aggregations": {}
+    aggregations: {}
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Query content using aggregations.</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.query({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.query({
     start: 0,
     count: 2,
     query: "startTime &gt; instant('2016-10-11T14:38:54.454Z')",
@@ -2500,58 +2504,58 @@ if (result) {
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">{
-    "total": 12902,
-    "count": 2,
-    "hits": [
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    total: 12902,
+    count: 2,
+    hits: [
         {
-            "id": "b186d24f-ac38-42ca-a6db-1c1bda6c6c26",
-            "score": 1.2300000190734863
+            id: "b186d24f-ac38-42ca-a6db-1c1bda6c6c26",
+            score: 1.2300000190734863
         },
         {
-            "id": "350ba4a6-589c-498b-8af0-f183850e1120",
-            "score": 1.399999976158142
+            id: "350ba4a6-589c-498b-8af0-f183850e1120",
+            score: 1.399999976158142
         }
     ],
-    "aggregations": {
-        "urls": {
-            "buckets": [
+    aggregations: {
+        urls: {
+            buckets: [
                 {
-                    "key": "/site/draft/superhero/search",
-                    "docCount": 6762,
-                    "duration": {
-                        "buckets": [
+                    key: "/site/draft/superhero/search",
+                    docCount: 6762,
+                    duration: {
+                        buckets: [
                             {
-                                "key": "1600",
-                                "docCount": 2
+                                key: "1600",
+                                docCount: 2
                             },
                             {
-                                "key": "1400",
-                                "docCount": 1
+                                key: "1400",
+                                docCount: 1
                             },
                             {
-                                "key": "1300",
-                                "docCount": 5
+                                key: "1300",
+                                docCount: 5
                             }
                         ]
                     }
                 },
                 {
-                    "key": "/site/draft/superhero",
-                    "docCount": 1245,
-                    "duration": {
-                        "buckets": [
+                    key: "/site/draft/superhero",
+                    docCount: 1245,
+                    duration: {
+                        buckets: [
                             {
-                                "key": "1600",
-                                "docCount": 2
+                                key: "1600",
+                                docCount: 2
                             },
                             {
-                                "key": "1400",
-                                "docCount": 1
+                                key: "1400",
+                                docCount: 1
                             },
                             {
-                                "key": "1300",
-                                "docCount": 5
+                                key: "1300",
+                                docCount: 5
                             }
                         ]
                     }
@@ -2566,7 +2570,7 @@ if (result) {
 <div class="sect2">
 <h3 id="refresh"><a class="link" href="#refresh">refresh</a></h3>
 <div class="paragraph">
-<p>Refresh the index for the current repoConnection.  The index has two parts, search and storage.  It is possible to index both or just one of them.</p>
+<p>Refreshes indices for the current repoConnection.  The index has two parts: search and storage.  It is possible to index both or just one of them.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2589,7 +2593,7 @@ if (result) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">mode</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ALL for both indexes, SEARCH for search-index or STORAGE for storage-index.  Default is ALL.</p>
+<p>ALL for both indices, SEARCH for search-index or STORAGE for storage-index.  Default is ALL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2606,20 +2610,20 @@ if (result) {
 <div class="listingblock">
 <div class="title">Refreshing the full index</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">repo.refresh();</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">repo.refresh();</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Refreshing the serach index</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">repo.refresh('SEARCH');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">repo.refresh('SEARCH');</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="setactiveversion"><a class="link" href="#setactiveversion">setActiveVersion</a></h3>
 <div class="paragraph">
-<p>Set the active version of a node.</p>
+<p>Sets the active version of a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2669,11 +2673,11 @@ if (result) {
 <div class="listingblock">
 <div class="title">Setting the previous version active</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var findVersions = repo.findVersions({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const findVersions = repo.findVersions({
     key: node._id
 });
 
-var result = repo.setActiveVersion({
+const result = repo.setActiveVersion({
     key: node._id,
     versionId: findVersions.hits[1].versionId
 });</code></pre>
@@ -2683,7 +2687,7 @@ var result = repo.setActiveVersion({
 <div class="sect2">
 <h3 id="setchildorder"><a class="link" href="#setchildorder">setChildOrder</a></h3>
 <div class="paragraph">
-<p>Set the order of the node&#8217;s children.</p>
+<p>Sets the order of a node&#8217;s children.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2733,7 +2737,7 @@ var result = repo.setActiveVersion({
 <div class="listingblock">
 <div class="title">Setting the children to be ordered in reverse alphabetical order by name</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">repo.setChildOrder({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">repo.setChildOrder({
     key: '/name-list',
     childOrder: 'name DESC'
 });</code></pre>
@@ -2743,7 +2747,7 @@ var result = repo.setActiveVersion({
 <div class="sect2">
 <h3 id="setrootpermissions"><a class="link" href="#setrootpermissions">setRootPermissions</a></h3>
 <div class="paragraph">
-<p>Set the root node permissions and inheritance.</p>
+<p>Sets the root node&#8217;s permissions and inheritance.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2793,11 +2797,11 @@ var result = repo.setActiveVersion({
 <div class="listingblock">
 <div class="title">Setting example permissions</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var result = repo.setRootPermissions({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.setRootPermissions({
     _permissions: [
         {
-            "principal": "role:system.admin",
-            "allow": [
+            principal: "role:system.admin",
+            allow: [
                 "READ",
                 "CREATE",
                 "MODIFY",
@@ -2806,7 +2810,7 @@ var result = repo.setActiveVersion({
                 "READ_PERMISSIONS",
                 "WRITE_PERMISSIONS"
             ],
-            "deny": []
+            deny: []
         }
     ],
     _inheritsPermissions: true
@@ -2915,7 +2919,7 @@ var result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

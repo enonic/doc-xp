@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Auditlog Library</title>
+<title>Auditlog API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Auditlog Library</h1>
+<h1>Auditlog API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -459,7 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.2.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.2.0</text></g></svg></span></p>
 </div>
 <div class="paragraph">
-<p>This library provides functions for audit log management.</p>
+<p>This API provides functions for audit log management.</p>
 </div>
 </div>
 </div>
@@ -477,15 +477,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const auditlogLib = require('/lib/xp/auditlog');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import auditlogLib from '/lib/xp/auditlog';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -627,8 +627,10 @@ All parameters are optional, but you should specify at least one of them. If no 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Find first audit log by ids
-var result = auditlogLib.find({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {find} from '/lib/xp/auditlog';
+
+// Find first audit log by ids
+const result = find({
     start: 0,
     count: 1,
     ids: [
@@ -681,8 +683,10 @@ var result = auditlogLib.find({
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Gets an audit log by id.
-var log = auditlogLib.get({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {get as getAuditEntry} from '/lib/xp/auditlog';
+
+// Gets an audit log by id.
+const log = getAuditEntry({
     id: '90b976f7-55ab-48ef-acb8-e7c6f0744442'
 });</code></pre>
 </div>
@@ -773,16 +777,18 @@ var log = auditlogLib.get({
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Creates an audit log.
-var log1 = auditlogLib.log({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {log as logAuditEntry} from '/lib/xp/auditlog';
+
+// Creates an audit log.
+const log1 = logAuditEntry({
     type: 'testlog'
 });</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">// Creates an audit log with more custom parameters.
-var log2 = auditlogLib.log({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">// Creates an audit log with more custom parameters.
+const log2 = logAuditEntry({
     type: 'testlog',
     time: '2019-08-12T08:44:02.767Z',
     source: 'unittests',
@@ -791,8 +797,8 @@ var log2 = auditlogLib.log({
         'some:resource:uri'
     ],
     data: {
-        'custom': 'string',
-        'somevalue': 2.5
+        custom: 'string',
+        somevalue: 2.5
     }
 });</code></pre>
 </div>
@@ -803,7 +809,7 @@ var log2 = auditlogLib.log({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>

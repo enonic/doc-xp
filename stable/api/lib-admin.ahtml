@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Admin Library</title>
+<title>Admin API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Admin Library</h1>
+<h1>Admin API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -464,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This library contains admin related functions.</p>
+<p>This API provides admin-related functions.</p>
 </div>
 </div>
 </div>
@@ -482,15 +482,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your JavaScript controller, add a require statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">const adminLib = require('/lib/xp/admin');</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import adminLib from '/lib/xp/admin';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the library functionality.</p>
+<p>You are now ready to use the API.</p>
 </div>
 </div>
 </div>
@@ -589,13 +589,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>string</strong> : The installation Name</p>
+<p><strong>string</strong> : The installation name</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="getlauncherpath"><a class="link" href="#getlauncherpath">getLauncherPath</a></h3>
 <div class="paragraph">
-<p>Returns the URL for launcher javascript.</p>
+<p>Returns URL to JS script for embedding XP Launcher panel.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -607,13 +607,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>string</strong> : The URL for the launcher javascript</p>
+<p><strong>string</strong> : URL of the Launcher JS script</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="getlauncherurl"><a class="link" href="#getlauncherurl">getLauncherUrl</a></h3>
 <div class="paragraph">
-<p>Returns the URL for the launcher panel.</p>
+<p>Returns URL of the Launcher panel.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -625,13 +625,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>string</strong> : The URL for the launcher panel</p>
+<p><strong>string</strong> : URL of the Launcher panel</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="getlocale"><a class="link" href="#getlocale">getLocale</a></h3>
 <div class="paragraph">
-<p>Returns the preferred locale based on the current HTTP request, or the server default locale if none is specified.</p>
+<p>Returns the preferred locale based on current HTTP request, or the default server locale if none is specified.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -649,7 +649,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="getlocales"><a class="link" href="#getlocales">getLocales</a></h3>
 <div class="paragraph">
-<p>Returns the list of preferred locales based on the current HTTP request, or the server default locale if none is specified.</p>
+<p>Returns the list of preferred locales based on current HTTP request, or the default server locale if none is specified.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -685,7 +685,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="gettoolurl"><a class="link" href="#gettoolurl">getToolUrl</a></h3>
 <div class="paragraph">
-<p>Returns the URL for an admin tool of specific application.</p>
+<p>Returns URL of an admin tool in an application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -724,7 +724,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>string</strong> : The URL to the requested tool.</p>
+<p><strong>string</strong> : URL of the requested admin tool.</p>
 </div>
 </div>
 <div class="sect2">
@@ -750,7 +750,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:06:42 UTC
+Last updated 2024-11-01 10:10:50 UTC
 </div>
 </div>
 </body>
