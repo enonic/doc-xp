@@ -475,7 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Functions to access portal functionality.</p>
+<p>API to access functions related to rendering.</p>
 </div>
 </div>
 </div>
@@ -493,7 +493,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your controller, add an import statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -511,7 +511,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="asseturl"><a class="link" href="#asseturl">assetUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to a static file.</p>
+<p>Generates URL to a static file.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -579,7 +579,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -618,7 +618,7 @@ const url = assetUrl({
 <div class="sect2">
 <h3 id="attachmenturl"><a class="link" href="#attachmenturl">attachmentUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to an attachment.</p>
+<p>Generates URL to an attachment.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -704,7 +704,7 @@ const url = assetUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set to true if the disposition header should be set to attachment.</p>
+<p>Set to <code>true</code> if the disposition header should be set to attachment.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -713,7 +713,7 @@ const url = assetUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -754,7 +754,7 @@ const url = attachmentUrl({
 <div class="sect2">
 <h3 id="componenturl"><a class="link" href="#componenturl">componentUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to a component.</p>
+<p>Generates URL to a page component.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -831,7 +831,7 @@ const url = attachmentUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -877,7 +877,7 @@ const url = componentUrl({
 <div class="sect2">
 <h3 id="getcomponent"><a class="link" href="#getcomponent">getComponent</a></h3>
 <div class="paragraph">
-<p>This function returns the component corresponding to the current execution context. It is meant to be called from a layout or part controller.</p>
+<p>Returns component in the current execution context. It is meant to be called from a layout or a part controller.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -889,7 +889,7 @@ const url = componentUrl({
 <p>Example</p>
 </div>
 <div class="listingblock">
-<div class="title">Obtains list of active tasks:</div>
+<div class="title">Returns component in the current context:</div>
 <div class="content">
 <pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getComponent} from '/lib/xp/portal';
 
@@ -929,7 +929,7 @@ log.info('Current component name = %s', result.name);</code></pre>
 <div class="sect2">
 <h3 id="getcontent"><a class="link" href="#getcontent">getContent</a></h3>
 <div class="paragraph">
-<p>This function returns the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.</p>
+<p>Returns content in the current execution context. It is meant to be called from a page, a layout or a part controller.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -979,19 +979,19 @@ log.info('Current content path = %s', result._path);</code></pre>
 <div class="sect2">
 <h3 id="getidproviderkey"><a class="link" href="#getidproviderkey">getIdProviderKey</a></h3>
 <div class="paragraph">
-<p>This function returns the id provider key corresponding to the current execution context.</p>
+<p>Returns the key of ID provider in the current execution context.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The current id provider as JSON.</p>
+<p><strong>object</strong> : The current ID provider as JSON.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
 </div>
 <div class="listingblock">
-<div class="title">Returns the current id provider:</div>
+<div class="title">Returns the current ID provider:</div>
 <div class="content">
 <pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getIdProviderKey} from '/lib/xp/portal';
 
@@ -1012,7 +1012,7 @@ if (idProviderKey) {
 <div class="sect2">
 <h3 id="getmultipartform"><a class="link" href="#getmultipartform">getMultipartForm</a></h3>
 <div class="paragraph">
-<p>This function returns a JSON containing multipart items. If not a multipart request, then this function returns <code>undefined</code>.</p>
+<p>Returns a JSON containing multipart items. If not a multipart request, then this function returns <code>undefined</code>.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -1063,7 +1063,7 @@ log.info('Multipart form %s', result);</code></pre>
 <div class="sect2">
 <h3 id="getmultipartitem"><a class="link" href="#getmultipartitem">getMultipartItem</a></h3>
 <div class="paragraph">
-<p>This function returns a JSON containing a named multipart item. If the item does not exists, it returns <code>undefined</code>.</p>
+<p>Returns a JSON containing a named multipart item. If the item does not exist, it returns <code>undefined</code>.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1135,7 +1135,7 @@ log.info('Multipart item %s', result);</code></pre>
 <div class="sect2">
 <h3 id="getmultipartstream"><a class="link" href="#getmultipartstream">getMultipartStream</a></h3>
 <div class="paragraph">
-<p>This function returns a data-stream for a named multipart item.</p>
+<p>Returns a data stream for a named multipart item.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1195,7 +1195,7 @@ const stream2 = getMultipartStream('item2', 1);</code></pre>
 <div class="sect2">
 <h3 id="getmultiparttext"><a class="link" href="#getmultiparttext">getMultipartText</a></h3>
 <div class="paragraph">
-<p>This function returns the multipart item data as text.</p>
+<p>Returns the multipart item data as text.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1254,7 +1254,7 @@ const text = getMultipartText('item1');</code></pre>
 <div class="sect2">
 <h3 id="getsite"><a class="link" href="#getsite">getSite</a></h3>
 <div class="paragraph">
-<p>This function returns the parent site of the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.</p>
+<p>Returns the parent site of a content in the current execution context. It is meant to be called from a page, a layout or a part controller.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -1303,7 +1303,7 @@ log.info('Current site name = %s', result._name);</code></pre>
 <div class="sect2">
 <h3 id="getsiteconfig"><a class="link" href="#getsiteconfig">getSiteConfig</a></h3>
 <div class="paragraph">
-<p>This function returns the site configuration for this app in the parent site of the content corresponding to the current execution context. It is meant to be called from a page, layout or part controller.</p>
+<p>Returns configuration of the parent site for a content in the current execution context. It is meant to be called from a page, a layout or a part controller.</p>
 </div>
 <div class="paragraph lead">
 <p>Returns</p>
@@ -1335,7 +1335,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="sect2">
 <h3 id="idproviderurl"><a class="link" href="#idproviderurl">idProviderUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to an ID provider.</p>
+<p>Generates URL to an ID provider.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1406,7 +1406,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1433,7 +1433,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <div class="sect2">
 <h3 id="imageplaceholder"><a class="link" href="#imageplaceholder">imagePlaceholder</a></h3>
 <div class="paragraph">
-<p>This function generates a URL to an image placeholder.</p>
+<p>Generates URL of an image placeholder with a specified size.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1522,7 +1522,7 @@ const url = imagePlaceholder({
 <div class="sect2">
 <h3 id="imageurl"><a class="link" href="#imageurl">imageUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to an image.</p>
+<p>Generates URL to an image.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1635,7 +1635,7 @@ const url = imagePlaceholder({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1677,7 +1677,7 @@ const url = imageUrl({
 <div class="sect2">
 <h3 id="loginurl"><a class="link" href="#loginurl">loginUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to the login function of an ID provider.</p>
+<p>Generates URL to the login endpoint of an ID provider.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1730,7 +1730,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Key of a id provider using an application. If idProvider is not set, then the id provider corresponding to the current execution context will be used.</p>
+<p>Id provider key. If idProvider is not set, then the id provider corresponding to the current execution context will be used.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1757,7 +1757,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1784,7 +1784,7 @@ const url = imageUrl({
 <div class="sect2">
 <h3 id="logouturl"><a class="link" href="#logouturl">logoutUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to the logout function of the application corresponding to the current user.</p>
+<p>Generates URL to the logout endpoint of ID provider in the current context.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1855,7 +1855,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1882,7 +1882,7 @@ const url = imageUrl({
 <div class="sect2">
 <h3 id="pageurl"><a class="link" href="#pageurl">pageUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to a page.</p>
+<p>Generates URL to a content page.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1932,7 +1932,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Id to the page. If id is set, then path is not used.</p>
+<p>Id of a content. If id is set, then path is not used.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1941,7 +1941,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Path to the page. Relative paths is resolved using the context page.</p>
+<p>Path of a content. Relative paths are resolved based on the current context.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1950,7 +1950,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1994,11 +1994,20 @@ const url = pageUrl({
 <div class="sect2">
 <h3 id="processhtml"><a class="link" href="#processhtml">processHtml</a></h3>
 <div id="processHtml" class="paragraph">
-<p>This function replaces abstract internal links to images and internal content items contained in an HTML text with full URLs.
-It will also render embedded macros.</p>
+<p>Resolves internal links to images and internal content items contained in an HTML text and replaces them with correct URLs.
+It will also process embedded macros.</p>
 </div>
-<div class="paragraph">
-<p>When outputting processed HTML in Thymeleaf, use attribute <code>data-th-utext="${processedHtml}"</code>.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When outputting processed HTML in Thymeleaf, use attribute <code>data-th-utext="${processedHtml}"</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2057,7 +2066,7 @@ It will also render embedded macros.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>URL type. Either server (server-relative URL) or absolute.</p>
+<p>URL type. Either <code>server</code> (server-relative URL) or <code>absolute</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2110,10 +2119,19 @@ const html = processHtml({
 <div class="sect2">
 <h3 id="sanitizehtml"><a class="link" href="#sanitizehtml">sanitizeHtml</a></h3>
 <div class="paragraph">
-<p>This function sanitizes an HTML string by stripping all potentially unsafe tags and attributes.</p>
+<p>Sanitizes an HTML string by stripping all potentially unsafe tags and attributes.</p>
 </div>
-<div class="paragraph">
-<p>HTML sanitization can be used to protect against cross-site scripting (XSS) attacks by sanitizing any HTML code submitted by a user.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+HTML sanitization can be used to protect against cross-site scripting (XSS) attacks by sanitizing any HTML code submitted by a user.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2170,7 +2188,7 @@ const sanitizedHtml = sanitizeHtml(unsafeHtml);</code></pre>
 <div class="sect2">
 <h3 id="serviceurl"><a class="link" href="#serviceurl">serviceUrl</a></h3>
 <div class="paragraph">
-<p>This function generates a URL pointing to a service.</p>
+<p>Generates URL to a service.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2281,7 +2299,7 @@ const url = serviceUrl({
 <div class="sect2">
 <h3 id="url"><a class="link" href="#url">url</a></h3>
 <div class="paragraph">
-<p>This function generates a URL.</p>
+<p>Generates URL to a resource.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2385,7 +2403,7 @@ const url = buildUrl({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 15:53:43 UTC
+Last updated 2024-11-01 10:06:18 UTC
 </div>
 </div>
 </body>

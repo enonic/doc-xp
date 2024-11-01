@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Node repository related functions.</p>
+<p>Functions related to management of a node repository.</p>
 </div>
 </div>
 </div>
@@ -490,7 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your controller, add an import statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -523,23 +523,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.created</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository is created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository is created</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.updated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository is updated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository is updated</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.deleted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository is deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository is deleted</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.restoreInitialized</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository restore begins</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository restore begins</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repository.restored</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">repository restore is completed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a repository restore is completed</p></td>
 </tr>
 </tbody>
 </table>
@@ -740,7 +740,7 @@ try {
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : true if deleted, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if deleted, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -933,7 +933,7 @@ const expected = [{
 <div class="sect2">
 <h3 id="refresh"><a class="link" href="#refresh">refresh</a></h3>
 <div class="paragraph">
-<p>Refresh the data for the given index-type in the current repository</p>
+<p>Refreshes indices in the current repository</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -999,7 +999,7 @@ refresh({
 <div class="sect2">
 <h3 id="createrepoparams"><a class="link" href="#createrepoparams">CreateRepoParams</a></h3>
 <div class="paragraph">
-<p>Object to pass to a create repo function.</p>
+<p>Object to pass to the <code>create</code> function.</p>
 </div>
 <div class="paragraph lead">
 <p>Fields</p>
@@ -1050,7 +1050,7 @@ refresh({
 <div class="sect2">
 <h3 id="reposettings"><a class="link" href="#reposettings">RepoSettings</a></h3>
 <div class="paragraph">
-<p>Repository settings json to optionally pass to a create function</p>
+<p>Repository settings to optionally pass to the <code>create</code> function</p>
 </div>
 <div class="paragraph lead">
 <p>Fields</p>
@@ -1312,7 +1312,7 @@ refresh({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 15:53:43 UTC
+Last updated 2024-11-01 10:06:18 UTC
 </div>
 </div>
 </body>

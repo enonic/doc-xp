@@ -476,7 +476,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your controller, add an import statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -494,7 +494,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="addtogroup"><a class="link" href="#addtogroup">addToGroup</a></h3>
 <div class="paragraph">
-<p>Add an id to a socket group.</p>
+<p>Adds an id to a socket group.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -549,7 +549,7 @@ addToGroup('people', session.id);</code></pre>
 <div class="sect2">
 <h3 id="removefromgroup"><a class="link" href="#removefromgroup">removeFromGroup</a></h3>
 <div class="paragraph">
-<p>Remove an id from a socket group.</p>
+<p>Removes an id from a socket group.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -604,7 +604,7 @@ removeFromGroup('people', session.id);</code></pre>
 <div class="sect2">
 <h3 id="send"><a class="link" href="#send">send</a></h3>
 <div class="paragraph">
-<p>Send message directly to a socket id.</p>
+<p>Sends a message directly to a socket id.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -659,7 +659,7 @@ send(session.id, 'You said - ' + message);</code></pre>
 <div class="sect2">
 <h3 id="sendtogroup"><a class="link" href="#sendtogroup">sendToGroup</a></h3>
 <div class="paragraph">
-<p>Send message to all sockets in group.</p>
+<p>Sends a message to all sockets in group.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -714,7 +714,7 @@ sendToGroup('people', 'Notice this message!');</code></pre>
 <div class="sect2">
 <h3 id="getgroupsize"><a class="link" href="#getgroupsize">getGroupSize</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span> Get number of all sockets in group.</p>
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span> Gets number of all sockets in a group.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -777,7 +777,7 @@ getGroupSize('people');</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 15:53:43 UTC
+Last updated 2024-11-01 10:06:18 UTC
 </div>
 </div>
 </body>

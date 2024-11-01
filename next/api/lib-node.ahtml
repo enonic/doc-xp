@@ -505,7 +505,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your controller, add an import statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -538,39 +538,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.created</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is created</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.deleted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is deleted</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.pushed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is pushed to a different branch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is pushed to a different branch</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.duplicated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is duplicated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is duplicated</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.updated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is updated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is updated</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.moved</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is moved in the tree structure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is moved in the tree structure</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.renamed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is renamed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is renamed</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.sorted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node is sorted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node is sorted</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.stateUpdated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">node state is updated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a node state is updated</p></td>
 </tr>
 </tbody>
 </table>
@@ -702,12 +702,12 @@ const searchConnection = multiRepoConnect({
 <h2 id="multirepoconnection"><a class="link" href="#multirepoconnection">MultiRepoConnection</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A MultiRepoConnection makes it possible to search across multiple repositories.  The object has only one method: query.</p>
+<p>A MultiRepoConnection makes it possible to search across multiple repositories.  The object has only one method: <code>query</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="query"><a class="link" href="#query">query</a></h3>
 <div class="paragraph">
-<p>This command queries nodes in a multi-repo connection.</p>
+<p>Queries nodes in a multi-repo connection.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -871,7 +871,7 @@ const searchConnection = multiRepoConnect({
 <h2 id="repoconnection"><a class="link" href="#repoconnection">RepoConnection</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A single repo connections with lots of methods to work on the repo:</p>
+<p>A single-repo connection with various methods for working in a single repo.</p>
 </div>
 <div class="paragraph">
 <p>All the examples below are using a repo connection to execute the functions.
@@ -984,8 +984,8 @@ const repo = connect({
 <div class="sect2">
 <h3 id="create"><a class="link" href="#create">create</a></h3>
 <div class="paragraph">
-<p>Creating a node.  To create a content where the name is not important and there could be multiple instances under the same parent content,
-skip the name parameter and specify a displayName.</p>
+<p>Creates a node. To create a content where the name is not important and there could be multiple instances under the same parent content,
+skip the <code>name</code> parameter and specify a <code>displayName</code>.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1146,7 +1146,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="delete"><a class="link" href="#delete">delete</a></h3>
 <div class="paragraph">
-<p>Deleting a node or nodes.</p>
+<p>Deletes a node or nodes.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1202,7 +1202,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="diff"><a class="link" href="#diff">diff</a></h3>
 <div class="paragraph">
-<p>Resolves the differences for a node between current and given branch.</p>
+<p>Resolves the differences for a node between the branch in the current context and a <code>target</code> branch.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1296,7 +1296,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="duplicate"><a class="link" href="#duplicate">duplicate</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> This function duplicates a node.</p>
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> Duplicates a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1407,7 +1407,7 @@ skip the name parameter and specify a displayName.</p>
 <div class="sect2">
 <h3 id="exists"><a class="link" href="#exists">exists</a></h3>
 <div class="paragraph">
-<p>Checks if a node exists for the current context.</p>
+<p>Checks if a node exists in the current context.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1439,7 +1439,7 @@ skip the name parameter and specify a displayName.</p>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : true if exists, false otherwise</p>
+<p><strong>boolean</strong> : <code>true</code> if exists, <code>false</code> otherwise</p>
 </div>
 <div class="paragraph lead">
 <p>Examples</p>
@@ -1474,7 +1474,7 @@ if (result) {
 <div class="sect2">
 <h3 id="findchildren"><a class="link" href="#findchildren">findChildren</a></h3>
 <div class="paragraph">
-<p>Fetch the children of a node.</p>
+<p>Fetches children of a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1586,7 +1586,7 @@ if (result) {
 <div class="sect2">
 <h3 id="findversions"><a class="link" href="#findversions">findVersions</a></h3>
 <div class="paragraph">
-<p>Fetch the versions of a node.</p>
+<p>Fetches versions of a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1680,7 +1680,7 @@ if (result) {
 <div class="sect2">
 <h3 id="get"><a class="link" href="#get">get</a></h3>
 <div class="paragraph">
-<p>Fetches specific nodes by path or ID.</p>
+<p>Fetches a specific node or nodes by path or ID.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2063,7 +2063,7 @@ if (result) {
 <div class="sect2">
 <h3 id="move"><a class="link" href="#move">move</a></h3>
 <div class="paragraph">
-<p>Rename a node or move it do a new path.</p>
+<p>Renames a node or moves it to a new path.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2397,7 +2397,7 @@ if (result) {
 <p>Examples</p>
 </div>
 <div class="listingblock">
-<div class="title">A simple query using a the fulltext function</div>
+<div class="title">A simple query using the fulltext function</div>
 <div class="content">
 <pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.query({
     query: "fulltext('_name', '_name')"
@@ -2570,7 +2570,7 @@ if (result) {
 <div class="sect2">
 <h3 id="refresh"><a class="link" href="#refresh">refresh</a></h3>
 <div class="paragraph">
-<p>Refresh the index for the current repoConnection.  The index has two parts, search and storage.  It is possible to index both or just one of them.</p>
+<p>Refreshes indices for the current repoConnection.  The index has two parts: search and storage.  It is possible to index both or just one of them.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2593,7 +2593,7 @@ if (result) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">mode</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ALL for both indexes, SEARCH for search-index or STORAGE for storage-index.  Default is ALL.</p>
+<p>ALL for both indices, SEARCH for search-index or STORAGE for storage-index.  Default is ALL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2623,7 +2623,7 @@ if (result) {
 <div class="sect2">
 <h3 id="setactiveversion"><a class="link" href="#setactiveversion">setActiveVersion</a></h3>
 <div class="paragraph">
-<p>Set the active version of a node.</p>
+<p>Sets the active version of a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2687,7 +2687,7 @@ const result = repo.setActiveVersion({
 <div class="sect2">
 <h3 id="setchildorder"><a class="link" href="#setchildorder">setChildOrder</a></h3>
 <div class="paragraph">
-<p>Set the order of the node&#8217;s children.</p>
+<p>Sets the order of a node&#8217;s children.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2747,7 +2747,7 @@ const result = repo.setActiveVersion({
 <div class="sect2">
 <h3 id="setrootpermissions"><a class="link" href="#setrootpermissions">setRootPermissions</a></h3>
 <div class="paragraph">
-<p>Set the root node permissions and inheritance.</p>
+<p>Sets the root node&#8217;s permissions and inheritance.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2919,7 +2919,7 @@ const result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 15:53:43 UTC
+Last updated 2024-11-01 10:06:18 UTC
 </div>
 </div>
 </body>

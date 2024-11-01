@@ -504,7 +504,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your controller, add an import statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1058,7 +1058,7 @@ const result = updateSchema({
 <div class="sect2">
 <h3 id="deleteschema"><a class="link" href="#deleteschema">deleteSchema</a></h3>
 <div class="paragraph">
-<p>Removes dynamic schema from virtual application.</p>
+<p>Removes a schema from a virtual application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1264,7 +1264,7 @@ const result = getComponent({
 <div class="sect2">
 <h3 id="listcomponents"><a class="link" href="#listcomponents">listComponents</a></h3>
 <div class="paragraph">
-<p>Fetches components of particular type from an application.</p>
+<p>Fetches components of a particular type from an application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1826,7 +1826,7 @@ if (result) {
 <div class="sect2">
 <h3 id="getstyles"><a class="link" href="#getstyles">getStyles</a></h3>
 <div class="paragraph">
-<p>Fetch styles from an application.</p>
+<p>Fetches styles (f.ex. image styles) from an application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1919,7 +1919,7 @@ const result = getStyles({
 <div class="sect2">
 <h3 id="createstyles"><a class="link" href="#createstyles">createStyles</a></h3>
 <div class="paragraph">
-<p>Create styles in virtual application.</p>
+<p>Creates styles in a virtual application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2171,7 +2171,7 @@ const result = updateStyles({
 <div class="sect2">
 <h3 id="deletestyles"><a class="link" href="#deletestyles">deleteStyles</a></h3>
 <div class="paragraph">
-<p>Deletes dynamic styles from a virtual application.</p>
+<p>Deletes styles from a virtual application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2252,7 +2252,7 @@ if (result) {
 <div class="sect2">
 <h3 id="getsite"><a class="link" href="#getsite">getSite</a></h3>
 <div class="paragraph">
-<p>Fetch a site descriptor from an application.</p>
+<p>Fetches a site descriptor from an application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -3202,7 +3202,7 @@ const result = updateSite({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 15:53:43 UTC
+Last updated 2024-11-01 10:06:18 UTC
 </div>
 </div>
 </body>

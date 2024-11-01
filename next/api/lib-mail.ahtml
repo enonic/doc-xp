@@ -478,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>In your controller, add an import statement:</p>
+<p>Add the <code>import</code> statement to your controller:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -510,11 +510,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="send"><a class="link" href="#send">send</a></h3>
 <div class="paragraph">
-<p>This function sends an email message using the mail server configured.</p>
+<p>Sends an email message using the mail server configured.</p>
 </div>
 <div class="paragraph">
-<p>The address values can be either a simple email address (e.g. ‘<a href="mailto:name@domain.org">name@domain.org</a>’ ) or an address with a display name. In the latter case the
-email will be enclosed with angle brackets (e.g. ‘Some Name &lt;<a href="mailto:name@domain.org">name@domain.org</a>&gt;’ ).</p>
+<p>The address values can be either a simple email address (e.g. <code>name@domain.org</code> ) or an address with a display name. In the latter case the
+email will be enclosed with angle brackets (e.g. <code>Some Name &lt;<a href="mailto:name@domain.org">name@domain.org</a>&gt;</code>).</p>
 </div>
 <div class="paragraph">
 <p>The <code>from</code> parameter supports the <a href="#getDefaultFromEmail">default <em>from</em> email</a> substitution.
@@ -623,7 +623,7 @@ However, an error is thrown if the default <em>from</em> email is not set.</p>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : True if message was successfully sent, false otherwise.</p>
+<p><strong>boolean</strong> : <code>true</code> if message was successfully sent, <code>false</code> otherwise.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -699,7 +699,7 @@ const flag2 = send({
     <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.14.1</text>
     <text x="435" y="140" transform="scale(.1)" textLength="290">7.14.1</text>
   </g>
-</svg></span> This function returns the default <em>from</em> email address configured in the <a href="../deployment/config.ahtml#mail">XP mail configuration</a>.</p>
+</svg></span> Returns the default <em>from</em> email address configured in the <a href="../deployment/config.ahtml#mail">XP mail configuration</a>.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -776,7 +776,7 @@ const defaultFromEmail = getDefaultFromEmail();</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-31 15:53:43 UTC
+Last updated 2024-11-01 10:06:18 UTC
 </div>
 </div>
 </body>
