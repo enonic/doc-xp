@@ -608,8 +608,7 @@ exports.webSocketEvent = function (event) {
   }
 
   if (event.type == 'close') {
-    // Remove client from a group
-    webSocketLib.removeFromGroup('chat', event.session.id);
+    log.info(`User left the chat`);
   }
 
 };</code></pre>
@@ -620,7 +619,7 @@ exports.webSocketEvent = function (event) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-01 10:10:50 UTC
+Last updated 2024-11-14 08:35:45 UTC
 </div>
 </div>
 </body>
