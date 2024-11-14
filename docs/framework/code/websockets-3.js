@@ -20,8 +20,7 @@ exports.webSocketEvent = function (event) {
   }
 
   if (event.type == 'close') {
-    // Remove client from a group
-    webSocketLib.removeFromGroup('chat', event.session.id);
+    log.info(`User left the chat`);
   }
 
 };
