@@ -206,6 +206,8 @@ const expected = {
 
 Creates a virtual application (along with its schema repository nodes) with the specified key.
 
+TIP: This function requires the Schema Admin role. It means that user role in the current context may lack sufficient permissions, for example when executed from inside a service - in this case you must explicitly execute the function in the <<lib-context#runcontext, context>> of `system.schema.admin` role.
+
 [.lead]
 Parameters
 
@@ -249,6 +251,8 @@ const app = createVirtualApplication({
 === deleteVirtualApplication
 
 Removes a virtual application with the specified key.
+
+TIP: This function requires the Schema Admin role. It means that user role in the current context may lack sufficient permissions, for example when executed from inside a service - in this case you must explicitly execute the function in the <<lib-context#runcontext, context>> of `system.schema.admin` role.
 
 [.lead]
 Parameters

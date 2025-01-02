@@ -4,6 +4,8 @@
 
 image:xp-7110.svg[XP 7.11.0,opts=inline] API for fetching and manipulating dynamic schemas.
 
+TIP: Functions of this library require the Schema Admin role. It means that user role in the current context may lack sufficient permissions, for example when executed from inside a service - in this case you must explicitly execute the function in the <<lib-context#runcontext, context>> of `system.schema.admin` role.
+
 == Usage
 
 Add the following to your `build.gradle` file:
