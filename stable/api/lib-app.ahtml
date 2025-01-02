@@ -745,6 +745,18 @@ const descriptor = getDescriptor({key: 'my-app-key'});</code></pre>
 <div class="paragraph">
 <p>Creates a virtual application (along with its schema repository nodes) with the specified key.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This function requires the Schema Admin role. It means that user role in the current context may lack sufficient permissions, for example when executed from inside a service - in this case you must explicitly execute the function in the <a href="lib-context.ahtml#runcontext">context</a> of <code>system.schema.admin</code> role.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph lead">
 <p>Parameters</p>
 </div>
@@ -819,6 +831,18 @@ const app = createVirtualApplication({
 <h3 id="deletevirtualapplication"><a class="link" href="#deletevirtualapplication">deleteVirtualApplication</a></h3>
 <div class="paragraph">
 <p>Removes a virtual application with the specified key.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This function requires the Schema Admin role. It means that user role in the current context may lack sufficient permissions, for example when executed from inside a service - in this case you must explicitly execute the function in the <a href="lib-context.ahtml#runcontext">context</a> of <code>system.schema.admin</code> role.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -1209,7 +1233,7 @@ const result = getApplicationMode({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-14 08:35:45 UTC
+Last updated 2025-01-02 13:25:14 UTC
 </div>
 </div>
 </body>
