@@ -77,7 +77,7 @@ Site Mappings can now be used to customize the behavior of Image, Attachment and
 
 Previously, custom content types required you to create a site, and link your app to the site before you could create them. <<cms/projects#applications, Project Applications>> enable you to add apps directly to the project instead, and thus create custom content directly on the project root.
 
-Also, <<cms/mappings#mappings, controller mappings>> will now work on project level, which means you may also write custom previews without using sites.
+Also, controller mappings will now work on project level, which means you may also write custom previews without using sites.
 
 NOTE: Pages, fragments and page templates still require to be in the context of a site.
 
@@ -405,7 +405,7 @@ headerConfig = set X-Frame-Options: SAMEORIGIN,set X-XSS-Protection: 1; mode=blo
 
 == XP7 Update 1
 
-NOTE: v7.1 is fully backward compatible with v7.0 and was released in parallel with https://developer.enonic.com/docs/content-studio/release#2_1_0[Content Studio v2.1].
+NOTE: v7.1 is fully backward compatible with v7.0 and was released in parallel with Content Studio v2.1.
 
 This update introduces new features and improvements as well as 28 bugfixes.
 The https://github.com/enonic/xp-distro/releases/tag/v7.1.0[complete list of changes] is available on Github.
