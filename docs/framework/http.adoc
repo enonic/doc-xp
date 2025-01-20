@@ -89,7 +89,7 @@ The ``response`` object is the value returned by an HTTP controller - as a respo
 <6> URI to redirect to. If specified, the value will be set in the "Location" header and the status will be set to 303.
 <7> Site engine only: If enabled the response body from a page render is processed to find and render any component tags found. (default is ``true``). Set to false to skip post processing of tags.
 <8> Site engine only: Use to contribute html to the resulting response markup. See <<contributions#, page contributions>> for more information.
-<9> Site engine only: If enabled, any defined <<response-processors#, response processors>> in the pipeline will be executed.
+<9> Site engine only: If enabled, any defined <<processors#, response processors>> in the pipeline will be executed.
 
 [#http-cookies]
 == HTTP Cookies
