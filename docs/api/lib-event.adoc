@@ -46,7 +46,7 @@ An object with the following keys and their values:
 [grid="none"]
 |===
 | Name | Kind | Details
-| type | string | Event type pattern. Supports `*` as a wildcard, equivalent to `.*` in regular expressions
+| type | string | Works like a Java Pattern, with two key differences: `.` is treated as a literal dot, not a wildcard. `\*` acts as `.*`, matching any sequence of characters.
 | callback | function | Callback event listener
 | localOnly | boolean | Local events only (default to false)
 |===
