@@ -532,7 +532,7 @@ For more details, check out the <a href="lib-node.ahtml#events">node API</a>, <a
 <td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Event type pattern. Supports <code><strong></code> as a wildcard, equivalent to <code>.</strong></code> in regular expressions</p>
+<p>Works like a Java Pattern, with two key differences: <code>.</code> is treated as a literal dot, not a wildcard. <code>*</code> acts as <code>.*</code>, matching any sequence of characters.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -649,7 +649,7 @@ For more details, check out the <a href="lib-node.ahtml#events">node API</a>, <a
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-28 12:16:15 UTC
+Last updated 2025-02-05 08:48:19 UTC
 </div>
 </div>
 </body>
