@@ -180,13 +180,13 @@ Use this file to configure the node repository layer.
 .Example below uses default settings
 [source,properties]
 ----
-cache.size = 1000000
+cache.capacity = 10%
 snapshots.dir = ${xp.home}/snapshots
 ----
 
-cache.size:: image:xp-7130.svg[XP 7.13.0,opts=inline] Specifies the maximum number of nodes to keep in memory. Default: `100000`
-
+cache.capacity:: image:xp-7150.svg[XP 7.15.0,opts=inline]. Defines Heap memory limit for node version cache. The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
 snapshots.dir:: Specifies the root location for where to find and place snapshot files. Default: `${xp.home}/snapshots`
+cache.size:: Added in image:xp-7130.svg[XP 7.13.0,opts=inline] and removed in image:xp-7150.svg[XP 7.15.0,opts=inline]. Specifies the maximum number of nodes to keep in memory. Default: `100000`
 
 NOTE: If you change this value, remember to update value for `path.repo` in `com.enonic.xp.elasticsearch.cfg` as well.
 
@@ -488,7 +488,7 @@ readonlyMode = true
 readonlyMode:: Activate read only mode to prevent installation and stop/start of applications via UI.
 Default: `false`
 
-
+[#jetty]
 === Jetty
 
 `XP_HOME/config/com.enonic.xp.web.jetty.cfg`
@@ -547,7 +547,7 @@ session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
 session.cookieSameSite:: image:xp-730.svg[XP 7.3.0,opts=inline]:: Specifies SameSite flag for session cookie. Can be `Lax`, `None`, `Strict` or unspecified. Default: `Lax`.
 session.cookieAlwaysSecure:: image:xp-730.svg[XP 7.3.0,opts=inline]:: If true, forces session cooke Secure flag even for HTTP connections. Default: `false`.
 session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
-gzip.enabled:: Enables GZIP compression for responses. Default: `true`.
+gzip.enabled:: Enables GZIP compression for responses. Default: `false`. Before image:xp-7150.svg[XP 7.15.0,opts=inline] the default was `true`.
 gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `23`.
 log.enabled:: Turns on request logging. Default: `false`.
 log.file:: Request log file location. Default: `${xp.home}/logs/jetty-yyyy_mm_dd.request.log`.
@@ -585,12 +585,14 @@ saveOnCreate:: Controls whether a session that is newly created will be immediat
 
 flushOnResponseCommit:: Controls whether a session that is changed ("dirty") will be persisted as the response is about to commit. If false, a dirty session will only be persisted when the last simultaneous request for it leaves the session. Has no effect in non-persistent storeMode. Default: `false`.
 
+[#media]
 === Media
 
 `XP_HOME/config/com.enonic.xp.media.cfg`
 
 Specify additional mime types if you are missing something.
-// TODO: Specify where this is this used?
+
+Asset Service, Image Service as well as lib-io and lib-mail use this config for detection of media type by file extension.
 
 .Sample additional mime types
 [source,properties]
@@ -662,6 +664,7 @@ trackSessions:: If true, usage rate is tracked by session if a session exists. D
 remotePort:: If true and session tracking is not used, then rate is tracked by IP+port (effectively connection). Default: `false`.
 ipWhitelist:: A comma-separated list of IP addresses that will not be rate limited.
 
+[#header]
 === Header Filter
 
 `XP_HOME/config/com.enonic.xp.web.header.cfg`
@@ -1073,6 +1076,7 @@ media.contentSecurityPolicy:: Defines media (images, attachments) `Content-Secur
 media.contentSecurityPolicy.svg:: Defines media (images, attachments) `Content-Security-Policy` header in cases when it is `image/svg+xml` mime type. Default: `default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`
 draftBranchAllowedFor:: Defines comma separated list of roles which are allowed to access the draft branch. Default: `role:system.admin.login`. Also, a user with role `role:system.admin` implicitly has access to the draft branch.
 
+[#image]
 === Image
 
 image:xp-770.svg[XP 7.7.0,opts=inline]
@@ -1087,12 +1091,14 @@ Configure the image service behaviour.
 scale.maxDimension = 8000
 filters.maxTotal = 5
 memoryLimit = 100mb
+progressive = jpeg
 ----
 
 scale.maxDimension:: Defines maximum dimension size (both height and width) when scaling is done. Default: `8000`
 filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
 memoryLimit:: image:xp-780.svg[XP 7.8.0,opts=inline] Defines Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP `429 Too Many Requests` status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
 The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
+progressive:: image:xp-7150.svg[XP 7.15.0,opts=inline]. Defines formats that will use progressive encoding. Default is `jpeg`.
 
 === Export
 

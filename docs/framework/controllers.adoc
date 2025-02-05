@@ -1,6 +1,6 @@
 = HTTP controllers
 :toc: right
-:imagesdir: framework/images
+:imagesdir: ../images
 
 JavaScript controllers represent the core concept of the Enonic XP framework.
 
@@ -10,7 +10,9 @@ HTTP controllers are essentially JavaScript files that are invoked by the variou
 
 Common for all http controllers is that they export functions matching the desired HTTP Method it implements.
 As such, any controller must explicitly declare one or more "exports" in order to handle requests:
-`get`, `post`, `delete` are examples of such methods.
+`get`, `post`, `delete`, `patch` are examples of such methods.
+
+NOTE: `patch` is supported starting from image:xp-7150.svg[XP 7.15.0,opts=inline].
 
 A controller can also export a special function `all` which will handle any HTTP method, unless there is a more specific handler available.
 

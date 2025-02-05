@@ -59,10 +59,10 @@ image::iam/system-idprovider.png[System ID provider login screen, 828]
 
 The purpose of the System ID provider is to hold system users such as `su` - the Super User, and `anonymous` - the user that is _de facto_ if no other user is specified.
 
-image:xp-7140.svg[XP 7.14.0,opts=inline]
+image:xp-7150.svg[XP 7.15.0,opts=inline]
 System ID provider users - other than system users - are called <<#service-accounts>>.
 
-NOTE: Prior to XP 7.14.0, manually added users to the System ID provider were treated as regular users with username-password credentials. System ID provider username-password credentials are still supported, but strongly discouraged. Instead, use service accounts with JWT tokens. See <<#service-accounts>> for more details.
+NOTE: Prior to XP image:xp-7150.svg[XP 7.15.0,opts=inline], manually added users to the System ID provider were treated as regular users with username-password credentials. System ID provider username-password credentials are still supported, but strongly discouraged. Instead, use service accounts with JWT tokens. See <<#service-accounts>> for more details.
 
 NOTE: Avoid placing your regular users in the System ID provider, rather create a new ID provider instead.
 
@@ -70,9 +70,16 @@ NOTE: Avoid placing your regular users in the System ID provider, rather create 
 ==== Service Accounts
 
 A service account is a special kind of user used by remote applications and services to authenticate with XP.
-Service accounts are not meant to be used by humans.
+Service accounts are not meant to be used by humans. Service accounts are managed by XP Users app.
 
-Service accounts are used to make authorized call to
+Each Service Account may (but not required to) have a Service Account Key. Or multiple service account keys.
+Using Service Account Key is beneficial for security reasons:
+
+* It allows to authenticate without transferring the password over the network.
+* Multiple Shared Account Keys allow rotation of Public-Private key-pairs without service interruption.
+* Stored Public key is not a hash of a password, so it is not possible to reverse-engineer the password from the public key.
+
+Service accounts keys are used to make authorized call to:
 
 * <<management_endpoint, Management Endpoint>>
 * any other XP service port endpoint that supports authentication and configured to use the System ID provider. See <<deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
@@ -95,7 +102,6 @@ JWT token must follow the following rules:
 Private key from Public-Private key-pair is stored only on the client side and must not be shared with the XP server.
 
 Public key from Public-Private key-pair is stored in the XP server and is used to verify the signature of the token.
-Each service account can store multiple Public keys in order to support rotation of Public-Private key-pairs without service interruption.
 
 NOTE: Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Whenever possible use other ID providers instead, such as OIDC ID provider.
 

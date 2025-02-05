@@ -3,12 +3,37 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
-== XP8
+== XP7 Update 15
+
+=== Asset Service
+
+Asset Service is deprecated and will be removed in future versions. Currently, it continues to work as before.
+`lib-asset` and `lib-static` are introduced to replace the Asset Service.
 
 === Service Accounts
 
-* Manually added <<iam#system-id-provider, System ID provider>> users are now called Service Accounts.
-* Service Accounts can be authenticated with JWT tokens.
+* Manually added <<iam#system-id-provider, System ID provider>> users are now called <<iam#service-accounts, Service Accounts>>.
+* Service Accounts can be authenticated with JWT tokens, including ability to authenticate on <<runtime/management#management_endpoint, Management Endpoint>>.
+
+=== HTTP Framework
+
+* Added support for `patch` method in <<framework/controllers#http-controller, HTTP Controllers>>.
+* Added ability to remove previously set HTTP Headers in controllers/filters. Note that headers set by <<deployment/config#header, Header Filter>> cannot be removed.
+
+=== Image Service
+
+* Image service added support for progressive image formats. Progressive images are loaded in multiple passes, which can improve perceived performance. It can be configured in <<deployment/config#image, Image config>>.
+* WEBP and AVIF image format basic support: images can be served in new formats, but transformations are not yet supported.
+
+=== Other changes
+
+* HTTP gzip compression disabled by default. Gzip compression often makes response chunked, which is not supported by some CDNs. It can be enabled back in <<deployment/config#jetty, Jetty config>>.
+* Automatic media-type detection for some essential file extensions such as `webmanifest`, `ico`, `webp`, `avif` ...  added, so you don't need to list them in <<deployment/config#media, Media config>>.
+* `@enonic-types/core` package added to provide common TypeScript types for Enonic XP.
+* Added `Request` and `Response` TypeScript types.
+* <<deployment/backup-restore#, Vacuuming>> now deletes snapshots that are no longer usable, or snapshots that are older that specified threshold.
+* Node Repositories can be created as transient - meaning that their data is not stored in system dumps and snapshots.
+* Node Versions cache size can be configured in <<deployment/config#repo, Repo config>> by `cache.capacity`. `cache.size` is no longer in use as it appears to be problematic in almost all use-case scenarios.
 
 
 == XP7 Update 14

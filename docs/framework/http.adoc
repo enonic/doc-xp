@@ -84,7 +84,7 @@ The ``response`` object is the value returned by an HTTP controller - as a respo
 <1> HTTP response status code (default is ``200``).
 <2> HTTP message body of the response that can either be a string or a JavaScript object.
 <3> MIME type of the body (defaults to ``text/plain; charset=utf-8``).
-<4> Name/value pairs with the HTTP headers to be added to the response.
+<4> Name/value pairs with the HTTP headers to be added to the response. Starting from image:xp-7150.svg[XP 7.15.0,opts=inline] value can be `null`/`undefined` to remove a headers added by other controllers/filters.
 <5> HTTP cookies to be added to the response. Will be described in a later section.
 <6> URI to redirect to. If specified, the value will be set in the "Location" header and the status will be set to 303.
 <7> Site engine only: If enabled the response body from a page render is processed to find and render any component tags found. (default is ``true``). Set to false to skip post processing of tags.
