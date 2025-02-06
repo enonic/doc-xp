@@ -1,7 +1,7 @@
 = Backup and restore
 
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
 This section describes how to manage and backup your XP data
 
@@ -21,18 +21,18 @@ The blobstores are effective since as a single blob may be re-used for a vast nu
 NOTE: For clustered deployments, the blobs must be stored on a dedicated shared/distributed filesystem.
 
 
-=== Indicies
-In addition to blobs, XP also creates and stores indicies.
-Indicies are automatically replicated across all data nodes (if you have a cluster).
+=== Indices
+In addition to blobs, XP also creates and stores indices.
+Indices are automatically replicated across all data nodes (if you have a cluster).
 
 There are essentially two types of indexes.
 
 * The search index which can be updated or re-created through re-indexing.
 * The metadata index contain critical repository, branch and tree structure information, as well as version history.
 
-The metadata indicies are required in order to restore XP to a working state, where as the search index may be re-generated from the combination of meta-data and blobstore.
+The metadata indices are required in order to restore XP to a working state, where as the search index may be re-generated from the combination of meta-data and blobstore.
 
-NOTE: Indicies MUST always be stored on a local filesystem, preferably using fast SSDs.
+NOTE: Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 
 
 == Useful tools
@@ -55,7 +55,7 @@ Snapshots normally complete within seconds. Once you have a snapshot, you may re
 ====
 Snapshots will only restore the metadata and search index of your instance, not the blobs. As such, you must have an intact blobstore from the time the snapshot was taken.
 
-If you for instance have performed a <<vacuum, Vacuum>> operation, cleaning up items of age > 10 days - Restoring an 11 days old snapshot will bring your solution into an inconsistent state.
+If you for instance have performed a <<vacuum, Vacuum>> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. Starting from image:xp-7150.svg[XP 7.15.0,opts=inline] to prevent confusion all snapshots are deleted after any vacuum operations that delete blobs.
 ====
 
 Snapshot and restore commands can be performed by using Enonic CLI, the API or a management application from Enonic Market.
@@ -128,7 +128,7 @@ Deleting the blobs would actually prevent you from easily rolling back to a prev
 
 To permanently delete the remaining metadata and blogs in a controlled fashion, XP offers a function called Vacuuming.
 
-There are multiple vacuum tasks available in XP:
+There are multiple Vacuuming tasks available in XP:
 
 * `VersionTableVacuumTask` - removes node metadata that is no longer referenced.
 * `SnapshotsVacuumTask` - removes snapshots that are older than specified age threshold.
@@ -139,6 +139,6 @@ There are multiple vacuum tasks available in XP:
 
 `VersionTableVacuumTask`, `SnapshotsVacuumTask` - are default tasks that run when no tasks are specified.
 
-IMPORTANT: `SegmentVacuumTask`, `BinaryBlobVacuumTask` and `NodeBlobVacuumTask` - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blob storage before running these tasks.
+IMPORTANT: `SegmentVacuumTask`, `BinaryBlobVacuumTask` and `NodeBlobVacuumTask` - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blobstore before running these tasks. It is also recommended to take a new snapshot right after the vacuum operation.
 
 TIP: Vacuuming can be setup to execute automatically as a scheduled job, or manually triggered via for instance the CLI.
