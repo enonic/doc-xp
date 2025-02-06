@@ -128,6 +128,17 @@ Deleting the blobs would actually prevent you from easily rolling back to a prev
 
 To permanently delete the remaining metadata and blogs in a controlled fashion, XP offers a function called Vacuuming.
 
-Vacuuming first removes the remaining metadata, and then effectively removes the blobs that are no longer referenced.
+There are multiple vacuum tasks available in XP:
+
+* `VersionTableVacuumTask` - removes node metadata that is no longer referenced.
+* `SnapshotsVacuumTask` - removes snapshots that are older than specified age threshold.
+
+* `SegmentVacuumTask` - deletes all blobs related to previously deleted repositories.
+* `BinaryBlobVacuumTask` - removes binary data blobs that are no longer referenced.
+* `NodeBlobVacuumTask` - removes node data blobs that are no longer referenced.
+
+`VersionTableVacuumTask`, `SnapshotsVacuumTask` - are default tasks that run when no tasks are specified.
+
+IMPORTANT: `SegmentVacuumTask`, `BinaryBlobVacuumTask` and `NodeBlobVacuumTask` - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blob storage before running these tasks.
 
 TIP: Vacuuming can be setup to execute automatically as a scheduled job, or manually triggered via for instance the CLI.

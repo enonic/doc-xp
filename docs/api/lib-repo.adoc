@@ -66,7 +66,7 @@ Parameters
 [grid="none"]
 |===
 | Name  | Type   | Description
-| params | <<CreateRepoParams>> | JSON with the parameters
+| params | <<CreateRepositoryParams>> | JSON with the parameters
 |===
 
 [.lead]
@@ -383,7 +383,7 @@ refresh({
 
 == Objects
 
-=== CreateRepoParams
+=== CreateRepositoryParams
 
 Object to pass to the `create` function.
 
@@ -397,10 +397,11 @@ Fields
 | Name | Type | Attributes| Details
 | id | string | | Repository ID
 | rootPermissions | array | <optional> |Array of root permissions. By default, all permissions to 'system.admin' and read permission to 'system.authenticated'
-| settings | <<RepoSettings>> | <optional> | Repository settings
+| settings | <<RepositorySettings>> | <optional> | Repository settings
+| transient | boolean | <optional> | If true, the repository will be transient
 |===
 
-=== RepoSettings
+=== RepositorySettings
 
 Repository settings to optionally pass to the `create` function
 
@@ -417,7 +418,7 @@ Fields
 
 === IndexDefinitions
 
-Index definitions used in <<RepoSettings>> parameter
+Index definitions used in <<RepositorySettings>> parameter
 
 [.lead]
 Fields
