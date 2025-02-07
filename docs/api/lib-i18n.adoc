@@ -114,7 +114,7 @@ Example
 .Getting the current context
 [source,typescript]
 ----
-const locales = i18nLib.getSupportedLocales(['site/i18n/phrases'])
+const locales = i18nLib.getSupportedLocales(['i18n/phrases'])
 ----
 
 .Sample response
