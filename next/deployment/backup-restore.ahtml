@@ -444,7 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#introduction">Introduction</a>
 <ul class="sectlevel2">
 <li><a href="#blobs">Blobs</a></li>
-<li><a href="#indicies">Indicies</a></li>
+<li><a href="#indices">Indices</a></li>
 </ul>
 </li>
 <li><a href="#useful_tools">Useful tools</a></li>
@@ -505,10 +505,10 @@ For clustered deployments, the blobs must be stored on a dedicated shared/distri
 </div>
 </div>
 <div class="sect2">
-<h3 id="indicies"><a class="link" href="#indicies">Indicies</a></h3>
+<h3 id="indices"><a class="link" href="#indices">Indices</a></h3>
 <div class="paragraph">
-<p>In addition to blobs, XP also creates and stores indicies.
-Indicies are automatically replicated across all data nodes (if you have a cluster).</p>
+<p>In addition to blobs, XP also creates and stores indices.
+Indices are automatically replicated across all data nodes (if you have a cluster).</p>
 </div>
 <div class="paragraph">
 <p>There are essentially two types of indexes.</p>
@@ -524,7 +524,7 @@ Indicies are automatically replicated across all data nodes (if you have a clust
 </ul>
 </div>
 <div class="paragraph">
-<p>The metadata indicies are required in order to restore XP to a working state, where as the search index may be re-generated from the combination of meta-data and blobstore.</p>
+<p>The metadata indices are required in order to restore XP to a working state, where as the search index may be re-generated from the combination of meta-data and blobstore.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -533,7 +533,7 @@ Indicies are automatically replicated across all data nodes (if you have a clust
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Indicies MUST always be stored on a local filesystem, preferably using fast SSDs.
+Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 </td>
 </tr>
 </table>
@@ -585,7 +585,27 @@ Indicies MUST always be stored on a local filesystem, preferably using fast SSDs
 <p>Snapshots will only restore the metadata and search index of your instance, not the blobs. As such, you must have an intact blobstore from the time the snapshot was taken.</p>
 </div>
 <div class="paragraph">
-<p>If you for instance have performed a <a href="#vacuum">Vacuum</a> operation, cleaning up items of age &gt; 10 days - Restoring an 11 days old snapshot will bring your solution into an inconsistent state.</p>
+<p>If you for instance have performed a <a href="#vacuum">Vacuum</a> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. Starting from <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="r">
+    <rect width="64" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#r)">
+    <rect width="25" height="20" fill="#555"/>
+    <rect x="25" width="39" height="20" fill="#007ec6"/>
+    <rect width="64" height="20" fill="url(#s)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
+     font-size="110">
+    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
+    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
+    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.15.0</text>
+    <text x="435" y="140" transform="scale(.1)" textLength="290">7.15.0</text>
+  </g>
+</svg></span> to prevent confusion all snapshots are deleted after any vacuum operations that delete blobs.</p>
 </div>
 </td>
 </tr>
@@ -742,7 +762,7 @@ Dumping is not a recommended backup solution, rather use snapshots in combinatio
 <p>To permanently delete the remaining metadata and blogs in a controlled fashion, XP offers a function called Vacuuming.</p>
 </div>
 <div class="paragraph">
-<p>There are multiple vacuum tasks available in XP:</p>
+<p>There are multiple Vacuuming tasks available in XP:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -773,7 +793,7 @@ Dumping is not a recommended backup solution, rather use snapshots in combinatio
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<code>SegmentVacuumTask</code>, <code>BinaryBlobVacuumTask</code> and <code>NodeBlobVacuumTask</code> - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blob storage before running these tasks.
+<code>SegmentVacuumTask</code>, <code>BinaryBlobVacuumTask</code> and <code>NodeBlobVacuumTask</code> - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blobstore before running these tasks. It is also recommended to take a new snapshot right after the vacuum operation.
 </td>
 </tr>
 </table>
@@ -796,7 +816,7 @@ Vacuuming can be setup to execute automatically as a scheduled job, or manually 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-06 15:16:07 UTC
+Last updated 2025-02-07 08:43:17 UTC
 </div>
 </div>
 </body>

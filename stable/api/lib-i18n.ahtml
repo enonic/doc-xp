@@ -627,7 +627,7 @@ notify.process.failed=Error al procesar: {0}.</code></pre>
 <div class="listingblock">
 <div class="title">Getting the current context</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">const locales = i18nLib.getSupportedLocales(['site/i18n/phrases'])</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const locales = i18nLib.getSupportedLocales(['i18n/phrases'])</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -731,7 +731,7 @@ const message2 = localize({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-06 15:15:42 UTC
+Last updated 2025-02-07 08:42:53 UTC
 </div>
 </div>
 </body>
