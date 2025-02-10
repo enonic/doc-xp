@@ -130,12 +130,12 @@ To permanently delete the remaining metadata and blogs in a controlled fashion, 
 
 There are multiple Vacuuming tasks available in XP:
 
-* `VersionTableVacuumTask` - removes node metadata that is no longer referenced.
-* `SnapshotsVacuumTask` - removes snapshots that are older than specified age threshold.
+* `VersionTableVacuumTask` - deletes node metadata that is no longer referenced.
+* `SnapshotsVacuumTask` - deletes snapshots that are older than specified age threshold.
 
 * `SegmentVacuumTask` - deletes all blobs related to previously deleted repositories.
-* `BinaryBlobVacuumTask` - removes binary data blobs that are no longer referenced.
-* `NodeBlobVacuumTask` - removes node data blobs that are no longer referenced.
+* `BinaryBlobVacuumTask` - deletes binary data blobs that are no longer referenced.
+* `NodeBlobVacuumTask` - deletes node data blobs that are no longer referenced.
 
 `VersionTableVacuumTask`, `SnapshotsVacuumTask` - are default tasks that run when no tasks are specified.
 
