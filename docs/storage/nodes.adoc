@@ -5,7 +5,7 @@
 
 == Introduction
 
-Repositories and nodes are the fundamental concepts that enable you to create and store data in XP. Nodes are the smallest possible data object that can be created, and they are always stored in a repository. A simple comparison might be: If a repository is a drive, nodes are the files (and folders). 
+Repositories and nodes are the fundamental concepts that enable you to create and store data in XP. Nodes are the smallest possible data object that can be created, and they are always stored in a repository. A simple comparison might be: If a repository is a drive, nodes are the files (and folders).
 
 == Nodes
 
@@ -35,6 +35,9 @@ Repositories are essentially containers of nodes.
 You may create any number of repositories within a single instance of Enonic XP, and even perform queries across them.
 
 Each repository has a unique name, where best practice is to name or prefix the repository according to your application. i.e. a good repository name might be 'com.company.myapp'
+
+Starting from image:xp-7150.svg[XP 7.15.0,opts=inline] you can flag repository as _transient_ meaning that their data is not stored in system dumps and snapshots.
+
 
 image::repos.png[]
 
