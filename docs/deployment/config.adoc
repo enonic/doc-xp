@@ -441,7 +441,7 @@ It also requires granting certain permissions. You can find more information in 
 
 `XP_HOME/config/com.enonic.xp.admin.cfg`
 
-General setting for /admin
+General settings for /admin.
 
 .Disable Content Security Policy for site preview
 [source,properties]
@@ -460,20 +460,32 @@ site.preview.contentSecurityPolicy:: Defines default value for Content-Security-
 Default: `default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:`
 
 
-=== Home app
+=== XP Dashboard
 
 `XP_HOME/config/com.enonic.xp.app.main.cfg`
 
-.Disable welcome tour
+==== Content Security Policy
+
+IMPORTANT: Disabling or changing built-in Content Security Policy is generally NOT RECOMMENDED. You may need to tweak
+CSP settings _only_ if you are building a Dashboard widget where you want to allow references to external resources
+(for example, a YouTube video) or other potentially unsafe (from the CSP point of view) actions.
+
+You can provide your own header for Content Security Policy using `contentSecurityPolicy.header` property.
+Note, that if you provide your own header, you should include all necessary directives, as the default headers (`self`) will not be added.
+
+.Customized Content Security Policy for XP Dashboard
 [source,properties]
 ----
-# Disable the "Welcome tour". Default: false
-tourDisabled = true
+contentSecurityPolicy.header=default-src 'self'; connect-src 'self' ws: wss:; object-src 'none'; style-src 'self' 'unsafe-inline'; frame-src 'self' https://*.youtube.com
 ----
 
-tourDisabled:: Specify if welcome tour should be enabled or not.
-Default: `false`
+To completely turn off Content Security Policy for the Dashboard, set `contentSecurityPolicy.enabled` property to `false`.
 
+.Disabled Content Security Policy for XP Dashboard
+[source,properties]
+----
+contentSecurityPolicy.enabled=false
+----
 
 === Applications app
 
