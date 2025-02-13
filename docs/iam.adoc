@@ -82,7 +82,7 @@ Using Service Account Key is beneficial for security reasons:
 Service accounts keys are used to make an authorized call to:
 
 * <<management_endpoint, Management Endpoint>>
-* any other XP service port endpoint that supports authentication and configured to use the System ID provider. See <<deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
+* any other XP service port endpoint that supports authentication and is configured to use the System ID provider. See <<deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
 
 Requests are authenticated by JWT token in the `Authorization` header.
 
