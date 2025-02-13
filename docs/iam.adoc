@@ -99,7 +99,7 @@ A JWT token must follow the following rules:
 * `exp` claim must be set to the expiration time of the token. The token will be rejected if it is expired.
 * `iat` claim must be set to the time when the token was issued. The token will be rejected if it was issued in the future.
 
-Private key from Public-Private key-pair is stored only on the client side and must not be shared with the XP server.
+Private key from Public-Private key pair is stored only on the client side and must not be shared with the XP server.
 
 Public key from Public-Private key pair is stored in the XP server and is used to verify signature of the token.
 
