@@ -101,7 +101,7 @@ A JWT token must follow the following rules:
 
 Private key from Public-Private key-pair is stored only on the client side and must not be shared with the XP server.
 
-Public key from Public-Private key-pair is stored in the XP server and is used to verify the signature of the token.
+Public key from Public-Private key pair is stored in the XP server and is used to verify signature of the token.
 
 NOTE: Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Whenever possible use other ID providers instead, such as OIDC ID provider.
 
