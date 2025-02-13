@@ -92,7 +92,7 @@ Authorization: Bearer <token>
 
 A JWT token must follow the following rules:
 
-* it must be valid RFC-7519 JWT token.
+* it must be a valid RFC-7519 JWT token.
 * `alg` header parameter must be set to `RS256`.
 * `kid` header parameter must be set to the ID of the public key that corresponds to the private key used to sign the token.
 * `sub` claim must be set to the ID of the service account, for instance, `user:system:user_id`.
