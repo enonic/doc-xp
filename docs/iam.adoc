@@ -62,7 +62,7 @@ The purpose of the System ID provider is to store system users, for example `su`
 image:xp-7150.svg[XP 7.15.0,opts=inline]
 Users in the System ID provider that are not system users are called <<#service-accounts>>.
 
-NOTE: Prior to XP image:xp-7150.svg[XP 7.15.0,opts=inline], manually added users to the System ID provider were treated as regular users with username-password credentials. System ID provider username-password credentials are still supported, but strongly discouraged. Instead, use service accounts with JWT tokens. See <<#service-accounts>> for more details.
+NOTE: Prior to XP image:xp-7150.svg[XP 7.15.0,opts=inline], users added to the System ID provider were treated as regular users with username-password credentials. Users with username-password credentials in the System ID provider are still supported, but strongly discouraged. Instead, use service accounts with JWT tokens. See <<#service-accounts>> for more details.
 
 NOTE: Avoid adding real users to the System ID provider, rather create a new ID provider instead.
 
