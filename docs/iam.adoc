@@ -64,7 +64,7 @@ System ID provider users - other than system users - are called <<#service-accou
 
 NOTE: Prior to XP image:xp-7150.svg[XP 7.15.0,opts=inline], manually added users to the System ID provider were treated as regular users with username-password credentials. System ID provider username-password credentials are still supported, but strongly discouraged. Instead, use service accounts with JWT tokens. See <<#service-accounts>> for more details.
 
-NOTE: Avoid placing your regular users in the System ID provider, rather create a new ID provider instead.
+NOTE: Avoid adding real users to the System ID provider, rather create a new ID provider instead.
 
 [#service-accounts]
 ==== Service Accounts
