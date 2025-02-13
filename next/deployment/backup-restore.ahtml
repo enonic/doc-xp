@@ -767,19 +767,19 @@ Dumping is not a recommended backup solution, rather use snapshots in combinatio
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionTableVacuumTask</code> - removes node metadata that is no longer referenced.</p>
+<p><code>VersionTableVacuumTask</code> - deletes node metadata that is no longer referenced.</p>
 </li>
 <li>
-<p><code>SnapshotsVacuumTask</code> - removes snapshots that are older than specified age threshold.</p>
+<p><code>SnapshotsVacuumTask</code> - deletes snapshots that are older than specified age threshold.</p>
 </li>
 <li>
 <p><code>SegmentVacuumTask</code> - deletes all blobs related to previously deleted repositories.</p>
 </li>
 <li>
-<p><code>BinaryBlobVacuumTask</code> - removes binary data blobs that are no longer referenced.</p>
+<p><code>BinaryBlobVacuumTask</code> - deletes binary data blobs that are no longer referenced.</p>
 </li>
 <li>
-<p><code>NodeBlobVacuumTask</code> - removes node data blobs that are no longer referenced.</p>
+<p><code>NodeBlobVacuumTask</code> - deletes node data blobs that are no longer referenced.</p>
 </li>
 </ul>
 </div>
@@ -816,7 +816,7 @@ Vacuuming can be setup to execute automatically as a scheduled job, or manually 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-07 08:43:17 UTC
+Last updated 2025-02-13 12:37:35 UTC
 </div>
 </div>
 </body>

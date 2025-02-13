@@ -459,7 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#elasticsearch">Elasticsearch</a></li>
 <li><a href="#hazelcast">Hazelcast</a></li>
 <li><a href="#admin">Admin</a></li>
-<li><a href="#home_app">Home app</a></li>
+<li><a href="#xp_dashboard">XP Dashboard</a></li>
 <li><a href="#applications_app">Applications app</a></li>
 <li><a href="#jetty">Jetty</a></li>
 <li><a href="#sessionstore">SessionStore</a></li>
@@ -1287,7 +1287,7 @@ It also requires granting certain permissions. You can find more information in 
 <p><code>XP_HOME/config/com.enonic.xp.admin.cfg</code></p>
 </div>
 <div class="paragraph">
-<p>General setting for /admin</p>
+<p>General settings for /admin.</p>
 </div>
 <div class="listingblock">
 <div class="title">Disable Content Security Policy for site preview</div>
@@ -1312,25 +1312,45 @@ Default: <code>default-src 'self'; base-uri 'self'; form-action 'self'; script-s
 </div>
 </div>
 <div class="sect2">
-<h3 id="home_app"><a class="link" href="#home_app">Home app</a></h3>
+<h3 id="xp_dashboard"><a class="link" href="#xp_dashboard">XP Dashboard</a></h3>
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.app.main.cfg</code></p>
 </div>
+<div class="sect3">
+<h4 id="content_security_policy"><a class="link" href="#content_security_policy">Content Security Policy</a></h4>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Disabling or changing built-in Content Security Policy is generally NOT RECOMMENDED. You may need to tweak
+CSP settings <em>only</em> if you are building a Dashboard widget where you want to allow references to external resources
+(for example, a YouTube video) or other potentially unsafe (from the CSP point of view) actions.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can provide your own header for Content Security Policy using <code>contentSecurityPolicy.header</code> property.
+Note, that if you provide your own header, you should include all necessary directives, as the default headers (<code>self</code>) will not be added.</p>
+</div>
 <div class="listingblock">
-<div class="title">Disable welcome tour</div>
+<div class="title">Customized Content Security Policy for XP Dashboard</div>
 <div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties"># Disable the "Welcome tour". Default: false
-tourDisabled = true</code></pre>
+<pre class="highlight"><code class="language-properties" data-lang="properties">contentSecurityPolicy.header=default-src 'self'; connect-src 'self' ws: wss:; object-src 'none'; style-src 'self' 'unsafe-inline'; frame-src 'self' https://*.youtube.com</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">tourDisabled</dt>
-<dd>
-<p>Specify if welcome tour should be enabled or not.
-Default: <code>false</code></p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>To completely turn off Content Security Policy for the Dashboard, set <code>contentSecurityPolicy.enabled</code> property to <code>false</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Disabled Content Security Policy for XP Dashboard</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">contentSecurityPolicy.enabled=false</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2466,7 +2486,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-07 08:42:53 UTC
+Last updated 2025-02-13 12:37:10 UTC
 </div>
 </div>
 </body>
