@@ -72,7 +72,7 @@ NOTE: Avoid adding real users to the System ID provider, rather create a new ID 
 A service account is a special kind of user used by remote applications and services to authenticate with XP.
 Service accounts are not meant to be used by humans. Service accounts are managed by XP Users app.
 
-Each Service Account may (but not required to) have a Service Account Key. Or multiple service account keys.
+Each Service Account may (but not required to) have one or several Service Account keys.
 Using Service Account Key is beneficial for security reasons:
 
 * It allows to authenticate without transferring the password over the network.
