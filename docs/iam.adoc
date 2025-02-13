@@ -57,10 +57,10 @@ When accessing the XP admin console for the first time in a fresh installation, 
 
 image::iam/system-idprovider.png[System ID provider login screen, 828]
 
-The purpose of the System ID provider is to hold system users such as `su` - the Super User, and `anonymous` - the user that is _de facto_ if no other user is specified.
+The purpose of the System ID provider is to store system users, for example `su`(the Super User) and `anonymous` (the default user when no other user is specified).
 
 image:xp-7150.svg[XP 7.15.0,opts=inline]
-System ID provider users - other than system users - are called <<#service-accounts>>.
+Users in the System ID provider that are not system users are called <<#service-accounts>>.
 
 NOTE: Prior to XP image:xp-7150.svg[XP 7.15.0,opts=inline], manually added users to the System ID provider were treated as regular users with username-password credentials. System ID provider username-password credentials are still supported, but strongly discouraged. Instead, use service accounts with JWT tokens. See <<#service-accounts>> for more details.
 
