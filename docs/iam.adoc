@@ -86,7 +86,7 @@ Service accounts keys are used to make an authorized call to:
 
 Requests are authenticated by JWT token in the `Authorization` header.
 
-The content of the header should look like the following:
+Content of the header should look like the following:
 [source,options="nowrap"]
 Authorization: Bearer <token>
 
