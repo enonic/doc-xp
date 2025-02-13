@@ -79,7 +79,7 @@ Using Service Account Key is beneficial for security reasons:
 * Multiple Shared Account Keys allow rotation of Public-Private key-pairs without service interruption.
 * Stored Public key is not a hash of a password, so it is not possible to reverse-engineer the password from the public key.
 
-Service accounts keys are used to make authorized call to:
+Service accounts keys are used to make an authorized call to:
 
 * <<management_endpoint, Management Endpoint>>
 * any other XP service port endpoint that supports authentication and configured to use the System ID provider. See <<deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
