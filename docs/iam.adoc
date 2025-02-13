@@ -90,7 +90,7 @@ Content of the header should look like the following:
 [source,options="nowrap"]
 Authorization: Bearer <token>
 
-JWT token must follow the following rules:
+A JWT token must follow the following rules:
 
 * it must be valid RFC-7519 JWT token.
 * `alg` header parameter must be set to `RS256`.
