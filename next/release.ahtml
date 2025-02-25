@@ -443,11 +443,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#xp7_update_15">XP7 Update 15</a>
 <ul class="sectlevel2">
-<li><a href="#asset_service">Asset Service</a></li>
 <li><a href="#service_accounts">Service Accounts</a></li>
-<li><a href="#http_framework">HTTP Framework</a></li>
-<li><a href="#image_service">Image Service</a></li>
+<li><a href="#progressive_image_delivery">Progressive image delivery</a></li>
+<li><a href="#basic_webp_and_avif_support">Basic WebP and AVIF support</a></li>
+<li><a href="#typescript">TypeScript</a></li>
 <li><a href="#other_changes">Other changes</a></li>
+<li><a href="#deprecated_asset_serivice">Deprecated asset serivice</a></li>
 </ul>
 </li>
 <li><a href="#xp7_update_14">XP7 Update 14</a>
@@ -579,50 +580,75 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="xp7_update_15"><a class="link" href="#xp7_update_15">XP7 Update 15</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="asset_service"><a class="link" href="#asset_service">Asset Service</a></h3>
 <div class="paragraph">
-<p>Asset Service is deprecated and will be removed in future versions. Currently, it continues to work as before.
-<code>lib-asset</code> and <code>lib-static</code> are introduced to replace the Asset Service.</p>
-</div>
+<p>This release includes a selection of new features, as well as several smaller improvements, bugfixes and stability improvements.</p>
 </div>
 <div class="sect2">
 <h3 id="service_accounts"><a class="link" href="#service_accounts">Service Accounts</a></h3>
+<div class="paragraph">
+<p>Say goodbye to passwords. The built-in <a href="iam.ahtml#system-id-provider">System ID provider</a> has been upgraded to support use of tokens.
+Users created created in the System ID provider are now referred to as <a href="iam.ahtml#service-accounts">Service Accounts</a>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="release/images/715-users-public-key.png" alt="Upload or generate keys" width="1077"></span></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Manually added <a href="iam.ahtml#system-id-provider">System ID provider</a> users are now called <a href="iam.ahtml#service-accounts">Service Accounts</a>.</p>
+<p>Upload a public key, or generate a key pair directly on the service account</p>
 </li>
 <li>
-<p>Service Accounts can be authenticated with JWT tokens, including ability to authenticate on <a href="runtime/management.ahtml#management_endpoint">Management Endpoint</a>.</p>
+<p>Use JWT token-based authentication when accessing XP programmatically or via the latest Enonic CLI</p>
+</li>
+<li>
+<p>The <a href="runtime/management.ahtml#management_endpoint">Management Endpoint</a> now also supports token-base auth.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are using automated appl deployments we recommend switching to token based authentication.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="http_framework"><a class="link" href="#http_framework">HTTP Framework</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Added support for <code>patch</code> method in <a href="framework/controllers.ahtml#http-controller">HTTP Controllers</a>.</p>
-</li>
-<li>
-<p>Added ability to remove previously set HTTP Headers in controllers/filters. Note that headers set by <a href="deployment/config.ahtml#header">Header Filter</a> cannot be removed.</p>
-</li>
-</ul>
+<h3 id="progressive_image_delivery"><a class="link" href="#progressive_image_delivery">Progressive image delivery</a></h3>
+<div class="paragraph">
+<p>The image service now supports progressive image formats. This means images images are loaded in multiple passes, rather than serially - which may improve perceived performance.</p>
+</div>
+<div class="paragraph">
+<p>Enable progressive images via the <a href="deployment/config.ahtml#image">Image config</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="image_service"><a class="link" href="#image_service">Image Service</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Image service added support for progressive image formats. Progressive images are loaded in multiple passes, which can improve perceived performance. It can be configured in <a href="deployment/config.ahtml#image">Image config</a>.</p>
-</li>
-<li>
-<p>WEBP and AVIF image format basic support: images can be served in new formats, but transformations are not yet supported.</p>
-</li>
-</ul>
+<h3 id="basic_webp_and_avif_support"><a class="link" href="#basic_webp_and_avif_support">Basic WebP and AVIF support</a></h3>
+<div class="paragraph">
+<p>Images in WebP and AVIF format can now be uploaded and delivered in their original size through XP, similar to how GIF and SVG files are handled - resizing and transformations are not yet supported.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Requires upgrading to Content Studio 5.3 or later.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="typescript"><a class="link" href="#typescript">TypeScript</a></h3>
+<div class="paragraph">
+<p>The <code>@enonic-types/core</code> package now includes TypeScript types for XP&#8217;s <code>Request</code> and <code>Response</code> objects.</p>
 </div>
 </div>
 <div class="sect2">
@@ -630,27 +656,46 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>HTTP gzip compression disabled by default. Gzip compression often makes response chunked, which is not supported by some CDNs. It can be enabled back in <a href="deployment/config.ahtml#jetty">Jetty config</a>.</p>
+<p>Added support for <code>patch</code> method in <a href="framework/controllers.ahtml#http-controller">HTTP Controllers</a>.</p>
+</li>
+<li>
+<p>Added ability to remove previously set HTTP Headers in controllers/filters.
+NOTE: Headers set by <a href="deployment/config.ahtml#header">Header Filter</a> cannot be removed.</p>
+</li>
+<li>
+<p>HTTP gzip compression is now disabled by default. Gzip compression often makes response chunked, which is not supported by some CDNs. It can manually be enabled in <a href="deployment/config.ahtml#jetty">Jetty config</a>.</p>
 </li>
 <li>
 <p>Automatic media-type detection for some essential file extensions such as <code>webmanifest</code>, <code>ico</code>, <code>webp</code>, <code>avif</code> &#8230;&#8203;  added, so you don&#8217;t need to list them in <a href="deployment/config.ahtml#media">Media config</a>.</p>
 </li>
 <li>
-<p><code>@enonic-types/core</code> package added to provide common TypeScript types for Enonic XP.</p>
-</li>
-<li>
-<p>Added <code>Request</code> and <code>Response</code> TypeScript types.</p>
-</li>
-<li>
 <p><a href="deployment/backup-restore.ahtml">Vacuuming</a> now deletes snapshots that are no longer usable, or snapshots that are older that specified threshold.</p>
 </li>
 <li>
-<p>Node Repositories can be created as transient - meaning that their data is not stored in system dumps and snapshots.</p>
+<p>Repositories can now be created as transient - meaning that their data is not stored in system dumps and snapshots.</p>
 </li>
 <li>
-<p>Node Versions cache size can be configured in <a href="deployment/config.ahtml#repo">Repo config</a> by <code>cache.capacity</code>. <code>cache.size</code> is no longer in use as it appears to be problematic in almost all use-case scenarios.</p>
+<p>Repository <code>cache.capacity</code> replaces <code>cache.size</code> in <a href="deployment/config.ahtml#repo">Repo config</a>.</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deprecated_asset_serivice"><a class="link" href="#deprecated_asset_serivice">Deprecated asset serivice</a></h3>
+<div class="paragraph">
+<p>To give developers more control, and make XP more flexible - the Asset Service is now officially deprecated. It will be removed in a future version of XP. Future-proof your application by upgrading to the new <a href="https://developer.enonic.com/docs/lib-asset">asset library</a> - a drop-in replacement. Upgrade instructions are in the documentation.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For even more control over your asset serving, check out lib static instead.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -671,7 +716,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="release/images/714-sdk-welcome.png" alt="SDK Welcome page" width="75%"></span></p>
+<p><span class="image"><img src="release/images/714-sdk-welcome.png" alt="SDK Welcome page" width="797"></span></p>
 </div>
 </div>
 </div>
@@ -1951,7 +1996,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-13 12:37:35 UTC
+Last updated 2025-02-25 20:01:17 UTC
 </div>
 </div>
 </body>
