@@ -5,35 +5,53 @@ include::.variables.adoc[]
 
 == XP7 Update 15
 
-=== Asset Service
-
-Asset Service is deprecated and will be removed in future versions. Currently, it continues to work as before.
-`lib-asset` and `lib-static` are introduced to replace the Asset Service.
+This release includes a selection of new features, as well as several smaller improvements, bugfixes and stability improvements.
 
 === Service Accounts
 
-* Manually added <<iam#system-id-provider, System ID provider>> users are now called <<iam#service-accounts, Service Accounts>>.
-* Service Accounts can be authenticated with JWT tokens, including ability to authenticate on <<runtime/management#management_endpoint, Management Endpoint>>.
+Say goodbye to passwords. The built-in <<iam#system-id-provider, System ID provider>> has been upgraded to support use of tokens.
+Users created created in the System ID provider are now referred to as <<iam#service-accounts, Service Accounts>>.
 
-=== HTTP Framework
+image:715-users-public-key.png["Upload or generate keys", 1077]
 
-* Added support for `patch` method in <<framework/controllers#http-controller, HTTP Controllers>>.
-* Added ability to remove previously set HTTP Headers in controllers/filters. Note that headers set by <<deployment/config#header, Header Filter>> cannot be removed.
+* Upload a public key, or generate a key pair directly on the service account
+* Use JWT token-based authentication when accessing XP programmatically or via the latest Enonic CLI
+* The <<runtime/management#management_endpoint, Management Endpoint>> now also supports token-base auth.
 
-=== Image Service
+NOTE: If you are using automated appl deployments we recommend switching to token based authentication.
 
-* Image service added support for progressive image formats. Progressive images are loaded in multiple passes, which can improve perceived performance. It can be configured in <<deployment/config#image, Image config>>.
-* WEBP and AVIF image format basic support: images can be served in new formats, but transformations are not yet supported.
+=== Progressive image delivery
+
+The image service now supports progressive image formats. This means images images are loaded in multiple passes, rather than serially - which may improve perceived performance.
+
+Enable progressive images via the <<deployment/config#image, Image config>>.
+
+=== Basic WebP and AVIF support
+
+Images in WebP and AVIF format can now be uploaded and delivered in their original size through XP, similar to how GIF and SVG files are handled - resizing and transformations are not yet supported.
+
+NOTE: Requires upgrading to Content Studio 5.3 or later.
+
+=== TypeScript
+
+The `@enonic-types/core` package now includes TypeScript types for XP's `Request` and `Response` objects.
 
 === Other changes
 
-* HTTP gzip compression disabled by default. Gzip compression often makes response chunked, which is not supported by some CDNs. It can be enabled back in <<deployment/config#jetty, Jetty config>>.
+* Added support for `patch` method in <<framework/controllers#http-controller, HTTP Controllers>>.
+* Added ability to remove previously set HTTP Headers in controllers/filters. 
+NOTE: Headers set by <<deployment/config#header, Header Filter>> cannot be removed.
+* HTTP gzip compression is now disabled by default. Gzip compression often makes response chunked, which is not supported by some CDNs. It can manually be enabled in <<deployment/config#jetty, Jetty config>>.
 * Automatic media-type detection for some essential file extensions such as `webmanifest`, `ico`, `webp`, `avif` ...  added, so you don't need to list them in <<deployment/config#media, Media config>>.
-* `@enonic-types/core` package added to provide common TypeScript types for Enonic XP.
-* Added `Request` and `Response` TypeScript types.
 * <<deployment/backup-restore#, Vacuuming>> now deletes snapshots that are no longer usable, or snapshots that are older that specified threshold.
-* Node Repositories can be created as transient - meaning that their data is not stored in system dumps and snapshots.
-* Node Versions cache size can be configured in <<deployment/config#repo, Repo config>> by `cache.capacity`. `cache.size` is no longer in use as it appears to be problematic in almost all use-case scenarios.
+* Repositories can now be created as transient - meaning that their data is not stored in system dumps and snapshots.
+* Repository `cache.capacity` replaces `cache.size` in <<deployment/config#repo, Repo config>>.
+
+=== Deprecated asset serivice
+
+To give developers more control, and make XP more flexible - the Asset Service is now officially deprecated. It will be removed in a future version of XP. Future-proof your application by upgrading to the new https://developer.enonic.com/docs/lib-asset[asset library] - a drop-in replacement. Upgrade instructions are in the documentation.
+
+TIP: For even more control over your asset serving, check out lib static instead.
 
 
 == XP7 Update 14
@@ -43,7 +61,7 @@ Asset Service is deprecated and will be removed in future versions. Currently, i
 * When a new XP sandbox is created using Enonic CLI 2.8 (or newer) and a template is chosen, the applications bundled with the chosen template are automatically installed during the sandbox's initial launch. This significantly streamlines the setup process, enabling developers to bypass the usual time-consuming application installation and dive straight into their work.
 * Welcome page (available at http://localhost:8080/ in SDK version) displays the list of configuration files with an option to quickly copy their paths to the clipboard, enabling developers to quickly open the configuration files for modification in the Terminal.
 
-image:714-sdk-welcome.png["SDK Welcome page", 75%]
+image:714-sdk-welcome.png["SDK Welcome page", 797]
 
 == XP7 Update 13
 
