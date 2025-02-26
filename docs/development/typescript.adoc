@@ -1,0 +1,182 @@
+= TypeScript definitions
+
+== Intro
+
+We default to TypeScript in our code examples and starters. This section describes how to configure and use our official TypeScript types - all aligned with our standard <<api#, JS APIs>>.
+
+== Install types
+
+To add types for corresponding library use NPM (or similar package manager) and install them as any other dependency. All types can be found under https://www.npmjs.com/org/enonic-types[@enonic-types] organisation on NPM.
+
+== Enonic Libraries
+
+For example, you have a `lib-auth` gradle dependency:
+
+```gradle
+dependencies {
+  include "com.enonic.xp:lib-auth:${xpVersion}"
+}
+```
+
+To add type definitions for the library, install dependency from NPM:
+
+```bash
+npm i --save-dev @enonic-types/lib-auth
+```
+
+=== Global
+
+Along with library types it is *higlhy recommended* to install definitions for global objects (`app`, `__`, `log`) and functions (`resolve`, `require`):
+
+```bash
+npm i --save-dev @enonic-types/global
+```
+
+Since `global` types are not placed under the `node_modules/@types`, it is neccessary to include them manually:
+
+`tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "types": [
+      "@enonic-types/global"
+    ]
+  }
+}
+```
+
+=== Core
+
+There are types that are shared between other libraries (like `Content` or `Principal`). Such types reside in the `core` package. It is not necessary to include this dependency into your project, as all libraries export related core types, e.g. Content library exports `Content`` type. But if you want to use these type directly, you'll need to install them:
+
+```bash
+npm i --save-dev @enonic-types/core
+```
+
+and then import them in your TypeScript code:
+
+```bash
+import type {Content} from '@enonic-types/core';
+```
+
+=== Content
+
+`Content` contains the `x` property that has a very special `XpXData` type.
+
+`XpXData` is an interface that is added to the global scope, so it can be modified using the https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces[declaration merging]. This allows you to set the shape of the XData in your project, simply by declaring the `XpXData` like this:
+
+```ts
+declare global {
+    interface XpXData {
+        'com-mysite-app': {
+            metadata: {
+                metaTagTitle: string;
+                metaTagImageId: string;
+            }
+        }
+    }
+}
+```
+
+=== Additional types
+
+`Content` is a complex type that contains unions and maps that are not exported but may be needed during the development. Actually, these types can easily be retrieved from the `Content` itself:
+
+```ts
+import type {Content} from '@enonic-types/core';
+
+type Attachments = Content['attachments'];
+
+type ContentInheritType = Content['inherit'];
+
+type Workflow = Content['workflow'];
+```
+
+
+== Usage
+
+=== require
+
+After `global` and library types are installed and configured in `tsconfig.json`, libraries can be imported just like they would be in JS code:
+
+```ts
+const libAuth = require('/lib/xp/auth');
+```
+
+=== ES6-style import
+
+If you are planning to use `import` in your code and transpile it with the default `tsc` TypeScript compiler, you'll need to add proper types mapping to your configuration via `baseUrl` and `paths` properties in `tsconfig.json`:
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "/lib/xp/auth": ["node_modules/@enonic-types/lib-auth"],
+    }
+  }
+}
+```
+
+Then in your code:
+
+```ts
+import {login, logout, getUser, generatePassword} from '/lib/xp/auth';
+```
+
+Configuring `baseUrl` and `paths` will allow the TypeScript compiler to keep the valid paths in the resulting JavaScript files.
+
+
+== Configuration
+
+=== Require
+
+To add support for type resolution for custom libraries via `require`, you can redeclare the `XpLibraries` interface in global scope, which will lead to declaration merging:
+
+```ts
+declare global {
+    interface XpLibraries {
+        '/lib/custom/mylib': typeof import('./mylib');
+    }
+}
+```
+
+=== Other imports
+
+If you want to use custom import functions, like `__non_webpack_require__` with Webpack, just use `XpRequire` from `global` types for this:
+
+```ts
+declare const __non_webpack_require__: XpRequire;
+```
+
+== Beans
+
+To create a new Java bean, the `__.newBean()` function must be used. Making it return a proper type can be done in two ways. Let's say, you have created an interface for that bean somewhere in your project:
+
+```ts
+interface SomeHelper {
+  help(text: string): void;
+}
+```
+
+=== Option 1
+
+You can pass the type argument explicitly. This option is a bit cleaner.
+
+```ts
+const helper = __.newBean<SomeHelper>('com.me.project.SomeHelper');
+```
+
+=== Option 2
+
+Or you can map the bean name to bean interface. It may be a preferable way to do it, if the bean is used across multiple files:
+
+```ts
+declare global {
+    interface XpBeans {
+        'com.me.project.SomeHelper': SomeHelper;
+    }
+}
+
+const helper = __.newBean('com.me.project.SomeHelper');
+```
