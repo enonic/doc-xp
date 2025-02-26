@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Widgets</title>
+<title>TypeScript definitions</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,21 +437,36 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Widgets</h1>
+<h1>TypeScript definitions</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#implementation">Implementation</a>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#install_types">Install types</a></li>
+<li><a href="#enonic_libraries">Enonic Libraries</a>
 <ul class="sectlevel2">
-<li><a href="#descriptor">Descriptor</a></li>
-<li><a href="#controller">Controller</a></li>
-<li><a href="#icon">Icon</a></li>
+<li><a href="#global">Global</a></li>
+<li><a href="#core">Core</a></li>
+<li><a href="#content">Content</a></li>
+<li><a href="#additional_types">Additional types</a></li>
 </ul>
 </li>
-<li><a href="#widget_types_interface">Widget Types (Interface)</a>
+<li><a href="#usage">Usage</a>
 <ul class="sectlevel2">
-<li><a href="#dashboard_widgets">Dashboard Widgets</a></li>
+<li><a href="#require">require</a></li>
+<li><a href="#es6_style_import">ES6-style import</a></li>
+</ul>
+</li>
+<li><a href="#configuration">Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#require_2">Require</a></li>
+<li><a href="#other_imports">Other imports</a></li>
+</ul>
+</li>
+<li><a href="#beans">Beans</a>
+<ul class="sectlevel2">
+<li><a href="#option_1">Option 1</a></li>
+<li><a href="#option_2">Option 2</a></li>
 </ul>
 </li>
 </ul>
@@ -459,268 +474,245 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<h2 id="intro"><a class="link" href="#intro">Intro</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Widgets are visual components that dynamically extend Admin UI.
-Widgets may or may not be context-dependent (require id of selected content and current branch).</p>
+<p>We default to TypeScript in our code examples and starters. This section describes how to configure and use our official TypeScript types - all aligned with our standard <a href="api.ahtml">JS APIs</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">Implementation</a></h2>
+<h2 id="install_types"><a class="link" href="#install_types">Install types</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Widget is essentially a special, admin-only kind of web application. Like all other XP components, widgets are defined by a controller and a descriptor.</p>
+<p>To add types for corresponding library use NPM (or similar package manager) and install them as any other dependency. All types can be found under <a href="https://www.npmjs.com/org/enonic-types">@enonic-types</a> organisation on NPM.</p>
 </div>
-<div class="paragraph">
-<p>To create a widget, add a new folder in your project structure, i.e.  <code>src/main/resources/admin/widgets/&lt;widget-name&gt;</code>.
-The folder must contain both a descriptor (<code>&lt;widget-name&gt;.xml</code>) and a controller (<code>&lt;widget-name&gt;.js</code>).</p>
 </div>
-<div class="sect2">
-<h3 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h3>
+</div>
+<div class="sect1">
+<h2 id="enonic_libraries"><a class="link" href="#enonic_libraries">Enonic Libraries</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Widget descriptor defines a display name, a list of roles required to access the widget and interfaces it implements.
-The descriptor file must match the widget folder name, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.xml</code>.</p>
+<p>For example, you have a <code>lib-auth</code> gradle dependency:</p>
 </div>
 <div class="listingblock">
-<div class="title">Sample descriptor file:</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget&gt;
-  &lt;display-name i18n="phrases.my-dashboard-widget"&gt;My dashboard widget&lt;/display-name&gt;
-  &lt;description i18n="phrases.my-dashboard-widget-desc"&gt;Description of my dashboard widget&lt;/description&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;allow&gt;
-    &lt;principal&gt;role:system.admin&lt;/principal&gt;
-    &lt;principal&gt;role:myapp.myrole&lt;/principal&gt;
-  &lt;/allow&gt;
-&lt;/widget&gt;</code></pre>
+<pre class="highlight"><code class="language-gradle" data-lang="gradle">dependencies {
+  include "com.enonic.xp:lib-auth:${xpVersion}"
+}</code></pre>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="controller"><a class="link" href="#controller">Controller</a></h3>
-<div class="paragraph">
-<p>To drive the widget, we will need a <a href="../framework/controllers.ahtml">controller</a>. The controller typically renders the widget&#8217;s HTML template.
-Depending on the widget implementation it may also handle any further server requests from the widgets interface.</p>
 </div>
 <div class="paragraph">
-<p>The controller file must match the widget name, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.js</code>:</p>
+<p>To add type definitions for the library, install dependency from NPM:</p>
 </div>
 <div class="listingblock">
-<div class="title">Example controller file:</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">exports.get = function (req) {
-    return {
-        body: '&lt;widget&gt;My dashboard widget&lt;/widget&gt;',
-        contentType: 'text/html'
-    };
-};</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Depending on the interface a widget is implementing, controller may be initialised with parameters, for instance providing a specific context.
-</td>
-</tr>
-</table>
+<pre class="highlight"><code class="language-bash" data-lang="bash">npm i --save-dev @enonic-types/lib-auth</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="icon"><a class="link" href="#icon">Icon</a></h3>
+<h3 id="global"><a class="link" href="#global">Global</a></h3>
 <div class="paragraph">
-<p>Widgets may also have icons. Simply place an SVG or PNG file into the widget folder, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.svg`</code></p>
+<p>Along with library types it is <strong>higlhy recommended</strong> to install definitions for global objects (<code>app</code>, <code>__</code>, <code>log</code>) and functions (<code>resolve</code>, <code>require</code>):</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Widget icon will not be used for Dashboard widgets, only for Content Studio widgets.
-</td>
-</tr>
-</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">npm i --save-dev @enonic-types/global</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since <code>global</code> types are not placed under the <code>node_modules/@types</code>, it is neccessary to include them manually:</p>
+</div>
+<div class="paragraph">
+<p><code>tsconfig.json</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "compilerOptions": {
+    "types": [
+      "@enonic-types/global"
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="core"><a class="link" href="#core">Core</a></h3>
+<div class="paragraph">
+<p>There are types that are shared between other libraries (like <code>Content</code> or <code>Principal</code>). Such types reside in the <code>core</code> package. It is not necessary to include this dependency into your project, as all libraries export related core types, e.g. Content library exports <code>Content`</code> type. But if you want to use these type directly, you&#8217;ll need to install them:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">npm i --save-dev @enonic-types/core</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and then import them in your TypeScript code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">import type {Content} from '@enonic-types/core';</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="content"><a class="link" href="#content">Content</a></h3>
+<div class="paragraph">
+<p><code>Content</code> contains the <code>x</code> property that has a very special <code>XpXData</code> type.</p>
+</div>
+<div class="paragraph">
+<p><code>XpXData</code> is an interface that is added to the global scope, so it can be modified using the <a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces">declaration merging</a>. This allows you to set the shape of the XData in your project, simply by declaring the <code>XpXData</code> like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">declare global {
+    interface XpXData {
+        'com-mysite-app': {
+            metadata: {
+                metaTagTitle: string;
+                metaTagImageId: string;
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="additional_types"><a class="link" href="#additional_types">Additional types</a></h3>
+<div class="paragraph">
+<p><code>Content</code> is a complex type that contains unions and maps that are not exported but may be needed during the development. Actually, these types can easily be retrieved from the <code>Content</code> itself:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">import type {Content} from '@enonic-types/core';
+
+type Attachments = Content['attachments'];
+
+type ContentInheritType = Content['inherit'];
+
+type Workflow = Content['workflow'];</code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="widget_types_interface"><a class="link" href="#widget_types_interface">Widget Types (Interface)</a></h2>
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="require"><a class="link" href="#require">require</a></h3>
 <div class="paragraph">
-<p>Widget interface is simply a unique identifier (or widget type, if you will) that links the widget to its extension point (i.e. Dashboard or Content Studio&#8217;s context panel). XP currently supports one type of widgets: Dashboard Widgets (interface <code>admin.dashboard</code>).</p>
+<p>After <code>global</code> and library types are installed and configured in <code>tsconfig.json</code>, libraries can be imported just like they would be in JS code:</p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Content Studio supports other types of widgets that will be embedded inside the Content Studio UI.
-Read more about Content Studio widgets <a href="https://developer.enonic.com/docs/content-studio/stable/widgets">here</a>
-</td>
-</tr>
-</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">const libAuth = require('/lib/xp/auth');</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="dashboard_widgets"><a class="link" href="#dashboard_widgets">Dashboard Widgets</a></h3>
+<h3 id="es6_style_import"><a class="link" href="#es6_style_import">ES6-style import</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span></p>
-</div>
-<div class="paragraph">
-<p>Dashboard Widgets will be identified by interface <code>admin.dashboard</code> and displayed on the Admin Dashboard screen.</p>
-</div>
-<div class="paragraph">
-<p>Following properties are supported in <code>&lt;config&gt;</code> of Dashboard Widget descriptor:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>width</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Used to specify widget width. Supported values are: <code>small</code> (25% of the screen width), <code>medium</code> (50%), <code>large</code> (75%) and <code>full</code> (100%).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<code>medium</code> is a default value for <code>width</code> config, if <code>width</code> is not specified or unsupported value is used.
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>height</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Used to specify widget height. Supported values are: <code>small</code> (25% of the screen height), <code>medium</code> (50%), <code>large</code> (75%) and <code>full</code> (100%).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<code>medium</code> is a default value for <code>height</code> config, if <code>height</code> is not specified or unsupported value is used.
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>header</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies whether widget will automatically have a header with widget title (coming from <code>display-name</code> field in descriptor).
-Default value (when nothing is specified) is <code>true</code> which means that widget will have a header by default.
-To hide the header, use <code>&lt;header&gt;false&lt;/header&gt;</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>style</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies whether XP will apply default styling to the widget (default). If you want to have full control over widget styling, use <code>&lt;style&gt;custom&lt;/style&gt;</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>order</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies desired order of the widget on the Dashboard (with <code>0</code> being the top-left position). If <code>order</code> is not specified, the widget will be placed after widgets with specified order.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Widgets with equal order or no order will be placed based on their size (to fit as many widgets as possible next to each other).
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/dashboard-widgets.png" alt="Dashboard Widgets" width="900px"></span></p>
-</div>
-<div class="paragraph">
-<p>Widgets in the screenshot above are configured in three different ways (from left to right):</p>
+<p>If you are planning to use <code>import</code> in your code and transpile it with the default <code>tsc</code> TypeScript compiler, you&#8217;ll need to add proper types mapping to your configuration via <code>baseUrl</code> and <code>paths</code> properties in <code>tsconfig.json</code>:</p>
 </div>
 <div class="listingblock">
-<div class="title">Custom styling, position 0, display name in the header, width 25%, height 50% (default):</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Useful Links&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="width" value="small"/&gt;
-    &lt;property name="style" value="custom"/&gt;
-    &lt;property name="order" value="0"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "/lib/xp/auth": ["node_modules/@enonic-types/lib-auth"],
+    }
+  }
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Then in your code:</p>
 </div>
 <div class="listingblock">
-<div class="title">Default styling, position 1, display name in the header, width 50% (default), height 50% (default):</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Content Studio: Recent items&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="order" value="1"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
+<pre class="highlight"><code class="language-ts" data-lang="ts">import {login, logout, getUser, generatePassword} from '/lib/xp/auth';</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Configuring <code>baseUrl</code> and <code>paths</code> will allow the TypeScript compiler to keep the valid paths in the resulting JavaScript files.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="link" href="#configuration">Configuration</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="require_2"><a class="link" href="#require_2">Require</a></h3>
+<div class="paragraph">
+<p>To add support for type resolution for custom libraries via <code>require</code>, you can redeclare the <code>XpLibraries</code> interface in global scope, which will lead to declaration merging:</p>
 </div>
 <div class="listingblock">
-<div class="title">Default styling, last position, no header, width 25%, height 100%:</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Statistics&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="width" value="small"/&gt;
-    &lt;property name="height" value="full"/&gt;
-    &lt;property name="header" value="false"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
+<pre class="highlight"><code class="language-ts" data-lang="ts">declare global {
+    interface XpLibraries {
+        '/lib/custom/mylib': typeof import('./mylib');
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other_imports"><a class="link" href="#other_imports">Other imports</a></h3>
+<div class="paragraph">
+<p>If you want to use custom import functions, like <code><em>non_webpack_require</em></code> with Webpack, just use <code>XpRequire</code> from <code>global</code> types for this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">declare const __non_webpack_require__: XpRequire;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="beans"><a class="link" href="#beans">Beans</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create a new Java bean, the <code>__.newBean()</code> function must be used. Making it return a proper type can be done in two ways. Let&#8217;s say, you have created an interface for that bean somewhere in your project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">interface SomeHelper {
+  help(text: string): void;
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="option_1"><a class="link" href="#option_1">Option 1</a></h3>
+<div class="paragraph">
+<p>You can pass the type argument explicitly. This option is a bit cleaner.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">const helper = __.newBean&lt;SomeHelper&gt;('com.me.project.SomeHelper');</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="option_2"><a class="link" href="#option_2">Option 2</a></h3>
+<div class="paragraph">
+<p>Or you can map the bean name to bean interface. It may be a preferable way to do it, if the bean is used across multiple files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">declare global {
+    interface XpBeans {
+        'com.me.project.SomeHelper': SomeHelper;
+    }
+}
+
+const helper = __.newBean('com.me.project.SomeHelper');</code></pre>
 </div>
 </div>
 </div>
@@ -729,7 +721,7 @@ Widgets with equal order or no order will be placed based on their size (to fit 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-26 11:06:11 UTC
+Last updated 2025-02-26 11:06:35 UTC
 </div>
 </div>
 </body>
