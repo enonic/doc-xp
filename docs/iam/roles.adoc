@@ -1,0 +1,74 @@
+= Roles
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+Roles provide access to application specific functionality via so-called Role Based Access Control (RBAC).
+
+== Custom roles
+
+Roles can be seen and managed from the `Users` admin app.
+
+A role consist of:
+
+* Display Name
+* name (unique identifier)
+* Description (optional)
+
+NOTE: Only Users with the *Administrator* or *Users Administrator* role may create or edit roles.
+
+You are free to manually define custom roles, i.e. by giving it select permissions. In general however, it is recommended that roles are created and managed by applications. The applications then typically also implement the related functionality that the role gives access to.
+
+NOTE: Unlike groups, a role may not be assigned other roles. It is designed to provide a specific access, and nothing else.
+
+== Permissions
+
+Just like users and gruoups, a role may be given explicit permissions to content in the CMS via https://developer.enonic.com/docs/content-studio/stable/permissions[Content Studio^]
+
+
+== System roles
+
+Enonic XP ships with several built-in roles. Each of which provide specific access and priveliges in the system.
+
+*system.admin*
+Users with this role have full access to all content and admin tools through the user interface.
+
+*system.admin.login*
+Users with this role can log in to the administration console. These users will also require a role for each of the admin tools that the users need access to.
+
+*system.user.admin*
+Grants full access to the Users admin tool, including create/edit/delete for ID providers, users, roles, and groups.
+
+*system.user.app*
+Provides read-only access to the Users admin tool.
+
+== Dynamic roles
+
+The system also includes two special roles which cannot be directly assigned to a user or group, but are conditionally assigned to users automatically. 
+
+*system.authenticated*
+All users that are authenticated gets this role, regardless of ID provider.
+
+*system.everyone*
+All users, both authenticated and non-autenticated users (The Anonymous user) are assigned this role. 
+
+TIP: The role can is typically used to grant read access to public content, thus making it available to - well everyone.
+
+
+== CMS Roles
+
+*cms.admin*
+Allows full access to Content Studio, including ability to create and delete content projects.
+
+*cms.expert*
+Grants the ability to view and modify source code in the rich text editor.
+
+*cms.cm.app*
+NOTE: This role is deprecated. It gives users to access to the legacy `default` project in Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project.
+
+:imagesdir: images
+image:xp-7110.svg[XP 7.11.0,opts=inline]
+When using <<cms/projects#, Content Projects>>, each project automatically creates a set of <<cms/projects#roles, project roles>> in addition to the built-in roles listed above.
+
+These roles will be prefixed with `cms.projectname.`, and as such be unique to each individual project.

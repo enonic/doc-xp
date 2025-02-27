@@ -1,0 +1,44 @@
+= Users and groups
+:toc: right
+:imagesdir: images
+
+Users and groups may be created exist within the scope of an ID provider.
+
+== Users
+
+Users are stored per ID provider. Selected IDP applications, such as the https://market.enonic.com/vendors/enonic/simple-idprovider[Simple ID provider^] let you create and manage users directly in the `Users` admin app.
+
+In other cases, users are entirely managed outside of XP, and you are limited to adding the users to roles and groups.
+
+A user generally consist of the following fields:
+
+* name (aka login)
+* display name (Full name)
+* e-mail
+
+TODO: Screenshot
+
+NOTE: In some cases you may also add credentials, such as
+* Password
+* Public key
+
+
+NOTE: Using Content Studio, you may also grant content permissions directly to a user
+
+
+=== Profiles
+
+Developers may also store custom properties and values in the user object via `profiles`. This information is currently not visible or possible to edit via the Users App.
+
+== Groups
+
+Like users, groups are created and managed witin an ID provider. Groups provide a flexible way to greate and manage permissions, without assigning them on a per-user-basis
+
+* You may add users to a group
+* Roles may be added to a group - Effectively assigning the roles to the users of the group
+* Groups may be added to a group - causing transitive resolving of roles
+
+TODO: Screenshot
+
+
+NOTE: Like users, Using Content Studio, you may also grant content permissions to a group
