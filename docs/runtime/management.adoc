@@ -7,8 +7,18 @@ Management commands are available at port `4848`, i.e. `localhost:4848` if you'r
 
 == Authorization [[authorization]]
 
-All endpoints here allow basic authorization.
-Most clients provide an option for authorization, but in case you need to do it manually: basic auth is simply a string of the username and password separated by a colon that is base64 encoded.
+All management endpoints require an authenticated user with the Administrator role.
+
+=== JWT Authentication image:xp-7150.svg[XP 7.15.0,opts=inline]
+
+All management endpoints can use <<../iam#, Service accounts JWT authentication>>. This is the recommended way to authenticate with the management endpoints.
+
+=== Basic Authentication
+
+WARNING: Starting from image:xp-7150.svg[XP 7.15.0,opts=inline] use of basic authentication is discouraged due to its security weaknesses. Use JWT authentication instead.
+
+All management endpoints allow basic authentication.
+Most clients provide an option for authentication, but in case you need to do it manually: basic auth is simply a string of the username and password separated by a colon that is base64 encoded.
 
 Make a source string:
 
@@ -1229,10 +1239,11 @@ NOTE: Read about authorization <<authorization, here>>
 |===
 
 This API supports the following tasks: +
-**SegmentVacuumTask** - removes unused repositories. +
+**SegmentVacuumTask** - removes unused repositories blobs. +
 **VersionTableVacuumTask** - removes unused and non-commited versions together with it's blobs. +
 **BinaryBlobVacuumTask** - checks all binary blobs and removes unused. +
 **NodeBlobVacuumTask** - checks all node blobs and removes unused. +
+**SnapshotsVacuumTask** - image:xp-7150.svg[XP 7.15.0,opts=inline] deletes snapshots that are older than specified age threshold. +
 
 NOTE: Read about authorization <<authorization, here>>
 

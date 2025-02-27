@@ -16,7 +16,7 @@ All fix upgrades (i.e. from 7.4.1 to 7.4.8), and most feature upgrades (i.e. fro
 
 To safely perform a rolling upgrade, perform the following steps.
 
-WARN: Before you perform a rolling upgrade, verify that all feature version in your upgrade path (from version -> to version) support rolling upgrade
+WARNING: Before you perform a rolling upgrade, verify that all feature version in your upgrade path (from version -> to version) support rolling upgrade
 
 . Upgrade only one node at a time. Wait for the node to start and join the cluster before you move on
 . Stop, upgrade image and start your master nodes first (We always recommend using dedicated master nodes)
