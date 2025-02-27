@@ -441,22 +441,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#iam_concepts">IAM Concepts</a>
-<ul class="sectlevel2">
+<li><a href="#identity_providers">Identity providers</a></li>
 <li><a href="#principals">Principals</a></li>
-</ul>
-</li>
 <li><a href="#permissions">Permissions</a></li>
-<li><a href="#identity_providers">Identity providers</a>
-<ul class="sectlevel2">
-<li><a href="#creating_an_id_provider">Creating an ID provider</a></li>
-<li><a href="#system-id-provider">System ID provider</a></li>
-<li><a href="#id_provider_apps">ID provider apps</a></li>
-<li><a href="#standard_id_provider_app">Standard ID provider app</a></li>
-</ul>
-</li>
-<li><a href="#built_in_roles">Built-in roles</a></li>
 </ul>
 </div>
 </div>
@@ -464,56 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP ships with a clearly defined and pluggable concept for handling authentication and authorization</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Enonic XP ships with a standard concept handling users, authentication, groups and roles based authorization.
-Additionally, the NoSQL storage supports fine-grained access control mechanisms down to a single item.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="iam_concepts"><a class="link" href="#iam_concepts">IAM Concepts</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>XP IAM consists of three central concepts:</p>
-</div>
-<div class="sect2">
-<h3 id="principals"><a class="link" href="#principals">Principals</a></h3>
-<div class="paragraph">
-<p>Principals are object that can be given permissions.
-There are three different types of principals:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Users</dt>
-<dd>
-<p>Principals that can be authenticated.</p>
-</dd>
-<dt class="hdlist1">Groups</dt>
-<dd>
-<p>Used to group other principals to simplify management.</p>
-</dd>
-<dt class="hdlist1">Roles</dt>
-<dd>
-<p>Provides access to application specific functionality.</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="permissions"><a class="link" href="#permissions">Permissions</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Principals may be given with fine grade access to items stored in the NoSQL storage.
-An example of this is the XP CMS, where users typically get access to create or publish content in specific areas of the solution.</p>
+<p>Enonic XP ships with a defined and pluggable concept for IAM handing</p>
 </div>
 </div>
 </div>
@@ -521,368 +459,30 @@ An example of this is the XP CMS, where users typically get access to create or 
 <h2 id="identity_providers"><a class="link" href="#identity_providers">Identity providers</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ID providers offer pluggable abstraction layer for user authentication.
-As such, in order to authenticate or even create users in XP, you will need to define an ID provider.</p>
-</div>
-<div class="paragraph">
-<p>ID providers are linked to your webapp or site through <a href="./deployment/vhosts.ahtml">virtual hosts</a>.</p>
-</div>
-<div class="sect2">
-<h3 id="creating_an_id_provider"><a class="link" href="#creating_an_id_provider">Creating an ID provider</a></h3>
-<div class="paragraph">
-<p>ID providers can be created and managed through the API,
-or through the Users app in the XP admin console.</p>
-</div>
-<div class="paragraph">
-<p>An ID provider essentially consist of the following:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>A unique name (cannot be changed later)</p>
-</li>
-<li>
-<p>ID provider application, with optional configuration settings.</p>
-</li>
-<li>
-<p>Permissions - specifies who can manage and access the ID provider</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-ID provider applications must be installed before you can select them.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/iam/system-idprovider-admin.png" alt="Setting up an ID provider from the Users admin tool" width="819">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="system-id-provider"><a class="link" href="#system-id-provider">System ID provider</a></h3>
-<div class="paragraph">
-<p>XP ships with a special ID provider that cannot be removed or renamed. It is called the System ID provider.</p>
-</div>
-<div class="paragraph">
-<p>When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/iam/system-idprovider.png" alt="System ID provider login screen" width="828">
-</div>
-</div>
-<div class="paragraph">
-<p>The purpose of the System ID provider is to store system users, for example <code>su</code>(the Super User) and <code>anonymous</code> (the default user when no other user is specified).</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
-  <linearGradient id="s" x2="0" y2="100%">
-    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-    <stop offset="1" stop-opacity=".1"/>
-  </linearGradient>
-  <clipPath id="r">
-    <rect width="64" height="20" rx="3" fill="#fff"/>
-  </clipPath>
-  <g clip-path="url(#r)">
-    <rect width="25" height="20" fill="#555"/>
-    <rect x="25" width="39" height="20" fill="#007ec6"/>
-    <rect width="64" height="20" fill="url(#s)"/>
-  </g>
-  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
-     font-size="110">
-    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
-    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
-    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.15.0</text>
-    <text x="435" y="140" transform="scale(.1)" textLength="290">7.15.0</text>
-  </g>
-</svg></span>
-Users in the System ID provider that are not system users are called <a href="#service-accounts">Service Accounts</a>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Prior to XP <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
-  <linearGradient id="s" x2="0" y2="100%">
-    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-    <stop offset="1" stop-opacity=".1"/>
-  </linearGradient>
-  <clipPath id="r">
-    <rect width="64" height="20" rx="3" fill="#fff"/>
-  </clipPath>
-  <g clip-path="url(#r)">
-    <rect width="25" height="20" fill="#555"/>
-    <rect x="25" width="39" height="20" fill="#007ec6"/>
-    <rect width="64" height="20" fill="url(#s)"/>
-  </g>
-  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
-     font-size="110">
-    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
-    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
-    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.15.0</text>
-    <text x="435" y="140" transform="scale(.1)" textLength="290">7.15.0</text>
-  </g>
-</svg></span>, users added to the System ID provider were treated as regular users with username-password credentials. Users with username-password credentials in the System ID provider are still supported, but strongly discouraged. Instead, use service accounts with JWT tokens. See <a href="#service-accounts">Service Accounts</a> for more details.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Avoid adding real users to the System ID provider, rather create a new ID provider instead.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect3">
-<h4 id="service-accounts"><a class="link" href="#service-accounts">Service Accounts</a></h4>
-<div class="paragraph">
-<p>A service account is a special kind of user used by remote applications and services to authenticate with XP.
-Service accounts are not meant to be used by humans. Service accounts are managed by XP Users app.</p>
-</div>
-<div class="paragraph">
-<p>Each Service Account may (but not required to) have one or several Service Account keys.
-Using Service Account Key is beneficial for security reasons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>It allows to authenticate without transferring the password over the network.</p>
-</li>
-<li>
-<p>Multiple Shared Account Keys allow rotation of Public-Private key-pairs without service interruption.</p>
-</li>
-<li>
-<p>Stored Public key is not a hash of a password, so it is not possible to reverse-engineer the password from the public key.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Service accounts keys are used to make an authorized call to:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#management_endpoint">Management Endpoint</a></p>
-</li>
-<li>
-<p>any other XP service port endpoint that supports authentication and is configured to use the System ID provider. See <a href="deployment/vhosts.ahtml#virtual-hosts">Virtual Hosts</a> for more details.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Requests are authenticated by JWT token in the <code>Authorization</code> header.</p>
-</div>
-<div class="paragraph">
-<p>Content of the header should look like the following:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code>Authorization: Bearer &lt;token&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>A JWT token must follow the following rules:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>it must be a valid RFC-7519 JWT token.</p>
-</li>
-<li>
-<p><code>alg</code> header parameter must be set to <code>RS256</code>.</p>
-</li>
-<li>
-<p><code>kid</code> header parameter must be set to ID of the public key that corresponds to the private key used to sign the token.</p>
-</li>
-<li>
-<p><code>sub</code> claim must be set to ID of the service account, for instance, <code>user:system:user_id</code>.</p>
-</li>
-<li>
-<p><code>exp</code> claim must be set to expiration time of the token. The token will be rejected if it is expired.</p>
-</li>
-<li>
-<p><code>iat</code> claim must be set to issue time of the token. The token will be rejected if it was issued in the future.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Private key from Public-Private key pair is stored only on the client side and must not be shared with the XP server.</p>
-</div>
-<div class="paragraph">
-<p>Public key from Public-Private key pair is stored in the XP server and is used to verify signature of the token.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Whenever possible use other ID providers instead, such as OIDC ID provider.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">JWT header example</div>
-<div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-  "kid": "51a29c2ab5ebf945f6a5ddac8935bf8b",
-  "typ": "JWT",
-  "alg": "RS256"
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">JWT payload example</div>
-<div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-  "sub": "user:system:user_id",
-  "exp": 1692787396,
-  "iat": 1692787366
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="id_provider_apps"><a class="link" href="#id_provider_apps">ID provider apps</a></h3>
-<div class="paragraph">
-<p>In order for an ID provider to work, it must be associated with an ID provider application that handles the authentication process.</p>
-</div>
-<div class="paragraph">
-<p>You may install ID providers from Enonic Market,
-or <a href="./framework/idprovider.ahtml">build your own</a> for a fully customized experience.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="standard_id_provider_app"><a class="link" href="#standard_id_provider_app">Standard ID provider app</a></h3>
-<div class="paragraph">
-<p>Enonic XP is shipped with an app called the "Standard ID provider".
-This is also the app that is being used by the <a href="#system-id-provider">System ID provider</a></p>
-</div>
+<p>ID providers represent the pluggable abstraction layer for user authentication. To authenticate or even create users in XP, you will need to create an <a href="idproviders.ahtml">ID provider</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="built_in_roles"><a class="link" href="#built_in_roles">Built-in roles</a></h2>
+<h2 id="principals"><a class="link" href="#principals">Principals</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP is shipped with several built-in roles (described below) which grant certain permissions when applied to users.
-New roles can be created by users with <strong>Administrators</strong> and <strong>Users Administrator</strong> roles.</p>
+<p>XP provide three basic principals, <a href="users.ahtml">users, groups</a> and <a href="roles.ahtml">roles</a>. Combined with ID providers these are the essence of Enonic IAM.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Permissions for every role can be overridden by <strong>Administrator</strong> or <strong>Content Manager Administrator</strong> on the content level.
-</td>
-</tr>
-</table>
 </div>
+</div>
+<div class="sect1">
+<h2 id="permissions"><a class="link" href="#permissions">Permissions</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><strong>Administrator</strong>
-Users with the <strong>Administrator</strong> role have full access to all content and admin tools through the user interface.</p>
-</div>
-<div class="paragraph">
-<p><strong>Administration Console Login</strong>
-Users with this role can log in to the administration console. These users will also require a role for each of the admin tools that the users need access to.</p>
-</div>
-<div class="paragraph">
-<p><strong>Content Manager Administrator</strong></p>
-</div>
-<div class="paragraph">
-<p>This role allows full access to Content Studio, including ability to create and delete content projects.</p>
-</div>
-<div class="paragraph">
-<p><strong>Content Manager Expert</strong></p>
-</div>
-<div class="paragraph">
-<p>This role gives members ability to view and modify source code in the rich text editor.</p>
-</div>
-<div class="paragraph">
-<p><strong>Content Manager App</strong></p>
-</div>
-<div class="paragraph">
-<p>Give users to access to the legacy <code>default</code> project in Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As of v7.3, XP supports creation of custom content projects. These offer project-specific roles that automatically provide access to both Content Studio and the project itself.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Users App</strong></p>
-</div>
-<div class="paragraph">
-<p>Provides view-only access to the Users admin tool.</p>
-</div>
-<div class="paragraph">
-<p><strong>Users Administrator</strong></p>
-</div>
-<div class="paragraph">
-<p>Grants full access to the Users admin tool, including create/edit/delete for ID providers, users, roles, and groups.</p>
-</div>
-<div class="paragraph">
-<p><strong>Authenticated</strong></p>
-</div>
-<div class="paragraph">
-<p>Users automatically get this role when they are logged into the platform, regardless of ID provider.</p>
-</div>
-<div class="paragraph">
-<p><strong>Everyone</strong></p>
-</div>
-<div class="paragraph">
-<p>A special role that both authenticated users, and visitors (Anonymous user) all have in common.
-The role is for instance used to grant read permissions to publicly available content projects.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.11.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.11.0</text></g></svg></span></p>
-</div>
-<div class="paragraph">
-<p><strong>Schemas Administrator</strong></p>
-</div>
-<div class="paragraph">
-<p>Grants permissions to manipulate virtual applications and schemas.</p>
-</div>
-<div class="paragraph">
-<p>NOTE:
-If you are using <a href="cms/projects.ahtml">Content Projects</a>, your project will have a set of <a href="cms/projects.ahtml#roles">project-specific roles</a> in addition to the built-in ones.</p>
+<p>In addition to users, roles and groups, the CMS (and underlying NoSQL storage) supports fine-grained access control mechanisms down to a single item.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-26 17:30:38 UTC
+Last updated 2025-02-27 13:41:55 UTC
 </div>
 </div>
 </body>

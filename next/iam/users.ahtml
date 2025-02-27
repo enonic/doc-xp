@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Virtual apps</title>
+<title>Users and groups</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,12 +437,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Virtual apps</h1>
+<h1>Users and groups</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#users">Users</a>
 <ul class="sectlevel2">
-<li><a href="#structure">Structure</a></li>
-<li><a href="#application_mode">Application Mode</a></li>
+<li><a href="#profiles">Profiles</a></li>
+</ul>
+</li>
+<li><a href="#groups">Groups</a></li>
 </ul>
 </div>
 </div>
@@ -450,61 +454,112 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.11.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.11.0</text></g></svg></span></p>
+<p>Users and groups may be created exist within the scope of an ID provider.</p>
 </div>
-<div class="admonitionblock warning">
+</div>
+</div>
+<div class="sect1">
+<h2 id="users"><a class="link" href="#users">Users</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Users are stored per ID provider. Selected IDP applications, such as the <a href="https://market.enonic.com/vendors/enonic/simple-idprovider" target="_blank" rel="noopener">Simple ID provider</a> let you create and manage users directly in the <code>Users</code> admin app.</p>
+</div>
+<div class="paragraph">
+<p>In other cases, users are entirely managed outside of XP, and you are limited to adding the users to roles and groups.</p>
+</div>
+<div class="paragraph">
+<p>A user generally consist of the following fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>name (aka login)</p>
+</li>
+<li>
+<p>display name (Full name)</p>
+</li>
+<li>
+<p>e-mail</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>TODO: Screenshot</p>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This feature is <em>experimental</em> and still under development. It is available for users to test and provide feedback.
+In some cases you may also add credentials, such as
+* Password
+* Public key
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Virtual applications lets you create schemas and descriptors without coding. You may even add or override schemas in standard application.</p>
-</div>
-<div class="paragraph">
-<p>Virtual application schemas and descriptors data are stored in the XP storage, using the <code>system.app</code> repository. Use <a href="../api/lib-app.ahtml">lib-app</a> to manipulate virtual applications.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="structure"><a class="link" href="#structure">Structure</a></h3>
-<div class="paragraph">
-<p>Node structure of a virtual application follows file structure inside the <code>site</code> folder of a bundled application:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-files" data-lang="files">virtual-app/
-    site/
-      content-types/
-      layouts/
-      mixins/
-      pages/
-      parts/
-      x-data/
-      site.xml
-      styles.xml</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Use <a href="../api/lib-schema.ahtml">lib-schema</a> to manipulate schemas and descriptors of virtual apps.</p>
-</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Using Content Studio, you may also grant content permissions directly to a user
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
-<h3 id="application_mode"><a class="link" href="#application_mode">Application Mode</a></h3>
+<h3 id="profiles"><a class="link" href="#profiles">Profiles</a></h3>
 <div class="paragraph">
-<p>Support for Virtual apps must be enabled via XP&#8217;s <a href="../deployment/config.ahtml#application">application config</a>.</p>
+<p>Developers may also store custom properties and values in the user object via <code>profiles</code>. This information is currently not visible or possible to edit via the Users App.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="groups"><a class="link" href="#groups">Groups</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Like users, groups are created and managed witin an ID provider. Groups provide a flexible way to greate and manage permissions, without assigning them on a per-user-basis</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You may add users to a group</p>
+</li>
+<li>
+<p>Roles may be added to a group - Effectively assigning the roles to the users of the group</p>
+</li>
+<li>
+<p>Groups may be added to a group - causing transitive resolving of roles</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>TODO: Screenshot</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Like users, Using Content Studio, you may also grant content permissions to a group
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-26 17:30:38 UTC
+Last updated 2025-02-27 13:41:55 UTC
 </div>
 </div>
 </body>

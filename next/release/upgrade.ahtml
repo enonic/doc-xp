@@ -506,8 +506,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>To safely perform a rolling upgrade, perform the following steps.</p>
 </div>
-<div class="paragraph">
-<p>WARN: Before you perform a rolling upgrade, verify that all feature version in your upgrade path (from version &#8594; to version) support rolling upgrade</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Before you perform a rolling upgrade, verify that all feature version in your upgrade path (from version &#8594; to version) support rolling upgrade
+</td>
+</tr>
+</table>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1323,7 +1332,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-26 17:30:38 UTC
+Last updated 2025-02-27 13:41:55 UTC
 </div>
 </div>
 </body>
