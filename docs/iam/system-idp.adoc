@@ -66,25 +66,19 @@ NOTE: The public key will be saved, and the private key will automatically be do
 
 You may also upload the public key portion of a user-managed key pair, and the use the private key for authenication later.
 
-The key you upload must be an RSA public key that is wrapped in an X.509 v3 certificate and encoded in base64. You can use tools such as OpenSSL to generate a key and certificate in this format.
+The key you upload must be an RSA public key and encoded in base64. You can use tools such as OpenSSL to generate a key and certificate in this format.
 
-WARNING: Do not include private information in the X.509 certificate. Specifically, use a generic subject, and avoid optional attributes. Any private information in the certificate is visible to anyone who retrieves the certificate.
-
-*Try it out* The following command generates a 2048-bit RSA key pair and wraps the public key in a self-signed certificate that is valid for 365 days:
+*Try it out* The following command generates a 2048-bit RSA key pair
 
 [source,terminal]
 ----
-openssl req -x509 -nodes -newkey rsa:2048 -days 365 \
-    -keyout /path/to/private_key.pem \
-    -out /path/to/public_key.pem \
-    -subj "/CN=unused"
+openssl genpkey -algorithm RSA -out xp_private_key.pem -pkeyopt rsa_keygen_bits:2048 && \
+openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem
 ----
 
-After generating the key, you may upload it the `private_key.pem` file to your service account.
+After generating the key, you may upload the `public_key.pem` file to your service account.
 
-
-image::service-account-key-upload.png[Upload private key, 807px]
-
+image::service-account-key-upload.png[Upload public key, 807px]
 
 
 == JWT authentication
