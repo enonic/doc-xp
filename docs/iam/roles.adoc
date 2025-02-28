@@ -16,6 +16,10 @@ A role consist of:
 * name (unique identifier)
 * Description (optional)
 
+When editing a role via the users app, you instantly grant the role to users or groups as well.
+
+image::roles-create.png[Creating a role in the Users app, 504]
+
 NOTE: Only Users with the *Administrator* or *Users Administrator* role may create or edit roles.
 
 You are free to manually define custom roles, i.e. by giving it select permissions. In general however, it is recommended that roles are created and managed by applications. The applications then typically also implement the related functionality that the role gives access to.
@@ -30,6 +34,9 @@ Just like users and gruoups, a role may be given explicit permissions to content
 == System roles
 
 Enonic XP ships with several built-in roles. Each of which provide specific access and priveliges in the system.
+
+image::roles.png[List of system roles, 504]
+
 
 *system.admin*
 Users with this role have full access to all content and admin tools through the user interface.

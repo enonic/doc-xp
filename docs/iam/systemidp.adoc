@@ -17,6 +17,9 @@ image::system-idprovider.png[System ID provider login screen, 828]
 == System users
 The System ID provider also contains some special users:
 
+image::super-user.png[The Super User, 834px]
+
+
 *system:su*
 The `Super User` exists in order to perform priveliged actions, and to allow you to start using XP before you have created any users. The Super User has the *system.admin* role, and thus unrestricted access.
 
@@ -32,6 +35,8 @@ TIP: Avoid adding human users to the System ID provider, rather <<idproviders#, 
 
 Since service accounts also are regular XP users, you may grant them roles and permissions as needed. 
 
+Service accounts users can be recognized from the small cog symbol above their avatar in the top right.
+
 == Service Account Key
 
 A Service Account may be associated with one, or several  Service Account keys. Using a Service Account Key is beneficial for security reasons:
@@ -45,15 +50,21 @@ Once a key is created, it may be used to make an authorized call to:
 * The <<management_endpoint, Management Endpoint>>
 * Any XP engine that mounts the System ID provider. See <<deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
 
+image::service-account-keys.png[List of service account keys, 662px]
+
 
 === Generate key
 
-TODO: Screenshot
+You may easily generate new keys by clicking add.
+Simply give your key a name, and click btn:generate.
 
+image::service-account-key-form.png[Generate service account key, 834px]
+
+NOTE: The public key will be saved, and the private key will automatically be downloaded to your device (in JSON format).
 
 === Upload key
 
-You can upload the public key portion of a user-managed key pair to associate it with a service account, and the use the private key for authenication later.
+You may also upload the public key portion of a user-managed key pair, and the use the private key for authenication later.
 
 The key you upload must be an RSA public key that is wrapped in an X.509 v3 certificate and encoded in base64. You can use tools such as OpenSSL to generate a key and certificate in this format.
 
@@ -70,6 +81,10 @@ openssl req -x509 -nodes -newkey rsa:2048 -days 365 \
 ----
 
 After generating the key, you may upload it the `private_key.pem` file to your service account.
+
+
+image::service-account-key-upload.png[Upload private key, 807px]
+
 
 
 == JWT authentication

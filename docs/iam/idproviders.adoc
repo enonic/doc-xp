@@ -30,5 +30,5 @@ NOTE: Often, ID providers are simply proxies against 3rd party systems such as G
 
 The main purpose of IDproviders is to control access to XP. Once you have configured your ID provider, the next step is to associate it with the endpoint you wish to protect - i.e XP admin, an API or a site. This is done by adding it to your <<./deployment/vhosts#,virtual hosts configuration>>.
 
-NOTE: ID providers generally have a lazy approch to autentication, and will only trigger one a requested resource responds with a 401 code (Unauthenticated).
+NOTE: ID providers generally have a passive approch to autentication, and will only trigger one a requested resource responds with a 401 code (Unauthenticated).
 
