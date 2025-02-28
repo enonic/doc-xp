@@ -16,15 +16,9 @@ A user generally consist of the following fields:
 * display name (Full name)
 * e-mail
 
-TODO: Screenshot
+image::user-form.png[Creating a user in the Users app, 811]
 
-NOTE: In some cases you may also add credentials, such as
-* Password
-* Public key
-
-
-NOTE: Using Content Studio, you may also grant content permissions directly to a user
-
+NOTE: For selected ID providers you may also add credentials, such as Password and Public key to a user
 
 === Profiles
 
@@ -35,10 +29,8 @@ Developers may also store custom properties and values in the user object via `p
 Like users, groups are created and managed witin an ID provider. Groups provide a flexible way to greate and manage permissions, without assigning them on a per-user-basis
 
 * You may add users to a group
-* Roles may be added to a group - Effectively assigning the roles to the users of the group
+* Roles may be granted to a group - Indirectly assigning the roles to the users of the group
 * Groups may be added to a group - causing transitive resolving of roles
-
-TODO: Screenshot
 
 
 NOTE: Like users, Using Content Studio, you may also grant content permissions to a group
