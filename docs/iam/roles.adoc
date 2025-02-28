@@ -28,12 +28,12 @@ NOTE: Unlike groups, a role may not be assigned other roles. It is designed to p
 
 == Permissions
 
-Just like users and gruoups, a role may be given explicit permissions to content in the CMS via https://developer.enonic.com/docs/content-studio/stable/permissions[Content Studio^]
+Just like users and groups, a role may be given explicit permissions to content in the CMS via https://developer.enonic.com/docs/content-studio/stable/permissions[Content Studio^]
 
 
 == System roles
 
-Enonic XP ships with several built-in roles. Each of which provide specific access and priveliges in the system.
+Enonic XP ships with several built-in roles. Each of which provide specific access and privileges in the system.
 
 image::roles.png[List of system roles, 504]
 
@@ -50,15 +50,18 @@ Grants full access to the Users admin tool, including create/edit/delete for ID 
 *system.user.app*
 Provides read-only access to the Users admin tool.
 
+*system.schema.admin*
+Grants permissions to read/write schemas.
+
 == Dynamic roles
 
-The system also includes two special roles which cannot be directly assigned to a user or group, but are conditionally assigned to users automatically. 
+The system also includes two special roles which cannot be directly assigned to a user or group, but are conditionally assigned to users automatically.
 
 *system.authenticated*
 All users that are authenticated gets this role, regardless of ID provider.
 
 *system.everyone*
-All users, both authenticated and non-autenticated users (The Anonymous user) are assigned this role. 
+All users, both authenticated and non-authenticated users (The Anonymous user) are assigned this role.
 
 TIP: The role can is typically used to grant read access to public content, thus making it available to - well everyone.
 
@@ -76,6 +79,6 @@ NOTE: This role is deprecated. It gives users to access to the legacy `default` 
 
 :imagesdir: images
 image:xp-7110.svg[XP 7.11.0,opts=inline]
-When using <<cms/projects#, Content Projects>>, each project automatically creates a set of <<cms/projects#roles, project roles>> in addition to the built-in roles listed above.
+When using <<../cms/projects#, Content Projects>>, each project automatically creates a set of <<../cms/projects#roles, project roles>> in addition to the built-in roles listed above.
 
 These roles will be prefixed with `cms.projectname.`, and as such be unique to each individual project.

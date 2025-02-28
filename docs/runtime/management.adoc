@@ -11,7 +11,7 @@ All management endpoints require an authenticated user with the Administrator ro
 
 === JWT Authentication image:xp-7150.svg[XP 7.15.0,opts=inline]
 
-All management endpoints can use <<../iam#, Service accounts JWT authentication>>. This is the recommended way to authenticate with the management endpoints.
+All management endpoints can use <<../iam/system-idp.adoc#jwt-authentication, Service accounts JWT authentication>>. This is the recommended way to authenticate with the management endpoints.
 
 === Basic Authentication
 

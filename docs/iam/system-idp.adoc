@@ -33,7 +33,7 @@ Service accounts are designed for machine-to-machine authentication from remote 
 
 TIP: Avoid adding human users to the System ID provider, rather <<idproviders#, create a new ID provider>> for this purpose.
 
-Since service accounts also are regular XP users, you may grant them roles and permissions as needed. 
+Since service accounts also are regular XP users, you may grant them roles and permissions as needed.
 
 Service accounts users can be recognized from the small cog symbol above their avatar in the top right.
 
@@ -52,6 +52,7 @@ Once a key is created, it may be used to make an authorized call to:
 
 image::service-account-keys.png[List of service account keys, 662px]
 
+NOTE: Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Also consider using ID providers that support 3-leg authentication, such as the https://market.enonic.com/vendors/enonic/oidc-id-provider[OIDC ID provider], if possible.
 
 === Generate key
 
@@ -80,7 +81,10 @@ After generating the key, you may upload the `public_key.pem` file to your servi
 
 image::service-account-key-upload.png[Upload public key, 807px]
 
+IMPORTANT: Your _Private_ key from the Public-Private key pair is stored only on the client side and must never be shared with the XP server.
+The _Public_ key from Public-Private key pair is stored in XP, and is used to verify the signature of your token.
 
+[[jwt-authentication]]
 == JWT authentication
 
 The System ID providers supports JWT (JSON Web Token) based authentication via the HTTP `Authorization` header.
@@ -89,17 +93,13 @@ Content of the header should look like the following:
 
   Authorization: Bearer <mytoken>
 
-A JWT token must be a valid RFC-7519 JWT token, following these requirements:
+A JWT token must be a valid https://datatracker.ietf.org/doc/html/rfc7519[RFC-7519] JWT token, following these requirements:
 
 * `alg` header parameter must be set to `RS256`.
 * `kid` header parameter must be set to ID of the public key that corresponds to the private key used to sign the token.
 * `sub` claim must be set to ID of the service account, for instance, `user:system:myuser`.
 * `exp` claim must be set to expiration time of the token. The token will be rejected if it is expired.
 * `iat` claim must be set to issue time of the token. The token will be rejected if it was issued in the future.
-
-Your private key from the Public-Private key pair is stored only on the client side and must never be shared with the XP server.
-
-The public key from Public-Private key pair is stored in XP, and is used to verify the signature of your token.
 
 .JWT header example
 [source,JSON]
@@ -121,8 +121,6 @@ The public key from Public-Private key pair is stored in XP, and is used to veri
 }
 ----
 
-In general we recommend using libraries that match your platform to generate the token, as performing this manually can be cumbersome.
+JWT parts must be signed and encoded according to https://datatracker.ietf.org/doc/html/rfc7519[RFC-7519].
 
-NOTE: Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Also consider using ID providers that support 3-leg authentication, such as the https://market.enonic.com/vendors/enonic/oidc-id-provider[OIDC ID provider], if possible.
-
-
+In general, we recommend using libraries that match your platform to generate the token, as performing this manually can be cumbersome.
