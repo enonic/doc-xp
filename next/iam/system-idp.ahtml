@@ -593,37 +593,23 @@ The public key will be saved, and the private key will automatically be download
 <p>You may also upload the public key portion of a user-managed key pair, and the use the private key for authenication later.</p>
 </div>
 <div class="paragraph">
-<p>The key you upload must be an RSA public key that is wrapped in an X.509 v3 certificate and encoded in base64. You can use tools such as OpenSSL to generate a key and certificate in this format.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Do not include private information in the X.509 certificate. Specifically, use a generic subject, and avoid optional attributes. Any private information in the certificate is visible to anyone who retrieves the certificate.
-</td>
-</tr>
-</table>
+<p>The key you upload must be an RSA public key and encoded in base64. You can use tools such as OpenSSL to generate a key and certificate in this format.</p>
 </div>
 <div class="paragraph">
-<p><strong>Try it out</strong> The following command generates a 2048-bit RSA key pair and wraps the public key in a self-signed certificate that is valid for 365 days:</p>
+<p><strong>Try it out</strong> The following command generates a 2048-bit RSA key pair</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-terminal" data-lang="terminal">openssl req -x509 -nodes -newkey rsa:2048 -days 365 \
-    -keyout /path/to/private_key.pem \
-    -out /path/to/public_key.pem \
-    -subj "/CN=unused"</code></pre>
+<pre class="highlight"><code class="language-terminal" data-lang="terminal">openssl genpkey -algorithm RSA -out xp_private_key.pem -pkeyopt rsa_keygen_bits:2048 &amp;&amp; \
+openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>After generating the key, you may upload it the <code>private_key.pem</code> file to your service account.</p>
+<p>After generating the key, you may upload the <code>public_key.pem</code> file to your service account.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/service-account-key-upload.png" alt="Upload private key" width="807px">
+<img src="images/service-account-key-upload.png" alt="Upload public key" width="807px">
 </div>
 </div>
 </div>
@@ -711,7 +697,7 @@ Service account keys are a security risk if not managed correctly. Make sure to 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-28 12:31:03 UTC
+Last updated 2025-02-28 12:36:11 UTC
 </div>
 </div>
 </body>
