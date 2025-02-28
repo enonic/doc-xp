@@ -481,6 +481,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>When editing a role via the users app, you instantly grant the role to users or groups as well.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/roles-create.png" alt="Creating a role in the Users app" width="504">
+</div>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -523,6 +531,11 @@ Unlike groups, a role may not be assigned other roles. It is designed to provide
 <div class="sectionbody">
 <div class="paragraph">
 <p>Enonic XP ships with several built-in roles. Each of which provide specific access and priveliges in the system.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/roles.png" alt="List of system roles" width="504">
+</div>
 </div>
 <div class="paragraph">
 <p><strong>system.admin</strong>
@@ -597,7 +610,7 @@ When using <a href="cms/projects.ahtml">Content Projects</a>, each project autom
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-28 12:05:59 UTC
+Last updated 2025-02-28 12:19:27 UTC
 </div>
 </div>
 </body>

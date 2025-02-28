@@ -20,7 +20,7 @@
         },
         {
           "title": "System ID provider",
-          "document": "iam/systemidp"
+          "document": "iam/system-idp"
         },
         {
           "title": "Users and groups",
@@ -245,9 +245,13 @@
           "document": "development/typescript"
         },
         {
-          "title": "Enonic Framework",
+          "title": "Framework",
           "document": "framework",
           "menuItems": [
+            {
+              "title": "Controllers",
+              "document": "framework/controllers"
+            },
             {
               "title": "Globals",
               "document": "framework/globals"
@@ -257,24 +261,16 @@
               "document": "framework/http"
             },
             {
-              "title": "Controllers",
-              "document": "framework/controllers"
-            },
-            {
-              "title": "Filters",
-              "document": "framework/filters"
-            },
-            {
               "title": "Events",
               "document": "framework/events"
             },
             {
-              "title": "Websocket",
-              "document": "framework/websocket"
-            },
-            {
               "title": "Error handler",
               "document": "framework/error"
+            },
+            {
+              "title": "Filters",
+              "document": "framework/filters"
             },
             {
               "title": "ID provider",
@@ -285,8 +281,16 @@
               "document": "framework/tasks"
             },
             {
+              "title": "Templating",
+              "document": "framework/templating"
+            },
+            {
               "title": "Localization",
               "document": "framework/i18n"
+            },
+            {
+              "title": "Websocket",
+              "document": "framework/websocket"
             },
             {
               "title": "Mappings",
@@ -303,10 +307,6 @@
             {
               "title": "Contributions",
               "document": "framework/contributions"
-            },
-            {
-              "title": "Templating",
-              "document": "framework/templating"
             },
             {
               "title": "Main controller",
