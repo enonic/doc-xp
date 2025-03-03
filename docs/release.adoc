@@ -18,11 +18,11 @@ image:715-users-public-key.png["Upload or generate keys", 1077]
 * Use JWT token-based authentication when accessing XP programmatically or via the latest Enonic CLI
 * The <<runtime/management#management_endpoint, Management Endpoint>> now also supports token-base auth.
 
-NOTE: If you are using automated appl deployments we recommend switching to token based authentication.
+NOTE: If you are using automated app deployments we recommend switching to token based authentication.
 
 === Progressive image delivery
 
-The image service now supports progressive image formats. This means images images are loaded in multiple passes, rather than serially - which may improve perceived performance.
+The image service now supports progressive image formats. This means images are loaded in multiple passes, rather than serially - which may improve perceived performance.
 
 Enable progressive images via the <<deployment/config#image, Image config>>.
 
@@ -39,7 +39,7 @@ The `@enonic-types/core` package now includes TypeScript types for XP's `Request
 === Other changes
 
 * Added support for `patch` method in <<framework/controllers#http-controller, HTTP Controllers>>.
-* Added ability to remove previously set HTTP Headers in controllers/filters. 
+* Added ability to remove previously set HTTP Headers in controllers/filters.
 NOTE: Headers set by <<deployment/config#header, Header Filter>> cannot be removed.
 * HTTP gzip compression is now disabled by default. Gzip compression often makes response chunked, which is not supported by some CDNs. It can manually be enabled in <<deployment/config#jetty, Jetty config>>.
 * Automatic media-type detection for some essential file extensions such as `webmanifest`, `ico`, `webp`, `avif` ...  added, so you don't need to list them in <<deployment/config#media, Media config>>.
