@@ -456,8 +456,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#objects">Objects</a>
 <ul class="sectlevel2">
-<li><a href="#createrepoparams">CreateRepoParams</a></li>
-<li><a href="#reposettings">RepoSettings</a></li>
+<li><a href="#createrepositoryparams">CreateRepositoryParams</a></li>
+<li><a href="#repositorysettings">RepositorySettings</a></li>
 <li><a href="#indexdefinitions">IndexDefinitions</a></li>
 <li><a href="#indexdefinition">IndexDefinition</a></li>
 <li><a href="#createbranchparams">CreateBranchParams</a></li>
@@ -575,7 +575,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">params</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#createrepoparams">CreateRepoParams</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#createrepositoryparams">CreateRepositoryParams</a></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>JSON with the parameters</p>
 </div></div></td>
@@ -997,7 +997,7 @@ refresh({
 <h2 id="objects"><a class="link" href="#objects">Objects</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="createrepoparams"><a class="link" href="#createrepoparams">CreateRepoParams</a></h3>
+<h3 id="createrepositoryparams"><a class="link" href="#createrepositoryparams">CreateRepositoryParams</a></h3>
 <div class="paragraph">
 <p>Object to pass to the <code>create</code> function.</p>
 </div>
@@ -1038,17 +1038,25 @@ refresh({
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">settings</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reposettings">RepoSettings</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#repositorysettings">RepositorySettings</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Repository settings</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">transient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If true, the repository will be transient</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="reposettings"><a class="link" href="#reposettings">RepoSettings</a></h3>
+<h3 id="repositorysettings"><a class="link" href="#repositorysettings">RepositorySettings</a></h3>
 <div class="paragraph">
 <p>Repository settings to optionally pass to the <code>create</code> function</p>
 </div>
@@ -1085,7 +1093,7 @@ refresh({
 <div class="sect2">
 <h3 id="indexdefinitions"><a class="link" href="#indexdefinitions">IndexDefinitions</a></h3>
 <div class="paragraph">
-<p>Index definitions used in <a href="#reposettings">RepoSettings</a> parameter</p>
+<p>Index definitions used in <a href="#repositorysettings">RepositorySettings</a> parameter</p>
 </div>
 <div class="paragraph lead">
 <p>Fields</p>
@@ -1312,7 +1320,7 @@ refresh({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-03 17:57:04 UTC
+Last updated 2025-03-03 18:59:43 UTC
 </div>
 </div>
 </body>

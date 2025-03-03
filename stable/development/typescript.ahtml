@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>ContentSelector input type</title>
+<title>TypeScript definitions</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,34 +437,164 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>ContentSelector input type</h1>
+<h1>TypeScript definitions</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#appearance">Appearance</a></li>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#install_types">Install types</a></li>
+<li><a href="#enonic_libraries">Enonic Libraries</a>
+<ul class="sectlevel2">
+<li><a href="#global">Global</a></li>
+<li><a href="#core">Core</a></li>
+<li><a href="#content">Content</a></li>
+<li><a href="#additional_types">Additional types</a></li>
+</ul>
+</li>
 <li><a href="#usage">Usage</a>
 <ul class="sectlevel2">
-<li><a href="#allowContentType">Allow content type pattern</a></li>
-<li><a href="#allowpath_samples">allowPath Samples</a></li>
+<li><a href="#require">require</a></li>
+<li><a href="#es6_style_import">ES6-style import</a></li>
+</ul>
+</li>
+<li><a href="#configuration">Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#require_2">Require</a></li>
+<li><a href="#other_imports">Other imports</a></li>
+</ul>
+</li>
+<li><a href="#beans">Beans</a>
+<ul class="sectlevel2">
+<li><a href="#option_1">Option 1</a></li>
+<li><a href="#option_2">Option 2</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="intro"><a class="link" href="#intro">Intro</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>References to other content are specified by this input type. Use the toggle icon to switch between the list mode (default) and the tree mode.</p>
+<p>We default to TypeScript in our code examples and starters. This section describes how to configure and use our official TypeScript types - all aligned with our standard <a href="api.ahtml">JS APIs</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="appearance"><a class="link" href="#appearance">Appearance</a></h2>
+<h2 id="install_types"><a class="link" href="#install_types">Install types</a></h2>
 <div class="sectionbody">
-<div class="imageblock">
+<div class="paragraph">
+<p>To add types for corresponding library use NPM (or similar package manager) and install them as any other dependency. All types can be found under <a href="https://www.npmjs.com/org/enonic-types">@enonic-types</a> organisation on NPM.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enonic_libraries"><a class="link" href="#enonic_libraries">Enonic Libraries</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For example, you have a <code>lib-auth</code> gradle dependency:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="images/Content-selector-default.png" alt="An input box with a dropdown options below it" width="700">
+<pre class="highlight"><code class="language-gradle" data-lang="gradle">dependencies {
+  include "com.enonic.xp:lib-auth:${xpVersion}"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To add type definitions for the library, install dependency from NPM:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">npm i --save-dev @enonic-types/lib-auth</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="global"><a class="link" href="#global">Global</a></h3>
+<div class="paragraph">
+<p>Along with library types it is <strong>higlhy recommended</strong> to install definitions for global objects (<code>app</code>, <code>__</code>, <code>log</code>) and functions (<code>resolve</code>, <code>require</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">npm i --save-dev @enonic-types/global</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since <code>global</code> types are not placed under the <code>node_modules/@types</code>, it is neccessary to include them manually:</p>
+</div>
+<div class="paragraph">
+<p><code>tsconfig.json</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "compilerOptions": {
+    "types": [
+      "@enonic-types/global"
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="core"><a class="link" href="#core">Core</a></h3>
+<div class="paragraph">
+<p>There are types that are shared between other libraries (like <code>Content</code> or <code>Principal</code>). Such types reside in the <code>core</code> package. It is not necessary to include this dependency into your project, as all libraries export related core types, e.g. Content library exports <code>Content`</code> type. But if you want to use these type directly, you&#8217;ll need to install them:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">npm i --save-dev @enonic-types/core</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and then import them in your TypeScript code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">import type {Content} from '@enonic-types/core';</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="content"><a class="link" href="#content">Content</a></h3>
+<div class="paragraph">
+<p><code>Content</code> contains the <code>x</code> property that has a very special <code>XpXData</code> type.</p>
+</div>
+<div class="paragraph">
+<p><code>XpXData</code> is an interface that is added to the global scope, so it can be modified using the <a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces">declaration merging</a>. This allows you to set the shape of the XData in your project, simply by declaring the <code>XpXData</code> like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">declare global {
+    interface XpXData {
+        'com-mysite-app': {
+            metadata: {
+                metaTagTitle: string;
+                metaTagImageId: string;
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="additional_types"><a class="link" href="#additional_types">Additional types</a></h3>
+<div class="paragraph">
+<p><code>Content</code> is a complex type that contains unions and maps that are not exported but may be needed during the development. Actually, these types can easily be retrieved from the <code>Content</code> itself:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">import type {Content} from '@enonic-types/core';
+
+type Attachments = Content['attachments'];
+
+type ContentInheritType = Content['inherit'];
+
+type Workflow = Content['workflow'];</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -472,238 +602,117 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="require"><a class="link" href="#require">require</a></h3>
+<div class="paragraph">
+<p>After <code>global</code> and library types are installed and configured in <code>tsconfig.json</code>, libraries can be imported just like they would be in JS code:</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mycontentselector" type="ContentSelector"&gt;
-  &lt;label&gt;My ContentSelector&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="0"/&gt;
-  &lt;config&gt;
-    &lt;allowContentType&gt;citation&lt;/allowContentType&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-    &lt;allowContentType&gt;my.other.app:quote&lt;/allowContentType&gt;
-    &lt;allowPath&gt;${site}/people/&lt;/allowPath&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;allowPath&gt;./*&lt;/allowPath&gt;
-    &lt;allowPath&gt;/quotes*&lt;/allowPath&gt;
-    &lt;treeMode&gt;true&lt;/treeMode&gt;   <i class="conum" data-value="3"></i><b>(3)</b>
-    &lt;hideToggleIcon&gt;true&lt;/hideToggleIcon&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>allowContentType</strong> is used to limit the content types that may be selected using the <a href="#allowContentType">Allow content type pattern</a></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>allowPath</strong> is used to limit the path of the content that may be selected using the <a href="#allowpath_samples">allowPath Samples</a>. By default, Content Selector
-only displays content from the same site.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>treeMode</strong> toggles between tree and flat modes. Default value is <code>false</code> (flat mode).<br>
-<span class="image"><img src="images/Content-selector-tree.png" alt="Input box with a dropdown with a tree structure" width="350"></span></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>hideToggleIcon</strong> hides the toggle icon when set to <code>false</code>.<br>
-<span class="image"><img src="images/Content-selector-no-icon.png" alt="Input box without an icon" width="500"></span></td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="allowContentType"><a class="link" href="#allowContentType">Allow content type pattern</a></h3>
-<div class="paragraph">
-<p>XP uses one of two modes when matching content type patterns:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>LEGACY</code></dt>
-<dd>
-<p>this mode simulates the pattern matching functionality that was the default before XP 7.7.0. <span class="image"><span class="alt">XP 7.7.0</span></span></p>
-</dd>
-<dt class="hdlist1"><code>MATCH</code></dt>
-<dd>
-<p>this mode is the current default mode and has a few notable changes from <code>LEGACY</code> mode.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>The modes are explained in further detail below. You can configure which mode to use in  <a href="../../../deployment/config.ahtml#admin_rest">the admin config</a>.</p>
-</div>
-<div class="sect3">
-<h4 id="legacy"><a class="link" href="#legacy">Legacy<br></a></h4>
-<div class="paragraph">
-<p>If the pattern value can be found in any part of the content type name, then it is considered a match.
-The pattern will be prefixed by the current application name unless:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the pattern uses the &lt;application-name:content-name&gt; format</p>
-</li>
-<li>
-<p>the pattern includes one of <code>:</code> or <code>*</code></p>
-</li>
-<li>
-<p>the pattern starts with <code>${app}</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="match"><a class="link" href="#match">Match<br></a></h4>
-<div class="paragraph">
-<p>The pattern will be treated as a Regular Expression (with <a href="#regex-differences">a few notable exceptions</a>) and the whole content type name must match it to be accepted.
-The pattern will be prefixed by the current application name if it does <em>not</em> contain any of the following characters: <code>\^$.|?*+()[{:</code>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="regex-differences"><a class="link" href="#regex-differences">XP patterns: special cases</a></h4>
-<div class="paragraph">
-<p>XP&#8217;s patterns have a few cases where they differ from normal Regular Expression syntax:</p>
-</div>
-<div class="paragraph">
-<div class="title"><code>${app}</code> template expression</div>
-<p>Most content type names start with the name of the application where they are stored. It may be quite messy and hard to maintain the whole application name in every pattern, so the <code>${app}</code> template expression can be used to replace it.</p>
-</div>
-<div class="paragraph">
-<div class="title">The '*' character</div>
-<p>In most regex engines, the <code>*</code> character means "0 or more of the preceding token". However, XP treats it differently and interprets it as "0 or more of any character(s) except for line breaks". In that way, it&#8217;s similar to <a href="https://en.wikipedia.org/wiki/Glob_%28programming%29">glob patterns</a>.</p>
-</div>
-<div class="paragraph">
-<p>To further clarify, in XP:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>*day</code> would match "monday", "day", and "mayday". This pattern would be invalid in most regex engines.</p>
-</li>
-<li>
-<p><code>p*age</code> would match "page" and "package", but <em>not</em> "age".</p>
-</li>
-<li>
-<p><code>monk*</code> would match "monkey" and  "monk", but <em>not</em> "mon".</p>
-</li>
-</ul>
-</div>
-<div class="exampleblock">
-<div class="title">Example 1. Samples</div>
-<div class="content">
-<div class="paragraph">
-<p>Content type "citation" within your current application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;citation&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Content type "quote" from the application "my.other.app"<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;my.other.app:quote&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Content types "quote" from any application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;*:quote&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Any content types from current application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;${app}:*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All content types starting with banana (using regular expressions)<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;*:banana*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All content types except 'base:folder'<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;^(?!base:folder$)*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-</div>
+<pre class="highlight"><code class="language-ts" data-lang="ts">const libAuth = require('/lib/xp/auth');</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="allowpath_samples"><a class="link" href="#allowpath_samples">allowPath Samples</a></h3>
-<div class="exampleblock">
-<div class="content">
+<h3 id="es6_style_import"><a class="link" href="#es6_style_import">ES6-style import</a></h3>
 <div class="paragraph">
-<p>Allow all content starting from the root<br></p>
+<p>If you are planning to use <code>import</code> in your code and transpile it with the default <code>tsc</code> TypeScript compiler, you&#8217;ll need to add proper types mapping to your configuration via <code>baseUrl</code> and <code>paths</code> properties in <code>tsconfig.json</code>:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>&lt;allowPath&gt;*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Only content from the current site (but from any location), e.g<br>
-* /mySite/fish.jpg<br>
-* /mySite/articles/new-blog-post<br>
-* /mySite/someFolder/anotherFolder/rubarb/lettuce<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;${site}/*&lt;/allowPath&gt;</pre>
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "/lib/xp/auth": ["node_modules/@enonic-types/lib-auth"],
+    }
+  }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>All children of &lt;site&gt;/people, e.g<br>
-* /mySite/people/myContent<br>
-* /mySite/people/myGroup/anotherContent<br></p>
+<p>Then in your code:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>&lt;allowPath&gt;${site}/people/*&lt;/allowPath&gt;</pre>
+<pre class="highlight"><code class="language-ts" data-lang="ts">import {login, logout, getUser, generatePassword} from '/lib/xp/auth';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>All content in mySite starting with people, including children, e.g<br>
-* /mySite/peoples<br>
-* /mySite/people/myContent<br>
-* /mySite/peoples/myContent<br>
-* /mySite/people/myGroup/anotherContent<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;/mySite/people*&lt;/allowPath&gt;</pre>
+<p>Configuring <code>baseUrl</code> and <code>paths</code> will allow the TypeScript compiler to keep the valid paths in the resulting JavaScript files.</p>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="link" href="#configuration">Configuration</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="require_2"><a class="link" href="#require_2">Require</a></h3>
 <div class="paragraph">
-<p>All children of the current content<br></p>
+<p>To add support for type resolution for custom libraries via <code>require</code>, you can redeclare the <code>XpLibraries</code> interface in global scope, which will lead to declaration merging:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>&lt;allowPath&gt;./*&lt;/allowPath&gt;</pre>
+<pre class="highlight"><code class="language-ts" data-lang="ts">declare global {
+    interface XpLibraries {
+        '/lib/custom/mylib': typeof import('./mylib');
+    }
+}</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="other_imports"><a class="link" href="#other_imports">Other imports</a></h3>
 <div class="paragraph">
-<p>All children of the current content&#8217;s parent<br></p>
+<p>If you want to use custom import functions, like <code><em>non_webpack_require</em></code> with Webpack, just use <code>XpRequire</code> from <code>global</code> types for this:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>&lt;allowPath&gt;../*&lt;/allowPath&gt;</pre>
+<pre class="highlight"><code class="language-ts" data-lang="ts">declare const __non_webpack_require__: XpRequire;</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="beans"><a class="link" href="#beans">Beans</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create a new Java bean, the <code>__.newBean()</code> function must be used. Making it return a proper type can be done in two ways. Let&#8217;s say, you have created an interface for that bean somewhere in your project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">interface SomeHelper {
+  help(text: string): void;
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="option_1"><a class="link" href="#option_1">Option 1</a></h3>
+<div class="paragraph">
+<p>You can pass the type argument explicitly. This option is a bit cleaner.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">const helper = __.newBean&lt;SomeHelper&gt;('com.me.project.SomeHelper');</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="option_2"><a class="link" href="#option_2">Option 2</a></h3>
+<div class="paragraph">
+<p>Or you can map the bean name to bean interface. It may be a preferable way to do it, if the bean is used across multiple files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">declare global {
+    interface XpBeans {
+        'com.me.project.SomeHelper': SomeHelper;
+    }
+}
+
+const helper = __.newBean('com.me.project.SomeHelper');</code></pre>
 </div>
 </div>
 </div>

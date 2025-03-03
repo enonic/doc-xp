@@ -606,7 +606,27 @@ Modification of <code>headers</code> does not affect the result of <code>getHead
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Name/value pairs with the HTTP headers to be added to the response.</td>
+<td>Name/value pairs with the HTTP headers to be added to the response. Starting from <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="r">
+    <rect width="64" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#r)">
+    <rect width="25" height="20" fill="#555"/>
+    <rect x="25" width="39" height="20" fill="#007ec6"/>
+    <rect width="64" height="20" fill="url(#s)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
+     font-size="110">
+    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
+    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
+    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.15.0</text>
+    <text x="435" y="140" transform="scale(.1)" textLength="290">7.15.0</text>
+  </g>
+</svg></span> value can be <code>null</code>/<code>undefined</code> to remove a headers added by other controllers/filters.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -717,7 +737,7 @@ Modification of <code>headers</code> does not affect the result of <code>getHead
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-03 17:57:04 UTC
+Last updated 2025-03-03 18:59:43 UTC
 </div>
 </div>
 </body>

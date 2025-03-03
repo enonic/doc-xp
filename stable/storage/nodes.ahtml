@@ -525,6 +525,9 @@ You may create any number of repositories within a single instance of Enonic XP,
 <div class="paragraph">
 <p>Each repository has a unique name, where best practice is to name or prefix the repository according to your application. i.e. a good repository name might be 'com.company.myapp'</p>
 </div>
+<div class="paragraph">
+<p>Starting from <span class="image"><span class="alt">XP 7.15.0</span></span> you can flag repository as <em>transient</em> meaning that their data is not stored in system dumps and snapshots.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/repos.png" alt="repos">
@@ -557,7 +560,7 @@ The system repo is used for the following data:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-03 17:57:04 UTC
+Last updated 2025-03-03 18:59:43 UTC
 </div>
 </div>
 </body>

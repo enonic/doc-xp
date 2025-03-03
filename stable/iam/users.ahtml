@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>ContentSelector input type</title>
+<title>Users and groups</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,17 +437,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>ContentSelector input type</h1>
+<h1>Users and groups</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#appearance">Appearance</a></li>
-<li><a href="#usage">Usage</a>
+<li><a href="#users">Users</a>
 <ul class="sectlevel2">
-<li><a href="#allowContentType">Allow content type pattern</a></li>
-<li><a href="#allowpath_samples">allowPath Samples</a></li>
+<li><a href="#profiles">Profiles</a></li>
 </ul>
 </li>
+<li><a href="#groups">Groups</a></li>
 </ul>
 </div>
 </div>
@@ -455,257 +454,90 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>References to other content are specified by this input type. Use the toggle icon to switch between the list mode (default) and the tree mode.</p>
+<p>Users and groups may be created exist within the scope of an ID provider.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="appearance"><a class="link" href="#appearance">Appearance</a></h2>
+<h2 id="users"><a class="link" href="#users">Users</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Users are stored per ID provider. Selected IDP applications, such as the <a href="https://market.enonic.com/vendors/enonic/simple-idprovider" target="_blank" rel="noopener">Simple ID provider</a> let you create and manage users directly in the <code>Users</code> admin app.</p>
+</div>
+<div class="paragraph">
+<p>In other cases, users are entirely managed outside of XP, and you are limited to adding the users to roles and groups.</p>
+</div>
+<div class="paragraph">
+<p>A user generally consist of the following fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>name (aka login)</p>
+</li>
+<li>
+<p>display name (Full name)</p>
+</li>
+<li>
+<p>e-mail</p>
+</li>
+</ul>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Content-selector-default.png" alt="An input box with a dropdown options below it" width="700">
+<img src="images/user-form.png" alt="Creating a user in the Users app" width="811">
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mycontentselector" type="ContentSelector"&gt;
-  &lt;label&gt;My ContentSelector&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="0"/&gt;
-  &lt;config&gt;
-    &lt;allowContentType&gt;citation&lt;/allowContentType&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-    &lt;allowContentType&gt;my.other.app:quote&lt;/allowContentType&gt;
-    &lt;allowPath&gt;${site}/people/&lt;/allowPath&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;allowPath&gt;./*&lt;/allowPath&gt;
-    &lt;allowPath&gt;/quotes*&lt;/allowPath&gt;
-    &lt;treeMode&gt;true&lt;/treeMode&gt;   <i class="conum" data-value="3"></i><b>(3)</b>
-    &lt;hideToggleIcon&gt;true&lt;/hideToggleIcon&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
+<div class="admonitionblock note">
 <table>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>allowContentType</strong> is used to limit the content types that may be selected using the <a href="#allowContentType">Allow content type pattern</a></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>allowPath</strong> is used to limit the path of the content that may be selected using the <a href="#allowpath_samples">allowPath Samples</a>. By default, Content Selector
-only displays content from the same site.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>treeMode</strong> toggles between tree and flat modes. Default value is <code>false</code> (flat mode).<br>
-<span class="image"><img src="images/Content-selector-tree.png" alt="Input box with a dropdown with a tree structure" width="350"></span></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>hideToggleIcon</strong> hides the toggle icon when set to <code>false</code>.<br>
-<span class="image"><img src="images/Content-selector-no-icon.png" alt="Input box without an icon" width="500"></span></td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For selected ID providers you may also add credentials, such as Password and Public key to a user
+</td>
 </tr>
 </table>
 </div>
 <div class="sect2">
-<h3 id="allowContentType"><a class="link" href="#allowContentType">Allow content type pattern</a></h3>
+<h3 id="profiles"><a class="link" href="#profiles">Profiles</a></h3>
 <div class="paragraph">
-<p>XP uses one of two modes when matching content type patterns:</p>
+<p>Developers may also store custom properties and values in the user object via <code>profiles</code>. This information is currently not visible or possible to edit via the Users App.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>LEGACY</code></dt>
-<dd>
-<p>this mode simulates the pattern matching functionality that was the default before XP 7.7.0. <span class="image"><span class="alt">XP 7.7.0</span></span></p>
-</dd>
-<dt class="hdlist1"><code>MATCH</code></dt>
-<dd>
-<p>this mode is the current default mode and has a few notable changes from <code>LEGACY</code> mode.</p>
-</dd>
-</dl>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="groups"><a class="link" href="#groups">Groups</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The modes are explained in further detail below. You can configure which mode to use in  <a href="../../../deployment/config.ahtml#admin_rest">the admin config</a>.</p>
-</div>
-<div class="sect3">
-<h4 id="legacy"><a class="link" href="#legacy">Legacy<br></a></h4>
-<div class="paragraph">
-<p>If the pattern value can be found in any part of the content type name, then it is considered a match.
-The pattern will be prefixed by the current application name unless:</p>
+<p>Like users, groups are created and managed witin an ID provider. Groups provide a flexible way to greate and manage permissions, without assigning them on a per-user-basis</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>the pattern uses the &lt;application-name:content-name&gt; format</p>
+<p>You may add users to a group</p>
 </li>
 <li>
-<p>the pattern includes one of <code>:</code> or <code>*</code></p>
+<p>Roles may be granted to a group - Indirectly assigning the roles to the users of the group</p>
 </li>
 <li>
-<p>the pattern starts with <code>${app}</code>.</p>
+<p>Groups may be added to a group - causing transitive resolving of roles</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="match"><a class="link" href="#match">Match<br></a></h4>
-<div class="paragraph">
-<p>The pattern will be treated as a Regular Expression (with <a href="#regex-differences">a few notable exceptions</a>) and the whole content type name must match it to be accepted.
-The pattern will be prefixed by the current application name if it does <em>not</em> contain any of the following characters: <code>\^$.|?*+()[{:</code>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="regex-differences"><a class="link" href="#regex-differences">XP patterns: special cases</a></h4>
-<div class="paragraph">
-<p>XP&#8217;s patterns have a few cases where they differ from normal Regular Expression syntax:</p>
-</div>
-<div class="paragraph">
-<div class="title"><code>${app}</code> template expression</div>
-<p>Most content type names start with the name of the application where they are stored. It may be quite messy and hard to maintain the whole application name in every pattern, so the <code>${app}</code> template expression can be used to replace it.</p>
-</div>
-<div class="paragraph">
-<div class="title">The '*' character</div>
-<p>In most regex engines, the <code>*</code> character means "0 or more of the preceding token". However, XP treats it differently and interprets it as "0 or more of any character(s) except for line breaks". In that way, it&#8217;s similar to <a href="https://en.wikipedia.org/wiki/Glob_%28programming%29">glob patterns</a>.</p>
-</div>
-<div class="paragraph">
-<p>To further clarify, in XP:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>*day</code> would match "monday", "day", and "mayday". This pattern would be invalid in most regex engines.</p>
-</li>
-<li>
-<p><code>p*age</code> would match "page" and "package", but <em>not</em> "age".</p>
-</li>
-<li>
-<p><code>monk*</code> would match "monkey" and  "monk", but <em>not</em> "mon".</p>
-</li>
-</ul>
-</div>
-<div class="exampleblock">
-<div class="title">Example 1. Samples</div>
-<div class="content">
-<div class="paragraph">
-<p>Content type "citation" within your current application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;citation&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Content type "quote" from the application "my.other.app"<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;my.other.app:quote&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Content types "quote" from any application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;*:quote&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Any content types from current application<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;${app}:*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All content types starting with banana (using regular expressions)<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;*:banana*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All content types except 'base:folder'<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowContentType&gt;^(?!base:folder$)*&lt;/allowContentType&gt;</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="allowpath_samples"><a class="link" href="#allowpath_samples">allowPath Samples</a></h3>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p>Allow all content starting from the root<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Only content from the current site (but from any location), e.g<br>
-* /mySite/fish.jpg<br>
-* /mySite/articles/new-blog-post<br>
-* /mySite/someFolder/anotherFolder/rubarb/lettuce<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;${site}/*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All children of &lt;site&gt;/people, e.g<br>
-* /mySite/people/myContent<br>
-* /mySite/people/myGroup/anotherContent<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;${site}/people/*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All content in mySite starting with people, including children, e.g<br>
-* /mySite/peoples<br>
-* /mySite/people/myContent<br>
-* /mySite/peoples/myContent<br>
-* /mySite/people/myGroup/anotherContent<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;/mySite/people*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All children of the current content<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;./*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>All children of the current content&#8217;s parent<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;allowPath&gt;../*&lt;/allowPath&gt;</pre>
-</div>
-</div>
-</div>
-</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Like users, Using Content Studio, you may also grant content permissions to a group
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

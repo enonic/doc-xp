@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Javascript Framework</title>
+<title>Enonic Framework</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,11 +437,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Javascript Framework</h1>
+<h1>Enonic Framework</h1>
 </div>
 <div id="content">
 <div class="paragraph">
-<p>Enonic XP ships with a flexible JavaScript MVC framework for server-side execution.</p>
+<p>Enonic applications are built using Enonic&#8217;s server-side JavaScript controller framework. Applications are executed by the <a href="runtime.ahtml">XP runtime</a>, which means it can take advantage of it&#8217;s modular architecture and get access to all platform <a href="api.ahtml">APIs</a> as well as access management and IDprovider features.</p>
 </div>
 <div class="paragraph">
 <p>Here are some highlights:</p>
@@ -449,19 +449,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Integrated</strong> with the Enonic applications runtime. Ship and execute JavaScript within your apps</p>
+<p><strong>Integrated</strong> with the Enonic applications runtime. Ship and execute server-side TypeScript/JavaScript.</p>
 </li>
 <li>
 <p><strong>Compatible</strong> across all releases of XP within a major version i.e. 7.x.x</p>
 </li>
 <li>
-<p><strong>Supports</strong> request-response, clustered events and and background task execution</p>
+<p><strong>Supports</strong> HTTP request-response, clustered events and and background task execution</p>
 </li>
 <li>
 <p><strong>Multithreaded</strong> for ease of development and effective use of multi-core CPU arcitectures</p>
 </li>
 <li>
-<p><strong>Fast and performant</strong> as JavaScripts are compiled and cached on first request</p>
+<p><strong>Fast and performant</strong> as JavaScripts are compiled and adapted to the underlying architecture.</p>
 </li>
 <li>
 <p><strong>Based on the <a href="https://wiki.commonjs.org/wiki/Modules/1.1">CommonJS module specification</a></strong></p>
@@ -474,7 +474,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-03 17:57:04 UTC
+Last updated 2025-03-03 18:59:43 UTC
 </div>
 </div>
 </body>
