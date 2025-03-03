@@ -1,0 +1,126 @@
+= System ID provider
+:toc: right
+:imagesdir: images
+
+== Introduction
+
+XP ships with a special ID provider that cannot be removed or renamed. It is called the System ID provider.
+
+
+== Built-in
+
+When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.
+
+image::system-idprovider.png[System ID provider login screen, 828]
+
+
+== System users
+The System ID provider also contains some special users:
+
+image::super-user.png[The Super User, 834px]
+
+
+*system:su*
+The `Super User` exists in order to perform priveliged actions, and to allow you to start using XP before you have created any users. The Super User has the *system.admin* role, and thus unrestricted access.
+
+*system:anonymous* - XP expects a user in every request. As such, the `Anonymous` user steps in to cover for users that have not authenticated.
+
+== Service Accounts
+
+Unlike other ID providers, the users in the System IDP are referred to as service accounts.
+
+Service accounts are designed for machine-to-machine authentication from remote clients to XP.
+
+TIP: Avoid adding human users to the System ID provider, rather <<idproviders#, create a new ID provider>> for this purpose.
+
+Since service accounts also are regular XP users, you may grant them roles and permissions as needed.
+
+Service accounts users can be recognized from the small cog symbol above their avatar in the top right.
+
+== Service Account Key
+
+A Service Account may be associated with one, or several  Service Account keys. Using a Service Account Key is beneficial for security reasons:
+
+* It allows to authenticate without transferring the password over the network.
+* Support for multiple keys allow rotation of Public-Private key-pairs without service interruption.
+* Stored Public key is not a hash of a password, so it is not possible to reverse-engineer the password from the public key.
+
+Once a key is created, it may be used to make an authorized call to:
+
+* The <<management_endpoint, Management Endpoint>>
+* Any XP engine that mounts the System ID provider. See <<deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
+
+image::service-account-keys.png[List of service account keys, 662px]
+
+NOTE: Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Also consider using ID providers that support 3-leg authentication, such as the https://market.enonic.com/vendors/enonic/oidc-id-provider[OIDC ID provider], if possible.
+
+=== Generate key
+
+You may easily generate new keys by clicking add.
+Simply give your key a name, and click btn:generate.
+
+image::service-account-key-form.png[Generate service account key, 834px]
+
+NOTE: The public key will be saved, and the private key will automatically be downloaded to your device (in JSON format).
+
+=== Upload key
+
+You may also upload the public key portion of a user-managed key pair, and the use the private key for authenication later.
+
+The key you upload must be an RSA public key and encoded in base64. You can use tools such as OpenSSL to generate a key and certificate in this format.
+
+*Try it out* The following command generates a 2048-bit RSA key pair
+
+[source,terminal]
+----
+openssl genpkey -algorithm RSA -out xp_private_key.pem -pkeyopt rsa_keygen_bits:2048 && \
+openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem
+----
+
+After generating the key, you may upload the `public_key.pem` file to your service account.
+
+image::service-account-key-upload.png[Upload public key, 807px]
+
+IMPORTANT: Your _Private_ key from the Public-Private key pair is stored only on the client side and must never be shared with the XP server.
+The _Public_ key from Public-Private key pair is stored in XP, and is used to verify the signature of your token.
+
+[[jwt-authentication]]
+== JWT authentication
+
+The System ID providers supports JWT (JSON Web Token) based authentication via the HTTP `Authorization` header.
+
+Content of the header should look like the following:
+
+  Authorization: Bearer <mytoken>
+
+A JWT token must be a valid https://datatracker.ietf.org/doc/html/rfc7519[RFC-7519] JWT token, following these requirements:
+
+* `alg` header parameter must be set to `RS256`.
+* `kid` header parameter must be set to ID of the public key that corresponds to the private key used to sign the token.
+* `sub` claim must be set to ID of the service account, for instance, `user:system:myuser`.
+* `exp` claim must be set to expiration time of the token. The token will be rejected if it is expired.
+* `iat` claim must be set to issue time of the token. The token will be rejected if it was issued in the future.
+
+.JWT header example
+[source,JSON]
+----
+{
+  "kid": "51a29c2ab5ebf945f6a5ddac8935bf8b",
+  "typ": "JWT",
+  "alg": "RS256"
+}
+----
+
+.JWT payload example
+[source,JSON]
+----
+{
+  "sub": "user:system:myuser",
+  "exp": 1692787396,
+  "iat": 1692787366
+}
+----
+
+JWT parts must be signed and encoded according to https://datatracker.ietf.org/doc/html/rfc7519[RFC-7519].
+
+In general, we recommend using libraries that match your platform to generate the token, as performing this manually can be cumbersome.

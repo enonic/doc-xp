@@ -1,129 +1,14 @@
 = Identity and access management (IAM)
 :toc: right
-:imagesdir: iam/images
+:imagesdir: images
 
-Enonic XP ships with a clearly defined and pluggable concept for handling authentication and authorization
-
-== Introduction
-
-Enonic XP ships with a standard concept handling users, authentication, groups and roles based authorization.
-Additionally, the NoSQL storage supports fine-grained access control mechanisms down to a single item.
-
-
-== IAM Concepts
-XP IAM consists of three central concepts:
-
-=== Principals
-Principals are object that can be given permissions.
-There are three different types of principals:
-
-Users:: Principals that can be authenticated.
-Groups::  Used to group other principals to simplify management.
-Roles:: Provides access to application specific functionality.
-
-
-== Permissions
-Principals may be given with fine grade access to items stored in the NoSQL storage.
-An example of this is the XP CMS, where users typically get access to create or publish content in specific areas of the solution.
+Enonic XP ships with a defined and pluggable concept for IAM handing
 
 == Identity providers
+ID providers represent the pluggable abstraction layer for user authentication. To authenticate or even create users in XP, you will need to create an <<idproviders#,ID provider>>.
 
-ID providers offer pluggable abstraction layer for user authentication.
-As such, in order to authenticate or even create users in XP, you will need to define an ID provider.
+== Principals
+XP provide three basic principals, <<users#, users, groups>> and <<roles#, roles>>. Combined with ID providers these are the essence of Enonic IAM.
 
-IDproviders are linked to your webapp or site through <<./deployment/vhosts#,virtual hosts>>.
-
-
-=== Creating an ID provider
-IDproviders can be created and managed through the API,
-or through the Users app in the XP admin console.
-
-An idprovider essentially consist of the following:
-
-* A unique name (cannot be changed later)
-* ID provider application, with optional configuration settings.
-* Permissions - specifies who can manage and access the ID provider
-
-NOTE: ID provider applications must be installed before you can select them.
-
-image::system-idprovider-admin.png[Setting up an ID provider from the Users admin tool, 819]
-
-[#system-id-provider]
-=== System ID provider
-
-XP ships with a special ID provider that cannot be removed or renamed.
-It is called the `system` ID provider.
-
-The purpose of the system ID provider is to hold system users such as `su` - the Super User, and `anonymous` - the user that is defacto if no other user is specified.
-
-When accessing the XP admin console for the first time in a fresh installation, you will see the system IDprovider.
-
-image::system-idprovider.png[System ID provider login screen, 828]
-
-NOTE: Avoid placing your regular users in the system ID provider, rather create a new ID provider instead.
-
-=== IDprovider apps
-
-In order for an ID provider to work, it must be associated with an ID provider application that handles the authentication process.
-
-You may install ID providers from Enonic Market,
-or <<./framework/idprovider#, build your own>> for a fully customized experience.
-
-=== Standard ID provider app
-By default, XP ships with an app app called the "Standard ID provider".
-This is also the app that is being used by the <<system-id-provider>>
-
-== Built-in roles
-
-Enonic XP is shipped with several built-in roles (described below) which grant certain permissions when applied to users.
-New roles can be created by users with *Administrators* and *Users Administrator* roles.
-
-NOTE: Permissions for every role can be overridden by *Administrator* or *Content Manager Administrator* on the content level.
-
-*Administrator*
-Users with the *Administrator* role have full access to all content and admin tools through the user interface.
-
-**Administration Console Login**
-Users with this role can log in to the administration console. These users will also require a role for each of the admin tools that the users need access to.
-
-*Content Manager Administrator*
-
-This role allows full access to Content Studio, including ability to create and delete content projects.
-
-*Content Manager Expert*
-
-This role gives members ability to view and modify source code in the rich text editor.
-
-*Content Manager App*
-
-Give users to access to the legacy `default` project in Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project.
-
-NOTE: As of v7.3, XP supports creation of custom content projects. These offer project-specific roles that automatically provide access to both Content Studio and the project itself.
-
-*Users App*
-
-Provides view-only access to the Users admin tool.
-
-*Users Administrator*
-
-Grants full access to the Users admin tool, including create/edit/delete for Id providers, users, roles, and groups.
-
-*Authenticated*
-
-Users automatically get this role when they are logged into the platform, regardless of IDprovider.
-
-*Everyone*
-
-A special role that both authenticated users, and visitors (Anonymous user) all have in common.
-The role is for instance used to grant read permissions to publicly available content projects.
-
-:imagesdir: images
-image:xp-7110.svg[XP 7.11.0,opts=inline]
-
-*Schemas Administrator*
-
-Grants permissions to manipulate virtual applications and schemas.
-
-NOTE:
-If you are using <<cms/projects#, Content Projects>>, your project will have a set of <<cms/projects#roles, project-specific roles>> in addition to the built-in ones.
-
+== Permissions
+In addition to users, roles and groups, the CMS (and underlying NoSQL storage) supports fine-grained access control mechanisms down to a single item.

@@ -7,6 +7,8 @@ HTTP filters enable pipelined processing of http requests.
 [#http-filter]
 == Filters
 
+NOTE: You may wire a a filter into the Site engine's execution pipeline via a <<mappings#, Site mapping>>.
+
 Filters enable you to step into the request pipeline, and execute code at both request and response of the execution pipeline, possibly intercepting the request directly.
 Similar to an <<controllers#,HTTP Controller>>, standalone filters are triggered based on an export.
 
@@ -66,6 +68,4 @@ exports.filter = function (req, next) {
     return next(req);
 };
 ----
-
-Filters can be wired into the execution pipeline as described in the <<mappings#, Site mappings>> section.
 

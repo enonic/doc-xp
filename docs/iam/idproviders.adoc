@@ -1,0 +1,34 @@
+= ID providers (IDP)
+:toc: right
+:imagesdir: images
+
+ID providers provide a pluggable abstraction layer for user authentication and access management in XP.
+
+== System ID provider
+
+To get started quickly, Enonic XP ships with a built-in IDprovider called the <<systemidp#, System ID provider>>. This is most commonly used by developers, or for administrative purposes.
+
+
+== Creating an ID provider
+ID providers can be created and managed in the Users app, or via the API. An ID provider essentially consist of the following:
+
+* A unique name (cannot be changed later)
+* ID provider application, with optional configuration settings.
++
+TIP: You may choose from a range of standard ID providers on https://market.enonic.com[Enonic Market^], or <<./framework/idprovider#, build your own>> for a fully customized approach.
++
+* Permissions - specifies who can manage and access the ID provider
+
+image::system-idprovider-admin.png[Setting up an ID provider from the Users admin tool, 819]
+
+Once your ID provider is created, you may start working with users and groups within it.
+
+NOTE: Often, ID providers are simply proxies against 3rd party systems such as Google Auth, or Microsoft Entra, In this case, you will not be able to manage the users locally - they will typically appear in XP once they sign in the first time.
+
+
+== Access management
+
+The main purpose of IDproviders is to control access to XP. Once you have configured your ID provider, the next step is to associate it with the endpoint you wish to protect - i.e XP admin, an API or a site. This is done by adding it to your <<./deployment/vhosts#,virtual hosts configuration>>.
+
+NOTE: ID providers generally have a passive approch to autentication, and will only trigger one a requested resource responds with a 401 code (Unauthenticated).
+

@@ -1,206 +1,23 @@
-= Platform APIs and libraries
+= Platform JavaScript APIs
 include::.variables.adoc[]
 :toc: right
 :imagesdir: images
-This section offers detailed documentation on our APIs.
+This section offers detailed documentation of our JavaScript APIs.
 
 
 == Introduction
 
-Enonic XP provides multiple APIs such as web endpoints and the platform Javascript APIs.
+When <<development#, developing Enonic apps>> using the <<framework#, JS framework>> you may acces a range of different platform capabilities via our extensive set of JavaScript APIs.
 
-TIP: Looking for our *Headless CMS GraphQL API?* To give it a quick spin, https://www.enonic.com/sign-up[sign up for a Free Plan] or visit the https://developer.enonic.com/start[Developer quickstart].
+TIP: In addition to the list available in this documentation, you may also browse the https://developer.enonic.com/jsdoc[JSDocs version].
 
-== Endpoints
 
-The <<runtime#, XP Runtime>> provides access to various <<runtime/engines#, Engines and services>>, including the REST-style <<runtime/management#, Management>> and <<runtime/statistics#, Statistics API>>s.
+== Headless CMS API
 
-== JavaScript API
-
-XP ships with a large number of build in JavaScript libraries that can be accessed when <<development#, developing Enonic apps>>. These are listed below this page in the documentation menu.
-
-Alternatively browse our https://developer.enonic.com/jsdoc[JSDocs].
-
-
-== TypeScript definitions
-
-=== Install
-
-To add types for corresponding library use NPM (or similar package manager) and install them as any other dependency. All types can be found under https://www.npmjs.com/org/enonic-types[@enonic-types] organisation on NPM.
-
-=== Libraries
-
-For example, you have a `lib-auth` gradle dependency:
-
-```gradle
-dependencies {
-  include "com.enonic.xp:lib-auth:${xpVersion}"
-}
-```
-
-To add type definitions for the library, install dependency from NPM:
-
-```bash
-npm i --save-dev @enonic-types/lib-auth
-```
-
-==== Global
-
-Along with library types it is *higlhy recommended* to install definitions for global objects (`app`, `__`, `log`) and functions (`resolve`, `require`):
-
-```bash
-npm i --save-dev @enonic-types/global
-```
-
-Since `global` types are not placed under the `node_modules/@types`, it is neccessary to include them manually:
-
-`tsconfig.json`
-
-```json
-{
-  "compilerOptions": {
-    "types": [
-      "@enonic-types/global"
-    ]
-  }
-}
-```
-
-==== Core
-
-There are types that are shared between other libraries (like `Content` or `Principal`). Such types reside in the `core` package. It is not necessary to include this dependency into your project, as all libraries export related core types, e.g. Content library exports `Content`` type. But if you want to use these type directly, you'll need to install them:
-
-```bash
-npm i --save-dev @enonic-types/core
-```
-
-and then import them in your TypeScript code:
-
-```bash
-import type {Content} from '@enonic-types/core';
-```
-
-==== Content
-
-`Content` contains the `x` property that has a very special `XpXData` type.
-
-`XpXData` is an interface that is added to the global scope, so it can be modified using the https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces[declaration merging]. This allows you to set the shape of the XData in your project, simply by declaring the `XpXData` like this:
-
-```ts
-declare global {
-    interface XpXData {
-        'com-mysite-app': {
-            metadata: {
-                metaTagTitle: string;
-                metaTagImageId: string;
-            }
-        }
-    }
-}
-```
-
-==== Additional types
-
-`Content` is a complex type that contains unions and maps that are not exported but may be needed during the development. Actually, these types can easily be retrieved from the `Content` itself:
-
-```ts
-import type {Content} from '@enonic-types/core';
-
-type Attachments = Content['attachments'];
-
-type ContentInheritType = Content['inherit'];
-
-type Workflow = Content['workflow'];
-```
-
-
-=== Usage
-
-==== require
-
-After `global` and library types are installed and configured in `tsconfig.json`, libraries can be imported just like they would be in JS code:
-
-```ts
-const libAuth = require('/lib/xp/auth');
-```
-
-==== ES6-style import
-
-If you are planning to use `import` in your code and transpile it with the default `tsc` TypeScript compiler, you'll need to add proper types mapping to your configuration via `baseUrl` and `paths` properties in `tsconfig.json`:
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "/lib/xp/auth": ["node_modules/@enonic-types/lib-auth"],
-    }
-  }
-}
-```
-
-Then in your code:
-
-```ts
-import {login, logout, getUser, generatePassword} from '/lib/xp/auth';
-```
-
-Configuring `baseUrl` and `paths` will allow the TypeScript compiler to keep the valid paths in the resulting JavaScript files.
-
-
-=== Configuration
-
-==== Require
-
-To add support for type resolution for custom libraries via `require`, you can redeclare the `XpLibraries` interface in global scope, which will lead to declaration merging:
-
-```ts
-declare global {
-    interface XpLibraries {
-        '/lib/custom/mylib': typeof import('./mylib');
-    }
-}
-```
-
-==== Other imports
-
-If you want to use custom import functions, like `__non_webpack_require__` with Webpack, just use `XpRequire` from `global` types for this:
-
-```ts
-declare const __non_webpack_require__: XpRequire;
-```
-
-=== Beans
-
-To create a new Java bean, the `__.newBean()` function must be used. Making it return a proper type can be done in two ways. Let's say, you have created an interface for that bean somewhere in your project:
-
-```ts
-interface SomeHelper {
-  help(text: string): void;
-}
-```
-
-==== Option 1
-
-You can pass the type argument explicitly. This option is a bit cleaner.
-
-```ts
-const helper = __.newBean<SomeHelper>('com.me.project.SomeHelper');
-```
-
-==== Option 2
-
-Or you can map the bean name to bean interface. It may be a preferable way to do it, if the bean is used across multiple files:
-
-```ts
-declare global {
-    interface XpBeans {
-        'com.me.project.SomeHelper': SomeHelper;
-    }
-}
-
-const helper = __.newBean('com.me.project.SomeHelper');
-```
+If you are looking for our *Headless CMS GraphQL API?* - visit https://developer.enonic.com/start[Developer quickstart] to get started.
 
 == JavaDoc
 
 Java developers or anyone interested in the Platform core may check out our JavaDoc (https://repo.enonic.com/public/com/enonic/xp/docs/{version}/docs-{version}-javadoc.zip[zipfile download]).
+
+
