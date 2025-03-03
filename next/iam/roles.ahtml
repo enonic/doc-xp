@@ -486,7 +486,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/roles-create.png" alt="Creating a role in the Users app" width="504">
+<img src="images/roles-create.png" alt="Creating a role in the Users app" width="845">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -522,7 +522,7 @@ Unlike groups, a role may not be assigned other roles. It is designed to provide
 <h2 id="permissions"><a class="link" href="#permissions">Permissions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Just like users and gruoups, a role may be given explicit permissions to content in the CMS via <a href="https://developer.enonic.com/docs/content-studio/stable/permissions" target="_blank" rel="noopener">Content Studio</a></p>
+<p>Just like users and groups, a role may be given explicit permissions to content in the CMS via <a href="https://developer.enonic.com/docs/content-studio/stable/permissions" target="_blank" rel="noopener">Content Studio</a></p>
 </div>
 </div>
 </div>
@@ -530,7 +530,7 @@ Unlike groups, a role may not be assigned other roles. It is designed to provide
 <h2 id="system_roles"><a class="link" href="#system_roles">System roles</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP ships with several built-in roles. Each of which provide specific access and priveliges in the system.</p>
+<p>Enonic XP ships with several built-in roles. Each of which provide specific access and privileges in the system.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -553,6 +553,10 @@ Grants full access to the Users admin tool, including create/edit/delete for ID 
 <p><strong>system.user.app</strong>
 Provides read-only access to the Users admin tool.</p>
 </div>
+<div class="paragraph">
+<p><strong>system.schema.admin</strong>
+Grants permissions to read/write schemas.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -567,7 +571,7 @@ All users that are authenticated gets this role, regardless of ID provider.</p>
 </div>
 <div class="paragraph">
 <p><strong>system.everyone</strong>
-All users, both authenticated and non-autenticated users (The Anonymous user) are assigned this role.</p>
+All users, both authenticated and non-authenticated users (The Anonymous user) are assigned this role.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -600,7 +604,7 @@ NOTE: This role is deprecated. It gives users to access to the legacy <code>defa
 </div>
 <div class="paragraph">
 <p><span class="image"><span class="alt">XP 7.11.0</span></span>
-When using <a href="cms/projects.ahtml">Content Projects</a>, each project automatically creates a set of <a href="cms/projects.ahtml#roles">project roles</a> in addition to the built-in roles listed above.</p>
+When using <a href="../cms/projects.ahtml">Content Projects</a>, each project automatically creates a set of <a href="../cms/projects.ahtml#roles">project roles</a> in addition to the built-in roles listed above.</p>
 </div>
 <div class="paragraph">
 <p>These roles will be prefixed with <code>cms.projectname.</code>, and as such be unique to each individual project.</p>
@@ -610,7 +614,7 @@ When using <a href="cms/projects.ahtml">Content Projects</a>, each project autom
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-28 12:36:11 UTC
+Last updated 2025-03-03 17:57:30 UTC
 </div>
 </div>
 </body>

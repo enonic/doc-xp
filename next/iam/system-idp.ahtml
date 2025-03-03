@@ -451,7 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#upload_key">Upload key</a></li>
 </ul>
 </li>
-<li><a href="#jwt_authentication">JWT authentication</a></li>
+<li><a href="#jwt-authentication">JWT authentication</a></li>
 </ul>
 </div>
 </div>
@@ -563,6 +563,18 @@ Avoid adding human users to the System ID provider, rather <a href="idproviders.
 <img src="images/service-account-keys.png" alt="List of service account keys" width="662px">
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Also consider using ID providers that support 3-leg authentication, such as the <a href="https://market.enonic.com/vendors/enonic/oidc-id-provider">OIDC ID provider</a>, if possible.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect2">
 <h3 id="generate_key"><a class="link" href="#generate_key">Generate key</a></h3>
 <div class="paragraph">
@@ -612,11 +624,24 @@ openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem</code></pre>
 <img src="images/service-account-key-upload.png" alt="Upload public key" width="807px">
 </div>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Your <em>Private</em> key from the Public-Private key pair is stored only on the client side and must never be shared with the XP server.
+The <em>Public</em> key from Public-Private key pair is stored in XP, and is used to verify the signature of your token.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="jwt_authentication"><a class="link" href="#jwt_authentication">JWT authentication</a></h2>
+<h2 id="jwt-authentication"><a class="link" href="#jwt-authentication">JWT authentication</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The System ID providers supports JWT (JSON Web Token) based authentication via the HTTP <code>Authorization</code> header.</p>
@@ -630,7 +655,7 @@ openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A JWT token must be a valid RFC-7519 JWT token, following these requirements:</p>
+<p>A JWT token must be a valid <a href="https://datatracker.ietf.org/doc/html/rfc7519">RFC-7519</a> JWT token, following these requirements:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -650,12 +675,6 @@ openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem</code></pre>
 <p><code>iat</code> claim must be set to issue time of the token. The token will be rejected if it was issued in the future.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Your private key from the Public-Private key pair is stored only on the client side and must never be shared with the XP server.</p>
-</div>
-<div class="paragraph">
-<p>The public key from Public-Private key pair is stored in XP, and is used to verify the signature of your token.</p>
 </div>
 <div class="listingblock">
 <div class="title">JWT header example</div>
@@ -678,26 +697,17 @@ openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In general we recommend using libraries that match your platform to generate the token, as performing this manually can be cumbersome.</p>
+<p>JWT parts must be signed and encoded according to <a href="https://datatracker.ietf.org/doc/html/rfc7519">RFC-7519</a>.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Also consider using ID providers that support 3-leg authentication, such as the <a href="https://market.enonic.com/vendors/enonic/oidc-id-provider">OIDC ID provider</a>, if possible.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>In general, we recommend using libraries that match your platform to generate the token, as performing this manually can be cumbersome.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-28 12:36:11 UTC
+Last updated 2025-03-03 17:57:30 UTC
 </div>
 </div>
 </body>

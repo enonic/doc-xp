@@ -449,6 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#rolling_cluster_upgrade">Rolling Cluster upgrade</a></li>
 <li><a href="#full_restart_cluster_upgrade">Full restart Cluster upgrade</a></li>
 <li><a href="#applications">Applications</a></li>
+<li><a href="#v7_15_notes">v7.15 notes</a></li>
 <li><a href="#v7_14_notes">v7.14 notes</a></li>
 <li><a href="#v7_13_notes">v7.13 notes</a></li>
 <li><a href="#v7_12_notes">v7.12 notes</a></li>
@@ -590,6 +591,48 @@ It is important to start the nodes at the same time to avoid timeouts, should an
 <div class="paragraph">
 <p>After upgrading XP, check for new versions of your installed applications from Enonic market.
 We generally always recommend updating your apps to the latest version!</p>
+</div>
+</div>
+<div class="sect1">
+<h2 id="v7_15_notes"><a class="link" href="#v7_15_notes">v7.15 notes</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>The image service now generates progressive JPEG images by default. This can be changed back in <a href="deployment/config.ahtml#image">deployment/config.ahtml</a> by setting <code>progressiveJpeg</code> to empty string.</p>
+</li>
+<li>
+<p>GZIP HTTP compression is disabled by default. It can be enabled in <a href="deployment/config.ahtml#jetty">Jetty config</a>. By setting <code>gzip.enabled = true</code>.</p>
+</li>
+<li>
+<p><code>image/webp</code> and <code>image/avif</code> media types will now produce content of <code>media:image</code> type, instead of <code>media:unknown</code>. Old versions of Content Studio might not work correctly with WebP and AVIF media types. Upgrade to the latest version of Content Studio.</p>
+</li>
+<li>
+<p><a href="deployment/config.ahtml#repo">Repo config</a> <code>cache.size</code> parameter no longer works. Use <code>cache.capacity</code> instead.</p>
+</li>
+<li>
+<p>Vacuuming no longer clears unused blobs from deleted repositories. <a href="deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
+</li>
+<li>
+<p>Vacuuming now deletes old snapshots by default. <a href="deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
+</li>
+<li>
+<p>Vacuuming that affects blobs will delete snapshots once completed. <a href="deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
+</li>
+<li>
+<p>Previously HTTP controllers did not support <code>patch</code> methods by responding <code>405 Method Not Allowed</code>. Now <code>patch</code> methods are supported, so <code>all</code> controller handles <code>patch</code> method, too.</p>
+</li>
+<li>
+<p>Portal Page resolution now happens before Site mapping controllers get executed. This changes what portal.getContent() and <code>portal.getComponent()</code> return when called from Site mapping controllers.</p>
+</li>
+<li>
+<p><code>/admin</code> paths now specify <code>Cache-Control</code> header <code>private</code> - by default CDNs no longer cache admin URLs.</p>
+</li>
+<li>
+<p>Management port returns <code>403</code> status code when no authentication is provided. Before <code>401</code> was returned.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1332,7 +1375,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-28 12:36:11 UTC
+Last updated 2025-03-03 17:57:30 UTC
 </div>
 </div>
 </body>
