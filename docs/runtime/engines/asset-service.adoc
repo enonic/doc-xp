@@ -2,9 +2,10 @@
 :toc: right
 :imagesdir: ../../images
 
-image:xp-7150.svg[XP 7.15.0,opts=inline] Asset Service is deprecated and will be removed in future versions.
-`lib-asset` and `lib-static` are introduced to replace the Asset Service which provide pre-compressed assets, conditional requests support, and more.
-
+====
+Starting from image:xp-7150.svg[XP 7.15.0,opts=inline] Asset Service is deprecated and will be removed in future versions.
+https://developer.enonic.com/docs/lib-asset[`lib-asset`] and https://developer.enonic.com/docs/lib-static[`lib-static`] are introduced to replace the Asset Service which provide pre-compressed assets, conditional requests support, and more.
+====
 
 Applications commonly need to serve static files such as icons, css and javascript to their clients.
 XP provides a standard and cache optimized approach to serving assets.

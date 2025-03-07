@@ -27,7 +27,10 @@ You are now ready to use the API.
 == Functions
 
 === assetUrl
-
+====
+Starting from image:xp-7150.svg[XP 7.15.0,opts=inline] `assetUrl` is deprecated and will be removed in future versions.
+https://developer.enonic.com/docs/lib-asset[`lib-asset`] and https://developer.enonic.com/docs/lib-static[`lib-static`] are introduced as a replacement.
+====
 Generates URL to a static file.
 
 [.lead]
