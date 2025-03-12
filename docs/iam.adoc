@@ -5,10 +5,10 @@
 Enonic XP ships with a defined and pluggable concept for IAM handing
 
 == Identity providers
-ID providers represent the pluggable abstraction layer for user authentication. To authenticate or even create users in XP, you will need to create an <<idproviders#,ID provider>>.
+ID providers represent the pluggable abstraction layer for user authentication. To authenticate or even create users in XP, you will need to create an <<iam/idproviders#, ID provider>>.
 
 == Principals
-XP provide three basic principals, <<users#, users, groups>> and <<roles#, roles>>. Combined with ID providers these are the essence of Enonic IAM.
+XP provide three basic principals, <<iam/users#users, users>>, <<iam/users#groups, groups>> and <<iam/roles#, roles>>. Combined with ID providers these are the essence of Enonic IAM.
 
 == Permissions
 In addition to users, roles and groups, the CMS (and underlying NoSQL storage) supports fine-grained access control mechanisms down to a single item.
