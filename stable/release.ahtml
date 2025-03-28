@@ -586,8 +586,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="service_accounts"><a class="link" href="#service_accounts">Service Accounts</a></h3>
 <div class="paragraph">
-<p>Say goodbye to passwords. The built-in <a href="iam.ahtml#system-id-provider">System ID provider</a> has been upgraded to support use of tokens.
-Users created created in the System ID provider are now referred to as <a href="iam.ahtml#service-accounts">Service Accounts</a>.</p>
+<p>Say goodbye to passwords. The built-in <a href="iam.ahtml#system-id-provider">System ID provider</a> has been upgraded to support use of JWT tokens.
+Users created created in the System ID provider are now referred to as <a href="iam/system-idp.ahtml#service-accounts">Service Accounts</a>.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="release/images/715-users-public-key.png" alt="Upload or generate keys" width="1077"></span></p>
@@ -1996,7 +1996,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-28 12:22:46 UTC
+Last updated 2025-03-28 12:30:26 UTC
 </div>
 </div>
 </body>

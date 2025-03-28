@@ -469,7 +469,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#header">Header Filter</a></li>
 <li><a href="#market">Market</a></li>
 <li><a href="#udc">UDC</a></li>
-<li><a href="#standard_idprovider">Standard IDprovider</a></li>
+<li><a href="#idprovider">Standard IDprovider</a></li>
 <li><a href="#logging">Logging</a></li>
 <li><a href="#audit">Audit</a></li>
 <li><a href="#content_config">Content</a></li>
@@ -1842,16 +1842,16 @@ This is only used to see what platforms are used and improve platform stability.
 </div>
 </div>
 <div class="sect2">
-<h3 id="standard_idprovider"><a class="link" href="#standard_idprovider">Standard IDprovider</a></h3>
+<h3 id="idprovider"><a class="link" href="#idprovider">Standard IDprovider</a></h3>
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.app.standardidprovider.cfg</code></p>
 </div>
 <div class="paragraph">
-<p>The Standard ID Provider, in charge of the login for admin by default, has a “Create Admin User” mode for new installations.
-When enabled, you may postpone creation of the admin user. You may turn off this feature.</p>
+<p>The Standard IDP application is bunedled with XP, and used by the <code>system</code> ID provider.
+There are several options you may configure:</p>
 </div>
 <div class="listingblock">
-<div class="title">Sample idprovider config file</div>
+<div class="title">Sample config file for system IDP</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">loginWithoutUser = true
 idprovider.system.autologin.jwt.enabled = true
@@ -2593,7 +2593,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-28 12:22:46 UTC
+Last updated 2025-03-28 12:30:26 UTC
 </div>
 </div>
 </body>
