@@ -718,15 +718,15 @@ This is only used to see what platforms are used and improve platform stability.
 enabled = true
 ----
 
-
+[#idprovider]
 === Standard IDprovider
 
 `XP_HOME/config/com.enonic.xp.app.standardidprovider.cfg`
 
-The Standard ID Provider, in charge of the login for admin by default, has a “Create Admin User” mode for new installations.
-When enabled, you may postpone creation of the admin user. You may turn off this feature.
+The Standard IDP application is bunedled with XP, and used by the `system` ID provider.
+There are several options you may configure:
 
-.Sample idprovider config file
+.Sample config file for system IDP
 [source,properties]
 ----
 loginWithoutUser = true

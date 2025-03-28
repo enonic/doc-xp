@@ -9,8 +9,8 @@ This release includes a selection of new features, as well as several smaller im
 
 === Service Accounts
 
-Say goodbye to passwords. The built-in <<iam#system-id-provider, System ID provider>> has been upgraded to support use of tokens.
-Users created created in the System ID provider are now referred to as <<iam#service-accounts, Service Accounts>>.
+Say goodbye to passwords. The built-in <<iam#system-id-provider, System ID provider>> has been upgraded to support use of JWT tokens.
+Users created created in the System ID provider are now referred to as <<iam/system-idp#service-accounts, Service Accounts>>.
 
 image:715-users-public-key.png["Upload or generate keys", 1077]
 

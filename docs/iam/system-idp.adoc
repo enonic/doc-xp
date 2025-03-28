@@ -25,6 +25,7 @@ The `Super User` exists in order to perform priveliged actions, and to allow you
 
 *system:anonymous* - XP expects a user in every request. As such, the `Anonymous` user steps in to cover for users that have not authenticated.
 
+[#service-accounts]
 == Service Accounts
 
 Unlike other ID providers, the users in the System IDP are referred to as service accounts.
@@ -81,19 +82,23 @@ After generating the key, you may upload the `public_key.pem` file to your servi
 
 image::service-account-key-upload.png[Upload public key, 807px]
 
-IMPORTANT: Your _Private_ key from the Public-Private key pair is stored only on the client side and must never be shared with the XP server.
-The _Public_ key from Public-Private key pair is stored in XP, and is used to verify the signature of your token.
 
 [[jwt-authentication]]
 == JWT authentication
 
+[NOTE]
+====
+*XP enforces short-lived tokens*.
+You may change the default timeout of 30 seconds in <<../deployment/config#idprovider, the ID provider configuration>>.
+====
+
 The System ID providers supports JWT (JSON Web Token) based authentication via the HTTP `Authorization` header.
 
-Content of the header should look like the following:
+The header should look like the following:
 
   Authorization: Bearer <mytoken>
 
-A JWT token must be a valid https://datatracker.ietf.org/doc/html/rfc7519[RFC-7519] JWT token, following these requirements:
+The JWT token must be a valid https://datatracker.ietf.org/doc/html/rfc7519[RFC-7519] JWT token, following these requirements:
 
 * `alg` header parameter must be set to `RS256`.
 * `kid` header parameter must be set to ID of the public key that corresponds to the private key used to sign the token.
@@ -120,7 +125,11 @@ A JWT token must be a valid https://datatracker.ietf.org/doc/html/rfc7519[RFC-75
   "iat": 1692787366
 }
 ----
+We recommend using libraries that match your client platform to generate the token - especially related to the requirement for short lived tokens.
 
-JWT parts must be signed and encoded according to https://datatracker.ietf.org/doc/html/rfc7519[RFC-7519].
+[WARNING]
+====
+* The private key from the Public-Private key pair should only be stored on the client side to generate the token, and never shared with the XP server.
+* The public key from Public-Private key pair is only stored in XP, and used to verify the signature of your token.
+====
 
-In general, we recommend using libraries that match your platform to generate the token, as performing this manually can be cumbersome.
