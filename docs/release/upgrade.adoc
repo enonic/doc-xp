@@ -47,19 +47,19 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.15 notes
 
-* The image service now generates progressive JPEG images by default. This can be changed back in <<deployment/config#image>> by setting `progressiveJpeg` to empty string.
+* The image service now generates progressive JPEG images by default. This can be changed back in <<../deployment/config#image>> by setting `progressiveJpeg` to empty string.
 
-* GZIP HTTP compression is disabled by default. It can be enabled in <<deployment/config#jetty, Jetty config>>. By setting `gzip.enabled = true`.
+* GZIP HTTP compression is disabled by default. It can be enabled in <<../deployment/config#jetty, Jetty config>>. By setting `gzip.enabled = true`.
 
 * `image/webp` and `image/avif` media types will now produce content of `media:image` type, instead of `media:unknown`. Old versions of Content Studio might not work correctly with WebP and AVIF media types. Upgrade to the latest version of Content Studio.
 
-* <<deployment/config#repo, Repo config>> `cache.size` parameter no longer works. Use `cache.capacity` instead.
+* <<../deployment/config#repo, Repo config>> `cache.size` parameter no longer works. Use `cache.capacity` instead.
 
-* Vacuuming no longer clears unused blobs from deleted repositories. <<deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
+* Vacuuming no longer clears unused blobs from deleted repositories. <<../deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
 
-* Vacuuming now deletes old snapshots by default. <<deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
+* Vacuuming now deletes old snapshots by default. <<../deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
 
-* Vacuuming that affects blobs will delete snapshots once completed. <<deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
+* Vacuuming that affects blobs will delete snapshots once completed. <<../deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
 
 * Previously HTTP controllers did not support `patch` methods by responding `405 Method Not Allowed`. Now `patch` methods are supported, so `all` controller handles `patch` method, too.
 
