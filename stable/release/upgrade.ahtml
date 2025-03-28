@@ -599,25 +599,25 @@ We generally always recommend updating your apps to the latest version!</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The image service now generates progressive JPEG images by default. This can be changed back in <a href="deployment/config.ahtml#image">deployment/config.ahtml</a> by setting <code>progressiveJpeg</code> to empty string.</p>
+<p>The image service now generates progressive JPEG images by default. This can be changed back in <a href="../deployment/config.ahtml#image">../deployment/config.ahtml</a> by setting <code>progressiveJpeg</code> to empty string.</p>
 </li>
 <li>
-<p>GZIP HTTP compression is disabled by default. It can be enabled in <a href="deployment/config.ahtml#jetty">Jetty config</a>. By setting <code>gzip.enabled = true</code>.</p>
+<p>GZIP HTTP compression is disabled by default. It can be enabled in <a href="../deployment/config.ahtml#jetty">Jetty config</a>. By setting <code>gzip.enabled = true</code>.</p>
 </li>
 <li>
 <p><code>image/webp</code> and <code>image/avif</code> media types will now produce content of <code>media:image</code> type, instead of <code>media:unknown</code>. Old versions of Content Studio might not work correctly with WebP and AVIF media types. Upgrade to the latest version of Content Studio.</p>
 </li>
 <li>
-<p><a href="deployment/config.ahtml#repo">Repo config</a> <code>cache.size</code> parameter no longer works. Use <code>cache.capacity</code> instead.</p>
+<p><a href="../deployment/config.ahtml#repo">Repo config</a> <code>cache.size</code> parameter no longer works. Use <code>cache.capacity</code> instead.</p>
 </li>
 <li>
-<p>Vacuuming no longer clears unused blobs from deleted repositories. <a href="deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
+<p>Vacuuming no longer clears unused blobs from deleted repositories. <a href="../deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
 </li>
 <li>
-<p>Vacuuming now deletes old snapshots by default. <a href="deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
+<p>Vacuuming now deletes old snapshots by default. <a href="../deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
 </li>
 <li>
-<p>Vacuuming that affects blobs will delete snapshots once completed. <a href="deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
+<p>Vacuuming that affects blobs will delete snapshots once completed. <a href="../deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
 </li>
 <li>
 <p>Previously HTTP controllers did not support <code>patch</code> methods by responding <code>405 Method Not Allowed</code>. Now <code>patch</code> methods are supported, so <code>all</code> controller handles <code>patch</code> method, too.</p>
@@ -1375,7 +1375,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-28 12:54:32 UTC
+Last updated 2025-03-28 13:28:17 UTC
 </div>
 </div>
 </body>
