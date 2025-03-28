@@ -459,7 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="system_id_provider"><a class="link" href="#system_id_provider">System ID provider</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To get started quickly, Enonic XP ships with a built-in IDprovider called the <a href="systemidp.ahtml">System ID provider</a>. This is most commonly used by developers, or for administrative purposes.</p>
+<p>To get started quickly, Enonic XP ships with a built-in IDprovider called the <a href="system-idp.ahtml">System ID provider</a>. This is most commonly used by developers, or for administrative purposes.</p>
 </div>
 </div>
 </div>
@@ -483,7 +483,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You may choose from a range of standard ID providers on <a href="https://market.enonic.com" target="_blank" rel="noopener">Enonic Market</a>, or <a href="./framework/idprovider.ahtml">build your own</a> for a fully customized approach.
+You may choose from a range of standard ID providers on <a href="https://market.enonic.com" target="_blank" rel="noopener">Enonic Market</a>, or <a href="../framework/idprovider.ahtml">build your own</a> for a fully customized approach.
 </td>
 </tr>
 </table>
@@ -520,7 +520,7 @@ Often, ID providers are simply proxies against 3rd party systems such as Google 
 <h2 id="access_management"><a class="link" href="#access_management">Access management</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The main purpose of IDproviders is to control access to XP. Once you have configured your ID provider, the next step is to associate it with the endpoint you wish to protect - i.e XP admin, an API or a site. This is done by adding it to your <a href="./deployment/vhosts.ahtml">virtual hosts configuration</a>.</p>
+<p>The main purpose of IDproviders is to control access to XP. Once you have configured your ID provider, the next step is to associate it with the endpoint you wish to protect - i.e XP admin, an API or a site. This is done by adding it to your <a href="../deployment/vhosts.ahtml">virtual hosts configuration</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -539,7 +539,7 @@ ID providers generally have a passive approch to autentication, and will only tr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-28 12:30:26 UTC
+Last updated 2025-03-28 12:54:32 UTC
 </div>
 </div>
 </body>
