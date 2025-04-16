@@ -601,15 +601,15 @@ Running this command requires you to have docker installed.
 <dl>
 <dt class="hdlist1">app.sh</dt>
 <dd>
-<p>Script to add/remove jars from the Enonic XP deploy folder. An example usage would be <code>app.sh add &lt;PUBLIC_URL_TO_JAR&gt;</code>. Description and source <a href="https://github.com/enonic/docker-xp7/blob/master/bin/app.sh">here</a>.</p>
+<p>Script to add/remove jars from the Enonic XP deploy folder. An example usage would be <code>app.sh add &lt;PUBLIC_URL_TO_JAR&gt;</code>. Description and source <a href="https://github.com/enonic/docker-xp/blob/master/bin/app.sh">here</a>.</p>
 </dd>
 <dt class="hdlist1">backups.sh</dt>
 <dd>
-<p>Convenient script for pre backup hooks to check the age of index snapshots created by the <a href="https://market.enonic.com/vendors/enonic/snapshotter">snapshotter</a> app. Description and source available <a href="https://github.com/enonic/docker-xp7/blob/master/bin/backup.sh">here</a>.</p>
+<p>Convenient script for pre backup hooks to check the age of index snapshots created by the <a href="https://market.enonic.com/vendors/enonic/snapshotter">snapshotter</a> app. Description and source available <a href="https://github.com/enonic/docker-xp/blob/master/bin/backup.sh">here</a>.</p>
 </dd>
 <dt class="hdlist1">dump.sh</dt>
 <dd>
-<p>Easily create JVM heap and thread dump. Description and source available <a href="https://github.com/enonic/docker-xp7/blob/master/bin/dump.sh">here</a>.</p>
+<p>Easily create JVM heap and thread dump. Description and source available <a href="https://github.com/enonic/docker-xp/blob/master/bin/dump.sh">here</a>.</p>
 </dd>
 <dt class="hdlist1">jattach</dt>
 <dd>
@@ -1114,14 +1114,14 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data</code></pre>
 <h2 id="image_source_code"><a class="link" href="#image_source_code">Image source code</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The source code for the <code>Dockerfile</code> and all related scripts is open source and can be viewed <a href="https://github.com/enonic/docker-xp7">here</a>.</p>
+<p>The source code for the <code>Dockerfile</code> and all related scripts is open source and can be viewed <a href="https://github.com/enonic/docker-xp">here</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-04-02 08:20:47 UTC
+Last updated 2025-04-16 10:47:07 UTC
 </div>
 </div>
 </body>
