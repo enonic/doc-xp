@@ -463,8 +463,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>We would greatly appreciate help with translating our Admin Console to more languages.  Here is a guide on how to contribute:</p>
 </div>
 <div class="paragraph">
-<p>First, you need to checkout the project from GitHub.  Then, create language files for the specific language you can provide a translation for.
-After the translation is done, a pull request should be sent to Enonic, so we can include the file in the next distribution.</p>
+<p>First, you need to fork the repository on GitHub, then checkout your fork to your local machine. After that, create language files for the specific language you can provide a translation for.
+When the translation is complete, a pull request should be sent to Enonic, so we can include the file in the next distribution.</p>
 </div>
 </div>
 </div>
@@ -472,10 +472,10 @@ After the translation is done, a pull request should be sent to Enonic, so we ca
 <h2 id="translating_files"><a class="link" href="#translating_files">Translating files</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To provide a translation, please start with the English original phrase files and make a copy of each of them, in the same folder, but extend the main filename with <code>_&lt;language-code&gt;</code>.
+<p>To provide a translation, please start with the English original phrase files and make a copy of each of them in the same folder, extending the main filename with <code>_&lt;language-code&gt;</code>.
 If, for instance, you want to make a translation to Spanish, the copied files should be called <code>common_es.properties</code> or <code>phrases_es.properties</code>.
 In the copied files, you may now translate all the English text into your preferred language.
-When done, please submit a pull request on the project, with the translations.</p>
+When done, please submit a pull request from your fork to the upstream project with the translations.</p>
 </div>
 </div>
 </div>
@@ -483,7 +483,27 @@ When done, please submit a pull request on the project, with the translations.</
 <h2 id="file_locations"><a class="link" href="#file_locations">File locations</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP is split in multiple projects.  One basic runtime, some libs and several apps.  All code is found on GitHub:</p>
+<p>XP is split into multiple projects: one basic runtime, some libraries, and several apps. All code is found on GitHub:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Before making changes, fork the repositories listed below to your own GitHub account.
+After forking, clone your fork to your local machine using:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git clone git@github.com:&lt;your-username&gt;/&lt;repository-name&gt;.git</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="admin_home_app"><a class="link" href="#admin_home_app">Admin Home App</a></h3>
@@ -502,7 +522,7 @@ When done, please submit a pull request on the project, with the translations.</
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:enonic/app-admin-home.git</code></p>
+<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-admin-home.git</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -531,7 +551,7 @@ When done, please submit a pull request on the project, with the translations.</
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:enonic/lib-admin-ui.git</code></p>
+<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/lib-admin-ui.git</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -560,7 +580,7 @@ When done, please submit a pull request on the project, with the translations.</
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:enonic/app-applications.git</code></p>
+<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-applications.git</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -589,13 +609,17 @@ When done, please submit a pull request on the project, with the translations.</
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:enonic/app-contentstudio.git</code></p>
+<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-contentstudio.git</code></p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original file in English</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original files in English</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>/src/main/resources/i18n/phrases.properties</code></p>
+<p><code>/modules/lib/src/main/resources/i18n/cs-plus.properties</code>
+<code>/modules/lib/src/main/resources/i18n/dialogs.properties</code>
+<code>/modules/lib/src/main/resources/i18n/page-editor.properties</code>
+<code>/modules/lib/src/main/resources/i18n/phrases.properties</code>
+<code>/modules/lib/src/main/resources/i18n/wcag.properties</code></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -618,7 +642,7 @@ When done, please submit a pull request on the project, with the translations.</
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:enonic/app-standardidprovider.git</code></p>
+<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-standardidprovider.git</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -647,7 +671,7 @@ When done, please submit a pull request on the project, with the translations.</
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:enonic/app-users.git</code></p>
+<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-users.git</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -676,7 +700,7 @@ When done, please submit a pull request on the project, with the translations.</
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:enonic/xp.git</code></p>
+<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/xp.git</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -693,7 +717,7 @@ When done, please submit a pull request on the project, with the translations.</
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-04-16 10:47:07 UTC
+Last updated 2025-04-28 08:22:24 UTC
 </div>
 </div>
 </body>
