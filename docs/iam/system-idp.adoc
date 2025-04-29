@@ -49,7 +49,7 @@ A Service Account may be associated with one, or several  Service Account keys. 
 Once a key is created, it may be used to make an authorized call to:
 
 * The <<management_endpoint, Management Endpoint>>
-* Any XP engine that mounts the System ID provider. See <<deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
+* Any XP engine that mounts the System ID provider. See <<../deployment/vhosts#virtual-hosts, Virtual Hosts>> for more details.
 
 image::service-account-keys.png[List of service account keys, 662px]
 
