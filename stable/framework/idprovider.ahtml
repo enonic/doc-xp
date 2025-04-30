@@ -621,6 +621,20 @@ This effectively blocks all unauthorised access attempts for the protected servi
 <div class="paragraph">
 <p>If no user already exists in the context, the autoLogin filter is executed early in the HTTP engine&#8217;s pipeline.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>autoLogin</code> works only for identity providers that are configured as <code>default</code> in the virtual host mapping. Visit the <a href="../deployment/config.ahtml#vhost">vhost configuration</a> section for more details.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="getpost_etc"><a class="link" href="#getpost_etc">GET/POST etc</a></h3>
@@ -699,7 +713,7 @@ exports.logout = function (req) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-04-30 09:02:11 UTC
+Last updated 2025-04-30 13:48:31 UTC
 </div>
 </div>
 </body>
