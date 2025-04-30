@@ -1010,7 +1010,7 @@ Properties prefixed with `init-job.<my-job-name>` will describe properties of a 
 
 |`init-job.<my-job-name>.timezone`
 |optional
-|Timezone used for cron. See string https://docs.oracle.com/en/java/javase/11/docs/api/java[format]. JVM value will be used if nothing is set.
+|Timezone used for cron. See string https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/TimeZone.html[format]. JVM value will be used if nothing is set.
 
 |`init-job.<my-job-name>.descriptor`
 |required
