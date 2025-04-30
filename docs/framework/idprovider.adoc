@@ -90,6 +90,11 @@ This effectively blocks all unauthorised access attempts for the protected servi
 
 If no user already exists in the context, the autoLogin filter is executed early in the HTTP engine's pipeline.
 
+[NOTE]
+====
+`autoLogin` works only for identity providers that are configured as `default` in the virtual host mapping. Visit the <<../deployment/config#vhost,vhost configuration>> section for more details.
+====
+
 
 === GET/POST etc
 
