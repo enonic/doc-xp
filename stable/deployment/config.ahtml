@@ -2345,7 +2345,7 @@ clustered.timeout = PT10S</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>init-job.&lt;my-job-name&gt;.timezone</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Timezone used for cron. See string <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java">format</a>. JVM value will be used if nothing is set.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timezone used for cron. See string <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/TimeZone.html">format</a>. JVM value will be used if nothing is set.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>init-job.&lt;my-job-name&gt;.descriptor</code></p></td>
@@ -2593,7 +2593,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-04-29 15:14:58 UTC
+Last updated 2025-04-30 09:02:11 UTC
 </div>
 </div>
 </body>
