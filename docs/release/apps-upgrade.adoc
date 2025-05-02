@@ -253,4 +253,21 @@ Java 21 is required for XP 8.0.0
 
 == Testing API
 
-If you are using Enonic testing API (`com.enonic.xp:testing`), you need to add Junit 5 dependency as well.
+If you are using Enonic testing API (`com.enonic.xp:testing`)
+You need to add Junit 5 dependency with the corresponding platform launcher.
+
+[source,groovy]
+----
+dependencies {
+testImplementation "com.enonic.xp:testing:${xpVersion}"
+testImplementation(platform("org.junit:junit-bom:5.12.2"))
+testImplementation 'org.junit.jupiter:junit-jupiter'
+testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+----
+
+Junit 4 is not supported in XP 8.0.0
