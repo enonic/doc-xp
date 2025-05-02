@@ -1,0 +1,9 @@
+{
+  "aggregations": {
+    "countProductsWithPrice": {
+      "count": {
+        "field": "data.product.price"
+      }
+    }
+  }
+}
