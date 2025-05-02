@@ -83,7 +83,7 @@ dependencies {
 
 repositories {
     mavenCentral()
-    xp.enonicRepo()
+    xp.enonicRepo('dev') //TODO 'dev' is only while XP 8.0 is in development
 }
 ----
 
@@ -101,7 +101,7 @@ appDisplayName = My Cool App
 appName = com.acme.something.myproject
 vendorName = Acme Inc
 vendorUrl = https://example.com
-xpVersion = 8.0.0
+xpVersion = 8.0.0-SNAPSHOT #TODO 'dev' is only while XP 8.0 is in development
 
 # Settings for publishing to a Maven repo
 group = com.acme.something
@@ -125,7 +125,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    xp.enonicRepo()
+    xp.enonicRepo('dev') //TODO 'dev' is only while XP 8.0 is in development
 }
 
 
