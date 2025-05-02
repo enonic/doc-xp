@@ -1,4 +1,4 @@
-= Upgrading applications from XP6 to XP7
+= Upgrading applications from XP7 to XP8
 :toc: right
 :imagesdir: images
 
@@ -140,7 +140,7 @@ via _xp.enonicRepo()_ shortcut
 ----
 group=com.mycompany.lib
 projectName=mylib
-xpVersion=8.0.0
+xpVersion=8.0.0-SNAPSHOT #TODO 'dev' is only while XP 8.0 is in development
 version=1.0.0-SNAPSHOT
 ----
 
@@ -155,7 +155,7 @@ You may also use `enonic project build` to build without deploying
 
 NOTE: Projects containing Java code might get build errors at this point, otherwise the build should complete successfully.
 
-=== Default CMS repository
+== Default CMS repository
 
 With XP 8, the default CMS repository `com.enonic.cms.default` is no longer created automatically. In fact, there is no default CMS repository at all. Existing `com.enonic.cms.default` repository is converted to a normal one without any special permissions or behavior.
 
