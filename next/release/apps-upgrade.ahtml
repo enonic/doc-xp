@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Upgrading applications from XP6 to XP7</title>
+<title>Upgrading applications from XP7 to XP8</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Upgrading applications from XP6 to XP7</h1>
+<h1>Upgrading applications from XP7 to XP8</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -448,9 +448,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#gradle_wrapper">Gradle Wrapper</a></li>
 <li><a href="#xp_gradle_plugins">XP Gradle plugins</a></li>
 <li><a href="#verify">Verify</a></li>
-<li><a href="#default_cms_repository">Default CMS repository</a></li>
 </ul>
 </li>
+<li><a href="#default_cms_repository">Default CMS repository</a></li>
 <li><a href="#assets">Assets</a></li>
 <li><a href="#http_services">HTTP Services</a></li>
 <li><a href="#widgets">Widgets</a></li>
@@ -686,7 +686,7 @@ via <em>xp.enonicRepo()</em> shortcut
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">group=com.mycompany.lib
 projectName=mylib
-xpVersion=8.0.0
+xpVersion=8.0.0-SNAPSHOT #TODO 'dev' is only while XP 8.0 is in development
 version=1.0.0-SNAPSHOT</code></pre>
 </div>
 </div>
@@ -719,11 +719,13 @@ Projects containing Java code might get build errors at this point, otherwise th
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="default_cms_repository"><a class="link" href="#default_cms_repository">Default CMS repository</a></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="default_cms_repository"><a class="link" href="#default_cms_repository">Default CMS repository</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>With XP 8, the default CMS repository <code>com.enonic.cms.default</code> is no longer created automatically. In fact, there is no default CMS repository at all. Existing <code>com.enonic.cms.default</code> repository is converted to a normal one without any special permissions or behavior.</p>
-</div>
 </div>
 </div>
 </div>
@@ -868,7 +870,7 @@ test {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-02 12:39:36 UTC
+Last updated 2025-05-02 12:45:19 UTC
 </div>
 </div>
 </body>
