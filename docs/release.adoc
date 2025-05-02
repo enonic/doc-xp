@@ -3,6 +3,29 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP8
+
+=== Tech Stack
+
+- Java 21
+- Jetty 12
+- Hazelcast 5
+- Prometheus metrics
+
+=== API
+
+- API replaces services
+- baseUrl
+
+=== Permissions
+
+- no more `inheritPermissions` flag on Node
+- permissions applied on all branches
+
+=== Node Patch
+
+- `patch` method in Node API - allows to apply changes in node in multiple branches
+
 == XP7 Update 15
 
 This release includes a selection of new features, as well as several smaller improvements, bugfixes and stability improvements.

@@ -1,0 +1,965 @@
+= Upgrading applications from XP6 to XP7
+:toc: right
+:imagesdir: images
+
+This section describes the steps required to upgrade an XP application from 6.x to 7.0
+
+NOTE: This section is only relevant when upgrading from XP6 to XP7.
+
+
+== Preparations
+
+Before you start the upgrade procedure:
+
+* Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
+* Check out the project source code to a local folder i.e. myapp/
+
+== 1. Create a sandbox
+
+NOTE: With XP 7 you no longer need to install JDK separately - it comes bundled with XP.
+
+To create the sandbox, go to your project folder and run the following command:
+
+  enonic project sandbox
+
+When the command has completed successfully, the sandbox will be associated with your project.
+This enables us to build, deploy and test the application.
+
+[TIP]
+====
+*Using Git?*
+Enonic CLI adds a `.enonic` file to your project root, consider updating your `.gitignore` file with the following entry:
+
+  ### Enonic ###
+  .enonic
+====
+
+
+== 2. Build system
+
+The standard build system used for XP projects must be updated.
+
+=== Gradle Wrapper
+
+XP 7.0 to 7.12 standardizes on the use of Gradle 5. XP 7.13 standardizes on the use of Gradle 8.3.
+We recommend bundling Gradle wrapper of version 8.3 or later in your project
+
+If you have installed Gradle 5, from your project root, run:
+
+  gradle wrapper
+
+This will install or update your project with a new Gradle wrapper.
+
+=== XP Gradle plugins
+
+==== Application upgrade
+
+If you are upgrading *an application*, you need to use version greater or equal to '2.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
+It supports Gradle 5, JDK 11 and building for XP 7.
+Gradle plugin '3.4.0' supports Gradle 8.3 and Java 17 - recommended to build apps for XP versions 7.13 and greater
+
+This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
+and enables quick reference to the Enonic repo via _xp.enonicRepo()_ shortcut
+
+NOTE: It is recommended to use latest version of Gradle 8.x as older Gradle versions may not work properly.
+
+NOTE: Syntax for adding plugins to Gradle may have changed for your project, we recommend the following updates to your build files:
+
+.build.gradle sample
+[source,groovy]
+----
+plugins {
+    id 'com.enonic.xp.app' version '3.4.0'
+}
+
+app {
+    name = "${appName}"
+    displayName = "${appDisplayName}"
+    vendorName = "${vendorName}"
+    vendorUrl = "${vendorUrl}"
+    systemVersion = "${xpVersion}"
+}
+
+dependencies {
+    implementation "com.enonic.xp:script-api:${xpVersion}"
+    include "com.enonic.xp:lib-content:${xpVersion}"
+    include "com.enonic.xp:lib-portal:${xpVersion}"
+}
+
+repositories {
+    mavenCentral()
+    xp.enonicRepo()
+}
+----
+
+Additionally, this is the recommended format for gradle.properties
+
+.gradle.properties sample
+[source,properties]
+----
+# Gradle Project settings
+projectName = myproject
+version = 1.0.0-SNAPSHOT
+
+# XP App values
+appDisplayName = My Cool App
+appName = com.acme.something.myproject
+vendorName = Acme Inc
+vendorUrl = https://example.com
+xpVersion = 7.0.0
+
+# Settings for publishing to a Maven repo
+group = com.acme.something
+----
+
+NOTE: `appName` and `appDisplayName` are only used for application projects, as well as `app` config in `build.gradle`
+
+==== Library upgrade
+
+If you are upgrading *a library*, you don't need to use _com.enonic.xp.app_ plugin or have `app {}` section in _build.gradle_.
+Below is a sample content of _build.gradle_ and _gradle.properties_ files for a library:
+
+.build.gradle sample
+[source,groovy]
+----
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.enonic.xp.base' version '3.4.0'
+}
+
+repositories {
+    mavenCentral()
+    xp.enonicRepo()
+}
+
+
+----
+
+NOTE: You only need to use _com.enonic.xp.base_ plugin if you are using XP dependencies and need to shortlink to Enonic repo
+via _xp.enonicRepo()_ shortcut
+
+
+.gradle.properties sample
+[source,properties]
+----
+group=com.mycompany.lib
+projectName=mylib
+xpVersion=7.0.0
+version=1.0.0-SNAPSHOT
+----
+
+
+=== Dependencies
+
+The following libraries have been take out of XP core, and are now released and versioned separately:
+
+* https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf]
+* https://market.enonic.com/vendors/enonic/xslt-lib[XSLT]
+* https://market.enonic.com/vendors/enonic/mustache-lib[Mustache]
+* https://market.enonic.com/vendors/enonic/http-client-lib[HTTP client]
+
+If your project used the bundled libraries,
+update you `build.gradle` dependencies to use the new libraries
+
+
+=== Verify
+
+After completing the steps above, you should now be able to test that your build is working, using the Enonic CLI:
+
+  enonic project deploy
+
+This command proxies the gradle wrapper, but also connects with the project sandbox.
+You may also use `enonic project build` to build without deploying
+
+NOTE: Projects containing Java code might get build errors at this point, otherwise the build should complete successfully.
+
+
+=== XP_HOME
+
+XP 6 developers will discover that the `XP_HOME` variable is no longer required.
+However, you may still specify this variable manually to build with gradle directly.
+
+To achieve this, you must also specify `JAVA_HOME` to build with the Java embedded in XP 7.
+
+The `XP_HOME` must essentially reference your Sandbox directory, and `JAVA_HOME` must reference the correct distribution.
+
+Sandboxes and distributions are located in your users home directory within the `.enonic/` folder.
+Also, relationships between a project and a sandbox is stored in the `.enonic` file in your project root.
+
+If you don't want to do this manually, run this command from your project:
+
+  enonic project shell
+
+_Happy hacking!_
+
+
+== 3. Schema changes
+
+CMS projects make extensive use of schemas.
+If relevant, update your project based on the following changes:
+
+=== Form element
+
+The schema definition syntax has been modified in order to harmonize all schema definitions.
+
+As a consequence, the <form> element replaces <config> in the following schema types:
+
+* site
+* layout
+* page
+* part
+* id-provider
+* task
+* mixin
+* x-data
+
+Example of how to update the site schema
+
+.Old site.xml
+[source,xml]
+----
+<site>
+  <config>schema goes here...</config>
+</site>
+----
+
+.New site.xml
+[source,xml]
+----
+<site>
+  <form>schema goes here...</form>
+</site>
+----
+
+=== Descriptions
+
+You can now declare description in the `<description>` field of the following schema types:
+
+* content-type
+* page
+* layout
+* part
+
+Description of a content type will be shown in the "New Content" dialog, while for pages, layouts or parts it will be shown inside the "Page Components" tree in the Content editor.
+
+content-type.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<content-type>
+  <display-name>Article</display-name>
+  <description>Content type for articles, blogs etc.</description>
+  ...
+</content-type>
+----
+
+=== FieldSet
+
+FieldSets used to require `name` attribute. The `name` attribute has no particular use-case and is now deprecated.
+Update schemas using fieldsets by removing the `name` attribute.
+
+.Old fieldset in schema
+[source,xml]
+----
+<form>
+  <field-set name="myname">schema goes here...</field-set>
+</form>
+----
+
+.New fieldset in schema
+[source,xml]
+----
+<form>
+  <field-set>schema goes here...</field-set>
+</form>
+----
+
+=== Content scope
+
+For all schemas in XP 6, the input types <<../cms/schemas/input-types/contentselector,contentSelectors>> and <<../cms/schemas/input-types/tag,tag>> defaulted to selecting content across the entire repository.
+The default scope is now reduced to the parent site.
+
+NOTE: mediaSelectors and contentSelector in rich text area still allows selection of content across the entire repository
+
+This change is made to reduce confusion (too much to select), and prevent users from erroneously linking to content outside the site.
+If you are fine with the new default behavior, no changes need to be made. If not, simply customize the allowPath for your input types.
+
+=== Mixins
+
+As part of the consolidated schema format, the `<items>` element of mixins has been replaced by `<form>`.
+Upgrade your mixin definitions to match the new format:
+
+.Old mixin using <items>
+[source,xml]
+----
+<mixin>
+  <items>schema goes here...</items>
+</mixin>
+----
+
+.New mixin using <form>
+[source,xml]
+----
+<mixin>
+  <form>schema goes here...</form>
+</mixin>
+----
+
+=== Inline
+
+With XP 7, the `<inline>` concept is directly replaced by `<mixin>`.
+
+Update any schemas using `<inline>` to match the new format:
+
+.Old schema using inline
+[source,xml]
+----
+<form>
+  <inline mixin="mymixin"/>
+</form>
+----
+
+.New schema using mixin
+[source,xml]
+----
+<form>
+  <mixin name="mymixin"/>
+</form>
+----
+
+=== Display name script
+
+The display name script is used to generate the display name from other content type text inputs.
+The old `<content-display-name-script>` field is deprecated, and replaced by a new field `<display-name-expression>` that supports ES 6 template literals
+which means that you can now combine field values with static text.
+
+.Old contenttype.xml
+[source,JavaScript]
+----
+  <content-display-name-script>$('firstName', 'middleName', 'lastName')</content-display-name-script>
+----
+
+.New contenttype.xml
+[source,JavaScript]
+----
+  <display-name-expression>My name is ${firstName} ${middleName} ${lastName}</display-name-expression>
+----
+
+=== CustomSelector update
+
+If your application implements a CustomSelector, a small change has been made to simplify code.
+
+The `ids` parameter in the request has changed from JSON string to regular string.
+Update your code to support the new format:
+
+.Old customSelector format
+[source,JavaScript]
+----
+getParams(): Object {
+    return {
+        ids: JSON.stringify(this.ids),
+        query: this.query || null,
+        start: this.start || null,
+        count: this.count || null
+    };
+}
+----
+
+.New customSelector format
+[source,JavaScript]
+----
+getParams(): Object {
+    return {
+        ids: this.ids.toString(),
+        query: this.query || null,
+        start: this.start || null,
+        count: this.count || null
+    };
+}
+----
+
+
+== 4. X-data
+
+In XP 7, X-data no longer refers to mixins, but are rather created as specific x-data definitions instead.
+If your application uses X-data, make the following changes to your project:
+
+=== x-data folder
+
+Identify all mixins referenced by X-data entries in your project (site.xml or content types)
+Move these mixins into a new folder structure, where each x-data entry gets its own folder:
+
+.Old folder structure
+[source,files]
+----
+resources/
+  sites/
+    mixins/
+      address.xml
+      shipping.xml
+      not-used-as-xdata.xml
+----
+
+.New folder structure
+[source,files]
+----
+resources/
+  sites/
+    mixins/
+      not-used-as-xdata.xml
+    x-data/
+      address/
+        address.xml
+      shipping/
+        shipping.xml
+----
+
+NOTE: For mixins used as both <mixin> and <x-data>, a copy of the mixin must remain in the mixins/ folder. Simply reference the mixin from the new x-data definition instead.
+
+
+=== X-data format
+
+The following changes are made to the format:
+
+* `<allowContentType>` config has been replaced by attribute of the same name on x-data reference in `site.xml`
+* Root element is changed from `<mixin>` to `<x-data>`
+* x-data reference attribute is renamed from "_mixin_" to "_name_"
+
+Upgrade your X-data references as follows:
+
+.Old mixins/my-sample.xml
+[source,xml]
+----
+<mixin>
+  <allowContentType>*:folder</allowContentType>
+  <items>Schema goes here..</items>
+</mixin>
+----
+
+.Old site.xml
+[source,xml]
+----
+<site>
+  <x-data mixin="my-sample">
+</site>
+----
+
+.New /x-data/my-sample/my-sample.xml
+[source,xml]
+----
+<x-data>
+  <form>Schema goes here..</form>
+</x-data>
+----
+
+.New site.xml
+[source,xml]
+----
+<site>
+  <x-data name="my-sample" allowContentTypes=".*:folder" optional="true">
+</site>
+----
+
+NOTE: Multiple allow entries can be added, separated by `|`
+
+
+== 5. Rich text editor
+
+=== Image styles
+
+For projects using the rich text editor,
+XP 7 introduces a new feature called _Image styles_.
+XP 6 provided editors with a dropdown option list for image "styles" when inserting images in the rich text editor.
+However, this list was hardcoded.
+With XP 7, developers are now able to customize this list with their own styles.
+
+By default the only available styles are:
+
+* None (uncropped, but optimized image, no client-side processing)
+* Original (unprocessed original image file, CSS style _.editor-style-original_)
+
+Editors of existing sites are likely to have used one or more of the XP 6 hardcoded styles.
+Migrated images will still keep the cropping from XP 6.
+However, to support inserting new images with the same style formats, add this file to your project:
+
+./site/styles.xml
+[source,xml]
+----
+include::code/styles.xml[]
+----
+
+Image styles also introduce the ability to use image service filters, and client side CSS styles that are used by the editor.
+
+Read more about Image styles https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[here]
+
+
+=== Editor XSS
+
+The XP 6 html editor allows users to add `<script>` and `<iframe>` tags to the source code.
+
+New version of Content Studio shipped XP 7 automatically removes any `<script>` and `<iframe>` tags from the source code.
+This measurement effectively reduces the attack surface of Enonic XP.
+This also removes any scripts from documents migrated from XP 6 on first save.
+
+Iframes can still be added through the use of the iframe macro.
+
+NOTE: Re-enable support for `<script>` in html fields at own risk by following receipt below:
+
+Add a content studio config file (_com.enonic.app.contentstudio.cfg_) to _XP_HOME/config_ folder , with the following settings:
+
+.com.enonic.app.contentstudio.cfg
+[source,properties]
+----
+htmlinput.allowScripts = true
+----
+
+
+=== Standard Classes
+
+XP 7 renames the standard editor classes for alignment and images.
+
+Changing some properties of an image might result in applying specific built-in CSS styles to the `<figure>` element:
+
+.Built-in editor CSS styles
+|===
+|Property |Style
+
+|"Justify" alignment
+|_.editor-align-justify_
+
+|"Left" alignment
+|_.editor-align-left_
+
+|"Center" alignment
+|_.editor-align-center_
+
+|"Right" alignment
+|_.editor-align-right_
+
+|Custom width
+|_.editor-width-custom_
+
+|"Original" image style
+|_.editor-style-original_
+|===
+
+
+== 6. Site engine
+
+The site rendering engine and content model has been updated and may impact your project.
+
+=== Flattened page components
+
+XP 6 persisted the component tree structure (domain model) on a 1 to 1 basis.
+In XP 7, the page structure is now persisted as a flat structure in the underlying node API.
+The motivation behind this change is to simplify searching for component specific data.
+
+For instance, one may now easily search for items using a specific part, or layout.
+
+For most projects, the rendering functionality is fully backward compatible.
+However, if you have implemented specific code that deals with the page domain, you may need to update your code.
+
+The changes to the JSON data model are as follows:
+
+* Page (root component) now includes the path field also
+* Page controller field is renamed to "descriptor" for consistency
+* Component "name" fields are removed from the structure
+* Fragment, Text and Image components no longer have an empty config field
+* A page referring to a template can no longer include region and other page data
+
+=== Response filters
+
+XP 7 introduces generic site filters. To avoid confusion, the XP 6 response filters for pages have been renamed to response processors.
+If your project uses response filters, you must perform the following updates of your project:
+
+==== Move files
+
+Update your project structure by renaming the _filters_ folder from `/src/main/resources/site/filters` to ``/src/main/resources/site/processors`
+
+==== Update site.xml
+
+The schema definitions have also changed:
+
+.Old site.xml
+[source,xml]
+----
+<site>
+  ...
+  <filters>
+    <response-filter name="bgcolor" order="10"/>
+    <response-filter name="app-header" order="10"/>
+  </filters>
+  ...
+</site>
+----
+
+.New site.xml
+[source,xml]
+----
+<site>
+  ...
+  <processors>
+    <response-processor name="bgcolor" order="10"/>
+    <response-processor name="app-header" order="10"/>
+  </processors>
+  ...
+</site>
+----
+
+==== Update controllers
+
+Finally, the JS controllers must now export a responseProcessor, rather than a responseFilter
+
+.Old filter.js
+[source,javascript]
+----
+exports.responseFilter = function (req, res) {
+// code goes here...
+}
+----
+
+.New processor.js
+[source,javascript]
+----
+exports.responseProcessor = function (req, res) {
+// code goes here...
+}
+----
+
+
+=== Render mode
+
+When the site engine is rendering pages, a so-called render mode is part of the request object.
+Until now, the render modes have been: ``PREVIEW``, ``EDIT`` and ``LIVE``
+
+With XP 7, the `INLINE` render mode is introduced.
+`INLINE` mode is exclusively used when a preview is rendered in the context of Content Studio browse view.
+Previously, this rendering would be using mode ``PREVIEW``.
+
+``PREVIEW``is now exclusively used in the standalone fullscreen preview summoned by the user clicking btn:[Preview].
+
+This change allows developers to be able to treat rendering differently when rendered inline vs a full preview.
+
+If your application has implemented specific behavior for ``PREVIEW`` mode,
+consider doing the same for ``INLINE`` modes to keep current functionality.
+
+
+== 7. JS Controllers
+
+If your project contains Javascript controllers, the following issues must be checked:
+
+=== Userstores and IDproviders
+
+For better consistency, userstores are now called IDproviders.
+If your project makes use of lib-auth, lib-context or lib-portal, or otherwise refers to "userStore" by name, you will need to upate your code:
+
+* For usage of Lib-auth, Lib-context and Lib-portal
+  * search and replace the text "userStore" with "idProvider" in your code.
+
+=== Content Library
+
+The `branch` parameter has also been removed from the content library.
+To connect to a different branch, simply use context library instead
+
+
+=== New CMS repo
+
+With XP 7, the default CMS repo is renamed from `cms-repo` to `com.enonic.cms.default`.
+This is done to prepare for use of multiple repos, where all CMS repos will be prefixed with `com.enonic.cms`
+
+If your project connects directly to a CMS repo, i.e. through the node API, ensure that you are still connecting to the right repository.
+
+
+=== Main.js
+
+If you project contains a _/src/main/resources/main.js_ file, you might need to update it.
+
+With XP 7, a dedicated web app controller _/src/main/resources/webapp/webapp.js_ is introduced.
+If your current project was a webapp, you will find that your main.js file exports one or more HTTP methods, like `GET`or `POST`.
+
+Split your _main.js_ file in two:
+
+* All HTTP require statements must be moved to the webapp.js
+* Only life cycle related code should remain in main.js.
+
+
+=== Require() resolving
+
+Enonic XP has used the same require() script resolving patterns since the release of XP 5.
+Strategies for resolving scripts have since been simplified, and with 7.0 breaking changes have been implemented.
+
+The change specifically affects relative paths, the resolver was automatically scanning for files in /site and /lib folders.
+This is now changed, and the resolver will only look for relative files in current directory.
+
+Verify that that your require statements are referring to absolute paths, or that the specific files are located in the current directory.
+
+Also, please check out the documentation of the <<../framework/globals#require,require function>>.
+
+
+
+== 8. Assets and services
+
+Assets and services must now exclusively be placed on the resources/ level.
+If your projects have assets/ and services/ folders within resources/site/ - their content must be moved/merged into respective folders on the resource/ level.
+
+.Old sample project structure
+[source,files]
+----
+src/
+  main/
+    resources/
+      assets/
+        animation.gif
+      services/
+        coolservice/
+          coolservice.xml
+          coolservice.js
+      site/
+        assets/
+          mystyles.css
+          myscript.js
+        services/
+          myservice/
+            myservice.js
+            myservice.xml
+        other/
+----
+
+.New sample project structure
+[source,files]
+----
+src/
+  main/
+    resources/
+      assets/
+        animation.gif
+        mystyles.css
+        myscript.js
+      services/
+        coolservice/
+          coolservice.xml
+          coolservice.js
+        myservice/
+          myservice.js
+          myservice.xml
+      site/
+        other/
+----
+
+
+== 10. Widgets
+
+The "Detail panel" of XP 6 Content Studio has been refactored, and is now called the "Context panel".
+With XP 7, this panel is now available in both Content Studio tree view, and in the content editor.
+
+If your application implements a detail panel widget (located in src/main/resources/admin/widgets/), you will need to upgrade it as follows:
+
+=== Widget HTML
+
+Root element of widget HTML template has changed from `<body>` to `<widget>`. Make sure that `<link>` element injecting widget's stylesheets is inside the `<widget></widget>` element.
+
+.Old widget.html
+[source,html]
+----
+<link rel="stylesheet" th:href="${widgetCssUrl}" type="text/css"/>
+<body>
+    <p>Hello World!</p>
+</body>
+----
+
+.New widget.html
+[source,html]
+----
+<widget>
+    <link rel="stylesheet" th:href="${widgetCssUrl}" type="text/css"/>
+    <p>Hello World!</p>
+</widget>
+----
+
+=== Implements
+
+Widget interface (in the widget's XML schema) is to be renamed from `com.enonic.xp.content-manager.context-widget` (old version) or `contentstudio.detailpanel` (XP 6.x version)
+to `contentstudio.contextpanel`.
+
+.mywidget.xml
+[source,xml]
+----
+<widget>
+  <display-name>My Widget</display-name>
+  <description>Awesome widget that does nothing</description>
+  <interfaces>
+    <interface>contentstudio.contextpanel</interface>
+  </interfaces>
+</widget>
+----
+
+=== Widget icon and description
+
+XP 7 supports widget icon and description that will be shown inside the widget selector inside Content Studio.
+To enable a description, add `<description></description>` field to the widget schema as shown in the example above.
+To enable an icon place the image file (SVG or PNG) called by the same name as the widget inside the widget's folder.
+
+[source,files]
+----
+src/
+  main/
+    resources/
+      admin/
+        widgets/
+            mywidget/
+                mywidget.html
+                mywidget.js
+                mywidget.svg
+                mywidget.xml
+----
+
+=== No context
+
+Starting from XP 7, contents of the selected widget will be displayed in the Content Studio's context panel even when no content is selected in the content tree.
+Developer of the widget must take care of that and implement necessary validation/feedback if the widget requires contentId (by checking value in `params.contentId`
+in the `request` object).
+
+.mywidget.js
+[source,JavaScript]
+----
+function handleGet(req) {
+
+    var contentId = req.params.contentId;
+
+    if (!contentId && portalLib.getContent()) {
+        contentId = portalLib.getContent()._id;
+    }
+
+    if (!contentId) {
+        return {
+            contentType: 'text/html',
+            body: '<widget class="error">No content selected</widget>'
+        };
+    }
+
+    // Further processing
+    ...
+}
+----
+
+=== Widget in the DOM
+
+Parameter `uuid` will no longer be sent to the widget from Content Studio. Before XP 7 several instances of the same widget element could technically be present in the DOM
+and `uuid` could be used to locate the correct element. Consider the following way to locate widget element in the DOM:
+
+.mywidget.html
+[source,HTML]
+----
+    <widget data-th-id="${'widget-' + widgetId}">
+      ... widget body...
+    </widget>
+
+    <script data-th-inline="javascript">
+        /*<![CDATA[*/
+        var CONFIG = {
+            widgetId: [[${widgetId}]]
+        };
+
+        /*]]>*/
+    </script>
+----
+
+.mywidget.js
+[source,JavaScript]
+----
+    var view = resolve('mywidget.html');
+    var params = {
+        widgetId: app.name
+    };
+
+    return {
+        contentType: 'text/html',
+        body: thymeleaf.render(view, params)
+    };
+}
+----
+
+.asset.js
+[source,JavaScript]
+----
+    window['HTMLImports'].whenReady(function() {
+        const widgetId = CONFIG.widgetId;
+        const widgetContainer = document.getElementById(`widget-${widgetId}`);
+
+        if (widgetContainer) {
+            ...
+        }
+    });
+----
+
+=== Repo context
+
+XP 7 is prepared for using multiple CMS repositories.
+As such, a widget must be able to determine which repository it should connect to and which branch (master or draft) the content is in.
+This info is now available in the `request` parameter.
+
+.mywidget.js
+[source,JavaScript]
+----
+function handleGet(req) {
+
+    var contentId = req.params.contentId;
+
+    if (!contentId && portalLib.getContent()) {
+        contentId = portalLib.getContent()._id;
+    }
+
+    if (!contentId) {
+        return {
+            contentType: 'text/html',
+            body: '<widget class="error">No content selected</widget>'
+        };
+    }
+
+    var repo = req.params.repository;
+    var branch = req.params.branch;
+
+    var nodeLib = require('/lib/xp/node');
+
+    // Connect to repo
+    var repo = nodeLib.connect({
+        repoId: repo,
+        branch: branch
+    });
+
+    // Work with the repo
+    ...
+}
+----
+
+== 11. JDK
+
+Where XP 6.x depends on Java 8 to be installed, XP 7 bundles Java 11 in the distro package.
+
+The first time you use Enonic CLI to create a new XP project you will be asked to create a sandbox for a specific version of XP.
+The new sandbox will have Java 11 bundled inside the package and you don't have to worry about whether you have Java installed or not.
+
+== 12. Testing API
+
+If you are using Enonic testing API (`com.enonic.xp:testing`), you need to change imports.
+
+.In Javascript test class:
+[source,JavaScript]
+----
+var assert = require('/lib/xp/assert');
+----
+to
+----
+var assert = require('/lib/xp/testing');
+----
+
+.In Java test class:
+[source,Java]
+----
+import com.enonic.xp.testing.script.ScriptRunnerSupport;
+----
+to
+----
+import com.enonic.xp.testing.ScriptRunnerSupport;
+----
