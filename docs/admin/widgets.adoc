@@ -14,6 +14,7 @@ Widget is essentially a special, admin-only kind of web application. Like all ot
 To create a widget, add a new folder in your project structure, i.e.  `src/main/resources/admin/widgets/<widget-name>`.
 The folder must contain both a descriptor (`<widget-name>.xml`) and a controller (`<widget-name>.js`).
 
+[#descriptor]
 === Descriptor
 
 Widget descriptor defines a display name, a list of roles required to access the widget and interfaces it implements.
@@ -69,6 +70,7 @@ Widget interface is simply a unique identifier (or widget type, if you will) tha
 TIP: Content Studio supports other types of widgets that will be embedded inside the Content Studio UI.
 Read more about Content Studio widgets https://developer.enonic.com/docs/content-studio/stable/widgets[here]
 
+[#dashboard_widgets]
 === Dashboard Widgets
 
 image:xp-7120.svg[XP 7.12.0,opts=inline]
