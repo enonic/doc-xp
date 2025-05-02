@@ -441,6 +441,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#xp8">XP8</a>
+<ul class="sectlevel2">
+<li><a href="#tech_stack">Tech Stack</a></li>
+<li><a href="#api">API</a></li>
+<li><a href="#permissions">Permissions</a></li>
+<li><a href="#node_patch">Node Patch</a></li>
+</ul>
+</li>
 <li><a href="#xp7_update_15">XP7 Update 15</a>
 <ul class="sectlevel2">
 <li><a href="#service_accounts">Service Accounts</a></li>
@@ -577,6 +585,66 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
+<div class="sect1">
+<h2 id="xp8"><a class="link" href="#xp8">XP8</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="tech_stack"><a class="link" href="#tech_stack">Tech Stack</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Java 21</p>
+</li>
+<li>
+<p>Jetty 12</p>
+</li>
+<li>
+<p>Hazelcast 5</p>
+</li>
+<li>
+<p>Prometheus metrics</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="api"><a class="link" href="#api">API</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>API replaces services</p>
+</li>
+<li>
+<p>baseUrl</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="permissions"><a class="link" href="#permissions">Permissions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>no more <code>inheritPermissions</code> flag on Node</p>
+</li>
+<li>
+<p>permissions applied on all branches</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="node_patch"><a class="link" href="#node_patch">Node Patch</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>patch</code> method in Node API - allows to apply changes in node in multiple branches</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="xp7_update_15"><a class="link" href="#xp7_update_15">XP7 Update 15</a></h2>
 <div class="sectionbody">
@@ -1996,7 +2064,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-02 09:18:28 UTC
+Last updated 2025-05-02 12:39:36 UTC
 </div>
 </div>
 </body>
