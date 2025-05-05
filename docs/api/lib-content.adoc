@@ -344,7 +344,7 @@ const expected = {
 };
 ----
 
-=== modifyMedia
+=== updateMedia
 
 Modifies a media content
 
@@ -382,10 +382,10 @@ Examples
 
 [source,typescript]
 ----
-import {modifyMedia} from '/lib/xp/content';
+import {updateMedia} from '/lib/xp/content';
 
 // Modifies a media.
-const result = modifyMedia({
+const result = updateMedia({
     key: '/a/b/mycontent',
     name: 'mycontent',
     data: stream,
@@ -1232,9 +1232,9 @@ contentTypes.forEach(({displayName,name,superType}) => {
 });
 ----
 
-=== modify
+=== update
 
-Modifies a content
+Update a content
 
 NOTE: Properties starting with `_` may not be modified using this function. To rename or move a content (ie to change the `_name` property), use the <<move, move function>> instead.
 
@@ -1263,7 +1263,7 @@ Examples
 
 [source,typescript]
 ----
-import {modify} from '/lib/xp/content';
+import {update} from '/lib/xp/content';
 
 // Editor to call for content.
 function editor(c) {
@@ -1276,8 +1276,8 @@ function editor(c) {
     return c;
 }
 
-// Modify content by path
-const result = modify({
+// Update content by path
+const result = update({
     key: '/a/b/mycontent',
     editor: editor
 });
@@ -1940,7 +1940,7 @@ An object with the following keys and their values:
 | permissions | <<PermissionsParams>>[] | <optional> | Array of permissions to overwrite current permissions. Cannot be used with 'addPermissions' or 'removePermissions'
 | addPermissions | <<PermissionsParams>>[] | <optional> | Array of permissions to add. Cannot be used simultaneously with 'permissions'
 | removePermissions | <<PermissionsParams>>[] | <optional> | Array of permissions to remove. Cannot be used simultaneously with 'permissions'
-| scope | string ('SINGLE' \| 'TREE' \| 'CHILDREN') | <optional>  | scope of applying permissions. Scope 'SINGLE' applies permissions only to the content itself. 'TREE' applies permissions to the content and its descendants. 'CHILDREN' applies permissions only to the content's descendants. Default is 'SINGLE'.
+| scope | string ('SINGLE' \| 'TREE' \| 'SUBTREE') | <optional>  | scope of applying permissions. Scope 'SINGLE' applies permissions only to the content itself. 'TREE' applies permissions to the content and its descendants. 'SUBTREE' applies permissions only to the content's descendants. Default is 'SINGLE'.
 |===
 
 [.lead]

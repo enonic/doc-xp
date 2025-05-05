@@ -36,7 +36,11 @@ controller.
   "cookies": { // <13>
     "mycookie": "123",
     "other": "abc"
-  }
+  },
+  "locales": [ // <14>
+    "en",
+    "no"
+  ],
 }
 ----
 
@@ -53,6 +57,7 @@ controller.
 <11> Name/value pairs of the query/form parameters from the request.
 <12> Name/value pairs of the HTTP request headers.
 <13> Name/value pairs of the HTTP request cookies.
+<14> image:xp-8000.svg[XP 8.0.0,opts=inline] Array of locale strings in decreasing order starting with the preferred locale, the locales that are acceptable to the client based on the Accept-Language header. If the client request doesn't provide an Accept-Language header an array with a single element with the default locale for the server is returned.
 
 image:xp-7120.svg[XP 7.12.0,opts=inline] The ``request`` object also has `getHeader(name)` function that reads out a header on the request. The name is case-insensitive.
 Use it instead of accessing ``headers`` values directly.

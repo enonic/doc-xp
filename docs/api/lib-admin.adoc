@@ -27,33 +27,26 @@ You are now ready to use the API.
 
 == Functions
 
-=== getAssetsUri
+=== getToolUrl
 
-Returns the admin assets uri.
-
-[.lead]
-Parameters
-
-None
-
-[.lead]
-Returns
-
-*string* : A URI pointing to the admin assets
-
-=== getBaseUri
-
-Returns the admin base uri.
+Returns URL of an admin tool in an application.
 
 [.lead]
 Parameters
 
-None
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| application | string | Full application name (f.ex, 'com.enonic.app')
+| tool | string | Name of the tool inside an app (f.ex, 'main')
+|===
 
 [.lead]
 Returns
 
-*string* : The admin base URI
+*string* : URL of the requested admin tool.
 
 === getHomeToolUrl
 
@@ -90,98 +83,6 @@ None
 Returns
 
 *string* : The installation name
-
-=== getLauncherPath
-
-Returns URL to JS script for embedding XP Launcher panel.
-
-[.lead]
-Parameters
-
-None
-
-[.lead]
-Returns
-
-*string* : URL of the Launcher JS script
-
-=== getLauncherUrl
-
-Returns URL of the Launcher panel.
-
-[.lead]
-Parameters
-
-None
-
-[.lead]
-Returns
-
-*string* : URL of the Launcher panel
-
-
-=== getLocale
-
-Returns the preferred locale based on current HTTP request, or the default server locale if none is specified.
-
-[.lead]
-Parameters
-
-None
-
-[.lead]
-Returns
-
-*string* : The preferred locale for this request
-
-=== getLocales
-
-Returns the list of preferred locales based on current HTTP request, or the default server locale if none is specified.
-
-[.lead]
-Parameters
-
-None
-
-[.lead]
-Returns
-
-*string[]* : Current locales in order of preference
-
-=== getPhrases
-
-Returns all i18n phrases.
-
-[.lead]
-Parameters
-
-None
-
-[.lead]
-Returns
-
-*object* : JSON object with phrases
-
-=== getToolUrl
-
-Returns URL of an admin tool in an application.
-
-[.lead]
-Parameters
-
-[%header,cols="1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Kind | Details
-| application | string | Full application name (f.ex, 'com.enonic.app')
-| tool | string | Name of the tool inside an app (f.ex, 'main')
-|===
-
-[.lead]
-Returns
-
-*string* : URL of the requested admin tool.
 
 === getVersion
 

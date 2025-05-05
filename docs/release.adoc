@@ -14,17 +14,23 @@ include::.variables.adoc[]
 
 === API
 
-- API replaces services
-- baseUrl
+- Universal API replaces services
+- content baseUrl
+- `request.locale` in <<framework/http#http-request, Request>>
 
 === Permissions
 
-- no more `inheritPermissions` flag on Node
-- permissions applied on all branches
+- no more `inheritsPermissions` flag on Node
+- content permissions applied on master and draft
+- node permissions can be applied on multiple branches simultaneously
 
 === Node Patch
 
 - `patch` method in Node API - allows to apply changes in node in multiple branches
+
+
+
+
 
 == XP7 Update 15
 

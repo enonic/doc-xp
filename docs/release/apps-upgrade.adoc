@@ -160,14 +160,44 @@ NOTE: Projects containing Java code might get build errors at this point, otherw
 With XP 8, the default CMS repository `com.enonic.cms.default` is no longer created automatically. In fact, there is no default CMS repository at all. Existing `com.enonic.cms.default` repository is converted to a normal one without any special permissions or behavior.
 
 
-== Assets
+== Widgets
 
-Assets service has been deprecated since XP 7.15
-Use `lib-asset` instead.
+Widgets are now an API
+TODO
 
-TODO: Do we remove assets service?
 
-== HTTP Services
+== Default context
+
+In XP 8 context repository and branch may return null if they are not set. This is a default behavior. Previously the default context was set with `com.enonic.cms.default` repository and `draft` branch.
+
+== JDK
+
+Java 21 is required for XP 8.0.0
+
+== Testing API
+
+If you are using Enonic testing API (`com.enonic.xp:testing`)
+You need to add Junit 5 dependency with the corresponding platform launcher.
+
+[source,groovy]
+----
+dependencies {
+testImplementation "com.enonic.xp:testing:${xpVersion}"
+testImplementation(platform("org.junit:junit-bom:5.12.2"))
+testImplementation 'org.junit.jupiter:junit-jupiter'
+testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+----
+
+Junit 4 is not supported in XP 8.0.0
+
+== API Deprecations and Breaking Changes
+
+=== HTTP Services
 
 HTTP Services are deprecated. APIs should be used instead.
 
@@ -237,37 +267,43 @@ In order for API to work on admin tool, site or webapp it must be mounted via th
 </tool>
 ----
 
-== Widgets
+=== Assets service
 
-Widgets are now an API
-TODO
+Assets service has been deprecated since XP 7.15
+Use `lib-asset` instead.
 
+TODO: Do we remove assets service?
 
-== Default context
+=== lib-admin
 
-In XP 8 context repository and branch may return null if they are not set. This is a default behavior. Previously the default context was set with `com.enonic.cms.default` repository and `draft` branch.
+`getAssetsUri` method is removed. Use `lib-asset` library instead.
 
-== JDK
+`getBaseUri` method is removed. Use `getHomeToolUrl` instead.
 
-Java 21 is required for XP 8.0.0
+`getLocale` method is removed without replacement.
 
-== Testing API
+`getLocales` method is removed. Use `request.locales` instead.
 
-If you are using Enonic testing API (`com.enonic.xp:testing`)
-You need to add Junit 5 dependency with the corresponding platform launcher.
+`getPhrases` method is removed. Use `lib-i18n` `getPhrases` instead.
 
-[source,groovy]
-----
-dependencies {
-testImplementation "com.enonic.xp:testing:${xpVersion}"
-testImplementation(platform("org.junit:junit-bom:5.12.2"))
-testImplementation 'org.junit.jupiter:junit-jupiter'
-testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+`getLauncherUrl` and `getLauncherPath` methods are removed. Launcher is a widget now.
 
-test {
-    useJUnitPlatform()
-}
-----
+=== node-lib
 
-Junit 4 is not supported in XP 8.0.0
+`_inheritsPermissions` node property is removed. It can only be used as an argument in `create` method - to copy permissions from the parent node.
+
+`setRootPermissions` method is removed. Use `applyPermissions` instead.
+
+`modify` method is deprecated. Use `update` instead.
+
+`editor` of deprecated `modify` method can no longer edit node permissions. Use separate call to `applyPermissions` method instead.
+
+=== content-lib
+
+`setPermissions` method is removed. Use `applyPermissions` instead.
+
+`editor` of deprecated `modify` method can no longer edit content permissions. Use separate call to `applyPermissions` method instead.
+
+`modify` method is deprecated. Use `update` instead.
+
+`modifyMedia` method is deprecated. Use `updateMedia` instead.

@@ -901,9 +901,9 @@ const expected = {
 }
 ----
 
-=== modify
+=== update
 
-Modifies a node.
+Updates a node.
 
 [.lead]
 Parameters
@@ -927,10 +927,10 @@ Returns
 [.lead]
 Example
 
-.Modifying a node.
+.Updating a node.
 [source,typescript]
 ----
-const result = repo.modify({
+const result = repo.update({
     key: key,
     editor: (node) => {
         node.someData.cars.push('peugeot');
@@ -1430,7 +1430,7 @@ An object with the following keys and their values:
 | permissions | <<PermissionsParams>>[] | <optional> | Array of permissions to overwrite current permissions. Cannot be used with 'addPermissions' or 'removePermissions'.
 | addPermissions | <<PermissionsParams>>[] | <optional> | Array of permissions to add. Cannot be used with 'permissions'.
 | removePermissions | <<PermissionsParams>>[] | <optional> | Array of permissions to remove. Cannot be used with 'permissions'.
-| scope | string ('SINGLE' \| 'TREE' \| 'CHILDREN') | <optional>  | scope of applying permissions. Scope 'SINGLE' applies permissions only to the node itself. 'TREE' applies permissions to the node and its descendants. 'CHILDREN' applies permissions only to the node's descendants. Default is 'SINGLE'.
+| scope | string ('SINGLE' \| 'TREE' \| 'SUBTREE') | <optional>  | scope of applying permissions. Scope 'SINGLE' applies permissions only to the node itself. 'TREE' applies permissions to the node and its descendants. 'SUBTREE' applies permissions only to the node's descendants. Default is 'SINGLE'.
 | branches | string[] | <optional> | Array of additional branches to apply permissions to. Current context branch should not be included.
 |===
 
