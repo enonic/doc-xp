@@ -164,6 +164,7 @@ An object with the following keys and their values:
 | childOrder | string | <optional> | | Default ordering of children when doing getChildren if no order is given in query
 | data | object | | | Actual content data
 | x | object | <optional> | | eXtra data to use
+| workflow | object | <optional> | | Workflow information to use. Default has state READY and empty check list.
 |===
 
 [.lead]
@@ -203,8 +204,12 @@ const result1 = create({
             }
         }
     },
-    attachments: {},
-    publish: {}
+    workflow: {
+        state: 'PENDING_APPROVAL',
+        checks: {
+            'Review by lawyer': 'PENDING'
+        }
+    },
 });
 
 log.info('Content created with id %s', result1._id);
