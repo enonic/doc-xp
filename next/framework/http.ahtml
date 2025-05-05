@@ -489,7 +489,11 @@ controller.</p>
   "cookies": { <i class="conum" data-value="13"></i><b>(13)</b>
     "mycookie": "123",
     "other": "abc"
-  }
+  },
+  "locales": [ <i class="conum" data-value="14"></i><b>(14)</b>
+    "en",
+    "no"
+  ],
 }</code></pre>
 </div>
 </div>
@@ -546,6 +550,30 @@ controller.</p>
 <tr>
 <td><i class="conum" data-value="13"></i><b>13</b></td>
 <td>Name/value pairs of the HTTP request cookies.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="14"></i><b>14</b></td>
+<td><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="r">
+    <rect width="64" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#r)">
+    <rect width="25" height="20" fill="#555"/>
+    <rect x="25" width="39" height="20" fill="#007ec6"/>
+    <rect width="64" height="20" fill="url(#s)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
+     font-size="110">
+    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
+    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
+    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">8.0.0</text>
+    <text x="435" y="140" transform="scale(.1)" textLength="290">8.0.0</text>
+  </g>
+</svg></span> Array of locale strings in decreasing order starting with the preferred locale, the locales that are acceptable to the client based on the Accept-Language header. If the client request doesn&#8217;t provide an Accept-Language header an array with a single element with the default locale for the server is returned.</td>
 </tr>
 </table>
 </div>
@@ -737,7 +765,7 @@ Modification of <code>headers</code> does not affect the result of <code>getHead
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-05 13:47:10 UTC
+Last updated 2025-05-05 15:01:27 UTC
 </div>
 </div>
 </body>

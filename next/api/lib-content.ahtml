@@ -454,7 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#archive">archive</a></li>
 <li><a href="#create">create</a></li>
 <li><a href="#createmedia">createMedia</a></li>
-<li><a href="#modifymedia">modifyMedia</a></li>
+<li><a href="#updatemedia">updateMedia</a></li>
 <li><a href="#delete">delete</a></li>
 <li><a href="#duplicate">duplicate</a></li>
 <li><a href="#exists">exists</a></li>
@@ -468,7 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#getsiteconfig">getSiteConfig</a></li>
 <li><a href="#gettype">getType</a></li>
 <li><a href="#gettypes">getTypes</a></li>
-<li><a href="#modify">modify</a></li>
+<li><a href="#update">update</a></li>
 <li><a href="#move">move</a></li>
 <li><a href="#publish">publish</a></li>
 <li><a href="#query">query</a></li>
@@ -1096,7 +1096,7 @@ const expected = {
 </div>
 </div>
 <div class="sect2">
-<h3 id="modifymedia"><a class="link" href="#modifymedia">modifyMedia</a></h3>
+<h3 id="updatemedia"><a class="link" href="#updatemedia">updateMedia</a></h3>
 <div class="paragraph">
 <p>Modifies a media content</p>
 </div>
@@ -1236,10 +1236,10 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {modifyMedia} from '/lib/xp/content';
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {updateMedia} from '/lib/xp/content';
 
 // Modifies a media.
-const result = modifyMedia({
+const result = updateMedia({
     key: '/a/b/mycontent',
     name: 'mycontent',
     data: stream,
@@ -2416,9 +2416,9 @@ contentTypes.forEach(({displayName,name,superType}) =&gt; {
 </div>
 </div>
 <div class="sect2">
-<h3 id="modify"><a class="link" href="#modify">modify</a></h3>
+<h3 id="update"><a class="link" href="#update">update</a></h3>
 <div class="paragraph">
-<p>Modifies a content</p>
+<p>Update a content</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2496,7 +2496,7 @@ Properties starting with <code>_</code> may not be modified using this function.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {modify} from '/lib/xp/content';
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {update} from '/lib/xp/content';
 
 // Editor to call for content.
 function editor(c) {
@@ -2509,8 +2509,8 @@ function editor(c) {
     return c;
 }
 
-// Modify content by path
-const result = modify({
+// Update content by path
+const result = update({
     key: '/a/b/mycontent',
     editor: editor
 });
@@ -3499,10 +3499,10 @@ If the content is published, the permissions will be applied to the published co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">scope</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string ('SINGLE' | 'TREE' | 'CHILDREN')</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string ('SINGLE' | 'TREE' | 'SUBTREE')</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>scope of applying permissions. Scope 'SINGLE' applies permissions only to the content itself. 'TREE' applies permissions to the content and its descendants. 'CHILDREN' applies permissions only to the content&#8217;s descendants. Default is 'SINGLE'.</p>
+<p>scope of applying permissions. Scope 'SINGLE' applies permissions only to the content itself. 'TREE' applies permissions to the content and its descendants. 'SUBTREE' applies permissions only to the content&#8217;s descendants. Default is 'SINGLE'.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3866,7 +3866,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-05 13:47:10 UTC
+Last updated 2025-05-05 15:01:27 UTC
 </div>
 </div>
 </body>

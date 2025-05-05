@@ -612,10 +612,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>API replaces services</p>
+<p>Universal API replaces services</p>
 </li>
 <li>
-<p>baseUrl</p>
+<p>content baseUrl</p>
+</li>
+<li>
+<p><code>request.locale</code> in <a href="framework/http.ahtml#http-request">Request</a></p>
 </li>
 </ul>
 </div>
@@ -625,10 +628,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>no more <code>inheritPermissions</code> flag on Node</p>
+<p>no more <code>inheritsPermissions</code> flag on Node</p>
 </li>
 <li>
-<p>permissions applied on all branches</p>
+<p>content permissions applied on master and draft</p>
+</li>
+<li>
+<p>node permissions can be applied on multiple branches simultaneously</p>
 </li>
 </ul>
 </div>
@@ -2064,7 +2070,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-05 13:47:10 UTC
+Last updated 2025-05-05 15:01:27 UTC
 </div>
 </div>
 </body>

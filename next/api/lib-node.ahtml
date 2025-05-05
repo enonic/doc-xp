@@ -468,7 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#getactiveversion">getActiveVersion</a></li>
 <li><a href="#getbinary">getBinary</a></li>
 <li><a href="#getcommit">getCommit</a></li>
-<li><a href="#modify">modify</a></li>
+<li><a href="#update">update</a></li>
 <li><a href="#move">move</a></li>
 <li><a href="#push">push</a></li>
 <li><a href="#query_2">query</a></li>
@@ -1998,9 +1998,9 @@ if (result) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="modify"><a class="link" href="#modify">modify</a></h3>
+<h3 id="update"><a class="link" href="#update">update</a></h3>
 <div class="paragraph">
-<p>Modifies a node.</p>
+<p>Updates a node.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2048,9 +2048,9 @@ if (result) {
 <p>Example</p>
 </div>
 <div class="listingblock">
-<div class="title">Modifying a node.</div>
+<div class="title">Updating a node.</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.modify({
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.update({
     key: key,
     editor: (node) =&gt; {
         node.someData.cars.push('peugeot');
@@ -2805,10 +2805,10 @@ const result = repo.setActiveVersion({
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">scope</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string ('SINGLE' | 'TREE' | 'CHILDREN')</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string ('SINGLE' | 'TREE' | 'SUBTREE')</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>scope of applying permissions. Scope 'SINGLE' applies permissions only to the node itself. 'TREE' applies permissions to the node and its descendants. 'CHILDREN' applies permissions only to the node&#8217;s descendants. Default is 'SINGLE'.</p>
+<p>scope of applying permissions. Scope 'SINGLE' applies permissions only to the node itself. 'TREE' applies permissions to the node and its descendants. 'SUBTREE' applies permissions only to the node&#8217;s descendants. Default is 'SINGLE'.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3029,7 +3029,7 @@ const result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-05 13:47:10 UTC
+Last updated 2025-05-05 15:01:27 UTC
 </div>
 </div>
 </body>

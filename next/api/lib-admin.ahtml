@@ -444,16 +444,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#usage">Usage</a></li>
 <li><a href="#functions">Functions</a>
 <ul class="sectlevel2">
-<li><a href="#getassetsuri">getAssetsUri</a></li>
-<li><a href="#getbaseuri">getBaseUri</a></li>
+<li><a href="#gettoolurl">getToolUrl</a></li>
 <li><a href="#gethometoolurl">getHomeToolUrl</a></li>
 <li><a href="#getinstallation">getInstallation</a></li>
-<li><a href="#getlauncherpath">getLauncherPath</a></li>
-<li><a href="#getlauncherurl">getLauncherUrl</a></li>
-<li><a href="#getlocale">getLocale</a></li>
-<li><a href="#getlocales">getLocales</a></li>
-<li><a href="#getphrases">getPhrases</a></li>
-<li><a href="#gettoolurl">getToolUrl</a></li>
 <li><a href="#getversion">getVersion</a></li>
 </ul>
 </li>
@@ -498,39 +491,48 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="functions"><a class="link" href="#functions">Functions</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="getassetsuri"><a class="link" href="#getassetsuri">getAssetsUri</a></h3>
+<h3 id="gettoolurl"><a class="link" href="#gettoolurl">getToolUrl</a></h3>
 <div class="paragraph">
-<p>Returns the admin assets uri.</p>
+<p>Returns URL of an admin tool in an application.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
 </div>
-<div class="paragraph">
-<p>None</p>
-</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 98%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Full application name (f.ex, 'com.enonic.app')</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the tool inside an app (f.ex, 'main')</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph lead">
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>string</strong> : A URI pointing to the admin assets</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="getbaseuri"><a class="link" href="#getbaseuri">getBaseUri</a></h3>
-<div class="paragraph">
-<p>Returns the admin base uri.</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<div class="paragraph">
-<p>None</p>
-</div>
-<div class="paragraph lead">
-<p>Returns</p>
-</div>
-<div class="paragraph">
-<p><strong>string</strong> : The admin base URI</p>
+<p><strong>string</strong> : URL of the requested admin tool.</p>
 </div>
 </div>
 <div class="sect2">
@@ -593,141 +595,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="getlauncherpath"><a class="link" href="#getlauncherpath">getLauncherPath</a></h3>
-<div class="paragraph">
-<p>Returns URL to JS script for embedding XP Launcher panel.</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<div class="paragraph">
-<p>None</p>
-</div>
-<div class="paragraph lead">
-<p>Returns</p>
-</div>
-<div class="paragraph">
-<p><strong>string</strong> : URL of the Launcher JS script</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="getlauncherurl"><a class="link" href="#getlauncherurl">getLauncherUrl</a></h3>
-<div class="paragraph">
-<p>Returns URL of the Launcher panel.</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<div class="paragraph">
-<p>None</p>
-</div>
-<div class="paragraph lead">
-<p>Returns</p>
-</div>
-<div class="paragraph">
-<p><strong>string</strong> : URL of the Launcher panel</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="getlocale"><a class="link" href="#getlocale">getLocale</a></h3>
-<div class="paragraph">
-<p>Returns the preferred locale based on current HTTP request, or the default server locale if none is specified.</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<div class="paragraph">
-<p>None</p>
-</div>
-<div class="paragraph lead">
-<p>Returns</p>
-</div>
-<div class="paragraph">
-<p><strong>string</strong> : The preferred locale for this request</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="getlocales"><a class="link" href="#getlocales">getLocales</a></h3>
-<div class="paragraph">
-<p>Returns the list of preferred locales based on current HTTP request, or the default server locale if none is specified.</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<div class="paragraph">
-<p>None</p>
-</div>
-<div class="paragraph lead">
-<p>Returns</p>
-</div>
-<div class="paragraph">
-<p><strong>string[]</strong> : Current locales in order of preference</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="getphrases"><a class="link" href="#getphrases">getPhrases</a></h3>
-<div class="paragraph">
-<p>Returns all i18n phrases.</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<div class="paragraph">
-<p>None</p>
-</div>
-<div class="paragraph lead">
-<p>Returns</p>
-</div>
-<div class="paragraph">
-<p><strong>object</strong> : JSON object with phrases</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="gettoolurl"><a class="link" href="#gettoolurl">getToolUrl</a></h3>
-<div class="paragraph">
-<p>Returns URL of an admin tool in an application.</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Kind</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">application</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Full application name (f.ex, 'com.enonic.app')</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">tool</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name of the tool inside an app (f.ex, 'main')</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph lead">
-<p>Returns</p>
-</div>
-<div class="paragraph">
-<p><strong>string</strong> : URL of the requested admin tool.</p>
-</div>
-</div>
-<div class="sect2">
 <h3 id="getversion"><a class="link" href="#getversion">getVersion</a></h3>
 <div class="paragraph">
 <p>Returns version of XP installation.</p>
@@ -750,7 +617,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-05 13:47:10 UTC
+Last updated 2025-05-05 15:01:27 UTC
 </div>
 </div>
 </body>

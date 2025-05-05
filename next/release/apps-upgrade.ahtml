@@ -451,12 +451,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#default_cms_repository">Default CMS repository</a></li>
-<li><a href="#assets">Assets</a></li>
-<li><a href="#http_services">HTTP Services</a></li>
 <li><a href="#widgets">Widgets</a></li>
 <li><a href="#default_context">Default context</a></li>
 <li><a href="#jdk">JDK</a></li>
 <li><a href="#testing_api">Testing API</a></li>
+<li><a href="#api_deprecations_and_breaking_changes">API Deprecations and Breaking Changes</a>
+<ul class="sectlevel2">
+<li><a href="#http_services">HTTP Services</a></li>
+<li><a href="#assets_service">Assets service</a></li>
+<li><a href="#lib_admin">lib-admin</a></li>
+<li><a href="#node_lib">node-lib</a></li>
+<li><a href="#content_lib">content-lib</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -730,20 +737,61 @@ Projects containing Java code might get build errors at this point, otherwise th
 </div>
 </div>
 <div class="sect1">
-<h2 id="assets"><a class="link" href="#assets">Assets</a></h2>
+<h2 id="widgets"><a class="link" href="#widgets">Widgets</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Assets service has been deprecated since XP 7.15
-Use <code>lib-asset</code> instead.</p>
-</div>
-<div class="paragraph">
-<p>TODO: Do we remove assets service?</p>
+<p>Widgets are now an API
+TODO</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="http_services"><a class="link" href="#http_services">HTTP Services</a></h2>
+<h2 id="default_context"><a class="link" href="#default_context">Default context</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>In XP 8 context repository and branch may return null if they are not set. This is a default behavior. Previously the default context was set with <code>com.enonic.cms.default</code> repository and <code>draft</code> branch.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jdk"><a class="link" href="#jdk">JDK</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Java 21 is required for XP 8.0.0</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing_api"><a class="link" href="#testing_api">Testing API</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you are using Enonic testing API (<code>com.enonic.xp:testing</code>)
+You need to add Junit 5 dependency with the corresponding platform launcher.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+testImplementation "com.enonic.xp:testing:${xpVersion}"
+testImplementation(platform("org.junit:junit-bom:5.12.2"))
+testImplementation 'org.junit.jupiter:junit-jupiter'
+testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Junit 4 is not supported in XP 8.0.0</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="api_deprecations_and_breaking_changes"><a class="link" href="#api_deprecations_and_breaking_changes">API Deprecations and Breaking Changes</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="http_services"><a class="link" href="#http_services">HTTP Services</a></h3>
 <div class="paragraph">
 <p>HTTP Services are deprecated. APIs should be used instead.</p>
 </div>
@@ -815,62 +863,73 @@ Use <code>lib-asset</code> instead.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="widgets"><a class="link" href="#widgets">Widgets</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="assets_service"><a class="link" href="#assets_service">Assets service</a></h3>
 <div class="paragraph">
-<p>Widgets are now an API
-TODO</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="default_context"><a class="link" href="#default_context">Default context</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In XP 8 context repository and branch may return null if they are not set. This is a default behavior. Previously the default context was set with <code>com.enonic.cms.default</code> repository and <code>draft</code> branch.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="jdk"><a class="link" href="#jdk">JDK</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Java 21 is required for XP 8.0.0</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="testing_api"><a class="link" href="#testing_api">Testing API</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you are using Enonic testing API (<code>com.enonic.xp:testing</code>)
-You need to add Junit 5 dependency with the corresponding platform launcher.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-testImplementation "com.enonic.xp:testing:${xpVersion}"
-testImplementation(platform("org.junit:junit-bom:5.12.2"))
-testImplementation 'org.junit.jupiter:junit-jupiter'
-testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-test {
-    useJUnitPlatform()
-}</code></pre>
-</div>
+<p>Assets service has been deprecated since XP 7.15
+Use <code>lib-asset</code> instead.</p>
 </div>
 <div class="paragraph">
-<p>Junit 4 is not supported in XP 8.0.0</p>
+<p>TODO: Do we remove assets service?</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lib_admin"><a class="link" href="#lib_admin">lib-admin</a></h3>
+<div class="paragraph">
+<p><code>getAssetsUri</code> method is removed. Use <code>lib-asset</code> library instead.</p>
+</div>
+<div class="paragraph">
+<p><code>getBaseUri</code> method is removed. Use <code>getHomeToolUrl</code> instead.</p>
+</div>
+<div class="paragraph">
+<p><code>getLocale</code> method is removed without replacement.</p>
+</div>
+<div class="paragraph">
+<p><code>getLocales</code> method is removed. Use <code>request.locales</code> instead.</p>
+</div>
+<div class="paragraph">
+<p><code>getPhrases</code> method is removed. Use <code>lib-i18n</code> <code>getPhrases</code> instead.</p>
+</div>
+<div class="paragraph">
+<p><code>getLauncherUrl</code> and <code>getLauncherPath</code> methods are removed. Launcher is a widget now.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="node_lib"><a class="link" href="#node_lib">node-lib</a></h3>
+<div class="paragraph">
+<p><code>_inheritsPermissions</code> node property is removed. It can only be used as an argument in <code>create</code> method - to copy permissions from the parent node.</p>
+</div>
+<div class="paragraph">
+<p><code>setRootPermissions</code> method is removed. Use <code>applyPermissions</code> instead.</p>
+</div>
+<div class="paragraph">
+<p><code>modify</code> method is deprecated. Use <code>update</code> instead.</p>
+</div>
+<div class="paragraph">
+<p><code>editor</code> of deprecated <code>modify</code> method can no longer edit node permissions. Use separate call to <code>applyPermissions</code> method instead.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="content_lib"><a class="link" href="#content_lib">content-lib</a></h3>
+<div class="paragraph">
+<p><code>setPermissions</code> method is removed. Use <code>applyPermissions</code> instead.</p>
+</div>
+<div class="paragraph">
+<p><code>editor</code> of deprecated <code>modify</code> method can no longer edit content permissions. Use separate call to <code>applyPermissions</code> method instead.</p>
+</div>
+<div class="paragraph">
+<p><code>modify</code> method is deprecated. Use <code>update</code> instead.</p>
+</div>
+<div class="paragraph">
+<p><code>modifyMedia</code> method is deprecated. Use <code>updateMedia</code> instead.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-05 13:47:10 UTC
+Last updated 2025-05-05 15:01:27 UTC
 </div>
 </div>
 </body>
