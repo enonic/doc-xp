@@ -840,6 +840,15 @@ log.info('Archived content ids: %s', result2.join(','));</code></pre>
 <p>eXtra data to use</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">workflow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Workflow information to use. Default has state READY and empty check list.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph lead">
@@ -880,8 +889,12 @@ const result1 = create({
             }
         }
     },
-    attachments: {},
-    publish: {}
+    workflow: {
+        state: 'PENDING_APPROVAL',
+        checks: {
+            'Review by lawyer': 'PENDING'
+        }
+    },
 });
 
 log.info('Content created with id %s', result1._id);</code></pre>
@@ -3776,7 +3789,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-02 12:44:55 UTC
+Last updated 2025-05-05 13:35:44 UTC
 </div>
 </div>
 </body>
