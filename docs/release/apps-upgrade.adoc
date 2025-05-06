@@ -307,3 +307,35 @@ TODO: Do we remove assets service?
 `modify` method is deprecated. Use `update` instead.
 
 `modifyMedia` method is deprecated. Use `updateMedia` instead.
+
+=== Javax to Jakarta
+
+Most of the Java EE APIs have been migrated to Jakarta EE APIs.
+Most noticeable ones are
+
+- `javax.servlet` to `jakarta.servlet`
+- `javax.mail` to `jakarta.mail`
+
+=== FasterXML Jackson JSON API
+
+Java FasterXML Jackson JSON API is no longer transitive dependency of XP Core API.
+
+If you need to serialize or deserialize JSON in Java, you need to add the dependency to your project, preferably using a library different from XP internal one (FasterXML Jackson) to avoid conflicts.
+
+We recommend using https://github.com/FasterXML/jackson-jr
+
+FasterXML Jackson Annotations `com.fasterxml.jackson.core:jackson-annotations` transitive dependency is still available in JAX-RS API.
+
+=== JAX-RS API
+
+Java JAX-RS API is deprecated. It was not documented, and used internally to implement REST APIs.
+
+If you have used JAX-RS API in your application, you need to migrate to the new XP8 Universal API.
+
+To know if you are using JAX-RS API, check for `com.enonic.xp:jaxrs-api` dependency in the project's gradle file.
+
+=== Dropwizard Metrics
+
+Java Dropwizard Metrics is no longer available in XP Core API. Migrate to `com.enonic.xp.metrics` Core API.
+
+Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard Metrics JSON but instead reports metrics in openmetrics format.
