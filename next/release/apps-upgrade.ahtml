@@ -462,6 +462,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#lib_admin">lib-admin</a></li>
 <li><a href="#node_lib">node-lib</a></li>
 <li><a href="#content_lib">content-lib</a></li>
+<li><a href="#javax_to_jakarta">Javax to Jakarta</a></li>
+<li><a href="#fasterxml_jackson_json_api">FasterXML Jackson JSON API</a></li>
+<li><a href="#jax_rs_api">JAX-RS API</a></li>
+<li><a href="#dropwizard_metrics">Dropwizard Metrics</a></li>
 </ul>
 </li>
 </ul>
@@ -924,12 +928,65 @@ Use <code>lib-asset</code> instead.</p>
 <p><code>modifyMedia</code> method is deprecated. Use <code>updateMedia</code> instead.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="javax_to_jakarta"><a class="link" href="#javax_to_jakarta">Javax to Jakarta</a></h3>
+<div class="paragraph">
+<p>Most of the Java EE APIs have been migrated to Jakarta EE APIs.
+Most noticeable ones are</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>javax.servlet</code> to <code>jakarta.servlet</code></p>
+</li>
+<li>
+<p><code>javax.mail</code> to <code>jakarta.mail</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fasterxml_jackson_json_api"><a class="link" href="#fasterxml_jackson_json_api">FasterXML Jackson JSON API</a></h3>
+<div class="paragraph">
+<p>Java FasterXML Jackson JSON API is no longer transitive dependency of XP Core API.</p>
+</div>
+<div class="paragraph">
+<p>If you need to serialize or deserialize JSON in Java, you need to add the dependency to your project, preferably using a library different from XP internal one (FasterXML Jackson) to avoid conflicts.</p>
+</div>
+<div class="paragraph">
+<p>We recommend using <a href="https://github.com/FasterXML/jackson-jr" class="bare">https://github.com/FasterXML/jackson-jr</a></p>
+</div>
+<div class="paragraph">
+<p>FasterXML Jackson Annotations <code>com.fasterxml.jackson.core:jackson-annotations</code> transitive dependency is still available in JAX-RS API.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jax_rs_api"><a class="link" href="#jax_rs_api">JAX-RS API</a></h3>
+<div class="paragraph">
+<p>Java JAX-RS API is deprecated. It was not documented, and used internally to implement REST APIs.</p>
+</div>
+<div class="paragraph">
+<p>If you have used JAX-RS API in your application, you need to migrate to the new XP8 Universal API.</p>
+</div>
+<div class="paragraph">
+<p>To know if you are using JAX-RS API, check for <code>com.enonic.xp:jaxrs-api</code> dependency in the project&#8217;s gradle file.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dropwizard_metrics"><a class="link" href="#dropwizard_metrics">Dropwizard Metrics</a></h3>
+<div class="paragraph">
+<p>Java Dropwizard Metrics is no longer available in XP Core API. Migrate to <code>com.enonic.xp.metrics</code> Core API.</p>
+</div>
+<div class="paragraph">
+<p>Statistics endpoint <a href="http://&lt;host&gt;:2609/metrics" class="bare">http://&lt;host&gt;:2609/metrics</a> is no longer reporting Dropwizard Metrics JSON but instead reports metrics in openmetrics format.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-05 15:01:27 UTC
+Last updated 2025-05-06 09:05:22 UTC
 </div>
 </div>
 </body>
