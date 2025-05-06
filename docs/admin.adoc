@@ -60,7 +60,7 @@ Tools are launched in separate browser tabs, running independently of other admi
 
 * A single XP application may contain multiple admin tools
 * Access to an admin tool typically requires authentication, and a particular role memberships
-* Admin tools are all served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/tool/<tool-name>``
+* Admin tools are all served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/<tool-name>``
 
 === Admin Widgets
 

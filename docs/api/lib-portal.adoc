@@ -53,7 +53,7 @@ Parameters
 ! path        ! string !            !         ! Path to the asset
 ! application ! string ! <optional> !         ! Other application to reference to. Defaults to current application
 ! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`
-! params      ! object ! <optional> !         ! Custom parameters to append to the url
+! params      ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -102,7 +102,7 @@ Parameters
 ! label    ! string  ! <optional> ! source  ! Label of the attachment.
 ! download ! boolean ! <optional> ! false   ! Set to `true` if the disposition header should be set to attachment.
 ! type     ! string  ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
-! params   ! object  ! <optional> !         ! Custom parameters to append to the url.
+! params   ! object  ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -151,7 +151,7 @@ Parameters
 ! path      ! string ! <optional> !         ! Path to the page.
 ! component ! string ! <optional> !         ! Path to the component. If not set, the current path is set.
 ! type      ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
-! params    ! object ! <optional> !         ! Custom parameters to append to the url.
+! params    ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -563,7 +563,7 @@ Parameters
 ! idProvider  ! string ! <optional> !         ! Key of an ID provider. If idProvider is not set, then the id provider corresponding to the current execution context will be used.
 ! contextPath ! string ! <optional> ! vhost   ! Context path. Either vhost (using vhost target path) or relative to the current path.
 ! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
-! params      ! object ! <optional> !         ! Custom parameters to append to the url.
+! params      ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -654,7 +654,7 @@ Parameters
 ! format     ! string ! <optional> !         ! Format of the image.
 ! filter     ! string ! <optional> !         ! A number of filters are available to alter the image appearance, for example, blur(3), grayscale(), rounded(5), etc.
 ! type       ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
-! params     ! object ! <optional> !         ! Custom parameters to append to the url.
+! params     ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -704,7 +704,7 @@ Parameters
 ! redirect    ! string ! <optional> !         ! The URL to redirect to after the login.
 ! contextPath ! string ! <optional> ! vhost   ! Context path. Either vhost (using vhost target path) or relative to the current path.
 ! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
-! params      ! object ! <optional> !         ! Custom parameters to append to the url.
+! params      ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -738,7 +738,7 @@ Parameters
 ! redirect    ! string ! <optional> !         ! The URL to redirect to after the logout.
 ! contextPath ! string ! <optional> ! vhost   ! Context path. Either vhost (using vhost target path) or relative to the current path.
 ! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
-! params      ! object ! <optional> !         ! Custom parameters to append to the url.
+! params      ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -772,7 +772,7 @@ Parameters
 ! id     ! string ! <optional> !         ! Id of a content. If id is set, then path is not used.
 ! path   ! string ! <optional> !         ! Path of a content. Relative paths are resolved based on the current context.
 ! type   ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
-! params ! object ! <optional> !         ! Custom parameters to append to the url.
+! params ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -919,7 +919,7 @@ Parameters
 ! service     ! string !            !         ! Name of the service.
 ! application ! string ! <optional> !         ! Other application to reference to. Default is current application.
 ! type        ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute` or `websocket.
-! params      ! object ! <optional> !         ! Custom parameters to append to the url.
+! params      ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===
@@ -968,7 +968,7 @@ Parameters
 ! Name   ! Type   ! Attributes ! Default ! Description
 ! path   ! string !            !         ! Path of the resource.
 ! type   ! string ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute` or `websocket`.
-! params ! object ! <optional> !         ! Custom parameters to append to the url.
+! params ! object ! <optional> !         ! Custom query parameters to append to the URL.
 !===
 
 |===

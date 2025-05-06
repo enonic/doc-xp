@@ -276,11 +276,11 @@ TODO: Do we remove assets service?
 
 === lib-admin
 
-`getAssetsUri` method is removed. Use `lib-asset` library instead.
+`getAssetsUri` method is removed. This method was never in use since XP 7.
 
-`getBaseUri` method is removed. Use `getHomeToolUrl` instead.
+`getBaseUri` method is removed. Use `getHomeToolUrl` instead as a drop-in replacement.
 
-`getLocale` method is removed without replacement.
+`getLocale` method is removed without replacement. This method was causing issues when first user preference did not match any localization files and English was chosen as default.
 
 `getLocales` method is removed. Use `request.locales` instead.
 
@@ -308,10 +308,15 @@ TODO: Do we remove assets service?
 
 `modifyMedia` method is deprecated. Use `updateMedia` instead.
 
+=== lib-io
+
+`localize` method no longer accepts `application` parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail.
+Required localize phrases should be copied over the applications instead.
+
 === Javax to Jakarta
 
 Most of the Java EE APIs have been migrated to Jakarta EE APIs.
-Most noticeable ones are
+Most noticeable ones are:
 
 - `javax.servlet` to `jakarta.servlet`
 - `javax.mail` to `jakarta.mail`
@@ -338,4 +343,8 @@ To know if you are using JAX-RS API, check for `com.enonic.xp:jaxrs-api` depende
 
 Java Dropwizard Metrics is no longer available in XP Core API. Migrate to `com.enonic.xp.metrics` Core API.
 
-Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard Metrics JSON but instead reports metrics in openmetrics format.
+Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard Metrics JSON but instead reports metrics in https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md[OpenMetrics] format.
+
+=== Others
+
+it is no longer possible to install applications by specifying a url in

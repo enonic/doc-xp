@@ -15,6 +15,6 @@ The site pipeline is executed as a subset of the <<../engines#common_request_pip
 
 image::admin-pipeline.svg[Admin rendering pipeline, 768px]
 
-Tools handler:: Tools are admin apps that extend the launcher menu. A tool's endpoint is `:8080/admin/tool/<app-name>/<tool-name>`. The respective widget controller must be located in your project at `src/main/resources/admin/tools/<tool-name>/<tool-name>.js`.
+Tools handler:: Tools are admin apps that extend the launcher menu. A tool's endpoint is `:8080/admin/<app-name>/<tool-name>`. The respective widget controller must be located in your project at `src/main/resources/admin/tools/<tool-name>/<tool-name>.js`.
 
 Widget handler:: Widgets are admin extensions used by admin tools. The respective widget controller must be located in your project at `src/main/resources/admin/widgets/<widget-name>/<widget-name>.js`.

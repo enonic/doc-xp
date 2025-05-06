@@ -27,6 +27,31 @@ You are now ready to use the API.
 
 == Functions
 
+=== widgetUrl
+
+Returns the URL for a widget.
+
+[.lead]
+Parameters
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Kind | Details
+| application | string | Full application name. (f.ex, 'com.enonic.xp.app.main')
+| widget | string | Name of the widget. (f.ex, 'launcher')
+| type | string | Either `server` (server-relative URL) or `absolute`
+| params | object | Custom query parameters to append to the url.
+
+|===
+
+[.lead]
+Returns
+
+*string* : URL of the requested admin tool.
+
+
 === getToolUrl
 
 Returns URL of an admin tool in an application.

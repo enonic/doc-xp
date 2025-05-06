@@ -16,7 +16,10 @@ include::.variables.adoc[]
 
 - Universal API replaces services
 - content baseUrl
-- `request.locale` in <<framework/http#http-request, Request>>
+
+=== Widget API
+
+`lib-admin` `widgetUrl`
 
 === Permissions
 
@@ -28,8 +31,14 @@ include::.variables.adoc[]
 
 - `patch` method in Node API - allows to apply changes in node in multiple branches
 
+=== Virtual Host Context
 
+- Default context values provided via vhost config files
 
+=== Other
+
+- New admin home page http://<host>:8080/admin
+- `request.locale` in <<framework/http#http-request, Request>>
 
 
 == XP7 Update 15
