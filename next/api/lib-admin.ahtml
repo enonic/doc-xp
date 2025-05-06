@@ -444,6 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#usage">Usage</a></li>
 <li><a href="#functions">Functions</a>
 <ul class="sectlevel2">
+<li><a href="#widgeturl">widgetUrl</a></li>
 <li><a href="#gettoolurl">getToolUrl</a></li>
 <li><a href="#gethometoolurl">getHomeToolUrl</a></li>
 <li><a href="#getinstallation">getInstallation</a></li>
@@ -490,6 +491,65 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="functions"><a class="link" href="#functions">Functions</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="widgeturl"><a class="link" href="#widgeturl">widgetUrl</a></h3>
+<div class="paragraph">
+<p>Returns the URL for a widget.</p>
+</div>
+<div class="paragraph lead">
+<p>Parameters</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 98%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Full application name. (f.ex, 'com.enonic.xp.app.main')</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">widget</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the widget. (f.ex, 'launcher')</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Either <code>server</code> (server-relative URL) or <code>absolute</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">params</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Custom query parameters to append to the url.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph lead">
+<p>Returns</p>
+</div>
+<div class="paragraph">
+<p><strong>string</strong> : URL of the requested admin tool.</p>
+</div>
+</div>
 <div class="sect2">
 <h3 id="gettoolurl"><a class="link" href="#gettoolurl">getToolUrl</a></h3>
 <div class="paragraph">
@@ -617,7 +677,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-06 09:05:22 UTC
+Last updated 2025-05-06 13:59:35 UTC
 </div>
 </div>
 </body>

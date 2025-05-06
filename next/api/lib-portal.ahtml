@@ -616,7 +616,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -750,7 +750,7 @@ const url = assetUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -868,7 +868,7 @@ const url = attachmentUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1443,7 +1443,7 @@ log.info('Field value for the current site config = %s', result.Field);</code></
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1672,7 +1672,7 @@ const url = imagePlaceholder({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1794,7 +1794,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1892,7 +1892,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1987,7 +1987,7 @@ const url = imageUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2293,7 +2293,7 @@ const sanitizedHtml = sanitizeHtml(unsafeHtml);</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2395,7 +2395,7 @@ const url = serviceUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom parameters to append to the url.</p>
+<p>Custom query parameters to append to the URL.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2431,7 +2431,7 @@ const url = buildUrl({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-06 09:05:22 UTC
+Last updated 2025-05-06 13:59:35 UTC
 </div>
 </div>
 </body>

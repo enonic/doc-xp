@@ -477,7 +477,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <dl>
 <dt class="hdlist1">Tools handler</dt>
 <dd>
-<p>Tools are admin apps that extend the launcher menu. A tool&#8217;s endpoint is <code>:8080/admin/tool/&lt;app-name&gt;/&lt;tool-name&gt;</code>. The respective widget controller must be located in your project at <code>src/main/resources/admin/tools/&lt;tool-name&gt;/&lt;tool-name&gt;.js</code>.</p>
+<p>Tools are admin apps that extend the launcher menu. A tool&#8217;s endpoint is <code>:8080/admin/&lt;app-name&gt;/&lt;tool-name&gt;</code>. The respective widget controller must be located in your project at <code>src/main/resources/admin/tools/&lt;tool-name&gt;/&lt;tool-name&gt;.js</code>.</p>
 </dd>
 <dt class="hdlist1">Widget handler</dt>
 <dd>
@@ -490,7 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-06 09:05:22 UTC
+Last updated 2025-05-06 13:59:35 UTC
 </div>
 </div>
 </body>
