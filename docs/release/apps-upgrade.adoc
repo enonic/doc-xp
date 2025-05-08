@@ -286,7 +286,7 @@ TODO: Do we remove assets service?
 
 `getPhrases` method is removed. Use `lib-i18n` `getPhrases` instead.
 
-`getLauncherUrl` and `getLauncherPath` methods are removed. Launcher is a widget now.
+`getLauncherUrl` and `getLauncherPath` methods are removed. Launcher is a widget now and available via widgets API.
 
 === node-lib
 
@@ -347,4 +347,6 @@ Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard
 
 === Others
 
-it is no longer possible to install applications by specifying a url in
+- it is no longer possible to install applications by specifying a url in
+
+- All admin tools are now present on the launcher panel - as it was stated in documentation. There is no more `AdminToolDescriptor.isAppLauncherApplication` API method.
