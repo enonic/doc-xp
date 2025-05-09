@@ -1797,7 +1797,7 @@ ipWhitelist =</code></pre>
 <div class="listingblock">
 <div class="title">Cross site scripting prevention headers</div>
 <div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">headerConfig = set X-Frame-Options: SAMEORIGIN,set X-XSS-Protection: 1; mode=block,set X-Content-Type-Options: nosniff</code></pre>
+<pre class="highlight"><code class="language-properties" data-lang="properties">headerConfig = set X-Frame-Options: SAMEORIGIN,set X-Content-Type-Options: nosniff</code></pre>
 </div>
 </div>
 <div class="dlist">
@@ -1805,7 +1805,7 @@ ipWhitelist =</code></pre>
 <dt class="hdlist1">headerConfig</dt>
 <dd>
 <p>Customizes default HTTP response headers. Accepts the following format: <code>[action] [header name]: [header value](,[action] [header name]: [header value])</code>. Supported header actions are <code>set</code>, <code>add</code>, <code>setDate</code> and <code>addDate</code>.
-Default: <code>set X-Frame-Options: DENY,set X-XSS-Protection: 1; mode=block,set X-Content-Type-Options: nosniff</code></p>
+Default value varies across XP releases and adheres to up-to-date security best practices.</p>
 </dd>
 </dl>
 </div>
@@ -2593,7 +2593,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-08 14:38:00 UTC
+Last updated 2025-05-09 07:19:21 UTC
 </div>
 </div>
 </body>
