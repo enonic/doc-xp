@@ -288,7 +288,7 @@ TODO: Do we remove assets service?
 
 `getLauncherUrl` and `getLauncherPath` methods are removed. Launcher is a widget now and available via widgets API.
 
-=== node-lib
+=== lib-node
 
 `_inheritsPermissions` node property is removed. It can only be used as an argument in `create` method - to copy permissions from the parent node.
 
@@ -298,7 +298,7 @@ TODO: Do we remove assets service?
 
 `editor` of deprecated `modify` method can no longer edit node permissions. Use separate call to `applyPermissions` method instead.
 
-=== content-lib
+=== lib-content
 
 `setPermissions` method is removed. Use `applyPermissions` instead.
 
@@ -312,6 +312,12 @@ TODO: Do we remove assets service?
 
 `localize` method no longer accepts `application` parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail.
 Required localize phrases should be copied over the applications instead.
+
+=== lib-task
+
+`submitNamed` method is removed. Use `submitTask` instead.
+
+`submit` method is removed. Use `executeFunction` instead.
 
 === Javax to Jakarta
 
