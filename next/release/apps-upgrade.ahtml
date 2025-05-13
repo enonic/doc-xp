@@ -460,9 +460,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#http_services">HTTP Services</a></li>
 <li><a href="#assets_service">Assets service</a></li>
 <li><a href="#lib_admin">lib-admin</a></li>
-<li><a href="#node_lib">node-lib</a></li>
-<li><a href="#content_lib">content-lib</a></li>
+<li><a href="#lib_node">lib-node</a></li>
+<li><a href="#lib_content">lib-content</a></li>
 <li><a href="#lib_io">lib-io</a></li>
+<li><a href="#lib_task">lib-task</a></li>
 <li><a href="#javax_to_jakarta">Javax to Jakarta</a></li>
 <li><a href="#fasterxml_jackson_json_api">FasterXML Jackson JSON API</a></li>
 <li><a href="#jax_rs_api">JAX-RS API</a></li>
@@ -901,7 +902,7 @@ Use <code>lib-asset</code> instead.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="node_lib"><a class="link" href="#node_lib">node-lib</a></h3>
+<h3 id="lib_node"><a class="link" href="#lib_node">lib-node</a></h3>
 <div class="paragraph">
 <p><code>_inheritsPermissions</code> node property is removed. It can only be used as an argument in <code>create</code> method - to copy permissions from the parent node.</p>
 </div>
@@ -916,7 +917,7 @@ Use <code>lib-asset</code> instead.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="content_lib"><a class="link" href="#content_lib">content-lib</a></h3>
+<h3 id="lib_content"><a class="link" href="#lib_content">lib-content</a></h3>
 <div class="paragraph">
 <p><code>setPermissions</code> method is removed. Use <code>applyPermissions</code> instead.</p>
 </div>
@@ -935,6 +936,15 @@ Use <code>lib-asset</code> instead.</p>
 <div class="paragraph">
 <p><code>localize</code> method no longer accepts <code>application</code> parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail.
 Required localize phrases should be copied over the applications instead.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lib_task"><a class="link" href="#lib_task">lib-task</a></h3>
+<div class="paragraph">
+<p><code>submitNamed</code> method is removed. Use <code>submitTask</code> instead.</p>
+</div>
+<div class="paragraph">
+<p><code>submit</code> method is removed. Use <code>executeFunction</code> instead.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1008,7 +1018,7 @@ Most noticeable ones are:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-09 07:19:46 UTC
+Last updated 2025-05-13 14:17:59 UTC
 </div>
 </div>
 </body>
