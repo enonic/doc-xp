@@ -1,0 +1,78 @@
+= Universal API WIP
+
+Universal API is designed to substitute <<http-service#,HTTP Service>>
+Like HTTP Service Universal API enables mounting of <<../../framework/http#http-controller,http controllers>> safely made available within an application (or site's) URL space, without the use of routers supporting <<site-engine#, Site engine>> or <<webapp-engine#, Webapp engine>> needs access to dynamic data, like REST API, GraphQL API, or other data sources.
+But by comparison to HTTP Service, Universal API is more flexible and powerful:
+
+
+== Controller
+
+To create an API, place an http controller file in the `src/main/resources/apis/` structure of your project.
+Each controller needs to be placed in a folder matching its name i.e.: `src/main/resources/api/myapi/myapi.js`
+
+Example service controller
+
+.src/main/resources/apis/<api-name>/<api-name>.js
+[source,JavaScript]
+----
+exports.get = function(req) {
+  return {
+    body: {
+      time: new Date()
+    },
+    contentType: 'application/json'
+  };
+
+};
+----
+
+== Endpoint
+
+API mount is context-aware
+Unlike HTTP Service, API cannot be accessed on any path depth.
+
+- Generic API endpoint `+/api/<api-name>/+`
+- For `site` engine: `+(/admin)/site/<site-path>/_/<api-name>/+`
+- For `webapp` engine: `+(/webapp/<webapp-name>/_/<api-name>/+`
+- For `admin` engine: `+/admin/_/<api-name>/+`
+
+Moreover - engine descriptors need to specify the available API names in the `api` element, except for Generic API endpoint where API is available by default.
+In order to disable the API endpoint, `mount=false` should be set in the descriptor.
+
+[source,xml]
+----
+<api mount="true">
+  <name>myapi</name>
+  <description>My API</description>
+  <allow>
+    <principal>role:system.admin</principal>
+    <principal>role:myapp.myrole</principal>
+  </allow>
+</allow>
+----
+
+== Descriptor
+
+By default, services may by used by any client or user.
+At times, it makes sense to restrict access to the service based on user roles.
+This can be done without custom coding.
+
+Sample descriptor limiting access to the service:
+
+.src/main/resouces/apis/<api-name>/<api-name>.xml
+[source,xml]
+----
+<api>
+  <allow>
+    <principal>role:system.admin</principal>
+    <principal>role:myapp.myrole</principal>
+  </allow>
+</api>
+----
+
+
+== apiUrl()
+
+To safely generate an API URL, use the `apiUrl()` function that is part of the <<../../api/lib-portal#,Portal Library>>.
+
+NOTE: When invoked, the function will generate a contextual service url based on the context of the current controller.
