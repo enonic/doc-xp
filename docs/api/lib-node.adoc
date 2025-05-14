@@ -348,7 +348,7 @@ An object with the following keys and their values:
 | _indexConfig | object | <optional> | How the document should be <<../storage/indexing#,indexed>>. A default template value
 "<<../storage/indexing#byType,byType>>" will be set if no value specified.
 | _permissions | object | <optional> | The access control list for the node. By default the creator will have full access
-| _inheritsPermissions | boolean | <optional> | `true` if the permissions should be inherited from the node parent. Default is `false`.
+| _inheritsPermissions | boolean | <optional> |  Set to `true` if the permissions should be inherited from the node parent. This is a meta-property and is not persisted. Default is `false`.
 | _manualOrderValue | number | <optional> | Value used to order document when ordering by parent and child-order is set to manual
 | _childOrder | string | <optional> | Default ordering of children when doing getChildren if no order is given in query
 |===
