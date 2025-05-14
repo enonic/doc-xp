@@ -1047,7 +1047,7 @@ skip the <code>name</code> parameter and specify a <code>displayName</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p> <code>true</code> if the permissions should be inherited from the node parent. Default is <code>false</code>.</p>
+<p>  Set to <code>true</code> if the permissions should be inherited from the node parent. This is a meta-property and is not persisted. Default is <code>false</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3029,7 +3029,7 @@ const result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-14 12:53:41 UTC
+Last updated 2025-05-14 15:03:41 UTC
 </div>
 </div>
 </body>
