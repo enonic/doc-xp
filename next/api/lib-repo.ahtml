@@ -457,9 +457,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#objects">Objects</a>
 <ul class="sectlevel2">
 <li><a href="#createrepositoryparams">CreateRepositoryParams</a></li>
-<li><a href="#repositorysettings">RepositorySettings</a></li>
-<li><a href="#indexdefinitions">IndexDefinitions</a></li>
-<li><a href="#indexdefinition">IndexDefinition</a></li>
 <li><a href="#createbranchparams">CreateBranchParams</a></li>
 <li><a href="#deletebranchparams">DeleteBranchParams</a></li>
 <li><a href="#refreshparams">RefreshParams</a></li>
@@ -638,8 +635,7 @@ const expected1 = {
     id: "test-repo",
     branches: [
         "master"
-    ],
-    settings: {}
+    ]
 };</code></pre>
 </div>
 </div>
@@ -882,8 +878,7 @@ const expected = {
     id: "test-repo",
     branches: [
         "master"
-    ],
-    settings: {}
+    ]
 };</code></pre>
 </div>
 </div>
@@ -919,13 +914,11 @@ const expected = [{
     branches: [
         "master"
     ],
-    settings: {}
 }, {
     id: "another-repo",
     branches: [
         "master"
-    ],
-    settings: {}
+    ]
 }];</code></pre>
 </div>
 </div>
@@ -1037,145 +1030,11 @@ refresh({
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">settings</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#repositorysettings">RepositorySettings</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Repository settings</p>
-</div></div></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">transient</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>If true, the repository will be transient</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="repositorysettings"><a class="link" href="#repositorysettings">RepositorySettings</a></h3>
-<div class="paragraph">
-<p>Repository settings to optionally pass to the <code>create</code> function</p>
-</div>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 97.03%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Attributes</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">definitions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#indexdefinitions">IndexDefinitions</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Index definitions</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="indexdefinitions"><a class="link" href="#indexdefinitions">IndexDefinitions</a></h3>
-<div class="paragraph">
-<p>Index definitions used in <a href="#repositorysettings">RepositorySettings</a> parameter</p>
-</div>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 97.03%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Attributes</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#indexdefinition">IndexDefinition</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Search index definition</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#indexdefinition">IndexDefinition</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Version index definition</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">branch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#indexdefinition">IndexDefinition</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Branch indexes definition</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="indexdefinition"><a class="link" href="#indexdefinition">IndexDefinition</a></h3>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 0.99%;">
-<col style="width: 97.03%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Attributes</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">settings</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Index definition settings</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">mapping</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Index definition settings</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1320,7 +1179,7 @@ refresh({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-14 15:03:41 UTC
+Last updated 2025-05-21 12:19:17 UTC
 </div>
 </div>
 </body>

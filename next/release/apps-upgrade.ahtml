@@ -462,12 +462,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#lib_admin">lib-admin</a></li>
 <li><a href="#lib_node">lib-node</a></li>
 <li><a href="#lib_content">lib-content</a></li>
-<li><a href="#lib_io">lib-io</a></li>
+<li><a href="#lib_i18n">lib-i18n</a></li>
+<li><a href="#lib_repo">lib-repo</a></li>
 <li><a href="#lib_task">lib-task</a></li>
 <li><a href="#javax_to_jakarta">Javax to Jakarta</a></li>
 <li><a href="#fasterxml_jackson_json_api">FasterXML Jackson JSON API</a></li>
 <li><a href="#jax_rs_api">JAX-RS API</a></li>
 <li><a href="#dropwizard_metrics">Dropwizard Metrics</a></li>
+<li><a href="#java_apis">Java APIs</a></li>
 <li><a href="#others">Others</a></li>
 </ul>
 </li>
@@ -524,7 +526,7 @@ This section is only relevant when upgrading from XP7 to XP8.
 </div>
 </div>
 <div class="paragraph">
-<p>When the command has completed successfully, the sandbox will be associated with your project.
+<p>When the command is completed successfully, the sandbox will be associated with your project.
 This enables us to build, deploy and test the application.</p>
 </div>
 <div class="admonitionblock tip">
@@ -574,7 +576,7 @@ We recommend bundling Gradle wrapper of version 8.14 or later in your project.</
 <p>This will install or update your project with a new Gradle wrapper.</p>
 </div>
 <div class="paragraph">
-<p>Please, refer to Grade documentation for more details <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:upgrading_wrapper" class="bare">https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:upgrading_wrapper</a></p>
+<p>Please refer to Grade documentation for more details <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:upgrading_wrapper" class="bare">https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:upgrading_wrapper</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -582,7 +584,7 @@ We recommend bundling Gradle wrapper of version 8.14 or later in your project.</
 <div class="sect3">
 <h4 id="application_upgrade"><a class="link" href="#application_upgrade">Application upgrade</a></h4>
 <div class="paragraph">
-<p>If you are upgrading <strong>an application</strong>, you need to use version greater or equal to '3.6.1' of the XP Gradle plugin (<em>com.enonic.xp.app</em>).</p>
+<p>If you are upgrading <strong>an application</strong>, you need to use a version greater or equal to '3.6.1' of the XP Gradle plugin (<em>com.enonic.xp.app</em>).</p>
 </div>
 <div class="paragraph">
 <p>This plugin expects application properties to be defined in the <code>app {}</code> section of <em>build.gradle</em>
@@ -717,7 +719,7 @@ version=1.0.0-SNAPSHOT</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This command proxies the gradle wrapper, but also connects with the project sandbox.
+<p>This command proxies the Gradle wrapper, but also connects with the project sandbox.
 You may also use <code>enonic project build</code> to build without deploying</p>
 </div>
 <div class="admonitionblock note">
@@ -800,7 +802,7 @@ test {
 <div class="sect2">
 <h3 id="http_services"><a class="link" href="#http_services">HTTP Services</a></h3>
 <div class="paragraph">
-<p>HTTP Services are deprecated. APIs should be used instead.</p>
+<p>HTTP Services are deprecated. Universal API should be used instead.</p>
 </div>
 <div class="listingblock">
 <div class="title">Old services</div>
@@ -853,7 +855,7 @@ test {
 </div>
 </div>
 <div class="paragraph">
-<p>In order for API to work on admin tool, site or webapp it must be mounted via the descriptor.</p>
+<p>In order for API to work on admin tool, site or webapp, it must be mounted via the descriptor.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example of mounting "coolservice" API in an admin tool</div>
@@ -900,6 +902,30 @@ Use <code>lib-asset</code> instead.</p>
 <div class="paragraph">
 <p><code>getLauncherUrl</code> and <code>getLauncherPath</code> methods are removed. Launcher is a widget now and available via widgets API.</p>
 </div>
+<div class="paragraph">
+<p><code>lib-admin</code> no longer depends on <code>lib-portal</code>. You need to explicitly add <code>lib-portal</code> dependency to your project if you are using it.</p>
+</div>
+<div class="paragraph">
+<p>XP 7</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    include "com.enonic.xp:lib-admin:${xpVersion}"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>XP 8</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    include "com.enonic.xp:lib-admin:${xpVersion}"
+    include "com.enonic.xp:lib-portal:${xpVersion}"
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="lib_node"><a class="link" href="#lib_node">lib-node</a></h3>
@@ -922,6 +948,9 @@ Use <code>lib-asset</code> instead.</p>
 <p><code>setPermissions</code> method is removed. Use <code>applyPermissions</code> instead.</p>
 </div>
 <div class="paragraph">
+<p><code>applyPermissions</code> method applies permissions on published and draft content simply.</p>
+</div>
+<div class="paragraph">
 <p><code>editor</code> of deprecated <code>modify</code> method can no longer edit content permissions. Use separate call to <code>applyPermissions</code> method instead.</p>
 </div>
 <div class="paragraph">
@@ -932,10 +961,15 @@ Use <code>lib-asset</code> instead.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="lib_io"><a class="link" href="#lib_io">lib-io</a></h3>
+<h3 id="lib_i18n"><a class="link" href="#lib_i18n">lib-i18n</a></h3>
 <div class="paragraph">
-<p><code>localize</code> method no longer accepts <code>application</code> parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail.
-Required localize phrases should be copied over the applications instead.</p>
+<p><code>localize</code> method no longer accepts <code>application</code> parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lib_repo"><a class="link" href="#lib_repo">lib-repo</a></h3>
+<div class="paragraph">
+<p><code>create</code> method <code>settings</code> param is removed. This was a direct exposure of internal implementation details.</p>
 </div>
 </div>
 <div class="sect2">
@@ -963,11 +997,14 @@ Most noticeable ones are:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Jetty was updated to version 12.x and now uses Jakarta EE APIs.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="fasterxml_jackson_json_api"><a class="link" href="#fasterxml_jackson_json_api">FasterXML Jackson JSON API</a></h3>
 <div class="paragraph">
-<p>Java FasterXML Jackson JSON API is no longer transitive dependency of XP Core API.</p>
+<p>Java FasterXML Jackson JSON API is no longer a transitive dependency of XP Core API.</p>
 </div>
 <div class="paragraph">
 <p>If you need to serialize or deserialize JSON in Java, you need to add the dependency to your project, preferably using a library different from XP internal one (FasterXML Jackson) to avoid conflicts.</p>
@@ -982,13 +1019,13 @@ Most noticeable ones are:</p>
 <div class="sect2">
 <h3 id="jax_rs_api"><a class="link" href="#jax_rs_api">JAX-RS API</a></h3>
 <div class="paragraph">
-<p>Java JAX-RS API is deprecated. It was not documented, and used internally to implement REST APIs.</p>
+<p>Java JAX-RS API is deprecated. It was not documented and used internally to implement legacy REST APIs.</p>
 </div>
 <div class="paragraph">
-<p>If you have used JAX-RS API in your application, you need to migrate to the new XP8 Universal API.</p>
+<p>If you have used JAX-RS API in your application, you need to migrate to the new XP 8 Universal API.</p>
 </div>
 <div class="paragraph">
-<p>To know if you are using JAX-RS API, check for <code>com.enonic.xp:jaxrs-api</code> dependency in the project&#8217;s gradle file.</p>
+<p>To know if you are using JAX-RS API, check for <code>com.enonic.xp:jaxrs-api</code> dependency in the project&#8217;s Gradle file.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1001,14 +1038,36 @@ Most noticeable ones are:</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="java_apis"><a class="link" href="#java_apis">Java APIs</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Java Portal View Functions are no longer part of XP Core API. They were incorporated into lib-thymeleaf and lib-xslt libraries.</p>
+</li>
+<li>
+<p>Java methods and classes marked as <code>@Deprecated</code> were removed.</p>
+</li>
+<li>
+<p>Concrete collection types like <code>LinkedList</code>, <code>HashMap</code>, etc. were replaced with corresponding interfaces like <code>List</code>, <code>Map</code>, etc.</p>
+</li>
+<li>
+<p><code>ContentService.deleteWithoutFetch</code> was renamed to <code>ContentService.delete</code> for consistency with other methods.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="others"><a class="link" href="#others">Others</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>it is no longer possible to install applications by specifying a url in</p>
+<p>It is no longer possible to via <code>com.enonic.xp.server.deploy.cfg</code> file. This method was not documented, unreliable in cluster installations and insecure.</p>
 </li>
 <li>
-<p>All admin tools are now present on the launcher panel - as it was stated in documentation. There is no more <code>AdminToolDescriptor.isAppLauncherApplication</code> API method.</p>
+<p>All admin tools are now present on the launcher panel as it was stated in documentation. There is no more <code>AdminToolDescriptor.isAppLauncherApplication</code> API method.</p>
+</li>
+<li>
+<p>Default Admin Home path is now <code>/admin</code> instead of <code>/admin/home</code>.</p>
 </li>
 </ul>
 </div>
@@ -1018,7 +1077,7 @@ Most noticeable ones are:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-14 15:03:41 UTC
+Last updated 2025-05-21 12:19:17 UTC
 </div>
 </div>
 </body>
