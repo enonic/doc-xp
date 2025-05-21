@@ -19,7 +19,7 @@ To create the sandbox, go to your project folder and run the following command:
 
   enonic project sandbox
 
-When the command has completed successfully, the sandbox will be associated with your project.
+When the command is completed successfully, the sandbox will be associated with your project.
 This enables us to build, deploy and test the application.
 
 [TIP]
@@ -46,13 +46,13 @@ For simple installations, from your project root, run:
 
 This will install or update your project with a new Gradle wrapper.
 
-Please, refer to Grade documentation for more details https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:upgrading_wrapper
+Please refer to Grade documentation for more details https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:upgrading_wrapper
 
 === XP Gradle plugins
 
 ==== Application upgrade
 
-If you are upgrading *an application*, you need to use version greater or equal to '3.6.1' of the XP Gradle plugin (_com.enonic.xp.app_).
+If you are upgrading *an application*, you need to use a version greater or equal to '3.6.1' of the XP Gradle plugin (_com.enonic.xp.app_).
 
 
 This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
@@ -150,7 +150,7 @@ After completing the steps above, you should now be able to test that your build
 
   enonic project deploy
 
-This command proxies the gradle wrapper, but also connects with the project sandbox.
+This command proxies the Gradle wrapper, but also connects with the project sandbox.
 You may also use `enonic project build` to build without deploying
 
 NOTE: Projects containing Java code might get build errors at this point, otherwise the build should complete successfully.
@@ -199,7 +199,7 @@ Junit 4 is not supported in XP 8.0.0
 
 === HTTP Services
 
-HTTP Services are deprecated. APIs should be used instead.
+HTTP Services are deprecated. Universal API should be used instead.
 
 .Old services
 [source,files]
@@ -251,7 +251,7 @@ src/
 </api>
 ----
 
-In order for API to work on admin tool, site or webapp it must be mounted via the descriptor.
+In order for API to work on admin tool, site or webapp, it must be mounted via the descriptor.
 
 .Example of mounting "coolservice" API in an admin tool
 [source,xml]
@@ -288,6 +288,21 @@ TODO: Do we remove assets service?
 
 `getLauncherUrl` and `getLauncherPath` methods are removed. Launcher is a widget now and available via widgets API.
 
+`lib-admin` no longer depends on `lib-portal`. You need to explicitly add `lib-portal` dependency to your project if you are using it.
+
+XP 7
+[source,groovy]
+dependencies {
+    include "com.enonic.xp:lib-admin:${xpVersion}"
+}
+
+XP 8
+[source,groovy]
+dependencies {
+    include "com.enonic.xp:lib-admin:${xpVersion}"
+    include "com.enonic.xp:lib-portal:${xpVersion}"
+}
+
 === lib-node
 
 `_inheritsPermissions` node property is removed. It can only be used as an argument in `create` method - to copy permissions from the parent node.
@@ -302,16 +317,21 @@ TODO: Do we remove assets service?
 
 `setPermissions` method is removed. Use `applyPermissions` instead.
 
+`applyPermissions` method applies permissions on published and draft content simply.
+
 `editor` of deprecated `modify` method can no longer edit content permissions. Use separate call to `applyPermissions` method instead.
 
 `modify` method is deprecated. Use `update` instead.
 
 `modifyMedia` method is deprecated. Use `updateMedia` instead.
 
-=== lib-io
+=== lib-i18n
 
-`localize` method no longer accepts `application` parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail.
-Required localize phrases should be copied over the applications instead.
+`localize` method no longer accepts `application` parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.
+
+=== lib-repo
+
+`create` method `settings` param is removed. This was a direct exposure of internal implementation details.
 
 === lib-task
 
@@ -327,9 +347,11 @@ Most noticeable ones are:
 - `javax.servlet` to `jakarta.servlet`
 - `javax.mail` to `jakarta.mail`
 
+Jetty was updated to version 12.x and now uses Jakarta EE APIs.
+
 === FasterXML Jackson JSON API
 
-Java FasterXML Jackson JSON API is no longer transitive dependency of XP Core API.
+Java FasterXML Jackson JSON API is no longer a transitive dependency of XP Core API.
 
 If you need to serialize or deserialize JSON in Java, you need to add the dependency to your project, preferably using a library different from XP internal one (FasterXML Jackson) to avoid conflicts.
 
@@ -339,11 +361,11 @@ FasterXML Jackson Annotations `com.fasterxml.jackson.core:jackson-annotations` t
 
 === JAX-RS API
 
-Java JAX-RS API is deprecated. It was not documented, and used internally to implement REST APIs.
+Java JAX-RS API is deprecated. It was not documented and used internally to implement legacy REST APIs.
 
-If you have used JAX-RS API in your application, you need to migrate to the new XP8 Universal API.
+If you have used JAX-RS API in your application, you need to migrate to the new XP 8 Universal API.
 
-To know if you are using JAX-RS API, check for `com.enonic.xp:jaxrs-api` dependency in the project's gradle file.
+To know if you are using JAX-RS API, check for `com.enonic.xp:jaxrs-api` dependency in the project's Gradle file.
 
 === Dropwizard Metrics
 
@@ -351,8 +373,22 @@ Java Dropwizard Metrics is no longer available in XP Core API. Migrate to `com.e
 
 Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard Metrics JSON but instead reports metrics in https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md[OpenMetrics] format.
 
+=== Java APIs
+
+- Java Portal View Functions are no longer part of XP Core API. They were incorporated into lib-thymeleaf and lib-xslt libraries.
+
+- Java methods and classes marked as `@Deprecated` were removed.
+
+- Concrete collection types like `LinkedList`, `HashMap`, etc. were replaced with corresponding interfaces like `List`, `Map`, etc.
+
+- `ContentService.deleteWithoutFetch` was renamed to `ContentService.delete` for consistency with other methods.
+
+
 === Others
 
-- it is no longer possible to install applications by specifying a url in
+- It is no longer possible to via `com.enonic.xp.server.deploy.cfg` file. This method was not documented, unreliable in cluster installations and insecure.
 
-- All admin tools are now present on the launcher panel - as it was stated in documentation. There is no more `AdminToolDescriptor.isAppLauncherApplication` API method.
+- All admin tools are now present on the launcher panel as it was stated in documentation. There is no more `AdminToolDescriptor.isAppLauncherApplication` API method.
+
+- Default Admin Home path is now `/admin` instead of `/admin/home`.
+

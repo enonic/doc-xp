@@ -124,8 +124,7 @@ const expected1 = {
     id: "test-repo",
     branches: [
         "master"
-    ],
-    settings: {}
+    ]
 };
 ----
 
@@ -296,8 +295,7 @@ const expected = {
     id: "test-repo",
     branches: [
         "master"
-    ],
-    settings: {}
+    ]
 };
 ----
 
@@ -330,13 +328,11 @@ const expected = [{
     branches: [
         "master"
     ],
-    settings: {}
 }, {
     id: "another-repo",
     branches: [
         "master"
-    ],
-    settings: {}
+    ]
 }];
 ----
 
@@ -397,54 +393,7 @@ Fields
 | Name | Type | Attributes| Details
 | id | string | | Repository ID
 | rootPermissions | array | <optional> |Array of root permissions. By default, all permissions to 'system.admin' and read permission to 'system.authenticated'
-| settings | <<RepositorySettings>> | <optional> | Repository settings
 | transient | boolean | <optional> | If true, the repository will be transient
-|===
-
-=== RepositorySettings
-
-Repository settings to optionally pass to the `create` function
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Details
-| definitions | <<IndexDefinitions>> | <optional> | Index definitions
-|===
-
-=== IndexDefinitions
-
-Index definitions used in <<RepositorySettings>> parameter
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Details
-| search | <<IndexDefinition>> | <optional> | Search index definition
-| version | <<IndexDefinition>> | <optional> | Version index definition
-| branch | <<IndexDefinition>> | <optional> | Branch indexes definition
-|===
-
-=== IndexDefinition
-
-[.lead]
-Fields
-
-[%header,cols="1%,1%,1%,98%a"]
-[frame="none"]
-[grid="none"]
-|===
-| Name | Type | Attributes| Description
-| settings | object | <optional> | Index definition settings
-| mapping | object | <optional> | Index definition settings
 |===
 
 === CreateBranchParams
