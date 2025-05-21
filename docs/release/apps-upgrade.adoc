@@ -341,11 +341,7 @@ dependencies {
 
 === Javax to Jakarta
 
-Most of the Java EE APIs have been migrated to Jakarta EE APIs.
-Most noticeable ones are:
-
-- `javax.servlet` to `jakarta.servlet`
-- `javax.mail` to `jakarta.mail`
+Most of the Java EE APIs have been migrated to Jakarta EE APIs. For instance `javax.servlet` is replaced with `jakarta.servlet`.
 
 Jetty was updated to version 12.x and now uses Jakarta EE APIs.
 
@@ -383,6 +379,7 @@ Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard
 
 - `ContentService.deleteWithoutFetch` was renamed to `ContentService.delete` for consistency with other methods.
 
+- Javax Mail is no longer a transitive dependency of XP Core API.
 
 === Others
 
