@@ -2,6 +2,13 @@
 :toc: right
 :imagesdir: media
 
+====
+HTTP Service is deprecated and will be removed in a future releases.
+
+Universal API is designed to substitute <<api-service#,Universal API>>.
+====
+
+
 HTTP Service enable mouting of <<../../framework/http#http-controller,http controllers>> safely made available within an application (or site's) url space, without the use of routers.
 Due to the URL-pattern created, an http service will never conflict with other application url patterns. 
 Services are in particular useful when used in the <<site-engine#, Site engine>> or webapps where URLs are not predictable.

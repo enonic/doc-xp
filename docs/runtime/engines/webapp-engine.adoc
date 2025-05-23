@@ -17,13 +17,13 @@ Web app controller:: Invokes the webapp controller of the contextual application
 
 == webapp.js
 
-To turn your application into a webapp, simply place an HTTP controller called ``/src/main/resources/webapp/webapp.js`` into your project.
+To turn your application into a webapp, simply place an HTTP controller called `+/src/main/resources/webapp/webapp.js+` into your project.
 
 When the application is deployed, the controller will be accessible from
 
-``<server>:<port>/webapp/<app-name>/`` (i.e. "localhost:8080/webapp/my.webapp/").
+`+<server>:<port>/webapp/<app-name>/+` (i.e. "localhost:8080/webapp/my.webapp/").
 
-``webapp.js`` now acts as an <<../../framework/http#http-controller,HTTP controller>> and may expose a function for each HTTP method that should be handled: i.e.
+`+webapp.js+` now acts as an <<../../framework/http#http-controller,HTTP controller>> and may expose a function for each HTTP method that should be handled: i.e.
 GET, POST, etc.
 
 Below is an example webapp controller.

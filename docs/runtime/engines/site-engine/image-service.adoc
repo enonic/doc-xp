@@ -3,7 +3,7 @@
 :toclevels: 2
 :imagesdir: media
 
-The image service enables real-time processing and delivery of rasterized RGB/RGBa image media via the `:8080/site/<repo>/<branch>/<path-to-page>/_/image/` endpoint
+The image service enables real-time processing and delivery of rasterized RGB/RGBa image media via the `:8080/site/<repo>/<branch>/<path-to-page>/_/media:image/` endpoint
 
 The image services are usually only used from one of our APIs: +
 <<../../../api/lib-portal#imageurl, Portal API, imageUrl>> +
@@ -14,7 +14,7 @@ https://developer.enonic.com/docs/guillotine/stable/usage#accessing_images[Guill
 An image URL consists of the following components:
 
 . Endpoint, followed by a forward slash. +
-  Format: `:8080/site/<repo>/<branch>/<path-to-page>/_/image/` +
+  Format: `:8080/site/<repo>/<branch>/<path-to-page>/_/media:image/` +
   On a live site behind virtualhost, everything before the path is typically hidden.
 . Content key, followed by a colon. +
   Example: `c82262a6-77d6-4276-b0e7-fe82f4eb57b8:`
@@ -37,7 +37,7 @@ WARNING: Content with MIME type `image/gif` and `image/svg+xml` returned as-is w
 
 Example of an image URL on the root of a live site behind virtualhost:
 ----
-/_/image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.png.jpg?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29
+/_/media:image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.png.jpg?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29
 ----
 
 == Scaling methods

@@ -45,7 +45,7 @@ Mappings are defined in the <<../cms/sites#site_xml, site descriptor>>. Examples
 <3> *<pattern>* specifies a regular expression based site contextual URL <<Patterns>>. Default is `/.*`
 <4> *<match>* a property condition to evaluate <<Matches>> for the contextual content.
 <5> *@filter* defines the path to the <<../framework/filters#, HTTP filter>>
-<6> *@service* specifies a system service which will be handled by the filter i.e. (`.../_/image/...` endpoint).
+<6> *@service* specifies a system service which will be handled by the filter i.e. (`.../_/media:image/...` endpoint).
 
 NOTE: Each mapping may exclusively specify a filter OR a controller, and it must define at least one pattern or match setting.
 
@@ -140,5 +140,5 @@ Allows to filter or redirect to a controller rendering of contextual page compon
 
 * `<service>image</service>`
 
-Allows to filter or redirect to a controller rendering of images on URLs like `<host>:<port>/site/<repo>/<branch>/<path-to-content>/_/image/<image-path>`
+Allows to filter or redirect to a controller rendering of images on URLs like `<host>:<port>/site/<repo>/<branch>/<path-to-content>/_/media:image/<image-path>`
 

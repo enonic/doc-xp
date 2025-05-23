@@ -1,8 +1,6 @@
 = Universal API WIP
 
-Universal API is designed to substitute <<http-service#,HTTP Service>>
-Like HTTP Service Universal API enables mounting of <<../../framework/http#http-controller,http controllers>> safely made available within an application (or site's) URL space, without the use of routers supporting <<site-engine#, Site engine>> or <<webapp-engine#, Webapp engine>> needs access to dynamic data, like REST API, GraphQL API, or other data sources.
-But by comparison to HTTP Service, Universal API is more flexible and powerful:
+Universal API is enables mounting of <<../../framework/http#http-controller,http controllers>> safely made available on `/api` enpdoint as well as within an application (or site's) URL space, without the use of routers. It supports Headless approach or <<site-engine#, Site engine>>, <<webapp-engine#, Webapp engine>> and <<admin-engine#,Admin engine>> needs to access dynamic data, like REST API, GraphQL API, or other data sources.
 
 
 == Controller
@@ -20,56 +18,68 @@ exports.get = function(req) {
     body: {
       time: new Date()
     },
-    contentType: 'application/json'
+    contentType: 'application/json; charset=utf-8'
   };
-
 };
 ----
 
-== Endpoint
-
-API mount is context-aware
-Unlike HTTP Service, API cannot be accessed on any path depth.
-
-- Generic API endpoint `+/api/<api-name>/+`
-- For `site` engine: `+(/admin)/site/<site-path>/_/<api-name>/+`
-- For `webapp` engine: `+(/webapp/<webapp-name>/_/<api-name>/+`
-- For `admin` engine: `+/admin/_/<api-name>/+`
-
-Moreover - engine descriptors need to specify the available API names in the `api` element, except for Generic API endpoint where API is available by default.
-In order to disable the API endpoint, `mount=false` should be set in the descriptor.
-
-[source,xml]
-----
-<api mount="true">
-  <name>myapi</name>
-  <description>My API</description>
-  <allow>
-    <principal>role:system.admin</principal>
-    <principal>role:myapp.myrole</principal>
-  </allow>
-</allow>
-----
-
+[#descriptor]
 == Descriptor
 
-By default, services may by used by any client or user.
-At times, it makes sense to restrict access to the service based on user roles.
-This can be done without custom coding.
+API descriptor provides a way to define the API's display name, description, documentation URL, and the roles required to access the API.
 
-Sample descriptor limiting access to the service:
-
-.src/main/resouces/apis/<api-name>/<api-name>.xml
+Example of Full API descriptor:
 [source,xml]
 ----
-<api>
-  <allow>
+<api mount="true"> <--1-->
+  <display-name i18n="displayName">My API</display-name> <--2-->
+  <description  i18n="description">API for My App</description> <--3-->
+  <documentation-url>https://developer.enonic.com/docs/api</documentation-url> <--4-->
+  <allow> <--5-->
     <principal>role:system.admin</principal>
     <principal>role:myapp.myrole</principal>
   </allow>
 </api>
 ----
 
+<1> By default, APIs are mounted on the <<#endpoint,Generic API endpoint>> .
+In order to disable it, `mount="false"` should be set in the descriptor.
++
+<2> *display-name* is the name of the API that will be shown the UI.
+
+<3> *description* is a short description of the API that will be shown in the UI.
+
+<4> *documentation-url* is a link to the API documentation.
+
+<5> By default, APIs may be used by any client or user.
++
+At times, it makes sense to restrict access to the API based on user roles.
+This can be done without custom coding.
++
+
+[#endpoint]
+== Endpoint
+
+API mount is context-aware:
+
+- Generic API endpoint `+/api/<app-name>/<api-name>/+`
+- For `site` engine: `+/site/<site-path>/_/<app-name>/<api-name>/+`
+- For `webapp` engine: `+(/webapp/<app-name>/_/<app-name>/<api-name>/+`
+- For `admin` engine: `+/admin/_/<app-name>/<api-name>/+`
+
+Engine descriptors need to specify the available API names in the `api` element, while Generic API endpoint can be disabled in <<#descriptor, API Descriptor>> itself.
+
+Example site descriptor with mounting of self-contained and external APIs:
+[source,xml]
+----
+<site xmlns="urn:enonic:xp:model:1.0">
+  <apis>
+        <api>ws</api>
+        <api>api-app:graphql</api>
+  </apis>
+  <form/>
+</site>
+----
 
 == apiUrl()
 

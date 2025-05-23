@@ -28,7 +28,7 @@ The site pipeline is executed as a subset of the <<../engines#common_request_pip
 
 image::site-pipeline.svg[Site rendering pipeline, 768px]
 
-This section describes the standard pipeline involved in processing a page request i.e. `:8080/site/<repo>/<branch>/<path-to-page>`.
+This section describes the standard pipeline involved in processing a page request i.e. `:8080/site/<project>/<branch>/<path-to-page>`.
 
 Mappings:: Uses path and content based mappings from site descriptor to trigger filters and controllers
 
@@ -64,6 +64,6 @@ Contributions filter::  For text/html responses, any pageContributions in the re
 
 Response filters:: Any filters registered through a mapping may now execute their final processing before the response is returned from the pipeline.
 
-Image service:: Requests for the _/image/ url pattern activate the <<site-engine/image-service#,image service>>, which will process and return images on demand
+Image service:: Requests for the `_/media:image/` URL pattern activate the <<site-engine/image-service#,image service>>, which will process and return images on demand.
 
 Component service:: Requests for the _/component/ url pattern trigger direct access to the <<site-engine/component-service#,component service>>, enabling direct HTTP request processing on a single component. This is effectively a subset of the site engine itself.
