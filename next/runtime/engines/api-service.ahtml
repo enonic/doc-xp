@@ -442,7 +442,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#controller">Controller</a></li>
-<li><a href="#endpoint">Endpoint</a></li>
 <li><a href="#descriptor">Descriptor</a></li>
 <li><a href="#apiurl">apiUrl()</a></li>
 </ul>
@@ -452,9 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Universal API is designed to substitute <a href="http-service.ahtml">HTTP Service</a>
-Like HTTP Service Universal API enables mounting of <a href="../../framework/http.ahtml#http-controller">http controllers</a> safely made available within an application (or site&#8217;s) URL space, without the use of routers supporting <a href="site-engine.ahtml">Site engine</a> or <a href="webapp-engine.ahtml">Webapp engine</a> needs access to dynamic data, like REST API, GraphQL API, or other data sources.
-But by comparison to HTTP Service, Universal API is more flexible and powerful:</p>
+<p>Universal API is enables mounting of <a href="../../framework/http.ahtml#http-controller">http controllers</a> safely made available on <code>/api</code> enpdoint as well as within an application (or site&#8217;s) URL space, without the use of routers. It supports Headless approach or <a href="site-engine.ahtml">Site engine</a>, <a href="webapp-engine.ahtml">Webapp engine</a> and <a href="admin-engine.ahtml">Admin engine</a> needs to access dynamic data, like REST API, GraphQL API, or other data sources.</p>
 </div>
 </div>
 </div>
@@ -476,51 +473,9 @@ Each controller needs to be placed in a folder matching its name i.e.: <code>src
     body: {
       time: new Date()
     },
-    contentType: 'application/json'
+    contentType: 'application/json; charset=utf-8'
   };
-
 };</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="endpoint"><a class="link" href="#endpoint">Endpoint</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>API mount is context-aware
-Unlike HTTP Service, API cannot be accessed on any path depth.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Generic API endpoint <code>/api/&lt;api-name&gt;/</code></p>
-</li>
-<li>
-<p>For <code>site</code> engine: <code>(/admin)/site/&lt;site-path&gt;/_/&lt;api-name&gt;/</code></p>
-</li>
-<li>
-<p>For <code>webapp</code> engine: <code>(/webapp/&lt;webapp-name&gt;/_/&lt;api-name&gt;/</code></p>
-</li>
-<li>
-<p>For <code>admin</code> engine: <code>/admin/_/&lt;api-name&gt;/</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Moreover - engine descriptors need to specify the available API names in the <code>api</code> element, except for Generic API endpoint where API is available by default.
-In order to disable the API endpoint, <code>mount=false</code> should be set in the descriptor.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;api mount="true"&gt;
-  &lt;name&gt;myapi&lt;/name&gt;
-  &lt;description&gt;My API&lt;/description&gt;
-  &lt;allow&gt;
-    &lt;principal&gt;role:system.admin&lt;/principal&gt;
-    &lt;principal&gt;role:myapp.myrole&lt;/principal&gt;
-  &lt;/allow&gt;
-&lt;/allow&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -529,22 +484,90 @@ In order to disable the API endpoint, <code>mount=false</code> should be set in 
 <h2 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, services may by used by any client or user.
-At times, it makes sense to restrict access to the service based on user roles.
-This can be done without custom coding.</p>
+<p>API descriptor provides a way to define the API&#8217;s display name, description, documentation URL, and the roles required to access the API.</p>
 </div>
 <div class="paragraph">
-<p>Sample descriptor limiting access to the service:</p>
+<p>Example of Full API descriptor:</p>
 </div>
 <div class="listingblock">
-<div class="title">src/main/resouces/apis/&lt;api-name&gt;/&lt;api-name&gt;.xml</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;api&gt;
-  &lt;allow&gt;
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;api mount="true"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;display-name i18n="displayName"&gt;My API&lt;/display-name&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;description  i18n="description"&gt;API for My App&lt;/description&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+  &lt;documentation-url&gt;https://developer.enonic.com/docs/api&lt;/documentation-url&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+  &lt;allow&gt; <i class="conum" data-value="5"></i><b>(5)</b>
     &lt;principal&gt;role:system.admin&lt;/principal&gt;
     &lt;principal&gt;role:myapp.myrole&lt;/principal&gt;
   &lt;/allow&gt;
 &lt;/api&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>By default, APIs are mounted on the <a href="#endpoint">Generic API endpoint</a> .
+In order to disable it, <code>mount="false"</code> should be set in the descriptor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>display-name</strong> is the name of the API that will be shown the UI.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>description</strong> is a short description of the API that will be shown in the UI.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>documentation-url</strong> is a link to the API documentation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>By default, APIs may be used by any client or user.
+<div class="paragraph">
+<p>At times, it makes sense to restrict access to the API based on user roles.
+This can be done without custom coding.</p>
+</div>
+<div id="endpoint" class="paragraph">
+<p>== Endpoint</p>
+</div></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>API mount is context-aware:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Generic API endpoint <code>/api/&lt;app-name&gt;/&lt;api-name&gt;/</code></p>
+</li>
+<li>
+<p>For <code>site</code> engine: <code>/site/&lt;site-path&gt;/_/&lt;app-name&gt;/&lt;api-name&gt;/</code></p>
+</li>
+<li>
+<p>For <code>webapp</code> engine: <code>(/webapp/&lt;app-name&gt;/_/&lt;app-name&gt;/&lt;api-name&gt;/</code></p>
+</li>
+<li>
+<p>For <code>admin</code> engine: <code>/admin/_/&lt;app-name&gt;/&lt;api-name&gt;/</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Engine descriptors need to specify the available API names in the <code>api</code> element, while Generic API endpoint can be disabled in <a href="#descriptor">API Descriptor</a> itself.</p>
+</div>
+<div class="paragraph">
+<p>Example site descriptor with mounting of self-contained and external APIs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;apis&gt;
+        &lt;api&gt;ws&lt;/api&gt;
+        &lt;api&gt;api-app:graphql&lt;/api&gt;
+  &lt;/apis&gt;
+  &lt;form/&gt;
+&lt;/site&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -572,7 +595,7 @@ When invoked, the function will generate a contextual service url based on the c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-21 12:31:35 UTC
+Last updated 2025-05-23 10:01:42 UTC
 </div>
 </div>
 </body>

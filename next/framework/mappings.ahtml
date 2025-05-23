@@ -546,7 +546,7 @@ Mappings are only available when using the <a href="../runtime/engines/site-engi
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><strong>@service</strong> specifies a system service which will be handled by the filter i.e. (<code>&#8230;&#8203;/_/image/&#8230;&#8203;</code> endpoint).</td>
+<td><strong>@service</strong> specifies a system service which will be handled by the filter i.e. (<code>&#8230;&#8203;/_/media:image/&#8230;&#8203;</code> endpoint).</td>
 </tr>
 </table>
 </div>
@@ -759,14 +759,14 @@ Don&#8217;t specify <code>&lt;match&gt;</code> if you need to map controller/fil
 </ul>
 </div>
 <div class="paragraph">
-<p>Allows to filter or redirect to a controller rendering of images on URLs like <code>&lt;host&gt;:&lt;port&gt;/site/&lt;repo&gt;/&lt;branch&gt;/&lt;path-to-content&gt;/_/image/&lt;image-path&gt;</code></p>
+<p>Allows to filter or redirect to a controller rendering of images on URLs like <code>&lt;host&gt;:&lt;port&gt;/site/&lt;repo&gt;/&lt;branch&gt;/&lt;path-to-content&gt;/_/media:image/&lt;image-path&gt;</code></p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-21 12:31:35 UTC
+Last updated 2025-05-23 10:01:42 UTC
 </div>
 </div>
 </body>
