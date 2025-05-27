@@ -32,7 +32,7 @@ exports.get = function(req) {
 [#descriptor]
 == Descriptor
 
-API descriptor is required. It provides a way to define the API's roles, availability on `/api` endpoint as well as display name, description and documentation URL.
+API descriptor is required. It provides a way to define the API's access, availability on `/api` endpoint as well as display name, description and documentation URL.
 
 Example of Full API descriptor:
 [source,xml]
