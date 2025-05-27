@@ -443,6 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#controller">Controller</a></li>
 <li><a href="#descriptor">Descriptor</a></li>
+<li><a href="#endpoint">Endpoint</a></li>
 <li><a href="#apiurl">apiUrl()</a></li>
 </ul>
 </div>
@@ -491,7 +492,8 @@ Each controller needs to be placed in a folder matching its name i.e.: <code>src
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;api mount="true"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;api&gt;
+  &lt;mount&gt;true&lt;/mount&gt; <i class="conum" data-value="1"></i><b>(1)</b>
   &lt;display-name i18n="displayName"&gt;My API&lt;/display-name&gt; <i class="conum" data-value="2"></i><b>(2)</b>
   &lt;description  i18n="description"&gt;API for My App&lt;/description&gt; <i class="conum" data-value="3"></i><b>(3)</b>
   &lt;documentation-url&gt;https://developer.enonic.com/docs/api&lt;/documentation-url&gt; <i class="conum" data-value="4"></i><b>(4)</b>
@@ -507,7 +509,7 @@ Each controller needs to be placed in a folder matching its name i.e.: <code>src
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>By default, APIs are not mounted on the <a href="#endpoint">Generic API endpoint</a>.
-To enable it, <code>mount="true"</code> should be set in the descriptor.</td>
+To enable it, <code>&lt;mount&gt;true&lt;/mount&gt;</code> should be set in the descriptor.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -523,17 +525,15 @@ To enable it, <code>mount="true"</code> should be set in the descriptor.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>By default, APIs may be used by any client or user.
-<div class="paragraph">
-<p>At times, it makes sense to restrict access to the API based on user roles.
-This can be done without custom coding.</p>
-</div>
-<div id="endpoint" class="paragraph">
-<p>== Endpoint</p>
-</div></td>
+<td>APIs must be protected by roles.</td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="endpoint"><a class="link" href="#endpoint">Endpoint</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>API mount is context-aware:</p>
 </div>
@@ -595,7 +595,7 @@ When invoked, the function will generate a contextual service url based on the c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-27 14:00:54 UTC
+Last updated 2025-05-27 15:03:46 UTC
 </div>
 </div>
 </body>
