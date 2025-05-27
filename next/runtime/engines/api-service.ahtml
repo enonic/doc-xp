@@ -454,6 +454,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Universal API enables mounting of <a href="../../framework/http.ahtml#http-controller">http controllers</a> safely made available on <code>/api</code> enpdoint as well as within an application (or site&#8217;s) URL space, without the use of routers. It supports Headless approach or <a href="site-engine.ahtml">Site engine</a>, <a href="webapp-engine.ahtml">Webapp engine</a> and <a href="admin-engine.ahtml">Admin engine</a> needs to access dynamic data, like REST API, GraphQL API, or other data sources.</p>
 </div>
+<div class="paragraph">
+<p>API Engine is made with security in mind:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It is not mounted anywhere by default, so you don&#8217;t need to worry about accidental exposure of an admin API on a site.</p>
+</li>
+<li>
+<p>Mounting of API is granular and must be explicitly specified in engine descriptor files. If API is desined for a webapp, it will not be automatically mounted on a site.</p>
+</li>
+<li>
+<p>There is a singular mounting location of an API - to avoid cache pollution and allow strict control of URL patterns in WAF.</p>
+</li>
+<li>
+<p>It requires to specify principals granted access to an API. Developers need to think about API access rights in advance.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -485,7 +504,7 @@ Each controller needs to be placed in a folder matching its name i.e.: <code>src
 <h2 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>API descriptor provides a way to define the API&#8217;s display name, description, documentation URL, and the roles required to access the API.</p>
+<p>API descriptor is required. It provides a way to define the API&#8217;s roles, availability on <code>/api</code> endpoint as well as display name, description and documentation URL.</p>
 </div>
 <div class="paragraph">
 <p>Example of Full API descriptor:</p>
@@ -494,8 +513,8 @@ Each controller needs to be placed in a folder matching its name i.e.: <code>src
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;api&gt;
   &lt;mount&gt;true&lt;/mount&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;display-name i18n="displayName"&gt;My API&lt;/display-name&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;description  i18n="description"&gt;API for My App&lt;/description&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+  &lt;display-name&gt;My API&lt;/display-name&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;description&gt;API for My App&lt;/description&gt; <i class="conum" data-value="3"></i><b>(3)</b>
   &lt;documentation-url&gt;https://developer.enonic.com/docs/api&lt;/documentation-url&gt; <i class="conum" data-value="4"></i><b>(4)</b>
   &lt;allow&gt; <i class="conum" data-value="5"></i><b>(5)</b>
     &lt;principal&gt;role:system.admin&lt;/principal&gt;
@@ -521,11 +540,11 @@ To enable it, <code>&lt;mount&gt;true&lt;/mount&gt;</code> should be set in the 
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>documentation-url</strong> is a link to the API documentation.</td>
+<td><strong>documentation-url</strong> is a link to the API documentation that will be shown in the UI.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>APIs must be protected by roles.</td>
+<td>APIs must list principles that have access to it. It is required to specify at least one principal. Use <code>role:system.everyone</code> to make API public.</td>
 </tr>
 </table>
 </div>
@@ -595,7 +614,7 @@ When invoked, the function will generate a contextual service url based on the c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-27 15:03:46 UTC
+Last updated 2025-05-27 17:49:02 UTC
 </div>
 </div>
 </body>
