@@ -451,7 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Universal API is enables mounting of <a href="../../framework/http.ahtml#http-controller">http controllers</a> safely made available on <code>/api</code> enpdoint as well as within an application (or site&#8217;s) URL space, without the use of routers. It supports Headless approach or <a href="site-engine.ahtml">Site engine</a>, <a href="webapp-engine.ahtml">Webapp engine</a> and <a href="admin-engine.ahtml">Admin engine</a> needs to access dynamic data, like REST API, GraphQL API, or other data sources.</p>
+<p>Universal API enables mounting of <a href="../../framework/http.ahtml#http-controller">http controllers</a> safely made available on <code>/api</code> enpdoint as well as within an application (or site&#8217;s) URL space, without the use of routers. It supports Headless approach or <a href="site-engine.ahtml">Site engine</a>, <a href="webapp-engine.ahtml">Webapp engine</a> and <a href="admin-engine.ahtml">Admin engine</a> needs to access dynamic data, like REST API, GraphQL API, or other data sources.</p>
 </div>
 </div>
 </div>
@@ -506,12 +506,12 @@ Each controller needs to be placed in a folder matching its name i.e.: <code>src
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>By default, APIs are mounted on the <a href="#endpoint">Generic API endpoint</a> .
-In order to disable it, <code>mount="false"</code> should be set in the descriptor.</td>
+<td>By default, APIs are not mounted on the <a href="#endpoint">Generic API endpoint</a>.
+To enable it, <code>mount="true"</code> should be set in the descriptor.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>display-name</strong> is the name of the API that will be shown the UI.</td>
+<td><strong>display-name</strong> is the name of the API that will be shown in the UI.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -595,7 +595,7 @@ When invoked, the function will generate a contextual service url based on the c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-23 10:01:42 UTC
+Last updated 2025-05-27 14:00:54 UTC
 </div>
 </div>
 </body>
