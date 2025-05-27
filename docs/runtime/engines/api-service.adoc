@@ -31,7 +31,8 @@ API descriptor provides a way to define the API's display name, description, doc
 Example of Full API descriptor:
 [source,xml]
 ----
-<api mount="true"> <--1-->
+<api>
+  <mount>true</mount> <--1-->
   <display-name i18n="displayName">My API</display-name> <--2-->
   <description  i18n="description">API for My App</description> <--3-->
   <documentation-url>https://developer.enonic.com/docs/api</documentation-url> <--4-->
@@ -43,7 +44,7 @@ Example of Full API descriptor:
 ----
 
 <1> By default, APIs are not mounted on the <<#endpoint,Generic API endpoint>>.
-To enable it, `mount="true"` should be set in the descriptor.
+To enable it, `<mount>true</mount>` should be set in the descriptor.
 +
 <2> *display-name* is the name of the API that will be shown in the UI.
 
@@ -51,11 +52,7 @@ To enable it, `mount="true"` should be set in the descriptor.
 
 <4> *documentation-url* is a link to the API documentation.
 
-<5> By default, APIs may be used by any client or user.
-+
-At times, it makes sense to restrict access to the API based on user roles.
-This can be done without custom coding.
-+
+<5> APIs must be protected by roles.
 
 [#endpoint]
 == Endpoint
