@@ -84,6 +84,11 @@ Example site descriptor with mounting of self-contained and external APIs:
 </site>
 ----
 
+== API discovery
+
+`GET :8080/api` - returns JSON with a list of all available APIs in the system.
+
+
 == apiUrl()
 
 To safely generate an API URL, use the `apiUrl()` function that is part of the <<../../api/lib-portal#,Portal Library>>.
