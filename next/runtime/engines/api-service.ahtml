@@ -444,6 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#controller">Controller</a></li>
 <li><a href="#descriptor">Descriptor</a></li>
 <li><a href="#endpoint">Endpoint</a></li>
+<li><a href="#api_discovery">API discovery</a></li>
 <li><a href="#apiurl">apiUrl()</a></li>
 </ul>
 </div>
@@ -592,6 +593,14 @@ To enable it, <code>&lt;mount&gt;true&lt;/mount&gt;</code> should be set in the 
 </div>
 </div>
 <div class="sect1">
+<h2 id="api_discovery"><a class="link" href="#api_discovery">API discovery</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>GET :8080/api</code> - returns JSON with a list of all available APIs in the system.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="apiurl"><a class="link" href="#apiurl">apiUrl()</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -614,7 +623,7 @@ When invoked, the function will generate a contextual service url based on the c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-27 17:53:13 UTC
+Last updated 2025-05-27 18:05:38 UTC
 </div>
 </div>
 </body>
