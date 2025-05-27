@@ -1,6 +1,6 @@
 = Universal API WIP
 
-Universal API is enables mounting of <<../../framework/http#http-controller,http controllers>> safely made available on `/api` enpdoint as well as within an application (or site's) URL space, without the use of routers. It supports Headless approach or <<site-engine#, Site engine>>, <<webapp-engine#, Webapp engine>> and <<admin-engine#,Admin engine>> needs to access dynamic data, like REST API, GraphQL API, or other data sources.
+Universal API enables mounting of <<../../framework/http#http-controller,http controllers>> safely made available on `/api` enpdoint as well as within an application (or site's) URL space, without the use of routers. It supports Headless approach or <<site-engine#,Site engine>>, <<webapp-engine#,Webapp engine>> and <<admin-engine#,Admin engine>> needs to access dynamic data, like REST API, GraphQL API, or other data sources.
 
 
 == Controller
@@ -42,10 +42,10 @@ Example of Full API descriptor:
 </api>
 ----
 
-<1> By default, APIs are mounted on the <<#endpoint,Generic API endpoint>> .
-In order to disable it, `mount="false"` should be set in the descriptor.
+<1> By default, APIs are not mounted on the <<#endpoint,Generic API endpoint>>.
+To enable it, `mount="true"` should be set in the descriptor.
 +
-<2> *display-name* is the name of the API that will be shown the UI.
+<2> *display-name* is the name of the API that will be shown in the UI.
 
 <3> *description* is a short description of the API that will be shown in the UI.
 
@@ -67,7 +67,7 @@ API mount is context-aware:
 - For `webapp` engine: `+(/webapp/<app-name>/_/<app-name>/<api-name>/+`
 - For `admin` engine: `+/admin/_/<app-name>/<api-name>/+`
 
-Engine descriptors need to specify the available API names in the `api` element, while Generic API endpoint can be disabled in <<#descriptor, API Descriptor>> itself.
+Engine descriptors need to specify the available API names in the `api` element, while Generic API endpoint can be disabled in <<#descriptor,API Descriptor>> itself.
 
 Example site descriptor with mounting of self-contained and external APIs:
 [source,xml]
