@@ -444,8 +444,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#controller">Controller</a></li>
 <li><a href="#descriptor">Descriptor</a></li>
 <li><a href="#endpoint">Endpoint</a></li>
+<li><a href="#built_in_apis">Built-in APIs</a>
+<ul class="sectlevel2">
+<li><a href="#media_apis">Media APIs</a></li>
+<li><a href="#widget_api">Widget API</a></li>
+</ul>
+</li>
 <li><a href="#api_discovery">API discovery</a></li>
 <li><a href="#apiurl">apiUrl()</a></li>
+<li><a href="#reserved_api_application_names">Reserved API application names</a></li>
 </ul>
 </div>
 </div>
@@ -453,24 +460,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Universal API enables mounting of <a href="../../framework/http.ahtml#http-controller">http controllers</a> safely made available on <code>/api</code> enpdoint as well as within an application (or site&#8217;s) URL space, without the use of routers. It supports Headless approach or <a href="site-engine.ahtml">Site engine</a>, <a href="webapp-engine.ahtml">Webapp engine</a> and <a href="admin-engine.ahtml">Admin engine</a> needs to access dynamic data, like REST API, GraphQL API, or other data sources.</p>
+<p>Universal API enables mounting of <a href="../../framework/http.ahtml#http-controller">http controllers</a> safely made available on <code>/api</code> endpoint as well as within an application (or site&#8217;s) URL space, without the use of routers. It supports Headless approach or <a href="site-engine.ahtml">Site engine</a>, <a href="webapp-engine.ahtml">Webapp engine</a> and <a href="admin-engine.ahtml">Admin engine</a> needs to access dynamic data, like REST API, GraphQL API, or other data sources.</p>
 </div>
 <div class="paragraph">
-<p>API Engine is made with security in mind:</p>
+<p>The Main Features of Universal API are:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>It is not mounted anywhere by default, so you don&#8217;t need to worry about accidental exposure of an admin API on a site.</p>
+<p>Secure be default</p>
+<div class="ulist">
+<ul>
+<li>
+<p>APIs are not mounted anywhere by default, so you don&#8217;t need to worry about accidental exposure of an admin API on a site.</p>
 </li>
 <li>
-<p>Mounting of API is granular and must be explicitly specified in engine descriptor files. If API is desined for a webapp, it will not be automatically mounted on a site.</p>
+<p>Nobody can access an API without explicitly specifying access rights in the descriptor.</p>
 </li>
 <li>
-<p>There is a singular mounting location of an API - to avoid cache pollution and allow strict control of URL patterns in WAF.</p>
+<p>Cache pollution is avoided by mounting APIs to a single endpoint (per engine).</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>It requires to specify principals granted access to an API. Developers need to think about API access rights in advance.</p>
+<p>Headless friendly. APIs can be mounted on <code>/api</code> endpoint, so they can be used by any client.</p>
+</li>
+<li>
+<p>Granular. Mounting of API must be explicitly specified in engine descriptor files.</p>
+</li>
+<li>
+<p>Modular. APIs can be borrowed from other applications, so you can use existing APIs in your application.</p>
 </li>
 </ul>
 </div>
@@ -545,7 +565,7 @@ To enable it, <code>&lt;mount&gt;true&lt;/mount&gt;</code> should be set in the 
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>APIs must list principles that have access to it. It is required to specify at least one principal. Use <code>role:system.everyone</code> to make API public.</td>
+<td>APIs must list principles that have access to it. It is required to specify at least one principal. Use <code>role:system.everyone</code> to make the API public.</td>
 </tr>
 </table>
 </div>
@@ -593,6 +613,32 @@ To enable it, <code>&lt;mount&gt;true&lt;/mount&gt;</code> should be set in the 
 </div>
 </div>
 <div class="sect1">
+<h2 id="built_in_apis"><a class="link" href="#built_in_apis">Built-in APIs</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="media_apis"><a class="link" href="#media_apis">Media APIs</a></h3>
+<div class="paragraph">
+<p>The Media APIs is a built-in API that provides access to media files in CMS repositories.</p>
+</div>
+<div class="paragraph">
+<p><a href="site-engine/image-service.ahtml">Media Image</a> API is available real-time processing and delivery of rasterized RGB/RGBa image media.</p>
+</div>
+<div class="paragraph">
+<p>Media Attachment API gives access to Content attached binaries - like PDFs, Word documents, etc.</p>
+</div>
+<div class="paragraph">
+<p>These two APIs are always mounted on Generic Endpoint as well as on Sites.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="widget_api"><a class="link" href="#widget_api">Widget API</a></h3>
+<div class="paragraph">
+<p><a href="../../admin/widgets.ahtml">Widget API</a> provide the way to dynamically extend Admin UI.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="api_discovery"><a class="link" href="#api_discovery">API discovery</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -620,10 +666,50 @@ When invoked, the function will generate a contextual service url based on the c
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="reserved_api_application_names"><a class="link" href="#reserved_api_application_names">Reserved API application names</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Applications names without namespace are reserved.
+This list includes, but not limited to, the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>media</code></p>
+</li>
+<li>
+<p><code>admin</code></p>
+</li>
+<li>
+<p><code>component</code></p>
+</li>
+<li>
+<p><code>attachment</code></p>
+</li>
+<li>
+<p><code>image</code></p>
+</li>
+<li>
+<p><code>asset</code></p>
+</li>
+<li>
+<p><code>service</code></p>
+</li>
+<li>
+<p><code>error</code></p>
+</li>
+<li>
+<p><code>idprovider</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-05-27 18:05:38 UTC
+Last updated 2025-05-30 15:04:47 UTC
 </div>
 </div>
 </body>
