@@ -1,13 +1,16 @@
 = Universal API WIP
 
-Universal API enables mounting of <<../../framework/http#http-controller,http controllers>> safely made available on `/api` enpdoint as well as within an application (or site's) URL space, without the use of routers. It supports Headless approach or <<site-engine#,Site engine>>, <<webapp-engine#,Webapp engine>> and <<admin-engine#,Admin engine>> needs to access dynamic data, like REST API, GraphQL API, or other data sources.
+Universal API enables mounting of <<../../framework/http#http-controller,http controllers>> safely made available on `/api` endpoint as well as within an application (or site's) URL space, without the use of routers. It supports Headless approach or <<site-engine#,Site engine>>, <<webapp-engine#,Webapp engine>> and <<admin-engine#,Admin engine>> needs to access dynamic data, like REST API, GraphQL API, or other data sources.
 
-API Engine is made with security in mind:
+The Main Features of Universal API are:
 
-- It is not mounted anywhere by default, so you don't need to worry about accidental exposure of an admin API on a site.
-- Mounting of API is granular and must be explicitly specified in engine descriptor files. If API is desined for a webapp, it will not be automatically mounted on a site.
-- There is a singular mounting location of an API - to avoid cache pollution and allow strict control of URL patterns in WAF.
-- It requires to specify principals granted access to an API. Developers need to think about API access rights in advance.
+* Secure be default
+ ** APIs are not mounted anywhere by default, so you don't need to worry about accidental exposure of an admin API on a site.
+ ** Nobody can access an API without explicitly specifying access rights in the descriptor.
+ ** Cache pollution is avoided by mounting APIs to a single endpoint (per engine).
+* Headless friendly. APIs can be mounted on `/api` endpoint, so they can be used by any client.
+* Granular. Mounting of API must be explicitly specified in engine descriptor files.
+* Modular. APIs can be borrowed from other applications, so you can use existing APIs in your application.
 
 == Controller
 
@@ -58,17 +61,17 @@ To enable it, `<mount>true</mount>` should be set in the descriptor.
 
 <4> *documentation-url* is a link to the API documentation that will be shown in the UI.
 
-<5> APIs must list principles that have access to it. It is required to specify at least one principal. Use `role:system.everyone` to make API public.
+<5> APIs must list principles that have access to it. It is required to specify at least one principal. Use `role:system.everyone` to make the API public.
 
 [#endpoint]
 == Endpoint
 
 API mount is context-aware:
 
-- Generic API endpoint `+/api/<app-name>/<api-name>/+`
-- For `site` engine: `+/site/<site-path>/_/<app-name>/<api-name>/+`
-- For `webapp` engine: `+(/webapp/<app-name>/_/<app-name>/<api-name>/+`
-- For `admin` engine: `+/admin/_/<app-name>/<api-name>/+`
+* Generic API endpoint `+/api/<app-name>/<api-name>/+`
+* For `site` engine: `+/site/<site-path>/_/<app-name>/<api-name>/+`
+* For `webapp` engine: `+(/webapp/<app-name>/_/<app-name>/<api-name>/+`
+* For `admin` engine: `+/admin/_/<app-name>/<api-name>/+`
 
 Engine descriptors need to specify the available API names in the `api` element, while Generic API endpoint can be disabled in <<#descriptor,API Descriptor>> itself.
 
@@ -84,6 +87,22 @@ Example site descriptor with mounting of self-contained and external APIs:
 </site>
 ----
 
+== Built-in APIs
+
+=== Media APIs
+
+The Media APIs is a built-in API that provides access to media files in CMS repositories.
+
+<<site-engine/image-service#,Media Image>> API is available real-time processing and delivery of rasterized RGB/RGBa image media.
+
+Media Attachment API gives access to Content attached binaries - like PDFs, Word documents, etc.
+
+These two APIs are always mounted on Generic Endpoint as well as on Sites.
+
+=== Widget API
+
+<<../../admin/widgets#,Widget API>> provide the way to dynamically extend Admin UI.
+
 == API discovery
 
 `GET :8080/api` - returns JSON with a list of all available APIs in the system.
@@ -94,3 +113,18 @@ Example site descriptor with mounting of self-contained and external APIs:
 To safely generate an API URL, use the `apiUrl()` function that is part of the <<../../api/lib-portal#,Portal Library>>.
 
 NOTE: When invoked, the function will generate a contextual service url based on the context of the current controller.
+
+== Reserved API application names
+
+Applications names without namespace are reserved.
+This list includes, but not limited to, the following:
+
+- `media`
+- `admin`
+- `component`
+- `attachment`
+- `image`
+- `asset`
+- `service`
+- `error`
+- `idprovider`
