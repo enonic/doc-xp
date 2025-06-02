@@ -457,10 +457,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p>HTTP Service is deprecated and will be removed in a future releases.</p>
+<p>HTTP Service is deprecated and will be removed in future releases.</p>
 </div>
 <div class="paragraph">
-<p>Universal API is designed to substitute <a href="api-service.ahtml">Universal API</a>.</p>
+<p><a href="api-service.ahtml">Universal API</a> is designed to substitute HTTP Service.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to control its availability via <code>legacy.httpService.enabled</code> parameter in <code>com.enonic.xp.portal.cfg</code></p>
 </div>
 </div>
 </div>
@@ -560,7 +563,7 @@ When invoked, the function will generate a contextual service url based on the c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-02 09:31:58 UTC
+Last updated 2025-06-02 14:35:59 UTC
 </div>
 </div>
 </body>

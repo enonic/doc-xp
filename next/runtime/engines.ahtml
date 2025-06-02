@@ -464,18 +464,21 @@ The HTTP engine is responsible for handling web-based request to the runtime.</p
 <div class="sectionbody">
 <div class="paragraph">
 <p>By default, the XP runtime serves HTTP requests from port 8080 (customizable).
-There are three specific web engine implementations available:</p>
+There are four specific web engine implementations available:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="engines/webapp-engine.ahtml">Web app engine</a> :8080/webapp/</p>
+<p><a href="engines/webapp-engine.ahtml">Web app engine</a> <code>:8080/webapp/</code></p>
 </li>
 <li>
-<p><a href="engines/site-engine.ahtml">Site engine</a> :8080/site/</p>
+<p><a href="engines/site-engine.ahtml">Site engine</a> <code>:8080/site/</code></p>
 </li>
 <li>
-<p><a href="engines/admin-engine.ahtml">Admin engine</a> :8080/admin/</p>
+<p><a href="engines/admin-engine.ahtml">Admin engine</a> <code>:8080/admin/</code></p>
+</li>
+<li>
+<p><a href="engines/api-engine.ahtml">Universal API</a> <code>:8080/api/</code></p>
 </li>
 </ul>
 </div>
@@ -512,23 +515,23 @@ There are three specific web engine implementations available:</p>
 </dd>
 <dt class="hdlist1">Asset service</dt>
 <dd>
-<p>Serves <a href="engines/asset-service.ahtml">static assets</a> for the /_/asset/* request patterns</p>
+<p>Serves <a href="engines/asset-service.ahtml">static assets</a> for the <code>/_/asset/*</code> request patterns</p>
 </dd>
 <dt class="hdlist1">HTTP Service</dt>
 <dd>
-<p>Provide access to <a href="engines/http-service.ahtml">Http service controllers</a> through the /_/service/* request pattern</p>
+<p>Provide access to <a href="engines/http-service.ahtml">Http service controllers</a> through the <code>/_/service/*</code> request pattern</p>
 </dd>
 <dt class="hdlist1">IDprovider Service</dt>
 <dd>
-<p>For direct interaction with the contextual <a href="engines/idprovider-service.ahtml">IDprovider</a> based on the /_/idprovider/* request patterns</p>
+<p>For direct interaction with the contextual <a href="engines/idprovider-service.ahtml">IDprovider</a> based on the <code>/_/idprovider/*</code> request patterns</p>
 </dd>
 <dt class="hdlist1">Auth handler</dt>
 <dd>
-<p>Triggered if the pipeline returns a "401: Unauthorized" error code, the contextual IDprovider will be invoked, optionally handling the request</p>
+<p>Triggered if the pipeline returns a "401: Unauthorized" error code, the contextual ID Provider will be invoked, optionally handling the request</p>
 </dd>
 <dt class="hdlist1">Error handler</dt>
 <dd>
-<p>If the pipeline returns an unhandled error (everything but "200: Ok") that was not handled by an ID provider, the contextual error handler will kick in.</p>
+<p>If the pipeline returns an unhandled error (everything but "200: OK") that was not handled by an ID Provider, the contextual error handler will kick in.</p>
 </dd>
 <dt class="hdlist1">Java response filters</dt>
 <dd>
@@ -547,16 +550,16 @@ There are three specific web engine implementations available:</p>
 <h2 id="underscore_endpoint"><a class="link" href="#underscore_endpoint">Underscore endpoint</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All engines reserve the use of the underscore characther <code>_</code> (by itself) to provide engine specific endpoints.
+<p>All engines reserve the use of the underscore character <code>\_</code> (by itself) to provide access to the <a href="engines/api-engine.ahtml">Universal API</a>.
 This applies to at any location within the URL path hierarchy.
-For instance, the following request <code>:8080/webapp/&lt;webapp&gt;/_/<strong></code> or <code>:8080/site/&lt;project&gt;/&lt;branch&gt;/some/content/_/</strong></code> are reserved.</p>
+For instance, the following request <code>:8080/webapp/&lt;webapp&gt;/_/*</code> or <code>:8080/site/&lt;project&gt;/&lt;branch&gt;/some/content/_/*</code> are reserved.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-02 09:31:58 UTC
+Last updated 2025-06-02 14:35:59 UTC
 </div>
 </div>
 </body>

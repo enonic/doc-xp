@@ -2471,6 +2471,18 @@ media.contentSecurityPolicy.svg =</code></pre>
 <dd>
 <p>Defines comma separated list of roles which are allowed to access the draft branch. Default: <code>role:system.admin.login</code>. Also, a user with role <code>role:system.admin</code> implicitly has access to the draft branch.</p>
 </dd>
+<dt class="hdlist1">legacy.attachmentService.enabled</dt>
+<dd>
+<p>Enables/Disables attachment service. Default <code>true</code> - means Legacy Attachment Service is enabled.</p>
+</dd>
+<dt class="hdlist1">legacy.imageService.enabled</dt>
+<dd>
+<p>Enables/Disables image service. Default <code>true</code> - means Legacy Image Service is enabled.</p>
+</dd>
+<dt class="hdlist1">legacy.httpService.enabled</dt>
+<dd>
+<p>Enables/Disables legacy HTTP service. Default <code>true</code> - means Legacy HTTP Service is enabled.</p>
+</dd>
 </dl>
 </div>
 </div>
@@ -2593,7 +2605,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-02 09:31:58 UTC
+Last updated 2025-06-02 14:35:59 UTC
 </div>
 </div>
 </body>
