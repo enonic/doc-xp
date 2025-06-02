@@ -1,18 +1,20 @@
 = Upgrading
 :toc: right
 :imagesdir: images
-This procedure applies to feature (7.x.0) and fix upgrades (7.x.y, etc).
 
-=== Non-cluster upgrade
+This procedure applies to feature (8.x.0) and fix upgrades (8.x.y, etc).
+
+== Non-cluster upgrade
 Single node deployments cannot be performed without downtime. To upgrade a single instance deployment, follow the instructions below:
 
 . Stop your instance
 . Replace your XP7 runtime image with the new XP7 image
 . Start the instance.
 
-=== Rolling Cluster upgrade
+== Rolling Cluster upgrade
 
-All fix upgrades (i.e. from 7.4.1 to 7.4.8), and most feature upgrades (i.e. from 7.5.x to 7.6.x) support rolling upgrades - with zero downtime.
+All fix upgrades (i.e. from 8.4.1 to 8.4.8), and most feature upgrades (i.e. from 8.5.x to 8.6.x) support rolling upgrades - with zero downtime.
+None of Major upgrades (i.e. from 7.x to 8.x) support rolling upgrades, and require a full restart of the cluster.
 
 To safely perform a rolling upgrade, perform the following steps.
 
@@ -23,7 +25,7 @@ WARNING: Before you perform a rolling upgrade, verify that all feature version i
 . Stop, upgrade image and start data nodes
 . Stop, upgrade image and start remaining nodes
 
-=== Full restart Cluster upgrade
+== Full restart Cluster upgrade
 
 Selected feature versions (i.e. when upgrading from 7.6.x to 7.7.x or 7.8.x) may require a full restart in order to guarantee no loss of
 data and/or state. Releases that require full restart are marked with a special warning section below.
@@ -45,342 +47,81 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market.
 We generally always recommend updating your apps to the latest version!
 
-== v7.15 notes
-
-* The image service now generates progressive JPEG images by default. This can be changed back in <<../deployment/config#image>> by setting `progressiveJpeg` to empty string.
-
-* GZIP HTTP compression is disabled by default. It can be enabled in <<../deployment/config#jetty, Jetty config>>. By setting `gzip.enabled = true`.
-
-* `image/webp` and `image/avif` media types will now produce content of `media:image` type, instead of `media:unknown`. Old versions of Content Studio might not work correctly with WebP and AVIF media types. Upgrade to the latest version of Content Studio.
-
-* <<../deployment/config#repo, Repo config>> `cache.size` parameter no longer works. Use `cache.capacity` instead.
-
-* Vacuuming no longer clears unused blobs from deleted repositories. <<../deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
-
-* Vacuuming now deletes old snapshots by default. <<../deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
-
-* Vacuuming that affects blobs will delete snapshots once completed. <<../deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
-
-* Previously HTTP controllers did not support `patch` methods by responding `405 Method Not Allowed`. Now `patch` methods are supported, so `all` controller handles `patch` method, too.
-
-* Portal Page resolution now happens before Site mapping controllers get executed. This changes what portal.getContent() and `portal.getComponent()` return when called from Site mapping controllers.
-
-* `/admin` paths now specify `Cache-Control` header `private` - by default CDNs no longer cache admin URLs.
-
-* Management port returns `403` status code when no authentication is provided. Before `401` was returned.
-
-== v7.14 notes
-
-* Content Project root no longer returns 403. It now returns 404 instead. This may affect your availability if it relies on 403 status code.
-
-== v7.13 notes
-
-* Content Studio has to be upgraded to version 5+ to be compatible with XP 7.13. If you are using Content Studio 4.x with XP 7.13, you may experience disappearing layouts inside Page Editor.
-
-* Bundled JVM was upgraded to version 17. Our internal testing didn't show any significant issues with this upgrade (except Nashorn engine removal), but we recommend testing your applications before upgrading to this version as always. Consult with https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html[JDK Migration Guide] for more information about migrating from JDK 11 to JDK 17 in case you experience any issues.
-
-* When building applications it is recommended to specify `options.release = 11` for `compileJava` task https://docs.gradle.org/current/userguide/building_java_projects.html#sec:compiling_with_release[in Gradle build file] to preserve compatibility with XP versions lower than 7.13.
-XP Gradle plugin `com.enonic.xp.app` version `3.4.0` does this automatically for you when `systemVersion` is set to `7.12.x` or lower.
-
-* Ensure you are using the latest version of the Test Framework `com.enonic.xp:testing` in your Gradle project. For example, if your Test Framework dependency is defined as `testImplementation "com.enonic.xp:testing:$\{xpVersion}"` you might need to change it to `testImplementation "com.enonic.xp:testing:7.13.0"`. Older versions may not work with JDK 17 and will cause tests to fail with `java.lang.NoClassDefFoundError: jdk/nashorn/api/scripting/NashornScriptEngineFactory`.
-
-* Usage of JDK 11 Nashorn engine is now deprecated and will be removed in future XP versions. Currently warning is issued for each usage: `Class x.y.Z uses unsupported jdk.nashorn. Application may stop working in future XP versions.` Applications must not use Nashorn engine directly, but instead use XP's Javascript API.
-
-* `base:media` content type is now abstract - it can no longer be created directly. It was documented as abstract, but was not enforced in previous versions.
-
-* Content API no longer reads Page/Layout descriptors to determine regions for every fetched content.
-Regions are built from `components` array in content data. This changes the behaviour for regions with no component assigned.
-Rendering engine is now responsible for reconstructing unused regions from Page/Layout descriptors.
-
-IMPORTANT: In `7.13.1` you can bring back the old deprecated behaviour making Content API inject empty regions by setting `resolveEmptyRegions` parameter to `true` in the <<../deployment/config#content_config, content config>>
-
-* Server Distro Mac ARM64 bundles GraalVM 22.3.1 JDK 17 due to lack of GraalVM 22.3.2 image for Mac ARM64. Other distros are based on GraalVM 22.3.2 JDK 17
-
-== v7.12 notes
-
-* You need to reconfigure all Project level applications configured before version 7.12, if you have any. This is not a breaking change, as this feature was not announced in 7.11 and was not officially supported until 7.12.
-* Content API is now enforced to support only `draft` and `master` branches. Node API continues to support custom branches.
-* Content API does not allow to create/modify/delete content directly on `master` branch or to publish to any other branch than `master`.
-* Content `PENDING_DELETE` state is no longer in use. Content deletion no longer happens during unpublishing. Instead, content deletion forces content to be unpublished immediately.
-* Node state has been deprecated and is no longer in use, as it was only used for content's `PENDING_DELETE` status.
-* Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<../deployment/config#content_config, content config>>.
-* `draft` branch is now restricted for unauthenticated access. By default, only `system.admin.login` role has access. Additional principles can be configured in <<../deployment/config#portal, portal config>> via `draftBranchAllowedFor` setting. Note that `system.admin` role always has access, regardless of the config.
-* Bundled GraalVM has been updated to version 22.3.1. Other JVM versions are not supported, although they may also work.
-
-== v7.11 notes
-
-WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (Hazelcast) has been updated in this release.
-A full restart is required in order to prevent loss of data or state.
-
-* Virtual application schemas may now override schema present in any installed (real) application.
-To prevent virtual applications from overriding schemas use <<../deployment/config#application, application config>> `virtual.schema.override = false`
-or disable virtual applications completely `virtual.enabled = false`
-
-* OSGi Compendium r8 is now provided as API dependency for Java Core API. (Component, Component Annotations and CM only)
-This may cause some compilation errors when XP application dependency version is bumped, but should not affect existing applications in runtime.
-
-* Default HTML now sets `utf-8` charset encoding, if controller haven't specified charset in Content-Type
-This may cause broken text on pages with page templates which specify content meta tag value other than `utf-8`.
-Make sure all your page templates use UTF-8. it is also recommended to use `<meta charset="utf-8">` tag on all pages.
-
-* TypeScript imports. As of this version, all Enonic libraries are completely rewritten in TypeScript. If you have been using TypesScript in your application, it may no longer be compiling. Importing `default` exports are no longer supported, and depending on your build-setup and code, you may need to change your import statements.
-For example:
-+
-.Old approach
-[source,Javascript]
-----
-import nodeLib from '/lib/xp/node';
-----
-+
-.New approach
-[source,Javascript]
-----
-import * as nodeLib from '/lib/xp/node';
-----
-
-== v7.10 notes
-
-* XP now bundles the GraalVM based JDK.
-We do not support running XP on other JDK except for the one bundled in the distro.
-Note that the default JavaScript Engine is still Nashorn.
-
-* Experimental support of arm64 (aarch64) based CPUs is added.
-You may see a WARNING message on XP startup `java.lang.UnsatisfiedLinkError: Can’t load library ...`. It does not affect XP operations and can be ignored.
-
-
-== v7.9 notes
-
-* <<../deployment/config#portal, Portal config>> now specifies default `Content-Security-Policy` for attachments and images.
-It is possible to configure the header via `media.contentSecurityPolicy` and `media.contentSecurityPolicy.svg` values. Empty value disables `Content-Security-Policy` for attachments and images.
-Default value is crafted to prevent common Persistent XSS attacks.
-
-* <<../deployment/config#admin, Admin config>> now specifies default Content-Security-Policy for page `preview` and `inline` mode (used by Content Studio).
-It is possible to configure the header via `site.preview.contentSecurityPolicy` value or go back to previous behavior by setting `site.preview.contentSecurityPolicy` to an empty value.
-Default value is crafted to prevent common Persistent XSS attacks in Content Studio.
-
-* Certain Security headers are now specified in <<../deployment/config#header_filter, header filter config>> by default.
-Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from an IFrame.
-You can customize default headers in <<../deployment/config#header_filter, header filter config>> `headerConfig` value to get back to previous behaviour.
-
-== v7.8 notes
-
-WARNING: FULL RESTART REQUIRED - A new feature for archiving content has been implemented in this release.
-A full restart is required in order for XP to create and correctly access the `/archive` node.
-
-* Versions of Content Studio before 4.0.0 will not run on XP 7.8.0 or later.
-
-* `params` returned from HTTP Filter now replace original request params with the same names. There is no way to restore previous behavior.
-
-* Internal Admin Rest API was moved to respective applications. Any use of `/admin/rest/*` endpoints was for internal use only.
-It was never documented or supported for external use. We recommend implementing your own application with GraphQL/REST api as an alternative.
-
-* `contentTypePatternMode` configuration parameter has been moved to Content Studio configuration.
-
-* JaxRS API backend was updated to the next major release. We didn't observe any incompatibilities, but if your application uses XP JaxRS API make sure you thoroughly test it.
-
-* Image Service now has memory usage constraints  configured by `memoryLimit` parameter in <<../deployment/config#image, Configuration Files / Image>>.
-This may cause `429 Too Many Requests` HTTP responses for images, if they are not yet scaled at least once and put into disk cache.
-
-* XP 7.8 fixed a bug when `lib-portal.getContent()` would return a non-empty value in a context where no content should be returned, for example
-inside a responseProcessor or a service. If you didn't have a proper check for non-empty content object returned by `lib-portal.getContent()`, you will have to fix your code.
-Please find an example of the fix below:
-
-.Before
-[source,Javascript]
-----
-exports.responseProcessor = function (req, res) {
-    const content = portalLib.getContent(); // This now returns null
-    let contentId = req.params.contentId;
-    if (!contentId) {
-        contentId = content._id; // This will be not null only inside a widget
-    }
-    const siteConfig = contentLib.getSiteConfig({
-        key: contentId, // This code assumes contentId is never null
-        applicationKey: app.name
-    });
-}
-----
-
-.After
-[source,Javascript]
-----
-exports.responseProcessor = function (req, res) {
-    const siteConfig = portalLib.getSiteConfig();
-    if (!siteConfig) {
-        return res;
-    }
-    let contentId = req.params.contentId;
-    if (!contentId) {
-        const content = portalLib.getContent();
-        if (content) {
-            contentId = content._id;
-        }
-    }
-    if (!contentId) {
-        return res;
-    }
-}
-----
-
-IMPORTANT: If you are using https://market.enonic.com/vendors/enonic/siteimprove[Siteimprove],
-https://market.enonic.com/vendors/enonic/google-analytics[Google Analytics]
-or https://market.enonic.com/vendors/enonic/com.enonic.app.metafields[SEO Meta Fields] applications, we recommend upgrading them to the latest
-versions (where this bug has been mitigated) before upgrading to XP 7.8.
-
-== v7.7 notes
-
-WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (Hazelcast) has been updated in this release. A full restart is required in order to prevent loss of data or state.
-
-* Session cookie specifies `SameSite=Lax` by default. It is similar to modern browsers default value except for "Lax + POST mitigation".
-You can revert to previous behavior by setting `session.cookieSameSite =` in <<../deployment/config#jetty, Configuration Files / Jetty>>
-
-* Native Java primitive arrays are now converted to JavaScript arrays. You may have to adapt your application to the new behaviour if your code was using workarounds.
-
-* Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <<../deployment/config#image, Configuration Files / Image>>
-
-* Image Service has more eager validation of scale, filters, background and quality parameter values. Make sure the requests to Image Service use only correct/supported values.
-
-* Built-in Embed Macro now requires body part to be HTML escaped. In general, it should not cause issues because ContentStudio HTML editor always escapes macro body.
-
-* Content attachment file names can no longer contain suspicious characters.
-You can revert to previous behavior by setting `attachments.allowUnsafeNames = true` in <<../deployment/config#content, Configuration Files / Content>>
-
-* Assets Service URL fingerprint part now uses application's "build time" instead of application's startup time. Make sure "build time" always changes for new versions of an application (this happens automatically if you use the standard xp build system)
-
-* Default Cache-Control headers for Assets Service and Portal Media Attachments have been changed.
-You can change default settings in <<../deployment/config#portal, Configuration Files / Portal>>
-
-* ResourceService no longer considers directories in jar as existing resources.
-If application code relies on checking directory existence in jar, consider checking existence of a file inside that directory instead.
-
-* Content integrity is verified during move operation, as it was done on create for `page-template`, `template-folder` and `site` built-in content types.
-
-* `page-template` content now accepts child content, but only `fragment` and `media:*`. Attachments are no longer redirected to the nearest template's site.
-
-* input-type's `allow-content-type`, x-data `allow-content-types` and newest content-type's `allow-child-content-type` share the same <<../cms/schemas/input-types/contentselector/#allowContentType, pattern matching>>, that is stricter than before.
-You can switch back to legacy mode by setting `contentTypePatternMode = LEGACY` in  <<../deployment/config#admin_rest, Configuration Files / Admin>> for `allow-content-type` and `allow-content-types`, but it won't affect `allow-child-content-type` pattern matching.
-
-
-== v7.6 notes
-* Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <<../framework/tasks#_distributable, Tasks / Distributable>> for more information.
-* XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to https://market.enonic.com. URL can be changed in <<../deployment/config#market, Configuration Files / Market>>.
-
-== v7.5 notes
-v7.5 is backward compatible with earlier versions
-
-== v7.4 notes
-v7.4 is backward compatible with earlier versions, but if you run XP on a cluster, several configurations need to change for the
-nodes to get in touch with each other after the upgrade.  Please do the following:
-
-* Create the configuration files `com.enonic.xp.hazelcast.cfg` and `com.enonic.xp.web.sessionstore.cfg` and consider the values in them as described in
-   <<../deployment/config#hazelcast, Configuration Files / Hazelcast>> and <<../deployment/config#sessionstore, Configuration Files / SessionStore>>.
-* Open port 5701 between the nodes in the network.  This port is used by Hazelcast for internal communication in the cluster.
-An alternate port may be chosen by setting `network.port`.  If using Docker, the port needs to be opened both in the network and in
-the `docker-compose.yml` container definition.
-* Evaluate the minimum required number of nodes in a cluster.  `system.hazelcast.initial.min.cluster.size` is by default set to 2.
-During start-up, events, tasks and sessions will not be communicated between nodes in the cluster until the minimum number of nodes have signed in.
-For large clusters, this is an important setting.  We recommend setting it to nodes/2 + 1, so for instance, in a cluster of six nodes, the value should be 4.
-* Distributed Sessions are off by default.  Enable them by setting `storeMode` to `replicated` in the sessionStore config, if desired.
-
-== v7.3 notes
-v7.3 is backward compatible with earlier versions, but includes fixes that may affect your existing deployments.
-
-Changed GIF handling:: The image service has been partly broken when processing GIF files. As of 7.3, GIFs are always returned as original files (unprocessed, similar to how SVGs are handled). This means GIFs will no longer be cropped, and always work as expected if they contain animations/videos. Animated GIFs are the most common usage of GIF files today.
-
-Ignite removed:: Ignite (grid memory component) has been part of the XP core for testing purposes, disabled by default. It has now been removed from the XP core. Unless you have enabled Ignite for testing purposes, this will not affect your deployment. Also, all Ignite configuration files and options can now safely be removed.
-
-Content projects:: XP 7.3 introduces the ability to create isolated content repositories. If you have many sites in your current deployment, consider moving your sites into separate projects.
-
-New docker image:: A new, improved and properly documented version of our <<../deployment/docker#, XP7 Docker image>> is now available. The documentation also describes how to upgrade from the old image.
-
-
-== v7.2 notes
-
-v7.2 is fully backward compatible with v7.1 and v7.0.
-
-NOTE: This version includes new "Audit logger" feature that requires a new repository. The repository will be created automatically during the upgrade process.
-
-
-== v7.1 notes
-
-v7.1 is fully backward compatible with v7.0.
-
-
-== Upgrading to v7.0
+== Upgrading to v8.0
 
 === Requirements
 
-This guide focuses on completing an upgrade with zero downtime, and requires you to set up production environment on XP7 in parallel with existing 6.15 environment.
+This guide focuses on completing an upgrade with zero downtime, and requires you to set up production environment on XP 8 in parallel with existing 7.15 environment.
 Carefully follow the below steps to upgrade your instance:
 
 NOTE: For scenarios where downtime cannot be avoided, additional steps, such as setting up a temporary "we are upgrading page", will be required:
 
 Before starting the upgrade process, ensure the following requirements are in place
 
-XP Version:: You need to be running at least Enonic XP 6.15.x (if you are running an older version, upgrade to 6.15.x first)
+XP Version:: You need to be running at least Enonic XP 8.15.x (if you are running an older version, upgrade to 8.15.x first)
 QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
-Toolbox:: Ensure you have 6.15 Toolbox available
+Toolbox:: Ensure you have latest Toolbox available
 Enonic CLI:: Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
 Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
-3rd party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 7.
-Custom apps:: Make sure all custom built applications have been upgraded to support XP 7, as described in <<apps-upgrade#,Upgrading Applications>>
+3rd party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 8.
+Custom apps:: Make sure all custom built applications have been upgraded to support XP 8, as described in <<apps-upgrade#,Upgrading Applications>>
 
 
-=== 1. Install XP 7
+=== 1. Install XP 8
 
-We recommend setting up a new production environment for XP 7, running in parallel with your XP 6 environment.
+We recommend setting up a new production environment for XP 8, running in parallel with your XP 7 environment.
 This will virtually eliminate downtime, and also be a safety net, should the upgrade fail somehow.
 
-Follow the <<../deployment/distro#XP_INSTALL,XP installation instructions>> to set up an instance matching your requirements
+Follow the <<../deployment/distro#xp_install,XP installation instructions>> to set up an instance matching your requirements
 
-==== File deployments
-If you have one or more applications deployed as files, replace them with their respective XP 7 versions
+==== File Application deployments
+If you have one or more applications deployed as files, replace them with their respective XP 8 versions
 
-==== Vhost config
+==== Jansi Logback plugin no longer supported
 
-Vhost configuration has changed:
+Console appender in distributive used to use Jansi plugin for colorized output. This plugin is no longer supported as logback now natively supports colorized output.
+Remove the `withJansi` element from your logback.xml file to avoid errors when starting the server.
 
-* `/app` has been renamed to `/webapp`
-* `/portal` has been renamed to `/site`
-* Repository name is added before the branch in site URL, ie `/site/default/draft`
-* `userStore` has been renamed to `idProvider`
-* idProvider config format is new
+Old logback.xml
+[source,xml]
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <withJansi>true</withJansi>
+    <encoder>
+      <pattern>%date{ISO8601} %highlight(%-5level) %cyan(%logger{36}) - %msg%n</pattern>
+    </encoder>
+  </appender>
 
-Update your vhost config file as follows:
+Old logback.xml
+[source,xml]
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date{ISO8601} %highlight(%-5level) %cyan(%logger{36}) - %msg%n</pattern>
+    </encoder>
+  </appender>
 
-.Before
-[source,properties]
-----
-include::code/vhost_before.cfg[]
-----
+==== Default CMS repository
 
-.After
-[source,properties]
-----
-include::code/vhost_after.cfg[]
-----
+With XP 8, the default CMS repository `com.enonic.cms.default` is no longer created automatically. In fact, there is no default CMS repository at all. Existing `com.enonic.cms.default` repository is converted to a normal one without any special permissions or behavior. During XP 8 startup the repository will be converted to a normal repository. To avoid permissions conflicts it is recommended to migrate the default repository prior migration.
 
-==== Port mappings
+==== Metrics Endpoint
 
-In XP 7 `/status` and `/api` have been moved to separate dedicated ports: 2609 and 4848 respectively.
+Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard Metrics JSON. Instead, it reports metrics in https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md[OpenMetrics] format.
 
-Consider how this affects your monitoring and how to expose management API internally.
+==== Admin Dashboard
 
-In `com.enonic.xp.web.jetty.cfg` `http.port` is replaced with `http.xp.port`, `http.management.port` and `http.monitor.port`.
+Default Admin Home path is now `/admin` instead of `/admin/home`.
 
-==== Elastic Search discovery
+==== General Admin Tools
 
-If specifying `discovery.unicast.sockets` in ES configuration: "ip[port]" is now "ip:port"
-
-.com.enonic.xp.elasticsearch.cfg
-[source,properties]
-----
-include::code/com.enonic.xp.elasticsearch.cfg[]
-----
+All admin tools are now present on the launcher panel as it was stated in documentation. In case when admin tool should not be present on the launcher panel convert it to an API.
 
 ==== Other configuration
 
-Migrate other configuration files from 6.15, including custom configurations (app config etc.).
+==== Others
+
+- It is no longer possible to via `com.enonic.xp.server.deploy.cfg` file. This method was not documented, unreliable in cluster installations and insecure.
+
+- Migrate other configuration files from 7.15, including custom configurations (app config etc.).
 
 ==== Start servers
 
@@ -389,52 +130,36 @@ Start your new servers and verify everything is working properly
 
 === 2. Dump data
 
-We are now ready to dump data from our existing 6.15 instance.  Do with the 6.15 toolbox:
+We are now ready to dump data from our existing 7.15 instance.
 
-    toolbox.sh dump -t mydump -a user:password --skip-versions
-
-NOTE:: We highly recommend dumping data without versions. This will dramatically speed up the upgrade while also preparing your dataset for the new vacuuming features in XP 7.
+    enonic dump create --archive
 
 
 === 3. Upgrade and Load
 
 Move dump:: Transfer dump files from previous step to the new instance. For clustered environments, any server will do.
 
-NOTE:: Toolbox has been removed from XP 7 and replaced by Enonic CLI.
-
-Upgrade dump:: Before we can load the dump, we need to upgrade the data to support XP 7:
-
-  enonic dump upgrade
-
-Load dump:: Now, load the dump into your XP 7 environment i.e.
+Load dump:: Now, load the dump into your XP 8 environment i.e.
 
   enonic dump load
 
 NOTE: Don't worry about the command losing connection, this is only related to the system repo (and user) being removed during the operation. Watch the log for progress.
 
+=== 4. Update apps
 
-=== 4. Install Content studio
-
-Content Studio is no longer part of the XP core distribution.
-Content Studio is now available as an https://market.enonic.com/vendors/enonic/content-studio[application on Enonic Market].
-Documentation for Content Studio can be found https://developer.enonic.com/docs/content-studio[here].
-
-=== 5. Update apps
-
-All installed applications must be updated to latest versions compatible with XP 7.
+All installed applications must be updated to latest versions compatible with XP 8.
 
 Market apps:: For market apps, go to the Applications tool, click "Install" in the menu and click "Upgrade" button for all applications where upgrade is available.
 
-Custom apps:: Install XP 7 compatible versions of your custom applications either through the "Install App" UI or by using CLI.
+Custom apps:: Install XP 8 compatible versions of your custom applications either through the "Install App" UI or by using CLI.
 
-
-=== 6. Validate
+=== 5. Validate
 
 Validate that your new installation is working as expected. We recommend checking logs, and performing live tests on services.
 
 
-=== 7. Go live
+=== 6. Go live
 
-With all lights green, simply redirect all traffic from your old XP 6 servers to the upgraded XP 7 environment.
+With all lights green, redirect all traffic from your old XP 7 servers to the upgraded XP 8 environment.
 
-Welcome to the XP 7 club!
+Welcome to the XP 8 club!

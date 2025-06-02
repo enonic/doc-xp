@@ -1,10 +1,10 @@
-= Upgrading applications from XP7 to XP8
+= Upgrading applications from XP 7 to XP 8
 :toc: right
 :imagesdir: images
 
 This section describes the steps required to upgrade an XP application from 7.x to 8.0
 
-NOTE: This section is only relevant when upgrading from XP7 to XP8.
+NOTE: This section is only relevant when upgrading from XP 7 to XP 8.
 
 == Preparations
 
@@ -154,11 +154,6 @@ This command proxies the Gradle wrapper, but also connects with the project sand
 You may also use `enonic project build` to build without deploying
 
 NOTE: Projects containing Java code might get build errors at this point, otherwise the build should complete successfully.
-
-== Default CMS repository
-
-With XP 8, the default CMS repository `com.enonic.cms.default` is no longer created automatically. In fact, there is no default CMS repository at all. Existing `com.enonic.cms.default` repository is converted to a normal one without any special permissions or behavior.
-
 
 == Widgets
 
@@ -367,8 +362,6 @@ To know if you are using JAX-RS API, check for `com.enonic.xp:jaxrs-api` depende
 
 Java Dropwizard Metrics is no longer available in XP Core API. Migrate to `com.enonic.xp.metrics` Core API.
 
-Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard Metrics JSON but instead reports metrics in https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md[OpenMetrics] format.
-
 === Java APIs
 
 - Java Portal View Functions are no longer part of XP Core API. They were incorporated into lib-thymeleaf and lib-xslt libraries.
@@ -380,12 +373,4 @@ Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard
 - `ContentService.deleteWithoutFetch` was renamed to `ContentService.delete` for consistency with other methods.
 
 - Javax Mail is no longer a transitive dependency of XP Core API.
-
-=== Others
-
-- It is no longer possible to via `com.enonic.xp.server.deploy.cfg` file. This method was not documented, unreliable in cluster installations and insecure.
-
-- All admin tools are now present on the launcher panel as it was stated in documentation. There is no more `AdminToolDescriptor.isAppLauncherApplication` API method.
-
-- Default Admin Home path is now `/admin` instead of `/admin/home`.
 
