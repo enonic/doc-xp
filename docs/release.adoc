@@ -14,12 +14,14 @@ include::.variables.adoc[]
 
 === API
 
-- Universal API replaces services
-- content baseUrl
+- <<runtime/engines/api-engine#, Universal API>>
+- <<api/lib-portal#, apiUrl>> method
+- <<api/lib-portal#, basUrl>> method and parameters
+- Content `baseUrl`
 
 === Widget API
 
-`lib-admin` `widgetUrl`
+`lib-admin.widgetUrl`
 
 === Permissions
 

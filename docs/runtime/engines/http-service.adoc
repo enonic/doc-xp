@@ -3,9 +3,11 @@
 :imagesdir: media
 
 ====
-HTTP Service is deprecated and will be removed in a future releases.
+HTTP Service is deprecated and will be removed in future releases.
 
-Universal API is designed to substitute <<api-service#,Universal API>>.
+<<api-service#,Universal API>> is designed to substitute HTTP Service.
+
+It is possible to control its availability via `legacy.httpService.enabled` parameter in `com.enonic.xp.portal.cfg`
 ====
 
 

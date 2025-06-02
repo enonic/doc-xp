@@ -1087,6 +1087,9 @@ media.private.cacheControl:: Defines media (images, attachments) `Cache-Control`
 media.contentSecurityPolicy:: Defines media (images, attachments) `Content-Security-Policy` header. Default: `default-src 'none'; base-uri 'none'; form-action 'none'`
 media.contentSecurityPolicy.svg:: Defines media (images, attachments) `Content-Security-Policy` header in cases when it is `image/svg+xml` mime type. Default: `default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`
 draftBranchAllowedFor:: Defines comma separated list of roles which are allowed to access the draft branch. Default: `role:system.admin.login`. Also, a user with role `role:system.admin` implicitly has access to the draft branch.
+legacy.attachmentService.enabled:: Enables/Disables attachment service. Default `true` - means Legacy Attachment Service is enabled.
+legacy.imageService.enabled:: Enables/Disables image service. Default `true` - means Legacy Image Service is enabled.
+legacy.httpService.enabled:: Enables/Disables legacy HTTP service. Default `true` - means Legacy HTTP Service is enabled.
 
 [#image]
 === Image

@@ -8,14 +8,16 @@ The HTTP engine is responsible for handling web-based request to the runtime.
 == Implementations
 
 By default, the XP runtime serves HTTP requests from port 8080 (customizable).
-There are three specific web engine implementations available:
+There are four specific web engine implementations available:
 
-* <<engines/webapp-engine#,Web app engine>> :8080/webapp/
-* <<engines/site-engine#,Site engine>> :8080/site/
-* <<engines/admin-engine#,Admin engine>> :8080/admin/
+* <<engines/webapp-engine#,Web app engine>> `:8080/webapp/`
+* <<engines/site-engine#,Site engine>> `:8080/site/`
+* <<engines/admin-engine#,Admin engine>> `:8080/admin/`
+* <<engines/api-engine#,Universal API>> `:8080/api/`
 
 Each engine provides a purpose specific request processing and execution pipeline.
 
+[[common_request_pipeline]]
 === Common request pipeline
 
 All HTTP engines share a common request pipeline as specified below:
@@ -30,15 +32,15 @@ Auth filter::  The <<../deployment/vhosts#,virtual host contextual ID provider>>
 
 Engine pipeline:: If nothing else matches, the pipeline of the specific engine will be executed
 
-Asset service:: Serves <<engines/asset-service#,static assets>> for the /_/asset/* request patterns
+Asset service:: Serves <<engines/asset-service#,static assets>> for the `/_/asset/*` request patterns
 
-HTTP Service:: Provide access to <<engines/http-service#,Http service controllers>> through the /_/service/* request pattern
+HTTP Service:: Provide access to <<engines/http-service#,Http service controllers>> through the `/_/service/*` request pattern
 
-IDprovider Service:: For direct interaction with the contextual <<engines/idprovider-service#,IDprovider>> based on the /_/idprovider/* request patterns
+IDprovider Service:: For direct interaction with the contextual <<engines/idprovider-service#,IDprovider>> based on the `/_/idprovider/*` request patterns
 
-Auth handler::  Triggered if the pipeline returns a "401: Unauthorized" error code, the contextual IDprovider will be invoked, optionally handling the request
+Auth handler::  Triggered if the pipeline returns a "401: Unauthorized" error code, the contextual ID Provider will be invoked, optionally handling the request
 
-Error handler:: If the pipeline returns an unhandled error (everything but "200: Ok") that was not handled by an ID provider, the contextual error handler will kick in.
+Error handler:: If the pipeline returns an unhandled error (everything but "200: OK") that was not handled by an ID Provider, the contextual error handler will kick in.
 
 Java response filters:: Optional Java response filters
 
@@ -46,6 +48,6 @@ Standard error handler:: Finally, if the request fails with an error that is sti
 
 == Underscore endpoint
 
-All engines reserve the use of the underscore characther `\_` (by itself) to provide engine specific endpoints.
+All engines reserve the use of the underscore character `\_` (by itself) to provide access to the <<engines/api-engine#, Universal API>>.
 This applies to at any location within the URL path hierarchy.
-For instance, the following request `:8080/webapp/<webapp>/_/*` or `:8080/site/<project>/<branch>/some/content/_/*` are reserved.
+For instance, the following request `+:8080/webapp/<webapp>/_/*+` or `+:8080/site/<project>/<branch>/some/content/_/*+` are reserved.

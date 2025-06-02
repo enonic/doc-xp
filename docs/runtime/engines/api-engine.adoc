@@ -81,7 +81,7 @@ Example site descriptor with mounting of self-contained and external APIs:
 <site xmlns="urn:enonic:xp:model:1.0">
   <apis>
         <api>ws</api>
-        <api>api-app:graphql</api>
+        <api>app:graphql</api>
   </apis>
   <form/>
 </site>
@@ -93,11 +93,11 @@ Example site descriptor with mounting of self-contained and external APIs:
 
 The Media APIs is a built-in API that provides access to media files in CMS repositories.
 
-<<site-engine/image-service#,Media Image>> API is available real-time processing and delivery of rasterized RGB/RGBa image media.
+<<image-service#,Media Image>> API is available real-time processing and delivery of rasterized RGB/RGBa image media.
 
 Media Attachment API gives access to Content attached binaries - like PDFs, Word documents, etc.
 
-These two APIs are always mounted on Generic Endpoint as well as on Sites.
+These two APIs are always mounted on Generic Endpoint as well as on Sites. Admin Tools and Webapps can also mount them by specifying them in the `api` element of the engine descriptor.
 
 === Widget API
 
