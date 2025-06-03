@@ -444,6 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#service_mapping">Service mapping</a></li>
 <li><a href="#request_matching">Request Matching</a></li>
 <li><a href="#capture_groups_xpxp7_8_07_8_0">Capture Groups <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></a></li>
+<li><a href="#virtual-host-context">Virtual Host Context</a></li>
 <li><a href="#examples">Examples</a></li>
 <li><a href="#testing_vhosts">Testing vhosts</a></li>
 </ul>
@@ -625,6 +626,53 @@ If host is not matched by regular expression, then group references in <code>tar
 </div>
 </div>
 <div class="sect1">
+<h2 id="virtual-host-context"><a class="link" href="#virtual-host-context">Virtual Host Context</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The virtual host context is a set of attributes that can be used to configure the behavior of controllers and other components within the context of a specific virtual host.</p>
+</div>
+<div class="paragraph">
+<p>Virtual hosts may define context attributes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mapping.adm.host = example.no
+...
+mapping.adm.context.my.timeZone = Europe/Oslo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Access to the context attributes is done via the <code>contextLib</code> library.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">const contextLib = require('/lib/xp/context');
+
+exports.get = () =&gt; {
+    const timeZone = contextLib.get()['attributes']['my.timeZone'];
+
+    return {
+        body: {
+            timeZone: timeZone
+        }
+    };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is also possible to set default context repository and branch for the virtual host.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mapping.adm.host = example.com
+...
+mapping.adm.com.enonic.xp.repository.RepositoryId = com.enonic.cms.repository.myproject
+mapping.adm.com.enonic.xp.branch.Branch = master</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="examples"><a class="link" href="#examples">Examples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -728,7 +776,7 @@ Location of hosts file on Mac/Linux_: <code>/etc/hosts</code>, on Windows: <code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-02 14:35:59 UTC
+Last updated 2025-06-03 13:30:30 UTC
 </div>
 </div>
 </body>

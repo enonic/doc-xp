@@ -631,8 +631,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="sect2">
 <h3 id="widget_api"><a class="link" href="#widget_api">Widget API</a></h3>
-<div class="paragraph">
-<p><code>lib-admin.widgetUrl</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="admin/widgets.ahtml">Widget API</a> replaces the old Admin Widgets</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -643,7 +647,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>no more <code>inheritsPermissions</code> flag on Node</p>
 </li>
 <li>
-<p>content permissions applied on master and draft</p>
+<p>content permissions applied on <code>master</code> and <code>draft</code></p>
 </li>
 <li>
 <p>node permissions can be applied on multiple branches simultaneously</p>
@@ -663,12 +667,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="sect2">
 <h3 id="virtual_host_context"><a class="link" href="#virtual_host_context">Virtual Host Context</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Default context values provided via vhost config files</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Default context values provided via <a href="deployment/vhosts.ahtml#virtual-host-context">vhost config files</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -2105,7 +2105,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-02 14:35:59 UTC
+Last updated 2025-06-03 13:30:30 UTC
 </div>
 </div>
 </body>

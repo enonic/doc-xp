@@ -537,13 +537,13 @@ Depending on the interface a widget is implementing, controller may be initialis
 <p>When the application is deployed, the controller will be accessible from</p>
 </div>
 <div class="paragraph">
-<p><code>&lt;server&gt;:&lt;port&gt;/admin/&lt;app-name&gt;/&lt;tool-name&gt;/_/admin:widget/&lt;widget-app-name&gt;/&lt;widget-name&gt;</code> (i.e. "localhost:8080/admin/com.enonic.xp.app.main/home/_/admin:widget/com.enonic.xp.app.main/launcher")</p>
+<p><code>&lt;server&gt;:&lt;port&gt;/admin/&lt;app-name&gt;/&lt;tool-name&gt;/_/admin:widget/&lt;widget-app-name&gt;/&lt;widget-name&gt;</code> (i.e. <code>localhost:8080/admin/com.enonic.xp.app.main/home/_/admin:widget/com.enonic.xp.app.main/launcher</code>)</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="icon"><a class="link" href="#icon">Icon</a></h3>
 <div class="paragraph">
-<p>Widgets may also have icons. Simply place an SVG or PNG file into the widget folder, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.svg`</code></p>
+<p>Widgets may also have icons. Simply place an SVG or PNG file into the widget folder, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.svg</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -564,7 +564,7 @@ Widget icon will not be used for Dashboard widgets, only for Content Studio widg
 <h2 id="widget_types_interface"><a class="link" href="#widget_types_interface">Widget Types (Interface)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Widget interface is simply a unique identifier (or widget type, if you will) that links the widget to its extension point (i.e. Dashboard or Content Studio&#8217;s context panel). XP currently supports one type of widgets: Dashboard Widgets (interface <code>admin.dashboard</code>).</p>
+<p>Widget interface is simply a unique identifier (or widget type, if you will) that links the widget to its extension point (i.e. Dashboard or Content Studio&#8217;s context panel). One well-known interface is <code>admin.dashboard</code> - <a href="#dashboard_widgets">Dashboard Widgets</a> that are displayed on the Admin Dashboard screen.</p>
 </div>
 <div class="paragraph">
 <p>Admin Tools are required to specify the widget interfaces (but not widget themselves) they support in their descriptor file, i.e. <code>admin/tools/&lt;tool-name&gt;/&lt;tool-name&gt;.xml</code>.</p>
@@ -577,10 +577,10 @@ Widget icon will not be used for Dashboard widgets, only for Content Studio widg
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;tool&gt;
   &lt;!--...--&gt;
   &lt;apis&gt;
-    &lt;api&gt;admin:widget&lt;/api&gt; &lt;!-- 1 --&gt;
+    &lt;api&gt;admin:widget&lt;/api&gt; <i class="conum" data-value="1"></i><b>(1)</b>
   &lt;/apis&gt;
   &lt;interfaces&gt;
-     &lt;interface&gt;admin.dashboard&lt;/interface&gt; &lt;!-- 2 --&gt;
+     &lt;interface&gt;admin.dashboard&lt;/interface&gt; <i class="conum" data-value="2"></i><b>(2)</b>
   &lt;/interfaces&gt;
 &lt;/tool&gt;</code></pre>
 </div>
@@ -825,7 +825,7 @@ Widgets with equal order or no order will be placed based on their size (to fit 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-02 14:35:59 UTC
+Last updated 2025-06-03 13:30:30 UTC
 </div>
 </div>
 </body>

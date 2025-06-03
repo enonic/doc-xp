@@ -443,7 +443,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#attachment_url">Attachment URL</a></li>
 <li><a href="#image_url">Image URL</a></li>
-<li><a href="#scaling_methods">Scaling methods</a>
+<li><a href="#media_scope">Media scope</a></li>
+<li><a href="#scaling-methods">Scaling methods</a>
 <ul class="sectlevel2">
 <li><a href="#block">Block</a></li>
 <li><a href="#height">Height</a></li>
@@ -506,7 +507,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="attachment_url"><a class="link" href="#attachment_url">Attachment URL</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The image API is usually used from <a href="../../api/lib-portal.ahtml#attachmenturl">Portal API, attachmentUrl</a><br></p>
+<p>The image API is usually used from <a href="../../api/lib-portal.ahtml#attachmentUrl">Portal API, attachmentUrl</a><br></p>
 </div>
 <div class="paragraph">
 <p>An attachment URL consists of the following components:</p>
@@ -514,45 +515,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Base URL<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>For Site Engine <code>:8080/site/&lt;project&gt;/&lt;branch&gt;/&lt;path-to-site&gt;/_/media:attachment/</code></p>
+<p>Base URL<br>
+For Site Engine <code>:8080/site/&lt;project&gt;/&lt;branch&gt;/&lt;path-to-site&gt;/_/media:attachment/</code>
+For API Engine <code>:8080/api/media:attachment/</code></p>
 </li>
 <li>
-<p>For API Engine <code>:8080/api/media:attachment/</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Attachment Locator with optional draft branch and optional fingerprint<br>
-<code>&lt;media-project&gt;(:&lt;media-branch&gt;)/&lt;content-id&gt;(:&lt;attachment-fingerprint&gt;)/&lt;attachment-name&gt;</code><br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Media branch is specified only if it is not <code>master</code> (which means published content). Specifying <code>master</code> branch is an error - to avoid cache pollution. Since we only have <code>master</code> and <code>draft</code> there are only two options: <code>/&lt;media-project&gt;</code>/ and <code>/&lt;media-project&gt;:draft/</code></p>
+<p>Media Locator with an optional (draft) branch<br>
+<code>&lt;media-project&gt;(:&lt;media-branch&gt;)/&lt;content-id&gt;</code><br>
+Media branch is specified only if it is not <code>master</code> (which means published content). Specifying <code>master</code> branch is an error - to avoid cache pollution. Since we only have <code>master</code> and <code>draft</code> there are only two options: <code>/&lt;media-project&gt;/</code> and <code>/&lt;media-project&gt;:draft/</code></p>
 </li>
 <li>
-<p>fingerprint is not required. If not supplied the response will not contain "immutable" <code>Cache-Control</code> header.</p>
-</li>
-</ul>
-</div>
+<p>(Optional) attachment fingerprint<br>
+<code>:&lt;attachment-fingerprint&gt;</code> - the fingerprint of the attachment. Some older versions of XP may not have created an attachment with SHA checksum, in which case it fingerprint not used.<br>
+If fingerprint is not supplied the response will not contain "immutable" <code>Cache-Control</code> header.</p>
 </li>
 <li>
-<p>Optional download parameter<br>
+<p>Attachment name<br>
+<code>&lt;attachment-name&gt;</code> is not a Content Name, but the name of the attachment itself, which is usually the file name.</p>
+</li>
+<li>
+<p>(Optional) download parameter<br>
 <code>?download</code> - the response will contain <code>Content-Disposition</code> header, if specified.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Example:
-  <code>/site/site-project/draft/mysite/_/media:attachment/media-project:draft/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:ec25d6e4126c7064f82aaab8b34693fc/attachment.png?download</code></p>
+<p>Example of an attachment URL on the root of a live site behind <a href="../../deployment/vhosts.ahtml">Virtual Host</a>:</p>
 </div>
-<div class="paragraph">
-<p>Usually, for Site Engine, <code>&lt;project&gt;</code> and <code>&lt;media-project&gt;</code> are the same as well <code>&lt;branch&gt;</code> and optional <code>&lt;media-branch&gt;</code>. This is the default behavior and by default other options are prohibited. This can be configured with <code>endpoint.media.scope = &lt;project1:draft&gt;, &lt;project2&gt;</code> Virtual Host Context.
-For Universal API Engine <code>/api</code> the default behavior is opposite - it is possible to specify any available project and branch by default.</p>
+<div class="listingblock">
+<div class="content">
+<pre>/_/media:attachment/media-project/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:ec25d6e4126c7064f82aaab8b34693fc/attachment.png?download</pre>
+</div>
 </div>
 </div>
 </div>
@@ -560,11 +553,8 @@ For Universal API Engine <code>/api</code> the default behavior is opposite - it
 <h2 id="image_url"><a class="link" href="#image_url">Image URL</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO. This is a copy from legacy Image Service. URL formats are invalid.</p>
-</div>
-<div class="paragraph">
 <p>The image API is usually used from one of our APIs:<br>
-<a href="../../api/lib-portal.ahtml#imageurl">Portal API, imageUrl</a><br>
+<a href="../../api/lib-portal.ahtml#imageUrl">Portal API, imageUrl</a><br>
 <a href="https://developer.enonic.com/docs/guillotine/stable/usage#accessing_images">Guillotine api, imageUrl</a></p>
 </div>
 <div class="paragraph">
@@ -573,20 +563,22 @@ For Universal API Engine <code>/api</code> the default behavior is opposite - it
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Endpoint, followed by a forward slash.<br>
-Format: <code>:8080/site/&lt;project&gt;/&lt;branch&gt;/&lt;path-to-site&gt;/_/media:image/</code><br>
-On a live site behind virtual host, everything before the path is typically hidden.</p>
+<p>Base URL<br>
+For Site Engine <code>:8080/site/&lt;project&gt;/&lt;branch&gt;/&lt;path-to-site&gt;/_/media:image/</code>
+For API Engine <code>:8080/api/media:image/</code></p>
 </li>
 <li>
-<p>Content key, followed by a colon.<br>
-Example: <code>c82262a6-77d6-4276-b0e7-fe82f4eb57b8:</code></p>
+<p>Media Locator with an optional (draft) branch<br>
+<code>&lt;media-project&gt;(:&lt;media-branch&gt;)/&lt;content-id&gt;</code><br>
+Media branch is specified only if it is not <code>master</code> (which means published content). Specifying <code>master</code> branch is an error - to avoid cache pollution. Since we only have <code>master</code> and <code>draft</code> there are only two options: <code>/&lt;media-project&gt;/</code> and <code>/&lt;media-project&gt;:draft/</code></p>
 </li>
 <li>
-<p>Content version key, followed by a forward slash.<br>
-Example: <code>1feb57ed672f8c3b9fd6d4614878dafd9882298b/</code></p>
+<p>(Optional) image fingerprint<br>
+<code>:&lt;image-fingerprint&gt;</code> - the fingerprint of the image. Some older versions of XP may not have created an attachment with SHA checksum, in which case it fingerprint not used.<br>
+If fingerprint is not supplied the response will not contain "immutable" <code>Cache-Control</code> header.</p>
 </li>
 <li>
-<p>Scaling (method followed by arguments, separated by dashes), followed by a forward slash.<br>
+<p>Scaling (<a href="#scaling-methods">method</a> followed by arguments, separated by dashes), followed by a forward slash.<br>
 Example: <code>block-300-100/</code></p>
 </li>
 <li>
@@ -640,17 +632,26 @@ Content with MIME type <code>image/gif</code> and <code>image/svg+xml</code> ret
 </table>
 </div>
 <div class="paragraph">
-<p>Example of an image URL on the root of a live site behind virtualhost:</p>
+<p>Example of an image URL on the root of a live site behind  <a href="../../deployment/vhosts.ahtml">Virtual Host</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>/_/media:image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.png.jpg?background=0x777777&amp;filter=sharpen%28%29%3Brounded%2820%2C3%29</pre>
+<pre>/_/media:image/media-project/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.png.jpg?background=0x777777&amp;filter=sharpen%28%29%3Brounded%2820%2C3%29</pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="scaling_methods"><a class="link" href="#scaling_methods">Scaling methods</a></h2>
+<h2 id="media_scope"><a class="link" href="#media_scope">Media scope</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Usually, for Site Engine, <code>&lt;project&gt;</code> and <code>&lt;media-project&gt;</code> are the same as well <code>&lt;branch&gt;</code> and optional <code>&lt;media-branch&gt;</code>. This is the default behavior and by default other options are prohibited. This can be configured with <code>endpoint.media.scope = &lt;project1:draft&gt;, &lt;project2&gt;</code>  <a href="../../deployment/vhosts.ahtml#virtual_host_context">Virtual Host Context</a>.<br>
+For Universal API Engine <code>/api</code> the default behavior is opposite - it is possible to specify any available project and branch by default.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="scaling-methods"><a class="link" href="#scaling-methods">Scaling methods</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="block"><a class="link" href="#block">Block</a></h3>
@@ -1561,7 +1562,7 @@ sepia(25)</pre>
 </div>
 <div class="sect2">
 <h3 id="sharpen"><a class="link" href="#sharpen">Sharpen</a></h3>
-<div id="sharpen" class="imageblock">
+<div class="imageblock">
 <div class="content">
 <img src="media/styling-sharpen.jpg" alt="Sharpen effect" width="152px">
 </div>
@@ -1601,7 +1602,7 @@ If the source image has a lot of compression artifacts or has very low resolutio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-02 14:35:59 UTC
+Last updated 2025-06-03 13:30:30 UTC
 </div>
 </div>
 </body>
