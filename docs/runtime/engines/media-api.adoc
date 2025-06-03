@@ -14,8 +14,8 @@ The Media Attachment API provides direct access to Content Attachments without p
 
 Both APIs are unconditionally enabled on the site engine and available on `:8080/site/<repo>/<branch>/<path-to-site>/_/media:<image|attachment>/` endpoint.
 
-
-== Attachment URL
+[[attachment-api]]
+== Attachment API
 
 The image API is usually used from <<../../api/lib-portal#attachmentUrl, Portal API, attachmentUrl>> +
 
@@ -39,12 +39,13 @@ An attachment URL consists of the following components:
 . (Optional) download parameter +
   `?download` - the response will contain `Content-Disposition` header, if specified.
 
-Example of an attachment URL on the root of a live site behind <<../../deployment/vhosts#,Virtual Host>>:
+Example of an attachment URL on the root of a live site behind <<../../deployment/vhosts#virtual-hosts,Virtual Host>>:
 ----
 /_/media:attachment/media-project/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:ec25d6e4126c7064f82aaab8b34693fc/attachment.png?download
 ----
 
-== Image URL
+[[image-api]]
+== Image API
 
 The image API is usually used from one of our APIs: +
 <<../../api/lib-portal#imageUrl, Portal API, imageUrl>> +
@@ -79,14 +80,14 @@ NOTE: Supported format extensions are `.jpg`, `.png` and `.gif`. Other extension
 
 WARNING: Content with MIME type `image/gif` and `image/svg+xml` returned as-is without any processing.
 
-Example of an image URL on the root of a live site behind  <<../../deployment/vhosts#,Virtual Host>>:
+Example of an image URL on the root of a live site behind  <<../../deployment/vhosts#virtual-hosts,Virtual Host>>:
 ----
 /_/media:image/media-project/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.png.jpg?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29
 ----
 
 == Media scope
 
-Usually, for Site Engine, `<project>` and `<media-project>` are the same as well `<branch>` and optional `<media-branch>`. This is the default behavior and by default other options are prohibited. This can be configured with `endpoint.media.scope = <project1:draft>, <project2>`  <<../../deployment/vhosts#virtual_host_context,Virtual Host Context>>. +
+Usually, for Site Engine, `<project>` and `<media-project>` are the same as well `<branch>` and optional `<media-branch>`. This is the default behavior and by default other options are prohibited. This can be configured with `endpoint.media.scope = <project1:draft>, <project2>`  <<../../deployment/vhosts#virtual-host-context,Virtual Host Context>>. +
 For Universal API Engine `/api` the default behavior is opposite - it is possible to specify any available project and branch by default.
 
 [[scaling-methods]]

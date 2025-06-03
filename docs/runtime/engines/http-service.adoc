@@ -5,14 +5,14 @@
 ====
 HTTP Service is deprecated and will be removed in future releases.
 
-<<api-service#,Universal API>> is designed to substitute HTTP Service.
+<<api-engine#, Universal API>> is designed to substitute HTTP Service.
 
 It is possible to control its availability via `legacy.httpService.enabled` parameter in `com.enonic.xp.portal.cfg`
 ====
 
 
 HTTP Service enable mouting of <<../../framework/http#http-controller,http controllers>> safely made available within an application (or site's) url space, without the use of routers.
-Due to the URL-pattern created, an http service will never conflict with other application url patterns. 
+Due to the URL-pattern created, an http service will never conflict with other application url patterns.
 Services are in particular useful when used in the <<site-engine#, Site engine>> or webapps where URLs are not predictable.
 
 == Controller
