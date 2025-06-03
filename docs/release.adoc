@@ -21,12 +21,12 @@ include::.variables.adoc[]
 
 === Widget API
 
-`lib-admin.widgetUrl`
+- <<admin/widgets#, Widget API>> replaces the old Admin Widgets
 
 === Permissions
 
 - no more `inheritsPermissions` flag on Node
-- content permissions applied on master and draft
+- content permissions applied on `master` and `draft`
 - node permissions can be applied on multiple branches simultaneously
 
 === Node Patch
@@ -35,7 +35,7 @@ include::.variables.adoc[]
 
 === Virtual Host Context
 
-- Default context values provided via vhost config files
+Default context values provided via <<deployment/vhosts#virtual-host-context,vhost config files>>
 
 === Other
 

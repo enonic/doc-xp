@@ -17,47 +17,54 @@ Both APIs are unconditionally enabled on the site engine and available on `:8080
 
 == Attachment URL
 
-The image API is usually used from <<../../api/lib-portal#attachmenturl, Portal API, attachmentUrl>> +
+The image API is usually used from <<../../api/lib-portal#attachmentUrl, Portal API, attachmentUrl>> +
 
 An attachment URL consists of the following components:
 
 . Base URL +
-- For Site Engine `+:8080/site/<project>/<branch>/<path-to-site>/_/media:attachment/+`
-- For API Engine `+:8080/api/media:attachment/+`
+ For Site Engine `+:8080/site/<project>/<branch>/<path-to-site>/_/media:attachment/+`
+ For API Engine `+:8080/api/media:attachment/+`
 
-. Attachment Locator with optional draft branch and optional fingerprint +
-  `<media-project>(:<media-branch>)/<content-id>(:<attachment-fingerprint>)/<attachment-name>` +
-  * Media branch is specified only if it is not `master` (which means published content). Specifying `master` branch is an error - to avoid cache pollution. Since we only have `master` and `draft` there are only two options: `/<media-project>`/ and `/<media-project>:draft/`
-  * fingerprint is not required. If not supplied the response will not contain "immutable" `Cache-Control` header.
+. Media Locator with an optional (draft) branch +
+  `<media-project>(:<media-branch>)/<content-id>` +
+  Media branch is specified only if it is not `master` (which means published content). Specifying `master` branch is an error - to avoid cache pollution. Since we only have `master` and `draft` there are only two options: `/<media-project>/` and `/<media-project>:draft/`
 
-. Optional download parameter +
+. (Optional) attachment fingerprint +
+  `:<attachment-fingerprint>` - the fingerprint of the attachment. Some older versions of XP may not have created an attachment with SHA checksum, in which case it fingerprint not used. +
+  If fingerprint is not supplied the response will not contain "immutable" `Cache-Control` header.
+
+. Attachment name +
+  `<attachment-name>` is not a Content Name, but the name of the attachment itself, which is usually the file name.
+
+. (Optional) download parameter +
   `?download` - the response will contain `Content-Disposition` header, if specified.
 
-Example:
-  `/site/site-project/draft/mysite/_/media:attachment/media-project:draft/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:ec25d6e4126c7064f82aaab8b34693fc/attachment.png?download`
-
-Usually, for Site Engine, `<project>` and `<media-project>` are the same as well `<branch>` and optional `<media-branch>`. This is the default behavior and by default other options are prohibited. This can be configured with `endpoint.media.scope = <project1:draft>, <project2>` Virtual Host Context.
-For Universal API Engine `/api` the default behavior is opposite - it is possible to specify any available project and branch by default.
+Example of an attachment URL on the root of a live site behind <<../../deployment/vhosts#,Virtual Host>>:
+----
+/_/media:attachment/media-project/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:ec25d6e4126c7064f82aaab8b34693fc/attachment.png?download
+----
 
 == Image URL
 
-TODO. This is a copy from legacy Image Service. URL formats are invalid.
-
-
 The image API is usually used from one of our APIs: +
-<<../../api/lib-portal#imageurl, Portal API, imageUrl>> +
+<<../../api/lib-portal#imageUrl, Portal API, imageUrl>> +
 https://developer.enonic.com/docs/guillotine/stable/usage#accessing_images[Guillotine api, imageUrl]
 
 An image URL consists of the following components:
 
-. Endpoint, followed by a forward slash. +
-  Format: `:8080/site/<project>/<branch>/<path-to-site>/_/media:image/` +
-  On a live site behind virtual host, everything before the path is typically hidden.
-. Content key, followed by a colon. +
-  Example: `c82262a6-77d6-4276-b0e7-fe82f4eb57b8:`
-. Content version key, followed by a forward slash. +
-  Example: `1feb57ed672f8c3b9fd6d4614878dafd9882298b/`
-. Scaling (method followed by arguments, separated by dashes), followed by a forward slash. +
+. Base URL +
+ For Site Engine `+:8080/site/<project>/<branch>/<path-to-site>/_/media:image/+`
+ For API Engine `+:8080/api/media:image/+`
+
+. Media Locator with an optional (draft) branch +
+`<media-project>(:<media-branch>)/<content-id>` +
+Media branch is specified only if it is not `master` (which means published content). Specifying `master` branch is an error - to avoid cache pollution. Since we only have `master` and `draft` there are only two options: `/<media-project>/` and `/<media-project>:draft/`
+
+. (Optional) image fingerprint +
+`:<image-fingerprint>` - the fingerprint of the image. Some older versions of XP may not have created an attachment with SHA checksum, in which case it fingerprint not used. +
+If fingerprint is not supplied the response will not contain "immutable" `Cache-Control` header.
+
+. Scaling (<<scaling-methods,method>> followed by arguments, separated by dashes), followed by a forward slash. +
   Example: `block-300-100/`
 . File name equal to content name. +
   Example: `content-name.png`
@@ -72,11 +79,17 @@ NOTE: Supported format extensions are `.jpg`, `.png` and `.gif`. Other extension
 
 WARNING: Content with MIME type `image/gif` and `image/svg+xml` returned as-is without any processing.
 
-Example of an image URL on the root of a live site behind virtualhost:
+Example of an image URL on the root of a live site behind  <<../../deployment/vhosts#,Virtual Host>>:
 ----
-/_/media:image/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.png.jpg?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29
+/_/media:image/media-project/c82262a6-77d6-4276-b0e7-fe82f4eb57b8:1feb57ed672f8c3b9fd6d4614878dafd9882298b/block-300-100/content-name.png.jpg?background=0x777777&filter=sharpen%28%29%3Brounded%2820%2C3%29
 ----
 
+== Media scope
+
+Usually, for Site Engine, `<project>` and `<media-project>` are the same as well `<branch>` and optional `<media-branch>`. This is the default behavior and by default other options are prohibited. This can be configured with `endpoint.media.scope = <project1:draft>, <project2>`  <<../../deployment/vhosts#virtual_host_context,Virtual Host Context>>. +
+For Universal API Engine `/api` the default behavior is opposite - it is possible to specify any available project and branch by default.
+
+[[scaling-methods]]
 == Scaling methods
 
 === Block
@@ -535,8 +548,8 @@ sepia()
 sepia(25)
 ----
 
-=== Sharpen
 [[sharpen]]
+=== Sharpen
 
 image::styling-sharpen.jpg[Sharpen effect, 152px]
 
