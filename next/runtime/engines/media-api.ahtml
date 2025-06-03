@@ -441,8 +441,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#attachment_url">Attachment URL</a></li>
-<li><a href="#image_url">Image URL</a></li>
+<li><a href="#attachment-api">Attachment API</a></li>
+<li><a href="#image-api">Image API</a></li>
 <li><a href="#media_scope">Media scope</a></li>
 <li><a href="#scaling-methods">Scaling methods</a>
 <ul class="sectlevel2">
@@ -504,7 +504,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="attachment_url"><a class="link" href="#attachment_url">Attachment URL</a></h2>
+<h2 id="attachment-api"><a class="link" href="#attachment-api">Attachment API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The image API is usually used from <a href="../../api/lib-portal.ahtml#attachmentUrl">Portal API, attachmentUrl</a><br></p>
@@ -540,7 +540,7 @@ If fingerprint is not supplied the response will not contain "immutable" <code>C
 </ol>
 </div>
 <div class="paragraph">
-<p>Example of an attachment URL on the root of a live site behind <a href="../../deployment/vhosts.ahtml">Virtual Host</a>:</p>
+<p>Example of an attachment URL on the root of a live site behind <a href="../../deployment/vhosts.ahtml#virtual-hosts">Virtual Host</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -550,7 +550,7 @@ If fingerprint is not supplied the response will not contain "immutable" <code>C
 </div>
 </div>
 <div class="sect1">
-<h2 id="image_url"><a class="link" href="#image_url">Image URL</a></h2>
+<h2 id="image-api"><a class="link" href="#image-api">Image API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The image API is usually used from one of our APIs:<br>
@@ -632,7 +632,7 @@ Content with MIME type <code>image/gif</code> and <code>image/svg+xml</code> ret
 </table>
 </div>
 <div class="paragraph">
-<p>Example of an image URL on the root of a live site behind  <a href="../../deployment/vhosts.ahtml">Virtual Host</a>:</p>
+<p>Example of an image URL on the root of a live site behind  <a href="../../deployment/vhosts.ahtml#virtual-hosts">Virtual Host</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -645,7 +645,7 @@ Content with MIME type <code>image/gif</code> and <code>image/svg+xml</code> ret
 <h2 id="media_scope"><a class="link" href="#media_scope">Media scope</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Usually, for Site Engine, <code>&lt;project&gt;</code> and <code>&lt;media-project&gt;</code> are the same as well <code>&lt;branch&gt;</code> and optional <code>&lt;media-branch&gt;</code>. This is the default behavior and by default other options are prohibited. This can be configured with <code>endpoint.media.scope = &lt;project1:draft&gt;, &lt;project2&gt;</code>  <a href="../../deployment/vhosts.ahtml#virtual_host_context">Virtual Host Context</a>.<br>
+<p>Usually, for Site Engine, <code>&lt;project&gt;</code> and <code>&lt;media-project&gt;</code> are the same as well <code>&lt;branch&gt;</code> and optional <code>&lt;media-branch&gt;</code>. This is the default behavior and by default other options are prohibited. This can be configured with <code>endpoint.media.scope = &lt;project1:draft&gt;, &lt;project2&gt;</code>  <a href="../../deployment/vhosts.ahtml#virtual-host-context">Virtual Host Context</a>.<br>
 For Universal API Engine <code>/api</code> the default behavior is opposite - it is possible to specify any available project and branch by default.</p>
 </div>
 </div>
@@ -1602,7 +1602,7 @@ If the source image has a lot of compression artifacts or has very low resolutio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-03 13:30:30 UTC
+Last updated 2025-06-03 13:55:14 UTC
 </div>
 </div>
 </body>

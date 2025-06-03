@@ -621,10 +621,10 @@ To enable it, <code>&lt;mount&gt;true&lt;/mount&gt;</code> should be set in the 
 <p>The Media APIs is a built-in API that provides access to media files in CMS repositories.</p>
 </div>
 <div class="paragraph">
-<p><a href="image-service.ahtml">Media Image</a> API is available real-time processing and delivery of rasterized RGB/RGBa image media.</p>
+<p><a href="media-api.ahtml#image-api">Media Image API</a> is available real-time processing and delivery of rasterized RGB/RGBa image media.</p>
 </div>
 <div class="paragraph">
-<p>Media Attachment API gives access to Content attached binaries - like PDFs, Word documents, etc.</p>
+<p><a href="media-api.ahtml#attachment-api">Media Attachment API</a> gives access to Content attached binaries - like PDFs, Word documents, etc.</p>
 </div>
 <div class="paragraph">
 <p>These two APIs are always mounted on Generic Endpoint as well as on Sites. Admin Tools and Webapps can also mount them by specifying them in the <code>api</code> element of the engine descriptor.</p>
@@ -709,7 +709,7 @@ This list includes, but not limited to, the following:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-03 13:30:30 UTC
+Last updated 2025-06-03 13:55:14 UTC
 </div>
 </div>
 </body>
