@@ -237,7 +237,7 @@
       ]
     },    
     {
-      "title": "Admin",
+      "title": "XP Admin",
       "document": "admin",
       "menuItems": [
         {
@@ -271,25 +271,21 @@
       ]
     },
     {
-      "title": "Platform",
-      "document": "platform",
+      "title": "API",
+      "document": "runtime/engines/api-engine",
       "menuItems": [
         {
-          "title": "Architecture",
-          "document": "platform/architecture"
+          "title": "Media API",
+          "document": "runtime/engines/media-api"
         },
         {
-          "title": "Web APIs",
-          "document": "runtime/engines/api-engine",
+          "title": "Component API",
+          "document": "runtime/engines/site-engine/component-service"
+        },
+        {
+          "title": "Deprecated APIs",
+          "document": "apis/deprecated",
           "menuItems": [
-            {
-              "title": "Media API",
-              "document": "runtime/engines/media-api"
-            },
-            {
-              "title": "Component API",
-              "document": "runtime/engines/site-engine/component-service"
-            },
             {
               "title": "Asset service",
               "document": "runtime/engines/asset-service"
@@ -301,12 +297,18 @@
             {
               "title": "Image service",
               "document": "runtime/engines/site-engine/image-service"
-            },
-            {
-              "title": "IDprovider service",
-              "document": "runtime/engines/idprovider-service"
             }
           ]
+        }
+      ]
+    },
+    {
+      "title": "The Platform",
+      "document": "platform",
+      "menuItems": [
+        {
+          "title": "Architecture",
+          "document": "platform/architecture"
         },
         {
           "title": "Runtime",
@@ -317,11 +319,15 @@
               "document": "runtime/engines"
             },
             {
-              "title": "Management Endpoint",
+              "title": "IDprovider",
+              "document": "runtime/engines/idprovider-service"
+            },
+            {
+              "title": "Management",
               "document": "runtime/management"
             },
             {
-              "title": "Statistics Endpoint",
+              "title": "Statistics",
               "document": "runtime/statistics"
             }
           ]
@@ -493,7 +499,7 @@
           ]
         },
         {
-          "title": "Web APIs",
+          "title": "APIs",
           "document": "runtime/engines/api-engine"
         },
         {
@@ -649,6 +655,10 @@
       ]
     },
     {
+      "title": "Enonic Cloud",
+      "document": "cloud"
+    },
+    {
       "title": "Hosting",
       "document": "deployment",
       "menuItems": [
@@ -661,8 +671,16 @@
           "document": "deployment/distro"
         },
         {
-          "title": "Docker image",
+          "title": "Docker",
           "document": "deployment/docker"
+        },
+        {
+          "title": "Kubernetes",
+          "document": "deployment/k8s"
+        },
+        {
+          "title": "Systemd",
+          "document": "deployment/systemd"
         },
         {
           "title": "Vhosts",
@@ -675,10 +693,6 @@
         {
           "title": "Backup & restore",
           "document": "deployment/backup-restore"
-        },
-        {
-          "title": "Systemd",
-          "document": "deployment/systemd"
         },
         {
           "title": "Clustering",
