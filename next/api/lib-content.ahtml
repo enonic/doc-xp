@@ -652,7 +652,7 @@ addAttachment({
 <div class="sect2">
 <h3 id="archive"><a class="link" href="#archive">archive</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.8.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>Archives a content</p>
@@ -1351,7 +1351,7 @@ if (result) {
 <div class="sect2">
 <h3 id="duplicate"><a class="link" href="#duplicate">duplicate</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span> Duplicates a content.</p>
+<p><span class="image"><span class="alt">XP 7.12.0</span></span> Duplicates a content.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -1588,7 +1588,7 @@ if (result) {
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">versionId <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.2.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.2.0</text></g></svg></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">versionId <span class="image"><span class="alt">XP 7.2.0</span></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1929,7 +1929,7 @@ const expected = {
 <div class="sect2">
 <h3 id="getoutbounddependencies"><a class="link" href="#getoutbounddependencies">getOutboundDependencies</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.2.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.2.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.2.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>Returns the list of content items that are outbound dependencies of specified content.</p>
@@ -2764,7 +2764,7 @@ try {
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>Not in use from</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch where the content to be published is stored.</p>
+<p><em>Not in use from</em> <span class="image"><span class="alt">XP 7.12.0</span></span>. The branch where the content to be published is stored.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2773,7 +2773,7 @@ try {
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>Not in use since</em> <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span>. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master</p>
+<p><em>Not in use since</em> <span class="image"><span class="alt">XP 7.12.0</span></span>. The branch to which the content should be published. Technically, publishing is just a move from one branch to another, and publishing user content from master to draft is therefore also valid usage of this function, which may be practical if user input to a web-page is stored on master</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2969,7 +2969,7 @@ const expected = {
 <p><strong>object</strong> : Result of query</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.5.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.5.0</text></g></svg></span> If <code>sort</code> was specified, results will contain system meta properties <code>_sort</code> and <code>_score: null</code>, otherwise <code>_score</code>
+<p><span class="image"><span class="alt">XP 7.5.0</span></span> If <code>sort</code> was specified, results will contain system meta properties <code>_sort</code> and <code>_score: null</code>, otherwise <code>_score</code>
  will have a relevant value.</p>
 </div>
 <div class="paragraph lead">
@@ -3274,7 +3274,7 @@ removeAttachment({key: '3381d720-993e-4576-b089-aaf67280a74c', name: ['document'
 <div class="sect2">
 <h3 id="resetinheritance"><a class="link" href="#resetinheritance">resetInheritance</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.6.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.6.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.6.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>Resets custom inheritance flags of a content item. For an item that was inherited from a parent content project/layer this action
@@ -3348,7 +3348,7 @@ resetInheritance({key: '/mySite/mycontent', projectName: 'layer-no', inherit: ['
 <div class="sect2">
 <h3 id="restore"><a class="link" href="#restore">restore</a></h3>
 <div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span></p>
+<p><span class="image"><span class="alt">XP 7.8.0</span></span></p>
 </div>
 <div class="paragraph">
 <p>Restores a content from the archive</p>
@@ -3866,7 +3866,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-03 13:55:14 UTC
+Last updated 2025-06-05 10:37:33 UTC
 </div>
 </div>
 </body>
