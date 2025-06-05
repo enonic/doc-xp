@@ -237,7 +237,39 @@
       ]
     },    
     {
-      "title": "XP Admin",
+      "title": "API",
+      "document": "runtime/engines/api-engine",
+      "menuItems": [
+        {
+          "title": "Media API",
+          "document": "runtime/engines/media-api"
+        },
+        {
+          "title": "Component API",
+          "document": "runtime/engines/site-engine/component-service"
+        },
+        {
+          "title": "Deprecated APIs",
+          "document": "apis/deprecated",
+          "menuItems": [
+            {
+              "title": "Asset service",
+              "document": "runtime/engines/asset-service"
+            },
+            {
+              "title": "HTTP service",
+              "document": "runtime/engines/http-service"
+            },
+            {
+              "title": "Image service",
+              "document": "runtime/engines/site-engine/image-service"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Admin",
       "document": "admin",
       "menuItems": [
         {
@@ -271,39 +303,7 @@
       ]
     },
     {
-      "title": "API",
-      "document": "runtime/engines/api-engine",
-      "menuItems": [
-        {
-          "title": "Media API",
-          "document": "runtime/engines/media-api"
-        },
-        {
-          "title": "Component API",
-          "document": "runtime/engines/site-engine/component-service"
-        },
-        {
-          "title": "Deprecated APIs",
-          "document": "apis/deprecated",
-          "menuItems": [
-            {
-              "title": "Asset service",
-              "document": "runtime/engines/asset-service"
-            },
-            {
-              "title": "HTTP service",
-              "document": "runtime/engines/http-service"
-            },
-            {
-              "title": "Image service",
-              "document": "runtime/engines/site-engine/image-service"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "The Platform",
+      "title": "Platform",
       "document": "platform",
       "menuItems": [
         {
