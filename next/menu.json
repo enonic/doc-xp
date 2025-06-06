@@ -468,15 +468,61 @@
               "document": "iam/roles"
             }
           ]
+        },
+        {
+          "title": "Hosting",
+          "document": "deployment",
+          "menuItems": [
+            {
+              "title": "Strategies",
+              "document": "deployment/strategies"
+            },
+            {
+              "title": "Distributions",
+              "document": "deployment/distro"
+            },
+            {
+              "title": "Docker",
+              "document": "deployment/docker"
+            },
+            {
+              "title": "Kubernetes",
+              "document": "deployment/k8s"
+            },
+            {
+              "title": "Systemd",
+              "document": "deployment/systemd"
+            },
+            {
+              "title": "Vhosts",
+              "document": "deployment/vhosts"
+            },
+            {
+              "title": "Configuration",
+              "document": "deployment/config"
+            },
+            {
+              "title": "Backup & restore",
+              "document": "deployment/backup-restore"
+            },
+            {
+              "title": "Clustering",
+              "document": "deployment/clustering"
+            },
+            {
+              "title": "Observability",
+              "document": "deployment/observability"
+            }
+          ]
         }
       ]
     },
     {
-      "title": "Development",
+      "title": "Extending",
       "document": "development",
       "menuItems": [
         {
-          "title": "Enonic apps",
+          "title": "Apps (mergeup)",
           "document": "apps"
         },
         {
@@ -564,11 +610,15 @@
           ]
         },
         {
-          "title": "APIs",
+          "title": "/api",
           "document": "runtime/engines/api-engine"
         },
         {
-          "title": "Sites",
+          "title": "/admin",
+          "document": "admin/tools"
+        },
+        {
+          "title": "/site",
           "document": "runtime/engines/site-engine",
           "menuItems": [
             {
@@ -590,33 +640,23 @@
           ]
         },
         {
-          "title": "Web apps",
+          "title": "/webapp",
           "document": "runtime/engines/webapp-engine"
         },
-         {
-          "title": "Extensions",
-          "document": "development/extensions",
-          "menuItems": [
-            {
-              "title": "ID providers",
-              "document": "framework/idprovider"
-            },
-            {
-              "title": "Admin",
-              "document": "admin/tools"
-            },
-            {
-              "title": "Admin Engine",
-              "document": "runtime/engines/admin-engine"
-            },
-            {
-              "title": "Widgets",
-              "document": "admin/widgets"
-            }
-          ]
+        {
+          "title": "ID providers",
+          "document": "framework/idprovider"
         },
         {
-          "title": "System API",
+          "title": "Admin Engine",
+          "document": "runtime/engines/admin-engine"
+        },
+        {
+          "title": "Widgets",
+          "document": "admin/widgets"
+        },
+        {
+          "title": "System APIs",
           "document": "api",
           "menuItems": [
             {
@@ -718,56 +758,6 @@
           ]
         }
       ]
-    },
-    {
-      "title": "Hosting",
-      "document": "deployment",
-      "menuItems": [
-        {
-          "title": "Strategies",
-          "document": "deployment/strategies"
-        },
-        {
-          "title": "Distributions",
-          "document": "deployment/distro"
-        },
-        {
-          "title": "Docker",
-          "document": "deployment/docker"
-        },
-        {
-          "title": "Kubernetes",
-          "document": "deployment/k8s"
-        },
-        {
-          "title": "Systemd",
-          "document": "deployment/systemd"
-        },
-        {
-          "title": "Vhosts",
-          "document": "deployment/vhosts"
-        },
-        {
-          "title": "Configuration",
-          "document": "deployment/config"
-        },
-        {
-          "title": "Backup & restore",
-          "document": "deployment/backup-restore"
-        },
-        {
-          "title": "Clustering",
-          "document": "deployment/clustering"
-        },
-        {
-          "title": "Observability",
-          "document": "deployment/observability"
-        }
-      ]
-    },
-    {
-      "title": "Enonic Cloud",
-      "document": "cloud"
     },
     {
       "title": "Enonic Market",
