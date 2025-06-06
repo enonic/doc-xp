@@ -255,6 +255,10 @@
               "document": "manage/attachments"
             },           
             {
+              "title": "X-data",
+              "document": "manage/x-data"
+            },                  
+            {
               "title": "Page",
               "document": "manage/page",
               "menuItems": [
@@ -265,16 +269,8 @@
                 {
                   "title": "Fragments",
                   "document": "cms/pages/fragments"
-                },
-                {
-                  "title": "Visual editor",
-                  "document": "cms/pages/editor"
                 }
               ]         
-            },                  
-            {
-              "title": "X-data",
-              "document": "manage/x-data"
             },                  
             {
               "title": "Variants",
@@ -292,7 +288,13 @@
         },
         {
           "title": "Preview",
-          "document": "manage/preview"
+          "document": "manage/preview",
+          "menuItems": [
+            {
+              "title": "Visual editor",
+              "document": "cms/pages/editor"
+            }
+          ]
         },
         {
           "title": "Publishing",
@@ -301,7 +303,7 @@
       ]
     },
     {
-      "title": "API",
+      "title": "Content APIs",
       "document": "runtime/engines/api-engine",
       "menuItems": [
         {
@@ -315,58 +317,6 @@
         {
           "title": "Component API",
           "document": "runtime/engines/site-engine/component-service"
-        },
-        {
-          "title": "Legacy APIs",
-          "document": "apis/deprecated",
-          "menuItems": [
-            {
-              "title": "Asset service",
-              "document": "runtime/engines/asset-service"
-            },
-            {
-              "title": "HTTP service",
-              "document": "runtime/engines/http-service"
-            },
-            {
-              "title": "Image service",
-              "document": "runtime/engines/site-engine/image-service"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Admin",
-      "document": "admin",
-      "menuItems": [
-        {
-          "title": "Navigating",
-          "document": "admin/navigating"
-        },
-        {
-          "title": "Users",
-          "document": "admin/users"
-        },
-        {
-          "title": "Applications",
-          "document": "admin/apps"
-        },
-        {
-          "title": "Data management",
-          "document": "admin/repos"
-        },
-        {
-          "title": "System info",
-          "document": "admin/info"
-        },
-        {
-          "title": "Audit Logs",
-          "document": "auditLogs"
-        },
-        {
-          "title": "Task management",
-          "document": "admin/tasks"
         }
       ]
     },
@@ -377,6 +327,50 @@
         {
           "title": "Architecture",
           "document": "platform/architecture"
+        },
+        {
+          "title": "Universal API",
+          "document": "platform/api",
+          "menuItems": [
+            {
+              "title": "TODO",
+              "document": "platform/todo"
+            }
+          ]
+        },
+        {
+          "title": "Admin",
+          "document": "admin",
+          "menuItems": [
+            {
+              "title": "Navigating",
+              "document": "admin/navigating"
+            },
+            {
+              "title": "Users",
+              "document": "admin/users"
+            },
+            {
+              "title": "Applications",
+              "document": "admin/apps"
+            },
+            {
+              "title": "Data management",
+              "document": "admin/repos"
+            },
+            {
+              "title": "System info",
+              "document": "admin/info"
+            },
+            {
+              "title": "Audit Logs",
+              "document": "auditLogs"
+            },
+            {
+              "title": "Task management",
+              "document": "admin/tasks"
+            }
+          ]
         },
         {
           "title": "Runtime",
@@ -420,13 +414,24 @@
               "title": "Branches",
               "document": "storage/branches"
             },
+
             {
-              "title": "Queries (NoQL)",
-              "document": "storage/noql"
+              "title": "Editors",
+              "document": "storage/editors"
+            }
+          ]
+        },
+        {
+          "title": "Search and Query",
+          "document": "platform/query",
+          "menuItems": [
+            {
+              "title": "DSL Queries",
+              "document": "storage/dsl"
             },
             {
-              "title": "Queries (DSL)",
-              "document": "storage/dsl"
+              "title": "NoQL Queries",
+              "document": "storage/noql"
             },
             {
               "title": "Filters",
@@ -439,16 +444,8 @@
             {
               "title": "Highlighting",
               "document": "storage/highlighting"
-            },
-            {
-              "title": "Editors",
-              "document": "storage/editors"
             }
           ]
-        },
-        {
-          "title": "Search and Query",
-          "document": "platform/query"
         },
         {
           "title": "IAM",
@@ -605,7 +602,7 @@
               "document": "framework/idprovider"
             },
             {
-              "title": "Admin apps",
+              "title": "Admin",
               "document": "admin/tools"
             },
             {
@@ -619,7 +616,7 @@
           ]
         },
         {
-          "title": "Core API",
+          "title": "System API",
           "document": "api",
           "menuItems": [
             {
@@ -723,10 +720,6 @@
       ]
     },
     {
-      "title": "Enonic Cloud",
-      "document": "cloud"
-    },
-    {
       "title": "Hosting",
       "document": "deployment",
       "menuItems": [
@@ -773,6 +766,10 @@
       ]
     },
     {
+      "title": "Enonic Cloud",
+      "document": "cloud"
+    },
+    {
       "title": "Enonic Market",
       "document": "apps",
       "menuItems": [
@@ -801,6 +798,24 @@
         {
           "title": "Upgrading Apps",
           "document": "release/apps-upgrade"
+        },
+        {
+          "title": "Legacy APIs",
+          "document": "apis/deprecated",
+          "menuItems": [
+            {
+              "title": "Asset service",
+              "document": "runtime/engines/asset-service"
+            },
+            {
+              "title": "HTTP service",
+              "document": "runtime/engines/http-service"
+            },
+            {
+              "title": "Image service",
+              "document": "runtime/engines/site-engine/image-service"
+            }
+          ]
         }
       ]
     }
