@@ -1,0 +1,18 @@
+= Enonic Development Kit
+:toc: right
+:imagesdir: images
+TODO
+
+== Introduction
+
+Enonic's Development Kit consists of several independent tools:
+
+* https://github.com/enonic/cli-enonic[Enonic CLI]
+* SDK versions of the <<deployment/distro#, Enonic XP distro>>
+* <<development/sandboxes#, Sandboxes>>
+* <<development/build#, Build system>>
+* https://market.enonic.com/starters[Starters]
+* <<api#, System libraries and APIs>>
+* https://market.enonic.com/libraries[Other libraries]
+
+Enonic CLI plays a central role in orhchestrating development activities, including downloading distros, setting up new development projects, building and even deploying to production servers.

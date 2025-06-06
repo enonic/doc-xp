@@ -1,26 +1,49 @@
-= Development and the SDK
+= Extending the platform with Enonic apps
+
 :toc: right
 :imagesdir: development/images
-Application development and the Software Development Kit (SDK)
-
-IMPORTANT: For hands on introduction to development and the SDK, visit the https://developer.enonic.com/start[quickstart], https://developer.enonic.com/docs/developer-101[Developer 101], or https://developer.enonic.com/docs/my-first-site[My first site] tutorials.
+Customize and extend Enonic XP to your needs by building your own apps
 
 == Introduction
 
-The majority of functionality and customizations in Enonic XP is implemented and delivered via <<apps#, applications>>. Application development mainly relates to defining customer specific <<cms#,schemas and content models>> as well as coding based on <<framework#, Enonic's JavaScript Framework>>
+Enonic XP is an extremely modular and customizable platform. Enonic apps can contain anything from <<cms#,content schemas>>, APIs, tasks, admin extensions, id providers, and webapps to modern websites.
 
-To facilitate and ease development, Enonic provides a purpose-specific SDK, libraries, starters and other tools to assist developers in their work.
+Enonic provides a Software Development Kit (SDK) that enable developers to quickly start building.
 
-== SDK
+== Tutorials
 
-The Enonic SDK consists of several independent tools:
+IMPORTANT: For hands on introduction to development and the SDK, visit the https://developer.enonic.com/start[quickstart], https://developer.enonic.com/docs/developer-101[Developer 101], or https://developer.enonic.com/docs/my-first-site[My first site] tutorials.
 
-* https://github.com/enonic/cli-enonic[Enonic CLI]
-* SDK versions of the <<deployment/distro#, Enonic XP distro>>
-* <<development/sandboxes#, Sandboxes>>
-* <<development/build#, Build system>>
-* https://market.enonic.com/starters[Starters]
-* <<api#, Platform libraries and APIs>>
-* https://market.enonic.com/libraries[Other libraries]
+== Enonic apps
 
-The CLI plays a central role in orhchestrating development activities, including downloading distros, setting up new development projects, building and even deploying to productin servers.
+Enonic apps are standalone software packages that can be installed and started within Enonic XP. Content Studio and the Headless API are examples of Enonic apps.
+
+Applications are powered by XP's <<runtime#, runtime>>, which means multiple applications can run within a single instance. Once an application has started, it has access to all platform services: TODO link to system apis.
+
+== Installation
+
+There are four ways to get your applications running on Enonic XP:
+
+Via Admin Console:: Applications can be manually installed through the "Applications" admin app. Once installed, the application will be available for all nodes in an XP cluster.
+
+Via API:: Applications may be installed through the Management API. The applications will be available for all nodes in an XP cluster. This approach is commonly used in a CI/CD setup.
+
+Via File system:: File system deployment is most commonly used during development, but it can also be applied for specialized deployment scenarios. Applications deployed on file will only be available on the local node, and overrides applications installed via other alternatives.
+
+Consider a microservice style highly controlled setup where you bundle your app(s) together with the XP runtime and launch it as a separate instance.
+
+== Life Cycle
+
+In addition to installing and uninstalling, XP applications may be started and stopped.
+This is referred to as the life cycle of the application. During the stop and start phases, applications themselves may execute custom code.
+
+Starting:: Once installed, applications are automatically started on all nodes. During the startup, if it exists, the application's main.js script will be executed.
+
+Stopping:: Before uninstalling, applications are automatically stopped on all nodes.
+During the stopping, if it exists, the disposer of the application's main.js script will be executed.
+
+== Configuration
+
+Applications can be configured by adding a <<deployment/config#, custom configuration file>> `<app-name>.cfg` i.e. `my.custom.app.cfg` to your Enonic instance
+
+

@@ -3,37 +3,24 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: media
 
-Welcome to the Enonic XP reference documentation
+API first Content platform and back-end for your digital experiences.
 
 NOTE: *Quick start?* Head over to our https://developer.enonic.com/start[Quick start guide] to install our CLI, SDK and build your first XP app in a few minutes.
 
-== Platform Introduction
+== Introduction
 
-Enonic XP is a modern stack, customizable content platform
+Enonic XP is an API first Content platform and back-end for your digital experiences.
 
-* Custom content modelling
-* Rich GraphqQL API
-* Move content and configuration between environments
-* Build custom back-ends using JavaScript
-* Integrate with 3rd party identity providers
-* Bring-your-own front-end, or use the platform's framework
-* Ready-made starters available on https://market.enonic.com
+* Customizable GraphqQL API
+* Schema system for structured content
+* Advanced search and querying
+* Extend with JavaScript/TypeScript
+* Flexible and pluggable IAM
+* Portable and Open Source
 
 === Platform components
 
 image::platform-components.png[Platform illustration,1092]
-
-These are the essential platform components and tools:
-
-* <<cms#, Content Management System>>
-* <<iam#, Identity and Access Management - IAM>>
-* <<framework#, Javascript development framework>>
-* <<runtime#, Application runtime>>.
-* <<storage#, NoSQL storage>> for your data.
-* Extensible <<admin#, Admin Console>> for back-office users
-* <<runtime/management#, Remote management API>>
-* <<runtime/statistics#, Statistics API for metrics and monitoring>>
-* https://developer.enonic.com/start[CLI and software development kit].
 
 
 == API
