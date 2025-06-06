@@ -53,19 +53,11 @@
       "document": "cms",
       "menuItems": [
         {
-          "title": "Principles",
+          "title": "Best practice",
           "document": "cms/principles"
         },
         {
-          "title": "Projects",
-          "document": "cms/projects"
-        },
-        {
-          "title": "Layers",
-          "document": "cms/layers"
-        },
-        {
-          "title": "Schema system",
+          "title": "Schema System",
           "document": "cms/schemas",
           "menuItems": [
             {
@@ -193,7 +185,7 @@
           "document": "cms/sites"
         },
         {
-          "title": "Pages",
+          "title": "Page components",
           "document": "cms/pages",
           "menuItems": [
             {
@@ -213,33 +205,109 @@
               "document": "cms/pages/text"
             },
             {
-              "title": "Fragments",
-              "document": "cms/pages/fragments"
-            },
-            {
-              "title": "Filtering",
+              "title": "Component Filtering",
               "document": "cms/pages/filtering"
             },
             {
-              "title": "Component indexing",
+              "title": "Component Indexing",
               "document": "cms/pages/indexing"
-            },
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Content Management",
+      "document": "manage",
+      "menuItems": [
+        {
+        "title": "Content Studio",
+        "document": "manage/content-studio"          
+        },
+        {
+          "title": "Projects",
+          "document": "manage/projects",
+          "menuItems": [
             {
-              "title": "Visual editor",
-              "document": "cms/pages/editor"
+              "title": "Branches",
+              "document": "manage/branches"
             }
           ]
         },
         {
-          "title": "Page templates",
-          "document": "cms/page-templates"
+          "title": "Layers",
+          "document": "manage/layers"
+        },
+        {
+          "title": "Content",
+          "document": "manage/content",
+          "menuItems": [
+            {
+              "title": "Lifecycle",
+              "document": "manage/lifecycle"
+            },            
+            {
+              "title": "Media",
+              "document": "manage/media"
+            },            
+            {
+              "title": "Attachments",
+              "document": "manage/attachments"
+            },           
+            {
+              "title": "Page",
+              "document": "manage/page",
+              "menuItems": [
+                {
+                  "title": "Page templates",
+                  "document": "cms/page-templates"
+                },
+                {
+                  "title": "Fragments",
+                  "document": "cms/pages/fragments"
+                },
+                {
+                  "title": "Visual editor",
+                  "document": "cms/pages/editor"
+                }
+              ]         
+            },                  
+            {
+              "title": "X-data",
+              "document": "manage/x-data"
+            },                  
+            {
+              "title": "Variants",
+              "document": "manage/variants"
+            },
+            {
+              "title": "Permissions",
+              "document": "manage/permissions"
+            }, 
+            {
+              "title": "Versions",
+              "document": "manage/versions"
+            }
+          ]
+        },
+        {
+          "title": "Preview",
+          "document": "manage/preview"
+        },
+        {
+          "title": "Publishing",
+          "document": "manage/publish"
         }
       ]
-    },    
+    },
     {
       "title": "API",
       "document": "runtime/engines/api-engine",
       "menuItems": [
+        {
+          "title": "Headless API",
+          "document": "api/headless"
+        },
         {
           "title": "Media API",
           "document": "runtime/engines/media-api"
@@ -249,7 +317,7 @@
           "document": "runtime/engines/site-engine/component-service"
         },
         {
-          "title": "Deprecated APIs",
+          "title": "Legacy APIs",
           "document": "apis/deprecated",
           "menuItems": [
             {
