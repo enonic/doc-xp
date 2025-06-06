@@ -441,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#platform_introduction">Platform Introduction</a>
+<li><a href="#introduction">Introduction</a>
 <ul class="sectlevel2">
 <li><a href="#platform_components">Platform components</a></li>
 </ul>
@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to the Enonic XP reference documentation</p>
+<p>API first Content platform and back-end for your digital experiences.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -472,33 +472,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="platform_introduction"><a class="link" href="#platform_introduction">Platform Introduction</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP is a modern stack, customizable content platform</p>
+<p>Enonic XP is an API first Content platform and back-end for your digital experiences.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Custom content modelling</p>
+<p>Customizable GraphqQL API</p>
 </li>
 <li>
-<p>Rich GraphqQL API</p>
+<p>Schema system for structured content</p>
 </li>
 <li>
-<p>Move content and configuration between environments</p>
+<p>Advanced search and querying</p>
 </li>
 <li>
-<p>Build custom back-ends using JavaScript</p>
+<p>Extend with JavaScript/TypeScript</p>
 </li>
 <li>
-<p>Integrate with 3rd party identity providers</p>
+<p>Flexible and pluggable IAM</p>
 </li>
 <li>
-<p>Bring-your-own front-end, or use the platform&#8217;s framework</p>
-</li>
-<li>
-<p>Ready-made starters available on <a href="https://market.enonic.com" class="bare">https://market.enonic.com</a></p>
+<p>Portable and Open Source</p>
 </li>
 </ul>
 </div>
@@ -508,40 +505,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="media/platform-components.png" alt="Platform illustration" width="1092">
 </div>
-</div>
-<div class="paragraph">
-<p>These are the essential platform components and tools:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="cms.ahtml">Content Management System</a></p>
-</li>
-<li>
-<p><a href="iam.ahtml">Identity and Access Management - IAM</a></p>
-</li>
-<li>
-<p><a href="framework.ahtml">Javascript development framework</a></p>
-</li>
-<li>
-<p><a href="runtime.ahtml">Application runtime</a>.</p>
-</li>
-<li>
-<p><a href="storage.ahtml">NoSQL storage</a> for your data.</p>
-</li>
-<li>
-<p>Extensible <a href="admin.ahtml">Admin Console</a> for back-office users</p>
-</li>
-<li>
-<p><a href="runtime/management.ahtml">Remote management API</a></p>
-</li>
-<li>
-<p><a href="runtime/statistics.ahtml">Statistics API for metrics and monitoring</a></p>
-</li>
-<li>
-<p><a href="https://developer.enonic.com/start">CLI and software development kit</a>.</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -577,7 +540,7 @@ If you are looking to upgrade from a previous version of XP, check out the <a hr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-06 13:46:38 UTC
+Last updated 2025-06-06 15:30:58 UTC
 </div>
 </div>
 </body>
