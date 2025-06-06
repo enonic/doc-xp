@@ -1,7 +1,7 @@
 {
   "menuItems": [
     {
-      "title": "Getting started",
+      "title": "Introduction",
       "document": "index",
       "menuItems": [
         {
@@ -15,36 +15,36 @@
         {
           "title": "Using docs",
           "document": "about"
-        },
-        {
-          "title": "Headless intro",
-          "document": "headless",
-          "menuItems": [
-            {
-              "title": "GraphQL API",
-              "document": "headless/graphql"
-            },
-            {
-              "title": "Queries",
-              "document": "headless/queries"
-            },
-            {
-              "title": "Media and images",
-              "document": "headless/media"
-            },
-            {
-              "title": "Auth and security",
-              "document": "headless/security"
-            },
-            {
-              "title": "Advanced",
-              "document": "headless/advanced"
-            }
-          ]
         }, 
         {
           "title": "Tutorials",
           "document": "tutorials"
+        }
+      ]
+    },
+    {
+      "title": "Quickstart",
+      "document": "quickstart",
+      "menuItems": [
+        {
+          "title": "GraphQL API",
+          "document": "quickstart/graphql"
+        },
+        {
+          "title": "Queries",
+          "document": "quickstart/queries"
+        },
+        {
+          "title": "Media and images",
+          "document": "quickstart/media"
+        },
+        {
+          "title": "Auth and security",
+          "document": "quickstart/security"
+        },
+        {
+          "title": "Advanced",
+          "document": "quickstart/advanced"
         }
       ]
     },
