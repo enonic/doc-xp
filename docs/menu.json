@@ -27,175 +27,277 @@
       ]
     },
     {
-      "title": "Content Modeling",
-      "document": "cms",
+      "title": "Headless API",
+      "document": "runtime/engines/api-engine",
       "menuItems": [
         {
-          "title": "Best practice",
-          "document": "cms/principles"
+          "title": "Intro",
+          "document": "api/intro"
         },
         {
-          "title": "Schema System",
-          "document": "cms/schemas",
+          "title": "GraphQL API",
+          "document": "api/headless"
+        },
+        {
+          "title": "Media API",
+          "document": "runtime/engines/media-api"
+        },
+        {
+          "title": "Extending the API",
+          "document": "headless/extending"
+        },
+        {
+          "title": "Component API",
+          "document": "runtime/engines/site-engine/component-service"
+        }
+      ]
+    },
+    {
+      "title": "Purple.js",
+      "document": "development",
+      "menuItems": [
+        {
+          "title": "Introduction",
+          "document": "development/intro",
+        },
+        {
+          "title": "Dev kit",
+          "document": "development/edk",
           "menuItems": [
             {
-              "title": "Input Types",
-              "document": "cms/schemas/input-types",
-              "menuItems": [
-                {
-                  "title": "AttachmentUploader",
-                  "document": "cms/schemas/input-types/attachmentuploader"
-                },
-                {
-                  "title": "Checkbox",
-                  "document": "cms/schemas/input-types/checkbox"
-                },
-                {
-                  "title": "Combobox",
-                  "document": "cms/schemas/input-types/combobox"
-                },
-                {
-                  "title": "ContentSelector",
-                  "document": "cms/schemas/input-types/contentselector"
-                },
-                {
-                  "title": "ContentTypeFilter",
-                  "document": "cms/schemas/input-types/contenttypefilter"
-                },
-                {
-                  "title": "CustomSelector",
-                  "document": "cms/schemas/input-types/customselector"
-                },
-                {
-                  "title": "Date",
-                  "document": "cms/schemas/input-types/date"
-                },
-                {
-                  "title": "DateTime",
-                  "document": "cms/schemas/input-types/datetime"
-                },
-                {
-                  "title": "Double",
-                  "document": "cms/schemas/input-types/double"
-                },
-                {
-                  "title": "GeoPoint",
-                  "document": "cms/schemas/input-types/geopoint"
-                },
-                {
-                  "title": "HtmlArea",
-                  "document": "cms/schemas/input-types/htmlarea"
-                },
-                {
-                  "title": "ImageSelector",
-                  "document": "cms/schemas/input-types/imageselector"
-                },
-                {
-                  "title": "Long",
-                  "document": "cms/schemas/input-types/long"
-                },
-                {
-                  "title": "MediaSelector",
-                  "document": "cms/schemas/input-types/mediaselector"
-                },
-                {
-                  "title": "Radiobutton",
-                  "document": "cms/schemas/input-types/radiobutton"
-                },
-                {
-                  "title": "Tag",
-                  "document": "cms/schemas/input-types/tag"
-                },
-                {
-                  "title": "TextArea",
-                  "document": "cms/schemas/input-types/textarea"
-                },
-                {
-                  "title": "TextLine",
-                  "document": "cms/schemas/input-types/textline"
-                },
-                {
-                  "title": "Time",
-                  "document": "cms/schemas/input-types/time"
-                }
-              ]
+            "title": "Sandboxes",
+            "document": "development/sandboxes"
             },
             {
-              "title": "Field set",
-              "document": "cms/schemas/field-set"
+              "title": "Code",
+              "document": "development/code"
             },
             {
-              "title": "Item set",
-              "document": "cms/schemas/item-set"
+              "title": "Building",
+              "document": "development/build"
             },
             {
-              "title": "Option set",
-              "document": "cms/schemas/option-set"
+              "title": "Configuration",
+              "document": "development/config"
             },
             {
-              "title": "Mixins",
-              "document": "cms/schemas/mixins"
+              "title": "TypeScript",
+              "document": "development/typescript"
+            }
+          ]
+        },
+                {
+          "title": "Building APIs",
+          "document": "runtime/engines/api-engine"
+        },
+        {
+          "title": "Buildig Sites",
+          "document": "runtime/engines/site-engine",
+          "menuItems": [
+            {
+              "title": "Mappings",
+              "document": "framework/mappings"
             },
             {
-              "title": "Localization",
-              "document": "cms/schemas/localization"
+              "title": "Components",
+              "document": "framework/components"
+            },
+            {
+              "title": "Processors",
+              "document": "framework/processors"
+            },
+            {
+              "title": "Contributions",
+              "document": "framework/contributions"
             }
           ]
         },
         {
-          "title": "Content Types",
-          "document": "cms/content-types"
+          "title": "Building webapps",
+          "document": "runtime/engines/webapp-engine"
         },
         {
-          "title": "X-data",
-          "document": "cms/x-data"
-        },
-        {
-          "title": "Macros",
-          "document": "cms/macros"
-        },
-        {
-          "title": "Custom styles",
-          "document": "cms/styles"
-        },
-        {
-          "title": "Sites",
-          "document": "cms/sites"
-        },
-        {
-          "title": "Page components",
-          "document": "cms/pages",
+          "title": "Core concepts",
+          "document": "framework",
           "menuItems": [
             {
-              "title": "Regions",
-              "document": "cms/pages/regions"
+              "title": "Controllers",
+              "document": "framework/controllers"
             },
             {
-              "title": "Part component",
-              "document": "cms/pages/parts"
+              "title": "Globals",
+              "document": "framework/globals"
             },
             {
-              "title": "Layout component",
-              "document": "cms/pages/layouts"
+              "title": "Events",
+              "document": "framework/events"
             },
             {
-              "title": "Text component",
-              "document": "cms/pages/text"
+              "title": "HTTP",
+              "document": "framework/http"
             },
             {
-              "title": "Component Filtering",
-              "document": "cms/pages/filtering"
+              "title": "Error handler",
+              "document": "framework/error"
             },
             {
-              "title": "Component Indexing",
-              "document": "cms/pages/indexing"
+              "title": "Filters",
+              "document": "framework/filters"
+            },
+            {
+              "title": "Templating",
+              "document": "framework/templating"
+            },
+            {
+              "title": "Localization",
+              "document": "framework/i18n"
+            },
+            {
+              "title": "Websocket",
+              "document": "framework/websocket"
+            },
+            {
+              "title": "Tasks",
+              "document": "framework/tasks"
+            },
+            {
+              "title": "Task engine",
+              "document": "runtime/task-engine"
+            },            
+            {
+              "title": "Main controller",
+              "document": "framework/main"
+            },
+            {
+              "title": "Java bridge",
+              "document": "framework/java-bridge"
+            }
+          ]
+        },
+        {
+          "title": "Server-side libraries",
+          "document": "api",
+          "menuItems": [
+            {
+              "title": "Admin API",
+              "document": "api/lib-admin"
+            },
+            {
+              "title": "Application API",
+              "document": "api/lib-app"
+            },
+            {
+              "title": "Auditlog API",
+              "document": "api/lib-auditlog"
+            },
+            {
+              "title": "Authentication API",
+              "document": "api/lib-auth"
+            },
+            {
+              "title": "Cluster API",
+              "document": "api/lib-cluster"
+            },
+            {
+              "title": "Common API",
+              "document": "api/lib-common"
+            },
+            {
+              "title": "Content API",
+              "document": "api/lib-content"
+            },
+            {
+              "title": "Context API",
+              "document": "api/lib-context"
+            },
+            {
+              "title": "Event API",
+              "document": "api/lib-event"
+            },
+            {
+              "title": "Export API",
+              "document": "api/lib-export"
+            },
+            {
+              "title": "Grid API",
+              "document": "api/lib-grid"
+            },
+            {
+              "title": "I18N API",
+              "document": "api/lib-i18n"
+            },
+            {
+              "title": "IO API",
+              "document": "api/lib-io"
+            },
+            {
+              "title": "Mail API",
+              "document": "api/lib-mail"
+            },
+            {
+              "title": "Node API",
+              "document": "api/lib-node"
+            },
+            {
+              "title": "Portal API",
+              "document": "api/lib-portal"
+            },
+            {
+              "title": "Project API",
+              "document": "api/lib-project"
+            },
+            {
+              "title": "Repo API",
+              "document": "api/lib-repo"
+            },
+            {
+              "title": "Scheduler API",
+              "document": "api/lib-scheduler"
+            },
+            {
+              "title": "Schema API",
+              "document": "api/lib-schema"
+            },
+            {
+              "title": "Tasks API",
+              "document": "api/lib-task"
+            },
+            {
+              "title": "Value API",
+              "document": "api/lib-value"
+            },
+            {
+              "title": "VHost API",
+              "document": "api/lib-vhost"
+            },
+            {
+              "title": "Websocket API",
+              "document": "api/lib-websocket"
+            }
+          ]
+        },
+        {
+          "title": "Platform extensions",
+          "document": "admin/tools",
+          "menuItems": [
+            {
+              "title": "ID providers",
+              "document": "framework/idprovider"
+            },
+            {
+              "title": "Admin Engine",
+              "document": "runtime/engines/admin-engine"
+            },
+            {
+              "title": "Widgets",
+              "document": "admin/widgets"
             }
           ]
         }
       ]
     },
     {
-      "title": "Content Management",
+      "title": "Content Studio",
       "document": "manage",
       "menuItems": [
         {
@@ -277,24 +379,6 @@
         {
           "title": "Publishing",
           "document": "manage/publish"
-        }
-      ]
-    },
-    {
-      "title": "Content APIs",
-      "document": "runtime/engines/api-engine",
-      "menuItems": [
-        {
-          "title": "Headless API",
-          "document": "api/headless"
-        },
-        {
-          "title": "Media API",
-          "document": "runtime/engines/media-api"
-        },
-        {
-          "title": "Component API",
-          "document": "runtime/engines/site-engine/component-service"
         }
       ]
     },
@@ -496,245 +580,175 @@
       ]
     },
     {
-      "title": "Extending",
-      "document": "development",
+      "title": "Schema reference",
+      "document": "cms",
       "menuItems": [
         {
-          "title": "Dev kit",
-          "document": "development/edk",
+          "title": "Best practice",
+          "document": "cms/principles"
+        },
+        {
+          "title": "Schema System",
+          "document": "cms/schemas",
           "menuItems": [
             {
-            "title": "Sandboxes",
-            "document": "development/sandboxes"
-            },
-            {
-              "title": "Code",
-              "document": "development/code"
-            },
-            {
-              "title": "Building",
-              "document": "development/build"
-            },
-            {
-              "title": "Configuration",
-              "document": "development/config"
-            },
-            {
-              "title": "TypeScript",
-              "document": "development/typescript"
-            },
-            {
-              "title": "Framework",
-              "document": "framework",
+              "title": "Input Types",
+              "document": "cms/schemas/input-types",
               "menuItems": [
                 {
-                  "title": "Controllers",
-                  "document": "framework/controllers"
+                  "title": "AttachmentUploader",
+                  "document": "cms/schemas/input-types/attachmentuploader"
                 },
                 {
-                  "title": "Globals",
-                  "document": "framework/globals"
+                  "title": "Checkbox",
+                  "document": "cms/schemas/input-types/checkbox"
                 },
                 {
-                  "title": "Events",
-                  "document": "framework/events"
+                  "title": "Combobox",
+                  "document": "cms/schemas/input-types/combobox"
                 },
                 {
-                  "title": "HTTP",
-                  "document": "framework/http"
+                  "title": "ContentSelector",
+                  "document": "cms/schemas/input-types/contentselector"
                 },
                 {
-                  "title": "Error handler",
-                  "document": "framework/error"
+                  "title": "ContentTypeFilter",
+                  "document": "cms/schemas/input-types/contenttypefilter"
                 },
                 {
-                  "title": "Filters",
-                  "document": "framework/filters"
+                  "title": "CustomSelector",
+                  "document": "cms/schemas/input-types/customselector"
                 },
                 {
-                  "title": "Templating",
-                  "document": "framework/templating"
+                  "title": "Date",
+                  "document": "cms/schemas/input-types/date"
                 },
                 {
-                  "title": "Localization",
-                  "document": "framework/i18n"
+                  "title": "DateTime",
+                  "document": "cms/schemas/input-types/datetime"
                 },
                 {
-                  "title": "Websocket",
-                  "document": "framework/websocket"
+                  "title": "Double",
+                  "document": "cms/schemas/input-types/double"
                 },
                 {
-                  "title": "Tasks",
-                  "document": "framework/tasks"
+                  "title": "GeoPoint",
+                  "document": "cms/schemas/input-types/geopoint"
                 },
                 {
-                  "title": "Task engine",
-                  "document": "runtime/task-engine"
-                },            
-                {
-                  "title": "Main controller",
-                  "document": "framework/main"
+                  "title": "HtmlArea",
+                  "document": "cms/schemas/input-types/htmlarea"
                 },
                 {
-                  "title": "Java bridge",
-                  "document": "framework/java-bridge"
+                  "title": "ImageSelector",
+                  "document": "cms/schemas/input-types/imageselector"
+                },
+                {
+                  "title": "Long",
+                  "document": "cms/schemas/input-types/long"
+                },
+                {
+                  "title": "MediaSelector",
+                  "document": "cms/schemas/input-types/mediaselector"
+                },
+                {
+                  "title": "Radiobutton",
+                  "document": "cms/schemas/input-types/radiobutton"
+                },
+                {
+                  "title": "Tag",
+                  "document": "cms/schemas/input-types/tag"
+                },
+                {
+                  "title": "TextArea",
+                  "document": "cms/schemas/input-types/textarea"
+                },
+                {
+                  "title": "TextLine",
+                  "document": "cms/schemas/input-types/textline"
+                },
+                {
+                  "title": "Time",
+                  "document": "cms/schemas/input-types/time"
                 }
               ]
             },
             {
-              "title": "Libraries",
-              "document": "api",
-              "menuItems": [
-                {
-                  "title": "Admin API",
-                  "document": "api/lib-admin"
-                },
-                {
-                  "title": "Application API",
-                  "document": "api/lib-app"
-                },
-                {
-                  "title": "Auditlog API",
-                  "document": "api/lib-auditlog"
-                },
-                {
-                  "title": "Authentication API",
-                  "document": "api/lib-auth"
-                },
-                {
-                  "title": "Cluster API",
-                  "document": "api/lib-cluster"
-                },
-                {
-                  "title": "Common API",
-                  "document": "api/lib-common"
-                },
-                {
-                  "title": "Content API",
-                  "document": "api/lib-content"
-                },
-                {
-                  "title": "Context API",
-                  "document": "api/lib-context"
-                },
-                {
-                  "title": "Event API",
-                  "document": "api/lib-event"
-                },
-                {
-                  "title": "Export API",
-                  "document": "api/lib-export"
-                },
-                {
-                  "title": "Grid API",
-                  "document": "api/lib-grid"
-                },
-                {
-                  "title": "I18N API",
-                  "document": "api/lib-i18n"
-                },
-                {
-                  "title": "IO API",
-                  "document": "api/lib-io"
-                },
-                {
-                  "title": "Mail API",
-                  "document": "api/lib-mail"
-                },
-                {
-                  "title": "Node API",
-                  "document": "api/lib-node"
-                },
-                {
-                  "title": "Portal API",
-                  "document": "api/lib-portal"
-                },
-                {
-                  "title": "Project API",
-                  "document": "api/lib-project"
-                },
-                {
-                  "title": "Repo API",
-                  "document": "api/lib-repo"
-                },
-                {
-                  "title": "Scheduler API",
-                  "document": "api/lib-scheduler"
-                },
-                {
-                  "title": "Schema API",
-                  "document": "api/lib-schema"
-                },
-                {
-                  "title": "Tasks API",
-                  "document": "api/lib-task"
-                },
-                {
-                  "title": "Value API",
-                  "document": "api/lib-value"
-                },
-                {
-                  "title": "VHost API",
-                  "document": "api/lib-vhost"
-                },
-                {
-                  "title": "Websocket API",
-                  "document": "api/lib-websocket"
-                }
-              ]
+              "title": "Field set",
+              "document": "cms/schemas/field-set"
+            },
+            {
+              "title": "Item set",
+              "document": "cms/schemas/item-set"
+            },
+            {
+              "title": "Option set",
+              "document": "cms/schemas/option-set"
+            },
+            {
+              "title": "Mixins",
+              "document": "cms/schemas/mixins"
+            },
+            {
+              "title": "Localization",
+              "document": "cms/schemas/localization"
             }
           ]
         },
         {
-          "title": "/api",
-          "document": "runtime/engines/api-engine"
+          "title": "Content Types",
+          "document": "cms/content-types"
         },
         {
-          "title": "/admin",
-          "document": "admin/tools"
+          "title": "X-data",
+          "document": "cms/x-data"
         },
         {
-          "title": "/site",
-          "document": "runtime/engines/site-engine",
+          "title": "Macros",
+          "document": "cms/macros"
+        },
+        {
+          "title": "Custom styles",
+          "document": "cms/styles"
+        },
+        {
+          "title": "Sites",
+          "document": "cms/sites"
+        },
+        {
+          "title": "Page components",
+          "document": "cms/pages",
           "menuItems": [
             {
-              "title": "Mappings",
-              "document": "framework/mappings"
+              "title": "Regions",
+              "document": "cms/pages/regions"
             },
             {
-              "title": "Components",
-              "document": "framework/components"
+              "title": "Part component",
+              "document": "cms/pages/parts"
             },
             {
-              "title": "Processors",
-              "document": "framework/processors"
+              "title": "Layout component",
+              "document": "cms/pages/layouts"
             },
             {
-              "title": "Contributions",
-              "document": "framework/contributions"
+              "title": "Text component",
+              "document": "cms/pages/text"
+            },
+            {
+              "title": "Component Filtering",
+              "document": "cms/pages/filtering"
+            },
+            {
+              "title": "Component Indexing",
+              "document": "cms/pages/indexing"
             }
           ]
-        },
-        {
-          "title": "/webapp",
-          "document": "runtime/engines/webapp-engine"
-        },
-        {
-          "title": "ID providers",
-          "document": "framework/idprovider"
-        },
-        {
-          "title": "Admin Engine",
-          "document": "runtime/engines/admin-engine"
-        },
-        {
-          "title": "Widgets",
-          "document": "admin/widgets"
         }
       ]
     },
     {
-      "title": "Enonic Market",
+      "title": "Apps",
       "document": "apps",
       "menuItems": [
         {
