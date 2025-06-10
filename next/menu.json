@@ -53,68 +53,102 @@
       ]
     },
     {
+      "title": "Content Studio",
+      "document": "manage",
+      "menuItems": [
+        {
+          "title": "Content Studio",
+          "document": "manage/content-studio"
+        },
+        {
+          "title": "Projects",
+          "document": "manage/projects",
+          "menuItems": [
+            {
+              "title": "Branches",
+              "document": "manage/branches"
+            }
+          ]
+        },
+        {
+          "title": "Layers",
+          "document": "manage/layers"
+        },
+        {
+          "title": "Content",
+          "document": "manage/content",
+          "menuItems": [
+            {
+              "title": "Lifecycle",
+              "document": "manage/lifecycle"
+            },
+            {
+              "title": "Media",
+              "document": "manage/media"
+            },
+            {
+              "title": "Attachments",
+              "document": "manage/attachments"
+            },
+            {
+              "title": "X-data",
+              "document": "manage/x-data"
+            },
+            {
+              "title": "Page",
+              "document": "manage/page",
+              "menuItems": [
+                {
+                  "title": "Page templates",
+                  "document": "cms/page-templates"
+                },
+                {
+                  "title": "Fragments",
+                  "document": "cms/pages/fragments"
+                }
+              ]
+            },
+            {
+              "title": "Variants",
+              "document": "manage/variants"
+            },
+            {
+              "title": "Permissions",
+              "document": "manage/permissions"
+            },
+            {
+              "title": "Versions",
+              "document": "manage/versions"
+            }
+          ]
+        },
+        {
+          "title": "Sites",
+          "document": "cms/sites"
+        },
+        {
+          "title": "Preview",
+          "document": "manage/preview",
+          "menuItems": [
+            {
+              "title": "Visual editor",
+              "document": "cms/pages/editor"
+            }
+          ]
+        },
+        {
+          "title": "Publishing",
+          "document": "manage/publish"
+        }
+      ]
+    },
+    {
       "title": "Framework",
       "document": "development",
       "menuItems": [
         {
           "title": "Introduction",
           "document": "development/intro"
-        },
-        {
-          "title": "Dev kit",
-          "document": "development/edk",
-          "menuItems": [
-            {
-              "title": "Sandboxes",
-              "document": "development/sandboxes"
-            },
-            {
-              "title": "Code",
-              "document": "development/code"
-            },
-            {
-              "title": "Building",
-              "document": "development/build"
-            },
-            {
-              "title": "Configuration",
-              "document": "development/config"
-            },
-            {
-              "title": "TypeScript",
-              "document": "development/typescript"
-            }
-          ]
-        },
-        {
-          "title": "Building APIs",
-          "document": "runtime/engines/api-engine"
-        },
-        {
-          "title": "Buildig Sites",
-          "document": "runtime/engines/site-engine",
-          "menuItems": [
-            {
-              "title": "Mappings",
-              "document": "framework/mappings"
-            },
-            {
-              "title": "Components",
-              "document": "framework/components"
-            },
-            {
-              "title": "Processors",
-              "document": "framework/processors"
-            },
-            {
-              "title": "Contributions",
-              "document": "framework/contributions"
-            }
-          ]
-        },
-        {
-          "title": "Building webapps",
-          "document": "runtime/engines/webapp-engine"
         },
         {
           "title": "Core concepts",
@@ -175,7 +209,7 @@
           ]
         },
         {
-          "title": "Server-side libraries",
+          "title": "Standard Libraries",
           "document": "api",
           "menuItems": [
             {
@@ -277,7 +311,67 @@
           ]
         },
         {
-          "title": "Platform extensions",
+          "title": "Dev tools",
+          "document": "development/sdk",
+          "menuItems": [
+            {
+              "title": "CLI",
+              "document": "development/cli"
+            },
+            {
+              "title": "Sandboxes",
+              "document": "development/sandboxes"
+            },
+            {
+              "title": "Code",
+              "document": "development/code"
+            },
+            {
+              "title": "Building",
+              "document": "development/build"
+            },
+            {
+              "title": "Configuration",
+              "document": "development/config"
+            },
+            {
+              "title": "TypeScript",
+              "document": "development/typescript"
+            }
+          ]
+        },
+        {
+          "title": "Building APIs",
+          "document": "runtime/engines/api-engine"
+        },
+        {
+          "title": "Building Sites",
+          "document": "runtime/engines/site-engine",
+          "menuItems": [
+            {
+              "title": "Mappings",
+              "document": "framework/mappings"
+            },
+            {
+              "title": "Components",
+              "document": "framework/components"
+            },
+            {
+              "title": "Processors",
+              "document": "framework/processors"
+            },
+            {
+              "title": "Contributions",
+              "document": "framework/contributions"
+            }
+          ]
+        },
+        {
+          "title": "Building Webapps",
+          "document": "runtime/engines/webapp-engine"
+        },
+        {
+          "title": "Building Extensions",
           "document": "admin/tools",
           "menuItems": [
             {
@@ -285,100 +379,14 @@
               "document": "framework/idprovider"
             },
             {
-              "title": "Admin Engine",
+              "title": "Admin Apps",
               "document": "runtime/engines/admin-engine"
             },
             {
-              "title": "Widgets",
+              "title": "Admin Widgets",
               "document": "admin/widgets"
             }
           ]
-        }
-      ]
-    },
-    {
-      "title": "Content Studio",
-      "document": "manage",
-      "menuItems": [
-        {
-          "title": "Content Studio",
-          "document": "manage/content-studio"
-        },
-        {
-          "title": "Projects",
-          "document": "manage/projects",
-          "menuItems": [
-            {
-              "title": "Branches",
-              "document": "manage/branches"
-            }
-          ]
-        },
-        {
-          "title": "Layers",
-          "document": "manage/layers"
-        },
-        {
-          "title": "Content",
-          "document": "manage/content",
-          "menuItems": [
-            {
-              "title": "Lifecycle",
-              "document": "manage/lifecycle"
-            },
-            {
-              "title": "Media",
-              "document": "manage/media"
-            },
-            {
-              "title": "Attachments",
-              "document": "manage/attachments"
-            },
-            {
-              "title": "X-data",
-              "document": "manage/x-data"
-            },
-            {
-              "title": "Page",
-              "document": "manage/page",
-              "menuItems": [
-                {
-                  "title": "Page templates",
-                  "document": "cms/page-templates"
-                },
-                {
-                  "title": "Fragments",
-                  "document": "cms/pages/fragments"
-                }
-              ]
-            },
-            {
-              "title": "Variants",
-              "document": "manage/variants"
-            },
-            {
-              "title": "Permissions",
-              "document": "manage/permissions"
-            },
-            {
-              "title": "Versions",
-              "document": "manage/versions"
-            }
-          ]
-        },
-        {
-          "title": "Preview",
-          "document": "manage/preview",
-          "menuItems": [
-            {
-              "title": "Visual editor",
-              "document": "cms/pages/editor"
-            }
-          ]
-        },
-        {
-          "title": "Publishing",
-          "document": "manage/publish"
         }
       ]
     },
@@ -575,6 +583,42 @@
               "document": "deployment/observability"
             }
           ]
+        },
+        {
+          "title": "Release",
+          "document": "release",
+          "menuItems": [
+            {
+              "title": "Notes",
+              "document": "release/notes"
+            },
+            {
+              "title": "Upgrade",
+              "document": "release/upgrade"
+            },
+            {
+              "title": "Upgrading Apps",
+              "document": "release/apps-upgrade"
+            },
+            {
+              "title": "Legacy APIs",
+              "document": "apis/deprecated",
+              "menuItems": [
+                {
+                  "title": "Asset service",
+                  "document": "runtime/engines/asset-service"
+                },
+                {
+                  "title": "HTTP service",
+                  "document": "runtime/engines/http-service"
+                },
+                {
+                  "title": "Image service",
+                  "document": "runtime/engines/site-engine/image-service"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -587,10 +631,14 @@
           "document": "cms/principles"
         },
         {
-          "title": "Schema System",
+          "title": "Core concepts",
           "document": "cms/schemas",
           "menuItems": [
-            {
+              {
+                "title": "Forms",
+                "document": "cms/schemas"
+              },
+              {
               "title": "Input Types",
               "document": "cms/schemas/input-types",
               "menuItems": [
@@ -673,16 +721,22 @@
               ]
             },
             {
-              "title": "Field set",
-              "document": "cms/schemas/field-set"
-            },
-            {
-              "title": "Item set",
-              "document": "cms/schemas/item-set"
-            },
-            {
-              "title": "Option set",
-              "document": "cms/schemas/option-set"
+              "title": "Sets",
+              "document": "cms/schemas/sets",
+              "menuItems": [
+                {
+                  "title": "Field set",
+                  "document": "cms/schemas/field-set"
+                },
+                {
+                  "title": "Item set",
+                  "document": "cms/schemas/item-set"
+                },
+                {
+                  "title": "Option set",
+                  "document": "cms/schemas/option-set"
+                }
+              ]
             },
             {
               "title": "Mixins",
@@ -707,18 +761,14 @@
           "document": "cms/macros"
         },
         {
-          "title": "Custom styles",
-          "document": "cms/styles"
-        },
-        {
-          "title": "Sites",
-          "document": "cms/sites"
-        },
-        {
-          "title": "Page components",
-          "document": "cms/pages",
+          "title": "Components",
+          "document": "cms/components",
           "menuItems": [
             {
+              "title": "Pages",
+              "document": "cms/pages"
+            },
+              {
               "title": "Regions",
               "document": "cms/pages/regions"
             },
@@ -743,6 +793,10 @@
               "document": "cms/pages/indexing"
             }
           ]
+        },
+        {
+          "title": "Styles",
+          "document": "cms/styles"
         }
       ]
     },
@@ -757,42 +811,6 @@
         {
           "title": "Market guidelines",
           "document": "apps/market-guidelines"
-        }
-      ]
-    },
-    {
-      "title": "Release",
-      "document": "release",
-      "menuItems": [
-        {
-          "title": "Notes",
-          "document": "release/notes"
-        },
-        {
-          "title": "Upgrade",
-          "document": "release/upgrade"
-        },
-        {
-          "title": "Upgrading Apps",
-          "document": "release/apps-upgrade"
-        },
-        {
-          "title": "Legacy APIs",
-          "document": "apis/deprecated",
-          "menuItems": [
-            {
-              "title": "Asset service",
-              "document": "runtime/engines/asset-service"
-            },
-            {
-              "title": "HTTP service",
-              "document": "runtime/engines/http-service"
-            },
-            {
-              "title": "Image service",
-              "document": "runtime/engines/site-engine/image-service"
-            }
-          ]
         }
       ]
     }
