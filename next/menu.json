@@ -151,7 +151,7 @@
           "document": "development/intro"
         },
         {
-          "title": "Core concepts",
+          "title": "Core features",
           "document": "framework",
           "menuItems": [
             {
@@ -167,8 +167,12 @@
               "document": "framework/events"
             },
             {
-              "title": "HTTP",
-              "document": "framework/http"
+              "title": "HTTP Request",
+              "document": "framework/request"
+            },
+            {
+              "title": "HTTP Response",
+              "document": "framework/response"
             },
             {
               "title": "Error handler",
@@ -195,10 +199,6 @@
               "document": "framework/tasks"
             },
             {
-              "title": "Task engine",
-              "document": "runtime/task-engine"
-            },
-            {
               "title": "Main controller",
               "document": "framework/main"
             },
@@ -209,106 +209,110 @@
           ]
         },
         {
-          "title": "Standard Libraries",
+          "title": "System Libraries",
           "document": "api",
           "menuItems": [
             {
-              "title": "Admin API",
+              "title": "Admin Lib",
               "document": "api/lib-admin"
             },
             {
-              "title": "Application API",
+              "title": "Application Lib",
               "document": "api/lib-app"
             },
             {
-              "title": "Auditlog API",
+              "title": "Auditlog Lib",
               "document": "api/lib-auditlog"
             },
             {
-              "title": "Authentication API",
+              "title": "Authentication Lib",
               "document": "api/lib-auth"
             },
             {
-              "title": "Cluster API",
+              "title": "Cluster Lib",
               "document": "api/lib-cluster"
             },
             {
-              "title": "Common API",
+              "title": "Common Lib",
               "document": "api/lib-common"
             },
             {
-              "title": "Content API",
+              "title": "Content Lib",
               "document": "api/lib-content"
             },
             {
-              "title": "Context API",
+              "title": "Context Lib",
               "document": "api/lib-context"
             },
             {
-              "title": "Event API",
+              "title": "Event Lib",
               "document": "api/lib-event"
             },
             {
-              "title": "Export API",
+              "title": "Export Lib",
               "document": "api/lib-export"
             },
             {
-              "title": "Grid API",
+              "title": "Grid Lib",
               "document": "api/lib-grid"
             },
             {
-              "title": "I18N API",
+              "title": "I18N Lib",
               "document": "api/lib-i18n"
             },
             {
-              "title": "IO API",
+              "title": "IO Lib",
               "document": "api/lib-io"
             },
             {
-              "title": "Mail API",
+              "title": "Mail Lib",
               "document": "api/lib-mail"
             },
             {
-              "title": "Node API",
+              "title": "Node Lib",
               "document": "api/lib-node"
             },
             {
-              "title": "Portal API",
+              "title": "Portal Lib",
               "document": "api/lib-portal"
             },
             {
-              "title": "Project API",
+              "title": "Project Lib",
               "document": "api/lib-project"
             },
             {
-              "title": "Repo API",
+              "title": "Repo Lib",
               "document": "api/lib-repo"
             },
             {
-              "title": "Scheduler API",
+              "title": "Scheduler Lib",
               "document": "api/lib-scheduler"
             },
             {
-              "title": "Schema API",
+              "title": "Schema Lib",
               "document": "api/lib-schema"
             },
             {
-              "title": "Tasks API",
+              "title": "Tasks Lib",
               "document": "api/lib-task"
             },
             {
-              "title": "Value API",
+              "title": "Value Lib",
               "document": "api/lib-value"
             },
             {
-              "title": "VHost API",
+              "title": "VHost Lib",
               "document": "api/lib-vhost"
             },
             {
-              "title": "Websocket API",
+              "title": "Websocket Lib",
               "document": "api/lib-websocket"
             }
           ]
+        },
+        {
+          "title": "Other Libraries",
+          "document": "todo"
         },
         {
           "title": "Dev tools",
@@ -631,13 +635,9 @@
           "document": "cms/principles"
         },
         {
-          "title": "Core concepts",
+          "title": "Forms",
           "document": "cms/schemas",
           "menuItems": [
-              {
-                "title": "Forms",
-                "document": "cms/schemas"
-              },
               {
               "title": "Input Types",
               "document": "cms/schemas/input-types",
@@ -745,6 +745,10 @@
             {
               "title": "Localization",
               "document": "cms/schemas/localization"
+            },
+            {
+              "title": "Styles",
+              "document": "cms/styles"
             }
           ]
         },
@@ -793,10 +797,6 @@
               "document": "cms/pages/indexing"
             }
           ]
-        },
-        {
-          "title": "Styles",
-          "document": "cms/styles"
         }
       ]
     },

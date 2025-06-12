@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>HTTP request and response</title>
+<title>HTTP response</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,11 +437,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>HTTP request and response</h1>
+<h1>HTTP response</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#http-request">HTTP Request</a></li>
 <li><a href="#http-response">HTTP Response</a></li>
 <li><a href="#http-cookies">HTTP Cookies</a></li>
 </ul>
@@ -451,147 +450,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The JavaScript framework defines the following basic HTTP request and response objects:</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="http-request"><a class="link" href="#http-request">HTTP Request</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The following object is passed along with every HTTP request. The object is similar to many traditional request objects, except for two special properties:
-mode and branch. These properties are specific to the XP Portal, automatically indicating the contextual branch and rendering mode.</p>
-</div>
-<div class="paragraph">
-<p>The <code>request</code> object represents the HTTP request and current context for the
-controller.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "method": "GET",  <i class="conum" data-value="1"></i><b>(1)</b>
-  "scheme": "http",  <i class="conum" data-value="2"></i><b>(2)</b>
-  "host": "enonic.com",  <i class="conum" data-value="3"></i><b>(3)</b>
-  "port": "80",  <i class="conum" data-value="4"></i><b>(4)</b>
-  "path": "/my/page",  <i class="conum" data-value="5"></i><b>(5)</b>
-  "url": "https://enonic.com/my/page?debug=true",  <i class="conum" data-value="6"></i><b>(6)</b>
-  "remoteAddress": "10.0.0.1",  <i class="conum" data-value="7"></i><b>(7)</b>
-  "mode": "edit",  <i class="conum" data-value="8"></i><b>(8)</b>
-  "branch": "master",  <i class="conum" data-value="9"></i><b>(9)</b>
-  "body": null <i class="conum" data-value="10"></i><b>(10)</b>
-  "params": { <i class="conum" data-value="11"></i><b>(11)</b>
-    "debug": "true"
-  },
-  "headers": { <i class="conum" data-value="12"></i><b>(12)</b>
-    "Language": "en",
-    "Cookies": "mycookie=123; other=abc;"
-  },
-  "cookies": { <i class="conum" data-value="13"></i><b>(13)</b>
-    "mycookie": "123",
-    "other": "abc"
-  },
-  "locales": [ <i class="conum" data-value="14"></i><b>(14)</b>
-    "en",
-    "no"
-  ],
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>HTTP method of the request</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Scheme used to make this request i.e. "http" / "https"</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Host name of the server to which the request was sent.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Port of the server to which the request was sent.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Path of the request</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>URL of the request.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>IP address of the client that sent the request. If the X-Forwarded-For <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> header is set, its value will override the client IP.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>Rendering mode (used in site context) one of: <code>inline</code>, <code>edit</code>, <code>preview</code>, <code>live</code>.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="9"></i><b>9</b></td>
-<td>Contextual repository branch (used in site context), one of: <code>draft</code>, <code>master</code>.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="10"></i><b>10</b></td>
-<td>Optional string value</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="11"></i><b>11</b></td>
-<td>Name/value pairs of the query/form parameters from the request.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="12"></i><b>12</b></td>
-<td>Name/value pairs of the HTTP request headers.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="13"></i><b>13</b></td>
-<td>Name/value pairs of the HTTP request cookies.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="14"></i><b>14</b></td>
-<td><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
-  <linearGradient id="s" x2="0" y2="100%">
-    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-    <stop offset="1" stop-opacity=".1"/>
-  </linearGradient>
-  <clipPath id="r">
-    <rect width="64" height="20" rx="3" fill="#fff"/>
-  </clipPath>
-  <g clip-path="url(#r)">
-    <rect width="25" height="20" fill="#555"/>
-    <rect x="25" width="39" height="20" fill="#007ec6"/>
-    <rect width="64" height="20" fill="url(#s)"/>
-  </g>
-  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
-     font-size="110">
-    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
-    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
-    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">8.0.0</text>
-    <text x="435" y="140" transform="scale(.1)" textLength="290">8.0.0</text>
-  </g>
-</svg></span> Array of locale strings in decreasing order starting with the preferred locale, the locales that are acceptable to the client based on the Accept-Language header. If the client request doesn&#8217;t provide an Accept-Language header an array with a single element with the default locale for the server is returned.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.12.0</span></span> The <code>request</code> object also has <code>getHeader(name)</code> function that reads out a header on the request. The name is case-insensitive.
-Use it instead of accessing <code>headers</code> values directly.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Modification of <code>headers</code> does not affect the result of <code>getHeader(name)</code> calls.
-</td>
-</tr>
-</table>
+<p>The framework defines the following HTTP response object:</p>
 </div>
 </div>
 </div>
@@ -730,22 +589,16 @@ Modification of <code>headers</code> does not affect the result of <code>getHead
 </tr>
 <tr>
 <td><i class="conum" data-value="10"></i><b>10</b></td>
-<td><span class="image"><span class="alt">XP 7.3.0</span></span> SameSite flag for the cookie. Can be <code>lax</code>, <code>strict</code>, <code>none</code> or <code>&nbsp;</code> for "not set". Default is "not set", meaning "browser&#8217;s default".</td>
+<td>SameSite flag for the cookie. Can be <code>lax</code>, <code>strict</code>, <code>none</code> or <code>&nbsp;</code> for "not set". Default is "not set", meaning "browser&#8217;s default".</td>
 </tr>
 </table>
 </div>
 </div>
 </div>
 </div>
-<div id="footnotes">
-<hr>
-<div class="footnote" id="_footnotedef_1">
-<a href="#_footnoteref_1">1</a>. <a href="https://en.wikipedia.org/wiki/X-Forwarded-For" class="bare">https://en.wikipedia.org/wiki/X-Forwarded-For</a>
-</div>
-</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-10 11:56:44 UTC
+Last updated 2025-06-12 06:18:47 UTC
 </div>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Enonic Framework</title>
+<title>Purple.js Server-Side Framework</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -435,14 +435,43 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-right">
 <div id="header">
-<h1>Enonic Framework</h1>
+<h1>Purple.js Server-Side Framework</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#enonic_apps">Enonic apps</a></li>
+<li><a href="#runtime">Runtime</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Enonic applications are built using Enonic&#8217;s server-side JavaScript controller framework. Applications are executed by the <a href="runtime.ahtml">XP runtime</a>, which means it can take advantage of it&#8217;s modular architecture and get access to all platform <a href="api.ahtml">APIs</a> as well as access management and IDprovider features.</p>
+<p>More than a Headless CMS - Enonic is a back-end for your digital experiences.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enonic offers a powerful Server-side JavaScript/TypeScript development framework. The framework, developers may <a href="todo.ahtml">build custom APIs</a>, <a href="todo.ahtml">extend the platform</a> or even <a href="#build web-sites">[build web-sites]</a>. Developers get full access to the Enonic platform, including persistence, background jobs, caching and much more.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enonic_apps"><a class="link" href="#enonic_apps">Enonic apps</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="runtime"><a class="link" href="#runtime">Runtime</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Here are some highlights:</p>
 </div>
@@ -472,9 +501,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 </div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-10 11:56:44 UTC
+Last updated 2025-06-12 06:18:47 UTC
 </div>
 </div>
 </body>

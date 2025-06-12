@@ -456,7 +456,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The XP framework also supports execution of asynchronous (potentially long running) background tasks.</p>
 </div>
 <div class="paragraph">
-<p>Tasks may simply be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. <code>src/main/resources/tasks/&lt;taskname&gt;</code> in your project.</p>
+<p>Tasks may be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. <code>src/main/resources/tasks/&lt;taskname&gt;</code> in your project.</p>
+</div>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/task-engine.svg" alt="Task execution process" width="768px">
+</div>
 </div>
 </div>
 </div>
@@ -503,7 +511,7 @@ The descriptor must be placed in task folder as follows: <code>src/main/resource
 <p>The run function will receive the task parameters as a JSON object.</p>
 </div>
 <div class="paragraph">
-<p><code>taskId</code> is provided as a second argument of the function <span class="image"><span class="alt">XP 7.13.0</span></span></p>
+<p><code>taskId</code> is provided as a second argument of the function.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example task controller</div>
@@ -559,16 +567,13 @@ var taskId = taskLib.submitTask({
 <h2 id="distributable"><a class="link" href="#distributable">Distributable</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.6.0</span></span></p>
-</div>
-<div class="paragraph">
 <p>Named tasks may get distributed over other cluster nodes.
 Cluster node can be configured to accept or decline distributable tasks execution.
 If multiple cluster nodes can accept a task, only one cluster node will be selected to execute it.
 If none of the nodes can accept a distributable task, an error will be thrown.</p>
 </div>
 <div class="paragraph">
-<p>Distributable task gets executed with the same context (user, repository/branch) it was originally submitted.</p>
+<p>Distributable tasks get executed with the same context (user, repository/branch) it was originally submitted.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -626,7 +631,7 @@ For fine-grained control which nodes should be capable to execute distributable 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-10 11:56:44 UTC
+Last updated 2025-06-12 06:18:47 UTC
 </div>
 </div>
 </body>
