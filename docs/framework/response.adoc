@@ -1,68 +1,8 @@
-= HTTP request and response
+= HTTP response
 :toc: right
 :imagesdir: ../images
 
-The JavaScript framework defines the following basic HTTP request and response objects:
-
-[#http-request]
-== HTTP Request
-
-The following object is passed along with every HTTP request. The object is similar to many traditional request objects, except for two special properties:
-mode and branch. These properties are specific to the XP Portal, automatically indicating the contextual branch and rendering mode.
-
-The ``request`` object represents the HTTP request and current context for the
-controller.
-
-[source,json]
-----
-{
-  "method": "GET",  // <1>
-  "scheme": "http",  // <2>
-  "host": "enonic.com",  // <3>
-  "port": "80",  // <4>
-  "path": "/my/page",  // <5>
-  "url": "https://enonic.com/my/page?debug=true",  // <6>
-  "remoteAddress": "10.0.0.1",  // <7>
-  "mode": "edit",  // <8>
-  "branch": "master",  // <9>
-  "body": null // <10>
-  "params": { // <11>
-    "debug": "true"
-  },
-  "headers": { // <12>
-    "Language": "en",
-    "Cookies": "mycookie=123; other=abc;"
-  },
-  "cookies": { // <13>
-    "mycookie": "123",
-    "other": "abc"
-  },
-  "locales": [ // <14>
-    "en",
-    "no"
-  ],
-}
-----
-
-<1> HTTP method of the request
-<2> Scheme used to make this request i.e. "http" / "https"
-<3> Host name of the server to which the request was sent.
-<4> Port of the server to which the request was sent.
-<5> Path of the request
-<6> URL of the request.
-<7> IP address of the client that sent the request. If the X-Forwarded-For footnote:[https://en.wikipedia.org/wiki/X-Forwarded-For] header is set, its value will override the client IP.
-<8> Rendering mode (used in site context) one of: ``inline``, ``edit``, ``preview``, ``live``.
-<9> Contextual repository branch (used in site context), one of: ``draft``, ``master``.
-<10> Optional string value
-<11> Name/value pairs of the query/form parameters from the request.
-<12> Name/value pairs of the HTTP request headers.
-<13> Name/value pairs of the HTTP request cookies.
-<14> image:xp-8000.svg[XP 8.0.0,opts=inline] Array of locale strings in decreasing order starting with the preferred locale, the locales that are acceptable to the client based on the Accept-Language header. If the client request doesn't provide an Accept-Language header an array with a single element with the default locale for the server is returned.
-
-image:xp-7120.svg[XP 7.12.0,opts=inline] The ``request`` object also has `getHeader(name)` function that reads out a header on the request. The name is case-insensitive.
-Use it instead of accessing ``headers`` values directly.
-
-NOTE: Modification of ``headers`` does not affect the result of `getHeader(name)` calls.
+The framework defines the following HTTP response object:
 
 [#http-response]
 == HTTP Response
@@ -133,4 +73,4 @@ return {
 <7> Number of **seconds** before the browser is allowed to delete the cookie. Defaults to ``-1`` (The cookie will live until the browser is shut down.)
 <8> Control if the cookie should only be accepted to be created and read over https and similar secure protocols. Defaults to ``false``
 <9> Control if the cookie is available for scripts or not. If `true`, only the serverside code can read the cookie. Defaults to ``false`` (Also client-side scripts can read the cookie.)
-<10> image:xp-730.svg[XP 7.3.0,opts=inline] SameSite flag for the cookie. Can be `lax`, `strict`, `none` or `&nbsp;` for "not set". Default is "not set", meaning "browser's default".
+<10> SameSite flag for the cookie. Can be `lax`, `strict`, `none` or `&nbsp;` for "not set". Default is "not set", meaning "browser's default".

@@ -4,7 +4,12 @@
 
 The XP framework also supports execution of asynchronous (potentially long running) background tasks.
 
-Tasks may simply be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. `src/main/resources/tasks/<taskname>` in your project.
+Tasks may be executed as inline functions, or as named tasks. Named tasks are defined by creating a folder i.e. `src/main/resources/tasks/<taskname>` in your project.
+
+TODO
+
+image::task-engine.svg[Task execution process, 768px]
+
 
 == Descriptor
 Named tasks requires a descriptor file.
@@ -38,7 +43,7 @@ A named task controller must export a run function, which will be invoked by the
 
 The run function will receive the task parameters as a JSON object.
 
-`taskId` is provided as a second argument of the function image:xp-7130.svg[XP 7.13.0,opts=inline]
+`taskId` is provided as a second argument of the function.
 
 .Example task controller
 [source,javascript]
@@ -84,14 +89,13 @@ var taskId = taskLib.submitTask({
 ----
 [#distributable]
 == Distributable
-image:xp-760.svg[XP 7.6.0,opts=inline]
 
 Named tasks may get distributed over other cluster nodes.
 Cluster node can be configured to accept or decline distributable tasks execution.
 If multiple cluster nodes can accept a task, only one cluster node will be selected to execute it.
 If none of the nodes can accept a distributable task, an error will be thrown.
 
-Distributable task gets executed with the same context (user, repository/branch) it was originally submitted.
+Distributable tasks get executed with the same context (user, repository/branch) it was originally submitted.
 
 WARNING: Make sure your Named task does not require a specific node to run on (i.e. it must not check for `isMaster`).
 If you need such check, use inline function task instead.
