@@ -481,12 +481,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#summary">Summary</a></li>
 </ul>
 </li>
-<li><a href="#migration">Migrating from old image</a>
-<ul class="sectlevel2">
-<li><a href="#the_binary_wget_is_no_longer_present">The binary wget is no longer present</a></li>
-<li><a href="#directory_xp_roothome_org_no_longer_present">Directory $XP_ROOT/home.org no longer present</a></li>
-</ul>
-</li>
 <li><a href="#image_source_code">Image source code</a></li>
 </ul>
 </div>
@@ -504,7 +498,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This applies to docker images for Enonic XP 7.3 and higher. For migration from versions 7.2 and lower read <a href="#migration">Migrating from old image</a> subsection.
+This applies to docker images for Enonic XP 8.0 and higher.
 </td>
 </tr>
 </table>
@@ -599,10 +593,6 @@ Running this command requires you to have docker installed.
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">app.sh</dt>
-<dd>
-<p>Script to add/remove jars from the Enonic XP deploy folder. An example usage would be <code>app.sh add &lt;PUBLIC_URL_TO_JAR&gt;</code>. Description and source <a href="https://github.com/enonic/docker-xp/blob/master/bin/app.sh">here</a>.</p>
-</dd>
 <dt class="hdlist1">backups.sh</dt>
 <dd>
 <p>Convenient script for pre backup hooks to check the age of index snapshots created by the <a href="https://market.enonic.com/vendors/enonic/snapshotter">snapshotter</a> app. Description and source available <a href="https://github.com/enonic/docker-xp/blob/master/bin/backup.sh">here</a>.</p>
@@ -1091,26 +1081,6 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="migration"><a class="link" href="#migration">Migrating from old image</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This image in general does not introduce any breaking changes for the regular user. There are some differences that can potentially break build pipelines that are based off the old image.</p>
-</div>
-<div class="sect2">
-<h3 id="the_binary_wget_is_no_longer_present"><a class="link" href="#the_binary_wget_is_no_longer_present">The binary wget is no longer present</a></h3>
-<div class="paragraph">
-<p>The old image contained the <code>wget</code> binary. To keep the image size to a minimum and because <code>curl</code> is already present in the new image, <code>wget</code> is not installed in the new image.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="directory_xp_roothome_org_no_longer_present"><a class="link" href="#directory_xp_roothome_org_no_longer_present">Directory $XP_ROOT/home.org no longer present</a></h3>
-<div class="paragraph">
-<p>The directory <code>$XP_ROOT/home.org</code> is now simply called <code>$XP_ROOT/home</code>. If you are modifying that directory in your build steps you will have make the appropriate changes.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="image_source_code"><a class="link" href="#image_source_code">Image source code</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -1121,7 +1091,7 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-19 11:16:37 UTC
+Last updated 2025-06-20 07:42:02 UTC
 </div>
 </div>
 </body>
