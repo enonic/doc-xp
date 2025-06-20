@@ -4,7 +4,7 @@ include::../.variables.adoc[]
 
 This section describes the official Enonic XP docker image as well how to configure and run it.
 
-NOTE: This applies to docker images for Enonic XP 7.3 and higher. For migration from versions 7.2 and lower read <<migration>> subsection.
+NOTE: This applies to docker images for Enonic XP 8.0 and higher.
 
 == Quick start
 
@@ -45,8 +45,6 @@ File permission:: The image is designed to run on multiple orchestration framewo
 === Preinstalled tools
 
 To help with _day 2 operations_, the image comes with some useful preinstalled tools.
-
-app.sh:: Script to add/remove jars from the Enonic XP deploy folder. An example usage would be `app.sh add <PUBLIC_URL_TO_JAR>`. Description and source https://github.com/enonic/docker-xp/blob/master/bin/app.sh[here].
 
 backups.sh:: Convenient script for pre backup hooks to check the age of index snapshots created by the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter] app. Description and source available https://github.com/enonic/docker-xp/blob/master/bin/backup.sh[here].
 
@@ -361,19 +359,6 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data
 ----
 
 To do backups you would simply back up the mountpoints for `demo_snapshots` and `demo_blobstore`. It is not as important to back up other directories.
-
-[#migration]
-== Migrating from old image
-
-This image in general does not introduce any breaking changes for the regular user. There are some differences that can potentially break build pipelines that are based off the old image.
-
-=== The binary wget is no longer present
-
-The old image contained the `wget` binary. To keep the image size to a minimum and because `curl` is already present in the new image, `wget` is not installed in the new image.
-
-=== Directory $XP_ROOT/home.org no longer present
-
-The directory `$XP_ROOT/home.org` is now simply called `$XP_ROOT/home`. If you are modifying that directory in your build steps you will have make the appropriate changes.
 
 == Image source code
 
