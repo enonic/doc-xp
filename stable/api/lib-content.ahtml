@@ -1291,7 +1291,7 @@ const expected = {
 <div class="sect2">
 <h3 id="delete"><a class="link" href="#delete">delete</a></h3>
 <div class="paragraph">
-<p>Deletes a content</p>
+<p>Deletes a content. A published content will be unpublished before deletion.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Parameters:</strong></p>
@@ -2842,7 +2842,6 @@ const result = publish({
 
 if (result) {
     log.info('Pushed %s content.', result.pushedContents.length);
-    log.info('Deleted %s content.1, result.deletedContents.length);
     log.info('Content that failed operation: %s', result.failedContents.length);
 } else {
     log.info('Operation failed.');
@@ -2857,9 +2856,6 @@ const expected = {
         "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
         "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
         "e1f57280-d672-4cd8-b674-98e26e5b69ae"
-    ],
-    deletedContents: [ // Removed from 7.12.0
-        "45d67001-7f2b-4093-99ae-639be9fdd1f6"
     ],
     failedContents: [
         "79e21db0-5b43-45ce-b58c-6e1c420b22bd"
@@ -3789,7 +3785,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-06-20 07:41:35 UTC
+Last updated 2025-07-22 10:28:50 UTC
 </div>
 </div>
 </body>
