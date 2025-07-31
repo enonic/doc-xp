@@ -46,7 +46,7 @@ File permission:: The image is designed to run on multiple orchestration framewo
 
 To help with _day 2 operations_, the image comes with some useful preinstalled tools.
 
-app.sh:: Script to add/remove jars from the Enonic XP deploy folder. An example usage would be `app.sh add <PUBLIC_URL_TO_JAR>`. Description and source https://github.com/enonic/docker-xp/blob/7.15/bin/app.sh[here].
+app.sh:: Script to add/remove jars from the Enonic XP deploy folder. An example usage would be `app.sh add <PUBLIC_URL_TO_JAR>`. Description and source https://github.com/enonic/docker-xp/blob/{feature-version}/bin/app.sh[here].
 
 backups.sh:: Convenient script for pre backup hooks to check the age of index snapshots created by the https://market.enonic.com/vendors/enonic/snapshotter[snapshotter] app. Description and source available https://github.com/enonic/docker-xp/blob/master/bin/backup.sh[here].
 
