@@ -340,6 +340,8 @@ const taskId = executeFunction({
 
 Causes the current execution thread to sleep (temporarily cease execution) for the specified number of milliseconds.
 
+IMPORTANT: This function will only work inside a task.
+
 [.lead]
 Parameters
 

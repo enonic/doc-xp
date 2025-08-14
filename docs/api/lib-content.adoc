@@ -69,7 +69,7 @@ An object with the following keys and their values:
 |===
 | Name | Type | Attributes| Description
 | key | string | | Path or id to the content
-| name | string | | Attachment name
+| name | string | | Attachment name (unique within the content)
 | mimeType | string | | Attachment content type
 | label | string | <optional> | Attachment label
 | data | object | <optional> | Stream with the binary data for the attachment

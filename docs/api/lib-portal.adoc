@@ -79,6 +79,8 @@ const url = assetUrl({
 
 Generates URL to an attachment.
 
+If `name` is provided, XP will try to find an attachment by the unique name and give an exception if it's not found. If `name` is empty but `label` is provided, XP will try to find an attachment with the provided label (will return the first one if several were found, or give an exception if none were found). If both `name` and `label` are empty, XP will generate attachment url only for a binary content with an attachment.
+
 [.lead]
 Parameters
 
@@ -96,9 +98,9 @@ Parameters
 .Properties
 !===
 ! Name     ! Type    ! Attributes ! Default ! Description
-! id       ! string  ! <optional> !         ! Id to the content holding the attachment.
-! path     ! string  ! <optional> !         ! Path to the content holding the attachment.
-! name     ! string  ! <optional> !         ! Name to the attachment.
+! id       ! string  ! <optional> !         ! Id of the content with the attachment.
+! path     ! string  ! <optional> !         ! Path to the content with the attachment.
+! name     ! string  ! <optional> !         ! Unique name of the attachment.
 ! label    ! string  ! <optional> ! source  ! Label of the attachment.
 ! download ! boolean ! <optional> ! false   ! Set to `true` if the disposition header should be set to attachment.
 ! type     ! string  ! <optional> ! server  ! URL type. Either `server` (server-relative URL) or `absolute`.
