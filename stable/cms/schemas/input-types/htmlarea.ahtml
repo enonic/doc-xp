@@ -458,7 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="appearance"><a class="link" href="#appearance">Appearance</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The rich text editor as seen with default configuration. The <code>Add</code> button indicated that this setup also supports multiple occurrences of the editor.</p>
+<p>The rich text editor as seen with the default configuration. The <code>Add</code> button indicated that this setup also supports multiple occurrences of the editor.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -523,7 +523,7 @@ If you are manually outputting contents of an HtmlArea input in your template, y
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-HTML Area is configured with default set of tools but the toolbar can be customized. Using the config setting you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. Complete list of supported tools can be found below.
+HTML Area is configured with a default set of tools, but the toolbar can be customized. Using the config setting, you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. A complete list of supported tools can be found below.
 </td>
 </tr>
 </table>
@@ -533,7 +533,7 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | SpecialChar Anchor Image Macro Link Unlink | Table | PasteModeSwitcher</pre>
+<pre>Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | FindAndReplace SpecialChar Anchor Image Macro Link Unlink | Table | PasteModeSwitcher</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -598,6 +598,10 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Indent</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Increase indent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FindAndReplace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find and Replace dialog</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SpecialChar</p></td>
@@ -722,7 +726,7 @@ HTML Area is configured with default set of tools but the toolbar can be customi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-07-31 08:08:44 UTC
+Last updated 2025-08-14 14:12:21 UTC
 </div>
 </div>
 </body>

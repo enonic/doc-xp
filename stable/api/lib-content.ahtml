@@ -602,7 +602,7 @@ const myRoot = ARCHIVE_ROOT_PATH; // NodePath.create( "/archive" ).build()</code
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Attachment name</p>
+<p>Attachment name (unique within the content)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3785,7 +3785,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-07-31 08:08:44 UTC
+Last updated 2025-08-14 14:12:21 UTC
 </div>
 </div>
 </body>
