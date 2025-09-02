@@ -25,10 +25,10 @@ Add the `import` statement to your controller:
 import i18nLib from '/lib/xp/i18n';
 ----
 
-Then you need to create files with original phrases and their translations.  These files should be placed
-in the `src/main/resources/site/i18n` folder of your application.  There must be a file named `phrases.properties` that contains all the default phrases.  Additional files with translations named `phrases_<locale>.properties` should contain the same phrases
-with texts localised to `<locale>` language.  If a phrase is missing from the locale-specific file, the default file will be used. This is what a couple
-of such files could look like:
+Then you need to create files with original phrases and their translations.  These files should normally be placed in the `src/main/resources/i18n` folder of your application.
+There must be a file named `phrases.properties` that contains all the default phrases.  
+Additional files with translations named `phrases_<locale>.properties` should contain the same phrases with texts localised to `<locale>` language.  
+If a phrase is missing from the locale-specific file, the default file will be used. This is what a couple of such files could look like:
 
 .phrases.properties
 [source,properties]
@@ -62,7 +62,7 @@ Parameters
 |===
 | Name | Kind | Details
 | locale | string \| string[] | A string-representation of a locale, or an array of locales in preferred order.  Pass in an empty array for default locale.
-| bundles | string[] | Required list of bundle names. Bundle names are specified as paths, relative to the `src/main/resources` folder.
+| bundles | string[] | Required list of bundle names. Bundle names are specified as paths, relative to the `src/main/resources/` folder.
 |===
 
 [.lead]
@@ -76,7 +76,7 @@ Example
 .Getting the current context
 [source,typescript]
 ----
-const phrasesEs = i18nLib.getPhrases('es', ['site/i18n/phrases'])
+const phrasesEs = i18nLib.getPhrases('es', ['i18n/phrases'])
 ----
 
 .Sample response
