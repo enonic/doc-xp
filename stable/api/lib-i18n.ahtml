@@ -494,10 +494,10 @@ This API uses standard framework functionality. Please read the <a href="../fram
 </div>
 </div>
 <div class="paragraph">
-<p>Then you need to create files with original phrases and their translations.  These files should be placed
-in the <code>src/main/resources/site/i18n</code> folder of your application.  There must be a file named <code>phrases.properties</code> that contains all the default phrases.  Additional files with translations named <code>phrases_&lt;locale&gt;.properties</code> should contain the same phrases
-with texts localised to <code>&lt;locale&gt;</code> language.  If a phrase is missing from the locale-specific file, the default file will be used. This is what a couple
-of such files could look like:</p>
+<p>Then you need to create files with original phrases and their translations.  These files should normally be placed in the <code>src/main/resources/i18n</code> folder of your application.
+There must be a file named <code>phrases.properties</code> that contains all the default phrases.
+Additional files with translations named <code>phrases_&lt;locale&gt;.properties</code> should contain the same phrases with texts localised to <code>&lt;locale&gt;</code> language.
+If a phrase is missing from the locale-specific file, the default file will be used. This is what a couple of such files could look like:</p>
 </div>
 <div class="listingblock">
 <div class="title">phrases.properties</div>
@@ -554,7 +554,7 @@ notify.process.failed=Error al procesar: {0}.</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">bundles</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Required list of bundle names. Bundle names are specified as paths, relative to the <code>src/main/resources</code> folder.</p>
+<p>Required list of bundle names. Bundle names are specified as paths, relative to the <code>src/main/resources/</code> folder.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -571,7 +571,7 @@ notify.process.failed=Error al procesar: {0}.</code></pre>
 <div class="listingblock">
 <div class="title">Getting the current context</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">const phrasesEs = i18nLib.getPhrases('es', ['site/i18n/phrases'])</code></pre>
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const phrasesEs = i18nLib.getPhrases('es', ['i18n/phrases'])</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -731,7 +731,7 @@ const message2 = localize({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-08-28 14:33:43 UTC
+Last updated 2025-09-02 13:34:58 UTC
 </div>
 </div>
 </body>
