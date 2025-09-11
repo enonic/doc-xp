@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Authentication API</title>
+<title>Auth API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Authentication API</h1>
+<h1>Auth API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -476,7 +476,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This API provides built-in authentication functions.</p>
+<p>Manage pricipals and authentication</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -485,8 +485,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If, while using this API, you are getting authentication errors like "<em>Access denied to user [unknown]</em>"
-it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
+If, while using this API, you are getting authentication errors like "<em>Access denied to user [unknown]</em>" it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
 In this case you must explicitly execute the function in the <a href="lib-context.ahtml#runcontext">context</a> of System Administrator role.
 </td>
 </tr>
@@ -2063,7 +2062,7 @@ const theUser = modifyUser({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-09-04 11:47:36 UTC
+Last updated 2025-09-11 07:52:49 UTC
 </div>
 </div>
 </body>
