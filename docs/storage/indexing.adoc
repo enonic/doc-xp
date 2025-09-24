@@ -2,10 +2,9 @@
 :toc: right
 :imagesdir: images
 
-Properties in a node can be indexed.
-Indexing is the process of extracting, processing and storing a search-optimized version of the property value.
+Indexing is the process of extracting, processing and storing a search-optimized version the property value.
 
-Properties are mapped to specific indexes based on its <<ValueTypes,valueType>>, and the node's <<Index config>> - as illustrated below:
+Properties are mapped to specific indexes based on its <<Value Types,properties#valueType>>, and the node's <<Index config>> - as illustrated below:
 
 image::indexmapping.svg[]
 
@@ -76,85 +75,8 @@ The path-elements (separated by default path-separator '/') are indexed as token
 === orderby
 
 Any indexed property automatically gets indexed with the orderby mapping as well.
-The "orderby" index mapping lets us sort text and numbers in a natural way across properties with different <<ValueTypes>>
+The "orderby" index mapping lets us sort text and numbers in a natural way across properties with different <<>>
 
-[#value_types]
-== ValueTypes
-
-Every property in a node has a specific value type.
-The value type enables the data storage to interpret and handle each value specially - applying to both validation and indexing.
-
-Below is the complete list of all supported value-types.
-
-[cols="1,1,1,2"]
-|===
-|Value Type |Example |Default indexing |Comment
-
-|String
-|My String
-|text
-|String of characters within UTF charset
-
-|BinaryReference
-|a-binary-reference
-|text
-|Handle for accessing a binary
-
-|Boolean
-|true
-|text
-|A value representing ``true`` or ``false``
-
-|Double
-|11.5
-|number, text
-|Double-precision 64-bit IEEE 754 floating point.
-
-|GeoPoint
-|59.9090442,10.7423389
-|geoPoint, text
-|Represents a geographical point on earth, given in latitude and longitude.
-
-|Instant
-|2015-03-16T10:00:02Z
-|datetime, text
-|A single point on the time-line (may include subsecond up to 9 digits).
-
-|LocalTime
-|10:00:03
-|text
-|A time representation without date or timezone(nor subsecond).
-
-|LocalDate
-|2015-03-16
-|datetime, text
-|A date representation. Will be indexed with UTC timezone offset.
-
-|LocalDateTime
-|2015-03-16T10:00:02
-|datetime, text
-|A date-time representation without timezone. Will be indexed with UTC timezone offset.
-
-|Long
-|1234
-|number, text
-|64-bit two's complement integer.
-
-|Reference
-|0b7f7720-6ab1-4a37-8edc-731b7e4f439e
-|text
-|Holds a reference to other nodes in the same repository.
-
-|Set
-|
-|Not indexed
-|Holds sub properties as it's value
-
-|XML
-|<some>xml</some>
-|text
-|Any valid XML
-|===
 
 [#_allText]
 == _allText

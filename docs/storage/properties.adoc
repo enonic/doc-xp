@@ -5,11 +5,9 @@
 == Introduction
 
 Properties contain the actual data inside a <<nodes#, node>>.
-Properties use a key-value format.
+Properties use a key-value format
 
-The key must be unique within the node, and the value must have a specific <<indexing#value_types, valueType>>, such as ``String``, or ``GeoPoint``.
-The valueType is used to index the property correctly, and does the basic validation.
-
+The key must be unique within the node, and the value must have a specific <<#value_types, valueType>>, such as ``String``, or ``GeoPoint``.
 
 == Property anatomy
 Examples of what a property might look like:
@@ -40,11 +38,87 @@ person.age = 39
 person.birth-date = localDate("1975-17-10")
 ----
 
-In the example above, the property `person` is of the ValueType `Set`.
+In the example above, the property `person` is of the <<#value_type, Value type >> `Set`.
 Sets are special in the way that they don't hold actual values, but rather act as containers for other properties.
 
-Properties are of a specific <<indexing#value_types, ValueType>>.
-ValueTypes are used for validation and securing correct <<indexing#, indexing>>.
+[#value_types]
+== Value types
+
+Each property has a specific value type. These are the primitive data types in the XP storage
+The value type enables the data storage to handle both validation and <<indexing#,indexing>> of the property.
+
+Below is the complete list of all supported value-types.
+
+[cols="1,1,1,2"]
+|===
+|Value Type |Example |Default indexing |Comment
+
+|String
+|My String
+|text
+|String of characters within UTF charset
+
+|BinaryReference
+|a-binary-reference
+|text
+|Handle for accessing a binary
+
+|Boolean
+|true
+|text
+|A value representing ``true`` or ``false``
+
+|Double
+|11.5
+|number, text
+|Double-precision 64-bit IEEE 754 floating point.
+
+|GeoPoint
+|59.9090442,10.7423389
+|geoPoint, text
+|Represents a geographical point on earth, given in latitude and longitude.
+
+|Instant
+|2015-03-16T10:00:02Z
+|datetime, text
+|A single point on the time-line (may include subsecond up to 9 digits).
+
+|LocalTime
+|10:00:03
+|text
+|A time representation without date or timezone(nor subsecond).
+
+|LocalDate
+|2015-03-16
+|datetime, text
+|A date representation. Will be indexed with UTC timezone offset.
+
+|LocalDateTime
+|2015-03-16T10:00:02
+|datetime, text
+|A date-time representation without timezone. Will be indexed with UTC timezone offset.
+
+|Long
+|1234
+|number, text
+|64-bit two's complement integer.
+
+|Reference
+|0b7f7720-6ab1-4a37-8edc-731b7e4f439e
+|text
+|Holds a reference to other nodes in the same repository.
+
+|Set
+|
+|Not indexed
+|Holds sub properties as it's value
+
+|XML
+|<some>xml</some>
+|text
+|Any valid XML
+|===
+
 
 [#sysprops]
 == System Properties
