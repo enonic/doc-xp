@@ -454,7 +454,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#orderby">orderby</a></li>
 </ul>
 </li>
-<li><a href="#value_types">ValueTypes</a></li>
 <li><a href="#_allText">_allText</a></li>
 <li><a href="#index_config">Index config</a>
 <ul class="sectlevel2">
@@ -488,11 +487,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Properties in a node can be indexed.
-Indexing is the process of extracting, processing and storing a search-optimized version of the property value.</p>
+<p>Indexing is the process of extracting, processing and storing a search-optimized version the property value.</p>
 </div>
 <div class="paragraph">
-<p>Properties are mapped to specific indexes based on its <a href="#value_types">valueType</a>, and the node&#8217;s <a href="#index_config">Index config</a> - as illustrated below:</p>
+<p>Properties are mapped to specific indexes based on its <a href="#Value Types">properties#valueType</a>, and the node&#8217;s <a href="#index_config">Index config</a> - as illustrated below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -600,117 +598,9 @@ When indexed, the result will be something like:</p>
 <h3 id="orderby"><a class="link" href="#orderby">orderby</a></h3>
 <div class="paragraph">
 <p>Any indexed property automatically gets indexed with the orderby mapping as well.
-The "orderby" index mapping lets us sort text and numbers in a natural way across properties with different <a href="#value_types">ValueTypes</a></p>
+The "orderby" index mapping lets us sort text and numbers in a natural way across properties with different &lt;&lt;&gt;&gt;</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="value_types"><a class="link" href="#value_types">ValueTypes</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Every property in a node has a specific value type.
-The value type enables the data storage to interpret and handle each value specially - applying to both validation and indexing.</p>
-</div>
-<div class="paragraph">
-<p>Below is the complete list of all supported value-types.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Value Type</th>
-<th class="tableblock halign-left valign-top">Example</th>
-<th class="tableblock halign-left valign-top">Default indexing</th>
-<th class="tableblock halign-left valign-top">Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">My String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String of characters within UTF charset</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BinaryReference</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a-binary-reference</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Handle for accessing a binary</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A value representing <code>true</code> or <code>false</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">11.5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number, text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Double-precision 64-bit IEEE 754 floating point.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GeoPoint</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">59.9090442,10.7423389</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">geoPoint, text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Represents a geographical point on earth, given in latitude and longitude.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Instant</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2015-03-16T10:00:02Z</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">datetime, text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A single point on the time-line (may include subsecond up to 9 digits).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LocalTime</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10:00:03</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A time representation without date or timezone(nor subsecond).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDate</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2015-03-16</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">datetime, text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A date representation. Will be indexed with UTC timezone offset.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDateTime</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2015-03-16T10:00:02</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">datetime, text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A date-time representation without timezone. Will be indexed with UTC timezone offset.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1234</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number, text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit two&#8217;s complement integer.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reference</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0b7f7720-6ab1-4a37-8edc-731b7e4f439e</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Holds a reference to other nodes in the same repository.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Set</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Not indexed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Holds sub properties as it&#8217;s value</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">XML</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;some&gt;xml&lt;/some&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any valid XML</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect1">
@@ -1277,7 +1167,7 @@ Rather than providing a full config object, you may instead reference a standard
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-09-11 07:53:13 UTC
+Last updated 2025-09-24 07:08:06 UTC
 </div>
 </div>
 </body>

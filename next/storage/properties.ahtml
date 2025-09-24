@@ -443,6 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#property_anatomy">Property anatomy</a></li>
+<li><a href="#value_types">Value types</a></li>
 <li><a href="#sysprops">System Properties</a>
 <ul class="sectlevel2">
 <li><a href="#core_properties">Core properties</a></li>
@@ -460,11 +461,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>Properties contain the actual data inside a <a href="nodes.ahtml">node</a>.
-Properties use a key-value format.</p>
+Properties use a key-value format</p>
 </div>
 <div class="paragraph">
-<p>The key must be unique within the node, and the value must have a specific <a href="indexing.ahtml#value_types">valueType</a>, such as <code>String</code>, or <code>GeoPoint</code>.
-The valueType is used to index the property correctly, and does the basic validation.</p>
+<p>The key must be unique within the node, and the value must have a specific <a href="#value_types">valueType</a>, such as <code>String</code>, or <code>GeoPoint</code>.</p>
 </div>
 </div>
 </div>
@@ -513,13 +513,117 @@ person.birth-date = localDate("1975-17-10")</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In the example above, the property <code>person</code> is of the ValueType <code>Set</code>.
+<p>In the example above, the property <code>person</code> is of the <a href="#value_type">Value type </a> <code>Set</code>.
 Sets are special in the way that they don&#8217;t hold actual values, but rather act as containers for other properties.</p>
 </div>
-<div class="paragraph">
-<p>Properties are of a specific <a href="indexing.ahtml#value_types">ValueType</a>.
-ValueTypes are used for validation and securing correct <a href="indexing.ahtml">indexing</a>.</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="value_types"><a class="link" href="#value_types">Value types</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each property has a specific value type. These are the primitive data types in the XP storage
+The value type enables the data storage to handle both validation and <a href="indexing.ahtml">indexing</a> of the property.</p>
+</div>
+<div class="paragraph">
+<p>Below is the complete list of all supported value-types.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+<th class="tableblock halign-left valign-top">Default indexing</th>
+<th class="tableblock halign-left valign-top">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">My String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String of characters within UTF charset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BinaryReference</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a-binary-reference</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Handle for accessing a binary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A value representing <code>true</code> or <code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11.5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number, text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double-precision 64-bit IEEE 754 floating point.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GeoPoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">59.9090442,10.7423389</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">geoPoint, text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents a geographical point on earth, given in latitude and longitude.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instant</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2015-03-16T10:00:02Z</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datetime, text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A single point on the time-line (may include subsecond up to 9 digits).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10:00:03</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A time representation without date or timezone(nor subsecond).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2015-03-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datetime, text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A date representation. Will be indexed with UTC timezone offset.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2015-03-16T10:00:02</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datetime, text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A date-time representation without timezone. Will be indexed with UTC timezone offset.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1234</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number, text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit two&#8217;s complement integer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0b7f7720-6ab1-4a37-8edc-731b7e4f439e</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Holds a reference to other nodes in the same repository.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not indexed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Holds sub properties as it&#8217;s value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;some&gt;xml&lt;/some&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any valid XML</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -736,7 +840,7 @@ The index structure is is flattened, and enables an effective way to query nodes
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-09-11 07:53:13 UTC
+Last updated 2025-09-24 07:08:06 UTC
 </div>
 </div>
 </body>
