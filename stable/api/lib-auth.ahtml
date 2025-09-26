@@ -545,7 +545,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">principalKey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Key of the principal to add members to</p>
@@ -896,7 +896,7 @@ const user = createUser({
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">principalKey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Key of the principal to delete</p>
@@ -1218,7 +1218,7 @@ const pwd = generatePassword();</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">principalKey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key to retrieve the members of.</p>
@@ -1275,7 +1275,7 @@ const result = getMembers('group:system:content-managers');</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">principalKey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key to retrieve memberships for</p>
@@ -1360,7 +1360,7 @@ const result = getMemberships('user:system:user1', true);</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">principalKey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key to retrieve memberships for</p>
@@ -1423,7 +1423,7 @@ const result = getPrincipal('user:system:user1');</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">principalKey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key to retrieve profile for</p>
@@ -1452,7 +1452,9 @@ const result = getPrincipal('user:system:user1');</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-typescript" data-lang="typescript">import {getProfile} from '/lib/xp/auth';
 
-const result = getProfile('user:system:user1');</code></pre>
+const result = getProfile({
+    key: 'user:system:user1'
+});</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1650,15 +1652,15 @@ const loginResult = login({
 <div class="title">Sample response</div>
 <div class="content">
 <pre class="highlight"><code class="language-typescript" data-lang="typescript">{
-    authenticated:true,
-    user:{
-        type:"user",
-        key:"user:system:user1",
-        displayName:"The One And Only",
-        disabled:false,
-        email:"user1@enonic.com",
-        login:"user1",
-        idProvider:"myIdProvider"
+    authenticated: true,
+    user: {
+        type: "user",
+        key: "user:system:user1",
+        displayName: "The One And Only",
+        disabled: false,
+        email: "user1@enonic.com",
+        login: "user1",
+        idProvider: "myIdProvider"
     }
 }</code></pre>
 </div>
@@ -1766,7 +1768,7 @@ const group = modifyGroup({
 <div class="sect2">
 <h3 id="modifyprofile"><a class="link" href="#modifyprofile">modifyProfile</a></h3>
 <div class="paragraph">
-<p>Updates an existing user profile.</p>
+<p>Updates an existing user profile. Will create a new profile, if an existing one with provided <code>scope</code> was not found.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -2029,7 +2031,7 @@ const theUser = modifyUser({
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">principalKey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The principal key of a group or a role to remove members from</p>
@@ -2062,7 +2064,7 @@ const theUser = modifyUser({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-09-24 07:07:31 UTC
+Last updated 2025-09-26 12:26:09 UTC
 </div>
 </div>
 </body>
