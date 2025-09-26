@@ -42,7 +42,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| principalKey | string | Key of the principal to add members to
+| key | string | Key of the principal to add members to
 | members | string[] | A list of the new members that should be added to the principal
 |===
 
@@ -244,7 +244,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| principalKey | string | Key of the principal to delete
+| key | string | Key of the principal to delete
 |===
 
 [.lead]
@@ -440,7 +440,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| principalKey | string | Principal key to retrieve the members of.
+| key | string | Principal key to retrieve the members of.
 |===
 
 [.lead]
@@ -479,7 +479,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| principalKey | string | Principal key to retrieve memberships for
+| key | string | Principal key to retrieve memberships for
 | transitive | boolean | Retrieve transitive memberships.  Considered `false` if not specified
 |===
 
@@ -540,7 +540,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| principalKey | string | Principal key to retrieve memberships for
+| key | string | Principal key to retrieve memberships for
 |===
 
 [.lead]
@@ -584,7 +584,7 @@ An object with the following keys and their values:
 [grid="none"]
 |===
 | Name | Kind | Details
-| principalKey | string | Principal key to retrieve profile for
+| key | string | Principal key to retrieve profile for
 | scope | string | Optional scope setting
 |===
 
@@ -601,7 +601,9 @@ Example
 ----
 import {getProfile} from '/lib/xp/auth';
 
-const result = getProfile('user:system:user1');
+const result = getProfile({
+    key: 'user:system:user1'
+});
 ----
 
 .Sample response
@@ -729,15 +731,15 @@ const loginResult = login({
 [source,typescript]
 ----
 {
-    authenticated:true,
-    user:{
-        type:"user",
-        key:"user:system:user1",
-        displayName:"The One And Only",
-        disabled:false,
-        email:"user1@enonic.com",
-        login:"user1",
-        idProvider:"myIdProvider"
+    authenticated: true,
+    user: {
+        type: "user",
+        key: "user:system:user1",
+        displayName: "The One And Only",
+        disabled: false,
+        email: "user1@enonic.com",
+        login: "user1",
+        idProvider: "myIdProvider"
     }
 }
 ----
@@ -814,7 +816,7 @@ const group = modifyGroup({
 
 === modifyProfile
 
-Updates an existing user profile.
+Updates an existing user profile. Will create a new profile, if an existing one with provided `scope` was not found.
 
 [.lead]
 Parameters
@@ -986,7 +988,7 @@ Parameters
 [grid="none"]
 |===
 | Name | Kind | Details
-| principalKey | string | The principal key of a group or a role to remove members from
+| key | string | The principal key of a group or a role to remove members from
 | members | string[] | Principal keys to remove as members
 |===
 
