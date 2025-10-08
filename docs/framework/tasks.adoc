@@ -18,7 +18,6 @@ The descriptor must be placed in task folder as follows: `src/main/resources/tas
   <form>
     <input type="Long" name="count">
       <label>Number of items to process</label>
-      <default>42</default>
       <occurrences minimum="1" maximum="1"/>
     </input>
   </form>
