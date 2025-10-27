@@ -938,6 +938,98 @@ const result = repo.update({
 });
 ----
 
+=== patch
+
+Applies a patch to a node.
+
+[WARNING]
+====
+This is a low-level function. It should be used with caution as it can corrupt data if used incorrectly.
+====
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| key | string | | | Path or id to the node
+| editor | function | | | Patcher callback function
+| branches | string[] | <optional> | false | A list of branches to patch. +
+* If not provided or empty, the content in the current branch will be patched. +
+* If one branch is listed, the patch occurs in that specific branch. +
+* If multiple branches are listed: +
+1.  The patch is applied to the *first* branch in the list. +
+2.  For each subsequent branch in the list: +
+* If its node version is identical to the *original* (pre-patch) version from any processed branch, it is simply switched to point to the new, patched version. (`publish` permission is required) +
+* If its node version is *different*, the patch is applied to it separately (`update` permission is required).
+|===
+
+
+[.lead]
+*Patchable Fields:*
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+| displayName | string | The display name of the node.
+| _nodeType | string | The type definition of the node.
+| _indexConfig | object | An object defining the search <<../storage/indexing#,index>> configuration for this node.
+| _childOrder | string | Defines the default sort order for the node's direct children.
+| _manualOrderValue | number | Numeric value used for manual sorting among siblings (when parent's `_childOrder` is manual).
+|===
+
+Any data can also be patched if the name of the field does not start with an underscore (_).
+
+[.lead]
+Examples
+
+.Patching a node's display name and adding a new field.
+[source,typescript]
+----
+const patchedNode = repo.patch({
+    key: '/my-node',
+    editor: (node) => {
+        node.displayName = 'New Display Name';
+        node.newField = 'New Value';
+        return node;
+    }
+});
+----
+
+.Patching childOrder in multiple branches.
+[source,typescript]
+----
+const patchedNode = repo.patch({
+    key: '/my-node',
+    branches: ['master', 'draft', 'other'],
+    editor: (node) => {
+        node._childOrder = 'field DESC';
+        return node;
+    }
+});
+----
+
+.Patching a node with data stream.
+[source,typescript]
+----
+var ioLib = require('/lib/xp/io');
+
+var stream = ioLib.newStream('Hello World');
+
+const patchedNode = repo.patch({
+    key: '/my-node',
+    editor: (node) => {
+        node.attachmentField = {
+            data: stream
+        };
+        return node;
+    }
+});
+----
+
+
 === move
 
 Renames a node or moves it to a new path.
