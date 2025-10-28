@@ -2110,6 +2110,12 @@ An object with the following keys and their values:
 |===
 
 [.lead]
+Returns
+
+*object* : The map <ContentId, Permissions> indicating for each content id which permissions were applied
+
+
+[.lead]
 Examples
 
 .1) Applying permissions to a content by overwriting the current permissions.
