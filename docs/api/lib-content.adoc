@@ -163,6 +163,7 @@ An object with the following keys and their values:
 | language | string | <optional> | | The language tag representing the content’s locale
 | childOrder | string | <optional> | | Default ordering of children when doing getChildren if no order is given in query
 | data | object | | | Actual content data
+| page | object | <optional> | | content <<PageType, page>>
 | x | object | <optional> | | eXtra data to use
 | workflow | object | <optional> | | Workflow information to use. Default has state READY and empty check list.
 |===
@@ -1336,6 +1337,171 @@ const expected = {
 };
 ----
 
+=== patch
+
+Patches a content
+
+[WARNING]
+====
+This is a low-level and potentially dangerous operation.
+
+It should be used with caution. Access is restricted to users with `admin` or `cms.admin` roles.
+====
+
+[%header,cols="1%,1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Default| Description
+| key | string | | | Path or id to the content
+| patcher | function | | | Patcher callback function
+| branches | string[] | <optional> | false | A list of branches to patch. +
+* If not provided or empty, the content in the current branch will be patched. +
+* If one branch is listed, the patch occurs in that specific branch. +
+* If multiple branches are listed: +
+1.  The patch is applied to the *first* branch in the list. +
+2.  For each subsequent branch in the list: +
+* If its content version is identical to the *original* (pre-patch) version from any processed branch, it is simply switched to point to the new, patched version. +
+* If its content version is *different*, the patch is applied to it separately.
+| skipSync | boolean | <optional> | false | If true, skip synchronization of the content in children projects after patching
+| attachments | object | <optional> | | Object for managing content attachments. Contains optional arrays: <<createAttachments_details, \`createAttachments` (add new)>>, <<modifyAttachments_details, \`modifyAttachments` (update existing)>> and \`removeAttachments` (a string array with attachment names to remove) .
+|===
+
+`patcher` is a function that receives the current content as parameter and must return the modified content. A list of supported fields that can be patched is provided below.
+
+[.lead]
+*Patchable Fields:*
+
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Description
+
+| displayName | string | The display name of the content.
+| language | string | The language tag representing the content's locale.
+| childOrder | string | String defining the sort order of children.
+| manualOrderValue | number | Numeric value used for manual sorting across siblings (when parent's childOrder is manual).
+| valid | boolean | Sets the content's validity status.
+
+| data | object | A JSON object containing the main data (properties) of the content, according to its content type.
+| page | object | A JSON object describing the <<PageType, page>> configuration including regions and components.
+| x | object | A JSON object containing extra data (x-data) associated with the content.
+
+| owner | string | The owner of the content. Must be a PrincipalKey string.
+| creator | string | The creator of the content. Must be a PrincipalKey string.
+| createdTime | string | The creation timestamp. Must be an ISO 8601 formatted string.
+| modifier | string | The principal who last modified the content. Must be a PrincipalKey string.
+| modifiedTime | string | The last modified timestamp. Must be an ISO 8601 formatted string.
+| archivedBy | string | The principal who archived the content. Must be a PrincipalKey string.
+| archivedTime | string | The archival timestamp. Must be an ISO 8601 formatted string.
+
+| publish | object | A JSON object containing publishing information.
+| workflow | object | A JSON object containing <<WorkflowInfoType, workflow>> state information.
+
+| inherit | string[] | An array of strings specifying which properties to inherit from the parent (e.g., ["owner", "language"]).
+| variantOf | string | The ContentId (as a string) of the content this item is a variant of (used for localization).
+| processedReferences | string[] | An array of ContentId strings that this content references.
+| validationErrors | <<ValidationErrorType, ValidationError>>[] | An array of objects describing validation errors.
+| originProject | string | The name of the project this content was inherited from.
+| originalParentPath | string | The original parent path in the parent project.
+| originalName | string | The original name in the parent project.
+|===
+
+[[createAttachments_details]]
+[.lead]
+*createAttachments:*
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes|  Description
+| name | string | | Name of the attachment to create
+| mimeType | string | <optional> | Mime-type of the data
+| label | string | <optional> | Label of the attachment
+| textContent | string | <optional> | Text content to set
+| sha512 | string | <optional> | SHA-512 hash of the data
+| size | number | <optional> | Size of the data in bytes
+|===
+
+[[modifyAttachments_details]]
+[.lead]
+*modifyAttachments:*
+An object with the following keys and their values:
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name        | Type    | Attributes |  Description
+| name        | string         |             | Name of the attachment to modify
+| mimeType    | string         | <optional> | Mime-type of the data
+| label       | string         | <optional> | Label of the attachment
+| textContent | string         | <optional> | Text content to set
+| data        | object(stream) | <optional> | Data (as stream) to use
+|===
+
+[.lead]
+Examples
+
+.Patching archival info.
+[source,typescript]
+----
+import {patch} from '/lib/xp/content';
+function patcher(c) {
+    c.archivedBy = 'user:system:admin';
+    c.archivedTime = new Date().toISOString();
+    return c;
+}
+
+const result = patch({
+    key: '/a/b/mycontent',
+    patcher: patcher
+});
+
+----
+
+.Patching content's attachments.
+[source,typescript]
+----
+import {patch} from '/lib/xp/content';
+import {newStream} from '/lib/xp/io';
+
+// Patcher function to modify content.
+function patcher(c) {
+    c.displayName = 'Patched Content';
+    c.data.myField = 'New Value';
+    return c;
+}
+// Patch content by path
+const result = patch({
+    key: '/a/b/mycontent',
+    patcher: patcher,
+    branches: ['draft', 'master'],
+    attachments: {
+        createAttachments: [
+            {
+                name: 'new-attachment.txt',
+                mimeType: 'text/plain',
+                data: newStream('Hello World')
+            }
+        ],
+        modifyAttachments: [
+            {
+                name: 'existing-attachment.txt',
+                mimeType: 'text/plain',
+                label: 'updated-label'
+            }
+        ],
+        removeAttachments: [
+            'old-attachment.txt'
+        ]
+    }
+});
+----
+
 === move
 [[move]]
 
@@ -1944,6 +2110,12 @@ An object with the following keys and their values:
 |===
 
 [.lead]
+Returns
+
+*object* : The map <ContentId, Permissions> indicating for each content id which permissions were applied
+
+
+[.lead]
 Examples
 
 .1) Applying permissions to a content by overwriting the current permissions.
@@ -2134,4 +2306,136 @@ Fields
 | data | object | <optional> | Stream with the binary data for the icon
 | mimeType | string | <optional> | Mime type of the icon image
 | modifiedTime | string | <optional> | Modified time of the icon. May be used for caching
+|===
+
+=== WorkflowInfoType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| state | string |  | The name of the current workflow state (e.g., "IN_PROGRESS", "READY").
+| checks | object | <optional> | A JSON object mapping specific check names (string) to their status (string). The status must be one of: `PENDING`, `REJECTED`, or `APPROVED`.
+|===
+
+=== ValidationErrorType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| errorCode | string | | **Required.** The validation error code (e.g., `MISSING_REQUIRED`, `INVALID_FORMAT`).
+| message | string | <optional> | A static, human-readable error message.
+| i18n | string | <optional> | The i18n localization key for the error message.
+| args | array | <optional> | An array of values to be substituted into the `i18n` message.
+| attachment | string | <optional> | The name (or `BinaryReference` string) of the attachment this error relates to.
+| propertyPath | string | <optional> | The `PropertyPath` (as a string) to the data field this error relates to (e.g., `mySet.0.myInput`).
+|===
+
+
+=== PageType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| descriptor | string |  | The `DescriptorKey` (e.g., `com.myapp:my-page`) of the page controller.
+| template | string | <optional> | The `PageTemplateKey` of the page template to use.
+| config | object | <optional> | A JSON object (PropertyTree) for the page's configuration.
+| regions | object | <optional> | An object mapping region names (string) to <<RegionType, RegionType objects>>.
+| fragment | object | <optional> | A fragment component.
+|===
+
+=== RegionType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| components | object[] | <optional> | An array of component objects (e.g., <<LayoutComponentType, Layout>>, <<PartComponentType, Part>>, etc.) placed within this region.
+|===
+
+=== LayoutComponentType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| descriptor | string |  | The `DescriptorKey` (e.g., `com.myapp:2-column`) of the layout.
+| config | object | <optional> | A JSON object for the layout's configuration.
+| regions | object | <optional> | A <<RegionType, Regions object>> map containing the regions *within* this layout.
+|===
+
+=== PartComponentType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| descriptor | string |  | The descriptor string (e.g., `com.myapp:my-part`) of the part.
+| config | object | <optional> | A JSON object for the part's configuration.
+|===
+
+=== TextComponentType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| text | string | <optional> | Text content of the component.
+|===
+
+=== ImageComponentType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| image | string | <optional> | The `ContentId` (as a string) of the image content item.
+| config | object | <optional> | A JSON object for the image's configuration.
+|===
+
+=== FragmentComponentType
+
+[.lead]
+Fields
+
+[%header,cols="1%,1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name | Type | Attributes| Description
+| fragment | string | <optional> | The `ContentId` (as a string) of the fragment content item.
 |===
