@@ -1379,7 +1379,7 @@ It should be used with caution. Access is restricted to users with `admin` or `c
 | Name | Type | Description
 
 | displayName | string | The display name of the content.
-| language | string | The language tag representing the content’s locale.
+| language | string | The language tag representing the content's locale.
 | childOrder | string | String defining the sort order of children.
 | manualOrderValue | number | Numeric value used for manual sorting across siblings (when parent's childOrder is manual).
 | valid | boolean | Sets the content's validity status.
