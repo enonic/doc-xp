@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="generator" content="Asciidoctor 2.0.26">
 <title>Content API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -116,7 +116,6 @@ h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title str
 :not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
 pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
 pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
-pre>code{display:block}
 pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
 em em{font-style:normal}
 strong strong{font-weight:400}
@@ -219,6 +218,7 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
 .literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
 .listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
 .listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
 .listingblock:hover code[data-lang]::before{display:block}
 .listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
@@ -469,6 +469,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#gettype">getType</a></li>
 <li><a href="#gettypes">getTypes</a></li>
 <li><a href="#update">update</a></li>
+<li><a href="#patch">patch</a></li>
 <li><a href="#move">move</a></li>
 <li><a href="#publish">publish</a></li>
 <li><a href="#query">query</a></li>
@@ -483,6 +484,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#contenttype">ContentType</a></li>
 <li><a href="#icontype">IconType</a></li>
+<li><a href="#workflowinfotype">WorkflowInfoType</a></li>
+<li><a href="#validationerrortype">ValidationErrorType</a></li>
+<li><a href="#pagetype">PageType</a></li>
+<li><a href="#regiontype">RegionType</a></li>
+<li><a href="#layoutcomponenttype">LayoutComponentType</a></li>
+<li><a href="#partcomponenttype">PartComponentType</a></li>
+<li><a href="#textcomponenttype">TextComponentType</a></li>
+<li><a href="#imagecomponenttype">ImageComponentType</a></li>
+<li><a href="#fragmentcomponenttype">FragmentComponentType</a></li>
 </ul>
 </li>
 </ul>
@@ -829,6 +839,15 @@ log.info('Archived content ids: %s', result2.join(','));</code></pre>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Actual content data</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>content <a href="#pagetype">page</a></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2571,6 +2590,481 @@ const expected = {
 </div>
 </div>
 <div class="sect2">
+<h3 id="patch"><a class="link" href="#patch">patch</a></h3>
+<div class="paragraph">
+<p>Patches a content</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is a low-level and potentially dangerous operation.</p>
+</div>
+<div class="paragraph">
+<p>It should be used with caution. Access is restricted to users with <code>admin</code> or <code>cms.admin</code> roles.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.9803%;">
+<col style="width: 0.9803%;">
+<col style="width: 0.9803%;">
+<col style="width: 0.9803%;">
+<col style="width: 96.0788%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path or id to the content</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">patcher</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Patcher callback function</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">branches</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A list of branches to patch.<br>
+* If not provided or empty, the content in the current branch will be patched.<br>
+* If one branch is listed, the patch occurs in that specific branch.<br>
+* If multiple branches are listed:<br>
+1.  The patch is applied to the <strong>first</strong> branch in the list.<br>
+2.  For each subsequent branch in the list:<br>
+* If its content version is identical to the <strong>original</strong> (pre-patch) version from any processed branch, it is simply switched to point to the new, patched version.<br>
+* If its content version is <strong>different</strong>, the patch is applied to it separately.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">skipSync</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If true, skip synchronization of the content in children projects after patching</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attachments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Object for managing content attachments. Contains optional arrays: <a href="#createAttachments_details">`createAttachments` (add new)</a>, <a href="#modifyAttachments_details">`modifyAttachments` (update existing)</a> and `removeAttachments` (a string array with attachment names to remove) .</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>patcher</code> is a function that receives the current content as parameter and must return the modified content. A list of supported fields that can be patched is provided below.</p>
+</div>
+<div class="paragraph lead">
+<p><strong>Patchable Fields:</strong></p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 98%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">displayName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The display name of the content.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The language tag representing the content&#8217;s locale.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">childOrder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>String defining the sort order of children.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manualOrderValue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Numeric value used for manual sorting across siblings (when parent&#8217;s childOrder is manual).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">valid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Sets the content&#8217;s validity status.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object containing the main data (properties) of the content, according to its content type.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object describing the <a href="#pagetype">page</a> configuration including regions and components.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object containing extra data (x-data) associated with the content.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">owner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The owner of the content. Must be a PrincipalKey string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">creator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The creator of the content. Must be a PrincipalKey string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createdTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The creation timestamp. Must be an ISO 8601 formatted string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modifier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The principal who last modified the content. Must be a PrincipalKey string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modifiedTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The last modified timestamp. Must be an ISO 8601 formatted string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">archivedBy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The principal who archived the content. Must be a PrincipalKey string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">archivedTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The archival timestamp. Must be an ISO 8601 formatted string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publish</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object containing publishing information.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">workflow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object containing <a href="#workflowinfotype">workflow</a> state information.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inherit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An array of strings specifying which properties to inherit from the parent (e.g., ["owner", "language"]).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">variantOf</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The ContentId (as a string) of the content this item is a variant of (used for localization).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">processedReferences</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An array of ContentId strings that this content references.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">validationErrors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#validationerrortype">ValidationError</a>[]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An array of objects describing validation errors.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">originProject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the project this content was inherited from.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">originalParentPath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The original parent path in the parent project.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">originalName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The original name in the parent project.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div id="createAttachments_details" class="paragraph lead">
+<p><strong>createAttachments:</strong>
+An object with the following keys and their values:</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the attachment to create</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mimeType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Mime-type of the data</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Label of the attachment</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">textContent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Text content to set</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sha512</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SHA-512 hash of the data</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Size of the data in bytes</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div id="modifyAttachments_details" class="paragraph lead">
+<p><strong>modifyAttachments:</strong>
+An object with the following keys and their values:</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the attachment to modify</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mimeType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Mime-type of the data</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Label of the attachment</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">textContent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Text content to set</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object(stream)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Data (as stream) to use</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph lead">
+<p>Examples</p>
+</div>
+<div class="listingblock">
+<div class="title">Patching archival info.</div>
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {patch} from '/lib/xp/content';
+function patcher(c) {
+    c.archivedBy = 'user:system:admin';
+    c.archivedTime = new Date().toISOString();
+    return c;
+}
+
+const result = patch({
+    key: '/a/b/mycontent',
+    patcher: patcher
+});</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Patching content&#8217;s attachments.</div>
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {patch} from '/lib/xp/content';
+import {newStream} from '/lib/xp/io';
+
+// Patcher function to modify content.
+function patcher(c) {
+    c.displayName = 'Patched Content';
+    c.data.myField = 'New Value';
+    return c;
+}
+// Patch content by path
+const result = patch({
+    key: '/a/b/mycontent',
+    patcher: patcher,
+    branches: ['draft', 'master'],
+    attachments: {
+        createAttachments: [
+            {
+                name: 'new-attachment.txt',
+                mimeType: 'text/plain',
+                data: newStream('Hello World')
+            }
+        ],
+        modifyAttachments: [
+            {
+                name: 'existing-attachment.txt',
+                mimeType: 'text/plain',
+                label: 'updated-label'
+            }
+        ],
+        removeAttachments: [
+            'old-attachment.txt'
+        ]
+    }
+});</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="move"><a class="link" href="#move">move</a></h3>
 <div id="move" class="paragraph">
 <p>Renames a content or moves it to a new path</p>
@@ -3508,6 +4002,12 @@ If the content is published, the permissions will be applied to the published co
 </tbody>
 </table>
 <div class="paragraph lead">
+<p>Returns</p>
+</div>
+<div class="paragraph">
+<p><strong>object</strong> : The map &lt;ContentId, Permissions&gt; indicating for each content id which permissions were applied</p>
+</div>
+<div class="paragraph lead">
 <p>Examples</p>
 </div>
 <div class="listingblock">
@@ -3861,12 +4361,412 @@ const expected = [
 </tbody>
 </table>
 </div>
+<div class="sect2">
+<h3 id="workflowinfotype"><a class="link" href="#workflowinfotype">WorkflowInfoType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">state</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the current workflow state (e.g., "IN_PROGRESS", "READY").</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">checks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object mapping specific check names (string) to their status (string). The status must be one of: <code>PENDING</code>, <code>REJECTED</code>, or <code>APPROVED</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="validationerrortype"><a class="link" href="#validationerrortype">ValidationErrorType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">errorCode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>Required.</strong> The validation error code (e.g., <code>MISSING_REQUIRED</code>, <code>INVALID_FORMAT</code>).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A static, human-readable error message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i18n</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The i18n localization key for the error message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">args</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An array of values to be substituted into the <code>i18n</code> message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attachment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name (or <code>BinaryReference</code> string) of the attachment this error relates to.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">propertyPath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The <code>PropertyPath</code> (as a string) to the data field this error relates to (e.g., <code>mySet.0.myInput</code>).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="pagetype"><a class="link" href="#pagetype">PageType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descriptor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The <code>DescriptorKey</code> (e.g., <code>com.myapp:my-page</code>) of the page controller.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">template</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The <code>PageTemplateKey</code> of the page template to use.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">config</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object (PropertyTree) for the page&#8217;s configuration.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">regions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An object mapping region names (string) to <a href="#regiontype">RegionType objects</a>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fragment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A fragment component.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="regiontype"><a class="link" href="#regiontype">RegionType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">components</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An array of component objects (e.g., <a href="#layoutcomponenttype">Layout</a>, <a href="#partcomponenttype">Part</a>, etc.) placed within this region.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="layoutcomponenttype"><a class="link" href="#layoutcomponenttype">LayoutComponentType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descriptor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The <code>DescriptorKey</code> (e.g., <code>com.myapp:2-column</code>) of the layout.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">config</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object for the layout&#8217;s configuration.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">regions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A <a href="#regiontype">Regions object</a> map containing the regions <strong>within</strong> this layout.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="partcomponenttype"><a class="link" href="#partcomponenttype">PartComponentType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">descriptor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The descriptor string (e.g., <code>com.myapp:my-part</code>) of the part.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">config</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object for the part&#8217;s configuration.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="textcomponenttype"><a class="link" href="#textcomponenttype">TextComponentType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Text content of the component.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="imagecomponenttype"><a class="link" href="#imagecomponenttype">ImageComponentType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The <code>ContentId</code> (as a string) of the image content item.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">config</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A JSON object for the image&#8217;s configuration.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="fragmentcomponenttype"><a class="link" href="#fragmentcomponenttype">FragmentComponentType</a></h3>
+<div class="paragraph lead">
+<p>Fields</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 0.99%;">
+<col style="width: 97.03%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fragment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The <code>ContentId</code> (as a string) of the fragment content item.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-10-08 07:55:29 UTC
+Last updated 2025-10-28 15:25:37 UTC
 </div>
 </div>
 </body>

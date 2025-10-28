@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="generator" content="Asciidoctor 2.0.26">
 <title>Node API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -116,7 +116,6 @@ h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title str
 :not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
 pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
 pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
-pre>code{display:block}
 pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
 em em{font-style:normal}
 strong strong{font-weight:400}
@@ -219,6 +218,7 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
 .literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
 .listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
 .listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
 .listingblock:hover code[data-lang]::before{display:block}
 .listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
@@ -469,6 +469,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#getbinary">getBinary</a></li>
 <li><a href="#getcommit">getCommit</a></li>
 <li><a href="#update">update</a></li>
+<li><a href="#patch">patch</a></li>
 <li><a href="#move">move</a></li>
 <li><a href="#push">push</a></li>
 <li><a href="#query_2">query</a></li>
@@ -2060,6 +2061,184 @@ if (result) {
 </div>
 </div>
 <div class="sect2">
+<h3 id="patch"><a class="link" href="#patch">patch</a></h3>
+<div class="paragraph">
+<p>Applies a patch to a node.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is a low-level function. It should be used with caution as it can corrupt data if used incorrectly.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 0.9803%;">
+<col style="width: 0.9803%;">
+<col style="width: 0.9803%;">
+<col style="width: 0.9803%;">
+<col style="width: 96.0788%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path or id to the node</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">editor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Patcher callback function</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">branches</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A list of branches to patch.<br>
+* If not provided or empty, the content in the current branch will be patched.<br>
+* If one branch is listed, the patch occurs in that specific branch.<br>
+* If multiple branches are listed:<br>
+1.  The patch is applied to the <strong>first</strong> branch in the list.<br>
+2.  For each subsequent branch in the list:<br>
+* If its node version is identical to the <strong>original</strong> (pre-patch) version from any processed branch, it is simply switched to point to the new, patched version. (<code>publish</code> permission is required)<br>
+* If its node version is <strong>different</strong>, the patch is applied to it separately (<code>update</code> permission is required).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph lead">
+<p><strong>Patchable Fields:</strong></p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 98%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">displayName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The display name of the node.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">_nodeType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The type definition of the node.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">_indexConfig</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An object defining the search <a href="../storage/indexing.ahtml">index</a> configuration for this node.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">_childOrder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Defines the default sort order for the node&#8217;s direct children.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">_manualOrderValue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Numeric value used for manual sorting among siblings (when parent&#8217;s <code>_childOrder</code> is manual).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Any data can also be patched if the name of the field does not start with an underscore (_).</p>
+</div>
+<div class="paragraph lead">
+<p>Examples</p>
+</div>
+<div class="listingblock">
+<div class="title">Patching a node&#8217;s display name and adding a new field.</div>
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const patchedNode = repo.patch({
+    key: '/my-node',
+    editor: (node) =&gt; {
+        node.displayName = 'New Display Name';
+        node.newField = 'New Value';
+        return node;
+    }
+});</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Patching childOrder in multiple branches.</div>
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const patchedNode = repo.patch({
+    key: '/my-node',
+    branches: ['master', 'draft', 'other'],
+    editor: (node) =&gt; {
+        node._childOrder = 'field DESC';
+        return node;
+    }
+});</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Patching a node with data stream.</div>
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">var ioLib = require('/lib/xp/io');
+
+var stream = ioLib.newStream('Hello World');
+
+const patchedNode = repo.patch({
+    key: '/my-node',
+    editor: (node) =&gt; {
+        node.attachmentField = {
+            data: stream
+        };
+        return node;
+    }
+});</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="move"><a class="link" href="#move">move</a></h3>
 <div class="paragraph">
 <p>Renames a node or moves it to a new path.</p>
@@ -3028,7 +3207,7 @@ const result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-10-08 07:55:29 UTC
+Last updated 2025-10-28 15:25:37 UTC
 </div>
 </div>
 </body>
