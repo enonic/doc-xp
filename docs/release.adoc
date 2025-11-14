@@ -3,6 +3,20 @@ include::.variables.adoc[]
 :toc: right
 :imagesdir: release/images
 
+== XP7 Update 16
+
+This release includes a selection of new features, as well as several smaller improvements, bugfixes and stability improvements.
+
+=== GraalVM for JDK 21
+
+XP is now powered by GraalVM for JDK 21
+
+WARNING: XP 7.16.0 is the final release with Mac x64 support. This is due Oracle's discontinuation of x64 builds for Mac.
+
+=== Temporary folder relocation
+
+Startup script relocates the Java defined temporary folder to `<xp-home>/work` by default. To override this behavior, set the `XP_TMP` environment variable to the desired location before starting XP.
+
 == XP7 Update 15
 
 This release includes a selection of new features, as well as several smaller improvements, bugfixes and stability improvements.

@@ -45,6 +45,15 @@ When upgrading to new feature versions of Enonic XP, new versions of standard ap
 After upgrading XP, check for new versions of your installed applications from Enonic market.
 We generally always recommend updating your apps to the latest version!
 
+== v7.16 notes
+
+* Java 21 is now the bundled JDK. Other JDK versions are not supported, although they may also work. We recommend testing your applications before upgrading to this version as always. Consult with https://docs.oracle.com/en/java/javase/21/migrate/getting-started.html[JDK Migration Guide] for more information about migrating from JDK 17 to JDK 21 in case you experience any issues.
+
+* XP 7.16.0 is the final release with Mac x64 support. This is due Oracle's discontinuation of x64 builds for Mac.
+
+* Temporary files are now created in `XP_HOME/work` directory instead of system temp directory. This may increase space requirements in `XP_HOME/work` location.
+It is possible to change the temp directory by setting `XP_TMP` environment variable.
+
 == v7.15 notes
 
 * The image service now generates progressive JPEG images by default. This can be changed back in <<../deployment/config#image>> by setting `progressiveJpeg` to empty string.
