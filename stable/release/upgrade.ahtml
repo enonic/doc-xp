@@ -449,6 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#rolling_cluster_upgrade">Rolling Cluster upgrade</a></li>
 <li><a href="#full_restart_cluster_upgrade">Full restart Cluster upgrade</a></li>
 <li><a href="#applications">Applications</a></li>
+<li><a href="#v7_16_notes">v7.16 notes</a></li>
 <li><a href="#v7_15_notes">v7.15 notes</a></li>
 <li><a href="#v7_14_notes">v7.14 notes</a></li>
 <li><a href="#v7_13_notes">v7.13 notes</a></li>
@@ -591,6 +592,25 @@ It is important to start the nodes at the same time to avoid timeouts, should an
 <div class="paragraph">
 <p>After upgrading XP, check for new versions of your installed applications from Enonic market.
 We generally always recommend updating your apps to the latest version!</p>
+</div>
+</div>
+<div class="sect1">
+<h2 id="v7_16_notes"><a class="link" href="#v7_16_notes">v7.16 notes</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Java 21 is now the bundled JDK. Other JDK versions are not supported, although they may also work. We recommend testing your applications before upgrading to this version as always. Consult with <a href="https://docs.oracle.com/en/java/javase/21/migrate/getting-started.html">JDK Migration Guide</a> for more information about migrating from JDK 17 to JDK 21 in case you experience any issues.</p>
+</li>
+<li>
+<p>XP 7.16.0 is the final release with Mac x64 support. This is due Oracle&#8217;s discontinuation of x64 builds for Mac.</p>
+</li>
+<li>
+<p>Temporary files are now created in <code>XP_HOME/work</code> directory instead of system temp directory. This may increase space requirements in <code>XP_HOME/work</code> location.
+It is possible to change the temp directory by setting <code>XP_TMP</code> environment variable.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1375,7 +1395,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-01 14:40:39 UTC
+Last updated 2025-12-09 17:06:04 UTC
 </div>
 </div>
 </body>

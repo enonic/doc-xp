@@ -443,6 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#xp_install">XP_INSTALL</a></li>
 <li><a href="#xp_home">XP_HOME</a></li>
+<li><a href="#xp_tmp">XP_TMP</a></li>
 </ul>
 </div>
 </div>
@@ -543,7 +544,7 @@ Folders marked with * will not appear until XP is started the first time
    |- index/  <i class="conum" data-value="5"></i><b>(5)</b>
    |- blob/  <i class="conum" data-value="6"></i><b>(6)</b>
 |- snapshots/ *  <i class="conum" data-value="7"></i><b>(7)</b>
-|- work/ *  <i class="conum" data-value="8"></i><b>(8)</b></code></pre>
+|- work/   <i class="conum" data-value="8"></i><b>(8)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -626,7 +627,27 @@ For clusters, this must be mounted to a shared volume, accessible by all nodes.
 </tr>
 <tr>
 <td><i class="conum" data-value="8"></i><b>8</b></td>
-<td><code>work/</code> Cache and generated bundles (apps etc) are stored here.
+<td><code>work/</code> Cache and generated bundles (apps etc) are stored here. It is also a default location for temporary files (from version <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="r">
+    <rect width="64" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#r)">
+    <rect width="25" height="20" fill="#555"/>
+    <rect x="25" width="39" height="20" fill="#007ec6"/>
+    <rect width="64" height="20" fill="url(#s)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
+     font-size="110">
+    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
+    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
+    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.16.0</text>
+    <text x="435" y="140" transform="scale(.1)" textLength="290">7.16.0</text>
+  </g>
+</svg></span>).
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -634,7 +655,7 @@ For clusters, this must be mounted to a shared volume, accessible by all nodes.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For optimal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.*
+For optimal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.
 </td>
 </tr>
 </table>
@@ -644,10 +665,42 @@ For optimal performance ,mount this to a local persisted volume. Caches do not n
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="xp_tmp"><a class="link" href="#xp_tmp">XP_TMP</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="r">
+    <rect width="64" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#r)">
+    <rect width="25" height="20" fill="#555"/>
+    <rect x="25" width="39" height="20" fill="#007ec6"/>
+    <rect width="64" height="20" fill="url(#s)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
+     font-size="110">
+    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
+    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
+    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.16.0</text>
+    <text x="435" y="140" transform="scale(.1)" textLength="290">7.16.0</text>
+  </g>
+</svg></span></p>
+</div>
+<div class="paragraph">
+<p>By default, Enonic XP uses <code>XP_HOME/work</code> as temporary folder.
+You may override this by setting the <code>XP_TMP</code> environment variable to point to a different location.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-01 14:40:39 UTC
+Last updated 2025-12-09 17:06:04 UTC
 </div>
 </div>
 </body>
