@@ -69,6 +69,103 @@ When indexed, the result will be something like:
 
 The same stemming algorithm is added to queries, supporting hits for queries like: "banana love", even if the strings do not match
 
+== Using stemming
+
+Stemming is a powerful feature for improving search relevance in multilingual applications.
+It works by reducing words to their root form, making search results more flexible and user-friendly.
+
+=== How stemming works
+
+When a property is configured with a language-specific stemming index:
+
+1. **During indexing**: The text is tokenized and each token is reduced to its stem (root form)
+2. **During search**: The search query is also stemmed using the same algorithm
+3. **Matching**: The stemmed tokens from the query are compared against the stemmed index
+
+This means that searches for "running", "runs", or "ran" can all match content containing "run" and vice versa.
+
+=== Configuring stemming
+
+To enable stemming for specific properties, you need to specify the language in the index configuration:
+
+.Enable stemming for a property
+[source,json]
+----
+"_indexConfig": {
+    "default": {
+        "enabled": true,
+        "decideByType": true,
+        "nGram": false,
+        "fulltext": false,
+        "includeInAllText": false,
+        "path": false,
+        "languages": ['en']  // <1>
+    }
+}
+----
+<1> This creates English-stemmed indices for all properties using default config
+
+For more granular control:
+
+.Configure stemming for specific properties
+[source,json]
+----
+"_indexConfig": {
+    "default": "byType",
+    "configs": [
+        {
+            "path": "title",
+            "config": {
+                "enabled": true,
+                "decideByType": false,
+                "fulltext": true,
+                "includeInAllText": true,
+                "languages": ['en']  // <1>
+            }
+        },
+        {
+            "path": "description_no",
+            "config": {
+                "enabled": true,
+                "decideByType": false,
+                "fulltext": true,
+                "includeInAllText": true,
+                "languages": ['no']  // <2>
+            }
+        }
+    ]
+}
+----
+<1> English stemming for the title property
+<2> Norwegian stemming for the Norwegian description
+
+=== Querying stemmed indices
+
+Use the <<noql#stemmed,stemmed()>> function to search against stemmed indices:
+
+.Basic stemmed query
+[source,javascript]
+----
+const result = repo.query({
+    query: "stemmed('_allText', 'running shoes', 'AND', 'en')"
+});
+----
+
+This will match content containing variations like:
+- "run shoe"
+- "running shoes"
+- "runs in shoes"
+- "ran with new shoes"
+
+=== Best practices
+
+* **Language detection**: Ensure content language is correctly identified before applying stemming
+* **Multiple languages**: For multilingual sites, create separate stemmed indices for each language
+* **Query language**: Always specify the same language in queries as was used during indexing
+* **Performance**: Stemming adds processing overhead - only enable it for fields that benefit from flexible search
+
+NOTE: See <<languages,supported languages>> section below for the complete list of available stemming languages.
+
 === path
 
 The path-elements (separated by default path-separator '/') are indexed as tokens.
