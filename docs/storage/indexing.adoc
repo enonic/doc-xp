@@ -99,7 +99,7 @@ To enable stemming for specific properties, you need to specify the language in 
         "fulltext": false,
         "includeInAllText": false,
         "path": false,
-        "languages": ['en']  // <1>
+        "languages": ["en"]  // <1>
     }
 }
 ----
@@ -120,7 +120,7 @@ For more granular control:
                 "decideByType": false,
                 "fulltext": true,
                 "includeInAllText": true,
-                "languages": ['en']  // <1>
+                "languages": ["en"]  // <1>
             }
         },
         {
@@ -130,7 +130,7 @@ For more granular control:
                 "decideByType": false,
                 "fulltext": true,
                 "includeInAllText": true,
-                "languages": ['no']  // <2>
+                "languages": ["no"]  // <2>
             }
         }
     ]
