@@ -469,6 +469,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#removemembers">removeMembers</a></li>
 </ul>
 </li>
+<li><a href="#type_definitions">Type Definitions</a>
+<ul class="sectlevel2">
+<li><a href="#user">User</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -476,7 +481,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Manage pricipals and authentication</p>
+<p>Manage principals and authentication</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -485,7 +490,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If, while using this API, you are getting authentication errors like "<em>Access denied to user [unknown]</em>" it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
+If, while using this API, you are getting authentication errors like "<em>Access denied to user [unknown]</em>"
+it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
 In this case you must explicitly execute the function in the <a href="lib-context.ahtml#runcontext">context</a> of System Administrator role.
 </td>
 </tr>
@@ -570,7 +576,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <div class="sect2">
 <h3 id="changepassword"><a class="link" href="#changepassword">changePassword</a></h3>
 <div class="paragraph">
-<p>Changes password for specified user.</p>
+<p>Changes password for a specified user.</p>
 </div>
 <div class="paragraph lead">
 <p>Parameters</p>
@@ -670,7 +676,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The created group.</p>
+<p><strong>object</strong>: The created group.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -691,12 +697,12 @@ const group = createGroup({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "group",
     key: "group:system:group-a",
     displayName: "Group A",
     description: "description"
-}</code></pre>
+})</code></pre>
 </div>
 </div>
 </div>
@@ -752,7 +758,7 @@ const group = createGroup({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The created role.</p>
+<p><strong>object</strong>: The created role.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -772,12 +778,12 @@ const role = createRole({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "role",
     key: "role:aRole",
     displayName: "Role Display Name",
     description: "description"
-}</code></pre>
+})</code></pre>
 </div>
 </div>
 </div>
@@ -840,7 +846,7 @@ const role = createRole({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The created group.</p>
+<p><strong>object</strong>: The created <a href="#user"><code>User</code></a>.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -861,15 +867,16 @@ const user = createUser({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "user",
     key: "user:system:user1",
     displayName: "The One And Only",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}</code></pre>
+    idProvider: "myIdProvider",
+    hasPassword: false
+})</code></pre>
 </div>
 </div>
 </div>
@@ -908,7 +915,7 @@ const user = createUser({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : <code>true</code> if the principal was deleted, <code>false</code> otherwise</p>
+<p><strong>boolean</strong>: <code>true</code> if the principal was deleted, <code>false</code> otherwise.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -955,7 +962,7 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">idProvider</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Key of the id provider to look for. If not specified all id providers will be included.</p>
+<p>Key of the id provider to look for. If not specified, all id providers will be included.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -992,7 +999,7 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The "total" number of principals matching the search, the "count" of principals included, and an array of "hits" containing the principals.</p>
+<p><strong>object</strong>: The "total" number of principals matching the search, the "count" of principals included, and an array of "hits" containing the principals.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1013,15 +1020,16 @@ const result = findPrincipals({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "user",
     key: "user:system:user1",
     displayName: "The One And Only",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}</code></pre>
+    idProvider: "myIdProvider",
+    hasPassword: true
+})</code></pre>
 </div>
 </div>
 </div>
@@ -1088,7 +1096,7 @@ const result = findPrincipals({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : An object containg the total number of hits, the number returned and an array of the hits.</p>
+<p><strong>object</strong>: An object containing the total number of hits, the number returned and an array of the hits.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1107,7 +1115,7 @@ const findUsersResult = findUsers({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     total: 2,
     count: 1,
     hits: [
@@ -1118,10 +1126,11 @@ const findUsersResult = findUsers({
             disabled: false,
             email: "jju@enonic.com",
             login: "jorgen-juve",
-            idProvider: "system"
+            idProvider: "system",
+            hasPassword: true
         }
     ]
-}</code></pre>
+})</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1163,7 +1172,7 @@ const findUsersResult = findUsers({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>string</strong> : A suggestion for a secure password</p>
+<p><strong>string</strong>: A suggestion for a secure password.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1192,7 +1201,7 @@ const pwd = generatePassword();</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : An object with all the values in the configuration</p>
+<p><strong>object</strong>: An object with all the values in the configuration.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1230,7 +1239,7 @@ const pwd = generatePassword();</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object[]</strong> : A list of objects for each member of the principal or empty array if none.</p>
+<p><strong>object[]</strong>: A list of objects for each member of the principal or empty array if none.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1246,9 +1255,26 @@ const result = getMembers('group:system:content-managers');</code></pre>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">[{type:"user",key:"user:system:user1",displayName:"User 1",disabled:false,email:"user1@enonic.com",login:"user1",idProvider:"system"},
- {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system"
- }]</code></pre>
+<pre class="highlight"><code class="language-js" data-lang="js">[{
+    type: "user",
+    key: "user:system:user1",
+    displayName: "User 1",
+    disabled: false,
+    email: "user1@enonic.com",
+    login: "user1",
+    idProvider: "system",
+    hasPassword: true
+},
+{
+    type: "user",
+    key: "user:system:user2",
+    displayName: "User 2",
+    disabled: false,
+    email: "user2@enonic.com",
+    login: "user2",
+    idProvider: "system",
+    hasPassword: false
+}]</code></pre>
 </div>
 </div>
 </div>
@@ -1294,7 +1320,7 @@ const result = getMembers('group:system:content-managers');</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>string[]</strong> : A list of the principals that the specified principal is a member of</p>
+<p><strong>string[]</strong>: A list of the principals that the specified principal is a member of.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1310,7 +1336,7 @@ const result = getMemberships('user:system:user1');</code></pre>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">[{
+<pre class="highlight"><code class="language-js" data-lang="js">[{
     type: "role",
     key: "role:system.admin",
     displayName:"Administrator"
@@ -1328,7 +1354,7 @@ const result = getMemberships('user:system:user1', true);</code></pre>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">[
+<pre class="highlight"><code class="language-js" data-lang="js">[
     "role:system.admin.login",
     "group:system:content-managers",
     "role:cms.expert",
@@ -1372,7 +1398,7 @@ const result = getMemberships('user:system:user1', true);</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The principal as an object</p>
+<p><strong>object</strong>: The principal as an object.</p>
 </div>
 <div class="listingblock">
 <div class="title">Retrieving the full principal for 'user1'</div>
@@ -1385,15 +1411,16 @@ const result = getPrincipal('user:system:user1');</code></pre>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "system"
-}</code></pre>
+    idProvider: "system",
+    hasPassword: true
+})</code></pre>
 </div>
 </div>
 </div>
@@ -1442,7 +1469,7 @@ const result = getPrincipal('user:system:user1');</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : Profile data</p>
+<p><strong>object</strong>: Profile data.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1460,9 +1487,9 @@ const result = getProfile({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     nickName: "User Nick"
-}</code></pre>
+})</code></pre>
 </div>
 </div>
 </div>
@@ -1481,7 +1508,7 @@ const result = getProfile({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : User data</p>
+<p><strong>object</strong>: <a href="#user"><code>User</code></a> data.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1497,15 +1524,16 @@ const result = getUser();</code></pre>
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "system"
-}</code></pre>
+    idProvider: "system",
+    hasPassword: true
+})</code></pre>
 </div>
 </div>
 </div>
@@ -1544,7 +1572,7 @@ const result = getUser();</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>boolean</strong> : <code>true</code> if the current user has the role, <code>false</code> otherwise</p>
+<p><strong>boolean</strong>: <code>true</code> if the current user has the role, <code>false</code> otherwise.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1631,7 +1659,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The logged-in user</p>
+<p><strong>object</strong>: The login result.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1651,7 +1679,7 @@ const loginResult = login({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     authenticated: true,
     user: {
         type: "user",
@@ -1660,9 +1688,10 @@ const loginResult = login({
         disabled: false,
         email: "user1@enonic.com",
         login: "user1",
-        idProvider: "myIdProvider"
+        idProvider: "myIdProvider",
+        hasPassword: true
     }
-}</code></pre>
+})</code></pre>
 </div>
 </div>
 </div>
@@ -1729,7 +1758,7 @@ const loginResult = login({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The updated group</p>
+<p><strong>object</strong>: The updated group.</p>
 </div>
 <div class="paragraph lead">
 <p>Example</p>
@@ -1756,12 +1785,12 @@ const group = modifyGroup({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "group",
     key: "group:system:group-a",
     displayName: "Modified display name",
     description: "descriptionX"
-}</code></pre>
+})</code></pre>
 </div>
 </div>
 </div>
@@ -1817,7 +1846,7 @@ const group = modifyGroup({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The updated profile</p>
+<p><strong>object</strong>: The updated profile.</p>
 </div>
 <div class="listingblock">
 <div class="title">Changing a profile</div>
@@ -1843,9 +1872,9 @@ const profileModified = modifyProfile({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     nickName: "User Nick"
-}</code></pre>
+})</code></pre>
 </div>
 </div>
 </div>
@@ -1894,7 +1923,7 @@ const profileModified = modifyProfile({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The updated role</p>
+<p><strong>object</strong>: The updated role.</p>
 </div>
 <div class="listingblock">
 <div class="title">Changing a role</div>
@@ -1908,7 +1937,7 @@ function roleEditor(c) {
     return c;
 }
 
-// Modify role with specified key.
+// Modify role with a specified key.
 const theRole = modifyRole({
     key: 'role:aRole',
     editor: roleEditor
@@ -1918,12 +1947,12 @@ const theRole = modifyRole({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "role",
     key: "role:aRole",
     displayName: "Nothing Role",
     description: "This role does not give access to anything!"
-}</code></pre>
+})</code></pre>
 </div>
 </div>
 </div>
@@ -1972,7 +2001,7 @@ const theRole = modifyRole({
 <p>Returns</p>
 </div>
 <div class="paragraph">
-<p><strong>object</strong> : The updated user</p>
+<p><strong>object</strong>: The updated <a href="#user"><code>User</code></a>.</p>
 </div>
 <div class="listingblock">
 <div class="title">Changing a user</div>
@@ -1986,7 +2015,7 @@ function userEditor(c) {
     return c;
 }
 
-// Modify user with specified key.
+// Modify user with a specified key.
 const theUser = modifyUser({
     key: 'user:system:user1',
     editor: userEditor
@@ -1996,15 +2025,16 @@ const theUser = modifyUser({
 <div class="listingblock">
 <div class="title">Sample response</div>
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">{
+<pre class="highlight"><code class="language-js" data-lang="js">({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1-A",
     disabled: false,
     email: "user1a@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}</code></pre>
+    idProvider: "myIdProvider",
+    hasPassword: true
+})</code></pre>
 </div>
 </div>
 </div>
@@ -2053,7 +2083,7 @@ const theUser = modifyUser({
 <p><strong>void</strong></p>
 </div>
 <div class="listingblock">
-<div class="title">Remove members from specified principal.</div>
+<div class="title">Remove members from a specified principal.</div>
 <div class="content">
 <pre class="highlight"><code class="language-typescript" data-lang="typescript">authLib.removeMembers('role:roleId', ['user:system:user1', 'group:system:group-a']);</code></pre>
 </div>
@@ -2061,10 +2091,126 @@ const theUser = modifyUser({
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="type_definitions"><a class="link" href="#type_definitions">Type Definitions</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="user"><a class="link" href="#user">User</a></h3>
+<div id="user" class="paragraph lead">
+<p>Type</p>
+</div>
+<div class="paragraph">
+<p><strong>object</strong></p>
+</div>
+<div class="paragraph lead">
+<p>Properties</p>
+</div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 1%;">
+<col style="width: 98%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The type of principal, always "user" for users</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The unique key of the user</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">displayName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The display name of the user</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modifiedTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The last modified time of the user in ISO 8601 format</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">disabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether the user is disabled or not</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The email of the user</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">login</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The login name of the user</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">idProvider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The id provider where the user is stored</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hasPassword</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="r">
+    <rect width="64" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#r)">
+    <rect width="25" height="20" fill="#555"/>
+    <rect x="25" width="39" height="20" fill="#007ec6"/>
+    <rect width="64" height="20" fill="url(#s)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
+     font-size="110">
+    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
+    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
+    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.15.0</text>
+    <text x="435" y="140" transform="scale(.1)" textLength="290">7.15.0</text>
+  </g>
+</svg></span> Whether the user has a password set</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-16 08:57:37 UTC
+Last updated 2025-12-18 13:08:54 UTC
 </div>
 </div>
 </body>
