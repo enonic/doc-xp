@@ -469,8 +469,8 @@ const result = getMembers('group:system:content-managers');
 [source,typescript]
 ----
 [{type:"user",key:"user:system:user1",displayName:"User 1",disabled:false,email:"user1@enonic.com",login:"user1",idProvider:"system",hasPassword:true}, <1>
- {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system",hasPassword:true <1>
- }]
+ {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system",hasPassword:true} <1>
+ ]
 ----
 <1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
