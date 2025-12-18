@@ -228,9 +228,11 @@ const user = createUser({
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
+    idProvider: "myIdProvider",
+    hasPassword: true <1>
 }
 ----
+<1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
 === deletePrincipal
 
@@ -313,9 +315,11 @@ const result = findPrincipals({
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
+    idProvider: "myIdProvider",
+    hasPassword: true <1>
 }
 ----
+<1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
 
 === findUsers
@@ -369,11 +373,13 @@ const findUsersResult = findUsers({
             disabled: false,
             email: "jju@enonic.com",
             login: "jorgen-juve",
-            idProvider: "system"
+            idProvider: "system",
+            hasPassword: true <1>
         }
     ]
 }
 ----
+<1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
 NOTE: If you want to find a user by key, you have to use `_id` field in the `query` parameter.
 
@@ -462,10 +468,11 @@ const result = getMembers('group:system:content-managers');
 .Sample response
 [source,typescript]
 ----
-[{type:"user",key:"user:system:user1",displayName:"User 1",disabled:false,email:"user1@enonic.com",login:"user1",idProvider:"system"},
- {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system"
+[{type:"user",key:"user:system:user1",displayName:"User 1",disabled:false,email:"user1@enonic.com",login:"user1",idProvider:"system",hasPassword:true}, <1>
+ {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system",hasPassword:true <1>
  }]
 ----
+<1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
 === getMemberships
 
@@ -566,9 +573,11 @@ const result = getPrincipal('user:system:user1');
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "system"
+    idProvider: "system",
+    hasPassword: true <1>
 }
 ----
+<1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
 === getProfile
 
@@ -650,9 +659,11 @@ const result = getUser();
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "system"
+    idProvider: "system",
+    hasPassword: true <1>
 }
 ----
+<1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
 === hasRole
 
@@ -739,10 +750,12 @@ const loginResult = login({
         disabled: false,
         email: "user1@enonic.com",
         login: "user1",
-        idProvider: "myIdProvider"
+        idProvider: "myIdProvider",
+        hasPassword: true <1>
     }
 }
 ----
+<1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
 === logout
 
@@ -972,9 +985,11 @@ const theUser = modifyUser({
     disabled: false,
     email: "user1a@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
+    idProvider: "myIdProvider",
+    hasPassword: true <1>
 }
 ----
+<1> image:xp-7150.svg[XP 7.15.0,opts=inline] Indicates whether the user has a password set
 
 === removeMembers
 
