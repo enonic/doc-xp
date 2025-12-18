@@ -2,9 +2,10 @@
 :toc: right
 :imagesdir: ../images
 
-Manage pricipals and authentication
+Manage principals and authentication
 
-TIP: If, while using this API, you are getting authentication errors like "_Access denied to user [unknown]_" it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
+TIP: If, while using this API, you are getting authentication errors like "_Access denied to user [unknown]_"
+it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
 In this case you must explicitly execute the function in the <<lib-context#runcontext, context>> of System Administrator role.
 
 == Usage
@@ -54,7 +55,7 @@ Returns
 
 === changePassword
 
-Changes password for specified user.
+Changes password for a specified user.
 
 [.lead]
 Parameters
@@ -98,7 +99,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The created group.
+*object*: The created group.
 
 [.lead]
 Example
@@ -117,14 +118,14 @@ const group = createGroup({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "group",
     key: "group:system:group-a",
     displayName: "Group A",
     description: "description"
-}
+})
 ----
 
 === createRole
@@ -149,7 +150,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The created role.
+*object*: The created role.
 
 [.lead]
 Example
@@ -167,14 +168,14 @@ const role = createRole({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "role",
     key: "role:aRole",
     displayName: "Role Display Name",
     description: "description"
-}
+})
 ----
 
 === createUser
@@ -200,7 +201,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The created group.
+*object*: The created <<user,`User`>>.
 
 [.lead]
 Example
@@ -219,17 +220,18 @@ const user = createUser({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "The One And Only",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}
+    idProvider: "myIdProvider",
+    hasPassword: false
+})
 ----
 
 === deletePrincipal
@@ -250,7 +252,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : `true` if the principal was deleted, `false` otherwise
+*boolean*: `true` if the principal was deleted, `false` otherwise.
 
 [.lead]
 Example
@@ -275,7 +277,7 @@ An object with the following keys and their value.  All parameters are optional:
 |===
 | Name | Kind | Description
 | type | string | Principal type to look for, one of: 'user', 'group' or 'role'. If not specified all principal types will be included.
-| idProvider | string | Key of the id provider to look for. If not specified all id providers will be included.
+| idProvider | string | Key of the id provider to look for. If not specified, all id providers will be included.
 | start | string | First principal to return from the search results. It can be used for pagination.
 | count | string | A limit on the number of principals to be returned
 | name | string | Name of the principal to look for
@@ -285,7 +287,7 @@ An object with the following keys and their value.  All parameters are optional:
 [.lead]
 Returns
 
-*object* : The "total" number of principals matching the search, the "count" of principals included, and an array of "hits" containing the principals.
+*object*: The "total" number of principals matching the search, the "count" of principals included, and an array of "hits" containing the principals.
 
 [.lead]
 Example
@@ -304,17 +306,18 @@ const result = findPrincipals({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "The One And Only",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}
+    idProvider: "myIdProvider",
+    hasPassword: true
+})
 ----
 
 
@@ -339,7 +342,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : An object containg the total number of hits, the number returned and an array of the hits.
+*object*: An object containing the total number of hits, the number returned and an array of the hits.
 
 [.lead]
 Example
@@ -356,9 +359,9 @@ const findUsersResult = findUsers({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     total: 2,
     count: 1,
     hits: [
@@ -369,10 +372,11 @@ const findUsersResult = findUsers({
             disabled: false,
             email: "jju@enonic.com",
             login: "jorgen-juve",
-            idProvider: "system"
+            idProvider: "system",
+            hasPassword: true
         }
     ]
-}
+})
 ----
 
 NOTE: If you want to find a user by key, you have to use `_id` field in the `query` parameter.
@@ -401,7 +405,7 @@ None
 [.lead]
 Returns
 
-*string* : A suggestion for a secure password
+*string*: A suggestion for a secure password.
 
 [.lead]
 Example
@@ -426,7 +430,7 @@ None
 [.lead]
 Returns
 
-*object* : An object with all the values in the configuration
+*object*: An object with all the values in the configuration.
 
 === getMembers
 
@@ -446,7 +450,7 @@ Parameters
 [.lead]
 Returns
 
-*object[]* : A list of objects for each member of the principal or empty array if none.
+*object[]*: A list of objects for each member of the principal or empty array if none.
 
 [.lead]
 Example
@@ -460,11 +464,28 @@ const result = getMembers('group:system:content-managers');
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-[{type:"user",key:"user:system:user1",displayName:"User 1",disabled:false,email:"user1@enonic.com",login:"user1",idProvider:"system"},
- {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system"
- }]
+[{
+    type: "user",
+    key: "user:system:user1",
+    displayName: "User 1",
+    disabled: false,
+    email: "user1@enonic.com",
+    login: "user1",
+    idProvider: "system",
+    hasPassword: true
+},
+{
+    type: "user",
+    key: "user:system:user2",
+    displayName: "User 2",
+    disabled: false,
+    email: "user2@enonic.com",
+    login: "user2",
+    idProvider: "system",
+    hasPassword: false
+}]
 ----
 
 === getMemberships
@@ -486,7 +507,7 @@ Parameters
 [.lead]
 Returns
 
-*string[]* : A list of the principals that the specified principal is a member of
+*string[]*: A list of the principals that the specified principal is a member of.
 
 [.lead]
 Example
@@ -500,7 +521,7 @@ const result = getMemberships('user:system:user1');
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
 [{
     type: "role",
@@ -518,7 +539,7 @@ const result = getMemberships('user:system:user1', true);
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
 [
     "role:system.admin.login",
@@ -546,7 +567,7 @@ Parameters
 [.lead]
 Returns
 
-*object* : The principal as an object
+*object*: The principal as an object.
 
 .Retrieving the full principal for 'user1'
 [source,typescript]
@@ -557,17 +578,18 @@ const result = getPrincipal('user:system:user1');
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "system"
-}
+    idProvider: "system",
+    hasPassword: true
+})
 ----
 
 === getProfile
@@ -591,7 +613,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : Profile data
+*object*: Profile data.
 
 [.lead]
 Example
@@ -607,11 +629,11 @@ const result = getProfile({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     nickName: "User Nick"
-}
+})
 ----
 
 
@@ -627,7 +649,7 @@ None
 [.lead]
 Returns
 
-*object* : User data
+*object*: <<user,`User`>> data.
 
 [.lead]
 Example
@@ -641,17 +663,18 @@ const result = getUser();
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "system"
-}
+    idProvider: "system",
+    hasPassword: true
+})
 ----
 
 === hasRole
@@ -672,7 +695,7 @@ Parameters
 [.lead]
 Returns
 
-*boolean* : `true` if the current user has the role, `false` otherwise
+*boolean*: `true` if the current user has the role, `false` otherwise.
 
 [.lead]
 Example
@@ -710,7 +733,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The logged-in user
+*object*: The login result.
 
 [.lead]
 Example
@@ -728,9 +751,9 @@ const loginResult = login({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     authenticated: true,
     user: {
         type: "user",
@@ -739,9 +762,10 @@ const loginResult = login({
         disabled: false,
         email: "user1@enonic.com",
         login: "user1",
-        idProvider: "myIdProvider"
+        idProvider: "myIdProvider",
+        hasPassword: true
     }
-}
+})
 ----
 
 === logout
@@ -779,7 +803,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The updated group
+*object*: The updated group.
 
 [.lead]
 Example
@@ -804,14 +828,14 @@ const group = modifyGroup({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "group",
     key: "group:system:group-a",
     displayName: "Modified display name",
     description: "descriptionX"
-}
+})
 ----
 
 === modifyProfile
@@ -836,7 +860,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The updated profile
+*object*: The updated profile.
 
 .Changing a profile
 [source,typescript]
@@ -860,11 +884,11 @@ const profileModified = modifyProfile({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     nickName: "User Nick"
-}
+})
 ----
 
 === modifyRole
@@ -888,7 +912,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The updated role
+*object*: The updated role.
 
 .Changing a role
 [source,typescript]
@@ -902,7 +926,7 @@ function roleEditor(c) {
     return c;
 }
 
-// Modify role with specified key.
+// Modify role with a specified key.
 const theRole = modifyRole({
     key: 'role:aRole',
     editor: roleEditor
@@ -910,14 +934,14 @@ const theRole = modifyRole({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "role",
     key: "role:aRole",
     displayName: "Nothing Role",
     description: "This role does not give access to anything!"
-}
+})
 ----
 
 === modifyUser
@@ -941,7 +965,7 @@ An object with the following keys and their values:
 [.lead]
 Returns
 
-*object* : The updated user
+*object*: The updated <<user,`User`>>.
 
 .Changing a user
 [source,typescript]
@@ -955,7 +979,7 @@ function userEditor(c) {
     return c;
 }
 
-// Modify user with specified key.
+// Modify user with a specified key.
 const theUser = modifyUser({
     key: 'user:system:user1',
     editor: userEditor
@@ -963,17 +987,18 @@ const theUser = modifyUser({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1-A",
     disabled: false,
     email: "user1a@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}
+    idProvider: "myIdProvider",
+    hasPassword: true
+})
 ----
 
 === removeMembers
@@ -997,9 +1022,36 @@ Returns
 
 *void*
 
-.Remove members from specified principal.
+.Remove members from a specified principal.
 [source,typescript]
 ----
 authLib.removeMembers('role:roleId', ['user:system:user1', 'group:system:group-a']);
 ----
 
+== Type Definitions
+
+=== User
+[[user]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name         | Type    | Description
+| type         | string  | The type of principal, always "user" for users
+| key          | string  | The unique key of the user
+| displayName  | string  | The display name of the user
+| modifiedTime | string  | The last modified time of the user in ISO 8601 format
+| disabled     | boolean | Whether the user is disabled or not
+| email        | string  | The email of the user
+| login        | string  | The login name of the user
+| idProvider   | string  | The id provider where the user is stored
+| hasPassword  | boolean | image:xp-7150.svg[XP 7.15.0,opts=inline] Whether the user has a password set
+|===
