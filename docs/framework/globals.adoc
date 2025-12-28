@@ -31,25 +31,25 @@ level and takes the same number of parameters.
   log.debug(message, [args]) // <1> <2>
 
 <1> *string message* Message to log as a debug-level message.
-<2> *array args* Optional arguments used in message format.
+<2> *array args* Optional arguments used in message format. Can also be an exception/error instance to log the stack trace.
 
 [source,javascript]
   log.info(message, [args]) // <1> <2>
 
 <1> *string message* Message to log as a info-level message.
-<2> *array args* Optional arguments used in message format.
+<2> *array args* Optional arguments used in message format. Can also be an exception/error instance to log the stack trace.
 
 [source,javascript]
   log.warning(message, [args]) // <1> <2>
 
 <1> *string message* Message to log as a warning-level message.
-<2> *array args* Optional arguments used in message format.
+<2> *array args* Optional arguments used in message format. Can also be an exception/error instance to log the stack trace.
 
 [source,javascript]
   log.error(message, [args]) // <1> <2>
 
 <1> *string message* Message to log as a error-level message.
-<2> *array args* Optional arguments used in message format.
+<2> *array args* Optional arguments used in message format. Can also be an exception/error instance to log the stack trace.
 
 Examples:
 
