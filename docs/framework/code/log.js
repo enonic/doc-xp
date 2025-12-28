@@ -16,3 +16,10 @@ try {
 } catch (e) {
   log.error('An error occurred', e);
 }
+
+// Log a formatting message with exception stack trace
+try {
+  bean.run();
+} catch (e) {
+  log.error('Error in %s', 'myFunction', e);
+}
