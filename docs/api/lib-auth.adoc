@@ -38,13 +38,13 @@ Adds members to a principal (user or role).
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Key of the principal to add members to
-| members | string[] | A list of the new members that should be added to the principal
+| Name | Kind | Attributes | Details
+| key | string | | Key of the principal to add members to
+| members | string[] | | A list of the new members that should be added to the principal
 |===
 
 [.lead]
@@ -62,13 +62,13 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,99%a"]
+[%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Description
-| userKey | The key of the user to change password for
-| password | The new password
+| Name | Attributes | Description
+| userKey | | The key of the user to change password for
+| password | | The new password
 |===
 
 [.lead]
@@ -85,15 +85,15 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| idProvider | string | Key for id provider where the group will be created
-| name | string | Group name
-| displayName | string | Group display name
-| description | string | A description of the principal
+| Name | Kind | Attributes | Description
+| idProvider | string | | Key for id provider where the group will be created
+| name | string | | Group name
+| displayName | string | | Group display name
+| description | string | | A description of the principal
 |===
 
 [.lead]
@@ -137,14 +137,14 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| name | string | The name of the role.  The key of the role will be 'role.<name>'.
-| displayName | string | Role display name
-| description | string | A description of the role
+| Name | Kind | Attributes | Description
+| name | string | | The name of the role.  The key of the role will be 'role.<name>'.
+| displayName | string | | Role display name
+| description | string | | A description of the role
 |===
 
 [.lead]
@@ -187,15 +187,15 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| idProvider | string | Key for id provider where the user will be created
-| name | string | User login name
-| displayName | string | User display name
-| email | string | Optional user e-mail
+| Name | Kind | Attributes | Description
+| idProvider | string | | Key for id provider where the user will be created
+| name | string | | User login name
+| displayName | string | | User display name
+| email | string | <optional> | Optional user e-mail
 |===
 
 [.lead]
@@ -241,12 +241,12 @@ Deletes the principal with the specified key.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Key of the principal to delete
+| Name | Kind | Attributes | Details
+| key | string | | Key of the principal to delete
 |===
 
 [.lead]
@@ -271,17 +271,17 @@ Search for principals matching the specified criteria.
 
 An object with the following keys and their value.  All parameters are optional:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| type | string | Principal type to look for, one of: 'user', 'group' or 'role'. If not specified all principal types will be included.
-| idProvider | string | Key of the id provider to look for. If not specified, all id providers will be included.
-| start | string | First principal to return from the search results. It can be used for pagination.
-| count | string | A limit on the number of principals to be returned
-| name | string | Name of the principal to look for
-| searchText | string | Text to look for in any principal field.
+| Name | Kind | Attributes | Description
+| type | string | <optional> | Principal type to look for, one of: 'user', 'group' or 'role'. If not specified all principal types will be included.
+| idProvider | string | <optional> | Key of the id provider to look for. If not specified, all id providers will be included.
+| start | string | <optional> | First principal to return from the search results. It can be used for pagination.
+| count | string | <optional> | A limit on the number of principals to be returned
+| name | string | <optional> | Name of the principal to look for
+| searchText | string | <optional> | Text to look for in any principal field.
 |===
 
 [.lead]
@@ -327,16 +327,16 @@ Search for users matching the specified query.
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| query | string | Query expression
-| start | number | Optional start index for paging
-| count | number | Optional number of users to fetch at a time
-| sort | string | Optional sorting expression
-| includeProfile | boolean | If set to `true`, a full profile of each user will be included in the result
+| Name | Kind | Attributes | Description
+| query | string | | Query expression
+| start | number | <optional> | Optional start index for paging
+| count | number | <optional> | Optional number of users to fetch at a time
+| sort | string | <optional> | Optional sorting expression
+| includeProfile | boolean | <optional> | If set to `true`, a full profile of each user will be included in the result
 |===
 
 [.lead]
@@ -439,12 +439,12 @@ Returns a list of principals that are members of the specified principal.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Principal key to retrieve the members of.
+| Name | Kind | Attributes | Details
+| key | string | | Principal key to retrieve the members of.
 |===
 
 [.lead]
@@ -495,13 +495,13 @@ Returns the list of principals which the specified principal is a member of.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Principal key to retrieve memberships for
-| transitive | boolean | Retrieve transitive memberships.  Considered `false` if not specified
+| Name | Kind | Attributes | Details
+| key | string | | Principal key to retrieve memberships for
+| transitive | boolean | <optional> | Retrieve transitive memberships.  Considered `false` if not specified
 |===
 
 [.lead]
@@ -556,12 +556,12 @@ Returns the principal with the specified key.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Principal key to retrieve memberships for
+| Name | Kind | Attributes | Details
+| key | string | | Principal key to retrieve memberships for
 |===
 
 [.lead]
@@ -601,13 +601,13 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Principal key to retrieve profile for
-| scope | string | Optional scope setting
+| Name | Kind | Attributes | Details
+| key | string | | Principal key to retrieve profile for
+| scope | string | <optional> | Optional scope setting
 |===
 
 [.lead]
@@ -684,12 +684,12 @@ Checks if the logged-in user has the specified role.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| role | string | The role to check for
+| Name | Kind | Attributes | Details
+| role | string | | The role to check for
 |===
 
 [.lead]
@@ -717,17 +717,17 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| user | string | Mandatory name of the user to log in
-| password | string | Password for the user. Ignored if skipAuth is set to true, mandatory otherwise.
-| idProvider | string | Name of id provider where the user is stored. If not specified it will try all available id providers, in alphabetical order.
-| skipAuth | boolean | Skip authentication.  Default is `false` if not specified.
-| sessionTimeout | number | Session timeout (in seconds). By default, the value of session.timeout from `com.enonic.xp.web.jetty.cfg`
-| scope image:xp-730.svg[XP 7.3.0,opts=inline] | string | Defines the scope of the login. Valid values are `SESSION`, `REQUEST` and `NONE` (starting from version image:xp-780.svg[XP 7.8.0,opts=inline]). When scope is set to `SESSION` the login is persistent. If scope is set to `REQUEST` the login is only valid for the current request. Scope `NONE` allows to check correctness of username and password without logging into the system. Default is `SESSION` if not specified.
+| Name | Kind | Attributes | Details
+| user | string | | Mandatory name of the user to log in
+| password | string | <optional> | Password for the user. Ignored if skipAuth is set to true, mandatory otherwise.
+| idProvider | string | <optional> | Name of id provider where the user is stored. If not specified it will try all available id providers, in alphabetical order.
+| skipAuth | boolean | <optional> | Skip authentication.  Default is `false` if not specified.
+| sessionTimeout | number | <optional> | Session timeout (in seconds). By default, the value of session.timeout from `com.enonic.xp.web.jetty.cfg`
+| scope image:xp-730.svg[XP 7.3.0,opts=inline] | string | <optional> | Defines the scope of the login. Valid values are `SESSION`, `REQUEST` and `NONE` (starting from version image:xp-780.svg[XP 7.8.0,opts=inline]). When scope is set to `SESSION` the login is persistent. If scope is set to `REQUEST` the login is only valid for the current request. Scope `NONE` allows to check correctness of username and password without logging into the system. Default is `SESSION` if not specified.
 |===
 
 [.lead]
@@ -791,13 +791,13 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Principal key of the group to modify
-| editor | function | Group editor function
+| Name | Kind | Attributes | Details
+| key | string | | Principal key of the group to modify
+| editor | function | | Group editor function
 |===
 
 [.lead]
@@ -847,14 +847,14 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Principal key of the user
-| scope | string | Optional scope setting
-| editor | function | Profile editor function
+| Name | Kind | Attributes | Details
+| key | string | | Principal key of the user
+| scope | string | <optional> | Optional scope setting
+| editor | function | | Profile editor function
 |===
 
 [.lead]
@@ -900,13 +900,13 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | The role key
-| editor | function | Role editor function
+| Name | Kind | Attributes | Details
+| key | string | | The role key
+| editor | function | | Role editor function
 |===
 
 [.lead]
@@ -953,13 +953,13 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | The user key
-| editor | function | User editor function
+| Name | Kind | Attributes | Details
+| key | string | | The user key
+| editor | function | | User editor function
 |===
 
 [.lead]
@@ -1008,13 +1008,13 @@ Removes members from a principal (group or role).
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | The principal key of a group or a role to remove members from
-| members | string[] | Principal keys to remove as members
+| Name | Kind | Attributes | Details
+| key | string | | The principal key of a group or a role to remove members from
+| members | string[] | | Principal keys to remove as members
 |===
 
 [.lead]
