@@ -164,7 +164,11 @@ NOTE: You cannot mix values of different types in the same `in` expression.
 ===== like
 
 Returns nodes that contain the field matching a wildcard pattern.
-A wildcard operator ( `*` ) is a placeholder that matches one or more characters.
+
+Supported wildcard operators:
+
+* `*` - matches zero or more characters
+* `?` - matches exactly one character
 
 .Expression parameters
 [cols="1,1,1, 2a"]
@@ -225,6 +229,17 @@ A wildcard operator ( `*` ) is a placeholder that matches one or more characters
     "field": "myString",
     "value": "*middle*",
     "boost": 2.2
+  }
+}
+----
+
+.Matches if "myString" field contains a value where '?' represents any single character, e.g. 'car', 'cat', 'can'.
+[source,json]
+----
+{
+  "like": {
+    "field": "myString",
+    "value": "ca?"
   }
 }
 ----
