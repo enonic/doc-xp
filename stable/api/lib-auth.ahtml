@@ -540,12 +540,14 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -553,6 +555,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Key of the principal to add members to</p>
 </div></div></td>
@@ -560,6 +563,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">members</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A list of the new members that should be added to the principal</p>
 </div></div></td>
@@ -587,23 +591,27 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <table class="tableblock frame-none grid-none stretch">
 <colgroup>
 <col style="width: 1%;">
-<col style="width: 99%;">
+<col style="width: 1%;">
+<col style="width: 98%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">userKey</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The key of the user to change password for</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The new password</p>
 </div></div></td>
@@ -632,12 +640,14 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
@@ -645,6 +655,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">idProvider</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Key for id provider where the group will be created</p>
 </div></div></td>
@@ -652,6 +663,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Group name</p>
 </div></div></td>
@@ -659,6 +671,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">displayName</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Group display name</p>
 </div></div></td>
@@ -666,6 +679,7 @@ In this case you must explicitly execute the function in the <a href="lib-contex
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A description of the principal</p>
 </div></div></td>
@@ -721,12 +735,14 @@ const group = createGroup({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
@@ -734,6 +750,7 @@ const group = createGroup({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The name of the role.  The key of the role will be 'role.&lt;name&gt;'.</p>
 </div></div></td>
@@ -741,6 +758,7 @@ const group = createGroup({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">displayName</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Role display name</p>
 </div></div></td>
@@ -748,6 +766,7 @@ const group = createGroup({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A description of the role</p>
 </div></div></td>
@@ -802,12 +821,14 @@ const role = createRole({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
@@ -815,6 +836,7 @@ const role = createRole({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">idProvider</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Key for id provider where the user will be created</p>
 </div></div></td>
@@ -822,6 +844,7 @@ const role = createRole({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>User login name</p>
 </div></div></td>
@@ -829,6 +852,7 @@ const role = createRole({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">displayName</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>User display name</p>
 </div></div></td>
@@ -836,6 +860,7 @@ const role = createRole({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional user e-mail</p>
 </div></div></td>
@@ -892,12 +917,14 @@ const user = createUser({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -905,6 +932,7 @@ const user = createUser({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Key of the principal to delete</p>
 </div></div></td>
@@ -941,12 +969,14 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
@@ -954,6 +984,7 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal type to look for, one of: 'user', 'group' or 'role'. If not specified all principal types will be included.</p>
 </div></div></td>
@@ -961,6 +992,7 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">idProvider</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Key of the id provider to look for. If not specified, all id providers will be included.</p>
 </div></div></td>
@@ -968,6 +1000,7 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">start</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>First principal to return from the search results. It can be used for pagination.</p>
 </div></div></td>
@@ -975,6 +1008,7 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">count</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A limit on the number of principals to be returned</p>
 </div></div></td>
@@ -982,6 +1016,7 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Name of the principal to look for</p>
 </div></div></td>
@@ -989,6 +1024,7 @@ const deleted = deletePrincipal('user:myIdProvider:userId');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">searchText</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Text to look for in any principal field.</p>
 </div></div></td>
@@ -1045,12 +1081,14 @@ const result = findPrincipals({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
@@ -1058,6 +1096,7 @@ const result = findPrincipals({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">query</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Query expression</p>
 </div></div></td>
@@ -1065,6 +1104,7 @@ const result = findPrincipals({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">start</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional start index for paging</p>
 </div></div></td>
@@ -1072,6 +1112,7 @@ const result = findPrincipals({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">count</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional number of users to fetch at a time</p>
 </div></div></td>
@@ -1079,6 +1120,7 @@ const result = findPrincipals({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sort</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional sorting expression</p>
 </div></div></td>
@@ -1086,6 +1128,7 @@ const result = findPrincipals({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">includeProfile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>If set to <code>true</code>, a full profile of each user will be included in the result</p>
 </div></div></td>
@@ -1216,12 +1259,14 @@ const pwd = generatePassword();</code></pre>
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1229,6 +1274,7 @@ const pwd = generatePassword();</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key to retrieve the members of.</p>
 </div></div></td>
@@ -1290,12 +1336,14 @@ const result = getMembers('group:system:content-managers');</code></pre>
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1303,6 +1351,7 @@ const result = getMembers('group:system:content-managers');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key to retrieve memberships for</p>
 </div></div></td>
@@ -1310,6 +1359,7 @@ const result = getMembers('group:system:content-managers');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">transitive</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Retrieve transitive memberships.  Considered <code>false</code> if not specified</p>
 </div></div></td>
@@ -1375,12 +1425,14 @@ const result = getMemberships('user:system:user1', true);</code></pre>
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1388,6 +1440,7 @@ const result = getMemberships('user:system:user1', true);</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key to retrieve memberships for</p>
 </div></div></td>
@@ -1439,12 +1492,14 @@ const result = getPrincipal('user:system:user1');</code></pre>
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1452,6 +1507,7 @@ const result = getPrincipal('user:system:user1');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key to retrieve profile for</p>
 </div></div></td>
@@ -1459,6 +1515,7 @@ const result = getPrincipal('user:system:user1');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">scope</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional scope setting</p>
 </div></div></td>
@@ -1549,12 +1606,14 @@ const result = getUser();</code></pre>
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1562,6 +1621,7 @@ const result = getUser();</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">role</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The role to check for</p>
 </div></div></td>
@@ -1601,12 +1661,14 @@ const hasRole = hasRole('system.admin');</code></pre>
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1614,6 +1676,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Mandatory name of the user to log in</p>
 </div></div></td>
@@ -1621,6 +1684,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Password for the user. Ignored if skipAuth is set to true, mandatory otherwise.</p>
 </div></div></td>
@@ -1628,6 +1692,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">idProvider</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Name of id provider where the user is stored. If not specified it will try all available id providers, in alphabetical order.</p>
 </div></div></td>
@@ -1635,6 +1700,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">skipAuth</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Skip authentication.  Default is <code>false</code> if not specified.</p>
 </div></div></td>
@@ -1642,6 +1708,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sessionTimeout</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Session timeout (in seconds). By default, the value of session.timeout from <code>com.enonic.xp.web.jetty.cfg</code></p>
 </div></div></td>
@@ -1649,6 +1716,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">scope <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.3.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.3.0</text></g></svg></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Defines the scope of the login. Valid values are <code>SESSION</code>, <code>REQUEST</code> and <code>NONE</code> (starting from version <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.8.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.8.0</text></g></svg></span>). When scope is set to <code>SESSION</code> the login is persistent. If scope is set to <code>REQUEST</code> the login is only valid for the current request. Scope <code>NONE</code> allows to check correctness of username and password without logging into the system. Default is <code>SESSION</code> if not specified.</p>
 </div></div></td>
@@ -1728,12 +1796,14 @@ const loginResult = login({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1741,6 +1811,7 @@ const loginResult = login({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key of the group to modify</p>
 </div></div></td>
@@ -1748,6 +1819,7 @@ const loginResult = login({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">editor</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Group editor function</p>
 </div></div></td>
@@ -1809,12 +1881,14 @@ const group = modifyGroup({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1822,6 +1896,7 @@ const group = modifyGroup({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal key of the user</p>
 </div></div></td>
@@ -1829,6 +1904,7 @@ const group = modifyGroup({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">scope</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Optional scope setting</p>
 </div></div></td>
@@ -1836,6 +1912,7 @@ const group = modifyGroup({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">editor</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Profile editor function</p>
 </div></div></td>
@@ -1893,12 +1970,14 @@ const profileModified = modifyProfile({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1906,6 +1985,7 @@ const profileModified = modifyProfile({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The role key</p>
 </div></div></td>
@@ -1913,6 +1993,7 @@ const profileModified = modifyProfile({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">editor</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Role editor function</p>
 </div></div></td>
@@ -1971,12 +2052,14 @@ const theRole = modifyRole({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -1984,6 +2067,7 @@ const theRole = modifyRole({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The user key</p>
 </div></div></td>
@@ -1991,6 +2075,7 @@ const theRole = modifyRole({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">editor</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>User editor function</p>
 </div></div></td>
@@ -2050,12 +2135,14 @@ const theUser = modifyUser({
 <colgroup>
 <col style="width: 1%;">
 <col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 1%;">
+<col style="width: 97%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Name</th>
 <th class="tableblock halign-left valign-top">Kind</th>
+<th class="tableblock halign-left valign-top">Attributes</th>
 <th class="tableblock halign-left valign-top">Details</th>
 </tr>
 </thead>
@@ -2063,6 +2150,7 @@ const theUser = modifyUser({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The principal key of a group or a role to remove members from</p>
 </div></div></td>
@@ -2070,6 +2158,7 @@ const theUser = modifyUser({
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">members</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Principal keys to remove as members</p>
 </div></div></td>
@@ -2210,7 +2299,7 @@ const theUser = modifyUser({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-28 17:29:48 UTC
+Last updated 2025-12-28 17:38:09 UTC
 </div>
 </div>
 </body>
