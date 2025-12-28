@@ -517,7 +517,7 @@ level and takes the same number of parameters.</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>array args</strong> Optional arguments used in message format.</td>
+<td><strong>array args</strong> Optional arguments used in message format. When the last argument is an exception/error instance, its stack trace will be logged.</td>
 </tr>
 </table>
 </div>
@@ -534,7 +534,7 @@ level and takes the same number of parameters.</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>array args</strong> Optional arguments used in message format.</td>
+<td><strong>array args</strong> Optional arguments used in message format. When the last argument is an exception/error instance, its stack trace will be logged.</td>
 </tr>
 </table>
 </div>
@@ -551,7 +551,7 @@ level and takes the same number of parameters.</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>array args</strong> Optional arguments used in message format.</td>
+<td><strong>array args</strong> Optional arguments used in message format. When the last argument is an exception/error instance, its stack trace will be logged.</td>
 </tr>
 </table>
 </div>
@@ -568,7 +568,7 @@ level and takes the same number of parameters.</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>array args</strong> Optional arguments used in message format.</td>
+<td><strong>array args</strong> Optional arguments used in message format. When the last argument is an exception/error instance, its stack trace will be logged.</td>
 </tr>
 </table>
 </div>
@@ -587,7 +587,21 @@ log.info('Hello %s', 'World');
 log.warning('%s %s', 'Hello', 'World');
 
 // Log using the built-in JSON converter
-log.error('My JSON %s', object );</code></pre>
+log.error('My JSON %s', object );
+
+// Log an exception with stack trace
+try {
+  thisWillFail();
+} catch (e) {
+  log.error('An error occurred', e);
+}
+
+// Log a formatting message with exception stack trace
+try {
+  bean.run();
+} catch (e) {
+  log.error('Error in %s', 'myFunction', e);
+}</code></pre>
 </div>
 </div>
 </div>
@@ -709,7 +723,7 @@ more about the <a href="java-bridge.ahtml">Java bridge</a>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-18 13:08:54 UTC
+Last updated 2025-12-28 17:29:48 UTC
 </div>
 </div>
 </body>
