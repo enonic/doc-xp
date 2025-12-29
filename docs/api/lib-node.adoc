@@ -425,6 +425,59 @@ const expected = {
 }
 ----
 
+[#stemming]
+.Create node with stemmed indices for specific <<../storage/indexing#languages, languages>>
+
+Setting the languages in the node config will create stemmed indices for all mapped properties.
+
+[source,typescript]
+----
+repo.create({
+    _name: "fruits",
+    displayName: "Fruit basket",
+    description: "language indices usage example",
+    english_set: {
+      fruit_a: "Apple",
+      fruit_set: {
+            fruit_b: "Lemon",
+            fruit_c: "Orange"
+        }
+    },
+    norwegian_set: {
+        fruit_a: "Eple",
+        fruit_set: {
+            fruit_b: "Sitron",
+            fruit_c: "Oransje"
+        }
+    },
+    _indexConfig: {
+        default: {
+            enabled: true,
+            decideByType: true,
+            nGram: false,
+            fulltext: false,
+            includeInAllText: false,
+            path: false,
+            languages: ['en']
+        }, configs: [{
+            path: "norwegian_set.**",
+            config: {
+                enabled: true,
+                decideByType: false,
+                nGram: true,
+                fulltext: true,
+                includeInAllText: true,
+                path: false,
+                languages: ['no']
+            }
+        }]
+    }
+});
+----
+
+Stemmed english indices will be generated for `displayName`, `description` and all strings inside `english_set`.
+Norwegian indices will be created for strings inside `norwegian_set` only.
+
 === delete
 
 Deletes a node or nodes.
@@ -1391,6 +1444,37 @@ const expected = {
             ]
         }
     }
+}
+----
+
+.Query node using <<../storage/dsl#stemmed, stemmed>> DSL function for specific <<../storage/indexing#languages, language>>.
+
+[source,typescript]
+----
+const result = repo.query({
+    query: {
+        stemmed: {
+            field: "description",
+            value: "running",
+            language: "en"
+        }
+    }
+});
+----
+
+.Sample response
+[source,typescript]
+----
+const expected = {
+    total: 1,
+    count: 1,
+    hits: [
+        {
+            id: "2f0d5c09-39fe-4746-9756-74491d75a185",
+            score: 0.5
+        }
+    ],
+    aggregations: {}
 }
 ----
 

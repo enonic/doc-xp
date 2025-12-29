@@ -82,11 +82,13 @@ The "orderby" index mapping lets us sort text and numbers in a natural way acros
 == _allText
 
 Nodes that contain indexed String values, typically gets a generated system property called _allText.
-This property has the valueType `String`, and by default get indexed as `text`, `ngram`, and `analyzed`
+This property has the valueType `String`, and by default get indexed as `text`, `ngram`, and `analyzed`.
+
+The allText's indexing is customizable via the node's <<Index config>>.
 
 The property is commonly used in "search everything" approaches.
 
-NOTE: When defining custom index configurations, you may choose if a property will be included in _allText, or not.
+NOTE: When defining custom index configurations, you may choose if a property will be included in _allText, or not. (`includeInAllText` is set to `true/false`)
 
 == Index config
 
@@ -140,7 +142,13 @@ A basic index config might look something like this:
                 "languages": ['en','no']  // <6>
             }
         }
-    ]
+    ],
+    "allText": {  // <7>
+        "enabled": true,
+        "nGram": true,
+        "fulltext": true,
+        "languages": []
+    }
 }
 ----
 
@@ -149,7 +157,8 @@ A basic index config might look something like this:
 <3> *path* specifies the propertyPath the config applies to
 <4> *config* is the specific overriding config
 <5> *mySet.*** applies to all sub properties of "mySet"
-<6> *languages* stemmed <<languages, language>> indices will be generated for all matched properties
+<6> *languages* stemmed <<languages, language>> indices will be generated for all matched properties. Read more in the <<#stemming,Stemming>> section below.
+<7> *allText* customizes the indexing of the `_allText` property. Read more in the <<#_allText,_allText>> section above.
 
 === Property paths
 
@@ -173,6 +182,72 @@ myProperty.myName
 ----
 
 // TODO: Verify that * is optional, what happens if it is missing?
+
+== Stemming
+
+Stemming is a powerful feature for improving search relevance in multilingual systems.
+It works by reducing words to their root form, making search results more flexible and user-friendly.
+
+=== How stemming works
+
+When a property is configured with a language-specific stemming index:
+
+1. **During indexing**: The text is tokenized and each token is reduced to its stem (root form)
+2. **During search**: The search query is also stemmed using the same algorithm
+3. **Matching**: The stemmed tokens from the query are compared against the stemmed index
+
+This means that searches for "running", "runs", or "ran" can all match content containing "run" and vice versa.
+
+=== Configuring stemming
+
+To enable stemming for specific properties, you need to specify the language in the index configuration:
+
+.Configure stemming for specific properties
+[source,json]
+----
+"_indexConfig": {
+    "default": "byType",
+    "configs": [
+        {
+            "path": "title",
+            "config": {
+                "enabled": true,
+                "decideByType": false,
+                "fulltext": true,
+                "includeInAllText": true,
+                "languages": ["en"]  // <1>
+            }
+        },
+        {
+            "path": "description_no",
+            "config": {
+                "enabled": true,
+                "decideByType": false,
+                "fulltext": true,
+                "includeInAllText": true,
+                "languages": ["no"]  // <2>
+            }
+        }
+    ]
+}
+----
+<1> English stemming for the title property
+<2> Norwegian stemming for the Norwegian description
+
+.Enable stemming for allText property
+[source,json]
+----
+"_indexConfig": {
+    "allText": {
+        "languages": ["en"]  // <1>
+    }
+}
+----
+<1> This creates English-stemmed indices for the `_allText` property
+
+=== Querying stemmed indices
+
+Use the <<noql#stemmed,NoQL>> function or <<../storage/dsl#stemmed, DSL>> query to search against stemmed indices.
 
 
 == Config options
