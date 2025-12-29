@@ -316,7 +316,7 @@ To enable stemming for specific properties, you need to specify the language in 
 [source,json]
 ----
 "_indexConfig": {
-    "alltext": {
+    "allText": {
         "languages": ["en"]  // <1>
     }
 }
