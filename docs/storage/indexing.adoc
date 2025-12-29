@@ -321,7 +321,7 @@ To enable stemming for specific properties, you need to specify the language in 
     }
 }
 ----
-<1> This creates English-stemmed indices for allText property
+<1> This creates English-stemmed indices for the `_allText` property
 
 === Querying stemmed indices
 
