@@ -431,9 +431,6 @@ const expected = {
 
 Setting the languages in the node config will create stemmed indices for all mapped properties.
 
-NOTE: Use <<noql#stemmed,stemmed()>> function to query data based on these indices.
-
-
 [source,typescript]
 ----
 repo.create({
@@ -1356,6 +1353,37 @@ const expected = {
             ]
         }
     }
+}
+----
+
+.Query node using <<../storage/dsl#stemmed, stemmed>> DSL function for specific <<../storage/indexing#languages, language>>.
+
+[source,typescript]
+----
+const result = repo.query({
+    query: {
+        stemmed: {
+            field: "description",
+            value: "running",
+            language: "en"
+        }
+    }
+});
+----
+
+.Sample response
+[source,typescript]
+----
+const expected = {
+    total: 1,
+    count: 1,
+    hits: [
+        {
+            id: "2f0d5c09-39fe-4746-9756-74491d75a185",
+            score: 0.5
+        }
+    ],
+    aggregations: {}
 }
 ----
 
