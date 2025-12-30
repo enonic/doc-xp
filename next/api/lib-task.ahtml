@@ -956,6 +956,18 @@ const taskId = executeFunction({
 <div class="paragraph">
 <p>Causes the current execution thread to sleep (temporarily cease execution) for the specified number of milliseconds.</p>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This function will only work inside a task.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph lead">
 <p>Parameters</p>
 </div>
@@ -1368,7 +1380,7 @@ const taskId = submitTask({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-28 17:39:58 UTC
+Last updated 2025-12-30 15:47:40 UTC
 </div>
 </div>
 </body>

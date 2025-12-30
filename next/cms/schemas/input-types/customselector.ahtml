@@ -478,7 +478,7 @@ Tutorial: Check out <a href="https://developer.enonic.com/docs/build-a-custom-se
 :ref:`services` section.</p>
 </div>
 <div class="paragraph">
-<p>Below are two sample usages of CustomSelector:</p>
+<p>Below are several sample usages of CustomSelector:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -499,6 +499,15 @@ Tutorial: Check out <a href="https://developer.enonic.com/docs/build-a-custom-se
     &lt;param value="genre"&gt;classic&lt;/param&gt;   <i class="conum" data-value="2"></i><b>(2)</b>
     &lt;param value="sortBy"&gt;length&lt;/param&gt;
   &lt;/config&gt;
+&lt;/input&gt;
+
+&lt;!-- Gallery mode --&gt;
+&lt;input name="albumCover" type="CustomSelector"&gt;
+  &lt;label&gt;Album cover&lt;/label&gt;
+  &lt;config&gt;
+    &lt;service&gt;spotify-album-cover-selector&lt;/service&gt;
+    &lt;galleryMode&gt;true&lt;/galleryMode&gt;   <i class="conum" data-value="3"></i><b>(3)</b>
+  &lt;/config&gt;
 &lt;/input&gt;</code></pre>
 </div>
 </div>
@@ -511,6 +520,10 @@ Tutorial: Check out <a href="https://developer.enonic.com/docs/build-a-custom-se
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td><strong>param</strong> lets you pass parameters to the service. This allows for the service to be used in different contexts. There can be multiple parameters or none. The parameters will be included in the HTTP request to the service as name-value query parameters.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>galleryMode</strong> set to <code>true</code> will display the options in a gallery style (three big images in a row), similar to the appearance of an <a href="imageselector.ahtml#appearance">ImageSelector</a>. Useful when images should be emphasized.</td>
 </tr>
 </table>
 </div>
@@ -597,7 +610,7 @@ Inline image content (for example, SVG)</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-28 17:39:58 UTC
+Last updated 2025-12-30 15:47:40 UTC
 </div>
 </div>
 </body>

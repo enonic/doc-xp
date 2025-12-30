@@ -628,6 +628,9 @@ const url = assetUrl({
 <div class="paragraph">
 <p>Generates URL to an attachment.</p>
 </div>
+<div class="paragraph">
+<p>If <code>name</code> is provided, XP will try to find an attachment by the unique name and give an exception if it&#8217;s not found. If <code>name</code> is empty but <code>label</code> is provided, XP will try to find an attachment with the provided label (will return the first one if several were found, or give an exception if none were found). If both <code>name</code> and <code>label</code> are empty, XP will generate attachment url only for a binary content with an attachment.</p>
+</div>
 <div class="paragraph lead">
 <p>Parameters</p>
 </div>
@@ -676,7 +679,7 @@ const url = assetUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Id to the content holding the attachment.</p>
+<p>Id of the content with the attachment.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -685,7 +688,7 @@ const url = assetUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Path to the content holding the attachment.</p>
+<p>Path to the content with the attachment.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -694,7 +697,7 @@ const url = assetUrl({
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name to the attachment.</p>
+<p>Unique name of the attachment.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2411,7 +2414,7 @@ const url = buildUrl({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-28 17:39:58 UTC
+Last updated 2025-12-30 15:47:40 UTC
 </div>
 </div>
 </body>

@@ -452,6 +452,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#other">Other</a></li>
 </ul>
 </li>
+<li><a href="#xp7_update_16">XP7 Update 16</a>
+<ul class="sectlevel2">
+<li><a href="#graalvm_for_jdk_21">GraalVM for JDK 21</a></li>
+<li><a href="#temporary_folder_relocation">Temporary folder relocation</a></li>
+</ul>
+</li>
 <li><a href="#xp7_update_15">XP7 Update 15</a>
 <ul class="sectlevel2">
 <li><a href="#service_accounts">Service Accounts</a></li>
@@ -596,7 +602,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Java 21</p>
+<p>Java 25</p>
 </li>
 <li>
 <p>Jetty 12</p>
@@ -682,6 +688,38 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><code>request.locale</code> in <a href="framework/http.ahtml#http-request">Request</a></p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="xp7_update_16"><a class="link" href="#xp7_update_16">XP7 Update 16</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This release includes a selection of new features, as well as several smaller improvements, bugfixes and stability improvements.</p>
+</div>
+<div class="sect2">
+<h3 id="graalvm_for_jdk_21"><a class="link" href="#graalvm_for_jdk_21">GraalVM for JDK 21</a></h3>
+<div class="paragraph">
+<p>XP is now powered by GraalVM for JDK 21</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+XP 7.16.0 is the final release with Mac x64 support. This is due Oracle&#8217;s discontinuation of x64 builds for Mac.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="temporary_folder_relocation"><a class="link" href="#temporary_folder_relocation">Temporary folder relocation</a></h3>
+<div class="paragraph">
+<p>Startup script relocates the Java defined temporary folder to <code>&lt;xp-home&gt;/work</code> by default. To override this behavior, set the <code>XP_TMP</code> environment variable to the desired location before starting XP.</p>
 </div>
 </div>
 </div>
@@ -2105,7 +2143,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-28 17:39:58 UTC
+Last updated 2025-12-30 15:47:40 UTC
 </div>
 </div>
 </body>

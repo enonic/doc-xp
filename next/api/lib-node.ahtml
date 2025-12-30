@@ -1142,6 +1142,71 @@ skip the <code>name</code> parameter and specify a <code>displayName</code>.</p>
 }</code></pre>
 </div>
 </div>
+<div id="stemming" class="paragraph">
+<div class="title">Create node with stemmed indices for specific <a href="../storage/indexing.ahtml#languages">languages</a></div>
+<p>Setting the languages in the node config will create stemmed indices for all mapped properties.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use <a href="noql.ahtml#stemmed">stemmed()</a> function to query data based on these indices.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">repo.create({
+    _name: "fruits",
+    displayName: "Fruit basket",
+    description: "language indices usage example",
+    english_set: {
+      fruit_a: "Apple",
+      fruit_set: {
+            fruit_b: "Lemon",
+            fruit_c: "Orange"
+        }
+    },
+    norwegian_set: {
+        fruit_a: "Eple",
+        fruit_set: {
+            fruit_b: "Sitron",
+            fruit_c: "Oransje"
+        }
+    },
+    _indexConfig: {
+        default: {
+            enabled: true,
+            decideByType: true,
+            nGram: false,
+            fulltext: false,
+            includeInAllText: false,
+            path: false,
+            languages: ['en']
+        }, configs: [{
+            path: "norwegian_set.**",
+            config: {
+                enabled: true,
+                decideByType: false,
+                nGram: true,
+                fulltext: true,
+                includeInAllText: true,
+                path: false,
+                languages: ['no']
+            }
+        }]
+    }
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Stemmed english indices will be generated for <code>displayName</code>, <code>description</code> and all strings inside <code>english_set</code>.
+Norwegian indices will be created for strings inside <code>norwegian_set</code> only.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="delete"><a class="link" href="#delete">delete</a></h3>
@@ -3207,7 +3272,7 @@ const result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-28 17:39:58 UTC
+Last updated 2025-12-30 15:47:40 UTC
 </div>
 </div>
 </body>

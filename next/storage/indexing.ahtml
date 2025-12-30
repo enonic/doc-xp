@@ -966,67 +966,8 @@ I.e. numeric values are indexed as both string and numeric.</p>
 <div class="paragraph">
 <p>Use <a href="noql.ahtml#stemmed">stemmed()</a> function to query data based on these indices.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-While setting the language for the content will only index the _allText field, setting the languages ​​in the node config will create stemmed indices for all mapped properties. See node <a href="../api/lib-node.ahtml#create">create</a> function.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">Sample use of languages for node</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">repo.create({
-    _name: "fruits",
-    displayName: "Fruit basket",
-    description: "language indices usage example",
-    english_set: {
-      fruit_a: "Apple",
-      fruit_set: {
-            fruit_b: "Lemon",
-            fruit_c: "Orange"
-        }
-    },
-    norwegian_set: {
-        fruit_a: "Eple",
-        fruit_set: {
-            fruit_b: "Sitron",
-            fruit_c: "Oransje"
-        }
-    },
-    _indexConfig: {
-        default: {
-            enabled: true,
-            decideByType: true,
-            nGram: false,
-            fulltext: false,
-            includeInAllText: false,
-            path: false,
-            languages: ['en']
-        }, configs: [{
-            path: "norwegian_set.**",
-            config: {
-                enabled: true,
-                decideByType: false,
-                nGram: true,
-                fulltext: true,
-                includeInAllText: true,
-                path: false,
-                languages: ['no']
-            }
-        }]
-    }
-});</code></pre>
-</div>
-</div>
 <div class="paragraph">
-<p>Stemmed english indices will be generated for <code>displayName</code>, <code>description</code> and all strings inside <code>english_set</code>.
-Norwegian indices will be created for strings inside <code>norwegian_set</code> only.</p>
+<p><a href="./api/nodes.ahtml#stemming">Example</a> of creating a node with properties indexed for multiple languages.</p>
 </div>
 </div>
 </div>
@@ -1167,7 +1108,7 @@ Rather than providing a full config object, you may instead reference a standard
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-28 17:39:58 UTC
+Last updated 2025-12-30 15:47:40 UTC
 </div>
 </div>
 </body>
