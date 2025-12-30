@@ -1,6 +1,6 @@
 = XP distributions
 :toc: right
-:imagesdir: config
+:imagesdir: ../images
 
 This chapter investigates the anatomy of the XP distribution files (aka the XP runtime)
 
@@ -54,7 +54,7 @@ XP_HOME/
    |- index/  // <5>
    |- blob/  // <6>
 |- snapshots/ *  // <7>
-|- work/ *  // <8>
+|- work/   // <8>
 ----
 
 <1> `config/` holds all configuration files, including vhost.cfg and system.properties. XP supports hot reloading of all files ending with .cfg
@@ -76,7 +76,14 @@ NOTE: Requires a persisted volume. For clusters, this must be a shared volume, a
 +
 NOTE: For clusters, this must be mounted to a shared volume, accessible by all nodes.
 +
-<8> `work/` Cache and generated bundles (apps etc) are stored here.
+<8> `work/` Cache and generated bundles (apps etc) are stored here. It is also a default location for temporary files (from version image:xp-7160.svg[XP 7.16.0,opts=inline]).
 +
-NOTE: For optimal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.*
+NOTE: For optimal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.
 +
+
+
+== XP_TMP
+image:xp-7160.svg[XP 7.16.0,opts=inline]
+
+By default, Enonic XP uses `XP_HOME/work` as temporary folder.
+You may override this by setting the `XP_TMP` environment variable to point to a different location.

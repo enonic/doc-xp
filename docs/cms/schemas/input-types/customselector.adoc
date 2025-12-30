@@ -15,7 +15,7 @@ TIP: Tutorial: Check out https://developer.enonic.com/docs/build-a-custom-select
 Application developers must create a service that returns results according to the required JSON format, and then specify the service name in the input config. For information on creating a service see the
 :ref:`services` section.
 
-Below are two sample usages of CustomSelector:
+Below are several sample usages of CustomSelector:
 
 [source,xml]
 ----
@@ -38,9 +38,19 @@ Below are two sample usages of CustomSelector:
     <param value="sortBy">length</param>
   </config>
 </input>
+
+<!-- Gallery mode -->
+<input name="albumCover" type="CustomSelector">
+  <label>Album cover</label>
+  <config>
+    <service>spotify-album-cover-selector</service>
+    <galleryMode>true</galleryMode>   // <3>
+  </config>
+</input>
 ----
 <1> *service* holds the name of a JavaScript service file, located under ``/resources/services/[my-custom-selector]/[my-custom-selector].js``. You can also refer to a service file in another application, for example *com.myapplication.app:myservice*.
 <2> *param* lets you pass parameters to the service. This allows for the service to be used in different contexts. There can be multiple parameters or none. The parameters will be included in the HTTP request to the service as name-value query parameters.
+<3> *galleryMode* set to `true` will display the options in a gallery style (three big images in a row), similar to the appearance of an <<imageselector#appearance,ImageSelector>>. Useful when images should be emphasized.
 
 === Service Request
 

@@ -9,7 +9,7 @@ A field for entering multi-line text with rich-formatting options.
 
 == Appearance
 
-The rich text editor as seen with default configuration. The `Add` button indicated that this setup also supports multiple occurrences of the editor.
+The rich text editor as seen with the default configuration. The `Add` button indicated that this setup also supports multiple occurrences of the editor.
 
 image::Html-area-editor.png[Input field with a toolbar at the top. Source and fullscreen buttons on the bottom left, 600]
 
@@ -38,11 +38,11 @@ image::Html-area-editor.png[Input field with a toolbar at the top. Source and fu
 TIP: If you are manually outputting contents of an HtmlArea input in your template, you might have to use
 <<../../../api/lib-portal#processHtml,processHtml()>> function which will process macros and generate correct links inside the HTML content.
 
-TIP: HTML Area is configured with default set of tools but the toolbar can be customized. Using the config setting you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. Complete list of supported tools can be found below.
+TIP: HTML Area is configured with a default set of tools, but the toolbar can be customized. Using the config setting, you can exclude specific tools from being shown (use "*" to exclude all tools at once) and/or include those that you want to have in the toolbar. Separate tools with a space and use "|" character to group tool buttons together. A complete list of supported tools can be found below.
 
 Below is the default editor tools configuration:
 
-  Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | SpecialChar Anchor Image Macro Link Unlink | Table | PasteModeSwitcher
+  Format | JustifyBlock JustifyLeft JustifyCenter JustifyRight | BulletedList NumberedList Outdent Indent | FindAndReplace SpecialChar Anchor Image Macro Link Unlink | Table | PasteModeSwitcher
 
 
 Below is the complete list of available editor tools:
@@ -62,6 +62,7 @@ Below is the complete list of available editor tools:
 | NumberedList | Insert a numbered list
 | Outdent | Decrease indent
 | Indent | Increase indent
+| FindAndReplace | Find and Replace dialog
 | SpecialChar | Insert a special character
 | Anchor | Insert an anchor
 | Image | Insert/Edit an image
@@ -79,10 +80,11 @@ Below is the complete list of available editor tools:
 | Font | Font menu
 | FontSize | Font size menu
 | HorizontalRule | Insert a horizontal line
+| Language | Set language for parts of the text
 | ListStyle | Change style of BulletedList
 | NewPage | Clean editor's content
 | Preview | Preview HTML Area contents
-| Redo | Repeat last action
+| Redo | Repeat the last action
 | RemoveFormat | Remove formatting
 | SelectAll | Select editor's content
 | Strike | Strikethrough over text
@@ -90,5 +92,5 @@ Below is the complete list of available editor tools:
 | Subscript | Subscript text
 | Superscript | Superscript text
 | TextColor | Text color
-| Undo | Undo last action
+| Undo | Undo the last action
 |===
