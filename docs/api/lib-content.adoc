@@ -69,7 +69,7 @@ An object with the following keys and their values:
 |===
 | Name | Type | Attributes| Description
 | key | string | | Path or id to the content
-| name | string | | Attachment name
+| name | string | | Attachment name (unique within the content)
 | mimeType | string | | Attachment content type
 | label | string | <optional> | Attachment label
 | data | object | <optional> | Stream with the binary data for the attachment
@@ -436,7 +436,7 @@ const expected = {
 
 === delete
 
-Deletes a content
+Deletes a content. A published content will be unpublished before deletion.
 
 [.lead]
 *Parameters:*
@@ -1661,7 +1661,6 @@ const result = publish({
 
 if (result) {
     log.info('Pushed %s content.', result.pushedContents.length);
-    log.info('Deleted %s content.1, result.deletedContents.length);
     log.info('Content that failed operation: %s', result.failedContents.length);
 } else {
     log.info('Operation failed.');
@@ -1676,9 +1675,6 @@ const expected = {
         "d7ad428b-eae2-4ff1-9427-e8e8a8a3ab23",
         "9f5b0db0-38f9-4e81-b92e-116f25476b1c",
         "e1f57280-d672-4cd8-b674-98e26e5b69ae"
-    ],
-    deletedContents: [ // Removed from 7.12.0
-        "45d67001-7f2b-4093-99ae-639be9fdd1f6"
     ],
     failedContents: [
         "79e21db0-5b43-45ce-b58c-6e1c420b22bd"

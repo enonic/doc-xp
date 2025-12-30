@@ -408,56 +408,7 @@ Language codes are specified in the `la[-co]`` format, where:
 
 Use <<noql#stemmed,stemmed()>> function to query data based on these indices.
 
-NOTE: While setting the language for the content will only index the _allText field, setting the languages ​​in the node config will create stemmed indices for all mapped properties. See node <<../api/lib-node#create,create>> function.
-
-.Sample use of languages for node
-[source,json]
-----
-repo.create({
-    _name: "fruits",
-    displayName: "Fruit basket",
-    description: "language indices usage example",
-    english_set: {
-      fruit_a: "Apple",
-      fruit_set: {
-            fruit_b: "Lemon",
-            fruit_c: "Orange"
-        }
-    },
-    norwegian_set: {
-        fruit_a: "Eple",
-        fruit_set: {
-            fruit_b: "Sitron",
-            fruit_c: "Oransje"
-        }
-    },
-    _indexConfig: {
-        default: {
-            enabled: true,
-            decideByType: true,
-            nGram: false,
-            fulltext: false,
-            includeInAllText: false,
-            path: false,
-            languages: ['en']
-        }, configs: [{
-            path: "norwegian_set.**",
-            config: {
-                enabled: true,
-                decideByType: false,
-                nGram: true,
-                fulltext: true,
-                includeInAllText: true,
-                path: false,
-                languages: ['no']
-            }
-        }]
-    }
-});
-----
-
-Stemmed english indices will be generated for `displayName`, `description` and all strings inside `english_set`.
-Norwegian indices will be created for strings inside `norwegian_set` only.
+<<./api/nodes#stemming, Example>> of creating a node with properties indexed for multiple languages.
 
 == Config templates
 

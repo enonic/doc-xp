@@ -430,6 +430,9 @@ const expected = {
 
 Setting the languages in the node config will create stemmed indices for all mapped properties.
 
+NOTE: Use <<noql#stemmed,stemmed()>> function to query data based on these indices.
+
+
 [source,typescript]
 ----
 repo.create({

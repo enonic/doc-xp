@@ -1,8 +1,8 @@
-= Authentication API
+= Auth API
 :toc: right
 :imagesdir: ../images
 
-This API provides built-in authentication functions.
+Manage principals and authentication
 
 TIP: If, while using this API, you are getting authentication errors like "_Access denied to user [unknown]_"
 it means that user role in the current context lacks sufficient permissions (for example when executed from inside a service).
@@ -38,13 +38,13 @@ Adds members to a principal (user or role).
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| principalKey | string | Key of the principal to add members to
-| members | string[] | A list of the new members that should be added to the principal
+| Name | Kind | Attributes | Details
+| key | string | | Key of the principal to add members to
+| members | string[] | | A list of the new members that should be added to the principal
 |===
 
 [.lead]
@@ -55,20 +55,20 @@ Returns
 
 === changePassword
 
-Changes password for specified user.
+Changes password for a specified user.
 
 [.lead]
 Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,99%a"]
+[%header,cols="1%,1%,98%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Description
-| userKey | The key of the user to change password for
-| password | The new password
+| Name | Attributes | Description
+| userKey | | The key of the user to change password for
+| password | | The new password
 |===
 
 [.lead]
@@ -85,21 +85,21 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| idProvider | string | Key for id provider where the group will be created
-| name | string | Group name
-| displayName | string | Group display name
-| description | string | A description of the principal
+| Name | Kind | Attributes | Description
+| idProvider | string | | Key for id provider where the group will be created
+| name | string | | Group name
+| displayName | string | | Group display name
+| description | string | | A description of the principal
 |===
 
 [.lead]
 Returns
 
-*object* : The created group.
+*object*: The created group.
 
 [.lead]
 Example
@@ -118,14 +118,14 @@ const group = createGroup({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "group",
     key: "group:system:group-a",
     displayName: "Group A",
     description: "description"
-}
+})
 ----
 
 === createRole
@@ -137,20 +137,20 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| name | string | The name of the role.  The key of the role will be 'role.<name>'.
-| displayName | string | Role display name
-| description | string | A description of the role
+| Name | Kind | Attributes | Description
+| name | string | | The name of the role.  The key of the role will be 'role.<name>'.
+| displayName | string | | Role display name
+| description | string | | A description of the role
 |===
 
 [.lead]
 Returns
 
-*object* : The created role.
+*object*: The created role.
 
 [.lead]
 Example
@@ -168,14 +168,14 @@ const role = createRole({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "role",
     key: "role:aRole",
     displayName: "Role Display Name",
     description: "description"
-}
+})
 ----
 
 === createUser
@@ -187,21 +187,21 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| idProvider | string | Key for id provider where the user will be created
-| name | string | User login name
-| displayName | string | User display name
-| email | string | Optional user e-mail
+| Name | Kind | Attributes | Description
+| idProvider | string | | Key for id provider where the user will be created
+| name | string | | User login name
+| displayName | string | | User display name
+| email | string | <optional> | Optional user e-mail
 |===
 
 [.lead]
 Returns
 
-*object* : The created group.
+*object*: The created <<user,`User`>>.
 
 [.lead]
 Example
@@ -220,17 +220,18 @@ const user = createUser({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "The One And Only",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}
+    idProvider: "myIdProvider",
+    hasPassword: false
+})
 ----
 
 === deletePrincipal
@@ -240,18 +241,18 @@ Deletes the principal with the specified key.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| principalKey | string | Key of the principal to delete
+| Name | Kind | Attributes | Details
+| key | string | | Key of the principal to delete
 |===
 
 [.lead]
 Returns
 
-*boolean* : `true` if the principal was deleted, `false` otherwise
+*boolean*: `true` if the principal was deleted, `false` otherwise.
 
 [.lead]
 Example
@@ -270,23 +271,23 @@ Search for principals matching the specified criteria.
 
 An object with the following keys and their value.  All parameters are optional:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| type | string | Principal type to look for, one of: 'user', 'group' or 'role'. If not specified all principal types will be included.
-| idProvider | string | Key of the id provider to look for. If not specified all id providers will be included.
-| start | string | First principal to return from the search results. It can be used for pagination.
-| count | string | A limit on the number of principals to be returned
-| name | string | Name of the principal to look for
-| searchText | string | Text to look for in any principal field.
+| Name | Kind | Attributes | Description
+| type | string | <optional> | Principal type to look for, one of: 'user', 'group' or 'role'. If not specified all principal types will be included.
+| idProvider | string | <optional> | Key of the id provider to look for. If not specified, all id providers will be included.
+| start | string | <optional> | First principal to return from the search results. It can be used for pagination.
+| count | string | <optional> | A limit on the number of principals to be returned
+| name | string | <optional> | Name of the principal to look for
+| searchText | string | <optional> | Text to look for in any principal field.
 |===
 
 [.lead]
 Returns
 
-*object* : The "total" number of principals matching the search, the "count" of principals included, and an array of "hits" containing the principals.
+*object*: The "total" number of principals matching the search, the "count" of principals included, and an array of "hits" containing the principals.
 
 [.lead]
 Example
@@ -305,17 +306,18 @@ const result = findPrincipals({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "The One And Only",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}
+    idProvider: "myIdProvider",
+    hasPassword: true
+})
 ----
 
 
@@ -325,22 +327,22 @@ Search for users matching the specified query.
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Description
-| query | string | Query expression
-| start | number | Optional start index for paging
-| count | number | Optional number of users to fetch at a time
-| sort | string | Optional sorting expression
-| includeProfile | boolean | If set to `true`, a full profile of each user will be included in the result
+| Name | Kind | Attributes | Description
+| query | string | | Query expression
+| start | number | <optional> | Optional start index for paging
+| count | number | <optional> | Optional number of users to fetch at a time
+| sort | string | <optional> | Optional sorting expression
+| includeProfile | boolean | <optional> | If set to `true`, a full profile of each user will be included in the result
 |===
 
 [.lead]
 Returns
 
-*object* : An object containg the total number of hits, the number returned and an array of the hits.
+*object*: An object containing the total number of hits, the number returned and an array of the hits.
 
 [.lead]
 Example
@@ -357,9 +359,9 @@ const findUsersResult = findUsers({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     total: 2,
     count: 1,
     hits: [
@@ -370,10 +372,11 @@ const findUsersResult = findUsers({
             disabled: false,
             email: "jju@enonic.com",
             login: "jorgen-juve",
-            idProvider: "system"
+            idProvider: "system",
+            hasPassword: true
         }
     ]
-}
+})
 ----
 
 NOTE: If you want to find a user by key, you have to use `_id` field in the `query` parameter.
@@ -402,7 +405,7 @@ None
 [.lead]
 Returns
 
-*string* : A suggestion for a secure password
+*string*: A suggestion for a secure password.
 
 [.lead]
 Example
@@ -427,7 +430,7 @@ None
 [.lead]
 Returns
 
-*object* : An object with all the values in the configuration
+*object*: An object with all the values in the configuration.
 
 === getMembers
 
@@ -436,18 +439,18 @@ Returns a list of principals that are members of the specified principal.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| principalKey | string | Principal key to retrieve the members of.
+| Name | Kind | Attributes | Details
+| key | string | | Principal key to retrieve the members of.
 |===
 
 [.lead]
 Returns
 
-*object[]* : A list of objects for each member of the principal or empty array if none.
+*object[]*: A list of objects for each member of the principal or empty array if none.
 
 [.lead]
 Example
@@ -461,11 +464,28 @@ const result = getMembers('group:system:content-managers');
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-[{type:"user",key:"user:system:user1",displayName:"User 1",disabled:false,email:"user1@enonic.com",login:"user1",idProvider:"system"},
- {type:"user",key:"user:system:user2",displayName:"User 2",disabled:false,email:"user2@enonic.com",login:"user2",idProvider:"system"
- }]
+[{
+    type: "user",
+    key: "user:system:user1",
+    displayName: "User 1",
+    disabled: false,
+    email: "user1@enonic.com",
+    login: "user1",
+    idProvider: "system",
+    hasPassword: true
+},
+{
+    type: "user",
+    key: "user:system:user2",
+    displayName: "User 2",
+    disabled: false,
+    email: "user2@enonic.com",
+    login: "user2",
+    idProvider: "system",
+    hasPassword: false
+}]
 ----
 
 === getMemberships
@@ -475,19 +495,19 @@ Returns the list of principals which the specified principal is a member of.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| principalKey | string | Principal key to retrieve memberships for
-| transitive | boolean | Retrieve transitive memberships.  Considered `false` if not specified
+| Name | Kind | Attributes | Details
+| key | string | | Principal key to retrieve memberships for
+| transitive | boolean | <optional> | Retrieve transitive memberships.  Considered `false` if not specified
 |===
 
 [.lead]
 Returns
 
-*string[]* : A list of the principals that the specified principal is a member of
+*string[]*: A list of the principals that the specified principal is a member of.
 
 [.lead]
 Example
@@ -501,7 +521,7 @@ const result = getMemberships('user:system:user1');
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
 [{
     type: "role",
@@ -519,7 +539,7 @@ const result = getMemberships('user:system:user1', true);
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
 [
     "role:system.admin.login",
@@ -536,18 +556,18 @@ Returns the principal with the specified key.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| principalKey | string | Principal key to retrieve memberships for
+| Name | Kind | Attributes | Details
+| key | string | | Principal key to retrieve memberships for
 |===
 
 [.lead]
 Returns
 
-*object* : The principal as an object
+*object*: The principal as an object.
 
 .Retrieving the full principal for 'user1'
 [source,typescript]
@@ -558,17 +578,18 @@ const result = getPrincipal('user:system:user1');
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "system"
-}
+    idProvider: "system",
+    hasPassword: true
+})
 ----
 
 === getProfile
@@ -580,19 +601,19 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| principalKey | string | Principal key to retrieve profile for
-| scope | string | Optional scope setting
+| Name | Kind | Attributes | Details
+| key | string | | Principal key to retrieve profile for
+| scope | string | <optional> | Optional scope setting
 |===
 
 [.lead]
 Returns
 
-*object* : Profile data
+*object*: Profile data.
 
 [.lead]
 Example
@@ -602,15 +623,17 @@ Example
 ----
 import {getProfile} from '/lib/xp/auth';
 
-const result = getProfile('user:system:user1');
+const result = getProfile({
+    key: 'user:system:user1'
+});
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     nickName: "User Nick"
-}
+})
 ----
 
 
@@ -626,7 +649,7 @@ None
 [.lead]
 Returns
 
-*object* : User data
+*object*: <<user,`User`>> data.
 
 [.lead]
 Example
@@ -640,17 +663,18 @@ const result = getUser();
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1",
     disabled: false,
     email: "user1@enonic.com",
     login: "user1",
-    idProvider: "system"
-}
+    idProvider: "system",
+    hasPassword: true
+})
 ----
 
 === hasRole
@@ -660,18 +684,18 @@ Checks if the logged-in user has the specified role.
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| role | string | The role to check for
+| Name | Kind | Attributes | Details
+| role | string | | The role to check for
 |===
 
 [.lead]
 Returns
 
-*boolean* : `true` if the current user has the role, `false` otherwise
+*boolean*: `true` if the current user has the role, `false` otherwise.
 
 [.lead]
 Example
@@ -693,23 +717,23 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| user | string | Mandatory name of the user to log in
-| password | string | Password for the user. Ignored if skipAuth is set to true, mandatory otherwise.
-| idProvider | string | Name of id provider where the user is stored. If not specified it will try all available id providers, in alphabetical order.
-| skipAuth | boolean | Skip authentication.  Default is `false` if not specified.
-| sessionTimeout | number | Session timeout (in seconds). By default, the value of session.timeout from `com.enonic.xp.web.jetty.cfg`
-| scope image:xp-730.svg[XP 7.3.0,opts=inline] | string | Defines the scope of the login. Valid values are `SESSION`, `REQUEST` and `NONE` (starting from version image:xp-780.svg[XP 7.8.0,opts=inline]). When scope is set to `SESSION` the login is persistent. If scope is set to `REQUEST` the login is only valid for the current request. Scope `NONE` allows to check correctness of username and password without logging into the system. Default is `SESSION` if not specified.
+| Name | Kind | Attributes | Details
+| user | string | | Mandatory name of the user to log in
+| password | string | <optional> | Password for the user. Ignored if skipAuth is set to true, mandatory otherwise.
+| idProvider | string | <optional> | Name of id provider where the user is stored. If not specified it will try all available id providers, in alphabetical order.
+| skipAuth | boolean | <optional> | Skip authentication.  Default is `false` if not specified.
+| sessionTimeout | number | <optional> | Session timeout (in seconds). By default, the value of session.timeout from `com.enonic.xp.web.jetty.cfg`
+| scope image:xp-730.svg[XP 7.3.0,opts=inline] | string | <optional> | Defines the scope of the login. Valid values are `SESSION`, `REQUEST` and `NONE` (starting from version image:xp-780.svg[XP 7.8.0,opts=inline]). When scope is set to `SESSION` the login is persistent. If scope is set to `REQUEST` the login is only valid for the current request. Scope `NONE` allows to check correctness of username and password without logging into the system. Default is `SESSION` if not specified.
 |===
 
 [.lead]
 Returns
 
-*object* : The logged-in user
+*object*: The login result.
 
 [.lead]
 Example
@@ -727,20 +751,21 @@ const loginResult = login({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
-    authenticated:true,
-    user:{
-        type:"user",
-        key:"user:system:user1",
-        displayName:"The One And Only",
-        disabled:false,
-        email:"user1@enonic.com",
-        login:"user1",
-        idProvider:"myIdProvider"
+({
+    authenticated: true,
+    user: {
+        type: "user",
+        key: "user:system:user1",
+        displayName: "The One And Only",
+        disabled: false,
+        email: "user1@enonic.com",
+        login: "user1",
+        idProvider: "myIdProvider",
+        hasPassword: true
     }
-}
+})
 ----
 
 === logout
@@ -766,19 +791,19 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Principal key of the group to modify
-| editor | function | Group editor function
+| Name | Kind | Attributes | Details
+| key | string | | Principal key of the group to modify
+| editor | function | | Group editor function
 |===
 
 [.lead]
 Returns
 
-*object* : The updated group
+*object*: The updated group.
 
 [.lead]
 Example
@@ -803,39 +828,39 @@ const group = modifyGroup({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "group",
     key: "group:system:group-a",
     displayName: "Modified display name",
     description: "descriptionX"
-}
+})
 ----
 
 === modifyProfile
 
-Updates an existing user profile.
+Updates an existing user profile. Will create a new profile, if an existing one with provided `scope` was not found.
 
 [.lead]
 Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | Principal key of the user
-| scope | string | Optional scope setting
-| editor | function | Profile editor function
+| Name | Kind | Attributes | Details
+| key | string | | Principal key of the user
+| scope | string | <optional> | Optional scope setting
+| editor | function | | Profile editor function
 |===
 
 [.lead]
 Returns
 
-*object* : The updated profile
+*object*: The updated profile.
 
 .Changing a profile
 [source,typescript]
@@ -859,11 +884,11 @@ const profileModified = modifyProfile({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     nickName: "User Nick"
-}
+})
 ----
 
 === modifyRole
@@ -875,19 +900,19 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | The role key
-| editor | function | Role editor function
+| Name | Kind | Attributes | Details
+| key | string | | The role key
+| editor | function | | Role editor function
 |===
 
 [.lead]
 Returns
 
-*object* : The updated role
+*object*: The updated role.
 
 .Changing a role
 [source,typescript]
@@ -901,7 +926,7 @@ function roleEditor(c) {
     return c;
 }
 
-// Modify role with specified key.
+// Modify role with a specified key.
 const theRole = modifyRole({
     key: 'role:aRole',
     editor: roleEditor
@@ -909,14 +934,14 @@ const theRole = modifyRole({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "role",
     key: "role:aRole",
     displayName: "Nothing Role",
     description: "This role does not give access to anything!"
-}
+})
 ----
 
 === modifyUser
@@ -928,19 +953,19 @@ Parameters
 
 An object with the following keys and their values:
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| key | string | The user key
-| editor | function | User editor function
+| Name | Kind | Attributes | Details
+| key | string | | The user key
+| editor | function | | User editor function
 |===
 
 [.lead]
 Returns
 
-*object* : The updated user
+*object*: The updated <<user,`User`>>.
 
 .Changing a user
 [source,typescript]
@@ -954,7 +979,7 @@ function userEditor(c) {
     return c;
 }
 
-// Modify user with specified key.
+// Modify user with a specified key.
 const theUser = modifyUser({
     key: 'user:system:user1',
     editor: userEditor
@@ -962,17 +987,18 @@ const theUser = modifyUser({
 ----
 
 .Sample response
-[source,typescript]
+[source,js]
 ----
-{
+({
     type: "user",
     key: "user:system:user1",
     displayName: "User 1-A",
     disabled: false,
     email: "user1a@enonic.com",
     login: "user1",
-    idProvider: "myIdProvider"
-}
+    idProvider: "myIdProvider",
+    hasPassword: true
+})
 ----
 
 === removeMembers
@@ -982,13 +1008,13 @@ Removes members from a principal (group or role).
 [.lead]
 Parameters
 
-[%header,cols="1%,1%,98%a"]
+[%header,cols="1%,1%,1%,97%a"]
 [frame="none"]
 [grid="none"]
 |===
-| Name | Kind | Details
-| principalKey | string | The principal key of a group or a role to remove members from
-| members | string[] | Principal keys to remove as members
+| Name | Kind | Attributes | Details
+| key | string | | The principal key of a group or a role to remove members from
+| members | string[] | | Principal keys to remove as members
 |===
 
 [.lead]
@@ -996,9 +1022,36 @@ Returns
 
 *void*
 
-.Remove members from specified principal.
+.Remove members from a specified principal.
 [source,typescript]
 ----
 authLib.removeMembers('role:roleId', ['user:system:user1', 'group:system:group-a']);
 ----
 
+== Type Definitions
+
+=== User
+[[user]]
+
+[.lead]
+Type
+
+*object*
+
+[.lead]
+Properties
+[%header,cols="1%,1%,98%a"]
+[frame="none"]
+[grid="none"]
+|===
+| Name         | Type    | Description
+| type         | string  | The type of principal, always "user" for users
+| key          | string  | The unique key of the user
+| displayName  | string  | The display name of the user
+| modifiedTime | string  | The last modified time of the user in ISO 8601 format
+| disabled     | boolean | Whether the user is disabled or not
+| email        | string  | The email of the user
+| login        | string  | The login name of the user
+| idProvider   | string  | The id provider where the user is stored
+| hasPassword  | boolean | image:xp-7150.svg[XP 7.15.0,opts=inline] Whether the user has a password set
+|===
