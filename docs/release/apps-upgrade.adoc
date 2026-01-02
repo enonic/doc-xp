@@ -37,12 +37,12 @@ The standard build system used for XP projects must be updated.
 
 === Gradle Wrapper
 
-XP 8.0 standardizes on the use of Gradle 8.14.
-We recommend bundling Gradle wrapper of version 8.14 or later in your project.
+XP 8.0 standardizes on the use of Gradle 9.x.
+We recommend bundling Gradle wrapper of version 9.2.1 or later in your project.
 
 For simple installations, from your project root, run:
 
-  ./gradle wrapper --gradle-version 8.14
+  ./gradle wrapper --gradle-version 9.2.1
 
 This will install or update your project with a new Gradle wrapper.
 
@@ -52,7 +52,7 @@ Please refer to Grade documentation for more details https://docs.gradle.org/cur
 
 ==== Application upgrade
 
-If you are upgrading *an application*, you need to use a version greater or equal to '3.6.1' of the XP Gradle plugin (_com.enonic.xp.app_).
+If you are upgrading *an application*, you need to use a version greater or equal to '4.0.0' of the XP Gradle plugin (_com.enonic.xp.app_).
 
 
 This plugin expects application properties to be defined in the `app {}` section of _build.gradle_
@@ -64,7 +64,7 @@ NOTE: Syntax for adding plugins to Gradle may have changed for your project, we 
 [source,groovy]
 ----
 plugins {
-    id 'com.enonic.xp.app' version '3.6.1'
+    id 'com.enonic.xp.app' version '4.0.0-A1'
 }
 
 app {
@@ -120,7 +120,7 @@ Below is a sample content of _build.gradle_ and _gradle.properties_ files for a 
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '3.6.1'
+    id 'com.enonic.xp.base' version '4.0.0-A1'
 }
 
 repositories {
@@ -167,7 +167,7 @@ In XP 8 context repository and branch may return null if they are not set. This 
 
 == JDK
 
-Java 21 is required for XP 8.0.0
+Java 25 is required for XP 8.0.0
 
 == Testing API
 
@@ -178,7 +178,7 @@ You need to add Junit 5 dependency with the corresponding platform launcher.
 ----
 dependencies {
 testImplementation "com.enonic.xp:testing:${xpVersion}"
-testImplementation(platform("org.junit:junit-bom:5.12.2"))
+testImplementation(platform("org.junit:junit-bom:6.0.1"))
 testImplementation 'org.junit.jupiter:junit-jupiter'
 testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
