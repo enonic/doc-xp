@@ -172,16 +172,26 @@ Examples:
 .Applies to "myProperty" and all sub properties
 [source,json]
 ----
-myProperty**
+myProperty.**
 ----
 
-.Applies to "myProperty.myName" and all sub properties
+.Applies to first level sub properties of "myProperty"
+[source,json]
+----
+myProperty.*
+----
+
+.Applies to all sub properties of all sets starting with "myProperty"
+[source,json]
+----
+myProperty*.**
+----
+
+.Applies only to "myProperty.myName"
 [source,json]
 ----
 myProperty.myName
 ----
-
-// TODO: Verify that * is optional, what happens if it is missing?
 
 == Stemming
 
