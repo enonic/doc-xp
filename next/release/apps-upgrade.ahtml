@@ -559,15 +559,15 @@ Enonic CLI adds a <code>.enonic</code> file to your project root, consider updat
 <div class="sect2">
 <h3 id="gradle_wrapper"><a class="link" href="#gradle_wrapper">Gradle Wrapper</a></h3>
 <div class="paragraph">
-<p>XP 8.0 standardizes on the use of Gradle 8.14.
-We recommend bundling Gradle wrapper of version 8.14 or later in your project.</p>
+<p>XP 8.0 standardizes on the use of Gradle 9.x.
+We recommend bundling Gradle wrapper of version 9.2.1 or later in your project.</p>
 </div>
 <div class="paragraph">
 <p>For simple installations, from your project root, run:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>./gradle wrapper --gradle-version 8.14</pre>
+<pre>./gradle wrapper --gradle-version 9.2.1</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -582,7 +582,7 @@ We recommend bundling Gradle wrapper of version 8.14 or later in your project.</
 <div class="sect3">
 <h4 id="application_upgrade"><a class="link" href="#application_upgrade">Application upgrade</a></h4>
 <div class="paragraph">
-<p>If you are upgrading <strong>an application</strong>, you need to use a version greater or equal to '3.6.1' of the XP Gradle plugin (<em>com.enonic.xp.app</em>).</p>
+<p>If you are upgrading <strong>an application</strong>, you need to use a version greater or equal to '4.0.0' of the XP Gradle plugin (<em>com.enonic.xp.app</em>).</p>
 </div>
 <div class="paragraph">
 <p>This plugin expects application properties to be defined in the <code>app {}</code> section of <em>build.gradle</em>
@@ -604,7 +604,7 @@ Syntax for adding plugins to Gradle may have changed for your project, we recomm
 <div class="title">build.gradle sample</div>
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">plugins {
-    id 'com.enonic.xp.app' version '3.6.1'
+    id 'com.enonic.xp.app' version '4.0.0-A1'
 }
 
 app {
@@ -673,7 +673,7 @@ Below is a sample content of <em>build.gradle</em> and <em>gradle.properties</em
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '3.6.1'
+    id 'com.enonic.xp.base' version '4.0.0-A1'
 }
 
 repositories {
@@ -756,7 +756,7 @@ TODO</p>
 <h2 id="jdk"><a class="link" href="#jdk">JDK</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Java 21 is required for XP 8.0.0</p>
+<p>Java 25 is required for XP 8.0.0</p>
 </div>
 </div>
 </div>
@@ -771,7 +771,7 @@ You need to add Junit 5 dependency with the corresponding platform launcher.</p>
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
 testImplementation "com.enonic.xp:testing:${xpVersion}"
-testImplementation(platform("org.junit:junit-bom:5.12.2"))
+testImplementation(platform("org.junit:junit-bom:6.0.1"))
 testImplementation 'org.junit.jupiter:junit-jupiter'
 testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -1040,7 +1040,7 @@ Use <code>lib-asset</code> instead.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-30 15:47:40 UTC
+Last updated 2026-01-02 12:13:58 UTC
 </div>
 </div>
 </body>
