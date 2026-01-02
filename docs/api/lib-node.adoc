@@ -1450,6 +1450,37 @@ const expected = {
 }
 ----
 
+.Query node using <<../storage/dsl#stemmed, stemmed>> DSL function for specific <<../storage/indexing#languages, language>>.
+
+[source,typescript]
+----
+const result = repo.query({
+    query: {
+        stemmed: {
+            field: "description",
+            value: "running",
+            language: "en"
+        }
+    }
+});
+----
+
+.Sample response
+[source,typescript]
+----
+const expected = {
+    total: 1,
+    count: 1,
+    hits: [
+        {
+            id: "2f0d5c09-39fe-4746-9756-74491d75a185",
+            score: 0.5
+        }
+    ],
+    aggregations: {}
+}
+----
+
 === refresh
 
 Refreshes indices for the current repoConnection.  The index has two parts: search and storage.  It is possible to index both or just one of them.
