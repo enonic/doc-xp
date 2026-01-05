@@ -2809,6 +2809,36 @@ const patchedNode = repo.patch({
 }</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Query node using <a href="../storage/dsl.ahtml#stemmed">stemmed</a> DSL function for specific <a href="../storage/indexing.ahtml#languages">language</a>.</div>
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const result = repo.query({
+    query: {
+        stemmed: {
+            field: "description",
+            value: "running",
+            language: "en"
+        }
+    }
+});</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Sample response</div>
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">const expected = {
+    total: 1,
+    count: 1,
+    hits: [
+        {
+            id: "2f0d5c09-39fe-4746-9756-74491d75a185",
+            score: 0.5
+        }
+    ],
+    aggregations: {}
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="refresh"><a class="link" href="#refresh">refresh</a></h3>
@@ -3272,7 +3302,7 @@ const result = repo.setActiveVersion({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-02 12:13:58 UTC
+Last updated 2026-01-05 08:08:35 UTC
 </div>
 </div>
 </body>

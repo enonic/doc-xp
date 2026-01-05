@@ -460,6 +460,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#property_paths">Property paths</a></li>
 </ul>
 </li>
+<li><a href="#stemming">Stemming</a>
+<ul class="sectlevel2">
+<li><a href="#how_stemming_works">How stemming works</a></li>
+<li><a href="#configuring_stemming">Configuring stemming</a></li>
+<li><a href="#querying_stemmed_indices">Querying stemmed indices</a></li>
+</ul>
+</li>
 <li><a href="#config_options">Config options</a>
 <ul class="sectlevel2">
 <li><a href="#enabled">enabled</a></li>
@@ -608,7 +615,10 @@ The "orderby" index mapping lets us sort text and numbers in a natural way acros
 <div class="sectionbody">
 <div class="paragraph">
 <p>Nodes that contain indexed String values, typically gets a generated system property called _allText.
-This property has the valueType <code>String</code>, and by default get indexed as <code>text</code>, <code>ngram</code>, and <code>analyzed</code></p>
+This property has the valueType <code>String</code>, and by default get indexed as <code>text</code>, <code>ngram</code>, and <code>analyzed</code>.</p>
+</div>
+<div class="paragraph">
+<p>The allText&#8217;s indexing is customizable via the node&#8217;s <a href="#index_config">Index config</a>.</p>
 </div>
 <div class="paragraph">
 <p>The property is commonly used in "search everything" approaches.</p>
@@ -620,7 +630,7 @@ This property has the valueType <code>String</code>, and by default get indexed 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When defining custom index configurations, you may choose if a property will be included in _allText, or not.
+When defining custom index configurations, you may choose if a property will be included in _allText, or not. (<code>includeInAllText</code> is set to <code>true/false</code>)
 </td>
 </tr>
 </table>
@@ -684,7 +694,13 @@ A basic index config might look something like this:</p>
                 "languages": ['en','no']  <i class="conum" data-value="6"></i><b>(6)</b>
             }
         }
-    ]
+    ],
+    "allText": {  <i class="conum" data-value="7"></i><b>(7)</b>
+        "enabled": true,
+        "nGram": true,
+        "fulltext": true,
+        "languages": []
+    }
 }</code></pre>
 </div>
 </div>
@@ -712,7 +728,11 @@ A basic index config might look something like this:</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><strong>languages</strong> stemmed <a href="#languages">language</a> indices will be generated for all matched properties</td>
+<td><strong>languages</strong> stemmed <a href="#languages">language</a> indices will be generated for all matched properties. Read more in the <a href="#stemming">Stemming</a> section below.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><strong>allText</strong> customizes the indexing of the <code>_allText</code> property. Read more in the <a href="#_allText">_allText</a> section above.</td>
 </tr>
 </table>
 </div>
@@ -731,14 +751,129 @@ The path element defines the property scope within the node where this index con
 <div class="listingblock">
 <div class="title">Applies to "myProperty" and all sub properties</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">myProperty**</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">myProperty.**</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Applies to "myProperty.myName" and all sub properties</div>
+<div class="title">Applies to first level sub properties of "myProperty"</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">myProperty.*</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Applies to all sub properties of all sets starting with "myProperty"</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">myProperty*.**</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Applies only to "myProperty.myName"</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">myProperty.myName</code></pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stemming"><a class="link" href="#stemming">Stemming</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stemming is a powerful feature for improving search relevance in multilingual systems.
+It works by reducing words to their root form, making search results more flexible and user-friendly.</p>
+</div>
+<div class="sect2">
+<h3 id="how_stemming_works"><a class="link" href="#how_stemming_works">How stemming works</a></h3>
+<div class="paragraph">
+<p>When a property is configured with a language-specific stemming index:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>During indexing</strong>: The text is tokenized and each token is reduced to its stem (root form)</p>
+</li>
+<li>
+<p><strong>During search</strong>: The search query is also stemmed using the same algorithm</p>
+</li>
+<li>
+<p><strong>Matching</strong>: The stemmed tokens from the query are compared against the stemmed index</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This means that searches for "running", "runs", or "ran" can all match content containing "run" and vice versa.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring_stemming"><a class="link" href="#configuring_stemming">Configuring stemming</a></h3>
+<div class="paragraph">
+<p>To enable stemming for specific properties, you need to specify the language in the index configuration:</p>
+</div>
+<div class="listingblock">
+<div class="title">Configure stemming for specific properties</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"_indexConfig": {
+    "default": "byType",
+    "configs": [
+        {
+            "path": "title",
+            "config": {
+                "enabled": true,
+                "decideByType": false,
+                "fulltext": true,
+                "includeInAllText": true,
+                "languages": ["en"]  <i class="conum" data-value="1"></i><b>(1)</b>
+            }
+        },
+        {
+            "path": "description_no",
+            "config": {
+                "enabled": true,
+                "decideByType": false,
+                "fulltext": true,
+                "includeInAllText": true,
+                "languages": ["no"]  <i class="conum" data-value="2"></i><b>(2)</b>
+            }
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>English stemming for the title property</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Norwegian stemming for the Norwegian description</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Enable stemming for allText property</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"_indexConfig": {
+    "allText": {
+        "languages": ["en"]  <i class="conum" data-value="1"></i><b>(1)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This creates English-stemmed indices for the <code>_allText</code> property</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="querying_stemmed_indices"><a class="link" href="#querying_stemmed_indices">Querying stemmed indices</a></h3>
+<div class="paragraph">
+<p>Use the <a href="noql.ahtml#stemmed">NoQL</a> function or <a href="../storage/dsl.ahtml#stemmed">DSL</a> query to search against stemmed indices.</p>
 </div>
 </div>
 </div>
@@ -1108,7 +1243,7 @@ Rather than providing a full config object, you may instead reference a standard
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-02 12:13:58 UTC
+Last updated 2026-01-05 08:08:35 UTC
 </div>
 </div>
 </body>
