@@ -196,7 +196,7 @@ Examples
 
 [source,typescript]
 ----
-import {delete as deleteRepo} from '/lib/xp/repo';
+import {deleteRepo} from '/lib/xp/repo';
 
 // Deletes a repository
 const result = deleteRepo('test-repo');
