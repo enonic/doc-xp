@@ -196,7 +196,7 @@ Junit 4 is not supported in XP 8.0.0
 
 HTTP controller method names have been changed to uppercase to avoid conflicts with JavaScript reserved words and imported library methods.
 
-The lowercase method names (`get`, `post`, `delete`, `put`, `patch`) are deprecated but still supported for backward compatibility. It is recommended to migrate to the new uppercase names (`GET`, `POST`, `DELETE`, `PUT`, `PATCH`). 
+The lowercase method names (`get`, `post`, `delete`, etc...) are deprecated but still supported for backward compatibility. It is recommended to migrate to the new uppercase names (`GET`, `POST`, `DELETE`, etc...). 
 
 NOTE: The `all` function remains lowercase and has not been changed to uppercase.
 
