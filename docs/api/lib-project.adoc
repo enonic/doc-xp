@@ -282,7 +282,7 @@ Example
 .Delete an existing content project
 [source,typescript]
 ----
-import {delete as deleteProject} from '/lib/xp/project';
+import {deleteProject} from '/lib/xp/project';
 
 const result = deleteProject({
     id: 'my-project'

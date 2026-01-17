@@ -461,7 +461,7 @@ Examples
 
 [source,typescript]
 ----
-import {delete as deleteContent} from '/lib/xp/content';
+import {deleteContent} from '/lib/xp/content';
 
 // Deletes a content by path.
 const result = deleteContent({

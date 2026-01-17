@@ -421,7 +421,7 @@ Example
 
 [source,typescript]
 ----
-import {delete as deleteJob} from '/lib/xp/scheduler';
+import {deleteJob} from '/lib/xp/scheduler';
 
 const result = deleteJob({
     name: 'myjob'
