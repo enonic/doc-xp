@@ -487,7 +487,7 @@ Each controller needs to be placed in a folder matching it&#8217;s name i.e.: <c
 <div class="listingblock">
 <div class="title">src/main/resources/services/&lt;service-name&gt;/&lt;service-name&gt;.js</div>
 <div class="content">
-<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">exports.get = function(req) {
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">exports.GET = function(req) {
   return {
     body: {
       time: new Date()
@@ -563,7 +563,7 @@ When invoked, the function will generate a contextual service url based on the c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-17 12:54:02 UTC
+Last updated 2026-01-17 17:09:53 UTC
 </div>
 </div>
 </body>

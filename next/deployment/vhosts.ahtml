@@ -648,7 +648,7 @@ mapping.adm.context.my.timeZone = Europe/Oslo</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-js" data-lang="js">const contextLib = require('/lib/xp/context');
 
-exports.get = () =&gt; {
+exports.GET = () =&gt; {
     const timeZone = contextLib.get()['attributes']['my.timeZone'];
 
     return {
@@ -776,7 +776,7 @@ Location of hosts file on Mac/Linux_: <code>/etc/hosts</code>, on Windows: <code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-17 12:54:02 UTC
+Last updated 2026-01-17 17:09:53 UTC
 </div>
 </div>
 </body>

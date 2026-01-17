@@ -549,7 +549,7 @@ Replace &lt;version&gt; with the version of the library you want to use.
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">var thymeleaf = require('/lib/thymeleaf');
 
-exports.get = function(req) {
+exports.GET = function(req) {
 
   // Resolve the view
   var view = resolve('/view/my-template.html');
@@ -582,7 +582,7 @@ exports.get = function(req) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-17 12:54:02 UTC
+Last updated 2026-01-17 17:09:53 UTC
 </div>
 </div>
 </body>

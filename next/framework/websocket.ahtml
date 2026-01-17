@@ -461,14 +461,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 you can connect to from a web-browser.</p>
 </div>
 <div class="paragraph">
-<p>A <code>get</code> method must be implemented to handle initialization
+<p>A <code>GET</code> method must be implemented to handle initialization
 of the websocket.
 It can supply <code>data</code> object that will be available via <code>event.data</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">// Create a websocket if websocket request.
-exports.get = function (req) {
+exports.GET = function (req) {
 
   if (!req.webSocket) {
     return {
@@ -564,7 +564,7 @@ exports.webSocketEvent = function (event) {
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>Data returned from WebSocket <code>get</code> controller.</td>
+<td>Data returned from WebSocket <code>GET</code> controller.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="7"></i><b>7</b></td>
@@ -619,7 +619,7 @@ exports.webSocketEvent = function (event) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-17 12:54:02 UTC
+Last updated 2026-01-17 17:09:53 UTC
 </div>
 </div>
 </body>

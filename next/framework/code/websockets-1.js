@@ -1,6 +1,6 @@
 
 // Create a websocket if websocket request.
-exports.get = function (req) {
+exports.GET = function (req) {
 
   if (!req.webSocket) {
     return {
