@@ -46,7 +46,7 @@ The controller file must match the widget name, i.e. `admin/widgets/<widget-name
 .Example controller file:
 [source, js]
 ----
-exports.get = function (req) {
+exports.GET = function (req) {
     return {
         body: '<widget>My dashboard widget</widget>',
         contentType: 'text/html'

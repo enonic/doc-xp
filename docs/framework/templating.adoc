@@ -57,7 +57,7 @@ Your controller must then be updated to use the template:
 ----
 var thymeleaf = require('/lib/thymeleaf');
 
-exports.get = function(req) {
+exports.GET = function(req) {
 
   // Resolve the view
   var view = resolve('/view/my-template.html');

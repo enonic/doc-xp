@@ -192,6 +192,61 @@ Junit 4 is not supported in XP 8.0.0
 
 == API Deprecations and Breaking Changes
 
+=== HTTP Controllers
+
+HTTP controller method names have been changed to uppercase to avoid conflicts with JavaScript reserved words and imported library methods.
+
+The lowercase method names (`get`, `post`, `delete`, etc...) are deprecated but still supported for backward compatibility. It is recommended to migrate to the new uppercase names (`GET`, `POST`, `DELETE`, etc...). 
+
+NOTE: The `all` function remains lowercase and has not been changed to uppercase.
+
+.XP 7 (deprecated but still works in XP 8)
+[source,javascript]
+----
+exports.get = function(req) {
+    return {
+        body: 'Hello World',
+        contentType: 'text/plain'
+    };
+};
+
+exports.post = function(req) {
+    // Handle POST
+};
+
+exports.delete = function(req) {
+    // Handle DELETE
+};
+
+exports.all = function(req) {
+    // Handle all other methods
+};
+----
+
+.XP 8 (recommended)
+[source,javascript]
+----
+exports.GET = function(req) {
+    return {
+        body: 'Hello World',
+        contentType: 'text/plain'
+    };
+};
+
+exports.POST = function(req) {
+    // Handle POST
+};
+
+exports.DELETE = function(req) {
+    // Handle DELETE
+};
+
+exports.all = function(req) {
+    // Handle all other methods
+};
+----
+
+
 === HTTP Services
 
 HTTP Services are deprecated. Universal API should be used instead.

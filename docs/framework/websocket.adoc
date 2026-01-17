@@ -10,7 +10,7 @@ HTTP WebSockets enable two-way communication with HTTP clients
 Websocket support allows a service to act as a websocket channel that
 you can connect to from a web-browser.
 
-A `get` method must be implemented to handle initialization
+A `GET` method must be implemented to handle initialization
 of the websocket.
 It can supply `data` object that will be available via `event.data`.
 
@@ -60,7 +60,7 @@ Event object example:
 <3> Path of the request when WebSocket was opened.
 <4> Name/value pairs of the query/form parameters from the request when WebSocket was opened.
 <5> Authenticated user data when WebSocket was opened, if available. image:xp-760.svg[XP 7.6.0,opts=inline]
-<6> Data returned from WebSocket `get` controller.
+<6> Data returned from WebSocket `GET` controller.
 <7> Error message, if available.
 <8> WebSocket Close reason code, if available.
 <9> WebSocket message, if available.
