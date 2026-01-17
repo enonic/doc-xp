@@ -1,4 +1,4 @@
-exports.get = function(request) {
+exports.GET = function(request) {
 
   if (request.mode === 'edit') {
     // do something...

@@ -22,7 +22,7 @@ Example service controller
 .src/main/resources/apis/<api-name>/<api-name>.js
 [source,JavaScript]
 ----
-exports.get = function(req) {
+exports.GET = function(req) {
   return {
     body: {
       time: new Date()

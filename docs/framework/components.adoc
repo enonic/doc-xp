@@ -38,7 +38,7 @@ Page controlles must be placed next to your <<../cms/pages#, page descriptor>> i
 ----
 const portal = require('/lib/xp/portal');
 
-exports.get = function(req) {
+exports.GET = function(req) {
 
   const content = portal.getContent();
   return {
@@ -60,7 +60,7 @@ Part controlles must be placed next to your <<../cms/pages/parts#, part descript
 ----
 const portal = require('/lib/xp/portal');
 
-exports.get = function(req) {
+exports.GET = function(req) {
 
   const config = portal.getComponent();
   return {
@@ -82,7 +82,7 @@ Layout controlles must be placed next to your <<../cms/pages/layouts#, layout de
 var portal = require('/lib/xp/portal');
 var thymeleaf = require('/lib/thymeleaf');
 
-exports.get = function (req) {
+exports.GET = function (req) {
     var component = portal.getComponent();
 
     return {
@@ -139,7 +139,7 @@ A basic approach to rendering the main region of a page might look something lik
 ----
 var portal = require('/lib/xp/portal');
 
-exports.get = function(req) {
+exports.GET = function(req) {
 
   // Get components of the main region
   const content = portal.getContent();
@@ -167,7 +167,7 @@ Using Thymeleaf templating, placeholder generation might look like this:
 ----
 var thymeleaf = require('/lib/thymeleaf');
 
-exports.get = function(req) {
+exports.GET = function(req) {
 
   var portal = require('/lib/xp/portal');
 

@@ -109,7 +109,7 @@ Access to the context attributes is done via the `contextLib` library.
 ----
 const contextLib = require('/lib/xp/context');
 
-exports.get = () => {
+exports.GET = () => {
     const timeZone = contextLib.get()['attributes']['my.timeZone'];
 
     return {

@@ -1,7 +1,7 @@
 var mustache = require('/lib/xp/mustache');
 
 // Handles a GET request
-exports.get = function (req) {
+exports.GET = function (req) {
 
     var view = resolve('my-page.html');
     var params = {
@@ -16,7 +16,7 @@ exports.get = function (req) {
 };
 
 // Handles a POST request
-exports.post = function (req) {
+exports.POST = function (req) {
     var name = request.params.name;
 
     return {
@@ -26,7 +26,7 @@ exports.post = function (req) {
 };
 
 // Handles all other method requests
-exports.all = function (req) {
+exports.ALL = function (req) {
     if (req.method === 'DELETE') {
         handleDelete(req);
 
