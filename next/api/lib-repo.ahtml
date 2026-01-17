@@ -743,7 +743,7 @@ try {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteRepo} from '/lib/xp/repo';
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteRepo} from '/lib/xp/repo';
 
 // Deletes a repository
 const result = deleteRepo('test-repo');
@@ -1179,7 +1179,7 @@ refresh({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-05 08:08:35 UTC
+Last updated 2026-01-17 12:54:02 UTC
 </div>
 </div>
 </body>

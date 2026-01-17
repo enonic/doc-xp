@@ -461,8 +461,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#lib_admin">lib-admin</a></li>
 <li><a href="#lib_node">lib-node</a></li>
 <li><a href="#lib_content">lib-content</a></li>
-<li><a href="#lib_i18n">lib-i18n</a></li>
+<li><a href="#lib_project">lib-project</a></li>
 <li><a href="#lib_repo">lib-repo</a></li>
+<li><a href="#lib_scheduler">lib-scheduler</a></li>
+<li><a href="#lib_i18n">lib-i18n</a></li>
 <li><a href="#lib_task">lib-task</a></li>
 <li><a href="#javax_to_jakarta">Javax to Jakarta</a></li>
 <li><a href="#fasterxml_jackson_json_api">FasterXML Jackson JSON API</a></li>
@@ -949,17 +951,99 @@ Use <code>lib-asset</code> instead.</p>
 <div class="paragraph">
 <p><code>modifyMedia</code> method is deprecated. Use <code>updateMedia</code> instead.</p>
 </div>
+<div class="paragraph">
+<p><code>delete</code> method is renamed to <code>deleteContent</code> to avoid conflicts with the JavaScript reserved word. The old <code>delete</code> export is still available for backward compatibility, but it&#8217;s recommended to use the new name directly.</p>
+</div>
+<div class="paragraph">
+<p>XP 7</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteContent} from '/lib/xp/content';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>XP 8</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteContent} from '/lib/xp/content';</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="lib_i18n"><a class="link" href="#lib_i18n">lib-i18n</a></h3>
+<h3 id="lib_project"><a class="link" href="#lib_project">lib-project</a></h3>
 <div class="paragraph">
-<p><code>localize</code> method no longer accepts <code>application</code> parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.</p>
+<p><code>delete</code> method is renamed to <code>deleteProject</code> to avoid conflicts with the JavaScript reserved word. The old <code>delete</code> export is still available for backward compatibility, but it&#8217;s recommended to use the new name directly.</p>
+</div>
+<div class="paragraph">
+<p>XP 7</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteProject} from '/lib/xp/project';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>XP 8</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteProject} from '/lib/xp/project';</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="lib_repo"><a class="link" href="#lib_repo">lib-repo</a></h3>
 <div class="paragraph">
+<p><code>delete</code> method is renamed to <code>deleteRepo</code> to avoid conflicts with the JavaScript reserved word. The old <code>delete</code> export is still available for backward compatibility, but it&#8217;s recommended to use the new name directly.</p>
+</div>
+<div class="paragraph">
+<p>XP 7</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteRepo} from '/lib/xp/repo';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>XP 8</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteRepo} from '/lib/xp/repo';</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p><code>create</code> method <code>settings</code> param is removed. This was a direct exposure of internal implementation details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lib_scheduler"><a class="link" href="#lib_scheduler">lib-scheduler</a></h3>
+<div class="paragraph">
+<p><code>delete</code> method is renamed to <code>deleteJob</code> to avoid conflicts with the JavaScript reserved word. The old <code>delete</code> export is still available for backward compatibility, but it&#8217;s recommended to use the new name directly.</p>
+</div>
+<div class="paragraph">
+<p>XP 7</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteJob} from '/lib/xp/scheduler';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>XP 8</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteJob} from '/lib/xp/scheduler';</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lib_i18n"><a class="link" href="#lib_i18n">lib-i18n</a></h3>
+<div class="paragraph">
+<p><code>localize</code> method no longer accepts <code>application</code> parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1040,7 +1124,7 @@ Use <code>lib-asset</code> instead.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-05 08:08:35 UTC
+Last updated 2026-01-17 12:54:02 UTC
 </div>
 </div>
 </body>

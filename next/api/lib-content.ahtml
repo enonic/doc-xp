@@ -1352,7 +1352,7 @@ const expected = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {delete as deleteContent} from '/lib/xp/content';
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import {deleteContent} from '/lib/xp/content';
 
 // Deletes a content by path.
 const result = deleteContent({
@@ -4762,7 +4762,7 @@ const expected = [
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-05 08:08:35 UTC
+Last updated 2026-01-17 12:54:02 UTC
 </div>
 </div>
 </body>
