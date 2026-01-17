@@ -246,10 +246,6 @@ exports.all = function(req) {
 };
 ----
 
-The change was made to:
-
-* Avoid conflicts with JavaScript reserved words like `delete`
-* Prevent naming conflicts when using ES6 module imports (e.g., `import {get} from '/lib/xp/content'`)
 
 === HTTP Services
 
