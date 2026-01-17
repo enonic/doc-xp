@@ -320,13 +320,73 @@ dependencies {
 
 `modifyMedia` method is deprecated. Use `updateMedia` instead.
 
-=== lib-i18n
+`delete` method is renamed to `deleteContent` to avoid conflicts with the JavaScript reserved word. The old `delete` export is still available for backward compatibility, but it's recommended to use the new name directly.
 
-`localize` method no longer accepts `application` parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.
+XP 7
+[source,typescript]
+----
+import {delete as deleteContent} from '/lib/xp/content';
+----
+
+XP 8
+[source,typescript]
+----
+import {deleteContent} from '/lib/xp/content';
+----
+
+=== lib-project
+
+`delete` method is renamed to `deleteProject` to avoid conflicts with the JavaScript reserved word. The old `delete` export is still available for backward compatibility, but it's recommended to use the new name directly.
+
+XP 7
+[source,typescript]
+----
+import {delete as deleteProject} from '/lib/xp/project';
+----
+
+XP 8
+[source,typescript]
+----
+import {deleteProject} from '/lib/xp/project';
+----
 
 === lib-repo
 
+`delete` method is renamed to `deleteRepo` to avoid conflicts with the JavaScript reserved word. The old `delete` export is still available for backward compatibility, but it's recommended to use the new name directly.
+
+XP 7
+[source,typescript]
+----
+import {delete as deleteRepo} from '/lib/xp/repo';
+----
+
+XP 8
+[source,typescript]
+----
+import {deleteRepo} from '/lib/xp/repo';
+----
+
 `create` method `settings` param is removed. This was a direct exposure of internal implementation details.
+
+=== lib-scheduler
+
+`delete` method is renamed to `deleteJob` to avoid conflicts with the JavaScript reserved word. The old `delete` export is still available for backward compatibility, but it's recommended to use the new name directly.
+
+XP 7
+[source,typescript]
+----
+import {delete as deleteJob} from '/lib/xp/scheduler';
+----
+
+XP 8
+[source,typescript]
+----
+import {deleteJob} from '/lib/xp/scheduler';
+----
+
+=== lib-i18n
+
+`localize` method no longer accepts `application` parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.
 
 === lib-task
 
