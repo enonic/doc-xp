@@ -26,7 +26,7 @@ exports.POST = function (req) {
 };
 
 // Handles all other method requests
-exports.ALL = function (req) {
+exports.all = function (req) {
     if (req.method === 'DELETE') {
         handleDelete(req);
 

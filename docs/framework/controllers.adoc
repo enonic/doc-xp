@@ -14,7 +14,7 @@ As such, any controller must explicitly declare one or more "exports" in order t
 
 NOTE: `PATCH` is supported starting from image:xp-7150.svg[XP 7.15.0,opts=inline]. Starting from XP 8.0.0, HTTP method names must be uppercase (`GET`, `POST`, etc.). The lowercase versions (`get`, `post`, etc.) are deprecated but still supported for backward compatibility.
 
-A controller can also export a special function `ALL` which will handle any HTTP method, unless there is a more specific handler available.
+A controller can also export a special function `all` which will handle any HTTP method, unless there is a more specific handler available.
 
 The appropriate function will automatically be invoked for every request sent to the controller.
 

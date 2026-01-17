@@ -5,4 +5,4 @@ exports.GET = function(req) {}
 exports.POST = function(req) {}
 
 // Handles all requests, other than GET or POST which are handled by the functions above
-exports.ALL = function(req) {}
+exports.all = function(req) {}
