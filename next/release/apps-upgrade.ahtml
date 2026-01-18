@@ -467,6 +467,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#lib_scheduler">lib-scheduler</a></li>
 <li><a href="#lib_i18n">lib-i18n</a></li>
 <li><a href="#lib_task">lib-task</a></li>
+<li><a href="#lib_auth">lib-auth</a></li>
+<li><a href="#lib_context">lib-context</a></li>
 <li><a href="#javax_to_jakarta">Javax to Jakarta</a></li>
 <li><a href="#fasterxml_jackson_json_api">FasterXML Jackson JSON API</a></li>
 <li><a href="#jax_rs_api">JAX-RS API</a></li>
@@ -1124,6 +1126,19 @@ Use <code>lib-asset</code> instead.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="lib_auth"><a class="link" href="#lib_auth">lib-auth</a></h3>
+<div class="paragraph">
+<p><code>login</code> method <code>idProvider</code> parameter now defaults to <code>system</code> if not provided, instead of trying all available id providers. It is also not possible to specify multiple values anymore.
+This change ensures consistent id provider selection during login.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lib_context"><a class="link" href="#lib_context">lib-context</a></h3>
+<div class="paragraph">
+<p><code>run</code> method <code>context.user.idProvider</code> parameter now defaults to <code>system</code> if not provided, instead of trying all available id providers.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="javax_to_jakarta"><a class="link" href="#javax_to_jakarta">Javax to Jakarta</a></h3>
 <div class="paragraph">
 <p>Most of the Java EE APIs have been migrated to Jakarta EE APIs. For instance <code>javax.servlet</code> is replaced with <code>jakarta.servlet</code>.</p>
@@ -1192,7 +1207,7 @@ Use <code>lib-asset</code> instead.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-17 17:09:53 UTC
+Last updated 2026-01-18 17:37:38 UTC
 </div>
 </div>
 </body>

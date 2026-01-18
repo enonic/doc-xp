@@ -1694,7 +1694,7 @@ const hasRole = hasRole('system.admin');</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name of id provider where the user is stored. If not specified it will try all available id providers, in alphabetical order.</p>
+<p>Name of id provider where the user is stored. If not specified system id provider will be used.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2279,7 +2279,7 @@ const theUser = modifyUser({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-17 17:09:53 UTC
+Last updated 2026-01-18 17:37:38 UTC
 </div>
 </div>
 </body>
