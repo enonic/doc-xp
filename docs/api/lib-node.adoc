@@ -1755,5 +1755,5 @@ Fields
 |===
 | Name | Kind | Details
 | login | string | user ID of the user
-| idProvider | string | Optional ID provider containing the user. By default, all the id providers will be used.
+| idProvider | string | Optional ID provider containing the user. By default the `system` provider is used.
 |===

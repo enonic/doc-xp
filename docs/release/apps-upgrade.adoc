@@ -449,6 +449,15 @@ import {deleteJob} from '/lib/xp/scheduler';
 
 `submit` method is removed. Use `executeFunction` instead.
 
+=== lib-auth
+
+`login` method `idProvider` parameter now defaults to `system` if not provided, instead of trying all available id providers. It is also not possible to specify multiple values anymore.
+This change ensures consistent id provider selection during login.
+
+=== lib-context
+
+`run` method `context.user.idProvider` parameter now defaults to `system` if not provided, instead of trying all available id providers.
+
 === Javax to Jakarta
 
 Most of the Java EE APIs have been migrated to Jakarta EE APIs. For instance `javax.servlet` is replaced with `jakarta.servlet`.
