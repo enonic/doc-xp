@@ -451,6 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#system_properties">System Properties</a></li>
 <li><a href="#vhost">Vhost</a></li>
+<li><a href="#security">Security</a></li>
 <li><a href="#mail">Mail</a></li>
 <li><a href="#repo">Repo</a></li>
 <li><a href="#blobstore">Blobstore</a></li>
@@ -594,8 +595,7 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 # xp.name = demo
 
 # Global security settings
-# xp.suPassword = password
-# xp.suPassword = {sha1}5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8
+# xp.suPassword = {sha512}b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86
 
 # Initialization settings
 # xp.init.adminUserCreation = true
@@ -613,11 +613,11 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 <dl>
 <dt class="hdlist1">xp.name</dt>
 <dd>
-<p>sets the name displayed to users from the admin console main menu, use to clarify what environment the user is working in</p>
+<p>Sets the name displayed to users from the admin console main menu, use to clarify what environment the user is working in</p>
 </dd>
 <dt class="hdlist1">xp.suPassword</dt>
 <dd>
-<p>override su user&#8217;s password in database, if any. Can also be used with hashing, the following are supported: <code>sha1</code>, <code>sha256</code>, <code>sha512</code> and <code>md5</code>.</p>
+<p>Hash of System <code>su</code> user&#8217;s password. Only <code>sha256</code>, <code>sha512</code> hashes are supported. Empty value disables <code>su</code> password based login.</p>
 </dd>
 <dt class="hdlist1">xp.init.maxTries</dt>
 <dd>
@@ -710,6 +710,46 @@ mapping.admin.host = example.com
 mapping.admin.source = /admin
 mapping.admin.target = /admin
 mapping.admin.idProvider.system = default</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="security"><a class="link" href="#security">Security</a></h3>
+<div id="security" class="paragraph">
+<p><code>XP_HOME/config/com.enonic.xp.web.security.cfg</code></p>
+</div>
+<div class="paragraph">
+<p>Security service configuration.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">auditlog.enabled</dt>
+<dd>
+<p>Set to <code>false</code> to disable the creation of audit log entries on content API operations. Default: <code>true</code>.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Audit log can be disabled by common <code><a href="#audit_enabled">enabled</a></code> property. Content flag won&#8217;t affect anything in this case.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">password.policy</dt>
+<dd>
+<p>Define the password hashing algorithm and parameters to be used when storing user passwords. Default: <code>$pbkdf2-sha512$i=210000,l=64,slen=16</code> - which is PBKDF2 with SHA-512, 210,000 iterations, hash length of 64 bytes and salt length of 16 bytes.</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="title">Sample security configuration</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.enabled = true
+password.policy = $pbkdf2-sha512$i=210000,l=64,slen=16</code></pre>
 </div>
 </div>
 </div>
@@ -2505,7 +2545,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-18 17:37:38 UTC
+Last updated 2026-02-03 10:45:19 UTC
 </div>
 </div>
 </body>

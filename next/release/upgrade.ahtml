@@ -719,6 +719,42 @@ Remove the <code>withJansi</code> element from your logback.xml file to avoid er
 </div>
 </div>
 <div class="sect3">
+<h4 id="security_changes"><a class="link" href="#security_changes">Security changes</a></h4>
+<div class="sect4">
+<h5 id="xp_supassword"><a class="link" href="#xp_supassword">xp.suPassword</a></h5>
+<div class="paragraph">
+<p><code>md5</code> and <code>sha1</code> hashing algorithms are no longer supported <code>xp.suPassword</code> system property as they are no longer considered secure.
+Plain text password isn&#8217;t supported anymore either. Please use stronger hashing algorithms <code>sha256</code> or <code>sha512</code>.</p>
+</div>
+<div class="paragraph">
+<p>To generate sha512 hash, you can use the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-terminal" data-lang="terminal">echo -n "yourStrongRandomPasswordHere" | shasum -a 512</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>System <code>su</code> user password is no longer read from the database either. If you had a su password stored in the database, it will be ignored after the upgrade.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="user_passwords"><a class="link" href="#user_passwords">User passwords</a></h5>
+<div class="paragraph">
+<p>User passwords are still supported in XP8, although the hashing algorithm is changed for new passwords.</p>
+</div>
+<div class="paragraph">
+<p>So far only <code>pbkdf2-sha512</code> is supported for new passwords, but new algorithms may be added in future releases.
+Hash function can be configured in the <a href="../deployment/config.ahtml#security">security service configuration</a>.</p>
+</div>
+<div class="paragraph">
+<p>The old passwords are <em>not</em> automatically converted to the new format.
+When a user with an old password logs in, the password is verified using the old algorithm.
+It is strongly recommended to change all passwords after the upgrade to ensure all passwords are stored using the new algorithm.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="other_configuration"><a class="link" href="#other_configuration">Other configuration</a></h4>
 
 </div>
@@ -823,7 +859,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-18 17:37:38 UTC
+Last updated 2026-02-03 10:45:19 UTC
 </div>
 </div>
 </body>

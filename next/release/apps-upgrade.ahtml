@@ -1191,6 +1191,9 @@ This change ensures consistent id provider selection during login.</p>
 <p>Java methods and classes marked as <code>@Deprecated</code> were removed.</p>
 </li>
 <li>
+<p><code>com.enonic.xp.page.DescriptorKey</code> moved to ´com.enonic.xp.descriptor.DescriptorKey`.</p>
+</li>
+<li>
 <p>Concrete collection types like <code>LinkedList</code>, <code>HashMap</code>, etc. were replaced with corresponding interfaces like <code>List</code>, <code>Map</code>, etc.</p>
 </li>
 <li>
@@ -1207,7 +1210,7 @@ This change ensures consistent id provider selection during login.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-18 17:37:38 UTC
+Last updated 2026-02-03 10:45:19 UTC
 </div>
 </div>
 </body>
