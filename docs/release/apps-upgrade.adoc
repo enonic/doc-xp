@@ -492,6 +492,8 @@ Java Dropwizard Metrics is no longer available in XP Core API. Migrate to `com.e
 
 - Java methods and classes marked as `@Deprecated` were removed.
 
+- `com.enonic.xp.page.DescriptorKey` moved to ´com.enonic.xp.descriptor.DescriptorKey`.
+
 - Concrete collection types like `LinkedList`, `HashMap`, etc. were replaced with corresponding interfaces like `List`, `Map`, etc.
 
 - `ContentService.deleteWithoutFetch` was renamed to `ContentService.delete` for consistency with other methods.

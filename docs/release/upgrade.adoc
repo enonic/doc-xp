@@ -115,6 +115,32 @@ Default Admin Home path is now `/admin` instead of `/admin/home`.
 
 All admin tools are now present on the Launcher Menu as it was stated in documentation. In case when admin tool should not be present on the launcher panel convert it to an API.
 
+==== Security changes
+
+===== xp.suPassword
+`md5` and `sha1` hashing algorithms are no longer supported `xp.suPassword` system property as they are no longer considered secure.
+Plain text password isn't supported anymore either. Please use stronger hashing algorithms `sha256` or `sha512`.
+
+To generate sha512 hash, you can use the following command:
+
+[source,terminal]
+----
+echo -n "yourStrongRandomPasswordHere" | shasum -a 512
+----
+
+System `su` user password is no longer read from the database either. If you had a su password stored in the database, it will be ignored after the upgrade.
+
+===== User passwords
+
+User passwords are still supported in XP8, although the hashing algorithm is changed for new passwords.
+
+So far only `pbkdf2-sha512` is supported for new passwords, but new algorithms may be added in future releases.
+Hash function can be configured in the <<../deployment/config#security,security service configuration>>.
+
+The old passwords are _not_ automatically converted to the new format.
+When a user with an old password logs in, the password is verified using the old algorithm.
+It is strongly recommended to change all passwords after the upgrade to ensure all passwords are stored using the new algorithm.
+
 ==== Other configuration
 
 ==== Others

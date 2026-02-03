@@ -75,8 +75,7 @@ Changes to this file requires a full restart of the XP instance in order to take
 # xp.name = demo
 
 # Global security settings
-# xp.suPassword = password
-# xp.suPassword = {sha1}5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8
+# xp.suPassword = {sha512}b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86
 
 # Initialization settings
 # xp.init.adminUserCreation = true
@@ -90,8 +89,8 @@ Changes to this file requires a full restart of the XP instance in order to take
 # xp.config.paths = ${xp.home}/appconfig,/usr/local/xp/${node.role},/etc/xp/config
 ----
 
-xp.name:: sets the name displayed to users from the admin console main menu, use to clarify what environment the user is working in
-xp.suPassword:: override su user's password in database, if any. Can also be used with hashing, the following are supported: `sha1`, `sha256`, `sha512` and `md5`.
+xp.name:: Sets the name displayed to users from the admin console main menu, use to clarify what environment the user is working in
+xp.suPassword:: Hash of System `su` user's password. Only `sha256`, `sha512` hashes are supported. Empty value disables `su` password based login.
 // xp.init.adminUserCreation:: TODO
 xp.init.maxTries:: Number of attampts system initializers will do to check if initialization is done. Default is `300` (which equals to 5 minutes) - before XP 7.14.3 and 900 (which equals to 5 minutes) after.
 xp.stop.gracePeriod:: Time in milliseconds XP waits for all services to stop. Default is `600000` (10 minutes). Before XP 7.14.3 value was 10000 (10 seconds) and not configurable.
@@ -141,6 +140,25 @@ mapping.admin.host = example.com
 mapping.admin.source = /admin
 mapping.admin.target = /admin
 mapping.admin.idProvider.system = default
+----
+
+=== Security
+[#security]
+
+`XP_HOME/config/com.enonic.xp.web.security.cfg`
+
+Security service configuration.
+
+auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
+IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
+
+password.policy:: Define the password hashing algorithm and parameters to be used when storing user passwords. Default: `$pbkdf2-sha512$i=210000,l=64,slen=16` - which is PBKDF2 with SHA-512, 210,000 iterations, hash length of 64 bytes and salt length of 16 bytes.
+
+.Sample security configuration
+[source,properties]
+----
+auditlog.enabled = true
+password.policy = $pbkdf2-sha512$i=210000,l=64,slen=16
 ----
 
 [#mail]
