@@ -76,7 +76,7 @@ Changes to this file requires a full restart of the XP instance in order to take
 # xp.name = demo
 
 # Global security settings
-# xp.suPassword = {sha512}b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86
+# xp.suPassword =
 
 # Initialization settings
 # xp.init.adminUserCreation = true
@@ -92,18 +92,18 @@ Changes to this file requires a full restart of the XP instance in order to take
 
 xp.name:: Sets the name displayed to users from the admin console main menu, use to clarify what environment the user is working in
 xp.suPassword:: Hash of System `su` user's password. Only `sha256`, `sha512` hashes are supported. Empty value disables `su` password based login.
-// xp.init.adminUserCreation:: TODO
+
+TIP: To generate `sha512` hash suitable for `xp.suPassword`, you can use the following Linux command:
+[source,terminal]
+----
+printf '{sha512}%s\n' "$(echo -n 'YourStrongRandomPassword' | sha512sum | cut -d' ' -f1)"
+----
+
 xp.init.maxTries:: Number of attampts system initializers will do to check if initialization is done. Default is `300` (which equals to 5 minutes) - before XP 7.14.3 and 900 (which equals to 5 minutes) after.
 xp.stop.gracePeriod:: Time in milliseconds XP waits for all services to stop. Default is `600000` (10 minutes). Before XP 7.14.3 value was 10000 (10 seconds) and not configurable.
 felix.fileinstall.poll:: Frequency in ms for how often the configuration folders are scanned for changes
 // felix.fileinstall.noInitialDelay:: TODO
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
-
-TIP: To generate `sha512` hash suitable for `xp.suPassword`, you can use the following command:
-[source,terminal]
-----
-printf '{sha512}%s\n' "$(echo -n 'YourStrongRandomPassword' | sha512sum | cut -d' ' -f1)"
-----
 
 [#vhost]
 === Vhost
