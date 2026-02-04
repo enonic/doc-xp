@@ -651,7 +651,7 @@ To generate <code>sha512</code> hash suitable for <code>xp.suPassword</code>, yo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-terminal" data-lang="terminal">printf '{sha512}%s\n' "$(echo -n 'pw' | sha512sum | cut -d' ' -f1)"</code></pre>
+<pre class="highlight"><code class="language-terminal" data-lang="terminal">printf '{sha512}%s\n' "$(echo -n 'YourStrongRandomPassword' | sha512sum | cut -d' ' -f1)"</code></pre>
 </div>
 </div>
 </div>
@@ -2562,7 +2562,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-04 11:03:57 UTC
+Last updated 2026-02-04 11:08:49 UTC
 </div>
 </div>
 </body>
