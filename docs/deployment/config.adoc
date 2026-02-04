@@ -63,6 +63,7 @@ This configuration is instantly available for developers via the <<../framework/
 The following are standard configuration files for Enonic XP
 
 === System Properties
+[#system-properties]
 
 `XP_HOME/config/system.properties`
 
@@ -97,6 +98,12 @@ xp.stop.gracePeriod:: Time in milliseconds XP waits for all services to stop. De
 felix.fileinstall.poll:: Frequency in ms for how often the configuration folders are scanned for changes
 // felix.fileinstall.noInitialDelay:: TODO
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
+
+TIP: To generate `sha512` hash suitable for `xp.suPassword`, you can use the following command:
+[source,terminal]
+----
+printf '{sha512}%s\n' "$(echo -n 'pw' | sha512sum | cut -d' ' -f1)"
+----
 
 [#vhost]
 === Vhost

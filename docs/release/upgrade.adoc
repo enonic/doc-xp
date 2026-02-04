@@ -120,15 +120,9 @@ All admin tools are now present on the Launcher Menu as it was stated in documen
 ===== xp.suPassword
 `md5` and `sha1` hashing algorithms are no longer supported `xp.suPassword` system property as they are no longer considered secure.
 Plain text password isn't supported anymore either. Please use stronger hashing algorithms `sha256` or `sha512`.
+More details about configuring `su` password can be found in <<../deployment/config#system-properties,system properties documentation>>.
 
-To generate sha512 hash, you can use the following command:
-
-[source,terminal]
-----
-echo -n "yourStrongRandomPasswordHere" | shasum -a 512
-----
-
-System `su` user password is no longer read from the database either. If you had a su password stored in the database, it will be ignored after the upgrade.
+System `su` user password is no longer read from the database either. If you had a `su` password stored in the database, it will be ignored after the upgrade.
 
 ===== User passwords
 
