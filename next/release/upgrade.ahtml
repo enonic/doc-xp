@@ -724,18 +724,11 @@ Remove the <code>withJansi</code> element from your logback.xml file to avoid er
 <h5 id="xp_supassword"><a class="link" href="#xp_supassword">xp.suPassword</a></h5>
 <div class="paragraph">
 <p><code>md5</code> and <code>sha1</code> hashing algorithms are no longer supported <code>xp.suPassword</code> system property as they are no longer considered secure.
-Plain text password isn&#8217;t supported anymore either. Please use stronger hashing algorithms <code>sha256</code> or <code>sha512</code>.</p>
+Plain text password isn&#8217;t supported anymore either. Please use stronger hashing algorithms <code>sha256</code> or <code>sha512</code>.
+More details about configuring <code>su</code> password can be found in <a href="../deployment/config.ahtml#system-properties">system properties documentation</a>.</p>
 </div>
 <div class="paragraph">
-<p>To generate sha512 hash, you can use the following command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-terminal" data-lang="terminal">echo -n "yourStrongRandomPasswordHere" | shasum -a 512</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>System <code>su</code> user password is no longer read from the database either. If you had a su password stored in the database, it will be ignored after the upgrade.</p>
+<p>System <code>su</code> user password is no longer read from the database either. If you had a <code>su</code> password stored in the database, it will be ignored after the upgrade.</p>
 </div>
 </div>
 <div class="sect4">
@@ -859,7 +852,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-03 10:45:19 UTC
+Last updated 2026-02-04 11:03:57 UTC
 </div>
 </div>
 </body>

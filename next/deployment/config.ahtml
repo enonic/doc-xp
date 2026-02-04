@@ -582,7 +582,7 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 </div>
 <div class="sect2">
 <h3 id="system_properties"><a class="link" href="#system_properties">System Properties</a></h3>
-<div class="paragraph">
+<div id="system-properties" class="paragraph">
 <p><code>XP_HOME/config/system.properties</code></p>
 </div>
 <div class="paragraph">
@@ -636,6 +636,23 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 <p>Config folders to scan in addition to <code>XP_HOME/config/</code>. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.</p>
 </dd>
 </dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To generate <code>sha512</code> hash suitable for <code>xp.suPassword</code>, you can use the following command:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-terminal" data-lang="terminal">printf '{sha512}%s\n' "$(echo -n 'pw' | sha512sum | cut -d' ' -f1)"</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2545,7 +2562,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-03 10:45:19 UTC
+Last updated 2026-02-04 11:03:57 UTC
 </div>
 </div>
 </body>
