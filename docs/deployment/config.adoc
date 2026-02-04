@@ -102,7 +102,7 @@ xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Usefu
 TIP: To generate `sha512` hash suitable for `xp.suPassword`, you can use the following command:
 [source,terminal]
 ----
-printf '{sha512}%s\n' "$(echo -n 'pw' | sha512sum | cut -d' ' -f1)"
+printf '{sha512}%s\n' "$(echo -n 'YourStrongRandomPassword' | sha512sum | cut -d' ' -f1)"
 ----
 
 [#vhost]
