@@ -69,25 +69,24 @@ The following are standard configuration files for Enonic XP
 
 Changes to this file requires a full restart of the XP instance in order to take effect.
 
-.Default version of system.properties
+.Sample version of system.properties
 [source,properties]
 ----
 # Installation settings
-# xp.name = demo
+xp.name = demo
 
 # Global security settings
-# xp.suPassword =
+xp.suPassword = {sha512}8340debf081a4504ac696618e587f3d9306b54b54d3250c8f0815734cf8e287a4e301b7243c70f459e42e3ef398d73b680f11396eea84c96563872e25390f845
 
-# Initialization settings
-# xp.init.adminUserCreation = true
-# xp.init.maxTries = 900
+# Initialization and termination settings
+xp.init.maxTries = 900
+xp.stop.gracePeriod = 600000
 
 # Configuration FileMonitor properties
-# felix.fileinstall.poll = 1000
-# felix.fileinstall.noInitialDelay = true
+felix.fileinstall.poll = 1000
 
 # Config loading properties
-# xp.config.paths = ${xp.home}/appconfig,/usr/local/xp/${node.role},/etc/xp/config
+xp.config.paths = ${xp.home}/appconfig,/usr/local/xp/${node.role},/etc/xp/config
 ----
 
 xp.name:: Sets the name displayed to users from the admin console main menu, use to clarify what environment the user is working in
@@ -100,9 +99,8 @@ printf '{sha512}%s\n' "$(echo -n 'YourStrongRandomPassword' | sha512sum | cut -d
 ----
 
 xp.init.maxTries:: Number of attampts system initializers will do to check if initialization is done. Default is `300` (which equals to 5 minutes) - before XP 7.14.3 and 900 (which equals to 5 minutes) after.
-xp.stop.gracePeriod:: Time in milliseconds XP waits for all services to stop. Default is `600000` (10 minutes). Before XP 7.14.3 value was 10000 (10 seconds) and not configurable.
+xp.stop.gracePeriod:: Time in milliseconds XP waits for all services to stop. Default is `600000` (10 minutes).
 felix.fileinstall.poll:: Frequency in ms for how often the configuration folders are scanned for changes
-// felix.fileinstall.noInitialDelay:: TODO
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
 
 [#vhost]
