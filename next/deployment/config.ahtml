@@ -589,24 +589,23 @@ simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>m
 <p>Changes to this file requires a full restart of the XP instance in order to take effect.</p>
 </div>
 <div class="listingblock">
-<div class="title">Default version of system.properties</div>
+<div class="title">Sample version of system.properties</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties"># Installation settings
-# xp.name = demo
+xp.name = demo
 
 # Global security settings
-# xp.suPassword =
+xp.suPassword = {sha512}8340debf081a4504ac696618e587f3d9306b54b54d3250c8f0815734cf8e287a4e301b7243c70f459e42e3ef398d73b680f11396eea84c96563872e25390f845
 
-# Initialization settings
-# xp.init.adminUserCreation = true
-# xp.init.maxTries = 900
+# Initialization and termination settings
+xp.init.maxTries = 900
+xp.stop.gracePeriod = 600000
 
 # Configuration FileMonitor properties
-# felix.fileinstall.poll = 1000
-# felix.fileinstall.noInitialDelay = true
+felix.fileinstall.poll = 1000
 
 # Config loading properties
-# xp.config.paths = ${xp.home}/appconfig,/usr/local/xp/${node.role},/etc/xp/config</code></pre>
+xp.config.paths = ${xp.home}/appconfig,/usr/local/xp/${node.role},/etc/xp/config</code></pre>
 </div>
 </div>
 <div class="dlist">
@@ -646,7 +645,7 @@ To generate <code>sha512</code> hash suitable for <code>xp.suPassword</code>, yo
 </dd>
 <dt class="hdlist1">xp.stop.gracePeriod</dt>
 <dd>
-<p>Time in milliseconds XP waits for all services to stop. Default is <code>600000</code> (10 minutes). Before XP 7.14.3 value was 10000 (10 seconds) and not configurable.</p>
+<p>Time in milliseconds XP waits for all services to stop. Default is <code>600000</code> (10 minutes).</p>
 </dd>
 <dt class="hdlist1">felix.fileinstall.poll</dt>
 <dd>
@@ -2566,7 +2565,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-04 11:24:09 UTC
+Last updated 2026-02-04 11:29:26 UTC
 </div>
 </div>
 </body>
