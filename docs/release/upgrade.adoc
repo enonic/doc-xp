@@ -137,6 +137,11 @@ It is strongly recommended to change all passwords after the upgrade to ensure a
 
 ==== Other configuration
 
+===== draftBranchAllowedFor
+
+Portal `draftBranchAllowedFor` configuration is removed.
+Instead - to access content from the draft branch - user must have any content project role assigned (like `com.enonoc.cms.project.<projectKey>.viewer`).
+
 ==== Others
 
 - It is no longer possible to via `com.enonic.xp.server.deploy.cfg` file. This method was not documented, unreliable in cluster installations and insecure.
