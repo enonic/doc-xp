@@ -2414,8 +2414,7 @@ init-job.my-job2.config={"myparam1":"value1","myset":{"myparam2":"value2"}}</cod
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">asset.cacheControl = public, max-age=31536000, immutable
 media.public.cacheControl = public, max-age=31536000, immutable
-media.private.cacheControl = private, max-age=31536000, immutable
-draftBranchAllowedFor = role:system.admin.login</code></pre>
+media.private.cacheControl = private, max-age=31536000, immutable</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2446,10 +2445,6 @@ media.contentSecurityPolicy.svg =</code></pre>
 <dt class="hdlist1">media.contentSecurityPolicy.svg</dt>
 <dd>
 <p>Defines media (images, attachments) <code>Content-Security-Policy</code> header in cases when it is <code>image/svg+xml</code> mime type. Default: <code>default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'</code></p>
-</dd>
-<dt class="hdlist1">draftBranchAllowedFor</dt>
-<dd>
-<p>Defines comma separated list of roles which are allowed to access the draft branch. Default: <code>role:system.admin.login</code>. Also, a user with role <code>role:system.admin</code> implicitly has access to the draft branch.</p>
 </dd>
 <dt class="hdlist1">legacy.attachmentService.enabled</dt>
 <dd>
@@ -2565,7 +2560,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-04 11:29:26 UTC
+Last updated 2026-02-13 10:33:45 UTC
 </div>
 </div>
 </body>
