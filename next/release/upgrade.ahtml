@@ -753,7 +753,7 @@ It is strongly recommended to change all passwords after the upgrade to ensure a
 <h5 id="draftbranchallowedfor"><a class="link" href="#draftbranchallowedfor">draftBranchAllowedFor</a></h5>
 <div class="paragraph">
 <p>Portal <code>draftBranchAllowedFor</code> configuration is removed.
-Instead - to access content from the draft branch - user must have any content project role assigned (like <code>com.enonoc.cms.project.&lt;projectKey&gt;.viewer</code>).</p>
+Instead - to access content from the draft branch - user must have any content project role assigned (like <code>cms.project.&lt;projectKey&gt;.viewer</code>).</p>
 </div>
 </div>
 </div>
@@ -858,7 +858,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-13 10:33:45 UTC
+Last updated 2026-02-13 11:12:40 UTC
 </div>
 </div>
 </body>
