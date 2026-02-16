@@ -137,7 +137,7 @@ There are multiple Vacuuming tasks available in XP:
 * `BinaryBlobVacuumTask` - deletes binary data blobs that are no longer referenced.
 * `NodeBlobVacuumTask` - deletes node data blobs that are no longer referenced.
 
-`VersionTableVacuumTask`, `SnapshotsVacuumTask` - are default tasks that run when no tasks are specified.
+`VersionTableVacuumTask` - is a default task that runs when no tasks are specified.
 
 IMPORTANT: `SegmentVacuumTask`, `BinaryBlobVacuumTask` and `NodeBlobVacuumTask` - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blobstore before running these tasks. It is also recommended to take a new snapshot right after the vacuum operation.
 
