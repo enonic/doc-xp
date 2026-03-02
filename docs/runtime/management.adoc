@@ -254,8 +254,10 @@ Export data from every repository. The result will be stored in the `$XP_HOME/da
 
 |`archive` image:xp-730.svg[XP 7.3.0,opts=inline]
 |Boolean
-|outputs dump output to an archive (`%name%`.zip) file (default is `false`)
+|outputs dump output to an archive (`%name%`.zip) file
 |===
+
+NOTE: In XP 8, dumps are always saved as ZIP archives (`{name}.zip`), regardless of the `archive` parameter.
 
 NOTE: Read about authorization <<authorization, here>>
 
@@ -377,7 +379,7 @@ WARNING: A load will delete all existing repositories before loading the reposit
 
 |`archive` image:xp-730.svg[XP 7.3.0,opts=inline]
 |Boolean
-|loads dump form an archive (`%name%`.zip) file (default is `false`)
+|set to `true` for XP 8 dumps (ZIP archives); set to `false` for XP 7 dumps (directory format)
 |===
 
 NOTE: Read about authorization <<authorization, here>>
@@ -444,7 +446,7 @@ Export and import data from a given repository, branch and content path.
 
 === Create
 
-Extract data from a given repository, branch and content path. The result will be stored in the `$XP_HOME/data/export` directory.
+Extract data from a given repository, branch and content path. The result will be stored in the `$XP_HOME/data/export` directory as a ZIP archive named `{exportName}.zip`.
 This is useful to move a part of a site from one installation to another.
 
 WARNING: Exporting content will not include the version history of the content, just the current version.
@@ -467,17 +469,9 @@ WARNING: Exporting content will not include the version history of the content, 
 |String
 |path of data to export. Format: `<repo-name>:<branch-name>:<node-path>` e.g. `cms-repo:draft:/some-content`
 
-|`exportWithIds`
-|Boolean
-|Flag to include or skip ids in data when exporting.
-
-|`includeVersions`
-|Boolean
-|Flag to include or skip versions in data when exporting.
-
-|`dryRun`
-|Boolean
-|Show the result without making actual changes.
+|`batchSize`
+|Number
+|number of nodes exported per batch (default: `1000`)
 |===
 
 NOTE: Read about authorization <<authorization, here>>
@@ -496,7 +490,6 @@ NOTE: Task info can be fetched with <<task, task>> request.
 [source,json]
 ----
 {
-    "DryRun": false,
     "ExportedBinaries": [],
     "ExportedNodes": [
         "/",
@@ -511,6 +504,8 @@ NOTE: Task info can be fetched with <<task, task>> request.
 
 Import data from a named export into Enonic XP at the desired content path.
 The export read has to be stored in the `$XP_HOME/data/export` directory.
+
+NOTE: `exportName` must refer to a ZIP archive file (e.g. `myexport` will load `$XP_HOME/data/export/myexport.zip`).
 
 .Url
  POST repo/import
@@ -545,10 +540,6 @@ The export read has to be stored in the `$XP_HOME/data/export` directory.
 |`importWithPermissions`
 |Boolean
 |flag to include or skip permissions when importing
-
-|`dry`
-|Boolean
-|show the result without making actual changes.
 |===
 
 NOTE: Read about authorization <<authorization, here>>
@@ -573,9 +564,9 @@ NOTE: Task info can be fetched with <<task, task>> request.
         "/content",
         "/issues"
     ],
+    "SkippedNodes": [],
     "ImportedBinaries": [],
-    "ImportErrors": [],
-    "DryRun": false
+    "ImportErrors": []
 }
 ----
 
