@@ -458,6 +458,17 @@ This change ensures consistent id provider selection during login.
 
 `run` method `context.user.idProvider` parameter now defaults to `system` if not provided, instead of trying all available id providers.
 
+=== lib-export
+
+==== exportNodes
+
+`includeNodeIds` and `includeVersions` parameters are removed.
+
+Exports are now stored as ZIP archives.
+The output file is named `{exportName}.zip` in the exports directory, replacing the previous folder-based structure.
+
+TIP: Folder-based exports from XP 7 should be converted to a ZIP archive before they can be imported in XP 8.
+
 === Javax to Jakarta
 
 Most of the Java EE APIs have been migrated to Jakarta EE APIs. For instance `javax.servlet` is replaced with `jakarta.servlet`.

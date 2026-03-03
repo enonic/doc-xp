@@ -47,10 +47,9 @@ An object with the following keys and their values:
 
 | sourceNodePath | string | | | Source nodes path
 | exportName | string | | | Export name
-| includeNodeIds | boolean | <optional>| true | Set to true to export node IDs
-| includeVersions | boolean | <optional>| false | Set to true to export all node versions
 | nodeResolved | function | <optional>| | A function to be called before export starts with number of nodes to export
 | nodeExported | function | <optional>| | A function to be called during export with number of nodes exported since last call
+| batchSize | number | <optional>| 1000 | Controls how many nodes are loaded into memory simultaneously during export. Higher value may speed up export but also increase memory usage
 |===
 
 
@@ -70,8 +69,6 @@ import {exportNodes} from '/lib/xp/export';
 const exportNodes = exportNodes({
     sourceNodePath: '/content',
     exportName: 'export-1',
-    includeNodeIds: true,
-    includeVersions: true,
     nodeExported: (i) => {
     },
     nodeResolved: (i) => {
@@ -121,6 +118,7 @@ An object with the following keys and their values:
 | includePermissions | boolean | <optional>| false | Set to `true` to overwrite Node permissions with permissions from the import, `false` to merge permissions with new parent permissions
 | nodeResolved | function | <optional>| | A function to be called during import with number of nodes imported since last call
 | nodeImported | function | <optional>| | A function to be called during import with number of nodes imported since last call
+| nodeSkipped | function | <optional>| | A function to be called during import with number of nodes skipped since last call
 |===
 
 
@@ -147,6 +145,8 @@ const importedNodes = importNodes({
     nodeImported: (i) => {
     },
     nodeResolved: (i) => {
+    },
+    nodeSkipped: (i) => {
     }
 });
 ----
