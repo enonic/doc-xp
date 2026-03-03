@@ -707,6 +707,74 @@ Remove the <code>withJansi</code> element from your logback.xml file to avoid er
 </div>
 </div>
 <div class="sect3">
+<h4 id="management_api"><a class="link" href="#management_api">Management API</a></h4>
+<div class="sect4">
+<h5 id="post_repoexport"><a class="link" href="#post_repoexport">POST /repo/export</a></h5>
+<div class="paragraph">
+<p>The following request parameters have been removed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>exportWithIds</code> - previously controlled whether node IDs were included in the export</p>
+</li>
+<li>
+<p><code>includeVersions</code> - previously controlled whether all node versions were exported</p>
+</li>
+<li>
+<p><code>dryRun</code> - dry-run mode is no longer supported</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A new optional <code>batchSize</code> parameter has been added to control the number of nodes processed per batch (default: <code>1000</code>).</p>
+</div>
+<div class="paragraph">
+<p>Exports are now stored as ZIP archives named <code>{exportName}.zip</code> in the exports directory,
+replacing the previous folder-based export structure.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="post_repoimport"><a class="link" href="#post_repoimport">POST /repo/import</a></h5>
+<div class="paragraph">
+<p>The <code>dryRun</code> request parameter has been removed.</p>
+</div>
+<div class="paragraph">
+<p>The <code>exportName</code> must refer to a ZIP archive present in the exports directory (<code>.zip</code> file).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Folder-based exports from XP 7 should be converted to ZIP format before they can be imported.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="post_systemdump"><a class="link" href="#post_systemdump">POST /system/dump</a></h5>
+<div class="paragraph">
+<p>The <code>archive</code> request parameter field has been removed.</p>
+</div>
+<div class="paragraph">
+<p>Dumps are now always stored as ZIP archives named <code>{name}.zip</code> in the dumps directory, replacing the previous folder-based structure.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="post_systemload"><a class="link" href="#post_systemload">POST /system/load</a></h5>
+<div class="paragraph">
+<p>The <code>archive</code> request parameter field has been removed.</p>
+</div>
+<div class="paragraph">
+<p>Folder-based dumps from XP 7 can still be loaded and upgraded by setting <code>upgrade: true</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="admin_dashboard"><a class="link" href="#admin_dashboard">Admin Dashboard</a></h4>
 <div class="paragraph">
 <p>Default Admin Home path is now <code>/admin</code> instead of <code>/admin/home</code>.</p>
@@ -858,7 +926,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-17 15:32:04 UTC
+Last updated 2026-03-03 10:32:10 UTC
 </div>
 </div>
 </body>

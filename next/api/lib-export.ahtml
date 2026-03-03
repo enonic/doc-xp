@@ -540,24 +540,6 @@ Export will be created in <a href="../deployment/config.ahtml#_export">exports</
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">includeNodeIds</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set to true to export node IDs</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">includeVersions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set to true to export all node versions</p>
-</div></div></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">nodeResolved</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
@@ -573,6 +555,15 @@ Export will be created in <a href="../deployment/config.ahtml#_export">exports</
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A function to be called during export with number of nodes exported since last call</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">batchSize</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Controls how many nodes are loaded into memory simultaneously during export. Higher value may speed up export but also increase memory usage</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -594,8 +585,6 @@ Export will be created in <a href="../deployment/config.ahtml#_export">exports</
 const exportNodes = exportNodes({
     sourceNodePath: '/content',
     exportName: 'export-1',
-    includeNodeIds: true,
-    includeVersions: true,
     nodeExported: (i) =&gt; {
     },
     nodeResolved: (i) =&gt; {
@@ -734,6 +723,15 @@ During node export, current permissions are included in the export file. But whe
 <p>A function to be called during import with number of nodes imported since last call</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nodeSkipped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A function to be called during import with number of nodes skipped since last call</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph lead">
@@ -760,6 +758,8 @@ const importedNodes = importNodes({
     nodeImported: (i) =&gt; {
     },
     nodeResolved: (i) =&gt; {
+    },
+    nodeSkipped: (i) =&gt; {
     }
 });</code></pre>
 </div>
@@ -804,7 +804,7 @@ const expected = {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-17 15:32:04 UTC
+Last updated 2026-03-03 10:32:10 UTC
 </div>
 </div>
 </body>

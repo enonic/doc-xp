@@ -469,6 +469,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#lib_task">lib-task</a></li>
 <li><a href="#lib_auth">lib-auth</a></li>
 <li><a href="#lib_context">lib-context</a></li>
+<li><a href="#lib_export">lib-export</a></li>
 <li><a href="#javax_to_jakarta">Javax to Jakarta</a></li>
 <li><a href="#fasterxml_jackson_json_api">FasterXML Jackson JSON API</a></li>
 <li><a href="#jax_rs_api">JAX-RS API</a></li>
@@ -1139,6 +1140,31 @@ This change ensures consistent id provider selection during login.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="lib_export"><a class="link" href="#lib_export">lib-export</a></h3>
+<div class="sect3">
+<h4 id="exportnodes"><a class="link" href="#exportnodes">exportNodes</a></h4>
+<div class="paragraph">
+<p><code>includeNodeIds</code> and <code>includeVersions</code> parameters are removed.</p>
+</div>
+<div class="paragraph">
+<p>Exports are now stored as ZIP archives.
+The output file is named <code>{exportName}.zip</code> in the exports directory, replacing the previous folder-based structure.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Folder-based exports from XP 7 should be converted to a ZIP archive before they can be imported in XP 8.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="javax_to_jakarta"><a class="link" href="#javax_to_jakarta">Javax to Jakarta</a></h3>
 <div class="paragraph">
 <p>Most of the Java EE APIs have been migrated to Jakarta EE APIs. For instance <code>javax.servlet</code> is replaced with <code>jakarta.servlet</code>.</p>
@@ -1210,7 +1236,7 @@ This change ensures consistent id provider selection during login.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-17 15:32:04 UTC
+Last updated 2026-03-03 10:32:10 UTC
 </div>
 </div>
 </body>
