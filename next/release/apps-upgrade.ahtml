@@ -450,12 +450,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#verify">Verify</a></li>
 </ul>
 </li>
-<li><a href="#widgets">Widgets</a></li>
 <li><a href="#default_context">Default context</a></li>
 <li><a href="#jdk">JDK</a></li>
 <li><a href="#testing_api">Testing API</a></li>
 <li><a href="#api_deprecations_and_breaking_changes">API Deprecations and Breaking Changes</a>
 <ul class="sectlevel2">
+<li><a href="#application_descriptor">Application Descriptor</a></li>
+<li><a href="#admin_api">Admin API</a></li>
+<li><a href="#admin_tool">Admin Tool</a></li>
+<li><a href="#task">Task</a></li>
+<li><a href="#id_provider">ID Provider</a></li>
+<li><a href="#cms_schema">CMS Schema</a></li>
 <li><a href="#http_controllers">HTTP Controllers</a></li>
 <li><a href="#http_services">HTTP Services</a></li>
 <li><a href="#assets_service">Assets service</a></li>
@@ -610,7 +615,7 @@ Syntax for adding plugins to Gradle may have changed for your project, we recomm
 <div class="title">build.gradle sample</div>
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">plugins {
-    id 'com.enonic.xp.app' version '4.0.0-A1'
+    id 'com.enonic.xp.app' version '4.0.0-A2'
 }
 
 app {
@@ -742,15 +747,6 @@ Projects containing Java code might get build errors at this point, otherwise th
 </div>
 </div>
 <div class="sect1">
-<h2 id="widgets"><a class="link" href="#widgets">Widgets</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Widgets are now an API
-TODO</p>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="default_context"><a class="link" href="#default_context">Default context</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -795,6 +791,550 @@ test {
 <div class="sect1">
 <h2 id="api_deprecations_and_breaking_changes"><a class="link" href="#api_deprecations_and_breaking_changes">API Deprecations and Breaking Changes</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="application_descriptor"><a class="link" href="#application_descriptor">Application Descriptor</a></h3>
+<div class="paragraph">
+<p>The <code>application.xml</code> descriptor must be converted to <code>application.yml</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to automate the conversion of XML descriptors to YAML.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - application.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;application xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;description&gt;My app description&lt;/description&gt;
+&lt;/application&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - application.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">description: "My app description"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="admin_api"><a class="link" href="#admin_api">Admin API</a></h3>
+<div class="paragraph">
+<p>All XML descriptor files must now be converted to YAML (<code>.yml</code>) descriptor files. XML descriptors are no longer supported in XP 8.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to automate the conversion of XML descriptors to YAML.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="admin_tool"><a class="link" href="#admin_tool">Admin Tool</a></h3>
+<div class="paragraph">
+<p>Admin Tool descriptors must be converted from XML to YAML.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - admin/tools/main/main.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;tool xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;display-name&gt;My Admin Tool&lt;/display-name&gt;
+  &lt;description&gt;An admin tool&lt;/description&gt;
+  &lt;allow&gt;
+    &lt;principal&gt;role:system.authenticated&lt;/principal&gt;
+  &lt;/allow&gt;
+&lt;/tool&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - admin/tools/main/main.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "My Admin Tool"
+description: "An admin tool"
+allow:
+- "role:system.authenticated"</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="widgets_extensions"><a class="link" href="#widgets_extensions">Widgets / Extensions</a></h4>
+<div class="paragraph">
+<p>Widgets are now part of the Admin Extensions API. The <code>admin/widgets</code> directory has been renamed to <code>admin/extensions</code>, and descriptors must be converted from XML to YAML.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - admin/widgets/settings/settings.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;display-name&gt;Settings&lt;/display-name&gt;
+  &lt;description&gt;Configure Projects&lt;/description&gt;
+  &lt;interfaces&gt;
+    &lt;interface&gt;contentstudio.menuitem&lt;/interface&gt;
+  &lt;/interfaces&gt;
+&lt;/widget&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - admin/extensions/settings/settings.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "Settings"
+description: "Configure Projects"
+interfaces:
+- "contentstudio.menuitem"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task"><a class="link" href="#task">Task</a></h3>
+<div class="paragraph">
+<p>Task descriptors must be converted from XML to YAML.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Task descriptor forms do not support form-fragments.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - tasks/mytask/mytask.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;task xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;description&gt;Background job&lt;/description&gt;
+  &lt;form&gt;
+    &lt;input type="Long" name="count"&gt;
+      &lt;label&gt;Number of items to process&lt;/label&gt;
+      &lt;default&gt;42&lt;/default&gt;
+      &lt;occurrences minimum="1" maximum="1"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/task&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - tasks/mytask/mytask.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">description: "Background job"
+form:
+- type: "Long"
+  name: "count"
+  label: "Number of items to process"
+  occurrences:
+    min: 1
+    max: 1
+  default: 42</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="id_provider"><a class="link" href="#id_provider">ID Provider</a></h3>
+<div class="paragraph">
+<p>ID Provider descriptors must be converted from XML to YAML.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - idprovider/idprovider.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;id-provider xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;mode&gt;MIXED&lt;/mode&gt;
+  &lt;form&gt;
+    &lt;input name="appClientId" type="TextLine"&gt;
+      &lt;label&gt;Client ID&lt;/label&gt;
+      &lt;occurrences minimum="1" maximum="1"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/id-provider&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - idprovider/idprovider.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">mode: "MIXED"
+form:
+- type: "TextLine"
+  name: "appClientId"
+  label: "Client ID"
+  occurrences:
+    min: 1
+    max: 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cms_schema"><a class="link" href="#cms_schema">CMS Schema</a></h3>
+<div class="paragraph">
+<p>All XML descriptor files must now be converted to YAML (<code>.yml</code>) descriptor files. XML descriptors are no longer supported in XP 8.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to automate the conversion of XML descriptors to YAML.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="site_descriptor_split"><a class="link" href="#site_descriptor_split">Site descriptor split</a></h4>
+<div class="paragraph">
+<p>The <code>site.xml</code> descriptor has been split into two separate files in XP 8:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>site.yml</code> - contains processors, mappings, and apis</p>
+</li>
+<li>
+<p><code>cms.yml</code> - contains mixin references (previously x-data) and the site form configuration</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally, the <code>site</code> directory has been renamed to <code>cms</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - site/site.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;site xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;x-data name="myapp:my-mixin"/&gt;
+  &lt;form&gt;
+    &lt;input type="TextLine" name="some-name"&gt;
+      &lt;label&gt;Textline&lt;/label&gt;
+      &lt;occurrences minimum="0" maximum="1"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+  &lt;processors&gt;
+    &lt;response-processor name="filter1" order="10"/&gt;
+  &lt;/processors&gt;
+  &lt;mappings&gt;
+    &lt;mapping controller="/controllers/preview.js" order="50"&gt;
+      &lt;match&gt;type:'.*:person'&lt;/match&gt;
+    &lt;/mapping&gt;
+  &lt;/mappings&gt;
+&lt;/site&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/site.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">processors:
+- name: "filter1"
+  order: 10
+mappings:
+- controller: "/controllers/preview.js"
+  order: 50
+  match: "type:'.*:person'"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/cms.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">mixin:
+- name: "myapp:my-mixin"
+  optional: false
+form:
+- type: "TextLine"
+  name: "some-name"
+  label: "Textline"
+  occurrences:
+    min: 0
+    max: 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="page_descriptor"><a class="link" href="#page_descriptor">Page descriptor</a></h4>
+<div class="listingblock">
+<div class="title">XP 7 - site/pages/main/main.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;page xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;display-name&gt;Main&lt;/display-name&gt;
+  &lt;description&gt;Contains a single main region&lt;/description&gt;
+  &lt;form/&gt;
+  &lt;regions&gt;
+    &lt;region name="main"/&gt;
+  &lt;/regions&gt;
+&lt;/page&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/pages/main/main.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "Main"
+description: "Contains a single main region"
+form: []
+regions:
+- "main"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="layout_descriptor"><a class="link" href="#layout_descriptor">Layout descriptor</a></h4>
+<div class="listingblock">
+<div class="title">XP 7 - site/layouts/2-column/2-column.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;layout xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;display-name&gt;2 columns&lt;/display-name&gt;
+  &lt;description&gt;Provides left and right regions&lt;/description&gt;
+  &lt;form/&gt;
+  &lt;regions&gt;
+    &lt;region name="left"/&gt;
+    &lt;region name="right"/&gt;
+  &lt;/regions&gt;
+&lt;/layout&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/layouts/2-column/2-column.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "2 columns"
+description: "Provides left and right regions"
+form: []
+regions:
+- "left"
+- "right"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="part_descriptor"><a class="link" href="#part_descriptor">Part descriptor</a></h4>
+<div class="listingblock">
+<div class="title">XP 7 - site/parts/my-part/my-part.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;part xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;display-name&gt;My Part&lt;/display-name&gt;
+  &lt;description&gt;A simple part&lt;/description&gt;
+  &lt;form&gt;
+    &lt;input name="title" type="TextLine"&gt;
+      &lt;label&gt;Title&lt;/label&gt;
+      &lt;occurrences minimum="1" maximum="1"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/part&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/parts/my-part/my-part.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "My Part"
+description: "A simple part"
+form:
+- type: "TextLine"
+  name: "title"
+  label: "Title"
+  occurrences:
+    min: 1
+    max: 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="content_type"><a class="link" href="#content_type">Content type</a></h4>
+<div class="listingblock">
+<div class="title">XP 7 - site/content-types/article/article.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;content-type xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;display-name&gt;Article&lt;/display-name&gt;
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt;
+    &lt;input name="title" type="TextLine"&gt;
+      &lt;label&gt;Title&lt;/label&gt;
+      &lt;occurrences minimum="1" maximum="1"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/content-types/article/article.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">superType: "base:structured"
+displayName: "Article"
+form:
+- type: "TextLine"
+  name: "title"
+  label: "Title"
+  occurrences:
+    min: 1
+    max: 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="x_data_renamed_to_mixin"><a class="link" href="#x_data_renamed_to_mixin">X-data renamed to Mixin</a></h4>
+<div class="paragraph">
+<p>X-data has been renamed to Mixin in XP 8. The <code>x-data</code> directory should be renamed to <code>mixins</code>, and descriptor files updated accordingly.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - site/x-data/myattachment/myattachment.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;x-data&gt;
+  &lt;display-name&gt;My Attachment&lt;/display-name&gt;
+  &lt;form&gt;
+    &lt;input name="myAttachment" type="AttachmentUploader"&gt;
+      &lt;label&gt;My Attachment&lt;/label&gt;
+      &lt;occurrences minimum="1" maximum="1"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/x-data&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/mixins/myattachment/myattachment.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "My Attachment"
+form:
+- type: "AttachmentUploader"
+  name: "myAttachment"
+  label: "My Attachment"
+  occurrences:
+    min: 1
+    max: 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mixins_renamed_to_form_fragments"><a class="link" href="#mixins_renamed_to_form_fragments">Mixins renamed to Form Fragments</a></h4>
+<div class="paragraph">
+<p>Mixins (XP 7) have been renamed to Form Fragments in XP 8. The <code>mixins</code> directory should be renamed to <code>form-fragments</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - site/mixins/address/address.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;mixin xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;display-name&gt;Address&lt;/display-name&gt;
+  &lt;form&gt;
+    &lt;input type="TextLine" name="street"&gt;
+      &lt;label&gt;Street&lt;/label&gt;
+      &lt;occurrences minimum="0" maximum="1"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/mixin&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/form-fragments/address/address.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "Address"
+form:
+- type: "TextLine"
+  name: "street"
+  label: "Street"
+  occurrences:
+    min: 0
+    max: 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="macro"><a class="link" href="#macro">Macro</a></h4>
+<div class="paragraph">
+<p>Macro descriptors must be converted from XML to YAML.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - site/macros/my-macro/my-macro.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;macro&gt;
+  &lt;display-name&gt;Current user&lt;/display-name&gt;
+  &lt;description&gt;Shows currently logged user&lt;/description&gt;
+  &lt;form&gt;
+    &lt;input name="defaultText" type="TextLine"&gt;
+      &lt;label&gt;Default text&lt;/label&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/macro&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/macros/my-macro/my-macro.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "Current user"
+description: "Shows currently logged user"
+form:
+- type: "TextLine"
+  name: "defaultText"
+  label: "Default text"
+  occurrences:
+    min: 0
+    max: 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="styles"><a class="link" href="#styles">Styles</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="datetime_and_instant_input_types"><a class="link" href="#datetime_and_instant_input_types">DateTime and Instant input types</a></h4>
+<div class="paragraph">
+<p>The XP 7 <code>DateTime</code> input type with <code>&lt;timezone&gt;true&lt;/timezone&gt;</code> has been split into a separate <code>Instant</code> type in XP 8. <code>DateTime</code> is now used exclusively for local date-time values (without timezone), while <code>Instant</code> represents a point in time.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - DateTime with timezone (XML)</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="publishDate" type="DateTime"&gt;
+  &lt;label&gt;Publish date&lt;/label&gt;
+  &lt;config&gt;
+    &lt;timezone&gt;true&lt;/timezone&gt;
+  &lt;/config&gt;
+&lt;/input&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - Instant (YAML)</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "Instant"
+  name: "publishDate"
+  label: "Publish date"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 7 - DateTime without timezone (XML)</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="eventDate" type="DateTime"&gt;
+  &lt;label&gt;Event date&lt;/label&gt;
+&lt;/input&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - DateTime (YAML)</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "DateTime"
+  name: "eventDate"
+  label: "Event date"</code></pre>
+</div>
+</div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="http_controllers"><a class="link" href="#http_controllers">HTTP Controllers</a></h3>
 <div class="paragraph">
@@ -890,11 +1430,11 @@ exports.all = function(req) {
     resources/
       apis/
         coolservice/
-          coolservice.xml
+          coolservice.yml
           coolservice.js
         myservice/
           myservice.js
-          myservice.xml</code></pre>
+          myservice.yml</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -908,13 +1448,10 @@ exports.all = function(req) {
 </div>
 </div>
 <div class="listingblock">
-<div class="title">New api.xml</div>
+<div class="title">New api.yml</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;api&gt;
-  &lt;allow&gt;
-    &lt;principal&gt;role:system.admin&lt;/principal&gt;
-  &lt;/allow&gt;
-&lt;/api&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">allow:
+  - "role:system.admin"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -923,15 +1460,11 @@ exports.all = function(req) {
 <div class="listingblock">
 <div class="title">Example of mounting "coolservice" API in an admin tool</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;tool xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;My Admin Tool&lt;/display-name&gt;
-  &lt;allow&gt;
-    &lt;principal&gt;role:system.admin&lt;/principal&gt;
-  &lt;/allow&gt;
-  &lt;apis&gt;
-    &lt;api&gt;coolservice&lt;/api&gt;
-  &lt;/apis&gt;
-&lt;/tool&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "My Admin Tool"
+allow:
+  - "role:system.admin"
+apis:
+  - "coolservice"</code></pre>
 </div>
 </div>
 </div>
@@ -1217,7 +1750,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 <p>Java methods and classes marked as <code>@Deprecated</code> were removed.</p>
 </li>
 <li>
-<p><code>com.enonic.xp.page.DescriptorKey</code> moved to ´com.enonic.xp.descriptor.DescriptorKey`.</p>
+<p><code>com.enonic.xp.page.DescriptorKey</code> moved to <code>com.enonic.xp.descriptor.DescriptorKey</code>.</p>
 </li>
 <li>
 <p>Concrete collection types like <code>LinkedList</code>, <code>HashMap</code>, etc. were replaced with corresponding interfaces like <code>List</code>, <code>Map</code>, etc.</p>
@@ -1236,7 +1769,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-03 10:32:10 UTC
+Last updated 2026-03-03 16:53:36 UTC
 </div>
 </div>
 </body>
