@@ -450,6 +450,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#verify">Verify</a></li>
 </ul>
 </li>
+<li><a href="#permissions">Permissions</a></li>
+<li><a href="#editorial_data">Editorial data</a></li>
 <li><a href="#default_context">Default context</a></li>
 <li><a href="#jdk">JDK</a></li>
 <li><a href="#testing_api">Testing API</a></li>
@@ -743,6 +745,22 @@ Projects containing Java code might get build errors at this point, otherwise th
 </tr>
 </table>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="permissions"><a class="link" href="#permissions">Permissions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>applyPermissions now applies them in multiple branches. Content API applies permissions in both draft and master branches.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="editorial_data"><a class="link" href="#editorial_data">Editorial data</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>New concept of editorial data is introduced in XP 8. Content API now has separate methods for manipulating of metadata, data.</p>
 </div>
 </div>
 </div>
@@ -1741,13 +1759,33 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div class="sect2">
 <h3 id="java_apis"><a class="link" href="#java_apis">Java APIs</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>There are many changes in Java APIs, multiple classes were moved or renamed, as well as their methods. The intention was to keep JavaScript API as compatible as possible, while improving Java API design and removing unnecessary or confusing methods and classes.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The most noticeable changes are:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Java Portal View Functions are no longer part of XP Core API. They were incorporated into lib-thymeleaf and lib-xslt libraries.</p>
+<p>Java methods and classes marked as <code>@Deprecated</code> were removed.</p>
 </li>
 <li>
-<p>Java methods and classes marked as <code>@Deprecated</code> were removed.</p>
+<p>Many classes and methods that were only used for internal implementation details and not intended for public use were removed.</p>
+</li>
+<li>
+<p>Methods that had names that could cause confusion with JavaScript API we renamed, for instance <code>ContentService.deleteWithoutFetch</code> renamed <code>ContentService.delete</code>.</p>
+</li>
+<li>
+<p>Classes that have direct replacement in Java 25 standard library were removed.</p>
+</li>
+<li>
+<p><code>ContentService.update</code> method was split into 3 separate methods: <code>ContentService.update</code>, <code>ContentService.updateMedia</code> and <code>ContentService.updatePermissions</code>.</p>
+</li>
+<li>
+<p>Java Portal View Functions are no longer part of XP Core API. They were incorporated into lib-thymeleaf and lib-xslt libraries.</p>
 </li>
 <li>
 <p><code>com.enonic.xp.page.DescriptorKey</code> moved to <code>com.enonic.xp.descriptor.DescriptorKey</code>.</p>
@@ -1756,10 +1794,10 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 <p>Concrete collection types like <code>LinkedList</code>, <code>HashMap</code>, etc. were replaced with corresponding interfaces like <code>List</code>, <code>Map</code>, etc.</p>
 </li>
 <li>
-<p><code>ContentService.deleteWithoutFetch</code> was renamed to <code>ContentService.delete</code> for consistency with other methods.</p>
+<p>Javax Mail is no longer a transitive dependency of XP Core API.</p>
 </li>
 <li>
-<p>Javax Mail is no longer a transitive dependency of XP Core API.</p>
+<p>OSGi classes are no longer part of API. OSGi is still used internally in XP.</p>
 </li>
 </ul>
 </div>
@@ -1769,7 +1807,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-03 16:53:36 UTC
+Last updated 2026-03-03 17:30:01 UTC
 </div>
 </div>
 </body>
