@@ -64,7 +64,7 @@ NOTE: Syntax for adding plugins to Gradle may have changed for your project, we 
 [source,groovy]
 ----
 plugins {
-    id 'com.enonic.xp.app' version '4.0.0-A1'
+    id 'com.enonic.xp.app' version '4.0.0-A2'
 }
 
 app {
@@ -155,10 +155,6 @@ You may also use `enonic project build` to build without deploying
 
 NOTE: Projects containing Java code might get build errors at this point, otherwise the build should complete successfully.
 
-== Widgets
-
-Widgets are now an API
-TODO
 
 
 == Default context
@@ -191,6 +187,474 @@ test {
 Junit 4 is not supported in XP 8.0.0
 
 == API Deprecations and Breaking Changes
+
+=== Application Descriptor
+
+The `application.xml` descriptor must be converted to `application.yml`.
+
+TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate the conversion of XML descriptors to YAML.
+
+.XP 7 - application.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="urn:enonic:xp:model:1.0">
+  <description>My app description</description>
+</application>
+----
+
+.XP 8 - application.yml
+[source,yaml]
+----
+description: "My app description"
+----
+
+=== Admin API
+
+All XML descriptor files must now be converted to YAML (`.yml`) descriptor files. XML descriptors are no longer supported in XP 8.
+
+TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate the conversion of XML descriptors to YAML.
+
+=== Admin Tool
+
+Admin Tool descriptors must be converted from XML to YAML.
+
+.XP 7 - admin/tools/main/main.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<tool xmlns="urn:enonic:xp:model:1.0">
+  <display-name>My Admin Tool</display-name>
+  <description>An admin tool</description>
+  <allow>
+    <principal>role:system.authenticated</principal>
+  </allow>
+</tool>
+----
+
+.XP 8 - admin/tools/main/main.yml
+[source,yaml]
+----
+displayName: "My Admin Tool"
+description: "An admin tool"
+allow:
+- "role:system.authenticated"
+----
+
+==== Widgets / Extensions
+
+Widgets are now part of the Admin Extensions API. The `admin/widgets` directory has been renamed to `admin/extensions`, and descriptors must be converted from XML to YAML.
+
+.XP 7 - admin/widgets/settings/settings.xml
+[source,xml]
+----
+<widget xmlns="urn:enonic:xp:model:1.0">
+  <display-name>Settings</display-name>
+  <description>Configure Projects</description>
+  <interfaces>
+    <interface>contentstudio.menuitem</interface>
+  </interfaces>
+</widget>
+----
+
+.XP 8 - admin/extensions/settings/settings.yml
+[source,yaml]
+----
+displayName: "Settings"
+description: "Configure Projects"
+interfaces:
+- "contentstudio.menuitem"
+----
+
+=== Task
+
+Task descriptors must be converted from XML to YAML.
+
+NOTE: Task descriptor forms do not support form-fragments.
+
+.XP 7 - tasks/mytask/mytask.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<task xmlns="urn:enonic:xp:model:1.0">
+  <description>Background job</description>
+  <form>
+    <input type="Long" name="count">
+      <label>Number of items to process</label>
+      <default>42</default>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+</task>
+----
+
+.XP 8 - tasks/mytask/mytask.yml
+[source,yaml]
+----
+description: "Background job"
+form:
+- type: "Long"
+  name: "count"
+  label: "Number of items to process"
+  occurrences:
+    min: 1
+    max: 1
+  default: 42
+----
+
+=== ID Provider
+
+ID Provider descriptors must be converted from XML to YAML.
+
+.XP 7 - idprovider/idprovider.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<id-provider xmlns="urn:enonic:xp:model:1.0">
+  <mode>MIXED</mode>
+  <form>
+    <input name="appClientId" type="TextLine">
+      <label>Client ID</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+</id-provider>
+----
+
+.XP 8 - idprovider/idprovider.yml
+[source,yaml]
+----
+mode: "MIXED"
+form:
+- type: "TextLine"
+  name: "appClientId"
+  label: "Client ID"
+  occurrences:
+    min: 1
+    max: 1
+----
+
+=== CMS Schema
+
+All XML descriptor files must now be converted to YAML (`.yml`) descriptor files. XML descriptors are no longer supported in XP 8.
+
+TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate the conversion of XML descriptors to YAML.
+
+==== Site descriptor split
+
+The `site.xml` descriptor has been split into two separate files in XP 8:
+
+* `site.yml` - contains processors, mappings, and apis
+* `cms.yml` - contains mixin references (previously x-data) and the site form configuration
+
+Additionally, the `site` directory has been renamed to `cms`.
+
+.XP 7 - site/site.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<site xmlns="urn:enonic:xp:model:1.0">
+  <x-data name="myapp:my-mixin"/>
+  <form>
+    <input type="TextLine" name="some-name">
+      <label>Textline</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </form>
+  <processors>
+    <response-processor name="filter1" order="10"/>
+  </processors>
+  <mappings>
+    <mapping controller="/controllers/preview.js" order="50">
+      <match>type:'.*:person'</match>
+    </mapping>
+  </mappings>
+</site>
+----
+
+.XP 8 - cms/site.yml
+[source,yaml]
+----
+processors:
+- name: "filter1"
+  order: 10
+mappings:
+- controller: "/controllers/preview.js"
+  order: 50
+  match: "type:'.*:person'"
+----
+
+.XP 8 - cms/cms.yml
+[source,yaml]
+----
+mixin:
+- name: "myapp:my-mixin"
+  optional: false
+form:
+- type: "TextLine"
+  name: "some-name"
+  label: "Textline"
+  occurrences:
+    min: 0
+    max: 1
+----
+
+==== Page descriptor
+
+.XP 7 - site/pages/main/main.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="urn:enonic:xp:model:1.0">
+  <display-name>Main</display-name>
+  <description>Contains a single main region</description>
+  <form/>
+  <regions>
+    <region name="main"/>
+  </regions>
+</page>
+----
+
+.XP 8 - cms/pages/main/main.yml
+[source,yaml]
+----
+displayName: "Main"
+description: "Contains a single main region"
+form: []
+regions:
+- "main"
+----
+
+==== Layout descriptor
+
+.XP 7 - site/layouts/2-column/2-column.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="urn:enonic:xp:model:1.0">
+  <display-name>2 columns</display-name>
+  <description>Provides left and right regions</description>
+  <form/>
+  <regions>
+    <region name="left"/>
+    <region name="right"/>
+  </regions>
+</layout>
+----
+
+.XP 8 - cms/layouts/2-column/2-column.yml
+[source,yaml]
+----
+displayName: "2 columns"
+description: "Provides left and right regions"
+form: []
+regions:
+- "left"
+- "right"
+----
+
+==== Part descriptor
+
+.XP 7 - site/parts/my-part/my-part.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<part xmlns="urn:enonic:xp:model:1.0">
+  <display-name>My Part</display-name>
+  <description>A simple part</description>
+  <form>
+    <input name="title" type="TextLine">
+      <label>Title</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+</part>
+----
+
+.XP 8 - cms/parts/my-part/my-part.yml
+[source,yaml]
+----
+displayName: "My Part"
+description: "A simple part"
+form:
+- type: "TextLine"
+  name: "title"
+  label: "Title"
+  occurrences:
+    min: 1
+    max: 1
+----
+
+==== Content type
+
+.XP 7 - site/content-types/article/article.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<content-type xmlns="urn:enonic:xp:model:1.0">
+  <display-name>Article</display-name>
+  <super-type>base:structured</super-type>
+  <form>
+    <input name="title" type="TextLine">
+      <label>Title</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+</content-type>
+----
+
+.XP 8 - cms/content-types/article/article.yml
+[source,yaml]
+----
+superType: "base:structured"
+displayName: "Article"
+form:
+- type: "TextLine"
+  name: "title"
+  label: "Title"
+  occurrences:
+    min: 1
+    max: 1
+----
+
+==== X-data renamed to Mixin
+
+X-data has been renamed to Mixin in XP 8. The `x-data` directory should be renamed to `mixins`, and descriptor files updated accordingly.
+
+.XP 7 - site/x-data/myattachment/myattachment.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<x-data>
+  <display-name>My Attachment</display-name>
+  <form>
+    <input name="myAttachment" type="AttachmentUploader">
+      <label>My Attachment</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+</x-data>
+----
+
+.XP 8 - cms/mixins/myattachment/myattachment.yml
+[source,yaml]
+----
+displayName: "My Attachment"
+form:
+- type: "AttachmentUploader"
+  name: "myAttachment"
+  label: "My Attachment"
+  occurrences:
+    min: 1
+    max: 1
+----
+
+==== Mixins renamed to Form Fragments
+
+Mixins (XP 7) have been renamed to Form Fragments in XP 8. The `mixins` directory should be renamed to `form-fragments`.
+
+.XP 7 - site/mixins/address/address.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<mixin xmlns="urn:enonic:xp:model:1.0">
+  <display-name>Address</display-name>
+  <form>
+    <input type="TextLine" name="street">
+      <label>Street</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </form>
+</mixin>
+----
+
+.XP 8 - cms/form-fragments/address/address.yml
+[source,yaml]
+----
+displayName: "Address"
+form:
+- type: "TextLine"
+  name: "street"
+  label: "Street"
+  occurrences:
+    min: 0
+    max: 1
+----
+
+==== Macro
+
+Macro descriptors must be converted from XML to YAML.
+
+.XP 7 - site/macros/my-macro/my-macro.xml
+[source,xml]
+----
+<macro>
+  <display-name>Current user</display-name>
+  <description>Shows currently logged user</description>
+  <form>
+    <input name="defaultText" type="TextLine">
+      <label>Default text</label>
+    </input>
+  </form>
+</macro>
+----
+
+.XP 8 - cms/macros/my-macro/my-macro.yml
+[source,yaml]
+----
+displayName: "Current user"
+description: "Shows currently logged user"
+form:
+- type: "TextLine"
+  name: "defaultText"
+  label: "Default text"
+  occurrences:
+    min: 0
+    max: 1
+----
+
+==== Styles
+
+// TODO. Waiting for implementation details
+
+==== DateTime and Instant input types
+
+The XP 7 `DateTime` input type with `<timezone>true</timezone>` has been split into a separate `Instant` type in XP 8. `DateTime` is now used exclusively for local date-time values (without timezone), while `Instant` represents a point in time.
+
+.XP 7 - DateTime with timezone (XML)
+[source,xml]
+----
+<input name="publishDate" type="DateTime">
+  <label>Publish date</label>
+  <config>
+    <timezone>true</timezone>
+  </config>
+</input>
+----
+
+.XP 8 - Instant (YAML)
+[source,yaml]
+----
+- type: "Instant"
+  name: "publishDate"
+  label: "Publish date"
+----
+
+.XP 7 - DateTime without timezone (XML)
+[source,xml]
+----
+<input name="eventDate" type="DateTime">
+  <label>Event date</label>
+</input>
+----
+
+.XP 8 - DateTime (YAML)
+[source,yaml]
+----
+- type: "DateTime"
+  name: "eventDate"
+  label: "Event date"
+----
 
 === HTTP Controllers
 
@@ -274,11 +738,11 @@ src/
     resources/
       apis/
         coolservice/
-          coolservice.xml
+          coolservice.yml
           coolservice.js
         myservice/
           myservice.js
-          myservice.xml
+          myservice.yml
 ----
 
 .Old service.xml
@@ -291,30 +755,23 @@ src/
 </service>
 ----
 
-.New api.xml
-[source,xml]
+.New api.yml
+[source,yaml]
 ----
-<api>
-  <allow>
-    <principal>role:system.admin</principal>
-  </allow>
-</api>
+allow:
+  - "role:system.admin"
 ----
 
 In order for API to work on admin tool, site or webapp, it must be mounted via the descriptor.
 
 .Example of mounting "coolservice" API in an admin tool
-[source,xml]
+[source,yaml]
 ----
-<tool xmlns="urn:enonic:xp:model:1.0">
-  <display-name>My Admin Tool</display-name>
-  <allow>
-    <principal>role:system.admin</principal>
-  </allow>
-  <apis>
-    <api>coolservice</api>
-  </apis>
-</tool>
+displayName: "My Admin Tool"
+allow:
+  - "role:system.admin"
+apis:
+  - "coolservice"
 ----
 
 === Assets service
@@ -503,7 +960,7 @@ Java Dropwizard Metrics is no longer available in XP Core API. Migrate to `com.e
 
 - Java methods and classes marked as `@Deprecated` were removed.
 
-- `com.enonic.xp.page.DescriptorKey` moved to ´com.enonic.xp.descriptor.DescriptorKey`.
+- `com.enonic.xp.page.DescriptorKey` moved to `com.enonic.xp.descriptor.DescriptorKey`.
 
 - Concrete collection types like `LinkedList`, `HashMap`, etc. were replaced with corresponding interfaces like `List`, `Map`, etc.
 
