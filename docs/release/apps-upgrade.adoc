@@ -156,6 +156,19 @@ You may also use `enonic project build` to build without deploying
 NOTE: Projects containing Java code might get build errors at this point, otherwise the build should complete successfully.
 
 
+== Permissions
+
+// TODO more details
+
+applyPermissions now applies them in multiple branches. Content API applies permissions in both draft and master branches.
+
+== Editorial data
+
+// TODO more details
+
+New concept of editorial data is introduced in XP 8. Content API now has separate methods for manipulating of metadata, data.
+
+
 
 == Default context
 
@@ -956,15 +969,26 @@ Java Dropwizard Metrics is no longer available in XP Core API. Migrate to `com.e
 
 === Java APIs
 
-- Java Portal View Functions are no longer part of XP Core API. They were incorporated into lib-thymeleaf and lib-xslt libraries.
+ There are many changes in Java APIs, multiple classes were moved or renamed, as well as their methods. The intention was to keep JavaScript API as compatible as possible, while improving Java API design and removing unnecessary or confusing methods and classes.
+
+The most noticeable changes are:
 
 - Java methods and classes marked as `@Deprecated` were removed.
+
+- Many classes and methods that were only used for internal implementation details and not intended for public use were removed.
+
+- Methods that had names that could cause confusion with JavaScript API we renamed, for instance `ContentService.deleteWithoutFetch` renamed `ContentService.delete`.
+
+- Classes that have direct replacement in Java 25 standard library were removed.
+
+- `ContentService.update` method was split into 3 separate methods: `ContentService.update`, `ContentService.updateMedia` and `ContentService.updatePermissions`.
+
+- Java Portal View Functions are no longer part of XP Core API. They were incorporated into lib-thymeleaf and lib-xslt libraries.
 
 - `com.enonic.xp.page.DescriptorKey` moved to `com.enonic.xp.descriptor.DescriptorKey`.
 
 - Concrete collection types like `LinkedList`, `HashMap`, etc. were replaced with corresponding interfaces like `List`, `Map`, etc.
 
-- `ContentService.deleteWithoutFetch` was renamed to `ContentService.delete` for consistency with other methods.
-
 - Javax Mail is no longer a transitive dependency of XP Core API.
 
+- OSGi classes are no longer part of API. OSGi is still used internally in XP.
