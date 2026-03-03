@@ -107,6 +107,43 @@ With XP 8, the default CMS repository `com.enonic.cms.default` is no longer crea
 
 Statistics endpoint http://<host>:2609/metrics is no longer reporting Dropwizard Metrics JSON. Instead, it reports metrics in https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md[OpenMetrics] format.
 
+==== Management API
+
+===== POST /repo/export
+
+The following request parameters have been removed:
+
+* `exportWithIds` - previously controlled whether node IDs were included in the export
+* `includeVersions` - previously controlled whether all node versions were exported
+* `dryRun` - dry-run mode is no longer supported
+
+A new optional `batchSize` parameter has been added to control the number of nodes processed per batch (default: `1000`).
+
+Exports are now stored as ZIP archives named `{exportName}.zip` in the exports directory,
+replacing the previous folder-based export structure.
+
+
+===== POST /repo/import
+
+The `dryRun` request parameter have been removed.
+
+The `exportName` must refer to a ZIP archive present in the exports directory (`.zip` file).
+
+TIP: Folder-based exports from XP 7 should be converted to ZIP format before they can be imported.
+
+===== POST /system/dump
+
+The `archive` request parameter field have been removed.
+
+Dumps are now always stored as ZIP archives named `{name}.zip` in the dumps directory, replacing the previous folder-based structure.
+
+===== POST /system/load
+
+The `archive` request parameter field have been removed.
+
+Folder-based dumps from XP 7 can still be loaded and upgraded by setting `upgrade: true`.
+
+
 ==== Admin Dashboard
 
 Default Admin Home path is now `/admin` instead of `/admin/home`.

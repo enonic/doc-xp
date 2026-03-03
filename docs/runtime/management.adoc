@@ -252,9 +252,6 @@ Export data from every repository. The result will be stored in the `$XP_HOME/da
 |Number
 |max number of versions to dump in addition to current version
 
-|`archive` image:xp-730.svg[XP 7.3.0,opts=inline]
-|Boolean
-|outputs dump output to an archive (`%name%`.zip) file
 |===
 
 NOTE: In XP 8, dumps are always saved as ZIP archives (`{name}.zip`), regardless of the `archive` parameter.
@@ -377,9 +374,6 @@ WARNING: A load will delete all existing repositories before loading the reposit
 |Boolean
 |upgrade the dump if necessary (default is `false`)
 
-|`archive` image:xp-730.svg[XP 7.3.0,opts=inline]
-|Boolean
-|set to `true` for XP 8 dumps (ZIP archives); set to `false` for XP 7 dumps (directory format)
 |===
 
 NOTE: Read about authorization <<authorization, here>>
