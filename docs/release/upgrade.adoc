@@ -125,7 +125,7 @@ replacing the previous folder-based export structure.
 
 ===== POST /repo/import
 
-The `dryRun` request parameter have been removed.
+The `dryRun` request parameter has been removed.
 
 The `exportName` must refer to a ZIP archive present in the exports directory (`.zip` file).
 
@@ -133,13 +133,13 @@ TIP: Folder-based exports from XP 7 should be converted to ZIP format before the
 
 ===== POST /system/dump
 
-The `archive` request parameter field have been removed.
+The `archive` request parameter field has been removed.
 
 Dumps are now always stored as ZIP archives named `{name}.zip` in the dumps directory, replacing the previous folder-based structure.
 
 ===== POST /system/load
 
-The `archive` request parameter field have been removed.
+The `archive` request parameter field has been removed.
 
 Folder-based dumps from XP 7 can still be loaded and upgraded by setting `upgrade: true`.
 

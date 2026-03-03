@@ -49,7 +49,7 @@ An object with the following keys and their values:
 | exportName | string | | | Export name
 | nodeResolved | function | <optional>| | A function to be called before export starts with number of nodes to export
 | nodeExported | function | <optional>| | A function to be called during export with number of nodes exported since last call
-| batchSize | number | <optional>| 1000 | controls how many nodes are loaded into memory simultaneously during export. Higher value may speed up export but also increase memory usage
+| batchSize | number | <optional>| 1000 | Controls how many nodes are loaded into memory simultaneously during export. Higher value may speed up export but also increase memory usage
 |===
 
 
