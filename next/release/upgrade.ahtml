@@ -618,7 +618,7 @@ For scenarios where downtime cannot be avoided, additional steps, such as settin
 <dl>
 <dt class="hdlist1">XP Version</dt>
 <dd>
-<p>You need to be running at least Enonic XP 8.15.x (if you are running an older version, upgrade to 8.15.x first)</p>
+<p>You need to be running at least Enonic XP 8.16.x (if you are running an older version, upgrade to 8.16.x first)</p>
 </dd>
 <dt class="hdlist1">QA environment</dt>
 <dd>
@@ -817,25 +817,33 @@ It is strongly recommended to change all passwords after the upgrade to ensure a
 </div>
 <div class="sect3">
 <h4 id="other_configuration"><a class="link" href="#other_configuration">Other configuration</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Migrate other configuration files from 7.15, including custom configurations (app config etc.).</p>
+</li>
+</ul>
+</div>
 <div class="sect4">
 <h5 id="draftbranchallowedfor"><a class="link" href="#draftbranchallowedfor">draftBranchAllowedFor</a></h5>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
 <p>Portal <code>draftBranchAllowedFor</code> configuration is removed.
 Instead - to access content from the draft branch - user must have any content project role assigned (like <code>cms.project.&lt;projectKey&gt;.viewer</code>).</p>
+</li>
+</ul>
 </div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="others"><a class="link" href="#others">Others</a></h4>
+<div class="sect4">
+<h5 id="deployment_configuration"><a class="link" href="#deployment_configuration">deployment configuration</a></h5>
 <div class="ulist">
 <ul>
 <li>
 <p>It is no longer possible to via <code>com.enonic.xp.server.deploy.cfg</code> file. This method was not documented, unreliable in cluster installations and insecure.</p>
 </li>
-<li>
-<p>Migrate other configuration files from 7.15, including custom configurations (app config etc.).</p>
-</li>
 </ul>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -926,7 +934,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-04 13:41:21 UTC
+Last updated 2026-03-04 14:04:19 UTC
 </div>
 </div>
 </body>
