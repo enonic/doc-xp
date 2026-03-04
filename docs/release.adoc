@@ -12,36 +12,115 @@ include::.variables.adoc[]
 - Hazelcast 5
 - Prometheus metrics
 
-=== API
+=== Universal API
 
 - <<runtime/engines/api-engine#, Universal API>>
 - <<api/lib-portal#, apiUrl>> method
 - <<api/lib-portal#, basUrl>> method and parameters
 - Content `baseUrl`
+- API support on management port
 
-=== Widget API
+=== Widget API renamed to Admin Extensions API
+
+//TODO
 
 - <<admin/widgets#, Widget API>> replaces the old Admin Widgets
 
 === Permissions
 
 - no more `inheritsPermissions` flag on Node
-- content permissions applied on `master` and `draft`
+- content permissions applied on `master` and `draft` simultaneously, there is no need to publish content to apply permissions
 - node permissions can be applied on multiple branches simultaneously
 
-=== Node Patch
+== Content API improvements
+
+- `move` and `rename` methods merged into one `move` method
+- `setChildOrder` and `reorderChildren` methods merged into one `sort` method
+- Content `hasChildren` property has been removed
+
+=== Node API improvements
 
 - `patch` method in Node API - allows to apply changes in node in multiple branches
+- `allText` config with languages support
 
 === Virtual Host Context
 
 Default context values provided via <<deployment/vhosts#virtual-host-context,vhost config files>>
 
+=== Identity keys validations
+
+All identity keys have several common restrictions:
+
+- must not be not empty string
+- must not be not a single underscore `+_+`, dot `.` or double dot `..`
+- must not include `/` or `\` characters
+- must not include and _Whitespace_ characters, except for space character `U+0020`
+- must not start or end with dot space character `U+0020`
+
+==== Node, Content, Issue names
+
+Follow common `Name` validation restrictions
+
+==== IdProviderKey and PrincipalKey
+
+Follow common `Name` validation restrictions with additional restriction of not including space character `U+0020` and the following characters: `<`, `>`, `:`, `"`, `|`, `?`, `*`, `&`, `'`
+
+==== DescriptorKey
+
+- All CMS Schema Descriptor Keys including MacroKey
+- Task key
+- API key
+- HTTP Service key
+- Admin Tool key
+- Admin Extension key
+
+Have additional restrictions:
+
+- must not include any of the following characters: `<`, `>`, `:`, `"`, `|`, `?`, `*`, `&`, `'`
+- must not incuse space character `U+0020`
+- 64 characters limit
+
+==== ApplicationKey
+
+- must match the following regex: `^\w+(?:\.\w+)*$`
+- 63 characters limit
+
+==== RepositoryId
+
+- must match the following regex: `^[a-z0-9][a-z0-9._-]*$`
+- 63 characters limit
+
+==== Branch
+
+- must match the following regex: `^[a-z0-9][a-z0-9.-]*$`
+- 63 characters limit
+
+==== ProjectName
+
+- must match the following regex: `^[a-z0-9][a-z0-9_-]*$`
+- 48 characters limit
+
+=== Langrage Specific Sort
+
+=== Security
+
+- Authentication no longer searches for the first matching user across all ID providers. It is ever VHost default, of explicitly specified ID provider.
+- New hashing algorithm for passwords `pbkdf2-sha512` used for new passwords
+- removed `md5` and `sha1` hashing algorithms support `xp.suPassword`
+
+== Dump-Restore, Import-Export
+
+- Full repository export
+- Partial dump and restore
+- drop support of plain-file exports and dumps
+- drop support of dry-run
+
 === Other
 
 - New admin home page http://<host>:8080/admin
 - `request.locale` in <<framework/http#http-request, Request>>
-
+- The location of dumps is now configurable in <<deployment/config#repo,Repository config>>
+- New names method for HTTP methods in controllers: `GET`, `POST`, ...
 
 == XP7 Update 16
 

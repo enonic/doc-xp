@@ -205,13 +205,15 @@ Use this file to configure the node repository layer.
 ----
 cache.capacity = 10%
 snapshots.dir = ${xp.home}/snapshots
+dumps.dir = ${xp.home}/dump
 ----
 
 cache.capacity:: image:xp-7150.svg[XP 7.15.0,opts=inline]. Defines Heap memory limit for node version cache. The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
 snapshots.dir:: Specifies the root location for where to find and place snapshot files. Default: `${xp.home}/snapshots`
-cache.size:: Added in image:xp-7130.svg[XP 7.13.0,opts=inline] and removed in image:xp-7150.svg[XP 7.15.0,opts=inline]. Specifies the maximum number of nodes to keep in memory. Default: `100000`
 
 NOTE: If you change this value, remember to update value for `path.repo` in `com.enonic.xp.elasticsearch.cfg` as well.
+
+dumps.dir:: Specifies the root location for where to find and place dump files. Default: `${xp.home}/dump`
 
 === Blobstore
 
