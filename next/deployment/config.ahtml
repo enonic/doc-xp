@@ -838,7 +838,8 @@ defaultFromEmail=noreply@domain.com</code></pre>
 <div class="title">Example below uses default settings</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">cache.capacity = 10%
-snapshots.dir = ${xp.home}/snapshots</code></pre>
+snapshots.dir = ${xp.home}/snapshots
+dumps.dir = ${xp.home}/dump</code></pre>
 </div>
 </div>
 <div class="dlist">
@@ -850,10 +851,6 @@ snapshots.dir = ${xp.home}/snapshots</code></pre>
 <dt class="hdlist1">snapshots.dir</dt>
 <dd>
 <p>Specifies the root location for where to find and place snapshot files. Default: <code>${xp.home}/snapshots</code></p>
-</dd>
-<dt class="hdlist1">cache.size</dt>
-<dd>
-<p>Added in <span class="image"><span class="alt">XP 7.13.0</span></span> and removed in <span class="image"><span class="alt">XP 7.15.0</span></span>. Specifies the maximum number of nodes to keep in memory. Default: <code>100000</code></p>
 </dd>
 </dl>
 </div>
@@ -868,6 +865,14 @@ If you change this value, remember to update value for <code>path.repo</code> in
 </td>
 </tr>
 </table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">dumps.dir</dt>
+<dd>
+<p>Specifies the root location for where to find and place dump files. Default: <code>${xp.home}/dump</code></p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="sect2">
@@ -2560,7 +2565,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-03 17:30:01 UTC
+Last updated 2026-03-04 13:36:39 UTC
 </div>
 </div>
 </body>
