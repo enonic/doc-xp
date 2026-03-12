@@ -52,6 +52,7 @@ An object with the following keys and their values:
 | batchSize | number | <optional>| 1000 | Controls how many nodes are loaded into memory simultaneously during export. Higher value may speed up export but also increase memory usage
 |===
 
+TIP: It is possible to export all nodes in the repository's branch by setting `sourceNodePath` to `/`.
 
 [.lead]
 Returns
@@ -98,6 +99,7 @@ Optionally pre-transforms node XML node files with XSLT before import.
 
 NOTE: During node export, current permissions are included in the export file. But when importing, you may need to apply permissions according to your new environment/parent permissions. `includePermissions` parameter is used to control this behavior.
 
+NOTE: It is possible to import the whole repository's branch by setting `targetNodePath` to `/`, but only if export is made for the whole branch as well.
 
 [.lead]
 Parameters
