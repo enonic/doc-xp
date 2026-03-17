@@ -1,0 +1,25 @@
+= The Enonic XP runtime
+:toc: right
+:imagesdir: images
+
+Applications built with the <<framework#,Enonic framework>> are powered by the XP's runtime.
+
+== Introduction
+The runtime is responsible for executing code deployed to the XP platform, and serves as the foundation for the Enonic apps and <<framework#,Enonic's JavaScript framework>>. Developers get direct access to all of XP's platform features, including NoSQL storage, clustering, and much more. 
+
+== Execution context
+Code is executed in the context of a request, a task, or an event. Each of these has its own execution pipeline, but they all share a common core. This means that for instance, a request may trigger a task, which in turn triggers an event. This allows for a powerful and flexible architecture, where applications can be built using a combination of these execution contexts, and take advantage of the strengths of each.
+
+== The XP stack
+The XP runtime stands on the shoulders of GraalVM, and a series of open source components. It uses the an embedded JavaScript engine to execute JavaScript code, and provides a powerful and flexible platform for building and delivering digital experiences of all kinds.
+
+image::runtime-architecture.svg[Simplified view of the XP runtime internals, 900]
+
+== Modular and multi-threaded
+The XP runtime allows for running multiple applications in a single instance. Executing code in parallel, or working together across multiple threads. This means that most XP apps consume very little resources beyond the actual processing, and that a single runtime may potentially contain many applications which are mostly idle when not executing.
+
+== Stateless and Stateful
+
+Code executing on the runtime is stateless, which means that it does not maintain any state between requests. However, applications may take advantage of the the platform's underlying stateful capabilities, and maintain state in memory or in the NoSQL storage as needed. 
+
+TODO: Session, NoSQL, lib-grid, lib-cache
