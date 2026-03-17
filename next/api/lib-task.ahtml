@@ -1125,19 +1125,6 @@ This function returns immediately. The callback function will be executed asynch
 </tr>
 </table>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-lib-task prior version 7.6 does not submit distributable named tasks, instead task always gets executed locally.
-Recompile your application with the newer library version in order for tasks to be distributable.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph lead">
 <p>Parameters</p>
 </div>
@@ -1183,7 +1170,7 @@ Recompile your application with the newer library version in order for tasks to 
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Descriptor of the task to execute. Descriptor can be relative to the current application, or a fully qualified task descriptor name (&lt;appname&gt;:&lt;taskname&gt;) <span class="image"><span class="alt">XP 7.13.0</span></span></p>
+<p>Descriptor of the task to execute. Descriptor can be relative to the current application, or a fully qualified task descriptor name (&lt;appname&gt;:&lt;taskname&gt;)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1331,7 +1318,7 @@ const taskId = submitTask({
 <td class="tableblock halign-left valign-top"><p class="tableblock">node</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>XP cluster node the task is running on <span class="image"><span class="alt">XP 7.13.0</span></span></p>
+<p>XP cluster node the task is running on</p>
 </div>
 <table class="tableblock frame-all grid-none stretch">
 <caption class="title">Properties</caption>
@@ -1380,7 +1367,7 @@ const taskId = submitTask({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

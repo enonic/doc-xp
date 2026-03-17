@@ -496,13 +496,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.9.0</span></span></p>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="query_dsl"><a class="link" href="#query_dsl">Query DSL</a></h2>
 <div class="sectionbody">
@@ -1131,7 +1124,7 @@ Also, a number of minimum matching elements that must match could be set.</p>
 <div class="sect4">
 <h5 id="exists"><a class="link" href="#exists">exists</a></h5>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.11.0</span></span> Returns nodes that contain a value for a field.</p>
+<p>Returns nodes that contain a value for a field.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 7. Expression parameters</caption>
@@ -1570,9 +1563,6 @@ All sub-expressions can contain a single expression or an array.</p>
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.11.0</span></span></p>
-</div>
 </div>
 <div class="sect4">
 <h5 id="filter"><a class="link" href="#filter">filter</a></h5>
@@ -1906,7 +1896,7 @@ Order defaults to DESC when sorting by <code>_score</code>, and ASC when sorting
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

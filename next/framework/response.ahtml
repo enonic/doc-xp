@@ -493,7 +493,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Name/value pairs with the HTTP headers to be added to the response. Starting from <span class="image"><span class="alt">XP 7.15.0</span></span> value can be <code>null</code>/<code>undefined</code> to remove a headers added by other controllers/filters.</td>
+<td>Name/value pairs with the HTTP headers to be added to the response. Value can be <code>null</code>/<code>undefined</code> to remove a headers added by other controllers/filters.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -598,7 +598,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

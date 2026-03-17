@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#authorization">Authorization</a>
 <ul class="sectlevel2">
-<li><a href="#jwt_authentication_xp_7_15_0">JWT Authentication <span class="image"><span class="alt">XP 7.15.0</span></span></a></li>
+<li><a href="#jwt_authentication">JWT Authentication</a></li>
 <li><a href="#basic_authentication">Basic Authentication</a></li>
 </ul>
 </li>
@@ -530,7 +530,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>All management endpoints require an authenticated user with the Administrator role.</p>
 </div>
 <div class="sect2">
-<h3 id="jwt_authentication_xp_7_15_0"><a class="link" href="#jwt_authentication_xp_7_15_0">JWT Authentication <span class="image"><span class="alt">XP 7.15.0</span></span></a></h3>
+<h3 id="jwt_authentication"><a class="link" href="#jwt_authentication">JWT Authentication</a></h3>
 <div class="paragraph">
 <p>All management endpoints can use <a href="../iam/system-idp.ahtml#jwt-authentication">Service accounts JWT authentication</a>. This is the recommended way to authenticate with the management endpoints.</p>
 </div>
@@ -544,7 +544,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Starting from <span class="image"><span class="alt">XP 7.15.0</span></span> use of basic authentication is discouraged due to its security weaknesses. Use JWT authentication instead.
+Use of basic authentication is discouraged due to its security weaknesses. Use JWT authentication instead.
 </td>
 </tr>
 </table>
@@ -629,11 +629,9 @@ For a clustered installation, the snapshot-location must be on a shared file-sys
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST repo/snapshot</pre>
-</div>
+<p>POST repo/snapshot</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Params</caption>
@@ -692,11 +690,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>List all the snapshots for the installation.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>GET repo/snapshot/list</pre>
-</div>
+<p>GET repo/snapshot/list</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -746,11 +742,9 @@ Read about authorization <a href="#authorization">here</a>
 </div>
 <div class="sect2">
 <h3 id="restore"><a class="link" href="#restore">Restore</a></h3>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST repo/snapshot/restore</pre>
-</div>
+<p>POST repo/snapshot/restore</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. Params</caption>
@@ -785,7 +779,7 @@ Read about authorization <a href="#authorization">here</a>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>force</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><span class="alt">XP 7.12.0</span></span> If <code>true</code> then affected indices will be removed before snapshot is applied. It is helpful when Elasticsearch indices are corrupted. Default: <code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>true</code> then affected indices will be removed before snapshot is applied. It is helpful when Elasticsearch indices are corrupted. Default: <code>false</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -823,11 +817,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>Deletes a snapshot by name or date:</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST repo/snapshot/delete</pre>
-</div>
+<p>POST repo/snapshot/delete</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. Params</caption>
@@ -892,11 +884,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>Export data from every repository. The result will be stored in the <code>$XP_HOME/data/dump</code> directory.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST system/dump</pre>
-</div>
+<p>POST system/dump</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 4. Params</caption>
@@ -1045,11 +1035,9 @@ Upgrade does not work with archived dumps.
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST system/upgrade</pre>
-</div>
+<p>POST system/upgrade</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 5. Params</caption>
@@ -1144,11 +1132,9 @@ A load will delete all existing repositories before loading the repositories pre
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST system/load</pre>
-</div>
+<p>POST system/load</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 6. Params</caption>
@@ -1278,11 +1264,9 @@ Exporting content will not include the version history of the content, just the 
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST repo/export</pre>
-</div>
+<p>POST repo/export</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 7. Params</caption>
@@ -1381,11 +1365,9 @@ The export read has to be stored in the <code>$XP_HOME/data/export</code> direct
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST repo/import</pre>
-</div>
+<p>POST repo/import</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 8. Params</caption>
@@ -1513,11 +1495,9 @@ Task info can be fetched with <a href="#task">task</a> request.
 <div class="paragraph">
 <p>Installs an application from file on all nodes.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST app/install</pre>
-</div>
+<p>POST app/install</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 9. Params</caption>
@@ -1584,11 +1564,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>Installs an application from url on all nodes.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST app/installUrl</pre>
-</div>
+<p>POST app/installUrl</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 10. Params</caption>
@@ -1613,7 +1591,7 @@ Read about authorization <a href="#authorization">here</a>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sha512</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><span class="alt">XP 7.6.0</span></span> application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1658,13 +1636,11 @@ Read about authorization <a href="#authorization">here</a>
 <div class="sect2">
 <h3 id="start"><a class="link" href="#start">Start</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.6.0</span></span> Starts an application with specific application key.</p>
+<p>Starts an application with a specific application key.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST app/start</pre>
-</div>
+<p>POST app/start</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 11. Params</caption>
@@ -1710,13 +1686,11 @@ Read about authorization <a href="#authorization">here</a>
 <div class="sect2">
 <h3 id="stop"><a class="link" href="#stop">Stop</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.6.0</span></span> Stops an application with specific application key.</p>
+<p>Stops an application with a specific application key.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST app/stop</pre>
-</div>
+<p>POST app/stop</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 12. Params</caption>
@@ -1762,13 +1736,11 @@ Read about authorization <a href="#authorization">here</a>
 <div class="sect2">
 <h3 id="uninstall"><a class="link" href="#uninstall">Uninstall</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.6.0</span></span> Uninstalls an application with specific application key.</p>
+<p>Uninstalls an application with a specific application key.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST app/uninstall</pre>
-</div>
+<p>POST app/uninstall</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 13. Params</caption>
@@ -1814,13 +1786,11 @@ Read about authorization <a href="#authorization">here</a>
 <div class="sect2">
 <h3 id="server_sent_events"><a class="link" href="#server_sent_events">Server-Sent Events</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.6.0</span></span> The client initiates the SSE connection by using the media type <code>text/event-stream</code> in the <code>Accept</code> header. Then it gets updates automatically without requesting the server.</p>
+<p>The client initiates the SSE connection by using the media type <code>text/event-stream</code> in the <code>Accept</code> header. Then it gets updates automatically without requesting the server.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>GET app/events</pre>
-</div>
+<p>GET app/events</p>
 </div>
 <div class="paragraph">
 <p>This API supports the following events:</p>
@@ -1895,11 +1865,9 @@ This command should be used after migrating content from Enonic CMS using the cm
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST content/reprocess</pre>
-</div>
+<p>POST content/reprocess</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 14. Params</caption>
@@ -1967,11 +1935,9 @@ This command should be used after migrating content from Enonic CMS using the cm
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST content/reprocessTask</pre>
-</div>
+<p>POST content/reprocessTask</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 15. Params</caption>
@@ -2030,16 +1996,11 @@ Task info can be fetched with <a href="#task">task</a> request.
 <div class="sect2">
 <h3 id="list_2"><a class="link" href="#list_2">List</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.13.0</span></span></p>
-</div>
-<div class="paragraph">
 <p>Lists all projects together with their sites.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>GET content/projects/list</pre>
-</div>
+<p>GET content/projects/list</p>
 </div>
 <div class="listingblock">
 <div class="title">Response</div>
@@ -2106,16 +2067,11 @@ Task info can be fetched with <a href="#task">task</a> request.
 <div class="sect2">
 <h3 id="syncall"><a class="link" href="#syncall">SyncAll</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.6.0</span></span></p>
-</div>
-<div class="paragraph">
 <p>Calls forced content sync for all available projects.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST content/syncAll</pre>
-</div>
+<p>POST content/syncAll</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2144,9 +2100,6 @@ Read about authorization <a href="#authorization">here</a>
 <h2 id="id_providers"><a class="link" href="#id_providers">ID Providers</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.13.0</span></span></p>
-</div>
-<div class="paragraph">
 <p>Id providers related commands.</p>
 </div>
 <div class="sect2">
@@ -2154,11 +2107,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>Lists all the id providers.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>GET idproviders/list</pre>
-</div>
+<p>GET idproviders/list</p>
 </div>
 <div class="listingblock">
 <div class="title">Response</div>
@@ -2189,9 +2140,6 @@ Read about authorization <a href="#authorization">here</a>
 <h2 id="webapps"><a class="link" href="#webapps">Webapps</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.13.0</span></span></p>
-</div>
-<div class="paragraph">
 <p>Web apps related commands.</p>
 </div>
 <div class="sect2">
@@ -2199,11 +2147,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>Lists all the web apps.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>GET webapps/list</pre>
-</div>
+<p>GET webapps/list</p>
 </div>
 <div class="listingblock">
 <div class="title">Response</div>
@@ -2232,11 +2178,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>Reindex the content in the search indices for the given repository and branches. This is usually required after upgrades and may be useful in many other cases.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST repo/index/reindex</pre>
-</div>
+<p>POST repo/index/reindex</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 16. Params</caption>
@@ -2304,11 +2248,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>Calls <a href="#reindex">reindex</a> endpoint as a task.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST repo/index/reindex</pre>
-</div>
+<p>POST repo/index/reindex</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 17. Params</caption>
@@ -2368,11 +2310,9 @@ Task info can be fetched with <a href="#task">task</a> request.
 <div class="paragraph">
 <p>Update settings for a specified repository.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST repo/index/updateSettings</pre>
-</div>
+<p>POST repo/index/updateSettings</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 18. Params</caption>
@@ -2455,11 +2395,9 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>List available repositories.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>GET repo/list</pre>
-</div>
+<p>GET repo/list</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2528,11 +2466,9 @@ Read about authorization <a href="#authorization">here</a>
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST system/vacuum</pre>
-</div>
+<p>POST system/vacuum</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 19. Params</caption>
@@ -2564,10 +2500,10 @@ Read about authorization <a href="#authorization">here</a>
 <div class="paragraph">
 <p>This API supports the following tasks:<br>
 <strong>SegmentVacuumTask</strong> - removes unused repositories blobs.<br>
-<strong>VersionTableVacuumTask</strong> - removes unused and non-commited versions together with it&#8217;s blobs.<br>
+<strong>VersionTableVacuumTask</strong> - removes unused and non-commited versions together with its blobs.<br>
 <strong>BinaryBlobVacuumTask</strong> - checks all binary blobs and removes unused.<br>
 <strong>NodeBlobVacuumTask</strong> - checks all node blobs and removes unused.<br>
-<strong>SnapshotsVacuumTask</strong> - <span class="image"><span class="alt">XP 7.15.0</span></span> deletes snapshots that are older than specified age threshold.<br></p>
+<strong>SnapshotsVacuumTask</strong> - deletes snapshots that are older than the specified age threshold.<br></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2644,11 +2580,9 @@ Make sure you have a backup of the installation available before running a clean
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>POST auditlog/cleanup</pre>
-</div>
+<p>POST auditlog/cleanup</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 20. Params</caption>
@@ -2693,11 +2627,9 @@ Make sure you have a backup of the installation available before running a clean
 <div class="paragraph">
 <p>Fetches particular Task information.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>GET task/{taskId}</pre>
-</div>
+<p>GET task/{taskId}</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 21. Params</caption>
@@ -2732,9 +2664,6 @@ Make sure you have a backup of the installation available before running a clean
 <h2 id="scheduled_jobs_list"><a class="link" href="#scheduled_jobs_list">Scheduled Jobs List</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.7.0</span></span></p>
-</div>
-<div class="paragraph">
 <p>List scheduled jobs.</p>
 </div>
 <div class="admonitionblock note">
@@ -2749,11 +2678,9 @@ Read about authorization <a href="#authorization">here</a>
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="paragraph">
 <div class="title">Url</div>
-<div class="content">
-<pre>GET scheduler/list</pre>
-</div>
+<p>GET scheduler/list</p>
 </div>
 <div class="listingblock">
 <div class="title">Response</div>
@@ -2814,7 +2741,7 @@ Read about authorization <a href="#authorization">here</a>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

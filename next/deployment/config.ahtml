@@ -641,7 +641,7 @@ To generate <code>sha512</code> hash suitable for <code>xp.suPassword</code>, yo
 <dl>
 <dt class="hdlist1">xp.init.maxTries</dt>
 <dd>
-<p>Number of attampts system initializers will do to check if initialization is done. Default is <code>300</code> (which equals to 5 minutes) - before XP 7.14.3 and 900 (which equals to 5 minutes) after.</p>
+<p>Number of attampts system initializers will do to check if initialization is done. Default is <code>300</code> (which equals to 5 minutes).</p>
 </dd>
 <dt class="hdlist1">xp.stop.gracePeriod</dt>
 <dd>
@@ -846,7 +846,7 @@ dumps.dir = ${xp.home}/dump</code></pre>
 <dl>
 <dt class="hdlist1">cache.capacity</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.15.0</span></span>. Defines Heap memory limit for node version cache. The value is set in percentage of total Heap, or in memory units (<code>mb</code>, <code>gb</code>, &#8230;&#8203;). Default: <code>10%</code></p>
+<p>Defines Heap memory limit for node version cache. The value is set in percentage of total Heap, or in memory units (<code>mb</code>, <code>gb</code>, &#8230;&#8203;). Default: <code>10%</code></p>
 </dd>
 <dt class="hdlist1">snapshots.dir</dt>
 <dd>
@@ -1149,9 +1149,6 @@ discovery.unicast.sockets =</code></pre>
 <div class="sect2">
 <h3 id="hazelcast"><a class="link" href="#hazelcast">Hazelcast</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.4.0</span></span></p>
-</div>
-<div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.hazelcast.cfg</code></p>
 </div>
 <div class="paragraph">
@@ -1224,43 +1221,43 @@ network.join.kubernetes.resolveNotReadyAddresses=true</code></pre>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.serviceDns</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> Service DNS for Kubernetes discovery. If not set, discovery over Kubernetes API is used. Default is not set.</p>
+<p>Service DNS for Kubernetes discovery. If not set, discovery over Kubernetes API is used. Default is not set.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.namespace</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> Kubernetes Namespace where Hazelcast is running. Default is not set.</p>
+<p>Kubernetes Namespace where Hazelcast is running. Default is not set.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.serviceName</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> Service name used to scan only PODs connected to the given service. Default is not set.</p>
+<p>Service name used to scan only PODs connected to the given service. Default is not set.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.serviceLabelName</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> Service label used to tag services that should form the Hazelcast cluster together. Default is not set.</p>
+<p>Service label used to tag services that should form the Hazelcast cluster together. Default is not set.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.serviceLabelValue</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> Service value used to tag services that should form the Hazelcast cluster together. Default is not set.</p>
+<p>Service value used to tag services that should form the Hazelcast cluster together. Default is not set.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.podLabelName</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> POD label used to tag PODs that should form the Hazelcast cluster together. Default is not set.</p>
+<p>POD label used to tag PODs that should form the Hazelcast cluster together. Default is not set.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.podLabelValue</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> POD value used to tag PODs that should form the Hazelcast cluster together. Default is not set.</p>
+<p>POD value used to tag PODs that should form the Hazelcast cluster together. Default is not set.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.resolveNotReadyAddresses</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> If set to <code>true</code>, it checks also the addresses of PODs which are not ready. Default: <code>false</code>.</p>
+<p>If set to <code>true</code>, it checks also the addresses of PODs which are not ready. Default: <code>false</code>.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.useNodeNameAsExternalAddress</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> If set to <code>true</code>, uses the node name to connect to a NodePort service instead of looking up the external IP using the API. Default: <code>false</code>.</p>
+<p>If set to <code>true</code>, uses the node name to connect to a NodePort service instead of looking up the external IP using the API. Default: <code>false</code>.</p>
 </dd>
 <dt class="hdlist1">network.join.kubernetes.kubernetesApiRetries</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> Number of retries in case of issues while connecting to Kubernetes API. Default: <code>3</code>.</p>
+<p>Number of retries in case of issues while connecting to Kubernetes API. Default: <code>3</code>.</p>
 </dd>
 <dt class="hdlist1">network.join.tcpIp.enabled</dt>
 <dd>
@@ -1288,11 +1285,11 @@ network.join.kubernetes.resolveNotReadyAddresses=true</code></pre>
 </dd>
 <dt class="hdlist1">partition.group.enabled</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> Enable partition grouping. Default: <code>false</code>.</p>
+<p>Enable partition grouping. Default: <code>false</code>.</p>
 </dd>
 <dt class="hdlist1">partition.group.groupType</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.7.0</span></span> Partition grouping type. Default: <code>PER_MEMBER</code>.</p>
+<p>Partition grouping type. Default: <code>PER_MEMBER</code>.</p>
 </dd>
 <dt class="hdlist1">system.hazelcast.phone.home.enabled</dt>
 <dd>
@@ -1527,11 +1524,11 @@ websocket.idleTimeout = 300000</code></pre>
 </dd>
 <dt class="hdlist1">session.cookieSameSite</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.3.0</span></span>:: Specifies SameSite flag for session cookie. Can be <code>Lax</code>, <code>None</code>, <code>Strict</code> or unspecified. Default: <code>Lax</code>.</p>
+<p>Specifies SameSite flag for session cookie. Can be <code>Lax</code>, <code>None</code>, <code>Strict</code> or unspecified. Default: <code>Lax</code>.</p>
 </dd>
 <dt class="hdlist1">session.cookieAlwaysSecure</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.3.0</span></span>:: If true, forces session cooke Secure flag even for HTTP connections. Default: <code>false</code>.</p>
+<p>If true, forces session cooke Secure flag even for HTTP connections. Default: <code>false</code>.</p>
 </dd>
 <dt class="hdlist1">session.cookiename</dt>
 <dd>
@@ -1539,7 +1536,7 @@ websocket.idleTimeout = 300000</code></pre>
 </dd>
 <dt class="hdlist1">gzip.enabled</dt>
 <dd>
-<p>Enables GZIP compression for responses. Default: <code>false</code>. Before <span class="image"><span class="alt">XP 7.15.0</span></span> the default was <code>true</code>.</p>
+<p>Enables GZIP compression for responses. Default: <code>false</code>.</p>
 </dd>
 <dt class="hdlist1">gzip.minsize</dt>
 <dd>
@@ -1569,19 +1566,19 @@ websocket.idleTimeout = 300000</code></pre>
 <dd>
 <p>Number of days to retain the logs. Default: <code>31</code>.</p>
 </dd>
-<dt class="hdlist1">threadPool.maxThreads  <span class="image"><span class="alt">XP 7.3.0</span></span></dt>
+<dt class="hdlist1">threadPool.maxThreads</dt>
 <dd>
 <p>Maximum number of threads. Default: <code>200</code>.</p>
 </dd>
-<dt class="hdlist1">threadPool.minThreads <span class="image"><span class="alt">XP 7.3.0</span></span></dt>
+<dt class="hdlist1">threadPool.minThreads</dt>
 <dd>
 <p>Minimum number of threads. Default: <code>8</code>.</p>
 </dd>
-<dt class="hdlist1">threadPool.idleTimeout <span class="image"><span class="alt">XP 7.3.0</span></span></dt>
+<dt class="hdlist1">threadPool.idleTimeout</dt>
 <dd>
 <p>Thread idle timeout (in milliseconds). Default: <code>60000</code>.</p>
 </dd>
-<dt class="hdlist1">websocket.idleTimeout <span class="image"><span class="alt">XP 7.3.0</span></span></dt>
+<dt class="hdlist1">websocket.idleTimeout</dt>
 <dd>
 <p>The time (in milliseconds) that a websocket may be idle before closing. Default: <code>300000</code>.</p>
 </dd>
@@ -1602,9 +1599,6 @@ Setting <code>session.cookieAlwaysSecure</code> to <code>true</code> would make 
 </div>
 <div class="sect2">
 <h3 id="sessionstore"><a class="link" href="#sessionstore">SessionStore</a></h3>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.4.0</span></span></p>
-</div>
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.web.sessionstore.cfg</code></p>
 </div>
@@ -2074,7 +2068,7 @@ Audit log can be disabled by common <code><a href="#audit_enabled">enabled</a></
 </dd>
 <dt class="hdlist1">auditlog.filter</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.12.0</span></span> Comma separated values <code>rule(,rule)*</code> of allow/deny rules. Default: <code>!system.content.update,*</code> (allow everything except "content update" event).</p>
+<p>Comma separated values <code>rule(,rule)*</code> of allow/deny rules. Default: <code>!system.content.update,*</code> (allow everything except "content update" event).</p>
 </dd>
 </dl>
 </div>
@@ -2118,7 +2112,7 @@ Only content event types can be filtered.</p>
 </dd>
 <dt class="hdlist1">resolveEmptyRegions</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.13.1</span></span> Set to <code>true</code> to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: <code>false</code>.</p>
+<p>Set to <code>true</code> to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: <code>false</code>.</p>
 </dd>
 </dl>
 </div>
@@ -2162,9 +2156,6 @@ As such, it may lead to slower system response and reduced efficiency. Important
 </div>
 <div class="sect2">
 <h3 id="application"><a class="link" href="#application">Application</a></h3>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.6.0</span></span></p>
-</div>
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.app.cfg</code></p>
 </div>
@@ -2233,9 +2224,6 @@ Filter rules apply separately on different nodes in cluster. If one cluster node
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.11.0</span></span></p>
-</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">virtual.enabled</dt>
@@ -2264,9 +2252,6 @@ Filter rules apply separately on different nodes in cluster. If one cluster node
 <div class="sect2">
 <h3 id="task"><a class="link" href="#task">Task</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.6.0</span></span></p>
-</div>
-<div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.task.cfg</code></p>
 </div>
 <div class="paragraph">
@@ -2294,9 +2279,6 @@ clustered.timeout = PT10S</code></pre>
 </div>
 <div class="sect2">
 <h3 id="scheduler"><a class="link" href="#scheduler">Scheduler</a></h3>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.7.0</span></span></p>
-</div>
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.scheduler.cfg</code></p>
 </div>
@@ -2410,9 +2392,6 @@ init-job.my-job2.config={"myparam1":"value1","myset":{"myparam2":"value2"}}</cod
 <div class="sect2">
 <h3 id="portal"><a class="link" href="#portal">Portal</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.7.0</span></span></p>
-</div>
-<div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.portal.cfg</code></p>
 </div>
 <div class="paragraph">
@@ -2473,9 +2452,6 @@ media.contentSecurityPolicy.svg =</code></pre>
 <div class="sect2">
 <h3 id="image"><a class="link" href="#image">Image</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.7.0</span></span></p>
-</div>
-<div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.image.cfg</code></p>
 </div>
 <div class="paragraph">
@@ -2502,21 +2478,18 @@ progressive = jpeg</code></pre>
 </dd>
 <dt class="hdlist1">memoryLimit</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.8.0</span></span> Defines Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP <code>429 Too Many Requests</code> status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
+<p>Defines Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP <code>429 Too Many Requests</code> status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
 The value is set in percentage of total Heap, or in memory units (<code>mb</code>, <code>gb</code>, &#8230;&#8203;). Default: <code>10%</code></p>
 </dd>
 <dt class="hdlist1">progressive</dt>
 <dd>
-<p><span class="image"><span class="alt">XP 7.15.0</span></span>. Defines formats that will use progressive encoding. Default is <code>jpeg</code>.</p>
+<p>Defines formats that will use progressive encoding. Default is <code>jpeg</code>.</p>
 </dd>
 </dl>
 </div>
 </div>
 <div class="sect2">
 <h3 id="export"><a class="link" href="#export">Export</a></h3>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.8.0</span></span></p>
-</div>
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.export.cfg</code></p>
 </div>
@@ -2540,9 +2513,6 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div class="sect2">
 <h3 id="binary_extractor"><a class="link" href="#binary_extractor">Binary Extractor</a></h3>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.2.0</span></span></p>
-</div>
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.extractor.cfg</code></p>
 </div>
@@ -2569,7 +2539,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

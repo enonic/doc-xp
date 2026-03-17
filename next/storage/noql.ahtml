@@ -503,9 +503,6 @@ A query normally targets a single repository, but may also query multiple reposi
 <div class="sect2">
 <h3 id="query_dsl"><a class="link" href="#query_dsl">Query DSL</a></h3>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.9.0</span></span></p>
-</div>
-<div class="paragraph">
 <p>Query DSL is an AST (Abstract Syntax Tree) expressed in JSON to define query expressions. See <a href="dsl.ahtml">documentation</a> for further explanation and examples.</p>
 </div>
 </div>
@@ -1220,8 +1217,8 @@ To sort by ranking, use the following statement:</p>
 <p>A sorting statement can consist of one or more comma separate expressions:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.5.0</span></span> If sort specified for a query, results will contain a meta system property <code>_sort</code>.
-Its exposes field values used for sorting.</p>
+<p>If sort specified for a query, results will contain a meta system property <code>_sort</code>.
+It exposes field values used for sorting.</p>
 </div>
 <div class="paragraph">
 <p>To use DSL sort check <a href="dsl.ahtml#sort">documentation</a>.</p>
@@ -1312,7 +1309,7 @@ Documents with no geo-point property with the given path will be ordered last if
 <dd>
 <p>The location is a geoPoint from which the distance factor should be calculated, formatted as "latitude,longitude".</p>
 </dd>
-<dt class="hdlist1">unit <span class="image"><span class="alt">XP 7.5.0</span></span></dt>
+<dt class="hdlist1">unit</dt>
 <dd>
 <p>The string representation of distance unit to use. Defaults to "m" or "meters", the list of available values below:</p>
 <div class="olist arabic">
@@ -1382,9 +1379,6 @@ how often the term appears in the documents when searching for text etc.</p>
 </div>
 <div class="sect2">
 <h3 id="sort_dsl"><a class="link" href="#sort_dsl">Sort DSL</a></h3>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.9.0</span></span></p>
-</div>
 <div class="paragraph">
 <p>Sort DSL is an AST (Abstract Syntax Tree) expressed in JSON to define sort expressions. See <a href="dsl.ahtml#sort">documentation</a> for further explanation and examples.</p>
 </div>
@@ -1686,7 +1680,7 @@ myDateTime = dateTime('2015-03-19T11:25:00+03:00')</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

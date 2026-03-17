@@ -575,9 +575,18 @@ controller.</p>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.12.0</span></span> The <code>request</code> object also has <code>getHeader(name)</code> function that reads out a header on the request. The name is case-insensitive.
-Use it instead of accessing <code>headers</code> values directly.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>request</code> object also has <code>getHeader(name)</code> function that reads out a header on the request. The name is case-insensitive.
+Use it instead of accessing <code>headers</code> values directly.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -602,7 +611,7 @@ Modification of <code>headers</code> does not affect the result of <code>getHead
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

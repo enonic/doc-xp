@@ -1714,11 +1714,11 @@ const hasRole = hasRole('system.admin');</code></pre>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">scope <span class="image"><span class="alt">XP 7.3.0</span></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scope</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Defines the scope of the login. Valid values are <code>SESSION</code>, <code>REQUEST</code> and <code>NONE</code> (starting from version <span class="image"><span class="alt">XP 7.8.0</span></span>). When scope is set to <code>SESSION</code> the login is persistent. If scope is set to <code>REQUEST</code> the login is only valid for the current request. Scope <code>NONE</code> allows to check correctness of username and password without logging into the system. Default is <code>SESSION</code> if not specified.</p>
+<p>Defines the scope of the login. Valid values are <code>SESSION</code>, <code>REQUEST</code> and <code>NONE</code>. When scope is set to <code>SESSION</code> the login is persistent. If scope is set to <code>REQUEST</code> the login is only valid for the current request. Scope <code>NONE</code> allows to check correctness of username and password without logging into the system. Default is <code>SESSION</code> if not specified.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2268,7 +2268,7 @@ const theUser = modifyUser({
 <td class="tableblock halign-left valign-top"><p class="tableblock">hasPassword</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.15.0</span></span> Whether the user has a password set</p>
+<p>Whether the user has a password set</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2279,7 +2279,7 @@ const theUser = modifyUser({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

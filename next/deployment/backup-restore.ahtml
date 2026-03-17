@@ -585,7 +585,7 @@ Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 <p>Snapshots will only restore the metadata and search index of your instance, not the blobs. As such, you must have an intact blobstore from the time the snapshot was taken.</p>
 </div>
 <div class="paragraph">
-<p>If you for instance have performed a <a href="#vacuum">Vacuum</a> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. Starting from <span class="image"><span class="alt">XP 7.15.0</span></span> to prevent confusion all snapshots are deleted after any vacuum operations that delete blobs.</p>
+<p>If you for instance have performed a <a href="#vacuum">Vacuum</a> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. To prevent confusion, all snapshots are deleted after any vacuum operations that delete blobs.</p>
 </div>
 </td>
 </tr>
@@ -796,7 +796,7 @@ Vacuuming can be setup to execute automatically as a scheduled job, or manually 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

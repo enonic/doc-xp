@@ -467,17 +467,14 @@ When searching with a regular query, steps like sorting and scoring are done to 
 A filter does none of these steps.
 A filter <em>only</em> removes nodes from the result - and is executed after the query statement, if it exists.</p>
 </div>
-<div class="paragraph">
-<p>As such, filters are the most efficient way of limiting hits when you only need basic comparison statements.</p>
-</div>
-<div class="admonitionblock note">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<span class="image"><span class="alt">XP 7.11.0</span></span> It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead of filters, however they can be used simultaneously.
+Filters are deprecated and will be removed in future XP versions. It is recommended to use <a href="dsl.ahtml#_filter">query filtering</a> instead of filters, however they can be used simultaneously.
 </td>
 </tr>
 </table>
@@ -595,11 +592,11 @@ A filter <em>only</em> removes nodes from the result - and is executed after the
 </div>
 <div class="paragraph">
 <p>field (string)
- The property path</p>
+The property path</p>
 </div>
 <div class="paragraph">
 <p>values (object[])
- Array of values to decide a match</p>
+Array of values to decide a match</p>
 </div>
 <div class="listingblock">
 <div class="title">Sample hasValue filter</div>
@@ -704,7 +701,7 @@ A filter <em>only</em> removes nodes from the result - and is executed after the
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

@@ -538,7 +538,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
   # Variable you can set to customize your setup. Remember to set JVM heap (XP_OPTS) to the correct value based on your setup!
   vars:
-    XP_VERSION: 7.7.1
+    XP_VERSION: 8.0.0
     XP_USER: xp
     XP_GROUP: xp
     XP_DIR_DISTROS: /opt/enonic/distros
@@ -692,7 +692,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ export XP_VERSION=7.7.1</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ export XP_VERSION=8.0.0</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -874,7 +874,7 @@ $ systemctl enable --now xp.service</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

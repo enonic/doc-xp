@@ -568,7 +568,7 @@ The localization key must then be declared and localised in the resource bundle.
 </tr>
 <tr>
 <td><i class="conum" data-value="9"></i><b>9</b></td>
-<td><strong>allow-child-content-type</strong> (optional) If specified, only content of content types matching specified criteria will be allowed to be created or moved under content of this content type. The pattern matching used is the same as the one described in <a href="./schemas/input-types/contentselector.ahtml#allowContentType">MATCH</a>. <span class="image"><span class="alt">XP 7.7.0</span></span></td>
+<td><strong>allow-child-content-type</strong> (optional) If specified, only content of content types matching specified criteria will be allowed to be created or moved under content of this content type. The pattern matching used is the same as the one described in <a href="./schemas/input-types/contentselector.ahtml#allowContentType">MATCH</a>.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="10"></i><b>10</b></td>
@@ -652,7 +652,7 @@ The localization key must then be declared and localised in the resource bundle.
 </dd>
 <dt class="hdlist1">workflow (propertySet)</dt>
 <dd>
-<p><em>(Since v7.1)</em> A property-set containing properties related to the workflow, e.g. the state being READY for publishing or IN PROGRESS</p>
+<p>A property-set containing properties related to the workflow, e.g. the state being READY for publishing or IN PROGRESS</p>
 </dd>
 <dt class="hdlist1">x (propertySet)</dt>
 <dd>
@@ -1124,7 +1124,7 @@ Application-specific content types may only be used within a site, to which the 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

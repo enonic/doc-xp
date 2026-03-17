@@ -545,18 +545,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="networking"><a class="link" href="#networking">Networking</a></h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This guide assumes that you are deploying XP version 7.4 or higher
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>To deploy a <em>basic cluster</em>, we need a total of 5 nodes for XP. You need to ensure that those servers can communicate on the following ports:</p>
 </div>
@@ -930,8 +918,17 @@ It is an indicator of server/cluster capacity problem, if such logs appear often
 Yet often great amount of work is put on them with inlined or named tasks run by applications.
 If heavy tasks must execute on master nodes (i.e. they have <code>isMaster</code> check), try to lower allocated heap from 75% to 50% of available RAM and allocate more total RAM for the master servers.</p>
 </div>
-<div class="paragraph">
-<p>Starting from XP version 7.6.0 it is possible to free master nodes from running named tasks by setting <code>distributable.acceptInbound = false</code> in <a href="../deployment/config.ahtml#_task">Task</a> config.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+It is possible to free master nodes from running named tasks by setting <code>distributable.acceptInbound = false</code> in <a href="../deployment/config.ahtml#_task">Task</a> config.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -939,7 +936,7 @@ If heavy tasks must execute on master nodes (i.e. they have <code>isMaster</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

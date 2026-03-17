@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#service_mapping">Service mapping</a></li>
 <li><a href="#request_matching">Request Matching</a></li>
-<li><a href="#capture_groups_xp_7_8_0">Capture Groups <span class="image"><span class="alt">XP 7.8.0</span></span></a></li>
+<li><a href="#capture_groups">Capture Groups</a></li>
 <li><a href="#virtual-host-context">Virtual Host Context</a></li>
 <li><a href="#examples">Examples</a></li>
 <li><a href="#testing_vhosts">Testing vhosts</a></li>
@@ -490,7 +490,7 @@ By default, XP provides the following endpoints:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.8.0</span></span> Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with <code>~</code> symbol).</p>
+<p>Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with <code>~</code> symbol).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -532,7 +532,7 @@ Vhosts only apply to XP service port (defaults to 8080), not the monitoring and 
 <p>VHost matches the request if <code>host</code> value matches the requested host <em>AND</em> request-uri matches <code>source</code>.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.8.0</span></span> Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Pattern JavaDoc</a>
+<p>Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/regex/Pattern.html">Pattern JavaDoc</a>
 Host matching is case-insensitive in both cases.</p>
 </div>
 <div class="admonitionblock note">
@@ -548,14 +548,18 @@ Specify both host values <code>mapping.example.host = example.com. example.com</
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>host mapping match both <code>www.example.com</code> and <code>example.com</code> hosts</p>
+</div>
 <div class="listingblock">
-<div class="title"><span class="image"><span class="alt">XP 7.8.0</span></span> host mapping match both <code>www.example.com</code> and <code>example.com</code> hosts</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">mapping.example.host = www.example.com example.com</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>host mapping will match any sub-domain: <code>1.example.com</code>, <code>2.example.com</code> hosts (but not sub-sub-domains)</p>
+</div>
 <div class="listingblock">
-<div class="title"><span class="image"><span class="alt">XP 7.8.0</span></span> host mapping will match any sub-domain: <code>1.example.com</code>, <code>2.example.com</code> hosts (but not sub-sub-domains)</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">mapping.example.host = ~[^.]+\\.example\\.com</code></pre>
 </div>
@@ -582,7 +586,7 @@ Source matching is case-sensitive, and is done before URI decoding.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="image"><span class="alt">XP 7.8.0</span></span> VHost with lower <code>order</code> value is preferred.
+<p>VHost with lower <code>order</code> value is preferred.
 If <code>order</code> is not specified, order is considered <em>least</em> preferable (<code>Integer.MAX_VALUE</code>).</p>
 </li>
 <li>
@@ -596,7 +600,7 @@ If <code>order</code> is not specified, order is considered <em>least</em> prefe
 </div>
 </div>
 <div class="sect1">
-<h2 id="capture_groups_xp_7_8_0"><a class="link" href="#capture_groups_xp_7_8_0">Capture Groups <span class="image"><span class="alt">XP 7.8.0</span></span></a></h2>
+<h2 id="capture_groups"><a class="link" href="#capture_groups">Capture Groups</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When VHost matched by a host regular expression, capture groups can be used in <code>target</code> via group references.</p>
@@ -776,7 +780,7 @@ Location of hosts file on Mac/Linux_: <code>/etc/hosts</code>, on Windows: <code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

@@ -653,18 +653,6 @@ Another alternative to XML-escape is to wrap the string in a CDATA block, as in 
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Before <span class="image"><span class="alt">XP 7.8.0</span></span> it was not possible to map controller or filter to the site itself.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -718,7 +706,7 @@ An example use case is automatic handling of the content type <code>portal:fragm
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<span class="image"><span class="alt">XP 7.8.0</span></span> Missing/unavailable content does not match any condition.
+Missing/unavailable content does not match any condition.
 Don&#8217;t specify <code>&lt;match&gt;</code> if you need to map controller/filter to the URL that does not correspond to any content.
 </td>
 </tr>
@@ -729,9 +717,6 @@ Don&#8217;t specify <code>&lt;match&gt;</code> if you need to map controller/fil
 <div class="sect1">
 <h2 id="service_mappings"><a class="link" href="#service_mappings">Service mappings</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><span class="image"><span class="alt">XP 7.12.0</span></span></p>
-</div>
 <div class="paragraph">
 <p>Service-based mappings can be used to associate service requests with controllers or filters directly.</p>
 </div>
@@ -766,7 +751,7 @@ Don&#8217;t specify <code>&lt;match&gt;</code> if you need to map controller/fil
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>

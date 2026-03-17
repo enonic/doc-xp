@@ -513,7 +513,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p>Starting from <span class="image"><span class="alt">XP 7.15.0</span></span> <code>assetUrl</code> is deprecated and will be removed in future versions.
+<p><code>assetUrl</code> is deprecated and will be removed in future versions.
 <a href="https://developer.enonic.com/docs/lib-asset"><code>lib-asset</code></a> and <a href="https://developer.enonic.com/docs/lib-static"><code>lib-static</code></a> are introduced as a replacement.</p>
 </div>
 </div>
@@ -2081,7 +2081,7 @@ When outputting processed HTML in Thymeleaf, use attribute <code>data-th-utext="
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><span class="alt">XP 7.7.0</span></span> imageWidths</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">imageWidths</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">number[]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -2090,7 +2090,7 @@ When outputting processed HTML in Thymeleaf, use attribute <code>data-th-utext="
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><span class="alt">XP 7.8.0</span></span> imageSizes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">imageSizes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;optional&gt;</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -2414,7 +2414,7 @@ const url = buildUrl({
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 08:06:53 UTC
+Last updated 2026-03-17 09:14:32 UTC
 </div>
 </div>
 </body>
