@@ -599,6 +599,7 @@ websocket.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: The time (in mill
 
 WARNING: Setting `session.cookieAlwaysSecure` to `true` would make session-involved login on HTTP connections impossible.
 
+[#sessionstore]
 === SessionStore
 image:xp-740.svg[XP 7.4.0,opts=inline]
 
@@ -612,15 +613,17 @@ saveOnCreate = true
 flushOnResponseCommit = true
 ----
 
-storeMode:: Switches between SessionStore mode. Can be `replicated` or `non-persistent`. In Replicated mode sessions are distributed over nodes in the cluster using Jetty-Hazelcast integration. Default: `non-persistent`.
+storeMode:: Switches between SessionStore mode. Can be `replicated`, `file` or `non-persistent`. In `replicated` mode sessions are distributed over nodes in the cluster using Jetty-Hazelcast integration. In `file` mode sessions are persisted to disk, allowing them to survive graceful restarts of standalone instances. Default: `non-persistent`.
 
-savePeriodSeconds:: A non-zero value means that session won't be persisted if only the access time changed, and it has been less than savePeriodSeconds since the last time the session was written. Has no effect in non-persistent storeMode. Default: `0`.
+storeDir:: Directory where sessions are stored on disk. Only used in `file` storeMode. Default: `${xp.home}/work/sessions`.
 
-gracePeriodSeconds:: Specifies how many seconds to wait for non-session-owner nodes to be checked to verify an expired session is in fact expired throughout the cluster before closing it. Has no effect in non-persistent storeMode. Default: `3600`.
+savePeriodSeconds:: A non-zero value means that session won't be persisted if only the access time changed, and it has been less than savePeriodSeconds since the last time the session was written. Has no effect in `non-persistent` storeMode. Default: `0`.
 
-saveOnCreate:: Controls whether a session that is newly created will be immediately (true) or lazily (false) persisted as the last request for the session exits. Has no effect in non-persistent storeMode. Default: `false`.
+gracePeriodSeconds:: Specifies how many seconds to wait for non-session-owner nodes to be checked to verify an expired session is in fact expired throughout the cluster before closing it. Has no effect in `non-persistent` storeMode. Default: `3600`.
 
-flushOnResponseCommit:: Controls whether a session that is changed ("dirty") will be persisted as the response is about to commit. If false, a dirty session will only be persisted when the last simultaneous request for it leaves the session. Has no effect in non-persistent storeMode. Default: `false`.
+saveOnCreate:: Controls whether a session that is newly created will be immediately (true) or lazily (false) persisted as the last request for the session exits. Has no effect in `non-persistent` storeMode. Default: `false`.
+
+flushOnResponseCommit:: Controls whether a session that is changed ("dirty") will be persisted as the response is about to commit. If false, a dirty session will only be persisted when the last simultaneous request for it leaves the session. Has no effect in `non-persistent` storeMode. Default: `false`.
 
 [#media]
 === Media
