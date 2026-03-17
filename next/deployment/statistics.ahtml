@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Field Set</title>
+<title>Statistics Endpoint</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -435,82 +435,458 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article toc2 toc-right">
+<body id="statistics_endpoint" class="article toc2 toc-right">
 <div id="header">
-<h1>Field Set</h1>
+<h1>Statistics Endpoint</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#appearance">Appearance</a></li>
-<li><a href="#usage">Usage</a></li>
-<li><a href="#output">Output</a></li>
+<li><a href="#monitoring">Monitoring</a></li>
+<li><a href="#cluster_monitoring">Cluster monitoring</a>
+<ul class="sectlevel2">
+<li><a href="#cluster_health">Cluster health</a></li>
+<li><a href="#elasticsearch_cluster_health">ElasticSearch cluster health</a></li>
+<li><a href="#index_stats">Index stats</a></li>
+<li><a href="#hazelcast_cluster_health">Hazelcast cluster health</a></li>
+<li><a href="#health_check">Health check</a></li>
+<li><a href="#readiness_check">Readiness check</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="monitoring"><a class="link" href="#monitoring">Monitoring</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A field set may be used to group items visually under a common label and distinguish this group from the rest of the form.</p>
+<p>We provide some basic metric tools for monitoring which are easily accessed in a simple JSON format. To access the monitoring JSON feed you can point to the following url:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="appearance"><a class="link" href="#appearance">Appearance</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Field sets seen in Content Studio.</p>
-</div>
-<div class="imageblock">
+<div class="literalblock">
 <div class="content">
-<img src="images/fieldset-1.png" alt="Example of a fieldset" width="689">
+<pre>GET http://&lt;host&gt;:2609/</pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="title">Sample field-set definition containing a single input-type</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;field-set&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;label i18n="metadata.label"&gt;Metadata&lt;/label&gt;
-  &lt;items&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;input name="tags" type="Tag"&gt;
-      &lt;label&gt;Tags for tag cloud&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="5"/&gt;
-    &lt;/input&gt;
-  &lt;/items&gt;
-&lt;/field-set&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
+<div class="admonitionblock tip">
 <table>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>field-set</strong> does not need a name since it is only visual, and does not affect the data model</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>items</strong> allow placement of form items to be contained within it</td>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>&lt;host&gt;</code> equals <code>localhost</code> on the machine with running enonic XP instance
+</td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>This will give you a list of status-reporters. Each reporter has a name and can be accessed using the following pattern:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/&lt;name&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here’s a list of all the status pages and what is shows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">cluster.elasticsearch</dt>
+<dd>
+<p>Information about the ElasticSearch cluster. Local-node and members.</p>
+</dd>
+<dt class="hdlist1">cluster.manager</dt>
+<dd>
+<p>Information about the state of the clusters: elasticsearch</p>
+</dd>
+<dt class="hdlist1">dump.deadlocks</dt>
+<dd>
+<p>This will try to detect thread deadlocks and show them if any.</p>
+</dd>
+<dt class="hdlist1">dump.threads</dt>
+<dd>
+<p>Dumps all current thread-states.</p>
+</dd>
+<dt class="hdlist1">http.filter</dt>
+<dd>
+<p>List of servlet filters registered. It shows class, order and the URL patterns to which it applies.</p>
+</dd>
+<dt class="hdlist1">http.servlet</dt>
+<dd>
+<p>List of HTTP servlets registered. It shows class, order and the URL patterns to which it applies.</p>
+</dd>
+<dt class="hdlist1">http.threadpool</dt>
+<dd>
+<p>Status of the the Jetty web server thread pool.</p>
+</dd>
+<dt class="hdlist1">http.webHandler</dt>
+<dd>
+<p>List of WebHandler instances registered.</p>
+</dd>
+<dt class="hdlist1">index</dt>
+<dd>
+<p>Shows ElasticSearch index status.</p>
+</dd>
+<dt class="hdlist1">jvm.gc</dt>
+<dd>
+<p>Information about JVM GC status.</p>
+</dd>
+<dt class="hdlist1">jvm.info</dt>
+<dd>
+<p>General JVM information (version, vendor, uptime).</p>
+</dd>
+<dt class="hdlist1">jvm.memory</dt>
+<dd>
+<p>JVM memory information (heap, non-heap, pools).</p>
+</dd>
+<dt class="hdlist1">jvm.os</dt>
+<dd>
+<p>Information about OS (name, version, architecture).</p>
+</dd>
+<dt class="hdlist1">jvm.threads</dt>
+<dd>
+<p>JVM thread stats (count, peak, total).</p>
+</dd>
+<dt class="hdlist1">mediaTypes</dt>
+<dd>
+<p>List of mappings from file extension to media type.</p>
+</dd>
+<dt class="hdlist1">metrics</dt>
+<dd>
+<p>Shows metrics. The information can be filtered using ?filter=&#8230;&#8203;.</p>
+</dd>
+<dt class="hdlist1">osgi.bundle</dt>
+<dd>
+<p>Information about all OSGi bundles.</p>
+</dd>
+<dt class="hdlist1">osgi.component</dt>
+<dd>
+<p>Information about registered SCR OSGi components.</p>
+</dd>
+<dt class="hdlist1">osgi.service</dt>
+<dd>
+<p>Shows all OSGi services registered.</p>
+</dd>
+<dt class="hdlist1">server</dt>
+<dd>
+<p>Information about the server (version, build).</p>
+</dd>
+</dl>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="output"><a class="link" href="#output">Output</a></h2>
+<h2 id="cluster_monitoring"><a class="link" href="#cluster_monitoring">Cluster monitoring</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Field sets do not affect the output of a schema.</p>
+<p>There are multiple tools at your disposal for monitoring the health of the clusters and indices:</p>
+</div>
+<div class="sect2">
+<h3 id="cluster_health"><a class="link" href="#cluster_health">Cluster health</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/cluster.manager</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To obtain a generic health check of the clusters. It should return you a response similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "state": "OK",
+    "clusters": [
+        {
+            "id": "elasticsearch",
+            "enabled": true,
+            "healthy": true,
+            "numberOfNodesSeen": 3
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This view gives a brief overview of the nodes in the cluster.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="elasticsearch_cluster_health"><a class="link" href="#elasticsearch_cluster_health">ElasticSearch cluster health</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/cluster.elasticsearch</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which should return you a response similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "name": "mycluster",
+    "localNode": {
+        "isMaster": true,
+        "id": "WT_gNgZ8SAu7GCJxvynSOg",
+        "hostName": "griPortable.local",
+        "version": "1.5.2",
+        "numberOfNodesSeen": 3
+    },
+    "members": [
+        {
+            "isMaster": false,
+            "id": "WqknPf3USg2fOnK6xGlWwA",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9301]",
+            "name": "01bd187e-7cd1-4a8a-ac0a-918d4e09aa64",
+            "isDataNode": true,
+            "isClientNode": false
+        },
+        {
+            "isMaster": false,
+            "id": "xDwdxa37SUy6AHPz6hMZMA",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9302]",
+            "name": "cf91d280-6111-47f2-8118-7d48664c3530",
+            "isDataNode": true,
+            "isClientNode": false
+        },
+        {
+            "isMaster": true,
+            "id": "WT_gNgZ8SAu7GCJxvynSOg",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9300]",
+            "name": "af5287fc-663d-40bd-9b05-7cca59f96522",
+            "isDataNode": true,
+            "isClientNode": false
+        }
+    ],
+    "state": "GREEN"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This view gives a brief overview of the nodes in the cluster. For convenience, the current local node to which the request was made has a separate entry in addition to being in the list of members.</p>
+</div>
+<div class="paragraph">
+<p>The <code>state</code> property is the most important:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Green</strong>: Cluster is operational and all configured replicas are distributed to a node</p>
+</li>
+<li>
+<p><strong>Yellow</strong>: Cluster is operational, but there are replicas that are not distributed to any node</p>
+</li>
+<li>
+<p><strong>Red</strong>: Cluster is not operational</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To see the details about how the replicas are distributed, let’s continue to the <code>Index stats</code> report:</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="index_stats"><a class="link" href="#index_stats">Index stats</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/index</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which should give you a response like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "summary": {
+        "total": 8,
+        "started": 8,
+        "unassigned": 0,
+        "relocating": 0,
+        "initializing": 0
+    },
+    "shards": {
+        "started": [
+            {
+                "id": "search-cms-repo(0)",
+                "nodeId": "xDwdxa37SUy6AHPz6hMZMA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "search-cms-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "search-system-repo(0)",
+                "nodeId": "xDwdxa37SUy6AHPz6hMZMA",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "search-system-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "storage-system-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "storage-system-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "storage-cms-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "storage-cms-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            }
+        ],
+        "unassigned": [],
+        "relocating": [],
+        "initializing": []
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This gives an overview of how the indices are distributed and what state the index parts (<strong>shards</strong>) are currently in. A shard could be either <code>PRIMARY</code> or <code>REPLICA</code> (copy of a primary shard). These are the possible states:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>total</strong>: Total number of index parts (e.g two repositories with two indices with one replica for each index)</p>
+</li>
+<li>
+<p><strong>started</strong>: Shards that are currently assigned to a node</p>
+</li>
+<li>
+<p><strong>unassigned</strong>: Shards waiting to be distributed to a node. Typically a setup with a number of replicas where one or more nodes are not running</p>
+</li>
+<li>
+<p><strong>relocating</strong>: Shards that are currently moving from one node to another</p>
+</li>
+<li>
+<p><strong>initializing</strong>: Shards that are currently being recovered from disk at startup.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>shards</code> section gives a more detailed overview on the shard distribution.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="hazelcast_cluster_health"><a class="link" href="#hazelcast_cluster_health">Hazelcast cluster health</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/cluster.hazelcast</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which should return you a response similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "clusterState": "ACTIVE",
+  "clusterTime": 1599748536909,
+  "clusterVersion": "3.12",
+  "members": [
+    {
+      "uuid": "d7b9b75e-aacf-444b-bff9-af5c786843c2",
+      "address": "192.168.1.1",
+      "port": 5701,
+      "liteMember": false,
+      "version": "3.12.7"
+    },
+    {
+      "uuid": "899920a2-d9bd-4add-8b1a-133bf27af9a0",
+      "address": "192.168.1.2",
+      "port": 5702,
+      "liteMember": false,
+      "version": "3.12.7"
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This view gives a brief overview of the nodes in the Hazelcast cluster. Check Hazelcast documentation for more details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="health_check"><a class="link" href="#health_check">Health check</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/health</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Health check validates that essential data services are available and ready to serve requests.</p>
+</div>
+<div class="paragraph">
+<p>Successful validation will return an empty response with <code>200</code> status code. Failed validation will return <code>503</code> status code with the list of errors:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "errors": [
+      "org.elasticsearch.client.Client service is not available"
+    ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="readiness_check"><a class="link" href="#readiness_check">Readiness check</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/ready</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Readiness check validates that all services needed for the instance to be fully operational are available and ready to serve requests.</p>
+</div>
+<div class="paragraph">
+<p>Successful validation will return an empty response with <code>200</code> status code. Failed validation will return <code>503</code> status code with the list of errors:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "errors": [
+      "com.enonic.xp.portal.websocket.WebSocketManager service is not available",
+      "com.enonic.xp.mail.MailService service is not available"
+    ]
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 09:14:32 UTC
+Last updated 2026-03-17 10:14:49 UTC
 </div>
 </div>
 </body>
