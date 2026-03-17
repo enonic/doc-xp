@@ -33,8 +33,6 @@ For more examples on how to deploy XP, check out the various <<strategies#, depl
 
 == Networking
 
-NOTE: This guide assumes that you are deploying XP version 7.4 or higher
-
 To deploy a _basic cluster_, we need a total of 5 nodes for XP. You need to ensure that those servers can communicate on the following ports:
 
 * `5701` for _hazelcast_ cluster communication
@@ -233,4 +231,4 @@ Master nodes should be freed form heavy operations as they are on duty to keep c
 Yet often great amount of work is put on them with inlined or named tasks run by applications.
 If heavy tasks must execute on master nodes (i.e. they have `isMaster` check), try to lower allocated heap from 75% to 50% of available RAM and allocate more total RAM for the master servers.
 
-Starting from XP version 7.6.0 it is possible to free master nodes from running named tasks by setting `distributable.acceptInbound = false` in <<../deployment/config.adoc#_task, Task>> config.
+TIP: It is possible to free master nodes from running named tasks by setting `distributable.acceptInbound = false` in <<../deployment/config.adoc#_task, Task>> config.

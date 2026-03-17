@@ -97,8 +97,6 @@ Examples:
 * Regular expression encapsulated in CDATA to avoid XML encoding: `<pattern><![CDATA[/endpoint\?bar=\d+&foo=.*]]></pattern>`
 * Inverted with invert option enabled: `<pattern invert="true">/section/.*</pattern>`
 
-NOTE: Before image:xp-780.svg[XP 7.8.0,opts=inline] it was not possible to map controller or filter to the site itself.
-
 == Match mappings
 
 Match based mappings can for instance be used to automatically render content types without using page templates or associating content with a controller directly.
@@ -121,12 +119,11 @@ Examples:
 
 The expected value can be either a regular expression to match the property value, or simply a string, number or boolean (`true` | `false`).
 
-NOTE: image:xp-780.svg[XP 7.8.0,opts=inline] Missing/unavailable content does not match any condition.
+NOTE: Missing/unavailable content does not match any condition.
 Don't specify `<match>` if you need to map controller/filter to the URL that does not correspond to any content.
 
 [#service_mappings]
 == Service mappings
-image:xp-7120.svg[XP 7.12.0,opts=inline]
 
 Service-based mappings can be used to associate service requests with controllers or filters directly.
 

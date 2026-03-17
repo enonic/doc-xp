@@ -3,7 +3,6 @@
 :toclevels: 4
 :imagesdir: ../images
 
-image:xp-790.svg[XP 7.9.0,opts=inline]
 
 == Query DSL
 === Introduction
@@ -416,7 +415,7 @@ Matches all nodes, giving them all a `_score` of '1.0'.
 
 ===== exists
 
-image:xp-7110.svg[XP 7.11.0,opts=inline] Returns nodes that contain a value for a field.
+Returns nodes that contain a value for a field.
 
 .Expression parameters
 [cols="1,1,1, 2a"]
@@ -728,7 +727,6 @@ All expressions in the mustNot must evaluate to false for nodes to match.
 }
 
 ----
-image:xp-7110.svg[XP 7.11.0,opts=inline]
 
 ===== filter
 All expressions must evaluate to true to include a node in the result (similar to <<must>>), but they will not affect the score for matching nodes.

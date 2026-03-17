@@ -46,7 +46,7 @@ Let's create an ansible playbook that will handle all the setup for you. Create 
 
   # Variable you can set to customize your setup. Remember to set JVM heap (XP_OPTS) to the correct value based on your setup!
   vars:
-    XP_VERSION: 7.7.1
+    XP_VERSION: 8.0.0
     XP_USER: xp
     XP_GROUP: xp
     XP_DIR_DISTROS: /opt/enonic/distros
@@ -192,7 +192,7 @@ To avoid making errors, lets set the `XP_VERSION` variable:
 
 [source,bash]
 ----
-$ export XP_VERSION=7.7.1
+$ export XP_VERSION=8.0.0
 ----
 
 NOTE: Step 1, 2 and 4 only have to be executed the first time you setup Enonic XP with systemd.

@@ -2,7 +2,6 @@
 :toc: right
 :imagesdir: ../images
 
-image:xp-730.svg[XP 7.3.0,opts=inline]
 
 This API provides functions for management of Content Projects.
 
@@ -105,7 +104,7 @@ Parameters
 | Name | Type | Attributes | Description
 | id | string | | Unique project id (alphanumeric characters and hyphens allowed).
 | displayName | string | | Project display name.
-| parent | string | <optional> | image:xp-760.svg[XP 7.6.0,opts=inline] Parent project id. If provided, the new project will be a Content Layer that automatically inherits changes from the parent project.
+| parent | string | <optional> | Parent project id. If provided, the new project will be a Content Layer that automatically inherits changes from the parent project.
 
 | description | string | <optional> | Project description.
 | language | string | <optional> | Default project language.
@@ -607,7 +606,6 @@ const expected = {
 ----
 
 === getAvailableApplications
-image:xp-7110.svg[XP 7.11.0,opts=inline]
 
 Returns available applications of a specified project. The result contains active apps assigned to the project and all of its parents, if any.
 

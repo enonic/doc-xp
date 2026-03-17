@@ -25,7 +25,6 @@ A query normally targets a single repository, but may also query multiple reposi
 There are two types of query's format available in XP: String format and DSL (Domain Specific Language).
 
 === Query DSL
-image:xp-790.svg[XP 7.9.0,opts=inline]
 
 Query DSL is an AST (Abstract Syntax Tree) expressed in JSON to define query expressions. See <<dsl#, documentation>> for further explanation and examples.
 
@@ -521,8 +520,8 @@ To sort by ranking, use the following statement:
 
 A sorting statement can consist of one or more comma separate expressions:
 
-image:xp-750.svg[XP 7.5.0,opts=inline] If sort specified for a query, results will contain a meta system property `_sort`.
-Its exposes field values used for sorting.
+If sort specified for a query, results will contain a meta system property `_sort`.
+It exposes field values used for sorting.
 
 
 To use DSL sort check <<dsl#sort, documentation>>.
@@ -589,7 +588,7 @@ geoDistance(<field>, <location>, [<unit>])
 
 field:: Any geoPoint property
 location:: The location is a geoPoint from which the distance factor should be calculated, formatted as "latitude,longitude".
-unit image:xp-750.svg[XP 7.5.0,opts=inline]:: The string representation of distance unit to use. Defaults to "m" or "meters", the list of available values below:
+unit:: The string representation of distance unit to use. Defaults to "m" or "meters", the list of available values below:
 . `"m" or "meters"`
 . `"in" or "inch"`
 . `"yd" or "yards"`
@@ -621,7 +620,6 @@ how often the term appears in the documents when searching for text etc.
 For more details, check out the Elasticsearch documentation.
 
 === Sort DSL
-image:xp-790.svg[XP 7.9.0,opts=inline]
 
 Sort DSL is an AST (Abstract Syntax Tree) expressed in JSON to define sort expressions. See <<dsl#sort, documentation>> for further explanation and examples.
 
@@ -689,7 +687,6 @@ publish.first NOT LIKE "*"
 ----
 
 NOTE: Using `exists` and `notExists` filters is considered the most efficient way searching for nodes with missing values
-
 
 
 === Querying references

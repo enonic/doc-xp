@@ -11,9 +11,7 @@ These are relatively costly operations.
 A filter does none of these steps.
 A filter _only_ removes nodes from the result - and is executed after the query statement, if it exists.
 
-As such, filters are the most efficient way of limiting hits when you only need basic comparison statements.
-
-NOTE: image:xp-7110.svg[XP 7.11.0,opts=inline] It is recommended to use <<dsl#_filter, query filtering>> instead of filters, however they can be used simultaneously.
+WARNING: Filters are deprecated and will be removed in future XP versions. It is recommended to use <<dsl#_filter, query filtering>> instead of filters, however they can be used simultaneously.
 
 
 === Syntax
@@ -61,10 +59,10 @@ include::code/notExists-filter.json[]
 The hasValue filter matches if document contain any of the values given in the value list
 
 field (string)
- The property path
+The property path
 
 values (object[])
- Array of values to decide a match
+Array of values to decide a match
 
 .Sample hasValue filter
 [source,json]

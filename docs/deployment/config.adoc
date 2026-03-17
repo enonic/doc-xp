@@ -98,7 +98,7 @@ TIP: To generate `sha512` hash suitable for `xp.suPassword`, you can use the fol
 printf '{sha512}%s\n' "$(echo -n 'YourStrongRandomPassword' | sha512sum | cut -d' ' -f1)"
 ----
 
-xp.init.maxTries:: Number of attampts system initializers will do to check if initialization is done. Default is `300` (which equals to 5 minutes) - before XP 7.14.3 and 900 (which equals to 5 minutes) after.
+xp.init.maxTries:: Number of attampts system initializers will do to check if initialization is done. Default is `300` (which equals to 5 minutes).
 xp.stop.gracePeriod:: Time in milliseconds XP waits for all services to stop. Default is `600000` (10 minutes).
 felix.fileinstall.poll:: Frequency in ms for how often the configuration folders are scanned for changes
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
@@ -208,7 +208,7 @@ snapshots.dir = ${xp.home}/snapshots
 dumps.dir = ${xp.home}/dump
 ----
 
-cache.capacity:: image:xp-7150.svg[XP 7.15.0,opts=inline]. Defines Heap memory limit for node version cache. The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
+cache.capacity:: Defines Heap memory limit for node version cache. The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
 snapshots.dir:: Specifies the root location for where to find and place snapshot files. Default: `${xp.home}/snapshots`
 
 NOTE: If you change this value, remember to update value for `path.repo` in `com.enonic.xp.elasticsearch.cfg` as well.
@@ -351,7 +351,6 @@ index.recovery.initial_shards:: Number of shards expected to be found on full cl
 index.auto_expand_replicas:: Auto-expand the number of replicas based on the number of available nodes. Set to a dash delimited lower and upper bound (e.g. 0-5) or use all for the upper bound (e.g. 0-all). Defaults to `false` (i.e. disabled).
 
 === Hazelcast
-image:xp-740.svg[XP 7.4.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.hazelcast.cfg`
 
@@ -403,25 +402,25 @@ network.join.multicast.enabled:: Enable Multicast discovery. Default: `false`.
 
 network.join.kubernetes.enabled:: Enable Kubernetes discovery. Default: `false`.
 
-network.join.kubernetes.serviceDns:: image:xp-770.svg[XP 7.7.0,opts=inline] Service DNS for Kubernetes discovery. If not set, discovery over Kubernetes API is used. Default is not set.
+network.join.kubernetes.serviceDns:: Service DNS for Kubernetes discovery. If not set, discovery over Kubernetes API is used. Default is not set.
 
-network.join.kubernetes.namespace:: image:xp-770.svg[XP 7.7.0,opts=inline] Kubernetes Namespace where Hazelcast is running. Default is not set.
+network.join.kubernetes.namespace:: Kubernetes Namespace where Hazelcast is running. Default is not set.
 
-network.join.kubernetes.serviceName:: image:xp-770.svg[XP 7.7.0,opts=inline] Service name used to scan only PODs connected to the given service. Default is not set.
+network.join.kubernetes.serviceName:: Service name used to scan only PODs connected to the given service. Default is not set.
 
-network.join.kubernetes.serviceLabelName:: image:xp-770.svg[XP 7.7.0,opts=inline] Service label used to tag services that should form the Hazelcast cluster together. Default is not set.
+network.join.kubernetes.serviceLabelName:: Service label used to tag services that should form the Hazelcast cluster together. Default is not set.
 
-network.join.kubernetes.serviceLabelValue:: image:xp-770.svg[XP 7.7.0,opts=inline] Service value used to tag services that should form the Hazelcast cluster together. Default is not set.
+network.join.kubernetes.serviceLabelValue:: Service value used to tag services that should form the Hazelcast cluster together. Default is not set.
 
-network.join.kubernetes.podLabelName:: image:xp-770.svg[XP 7.7.0,opts=inline] POD label used to tag PODs that should form the Hazelcast cluster together. Default is not set.
+network.join.kubernetes.podLabelName:: POD label used to tag PODs that should form the Hazelcast cluster together. Default is not set.
 
-network.join.kubernetes.podLabelValue:: image:xp-770.svg[XP 7.7.0,opts=inline] POD value used to tag PODs that should form the Hazelcast cluster together. Default is not set.
+network.join.kubernetes.podLabelValue:: POD value used to tag PODs that should form the Hazelcast cluster together. Default is not set.
 
-network.join.kubernetes.resolveNotReadyAddresses:: image:xp-770.svg[XP 7.7.0,opts=inline] If set to `true`, it checks also the addresses of PODs which are not ready. Default: `false`.
+network.join.kubernetes.resolveNotReadyAddresses:: If set to `true`, it checks also the addresses of PODs which are not ready. Default: `false`.
 
-network.join.kubernetes.useNodeNameAsExternalAddress:: image:xp-770.svg[XP 7.7.0,opts=inline] If set to `true`, uses the node name to connect to a NodePort service instead of looking up the external IP using the API. Default: `false`.
+network.join.kubernetes.useNodeNameAsExternalAddress:: If set to `true`, uses the node name to connect to a NodePort service instead of looking up the external IP using the API. Default: `false`.
 
-network.join.kubernetes.kubernetesApiRetries:: image:xp-770.svg[XP 7.7.0,opts=inline] Number of retries in case of issues while connecting to Kubernetes API. Default: `3`.
+network.join.kubernetes.kubernetesApiRetries:: Number of retries in case of issues while connecting to Kubernetes API. Default: `3`.
 
 network.join.tcpIp.enabled:: Enable TcpIP discovery. Default: `true`.
 
@@ -435,9 +434,9 @@ network.restApi.enabled:: Enable Hazelcast REST API. Default: `false`.
 
 network.restApi.restEndpointGroups:: Comma separated list of REST API Endpoint Groups. Default: `HEALTH_CHECK, CLUSTER_READ`.
 
-partition.group.enabled:: image:xp-770.svg[XP 7.7.0,opts=inline] Enable partition grouping. Default: `false`.
+partition.group.enabled:: Enable partition grouping. Default: `false`.
 
-partition.group.groupType:: image:xp-770.svg[XP 7.7.0,opts=inline] Partition grouping type. Default: `PER_MEMBER`.
+partition.group.groupType:: Partition grouping type. Default: `PER_MEMBER`.
 
 system.hazelcast.phone.home.enabled:: Enable or disable the sending of phone home data to Hazelcast's phone home server. Default: `true`.
 
@@ -581,10 +580,10 @@ http.port:: specifies http port number to use. Default: `8080`.
 http.requestHeaderSize:: Maximum request header size. Default: 32K.
 http.requestHeaderSize:: Maximum response header size. Default: 32K.
 session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
-session.cookieSameSite:: image:xp-730.svg[XP 7.3.0,opts=inline]:: Specifies SameSite flag for session cookie. Can be `Lax`, `None`, `Strict` or unspecified. Default: `Lax`.
-session.cookieAlwaysSecure:: image:xp-730.svg[XP 7.3.0,opts=inline]:: If true, forces session cooke Secure flag even for HTTP connections. Default: `false`.
+session.cookieSameSite:: Specifies SameSite flag for session cookie. Can be `Lax`, `None`, `Strict` or unspecified. Default: `Lax`.
+session.cookieAlwaysSecure:: If true, forces session cooke Secure flag even for HTTP connections. Default: `false`.
 session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
-gzip.enabled:: Enables GZIP compression for responses. Default: `false`. Before image:xp-7150.svg[XP 7.15.0,opts=inline] the default was `true`.
+gzip.enabled:: Enables GZIP compression for responses. Default: `false`.
 gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `23`.
 log.enabled:: Turns on request logging. Default: `false`.
 log.file:: Request log file location. Default: `${xp.home}/logs/jetty-yyyy_mm_dd.request.log`.
@@ -592,16 +591,15 @@ log.append:: append to existing file, or create new one when started. Default: `
 log.extended:: turns on extended logging format. Default: `true`.
 log.timeZone:: Timezone to display timestamp in. Default: `GMT`.
 log.retainDays:: Number of days to retain the logs. Default: `31`.
-threadPool.maxThreads  image:xp-730.svg[XP 7.3.0,opts=inline]:: Maximum number of threads. Default: `200`.
-threadPool.minThreads image:xp-730.svg[XP 7.3.0,opts=inline]:: Minimum number of threads. Default: `8`.
-threadPool.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: Thread idle timeout (in milliseconds). Default: `60000`.
-websocket.idleTimeout image:xp-730.svg[XP 7.3.0,opts=inline]:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
+threadPool.maxThreads:: Maximum number of threads. Default: `200`.
+threadPool.minThreads:: Minimum number of threads. Default: `8`.
+threadPool.idleTimeout:: Thread idle timeout (in milliseconds). Default: `60000`.
+websocket.idleTimeout:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
 
 WARNING: Setting `session.cookieAlwaysSecure` to `true` would make session-involved login on HTTP connections impossible.
 
 [#sessionstore]
 === SessionStore
-image:xp-740.svg[XP 7.4.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.web.sessionstore.cfg`
 
@@ -881,7 +879,7 @@ auditlog.enabled:: Set to `false` to disable the creation of audit log entries o
 IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
 
 
-auditlog.filter:: image:xp-7120.svg[XP 7.12.0,opts=inline] Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `!system.content.update,*` (allow everything except "content update" event).
+auditlog.filter:: Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `!system.content.update,*` (allow everything except "content update" event).
 
 A rule prefixed with `!` is a `deny` rule, otherwise it is an `allow` rule.
 A rule suffixed with `*` is a wildcard rule.
@@ -915,7 +913,7 @@ auditlog.filter = system.content.set*
 
 attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in content attachment file names. Default: `false`.
 
-resolveEmptyRegions:: image:xp-7131.svg[XP 7.13.1,opts=inline] Set to `true` to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: `false`.
+resolveEmptyRegions:: Set to `true` to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: `false`.
 
 WARNING: Setting `resolveEmptyRegions` to `true` can adversely impact system performance.
 By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required.
@@ -937,8 +935,6 @@ ageThreshold:: Age of data to be vacuumed. The format is based on the ISO-8601 d
 
 [#application]
 === Application
-
-image:xp-760.svg[XP 7.6.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.app.cfg`
 
@@ -977,8 +973,6 @@ Stored application installation is skipped if filter denies it.
 
 NOTE: Filter rules apply separately on different nodes in cluster. If one cluster node denies an app, another cluster node may still allow it.
 
-image:xp-7110.svg[XP 7.11.0,opts=inline]
-
 virtual.enabled:: Allows the use of virtual applications. If set to `true` then schemas from virtual applications will be visible as resources. Default: `false`.
 virtual.schema.override:: When set to `true`, virtual application schemes will have a priority over schemes in a real application with the same name. When set to `false` virtual application schemes have no affect if real application with the same name exists. Default: `true`.
 
@@ -995,7 +989,6 @@ virtual.schema.override = false
 ----
 
 === Task
-image:xp-760.svg[XP 7.6.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.task.cfg`
 
@@ -1013,7 +1006,6 @@ clustered.timeout:: The time (in ISO-8601 Period format) the node waits for a jo
 
 [#scheduler]
 === Scheduler
-image:xp-770.svg[XP 7.7.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.scheduler.cfg`
 
@@ -1087,8 +1079,6 @@ init-job.my-job2.cron:: 0 5 * * * - job will be created to run task at 5:00AM ev
 
 === Portal
 
-image:xp-770.svg[XP 7.7.0,opts=inline]
-
 `XP_HOME/config/com.enonic.xp.portal.cfg`
 
 Configure the portal behaviour.
@@ -1120,8 +1110,6 @@ legacy.httpService.enabled:: Enables/Disables legacy HTTP service. Default `true
 [#image]
 === Image
 
-image:xp-770.svg[XP 7.7.0,opts=inline]
-
 `XP_HOME/config/com.enonic.xp.image.cfg`
 
 Configure the image service behaviour.
@@ -1137,13 +1125,11 @@ progressive = jpeg
 
 scale.maxDimension:: Defines maximum dimension size (both height and width) when scaling is done. Default: `8000`
 filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
-memoryLimit:: image:xp-780.svg[XP 7.8.0,opts=inline] Defines Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP `429 Too Many Requests` status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
+memoryLimit:: Defines Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP `429 Too Many Requests` status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
 The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
-progressive:: image:xp-7150.svg[XP 7.15.0,opts=inline]. Defines formats that will use progressive encoding. Default is `jpeg`.
+progressive:: Defines formats that will use progressive encoding. Default is `jpeg`.
 
 === Export
-
-image:xp-780.svg[XP 7.8.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.export.cfg`
 
@@ -1158,8 +1144,6 @@ exports.dir = /xp-exports
 exports.dir:: Defines location of exports directory. Default: `${xp.home}/data/export`
 
 === Binary Extractor
-
-image:xp-720.svg[XP 7.2.0,opts=inline]
 
 `XP_HOME/config/com.enonic.xp.extractor.cfg`
 

@@ -55,7 +55,7 @@ Snapshots normally complete within seconds. Once you have a snapshot, you may re
 ====
 Snapshots will only restore the metadata and search index of your instance, not the blobs. As such, you must have an intact blobstore from the time the snapshot was taken.
 
-If you for instance have performed a <<vacuum, Vacuum>> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. Starting from image:xp-7150.svg[XP 7.15.0,opts=inline] to prevent confusion all snapshots are deleted after any vacuum operations that delete blobs.
+If you for instance have performed a <<vacuum, Vacuum>> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. To prevent confusion, all snapshots are deleted after any vacuum operations that delete blobs.
 ====
 
 Snapshot and restore commands can be performed by using Enonic CLI, the API or a management application from Enonic Market.

@@ -572,7 +572,7 @@ const result = repo.diff({
 
 === duplicate
 
-image:xp-7120.svg[XP 7.12.0,opts=inline] Duplicates a node.
+Duplicates a node.
 
 [.lead]
 Parameters
@@ -902,7 +902,6 @@ const binaryStream = repo.getBinary({
 ----
 
 === getCommit
-image:xp-770.svg[XP 7.7.0,opts=inline]
 
 Returns a node version commit.
 
@@ -1269,8 +1268,6 @@ An object with the following keys and their values:
 | highlight | object | optional | <<../storage/highlighting#,Highlighting>> config
 | explain | boolean | optional | If set to `true`, score calculation explanation will be included in result.
 |===
-
-
 
 [.lead]
 Returns

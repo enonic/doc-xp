@@ -9,13 +9,13 @@ Management commands are available at port `4848`, i.e. `localhost:4848` if you'r
 
 All management endpoints require an authenticated user with the Administrator role.
 
-=== JWT Authentication image:xp-7150.svg[XP 7.15.0,opts=inline]
+=== JWT Authentication
 
 All management endpoints can use <<../iam/system-idp.adoc#jwt-authentication, Service accounts JWT authentication>>. This is the recommended way to authenticate with the management endpoints.
 
 === Basic Authentication
 
-WARNING: Starting from image:xp-7150.svg[XP 7.15.0,opts=inline] use of basic authentication is discouraged due to its security weaknesses. Use JWT authentication instead.
+WARNING: Use of basic authentication is discouraged due to its security weaknesses. Use JWT authentication instead.
 
 All management endpoints allow basic authentication.
 Most clients provide an option for authentication, but in case you need to do it manually: basic auth is simply a string of the username and password separated by a colon that is base64 encoded.
@@ -57,7 +57,7 @@ NOTE: The first snapshot only stores markers in the repository for the current s
 WARNING: For a clustered installation, the snapshot-location must be on a shared file-system.
 
 .Url
- POST repo/snapshot
+POST repo/snapshot
 
 .Params
 [cols="1,1,3", options="header"]
@@ -95,7 +95,7 @@ NOTE: Read about authorization <<authorization, here>>
 List all the snapshots for the installation.
 
 .Url
- GET repo/snapshot/list
+GET repo/snapshot/list
 
 NOTE: Read about authorization <<authorization, here>>
 
@@ -135,7 +135,7 @@ NOTE: Read about authorization <<authorization, here>>
 === Restore
 
 .Url
- POST repo/snapshot/restore
+POST repo/snapshot/restore
 
 .Params
 [cols="1,1,3", options="header"]
@@ -158,7 +158,7 @@ NOTE: Read about authorization <<authorization, here>>
 
 |`force`
 |Boolean
-| image:xp-7120.svg[XP 7.12.0,opts=inline] If `true` then affected indices will be removed before snapshot is applied. It is helpful when Elasticsearch indices are corrupted. Default: `false`
+| If `true` then affected indices will be removed before snapshot is applied. It is helpful when Elasticsearch indices are corrupted. Default: `false`
 |===
 
 NOTE: Read about authorization <<authorization, here>>
@@ -184,7 +184,7 @@ NOTE: Read about authorization <<authorization, here>>
 Deletes a snapshot by name or date:
 
 .Url
- POST repo/snapshot/delete
+POST repo/snapshot/delete
 
 .Params
 [cols="1,1,3", options="header"]
@@ -227,7 +227,7 @@ List of command for manipulating all repositories
 Export data from every repository. The result will be stored in the `$XP_HOME/data/dump` directory.
 
 .Url
- POST system/dump
+POST system/dump
 
 .Params
 [cols="1,1,3", options="header"]
@@ -313,7 +313,7 @@ NOTE: The current version XP installation must be running with the upgraded app 
 NOTE: Upgrade does not work with archived dumps.
 
 .Url
- POST system/upgrade
+POST system/upgrade
 
 .Params
 [cols="1,1,3", options="header"]
@@ -357,7 +357,7 @@ NOTE: Upgrade does not work with archived dumps.
 WARNING: A load will delete all existing repositories before loading the repositories present in the system-dump
 
 .Url
- POST system/load
+POST system/load
 
 .Params
 [cols="1,1,3", options="header"]
@@ -446,7 +446,7 @@ This is useful to move a part of a site from one installation to another.
 WARNING: Exporting content will not include the version history of the content, just the current version.
 
 .Url
- POST repo/export
+POST repo/export
 
 .Params
 [cols="1,1,3", options="header"]
@@ -502,7 +502,7 @@ The export read has to be stored in the `$XP_HOME/data/export` directory.
 NOTE: `exportName` must refer to a ZIP archive file (e.g. `myexport` will load `$XP_HOME/data/export/myexport.zip`).
 
 .Url
- POST repo/import
+POST repo/import
 
 .Params
 [cols="1,1,3", options="header"]
@@ -584,7 +584,7 @@ Commands to manage applications in a running Enonic XP instance.
 Installs an application from file on all nodes.
 
 .Url
- POST app/install
+POST app/install
 
 .Params
 [cols="1,1,3", options="header"]
@@ -630,7 +630,7 @@ NOTE: Read about authorization <<authorization, here>>
 Installs an application from url on all nodes.
 
 .Url
- POST app/installUrl
+POST app/installUrl
 
 .Params
 [cols="1,1,3", options="header"]
@@ -645,7 +645,7 @@ Installs an application from url on all nodes.
 
 |`sha512`
 |String
-|image:xp-760.svg[XP 7.6.0,opts=inline] application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.
+| Application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.
 |===
 
 NOTE: Read about authorization <<authorization, here>>
@@ -677,10 +677,10 @@ NOTE: Read about authorization <<authorization, here>>
 
 === Start
 
-image:xp-760.svg[XP 7.6.0,opts=inline] Starts an application with specific application key.
+Starts an application with a specific application key.
 
 .Url
- POST app/start
+POST app/start
 
 .Params
 [cols="1,1,3", options="header"]
@@ -704,10 +704,10 @@ No response body
 
 === Stop
 
-image:xp-760.svg[XP 7.6.0,opts=inline] Stops an application with specific application key.
+Stops an application with a specific application key.
 
 .Url
- POST app/stop
+POST app/stop
 
 .Params
 [cols="1,1,3", options="header"]
@@ -731,10 +731,10 @@ No response body
 
 === Uninstall
 
-image:xp-760.svg[XP 7.6.0,opts=inline] Uninstalls an application with specific application key.
+Uninstalls an application with a specific application key.
 
 .Url
- POST app/uninstall
+POST app/uninstall
 
 .Params
 [cols="1,1,3", options="header"]
@@ -758,10 +758,10 @@ No response body
 
 === Server-Sent Events
 
-image:xp-760.svg[XP 7.6.0,opts=inline] The client initiates the SSE connection by using the media type `text/event-stream` in the `Accept` header. Then it gets updates automatically without requesting the server.
+The client initiates the SSE connection by using the media type `text/event-stream` in the `Accept` header. Then it gets updates automatically without requesting the server.
 
 .Url
- GET app/events
+GET app/events
 
 This API supports the following events:
 
@@ -812,7 +812,7 @@ Unless the `skipChildren` flag is specified, it processes all descendants of the
 NOTE: This command should be used after migrating content from Enonic CMS using the cms2xp tool.
 
 .Url
- POST content/reprocess
+POST content/reprocess
 
 .Params
 [cols="1,1,3", options="header"]
@@ -848,7 +848,7 @@ Calls <<reprocess,reprocess>> endpoint as a task.
 NOTE: This command should be used after migrating content from Enonic CMS using the cms2xp tool.
 
 .Url
- POST content/reprocessTask
+POST content/reprocessTask
 
 .Params
 [cols="1,1,3", options="header"]
@@ -881,12 +881,11 @@ NOTE: Task info can be fetched with <<task, task>> request.
 Project related commands.
 
 === List
-image:xp-7130.svg[XP 7.13.0,opts=inline]
 
 Lists all projects together with their sites.
 
 .Url
- GET content/projects/list
+GET content/projects/list
 
 .Response
 [source,json]
@@ -950,12 +949,11 @@ Lists all projects together with their sites.
 ----
 
 === SyncAll
-image:xp-760.svg[XP 7.6.0,opts=inline]
 
 Calls forced content sync for all available projects.
 
 .Url
- POST content/syncAll
+POST content/syncAll
 
 NOTE: Read about authorization <<authorization, here>>
 
@@ -967,7 +965,6 @@ NOTE: Read about authorization <<authorization, here>>
 }
 ----
 == ID Providers
-image:xp-7130.svg[XP 7.13.0,opts=inline]
 
 Id providers related commands.
 
@@ -975,7 +972,7 @@ Id providers related commands.
 Lists all the id providers.
 
 .Url
- GET idproviders/list
+GET idproviders/list
 
 .Response
 [source,json]
@@ -999,7 +996,6 @@ Lists all the id providers.
 ]
 ----
 == Webapps
-image:xp-7130.svg[XP 7.13.0,opts=inline]
 
 Web apps related commands.
 
@@ -1007,7 +1003,7 @@ Web apps related commands.
 Lists all the web apps.
 
 .Url
- GET webapps/list
+GET webapps/list
 
 .Response
 [source,json]
@@ -1036,7 +1032,7 @@ Commands for configuring and managing repositories.
 Reindex the content in the search indices for the given repository and branches. This is usually required after upgrades and may be useful in many other cases.
 
 .Url
- POST repo/index/reindex
+POST repo/index/reindex
 
 .Params
 [cols="1,1,3", options="header"]
@@ -1082,7 +1078,7 @@ Calls <<reindex,reindex>> endpoint as a task.
 
 
 .Url
- POST repo/index/reindex
+POST repo/index/reindex
 
 .Params
 [cols="1,1,3", options="header"]
@@ -1119,7 +1115,7 @@ NOTE: Task info can be fetched with <<task, task>> request.
 Update settings for a specified repository.
 
 .Url
- POST repo/index/updateSettings
+POST repo/index/updateSettings
 
 .Params
 [cols="1,1,3", options="header"]
@@ -1170,7 +1166,7 @@ NOTE: Read about authorization <<authorization, here>>
 List available repositories.
 
 .Url
- GET repo/list
+GET repo/list
 
 NOTE: Read about authorization <<authorization, here>>
 
@@ -1205,7 +1201,7 @@ WARNING: Make sure you have a backup of the installation available before doing 
 NOTE: Read about authorization <<authorization, here>>
 
 .Url
- POST system/vacuum
+POST system/vacuum
 
 .Params
 [cols="1,1,3", options="header"]
@@ -1225,10 +1221,10 @@ NOTE: Read about authorization <<authorization, here>>
 
 This API supports the following tasks: +
 **SegmentVacuumTask** - removes unused repositories blobs. +
-**VersionTableVacuumTask** - removes unused and non-commited versions together with it's blobs. +
+**VersionTableVacuumTask** - removes unused and non-commited versions together with its blobs. +
 **BinaryBlobVacuumTask** - checks all binary blobs and removes unused. +
 **NodeBlobVacuumTask** - checks all node blobs and removes unused. +
-**SnapshotsVacuumTask** - image:xp-7150.svg[XP 7.15.0,opts=inline] deletes snapshots that are older than specified age threshold. +
+**SnapshotsVacuumTask** - deletes snapshots that are older than the specified age threshold. +
 
 NOTE: Read about authorization <<authorization, here>>
 
@@ -1272,7 +1268,7 @@ Deletes records from audit log repository.
 WARNING: Make sure you have a backup of the installation available before running a cleanup.
 
 .Url
- POST auditlog/cleanup
+POST auditlog/cleanup
 
 .Params
 [cols="1,1,3", options="header"]
@@ -1308,7 +1304,7 @@ WARNING: Make sure you have a backup of the installation available before runnin
 Fetches particular Task information.
 
 .Url
- GET task/{taskId}
+GET task/{taskId}
 
 .Params
 [cols="1,1,3", options="header"]
@@ -1327,15 +1323,12 @@ Fetches particular Task information.
 
 == Scheduled Jobs List
 
-image:xp-770.svg[XP 7.7.0,opts=inline]
-
-
 List scheduled jobs.
 
 NOTE: Read about authorization <<authorization, here>>
 
 .Url
- GET scheduler/list
+GET scheduler/list
 
 .Response
 [source,json]

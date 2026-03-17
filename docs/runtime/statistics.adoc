@@ -228,7 +228,6 @@ This gives an overview of how the indices are distributed and what state the ind
 The `shards` section gives a more detailed overview on the shard distribution.
 
 === Hazelcast cluster health
-image:xp-740.svg[XP 7.4.0,opts=inline]
 
  GET http://<host>:2609/cluster.hazelcast
 
@@ -260,7 +259,6 @@ Which should return you a response similar to:
 This view gives a brief overview of the nodes in the Hazelcast cluster. Check Hazelcast documentation for more details.
 
 === Health check
-image:xp-7130.svg[XP 7.13.0,opts=inline]
 
  GET http://<host>:2609/health
 
@@ -278,7 +276,6 @@ Successful validation will return an empty response with `200` status code. Fail
 
 
 === Readiness check
-image:xp-7130.svg[XP 7.13.0,opts=inline]
 
  GET http://<host>:2609/ready
 

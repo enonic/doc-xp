@@ -31,7 +31,7 @@ appDisplayName = Vanilla Example <3>
 appName = com.acme.example.vanilla <4>
 vendorName = Acme Inc
 vendorUrl = https://example.com
-xpVersion = 7.13.3 <5>
+xpVersion = 8.0.0 <5>
 
 # Settings for publishing to a Maven repo
 group = com.acme.example <6>
@@ -179,6 +179,6 @@ Windows:: `gradlew.bat dev`
 TIP: Development mode also disables some of XP's caching mechanisms. To make the development workflow as smooth as possible, XP tries to invalidate caches for your static assets. This is to prevent you from getting stale resources so that what you see in the browser is always as up to date as possible.
 
 
-NOTE: XP 7.x defaults to the Nashorn JavaScript engine for executing JavaScript. For an overview over what JavaScript features Nashorn supports, see https://kangax.github.io/compat-table/es6/#nashorn1_8[this feature table].
+NOTE: For an overview over what JavaScript features Nashorn supports, see https://kangax.github.io/compat-table/es6/#nashorn1_8[this feature table].
 
 

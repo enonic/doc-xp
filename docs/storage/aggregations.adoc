@@ -34,7 +34,7 @@ get its own bucket. Here's a list of properties:
 field (string):: The property path.
 size (int):: The number of bucket to return, ordered by the given orderType and orderDirection. Default to ``10``.
 order (string):: How to order the results, type and direction. Default to ``_term ASC``.
-image:xp-770.svg[XP 7.7.0,opts=inline] minDocCount (int):: Only include bucket in the result if number of hits is ``minDocCount`` or more. This parameter is optional.
+minDocCount (int):: Only include bucket in the result if number of hits is ``minDocCount`` or more. This parameter is optional.
 
 Types:
 
@@ -78,7 +78,7 @@ include::code/stats-result.json[]
 
 === Min
 
-image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that computes the minimum of the values in the current bucket. Here's the list of properties:
+An aggregation that computes the minimum of the values in the current bucket. Here's the list of properties:
 
 field (string):: The property path.
 
@@ -96,7 +96,7 @@ include::code/min-result.json[]
 
 === Max
 
-image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that computes the maximum of the values in the current bucket. Here's the list of properties:
+An aggregation that computes the maximum of the values in the current bucket. Here's the list of properties:
 
 field (string):: The property path.
 
@@ -114,7 +114,7 @@ include::code/max-result.json[]
 
 === Value Count
 
-image:xp-770.svg[XP 7.7.0,opts=inline] An aggregation that counts the number of values that current document set has for a specific field. Here's the list of properties:
+An aggregation that counts the number of values that current document set has for a specific field. Here's the list of properties:
 
 field (string):: The property path.
 
@@ -228,7 +228,6 @@ include::code/date-range-query.json[]
 ----
 include::code/date-range-result.json[]
 ----
-
 
 
 ==== Date-math expression

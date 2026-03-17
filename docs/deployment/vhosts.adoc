@@ -20,7 +20,7 @@ By using vhosts, traffic for specific domains and url patterns may be routed dir
 
   I.e. example.com -> :8080/site/default/master/homepage
 
-image:xp-780.svg[XP 7.8.0,opts=inline] Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with `~` symbol).
+Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with `~` symbol).
 
 
 NOTE: IDN hosts should be specified using Punycode representation.
@@ -36,19 +36,19 @@ NOTE: Vhosts only apply to XP service port (defaults to 8080), not the monitorin
 
 VHost matches the request if `host` value matches the requested host _AND_ request-uri matches `source`.
 
-image:xp-780.svg[XP 7.8.0,opts=inline] Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[Pattern JavaDoc]
+Host matching can be an exact match or regular expression match. Read more about Java Regular Expressions at https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/regex/Pattern.html[Pattern JavaDoc]
 Host matching is case-insensitive in both cases.
 
 NOTE: For backwards compatibility with old versions of XP root domain is not normalized in host.
 Specify both host values `mapping.example.host = example.com. example.com` if case you need to support FQDN-style host.
 
-.image:xp-780.svg[XP 7.8.0,opts=inline] host mapping match both `www.example.com` and `example.com` hosts
+host mapping match both `www.example.com` and `example.com` hosts
 [source,properties]
 ----
 mapping.example.host = www.example.com example.com
 ----
 
-.image:xp-780.svg[XP 7.8.0,opts=inline] host mapping will match any sub-domain: `1.example.com`, `2.example.com` hosts (but not sub-sub-domains)
+host mapping will match any sub-domain: `1.example.com`, `2.example.com` hosts (but not sub-sub-domains)
 [source,properties]
 ----
 mapping.example.host = ~[^.]+\\.example\\.com
@@ -71,12 +71,12 @@ mapping.example.source = /hello
 
 If multiple VHosts match the request, disambiguation rules apply in the following order:
 
-- image:xp-780.svg[XP 7.8.0,opts=inline] VHost with lower `order` value is preferred.
+- VHost with lower `order` value is preferred.
 If `order` is not specified, order is considered _least_ preferable (`Integer.MAX_VALUE`).
 - VHost with the longest `source` value is preferred.
 - arbitrary VHost is selected.
 
-== Capture Groups image:xp-780.svg[XP 7.8.0,opts=inline]
+== Capture Groups
 
 When VHost matched by a host regular expression, capture groups can be used in `target` via group references.
 

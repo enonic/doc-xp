@@ -727,7 +727,7 @@ An object with the following keys and their values:
 | idProvider | string | <optional> | Name of id provider where the user is stored. If not specified system id provider will be used.
 | skipAuth | boolean | <optional> | Skip authentication.  Default is `false` if not specified.
 | sessionTimeout | number | <optional> | Session timeout (in seconds). By default, the value of session.timeout from `com.enonic.xp.web.jetty.cfg`
-| scope image:xp-730.svg[XP 7.3.0,opts=inline] | string | <optional> | Defines the scope of the login. Valid values are `SESSION`, `REQUEST` and `NONE` (starting from version image:xp-780.svg[XP 7.8.0,opts=inline]). When scope is set to `SESSION` the login is persistent. If scope is set to `REQUEST` the login is only valid for the current request. Scope `NONE` allows to check correctness of username and password without logging into the system. Default is `SESSION` if not specified.
+| scope  | string | <optional> | Defines the scope of the login. Valid values are `SESSION`, `REQUEST` and `NONE`. When scope is set to `SESSION` the login is persistent. If scope is set to `REQUEST` the login is only valid for the current request. Scope `NONE` allows to check correctness of username and password without logging into the system. Default is `SESSION` if not specified.
 |===
 
 [.lead]
@@ -1053,5 +1053,5 @@ Properties
 | email        | string  | The email of the user
 | login        | string  | The login name of the user
 | idProvider   | string  | The id provider where the user is stored
-| hasPassword  | boolean | image:xp-7150.svg[XP 7.15.0,opts=inline] Whether the user has a password set
+| hasPassword  | boolean | Whether the user has a password set
 |===

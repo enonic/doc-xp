@@ -51,7 +51,7 @@ We generally always recommend updating your apps to the latest version!
 
 === Requirements
 
-This guide focuses on completing an upgrade with zero downtime, and requires you to set up production environment on XP 8 in parallel with existing 7.15 environment.
+This guide focuses on completing an upgrade with zero downtime, and requires you to set up production environment on XP 8 in parallel with existing 7.16 environment.
 Carefully follow the below steps to upgrade your instance:
 
 NOTE: For scenarios where downtime cannot be avoided, additional steps, such as setting up a temporary "we are upgrading page", will be required:
@@ -174,7 +174,7 @@ It is strongly recommended to change all passwords after the upgrade to ensure a
 
 ==== Other configuration
 
-- Migrate other configuration files from 7.15, including custom configurations (app config etc.).
+- Migrate other configuration files from 7.16, including custom configurations (app config etc.).
 
 ===== draftBranchAllowedFor
 
