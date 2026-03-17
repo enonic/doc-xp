@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Systemd deployments</title>
+<title>XP Applications</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,19 +437,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Systemd deployments</h1>
+<h1>XP Applications</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#explanation_of_the_setup">Explanation of the setup</a></li>
-<li><a href="#using_ansible">Using Ansible</a>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#enonic_market">Enonic Market</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#life_cycle">Life Cycle</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#use_cases">Use cases</a>
 <ul class="sectlevel2">
-<li><a href="#creating_the_ansible_playbook">Creating the Ansible playbook</a></li>
-<li><a href="#running_the_ansible_playbook">Running the Ansible playbook</a></li>
+<li><a href="#sites">Sites</a></li>
+<li><a href="#id_providers">ID providers</a></li>
+<li><a href="#tasks">Tasks</a></li>
+<li><a href="#web_apps">Web apps</a></li>
+<li><a href="#admin_tools">Admin tools</a></li>
 </ul>
 </li>
-<li><a href="#manual-setup">Manual setup</a></li>
-<li><a href="#useful-commands">Useful commands</a></li>
 </ul>
 </div>
 </div>
@@ -457,416 +462,173 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes how to run Enonic XP as a systemd service.</p>
+<p>Schemas, code, and functionality is added to XP via applications.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="explanation_of_the_setup"><a class="link" href="#explanation_of_the_setup">Explanation of the setup</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>What we want to achieve is to setup XP with systemd. The setup should be easy to install, upgrade, rollback and backup. We will setup the following:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Set correct <code>vm.max_map_count</code>.</p>
-</li>
-<li>
-<p>Create a user and group for XP.</p>
-</li>
-<li>
-<p>Download and extract the desired distribution into <code>/opt/enonic/distros</code>.</p>
-</li>
-<li>
-<p>Setup the XP home folder at <code>/opt/enonic/home</code>.</p>
-</li>
-<li>
-<p>Create a systemd service file using the desired distro.</p>
-</li>
-<li>
-<p>Start the systemd service.</p>
-</li>
-</ol>
+<p>Enonic apps are standalone software packages that can be installed and started on Enonic XP.</p>
 </div>
 <div class="paragraph">
-<p>This guide will use the following folder setup:</p>
+<p>Applications are powered by the <a href="runtime.ahtml">XP runtime</a>. This also means XP is capable of running multiple applications in a single instance.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-files" data-lang="files">/opt/enonic <i class="conum" data-value="1"></i><b>(1)</b>
-  /distros <i class="conum" data-value="2"></i><b>(2)</b>
-  /home <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+<div class="paragraph">
+<p>Once an application has started, it has access to all platform services, such as the <a href="storage.ahtml">NoSQL storage</a>.</p>
 </div>
+<div class="paragraph">
+<p>A single application may offer many different capabilities, from CMS schemas, to low level features like exposing services to other apps.</p>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Root folder to contain all Enonic related files</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Folder to store all downloaded distributions</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Folder containing XP home, that includes blobstore, index, configuration, e.t.c.</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Fundamentally, most of XP&#8217;s core software components are built like applications.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="using_ansible"><a class="link" href="#using_ansible">Using Ansible</a></h2>
+<h2 id="enonic_market"><a class="link" href="#enonic_market">Enonic Market</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The easiest way to achive this is to use an ansible playbook. We will focus on that first. If you are not familiar with ansible, don&#8217;t worry. We will also show you how to do this manually in section <a href="#manual-setup">Manual setup</a>.</p>
+<p><a href="https://market.enonic.com">Enonic market</a> is the go-to place for official apps from Enonic, as well as 3rd party applications.
+The marketplace also offers starter kits and software libraries that help you create new apps better and faster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="installation"><a class="link" href="#installation">Installation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are four ways to get your applications running on Enonic XP:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Via Admin Interface</dt>
+<dd>
+<p>Applications can be manually installed through the admin tool "Applications", included with Enonic XP. Once installed, the applications will be available for all nodes in an XP cluster.</p>
+</dd>
+<dt class="hdlist1">Via Management API</dt>
+<dd>
+<p>Applications can be installed through the Management API. The applications will be available for all nodes in an XP cluster. This approach is commonly used in a CI/CD setup.</p>
+</dd>
+<dt class="hdlist1">Via File system</dt>
+<dd>
+<p>File system deployment is most commonly used during development, but it can also be applied for specialized deployment scenarios. Applications deployed on file will only be available on the local node, and overrides applications installed via other alternatives.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Consider a microservice style highly controlled setup where you bundle your app(s) together with the XP runtime and launch it as a separate instance.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="life_cycle"><a class="link" href="#life_cycle">Life Cycle</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to installing and uninstalling, XP applications may be started and stopped.
+This is referred to as the life cycle of the application. During the stop and start phases, applications themselves may execute custom code.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Starting</dt>
+<dd>
+<p>Once installed, applications are automatically started on all nodes. During the startup, if it exists, the application&#8217;s main.js script will be executed.</p>
+</dd>
+<dt class="hdlist1">Stopping</dt>
+<dd>
+<p>Before uninstalling, applications are automatically stopped on all nodes.
+During the stopping, if it exists, the disposer of the application&#8217;s main.js script will be executed.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="link" href="#configuration">Configuration</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Applications can be configured by adding a <a href="deployment/config.ahtml">custom configuration file</a> <code>&lt;app-name&gt;.cfg</code> i.e. <code>my.custom.app.cfg</code> to your Enonic instance</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use_cases"><a class="link" href="#use_cases">Use cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are endless use cases for the XP platform, but the most common scenarios are listed below:</p>
 </div>
 <div class="sect2">
-<h3 id="creating_the_ansible_playbook"><a class="link" href="#creating_the_ansible_playbook">Creating the Ansible playbook</a></h3>
+<h3 id="sites"><a class="link" href="#sites">Sites</a></h3>
 <div class="paragraph">
-<p>Let&#8217;s create an ansible playbook that will handle all the setup for you. Create a file called <code>xp-systemd.yaml</code> and paste the following contents into it:</p>
+<p>You may build applications that go from serving content via a standard GraphQL API, to rendered with the <a href="framework.ahtml">Enonic Framework</a>, building your own API or a combination of all of these.</p>
 </div>
-<div class="listingblock">
-<div class="title">xp-systemd.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml"># Run on all hosts in your inventory. You should probably change this!
-- hosts: "all"
-# Run playbook as root. This is required!
-  become: true
-
-  # Variable you can set to customize your setup. Remember to set JVM heap (XP_OPTS) to the correct value based on your setup!
-  vars:
-    XP_VERSION: 7.7.1
-    XP_USER: xp
-    XP_GROUP: xp
-    XP_DIR_DISTROS: /opt/enonic/distros
-    XP_DIR_HOME: /opt/enonic/home
-    XP_SERVICE_NAME: xp.service
-    XP_SERVICE_FILE: "/etc/systemd/system/{{ XP_SERVICE_NAME }}"
-    XP_OPTS: "-Xms1G -Xmx1G"
-
-  tasks:
-    - name: Set vm.max_map_count
-      sysctl:
-        name: vm.max_map_count
-        value: "262144"
-        sysctl_set: true
-
-    - name: Ensure user group exists
-      ansible.builtin.group:
-        name: "{{ XP_GROUP }}"
-
-    - name: Ensure user exists
-      ansible.builtin.user:
-        name: "{{ XP_USER }}"
-        group: "{{ XP_GROUP }}"
-        system: true
-
-    - name: Check if distro directory exists
-      ansible.builtin.stat:
-        path: "{{ XP_DIR_HOME }}"
-      register: distro_details
-
-    - name: Create distro directory
-      when: not distro_details.stat.exists
-      ansible.builtin.file:
-        path: "{{ XP_DIR_DISTROS }}"
-        state: directory
-        recurse: true
-        owner: "{{ XP_USER }}"
-        group: "{{ XP_GROUP }}"
-        mode: 0775
-
-    - name: Check if desired distro exists
-      ansible.builtin.stat:
-        path: "{{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}"
-      register: distro_details
-
-    - name: Download desired distro
-      when: not distro_details.stat.exists
-      ansible.builtin.unarchive:
-        src: "https://repo.enonic.com/public/com/enonic/xp/enonic-xp-linux-server/{{ XP_VERSION }}/enonic-xp-linux-server-{{ XP_VERSION }}.tgz"
-        dest: "{{ XP_DIR_DISTROS }}"
-        owner: "{{ XP_USER }}"
-        group: "{{ XP_GROUP }}"
-        remote_src: true
-
-    - name: Check if home directory exists
-      ansible.builtin.stat:
-        path: "{{ XP_DIR_HOME }}"
-      register: home_details
-
-    - name: Copy home directory from distro
-      when: not home_details.stat.exists
-      ansible.posix.synchronize:
-        src: "{{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}/home/"
-        dest: "{{ XP_DIR_HOME }}"
-      delegate_to: "{{ inventory_hostname }}"
-
-    - name: Create systemd service
-      ansible.builtin.copy:
-        dest: "{{ XP_SERVICE_FILE }}"
-        content: |
-          [Unit]
-          Description=Enonic XP
-          Documentation=https://developer.enonic.com/docs
-          Wants=network-online.target
-          After=network-online.target
-
-          [Service]
-          Type=simple
-          PrivateTmp=true
-          Environment=XP_INSTALL={{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}
-          Environment=XP_JAVA_HOME={{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}/jdk
-          Environment=XP_HOME={{ XP_DIR_HOME }}
-          Environment=XP_OPTS={{ XP_OPTS }}
-
-          User={{ XP_USER }}
-          Group={{ XP_GROUP }}
-
-          ExecStart={{ XP_DIR_DISTROS }}/enonic-xp-linux-server-{{ XP_VERSION }}/bin/server.sh
-
-          StandardOutput=journal
-          StandardError=inherit
-
-          LimitNOFILE=65536
-          LimitNPROC=4096
-          LimitAS=infinity
-          LimitFSIZE=infinity
-
-          KillSignal=SIGTERM
-          KillMode=process
-          SendSIGKILL=no
-          SuccessExitStatus=143
-
-          [Install]
-          WantedBy=multi-user.target
-      register: systemd_service_definition
-
-    # Only runs the first time the service definition is created
-    - name: Enable and start systemd service
-      when: systemd_service_definition.changed
-      ansible.builtin.systemd:
-        name: "{{ XP_SERVICE_NAME }}"
-        state: started
-        enabled: yes
-        daemon_reload: yes
-      register: systemd_service_enabled
-
-    # Only runs if the service definition changed and the service is already running
-    - name: Restart systemd service
-      when: systemd_service_definition.changed and not systemd_service_enabled.changed
-      ansible.builtin.systemd:
-        name: "{{ XP_SERVICE_NAME }}"
-        state: restarted
-        daemon_reload: yes</code></pre>
+<div class="paragraph">
+<p>The CMS offering essentially consist of three parts:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Content Studio - Editorial admin interface, available as an app on <a href="https://market.enonic.com/vendors/enonic/content-studio">Enonic Market</a></p>
+</li>
+<li>
+<p>Content API - Low level API built on top of the NoSQL Storage</p>
+</li>
+<li>
+<p>GraphQL API - The built on top of the Content API, available on <a href="https://market.enonic.com/vendors/enonic/guillotine">Enonic Market</a></p>
+</li>
+<li>
+<p>Site Engine - Content driven rendering engine, based on the HTTP engine</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Learn more about the <a href="cms.ahtml">Content Management System</a> and the <a href="runtime/engines/site-engine.ahtml">site engine</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running_the_ansible_playbook"><a class="link" href="#running_the_ansible_playbook">Running the Ansible playbook</a></h3>
+<h3 id="id_providers"><a class="link" href="#id_providers">ID providers</a></h3>
 <div class="paragraph">
-<p>Assuming you already have an ansible inventory file called <code>hosts</code> you can run the playbook by running this command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ ansible-playbook -i hosts xp-systemd.yaml</code></pre>
-</div>
+<p>XP apps may also be ID providers.
+Once installed and configured, an ID provider can join the request pipeline of other sites and applications, dynamically providing authentication and authorization as needed.</p>
 </div>
 <div class="paragraph">
-<p>Once the playbook has finished, XP should be up and running using systemd. See section <a href="#useful-commands">Useful commands</a> to check logs.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="manual-setup"><a class="link" href="#manual-setup">Manual setup</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Here we will do the exact same steps as are done in the ansible playbook. But in this case we will execute them manually.</p>
+<p>There are multiple standard ID providers available on Enonic Market.</p>
 </div>
 <div class="paragraph">
-<p>To avoid making errors, lets set the <code>XP_VERSION</code> variable:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ export XP_VERSION=7.7.1</code></pre>
+<p>Learn more about the <a href="iam.ahtml">identity and access management</a></p>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Step 1, 2 and 4 only have to be executed the first time you setup Enonic XP with systemd.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Set correct <code>vm.max_map_count</code>.</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ echo "vm.max_map_count=262144" &gt; "/etc/sysctl.d/99-xp.conf"
-$ sysctl --system</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create a user and group for XP.</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ groupadd -f xp
-$ useradd --gid xp --system xp</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Download and extract the desired distribution into <code>/opt/enonic/distros</code>.</p>
-</li>
-</ol>
+<div class="sect2">
+<h3 id="tasks"><a class="link" href="#tasks">Tasks</a></h3>
+<div class="paragraph">
+<p>The XP runtime also supports executing scripts running in the background.
+Unlike sites and web-applications, tasks are not exposed as an end-point.
+Tasks can be started and monitored via the the task API
+Tasks are made by adding one or more JavaScript controllers to your project.</p>
 </div>
 <div class="paragraph">
-<p>First create the required directories:</p>
+<p>Read more about <a href="runtime/task-engine.ahtml">tasks and the task engine</a></p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ install -d -m 0755 -o xp -g xp /opt/enonic/distros
-$ install -d -m 0755 -o xp -g xp /opt/enonic/home</code></pre>
 </div>
+<div class="sect2">
+<h3 id="web_apps"><a class="link" href="#web_apps">Web apps</a></h3>
+<div class="paragraph">
+<p>The JavaScript framework offers an easy way to build and to serve web applications.</p>
 </div>
 <div class="paragraph">
-<p>Then download the distribution:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ su -m xp -c "wget -q -c https://repo.enonic.com/public/com/enonic/xp/enonic-xp-linux-server/${XP_VERSION}/enonic-xp-linux-server-${XP_VERSION}.tgz -O - | tar -xz -C /opt/enonic/distros"</code></pre>
+<p>Read more about <a href="runtime/engines/webapp-engine.ahtml">webapps and the webapp engine</a></p>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Setup the XP home folder at <code>/opt/enonic/home</code>.</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ cp -rp /opt/enonic/distros/enonic-xp-linux-server-${XP_VERSION}/home/* /opt/enonic/home</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create a systemd service file using the desired distro.</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ cat &lt;&lt; EOF &gt; /etc/systemd/system/xp.service
-[Unit]
-Description=Enonic XP
-Documentation=https://developer.enonic.com/docs
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=simple
-PrivateTmp=true
-Environment=XP_INSTALL=/opt/enonic/distros/enonic-xp-linux-server-${XP_VERSION}
-Environment=XP_JAVA_HOME=/opt/enonic/distros/enonic-xp-linux-server-${XP_VERSION}/jdk
-Environment=XP_HOME=/opt/enonic/distros/home
-Environment=XP_OPTS=-Xms1G -Xmx1G
-
-User=xp
-Group=xp
-
-ExecStart=/opt/enonic/distros/enonic-xp-linux-server-${XP_VERSION}/bin/server.sh
-
-StandardOutput=journal
-StandardError=inherit
-
-LimitNOFILE=65536
-LimitNPROC=4096
-LimitAS=infinity
-LimitFSIZE=infinity
-
-KillSignal=SIGTERM
-KillMode=process
-SendSIGKILL=no
-SuccessExitStatus=143
-
-[Install]
-WantedBy=multi-user.target
-EOF</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Start the systemd service.</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ systemctl daemon-reload
-$ systemctl enable --now xp.service</code></pre>
-</div>
+<div class="sect2">
+<h3 id="admin_tools"><a class="link" href="#admin_tools">Admin tools</a></h3>
+<div class="paragraph">
+<p>XP apps can also contribute to Enonic XP&#8217;s admin console.
+The platform comes with a standardized approach to extend the admin console with custom interfaces, called admin tools.
+Admin tools are created by adding one or more JavaScript controllers to your project.</p>
 </div>
 <div class="paragraph">
-<p>XP should now be up and running using systemd. See section <a href="#useful-commands">Useful commands</a> to check logs.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="useful-commands"><a class="link" href="#useful-commands">Useful commands</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>View Enonic XP logs:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ journalctl -u xp.service</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Stop Enonic XP:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ systemctl stop xp.service</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Start Enonic XP:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ systemctl start xp.service</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Restart Enonic XP:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ systemctl restart xp.service</code></pre>
+<p>Read more about <a href="runtime/engines/admin-engine.ahtml">Admin tools</a></p>
 </div>
 </div>
 </div>
@@ -874,7 +636,7 @@ $ systemctl enable --now xp.service</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-17 11:09:16 UTC
+Last updated 2026-03-17 11:09:45 UTC
 </div>
 </div>
 </body>
