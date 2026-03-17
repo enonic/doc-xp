@@ -1,6 +1,6 @@
 # Agent Instructions for Enonic XP Documentation
 
-This repository contains the reference documentation for Enonic XP, written in AsciiDoc.
+This repository contains reference documentation for Enonic XP, written in AsciiDoc.
 
 ## Build, Test, and Lint
 
