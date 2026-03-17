@@ -1620,23 +1620,27 @@ flushOnResponseCommit = true</code></pre>
 <dl>
 <dt class="hdlist1">storeMode</dt>
 <dd>
-<p>Switches between SessionStore mode. Can be <code>replicated</code> or <code>non-persistent</code>. In Replicated mode sessions are distributed over nodes in the cluster using Jetty-Hazelcast integration. Default: <code>non-persistent</code>.</p>
+<p>Switches between SessionStore mode. Can be <code>replicated</code>, <code>file</code> or <code>non-persistent</code>. In <code>replicated</code> mode sessions are distributed over nodes in the cluster using Jetty-Hazelcast integration. In <code>file</code> mode sessions are persisted to disk, allowing them to survive graceful restarts of standalone instances. Default: <code>non-persistent</code>.</p>
+</dd>
+<dt class="hdlist1">storeDir</dt>
+<dd>
+<p>Directory where sessions are stored on disk. Only used in <code>file</code> storeMode. Default: <code>${xp.home}/work/sessions</code>.</p>
 </dd>
 <dt class="hdlist1">savePeriodSeconds</dt>
 <dd>
-<p>A non-zero value means that session won&#8217;t be persisted if only the access time changed, and it has been less than savePeriodSeconds since the last time the session was written. Has no effect in non-persistent storeMode. Default: <code>0</code>.</p>
+<p>A non-zero value means that session won&#8217;t be persisted if only the access time changed, and it has been less than savePeriodSeconds since the last time the session was written. Has no effect in <code>non-persistent</code> storeMode. Default: <code>0</code>.</p>
 </dd>
 <dt class="hdlist1">gracePeriodSeconds</dt>
 <dd>
-<p>Specifies how many seconds to wait for non-session-owner nodes to be checked to verify an expired session is in fact expired throughout the cluster before closing it. Has no effect in non-persistent storeMode. Default: <code>3600</code>.</p>
+<p>Specifies how many seconds to wait for non-session-owner nodes to be checked to verify an expired session is in fact expired throughout the cluster before closing it. Has no effect in <code>non-persistent</code> storeMode. Default: <code>3600</code>.</p>
 </dd>
 <dt class="hdlist1">saveOnCreate</dt>
 <dd>
-<p>Controls whether a session that is newly created will be immediately (true) or lazily (false) persisted as the last request for the session exits. Has no effect in non-persistent storeMode. Default: <code>false</code>.</p>
+<p>Controls whether a session that is newly created will be immediately (true) or lazily (false) persisted as the last request for the session exits. Has no effect in <code>non-persistent</code> storeMode. Default: <code>false</code>.</p>
 </dd>
 <dt class="hdlist1">flushOnResponseCommit</dt>
 <dd>
-<p>Controls whether a session that is changed ("dirty") will be persisted as the response is about to commit. If false, a dirty session will only be persisted when the last simultaneous request for it leaves the session. Has no effect in non-persistent storeMode. Default: <code>false</code>.</p>
+<p>Controls whether a session that is changed ("dirty") will be persisted as the response is about to commit. If false, a dirty session will only be persisted when the last simultaneous request for it leaves the session. Has no effect in <code>non-persistent</code> storeMode. Default: <code>false</code>.</p>
 </dd>
 </dl>
 </div>
@@ -2565,7 +2569,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-12 09:06:06 UTC
+Last updated 2026-03-17 08:06:53 UTC
 </div>
 </div>
 </body>
