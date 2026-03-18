@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Configuration files</title>
+<title>System Configuration files</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,15 +437,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Configuration files</h1>
+<h1>System Configuration files</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#xp_homeconfig">XP_HOME/config</a></li>
-<li><a href="#xp_homelicense">XP_HOME/license</a></li>
-<li><a href="#format">Format</a></li>
-<li><a href="#variables">Variables</a></li>
-<li><a href="#properties_vs_cfg">.properties vs .cfg</a></li>
 <li><a href="#custom_config">Custom config</a></li>
 <li><a href="#standard_config_files">Standard config files</a>
 <ul class="sectlevel2">
@@ -491,71 +486,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes how to configure Enonic XP and installed 3rd party applications.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp_homeconfig"><a class="link" href="#xp_homeconfig">XP_HOME/config</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The <a href="./distro.ahtml#xp_home">XP_HOME/config/</a> folder contains all instance specific configuration.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp_homelicense"><a class="link" href="#xp_homelicense">XP_HOME/license</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Some apps require a license to work.  The <code>XP_HOME/license</code> folder is where the system looks for the licenses.  The license should be named <code>&lt;appKey&gt;.lic</code>.  If you are running an app with a license, please ask the supplier for the app key.</p>
-</div>
-<div class="paragraph">
-<p>The Enonic apps, Content Studio+, Live Trace and Booster, all require an XP license to run.  The app key for XP is "enonic.platform.subscription", so the license should be named <code>enonic.platform.subscription.lic</code>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="format"><a class="link" href="#format">Format</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>All configuration files (both .cfg and .properties) use the <a href="https://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29">properties</a> format.
-This is a simple key = value format.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample config file</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">mySetting = true
-another.setting = Not so sure
-multiline.value = another \
-                  line</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="variables"><a class="link" href="#variables">Variables</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>XP also offers support for value variables, as this is often useful to handle dynamic settings.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample config with variable</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">another.setting = ${myvaraible}
-somePath = ${xp.home}/myfolder</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="properties_vs_cfg"><a class="link" href="#properties_vs_cfg">.properties vs .cfg</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>When changing files ending with .cfg, it’s respective application will automatically restart with the new configuration.
-Files ending with .properties require a full restart of the XP instance to be applied.</p>
-</div>
-<div class="paragraph">
-<p>In a clustered environment, configuration files must be distributed to all nodes where it is relevant.</p>
+<p>This section describes all standard configuration files and options for Enonic XP</p>
 </div>
 </div>
 </div>
@@ -2539,7 +2470,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 14:25:41 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>

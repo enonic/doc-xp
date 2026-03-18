@@ -639,7 +639,7 @@ openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem</code></pre>
 <td class="content">
 <div class="paragraph">
 <p><strong>XP enforces short-lived tokens</strong>.
-You may change the default timeout of 30 seconds in <a href="../deployment/config.ahtml#idprovider">the ID provider configuration</a>.</p>
+You may change the default timeout of 30 seconds in <a href="../config/system.ahtml#idprovider">the ID provider configuration</a>.</p>
 </div>
 </td>
 </tr>
@@ -727,7 +727,7 @@ You may change the default timeout of 30 seconds in <a href="../deployment/confi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 14:25:41 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>

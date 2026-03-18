@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Events</title>
+<title>Platform Configuration</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,13 +437,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Events</h1>
+<h1>Platform Configuration</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#events">Introduction</a></li>
-<li><a href="#use_cases">Use cases</a></li>
-<li><a href="#implementation">Implementation</a></li>
+<li><a href="#config_folder">Config folder</a></li>
+<li><a href="#license_folder">License folder</a></li>
+<li><a href="#file_format">File Format</a></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#automatic_updates">Automatic updates</a></li>
+<li><a href="#clustered_deployments">Clustered deployments</a></li>
 </ul>
 </div>
 </div>
@@ -451,53 +454,82 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Send and listen to local or cluster wide events</p>
+<p>This section describes how to configure Enonic XP and installed applications.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="events"><a class="link" href="#events">Introduction</a></h2>
+<h2 id="config_folder"><a class="link" href="#config_folder">Config folder</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The XP framework enable developers to create and/or listen to events.
-Events may be local (within a single server) or cluster wide (distributed to all servers within a cluster).
-In addition to application specific events, XP itself produces a range of standard events.</p>
+<p>The <a href="deployment/distro.ahtml#xp_home">XP_HOME/config/</a> folder contains all of your configuration files. It&#8217;s actual location will depend on your deployment.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="use_cases"><a class="link" href="#use_cases">Use cases</a></h2>
+<h2 id="license_folder"><a class="link" href="#license_folder">License folder</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The use cases for events are limitless, but the most common are:</p>
+<p>Some applications may require a license in order to work properly.  The <code>XP_HOME/license</code> folder is where the system looks for licenses.  The license should be named <code>&lt;appKey&gt;.lic</code>.  If you are running an app with a license, please ask the supplier for the app license file.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Cache invalidation</p>
-</li>
-<li>
-<p>Notifications (i.e. notify clients connected to any server in the cluster via Websocket)</p>
-</li>
-<li>
-<p>Job triggering</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Enonic apps like Content Studio+, Live Trace and Booster require a license issued by Enonic to work.  The app key for XP is "enonic.platform.subscription", so the license should be named <code>enonic.platform.subscription.lic</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">Implementation</a></h2>
+<h2 id="file_format"><a class="link" href="#file_format">File Format</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For implementation details, please visit the <a href="../api/lib-event.ahtml">event library</a> documentation.</p>
+<p>All configuration files (both .cfg and .properties) use the <a href="https://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29">properties</a> format.
+This is a simple key = value format.</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample config file</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mySetting = true
+another.setting = Not so sure
+multiline.value = another \
+                  line</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="variables"><a class="link" href="#variables">Variables</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You may use value variables, as these are often useful to handle dynamic settings.</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample config with variable</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">another.setting = ${myvaraible}
+somePath = ${xp.home}/myfolder</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="automatic_updates"><a class="link" href="#automatic_updates">Automatic updates</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When changing files ending with <code>.cfg</code>, application using them will automatically restart with the new configuration. Files ending with <code>.properties</code> require a full restart of the XP instance to be effectively applied.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="clustered_deployments"><a class="link" href="#clustered_deployments">Clustered deployments</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In a clustered environment, configuration files must be distributed to all nodes where it is relevant. This also means you may have different configuration files on different nodes - but be careful as some configuration files may cause issues if they are not consistent across the cluster.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 15:23:00 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>

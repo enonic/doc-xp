@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Events</title>
+<title>Custom' Configuration files</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,13 +437,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Events</h1>
+<h1>Custom' Configuration files</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#events">Introduction</a></li>
-<li><a href="#use_cases">Use cases</a></li>
-<li><a href="#implementation">Implementation</a></li>
+<li><a href="#custom_config">Custom config</a></li>
 </ul>
 </div>
 </div>
@@ -451,53 +449,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Send and listen to local or cluster wide events</p>
+<p>This section describes all custom configuration files and options for Enonic XP</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="events"><a class="link" href="#events">Introduction</a></h2>
+<h2 id="custom_config"><a class="link" href="#custom_config">Custom config</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The XP framework enable developers to create and/or listen to events.
-Events may be local (within a single server) or cluster wide (distributed to all servers within a cluster).
-In addition to application specific events, XP itself produces a range of standard events.</p>
+<p>To provide file based configuration to custom applications,
+simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>my.custom.app.cfg</code>. in the <code>XP_HOME/config/</code> folder, and it will instantly be available for the application.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="use_cases"><a class="link" href="#use_cases">Use cases</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>The use cases for events are limitless, but the most common are:</p>
+<p>Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Cache invalidation</p>
-</li>
-<li>
-<p>Notifications (i.e. notify clients connected to any server in the cluster via Websocket)</p>
-</li>
-<li>
-<p>Job triggering</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">Implementation</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>For implementation details, please visit the <a href="../api/lib-event.ahtml">event library</a> documentation.</p>
+<p>This configuration is instantly available for developers via the <a href="../framework/globals.ahtml#App">global <code>app</code> object</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 15:23:00 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>

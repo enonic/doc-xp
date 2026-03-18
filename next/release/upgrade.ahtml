@@ -793,7 +793,7 @@ Folder-based exports from XP 7 should be converted to ZIP format before they can
 <div class="paragraph">
 <p><code>md5</code> and <code>sha1</code> hashing algorithms are no longer supported <code>xp.suPassword</code> system property as they are no longer considered secure.
 Plain text password isn&#8217;t supported anymore either. Please use stronger hashing algorithms <code>sha256</code> or <code>sha512</code>.
-More details about configuring <code>su</code> password can be found in <a href="../deployment/config.ahtml#system-properties">system properties documentation</a>.</p>
+More details about configuring <code>su</code> password can be found in <a href="../config/system.ahtml#system-properties">system properties documentation</a>.</p>
 </div>
 <div class="paragraph">
 <p>System <code>su</code> user password is no longer read from the database either. If you had a <code>su</code> password stored in the database, it will be ignored after the upgrade.</p>
@@ -806,7 +806,7 @@ More details about configuring <code>su</code> password can be found in <a href=
 </div>
 <div class="paragraph">
 <p>So far only <code>pbkdf2-sha512</code> is supported for new passwords, but new algorithms may be added in future releases.
-Hash function can be configured in the <a href="../deployment/config.ahtml#security">security service configuration</a>.</p>
+Hash function can be configured in the <a href="../config/system.ahtml#security">security service configuration</a>.</p>
 </div>
 <div class="paragraph">
 <p>The old passwords are <em>not</em> automatically converted to the new format.
@@ -934,7 +934,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 14:25:41 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>

@@ -162,7 +162,21 @@
     },
     {
       "title": "Configuration",
-      "document": "config"
+      "document": "config",
+      "menuItems": [
+        {
+          "title": "System",
+          "document": "config/system"
+        },
+        {
+          "title": "Applications",
+          "document": "config/apps"
+        },
+        {
+          "title": "Vhost",
+          "document": "config/vhosts"
+        }
+      ] 
     },
     {
       "title": "Release Notes",

@@ -608,10 +608,10 @@ Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 <p>Take a <a href="#snapshot-restore">Snapshot</a> of your instance.</p>
 </li>
 <li>
-<p>Backup the files in your <a href="config.ahtml#repo">snapshots folder</a> to a safe location</p>
+<p>Backup the files in your <a href="../config/system.ahtml#repo">snapshots folder</a> to a safe location</p>
 </li>
 <li>
-<p>Backup the files in your <a href="config.ahtml#file-blobstore">blobstore folder</a> to a safe location</p>
+<p>Backup the files in your <a href="../config/system.ahtml#file-blobstore">blobstore folder</a> to a safe location</p>
 </li>
 </ol>
 </div>
@@ -641,10 +641,10 @@ If you are restoring to the same environment as the backup was performed, you ma
 <p>Deploy and start a new instance of XP, using the same version that was used to create your backup.</p>
 </li>
 <li>
-<p>Copy the blobstore backup files into your instance&#8217;s <a href="config.ahtml#file-blobstore">blobstore folder</a></p>
+<p>Copy the blobstore backup files into your instance&#8217;s <a href="../config/system.ahtml#file-blobstore">blobstore folder</a></p>
 </li>
 <li>
-<p>Copy the snapshot backup files into your instance&#8217;s <a href="config.ahtml#repo">snapshots folder</a>.</p>
+<p>Copy the snapshot backup files into your instance&#8217;s <a href="../config/system.ahtml#repo">snapshots folder</a>.</p>
 </li>
 <li>
 <p>Using CLI, or via Admin console/Data Toolbox: Perform a <a href="#snapshot-restore">Snapshot restore</a></p>
@@ -796,7 +796,7 @@ Vacuuming can be setup to execute automatically as a scheduled job, or manually 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 14:25:41 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>

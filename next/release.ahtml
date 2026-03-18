@@ -737,7 +737,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Filesystem persistent sessions via <code>file</code> <a href="deployment/config.ahtml#sessionstore">storeMode</a> - sessions survive graceful restarts on standalone instances</p>
+<p>Filesystem persistent sessions via <code>file</code> <a href="config/system.ahtml#sessionstore">storeMode</a> - sessions survive graceful restarts on standalone instances</p>
 </li>
 <li>
 <p>New admin home page <a href="http://&lt;host&gt;:8080/admin" class="bare">http://&lt;host&gt;:8080/admin</a></p>
@@ -746,7 +746,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><code>request.locale</code> in <a href="framework/http.ahtml#http-request">Request</a></p>
 </li>
 <li>
-<p>The location of dumps is now configurable in <a href="deployment/config.ahtml#repo">Repository config</a></p>
+<p>The location of dumps is now configurable in <a href="config/system.ahtml#repo">Repository config</a></p>
 </li>
 <li>
 <p>New names method for HTTP methods in controllers: <code>GET</code>, <code>POST</code>, &#8230;&#8203;</p>
@@ -759,7 +759,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 14:25:41 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>

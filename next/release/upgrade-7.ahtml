@@ -602,16 +602,16 @@ We generally always recommend updating your apps to the latest version!</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The image service now generates progressive JPEG images by default. This can be changed back in <a href="../deployment/config.ahtml#image">../deployment/config.ahtml</a> by setting <code>progressiveJpeg</code> to empty string.</p>
+<p>The image service now generates progressive JPEG images by default. This can be changed back in <a href="../config/system.ahtml#image">../config/system.ahtml</a> by setting <code>progressiveJpeg</code> to empty string.</p>
 </li>
 <li>
-<p>GZIP HTTP compression is disabled by default. It can be enabled in <a href="../deployment/config.ahtml#jetty">Jetty config</a>. By setting <code>gzip.enabled = true</code>.</p>
+<p>GZIP HTTP compression is disabled by default. It can be enabled in <a href="../config/system.ahtml#jetty">Jetty config</a>. By setting <code>gzip.enabled = true</code>.</p>
 </li>
 <li>
 <p><code>image/webp</code> and <code>image/avif</code> media types will now produce content of <code>media:image</code> type, instead of <code>media:unknown</code>. Old versions of Content Studio might not work correctly with WebP and AVIF media types. Upgrade to the latest version of Content Studio.</p>
 </li>
 <li>
-<p><a href="../deployment/config.ahtml#repo">Repo config</a> <code>cache.size</code> parameter no longer works. Use <code>cache.capacity</code> instead.</p>
+<p><a href="../config/system.ahtml#repo">Repo config</a> <code>cache.size</code> parameter no longer works. Use <code>cache.capacity</code> instead.</p>
 </li>
 <li>
 <p>Vacuuming no longer clears unused blobs from deleted repositories. <a href="../deployment/backup-restore.ahtml#vacuum">Vacuuming</a> documentation has been updated to reflect this change.</p>
@@ -688,7 +688,7 @@ Rendering engine is now responsible for reconstructing unused regions from Page/
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-In <code>7.13.1</code> you can bring back the old deprecated behaviour making Content API inject empty regions by setting <code>resolveEmptyRegions</code> parameter to <code>true</code> in the <a href="../deployment/config.ahtml#content_config">content config</a>
+In <code>7.13.1</code> you can bring back the old deprecated behaviour making Content API inject empty regions by setting <code>resolveEmptyRegions</code> parameter to <code>true</code> in the <a href="../config/system.ahtml#content_config">content config</a>
 </td>
 </tr>
 </table>
@@ -723,10 +723,10 @@ In <code>7.13.1</code> you can bring back the old deprecated behaviour making Co
 <p>Node state has been deprecated and is no longer in use, as it was only used for content&#8217;s <code>PENDING_DELETE</code> status.</p>
 </li>
 <li>
-<p>Content API audit-log no longer logs <code>system.content.update</code> events by default. This can be changed back by setting <code>auditlog.filter = *</code> in <a href="../deployment/config.ahtml#content_config">content config</a>.</p>
+<p>Content API audit-log no longer logs <code>system.content.update</code> events by default. This can be changed back by setting <code>auditlog.filter = *</code> in <a href="../config/system.ahtml#content_config">content config</a>.</p>
 </li>
 <li>
-<p><code>draft</code> branch is now restricted for unauthenticated access. By default, only <code>system.admin.login</code> role has access. Additional principles can be configured in <a href="../deployment/config.ahtml#portal">portal config</a> via <code>draftBranchAllowedFor</code> setting. Note that <code>system.admin</code> role always has access, regardless of the config.</p>
+<p><code>draft</code> branch is now restricted for unauthenticated access. By default, only <code>system.admin.login</code> role has access. Additional principles can be configured in <a href="../config/system.ahtml#portal">portal config</a> via <code>draftBranchAllowedFor</code> setting. Note that <code>system.admin</code> role always has access, regardless of the config.</p>
 </li>
 <li>
 <p>Bundled GraalVM has been updated to version 22.3.1. Other JVM versions are not supported, although they may also work.</p>
@@ -755,7 +755,7 @@ A full restart is required in order to prevent loss of data or state.
 <ul>
 <li>
 <p>Virtual application schemas may now override schema present in any installed (real) application.
-To prevent virtual applications from overriding schemas use <a href="../deployment/config.ahtml#application">application config</a> <code>virtual.schema.override = false</code>
+To prevent virtual applications from overriding schemas use <a href="../config/system.ahtml#application">application config</a> <code>virtual.schema.override = false</code>
 or disable virtual applications completely <code>virtual.enabled = false</code></p>
 </li>
 <li>
@@ -811,19 +811,19 @@ You may see a WARNING message on XP startup <code>java.lang.UnsatisfiedLinkError
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../deployment/config.ahtml#portal">Portal config</a> now specifies default <code>Content-Security-Policy</code> for attachments and images.
+<p><a href="../config/system.ahtml#portal">Portal config</a> now specifies default <code>Content-Security-Policy</code> for attachments and images.
 It is possible to configure the header via <code>media.contentSecurityPolicy</code> and <code>media.contentSecurityPolicy.svg</code> values. Empty value disables <code>Content-Security-Policy</code> for attachments and images.
 Default value is crafted to prevent common Persistent XSS attacks.</p>
 </li>
 <li>
-<p><a href="../deployment/config.ahtml#admin">Admin config</a> now specifies default Content-Security-Policy for page <code>preview</code> and <code>inline</code> mode (used by Content Studio).
+<p><a href="../config/system.ahtml#admin">Admin config</a> now specifies default Content-Security-Policy for page <code>preview</code> and <code>inline</code> mode (used by Content Studio).
 It is possible to configure the header via <code>site.preview.contentSecurityPolicy</code> value or go back to previous behavior by setting <code>site.preview.contentSecurityPolicy</code> to an empty value.
 Default value is crafted to prevent common Persistent XSS attacks in Content Studio.</p>
 </li>
 <li>
-<p>Certain Security headers are now specified in <a href="../deployment/config.ahtml#header_filter">header filter config</a> by default.
+<p>Certain Security headers are now specified in <a href="../config/system.ahtml#header_filter">header filter config</a> by default.
 Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from an IFrame.
-You can customize default headers in <a href="../deployment/config.ahtml#header_filter">header filter config</a> <code>headerConfig</code> value to get back to previous behaviour.</p>
+You can customize default headers in <a href="../config/system.ahtml#header_filter">header filter config</a> <code>headerConfig</code> value to get back to previous behaviour.</p>
 </li>
 </ul>
 </div>
@@ -864,7 +864,7 @@ It was never documented or supported for external use. We recommend implementing
 <p>JaxRS API backend was updated to the next major release. We didn&#8217;t observe any incompatibilities, but if your application uses XP JaxRS API make sure you thoroughly test it.</p>
 </li>
 <li>
-<p>Image Service now has memory usage constraints  configured by <code>memoryLimit</code> parameter in <a href="../deployment/config.ahtml#image">Configuration Files / Image</a>.
+<p>Image Service now has memory usage constraints  configured by <code>memoryLimit</code> parameter in <a href="../config/system.ahtml#image">Configuration Files / Image</a>.
 This may cause <code>429 Too Many Requests</code> HTTP responses for images, if they are not yet scaled at least once and put into disk cache.</p>
 </li>
 <li>
@@ -947,13 +947,13 @@ FULL RESTART REQUIRED - For security reasons, XP&#8217;s clustering engine (Haze
 <ul>
 <li>
 <p>Session cookie specifies <code>SameSite=Lax</code> by default. It is similar to modern browsers default value except for "Lax + POST mitigation".
-You can revert to previous behavior by setting <code>session.cookieSameSite =</code> in <a href="../deployment/config.ahtml#jetty">Configuration Files / Jetty</a></p>
+You can revert to previous behavior by setting <code>session.cookieSameSite =</code> in <a href="../config/system.ahtml#jetty">Configuration Files / Jetty</a></p>
 </li>
 <li>
 <p>Native Java primitive arrays are now converted to JavaScript arrays. You may have to adapt your application to the new behaviour if your code was using workarounds.</p>
 </li>
 <li>
-<p>Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <a href="../deployment/config.ahtml#image">Configuration Files / Image</a></p>
+<p>Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <a href="../config/system.ahtml#image">Configuration Files / Image</a></p>
 </li>
 <li>
 <p>Image Service has more eager validation of scale, filters, background and quality parameter values. Make sure the requests to Image Service use only correct/supported values.</p>
@@ -963,14 +963,14 @@ You can revert to previous behavior by setting <code>session.cookieSameSite =</c
 </li>
 <li>
 <p>Content attachment file names can no longer contain suspicious characters.
-You can revert to previous behavior by setting <code>attachments.allowUnsafeNames = true</code> in <a href="../deployment/config.ahtml#content">Configuration Files / Content</a></p>
+You can revert to previous behavior by setting <code>attachments.allowUnsafeNames = true</code> in <a href="../config/system.ahtml#content">Configuration Files / Content</a></p>
 </li>
 <li>
 <p>Assets Service URL fingerprint part now uses application&#8217;s "build time" instead of application&#8217;s startup time. Make sure "build time" always changes for new versions of an application (this happens automatically if you use the standard xp build system)</p>
 </li>
 <li>
 <p>Default Cache-Control headers for Assets Service and Portal Media Attachments have been changed.
-You can change default settings in <a href="../deployment/config.ahtml#portal">Configuration Files / Portal</a></p>
+You can change default settings in <a href="../config/system.ahtml#portal">Configuration Files / Portal</a></p>
 </li>
 <li>
 <p>ResourceService no longer considers directories in jar as existing resources.
@@ -984,7 +984,7 @@ If application code relies on checking directory existence in jar, consider chec
 </li>
 <li>
 <p>input-type&#8217;s <code>allow-content-type</code>, x-data <code>allow-content-types</code> and newest content-type&#8217;s <code>allow-child-content-type</code> share the same <a href="../cms/schemas/input-types/contentselector/.ahtml#allowContentType">pattern matching</a>, that is stricter than before.
-You can switch back to legacy mode by setting <code>contentTypePatternMode = LEGACY</code> in  <a href="../deployment/config.ahtml#admin_rest">Configuration Files / Admin</a> for <code>allow-content-type</code> and <code>allow-content-types</code>, but it won&#8217;t affect <code>allow-child-content-type</code> pattern matching.</p>
+You can switch back to legacy mode by setting <code>contentTypePatternMode = LEGACY</code> in  <a href="../config/system.ahtml#admin_rest">Configuration Files / Admin</a> for <code>allow-content-type</code> and <code>allow-content-types</code>, but it won&#8217;t affect <code>allow-child-content-type</code> pattern matching.</p>
 </li>
 </ul>
 </div>
@@ -999,7 +999,7 @@ You can switch back to legacy mode by setting <code>contentTypePatternMode = LEG
 <p>Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <a href="../framework/tasks.ahtml#_distributable">Tasks / Distributable</a> for more information.</p>
 </li>
 <li>
-<p>XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to <a href="https://market.enonic.com" class="bare">https://market.enonic.com</a>. URL can be changed in <a href="../deployment/config.ahtml#market">Configuration Files / Market</a>.</p>
+<p>XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to <a href="https://market.enonic.com" class="bare">https://market.enonic.com</a>. URL can be changed in <a href="../config/system.ahtml#market">Configuration Files / Market</a>.</p>
 </li>
 </ul>
 </div>
@@ -1024,7 +1024,7 @@ nodes to get in touch with each other after the upgrade.  Please do the followin
 <ul>
 <li>
 <p>Create the configuration files <code>com.enonic.xp.hazelcast.cfg</code> and <code>com.enonic.xp.web.sessionstore.cfg</code> and consider the values in them as described in
-<a href="../deployment/config.ahtml#hazelcast">Configuration Files / Hazelcast</a> and <a href="../deployment/config.ahtml#sessionstore">Configuration Files / SessionStore</a>.</p>
+<a href="../config/system.ahtml#hazelcast">Configuration Files / Hazelcast</a> and <a href="../config/system.ahtml#sessionstore">Configuration Files / SessionStore</a>.</p>
 </li>
 <li>
 <p>Open port 5701 between the nodes in the network.  This port is used by Hazelcast for internal communication in the cluster.
@@ -1378,7 +1378,7 @@ Documentation for Content Studio can be found <a href="https://developer.enonic.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 14:25:41 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>

@@ -619,7 +619,7 @@ Using <em>NFS</em> introduces a single point of failure to the cluster, but has 
 </ul>
 </div>
 <div class="paragraph">
-<p>We will set the bare minimum for those files. You can read the <a href="./config.ahtml">Configuration</a> documentation for more details.</p>
+<p>We will set the bare minimum for those files. You can read the <a href="./../config/system.ahtml">Configuration</a> documentation for more details.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -821,7 +821,7 @@ Setting replicas number to 1...Done
 </ol>
 </div>
 <div class="paragraph">
-<p>For session-based logins, XP now supports <a href="https://developer.enonic.com/docs/xp/stable/deployment/config#sessionstore">session replication</a> between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.</p>
+<p>For session-based logins, XP now supports <a href="https://developer.enonic.com/docs/xp/stable/config/system#sessionstore">session replication</a> between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.</p>
 </div>
 </div>
 </div>
@@ -936,7 +936,7 @@ It is possible to free master nodes from running named tasks by setting <code>di
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 14:25:41 UTC
+Last updated 2026-03-18 15:23:26 UTC
 </div>
 </div>
 </body>
