@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Content projects</title>
+<title>Concepts and overview</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,189 +437,45 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Content projects</h1>
+<h1>Concepts and overview</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#project_settings">Project settings</a>
+<li><a href="#more_than_an_api">More than an API</a>
 <ul class="sectlevel2">
-<li><a href="#basics">Basics</a></li>
-<li><a href="#access_mode">Access mode</a></li>
-<li><a href="#roles">Roles</a></li>
-<li><a href="#applications">Applications</a></li>
+<li><a href="#platform_components">Platform components</a></li>
 </ul>
 </li>
-<li><a href="#storage">Storage</a></li>
-<li><a href="#site_engine">Site engine</a></li>
-<li><a href="#api">API</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="more_than_an_api"><a class="link" href="#more_than_an_api">More than an API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Create independent content repositories for your different teams and projects.</p>
+<p>Enonic XP aims to be the ultimate CMS and back-end for your digital experiences. It provides a powerful and flexible foundation where you can customize and extend every aspect of the platform to fit your unique needs - without starting from scratch.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Content projects represent the starting point of XP&#8217;s CMS. In order to create sites and content, you first need to create a project. Project defines default permissions and other useful settings for your content and editors.</p>
+<p>In order to provide this flexibility, XP was built like an operating system, with a core platform that provides essential services and APIs, and an ecosystem of applications that can be installed on top to add specific functionality.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project_settings"><a class="link" href="#project_settings">Project settings</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="basics"><a class="link" href="#basics">Basics</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Display name - a human readable name</p>
-</li>
-<li>
-<p>Identifier - a unique id within the installation. Cannot be changed when first created</p>
-</li>
-<li>
-<p>Default language - Specifies the default language for content created in the project</p>
-</li>
-</ul>
-</div>
+<div class="paragraph">
+<p>This architecture allows you to pick and choose the capabilities you need, while still having the option to build custom applications or extend existing ones. The platform provides the building blocks, and you can assemble them in whatever way makes sense for your project.</p>
 </div>
 <div class="sect2">
-<h3 id="access_mode"><a class="link" href="#access_mode">Access mode</a></h3>
-<div class="paragraph">
-<p>Project access mode defines default read permissions for it&#8217;s content.
-The available values are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Public (Everyone can read the content)</p>
-</li>
-<li>
-<p>Private (only users with project roles can read the content)</p>
-</li>
-<li>
-<p>Custom (a specific list of principals can be granted access to read the content, i.e. Employees)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>To handle private and custom mode, a special "viewer" role is created and given read access to the content items.</p>
+<h3 id="platform_components"><a class="link" href="#platform_components">Platform components</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="media/platform-components.png" alt="Platform illustration" width="1092">
 </div>
 </div>
-<div class="sect2">
-<h3 id="roles"><a class="link" href="#roles">Roles</a></h3>
-<div class="paragraph">
-<p>To provide access to a project or manage it, users can be granted special roles.
-The following roles are available per project:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Contributor - Access to project and issues (must be given specific permissions to create or manage any content)</p>
-</li>
-<li>
-<p>Author - Same as contributor, but can additionally create and update content anywhere in the structure</p>
-</li>
-<li>
-<p>Editor - Same as Author, but with full permissions and access to rich-text editor source mode</p>
-</li>
-<li>
-<p>Owner - Same as Editor, but can also manage the project settings</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>For each project, dedicated principal roles are created. The roles are named as follows:
-<code>com.enonic.cms.project.&lt;id&gt;.&lt;roletype&gt;</code></p>
-</div>
-<div class="paragraph">
-<p>An example might be com.enonic.cms.myproject.author.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="applications"><a class="link" href="#applications">Applications</a></h3>
-<div class="paragraph">
-<p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20"><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="64" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="25" height="20" fill="#555"/><rect x="25" width="39" height="20" fill="#007ec6"/><rect width="64" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text><text x="135" y="140" transform="scale(.1)" textLength="150">XP</text><text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.12.0</text><text x="435" y="140" transform="scale(.1)" textLength="290">7.12.0</text></g></svg></span></p>
-</div>
-<div class="paragraph">
-<p>Applications can be assigned directly to a content project. Most functionality, schemas (content types, mixins, x-data) as well as controller mappings be available within the scope of the project, until a site item appears.</p>
-</div>
-<div class="paragraph">
-<p>Unlike sites, content at project level does not support pages, fragments and page page templates, so content preview and rendring must be done directly via <a href="../framework/mappings.ahtml">Mappings</a>.</p>
-</div>
-<div class="paragraph">
-<p>It is also worth noting that configurations of applications assigned to a project will be published instantly - unlike changes to a site.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Sites override project applications. If a site should use an application already assigned to its project, you must assign the application directly to the site.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><a href="layers.ahtml">Layered projects</a> inherit application settings from parent layers, just like .</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Sites inside the project are isolated and have no access to project&#8217;s or each other&#8217;s apps.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="storage"><a class="link" href="#storage">Storage</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Another important purpose of projecs is to strictly isolate the content from other projects.
-As such, each project gets a dedicated <a href="../storage.ahtml">repository</a>.</p>
-</div>
-<div class="paragraph">
-<p>This means, that editors of a particular project will not be able to see, use or link to content within other projects.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="site_engine"><a class="link" href="#site_engine">Site engine</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><a href="../runtime/engines/site-engine.ahtml">Site engine</a> provides access to content in a specific branch of a specific project at <code>/site/{projectId}/{branch}</code>, where <code>{projectId}</code> is a unique project identifier. For example, draft items of a project with identifier ´myproject´ can be accessed via internal path <code>/site/myproject/draft</code>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="api"><a class="link" href="#api">API</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To programmatically manage projects, use the <a href="../api/lib-project.ahtml">project API</a></p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 16:26:36 UTC
+Last updated 2026-03-18 16:27:08 UTC
 </div>
 </div>
 </body>

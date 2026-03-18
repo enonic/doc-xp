@@ -441,7 +441,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#service_mapping">Service mapping</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#domains">Domains</a></li>
 <li><a href="#request_matching">Request Matching</a></li>
 <li><a href="#capture_groups">Capture Groups</a></li>
 <li><a href="#virtual-host-context">Virtual Host Context</a></li>
@@ -454,43 +455,68 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Use vhosts to safely expose services (sites/webapps etc) through public domains.</p>
+<p>Use vhosts to expose Universal APIs, Admin, Sites or Webapps on custom domains and paths.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Vhosts only apply to XP&#8217;s web endpoint (defaults to port 8080). They do not affect the management and monitoring endpoints.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="service_mapping"><a class="link" href="#service_mapping">Service mapping</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Vhosts essentially serve two purposes, traffic routing and mapping to ID providers.</p>
-</div>
-<div class="paragraph">
-<p>A single XP runtime instance may offer multiple services.
-By default, XP provides the following endpoints:</p>
+<p>Vhosts essentially serve three purposes</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>localhost:8080/webapp/&lt;app-name&gt;/ (webapp engine)</p>
+<p>Traffic routing</p>
 </li>
 <li>
-<p>localhost:8080/site/&lt;repo&gt;/&lt;branch&gt;/&lt;path&gt; (site engine)</p>
+<p>Security via IDprovider mapping</p>
 </li>
 <li>
-<p>localhost:8080/admin/ (admin engine)</p>
+<p>Setting Context attributes</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>By using vhosts, traffic for specific domains and url patterns may be routed directly to defined service paths in XP.</p>
+<p>By using vhosts, traffic for specific domains and url patterns may be routed directly to defined targets in XP, such as an API, a Site or the XP admin.</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>I.e. example.com -&gt; :8080/site/default/master/homepage</pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Once vhosts are enabled, unmapped endpoints are no longer accessible.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="domains"><a class="link" href="#domains">Domains</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with <code>~</code> symbol).</p>
+<p>In the definition, Domains can be a single host, multiple hosts separated by space and/or regular expressions (started with <code>~</code> symbol).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -500,25 +526,6 @@ By default, XP provides the following endpoints:</p>
 </td>
 <td class="content">
 IDN hosts should be specified using Punycode representation.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>With vhosts enabled, unexposed services are no longer accessible.</p>
-</div>
-<div class="paragraph">
-<p>Vhosts may also define the relationship to one or more ID providers.
-This enables pluggable authentication on a per-vhost basis.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Vhosts only apply to XP service port (defaults to 8080), not the monitoring and management ports.
 </td>
 </tr>
 </table>
@@ -737,7 +744,7 @@ mapping.adm.idProvider.system = default</code></pre>
 <td class="content">
 <div class="paragraph">
 <p>This time we also added an ID provider to the mapping.
-This effectively activates <code>system</code> the default (and only) ID provider for this vhost.</p>
+This effectively activates <code>system</code> as the default (and only) ID provider for this vhost.</p>
 </div>
 </td>
 </tr>
@@ -780,7 +787,7 @@ Location of hosts file on Mac/Linux_: <code>/etc/hosts</code>, on Windows: <code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 15:23:26 UTC
+Last updated 2026-03-18 16:27:08 UTC
 </div>
 </div>
 </body>

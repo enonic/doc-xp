@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#license_folder">License folder</a></li>
 <li><a href="#file_format">File Format</a></li>
 <li><a href="#variables">Variables</a></li>
-<li><a href="#automatic_updates">Automatic updates</a></li>
+<li><a href="#hot_deployment">Hot deployment</a></li>
 <li><a href="#clustered_deployments">Clustered deployments</a></li>
 </ul>
 </div>
@@ -511,10 +511,10 @@ somePath = ${xp.home}/myfolder</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="automatic_updates"><a class="link" href="#automatic_updates">Automatic updates</a></h2>
+<h2 id="hot_deployment"><a class="link" href="#hot_deployment">Hot deployment</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When changing files ending with <code>.cfg</code>, application using them will automatically restart with the new configuration. Files ending with <code>.properties</code> require a full restart of the XP instance to be effectively applied.</p>
+<p>When changing files ending with <code>.cfg</code>, application using them will automatically restart with the new configuration loaded. Files ending with <code>.properties</code> require a full restart of the XP instance to be effectively applied.</p>
 </div>
 </div>
 </div>
@@ -529,7 +529,7 @@ somePath = ${xp.home}/myfolder</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 15:23:26 UTC
+Last updated 2026-03-18 16:27:08 UTC
 </div>
 </div>
 </body>

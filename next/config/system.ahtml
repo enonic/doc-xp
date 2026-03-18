@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>System Configuration files</title>
+<title>System Configuration</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,13 +437,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>System Configuration files</h1>
+<h1>System Configuration</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#custom_config">Custom config</a></li>
-<li><a href="#standard_config_files">Standard config files</a>
-<ul class="sectlevel2">
 <li><a href="#system_properties">System Properties</a></li>
 <li><a href="#vhost">Vhost</a></li>
 <li><a href="#security">Security</a></li>
@@ -455,7 +452,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#elasticsearch">Elasticsearch</a></li>
 <li><a href="#hazelcast">Hazelcast</a></li>
 <li><a href="#admin">Admin</a></li>
-<li><a href="#xp_dashboard">XP Dashboard</a></li>
+<li><a href="#xp_dashboard">XP Dashboard</a>
+<ul class="sectlevel2">
+<li><a href="#content_security_policy">Content Security Policy</a></li>
+</ul>
+</li>
 <li><a href="#applications_app">Applications app</a></li>
 <li><a href="#jetty">Jetty</a></li>
 <li><a href="#sessionstore">SessionStore</a></li>
@@ -465,7 +466,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#header">Header Filter</a></li>
 <li><a href="#market">Market</a></li>
 <li><a href="#udc">UDC</a></li>
-<li><a href="#idprovider">Standard IDprovider</a></li>
+<li><a href="#idprovider">System IDprovider</a></li>
 <li><a href="#logging">Logging</a></li>
 <li><a href="#audit">Audit</a></li>
 <li><a href="#content_config">Content</a></li>
@@ -478,41 +479,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#export">Export</a></li>
 <li><a href="#binary_extractor">Binary Extractor</a></li>
 </ul>
-</li>
-</ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes all standard configuration files and options for Enonic XP</p>
+<p>This section describes all standard configuration files and options for Enonic XP. These are primarily relevant when hosting XP on your own infrastructure.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="custom_config"><a class="link" href="#custom_config">Custom config</a></h2>
+<h2 id="system_properties"><a class="link" href="#system_properties">System Properties</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>To provide file based configuration to custom applications,
-simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>my.custom.app.cfg</code>. in the <code>XP_HOME/config/</code> folder, and it will instantly be available for the application.</p>
-</div>
-<div class="paragraph">
-<p>Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.</p>
-</div>
-<div class="paragraph">
-<p>This configuration is instantly available for developers via the <a href="../framework/globals.ahtml#App">global <code>app</code> object</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="standard_config_files"><a class="link" href="#standard_config_files">Standard config files</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The following are standard configuration files for Enonic XP</p>
-</div>
-<div class="sect2">
-<h3 id="system_properties"><a class="link" href="#system_properties">System Properties</a></h3>
 <div id="system-properties" class="paragraph">
 <p><code>XP_HOME/config/system.properties</code></p>
 </div>
@@ -589,8 +568,10 @@ To generate <code>sha512</code> hash suitable for <code>xp.suPassword</code>, yo
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="vhost"><a class="link" href="#vhost">Vhost</a></h3>
+</div>
+<div class="sect1">
+<h2 id="vhost"><a class="link" href="#vhost">Vhost</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.web.vhost.cfg</code></p>
 </div>
@@ -664,8 +645,10 @@ mapping.admin.idProvider.system = default</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="security"><a class="link" href="#security">Security</a></h3>
+</div>
+<div class="sect1">
+<h2 id="security"><a class="link" href="#security">Security</a></h2>
+<div class="sectionbody">
 <div id="security" class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.web.security.cfg</code></p>
 </div>
@@ -704,8 +687,10 @@ password.policy = $pbkdf2-sha512$i=210000,l=64,slen=16</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="mail"><a class="link" href="#mail">Mail</a></h3>
+</div>
+<div class="sect1">
+<h2 id="mail"><a class="link" href="#mail">Mail</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.mail.cfg</code></p>
 </div>
@@ -757,8 +742,10 @@ defaultFromEmail=noreply@domain.com</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="repo"><a class="link" href="#repo">Repo</a></h3>
+</div>
+<div class="sect1">
+<h2 id="repo"><a class="link" href="#repo">Repo</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.repo.cfg</code></p>
 </div>
@@ -806,8 +793,10 @@ If you change this value, remember to update value for <code>path.repo</code> in
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="blobstore"><a class="link" href="#blobstore">Blobstore</a></h3>
+</div>
+<div class="sect1">
+<h2 id="blobstore"><a class="link" href="#blobstore">Blobstore</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.blobstore.cfg</code></p>
 </div>
@@ -844,8 +833,10 @@ cache.FCapacity = 100mb</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="file-blobstore"><a class="link" href="#file-blobstore">File blobstore</a></h3>
+</div>
+<div class="sect1">
+<h2 id="file-blobstore"><a class="link" href="#file-blobstore">File blobstore</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.blobstore.file.cfg</code></p>
 </div>
@@ -878,8 +869,10 @@ readThrough.sizeThreshold = 100mb</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="cluster"><a class="link" href="#cluster">Cluster</a></h3>
+</div>
+<div class="sect1">
+<h2 id="cluster"><a class="link" href="#cluster">Cluster</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.cluster.cfg</code></p>
 </div>
@@ -954,8 +947,10 @@ NOTE: Values set as host-name are resolved to a single IP-address of the host-na
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="elasticsearch"><a class="link" href="#elasticsearch">Elasticsearch</a></h3>
+</div>
+<div class="sect1">
+<h2 id="elasticsearch"><a class="link" href="#elasticsearch">Elasticsearch</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.elasticsearch.cfg</code></p>
 </div>
@@ -1077,8 +1072,10 @@ discovery.unicast.sockets =</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="hazelcast"><a class="link" href="#hazelcast">Hazelcast</a></h3>
+</div>
+<div class="sect1">
+<h2 id="hazelcast"><a class="link" href="#hazelcast">Hazelcast</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.hazelcast.cfg</code></p>
 </div>
@@ -1278,8 +1275,10 @@ It also requires granting certain permissions. You can find more information in 
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="admin"><a class="link" href="#admin">Admin</a></h3>
+</div>
+<div class="sect1">
+<h2 id="admin"><a class="link" href="#admin">Admin</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.admin.cfg</code></p>
 </div>
@@ -1308,13 +1307,15 @@ Default: <code>default-src 'self'; base-uri 'self'; form-action 'self'; script-s
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="xp_dashboard"><a class="link" href="#xp_dashboard">XP Dashboard</a></h3>
+</div>
+<div class="sect1">
+<h2 id="xp_dashboard"><a class="link" href="#xp_dashboard">XP Dashboard</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.app.main.cfg</code></p>
 </div>
-<div class="sect3">
-<h4 id="content_security_policy"><a class="link" href="#content_security_policy">Content Security Policy</a></h4>
+<div class="sect2">
+<h3 id="content_security_policy"><a class="link" href="#content_security_policy">Content Security Policy</a></h3>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -1350,8 +1351,10 @@ Note, that if you provide your own header, you should include all necessary dire
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="applications_app"><a class="link" href="#applications_app">Applications app</a></h3>
+</div>
+<div class="sect1">
+<h2 id="applications_app"><a class="link" href="#applications_app">Applications app</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.app.applications.cfg</code></p>
 </div>
@@ -1371,8 +1374,10 @@ Default: <code>false</code></p>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="jetty"><a class="link" href="#jetty">Jetty</a></h3>
+</div>
+<div class="sect1">
+<h2 id="jetty"><a class="link" href="#jetty">Jetty</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.web.jetty.cfg</code></p>
 </div>
@@ -1528,8 +1533,10 @@ Setting <code>session.cookieAlwaysSecure</code> to <code>true</code> would make 
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="sessionstore"><a class="link" href="#sessionstore">SessionStore</a></h3>
+</div>
+<div class="sect1">
+<h2 id="sessionstore"><a class="link" href="#sessionstore">SessionStore</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.web.sessionstore.cfg</code></p>
 </div>
@@ -1570,8 +1577,10 @@ flushOnResponseCommit = true</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="media"><a class="link" href="#media">Media</a></h3>
+</div>
+<div class="sect1">
+<h2 id="media"><a class="link" href="#media">Media</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.media.cfg</code></p>
 </div>
@@ -1598,8 +1607,10 @@ ext.p = text/x-pascal</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="osgi_shell"><a class="link" href="#osgi_shell">OSGi shell</a></h3>
+</div>
+<div class="sect1">
+<h2 id="osgi_shell"><a class="link" href="#osgi_shell">OSGi shell</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.server.shell.cfg</code></p>
 </div>
@@ -1641,8 +1652,10 @@ telnet.socketTimeout = 0</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="dos_filter"><a class="link" href="#dos_filter">DoS filter</a></h3>
+</div>
+<div class="sect1">
+<h2 id="dos_filter"><a class="link" href="#dos_filter">DoS filter</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.web.dos.cfg</code></p>
 </div>
@@ -1720,8 +1733,10 @@ ipWhitelist =</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="header"><a class="link" href="#header">Header Filter</a></h3>
+</div>
+<div class="sect1">
+<h2 id="header"><a class="link" href="#header">Header Filter</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.web.header.cfg</code></p>
 </div>
@@ -1744,8 +1759,10 @@ Default value varies across XP releases and adheres to up-to-date security best 
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="market"><a class="link" href="#market">Market</a></h3>
+</div>
+<div class="sect1">
+<h2 id="market"><a class="link" href="#market">Market</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.market.cfg</code></p>
 </div>
@@ -1759,8 +1776,10 @@ Default value varies across XP releases and adheres to up-to-date security best 
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="udc"><a class="link" href="#udc">UDC</a></h3>
+</div>
+<div class="sect1">
+<h2 id="udc"><a class="link" href="#udc">UDC</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.server.udc.cfg</code></p>
 </div>
@@ -1775,13 +1794,15 @@ This is only used to see what platforms are used and improve platform stability.
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="idprovider"><a class="link" href="#idprovider">Standard IDprovider</a></h3>
+</div>
+<div class="sect1">
+<h2 id="idprovider"><a class="link" href="#idprovider">System IDprovider</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.app.standardidprovider.cfg</code></p>
 </div>
 <div class="paragraph">
-<p>The Standard IDP application is bunedled with XP, and used by the <code>system</code> ID provider.
+<p>The <code>system</code> IdProvider uses an implementation called the standard ID provider.
 There are several options you may configure:</p>
 </div>
 <div class="listingblock">
@@ -1814,8 +1835,10 @@ idprovider.system.autologin.jwt.maxLifetimeSeconds = 30</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">Logging</a></h3>
+</div>
+<div class="sect1">
+<h2 id="logging"><a class="link" href="#logging">Logging</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/logback.xml</code></p>
 </div>
@@ -1908,20 +1931,10 @@ See: <a href="https://logback.qos.ch/manual/configuration.html#loggerElement">Lo
 <p>Additional information can be found here: <a href="https://logback.qos.ch/manual/configuration.html">Logback documentation</a></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="audit"><a class="link" href="#audit">Audit</a></h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This config file was first introduced in v7.2
-</td>
-</tr>
-</table>
 </div>
+<div class="sect1">
+<h2 id="audit"><a class="link" href="#audit">Audit</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.audit.cfg</code></p>
 </div>
@@ -1953,25 +1966,15 @@ ageThreshold =</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="content_config"><a class="link" href="#content_config">Content</a></h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This config file was first introduced in v7.2
-</td>
-</tr>
-</table>
 </div>
+<div class="sect1">
+<h2 id="content_config"><a class="link" href="#content_config">Content</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.content.cfg</code></p>
 </div>
 <div class="paragraph">
-<p>Configure the content layer behaviour.</p>
+<p>Configure the content behaviour.</p>
 </div>
 <div class="listingblock">
 <div class="title">Sample content config file</div>
@@ -2062,8 +2065,10 @@ As such, it may lead to slower system response and reduced efficiency. Important
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="vacuum"><a class="link" href="#vacuum">Vacuum</a></h3>
+</div>
+<div class="sect1">
+<h2 id="vacuum"><a class="link" href="#vacuum">Vacuum</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.vacuum.cfg</code></p>
 </div>
@@ -2085,8 +2090,10 @@ As such, it may lead to slower system response and reduced efficiency. Important
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="application"><a class="link" href="#application">Application</a></h3>
+</div>
+<div class="sect1">
+<h2 id="application"><a class="link" href="#application">Application</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.app.cfg</code></p>
 </div>
@@ -2180,8 +2187,10 @@ Filter rules apply separately on different nodes in cluster. If one cluster node
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="task"><a class="link" href="#task">Task</a></h3>
+</div>
+<div class="sect1">
+<h2 id="task"><a class="link" href="#task">Task</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.task.cfg</code></p>
 </div>
@@ -2208,8 +2217,10 @@ clustered.timeout = PT10S</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="scheduler"><a class="link" href="#scheduler">Scheduler</a></h3>
+</div>
+<div class="sect1">
+<h2 id="scheduler"><a class="link" href="#scheduler">Scheduler</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.scheduler.cfg</code></p>
 </div>
@@ -2320,8 +2331,10 @@ init-job.my-job2.config={"myparam1":"value1","myset":{"myparam2":"value2"}}</cod
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="portal"><a class="link" href="#portal">Portal</a></h3>
+</div>
+<div class="sect1">
+<h2 id="portal"><a class="link" href="#portal">Portal</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.portal.cfg</code></p>
 </div>
@@ -2380,8 +2393,10 @@ media.contentSecurityPolicy.svg =</code></pre>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="image"><a class="link" href="#image">Image</a></h3>
+</div>
+<div class="sect1">
+<h2 id="image"><a class="link" href="#image">Image</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.image.cfg</code></p>
 </div>
@@ -2419,8 +2434,10 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="export"><a class="link" href="#export">Export</a></h3>
+</div>
+<div class="sect1">
+<h2 id="export"><a class="link" href="#export">Export</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.export.cfg</code></p>
 </div>
@@ -2442,8 +2459,10 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="binary_extractor"><a class="link" href="#binary_extractor">Binary Extractor</a></h3>
+</div>
+<div class="sect1">
+<h2 id="binary_extractor"><a class="link" href="#binary_extractor">Binary Extractor</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.extractor.cfg</code></p>
 </div>
@@ -2467,10 +2486,9 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 </div>
 </div>
-</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 15:23:26 UTC
+Last updated 2026-03-18 16:27:08 UTC
 </div>
 </div>
 </body>
