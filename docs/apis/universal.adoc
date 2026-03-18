@@ -1,5 +1,4 @@
 = Universal API
-include::.variables.adoc[]
 :toc: right
 :imagesdir: images
 
@@ -263,13 +262,6 @@ Built-in monitoring capabilities:
 
 == Best Practices
 
-=== Query Optimization
-
-* Request only the fields you need
-* Use pagination for large result sets
-* Implement proper caching strategies
-* Batch related queries together
-
 === Error Handling
 
 * Check for errors in all responses
@@ -290,30 +282,3 @@ Built-in monitoring capabilities:
 * Monitor deprecation warnings
 * Plan for breaking changes
 * Test against new versions before upgrading
-
-
-=== User API
-
-Before (XP 7):
-[source,javascript]
-----
-const authLib = require('/lib/xp/auth');
-const user = authLib.getUser();
-----
-
-After (XP {release}):
-[source,javascript]
-----
-const universalApi = require('/lib/xp/universal-api');
-const user = universalApi.query(`
-  query {
-    currentUser {
-      key
-      displayName
-      email
-    }
-  }
-`);
-----
-
-
