@@ -48,13 +48,13 @@ We generally always recommend updating your apps to the latest version!
 
 == v7.15 notes
 
-* The image service now generates progressive JPEG images by default. This can be changed back in <<../deployment/config#image>> by setting `progressiveJpeg` to empty string.
+* The image service now generates progressive JPEG images by default. This can be changed back in <<../config/system#image>> by setting `progressiveJpeg` to empty string.
 
-* GZIP HTTP compression is disabled by default. It can be enabled in <<../deployment/config#jetty, Jetty config>>. By setting `gzip.enabled = true`.
+* GZIP HTTP compression is disabled by default. It can be enabled in <<../config/system#jetty, Jetty config>>. By setting `gzip.enabled = true`.
 
 * `image/webp` and `image/avif` media types will now produce content of `media:image` type, instead of `media:unknown`. Old versions of Content Studio might not work correctly with WebP and AVIF media types. Upgrade to the latest version of Content Studio.
 
-* <<../deployment/config#repo, Repo config>> `cache.size` parameter no longer works. Use `cache.capacity` instead.
+* <<../config/system#repo, Repo config>> `cache.size` parameter no longer works. Use `cache.capacity` instead.
 
 * Vacuuming no longer clears unused blobs from deleted repositories. <<../deployment/backup-restore#vacuum, Vacuuming>> documentation has been updated to reflect this change.
 
@@ -93,7 +93,7 @@ XP Gradle plugin `com.enonic.xp.app` version `3.4.0` does this automatically for
 Regions are built from `components` array in content data. This changes the behaviour for regions with no component assigned.
 Rendering engine is now responsible for reconstructing unused regions from Page/Layout descriptors.
 
-IMPORTANT: In `7.13.1` you can bring back the old deprecated behaviour making Content API inject empty regions by setting `resolveEmptyRegions` parameter to `true` in the <<../deployment/config#content_config, content config>>
+IMPORTANT: In `7.13.1` you can bring back the old deprecated behaviour making Content API inject empty regions by setting `resolveEmptyRegions` parameter to `true` in the <<../config/system#content_config, content config>>
 
 * Server Distro Mac ARM64 bundles GraalVM 22.3.1 JDK 17 due to lack of GraalVM 22.3.2 image for Mac ARM64. Other distros are based on GraalVM 22.3.2 JDK 17
 
@@ -104,8 +104,8 @@ IMPORTANT: In `7.13.1` you can bring back the old deprecated behaviour making Co
 * Content API does not allow to create/modify/delete content directly on `master` branch or to publish to any other branch than `master`.
 * Content `PENDING_DELETE` state is no longer in use. Content deletion no longer happens during unpublishing. Instead, content deletion forces content to be unpublished immediately.
 * Node state has been deprecated and is no longer in use, as it was only used for content's `PENDING_DELETE` status.
-* Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<../deployment/config#content_config, content config>>.
-* `draft` branch is now restricted for unauthenticated access. By default, only `system.admin.login` role has access. Additional principles can be configured in <<../deployment/config#portal, portal config>> via `draftBranchAllowedFor` setting. Note that `system.admin` role always has access, regardless of the config.
+* Content API audit-log no longer logs `system.content.update` events by default. This can be changed back by setting `auditlog.filter = *` in <<../config/system#content_config, content config>>.
+* `draft` branch is now restricted for unauthenticated access. By default, only `system.admin.login` role has access. Additional principles can be configured in <<../config/system#portal, portal config>> via `draftBranchAllowedFor` setting. Note that `system.admin` role always has access, regardless of the config.
 * Bundled GraalVM has been updated to version 22.3.1. Other JVM versions are not supported, although they may also work.
 
 == v7.11 notes
@@ -114,7 +114,7 @@ WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (H
 A full restart is required in order to prevent loss of data or state.
 
 * Virtual application schemas may now override schema present in any installed (real) application.
-To prevent virtual applications from overriding schemas use <<../deployment/config#application, application config>> `virtual.schema.override = false`
+To prevent virtual applications from overriding schemas use <<../config/system#application, application config>> `virtual.schema.override = false`
 or disable virtual applications completely `virtual.enabled = false`
 
 * OSGi Compendium r8 is now provided as API dependency for Java Core API. (Component, Component Annotations and CM only)
@@ -151,17 +151,17 @@ You may see a WARNING message on XP startup `java.lang.UnsatisfiedLinkError: Can
 
 == v7.9 notes
 
-* <<../deployment/config#portal, Portal config>> now specifies default `Content-Security-Policy` for attachments and images.
+* <<../config/system#portal, Portal config>> now specifies default `Content-Security-Policy` for attachments and images.
 It is possible to configure the header via `media.contentSecurityPolicy` and `media.contentSecurityPolicy.svg` values. Empty value disables `Content-Security-Policy` for attachments and images.
 Default value is crafted to prevent common Persistent XSS attacks.
 
-* <<../deployment/config#admin, Admin config>> now specifies default Content-Security-Policy for page `preview` and `inline` mode (used by Content Studio).
+* <<../config/system#admin, Admin config>> now specifies default Content-Security-Policy for page `preview` and `inline` mode (used by Content Studio).
 It is possible to configure the header via `site.preview.contentSecurityPolicy` value or go back to previous behavior by setting `site.preview.contentSecurityPolicy` to an empty value.
 Default value is crafted to prevent common Persistent XSS attacks in Content Studio.
 
-* Certain Security headers are now specified in <<../deployment/config#header_filter, header filter config>> by default.
+* Certain Security headers are now specified in <<../config/system#header_filter, header filter config>> by default.
 Default value is crafted to prevent Clickjacking attacks. It may prevent some pages to work properly if they, for instance, require to be loaded from an IFrame.
-You can customize default headers in <<../deployment/config#header_filter, header filter config>> `headerConfig` value to get back to previous behaviour.
+You can customize default headers in <<../config/system#header_filter, header filter config>> `headerConfig` value to get back to previous behaviour.
 
 == v7.8 notes
 
@@ -179,7 +179,7 @@ It was never documented or supported for external use. We recommend implementing
 
 * JaxRS API backend was updated to the next major release. We didn't observe any incompatibilities, but if your application uses XP JaxRS API make sure you thoroughly test it.
 
-* Image Service now has memory usage constraints  configured by `memoryLimit` parameter in <<../deployment/config#image, Configuration Files / Image>>.
+* Image Service now has memory usage constraints  configured by `memoryLimit` parameter in <<../config/system#image, Configuration Files / Image>>.
 This may cause `429 Too Many Requests` HTTP responses for images, if they are not yet scaled at least once and put into disk cache.
 
 * XP 7.8 fixed a bug when `lib-portal.getContent()` would return a non-empty value in a context where no content should be returned, for example
@@ -233,23 +233,23 @@ versions (where this bug has been mitigated) before upgrading to XP 7.8.
 WARNING: FULL RESTART REQUIRED - For security reasons, XP's clustering engine (Hazelcast) has been updated in this release. A full restart is required in order to prevent loss of data or state.
 
 * Session cookie specifies `SameSite=Lax` by default. It is similar to modern browsers default value except for "Lax + POST mitigation".
-You can revert to previous behavior by setting `session.cookieSameSite =` in <<../deployment/config#jetty, Configuration Files / Jetty>>
+You can revert to previous behavior by setting `session.cookieSameSite =` in <<../config/system#jetty, Configuration Files / Jetty>>
 
 * Native Java primitive arrays are now converted to JavaScript arrays. You may have to adapt your application to the new behaviour if your code was using workarounds.
 
-* Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <<../deployment/config#image, Configuration Files / Image>>
+* Image Service now limits maximum image size and number of filters applied. You can configure thresholds in <<../config/system#image, Configuration Files / Image>>
 
 * Image Service has more eager validation of scale, filters, background and quality parameter values. Make sure the requests to Image Service use only correct/supported values.
 
 * Built-in Embed Macro now requires body part to be HTML escaped. In general, it should not cause issues because ContentStudio HTML editor always escapes macro body.
 
 * Content attachment file names can no longer contain suspicious characters.
-You can revert to previous behavior by setting `attachments.allowUnsafeNames = true` in <<../deployment/config#content, Configuration Files / Content>>
+You can revert to previous behavior by setting `attachments.allowUnsafeNames = true` in <<../config/system#content, Configuration Files / Content>>
 
 * Assets Service URL fingerprint part now uses application's "build time" instead of application's startup time. Make sure "build time" always changes for new versions of an application (this happens automatically if you use the standard xp build system)
 
 * Default Cache-Control headers for Assets Service and Portal Media Attachments have been changed.
-You can change default settings in <<../deployment/config#portal, Configuration Files / Portal>>
+You can change default settings in <<../config/system#portal, Configuration Files / Portal>>
 
 * ResourceService no longer considers directories in jar as existing resources.
 If application code relies on checking directory existence in jar, consider checking existence of a file inside that directory instead.
@@ -259,12 +259,12 @@ If application code relies on checking directory existence in jar, consider chec
 * `page-template` content now accepts child content, but only `fragment` and `media:*`. Attachments are no longer redirected to the nearest template's site.
 
 * input-type's `allow-content-type`, x-data `allow-content-types` and newest content-type's `allow-child-content-type` share the same <<../cms/schemas/input-types/contentselector/#allowContentType, pattern matching>>, that is stricter than before.
-You can switch back to legacy mode by setting `contentTypePatternMode = LEGACY` in  <<../deployment/config#admin_rest, Configuration Files / Admin>> for `allow-content-type` and `allow-content-types`, but it won't affect `allow-child-content-type` pattern matching.
+You can switch back to legacy mode by setting `contentTypePatternMode = LEGACY` in  <<../config/system#admin_rest, Configuration Files / Admin>> for `allow-content-type` and `allow-content-types`, but it won't affect `allow-child-content-type` pattern matching.
 
 
 == v7.6 notes
 * Named tasks do not necessarily execute on the node they were submitted on anymore. Instead, a random node capable to run a task is selected and task gets executed there. Make sure your named tasks do not require a specific node to be run on. Follow the <<../framework/tasks#_distributable, Tasks / Distributable>> for more information.
-* XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to https://market.enonic.com. URL can be changed in <<../deployment/config#market, Configuration Files / Market>>.
+* XP does not proxy market.enonic.com requests anymore, meaning that browser should have access to https://market.enonic.com. URL can be changed in <<../config/system#market, Configuration Files / Market>>.
 
 == v7.5 notes
 v7.5 is backward compatible with earlier versions
@@ -274,7 +274,7 @@ v7.4 is backward compatible with earlier versions, but if you run XP on a cluste
 nodes to get in touch with each other after the upgrade.  Please do the following:
 
 * Create the configuration files `com.enonic.xp.hazelcast.cfg` and `com.enonic.xp.web.sessionstore.cfg` and consider the values in them as described in
-   <<../deployment/config#hazelcast, Configuration Files / Hazelcast>> and <<../deployment/config#sessionstore, Configuration Files / SessionStore>>.
+   <<../config/system#hazelcast, Configuration Files / Hazelcast>> and <<../config/system#sessionstore, Configuration Files / SessionStore>>.
 * Open port 5701 between the nodes in the network.  This port is used by Hazelcast for internal communication in the cluster.
 An alternate port may be chosen by setting `network.port`.  If using Docker, the port needs to be opened both in the network and in
 the `docker-compose.yml` container definition.

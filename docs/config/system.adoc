@@ -1,53 +1,8 @@
-= Configuration files
+= System Configuration files
 :toc: right
 :imagesdir: ../images
 
-This section describes how to configure Enonic XP and installed 3rd party applications.
-
-== XP_HOME/config
-
-The <<./distro#xp_home,XP_HOME/config/>> folder contains all instance specific configuration.
-
-== XP_HOME/license
-
-Some apps require a license to work.  The `XP_HOME/license` folder is where the system looks for the licenses.  The license should be named `<appKey>.lic`.  If you are running an app with a license, please ask the supplier for the app key.
-
-The Enonic apps, Content Studio+, Live Trace and Booster, all require an XP license to run.  The app key for XP is "enonic.platform.subscription", so the license should be named `enonic.platform.subscription.lic`.
-
-== Format
-
-All configuration files (both .cfg and .properties) use the https://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29[properties] format.
-This is a simple key = value format.
-
-.Sample config file
-[source,properties]
-----
-mySetting = true
-another.setting = Not so sure
-multiline.value = another \
-                  line
-----
-
-== Variables
-
-XP also offers support for value variables, as this is often useful to handle dynamic settings.
-
-.Sample config with variable
-[source,properties]
-----
-another.setting = ${myvaraible}
-somePath = ${xp.home}/myfolder
-----
-
-// TODO: how to inject variables
-
-== .properties vs .cfg
-
-When changing files ending with .cfg, it’s respective application will automatically restart with the new configuration.
-Files ending with .properties require a full restart of the XP instance to be applied.
-
-In a clustered environment, configuration files must be distributed to all nodes where it is relevant.
-
+This section describes all standard configuration files and options for Enonic XP
 
 == Custom config
 

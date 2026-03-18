@@ -115,9 +115,9 @@ Have additional restrictions:
 
 === Other
 
-- Filesystem persistent sessions via `file` <<deployment/config#sessionstore,storeMode>> - sessions survive graceful restarts on standalone instances
+- Filesystem persistent sessions via `file` <<config/system#sessionstore,storeMode>> - sessions survive graceful restarts on standalone instances
 - New admin home page http://<host>:8080/admin
 - `request.locale` in <<framework/http#http-request, Request>>
-- The location of dumps is now configurable in <<deployment/config#repo,Repository config>>
+- The location of dumps is now configurable in <<config/system#repo,Repository config>>
 - New names method for HTTP methods in controllers: `GET`, `POST`, ...
 

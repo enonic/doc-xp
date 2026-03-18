@@ -89,7 +89,7 @@ image::service-account-key-upload.png[Upload public key, 807px]
 [NOTE]
 ====
 *XP enforces short-lived tokens*.
-You may change the default timeout of 30 seconds in <<../deployment/config#idprovider, the ID provider configuration>>.
+You may change the default timeout of 30 seconds in <<../config/system#idprovider, the ID provider configuration>>.
 ====
 
 The System ID providers supports JWT (JSON Web Token) based authentication via the HTTP `Authorization` header.

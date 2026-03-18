@@ -66,7 +66,7 @@ There are 3 configuration files that enable cluster setup. Those are:
 * `com.enonic.xp.elasticsearch.cfg`
 * `com.enonic.xp.hazelcast.cfg`
 
-We will set the bare minimum for those files. You can read the <<./config#,Configuration>> documentation for more details.
+We will set the bare minimum for those files. You can read the <<./../config/system#,Configuration>> documentation for more details.
 
 NOTE: We assume that the IP addresses for the nodes are 10.0.0.1, 10.0.0.2, 10.0.0.3, 10.0.0.4 and 10.0.0.5.
 
@@ -184,7 +184,7 @@ When running XP in a cluster, we generally recommend using sticky sessions. Stic
 . Any kind of node-local file handling will ONLY work across requests if the request is handled by the same node.
 . Performance is generally better and more consistent for users
 
-For session-based logins, XP now supports https://developer.enonic.com/docs/xp/stable/deployment/config#sessionstore[session replication] between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.
+For session-based logins, XP now supports https://developer.enonic.com/docs/xp/stable/config/system#sessionstore[session replication] between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.
 
 
 == Backup and restore
