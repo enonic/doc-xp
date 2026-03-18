@@ -1,0 +1,319 @@
+= Universal API
+include::.variables.adoc[]
+:toc: right
+:imagesdir: images
+
+One API to rule them all - dynamically extensible with Enonic apps.
+
+Universal API's can be mounted to the default endpoint on `8080/api`, i.e. `localhost:8080/api` if you're running XP locally, however APIs can also be contextually mounted across other XP services via the `_` path, such as `/site/<project>/<branch>/_/<appname>:<apiname>`.
+
+== Introduction
+
+The Universal API is a new concept introduced in Enonic XP8, inspired by the Kubernetes API model. It enables applications to dynamically extend the platform's API surface as they are installed.
+
+Rather than being a monolithic API, Universal API is a framework that allows any Enonic app to contribute their own APIs - whether GraphQL, REST, or any other protocol. All contributed APIs automatically integrate with XP's built-in IAM and security model, providing consistent authentication and authorization across the platform.
+
+== Key Features
+
+=== Customized exposure
+
+TODO: Expose and secure with vhosts
+
+
+=== API Discovery
+
+The hallmark feature of Universal API is the ability to browse and discover all installed APIs:
+
+* **Dynamic registration** - APIs are automatically registered as apps are installed
+* **Runtime discovery** - Query the platform to see what APIs are available
+* **Self-documentation** - Each API can provide its own documentation and schema
+* **Version management** - Multiple versions of the same API can coexist
+
+=== Dynamic Extension
+
+Following the Kubernetes model, the API surface grows with your application ecosystem:
+
+* **App-contributed APIs** - Any Enonic app can contribute one or more APIs
+* **Automatic integration** - New APIs become available immediately upon app installation
+* **No platform updates required** - Extend capabilities without modifying XP core
+* **Decentralized development** - Third-party developers can create and distribute APIs
+
+=== Protocol Agnostic
+
+Universal APIs can be implemented using any protocol or technology:
+
+* **GraphQL** - For flexible, type-safe queries
+* **REST** - For traditional HTTP APIs
+* **WebSocket** - For real-time communication
+* **gRPC** - For high-performance RPC
+* **Custom protocols** - Implement any protocol you need
+
+=== Integrated Security
+
+All Universal APIs automatically leverage XP's built-in security:
+
+* **IAM integration** - Use XP's identity and access management
+* **Authentication** - Session, JWT, OAuth2, ID providers
+* **Authorization** - Role-based and resource-based access control
+* **Audit logging** - All API access is logged automatically
+* **Consistent security model** - Same security across all APIs
+
+== Architecture
+
+=== API Registry
+
+Universal API uses a central registry to track all installed APIs:
+
+* **Dynamic registration** - Apps register their APIs at installation
+* **Metadata storage** - API names, versions, schemas, and capabilities
+* **Discovery endpoint** - Query to list all available APIs
+* **Deregistration** - APIs are removed when apps are uninstalled
+
+=== IAM Integration
+
+All Universal APIs are automatically integrated with XP's security model:
+
+* **Authentication layer** - Built-in support for sessions, JWT, OAuth2, API keys
+* **Authorization enforcement** - Role and permission checks before API access
+* **Context propagation** - User context flows through all API calls
+* **ID provider support** - Leverage custom authentication backends
+
+=== Routing
+
+The platform handles routing to the appropriate API implementation:
+
+* **URL pattern matching** - Parse `<appname>:<apiname>` from requests
+* **App resolution** - Locate the installed application
+* **API delegation** - Forward requests to the app's API handler
+* **Context injection** - Provide site, project, or admin context when mounted contextually
+
+== Getting Started
+
+=== Accessing APIs
+
+Universal APIs can be exposed in two ways:
+
+==== Dedicated API Endpoint
+
+APIs can be mounted on the dedicated `/api` endpoint with the following URL pattern:
+
+----
+/api/<appname>:<apiname>
+----
+
+For example, the Guillotine GraphQL API would be accessed at:
+
+----
+https://your-xp-instance.com/api/com.enonic.app.guillotine:graphql
+----
+
+==== Contextual Mounting
+
+APIs can also be contextually mounted across other XP services via the `_` path:
+
+* **Site engine** - `/site/<project>/<branch>/_/<appname>:<apiname>`
+* **Webapp engine** - `/webapp/<appname>/_/<appname>:<apiname>`
+* **Admin engine** - `/admin/_/<appname>:<apiname>`
+
+This allows APIs to be scoped to specific contexts, such as a content site or administrative tool.
+
+=== Example: GraphQL API
+
+Accessing a GraphQL API via the dedicated endpoint:
+
+----
+POST https://your-xp-instance.com/api/com.enonic.app.guillotine:graphql
+----
+
+=== Example: REST API
+
+Accessing a REST API:
+
+----
+GET https://your-xp-instance.com/api/com.myapp.api:rest/users
+----
+
+=== Authentication
+
+Include authentication credentials in your requests:
+
+[source,http]
+----
+Authorization: Bearer <your-token>
+----
+
+Or use session-based authentication with cookies.
+
+=== GraphQL Example
+
+Query the Guillotine GraphQL API:
+
+[source,graphql]
+----
+POST /api/com.enonic.app.guillotine:graphql
+
+{
+  query: `{
+    guillotine {
+      get(key: "/my-site/article") {
+        displayName
+        type
+        ... on com_myapp_Article {
+          data {
+            title
+            body
+          }
+        }
+      }
+    }
+  }`
+}
+----
+
+=== REST API Example
+
+Call a custom REST API:
+
+[source,bash]
+----
+curl -X GET \
+  https://your-xp-instance.com/api/com.mycompany.products:rest/items/123 \
+  -H "Authorization: Bearer <your-token>"
+----
+
+=== Discovering Available APIs
+
+List all registered APIs:
+
+[source,bash]
+----
+curl -X GET \
+  https://your-xp-instance.com/api
+----
+
+== Use Cases
+
+=== Headless CMS
+
+Use the Universal API to power headless applications:
+
+* **Mobile apps** - Native iOS and Android
+* **Single-page apps** - React, Vue, Angular
+* **Static site generators** - Gatsby, Next.js, Nuxt
+* **IoT devices** - Connected hardware
+
+=== Integration Platform
+
+Connect XP with other systems:
+
+* **CRM systems** - Salesforce, HubSpot
+* **Marketing automation** - Marketo, Mailchimp
+* **Analytics** - Google Analytics, Mixpanel
+* **Business intelligence** - Tableau, Power BI
+
+=== Custom Applications
+
+Build custom administrative interfaces:
+
+* **Content management tools**
+* **User management dashboards**
+* **System monitoring**
+* **Custom workflows**
+
+== Security
+
+The Universal API implements multiple security layers:
+
+=== Authentication
+
+Supported authentication methods:
+
+* **Session-based** - Traditional cookie authentication
+* **JWT tokens** - Stateless authentication
+* **OAuth2** - Third-party integration
+* **API keys** - Service-to-service communication
+* **ID providers** - Custom authentication backends
+
+=== Authorization
+
+Fine-grained access control:
+
+* **Role-based** - Assign permissions to roles
+* **Resource-based** - Control access per resource
+* **Field-level** - Hide sensitive data fields
+* **Operation-based** - Restrict specific operations
+
+=== Audit Logging
+
+All API access is logged for security and compliance:
+
+* **Request logging** - Track all API calls
+* **Change tracking** - Monitor data modifications
+* **Security events** - Detect suspicious activity
+* **Compliance reports** - Generate audit reports
+
+=== Monitoring
+
+Built-in monitoring capabilities:
+
+* **Metrics** - API usage statistics
+* **Tracing** - Request tracing
+* **Performance profiling** - Identify bottlenecks
+* **Alerting** - Proactive issue detection
+
+== Best Practices
+
+=== Query Optimization
+
+* Request only the fields you need
+* Use pagination for large result sets
+* Implement proper caching strategies
+* Batch related queries together
+
+=== Error Handling
+
+* Check for errors in all responses
+* Implement retry logic with exponential backoff
+* Log errors for debugging
+* Provide meaningful error messages to users
+
+=== Security
+
+* Always use HTTPS in production
+* Rotate API keys regularly
+* Implement rate limiting on client side
+* Validate all input data
+
+=== Versioning
+
+* Specify API version in requests
+* Monitor deprecation warnings
+* Plan for breaking changes
+* Test against new versions before upgrading
+
+
+=== User API
+
+Before (XP 7):
+[source,javascript]
+----
+const authLib = require('/lib/xp/auth');
+const user = authLib.getUser();
+----
+
+After (XP {release}):
+[source,javascript]
+----
+const universalApi = require('/lib/xp/universal-api');
+const user = universalApi.query(`
+  query {
+    currentUser {
+      key
+      displayName
+      email
+    }
+  }
+`);
+----
+
+

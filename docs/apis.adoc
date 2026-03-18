@@ -1,0 +1,89 @@
+= Endpoints and APIs
+include:.variables.adoc[]
+:toc: right
+:imagesdir: images
+
+Enonic XP exposes its functionality through multiple HTTP endpoints, each serving specific purposes.
+
+== Web Endpoint (Port 8080)
+
+The main web endpoint is where your applications and content are served to end users.
+
+=== Universal API (/api)
+
+The Universal API is a new framework that allows any Enonic app to contribute its own APIs - whether GraphQL, REST, or any other protocol. All contributed APIs automatically integrate with XP's built-in IAM and security model, providing consistent authentication and authorization across the platform.
+
+For detailed documentation, see <<apis/universal#,Universal API>>.
+
+== Site Engine (/site)
+
+The Site Engine serves websites and content. It handles requests to `/site/<project>/<branch>/<path>` and renders content based on the site's configuration.
+
+TODO: Document site engine endpoints and capabilities.
+
+== Webapp Engine (/webapp)
+
+The Webapp Engine hosts web applications. It serves requests to `/webapp/<appname:webapp>` and routes them to the corresponding application.
+
+== Admin Engine (/admin)
+
+The Admin Engine serves the admin console and tools. It handles requests to `/admin` and provides interfaces for managing the XP instance.
+
+TODO: Document admin engine endpoints and capabilities.
+
+
+== ID Provider Endpoints (/idprovider)
+
+TODO: Document ID provider endpoints and capabilities.
+* **/idprovider** - Authentication endpoints (`/idprovider/<idprovider>`)
+
+
+== Management API (Port 4848)
+
+The Management API provides programmatic access to administrative and operational functions.
+
+=== Capabilities
+
+The Management API allows you to:
+
+* **Application management** - Install, start, stop, and uninstall applications
+* **Repository operations** - Create, modify, and delete repositories
+* **Content management** - Import and export content
+* **Task execution** - Run and monitor background tasks
+* **System information** - Query platform version and status
+* **Export/Import** - Backup and restore data
+
+For detailed documentation, see <<apis/management#,Management API>>.
+
+== Statistics API (Port 2609)
+
+The Statistics API exposes real-time metrics and monitoring data about the XP instance.
+
+=== Metrics
+
+The Statistics API provides insights into:
+
+* **JVM metrics** - Memory usage, garbage collection, thread counts
+* **HTTP metrics** - Request rates, response times, error rates
+* **Cache statistics** - Hit rates and cache utilization
+* **Cluster health** - Node status and communication
+* **Content statistics** - Repository and index metrics
+* **Task execution** - Background task performance
+
+For detailed documentation, see <<deployment/statistics#,Statistics API>>.
+
+== Port Configuration
+
+All endpoint ports can be configured in `com.enonic.xp.web.jetty.cfg`:
+
+[source,properties]
+----
+# Web endpoint
+http.port = 8080
+
+# Management API
+management.port = 4848
+
+# Statistics API  
+monitoring.port = 2609
+----

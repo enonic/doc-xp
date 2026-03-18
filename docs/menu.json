@@ -5,12 +5,20 @@
       "document": "index"
     },
     {
-      "title": "Admin",
-      "document": "admin",
+      "title": "Applications",
+      "document": "apps",
       "menuItems": [
         {
-          "title": "Widgets",
-          "document": "admin/widgets"
+          "title": "Runtime",
+          "document": "apps/runtime"
+        },
+        {
+          "title": "Lifecycle",
+          "document": "apps/lifecycle"
+        },
+        {
+          "title": "Configuration",
+          "document": "apps/configuration"
         }
       ]
     },
@@ -37,12 +45,14 @@
       ]
     },
     {
-      "title": "Runtime",
-      "document": "runtime"
-    },
-    {
-      "title": "Applications",
-      "document": "apps"
+      "title": "Admin",
+      "document": "admin",
+      "menuItems": [
+        {
+          "title": "Widgets",
+          "document": "admin/widgets"
+        }
+      ]
     },
     {
       "title": "Storage",
@@ -125,20 +135,34 @@
         {
           "title": "Clustering",
           "document": "deployment/clustering"
-        },
-        {
-          "title": "Management API",
-          "document": "deployment/management"
-        },
-        {
-          "title": "Statistics API",
-          "document": "deployment/statistics"
         }
       ]
     },
     {
       "title": "Audit Logs",
       "document": "auditLogs"
+    },
+    {
+      "title": "APIs",
+      "document": "apis",
+      "menuItems": [
+        {
+          "title": "Universal API",
+          "document": "apis/universal"
+        },
+        {
+          "title": "Management API",
+          "document": "apis/management"
+        },
+        {
+          "title": "Statistics API",
+          "document": "apis/statistics"
+        }
+      ]
+    },
+    {
+      "title": "Configuration",
+      "document": "config"
     },
     {
       "title": "Release Notes",
