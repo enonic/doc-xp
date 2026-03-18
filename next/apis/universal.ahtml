@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Schema localization</title>
+<title>Universal API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,13 +437,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Schema localization</h1>
+<h1>Universal API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#example">Example</a></li>
-<li><a href="#supported_fields">Supported Fields</a></li>
-<li><a href="#translation_files">Translation files</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#key_features">Key Features</a>
+<ul class="sectlevel2">
+<li><a href="#customized_exposure">Customized exposure</a></li>
+<li><a href="#api_discovery">API Discovery</a></li>
+<li><a href="#dynamic_extension">Dynamic Extension</a></li>
+<li><a href="#protocol_agnostic">Protocol Agnostic</a></li>
+<li><a href="#integrated_security">Integrated Security</a></li>
+</ul>
+</li>
+<li><a href="#architecture">Architecture</a>
+<ul class="sectlevel2">
+<li><a href="#api_registry">API Registry</a></li>
+<li><a href="#iam_integration">IAM Integration</a></li>
+<li><a href="#routing">Routing</a></li>
+</ul>
+</li>
+<li><a href="#getting_started">Getting Started</a>
+<ul class="sectlevel2">
+<li><a href="#accessing_apis">Accessing APIs</a></li>
+<li><a href="#example_graphql_api">Example: GraphQL API</a></li>
+<li><a href="#example_rest_api">Example: REST API</a></li>
+<li><a href="#authentication">Authentication</a></li>
+<li><a href="#graphql_example">GraphQL Example</a></li>
+<li><a href="#rest_api_example">REST API Example</a></li>
+<li><a href="#discovering_available_apis">Discovering Available APIs</a></li>
+</ul>
+</li>
+<li><a href="#use_cases">Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#headless_cms">Headless CMS</a></li>
+<li><a href="#integration_platform">Integration Platform</a></li>
+<li><a href="#custom_applications">Custom Applications</a></li>
+</ul>
+</li>
+<li><a href="#security">Security</a>
+<ul class="sectlevel2">
+<li><a href="#authentication_2">Authentication</a></li>
+<li><a href="#authorization">Authorization</a></li>
+<li><a href="#audit_logging">Audit Logging</a></li>
+<li><a href="#monitoring">Monitoring</a></li>
+</ul>
+</li>
+<li><a href="#best_practices">Best Practices</a>
+<ul class="sectlevel2">
+<li><a href="#error_handling">Error Handling</a></li>
+<li><a href="#security_2">Security</a></li>
+<li><a href="#versioning">Versioning</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -451,156 +498,577 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Labels and texts in schemas can be displayed in the users preferred language (based on browser settings).</p>
+<p>One API to rule them all - dynamically extensible with Enonic apps.</p>
 </div>
 <div class="paragraph">
-<p>Simply add an <code>i18n="key"</code> attribute to the form elements. The key mustmatch an entry in your application&#8217;s <code>src/main/resources/i18n/phrases.properties</code> file.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Schema localization uses the same properties files format as the rest of XP. Please consult the <a href="../../framework/i18n.ahtml">framework localization docs</a> for more details.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Localization is optional. If the <code>i18n</code> attribute is not specified, the value of the XML element will be used.</p>
+<p>Universal API&#8217;s can be mounted to the default endpoint on <code>8080/api</code>, i.e. <code>localhost:8080/api</code> if you&#8217;re running XP locally, however APIs can also be contextually mounted across other XP services via the <code><em></code> path, such as <code>/site/&lt;project&gt;/&lt;branch&gt;/</em>/&lt;appname&gt;:&lt;apiname&gt;</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="example"><a class="link" href="#example">Example</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Below is an example of a content type where localization has been enabled.</p>
+<p>The Universal API is a new concept introduced in Enonic XP8, inspired by the Kubernetes API model. It enables applications to dynamically extend the platform&#8217;s API surface as they are installed.</p>
 </div>
-<div class="listingblock">
-<div class="title">Localized content type schema</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;content-type&gt;
-  &lt;display-name i18n="person.display-name"&gt;Person&lt;/display-name&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
-    &lt;input type="TextLine" name="name"&gt;
-      &lt;label i18n="person.name.label"&gt;Name&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="age"&gt;
-      &lt;label i18n="person.age.label"&gt;Age&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="imageSelector" name="photo"&gt;
-      &lt;label i18n="person.photo.label"&gt;Photo&lt;/label&gt;
-      &lt;help-text i18n="person.photo.help-text"&gt;Passport photo&lt;/help-text&gt;
-      &lt;occurrences minimum="0" maximum="1"/&gt;
-    &lt;/input&gt;
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
-</div>
+<div class="paragraph">
+<p>Rather than being a monolithic API, Universal API is a framework that allows any Enonic app to contribute their own APIs - whether GraphQL, REST, or any other protocol. All contributed APIs automatically integrate with XP&#8217;s built-in IAM and security model, providing consistent authentication and authorization across the platform.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="supported_fields"><a class="link" href="#supported_fields">Supported Fields</a></h2>
+<h2 id="key_features"><a class="link" href="#key_features">Key Features</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="customized_exposure"><a class="link" href="#customized_exposure">Customized exposure</a></h3>
 <div class="paragraph">
-<p>In general, the following schema elements support the <code>i18n</code> localization attribute:</p>
+<p>TODO: Expose and secure with vhosts</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="api_discovery"><a class="link" href="#api_discovery">API Discovery</a></h3>
+<div class="paragraph">
+<p>The hallmark feature of Universal API is the ability to browse and discover all installed APIs:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>displayName</p>
+<p><strong>Dynamic registration</strong> - APIs are automatically registered as apps are installed</p>
 </li>
 <li>
-<p>label</p>
+<p><strong>Runtime discovery</strong> - Query the platform to see what APIs are available</p>
 </li>
 <li>
-<p>help-text</p>
+<p><strong>Self-documentation</strong> - Each API can provide its own documentation and schema</p>
 </li>
 <li>
-<p>description</p>
+<p><strong>Version management</strong> - Multiple versions of the same API can coexist</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="dynamic_extension"><a class="link" href="#dynamic_extension">Dynamic Extension</a></h3>
 <div class="paragraph">
-<p>Other elements may also support localization, simply try adding the attribute to see if it works.</p>
+<p>Following the Kubernetes model, the API surface grows with your application ecosystem:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>App-contributed APIs</strong> - Any Enonic app can contribute one or more APIs</p>
+</li>
+<li>
+<p><strong>Automatic integration</strong> - New APIs become available immediately upon app installation</p>
+</li>
+<li>
+<p><strong>No platform updates required</strong> - Extend capabilities without modifying XP core</p>
+</li>
+<li>
+<p><strong>Decentralized development</strong> - Third-party developers can create and distribute APIs</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="protocol_agnostic"><a class="link" href="#protocol_agnostic">Protocol Agnostic</a></h3>
+<div class="paragraph">
+<p>Universal APIs can be implemented using any protocol or technology:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>GraphQL</strong> - For flexible, type-safe queries</p>
+</li>
+<li>
+<p><strong>REST</strong> - For traditional HTTP APIs</p>
+</li>
+<li>
+<p><strong>WebSocket</strong> - For real-time communication</p>
+</li>
+<li>
+<p><strong>gRPC</strong> - For high-performance RPC</p>
+</li>
+<li>
+<p><strong>Custom protocols</strong> - Implement any protocol you need</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="integrated_security"><a class="link" href="#integrated_security">Integrated Security</a></h3>
+<div class="paragraph">
+<p>All Universal APIs automatically leverage XP&#8217;s built-in security:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>IAM integration</strong> - Use XP&#8217;s identity and access management</p>
+</li>
+<li>
+<p><strong>Authentication</strong> - Session, JWT, OAuth2, ID providers</p>
+</li>
+<li>
+<p><strong>Authorization</strong> - Role-based and resource-based access control</p>
+</li>
+<li>
+<p><strong>Audit logging</strong> - All API access is logged automatically</p>
+</li>
+<li>
+<p><strong>Consistent security model</strong> - Same security across all APIs</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="translation_files"><a class="link" href="#translation_files">Translation files</a></h2>
+<h2 id="architecture"><a class="link" href="#architecture">Architecture</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="api_registry"><a class="link" href="#api_registry">API Registry</a></h3>
+<div class="paragraph">
+<p>Universal API uses a central registry to track all installed APIs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Dynamic registration</strong> - Apps register their APIs at installation</p>
+</li>
+<li>
+<p><strong>Metadata storage</strong> - API names, versions, schemas, and capabilities</p>
+</li>
+<li>
+<p><strong>Discovery endpoint</strong> - Query to list all available APIs</p>
+</li>
+<li>
+<p><strong>Deregistration</strong> - APIs are removed when apps are uninstalled</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="iam_integration"><a class="link" href="#iam_integration">IAM Integration</a></h3>
+<div class="paragraph">
+<p>All Universal APIs are automatically integrated with XP&#8217;s security model:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Authentication layer</strong> - Built-in support for sessions, JWT, OAuth2, API keys</p>
+</li>
+<li>
+<p><strong>Authorization enforcement</strong> - Role and permission checks before API access</p>
+</li>
+<li>
+<p><strong>Context propagation</strong> - User context flows through all API calls</p>
+</li>
+<li>
+<p><strong>ID provider support</strong> - Leverage custom authentication backends</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="routing"><a class="link" href="#routing">Routing</a></h3>
+<div class="paragraph">
+<p>The platform handles routing to the appropriate API implementation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>URL pattern matching</strong> - Parse <code>&lt;appname&gt;:&lt;apiname&gt;</code> from requests</p>
+</li>
+<li>
+<p><strong>App resolution</strong> - Locate the installed application</p>
+</li>
+<li>
+<p><strong>API delegation</strong> - Forward requests to the app&#8217;s API handler</p>
+</li>
+<li>
+<p><strong>Context injection</strong> - Provide site, project, or admin context when mounted contextually</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="getting_started"><a class="link" href="#getting_started">Getting Started</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="accessing_apis"><a class="link" href="#accessing_apis">Accessing APIs</a></h3>
+<div class="paragraph">
+<p>Universal APIs can be exposed in two ways:</p>
+</div>
+<div class="sect3">
+<h4 id="dedicated_api_endpoint"><a class="link" href="#dedicated_api_endpoint">Dedicated API Endpoint</a></h4>
+<div class="paragraph">
+<p>APIs can be mounted on the dedicated <code>/api</code> endpoint with the following URL pattern:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>/api/&lt;appname&gt;:&lt;apiname&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, the Guillotine GraphQL API would be accessed at:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>https://your-xp-instance.com/api/com.enonic.app.guillotine:graphql</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="contextual_mounting"><a class="link" href="#contextual_mounting">Contextual Mounting</a></h4>
+<div class="paragraph">
+<p>APIs can also be contextually mounted across other XP services via the <code>_</code> path:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Site engine</strong> - <code>/site/&lt;project&gt;/&lt;branch&gt;/_/&lt;appname&gt;:&lt;apiname&gt;</code></p>
+</li>
+<li>
+<p><strong>Webapp engine</strong> - <code>/webapp/&lt;appname&gt;/_/&lt;appname&gt;:&lt;apiname&gt;</code></p>
+</li>
+<li>
+<p><strong>Admin engine</strong> - <code>/admin/_/&lt;appname&gt;:&lt;apiname&gt;</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This allows APIs to be scoped to specific contexts, such as a content site or administrative tool.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example_graphql_api"><a class="link" href="#example_graphql_api">Example: GraphQL API</a></h3>
+<div class="paragraph">
+<p>Accessing a GraphQL API via the dedicated endpoint:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>POST https://your-xp-instance.com/api/com.enonic.app.guillotine:graphql</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example_rest_api"><a class="link" href="#example_rest_api">Example: REST API</a></h3>
+<div class="paragraph">
+<p>Accessing a REST API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>GET https://your-xp-instance.com/api/com.myapp.api:rest/users</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="authentication"><a class="link" href="#authentication">Authentication</a></h3>
+<div class="paragraph">
+<p>Include authentication credentials in your requests:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-http" data-lang="http">Authorization: Bearer &lt;your-token&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or use session-based authentication with cookies.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="graphql_example"><a class="link" href="#graphql_example">GraphQL Example</a></h3>
+<div class="paragraph">
+<p>Query the Guillotine GraphQL API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">POST /api/com.enonic.app.guillotine:graphql
+
+{
+  query: `{
+    guillotine {
+      get(key: "/my-site/article") {
+        displayName
+        type
+        ... on com_myapp_Article {
+          data {
+            title
+            body
+          }
+        }
+      }
+    }
+  }`
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rest_api_example"><a class="link" href="#rest_api_example">REST API Example</a></h3>
+<div class="paragraph">
+<p>Call a custom REST API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -X GET \
+  https://your-xp-instance.com/api/com.mycompany.products:rest/items/123 \
+  -H "Authorization: Bearer &lt;your-token&gt;"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="discovering_available_apis"><a class="link" href="#discovering_available_apis">Discovering Available APIs</a></h3>
+<div class="paragraph">
+<p>List all registered APIs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -X GET \
+  https://your-xp-instance.com/api</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use_cases"><a class="link" href="#use_cases">Use Cases</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="headless_cms"><a class="link" href="#headless_cms">Headless CMS</a></h3>
+<div class="paragraph">
+<p>Use the Universal API to power headless applications:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Mobile apps</strong> - Native iOS and Android</p>
+</li>
+<li>
+<p><strong>Single-page apps</strong> - React, Vue, Angular</p>
+</li>
+<li>
+<p><strong>Static site generators</strong> - Gatsby, Next.js, Nuxt</p>
+</li>
+<li>
+<p><strong>IoT devices</strong> - Connected hardware</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="integration_platform"><a class="link" href="#integration_platform">Integration Platform</a></h3>
+<div class="paragraph">
+<p>Connect XP with other systems:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>CRM systems</strong> - Salesforce, HubSpot</p>
+</li>
+<li>
+<p><strong>Marketing automation</strong> - Marketo, Mailchimp</p>
+</li>
+<li>
+<p><strong>Analytics</strong> - Google Analytics, Mixpanel</p>
+</li>
+<li>
+<p><strong>Business intelligence</strong> - Tableau, Power BI</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="custom_applications"><a class="link" href="#custom_applications">Custom Applications</a></h3>
+<div class="paragraph">
+<p>Build custom administrative interfaces:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Content management tools</strong></p>
+</li>
+<li>
+<p><strong>User management dashboards</strong></p>
+</li>
+<li>
+<p><strong>System monitoring</strong></p>
+</li>
+<li>
+<p><strong>Custom workflows</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="security"><a class="link" href="#security">Security</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The translated texts for each of the i18n keys should be placed in the corresponding <code>phrases.properties</code> file within the same application where the schema is defined.</p>
+<p>The Universal API implements multiple security layers:</p>
 </div>
+<div class="sect2">
+<h3 id="authentication_2"><a class="link" href="#authentication_2">Authentication</a></h3>
 <div class="paragraph">
-<p>Steps to add the translations for a schema:</p>
+<p>Supported authentication methods:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Add or edit one file per language supported:</p>
-<div class="paragraph">
-<p><code>src/main/resources/i18n/phrases_&lt;language-code&gt;.properties</code></p>
-</div>
-<div class="listingblock">
-<div class="title">Example files to support English and Norwegian</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">src/main/resources/i18n/phrases.properties
-src/main/resources/i18n/phrases_en.properties
-src/main/resources/i18n/phrases_no.properties</code></pre>
-</div>
-</div>
+<p><strong>Session-based</strong> - Traditional cookie authentication</p>
 </li>
 <li>
-<p>Add the i18n keys from the schema in each of the phrases.properties files.</p>
-<div class="paragraph">
-<p>Each line should have the key, an equals <code>=</code> sign, and the text in the specific language.</p>
-</div>
-<div class="listingblock">
-<div class="title">phrases_en.properties</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">person.display-name=Person
-person.name.label=Name
-person.age.label=Age
-person.photo.label=Photo
-person.photo.help-text=Passport photo</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">phrases_no.properties</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">person.display-name=Person
-person.name.label=Navn
-person.age.label=Alder
-person.photo.label=Bilde
-person.photo.help-text=Passbilde</code></pre>
-</div>
-</div>
+<p><strong>JWT tokens</strong> - Stateless authentication</p>
 </li>
 <li>
-<p>fallback file <code>phrases.properties</code> file</p>
-<div class="paragraph">
-<p>It is recommended to have default phrases file. This will be used if the translation for the browser language cannot be found.</p>
-</div>
+<p><strong>OAuth2</strong> - Third-party integration</p>
 </li>
-</ol>
+<li>
+<p><strong>API keys</strong> - Service-to-service communication</p>
+</li>
+<li>
+<p><strong>ID providers</strong> - Custom authentication backends</p>
+</li>
+</ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="authorization"><a class="link" href="#authorization">Authorization</a></h3>
 <div class="paragraph">
-<p>For more details, check out the <a href="../../api/lib-i18n.ahtml">runtime localization docs</a></p>
+<p>Fine-grained access control:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Role-based</strong> - Assign permissions to roles</p>
+</li>
+<li>
+<p><strong>Resource-based</strong> - Control access per resource</p>
+</li>
+<li>
+<p><strong>Field-level</strong> - Hide sensitive data fields</p>
+</li>
+<li>
+<p><strong>Operation-based</strong> - Restrict specific operations</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="audit_logging"><a class="link" href="#audit_logging">Audit Logging</a></h3>
+<div class="paragraph">
+<p>All API access is logged for security and compliance:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Request logging</strong> - Track all API calls</p>
+</li>
+<li>
+<p><strong>Change tracking</strong> - Monitor data modifications</p>
+</li>
+<li>
+<p><strong>Security events</strong> - Detect suspicious activity</p>
+</li>
+<li>
+<p><strong>Compliance reports</strong> - Generate audit reports</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="monitoring"><a class="link" href="#monitoring">Monitoring</a></h3>
+<div class="paragraph">
+<p>Built-in monitoring capabilities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Metrics</strong> - API usage statistics</p>
+</li>
+<li>
+<p><strong>Tracing</strong> - Request tracing</p>
+</li>
+<li>
+<p><strong>Performance profiling</strong> - Identify bottlenecks</p>
+</li>
+<li>
+<p><strong>Alerting</strong> - Proactive issue detection</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="best_practices"><a class="link" href="#best_practices">Best Practices</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="error_handling"><a class="link" href="#error_handling">Error Handling</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Check for errors in all responses</p>
+</li>
+<li>
+<p>Implement retry logic with exponential backoff</p>
+</li>
+<li>
+<p>Log errors for debugging</p>
+</li>
+<li>
+<p>Provide meaningful error messages to users</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="security_2"><a class="link" href="#security_2">Security</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Always use HTTPS in production</p>
+</li>
+<li>
+<p>Rotate API keys regularly</p>
+</li>
+<li>
+<p>Implement rate limiting on client side</p>
+</li>
+<li>
+<p>Validate all input data</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="versioning"><a class="link" href="#versioning">Versioning</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Specify API version in requests</p>
+</li>
+<li>
+<p>Monitor deprecation warnings</p>
+</li>
+<li>
+<p>Plan for breaking changes</p>
+</li>
+<li>
+<p>Test against new versions before upgrading</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 14:25:14 UTC
+Last updated 2026-03-18 14:25:41 UTC
 </div>
 </div>
 </body>
