@@ -41,9 +41,9 @@ somePath = ${xp.home}/myfolder
 
 // TODO: how to inject variables
 
-== Automatic updates
+== Hot deployment
 
-When changing files ending with `.cfg`, application using them will automatically restart with the new configuration. Files ending with `.properties` require a full restart of the XP instance to be effectively applied.
+When changing files ending with `.cfg`, application using them will automatically restart with the new configuration loaded. Files ending with `.properties` require a full restart of the XP instance to be effectively applied.
 
 == Clustered deployments
 

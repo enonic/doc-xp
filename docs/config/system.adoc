@@ -1,23 +1,10 @@
-= System Configuration files
+= System Configuration
 :toc: right
 :imagesdir: ../images
 
-This section describes all standard configuration files and options for Enonic XP
+This section describes all standard configuration files and options for Enonic XP. These are primarily relevant when hosting XP on your own infrastructure.
 
-== Custom config
-
-To provide file based configuration to custom applications,
-simply place a file with the name `<app-name>.cfg` i.e. `my.custom.app.cfg`. in the `XP_HOME/config/` folder, and it will instantly be available for the application.
-
-Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.
-
-This configuration is instantly available for developers via the <<../framework/globals#App, global `app` object>>.
-
-== Standard config files
-
-The following are standard configuration files for Enonic XP
-
-=== System Properties
+== System Properties
 [#system-properties]
 
 `XP_HOME/config/system.properties`
@@ -59,7 +46,7 @@ felix.fileinstall.poll:: Frequency in ms for how often the configuration folders
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
 
 [#vhost]
-=== Vhost
+== Vhost
 
 `XP_HOME/config/com.enonic.xp.web.vhost.cfg`
 
@@ -102,7 +89,7 @@ mapping.admin.target = /admin
 mapping.admin.idProvider.system = default
 ----
 
-=== Security
+== Security
 [#security]
 
 `XP_HOME/config/com.enonic.xp.web.security.cfg`
@@ -122,7 +109,7 @@ password.policy = $pbkdf2-sha512$i=210000,l=64,slen=16
 ----
 
 [#mail]
-=== Mail
+== Mail
 
 `XP_HOME/config/com.enonic.xp.mail.cfg`
 
@@ -149,7 +136,7 @@ smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required.
 defaultFromEmail:: Default email address to use as sender for all emails sent from XP if sender is not explicitly specified.
 
 [#repo]
-=== Repo
+== Repo
 
 `XP_HOME/config/com.enonic.xp.repo.cfg`
 
@@ -170,7 +157,7 @@ NOTE: If you change this value, remember to update value for `path.repo` in `com
 
 dumps.dir:: Specifies the root location for where to find and place dump files. Default: `${xp.home}/dump`
 
-=== Blobstore
+== Blobstore
 
 `XP_HOME/config/com.enonic.xp.blobstore.cfg`
 
@@ -191,7 +178,7 @@ cache.sizeThreshold:: specifies the maximum size for objects to be cached. Defau
 cache.memoryCapacity:: is the maximum memory footprint of the blob cache. Default: 100mb. The size notation accepts a number plus byte-size identifier (b/kb/mb/gb/tb/pb)
 
 [#file-blobstore]
-=== File blobstore
+== File blobstore
 
 `XP_HOME/config/com.enonic.xp.blobstore.file.cfg`
 
@@ -213,8 +200,7 @@ readThrough.sizeThreshold:: specifies he maximum size of objects to be cache in 
 
 // TODO: Verify existence of readThrough provider and actual values!
 
-
-=== Cluster
+== Cluster
 
 `XP_HOME/config/com.enonic.xp.cluster.cfg`
 
@@ -248,7 +234,7 @@ Network host aliases:
 * `\_[networkInterface]:ipv6_` : Resolves to the ipv6 address of the provided network interface. For example `\_en0:ipv6_`
 
 
-=== Elasticsearch
+== Elasticsearch
 
 `XP_HOME/config/com.enonic.xp.elasticsearch.cfg`
 
@@ -305,7 +291,7 @@ discovery.unicast.sockets:: Comma separated list of hosts to be discovered as se
 index.recovery.initial_shards:: Number of shards expected to be found on full cluster restart per index. Default: `quorum`.
 index.auto_expand_replicas:: Auto-expand the number of replicas based on the number of available nodes. Set to a dash delimited lower and upper bound (e.g. 0-5) or use all for the upper bound (e.g. 0-all). Defaults to `false` (i.e. disabled).
 
-=== Hazelcast
+== Hazelcast
 
 `XP_HOME/config/com.enonic.xp.hazelcast.cfg`
 
@@ -416,7 +402,7 @@ hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before joi
 NOTE: In case of using Kubernetes API discovery each node makes a call to Kubernetes Master in order to discover PODs.
 It also requires granting certain permissions. You can find more information in the documentation of https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes].
 
-=== Admin
+== Admin
 
 `XP_HOME/config/com.enonic.xp.admin.cfg`
 
@@ -439,11 +425,11 @@ site.preview.contentSecurityPolicy:: Defines default value for Content-Security-
 Default: `default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:`
 
 
-=== XP Dashboard
+== XP Dashboard
 
 `XP_HOME/config/com.enonic.xp.app.main.cfg`
 
-==== Content Security Policy
+=== Content Security Policy
 
 IMPORTANT: Disabling or changing built-in Content Security Policy is generally NOT RECOMMENDED. You may need to tweak
 CSP settings _only_ if you are building a Dashboard widget where you want to allow references to external resources
@@ -466,7 +452,7 @@ To completely turn off Content Security Policy for the Dashboard, set `contentSe
 contentSecurityPolicy.enabled=false
 ----
 
-=== Applications app
+== Applications app
 
 `XP_HOME/config/com.enonic.xp.app.applications.cfg`
 
@@ -480,7 +466,7 @@ readonlyMode:: Activate read only mode to prevent installation and stop/start of
 Default: `false`
 
 [#jetty]
-=== Jetty
+== Jetty
 
 `XP_HOME/config/com.enonic.xp.web.jetty.cfg`
 
@@ -554,7 +540,7 @@ websocket.idleTimeout:: The time (in milliseconds) that a websocket may be idle 
 WARNING: Setting `session.cookieAlwaysSecure` to `true` would make session-involved login on HTTP connections impossible.
 
 [#sessionstore]
-=== SessionStore
+== SessionStore
 
 `XP_HOME/config/com.enonic.xp.web.sessionstore.cfg`
 
@@ -579,7 +565,7 @@ saveOnCreate:: Controls whether a session that is newly created will be immediat
 flushOnResponseCommit:: Controls whether a session that is changed ("dirty") will be persisted as the response is about to commit. If false, a dirty session will only be persisted when the last simultaneous request for it leaves the session. Has no effect in `non-persistent` storeMode. Default: `false`.
 
 [#media]
-=== Media
+== Media
 
 `XP_HOME/config/com.enonic.xp.media.cfg`
 
@@ -597,7 +583,7 @@ ext.p = text/x-pascal
 
 ext.<file-extension>:: value must match a defined mime type
 
-=== OSGi shell
+== OSGi shell
 
 `XP_HOME/config/com.enonic.xp.server.shell.cfg`
 
@@ -620,7 +606,7 @@ telnet.port:: Port to use for service. Default: `5555`.
 telnet.maxConnect:: Maximum number of concurrent connections. Default: `2`.
 telnet.socketTimeout:: Default: `0`
 
-=== DoS filter
+== DoS filter
 
 `XP_HOME/config/com.enonic.xp.web.dos.cfg`
 
@@ -658,7 +644,7 @@ remotePort:: If true and session tracking is not used, then rate is tracked by I
 ipWhitelist:: A comma-separated list of IP addresses that will not be rate limited.
 
 [#header]
-=== Header Filter
+== Header Filter
 
 `XP_HOME/config/com.enonic.xp.web.header.cfg`
 
@@ -673,7 +659,7 @@ headerConfig = set X-Frame-Options: SAMEORIGIN,set X-Content-Type-Options: nosni
 headerConfig:: Customizes default HTTP response headers. Accepts the following format: `[action] [header name]: [header value](,[action] [header name]: [header value])`. Supported header actions are `set`, `add`, `setDate` and `addDate`.
 Default value varies across XP releases and adheres to up-to-date security best practices.
 
-=== Market
+== Market
 
 `XP_HOME/config/com.enonic.xp.market.cfg`
 
@@ -686,7 +672,7 @@ marketUrl = https://market.enonic.com/applications
 ----
 
 
-=== UDC
+== UDC
 
 `XP_HOME/config/com.enonic.xp.server.udc.cfg`
 
@@ -700,11 +686,11 @@ enabled = true
 ----
 
 [#idprovider]
-=== Standard IDprovider
+== System IDprovider
 
 `XP_HOME/config/com.enonic.xp.app.standardidprovider.cfg`
 
-The Standard IDP application is bunedled with XP, and used by the `system` ID provider.
+The `system` IdProvider uses an implementation called the standard ID provider.
 There are several options you may configure:
 
 .Sample config file for system IDP
@@ -721,7 +707,7 @@ idprovider.system.autologin.jwt.enabled:: Set to false to disable auto-login wit
 idprovider.system.autologin.jwt.acceptLeewaySeconds:: This option allows you to set the default time window in seconds during which the `Not Before`, `Issued At`, and `Expires At` claims will remain valid. To enable this option, the value must be a positive number. By default, this option is disabled with a value of `-1`.
 idprovider.system.autologin.jwt.maxLifetimeSeconds:: This option allows you to limit the lifetime of the JWT token in the XP environment to avoid the usage of long-lived tokens. The default value is `30`.
 
-=== Logging
+== Logging
 
 `XP_HOME/config/logback.xml`
 
@@ -794,9 +780,7 @@ See: https://logback.qos.ch/manual/configuration.html#loggerElement[Logger], htt
 
 Additional information can be found here: https://logback.qos.ch/manual/configuration.html[Logback documentation]
 
-=== Audit
-
-NOTE: This config file was first introduced in v7.2
+== Audit
 
 `XP_HOME/config/com.enonic.xp.audit.cfg`
 
@@ -816,13 +800,12 @@ outputLogs:: Set to true to log the stored audit log entries. Default: `false`.
 ageThreshold:: Age of data to be removed by a cleanup task. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Nothing will be removed by default, duration must me set.
 
 [#content_config]
-=== Content
+== Content
 
-NOTE: This config file was first introduced in v7.2
 
 `XP_HOME/config/com.enonic.xp.content.cfg`
 
-Configure the content layer behaviour.
+Configure the content behaviour.
 
 .Sample content config file
 [source,properties]
@@ -832,7 +815,6 @@ auditlog.enabled = true
 
 auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
 IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
-
 
 auditlog.filter:: Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `!system.content.update,*` (allow everything except "content update" event).
 
@@ -875,7 +857,7 @@ By using this deprecated Content API functionality to read Page/Layout descripto
 As such, it may lead to slower system response and reduced efficiency. Importantly, this functionality is deprecated and will be removed in future versions of Enonic XP. It is advisable to adapt your workflows to operate without this feature to ensure future compatibility.
 
 [#vacuum]
-=== Vacuum
+== Vacuum
 
 `XP_HOME/config/com.enonic.xp.vacuum.cfg`
 
@@ -889,7 +871,7 @@ ageThreshold = P21D
 ageThreshold:: Age of data to be vacuumed. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Default: `P21D` (21 days).
 
 [#application]
-=== Application
+== Application
 
 `XP_HOME/config/com.enonic.xp.app.cfg`
 
@@ -943,7 +925,7 @@ virtual.enabled = false
 virtual.schema.override = false
 ----
 
-=== Task
+== Task
 
 `XP_HOME/config/com.enonic.xp.task.cfg`
 
@@ -960,7 +942,7 @@ distributable.acceptInbound:: If true, accept inbound distributable tasks. Defau
 clustered.timeout:: The time (in ISO-8601 Period format) the node waits for a job (task or task-info job) to be submitted to another cluster node. Default: `PT5S` (5 seconds).
 
 [#scheduler]
-=== Scheduler
+== Scheduler
 
 `XP_HOME/config/com.enonic.xp.scheduler.cfg`
 
@@ -1032,7 +1014,7 @@ Properties prefixed with `init-job.my-job2` describe properties of `my-job2` job
 init-job.my-job2.enabled:: False - job will be created, but never run until it changes.
 init-job.my-job2.cron:: 0 5 * * * - job will be created to run task at 5:00AM every day according to it's timezone.
 
-=== Portal
+== Portal
 
 `XP_HOME/config/com.enonic.xp.portal.cfg`
 
@@ -1063,7 +1045,7 @@ legacy.imageService.enabled:: Enables/Disables image service. Default `true` - m
 legacy.httpService.enabled:: Enables/Disables legacy HTTP service. Default `true` - means Legacy HTTP Service is enabled.
 
 [#image]
-=== Image
+== Image
 
 `XP_HOME/config/com.enonic.xp.image.cfg`
 
@@ -1084,7 +1066,7 @@ memoryLimit:: Defines Heap memory limit for image processing. If the memory limi
 The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
 progressive:: Defines formats that will use progressive encoding. Default is `jpeg`.
 
-=== Export
+== Export
 
 `XP_HOME/config/com.enonic.xp.export.cfg`
 
@@ -1098,7 +1080,7 @@ exports.dir = /xp-exports
 
 exports.dir:: Defines location of exports directory. Default: `${xp.home}/data/export`
 
-=== Binary Extractor
+== Binary Extractor
 
 `XP_HOME/config/com.enonic.xp.extractor.cfg`
 

@@ -3,34 +3,30 @@
 :toc: right
 :imagesdir: ../images
 
-Use vhosts to safely expose services (sites/webapps etc) through public domains.
+Use vhosts to expose Universal APIs, Admin, Sites or Webapps on custom domains and paths.
 
-== Service mapping
+NOTE: Vhosts only apply to XP's web endpoint (defaults to port 8080). They do not affect the management and monitoring endpoints.
 
-Vhosts essentially serve two purposes, traffic routing and mapping to ID providers.
+== Introduction
 
-A single XP runtime instance may offer multiple services.
-By default, XP provides the following endpoints:
+Vhosts essentially serve three purposes
 
-* localhost:8080/webapp/<app-name>/ (webapp engine)
-* localhost:8080/site/<repo>/<branch>/<path> (site engine)
-* localhost:8080/admin/ (admin engine)
+* Traffic routing
+* Security via IDprovider mapping
+* Setting Context attributes
 
-By using vhosts, traffic for specific domains and url patterns may be routed directly to defined service paths in XP.
+By using vhosts, traffic for specific domains and url patterns may be routed directly to defined targets in XP, such as an API, a Site or the XP admin.
 
   I.e. example.com -> :8080/site/default/master/homepage
 
-Domains can be defined as single host, multiple hosts separated by space and/or regular expressions (started with `~` symbol).
 
+NOTE: Once vhosts are enabled, unmapped endpoints are no longer accessible.
+
+== Domains
+
+In the definition, Domains can be a single host, multiple hosts separated by space and/or regular expressions (started with `~` symbol).
 
 NOTE: IDN hosts should be specified using Punycode representation.
-
-With vhosts enabled, unexposed services are no longer accessible.
-
-Vhosts may also define the relationship to one or more ID providers.
-This enables pluggable authentication on a per-vhost basis.
-
-NOTE: Vhosts only apply to XP service port (defaults to 8080), not the monitoring and management ports.
 
 == Request Matching
 
@@ -166,7 +162,7 @@ mapping.adm.idProvider.system = default
 [NOTE]
 ====
 This time we also added an ID provider to the mapping.
-This effectively activates `system` the default (and only) ID provider for this vhost.
+This effectively activates `system` as the default (and only) ID provider for this vhost.
 ====
 
 == Testing vhosts
