@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>XP distributions</title>
+<title>Kubernetes deployments</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,15 +437,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>XP distributions</h1>
+<h1>Kubernetes deployments</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#downloading">Downloading</a></li>
-<li><a href="#server_vs_sdk">Server vs SDK</a></li>
-<li><a href="#xp_install">XP_INSTALL</a></li>
-<li><a href="#xp_home">XP_HOME</a></li>
+<li><a href="#xp_operator">XP operator</a></li>
+<li><a href="#k89s_resources">K89S resources</a></li>
+<li><a href="#documentation">Documentation</a></li>
 </ul>
 </div>
 </div>
@@ -453,7 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This chapter investigates the anatomy of the XP distribution filestructure</p>
+<p>This section describes how to run Enonic XP on a Kubernetes cluster.</p>
 </div>
 </div>
 </div>
@@ -461,236 +460,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP is built and distributed as a self-contained package for multiple different architectures, which includes all necessary components to run the platform. This includes the application code, embedded GraalVM, configuration files, and more.</p>
+<p>Running Enonic XP on Kubernetes is a great way to achieve scalability, high availability and ease of management. Kubernetes deployments are generally based on the <a href="docker.ahtml">XP Docker image</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="downloading"><a class="link" href="#downloading">Downloading</a></h2>
+<h2 id="xp_operator"><a class="link" href="#xp_operator">XP operator</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Pre-compiled XP distributions can be manually downloaded from the <a href="https://repo.enonic.com/#browse/browse:public:com">Enonic Repo</a>, or built from source on <a href="https://github.com/enonic/xp">GitHub</a>.</p>
+<p>The recommended way to deploy XP on Kubernetes is to use the XP Operator, which provides a Kubernetes-native way to manage XP instances.</p>
 </div>
 <div class="paragraph">
-<p>Also check out the <a href="docker.ahtml#XP Docker image">docker.ahtml</a> versions of XP, which are based on the same distributions, but optimized for containerized deployment.</p>
+<p>The operator handles the deployment, scaling, configuration and management of XP instances on the K8S cluster.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="server_vs_sdk"><a class="link" href="#server_vs_sdk">Server vs SDK</a></h2>
+<h2 id="k89s_resources"><a class="link" href="#k89s_resources">K89S resources</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP is available in two different packages: Server and SDK.</p>
+<p>Working with the operator involves creating custom resources that define the desired state of your XP instance, and the operator will take care of the rest.</p>
 </div>
 <div class="paragraph">
-<p>The Server version is secured by default and optimized for production use, while the SDK version is intended for development and testing purposes.</p>
-</div>
-<div class="paragraph">
-<p>The SDK version includes additional tools and libraries that are not necessary for running XP in a production environment.</p>
-</div>
-<div class="paragraph">
-<p>For development on the XP platform, check out the <a href="https://developer.enonic.com/docs/code">Enonic Developer Docs</a>.</p>
+<p>The XP operator is natively integrated with K8S ingresses, making it easy to expose your XP instance to the outside world.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="xp_install"><a class="link" href="#xp_install">XP_INSTALL</a></h2>
+<h2 id="documentation"><a class="link" href="#documentation">Documentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When downloading and unzipping the XP distro, you will find the following root structure inside:</p>
-</div>
-<div class="listingblock">
-<div class="title">XP distribution folder structure</div>
-<div class="content">
-<pre class="highlight"><code class="language-folders" data-lang="folders">enonic-xp-&lt;OS&gt;-&lt;type&gt;-&lt;version&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
- |- bin/  <i class="conum" data-value="2"></i><b>(2)</b>
- |- home/   <i class="conum" data-value="3"></i><b>(3)</b>
- |- java/  <i class="conum" data-value="4"></i><b>(4)</b>
- |- lib/  <i class="conum" data-value="5"></i><b>(5)</b>
- |- service/  <i class="conum" data-value="6"></i><b>(6)</b>
- |- system/  <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The root folder is simply referred to as XP_INSTALL.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><code>bin/*</code> contains the scripts for starting and stopping Enonic XP and setting environment variables.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><code>home/</code> also known as <a href="#xp_home">XP_HOME</a></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><code>java/</code> contains the embedded JVM distro, contents vary with distro</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><code>lib/</code> contains the bootstrap code used to launch Enonic XP.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><code>service/</code> contains install script for Linux to make Enonic XP run as a service</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td><code>system/</code> Default OSGi bundles are placed here.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp_home"><a class="link" href="#xp_home">XP_HOME</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Inside the XP_INSTALL folder, you will find the <code>home/</code> folder, which is also referred to as XP_HOME. This is the default location for all data and configuration files used by Enonic XP.</p>
-</div>
-<div class="paragraph">
-<p>It is commonly moved out or treated specially from the rest of the files and folders in XP_INSTALL, as it contains stateful data.
-An example of this is when using Enonic CLI. Each "sandbox" created is basically a copy of the XP_HOME structure.</p>
-</div>
-<div class="paragraph">
-<p>You may override the default location of XP_HOME by passing a boot parameter to XP, or by creating an XP_HOME environment variable.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Folders marked with * will not appear until XP is started the first time
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">Standard folder structure</div>
-<div class="content">
-<pre class="highlight"><code class="language-folders" data-lang="folders">XP_HOME/
-|- config/  <i class="conum" data-value="1"></i><b>(1)</b>
-|- data/ *  <i class="conum" data-value="2"></i><b>(2)</b>
-   |- dump/
-   |- export/
-|- deploy/  <i class="conum" data-value="3"></i><b>(3)</b>
-|- logs/  <i class="conum" data-value="4"></i><b>(4)</b>
-|- repo/ *
-   |- index/  <i class="conum" data-value="5"></i><b>(5)</b>
-   |- blob/  <i class="conum" data-value="6"></i><b>(6)</b>
-|- snapshots/ *  <i class="conum" data-value="7"></i><b>(7)</b>
-|- work/   <i class="conum" data-value="8"></i><b>(8)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><code>config/</code> holds all configuration files, including vhost.cfg and system.properties. XP supports hot reloading of all files ending with .cfg</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><code>data/</code> Contains system dumps and exports.
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Should be mounted to a dedicated volume as usage may grow quickly, and exceed the size of the live repo data. Clusters should use a shared volume.
-</td>
-</tr>
-</table>
-</div></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><code>deploy/</code> Apps placed here are automatically loaded and started on the specific node.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><code>logs/</code> default output location for all logs.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><code>repo/index/</code> contains repository metadata and indexes
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Requires a local persisted volume (Preferably using SSD). Must never be mapped to a shared volume. The content is automatically replicated across nodes in the cluster.
-</td>
-</tr>
-</table>
-</div></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><code>repo/blob/</code> contains the XP blobstore
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Requires a persisted volume. For clusters, this must be a shared volume, accessible by all nodes.
-</td>
-</tr>
-</table>
-</div></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td><code>snapshots/</code> Location where snapshots (of index and metadata) are stored when using the snapshot-operation.
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For clusters, this must be mounted to a shared volume, accessible by all nodes.
-</td>
-</tr>
-</table>
-</div></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td><code>work/</code> Cache and generated bundles (apps etc) are stored here. It is also a default location for temporary files.
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For optimal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>== XP_TMP</p>
-</div></td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>By default, Enonic XP uses <code>XP_HOME/work</code> as temporary folder.</p>
-</div>
-<div class="paragraph">
-<p>You may override this by setting the <code>XP_TMP</code> environment variable to point to a different location.</p>
+<p>THe XP Operator is a comprehensive solution which is separately developed and maintained. For detailed documentation, see the <a href="https://developer.enonic.com/docs/xp-operator">XP Operator documentation</a>.</p>
 </div>
 </div>
 </div>
