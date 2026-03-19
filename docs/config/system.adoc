@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: ../images
 
-This section describes all standard configuration files and options for Enonic XP. These are primarily relevant when hosting XP on your own infrastructure.
+This section describes system-level configuration files for Enonic XP. These are primarily relevant when hosting XP on your own infrastructure.
 
 == System Properties
 [#system-properties]
@@ -45,49 +45,6 @@ xp.stop.gracePeriod:: Time in milliseconds XP waits for all services to stop. De
 felix.fileinstall.poll:: Frequency in ms for how often the configuration folders are scanned for changes
 xp.config.paths:: Config folders to scan in addition to `XP_HOME/config/`. Useful for fine grained control over configuration management. Folders will be scanned in the defined order. The first file found per configuration will be used.
 
-[#vhost]
-== Vhost
-
-`XP_HOME/config/com.enonic.xp.web.vhost.cfg`
-
-The standard XP port (default: 8080) provides access to `webapps/`, `site/` and `admin/` endpoints.
-Vhosts enable you to define controlled and secured access to a single webapp, site or even the admin console.
-
-Virtual hosts are automatically updated upon change.
-
-.Sample vhost config file with a one entry
-[source,properties]
-----
-enabled = true
-
-mapping.myapp.host = company.com
-mapping.myapp.source = /app
-mapping.myapp.target = /webapp/name.of.my.app
-mapping.myapp.idProvider.myldap = default
-----
-
-enabled:: turns on or of vhosts, enabled = false should only be used for development purposes
-host:: specifies the hostname (aka domain) the vhost will handle
-source:: refers to basepath used in request, sample above handles company.com/app
-target:: is the internal route in XP to the specific endpoint/service
-idProvider:: optionally adds one or more idProviders to the vhost. `idProvider` must be followed by the name of an existing idProvider. The example above refers to the idProvider called `myldap`. Supported values are `default` or `enabled`. Only one entry may use `default`.
-
-NOTE: Each mapping must define a unique name to separate the mappings when multiple mappings in the same file. In the example above `myapp` is used.
-
-.Sample vhost config file with both site and admin entries
-[source,properties]
-----
-mapping.website.host = example.com
-mapping.website.source = /
-mapping.website.target = /site/default/master/website
-mapping.website.idProvider.adfs = default
-mapping.website.idProvider.system = enabled
-
-mapping.admin.host = example.com
-mapping.admin.source = /admin
-mapping.admin.target = /admin
-mapping.admin.idProvider.system = default
-----
 
 == Security
 [#security]
@@ -96,8 +53,9 @@ mapping.admin.idProvider.system = default
 
 Security service configuration.
 
-auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
-IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
+auditlog.enabled:: Set to `false` to disable the creation of audit log entries on security API operations such IAM and application changes. Default: `true`.
+
+IMPORTANT: Audit log can be globally disabled in `<<logging#audit_enabled, Audit log config>>`.
 
 password.policy:: Define the password hashing algorithm and parameters to be used when storing user passwords. Default: `$pbkdf2-sha512$i=210000,l=64,slen=16` - which is PBKDF2 with SHA-512, 210,000 iterations, hash length of 64 bytes and salt length of 16 bytes.
 
@@ -402,68 +360,6 @@ hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before joi
 NOTE: In case of using Kubernetes API discovery each node makes a call to Kubernetes Master in order to discover PODs.
 It also requires granting certain permissions. You can find more information in the documentation of https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes].
 
-== Admin
-
-`XP_HOME/config/com.enonic.xp.admin.cfg`
-
-General settings for /admin.
-
-.Disable Content Security Policy for site preview
-[source,properties]
-----
-site.preview.contentSecurityPolicy=
-----
-
-.Allow scripts from maps.googleapis.com
-[source,properties]
-----
-site.preview.contentSecurityPolicy=default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self' maps.googleapis.com; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:
-----
-
-
-site.preview.contentSecurityPolicy:: Defines default value for Content-Security-Policy header for the site engine - when running in Admin Context. The policy is applied in `preview` and `inline` mode - if the page controllers do not specify a Content-Security-Policy header itself.
-Default: `default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:`
-
-
-== XP Dashboard
-
-`XP_HOME/config/com.enonic.xp.app.main.cfg`
-
-=== Content Security Policy
-
-IMPORTANT: Disabling or changing built-in Content Security Policy is generally NOT RECOMMENDED. You may need to tweak
-CSP settings _only_ if you are building a Dashboard widget where you want to allow references to external resources
-(for example, a YouTube video) or other potentially unsafe (from the CSP point of view) actions.
-
-You can provide your own header for Content Security Policy using `contentSecurityPolicy.header` property.
-Note, that if you provide your own header, you should include all necessary directives, as the default headers (`self`) will not be added.
-
-.Customized Content Security Policy for XP Dashboard
-[source,properties]
-----
-contentSecurityPolicy.header=default-src 'self'; connect-src 'self' ws: wss:; object-src 'none'; style-src 'self' 'unsafe-inline'; frame-src 'self' https://*.youtube.com
-----
-
-To completely turn off Content Security Policy for the Dashboard, set `contentSecurityPolicy.enabled` property to `false`.
-
-.Disabled Content Security Policy for XP Dashboard
-[source,properties]
-----
-contentSecurityPolicy.enabled=false
-----
-
-== Applications app
-
-`XP_HOME/config/com.enonic.xp.app.applications.cfg`
-
-.Disable installation of apps from UI
-[source,properties]
-----
-readonlyMode = true
-----
-
-readonlyMode:: Activate read only mode to prevent installation and stop/start of applications via UI.
-Default: `false`
 
 [#jetty]
 == Jetty
@@ -565,7 +461,7 @@ saveOnCreate:: Controls whether a session that is newly created will be immediat
 flushOnResponseCommit:: Controls whether a session that is changed ("dirty") will be persisted as the response is about to commit. If false, a dirty session will only be persisted when the last simultaneous request for it leaves the session. Has no effect in `non-persistent` storeMode. Default: `false`.
 
 [#media]
-== Media
+== Mime types
 
 `XP_HOME/config/com.enonic.xp.media.cfg`
 
@@ -671,7 +567,6 @@ Enonic Market configuration options:
 marketUrl = https://market.enonic.com/applications
 ----
 
-
 == UDC
 
 `XP_HOME/config/com.enonic.xp.server.udc.cfg`
@@ -707,154 +602,6 @@ idprovider.system.autologin.jwt.enabled:: Set to false to disable auto-login wit
 idprovider.system.autologin.jwt.acceptLeewaySeconds:: This option allows you to set the default time window in seconds during which the `Not Before`, `Issued At`, and `Expires At` claims will remain valid. To enable this option, the value must be a positive number. By default, this option is disabled with a value of `-1`.
 idprovider.system.autologin.jwt.maxLifetimeSeconds:: This option allows you to limit the lifetime of the JWT token in the XP environment to avoid the usage of long-lived tokens. The default value is `30`.
 
-== Logging
-
-`XP_HOME/config/logback.xml`
-
-Configure all logging inside the system.
-
-.Default logback file
-[source, XML]
-----
-<configuration scan="true" scanPeriod="60 seconds"> <--1-->
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> <--2-->
-    <file>${xp.home}/logs/server.log</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-      <fileNamePattern>${xp.home}/logs/server.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-      <maxFileSize>100MB</maxFileSize>
-      <maxHistory>7</maxHistory>
-      <totalSizeCap>3GB</totalSizeCap>
-    </rollingPolicy>
-    <encoder>
-      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
-    </encoder>
-  </appender>
-
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <withJansi>true</withJansi>
-    <encoder>
-      <pattern>%date{ISO8601} %highlight(%-5level) %cyan(%logger{36}) - %msg%n</pattern>
-    </encoder>
-  </appender>
-
-  <root level="info"> <--3-->
-    <appender-ref ref="STDOUT"/>
-    <appender-ref ref="FILE"/>
-  </root>
-
-  <logger name="Events.Service" level="WARN" additivity="false">
-    <appender-ref ref="STDOUT"/>
-    <appender-ref ref="FILE"/>
-  </logger>
-
-  <logger name="Events.Bundle" level="WARN" additivity="false">
-    <appender-ref ref="STDOUT"/>
-    <appender-ref ref="FILE"/>
-  </logger>
-</configuration>
-----
-
-<1> *Configuration*
-+
-*scan*: If true sets the file in scan mode and will reconfigure itself when the configuration file changes.
-+
-*scanPeriod*: Sets the scanning period. Values can be specified in units of miliseconds, seconds, miniutes or hours. Defaults to every minute.
-If no unit of time is specified, milisceonds will be used.
-
-<2> *Appender* creates a new logging component
-+
-*class* Points to what java class you want handle your logging
-+
-Possible classes:
-+
-*ConsoleAppender*: "ch.qos.logback.core.ConsoleAppender" https://logback.qos.ch/manual/appenders.html#ConsoleAppender[ConsoleAppender] +
-*FileAppender*: "ch.qos.logback.core.FileAppender" https://logback.qos.ch/manual/appenders.html#FileAppender[FileAppender] +
-*RollingFileAppender*: "ch.qos.logback.core.rolling.RollingFileAppender" https://logback.qos.ch/manual/appenders.html#RollingFileAppender[RollingFileAppender]
-
-<3> *Root* Configuring the root logger.
-+
-*level* Can be set on <logger> and <root> to specify the importance of the message logged.
-+
-*values*: "DEBUG", "INFO", "WARN", "ERROR", "ALL", "OFF" or "TRACE"
-See: https://logback.qos.ch/manual/configuration.html#loggerElement[Logger], https://logback.qos.ch/manual/configuration.html#rootElement[Root] for additional information
-
-Additional information can be found here: https://logback.qos.ch/manual/configuration.html[Logback documentation]
-
-== Audit
-
-`XP_HOME/config/com.enonic.xp.audit.cfg`
-
-Configure the audit log feature.
-
-.Sample audit config file
-[source,properties]
-----
-enabled = true
-outputLogs = false
-ageThreshold =
-----
-
-[#audit_enabled]
-enabled:: Set to false to disable the creation of audit log entries. Default: `true`.
-outputLogs:: Set to true to log the stored audit log entries. Default: `false`.
-ageThreshold:: Age of data to be removed by a cleanup task. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Nothing will be removed by default, duration must me set.
-
-[#content_config]
-== Content
-
-
-`XP_HOME/config/com.enonic.xp.content.cfg`
-
-Configure the content behaviour.
-
-.Sample content config file
-[source,properties]
-----
-auditlog.enabled = true
-----
-
-auditlog.enabled:: Set to `false` to disable the creation of audit log entries on content API operations. Default: `true`.
-IMPORTANT: Audit log can be disabled by common `<<audit_enabled, enabled>>` property. Content flag won't affect anything in this case.
-
-auditlog.filter:: Comma separated values `rule(,rule)\*` of allow/deny rules. Default: `!system.content.update,*` (allow everything except "content update" event).
-
-A rule prefixed with `!` is a `deny` rule, otherwise it is an `allow` rule.
-A rule suffixed with `*` is a wildcard rule.
-
-Rules are applied in sequence. A first matching rule wins. If no matching rule found, event type is denied.
-Only content event types can be filtered.
-
-.None of events will be logged
-[source,properties]
-----
-auditlog.filter = !*
-----
-
-.Allow all event types
-[source,properties]
-----
-auditlog.filter = *
-----
-
-.Every event type except 'system.content.update' will be logged (default behavior)
-[source,properties]
-----
-auditlog.filter = !system.content.update,*
-----
-
-.Allow only event types with "system.content.set*" prefix.
-[source,properties]
-----
-auditlog.filter = system.content.set*
-----
-
-attachments.allowUnsafeNames:: Set to `true` to allow suspicious characters in content attachment file names. Default: `false`.
-
-resolveEmptyRegions:: Set to `true` to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: `false`.
-
-WARNING: Setting `resolveEmptyRegions` to `true` can adversely impact system performance.
-By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required.
-As such, it may lead to slower system response and reduced efficiency. Importantly, this functionality is deprecated and will be removed in future versions of Enonic XP. It is advisable to adapt your workflows to operate without this feature to ensure future compatibility.
 
 [#vacuum]
 == Vacuum
@@ -1014,57 +761,6 @@ Properties prefixed with `init-job.my-job2` describe properties of `my-job2` job
 init-job.my-job2.enabled:: False - job will be created, but never run until it changes.
 init-job.my-job2.cron:: 0 5 * * * - job will be created to run task at 5:00AM every day according to it's timezone.
 
-== Portal
-
-`XP_HOME/config/com.enonic.xp.portal.cfg`
-
-Configure the portal behaviour.
-
-.Sample content config file
-[source,properties]
-----
-asset.cacheControl = public, max-age=31536000, immutable
-media.public.cacheControl = public, max-age=31536000, immutable
-media.private.cacheControl = private, max-age=31536000, immutable
-----
-
-.Disable Content Security Policy for media
-[source,properties]
-----
-media.contentSecurityPolicy =
-media.contentSecurityPolicy.svg =
-----
-
-asset.cacheControl:: Defines assets cache-control header when asset is cachable. Default: `public, max-age=31536000, immutable`
-media.public.cacheControl:: Defines media (images, attachments) `Cache-Control` header when media is cachable and accessible by Everyone. Default: `public, max-age=31536000, immutable`
-media.private.cacheControl:: Defines media (images, attachments) `Cache-Control` header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
-media.contentSecurityPolicy:: Defines media (images, attachments) `Content-Security-Policy` header. Default: `default-src 'none'; base-uri 'none'; form-action 'none'`
-media.contentSecurityPolicy.svg:: Defines media (images, attachments) `Content-Security-Policy` header in cases when it is `image/svg+xml` mime type. Default: `default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`
-legacy.attachmentService.enabled:: Enables/Disables attachment service. Default `true` - means Legacy Attachment Service is enabled.
-legacy.imageService.enabled:: Enables/Disables image service. Default `true` - means Legacy Image Service is enabled.
-legacy.httpService.enabled:: Enables/Disables legacy HTTP service. Default `true` - means Legacy HTTP Service is enabled.
-
-[#image]
-== Image
-
-`XP_HOME/config/com.enonic.xp.image.cfg`
-
-Configure the image service behaviour.
-
-.Sample content config file
-[source,properties]
-----
-scale.maxDimension = 8000
-filters.maxTotal = 5
-memoryLimit = 100mb
-progressive = jpeg
-----
-
-scale.maxDimension:: Defines maximum dimension size (both height and width) when scaling is done. Default: `8000`
-filters.maxTotal:: Defines maximum total filters applied per call. Default: `25`
-memoryLimit:: Defines Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP `429 Too Many Requests` status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
-The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
-progressive:: Defines formats that will use progressive encoding. Default is `jpeg`.
 
 == Export
 
@@ -1080,16 +776,4 @@ exports.dir = /xp-exports
 
 exports.dir:: Defines location of exports directory. Default: `${xp.home}/data/export`
 
-== Binary Extractor
-
-`XP_HOME/config/com.enonic.xp.extractor.cfg`
-
-Configure binary extractor service behaviour.
-
-.Sample content config file
-[source,properties]
-----
-body.size.limit = 500000
-----
-
-body.size.limit:: Defines maximum number of characters from a textual media. Default: `500000`
+NOTE: Exports dir should be a shared storage for cluster environments.
