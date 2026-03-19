@@ -442,7 +442,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#system_properties">System Properties</a></li>
-<li><a href="#vhost">Vhost</a></li>
 <li><a href="#security">Security</a></li>
 <li><a href="#mail">Mail</a></li>
 <li><a href="#repo">Repo</a></li>
@@ -451,33 +450,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#cluster">Cluster</a></li>
 <li><a href="#elasticsearch">Elasticsearch</a></li>
 <li><a href="#hazelcast">Hazelcast</a></li>
-<li><a href="#admin">Admin</a></li>
-<li><a href="#xp_dashboard">XP Dashboard</a>
-<ul class="sectlevel2">
-<li><a href="#content_security_policy">Content Security Policy</a></li>
-</ul>
-</li>
-<li><a href="#applications_app">Applications app</a></li>
 <li><a href="#jetty">Jetty</a></li>
 <li><a href="#sessionstore">SessionStore</a></li>
-<li><a href="#media">Media</a></li>
+<li><a href="#media">Mime types</a></li>
 <li><a href="#osgi_shell">OSGi shell</a></li>
 <li><a href="#dos_filter">DoS filter</a></li>
 <li><a href="#header">Header Filter</a></li>
 <li><a href="#market">Market</a></li>
 <li><a href="#udc">UDC</a></li>
 <li><a href="#idprovider">System IDprovider</a></li>
-<li><a href="#logging">Logging</a></li>
-<li><a href="#audit">Audit</a></li>
-<li><a href="#content_config">Content</a></li>
 <li><a href="#vacuum">Vacuum</a></li>
 <li><a href="#application">Application</a></li>
 <li><a href="#task">Task</a></li>
 <li><a href="#scheduler">Scheduler</a></li>
-<li><a href="#portal">Portal</a></li>
-<li><a href="#image">Image</a></li>
 <li><a href="#export">Export</a></li>
-<li><a href="#binary_extractor">Binary Extractor</a></li>
 </ul>
 </div>
 </div>
@@ -485,7 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes all standard configuration files and options for Enonic XP. These are primarily relevant when hosting XP on your own infrastructure.</p>
+<p>This section describes system-level configuration files for Enonic XP. These are primarily relevant when hosting XP on your own infrastructure.</p>
 </div>
 </div>
 </div>
@@ -570,83 +556,6 @@ To generate <code>sha512</code> hash suitable for <code>xp.suPassword</code>, yo
 </div>
 </div>
 <div class="sect1">
-<h2 id="vhost"><a class="link" href="#vhost">Vhost</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.web.vhost.cfg</code></p>
-</div>
-<div class="paragraph">
-<p>The standard XP port (default: 8080) provides access to <code>webapps/</code>, <code>site/</code> and <code>admin/</code> endpoints.
-Vhosts enable you to define controlled and secured access to a single webapp, site or even the admin console.</p>
-</div>
-<div class="paragraph">
-<p>Virtual hosts are automatically updated upon change.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample vhost config file with a one entry</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">enabled = true
-
-mapping.myapp.host = company.com
-mapping.myapp.source = /app
-mapping.myapp.target = /webapp/name.of.my.app
-mapping.myapp.idProvider.myldap = default</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">enabled</dt>
-<dd>
-<p>turns on or of vhosts, enabled = false should only be used for development purposes</p>
-</dd>
-<dt class="hdlist1">host</dt>
-<dd>
-<p>specifies the hostname (aka domain) the vhost will handle</p>
-</dd>
-<dt class="hdlist1">source</dt>
-<dd>
-<p>refers to basepath used in request, sample above handles company.com/app</p>
-</dd>
-<dt class="hdlist1">target</dt>
-<dd>
-<p>is the internal route in XP to the specific endpoint/service</p>
-</dd>
-<dt class="hdlist1">idProvider</dt>
-<dd>
-<p>optionally adds one or more idProviders to the vhost. <code>idProvider</code> must be followed by the name of an existing idProvider. The example above refers to the idProvider called <code>myldap</code>. Supported values are <code>default</code> or <code>enabled</code>. Only one entry may use <code>default</code>.</p>
-</dd>
-</dl>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Each mapping must define a unique name to separate the mappings when multiple mappings in the same file. In the example above <code>myapp</code> is used.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">Sample vhost config file with both site and admin entries</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">mapping.website.host = example.com
-mapping.website.source = /
-mapping.website.target = /site/default/master/website
-mapping.website.idProvider.adfs = default
-mapping.website.idProvider.system = enabled
-
-mapping.admin.host = example.com
-mapping.admin.source = /admin
-mapping.admin.target = /admin
-mapping.admin.idProvider.system = default</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="security"><a class="link" href="#security">Security</a></h2>
 <div class="sectionbody">
 <div id="security" class="paragraph">
@@ -659,7 +568,10 @@ mapping.admin.idProvider.system = default</code></pre>
 <dl>
 <dt class="hdlist1">auditlog.enabled</dt>
 <dd>
-<p>Set to <code>false</code> to disable the creation of audit log entries on content API operations. Default: <code>true</code>.</p>
+<p>Set to <code>false</code> to disable the creation of audit log entries on security API operations such IAM and application changes. Default: <code>true</code>.</p>
+</dd>
+</dl>
+</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -667,12 +579,13 @@ mapping.admin.idProvider.system = default</code></pre>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Audit log can be disabled by common <code><a href="#audit_enabled">enabled</a></code> property. Content flag won&#8217;t affect anything in this case.
+Audit log can be globally disabled in <code><a href="logging.ahtml#audit_enabled">Audit log config</a></code>.
 </td>
 </tr>
 </table>
 </div>
-</dd>
+<div class="dlist">
+<dl>
 <dt class="hdlist1">password.policy</dt>
 <dd>
 <p>Define the password hashing algorithm and parameters to be used when storing user passwords. Default: <code>$pbkdf2-sha512$i=210000,l=64,slen=16</code> - which is PBKDF2 with SHA-512, 210,000 iterations, hash length of 64 bytes and salt length of 16 bytes.</p>
@@ -1277,105 +1190,6 @@ It also requires granting certain permissions. You can find more information in 
 </div>
 </div>
 <div class="sect1">
-<h2 id="admin"><a class="link" href="#admin">Admin</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.admin.cfg</code></p>
-</div>
-<div class="paragraph">
-<p>General settings for /admin.</p>
-</div>
-<div class="listingblock">
-<div class="title">Disable Content Security Policy for site preview</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">site.preview.contentSecurityPolicy=</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Allow scripts from maps.googleapis.com</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">site.preview.contentSecurityPolicy=default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self' maps.googleapis.com; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">site.preview.contentSecurityPolicy</dt>
-<dd>
-<p>Defines default value for Content-Security-Policy header for the site engine - when running in Admin Context. The policy is applied in <code>preview</code> and <code>inline</code> mode - if the page controllers do not specify a Content-Security-Policy header itself.
-Default: <code>default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; object-src 'none'; img-src * data:; style-src * 'unsafe-inline'; font-src * data:</code></p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp_dashboard"><a class="link" href="#xp_dashboard">XP Dashboard</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.app.main.cfg</code></p>
-</div>
-<div class="sect2">
-<h3 id="content_security_policy"><a class="link" href="#content_security_policy">Content Security Policy</a></h3>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Disabling or changing built-in Content Security Policy is generally NOT RECOMMENDED. You may need to tweak
-CSP settings <em>only</em> if you are building a Dashboard widget where you want to allow references to external resources
-(for example, a YouTube video) or other potentially unsafe (from the CSP point of view) actions.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>You can provide your own header for Content Security Policy using <code>contentSecurityPolicy.header</code> property.
-Note, that if you provide your own header, you should include all necessary directives, as the default headers (<code>self</code>) will not be added.</p>
-</div>
-<div class="listingblock">
-<div class="title">Customized Content Security Policy for XP Dashboard</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">contentSecurityPolicy.header=default-src 'self'; connect-src 'self' ws: wss:; object-src 'none'; style-src 'self' 'unsafe-inline'; frame-src 'self' https://*.youtube.com</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To completely turn off Content Security Policy for the Dashboard, set <code>contentSecurityPolicy.enabled</code> property to <code>false</code>.</p>
-</div>
-<div class="listingblock">
-<div class="title">Disabled Content Security Policy for XP Dashboard</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">contentSecurityPolicy.enabled=false</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="applications_app"><a class="link" href="#applications_app">Applications app</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.app.applications.cfg</code></p>
-</div>
-<div class="listingblock">
-<div class="title">Disable installation of apps from UI</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">readonlyMode = true</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">readonlyMode</dt>
-<dd>
-<p>Activate read only mode to prevent installation and stop/start of applications via UI.
-Default: <code>false</code></p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="jetty"><a class="link" href="#jetty">Jetty</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -1579,7 +1393,7 @@ flushOnResponseCommit = true</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="media"><a class="link" href="#media">Media</a></h2>
+<h2 id="media"><a class="link" href="#media">Mime types</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><code>XP_HOME/config/com.enonic.xp.media.cfg</code></p>
@@ -1833,236 +1647,6 @@ idprovider.system.autologin.jwt.maxLifetimeSeconds = 30</code></pre>
 <p>This option allows you to limit the lifetime of the JWT token in the XP environment to avoid the usage of long-lived tokens. The default value is <code>30</code>.</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="logging"><a class="link" href="#logging">Logging</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/logback.xml</code></p>
-</div>
-<div class="paragraph">
-<p>Configure all logging inside the system.</p>
-</div>
-<div class="listingblock">
-<div class="title">Default logback file</div>
-<div class="content">
-<pre class="highlight"><code class="language-XML" data-lang="XML">&lt;configuration scan="true" scanPeriod="60 seconds"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;file&gt;${xp.home}/logs/server.log&lt;/file&gt;
-    &lt;rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy"&gt;
-      &lt;fileNamePattern&gt;${xp.home}/logs/server.%d{yyyy-MM-dd}.%i.log&lt;/fileNamePattern&gt;
-      &lt;maxFileSize&gt;100MB&lt;/maxFileSize&gt;
-      &lt;maxHistory&gt;7&lt;/maxHistory&gt;
-      &lt;totalSizeCap&gt;3GB&lt;/totalSizeCap&gt;
-    &lt;/rollingPolicy&gt;
-    &lt;encoder&gt;
-      &lt;pattern&gt;%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n&lt;/pattern&gt;
-    &lt;/encoder&gt;
-  &lt;/appender&gt;
-
-  &lt;appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"&gt;
-    &lt;withJansi&gt;true&lt;/withJansi&gt;
-    &lt;encoder&gt;
-      &lt;pattern&gt;%date{ISO8601} %highlight(%-5level) %cyan(%logger{36}) - %msg%n&lt;/pattern&gt;
-    &lt;/encoder&gt;
-  &lt;/appender&gt;
-
-  &lt;root level="info"&gt; <i class="conum" data-value="3"></i><b>(3)</b>
-    &lt;appender-ref ref="STDOUT"/&gt;
-    &lt;appender-ref ref="FILE"/&gt;
-  &lt;/root&gt;
-
-  &lt;logger name="Events.Service" level="WARN" additivity="false"&gt;
-    &lt;appender-ref ref="STDOUT"/&gt;
-    &lt;appender-ref ref="FILE"/&gt;
-  &lt;/logger&gt;
-
-  &lt;logger name="Events.Bundle" level="WARN" additivity="false"&gt;
-    &lt;appender-ref ref="STDOUT"/&gt;
-    &lt;appender-ref ref="FILE"/&gt;
-  &lt;/logger&gt;
-&lt;/configuration&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>Configuration</strong>
-<div class="paragraph">
-<p><strong>scan</strong>: If true sets the file in scan mode and will reconfigure itself when the configuration file changes.</p>
-</div>
-<div class="paragraph">
-<p><strong>scanPeriod</strong>: Sets the scanning period. Values can be specified in units of miliseconds, seconds, miniutes or hours. Defaults to every minute.
-If no unit of time is specified, milisceonds will be used.</p>
-</div></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><strong>Appender</strong> creates a new logging component
-<div class="paragraph">
-<p><strong>class</strong> Points to what java class you want handle your logging</p>
-</div>
-<div class="paragraph">
-<p>Possible classes:</p>
-</div>
-<div class="paragraph">
-<p><strong>ConsoleAppender</strong>: "ch.qos.logback.core.ConsoleAppender" <a href="https://logback.qos.ch/manual/appenders.html#ConsoleAppender">ConsoleAppender</a><br>
-<strong>FileAppender</strong>: "ch.qos.logback.core.FileAppender" <a href="https://logback.qos.ch/manual/appenders.html#FileAppender">FileAppender</a><br>
-<strong>RollingFileAppender</strong>: "ch.qos.logback.core.rolling.RollingFileAppender" <a href="https://logback.qos.ch/manual/appenders.html#RollingFileAppender">RollingFileAppender</a></p>
-</div></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>Root</strong> Configuring the root logger.
-<div class="paragraph">
-<p><strong>level</strong> Can be set on &lt;logger&gt; and &lt;root&gt; to specify the importance of the message logged.</p>
-</div>
-<div class="paragraph">
-<p><strong>values</strong>: "DEBUG", "INFO", "WARN", "ERROR", "ALL", "OFF" or "TRACE"
-See: <a href="https://logback.qos.ch/manual/configuration.html#loggerElement">Logger</a>, <a href="https://logback.qos.ch/manual/configuration.html#rootElement">Root</a> for additional information</p>
-</div></td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Additional information can be found here: <a href="https://logback.qos.ch/manual/configuration.html">Logback documentation</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="audit"><a class="link" href="#audit">Audit</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.audit.cfg</code></p>
-</div>
-<div class="paragraph">
-<p>Configure the audit log feature.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample audit config file</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">enabled = true
-outputLogs = false
-ageThreshold =</code></pre>
-</div>
-</div>
-<div id="audit_enabled" class="dlist">
-<dl>
-<dt class="hdlist1">enabled</dt>
-<dd>
-<p>Set to false to disable the creation of audit log entries. Default: <code>true</code>.</p>
-</dd>
-<dt class="hdlist1">outputLogs</dt>
-<dd>
-<p>Set to true to log the stored audit log entries. Default: <code>false</code>.</p>
-</dd>
-<dt class="hdlist1">ageThreshold</dt>
-<dd>
-<p>Age of data to be removed by a cleanup task. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Nothing will be removed by default, duration must me set.</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="content_config"><a class="link" href="#content_config">Content</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.content.cfg</code></p>
-</div>
-<div class="paragraph">
-<p>Configure the content behaviour.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample content config file</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.enabled = true</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">auditlog.enabled</dt>
-<dd>
-<p>Set to <code>false</code> to disable the creation of audit log entries on content API operations. Default: <code>true</code>.</p>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Audit log can be disabled by common <code><a href="#audit_enabled">enabled</a></code> property. Content flag won&#8217;t affect anything in this case.
-</td>
-</tr>
-</table>
-</div>
-</dd>
-<dt class="hdlist1">auditlog.filter</dt>
-<dd>
-<p>Comma separated values <code>rule(,rule)*</code> of allow/deny rules. Default: <code>!system.content.update,*</code> (allow everything except "content update" event).</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>A rule prefixed with <code>!</code> is a <code>deny</code> rule, otherwise it is an <code>allow</code> rule.
-A rule suffixed with <code>*</code> is a wildcard rule.</p>
-</div>
-<div class="paragraph">
-<p>Rules are applied in sequence. A first matching rule wins. If no matching rule found, event type is denied.
-Only content event types can be filtered.</p>
-</div>
-<div class="listingblock">
-<div class="title">None of events will be logged</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.filter = !*</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Allow all event types</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.filter = *</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Every event type except 'system.content.update' will be logged (default behavior)</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.filter = !system.content.update,*</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Allow only event types with "system.content.set*" prefix.</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.filter = system.content.set*</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">attachments.allowUnsafeNames</dt>
-<dd>
-<p>Set to <code>true</code> to allow suspicious characters in content attachment file names. Default: <code>false</code>.</p>
-</dd>
-<dt class="hdlist1">resolveEmptyRegions</dt>
-<dd>
-<p>Set to <code>true</code> to use deprecated Content API functionality that will read Page/Layout descriptors and inject empty regions into fetched content objects. Default: <code>false</code>.</p>
-</dd>
-</dl>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Setting <code>resolveEmptyRegions</code> to <code>true</code> can adversely impact system performance.
-By using this deprecated Content API functionality to read Page/Layout descriptors and inject empty regions into fetched content objects, additional computational resources and processing time are required.
-As such, it may lead to slower system response and reduced efficiency. Importantly, this functionality is deprecated and will be removed in future versions of Enonic XP. It is advisable to adapt your workflows to operate without this feature to ensure future compatibility.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -2333,109 +1917,6 @@ init-job.my-job2.config={"myparam1":"value1","myset":{"myparam2":"value2"}}</cod
 </div>
 </div>
 <div class="sect1">
-<h2 id="portal"><a class="link" href="#portal">Portal</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.portal.cfg</code></p>
-</div>
-<div class="paragraph">
-<p>Configure the portal behaviour.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample content config file</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">asset.cacheControl = public, max-age=31536000, immutable
-media.public.cacheControl = public, max-age=31536000, immutable
-media.private.cacheControl = private, max-age=31536000, immutable</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Disable Content Security Policy for media</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">media.contentSecurityPolicy =
-media.contentSecurityPolicy.svg =</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">asset.cacheControl</dt>
-<dd>
-<p>Defines assets cache-control header when asset is cachable. Default: <code>public, max-age=31536000, immutable</code></p>
-</dd>
-<dt class="hdlist1">media.public.cacheControl</dt>
-<dd>
-<p>Defines media (images, attachments) <code>Cache-Control</code> header when media is cachable and accessible by Everyone. Default: <code>public, max-age=31536000, immutable</code></p>
-</dd>
-<dt class="hdlist1">media.private.cacheControl</dt>
-<dd>
-<p>Defines media (images, attachments) <code>Cache-Control</code> header when media is cachable and not accessible by Everyone. Default: <code>private, max-age=31536000, immutable</code></p>
-</dd>
-<dt class="hdlist1">media.contentSecurityPolicy</dt>
-<dd>
-<p>Defines media (images, attachments) <code>Content-Security-Policy</code> header. Default: <code>default-src 'none'; base-uri 'none'; form-action 'none'</code></p>
-</dd>
-<dt class="hdlist1">media.contentSecurityPolicy.svg</dt>
-<dd>
-<p>Defines media (images, attachments) <code>Content-Security-Policy</code> header in cases when it is <code>image/svg+xml</code> mime type. Default: <code>default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'</code></p>
-</dd>
-<dt class="hdlist1">legacy.attachmentService.enabled</dt>
-<dd>
-<p>Enables/Disables attachment service. Default <code>true</code> - means Legacy Attachment Service is enabled.</p>
-</dd>
-<dt class="hdlist1">legacy.imageService.enabled</dt>
-<dd>
-<p>Enables/Disables image service. Default <code>true</code> - means Legacy Image Service is enabled.</p>
-</dd>
-<dt class="hdlist1">legacy.httpService.enabled</dt>
-<dd>
-<p>Enables/Disables legacy HTTP service. Default <code>true</code> - means Legacy HTTP Service is enabled.</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="image"><a class="link" href="#image">Image</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.image.cfg</code></p>
-</div>
-<div class="paragraph">
-<p>Configure the image service behaviour.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample content config file</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">scale.maxDimension = 8000
-filters.maxTotal = 5
-memoryLimit = 100mb
-progressive = jpeg</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">scale.maxDimension</dt>
-<dd>
-<p>Defines maximum dimension size (both height and width) when scaling is done. Default: <code>8000</code></p>
-</dd>
-<dt class="hdlist1">filters.maxTotal</dt>
-<dd>
-<p>Defines maximum total filters applied per call. Default: <code>25</code></p>
-</dd>
-<dt class="hdlist1">memoryLimit</dt>
-<dd>
-<p>Defines Heap memory limit for image processing. If the memory limit is reached, the Image Service will start to protect itself from being overwhelmed by additional requests. It does so by responding with an HTTP <code>429 Too Many Requests</code> status code to subsequent incoming requests. This memory limit acts as a soft cap rather than a hard limit. This means that the used memory can momentarily exceed the limit.
-The value is set in percentage of total Heap, or in memory units (<code>mb</code>, <code>gb</code>, &#8230;&#8203;). Default: <code>10%</code></p>
-</dd>
-<dt class="hdlist1">progressive</dt>
-<dd>
-<p>Defines formats that will use progressive encoding. Default is <code>jpeg</code>.</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="export"><a class="link" href="#export">Export</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2458,37 +1939,24 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </dd>
 </dl>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="binary_extractor"><a class="link" href="#binary_extractor">Binary Extractor</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.extractor.cfg</code></p>
-</div>
-<div class="paragraph">
-<p>Configure binary extractor service behaviour.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample content config file</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">body.size.limit = 500000</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">body.size.limit</dt>
-<dd>
-<p>Defines maximum number of characters from a textual media. Default: <code>500000</code></p>
-</dd>
-</dl>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Exports dir should be a shared storage for cluster environments.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 16:27:08 UTC
+Last updated 2026-03-19 08:07:45 UTC
 </div>
 </div>
 </body>

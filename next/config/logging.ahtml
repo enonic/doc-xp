@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Custom' Configuration files</title>
+<title>Logging</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,11 +437,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Custom' Configuration files</h1>
+<h1>Logging</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#custom_config">Custom config</a></li>
+<li><a href="#standard_logging">Standard logging</a></li>
+<li><a href="#audit_logging">Audit logging</a></li>
 </ul>
 </div>
 </div>
@@ -449,29 +450,157 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes all custom configuration files and options for Enonic XP</p>
+<p>This section describes configuration files and for logging in Enonic XP</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="custom_config"><a class="link" href="#custom_config">Custom config</a></h2>
+<h2 id="standard_logging"><a class="link" href="#standard_logging">Standard logging</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To provide file based configuration to custom applications,
-simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>my.custom.app.cfg</code>. in the <code>XP_HOME/config/</code> folder, and it will instantly be available for the application.</p>
+<p><code>XP_HOME/config/logback.xml</code></p>
 </div>
 <div class="paragraph">
-<p>Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.</p>
+<p>This logging is used for the XP server and all applications running on it. By default, the logback configuration is set to log to both console and file, but you can customize it as needed.</p>
+</div>
+<div class="listingblock">
+<div class="title">Default logback file</div>
+<div class="content">
+<pre class="highlight"><code class="language-XML" data-lang="XML">&lt;configuration scan="true" scanPeriod="60 seconds"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+    &lt;file&gt;${xp.home}/logs/server.log&lt;/file&gt;
+    &lt;rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy"&gt;
+      &lt;fileNamePattern&gt;${xp.home}/logs/server.%d{yyyy-MM-dd}.%i.log&lt;/fileNamePattern&gt;
+      &lt;maxFileSize&gt;100MB&lt;/maxFileSize&gt;
+      &lt;maxHistory&gt;7&lt;/maxHistory&gt;
+      &lt;totalSizeCap&gt;3GB&lt;/totalSizeCap&gt;
+    &lt;/rollingPolicy&gt;
+    &lt;encoder&gt;
+      &lt;pattern&gt;%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n&lt;/pattern&gt;
+    &lt;/encoder&gt;
+  &lt;/appender&gt;
+
+  &lt;appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"&gt;
+    &lt;withJansi&gt;true&lt;/withJansi&gt;
+    &lt;encoder&gt;
+      &lt;pattern&gt;%date{ISO8601} %highlight(%-5level) %cyan(%logger{36}) - %msg%n&lt;/pattern&gt;
+    &lt;/encoder&gt;
+  &lt;/appender&gt;
+
+  &lt;root level="info"&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+    &lt;appender-ref ref="STDOUT"/&gt;
+    &lt;appender-ref ref="FILE"/&gt;
+  &lt;/root&gt;
+
+  &lt;logger name="Events.Service" level="WARN" additivity="false"&gt;
+    &lt;appender-ref ref="STDOUT"/&gt;
+    &lt;appender-ref ref="FILE"/&gt;
+  &lt;/logger&gt;
+
+  &lt;logger name="Events.Bundle" level="WARN" additivity="false"&gt;
+    &lt;appender-ref ref="STDOUT"/&gt;
+    &lt;appender-ref ref="FILE"/&gt;
+  &lt;/logger&gt;
+&lt;/configuration&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Configuration</strong>
+<div class="paragraph">
+<p><strong>scan</strong>: If true sets the file in scan mode and will reconfigure itself when the configuration file changes.</p>
 </div>
 <div class="paragraph">
-<p>This configuration is instantly available for developers via the <a href="../framework/globals.ahtml#App">global <code>app</code> object</a>.</p>
+<p><strong>scanPeriod</strong>: Sets the scanning period. Values can be specified in units of miliseconds, seconds, miniutes or hours. Defaults to every minute.
+If no unit of time is specified, milisceonds will be used.</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>Appender</strong> creates a new logging component
+<div class="paragraph">
+<p><strong>class</strong> Points to what java class you want handle your logging</p>
+</div>
+<div class="paragraph">
+<p>Possible classes:</p>
+</div>
+<div class="paragraph">
+<p><strong>ConsoleAppender</strong>: "ch.qos.logback.core.ConsoleAppender" <a href="https://logback.qos.ch/manual/appenders.html#ConsoleAppender">ConsoleAppender</a><br>
+<strong>FileAppender</strong>: "ch.qos.logback.core.FileAppender" <a href="https://logback.qos.ch/manual/appenders.html#FileAppender">FileAppender</a><br>
+<strong>RollingFileAppender</strong>: "ch.qos.logback.core.rolling.RollingFileAppender" <a href="https://logback.qos.ch/manual/appenders.html#RollingFileAppender">RollingFileAppender</a></p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>Root</strong> Configuring the root logger.
+<div class="paragraph">
+<p><strong>level</strong> Can be set on &lt;logger&gt; and &lt;root&gt; to specify the importance of the message logged.</p>
+</div>
+<div class="paragraph">
+<p><strong>values</strong>: "DEBUG", "INFO", "WARN", "ERROR", "ALL", "OFF" or "TRACE"
+See: <a href="https://logback.qos.ch/manual/configuration.html#loggerElement">Logger</a>, <a href="https://logback.qos.ch/manual/configuration.html#rootElement">Root</a> for additional information</p>
+</div></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Additional information can be found here: <a href="https://logback.qos.ch/manual/configuration.html">Logback documentation</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="audit_logging"><a class="link" href="#audit_logging">Audit logging</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>XP_HOME/config/com.enonic.xp.audit.cfg</code></p>
+</div>
+<div class="paragraph">
+<p>Configure the audit log feature.</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample audit config file</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">enabled = true
+outputLogs = false
+ageThreshold =</code></pre>
+</div>
+</div>
+<div id="audit_enabled" class="dlist">
+<dl>
+<dt class="hdlist1">enabled</dt>
+<dd>
+<p>Set to false to disable the creation of audit log entries. Default: <code>true</code>.</p>
+</dd>
+<dt class="hdlist1">outputLogs</dt>
+<dd>
+<p>Set to true to log the stored audit log entries. Default: <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">ageThreshold</dt>
+<dd>
+<p>Age of data to be removed by a cleanup task. The format is based on the ISO-8601 duration format PnDTnHnMn.nS with days considered to be exactly 24 hours. Nothing will be removed by default, duration must me set.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Individual applications may have their own audit log configuration, which can be found in the respective application configuration file. If the common <code>enabled</code> property is set to <code>false</code>, application-specific audit log settings will not have any effect.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-18 16:27:08 UTC
+Last updated 2026-03-19 08:07:45 UTC
 </div>
 </div>
 </body>
