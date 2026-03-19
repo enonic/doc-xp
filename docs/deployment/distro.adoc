@@ -2,7 +2,28 @@
 :toc: right
 :imagesdir: ../images
 
-This chapter investigates the anatomy of the XP distribution files (aka the XP runtime)
+This chapter investigates the anatomy of the XP distribution filestructure
+
+== Introduction
+
+XP is built and distributed as a self-contained package for multiple different architectures, which includes all necessary components to run the platform. This includes the application code, embedded GraalVM, configuration files, and more.
+
+
+== Downloading
+Pre-compiled XP distributions can be manually downloaded from the https://repo.enonic.com/#browse/browse:public:com[Enonic Repo], or built from source on https://github.com/enonic/xp[GitHub].
+
+Also check out the <<docker#XP Docker image>> versions of XP, which are based on the same distributions, but optimized for containerized deployment.
+
+== Server vs SDK
+
+Enonic XP is available in two different packages: Server and SDK. 
+
+The Server version is secured by default and optimized for production use, while the SDK version is intended for development and testing purposes. 
+
+The SDK version includes additional tools and libraries that are not necessary for running XP in a production environment.
+
+For development on the XP platform, check out the https://developer.enonic.com/docs/code[Enonic Developer Docs].
+
 
 [[xp_install]]
 == XP_INSTALL
@@ -32,7 +53,8 @@ enonic-xp-<OS>-<type>-<version>  // <1>
 [#xp_home]
 == XP_HOME
 
-By default, this folder structure exists inside the XP_INSTALL.
+Inside the XP_INSTALL folder, you will find the `home/` folder, which is also referred to as XP_HOME. This is the default location for all data and configuration files used by Enonic XP.
+
 It is commonly moved out or treated specially from the rest of the files and folders in XP_INSTALL, as it contains stateful data.
 An example of this is when using Enonic CLI. Each "sandbox" created is basically a copy of the XP_HOME structure.
 
@@ -81,8 +103,8 @@ NOTE: For clusters, this must be mounted to a shared volume, accessible by all n
 NOTE: For optimal performance ,mount this to a local persisted volume. Caches do not need to be re-generated after each restart.
 +
 
-
 == XP_TMP
 
 By default, Enonic XP uses `XP_HOME/work` as temporary folder.
+
 You may override this by setting the `XP_TMP` environment variable to point to a different location.
