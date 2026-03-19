@@ -5,7 +5,7 @@
       "document": "index"
     },
     {
-      "title": "Platform overview",
+      "title": "Platform",
       "document": "platform"
     },
     {
@@ -19,32 +19,32 @@
         {
           "title": "Lifecycle",
           "document": "apps/lifecycle"
-        },
-        {
-          "title": "Configuration",
-          "document": "apps/configuration"
         }
       ]
     },
     {
-      "title": "IAM",
-      "document": "iam",
+      "title": "Security",
+      "document": "security",
       "menuItems": [
         {
           "title": "ID providers",
-          "document": "iam/idproviders"
+          "document": "security/idproviders"
         },
         {
           "title": "System ID provider",
-          "document": "iam/system-idp"
+          "document": "security/system-idp"
         },
         {
           "title": "Users and groups",
-          "document": "iam/users"
+          "document": "security/users"
         },
         {
           "title": "Roles",
-          "document": "iam/roles"
+          "document": "security/roles"
+        },
+        {
+          "title": "Audit Logs",
+          "document": "auditLogs"
         }
       ]
     },
@@ -53,8 +53,12 @@
       "document": "admin",
       "menuItems": [
         {
-          "title": "Widgets",
-          "document": "admin/widgets"
+          "title": "Tools",
+          "document": "admin/tools"
+        },
+        {
+          "title": "Extensions",
+          "document": "admin/extensions"
         }
       ]
     },
@@ -109,42 +113,30 @@
       "document": "deployment",
       "menuItems": [
         {
-          "title": "Strategies",
-          "document": "deployment/strategies"
-        },
-        {
           "title": "Distributions",
           "document": "deployment/distro"
         },
         {
-          "title": "Docker image",
-          "document": "deployment/docker"
-        },
-        {
-          "title": "Vhosts",
-          "document": "deployment/vhosts"
-        },
-        {
-          "title": "Configuration",
-          "document": "deployment/config"
+          "title": "Strategies",
+          "document": "deployment/strategies"
         },
         {
           "title": "Backup & restore",
           "document": "deployment/backup-restore"
         },
         {
+          "title": "Clustering",
+          "document": "deployment/clustering"
+        },
+        {
           "title": "Systemd",
           "document": "deployment/systemd"
         },
         {
-          "title": "Clustering",
-          "document": "deployment/clustering"
+          "title": "Docker image",
+          "document": "deployment/docker"
         }
       ]
-    },
-    {
-      "title": "Audit Logs",
-      "document": "auditLogs"
     },
     {
       "title": "APIs",

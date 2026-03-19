@@ -1,34 +1,23 @@
 = Enonic XP8 Platform Documentation
 include::.variables.adoc[]
 :toc: right
-:imagesdir: media
+:imagesdir: images
 
-This documentation provides details on the Enonic XP core platform, its concepts and architecture.
+This documentation provides details on the Enonic XP core platform.
 
-NOTE: *Front-end developer* Head over to the https://developer.enonic.com/docs/cms[CMS documentation] or try out the https://developer.enonic.com/start[Quick start guide]
+====
+NOTE: *Front-end developer?* Head over to the https://developer.enonic.com/docs/cms[CMS documentation] or try out the https://developer.enonic.com/start[Quick start guide]
 
-NOTE: *Enonic developer* Building Enonic apps? Visit the https://developer.enonic.com/docs/code[Platform Developer Docs] 
+NOTE: *Enonic developer?* Building Enonic apps? Visit the https://developer.enonic.com/docs/code[Platform Developer Docs] 
+====
 
+== Platform overview
+Beyond the limitations of a Headless CMS, Enonic XP allows you to customize the back-end to your needs. Whether you're building a simple website or an international digital presence, XP provides the tools and capabilities you need to create something truly unique.
 
-== About
+For more details on the platform architecture and concepts, see <<platform#,Platform overview>>.
 
-Enonic XP is an API first CMS and back-end for your digital experiences.
+image::platform.png[Platform illustration,1312]
 
-* Schema system for structured content
-* Augmentable Headless Content API
-* Advanced search and querying
-* Customize the platform with JavaScript/TypeScript
-* Flexible and pluggable end-to-end IAM
-* Portable and Open Source
-
-=== Platform components
-
-image::platform-components.png[Platform illustration,1092]
-
-
-== API
-
-For detailed specifications of our various platform APIs, visit the <<apis#,API section>>
 
 == Release notes
 

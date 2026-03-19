@@ -1,20 +1,37 @@
-= Concepts and overview
+= Platform concept overview
 include::.variables.adoc[]
 :toc: right
-:imagesdir: media
+:imagesdir: images
+Enonic XP is an API-first platform and back-end for digital experiences. 
+
+== Vision
+The best CMS is the one you create yourself, but that doesn't mean you have to start from scratch. Enonic XP provides a powerful and flexible foundation where you can customize and extend every aspect of the platform to fit your unique needs - without starting from scratch.
+ 
+== Built like an operating system
+XP is built like an operating system, with a core platform's essential services and APIs, combined with an ecosystem of applications that can be installed on top to add specific functionality and features.
+
+=== Applications
+
+Applications are standalone software packages that can be installed and started on Enonic XP, and they have access to all platform services and APIs. You may use them to add your own specific features, or extend existing ones.
+
+=== CMS
+XP ships with powerful CMS capabilities out of the box:
+
+* A flexible schema system that allows you to define your content model
+* APIs for querying and manipulating content
+* Content Studio - A rich admin interface for content management
+* Site Engine for serving websites without using 3rd party frameworks
 
 
+=== Platform Core
+The core platform provides essential services and APIs that applications can leverage to build their functionality:
 
-== More than an API
-Enonic XP aims to be the ultimate CMS and back-end for your digital experiences. It provides a powerful and flexible foundation where you can customize and extend every aspect of the platform to fit your unique needs - without starting from scratch.
+* Universal API - A Kubernetes-inspired API model that allows applications to contribute their own APIs, automatically integrating with XP's security model.
+* Runtime - A powerful and flexible application engine that can run multiple applications simultaneously.
+* Storage - A built-in NoSQL storage engine for storing content, application- and system data.
+* Identity and Access Management (IAM) - A comprehensive security model for authentication and authorization across the platform
+* Grid - for distributed memory caching, events and distributed job execution 
 
-In order to provide this flexibility, XP was built like an operating system, with a core platform that provides essential services and APIs, and an ecosystem of applications that can be installed on top to add specific functionality. 
-
-This architecture allows you to pick and choose the capabilities you need, while still having the option to build custom applications or extend existing ones. The platform provides the building blocks, and you can assemble them in whatever way makes sense for your project.
+image::architecture.svg[Platform illustration,1092]
 
 
-
-
-=== Platform components
-
-image::platform-components.png[Platform illustration,1092]
