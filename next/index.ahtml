@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Enonic XP Platform 8 documentation</title>
+<title>Enonic XP8 Platform Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Enonic XP Platform 8 documentation</h1>
+<h1>Enonic XP8 Platform Documentation</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This documentation provides an overview of the Enonic XP core platform, its concepts and architecture.</p>
+<p>This documentation provides details on the Enonic XP core platform, its concepts and architecture.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -464,13 +464,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<strong>Front-end developers</strong> Head over to the <a href="https://developer.enonic.com/docs/cms">CMS documentation</a> or try out the <a href="https://developer.enonic.com/start">Quick start guide</a>
+<strong>Front-end developer</strong> Head over to the <a href="https://developer.enonic.com/docs/cms">CMS documentation</a> or try out the <a href="https://developer.enonic.com/start">Quick start guide</a>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>If you are looking to build on or extend the Enonic platform, head over to the <a href="https://developer.enonic.com/docs/code">Enonioc developer documentation</a></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>Enonic developer</strong> Building Enonic apps? Visit the <a href="https://developer.enonic.com/docs/code">Platform Developer Docs</a>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -483,16 +492,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Augmentable Headless Content API</p>
+<p>Schema system for structured content</p>
 </li>
 <li>
-<p>Schema system for structured content</p>
+<p>Augmentable Headless Content API</p>
 </li>
 <li>
 <p>Advanced search and querying</p>
 </li>
 <li>
-<p>Extend with JavaScript/TypeScript</p>
+<p>Customize the platform with JavaScript/TypeScript</p>
 </li>
 <li>
 <p>Flexible and pluggable end-to-end IAM</p>
@@ -516,7 +525,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="api"><a class="link" href="#api">API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For detailed specifications of our various platform APIs, visit the <a href="api.ahtml">API section</a></p>
+<p>For detailed specifications of our various platform APIs, visit the <a href="apis.ahtml">API section</a></p>
 </div>
 </div>
 </div>
@@ -543,7 +552,7 @@ If you are looking to upgrade from a previous version of XP, check out the <a hr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-19 08:07:45 UTC
+Last updated 2026-03-19 08:18:26 UTC
 </div>
 </div>
 </body>
