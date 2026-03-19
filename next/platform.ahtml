@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Concepts and overview</title>
+<meta name="author" content="Enonic XP is an API-first platform and back-end for digital experiences.">
+<title>Platform concept overview</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,13 +438,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Concepts and overview</h1>
+<h1>Platform concept overview</h1>
+<div class="details">
+<span id="author" class="author">Enonic XP is an API-first platform and back-end for digital experiences.</span><br>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#more_than_an_api">More than an API</a>
+<li><a href="#vision">Vision</a></li>
+<li><a href="#built_like_an_operating_system">Built like an operating system</a>
 <ul class="sectlevel2">
-<li><a href="#platform_components">Platform components</a></li>
+<li><a href="#applications">Applications</a></li>
+<li><a href="#cms">CMS</a></li>
+<li><a href="#platform_core">Platform Core</a></li>
 </ul>
 </li>
 </ul>
@@ -451,22 +458,74 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="more_than_an_api"><a class="link" href="#more_than_an_api">More than an API</a></h2>
+<h2 id="vision"><a class="link" href="#vision">Vision</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP aims to be the ultimate CMS and back-end for your digital experiences. It provides a powerful and flexible foundation where you can customize and extend every aspect of the platform to fit your unique needs - without starting from scratch.</p>
+<p>The best CMS is the one you create yourself, but that doesn&#8217;t mean you have to start from scratch. Enonic XP provides a powerful and flexible foundation where you can customize and extend every aspect of the platform to fit your unique needs - without starting from scratch.</p>
 </div>
-<div class="paragraph">
-<p>In order to provide this flexibility, XP was built like an operating system, with a core platform that provides essential services and APIs, and an ecosystem of applications that can be installed on top to add specific functionality.</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="built_like_an_operating_system"><a class="link" href="#built_like_an_operating_system">Built like an operating system</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>This architecture allows you to pick and choose the capabilities you need, while still having the option to build custom applications or extend existing ones. The platform provides the building blocks, and you can assemble them in whatever way makes sense for your project.</p>
+<p>XP is built like an operating system, with a core platform&#8217;s essential services and APIs, combined with an ecosystem of applications that can be installed on top to add specific functionality and features.</p>
 </div>
 <div class="sect2">
-<h3 id="platform_components"><a class="link" href="#platform_components">Platform components</a></h3>
+<h3 id="applications"><a class="link" href="#applications">Applications</a></h3>
+<div class="paragraph">
+<p>Applications are standalone software packages that can be installed and started on Enonic XP, and they have access to all platform services and APIs. You may use them to add your own specific features, or extend existing ones.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cms"><a class="link" href="#cms">CMS</a></h3>
+<div class="paragraph">
+<p>XP ships with powerful CMS capabilities out of the box:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A flexible schema system that allows you to define your content model</p>
+</li>
+<li>
+<p>APIs for querying and manipulating content</p>
+</li>
+<li>
+<p>Content Studio - A rich admin interface for content management</p>
+</li>
+<li>
+<p>Site Engine for serving websites without using 3rd party frameworks</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="platform_core"><a class="link" href="#platform_core">Platform Core</a></h3>
+<div class="paragraph">
+<p>The core platform provides essential services and APIs that applications can leverage to build their functionality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Universal API - A Kubernetes-inspired API model that allows applications to contribute their own APIs, automatically integrating with XP&#8217;s security model.</p>
+</li>
+<li>
+<p>Runtime - A powerful and flexible application engine that can run multiple applications simultaneously.</p>
+</li>
+<li>
+<p>Storage - A built-in NoSQL storage engine for storing content, application- and system data.</p>
+</li>
+<li>
+<p>Identity and Access Management (IAM) - A comprehensive security model for authentication and authorization across the platform</p>
+</li>
+<li>
+<p>Grid - for distributed memory caching, events and distributed job execution</p>
+</li>
+</ul>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="media/platform-components.png" alt="Platform illustration" width="1092">
+<img src="images/architecture.svg" alt="Platform illustration" width="1092">
 </div>
 </div>
 </div>
@@ -475,7 +534,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-19 08:18:26 UTC
+Last updated 2026-03-19 15:26:12 UTC
 </div>
 </div>
 </body>

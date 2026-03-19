@@ -441,12 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#about">About</a>
-<ul class="sectlevel2">
-<li><a href="#platform_components">Platform components</a></li>
-</ul>
-</li>
-<li><a href="#api">API</a></li>
+<li><a href="#platform_overview">Platform overview</a></li>
 <li><a href="#release_notes">Release notes</a></li>
 </ul>
 </div>
@@ -455,8 +450,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This documentation provides details on the Enonic XP core platform, its concepts and architecture.</p>
+<p>This documentation provides details on the Enonic XP core platform.</p>
 </div>
+<div class="exampleblock">
+<div class="content">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -464,7 +461,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<strong>Front-end developer</strong> Head over to the <a href="https://developer.enonic.com/docs/cms">CMS documentation</a> or try out the <a href="https://developer.enonic.com/start">Quick start guide</a>
+<strong>Front-end developer?</strong> Head over to the <a href="https://developer.enonic.com/docs/cms">CMS documentation</a> or try out the <a href="https://developer.enonic.com/start">Quick start guide</a>
 </td>
 </tr>
 </table>
@@ -476,56 +473,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<strong>Enonic developer</strong> Building Enonic apps? Visit the <a href="https://developer.enonic.com/docs/code">Platform Developer Docs</a>
+<strong>Enonic developer?</strong> Building Enonic apps? Visit the <a href="https://developer.enonic.com/docs/code">Platform Developer Docs</a>
 </td>
 </tr>
 </table>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="about"><a class="link" href="#about">About</a></h2>
+<h2 id="platform_overview"><a class="link" href="#platform_overview">Platform overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP is an API first CMS and back-end for your digital experiences.</p>
+<p>Beyond the limitations of a Headless CMS, Enonic XP allows you to customize the back-end to your needs. Whether you&#8217;re building a simple website or an international digital presence, XP provides the tools and capabilities you need to create something truly unique.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Schema system for structured content</p>
-</li>
-<li>
-<p>Augmentable Headless Content API</p>
-</li>
-<li>
-<p>Advanced search and querying</p>
-</li>
-<li>
-<p>Customize the platform with JavaScript/TypeScript</p>
-</li>
-<li>
-<p>Flexible and pluggable end-to-end IAM</p>
-</li>
-<li>
-<p>Portable and Open Source</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>For more details on the platform architecture and concepts, see <a href="platform.ahtml">Platform overview</a>.</p>
 </div>
-<div class="sect2">
-<h3 id="platform_components"><a class="link" href="#platform_components">Platform components</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="media/platform-components.png" alt="Platform illustration" width="1092">
+<img src="images/platform.png" alt="Platform illustration" width="1312">
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="api"><a class="link" href="#api">API</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>For detailed specifications of our various platform APIs, visit the <a href="apis.ahtml">API section</a></p>
 </div>
 </div>
 </div>
@@ -552,7 +521,7 @@ If you are looking to upgrade from a previous version of XP, check out the <a hr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-19 08:18:26 UTC
+Last updated 2026-03-19 15:26:12 UTC
 </div>
 </div>
 </body>

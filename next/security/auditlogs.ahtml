@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Users and groups</title>
+<title>Audit Logs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,16 +437,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Users and groups</h1>
+<h1>Audit Logs</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#users">Users</a>
+<li><a href="#principals_and_id_providers">Principals and ID providers</a>
 <ul class="sectlevel2">
-<li><a href="#profiles">Profiles</a></li>
+<li><a href="#xp_registers_the_following_actions_for_principals_and_id_providers">XP registers the following actions for principals and ID providers:</a></li>
 </ul>
 </li>
-<li><a href="#groups">Groups</a></li>
+<li><a href="#application">Application</a>
+<ul class="sectlevel2">
+<li><a href="#xp_registers_the_following_actions_for_applications">XP registers the following actions for applications:</a></li>
+</ul>
+</li>
+<li><a href="#content">Content</a>
+<ul class="sectlevel2">
+<li><a href="#xp_registers_the_following_actions_for_content">XP registers the following actions for content:</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -454,97 +463,242 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Users and groups may be created exist within the scope of an ID provider.</p>
+<p>XP registers successfully completed actions that affect content, applications, principals and ID providers in the <code>system.auditlog</code> repository.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="users"><a class="link" href="#users">Users</a></h2>
+<h2 id="principals_and_id_providers"><a class="link" href="#principals_and_id_providers">Principals and ID providers</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Users are stored per ID provider. Selected IDP applications, such as the <a href="https://market.enonic.com/vendors/enonic/simple-idprovider" target="_blank" rel="noopener">Simple ID provider</a> let you create and manage users directly in the <code>Users</code> admin app.</p>
+<p>In order to enable or disable audit logs for actions affecting ID providers and principal entities (such as <code>users</code>, <code>roles</code> and <code>groups</code>) you have to modify configuration file <code>com.enonic.xp.security.cfg</code> and set <code>auditlog.enabled</code> option to <code>true</code> to enable or <code>false</code> to disable logging. Default value is <code>true</code>.</p>
 </div>
-<div class="paragraph">
-<p>In other cases, users are entirely managed outside of XP, and you are limited to adding the users to roles and groups.</p>
-</div>
-<div class="paragraph">
-<p>A user generally consist of the following fields:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>name (aka login)</p>
-</li>
-<li>
-<p>display name (Full name)</p>
-</li>
-<li>
-<p>e-mail</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
+<div class="listingblock">
+<div class="title">com.enonic.xp.security.cfg</div>
 <div class="content">
-<img src="images/user-form.png" alt="Creating a user in the Users app" width="811">
+<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.enabled = true</code></pre>
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For selected ID providers you may also add credentials, such as Password and Public key to a user
-</td>
-</tr>
-</table>
 </div>
 <div class="sect2">
-<h3 id="profiles"><a class="link" href="#profiles">Profiles</a></h3>
+<h3 id="xp_registers_the_following_actions_for_principals_and_id_providers"><a class="link" href="#xp_registers_the_following_actions_for_principals_and_id_providers">XP registers the following actions for principals and ID providers:</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>system.security.principal.create</code> - a principal (user, group or role) has been created</p>
+</li>
+<li>
+<p><code>system.security.principal.update</code> - a principal (user, group or role) has been updated</p>
+</li>
+<li>
+<p><code>system.security.principal.delete</code> - a principal (user, group or role) has been deleted</p>
+</li>
+<li>
+<p><code>system.security.principal.addRelationship</code> - a principal joins a group or a role</p>
+</li>
+<li>
+<p><code>system.security.principal.removeRelationship</code> - a principal leaves a group or a role</p>
+</li>
+<li>
+<p><code>system.security.principal.removeRelationships</code> - all group or role relationships have been removed (deprecated)</p>
+</li>
+<li>
+<p><code>system.security.principal.setPassword</code> - new password has been set for a user</p>
+</li>
+<li>
+<p><code>system.security.idProvider.create</code> - an ID provider has been created</p>
+</li>
+<li>
+<p><code>system.security.idProvider.update</code> - an ID provider has been updated</p>
+</li>
+<li>
+<p><code>system.security.idProvider.delete</code> - an ID provider has been deleted</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p>Developers may also store custom properties and values in the user object via <code>profiles</code>. This information is currently not visible or possible to edit via the Users App.</p>
+<p>Below you can see some examples of how data is stored for various actions:</p>
+</div>
+<div class="paragraph">
+<div class="title"><code>system.security.principal.addRelationship</code></div>
+<p>User <code>user:system:username</code> has been added to group <code>group:system:usergroup</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
+  "type": "system.security.principal.addRelationship",
+  "source": "com.enonic.xp.security",
+  "user": "user:system:admin",
+  "objects": ["user:system:username","group:system:usergroup"],
+  "data": {
+    "params": {
+      "principal": "user:system:username",
+      "joins": "group:system:usergroup"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Role <code>role:system.admin</code> has been assigned to user <code>user:system:username</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
+  "type": "system.security.principal.addRelationship",
+  "source": "com.enonic.xp.security",
+  "user": "user:system:admin",
+  "objects": ["user:system:username","role:system.admin"],
+  "data": {
+    "params": {
+      "principal": "user:system:username",
+      "joins": "role:system.admin"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Group <code>group:system:group1</code> has been added to group <code>group:system:group2</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
+  "type": "system.security.principal.addRelationship",
+  "source": "com.enonic.xp.security",
+  "user": "user:system:admin",
+  "objects": ["group:system:group1","group:system:group2"],
+  "data": {
+    "params": {
+      "principal": "group:system:group1",
+      "joins": "group:system:group2"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title"><code>system.security.principal.removeRelationship</code></div>
+<p>Role <code>role:system.admin</code> has been unassigned from user <code>user:system:username</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
+  "type": "system.security.principal.removeRelationship",
+  "source": "com.enonic.xp.security",
+  "user": "user:system:admin",
+  "objects": ["user:system:username","role:system.admin"],
+  "data": {
+    "params": {
+      "principal": "user:system:username",
+      "leaves": "role:system.admin"
+    }
+  }
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="groups"><a class="link" href="#groups">Groups</a></h2>
+<h2 id="application"><a class="link" href="#application">Application</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Like users, groups are created and managed within an ID provider. Groups provide a flexible way to create and manage permissions, without assigning them on a per-user-basis</p>
+<p>In order to enable or disable audit logs for application actions you have to modify configuration file <code>com.enonic.xp.app.cfg</code> and set <code>auditlog.enabled</code> option to <code>true</code> to enable or <code>false</code> to disable logging. Default value is <code>true</code>.</p>
 </div>
+<div class="listingblock">
+<div class="title">com.enonic.xp.app.cfg</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.enabled = true</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="xp_registers_the_following_actions_for_applications"><a class="link" href="#xp_registers_the_following_actions_for_applications">XP registers the following actions for applications:</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>You may add users to a group</p>
+<p><code>system.application.start</code> - an application has been started</p>
 </li>
 <li>
-<p>Roles may be granted to a group - Indirectly assigning the roles to the users of the group</p>
+<p><code>system.application.stop</code> - an application has been stopped</p>
 </li>
 <li>
-<p>Groups may be added to a group - causing transitive resolving of roles</p>
+<p><code>system.application.install</code> - an application has been installed</p>
+</li>
+<li>
+<p><code>system.application.uninstall</code> - an application has been uninstalled</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Like users, Using Content Studio, you may also grant content permissions to a group
-</td>
-</tr>
-</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="content"><a class="link" href="#content">Content</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to enable or disable audit logs for content actions you have to modify configuration file <code>com.enonic.xp.content.cfg</code> and set <code>auditlog.enabled</code> option to <code>true</code> to enable or <code>false</code> to disable logging. Default value is <code>true</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">com.enonic.xp.app.cfg</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.enabled = true</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="xp_registers_the_following_actions_for_content"><a class="link" href="#xp_registers_the_following_actions_for_content">XP registers the following actions for content:</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>system.content.create</code> - a content has been created, for instance, <code>content</code>, <code>site</code> or <code>media</code></p>
+</li>
+<li>
+<p><code>system.content.update</code> - a content has been updated</p>
+</li>
+<li>
+<p><code>system.content.delete</code> - a content has been deleted</p>
+</li>
+<li>
+<p><code>system.content.publish</code> - a content has been published</p>
+</li>
+<li>
+<p><code>system.content.unpublishContent</code> - a content has been unpublished</p>
+</li>
+<li>
+<p><code>system.content.duplicate</code> - a content has been duplicated</p>
+</li>
+<li>
+<p><code>system.content.move</code> - a content has been moved</p>
+</li>
+<li>
+<p><code>system.content.archive</code> - a content has been archived</p>
+</li>
+<li>
+<p><code>system.content.restore</code> - a content has been restored</p>
+</li>
+<li>
+<p><code>system.content.rename</code> - a content has been renamed</p>
+</li>
+<li>
+<p><code>system.content.setChildOrder</code> - a <code>childOrder</code> has been set</p>
+</li>
+<li>
+<p><code>system.content.reorderChildren</code> - a <code>childOrder</code> has been reordered</p>
+</li>
+<li>
+<p><code>system.content.applyPermissions</code> - content permissions have been applied</p>
+</li>
+<li>
+<p><code>system.content.reprocess</code> - a content has been reprocessed</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-19 08:18:26 UTC
+Last updated 2026-03-19 15:26:12 UTC
 </div>
 </div>
 </body>

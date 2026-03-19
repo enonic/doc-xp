@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Widgets</title>
+<title>System ID provider</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,24 +437,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Widgets</h1>
+<h1>System ID provider</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#implementation">Implementation</a>
+<li><a href="#built_in">Built-in</a></li>
+<li><a href="#system_users">System users</a></li>
+<li><a href="#service-accounts">Service Accounts</a></li>
+<li><a href="#service_account_key">Service Account Key</a>
 <ul class="sectlevel2">
-<li><a href="#descriptor">Descriptor</a></li>
-<li><a href="#controller">Controller</a></li>
-<li><a href="#icon">Icon</a></li>
+<li><a href="#generate_key">Generate key</a></li>
+<li><a href="#upload_key">Upload key</a></li>
 </ul>
 </li>
-<li><a href="#widget_types_interface">Widget Types (Interface)</a></li>
-<li><a href="#widgeturl">widgetUrl()</a>
-<ul class="sectlevel2">
-<li><a href="#dashboard_widgets">Dashboard Widgets</a></li>
-</ul>
-</li>
+<li><a href="#jwt-authentication">JWT authentication</a></li>
 </ul>
 </div>
 </div>
@@ -463,62 +460,107 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Widgets are visual components that dynamically extend Admin UI.
-Widgets may or may not be context-dependent (require id of selected content and current branch).</p>
+<p>XP ships with a special ID provider that cannot be removed or renamed. It is called the System ID provider.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">Implementation</a></h2>
+<h2 id="built_in"><a class="link" href="#built_in">Built-in</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Widget is essentially a special, admin-only kind of web application. Like all other XP components, widgets are defined by a controller and a descriptor.</p>
+<p>When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.</p>
 </div>
-<div class="paragraph">
-<p>To create a widget, add a new folder in your project structure, i.e.  <code>src/main/resources/admin/widgets/&lt;widget-name&gt;</code>.
-The folder must contain both a descriptor (<code>&lt;widget-name&gt;.xml</code>) and a controller (<code>&lt;widget-name&gt;.js</code>).</p>
-</div>
-<div class="sect2">
-<h3 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h3>
-<div class="paragraph">
-<p>Widget descriptor defines a display name, a list of roles required to access the widget and interfaces it implements.
-The descriptor file must match the widget folder name, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.xml</code>.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample descriptor file:</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget&gt;
-  &lt;display-name i18n="phrases.my-dashboard-widget"&gt;My dashboard widget&lt;/display-name&gt;
-  &lt;description i18n="phrases.my-dashboard-widget-desc"&gt;Description of my dashboard widget&lt;/description&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;allow&gt;
-    &lt;principal&gt;role:system.admin&lt;/principal&gt;
-    &lt;principal&gt;role:myapp.myrole&lt;/principal&gt;
-  &lt;/allow&gt;
-&lt;/widget&gt;</code></pre>
+<img src="images/system-idprovider.png" alt="System ID provider login screen" width="828">
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="controller"><a class="link" href="#controller">Controller</a></h3>
+</div>
+<div class="sect1">
+<h2 id="system_users"><a class="link" href="#system_users">System users</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>To drive the widget, we will need a <a href="../framework/controllers.ahtml">controller</a>. The controller typically renders the widget&#8217;s HTML template.
-Depending on the widget implementation it may also handle any further server requests from the widgets interface.</p>
+<p>The System ID provider also contains some special users:</p>
 </div>
-<div class="paragraph">
-<p>The controller file must match the widget name, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.js</code>:</p>
-</div>
-<div class="listingblock">
-<div class="title">Example controller file:</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">exports.GET = function (req) {
-    return {
-        body: '&lt;widget&gt;My dashboard widget&lt;/widget&gt;',
-        contentType: 'text/html'
-    };
-};</code></pre>
+<img src="images/super-user.png" alt="The Super User" width="834px">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>system:su</strong>
+The <code>Super User</code> exists in order to perform priveliged actions, and to allow you to start using XP before you have created any users. The Super User has the <strong>system.admin</strong> role, and thus unrestricted access.</p>
+</div>
+<div class="paragraph">
+<p><strong>system:anonymous</strong> - XP expects a user in every request. As such, the <code>Anonymous</code> user steps in to cover for users that have not authenticated.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="service-accounts"><a class="link" href="#service-accounts">Service Accounts</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unlike other ID providers, the users in the System IDP are referred to as service accounts.</p>
+</div>
+<div class="paragraph">
+<p>Service accounts are designed for machine-to-machine authentication from remote clients to XP.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Avoid adding human users to the System ID provider, rather <a href="idproviders.ahtml">create a new ID provider</a> for this purpose.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Since service accounts also are regular XP users, you may grant them roles and permissions as needed.</p>
+</div>
+<div class="paragraph">
+<p>Service accounts users can be recognized from the small cog symbol above their avatar in the top right.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="service_account_key"><a class="link" href="#service_account_key">Service Account Key</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Service Account may be associated with one, or several  Service Account keys. Using a Service Account Key is beneficial for security reasons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It allows to authenticate without transferring the password over the network.</p>
+</li>
+<li>
+<p>Support for multiple keys allow rotation of Public-Private key-pairs without service interruption.</p>
+</li>
+<li>
+<p>Stored Public key is not a hash of a password, so it is not possible to reverse-engineer the password from the public key.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once a key is created, it may be used to make an authorized call to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="#management_endpoint">Management Endpoint</a></p>
+</li>
+<li>
+<p>Any XP engine that mounts the System ID provider. See <a href="../deployment/vhosts.ahtml#virtual-hosts">Virtual Hosts</a> for more details.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service-account-keys.png" alt="List of service account keys" width="662px">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -528,22 +570,21 @@ Depending on the widget implementation it may also handle any further server req
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Depending on the interface a widget is implementing, controller may be initialised with parameters, for instance providing a specific context.
+Service account keys are a security risk if not managed correctly. Make sure to rotate keys regularly and keep them safe. If you suspect that your keys have been compromised, you can revoke them in the Users app. Also consider using ID providers that support 3-leg authentication, such as the <a href="https://market.enonic.com/vendors/enonic/oidc-id-provider">OIDC ID provider</a>, if possible.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>When the application is deployed, the controller will be accessible from</p>
-</div>
-<div class="paragraph">
-<p><code>&lt;server&gt;:&lt;port&gt;/admin/&lt;app-name&gt;/&lt;tool-name&gt;/_/admin:widget/&lt;widget-app-name&gt;/&lt;widget-name&gt;</code> (i.e. <code>localhost:8080/admin/com.enonic.xp.app.main/home/_/admin:widget/com.enonic.xp.app.main/launcher</code>)</p>
-</div>
-</div>
 <div class="sect2">
-<h3 id="icon"><a class="link" href="#icon">Icon</a></h3>
+<h3 id="generate_key"><a class="link" href="#generate_key">Generate key</a></h3>
 <div class="paragraph">
-<p>Widgets may also have icons. Simply place an SVG or PNG file into the widget folder, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.svg</code></p>
+<p>You may easily generate new keys by clicking add.
+Simply give your key a name, and click btn:generate.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service-account-key-form.png" alt="Generate service account key" width="834px">
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -552,51 +593,113 @@ Depending on the interface a widget is implementing, controller may be initialis
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Widget icon will not be used for Dashboard widgets, only for Content Studio widgets.
+The public key will be saved, and the private key will automatically be downloaded to your device (in JSON format).
 </td>
 </tr>
 </table>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="widget_types_interface"><a class="link" href="#widget_types_interface">Widget Types (Interface)</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="upload_key"><a class="link" href="#upload_key">Upload key</a></h3>
 <div class="paragraph">
-<p>Widget interface is simply a unique identifier (or widget type, if you will) that links the widget to its extension point (i.e. Dashboard or Content Studio&#8217;s context panel). One well-known interface is <code>admin.dashboard</code> - <a href="#dashboard_widgets">Dashboard Widgets</a> that are displayed on the Admin Dashboard screen.</p>
+<p>You may also upload the public key portion of a user-managed key pair, and the use the private key for authenication later.</p>
 </div>
 <div class="paragraph">
-<p>Admin Tools are required to specify the widget interfaces (but not widget themselves) they support in their descriptor file, i.e. <code>admin/tools/&lt;tool-name&gt;/&lt;tool-name&gt;.xml</code>.</p>
+<p>The key you upload must be an RSA public key and encoded in base64. You can use tools such as OpenSSL to generate a key and certificate in this format.</p>
 </div>
 <div class="paragraph">
-<p>For example, if a tool supports Dashboard Widgets, it should have the following in its descriptor:</p>
+<p><strong>Try it out</strong> The following command generates a 2048-bit RSA key pair</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;tool&gt;
-  &lt;!--...--&gt;
-  &lt;apis&gt;
-    &lt;api&gt;admin:widget&lt;/api&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;/apis&gt;
-  &lt;interfaces&gt;
-     &lt;interface&gt;admin.dashboard&lt;/interface&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;/interfaces&gt;
-&lt;/tool&gt;</code></pre>
+<pre class="highlight"><code class="language-terminal" data-lang="terminal">openssl genpkey -algorithm RSA -out xp_private_key.pem -pkeyopt rsa_keygen_bits:2048 &amp;&amp; \
+openssl rsa -pubout -in xp_private_key.pem -out xp_public_key.pem</code></pre>
 </div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>This line mounts the Widget API to the tool, allowing it to use widgets.</p>
-</li>
-<li>
-<p>This line specifies that the tool supports Dashboard Widgets, allowing it to display them in your widget.</p>
-</li>
-</ol>
 </div>
 <div class="paragraph">
-<p>There is one exception form this rule - The <code>generic</code> interface. In order to use such widgets Admin Tool just needs to mount the Widget API.</p>
+<p>After generating the key, you may upload the <code>public_key.pem</code> file to your service account.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service-account-key-upload.png" alt="Upload public key" width="807px">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jwt-authentication"><a class="link" href="#jwt-authentication">JWT authentication</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>XP enforces short-lived tokens</strong>.
+You may change the default timeout of 30 seconds in <a href="../config/system.ahtml#idprovider">the ID provider configuration</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The System ID providers supports JWT (JSON Web Token) based authentication via the HTTP <code>Authorization</code> header.</p>
+</div>
+<div class="paragraph">
+<p>The header should look like the following:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Authorization: Bearer &lt;mytoken&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The JWT token must be a valid <a href="https://datatracker.ietf.org/doc/html/rfc7519">RFC-7519</a> JWT token, following these requirements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>alg</code> header parameter must be set to <code>RS256</code>.</p>
+</li>
+<li>
+<p><code>kid</code> header parameter must be set to ID of the public key that corresponds to the private key used to sign the token.</p>
+</li>
+<li>
+<p><code>sub</code> claim must be set to ID of the service account, for instance, <code>user:system:myuser</code>.</p>
+</li>
+<li>
+<p><code>exp</code> claim must be set to expiration time of the token. The token will be rejected if it is expired.</p>
+</li>
+<li>
+<p><code>iat</code> claim must be set to issue time of the token. The token will be rejected if it was issued in the future.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">JWT header example</div>
+<div class="content">
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
+  "kid": "51a29c2ab5ebf945f6a5ddac8935bf8b",
+  "typ": "JWT",
+  "alg": "RS256"
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">JWT payload example</div>
+<div class="content">
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
+  "sub": "user:system:myuser",
+  "exp": 1692787396,
+  "iat": 1692787366
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We recommend using libraries that match your client platform to generate the token - especially related to the requirement for short lived tokens.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -605,224 +708,26 @@ Widget icon will not be used for Dashboard widgets, only for Content Studio widg
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-The <code>generic</code> interface widgets should be used sparsely as they may impose security risks. For instance, Launcher widget is <code>generic</code> because all Admin Tools should be able to show the Launcher Menu - but it does not accept any mutation requests or exposes secrets, so it is safe to use.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Widget API is <em>not</em> mounted to Admin Tools by default. In order to use any widgets in Admin Tools, you need to add the following to your Admin Tool descriptor:
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;tool&gt;
-    &lt;apis&gt;
-        &lt;api&gt;admin:widget&lt;/api&gt;
-    &lt;/apis&gt;
-&lt;/tool&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To enumerate all available widgets by interface, use the Widget API:
-<code>&lt;server&gt;:&lt;port&gt;/admin/&lt;app-name&gt;/&lt;tool-name&gt;/_/admin:widget?widgetInterface=&lt;interface&gt;</code> (i.e. <code>localhost:8080/admin/com.enonic.xp.app.main/home/_/admin:widget?widgetInterface=admin.dashboard</code>)</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Although browsers do not restrict web pages from accessing URLs on the same domain, there is no safe way to generate working URLs to other APIs from within the widget. Only APIs that are available to the Admin Tool that the widget is used in can be accessed.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Content Studio supports other types of widgets that will be embedded inside the Content Studio UI.
-Read more about Content Studio widgets <a href="https://developer.enonic.com/docs/content-studio/stable/widgets">here</a>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="widgeturl"><a class="link" href="#widgeturl">widgetUrl()</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To safely generate a Widget URL, use the <code>widgetUrl()</code> function that is part of the <a href="../api/lib-admin.ahtml#widget-url">Admin Library</a>.</p>
-</div>
-<div class="sect2">
-<h3 id="dashboard_widgets"><a class="link" href="#dashboard_widgets">Dashboard Widgets</a></h3>
-<div class="paragraph">
-<p>Dashboard Widgets will be identified by interface <code>admin.dashboard</code> and displayed on the Admin Dashboard screen.</p>
-</div>
-<div class="paragraph">
-<p>Following properties are supported in <code>&lt;config&gt;</code> of Dashboard Widget descriptor:</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>width</code></p>
+<p>The private key from the Public-Private key pair should only be stored on the client side to generate the token, and never shared with the XP server.</p>
+</li>
+<li>
+<p>The public key from Public-Private key pair is only stored in XP, and used to verify the signature of your token.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Used to specify widget width. Supported values are: <code>small</code> (25% of the screen width), <code>medium</code> (50%), <code>large</code> (75%) and <code>full</code> (100%).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<code>medium</code> is a default value for <code>width</code> config, if <code>width</code> is not specified or unsupported value is used.
 </td>
 </tr>
 </table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>height</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Used to specify widget height. Supported values are: <code>small</code> (25% of the screen height), <code>medium</code> (50%), <code>large</code> (75%) and <code>full</code> (100%).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<code>medium</code> is a default value for <code>height</code> config, if <code>height</code> is not specified or unsupported value is used.
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>header</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies whether widget will automatically have a header with widget title (coming from <code>display-name</code> field in descriptor).
-Default value (when nothing is specified) is <code>true</code> which means that widget will have a header by default.
-To hide the header, use <code>&lt;header&gt;false&lt;/header&gt;</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>style</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies whether XP will apply default styling to the widget (default). If you want to have full control over widget styling, use <code>&lt;style&gt;custom&lt;/style&gt;</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>order</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies desired order of the widget on the Dashboard (with <code>0</code> being the top-left position). If <code>order</code> is not specified, the widget will be placed after widgets with specified order.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Widgets with equal order or no order will be placed based on their size (to fit as many widgets as possible next to each other).
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/dashboard-widgets.png" alt="Dashboard Widgets" width="900px"></span></p>
-</div>
-<div class="paragraph">
-<p>Widgets in the screenshot above are configured in three different ways (from left to right):</p>
-</div>
-<div class="listingblock">
-<div class="title">Custom styling, position 0, display name in the header, width 25%, height 50% (default):</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Useful Links&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="width" value="small"/&gt;
-    &lt;property name="style" value="custom"/&gt;
-    &lt;property name="order" value="0"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Default styling, position 1, display name in the header, width 50% (default), height 50% (default):</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Content Studio: Recent items&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="order" value="1"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Default styling, last position, no header, width 25%, height 100%:</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Statistics&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="width" value="small"/&gt;
-    &lt;property name="height" value="full"/&gt;
-    &lt;property name="header" value="false"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
-</div>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-19 08:18:26 UTC
+Last updated 2026-03-19 15:26:12 UTC
 </div>
 </div>
 </body>
