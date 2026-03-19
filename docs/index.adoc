@@ -11,12 +11,38 @@ NOTE: *Front-end developer?* Head over to the https://developer.enonic.com/docs/
 NOTE: *Enonic developer?* Building Enonic apps? Visit the https://developer.enonic.com/docs/code[Platform Developer Docs] 
 ====
 
-== Platform overview
+== The Universal CMS
 Beyond the limitations of a Headless CMS, Enonic XP allows you to customize the back-end to your needs. Whether you're building a simple website or an international digital presence, XP provides the tools and capabilities you need to create something truly unique.
 
-For more details on the platform architecture and concepts, see <<platform#,Platform overview>>.
+== Built like an operating system
+XP is built like an operating system. A core with essential services and APIs combined with an ecosystem of applications that can be installed on top to add specific functionality and features. 
 
 image::platform.png[Platform illustration,1312]
+
+=== Applications
+
+Applications are standalone software packages that can be installed and started on Enonic XP, and they have access to all platform services and APIs. You may use them to add your own specific features, or extend existing ones.
+
+Visit https://market.enonic.com[Enonic Market] to find official apps from Enonic, as well as 3rd party applications.
+
+=== CMS
+XP bolts powerful CMS capabilities on top of the core platform:
+
+* Flexible schema system that allows you to define your content model
+* APIs for querying and manipulating content
+* https://developer.enonic.com/docs/content-studio[Content Studio] - A rich admin interface for content management
+* OPTIONAL: Site Engine for serving websites without using 3rd party frameworks
+
+Visit the separately maintained https://developer.enonic.com/docs/cms[CMS documentation] to learn more.
+
+=== Platform
+The core platform provides essential services and APIs that applications can leverage to build their functionality.
+
+* <<apis/universal#,Universal API>> - A Kubernetes-inspired API model that allows applications to contribute their own APIs, automatically integrating with XP's security model.
+* <<apps/runtime#,App runtime>> - A powerful and flexible application engine that can run multiple applications simultaneously.
+* <<security/iam#,Identity and Access Management (IAM)>> - A comprehensive security model for authentication and authorization across the platform
+* <<storage#,NoSQL Storage>> - A built-in NoSQL storage engine for storing content, application- and system data.
+* Grid and clustering - for distributed memory caching, events and job execution 
 
 
 == Release notes
