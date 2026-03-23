@@ -55,9 +55,10 @@ All identity keys have several common restrictions:
 - must not include and _Whitespace_ characters, except for space character `U+0020`
 - must not start or end with dot space character `U+0020`
 
-==== Node, Content, Issue names
+==== Node, Content, Issue names and keys
 
-Follow common `Name` validation restrictions
+- Names follow common `Name` validation restrictions
+- Ids are limited to 256 bytes/characters and no longer accept uppercase letters: `[a-z0-9_.:-]+`
 
 ==== IdProviderKey and PrincipalKey
 
@@ -80,22 +81,22 @@ Have additional restrictions:
 
 ==== ApplicationKey
 
-- must match the following regex: `^\w+(?:\.\w+)*$`
+- must match the following regex: `\w+(?:\.\w+)*`
 - 63 characters limit
 
 ==== RepositoryId
 
-- must match the following regex: `^[a-z0-9][a-z0-9._-]*$`
+- must match the following regex: `[a-z0-9][a-z0-9._-]*`
 - 63 characters limit
 
 ==== Branch
 
-- must match the following regex: `^[a-z0-9][a-z0-9.-]*$`
+- must match the following regex: `[a-z0-9][a-z0-9.-]*`
 - 63 characters limit
 
 ==== ProjectName
 
-- must match the following regex: `^[a-z0-9][a-z0-9_-]*$`
+- must match the following regex: `[a-z0-9][a-z0-9_-]*`
 - 48 characters limit
 
 === Langrage Specific Sort

@@ -58,7 +58,7 @@ NOTE: For scenarios where downtime cannot be avoided, additional steps, such as 
 
 Before starting the upgrade process, ensure the following requirements are in place
 
-XP Version:: You need to be running at least Enonic XP 8.16.x (if you are running an older version, upgrade to 8.16.x first)
+XP Version:: You need to be running at least Enonic XP 7.16.x (if you are running an older version, upgrade to 7.16.x first)
 QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
 Toolbox:: Ensure you have latest Toolbox available
 Enonic CLI:: Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
@@ -191,7 +191,7 @@ Start your new servers and verify everything is working properly
 
 === 2. Dump data
 
-We are now ready to dump data from our existing 7.15 instance.
+We are now ready to dump data from our existing 7.16 instance.
 
     enonic dump create --archive
 
