@@ -202,7 +202,7 @@ Move dump:: Transfer dump files from previous step to the new instance. For clus
 
 Load dump:: Now, load the dump into your XP 8 environment i.e.
 
-  enonic dump load
+  enonic dump load --upgrade
 
 NOTE: Don't worry about the command losing connection, this is only related to the system repo (and user) being removed during the operation. Watch the log for progress.
 
