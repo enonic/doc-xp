@@ -141,6 +141,14 @@ Dumps are now always stored as ZIP archives named `{name}.zip` in the dumps dire
 
 The `archive` request parameter field has been removed.
 
+===== POST /repo/snapshot
+
+No longer waits for the snapshot to complete and returns immediately after the snapshot process is started. The response contains a `taskId` field that can be used to track the progress of the snapshot.
+
+===== POST /repo/snapshot/restore
+
+No longer waits for the snapshot restore to complete and returns immediately after the restore process is started. The response contains a `taskId` field that can be used to track the progress of the snapshot restore.
+
 
 ==== Admin Dashboard
 

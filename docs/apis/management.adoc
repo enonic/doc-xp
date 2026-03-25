@@ -77,6 +77,16 @@ NOTE: Read about authorization <<authorization, here>>
 [source,json]
 ----
 {
+    "taskId": "f8565e19-3960-4bf0-8daa-f4ca77ef338f"
+}
+----
+
+NOTE: The endpoint returns immediately after the snapshot process is started. Task info can be fetched with a <<task,task>> request.
+
+.TaskInfo.progress.info value:
+[source,json]
+----
+{
     "Name": "2019-06-13t13-10-51.973z",
     "Reason": "",
     "State": "SUCCESS",
@@ -164,6 +174,16 @@ POST repo/snapshot/restore
 NOTE: Read about authorization <<authorization, here>>
 
 .Response
+[source,json]
+----
+{
+    "taskId": "a0b774dd-03f1-48fd-b500-b76a93c6b6fe"
+}
+----
+
+NOTE: The endpoint returns immediately after the restore process is started. Task info can be fetched with a <<task,task>> request.
+
+.TaskInfo.progress.info value:
 [source,json]
 ----
 {
