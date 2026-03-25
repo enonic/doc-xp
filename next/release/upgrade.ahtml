@@ -770,6 +770,18 @@ Folder-based exports from XP 7 should be converted to ZIP format before they can
 <p>The <code>archive</code> request parameter field has been removed.</p>
 </div>
 </div>
+<div class="sect4">
+<h5 id="post_reposnapshot"><a class="link" href="#post_reposnapshot">POST /repo/snapshot</a></h5>
+<div class="paragraph">
+<p>No longer waits for the snapshot to complete and returns immediately after the snapshot process is started. The response contains a <code>taskId</code> field that can be used to track the progress of the snapshot.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="post_reposnapshotrestore"><a class="link" href="#post_reposnapshotrestore">POST /repo/snapshot/restore</a></h5>
+<div class="paragraph">
+<p>No longer waits for the snapshot restore to complete and returns immediately after the restore process is started. The response contains a <code>taskId</code> field that can be used to track the progress of the snapshot restore.</p>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="admin_dashboard"><a class="link" href="#admin_dashboard">Admin Dashboard</a></h4>
@@ -931,7 +943,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-24 13:26:23 UTC
+Last updated 2026-03-25 12:35:02 UTC
 </div>
 </div>
 </body>
