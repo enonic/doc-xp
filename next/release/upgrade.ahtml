@@ -443,20 +443,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#non_cluster_upgrade">Non-cluster upgrade</a></li>
 <li><a href="#rolling_cluster_upgrade">Rolling Cluster upgrade</a></li>
-<li><a href="#full_restart_cluster_upgrade">Full restart Cluster upgrade</a>
-<ul class="sectlevel2">
+<li><a href="#full_restart_cluster_upgrade">Full restart Cluster upgrade</a></li>
 <li><a href="#applications">Applications</a></li>
-</ul>
-</li>
 <li><a href="#upgrading_to_v8_0">Upgrading to v8.0</a>
 <ul class="sectlevel2">
 <li><a href="#requirements">Requirements</a></li>
+<li><a href="#breaking_changes">Breaking changes</a></li>
 <li><a href="#1_install_xp_8">1. Install XP 8</a></li>
-<li><a href="#2_dump_data">2. Dump data</a></li>
-<li><a href="#3_upgrade_and_load">3. Upgrade and Load</a></li>
-<li><a href="#4_update_apps">4. Update apps</a></li>
-<li><a href="#5_validate">5. Validate</a></li>
-<li><a href="#6_go_live">6. Go live</a></li>
+<li><a href="#2_create_service_accounts">2. Create service accounts</a></li>
+<li><a href="#3_dump_data">3. Dump data</a></li>
+<li><a href="#4_upgrade_and_load">4. Upgrade and load</a></li>
+<li><a href="#5_update_apps">5. Update apps</a></li>
+<li><a href="#6_validate">6. Validate</a></li>
+<li><a href="#7_go_live">7. Go live</a></li>
 </ul>
 </li>
 </ul>
@@ -578,15 +577,13 @@ It is important to start the nodes at the same time to avoid timeouts, should an
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="applications"><a class="link" href="#applications">Applications</a></h3>
-<div class="paragraph">
-<p>When upgrading to new feature versions of Enonic XP, new versions of standard apps may also be available.</p>
 </div>
-<div class="paragraph">
-<p>After upgrading XP, check for new versions of your installed applications from Enonic market.
-We generally always recommend updating your apps to the latest version!</p>
 </div>
+<div class="sect1">
+<h2 id="applications"><a class="link" href="#applications">Applications</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After upgrading to a new feature version of Enonic XP, it&#8217;s a good idea to check the Enonic Market - newer versions of the apps you are using may be available there. We generally always recommend updating your apps to the latest version!</p>
 </div>
 </div>
 </div>
@@ -648,14 +645,7 @@ For scenarios where downtime cannot be avoided, additional steps, such as settin
 </div>
 </div>
 <div class="sect2">
-<h3 id="1_install_xp_8"><a class="link" href="#1_install_xp_8">1. Install XP 8</a></h3>
-<div class="paragraph">
-<p>We recommend setting up a new production environment for XP 8, running in parallel with your XP 7 environment.
-This will virtually eliminate downtime, and also be a safety net, should the upgrade fail somehow.</p>
-</div>
-<div class="paragraph">
-<p>Follow the <a href="../deployment/distro.ahtml#xp_install">XP installation instructions</a> to set up an instance matching your requirements</p>
-</div>
+<h3 id="breaking_changes"><a class="link" href="#breaking_changes">Breaking changes</a></h3>
 <div class="sect3">
 <h4 id="file_application_deployments"><a class="link" href="#file_application_deployments">File Application deployments</a></h4>
 <div class="paragraph">
@@ -855,38 +845,75 @@ Instead - to access content from the draft branch - user must have any content p
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="start_servers"><a class="link" href="#start_servers">Start servers</a></h4>
-<div class="paragraph">
-<p>Start your new servers and verify everything is working properly</p>
 </div>
+<div class="sect2">
+<h3 id="1_install_xp_8"><a class="link" href="#1_install_xp_8">1. Install XP 8</a></h3>
+<div class="paragraph">
+<p>We recommend setting up a new production environment for XP 8, running in parallel with your XP 7 environment.
+This will virtually eliminate downtime and also be a safety net should the upgrade fail somehow.</p>
+</div>
+<div class="paragraph">
+<p>Follow the <a href="../deployment/distro.ahtml#xp_install">XP installation instructions</a> to set up an instance matching your requirements</p>
+</div>
+<div class="paragraph">
+<p>Start your new server and verify everything is working properly.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="2_dump_data"><a class="link" href="#2_dump_data">2. Dump data</a></h3>
+<h3 id="2_create_service_accounts"><a class="link" href="#2_create_service_accounts">2. Create service accounts</a></h3>
 <div class="paragraph">
-<p>We are now ready to dump data from our existing 7.16 instance.</p>
+<p>Generate (or download, if already exists) a private key for a service account with Administrator role, one on the existing XP7 instance (to be used for <code>dump create</code>), another on the new XP8 instance (to be used for <code>dump load</code>). The key will be automatically downloaded to your disk after it&#8217;s generated. Read <a href="..security/system-idp.ahtml#service_account_key">here</a> to learn how to generate keys for service accounts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="3_dump_data"><a class="link" href="#3_dump_data">3. Dump data</a></h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure you have the latest version of Enonic CLI installed - you will use it for creating and loading dumps.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We are now ready to dump data from our existing XP7 instance:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>enonic dump create --archive</pre>
+<pre>enonic dump create -d xp7to8 --archive --cred-file xp7-private-key.json</pre>
 </div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>--archive</code> parameter must be provided, otherwise XP8 will not be able to read the dump.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="3_upgrade_and_load"><a class="link" href="#3_upgrade_and_load">3. Upgrade and Load</a></h3>
+<h3 id="4_upgrade_and_load"><a class="link" href="#4_upgrade_and_load">4. Upgrade and load</a></h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Move dump</dt>
 <dd>
-<p>Transfer dump files from previous step to the new instance. For clustered environments, any server will do.</p>
+<p>Transfer the dump archive from the previous step to the new instance. For clustered environments, any server will do.</p>
 </dd>
 <dt class="hdlist1">Load dump</dt>
 <dd>
-<p>Now, load the dump into your XP 8 environment i.e.</p>
+<p>Now, load the dump into your XP 8 environment:</p>
 <div class="literalblock">
 <div class="content">
-<pre>enonic dump load --upgrade</pre>
+<pre>enonic dump load -d xp7to8 --upgrade --cred-file xp8-private-key.json</pre>
 </div>
 </div>
 </dd>
@@ -899,14 +926,14 @@ Instead - to access content from the draft branch - user must have any content p
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Don&#8217;t worry about the command losing connection, this is only related to the system repo (and user) being removed during the operation. Watch the log for progress.
+Don&#8217;t worry about the CLI losing connection, this is only related to the system repo (and user) being removed during the operation. Watch the log for progress and don&#8217;t start changing data until all the activity in the XP log is finished.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="4_update_apps"><a class="link" href="#4_update_apps">4. Update apps</a></h3>
+<h3 id="5_update_apps"><a class="link" href="#5_update_apps">5. Update apps</a></h3>
 <div class="paragraph">
 <p>All installed applications must be updated to latest versions compatible with XP 8.</p>
 </div>
@@ -918,19 +945,19 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </dd>
 <dt class="hdlist1">Custom apps</dt>
 <dd>
-<p>Install XP 8 compatible versions of your custom applications either through the "Install App" UI or by using CLI.</p>
+<p>Install XP8-compatible versions of your custom applications either through the "Install App" UI or by using CLI.</p>
 </dd>
 </dl>
 </div>
 </div>
 <div class="sect2">
-<h3 id="5_validate"><a class="link" href="#5_validate">5. Validate</a></h3>
+<h3 id="6_validate"><a class="link" href="#6_validate">6. Validate</a></h3>
 <div class="paragraph">
 <p>Validate that your new installation is working as expected. We recommend checking logs, and performing live tests on services.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="6_go_live"><a class="link" href="#6_go_live">6. Go live</a></h3>
+<h3 id="7_go_live"><a class="link" href="#7_go_live">7. Go live</a></h3>
 <div class="paragraph">
 <p>With all lights green, redirect all traffic from your old XP 7 servers to the upgraded XP 8 environment.</p>
 </div>
@@ -943,7 +970,7 @@ Don&#8217;t worry about the command losing connection, this is only related to t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-25 12:35:02 UTC
+Last updated 2026-03-26 13:57:16 UTC
 </div>
 </div>
 </body>
