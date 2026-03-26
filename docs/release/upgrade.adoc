@@ -41,11 +41,9 @@ Follow the steps below to complete a restart upgrade:
 NOTE: It is important to start the nodes at the same time to avoid timeouts, should any upgrade scripts be supplied with the new version.
 
 
-=== Applications
-When upgrading to new feature versions of Enonic XP, new versions of standard apps may also be available.
+== Applications
 
-After upgrading XP, check for new versions of your installed applications from Enonic market.
-We generally always recommend updating your apps to the latest version!
+After upgrading to a new feature version of Enonic XP, it's a good idea to check the Enonic Market - newer versions of the apps you are using may be available there. We generally always recommend updating your apps to the latest version!
 
 == Upgrading to v8.0
 
@@ -60,19 +58,12 @@ Before starting the upgrade process, ensure the following requirements are in pl
 
 XP Version:: You need to be running at least Enonic XP 7.16.x (if you are running an older version, upgrade to 7.16.x first)
 QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
-Toolbox:: Ensure you have latest Toolbox available
-Enonic CLI:: Make sure you have https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
+Enonic CLI:: Make sure you have the latest version of https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
 Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
 3rd party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 8.
 Custom apps:: Make sure all custom built applications have been upgraded to support XP 8, as described in <<apps-upgrade#,Upgrading Applications>>
 
-
-=== 1. Install XP 8
-
-We recommend setting up a new production environment for XP 8, running in parallel with your XP 7 environment.
-This will virtually eliminate downtime, and also be a safety net, should the upgrade fail somehow.
-
-Follow the <<../deployment/distro#xp_install,XP installation instructions>> to set up an instance matching your requirements
+=== Breaking changes
 
 ==== File Application deployments
 If you have one or more applications deployed as files, replace them with their respective XP 8 versions
@@ -101,7 +92,7 @@ Old logback.xml
 
 ==== Default CMS repository
 
-With XP 8, the default CMS repository `com.enonic.cms.default` is no longer created automatically. In fact, there is no default CMS repository at all. Existing `com.enonic.cms.default` repository is converted to a normal one without any special permissions or behavior. During XP 8 startup the repository will be converted to a normal repository. To avoid permissions conflicts it is recommended to migrate the default repository prior migration.
+With XP 8, the default CMS repository `com.enonic.cms.default` is no longer created automatically. In fact, there is no default CMS repository at all. Existing `com.enonic.cms.default` repository is converted to a normal one without any special permissions or behavior. During XP 8 startup the repository will be converted to a normal repository. To avoid permission conflicts, it is recommended to migrate the default repository prior migration.
 
 ==== Metrics Endpoint
 
@@ -191,41 +182,52 @@ Instead - to access content from the draft branch - user must have any content p
 
 - It is no longer possible to via `com.enonic.xp.server.deploy.cfg` file. This method was not documented, unreliable in cluster installations and insecure.
 
-==== Start servers
 
-Start your new servers and verify everything is working properly
+=== 1. Install XP 8
 
-=== 2. Dump data
+We recommend setting up a new production environment for XP 8, running in parallel with your XP 7 environment.
+This will virtually eliminate downtime and also be a safety net should the upgrade fail somehow.
 
-We are now ready to dump data from our existing 7.16 instance.
+Follow the <<../deployment/distro#xp_install,XP installation instructions>> to set up an instance matching your requirements
 
-    enonic dump create --archive
+Start your new server and verify everything is working properly.
 
+=== 2. Create service accounts
 
-=== 3. Upgrade and Load
+Generate (or download, if already exists) a private key for a service account with Administrator role, one on the existing XP7 instance (to be used for `dump create`), another on the new XP8 instance (to be used for `dump load`). The key will be automatically downloaded to your disk after it's generated. Read <<../security/system-idp#service_account_key, here>> to learn how to generate keys for service accounts.
 
-Move dump:: Transfer dump files from previous step to the new instance. For clustered environments, any server will do.
+=== 3. Dump data
 
-Load dump:: Now, load the dump into your XP 8 environment i.e.
+We are now ready to dump data from our existing XP7 instance:
 
-  enonic dump load --upgrade
+    enonic dump create -d xp7to8 --archive --cred-file xp7-private-key.json
 
-NOTE: Don't worry about the command losing connection, this is only related to the system repo (and user) being removed during the operation. Watch the log for progress.
+IMPORTANT: The `--archive` parameter must be provided, otherwise XP8 will not be able to read the dump.
 
-=== 4. Update apps
+=== 4. Upgrade and load
+
+Move dump:: Transfer the dump archive from the previous step to the new instance. For clustered environments, any server will do.
+
+Load dump:: Now, load the dump into your XP 8 environment:
+
+  enonic dump load -d xp7to8 --upgrade --cred-file xp8-private-key.json
+
+NOTE: Don't worry about the CLI losing connection, this is only related to the system repo (and user) being removed during the operation. Watch the log for progress and don't start changing data until all the activity in the XP log is finished.
+
+=== 5. Update apps
 
 All installed applications must be updated to latest versions compatible with XP 8.
 
 Market apps:: For market apps, go to the Applications tool, click "Install" in the menu and click "Upgrade" button for all applications where upgrade is available.
 
-Custom apps:: Install XP 8 compatible versions of your custom applications either through the "Install App" UI or by using CLI.
+Custom apps:: Install XP8-compatible versions of your custom applications either through the "Install App" UI or by using CLI.
 
-=== 5. Validate
+=== 6. Validate
 
 Validate that your new installation is working as expected. We recommend checking logs, and performing live tests on services.
 
 
-=== 6. Go live
+=== 7. Go live
 
 With all lights green, redirect all traffic from your old XP 7 servers to the upgraded XP 8 environment.
 
