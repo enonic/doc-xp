@@ -621,13 +621,9 @@ For scenarios where downtime cannot be avoided, additional steps, such as settin
 <dd>
 <p>Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)</p>
 </dd>
-<dt class="hdlist1">Toolbox</dt>
-<dd>
-<p>Ensure you have latest Toolbox available</p>
-</dd>
 <dt class="hdlist1">Enonic CLI</dt>
 <dd>
-<p>Make sure you have <a href="https://developer.enonic.com/docs/enonic-cli">Enonic CLI</a> installed</p>
+<p>Make sure you have the latest version of <a href="https://developer.enonic.com/docs/enonic-cli">Enonic CLI</a> installed</p>
 </dd>
 <dt class="hdlist1">Disk space</dt>
 <dd>
@@ -687,7 +683,7 @@ Remove the <code>withJansi</code> element from your logback.xml file to avoid er
 <div class="sect3">
 <h4 id="default_cms_repository"><a class="link" href="#default_cms_repository">Default CMS repository</a></h4>
 <div class="paragraph">
-<p>With XP 8, the default CMS repository <code>com.enonic.cms.default</code> is no longer created automatically. In fact, there is no default CMS repository at all. Existing <code>com.enonic.cms.default</code> repository is converted to a normal one without any special permissions or behavior. During XP 8 startup the repository will be converted to a normal repository. To avoid permissions conflicts it is recommended to migrate the default repository prior migration.</p>
+<p>With XP 8, the default CMS repository <code>com.enonic.cms.default</code> is no longer created automatically. In fact, there is no default CMS repository at all. Existing <code>com.enonic.cms.default</code> repository is converted to a normal one without any special permissions or behavior. During XP 8 startup the repository will be converted to a normal repository. To avoid permission conflicts, it is recommended to migrate the default repository prior migration.</p>
 </div>
 </div>
 <div class="sect3">
@@ -867,18 +863,6 @@ This will virtually eliminate downtime and also be a safety net should the upgra
 </div>
 <div class="sect2">
 <h3 id="3_dump_data"><a class="link" href="#3_dump_data">3. Dump data</a></h3>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Make sure you have the latest version of Enonic CLI installed - you will use it for creating and loading dumps.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>We are now ready to dump data from our existing XP7 instance:</p>
 </div>
@@ -970,7 +954,7 @@ Don&#8217;t worry about the CLI losing connection, this is only related to the s
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-03-26 14:01:15 UTC
+Last updated 2026-03-26 14:33:39 UTC
 </div>
 </div>
 </body>
