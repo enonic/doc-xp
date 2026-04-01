@@ -635,7 +635,7 @@ Syntax for adding plugins to Gradle may have changed for your project, we recomm
 <div class="title">build.gradle sample</div>
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">plugins {
-    id 'com.enonic.xp.app' version '4.0.0-A3'
+    id 'com.enonic.xp.app'
 }
 
 repositories {
@@ -690,7 +690,7 @@ Below is a sample content of <em>build.gradle</em> and <em>gradle.properties</em
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '4.0.0-A3'
+    id 'com.enonic.xp.base'
 }
 
 repositories {
@@ -1811,7 +1811,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-01 09:51:48 UTC
+Last updated 2026-04-01 10:11:46 UTC
 </div>
 </div>
 </body>
