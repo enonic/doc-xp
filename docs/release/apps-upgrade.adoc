@@ -187,7 +187,7 @@ Junit 4 is not supported in XP 8.0.0
 
 === Application Descriptor
 
-The `application.xml` descriptor must be converted to `application.yml`.
+The `application.xml` descriptor must be converted to `application.yaml`.
 
 TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate the conversion of XML descriptors to YAML.
 
@@ -200,15 +200,16 @@ TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate
 </application>
 ----
 
-.XP 8 - application.yml
+.XP 8 - application.yaml
 [source,yaml]
 ----
+kind: Application
 description: "My app description"
 ----
 
 === Admin API
 
-All XML descriptor files must now be converted to YAML (`.yml`) descriptor files. XML descriptors are no longer supported in XP 8.
+All XML descriptor files must now be converted to YAML (`.yaml`) descriptor files. XML descriptors are no longer supported in XP 8.
 
 TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate the conversion of XML descriptors to YAML.
 
@@ -229,9 +230,10 @@ Admin Tool descriptors must be converted from XML to YAML.
 </tool>
 ----
 
-.XP 8 - admin/tools/main/main.yml
+.XP 8 - admin/tools/main/main.yaml
 [source,yaml]
 ----
+kind: AdminTool
 displayName: "My Admin Tool"
 description: "An admin tool"
 allow:
@@ -254,9 +256,10 @@ Widgets are now part of the Admin Extensions API. The `admin/widgets` directory 
 </widget>
 ----
 
-.XP 8 - admin/extensions/settings/settings.yml
+.XP 8 - admin/extensions/settings/settings.yaml
 [source,yaml]
 ----
+kind: AdminExtension
 displayName: "Settings"
 description: "Configure Projects"
 interfaces:
@@ -285,9 +288,10 @@ NOTE: Task descriptor forms do not support form-fragments.
 </task>
 ----
 
-.XP 8 - tasks/mytask/mytask.yml
+.XP 8 - tasks/mytask/mytask.yaml
 [source,yaml]
 ----
+kind: Task
 description: "Background job"
 form:
 - type: "Long"
@@ -318,9 +322,10 @@ ID Provider descriptors must be converted from XML to YAML.
 </id-provider>
 ----
 
-.XP 8 - idprovider/idprovider.yml
+.XP 8 - idprovider/idprovider.yaml
 [source,yaml]
 ----
+kind: IdProvider
 mode: "MIXED"
 form:
 - type: "TextLine"
@@ -333,7 +338,7 @@ form:
 
 === CMS Schema
 
-All XML descriptor files must now be converted to YAML (`.yml`) descriptor files. XML descriptors are no longer supported in XP 8.
+All XML descriptor files must now be converted to YAML (`.yaml`) descriptor files. XML descriptors are no longer supported in XP 8.
 
 TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate the conversion of XML descriptors to YAML.
 
@@ -341,8 +346,8 @@ TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate
 
 The `site.xml` descriptor has been split into two separate files in XP 8:
 
-* `site.yml` - contains processors, mappings, and apis
-* `cms.yml` - contains mixin references (previously x-data) and the site form configuration
+* `site.yaml` - contains processors, mappings, and apis
+* `cms.yaml` - contains mixin references (previously x-data) and the site form configuration
 
 Additionally, the `site` directory has been renamed to `cms`.
 
@@ -369,9 +374,10 @@ Additionally, the `site` directory has been renamed to `cms`.
 </site>
 ----
 
-.XP 8 - cms/site.yml
+.XP 8 - cms/site.yaml
 [source,yaml]
 ----
+kind: Site
 processors:
 - name: "filter1"
   order: 10
@@ -381,9 +387,10 @@ mappings:
   match: "type:'.*:person'"
 ----
 
-.XP 8 - cms/cms.yml
+.XP 8 - cms/cms.yaml
 [source,yaml]
 ----
+kind: CMS
 mixin:
 - name: "myapp:my-mixin"
   optional: false
@@ -412,9 +419,10 @@ form:
 </page>
 ----
 
-.XP 8 - cms/pages/main/main.yml
+.XP 8 - cms/pages/main/main.yaml
 [source,yaml]
 ----
+kind: Page
 displayName: "Main"
 description: "Contains a single main region"
 form: []
@@ -439,9 +447,10 @@ regions:
 </layout>
 ----
 
-.XP 8 - cms/layouts/2-column/2-column.yml
+.XP 8 - cms/layouts/2-column/2-column.yaml
 [source,yaml]
 ----
+kind: Layout
 displayName: "2 columns"
 description: "Provides left and right regions"
 form: []
@@ -468,9 +477,10 @@ regions:
 </part>
 ----
 
-.XP 8 - cms/parts/my-part/my-part.yml
+.XP 8 - cms/parts/my-part/my-part.yaml
 [source,yaml]
 ----
+kind: Part
 displayName: "My Part"
 description: "A simple part"
 form:
@@ -500,9 +510,10 @@ form:
 </content-type>
 ----
 
-.XP 8 - cms/content-types/article/article.yml
+.XP 8 - cms/content-types/article/article.yaml
 [source,yaml]
 ----
+kind: ContentType
 superType: "base:structured"
 displayName: "Article"
 form:
@@ -533,9 +544,10 @@ X-data has been renamed to Mixin in XP 8. The `x-data` directory should be renam
 </x-data>
 ----
 
-.XP 8 - cms/mixins/myattachment/myattachment.yml
+.XP 8 - cms/mixins/myattachment/myattachment.yaml
 [source,yaml]
 ----
+kind: Mixin
 displayName: "My Attachment"
 form:
 - type: "AttachmentUploader"
@@ -565,9 +577,10 @@ Mixins (XP 7) have been renamed to Form Fragments in XP 8. The `mixins` director
 </mixin>
 ----
 
-.XP 8 - cms/form-fragments/address/address.yml
+.XP 8 - cms/form-fragments/address/address.yaml
 [source,yaml]
 ----
+kind: FormFragment
 displayName: "Address"
 form:
 - type: "TextLine"
@@ -596,9 +609,10 @@ Macro descriptors must be converted from XML to YAML.
 </macro>
 ----
 
-.XP 8 - cms/macros/my-macro/my-macro.yml
+.XP 8 - cms/macros/my-macro/my-macro.yaml
 [source,yaml]
 ----
+kind: Macro
 displayName: "Current user"
 description: "Shows currently logged user"
 form:
@@ -735,11 +749,11 @@ src/
     resources/
       apis/
         coolservice/
-          coolservice.yml
+          coolservice.yaml
           coolservice.js
         myservice/
           myservice.js
-          myservice.yml
+          myservice.yaml
 ----
 
 .Old service.xml
@@ -752,9 +766,10 @@ src/
 </service>
 ----
 
-.New api.yml
+.New api.yaml
 [source,yaml]
 ----
+kind: API
 allow:
   - "role:system.admin"
 ----
@@ -764,6 +779,7 @@ In order for API to work on admin tool, site or webapp, it must be mounted via t
 .Example of mounting "coolservice" API in an admin tool
 [source,yaml]
 ----
+kind: AdminTool
 displayName: "My Admin Tool"
 allow:
   - "role:system.admin"
