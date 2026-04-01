@@ -450,9 +450,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#universal_api_api">Universal API (/api)</a></li>
 </ul>
 </li>
+<li><a href="#xp_admin_admin">XP Admin (/admin)</a></li>
 <li><a href="#site_engine_site">Site Engine (/site)</a></li>
 <li><a href="#webapp_engine_webapp">Webapp Engine (/webapp)</a></li>
-<li><a href="#admin_engine_admin">Admin Engine (/admin)</a></li>
 <li><a href="#id_provider_endpoints_idprovider">ID Provider Endpoints (/idprovider)</a></li>
 <li><a href="#management_api_port_4848">Management API (Port 4848)</a>
 <ul class="sectlevel2">
@@ -494,6 +494,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
+<h2 id="xp_admin_admin"><a class="link" href="#xp_admin_admin">XP Admin (/admin)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Admin Engine serves the admin console and the various admin tools (such as Content Studio). It handles requests to <code>/admin</code> and provides interfaces for managing the XP instance.</p>
+</div>
+<div class="paragraph">
+<p>TODO: Document admin engine endpoints and capabilities.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="site_engine_site"><a class="link" href="#site_engine_site">Site Engine (/site)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -509,17 +520,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Webapp Engine hosts web applications. It serves requests to <code>/webapp/&lt;appname:webapp&gt;</code> and routes them to the corresponding application.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="admin_engine_admin"><a class="link" href="#admin_engine_admin">Admin Engine (/admin)</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Admin Engine serves the admin console and tools. It handles requests to <code>/admin</code> and provides interfaces for managing the XP instance.</p>
-</div>
-<div class="paragraph">
-<p>TODO: Document admin engine endpoints and capabilities.</p>
 </div>
 </div>
 </div>
@@ -633,7 +633,7 @@ monitoring.port = 2609</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-01 10:11:46 UTC
+Last updated 2026-04-01 14:22:58 UTC
 </div>
 </div>
 </body>
