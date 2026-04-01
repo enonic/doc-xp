@@ -15,6 +15,13 @@ The Universal API is a new framework that allows any Enonic app to contribute it
 
 For detailed documentation, see <<apis/universal#,Universal API>>.
 
+== XP Admin (/admin)
+
+The Admin Engine serves the admin console and the various admin tools (such as Content Studio). It handles requests to `/admin` and provides interfaces for managing the XP instance.
+
+TODO: Document admin engine endpoints and capabilities.
+
+
 == Site Engine (/site)
 
 The Site Engine serves websites and content. It handles requests to `/site/<project>/<branch>/<path>` and renders content based on the site's configuration.
@@ -24,12 +31,6 @@ TODO: Document site engine endpoints and capabilities.
 == Webapp Engine (/webapp)
 
 The Webapp Engine hosts web applications. It serves requests to `/webapp/<appname:webapp>` and routes them to the corresponding application.
-
-== Admin Engine (/admin)
-
-The Admin Engine serves the admin console and tools. It handles requests to `/admin` and provides interfaces for managing the XP instance.
-
-TODO: Document admin engine endpoints and capabilities.
 
 
 == ID Provider Endpoints (/idprovider)
