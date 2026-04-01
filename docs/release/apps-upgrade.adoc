@@ -74,7 +74,7 @@ NOTE: Syntax for adding plugins to Gradle may have changed for your project, we 
 [source,groovy]
 ----
 plugins {
-    id 'com.enonic.xp.app' version '4.0.0-A3'
+    id 'com.enonic.xp.app'
 }
 
 repositories {
@@ -118,7 +118,7 @@ Below is a sample content of _build.gradle_ and _gradle.properties_ files for a 
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '4.0.0-A3'
+    id 'com.enonic.xp.base'
 }
 
 repositories {
