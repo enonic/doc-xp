@@ -800,7 +800,7 @@ test {
 <div class="sect2">
 <h3 id="application_descriptor"><a class="link" href="#application_descriptor">Application Descriptor</a></h3>
 <div class="paragraph">
-<p>The <code>application.xml</code> descriptor must be converted to <code>application.yml</code>.</p>
+<p>The <code>application.xml</code> descriptor must be converted to <code>application.yaml</code>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -824,16 +824,17 @@ Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to 
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - application.yml</div>
+<div class="title">XP 8 - application.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">description: "My app description"</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Application
+description: "My app description"</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="admin_api"><a class="link" href="#admin_api">Admin API</a></h3>
 <div class="paragraph">
-<p>All XML descriptor files must now be converted to YAML (<code>.yml</code>) descriptor files. XML descriptors are no longer supported in XP 8.</p>
+<p>All XML descriptor files must now be converted to YAML (<code>.yaml</code>) descriptor files. XML descriptors are no longer supported in XP 8.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -867,9 +868,10 @@ Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to 
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - admin/tools/main/main.yml</div>
+<div class="title">XP 8 - admin/tools/main/main.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "My Admin Tool"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: AdminTool
+displayName: "My Admin Tool"
 description: "An admin tool"
 allow:
 - "role:system.authenticated"</code></pre>
@@ -893,9 +895,10 @@ allow:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - admin/extensions/settings/settings.yml</div>
+<div class="title">XP 8 - admin/extensions/settings/settings.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "Settings"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: AdminExtension
+displayName: "Settings"
 description: "Configure Projects"
 interfaces:
 - "contentstudio.menuitem"</code></pre>
@@ -937,9 +940,10 @@ Task descriptor forms do not support form-fragments.
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - tasks/mytask/mytask.yml</div>
+<div class="title">XP 8 - tasks/mytask/mytask.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">description: "Background job"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Task
+description: "Background job"
 form:
 - type: "Long"
   name: "count"
@@ -972,9 +976,10 @@ form:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - idprovider/idprovider.yml</div>
+<div class="title">XP 8 - idprovider/idprovider.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">mode: "MIXED"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: IdProvider
+mode: "MIXED"
 form:
 - type: "TextLine"
   name: "appClientId"
@@ -988,7 +993,7 @@ form:
 <div class="sect2">
 <h3 id="cms_schema"><a class="link" href="#cms_schema">CMS Schema</a></h3>
 <div class="paragraph">
-<p>All XML descriptor files must now be converted to YAML (<code>.yml</code>) descriptor files. XML descriptors are no longer supported in XP 8.</p>
+<p>All XML descriptor files must now be converted to YAML (<code>.yaml</code>) descriptor files. XML descriptors are no longer supported in XP 8.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1010,10 +1015,10 @@ Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to 
 <div class="ulist">
 <ul>
 <li>
-<p><code>site.yml</code> - contains processors, mappings, and apis</p>
+<p><code>site.yaml</code> - contains processors, mappings, and apis</p>
 </li>
 <li>
-<p><code>cms.yml</code> - contains mixin references (previously x-data) and the site form configuration</p>
+<p><code>cms.yaml</code> - contains mixin references (previously x-data) and the site form configuration</p>
 </li>
 </ul>
 </div>
@@ -1044,9 +1049,10 @@ Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to 
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/site.yml</div>
+<div class="title">XP 8 - cms/site.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">processors:
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Site
+processors:
 - name: "filter1"
   order: 10
 mappings:
@@ -1056,9 +1062,10 @@ mappings:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/cms.yml</div>
+<div class="title">XP 8 - cms/cms.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">mixin:
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: CMS
+mixin:
 - name: "myapp:my-mixin"
   optional: false
 form:
@@ -1088,9 +1095,10 @@ form:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/pages/main/main.yml</div>
+<div class="title">XP 8 - cms/pages/main/main.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "Main"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Page
+displayName: "Main"
 description: "Contains a single main region"
 form: []
 regions:
@@ -1116,9 +1124,10 @@ regions:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/layouts/2-column/2-column.yml</div>
+<div class="title">XP 8 - cms/layouts/2-column/2-column.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "2 columns"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Layout
+displayName: "2 columns"
 description: "Provides left and right regions"
 form: []
 regions:
@@ -1146,9 +1155,10 @@ regions:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/parts/my-part/my-part.yml</div>
+<div class="title">XP 8 - cms/parts/my-part/my-part.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "My Part"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Part
+displayName: "My Part"
 description: "A simple part"
 form:
 - type: "TextLine"
@@ -1179,9 +1189,10 @@ form:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/content-types/article/article.yml</div>
+<div class="title">XP 8 - cms/content-types/article/article.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">superType: "base:structured"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: ContentType
+superType: "base:structured"
 displayName: "Article"
 form:
 - type: "TextLine"
@@ -1214,9 +1225,10 @@ form:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/mixins/myattachment/myattachment.yml</div>
+<div class="title">XP 8 - cms/mixins/myattachment/myattachment.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "My Attachment"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Mixin
+displayName: "My Attachment"
 form:
 - type: "AttachmentUploader"
   name: "myAttachment"
@@ -1248,9 +1260,10 @@ form:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/form-fragments/address/address.yml</div>
+<div class="title">XP 8 - cms/form-fragments/address/address.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "Address"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: FormFragment
+displayName: "Address"
 form:
 - type: "TextLine"
   name: "street"
@@ -1281,9 +1294,10 @@ form:
 </div>
 </div>
 <div class="listingblock">
-<div class="title">XP 8 - cms/macros/my-macro/my-macro.yml</div>
+<div class="title">XP 8 - cms/macros/my-macro/my-macro.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "Current user"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Macro
+displayName: "Current user"
 description: "Shows currently logged user"
 form:
 - type: "TextLine"
@@ -1436,11 +1450,11 @@ exports.all = function(req) {
     resources/
       apis/
         coolservice/
-          coolservice.yml
+          coolservice.yaml
           coolservice.js
         myservice/
           myservice.js
-          myservice.yml</code></pre>
+          myservice.yaml</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1454,9 +1468,10 @@ exports.all = function(req) {
 </div>
 </div>
 <div class="listingblock">
-<div class="title">New api.yml</div>
+<div class="title">New api.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">allow:
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: API
+allow:
   - "role:system.admin"</code></pre>
 </div>
 </div>
@@ -1466,7 +1481,8 @@ exports.all = function(req) {
 <div class="listingblock">
 <div class="title">Example of mounting "coolservice" API in an admin tool</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">displayName: "My Admin Tool"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: AdminTool
+displayName: "My Admin Tool"
 allow:
   - "role:system.admin"
 apis:
@@ -1795,7 +1811,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-01 09:46:26 UTC
+Last updated 2026-04-01 09:51:48 UTC
 </div>
 </div>
 </body>
