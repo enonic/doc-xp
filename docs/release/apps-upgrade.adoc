@@ -58,6 +58,16 @@ If you are upgrading *an application*, you need to use a version greater or equa
 This plugin no longer requires the `app {}` section in _build.gradle_ — developers only need to specify `appName` and `xpVersion` in _gradle.properties_. Although it is still possible to use `app {}` section. Read more about it in the plugin documentation.
 Application properties such as `displayName`, `url`, `vendorName` and `vendorUrl` must be moved to _src/main/resources/application.yaml_ (note: `displayName` is now called `title` in _application.yaml_).
 
+NOTE: For the plugin to work, you must add the following to your _settings.gradle_:
+
+.settings.gradle sample
+[source,groovy]
+----
+plugins {
+    id("com.enonic.xp.settings") version "4.0.0-A3"
+}
+----
+
 NOTE: Syntax for adding plugins to Gradle may have changed for your project, we recommend the following updates to your build files:
 
 .build.gradle sample
@@ -90,17 +100,12 @@ projectName = myproject
 version = 1.0.0-SNAPSHOT
 
 # XP App values
-appDisplayName = My Cool App
 appName = com.acme.something.myproject
-vendorName = Acme Inc
-vendorUrl = https://example.com
 xpVersion = 8.0.0-SNAPSHOT #TODO 'dev' is only while XP 8.0 is in development
 
-# Settings for publishing to a Maven repo
-group = com.acme.something
 ----
 
-NOTE: `appName` and `appDisplayName` are only used for application projects, as well as `app` config in `build.gradle`
+NOTE: `appName` is only used for application projects, as well as `app` config in `build.gradle`
 
 ==== Library upgrade
 
@@ -113,7 +118,7 @@ Below is a sample content of _build.gradle_ and _gradle.properties_ files for a 
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '4.0.0-A2'
+    id 'com.enonic.xp.base' version '4.0.0-A3'
 }
 
 repositories {
