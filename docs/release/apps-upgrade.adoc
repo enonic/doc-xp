@@ -913,6 +913,10 @@ XP 8
 import {deleteJob} from '/lib/xp/scheduler';
 ----
 
+=== lib-cluster
+
+`isMaster` method is deprecated. Use `isLeader` instead.
+
 === lib-i18n
 
 `localize` method no longer accepts `application` parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.
