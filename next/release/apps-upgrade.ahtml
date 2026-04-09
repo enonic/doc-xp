@@ -450,14 +450,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#verify">Verify</a></li>
 </ul>
 </li>
-<li><a href="#default_context">Default context</a></li>
 <li><a href="#jdk">JDK</a></li>
 <li><a href="#testing_api">Testing API</a></li>
 <li><a href="#api_deprecations_and_breaking_changes">API Deprecations and Breaking Changes</a>
 <ul class="sectlevel2">
+<li><a href="#default_context">Default context</a></li>
 <li><a href="#application_descriptor">Application Descriptor</a></li>
 <li><a href="#admin_api">Admin API</a></li>
 <li><a href="#admin_tool">Admin Tool</a></li>
+<li><a href="#script_globals">Script Globals</a></li>
 <li><a href="#task">Task</a></li>
 <li><a href="#id_provider">ID Provider</a></li>
 <li><a href="#cms_schema">CMS Schema</a></li>
@@ -753,14 +754,6 @@ Projects containing Java code might get build errors at this point, otherwise th
 </div>
 </div>
 <div class="sect1">
-<h2 id="default_context"><a class="link" href="#default_context">Default context</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In XP 8 context repository and branch may return null if they are not set. This is a default behavior. Previously the default context was set with <code>com.enonic.cms.default</code> repository and <code>draft</code> branch.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="jdk"><a class="link" href="#jdk">JDK</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -797,6 +790,12 @@ test {
 <div class="sect1">
 <h2 id="api_deprecations_and_breaking_changes"><a class="link" href="#api_deprecations_and_breaking_changes">API Deprecations and Breaking Changes</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="default_context"><a class="link" href="#default_context">Default context</a></h3>
+<div class="paragraph">
+<p>In XP 8 context repository and branch may return null if they are not set. This is a default behavior. Previously the default context was set with <code>com.enonic.cms.default</code> repository and <code>draft</code> branch.</p>
+</div>
+</div>
 <div class="sect2">
 <h3 id="application_descriptor"><a class="link" href="#application_descriptor">Application Descriptor</a></h3>
 <div class="paragraph">
@@ -904,6 +903,12 @@ interfaces:
 - "contentstudio.menuitem"</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="script_globals"><a class="link" href="#script_globals">Script Globals</a></h3>
+<div class="paragraph">
+<p><code>resolve</code> function no longer uses <code>src/main/resources/site</code> as its first root folder. Only <code>src/main/resources</code> is used as the root. If your scripts relied on resolving paths relative to the <code>site</code> folder, update them to use full paths from the resources root.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1671,6 +1676,9 @@ Use <code>lib-asset</code> instead.</p>
 <div class="paragraph">
 <p><code>localize</code> method no longer accepts <code>application</code> parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.</p>
 </div>
+<div class="paragraph">
+<p>Methods no longer use the undocumented <code>/site/i18n/phrases</code> bundle location by default. Only the standard <code>/i18n/phrases</code> location is used. If your application relied on <code>/site/i18n/phrases</code>, move the files to <code>/i18n/phrases</code> or use your own custom bundle location.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="lib_task"><a class="link" href="#lib_task">lib-task</a></h3>
@@ -1811,7 +1819,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-01 14:22:58 UTC
+Last updated 2026-04-09 06:39:19 UTC
 </div>
 </div>
 </body>
