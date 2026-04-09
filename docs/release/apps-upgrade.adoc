@@ -153,11 +153,6 @@ You may also use `enonic project build` to build without deploying
 
 NOTE: Projects containing Java code might get build errors at this point, otherwise the build should complete successfully.
 
-
-== Default context
-
-In XP 8 context repository and branch may return null if they are not set. This is a default behavior. Previously the default context was set with `com.enonic.cms.default` repository and `draft` branch.
-
 == JDK
 
 Java 25 is required for XP 8.0.0
@@ -184,6 +179,10 @@ test {
 Junit 4 is not supported in XP 8.0.0
 
 == API Deprecations and Breaking Changes
+
+=== Default context
+
+In XP 8 context repository and branch may return null if they are not set. This is a default behavior. Previously the default context was set with `com.enonic.cms.default` repository and `draft` branch.
 
 === Application Descriptor
 
@@ -265,6 +264,11 @@ description: "Configure Projects"
 interfaces:
 - "contentstudio.menuitem"
 ----
+
+=== Script Globals
+
+`resolve` function no longer uses `src/main/resources/site` as its first root folder. Only `src/main/resources` is used as the root. If your scripts relied on resolving paths relative to the `site` folder, update them to use full paths from the resources root.
+
 
 === Task
 
@@ -912,6 +916,8 @@ import {deleteJob} from '/lib/xp/scheduler';
 === lib-i18n
 
 `localize` method no longer accepts `application` parameter -  because application load order is not guaranteed, trying to load foreign application localization might fail. Required localize phrases should be copied over the applications instead.
+
+Methods no longer use the undocumented `/site/i18n/phrases` bundle location by default. Only the standard `/i18n/phrases` location is used. If your application relied on `/site/i18n/phrases`, move the files to `/i18n/phrases` or use your own custom bundle location.
 
 === lib-task
 
