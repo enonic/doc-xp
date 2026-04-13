@@ -265,6 +265,19 @@ interfaces:
 - "contentstudio.menuitem"
 ----
 
+NOTE: Unlike the `widgets` API in XP 7, the `admin:extension` API is not automatically mounted on admin tools. It must be explicitly mounted in the admin tool descriptor in order for extensions to work.
+
+.Example of mounting `admin:extension` API in an admin tool
+[source,yaml]
+----
+kind: AdminTool
+displayName: "My Admin Tool"
+allow:
+- "role:system.admin"
+apis:
+- "admin:extension"
+----
+
 === Script Globals
 
 `resolve` function no longer uses `src/main/resources/site` as its first root folder. Only `src/main/resources` is used as the root. If your scripts relied on resolving paths relative to the `site` folder, update them to use full paths from the resources root.
@@ -778,7 +791,9 @@ allow:
   - "role:system.admin"
 ----
 
-In order for API to work on admin tool, site or webapp, it must be mounted via the descriptor.
+Use `portal.apiUrl()` instead of `portal.serviceUrl()` to generate URLs pointing to APIs.
+
+NOTE: Unlike services, APIs are not automatically mounted on admin tools web-apps and sites. They must be explicitly mounted via the descriptor.
 
 .Example of mounting "coolservice" API in an admin tool
 [source,yaml]
