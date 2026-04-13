@@ -904,6 +904,29 @@ interfaces:
 - "contentstudio.menuitem"</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Unlike the <code>widgets</code> API in XP 7, the <code>admin:extension</code> API is not automatically mounted on admin tools. It must be explicitly mounted in the admin tool descriptor in order for extensions to work.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Example of mounting <code>admin:extension</code> API in an admin tool</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: AdminTool
+displayName: "My Admin Tool"
+allow:
+- "role:system.admin"
+apis:
+- "admin:extension"</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1482,7 +1505,19 @@ allow:
 </div>
 </div>
 <div class="paragraph">
-<p>In order for API to work on admin tool, site or webapp, it must be mounted via the descriptor.</p>
+<p>Use <code>portal.apiUrl()</code> instead of <code>portal.serviceUrl()</code> to generate URLs pointing to APIs.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Unlike services, APIs are not automatically mounted on admin tools web-apps and sites. They must be explicitly mounted via the descriptor.
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="title">Example of mounting "coolservice" API in an admin tool</div>
@@ -1826,7 +1861,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-09 07:44:29 UTC
+Last updated 2026-04-13 05:45:56 UTC
 </div>
 </div>
 </body>
