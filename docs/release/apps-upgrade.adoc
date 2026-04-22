@@ -202,7 +202,7 @@ TIP: Use the https://github.com/enonic/xp8migrator[xp8migrator] tool to automate
 .XP 8 - application.yaml
 [source,yaml]
 ----
-kind: Application
+kind: "Application"
 description: "My app description"
 ----
 
@@ -232,8 +232,8 @@ Admin Tool descriptors must be converted from XML to YAML.
 .XP 8 - admin/tools/main/main.yaml
 [source,yaml]
 ----
-kind: AdminTool
-displayName: "My Admin Tool"
+kind: "AdminTool"
+title: "My Admin Tool"
 description: "An admin tool"
 allow:
 - "role:system.authenticated"
@@ -258,8 +258,8 @@ Widgets are now part of the Admin Extensions API. The `admin/widgets` directory 
 .XP 8 - admin/extensions/settings/settings.yaml
 [source,yaml]
 ----
-kind: AdminExtension
-displayName: "Settings"
+kind: "AdminExtension"
+title: "Settings"
 description: "Configure Projects"
 interfaces:
 - "contentstudio.menuitem"
@@ -270,8 +270,8 @@ NOTE: Unlike the `widgets` API in XP 7, the `admin:extension` API is not automat
 .Example of mounting `admin:extension` API in an admin tool
 [source,yaml]
 ----
-kind: AdminTool
-displayName: "My Admin Tool"
+kind: "AdminTool"
+title: "My Admin Tool"
 allow:
 - "role:system.admin"
 apis:
@@ -308,7 +308,7 @@ NOTE: Task descriptor forms do not support form-fragments.
 .XP 8 - tasks/mytask/mytask.yaml
 [source,yaml]
 ----
-kind: Task
+kind: "Task"
 description: "Background job"
 form:
 - type: "Long"
@@ -342,7 +342,7 @@ ID Provider descriptors must be converted from XML to YAML.
 .XP 8 - idprovider/idprovider.yaml
 [source,yaml]
 ----
-kind: IdProvider
+kind: "IdProvider"
 mode: "MIXED"
 form:
 - type: "TextLine"
@@ -394,7 +394,7 @@ Additionally, the `site` directory has been renamed to `cms`.
 .XP 8 - cms/site.yaml
 [source,yaml]
 ----
-kind: Site
+kind: "Site"
 processors:
 - name: "filter1"
   order: 10
@@ -402,12 +402,15 @@ mappings:
 - controller: "/controllers/preview.js"
   order: 50
   match: "type:'.*:person'"
+apis:
+ - "apiname" # belongs to the current application
+ - "com.enonic.app.myapp:apiname"
 ----
 
 .XP 8 - cms/cms.yaml
 [source,yaml]
 ----
-kind: CMS
+kind: "CMS"
 mixin:
 - name: "myapp:my-mixin"
   optional: false
@@ -439,8 +442,8 @@ form:
 .XP 8 - cms/pages/main/main.yaml
 [source,yaml]
 ----
-kind: Page
-displayName: "Main"
+kind: "Page"
+title: "Main"
 description: "Contains a single main region"
 form: []
 regions:
@@ -467,8 +470,8 @@ regions:
 .XP 8 - cms/layouts/2-column/2-column.yaml
 [source,yaml]
 ----
-kind: Layout
-displayName: "2 columns"
+kind: "Layout"
+title: "2 columns"
 description: "Provides left and right regions"
 form: []
 regions:
@@ -497,8 +500,8 @@ regions:
 .XP 8 - cms/parts/my-part/my-part.yaml
 [source,yaml]
 ----
-kind: Part
-displayName: "My Part"
+kind: "Part"
+title: "My Part"
 description: "A simple part"
 form:
 - type: "TextLine"
@@ -530,9 +533,9 @@ form:
 .XP 8 - cms/content-types/article/article.yaml
 [source,yaml]
 ----
-kind: ContentType
+kind: "ContentType"
 superType: "base:structured"
-displayName: "Article"
+title: "Article"
 form:
 - type: "TextLine"
   name: "title"
@@ -564,8 +567,8 @@ X-data has been renamed to Mixin in XP 8. The `x-data` directory should be renam
 .XP 8 - cms/mixins/myattachment/myattachment.yaml
 [source,yaml]
 ----
-kind: Mixin
-displayName: "My Attachment"
+kind: "Mixin"
+title: "My Attachment"
 form:
 - type: "AttachmentUploader"
   name: "myAttachment"
@@ -597,8 +600,8 @@ Mixins (XP 7) have been renamed to Form Fragments in XP 8. The `mixins` director
 .XP 8 - cms/form-fragments/address/address.yaml
 [source,yaml]
 ----
-kind: FormFragment
-displayName: "Address"
+kind: "FormFragment"
+title: "Address"
 form:
 - type: "TextLine"
   name: "street"
@@ -629,8 +632,8 @@ Macro descriptors must be converted from XML to YAML.
 .XP 8 - cms/macros/my-macro/my-macro.yaml
 [source,yaml]
 ----
-kind: Macro
-displayName: "Current user"
+kind: "Macro"
+title: "Current user"
 description: "Shows currently logged user"
 form:
 - type: "TextLine"
@@ -643,7 +646,45 @@ form:
 
 ==== Styles
 
-// TODO. Waiting for implementation details
+Style descriptor must be converted from XML to YAML.
+
+.XP7 - site/styles.xml
+[source,xml]
+----
+<styles css="styles/styles.css" xmlns="urn:enonic:xp:model:1.0">
+  <image name="editor-image-skyscraper">
+    <display-name>Skyscraper (9:21)</display-name>
+    <aspect-ratio>9:21</aspect-ratio>
+  </image>
+  <image name="editor-image-sepia">
+    <display-name>Old photo</display-name>
+    <filter>sepia(25)</filter>
+  </image>
+</styles>
+----
+
+.XP 8 - cms/style/style.yaml
+[source,yaml]
+----
+kind: "Style"
+styles:
+  - name: "editor-image-skyscraper"
+    type: "Image"
+    label: "Skyscraper (9:21)"
+    aspectRatio: "9:21"
+    editor:
+      css: |
+        <Here you should specify the CSS selectors for this style from the styles/styles.css file.>
+  - name: "editor-image-sepia"
+    type: "Image"
+    label: "Old photo"
+    filter: "sepia(25)"
+    editor:
+      css: |
+        <Here you should specify the CSS selectors for this style from the styles/styles.css file.>
+----
+
+The `styles/styles.css` file must be removed.
 
 ==== DateTime and Instant input types
 
@@ -786,7 +827,7 @@ src/
 .New api.yaml
 [source,yaml]
 ----
-kind: API
+kind: "API"
 allow:
   - "role:system.admin"
 ----
@@ -798,8 +839,8 @@ NOTE: Unlike services, APIs are not automatically mounted on admin tools web-app
 .Example of mounting "coolservice" API in an admin tool
 [source,yaml]
 ----
-kind: AdminTool
-displayName: "My Admin Tool"
+kind: "AdminTool"
+title: "My Admin Tool"
 allow:
   - "role:system.admin"
 apis:
