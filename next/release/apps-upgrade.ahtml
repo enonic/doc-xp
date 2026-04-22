@@ -826,7 +826,7 @@ Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to 
 <div class="listingblock">
 <div class="title">XP 8 - application.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Application
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Application"
 description: "My app description"</code></pre>
 </div>
 </div>
@@ -870,8 +870,8 @@ Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to 
 <div class="listingblock">
 <div class="title">XP 8 - admin/tools/main/main.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: AdminTool
-displayName: "My Admin Tool"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "AdminTool"
+title: "My Admin Tool"
 description: "An admin tool"
 allow:
 - "role:system.authenticated"</code></pre>
@@ -897,8 +897,8 @@ allow:
 <div class="listingblock">
 <div class="title">XP 8 - admin/extensions/settings/settings.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: AdminExtension
-displayName: "Settings"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "AdminExtension"
+title: "Settings"
 description: "Configure Projects"
 interfaces:
 - "contentstudio.menuitem"</code></pre>
@@ -919,8 +919,8 @@ Unlike the <code>widgets</code> API in XP 7, the <code>admin:extension</code> AP
 <div class="listingblock">
 <div class="title">Example of mounting <code>admin:extension</code> API in an admin tool</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: AdminTool
-displayName: "My Admin Tool"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "AdminTool"
+title: "My Admin Tool"
 allow:
 - "role:system.admin"
 apis:
@@ -971,7 +971,7 @@ Task descriptor forms do not support form-fragments.
 <div class="listingblock">
 <div class="title">XP 8 - tasks/mytask/mytask.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Task
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Task"
 description: "Background job"
 form:
 - type: "Long"
@@ -1007,7 +1007,7 @@ form:
 <div class="listingblock">
 <div class="title">XP 8 - idprovider/idprovider.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: IdProvider
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "IdProvider"
 mode: "MIXED"
 form:
 - type: "TextLine"
@@ -1080,20 +1080,23 @@ Use the <a href="https://github.com/enonic/xp8migrator">xp8migrator</a> tool to 
 <div class="listingblock">
 <div class="title">XP 8 - cms/site.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Site
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Site"
 processors:
 - name: "filter1"
   order: 10
 mappings:
 - controller: "/controllers/preview.js"
   order: 50
-  match: "type:'.*:person'"</code></pre>
+  match: "type:'.*:person'"
+apis:
+ - "apiname" # belongs to the current application
+ - "com.enonic.app.myapp:apiname"</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">XP 8 - cms/cms.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: CMS
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "CMS"
 mixin:
 - name: "myapp:my-mixin"
   optional: false
@@ -1126,8 +1129,8 @@ form:
 <div class="listingblock">
 <div class="title">XP 8 - cms/pages/main/main.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Page
-displayName: "Main"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Page"
+title: "Main"
 description: "Contains a single main region"
 form: []
 regions:
@@ -1155,8 +1158,8 @@ regions:
 <div class="listingblock">
 <div class="title">XP 8 - cms/layouts/2-column/2-column.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Layout
-displayName: "2 columns"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Layout"
+title: "2 columns"
 description: "Provides left and right regions"
 form: []
 regions:
@@ -1186,8 +1189,8 @@ regions:
 <div class="listingblock">
 <div class="title">XP 8 - cms/parts/my-part/my-part.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Part
-displayName: "My Part"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Part"
+title: "My Part"
 description: "A simple part"
 form:
 - type: "TextLine"
@@ -1220,9 +1223,9 @@ form:
 <div class="listingblock">
 <div class="title">XP 8 - cms/content-types/article/article.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: ContentType
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 superType: "base:structured"
-displayName: "Article"
+title: "Article"
 form:
 - type: "TextLine"
   name: "title"
@@ -1256,8 +1259,8 @@ form:
 <div class="listingblock">
 <div class="title">XP 8 - cms/mixins/myattachment/myattachment.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Mixin
-displayName: "My Attachment"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Mixin"
+title: "My Attachment"
 form:
 - type: "AttachmentUploader"
   name: "myAttachment"
@@ -1291,8 +1294,8 @@ form:
 <div class="listingblock">
 <div class="title">XP 8 - cms/form-fragments/address/address.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: FormFragment
-displayName: "Address"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "FormFragment"
+title: "Address"
 form:
 - type: "TextLine"
   name: "street"
@@ -1325,8 +1328,8 @@ form:
 <div class="listingblock">
 <div class="title">XP 8 - cms/macros/my-macro/my-macro.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: Macro
-displayName: "Current user"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Macro"
+title: "Current user"
 description: "Shows currently logged user"
 form:
 - type: "TextLine"
@@ -1340,7 +1343,48 @@ form:
 </div>
 <div class="sect3">
 <h4 id="styles"><a class="link" href="#styles">Styles</a></h4>
-
+<div class="paragraph">
+<p>Style descriptor must be converted from XML to YAML.</p>
+</div>
+<div class="listingblock">
+<div class="title">XP7 - site/styles.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;styles css="styles/styles.css" xmlns="urn:enonic:xp:model:1.0"&gt;
+  &lt;image name="editor-image-skyscraper"&gt;
+    &lt;display-name&gt;Skyscraper (9:21)&lt;/display-name&gt;
+    &lt;aspect-ratio&gt;9:21&lt;/aspect-ratio&gt;
+  &lt;/image&gt;
+  &lt;image name="editor-image-sepia"&gt;
+    &lt;display-name&gt;Old photo&lt;/display-name&gt;
+    &lt;filter&gt;sepia(25)&lt;/filter&gt;
+  &lt;/image&gt;
+&lt;/styles&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">XP 8 - cms/style/style.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Style"
+styles:
+  - name: "editor-image-skyscraper"
+    type: "Image"
+    label: "Skyscraper (9:21)"
+    aspectRatio: "9:21"
+    editor:
+      css: |
+        &lt;Here you should specify the CSS selectors for this style from the styles/styles.css file.&gt;
+  - name: "editor-image-sepia"
+    type: "Image"
+    label: "Old photo"
+    filter: "sepia(25)"
+    editor:
+      css: |
+        &lt;Here you should specify the CSS selectors for this style from the styles/styles.css file.&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>styles/styles.css</code> file must be removed.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="datetime_and_instant_input_types"><a class="link" href="#datetime_and_instant_input_types">DateTime and Instant input types</a></h4>
@@ -1499,7 +1543,7 @@ exports.all = function(req) {
 <div class="listingblock">
 <div class="title">New api.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: API
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "API"
 allow:
   - "role:system.admin"</code></pre>
 </div>
@@ -1522,8 +1566,8 @@ Unlike services, APIs are not automatically mounted on admin tools web-apps and 
 <div class="listingblock">
 <div class="title">Example of mounting "coolservice" API in an admin tool</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: AdminTool
-displayName: "My Admin Tool"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "AdminTool"
+title: "My Admin Tool"
 allow:
   - "role:system.admin"
 apis:
@@ -1861,7 +1905,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-13 05:45:56 UTC
+Last updated 2026-04-22 11:02:04 UTC
 </div>
 </div>
 </body>
