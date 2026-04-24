@@ -107,6 +107,8 @@ xpVersion = 8.0.0-SNAPSHOT #TODO 'dev' is only while XP 8.0 is in development
 
 NOTE: `appName` is only used for application projects, as well as `app` config in `build.gradle`
 
+NOTE: The default `dev` task is now registered automatically by the plugin. If your project defines its own `dev` task, either remove it to use the default, or set `createDefaultDevTask = false` in the `app {}` section to keep your custom task.
+
 ==== Library upgrade
 
 If you are upgrading *a library*, you don't need to use _com.enonic.xp.app_ plugin or have `app {}` section in _build.gradle_.
