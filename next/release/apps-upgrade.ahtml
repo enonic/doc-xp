@@ -679,6 +679,18 @@ xpVersion = 8.0.0-SNAPSHOT #TODO 'dev' is only while XP 8.0 is in development</c
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The default <code>dev</code> task is now registered automatically by the plugin. If your project defines its own <code>dev</code> task, either remove it to use the default, or set <code>createDefaultDevTask = false</code> in the <code>app {}</code> section to keep your custom task.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="library_upgrade"><a class="link" href="#library_upgrade">Library upgrade</a></h4>
@@ -1905,7 +1917,7 @@ Folder-based exports from XP 7 should be converted to a ZIP archive before they 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-22 11:02:04 UTC
+Last updated 2026-04-24 20:04:46 UTC
 </div>
 </div>
 </body>
