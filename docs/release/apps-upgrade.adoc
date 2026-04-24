@@ -269,6 +269,8 @@ interfaces:
 
 NOTE: Unlike the `widgets` API in XP 7, the `admin:extension` API is not automatically mounted on admin tools. It must be explicitly mounted in the admin tool descriptor in order for extensions to work.
 
+WARNING: In admin extensions, use `lib-static` instead of `lib-asset`. Both `lib-asset` and admin extensions are implemented as Universal APIs, so serving assets from an extension via `lib-asset` will not work without additional configuration. `lib-static` + is designed specifically for serving static files from admin extensions and does not require any additional configuration.
+
 .Example of mounting `admin:extension` API in an admin tool
 [source,yaml]
 ----
