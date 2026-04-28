@@ -1,8 +1,14 @@
-= Upgrading
+= Upgrading to XP8
 :toc: right
 :imagesdir: images
 
 This procedure applies to feature (8.x.0) and fix upgrades (8.x.y, etc).
+
+== Preparations
+
+Before you start the upgrade process, make sure to read through the entire documentation and understand the steps involved. You should always perform a test upgrade in a staging environment before applying the changes to production.
+
+
 
 == Non-cluster upgrade
 Single node deployments cannot be performed without downtime. To upgrade a single instance deployment, follow the instructions below:
@@ -61,7 +67,10 @@ QA environment:: Ensure you have a QA environment where you can perform a test u
 Enonic CLI:: Make sure you have the latest version of https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
 Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
 3rd party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 8.
-Custom apps:: Make sure all custom built applications have been upgraded to support XP 8, as described in <<apps-upgrade#,Upgrading Applications>>
+Custom apps:: Make sure all custom built applications have been upgraded to support XP 8
+
+NOTE: To upgrade your custom Enonic apps, follow the https://developer.enonic.com/docs/code/stable/upgrade[application upgrade instructions] in the Enonic Dev kit documentation.
+
 
 === Breaking changes
 
