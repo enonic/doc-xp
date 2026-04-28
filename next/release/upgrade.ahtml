@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Upgrading</title>
+<title>Upgrading to XP8</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,10 +437,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Upgrading</h1>
+<h1>Upgrading to XP8</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#preparations">Preparations</a></li>
 <li><a href="#non_cluster_upgrade">Non-cluster upgrade</a></li>
 <li><a href="#rolling_cluster_upgrade">Rolling Cluster upgrade</a></li>
 <li><a href="#full_restart_cluster_upgrade">Full restart Cluster upgrade</a></li>
@@ -466,6 +467,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>This procedure applies to feature (8.x.0) and fix upgrades (8.x.y, etc).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="preparations"><a class="link" href="#preparations">Preparations</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before you start the upgrade process, make sure to read through the entire documentation and understand the steps involved. You should always perform a test upgrade in a staging environment before applying the changes to production.</p>
 </div>
 </div>
 </div>
@@ -635,9 +644,21 @@ For scenarios where downtime cannot be avoided, additional steps, such as settin
 </dd>
 <dt class="hdlist1">Custom apps</dt>
 <dd>
-<p>Make sure all custom built applications have been upgraded to support XP 8, as described in <a href="apps-upgrade.ahtml">Upgrading Applications</a></p>
+<p>Make sure all custom built applications have been upgraded to support XP 8</p>
 </dd>
 </dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To upgrade your custom Enonic apps, follow the <a href="https://developer.enonic.com/docs/code/stable/upgrade">application upgrade instructions</a> in the Enonic Dev kit documentation.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -954,7 +975,7 @@ Don&#8217;t worry about the CLI losing connection, this is only related to the s
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-24 20:12:10 UTC
+Last updated 2026-04-28 15:08:13 UTC
 </div>
 </div>
 </body>
