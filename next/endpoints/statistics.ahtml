@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Universal API</title>
+<title>Statistics API (Port 2609)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,58 +437,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Universal API</h1>
+<h1>Statistics API (Port 2609)</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#key_features">Key Features</a>
-<ul class="sectlevel2">
-<li><a href="#customized_exposure">Customized exposure</a></li>
-<li><a href="#api_discovery">API Discovery</a></li>
-<li><a href="#dynamic_extension">Dynamic Extension</a></li>
-<li><a href="#protocol_agnostic">Protocol Agnostic</a></li>
-<li><a href="#integrated_security">Integrated Security</a></li>
-</ul>
-</li>
-<li><a href="#architecture">Architecture</a>
-<ul class="sectlevel2">
-<li><a href="#api_registry">API Registry</a></li>
-<li><a href="#iam_integration">IAM Integration</a></li>
-<li><a href="#routing">Routing</a></li>
-</ul>
-</li>
-<li><a href="#getting_started">Getting Started</a>
-<ul class="sectlevel2">
-<li><a href="#accessing_apis">Accessing APIs</a></li>
-<li><a href="#example_graphql_api">Example: GraphQL API</a></li>
-<li><a href="#example_rest_api">Example: REST API</a></li>
-<li><a href="#authentication">Authentication</a></li>
-<li><a href="#graphql_example">GraphQL Example</a></li>
-<li><a href="#rest_api_example">REST API Example</a></li>
-<li><a href="#discovering_available_apis">Discovering Available APIs</a></li>
-</ul>
-</li>
-<li><a href="#use_cases">Use Cases</a>
-<ul class="sectlevel2">
-<li><a href="#headless_cms">Headless CMS</a></li>
-<li><a href="#integration_platform">Integration Platform</a></li>
-<li><a href="#custom_applications">Custom Applications</a></li>
-</ul>
-</li>
-<li><a href="#security">Security</a>
-<ul class="sectlevel2">
-<li><a href="#authentication_2">Authentication</a></li>
-<li><a href="#authorization">Authorization</a></li>
-<li><a href="#audit_logging">Audit Logging</a></li>
+<li><a href="#access">Access</a></li>
 <li><a href="#monitoring">Monitoring</a></li>
-</ul>
-</li>
-<li><a href="#best_practices">Best Practices</a>
+<li><a href="#cluster_monitoring">Cluster monitoring</a>
 <ul class="sectlevel2">
-<li><a href="#error_handling">Error Handling</a></li>
-<li><a href="#security_2">Security</a></li>
-<li><a href="#versioning">Versioning</a></li>
+<li><a href="#cluster_health">Cluster health</a></li>
+<li><a href="#elasticsearch_cluster_health">ElasticSearch cluster health</a></li>
+<li><a href="#index_stats">Index stats</a></li>
+<li><a href="#hazelcast_cluster_health">Hazelcast cluster health</a></li>
+<li><a href="#health_check">Health check</a></li>
+<li><a href="#readiness_check">Readiness check</a></li>
 </ul>
 </li>
 </ul>
@@ -498,569 +460,453 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>One API to rule them all - dynamically extensible with Enonic apps.</p>
-</div>
-<div class="paragraph">
-<p>Universal API&#8217;s can be mounted to the default endpoint on <code>8080/api</code>, i.e. <code>localhost:8080/api</code> if you&#8217;re running XP locally, however APIs can also be contextually mounted across other XP services via the <code><em></code> path, such as <code>/site/&lt;project&gt;/&lt;branch&gt;/</em>/&lt;appname&gt;:&lt;apiname&gt;</code>.</p>
+<p>The Statistics API exposes real-time metrics and monitoring data about the XP instance. It is commonly used for health checks, performance monitoring, and capacity planning.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<h2 id="access"><a class="link" href="#access">Access</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Universal API is a new concept introduced in Enonic XP8, inspired by the Kubernetes API model. It enables applications to dynamically extend the platform&#8217;s API surface as they are installed.</p>
+<p>The Statistics API is intended for internal monitoring and is exposed without authentication on port 2609. Do not expose it publicly.</p>
 </div>
-<div class="paragraph">
-<p>Rather than being a monolithic API, Universal API is a framework that allows any Enonic app to contribute their own APIs - whether GraphQL, REST, or any other protocol. All contributed APIs automatically integrate with XP&#8217;s built-in IAM and security model, providing consistent authentication and authorization across the platform.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="../config/vhosts.ahtml">Vhost</a> configuration only applies to the web endpoint (port 8080) and does not affect the Statistics API.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="key_features"><a class="link" href="#key_features">Key Features</a></h2>
+<h2 id="monitoring"><a class="link" href="#monitoring">Monitoring</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="customized_exposure"><a class="link" href="#customized_exposure">Customized exposure</a></h3>
 <div class="paragraph">
-<p>TODO: Expose and secure with vhosts</p>
+<p>For operational purposes, Enonic XP provide advanced metrics for monitoring which are easily accessed. To access the monitoring JSON feed you can point to the following url:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/</pre>
 </div>
 </div>
-<div class="sect2">
-<h3 id="api_discovery"><a class="link" href="#api_discovery">API Discovery</a></h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>&lt;host&gt;</code> equals <code>localhost</code> on the machine with running enonic XP instance
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>The hallmark feature of Universal API is the ability to browse and discover all installed APIs:</p>
+<p>This will give you a list of status-reporters. Each reporter has a name and can be accessed using the following pattern:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Dynamic registration</strong> - APIs are automatically registered as apps are installed</p>
-</li>
-<li>
-<p><strong>Runtime discovery</strong> - Query the platform to see what APIs are available</p>
-</li>
-<li>
-<p><strong>Self-documentation</strong> - Each API can provide its own documentation and schema</p>
-</li>
-<li>
-<p><strong>Version management</strong> - Multiple versions of the same API can coexist</p>
-</li>
-</ul>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/&lt;name&gt;</pre>
 </div>
 </div>
-<div class="sect2">
-<h3 id="dynamic_extension"><a class="link" href="#dynamic_extension">Dynamic Extension</a></h3>
 <div class="paragraph">
-<p>Following the Kubernetes model, the API surface grows with your application ecosystem:</p>
+<p>Here’s a list of all the status pages and what is shows:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>App-contributed APIs</strong> - Any Enonic app can contribute one or more APIs</p>
-</li>
-<li>
-<p><strong>Automatic integration</strong> - New APIs become available immediately upon app installation</p>
-</li>
-<li>
-<p><strong>No platform updates required</strong> - Extend capabilities without modifying XP core</p>
-</li>
-<li>
-<p><strong>Decentralized development</strong> - Third-party developers can create and distribute APIs</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="protocol_agnostic"><a class="link" href="#protocol_agnostic">Protocol Agnostic</a></h3>
-<div class="paragraph">
-<p>Universal APIs can be implemented using any protocol or technology:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>GraphQL</strong> - For flexible, type-safe queries</p>
-</li>
-<li>
-<p><strong>REST</strong> - For traditional HTTP APIs</p>
-</li>
-<li>
-<p><strong>WebSocket</strong> - For real-time communication</p>
-</li>
-<li>
-<p><strong>gRPC</strong> - For high-performance RPC</p>
-</li>
-<li>
-<p><strong>Custom protocols</strong> - Implement any protocol you need</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="integrated_security"><a class="link" href="#integrated_security">Integrated Security</a></h3>
-<div class="paragraph">
-<p>All Universal APIs automatically leverage XP&#8217;s built-in security:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>IAM integration</strong> - Use XP&#8217;s identity and access management</p>
-</li>
-<li>
-<p><strong>Authentication</strong> - Session, JWT, OAuth2, ID providers</p>
-</li>
-<li>
-<p><strong>Authorization</strong> - Role-based and resource-based access control</p>
-</li>
-<li>
-<p><strong>Audit logging</strong> - All API access is logged automatically</p>
-</li>
-<li>
-<p><strong>Consistent security model</strong> - Same security across all APIs</p>
-</li>
-</ul>
-</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">cluster.elasticsearch</dt>
+<dd>
+<p>Information about the ElasticSearch cluster. Local-node and members.</p>
+</dd>
+<dt class="hdlist1">cluster.manager</dt>
+<dd>
+<p>Information about the state of the clusters: elasticsearch</p>
+</dd>
+<dt class="hdlist1">dump.deadlocks</dt>
+<dd>
+<p>This will try to detect thread deadlocks and show them if any.</p>
+</dd>
+<dt class="hdlist1">dump.threads</dt>
+<dd>
+<p>Dumps all current thread-states.</p>
+</dd>
+<dt class="hdlist1">http.filter</dt>
+<dd>
+<p>List of servlet filters registered. It shows class, order and the URL patterns to which it applies.</p>
+</dd>
+<dt class="hdlist1">http.servlet</dt>
+<dd>
+<p>List of HTTP servlets registered. It shows class, order and the URL patterns to which it applies.</p>
+</dd>
+<dt class="hdlist1">http.threadpool</dt>
+<dd>
+<p>Status of the the Jetty web server thread pool.</p>
+</dd>
+<dt class="hdlist1">http.webHandler</dt>
+<dd>
+<p>List of WebHandler instances registered.</p>
+</dd>
+<dt class="hdlist1">index</dt>
+<dd>
+<p>Shows ElasticSearch index status.</p>
+</dd>
+<dt class="hdlist1">jvm.gc</dt>
+<dd>
+<p>Information about JVM GC status.</p>
+</dd>
+<dt class="hdlist1">jvm.info</dt>
+<dd>
+<p>General JVM information (version, vendor, uptime).</p>
+</dd>
+<dt class="hdlist1">jvm.memory</dt>
+<dd>
+<p>JVM memory information (heap, non-heap, pools).</p>
+</dd>
+<dt class="hdlist1">jvm.os</dt>
+<dd>
+<p>Information about OS (name, version, architecture).</p>
+</dd>
+<dt class="hdlist1">jvm.threads</dt>
+<dd>
+<p>JVM thread stats (count, peak, total).</p>
+</dd>
+<dt class="hdlist1">mediaTypes</dt>
+<dd>
+<p>List of mappings from file extension to media type.</p>
+</dd>
+<dt class="hdlist1">metrics</dt>
+<dd>
+<p>Shows metrics. The information can be filtered using ?filter=&#8230;&#8203;.</p>
+</dd>
+<dt class="hdlist1">osgi.bundle</dt>
+<dd>
+<p>Information about all OSGi bundles.</p>
+</dd>
+<dt class="hdlist1">osgi.component</dt>
+<dd>
+<p>Information about registered SCR OSGi components.</p>
+</dd>
+<dt class="hdlist1">osgi.service</dt>
+<dd>
+<p>Shows all OSGi services registered.</p>
+</dd>
+<dt class="hdlist1">server</dt>
+<dd>
+<p>Information about the server (version, build).</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="architecture"><a class="link" href="#architecture">Architecture</a></h2>
+<h2 id="cluster_monitoring"><a class="link" href="#cluster_monitoring">Cluster monitoring</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="api_registry"><a class="link" href="#api_registry">API Registry</a></h3>
 <div class="paragraph">
-<p>Universal API uses a central registry to track all installed APIs:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Dynamic registration</strong> - Apps register their APIs at installation</p>
-</li>
-<li>
-<p><strong>Metadata storage</strong> - API names, versions, schemas, and capabilities</p>
-</li>
-<li>
-<p><strong>Discovery endpoint</strong> - Query to list all available APIs</p>
-</li>
-<li>
-<p><strong>Deregistration</strong> - APIs are removed when apps are uninstalled</p>
-</li>
-</ul>
-</div>
+<p>There are multiple tools at your disposal for monitoring the health of the clusters and indices:</p>
 </div>
 <div class="sect2">
-<h3 id="iam_integration"><a class="link" href="#iam_integration">IAM Integration</a></h3>
+<h3 id="cluster_health"><a class="link" href="#cluster_health">Cluster health</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/cluster.manager</pre>
+</div>
+</div>
 <div class="paragraph">
-<p>All Universal APIs are automatically integrated with XP&#8217;s security model:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Authentication layer</strong> - Built-in support for sessions, JWT, OAuth2, API keys</p>
-</li>
-<li>
-<p><strong>Authorization enforcement</strong> - Role and permission checks before API access</p>
-</li>
-<li>
-<p><strong>Context propagation</strong> - User context flows through all API calls</p>
-</li>
-<li>
-<p><strong>ID provider support</strong> - Leverage custom authentication backends</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="routing"><a class="link" href="#routing">Routing</a></h3>
-<div class="paragraph">
-<p>The platform handles routing to the appropriate API implementation:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>URL pattern matching</strong> - Parse <code>&lt;appname&gt;:&lt;apiname&gt;</code> from requests</p>
-</li>
-<li>
-<p><strong>App resolution</strong> - Locate the installed application</p>
-</li>
-<li>
-<p><strong>API delegation</strong> - Forward requests to the app&#8217;s API handler</p>
-</li>
-<li>
-<p><strong>Context injection</strong> - Provide site, project, or admin context when mounted contextually</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="getting_started"><a class="link" href="#getting_started">Getting Started</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="accessing_apis"><a class="link" href="#accessing_apis">Accessing APIs</a></h3>
-<div class="paragraph">
-<p>Universal APIs can be exposed in two ways:</p>
-</div>
-<div class="sect3">
-<h4 id="dedicated_api_endpoint"><a class="link" href="#dedicated_api_endpoint">Dedicated API Endpoint</a></h4>
-<div class="paragraph">
-<p>APIs can be mounted on the dedicated <code>/api</code> endpoint with the following URL pattern:</p>
+<p>To obtain a generic health check of the clusters. It should return you a response similar to:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>/api/&lt;appname&gt;:&lt;apiname&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For example, the Guillotine GraphQL API would be accessed at:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>https://your-xp-instance.com/api/com.enonic.app.guillotine:graphql</pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="contextual_mounting"><a class="link" href="#contextual_mounting">Contextual Mounting</a></h4>
-<div class="paragraph">
-<p>APIs can also be contextually mounted across other XP services via the <code>_</code> path:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Site engine</strong> - <code>/site/&lt;project&gt;/&lt;branch&gt;/_/&lt;appname&gt;:&lt;apiname&gt;</code></p>
-</li>
-<li>
-<p><strong>Webapp engine</strong> - <code>/webapp/&lt;appname&gt;/_/&lt;appname&gt;:&lt;apiname&gt;</code></p>
-</li>
-<li>
-<p><strong>Admin engine</strong> - <code>/admin/_/&lt;appname&gt;:&lt;apiname&gt;</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This allows APIs to be scoped to specific contexts, such as a content site or administrative tool.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="example_graphql_api"><a class="link" href="#example_graphql_api">Example: GraphQL API</a></h3>
-<div class="paragraph">
-<p>Accessing a GraphQL API via the dedicated endpoint:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>POST https://your-xp-instance.com/api/com.enonic.app.guillotine:graphql</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="example_rest_api"><a class="link" href="#example_rest_api">Example: REST API</a></h3>
-<div class="paragraph">
-<p>Accessing a REST API:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>GET https://your-xp-instance.com/api/com.myapp.api:rest/users</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="authentication"><a class="link" href="#authentication">Authentication</a></h3>
-<div class="paragraph">
-<p>Include authentication credentials in your requests:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-http" data-lang="http">Authorization: Bearer &lt;your-token&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Or use session-based authentication with cookies.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="graphql_example"><a class="link" href="#graphql_example">GraphQL Example</a></h3>
-<div class="paragraph">
-<p>Query the Guillotine GraphQL API:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">POST /api/com.enonic.app.guillotine:graphql
-
-{
-  query: `{
-    guillotine {
-      get(key: "/my-site/article") {
-        displayName
-        type
-        ... on com_myapp_Article {
-          data {
-            title
-            body
-          }
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "state": "OK",
+    "clusters": [
+        {
+            "id": "elasticsearch",
+            "enabled": true,
+            "healthy": true,
+            "numberOfNodesSeen": 3
         }
-      }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This view gives a brief overview of the nodes in the cluster.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="elasticsearch_cluster_health"><a class="link" href="#elasticsearch_cluster_health">ElasticSearch cluster health</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/cluster.elasticsearch</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which should return you a response similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "name": "mycluster",
+    "localNode": {
+        "isMaster": true,
+        "id": "WT_gNgZ8SAu7GCJxvynSOg",
+        "hostName": "griPortable.local",
+        "version": "1.5.2",
+        "numberOfNodesSeen": 3
+    },
+    "members": [
+        {
+            "isMaster": false,
+            "id": "WqknPf3USg2fOnK6xGlWwA",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9301]",
+            "name": "01bd187e-7cd1-4a8a-ac0a-918d4e09aa64",
+            "isDataNode": true,
+            "isClientNode": false
+        },
+        {
+            "isMaster": false,
+            "id": "xDwdxa37SUy6AHPz6hMZMA",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9302]",
+            "name": "cf91d280-6111-47f2-8118-7d48664c3530",
+            "isDataNode": true,
+            "isClientNode": false
+        },
+        {
+            "isMaster": true,
+            "id": "WT_gNgZ8SAu7GCJxvynSOg",
+            "hostName": "griPortable.local",
+            "version": "1.5.2",
+            "address": "inet[/127.0.0.1:9300]",
+            "name": "af5287fc-663d-40bd-9b05-7cca59f96522",
+            "isDataNode": true,
+            "isClientNode": false
+        }
+    ],
+    "state": "GREEN"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This view gives a brief overview of the nodes in the cluster. For convenience, the current local node to which the request was made has a separate entry in addition to being in the list of members.</p>
+</div>
+<div class="paragraph">
+<p>The <code>state</code> property is the most important:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Green</strong>: Cluster is operational and all configured replicas are distributed to a node</p>
+</li>
+<li>
+<p><strong>Yellow</strong>: Cluster is operational, but there are replicas that are not distributed to any node</p>
+</li>
+<li>
+<p><strong>Red</strong>: Cluster is not operational</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To see the details about how the replicas are distributed, let’s continue to the <code>Index stats</code> report:</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="index_stats"><a class="link" href="#index_stats">Index stats</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/index</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which should give you a response like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "summary": {
+        "total": 8,
+        "started": 8,
+        "unassigned": 0,
+        "relocating": 0,
+        "initializing": 0
+    },
+    "shards": {
+        "started": [
+            {
+                "id": "search-cms-repo(0)",
+                "nodeId": "xDwdxa37SUy6AHPz6hMZMA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "search-cms-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "search-system-repo(0)",
+                "nodeId": "xDwdxa37SUy6AHPz6hMZMA",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "search-system-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "storage-system-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            },
+            {
+                "id": "storage-system-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "storage-cms-repo(0)",
+                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
+                "nodeAddress": "192.168.1.5",
+                "type": "PRIMARY"
+            },
+            {
+                "id": "storage-cms-repo(0)",
+                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
+                "nodeAddress": "192.168.1.5",
+                "type": "REPLICA"
+            }
+        ],
+        "unassigned": [],
+        "relocating": [],
+        "initializing": []
     }
-  }`
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This gives an overview of how the indices are distributed and what state the index parts (<strong>shards</strong>) are currently in. A shard could be either <code>PRIMARY</code> or <code>REPLICA</code> (copy of a primary shard). These are the possible states:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>total</strong>: Total number of index parts (e.g two repositories with two indices with one replica for each index)</p>
+</li>
+<li>
+<p><strong>started</strong>: Shards that are currently assigned to a node</p>
+</li>
+<li>
+<p><strong>unassigned</strong>: Shards waiting to be distributed to a node. Typically a setup with a number of replicas where one or more nodes are not running</p>
+</li>
+<li>
+<p><strong>relocating</strong>: Shards that are currently moving from one node to another</p>
+</li>
+<li>
+<p><strong>initializing</strong>: Shards that are currently being recovered from disk at startup.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>shards</code> section gives a more detailed overview on the shard distribution.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="hazelcast_cluster_health"><a class="link" href="#hazelcast_cluster_health">Hazelcast cluster health</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/cluster.hazelcast</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which should return you a response similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "clusterState": "ACTIVE",
+  "clusterTime": 1599748536909,
+  "clusterVersion": "3.12",
+  "members": [
+    {
+      "uuid": "d7b9b75e-aacf-444b-bff9-af5c786843c2",
+      "address": "192.168.1.1",
+      "port": 5701,
+      "liteMember": false,
+      "version": "3.12.7"
+    },
+    {
+      "uuid": "899920a2-d9bd-4add-8b1a-133bf27af9a0",
+      "address": "192.168.1.2",
+      "port": 5702,
+      "liteMember": false,
+      "version": "3.12.7"
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This view gives a brief overview of the nodes in the Hazelcast cluster. Check Hazelcast documentation for more details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="health_check"><a class="link" href="#health_check">Health check</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/health</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Health check validates that essential data services are available and ready to serve requests.</p>
+</div>
+<div class="paragraph">
+<p>Successful validation will return an empty response with <code>200</code> status code. Failed validation will return <code>503</code> status code with the list of errors:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "errors": [
+      "org.elasticsearch.client.Client service is not available"
+    ]
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="rest_api_example"><a class="link" href="#rest_api_example">REST API Example</a></h3>
+<h3 id="readiness_check"><a class="link" href="#readiness_check">Readiness check</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/ready</pre>
+</div>
+</div>
 <div class="paragraph">
-<p>Call a custom REST API:</p>
+<p>Readiness check validates that all services needed for the instance to be fully operational are available and ready to serve requests.</p>
+</div>
+<div class="paragraph">
+<p>Successful validation will return an empty response with <code>200</code> status code. Failed validation will return <code>503</code> status code with the list of errors:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl -X GET \
-  https://your-xp-instance.com/api/com.mycompany.products:rest/items/123 \
-  -H "Authorization: Bearer &lt;your-token&gt;"</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "errors": [
+      "com.enonic.xp.portal.websocket.WebSocketManager service is not available",
+      "com.enonic.xp.mail.MailService service is not available"
+    ]
+}</code></pre>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="discovering_available_apis"><a class="link" href="#discovering_available_apis">Discovering Available APIs</a></h3>
-<div class="paragraph">
-<p>List all registered APIs:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl -X GET \
-  https://your-xp-instance.com/api</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="use_cases"><a class="link" href="#use_cases">Use Cases</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="headless_cms"><a class="link" href="#headless_cms">Headless CMS</a></h3>
-<div class="paragraph">
-<p>Use the Universal API to power headless applications:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Mobile apps</strong> - Native iOS and Android</p>
-</li>
-<li>
-<p><strong>Single-page apps</strong> - React, Vue, Angular</p>
-</li>
-<li>
-<p><strong>Static site generators</strong> - Gatsby, Next.js, Nuxt</p>
-</li>
-<li>
-<p><strong>IoT devices</strong> - Connected hardware</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="integration_platform"><a class="link" href="#integration_platform">Integration Platform</a></h3>
-<div class="paragraph">
-<p>Connect XP with other systems:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>CRM systems</strong> - Salesforce, HubSpot</p>
-</li>
-<li>
-<p><strong>Marketing automation</strong> - Marketo, Mailchimp</p>
-</li>
-<li>
-<p><strong>Analytics</strong> - Google Analytics, Mixpanel</p>
-</li>
-<li>
-<p><strong>Business intelligence</strong> - Tableau, Power BI</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="custom_applications"><a class="link" href="#custom_applications">Custom Applications</a></h3>
-<div class="paragraph">
-<p>Build custom administrative interfaces:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Content management tools</strong></p>
-</li>
-<li>
-<p><strong>User management dashboards</strong></p>
-</li>
-<li>
-<p><strong>System monitoring</strong></p>
-</li>
-<li>
-<p><strong>Custom workflows</strong></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="security"><a class="link" href="#security">Security</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Universal API implements multiple security layers:</p>
-</div>
-<div class="sect2">
-<h3 id="authentication_2"><a class="link" href="#authentication_2">Authentication</a></h3>
-<div class="paragraph">
-<p>Supported authentication methods:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Session-based</strong> - Traditional cookie authentication</p>
-</li>
-<li>
-<p><strong>JWT tokens</strong> - Stateless authentication</p>
-</li>
-<li>
-<p><strong>OAuth2</strong> - Third-party integration</p>
-</li>
-<li>
-<p><strong>API keys</strong> - Service-to-service communication</p>
-</li>
-<li>
-<p><strong>ID providers</strong> - Custom authentication backends</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="authorization"><a class="link" href="#authorization">Authorization</a></h3>
-<div class="paragraph">
-<p>Fine-grained access control:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Role-based</strong> - Assign permissions to roles</p>
-</li>
-<li>
-<p><strong>Resource-based</strong> - Control access per resource</p>
-</li>
-<li>
-<p><strong>Field-level</strong> - Hide sensitive data fields</p>
-</li>
-<li>
-<p><strong>Operation-based</strong> - Restrict specific operations</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="audit_logging"><a class="link" href="#audit_logging">Audit Logging</a></h3>
-<div class="paragraph">
-<p>All API access is logged for security and compliance:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Request logging</strong> - Track all API calls</p>
-</li>
-<li>
-<p><strong>Change tracking</strong> - Monitor data modifications</p>
-</li>
-<li>
-<p><strong>Security events</strong> - Detect suspicious activity</p>
-</li>
-<li>
-<p><strong>Compliance reports</strong> - Generate audit reports</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="monitoring"><a class="link" href="#monitoring">Monitoring</a></h3>
-<div class="paragraph">
-<p>Built-in monitoring capabilities:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Metrics</strong> - API usage statistics</p>
-</li>
-<li>
-<p><strong>Tracing</strong> - Request tracing</p>
-</li>
-<li>
-<p><strong>Performance profiling</strong> - Identify bottlenecks</p>
-</li>
-<li>
-<p><strong>Alerting</strong> - Proactive issue detection</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="best_practices"><a class="link" href="#best_practices">Best Practices</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="error_handling"><a class="link" href="#error_handling">Error Handling</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Check for errors in all responses</p>
-</li>
-<li>
-<p>Implement retry logic with exponential backoff</p>
-</li>
-<li>
-<p>Log errors for debugging</p>
-</li>
-<li>
-<p>Provide meaningful error messages to users</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="security_2"><a class="link" href="#security_2">Security</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Always use HTTPS in production</p>
-</li>
-<li>
-<p>Rotate API keys regularly</p>
-</li>
-<li>
-<p>Implement rate limiting on client side</p>
-</li>
-<li>
-<p>Validate all input data</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="versioning"><a class="link" href="#versioning">Versioning</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Specify API version in requests</p>
-</li>
-<li>
-<p>Monitor deprecation warnings</p>
-</li>
-<li>
-<p>Plan for breaking changes</p>
-</li>
-<li>
-<p>Test against new versions before upgrading</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -1068,7 +914,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-28 15:08:13 UTC
+Last updated 2026-04-29 15:57:40 UTC
 </div>
 </div>
 </body>
