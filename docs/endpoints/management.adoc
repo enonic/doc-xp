@@ -1,13 +1,12 @@
-[#management_endpoint]
-= Management Endpoint
+= Management API (Port 4848)
 :toc: right
-:imagesdir: images
+:imagesdir: ../images
 
-Management commands are available at port `4848`, i.e. `localhost:4848` if you're running XP locally
+The Management API provides programmatic access to administrative and operational functions, commonly used by developers and DevOps teams in combination with Enonic CLI.
 
 == Authorization [[authorization]]
 
-All management endpoints require an authenticated user with the Administrator role.
+The management API requires an authenticated user with the Administrator role.
 
 === JWT Authentication
 
@@ -71,8 +70,6 @@ POST repo/snapshot
 |the name of the repository to snapshot.
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -106,8 +103,6 @@ List all the snapshots for the installation.
 
 .Url
 GET repo/snapshot/list
-
-NOTE: Read about authorization <<authorization, here>>
 
 .Response
 [source,json]
@@ -171,8 +166,6 @@ POST repo/snapshot/restore
 | If `true` then affected indices will be removed before snapshot is applied. It is helpful when Elasticsearch indices are corrupted. Default: `false`
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -221,8 +214,6 @@ POST repo/snapshot/delete
 |String[]
 |List of snapshot names to delete
 |===
-
-NOTE: Read about authorization <<authorization, here>>
 
 .Response
 [source,json]
@@ -275,8 +266,6 @@ POST system/dump
 |===
 
 NOTE: In XP 8, dumps are always saved as ZIP archives (`{name}.zip`).
-
-NOTE: Read about authorization <<authorization, here>>
 
 .Response
 [source,json]
@@ -347,8 +336,6 @@ POST system/upgrade
 |dump name
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -395,8 +382,6 @@ POST system/load
 |upgrade the dump if necessary (default is `false`)
 
 |===
-
-NOTE: Read about authorization <<authorization, here>>
 
 .Response
 [source,json]
@@ -488,8 +473,6 @@ POST repo/export
 |number of nodes exported per batch (default: `1000`)
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -556,8 +539,6 @@ POST repo/import
 |flag to include or skip permissions when importing
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -618,8 +599,6 @@ POST app/install
 |File of the application
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -668,8 +647,6 @@ POST app/installUrl
 | Application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -714,8 +691,6 @@ POST app/start
 |Application key, for instance, `com.enonic.app.contentstudio`.
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,plain]
 ----
@@ -741,8 +716,6 @@ POST app/stop
 |Application key, for instance, `com.enonic.app.contentstudio`.
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,plain]
 ----
@@ -767,8 +740,6 @@ POST app/uninstall
 |String
 |Application key, for instance, `com.enonic.app.contentstudio`.
 |===
-
-NOTE: Read about authorization <<authorization, here>>
 
 .Response
 [source,plain]
@@ -850,8 +821,6 @@ POST content/reprocess
 |flag to skip processing of content children
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -896,7 +865,7 @@ POST content/reprocessTask
 
 NOTE: Task info can be fetched with <<task, task>> request.
 
-=== Projects
+== Projects
 
 Project related commands.
 
@@ -975,8 +944,6 @@ Calls forced content sync for all available projects.
 .Url
 POST content/syncAll
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -1017,10 +984,10 @@ GET idproviders/list
 ----
 == Webapps
 
-Web apps related commands.
+Webapp related commands.
 
 === List
-Lists all the web apps.
+Lists all the webapps.
 
 .Url
 GET webapps/list
@@ -1074,8 +1041,6 @@ POST repo/index/reindex
 |if true, the indices will be deleted before recreated
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -1096,9 +1061,8 @@ NOTE: Read about authorization <<authorization, here>>
 
 Calls <<reindex,reindex>> endpoint as a task.
 
-
 .Url
-POST repo/index/reindex
+POST repo/index/reindexTask
 
 .Params
 [cols="1,1,3", options="header"]
@@ -1153,8 +1117,6 @@ POST repo/index/updateSettings
 |settings object, see below
 |===
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Available settings options
 [source,json]
 ----
@@ -1188,8 +1150,6 @@ List available repositories.
 .Url
 GET repo/list
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Response
 [source,json]
 ----
@@ -1218,8 +1178,6 @@ Deletes unused blobs and binaries from blobstore.
 
 WARNING: Make sure you have a backup of the installation available before doing a vacuum.
 
-NOTE: Read about authorization <<authorization, here>>
-
 .Url
 POST system/vacuum
 
@@ -1245,8 +1203,6 @@ This API supports the following tasks: +
 **BinaryBlobVacuumTask** - checks all binary blobs and removes unused. +
 **NodeBlobVacuumTask** - checks all node blobs and removes unused. +
 **SnapshotsVacuumTask** - deletes snapshots that are older than the specified age threshold. +
-
-NOTE: Read about authorization <<authorization, here>>
 
 .Response
 [source,json]
@@ -1319,7 +1275,7 @@ POST auditlog/cleanup
 ----
 
 [#task]
-=== Task
+== Task
 
 Fetches particular Task information.
 
@@ -1341,11 +1297,13 @@ GET task/{taskId}
 .Response
 <<../api/lib-task#taskinfo,`TaskInfo`>> object.
 
-== Scheduled Jobs List
+== Scheduler
+
+Scheduled jobs related commands.
+
+=== List
 
 List scheduled jobs.
-
-NOTE: Read about authorization <<authorization, here>>
 
 .Url
 GET scheduler/list
