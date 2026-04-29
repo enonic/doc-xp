@@ -448,7 +448,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#portal_port_8080">Portal (Port 8080)</a></li>
 <li><a href="#management_api_port_4848">Management API (Port 4848)</a></li>
 <li><a href="#statistics_api_port_2609">Statistics API (Port 2609)</a></li>
-<li><a href="#port_configuration">Port Configuration</a></li>
 </ul>
 </div>
 </div>
@@ -464,7 +463,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="portal_port_8080"><a class="link" href="#portal_port_8080">Portal (Port 8080)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The default gateway for all client interactions, including APIs, admin and the Site Engine. See <a href="endpoints/portal.ahtml">Portal</a>.</p>
+<p>Portal (aka Web) is the gateway for all client interactions, including APIs, Admin and the Site Engine. See <a href="endpoints/portal.ahtml">Portal</a>.</p>
 </div>
 </div>
 </div>
@@ -482,32 +481,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Real-time metrics and monitoring data about the XP instance, used for health checks and performance monitoring. See <a href="endpoints/statistics.ahtml">Statistics API</a>.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="port_configuration"><a class="link" href="#port_configuration">Port Configuration</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The default ports can be overridden via <code>com.enonic.xp.web.jetty.cfg</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties"># Web endpoint
-http.port = 8080
-
-# Management API
-management.port = 4848
-
-# Statistics API
-monitoring.port = 2609</code></pre>
-</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The default ports can be overridden via <code>com.enonic.xp.web.jetty.cfg</code>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-29 15:57:40 UTC
+Last updated 2026-04-29 16:04:20 UTC
 </div>
 </div>
 </body>
