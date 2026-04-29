@@ -7,7 +7,7 @@ Enonic XP exposes APIs and functionality through multiple HTTP endpoints, each s
 
 == Portal (Port 8080)
 
-The default gateway for all client interactions, including APIs, admin and the Site Engine. See <<endpoints/portal#,Portal>>.
+Portal (aka Web) is the gateway for all client interactions, including APIs, Admin and the Site Engine. See <<endpoints/portal#,Portal>>.
 
 == Management API (Port 4848)
 
@@ -17,18 +17,4 @@ Programmatic access to administrative and operational functions, commonly used t
 
 Real-time metrics and monitoring data about the XP instance, used for health checks and performance monitoring. See <<endpoints/statistics#,Statistics API>>.
 
-== Port Configuration
-
-The default ports can be overridden via `com.enonic.xp.web.jetty.cfg`:
-
-[source,properties]
-----
-# Web endpoint
-http.port = 8080
-
-# Management API
-management.port = 4848
-
-# Statistics API  
-monitoring.port = 2609
-----
+TIP: The default ports can be overridden via `com.enonic.xp.web.jetty.cfg`
