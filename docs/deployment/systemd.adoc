@@ -8,7 +8,7 @@ This section describes how to run Enonic XP as a systemd service.
 
 What we want to achieve is to setup XP with systemd. The setup should be easy to install, upgrade, rollback and backup. We will setup the following:
 
-1. Set correct `vm.max_map_count`.
+1. Set correct `vm.max_map_count` and `vm.swappiness`.
 2. Create a user and group for XP.
 3. Download and extract the desired distribution into `/opt/enonic/distros`.
 4. Setup the XP home folder at `/opt/enonic/home`.
@@ -60,6 +60,12 @@ Let's create an ansible playbook that will handle all the setup for you. Create 
       sysctl:
         name: vm.max_map_count
         value: "262144"
+        sysctl_set: true
+
+    - name: Set vm.swappiness
+      sysctl:
+        name: vm.swappiness
+        value: "1"
         sysctl_set: true
 
     - name: Ensure user group exists
@@ -197,11 +203,12 @@ $ export XP_VERSION=7.7.1
 
 NOTE: Step 1, 2 and 4 only have to be executed the first time you setup Enonic XP with systemd.
 
-1. Set correct `vm.max_map_count`.
+1. Set correct `vm.max_map_count` and `vm.swappiness`.
 
 [source,bash]
 ----
 $ echo "vm.max_map_count=262144" > "/etc/sysctl.d/99-xp.conf"
+$ echo "vm.swappiness=1" >> "/etc/sysctl.d/99-xp.conf"
 $ sysctl --system
 ----
 
