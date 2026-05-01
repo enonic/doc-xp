@@ -602,7 +602,35 @@ Using <em>NFS</em> introduces a single point of failure to the cluster, but has 
 <p>Master nodes can be configured with less memory and capacity as they are generally not processing requests or queries.</p>
 </div>
 <div class="paragraph">
-<p>Since Elasticsearch is embedded in XP, be sure also to setup virtual memory, file descriptors and swap setting correctly for <em>elasticsearch</em>. Read more about that in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html">elasticsearch documentation</a>.</p>
+<p>Since Elasticsearch is embedded in XP, you must also configure the following kernel settings on every XP node:</p>
+</div>
+<div class="listingblock">
+<div class="title">Disable swap</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ sysctl -w vm.swappiness=1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A malfunctioning node must be OOM-killed rather than allowed to swap, as swapping can cause severe performance degradation and mask memory issues.</p>
+</div>
+<div class="listingblock">
+<div class="title">Allow more memory-mapped areas</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ sysctl -w vm.max_map_count=262144</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Elasticsearch requires many <code>mmap</code> calls and will fail to start if this limit is too low.</p>
+</div>
+<div class="paragraph">
+<p>To make these settings permanent across reboots, add them to <code>/etc/sysctl.d/</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ echo "vm.swappiness=1" &gt;&gt; /etc/sysctl.d/99-xp.conf
+$ echo "vm.max_map_count=262144" &gt;&gt; /etc/sysctl.d/99-xp.conf
+$ sysctl --system</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -876,7 +904,7 @@ Setting replicas number to 1...Done
 <p>Make sure ports <code>5701</code> and <code>9300</code> is open between all cluster members.</p>
 </li>
 <li>
-<p>Setup virtual memory, file descriptors and swap setting on servers correctly.</p>
+<p>Setup virtual memory and swap settings on servers correctly: set <code>vm.max_map_count=262144</code> and <code>vm.swappiness=1</code>.</p>
 </li>
 <li>
 <p>Tailor the 3 cluster configuration files to your setup.</p>
@@ -939,7 +967,7 @@ If heavy tasks must execute on master nodes (i.e. they have <code>isMaster</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-29 16:03:53 UTC
+Last updated 2026-05-01 18:56:59 UTC
 </div>
 </div>
 </body>
