@@ -458,7 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="standard_logging"><a class="link" href="#standard_logging">Standard logging</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/logback.xml</code></p>
+<p><code>logback.xml</code></p>
 </div>
 <div class="paragraph">
 <p>This logging is used for the XP server and all applications running on it. By default, the logback configuration is set to log to both console and file, but you can customize it as needed.</p>
@@ -554,7 +554,7 @@ See: <a href="https://logback.qos.ch/manual/configuration.html#loggerElement">Lo
 <h2 id="audit_logging"><a class="link" href="#audit_logging">Audit logging</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.audit.cfg</code></p>
+<p><code>com.enonic.xp.audit.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Configure the audit log feature.</p>
@@ -600,7 +600,7 @@ Individual applications may have their own audit log configuration, which can be
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 06:09:32 UTC
+Last updated 2026-05-05 08:32:11 UTC
 </div>
 </div>
 </body>

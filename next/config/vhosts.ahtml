@@ -475,7 +475,7 @@ Vhosts only apply to XP&#8217;s web endpoint (defaults to port 8080). They do no
 <h2 id="configuration_file"><a class="link" href="#configuration_file">Configuration file</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.web.vhost.cfg</code></p>
+<p><code>com.enonic.xp.web.vhost.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>XP&#8217;s web port (default: 8080) provide the following services: <code>/api</code>, <code>/admin</code>, <code>/webapp</code> and <code>/site</code>. Use Vhosts to route traffic for specific domains and url patterns to one of these services.</p>
@@ -839,7 +839,7 @@ Location of hosts file on Mac/Linux_: <code>/etc/hosts</code>, on Windows: <code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 06:09:32 UTC
+Last updated 2026-05-05 08:32:11 UTC
 </div>
 </div>
 </body>

@@ -450,6 +450,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#cluster">Cluster</a></li>
 <li><a href="#elasticsearch">Elasticsearch</a></li>
 <li><a href="#hazelcast">Hazelcast</a></li>
+<li><a href="#universal_api">Universal API</a></li>
 <li><a href="#jetty">Jetty</a></li>
 <li><a href="#sessionstore">SessionStore</a></li>
 <li><a href="#media">Mime types</a></li>
@@ -479,7 +480,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="system_properties"><a class="link" href="#system_properties">System Properties</a></h2>
 <div class="sectionbody">
 <div id="system-properties" class="paragraph">
-<p><code>XP_HOME/config/system.properties</code></p>
+<p><code>system.properties</code></p>
 </div>
 <div class="paragraph">
 <p>Changes to this file requires a full restart of the XP instance in order to take effect.</p>
@@ -559,7 +560,7 @@ To generate <code>sha512</code> hash suitable for <code>xp.suPassword</code>, yo
 <h2 id="security"><a class="link" href="#security">Security</a></h2>
 <div class="sectionbody">
 <div id="security" class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.web.security.cfg</code></p>
+<p><code>com.enonic.xp.web.security.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Security service configuration.</p>
@@ -605,7 +606,7 @@ password.policy = $pbkdf2-sha512$i=210000,l=64,slen=16</code></pre>
 <h2 id="mail"><a class="link" href="#mail">Mail</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.mail.cfg</code></p>
+<p><code>com.enonic.xp.mail.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Use this file to configure global mail server settings for XP.</p>
@@ -660,7 +661,7 @@ defaultFromEmail=noreply@domain.com</code></pre>
 <h2 id="repo"><a class="link" href="#repo">Repo</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.repo.cfg</code></p>
+<p><code>com.enonic.xp.repo.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Use this file to configure the node repository layer.</p>
@@ -711,7 +712,7 @@ If you change this value, remember to update value for <code>path.repo</code> in
 <h2 id="blobstore"><a class="link" href="#blobstore">Blobstore</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.blobstore.cfg</code></p>
+<p><code>com.enonic.xp.blobstore.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Control settings for the blobstore persistence layer.</p>
@@ -751,7 +752,7 @@ cache.FCapacity = 100mb</code></pre>
 <h2 id="file-blobstore"><a class="link" href="#file-blobstore">File blobstore</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.blobstore.file.cfg</code></p>
+<p><code>com.enonic.xp.blobstore.file.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Control settings for the file-based blobstore implementation</p>
@@ -769,7 +770,7 @@ readThrough.sizeThreshold = 100mb</code></pre>
 <dl>
 <dt class="hdlist1">baseDir</dt>
 <dd>
-<p>specifies root location of blobs. Default: <code>${xp.home}/repo/blob</code>.</p>
+<p>specifies root of blobs. Default: <code>${xp.home}/repo/blob</code>.</p>
 </dd>
 <dt class="hdlist1">readThrough.enabled</dt>
 <dd>
@@ -787,7 +788,7 @@ readThrough.sizeThreshold = 100mb</code></pre>
 <h2 id="cluster"><a class="link" href="#cluster">Cluster</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.cluster.cfg</code></p>
+<p><code>com.enonic.xp.cluster.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Basic cluster settings</p>
@@ -865,7 +866,7 @@ NOTE: Values set as host-name are resolved to a single IP-address of the host-na
 <h2 id="elasticsearch"><a class="link" href="#elasticsearch">Elasticsearch</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.elasticsearch.cfg</code></p>
+<p><code>com.enonic.xp.elasticsearch.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Tuning of all relevant settings for the embedded Elasticsearch component</p>
@@ -990,7 +991,7 @@ discovery.unicast.sockets =</code></pre>
 <h2 id="hazelcast"><a class="link" href="#hazelcast">Hazelcast</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.hazelcast.cfg</code></p>
+<p><code>com.enonic.xp.hazelcast.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Tuning of all relevant settings for the embedded Hazelcast component</p>
@@ -1190,10 +1191,35 @@ It also requires granting certain permissions. You can find more information in 
 </div>
 </div>
 <div class="sect1">
+<h2 id="universal_api"><a class="link" href="#universal_api">Universal API</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>com.enonic.xp.api.cfg</code></p>
+</div>
+<div class="paragraph">
+<p>Manage settings for the Universal API</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample API configuration</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">api.index.enabled=auto|on|off|</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">api.index.enabled</dt>
+<dd>
+<p>Enable or disable the <code>/api</code> index page. Default: <code>auto</code> &#8658; enabled if instance is running in dev mode, otherwise disabled.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="jetty"><a class="link" href="#jetty">Jetty</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.web.jetty.cfg</code></p>
+<p><code>com.enonic.xp.web.jetty.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Selected options to configure the embedded servlet engine Jetty</p>
@@ -1352,7 +1378,7 @@ Setting <code>session.cookieAlwaysSecure</code> to <code>true</code> would make 
 <h2 id="sessionstore"><a class="link" href="#sessionstore">SessionStore</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.web.sessionstore.cfg</code></p>
+<p><code>com.enonic.xp.web.sessionstore.cfg</code></p>
 </div>
 <div class="listingblock">
 <div class="title">Sample SessionStore configuration</div>
@@ -1396,7 +1422,7 @@ flushOnResponseCommit = true</code></pre>
 <h2 id="media"><a class="link" href="#media">Mime types</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.media.cfg</code></p>
+<p><code>com.enonic.xp.media.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Specify additional mime types if you are missing something.</p>
@@ -1426,7 +1452,7 @@ ext.p = text/x-pascal</code></pre>
 <h2 id="osgi_shell"><a class="link" href="#osgi_shell">OSGi shell</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.server.shell.cfg</code></p>
+<p><code>com.enonic.xp.server.shell.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Optionally activate shell to manage OSGi bundles remotely</p>
@@ -1471,7 +1497,7 @@ telnet.socketTimeout = 0</code></pre>
 <h2 id="dos_filter"><a class="link" href="#dos_filter">DoS filter</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.web.dos.cfg</code></p>
+<p><code>com.enonic.xp.web.dos.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Activate and configure the DoS (Denial Of Service) feature.</p>
@@ -1552,7 +1578,7 @@ ipWhitelist =</code></pre>
 <h2 id="header"><a class="link" href="#header">Header Filter</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.web.header.cfg</code></p>
+<p><code>com.enonic.xp.web.header.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Configure default HTTP response headers.</p>
@@ -1578,7 +1604,7 @@ Default value varies across XP releases and adheres to up-to-date security best 
 <h2 id="market"><a class="link" href="#market">Market</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.market.cfg</code></p>
+<p><code>com.enonic.xp.market.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Enonic Market configuration options:</p>
@@ -1595,7 +1621,7 @@ Default value varies across XP releases and adheres to up-to-date security best 
 <h2 id="udc"><a class="link" href="#udc">UDC</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.server.udc.cfg</code></p>
+<p><code>com.enonic.xp.server.udc.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>UDC (Usage Data Collector) is passing anonymous usage data 10 minutes after startup and then every 24 hours.
@@ -1613,7 +1639,7 @@ This is only used to see what platforms are used and improve platform stability.
 <h2 id="idprovider"><a class="link" href="#idprovider">System IDprovider</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.app.standardidprovider.cfg</code></p>
+<p><code>com.enonic.xp.app.standardidprovider.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>The <code>system</code> IdProvider uses an implementation called the standard ID provider.
@@ -1654,7 +1680,7 @@ idprovider.system.autologin.jwt.maxLifetimeSeconds = 30</code></pre>
 <h2 id="vacuum"><a class="link" href="#vacuum">Vacuum</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.vacuum.cfg</code></p>
+<p><code>com.enonic.xp.vacuum.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Configure default properties for vacuum process.
@@ -1679,7 +1705,7 @@ idprovider.system.autologin.jwt.maxLifetimeSeconds = 30</code></pre>
 <h2 id="application"><a class="link" href="#application">Application</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.app.cfg</code></p>
+<p><code>com.enonic.xp.app.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Configure applications behavior.</p>
@@ -1776,7 +1802,7 @@ Filter rules apply separately on different nodes in cluster. If one cluster node
 <h2 id="task"><a class="link" href="#task">Task</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.task.cfg</code></p>
+<p><code>com.enonic.xp.task.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Configure the task behaviour.</p>
@@ -1806,7 +1832,7 @@ clustered.timeout = PT10S</code></pre>
 <h2 id="scheduler"><a class="link" href="#scheduler">Scheduler</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.scheduler.cfg</code></p>
+<p><code>com.enonic.xp.scheduler.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Configure default custom jobs to be created for scheduling when an XP instance start. Skip creation if a job with the same name exists already. Only recurring (cron) jobs can be created by the config file. There is no guaranteed order for distributed environment, so the first started node will create its version of a job for the whole cluster.</p>
@@ -1920,7 +1946,7 @@ init-job.my-job2.config={"myparam1":"value1","myset":{"myparam2":"value2"}}</cod
 <h2 id="export"><a class="link" href="#export">Export</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.export.cfg</code></p>
+<p><code>com.enonic.xp.export.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Configure exports service behaviour.</p>
@@ -1956,7 +1982,7 @@ Exports dir should be a shared storage for cluster environments.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 06:09:32 UTC
+Last updated 2026-05-05 08:32:11 UTC
 </div>
 </div>
 </body>

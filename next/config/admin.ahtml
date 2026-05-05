@@ -464,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="admin"><a class="link" href="#admin">Admin</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.admin.cfg</code></p>
+<p><code>com.enonic.xp.admin.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>General settings for /admin.</p>
@@ -496,7 +496,7 @@ Default: <code>default-src 'self'; base-uri 'self'; form-action 'self'; script-s
 <h2 id="xp_dashboard"><a class="link" href="#xp_dashboard">XP Dashboard</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.app.main.cfg</code></p>
+<p><code>com.enonic.xp.app.main.cfg</code></p>
 </div>
 <div class="sect2">
 <h3 id="content_security_policy"><a class="link" href="#content_security_policy">Content Security Policy</a></h3>
@@ -540,7 +540,7 @@ Note, that if you provide your own header, you should include all necessary dire
 <h2 id="applications_app"><a class="link" href="#applications_app">Applications app</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.app.applications.cfg</code></p>
+<p><code>com.enonic.xp.app.applications.cfg</code></p>
 </div>
 <div class="listingblock">
 <div class="title">Disable installation of apps from UI</div>
@@ -563,7 +563,7 @@ Default: <code>false</code></p>
 <h2 id="jetty"><a class="link" href="#jetty">Jetty</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>XP_HOME/config/com.enonic.xp.web.jetty.cfg</code></p>
+<p><code>com.enonic.xp.web.jetty.cfg</code></p>
 </div>
 <div class="paragraph">
 <p>Selected options to configure the embedded servlet engine Jetty</p>
@@ -721,7 +721,7 @@ Setting <code>session.cookieAlwaysSecure</code> to <code>true</code> would make 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 06:09:32 UTC
+Last updated 2026-05-05 08:32:11 UTC
 </div>
 </div>
 </body>
