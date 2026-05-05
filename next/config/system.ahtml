@@ -638,11 +638,11 @@ defaultFromEmail=noreply@domain.com</code></pre>
 </dd>
 <dt class="hdlist1">smtpUser</dt>
 <dd>
-<p>User to be used during authentication with the SMTP server, if ‘smtpAuth = true`.</p>
+<p>User to be used during authentication with the SMTP server, if <code>smtpAuth = true</code>.</p>
 </dd>
 <dt class="hdlist1">smtpPassword</dt>
 <dd>
-<p>Password to be used during authentication with the SMTP server, if ‘smtpAuth = true`.</p>
+<p>Password to be used during authentication with the SMTP server, if <code>smtpAuth = true</code>.</p>
 </dd>
 <dt class="hdlist1">smtpTLS</dt>
 <dd>
@@ -769,7 +769,7 @@ readThrough.sizeThreshold = 100mb</code></pre>
 <dl>
 <dt class="hdlist1">baseDir</dt>
 <dd>
-<p>specifies root location of blobs. Default: <code>`${xp.home}/repo/blob</code>.</p>
+<p>specifies root location of blobs. Default: <code>${xp.home}/repo/blob</code>.</p>
 </dd>
 <dt class="hdlist1">readThrough.enabled</dt>
 <dd>
@@ -1956,7 +1956,7 @@ Exports dir should be a shared storage for cluster environments.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 06:06:36 UTC
+Last updated 2026-05-05 06:09:32 UTC
 </div>
 </div>
 </body>
