@@ -7,7 +7,7 @@ This section describes configuration files related to content and media handling
 
 == Media Serving
 
-`XP_HOME/config/com.enonic.xp.portal.cfg`
+`com.enonic.xp.portal.cfg`
 
 Configure the portal behaviour.
 
@@ -37,7 +37,7 @@ asset.cacheControl:: Defines assets cache-control header when asset is cachable.
 [#image]
 == Image
 
-`XP_HOME/config/com.enonic.xp.image.cfg`
+`com.enonic.xp.image.cfg`
 
 Configure the image service behaviour.
 
@@ -59,7 +59,7 @@ progressive:: Defines formats that will use progressive encoding. Default is `jp
 
 == Binary Text Extractor
 
-`XP_HOME/config/com.enonic.xp.extractor.cfg`
+`com.enonic.xp.extractor.cfg`
 
 Configure binary text extractor service behaviour.
 
@@ -75,7 +75,7 @@ body.size.limit:: Defines maximum number of characters from a textual media. Def
 [#content_config]
 == Content
 
-`XP_HOME/config/com.enonic.xp.content.cfg`
+`com.enonic.xp.content.cfg`
 
 Configure the content API behavior.
 

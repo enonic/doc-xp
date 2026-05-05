@@ -7,7 +7,7 @@ This section describes configuration files and for logging in Enonic XP
 
 == Standard logging
 
-`XP_HOME/config/logback.xml`
+`logback.xml`
 
 This logging is used for the XP server and all applications running on it. By default, the logback configuration is set to log to both console and file, but you can customize it as needed.
 
@@ -80,7 +80,7 @@ Additional information can be found here: https://logback.qos.ch/manual/configur
 
 == Audit logging
 
-`XP_HOME/config/com.enonic.xp.audit.cfg`
+`com.enonic.xp.audit.cfg`
 
 Configure the audit log feature.
 

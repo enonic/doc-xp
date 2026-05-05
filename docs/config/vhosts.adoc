@@ -10,7 +10,7 @@ NOTE: Vhosts only apply to XP's web endpoint (defaults to port 8080). They do no
 
 == Configuration file
 
-`XP_HOME/config/com.enonic.xp.web.vhost.cfg`
+`com.enonic.xp.web.vhost.cfg`
 
 XP's web port (default: 8080) provide the following services: `/api`, `/admin`, `/webapp` and `/site`. Use Vhosts to route traffic for specific domains and url patterns to one of these services.
 

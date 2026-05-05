@@ -7,7 +7,7 @@ This section describes configuration files related to the XP admin console and s
 
 == Admin
 
-`XP_HOME/config/com.enonic.xp.admin.cfg`
+`com.enonic.xp.admin.cfg`
 
 General settings for /admin.
 
@@ -30,7 +30,7 @@ Default: `default-src 'self'; base-uri 'self'; form-action 'self'; script-src 's
 
 == XP Dashboard
 
-`XP_HOME/config/com.enonic.xp.app.main.cfg`
+`com.enonic.xp.app.main.cfg`
 
 === Content Security Policy
 
@@ -57,7 +57,7 @@ contentSecurityPolicy.enabled=false
 
 == Applications app
 
-`XP_HOME/config/com.enonic.xp.app.applications.cfg`
+`com.enonic.xp.app.applications.cfg`
 
 .Disable installation of apps from UI
 [source,properties]
@@ -71,7 +71,7 @@ Default: `false`
 [#jetty]
 == Jetty
 
-`XP_HOME/config/com.enonic.xp.web.jetty.cfg`
+`com.enonic.xp.web.jetty.cfg`
 
 Selected options to configure the embedded servlet engine Jetty
 
