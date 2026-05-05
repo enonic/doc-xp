@@ -5,20 +5,19 @@
 This section describes how to run Enonic XP on a Kubernetes cluster. 
 
 == Introduction
-Running Enonic XP on Kubernetes is a great way to achieve scalability, high availability and ease of management. Kubernetes deployments are generally based on the <<docker#, XP Docker image>>.
-
 == XP operator
+
+Running Enonic XP on Kubernetes is a great way to achieve scalability, high availability and ease of management. Kubernetes deployments are generally based on the <<docker#, XP Docker image>>.
 
 The recommended way to deploy XP on Kubernetes is to use the XP Operator, which provides a Kubernetes-native way to manage XP instances. 
 
-The operator handles the deployment, scaling, configuration and management of XP instances on the K8S cluster. 
+NOTE: For detailed documentation, see the https://developer.enonic.com/docs/xp-operator[XP Operator documentation].
 
-== K89S resources
 
-Working with the operator involves creating custom resources that define the desired state of your XP instance, and the operator will take care of the rest.
+Benefits of using the XP Operator include:
 
-The XP operator is natively integrated with K8S ingresses, making it easy to expose your XP instance to the outside world.
+* *Lifecycle management* - handles the deployment, scaling, configuration and management of XP instances on the K8S cluster.
+* *Custom resources* - working with the operator involves creating custom resources that define the desired state of your XP instance, and the operator will take care of the rest.
+* *Ingress integration* - natively integrated with K8S ingresses, making it easy to expose your XP instance to the outside world.
 
-== Documentation
 
-THe XP Operator is a comprehensive solution which is separately developed and maintained. For detailed documentation, see the https://developer.enonic.com/docs/xp-operator[XP Operator documentation].
