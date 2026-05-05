@@ -88,8 +88,8 @@ defaultFromEmail=noreply@domain.com
 smtpHost:: Host name of the SMTP server. Default: `localhost`.
 smtpPort:: TCP port of the SMTP server. Default: `25`.
 smtpAuth:: Enable authentication with SMTP server. Default: `false`
-smtpUser:: User to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
-smtpPassword:: Password to be used during authentication with the SMTP server, if ‘smtpAuth = true`.
+smtpUser:: User to be used during authentication with the SMTP server, if `smtpAuth = true`.
+smtpPassword:: Password to be used during authentication with the SMTP server, if `smtpAuth = true`.
 smtpTLS:: Turns on Transport Layer Security (TLS) security for SMTP if required. Default: `false`.
 defaultFromEmail:: Default email address to use as sender for all emails sent from XP if sender is not explicitly specified.
 
@@ -151,7 +151,7 @@ readThrough.enabled = false
 readThrough.sizeThreshold = 100mb
 ----
 
-baseDir:: specifies root location of blobs. Default: ``${xp.home}/repo/blob`.
+baseDir:: specifies root location of blobs. Default: `${xp.home}/repo/blob`.
 // readThrough.provider:: TODO TODO is a file-based cache. Used to cache files on local disk to boost performance of the underlying blobstore filesystem
 readThrough.enabled:: enables or disables readthough provider. Default: `false`.
 readThrough.sizeThreshold:: specifies he maximum size of objects to be cache in readthrough provider. Default: 100mb. The size notation accepts a number plus byte-size idenfier (b/kb/mb/gb/tb/pb)
