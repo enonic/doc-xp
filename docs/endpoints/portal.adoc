@@ -1,6 +1,6 @@
 = Portal (Port 8080)
 :toc: right
-:imagesdir: ../images
+:imagesdir: images
 
 Portal (aka Web) is the default gateway for all client interactions, including APIs, XP Admin and the Site Engine. 
 
@@ -10,21 +10,10 @@ The portal is where your applications and content gets exposed to the world. It 
 
 The portal consists of four main services: <<#api, /api>>, <<#admin, /admin>>, <<#site, /site>> and <<#webapp, /webapp>>, each serving specific purposes and use cases.
 
-NOTE: When running the Enonic XP SDK, the portal serves a boot page on localhost:8080 with an overview of the instance.
+NOTE: When running Enonic SDK distribution, localhost:8080 will display an overview of the instance, for developer convenice. Other XP distributions will redirect to /admin.
 
-== Vhosts
+image::welcome.png[width=1022]
 
-The portal supports virtual hosts, allowing you to expose APIs and content on custom domains and paths. For example, you can mount the full API on `apis.yourdomain.com` or a site on `www.yourdomain.com` - including use of sub-paths like `yourdomain.com/content`.
-
-For more information on how to configure vhosts, see <<../config/vhosts#,Virtual Hosts>>.
-
-== Identity and access management
-
-The portal is fully integrated with XP's identity and access management (IAM) system, allowing you to control access to your applications and content based on user roles and permissions.
-
-Authentication is configured per vhost by mapping ID providers, so different parts of your portal can use different authentication mechanisms. See <<../config/vhosts#,Virtual Hosts>> for the mapping syntax and <<../security/idproviders#,ID providers>> for the available providers.
-
-For service-to-service access, the platform supports JWT authentication via the system ID provider — see <<../security/system-idp#jwt-authentication,JWT authentication>>. Individual endpoints may document additional authentication options; see for example <<management#authorization,Management API>>.
 
 [#api]
 == /api (:8080/api)
@@ -45,7 +34,16 @@ For example, the Guillotine GraphQL API would be accessed at:
 https://your-xp-instance.com/api/com.enonic.app.guillotine:graphql
 ----
 
-=== Contextual Mounting
+=== API index page
+
+When enabled, the API index page provides a human-friendly overview of the APIs mounted in `/api`. It lists all registered APIs along with their respective endpoints and descriptions, making it easier for developers to discover and understand the capabilities of the platform.
+
+NOTE: The API index page is disabled by default in production environments for security reasons, but can be enabled in development mode or explicitly via configuration. See <<../config/system#universal-api,Universal API>> for details.
+
+image::api-index.png[width=1790]
+
+
+=== Contextual mounts
 
 NOTE: APIs can also be contextually mounted across other Portal services via the `_` path:
 
@@ -53,7 +51,7 @@ NOTE: APIs can also be contextually mounted across other Portal services via the
 * **Webapp service** - `/webapp/<appname>/_/<appname>:<apiname>`
 * **Admin service** - `/admin/_/<appname>:<apiname>`
 
-This allows APIs to be scoped to specific contexts, such as a content site or administrative tool. The mount point of the API is determined by the application, allowing for flexible API design and organization.
+This allows APIs to be scoped to specific contexts, such as a content site or administrative tool. The mount point of the API is determined by each individual application, allowing for flexible API design and organization. For example, an admin tool may mount an API within the admin service.
 
 
 [#admin]
@@ -88,3 +86,18 @@ The Webapp service allows you to serve any kind of web applications built with a
 Access your web applications using the following URL pattern: `/webapp/<appname>/`
 
 For a more detailed introduction to building web applications on Enonic, see https://developer.enonic.com/docs/code[Enonic Development Kit] or check out this tutorial https://developer.enonic.com/learn/building-xp-webapps[My first web app].
+
+
+== Vhosts
+
+The portal supports virtual hosts, allowing you to expose APIs and content on custom domains and paths. For example, you can mount the full API on `apis.yourdomain.com` or a site on `www.yourdomain.com` - including use of sub-paths like `yourdomain.com/content`.
+
+For more information on how to configure vhosts, see <<../config/vhosts#,Virtual Hosts>>.
+
+== Identity and access management
+
+The portal is fully integrated with XP's identity and access management (IAM) system, allowing you to control access to your applications and content based on user roles and permissions.
+
+Authentication is configured per vhost by mapping ID providers, so different parts of your portal can use different authentication mechanisms. See <<../config/vhosts#,Virtual Hosts>> for the mapping syntax and <<../security/idproviders#,ID providers>> for the available providers.
+
+For service-to-service access, the platform supports JWT authentication via the system ID provider — see <<../security/system-idp#jwt-authentication,JWT authentication>>. Individual endpoints may document additional authentication options; see for example <<management#authorization,Management API>>.

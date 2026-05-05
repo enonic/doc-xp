@@ -360,6 +360,7 @@ hazelcast.max.wait.seconds.before.join:: Maximum wait time in seconds before joi
 NOTE: In case of using Kubernetes API discovery each node makes a call to Kubernetes Master in order to discover PODs.
 It also requires granting certain permissions. You can find more information in the documentation of https://github.com/hazelcast/hazelcast-kubernetes/tree/1.5.x[Hazelcast Discovery Plugin for Kubernetes].
 
+[#universal-api]
 == Universal API
 
 `com.enonic.xp.api.cfg`
@@ -372,7 +373,7 @@ Manage settings for the Universal API
 api.index.enabled=auto|on|off|
 ----
 
-api.index.enabled:: Enable or disable the `/api` index page. Default: `auto` => enabled if instance is running in dev mode, otherwise disabled.
+api.index.enabled:: Enable or disable the `/api` index page. Default: `auto` -> enabled if in dev mode, otherwise disabled.
 
 
 [#jetty]
