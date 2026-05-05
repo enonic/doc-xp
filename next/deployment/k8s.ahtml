@@ -443,8 +443,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#xp_operator">XP operator</a></li>
-<li><a href="#k89s_resources">K89S resources</a></li>
-<li><a href="#documentation">Documentation</a></li>
 </ul>
 </div>
 </div>
@@ -459,45 +457,52 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Running Enonic XP on Kubernetes is a great way to achieve scalability, high availability and ease of management. Kubernetes deployments are generally based on the <a href="docker.ahtml">XP Docker image</a>.</p>
-</div>
+
 </div>
 </div>
 <div class="sect1">
 <h2 id="xp_operator"><a class="link" href="#xp_operator">XP operator</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>Running Enonic XP on Kubernetes is a great way to achieve scalability, high availability and ease of management. Kubernetes deployments are generally based on the <a href="docker.ahtml">XP Docker image</a>.</p>
+</div>
+<div class="paragraph">
 <p>The recommended way to deploy XP on Kubernetes is to use the XP Operator, which provides a Kubernetes-native way to manage XP instances.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For detailed documentation, see the <a href="https://developer.enonic.com/docs/xp-operator">XP Operator documentation</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>The operator handles the deployment, scaling, configuration and management of XP instances on the K8S cluster.</p>
+<p>Benefits of using the XP Operator include:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="k89s_resources"><a class="link" href="#k89s_resources">K89S resources</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Working with the operator involves creating custom resources that define the desired state of your XP instance, and the operator will take care of the rest.</p>
-</div>
-<div class="paragraph">
-<p>The XP operator is natively integrated with K8S ingresses, making it easy to expose your XP instance to the outside world.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">Documentation</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>THe XP Operator is a comprehensive solution which is separately developed and maintained. For detailed documentation, see the <a href="https://developer.enonic.com/docs/xp-operator">XP Operator documentation</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Lifecycle management</strong> - handles the deployment, scaling, configuration and management of XP instances on the K8S cluster.</p>
+</li>
+<li>
+<p><strong>Custom resources</strong> - working with the operator involves creating custom resources that define the desired state of your XP instance, and the operator will take care of the rest.</p>
+</li>
+<li>
+<p><strong>Ingress integration</strong> - natively integrated with K8S ingresses, making it easy to expose your XP instance to the outside world.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 09:04:57 UTC
+Last updated 2026-05-05 12:46:10 UTC
 </div>
 </div>
 </body>
