@@ -442,17 +442,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#vhosts">Vhosts</a></li>
-<li><a href="#identity_and_access_management">Identity and access management</a></li>
 <li><a href="#api">/api (:8080/api)</a>
 <ul class="sectlevel2">
 <li><a href="#api_registry">API registry</a></li>
-<li><a href="#contextual_mounting">Contextual Mounting</a></li>
+<li><a href="#api_index_page">API index page</a></li>
+<li><a href="#contextual_mounts">Contextual mounts</a></li>
 </ul>
 </li>
 <li><a href="#admin">/admin (:8080/admin)</a></li>
 <li><a href="#site">/site (:8080/site)</a></li>
 <li><a href="#webapp">/webapp (:8080/webapp)</a></li>
+<li><a href="#vhosts">Vhosts</a></li>
+<li><a href="#identity_and_access_management">Identity and access management</a></li>
 </ul>
 </div>
 </div>
@@ -480,35 +481,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When running the Enonic XP SDK, the portal serves a boot page on localhost:8080 with an overview of the instance.
+When running Enonic SDK distribution, localhost:8080 will display an overview of the instance, for developer convenice. Other XP distributions will redirect to /admin.
 </td>
 </tr>
 </table>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/welcome.png" alt="welcome" width="1022">
 </div>
-</div>
-<div class="sect1">
-<h2 id="vhosts"><a class="link" href="#vhosts">Vhosts</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The portal supports virtual hosts, allowing you to expose APIs and content on custom domains and paths. For example, you can mount the full API on <code>apis.yourdomain.com</code> or a site on <code>www.yourdomain.com</code> - including use of sub-paths like <code>yourdomain.com/content</code>.</p>
-</div>
-<div class="paragraph">
-<p>For more information on how to configure vhosts, see <a href="../config/vhosts.ahtml">Virtual Hosts</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="identity_and_access_management"><a class="link" href="#identity_and_access_management">Identity and access management</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The portal is fully integrated with XP&#8217;s identity and access management (IAM) system, allowing you to control access to your applications and content based on user roles and permissions.</p>
-</div>
-<div class="paragraph">
-<p>Authentication is configured per vhost by mapping ID providers, so different parts of your portal can use different authentication mechanisms. See <a href="../config/vhosts.ahtml">Virtual Hosts</a> for the mapping syntax and <a href="../security/idproviders.ahtml">ID providers</a> for the available providers.</p>
-</div>
-<div class="paragraph">
-<p>For service-to-service access, the platform supports JWT authentication via the system ID provider — see <a href="../security/system-idp.ahtml#jwt-authentication">JWT authentication</a>. Individual endpoints may document additional authentication options; see for example <a href="management.ahtml#authorization">Management API</a>.</p>
 </div>
 </div>
 </div>
@@ -538,7 +519,30 @@ When running the Enonic XP SDK, the portal serves a boot page on localhost:8080 
 </div>
 </div>
 <div class="sect2">
-<h3 id="contextual_mounting"><a class="link" href="#contextual_mounting">Contextual Mounting</a></h3>
+<h3 id="api_index_page"><a class="link" href="#api_index_page">API index page</a></h3>
+<div class="paragraph">
+<p>When enabled, the API index page provides a human-friendly overview of the APIs mounted in <code>/api</code>. It lists all registered APIs along with their respective endpoints and descriptions, making it easier for developers to discover and understand the capabilities of the platform.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The API index page is disabled by default in production environments for security reasons, but can be enabled in development mode or explicitly via configuration. See <a href="../config/system.ahtml#universal-api">Universal API</a> for details.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/api-index.png" alt="api index" width="1790">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="contextual_mounts"><a class="link" href="#contextual_mounts">Contextual mounts</a></h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -565,7 +569,7 @@ APIs can also be contextually mounted across other Portal services via the <code
 </ul>
 </div>
 <div class="paragraph">
-<p>This allows APIs to be scoped to specific contexts, such as a content site or administrative tool. The mount point of the API is determined by the application, allowing for flexible API design and organization.</p>
+<p>This allows APIs to be scoped to specific contexts, such as a content site or administrative tool. The mount point of the API is determined by each individual application, allowing for flexible API design and organization. For example, an admin tool may mount an API within the admin service.</p>
 </div>
 </div>
 </div>
@@ -636,10 +640,35 @@ The site service relies on both content, and installed Enonic applications to pr
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="vhosts"><a class="link" href="#vhosts">Vhosts</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The portal supports virtual hosts, allowing you to expose APIs and content on custom domains and paths. For example, you can mount the full API on <code>apis.yourdomain.com</code> or a site on <code>www.yourdomain.com</code> - including use of sub-paths like <code>yourdomain.com/content</code>.</p>
+</div>
+<div class="paragraph">
+<p>For more information on how to configure vhosts, see <a href="../config/vhosts.ahtml">Virtual Hosts</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="identity_and_access_management"><a class="link" href="#identity_and_access_management">Identity and access management</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The portal is fully integrated with XP&#8217;s identity and access management (IAM) system, allowing you to control access to your applications and content based on user roles and permissions.</p>
+</div>
+<div class="paragraph">
+<p>Authentication is configured per vhost by mapping ID providers, so different parts of your portal can use different authentication mechanisms. See <a href="../config/vhosts.ahtml">Virtual Hosts</a> for the mapping syntax and <a href="../security/idproviders.ahtml">ID providers</a> for the available providers.</p>
+</div>
+<div class="paragraph">
+<p>For service-to-service access, the platform supports JWT authentication via the system ID provider — see <a href="../security/system-idp.ahtml#jwt-authentication">JWT authentication</a>. Individual endpoints may document additional authentication options; see for example <a href="management.ahtml#authorization">Management API</a>.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 08:32:11 UTC
+Last updated 2026-05-05 09:04:57 UTC
 </div>
 </div>
 </body>

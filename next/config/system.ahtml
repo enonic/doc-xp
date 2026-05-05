@@ -450,7 +450,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#cluster">Cluster</a></li>
 <li><a href="#elasticsearch">Elasticsearch</a></li>
 <li><a href="#hazelcast">Hazelcast</a></li>
-<li><a href="#universal_api">Universal API</a></li>
+<li><a href="#universal-api">Universal API</a></li>
 <li><a href="#jetty">Jetty</a></li>
 <li><a href="#sessionstore">SessionStore</a></li>
 <li><a href="#media">Mime types</a></li>
@@ -1191,7 +1191,7 @@ It also requires granting certain permissions. You can find more information in 
 </div>
 </div>
 <div class="sect1">
-<h2 id="universal_api"><a class="link" href="#universal_api">Universal API</a></h2>
+<h2 id="universal-api"><a class="link" href="#universal-api">Universal API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><code>com.enonic.xp.api.cfg</code></p>
@@ -1209,7 +1209,7 @@ It also requires granting certain permissions. You can find more information in 
 <dl>
 <dt class="hdlist1">api.index.enabled</dt>
 <dd>
-<p>Enable or disable the <code>/api</code> index page. Default: <code>auto</code> &#8658; enabled if instance is running in dev mode, otherwise disabled.</p>
+<p>Enable or disable the <code>/api</code> index page. Default: <code>auto</code> &#8594; enabled if in dev mode, otherwise disabled.</p>
 </dd>
 </dl>
 </div>
@@ -1982,7 +1982,7 @@ Exports dir should be a shared storage for cluster environments.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 08:32:11 UTC
+Last updated 2026-05-05 09:04:57 UTC
 </div>
 </div>
 </body>
