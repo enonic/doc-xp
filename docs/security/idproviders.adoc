@@ -4,12 +4,33 @@
 
 ID providers provide a pluggable abstraction layer for user authentication and access management in XP.
 
+== Introduction
+
+The main purpose of IDproviders is to provde pluggable authentication and authorization to XP. With an ID provider configured, your may associate it with a <<../endpoints/portal#, portal service>> of your choice via  <<../config/vhosts#,virtual host>> configuration.
+
+
 == System ID provider
 
-To get started quickly, Enonic XP ships with a built-in IDprovider called the <<system-idp#, System ID provider>>. This is most commonly used by developers, or for administrative purposes.
+To get started quickly, Enonic XP ships with a built-in IDprovider called the <<system-idp#, System ID provider>>. This is most commonly used by developers, or for administrative purposes. When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.
+
+image::system-idprovider.png[System ID provider login screen, 828]
+
+You may also create service accounts in the System ID provider, and use them to authenticate against the Management Endpoint, or other APIs as described in <<service-accounts#, Service accounts>>.
+
+TIP: Avoid adding human users to the System ID provider, but rather create custom ID providers for this purpose.
+
+=== System users
+The System ID provider is also the home of two special users:
+
+image::super-user.png[The Super User, 834px]
+
+*system:su*
+The `Super User` exists in order to perform priveliged actions, and to allow you to start using XP before you have created any users. The Super User has the *system.admin* role, and thus unrestricted access.
+
+*system:anonymous* - XP expects a user in every request. As such, the `Anonymous` user steps in to cover for users that have not authenticated.
 
 
-== Creating an ID provider
+== Custom ID providers
 ID providers can be created and managed in the Users app, or via the API. An ID provider essentially consist of the following:
 
 * A unique name (cannot be changed later)
@@ -25,10 +46,4 @@ Once your ID provider is created, you may start working with users and groups wi
 
 NOTE: Often, ID providers are simply proxies against 3rd party systems such as Google Auth, or Microsoft Entra, In this case, you will not be able to manage the users locally - they will typically appear in XP once they sign in the first time.
 
-
-== Access management
-
-The main purpose of IDproviders is to control access to XP. Once you have configured your ID provider, the next step is to associate it with the endpoint you wish to protect - i.e XP admin, an API or a site. This is done by adding it to your <<../deployment/vhosts#,virtual hosts configuration>>.
-
-NOTE: ID providers generally have a passive approch to autentication, and will only trigger one a requested resource responds with a 401 code (Unauthenticated).
 
