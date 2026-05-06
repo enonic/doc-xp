@@ -444,11 +444,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#the_universal_cms">The Universal CMS</a></li>
 <li><a href="#built_like_an_operating_system">Built like an operating system</a>
 <ul class="sectlevel2">
-<li><a href="#applications">Applications</a></li>
+<li><a href="#enonic_apps">Enonic apps</a></li>
 <li><a href="#cms">CMS</a></li>
-<li><a href="#platform">Platform</a></li>
 </ul>
 </li>
+<li><a href="#platform_features">Platform features</a></li>
 <li><a href="#release_notes">Release notes</a></li>
 </ul>
 </div>
@@ -457,35 +457,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This documentation provides details on the Enonic XP core platform.</p>
+<p>This documentation covers the core platform features and architecture.</p>
 </div>
-<div class="exampleblock">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<strong>Front-end developer?</strong> Head over to the <a href="https://developer.enonic.com/docs/cms">CMS documentation</a> or try out the <a href="https://developer.enonic.com/start">Quick start guide</a>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Other relevant relevant documentation includes:</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<strong>Enonic developer?</strong> Building Enonic apps? Visit the <a href="https://developer.enonic.com/docs/code">Platform Developer Docs</a>
-</td>
-</tr>
-</table>
-</div>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://developer.enonic.com/docs/cms">CMS docs</a> for content modelling and content APIs</p>
+</li>
+<li>
+<p><a href="https://developer.enonic.com/docs/content-studio">Content Studio</a> for content authoring interface</p>
+</li>
+<li>
+<p><a href="https://developer.enonic.com/docs/code">Enonic Development Kit</a> for building Enonic applications</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -501,7 +489,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="built_like_an_operating_system"><a class="link" href="#built_like_an_operating_system">Built like an operating system</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP is built like an operating system. A core with essential services and APIs combined with an ecosystem of applications that can be installed on top to add specific functionality and features.</p>
+<p>XP is conceptually a core with essential services and APIs combined with an ecosystem of applications that can be installed on top to add specific functionality and features. This architecture allows for a high degree of flexibility and extensibility, enabling you to tailor the platform to your specific needs and use cases.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -509,9 +497,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="applications"><a class="link" href="#applications">Applications</a></h3>
+<h3 id="enonic_apps"><a class="link" href="#enonic_apps">Enonic apps</a></h3>
 <div class="paragraph">
-<p>Applications are standalone software packages that can be installed and started on Enonic XP, and they have access to all platform services and APIs. You may use them to add your own specific features, or extend existing ones.</p>
+<p>Enonic applications are standalone software packages that can be installed and started on Enonic XP, and they have access to all platform services and APIs. You may use them to add your own specific features, or extend existing ones.</p>
 </div>
 <div class="paragraph">
 <p>Visit <a href="https://market.enonic.com">Enonic Market</a> to find official apps from Enonic, as well as 3rd party applications.</p>
@@ -534,7 +522,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="https://developer.enonic.com/docs/content-studio">Content Studio</a> - A rich admin interface for content management</p>
 </li>
 <li>
-<p>OPTIONAL: Site Engine for serving websites without using 3rd party frameworks</p>
+<p>Hybrid delivery using the embedded rendering engine</p>
 </li>
 </ul>
 </div>
@@ -542,8 +530,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Visit the separately maintained <a href="https://developer.enonic.com/docs/cms">CMS documentation</a> to learn more.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="platform"><a class="link" href="#platform">Platform</a></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="platform_features"><a class="link" href="#platform_features">Platform features</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The core platform provides essential services and APIs that applications can leverage to build their functionality.</p>
 </div>
@@ -553,19 +544,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="apis/universal.ahtml">Universal API</a> - A Kubernetes-inspired API model that allows applications to contribute their own APIs, automatically integrating with XP&#8217;s security model.</p>
 </li>
 <li>
-<p><a href="apps/runtime.ahtml">App runtime</a> - A powerful and flexible application engine that can run multiple applications simultaneously.</p>
-</li>
-<li>
-<p><a href="security/iam.ahtml">Identity and Access Management (IAM)</a> - A comprehensive security model for authentication and authorization across the platform</p>
-</li>
-<li>
 <p><a href="storage.ahtml">NoSQL Storage</a> - A built-in NoSQL storage engine for storing content, application- and system data.</p>
 </li>
 <li>
 <p>Grid and clustering - for distributed memory caching, events and job execution</p>
 </li>
+<li>
+<p><a href="security/iam.ahtml">Identity and Access Management (IAM)</a> - A comprehensive security model for authentication and authorization across the platform</p>
+</li>
+<li>
+<p><a href="apps/runtime.ahtml">App runtime</a> - A powerful and flexible application engine that can run multiple applications simultaneously.</p>
+</li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -592,7 +582,7 @@ If you are looking to upgrade from a previous version of XP, check out the <a hr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 12:46:10 UTC
+Last updated 2026-05-06 14:38:35 UTC
 </div>
 </div>
 </body>

@@ -441,9 +441,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#system_id_provider">System ID provider</a></li>
-<li><a href="#creating_an_id_provider">Creating an ID provider</a></li>
-<li><a href="#access_management">Access management</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#system_id_provider">System ID provider</a>
+<ul class="sectlevel2">
+<li><a href="#system_users">System users</a></li>
+</ul>
+</li>
+<li><a href="#custom_id_providers">Custom ID providers</a></li>
 </ul>
 </div>
 </div>
@@ -456,15 +460,61 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="system_id_provider"><a class="link" href="#system_id_provider">System ID provider</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To get started quickly, Enonic XP ships with a built-in IDprovider called the <a href="system-idp.ahtml">System ID provider</a>. This is most commonly used by developers, or for administrative purposes.</p>
+<p>The main purpose of IDproviders is to provde pluggable authentication and authorization to XP. With an ID provider configured, your may associate it with a <a href="../endpoints/portal.ahtml">portal service</a> of your choice via  <a href="../config/vhosts.ahtml">virtual host</a> configuration.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating_an_id_provider"><a class="link" href="#creating_an_id_provider">Creating an ID provider</a></h2>
+<h2 id="system_id_provider"><a class="link" href="#system_id_provider">System ID provider</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To get started quickly, Enonic XP ships with a built-in IDprovider called the <a href="system-idp.ahtml">System ID provider</a>. This is most commonly used by developers, or for administrative purposes. When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/system-idprovider.png" alt="System ID provider login screen" width="828">
+</div>
+</div>
+<div class="paragraph">
+<p>You may also create service accounts in the System ID provider, and use them to authenticate against the Management Endpoint, or other APIs as described in <a href="service-accounts.ahtml">Service accounts</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Avoid adding human users to the System ID provider, but rather create custom ID providers for this purpose.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="system_users"><a class="link" href="#system_users">System users</a></h3>
+<div class="paragraph">
+<p>The System ID provider is also the home of two special users:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/super-user.png" alt="The Super User" width="834px">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>system:su</strong>
+The <code>Super User</code> exists in order to perform priveliged actions, and to allow you to start using XP before you have created any users. The Super User has the <strong>system.admin</strong> role, and thus unrestricted access.</p>
+</div>
+<div class="paragraph">
+<p><strong>system:anonymous</strong> - XP expects a user in every request. As such, the <code>Anonymous</code> user steps in to cover for users that have not authenticated.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="custom_id_providers"><a class="link" href="#custom_id_providers">Custom ID providers</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>ID providers can be created and managed in the Users app, or via the API. An ID provider essentially consist of the following:</p>
@@ -516,30 +566,10 @@ Often, ID providers are simply proxies against 3rd party systems such as Google 
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="access_management"><a class="link" href="#access_management">Access management</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The main purpose of IDproviders is to control access to XP. Once you have configured your ID provider, the next step is to associate it with the endpoint you wish to protect - i.e XP admin, an API or a site. This is done by adding it to your <a href="../deployment/vhosts.ahtml">virtual hosts configuration</a>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-ID providers generally have a passive approch to autentication, and will only trigger one a requested resource responds with a 401 code (Unauthenticated).
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-05 12:46:10 UTC
+Last updated 2026-05-06 14:38:35 UTC
 </div>
 </div>
 </body>
