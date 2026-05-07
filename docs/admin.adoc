@@ -2,34 +2,58 @@
 :toc: right
 :imagesdir: admin/images
 
-This document describes built-in administration of Enonic XP.
-There are a number of apps that can extend and simplify XP administration.
-Please check out the documentation of each of them for details.
+Details on XP's built-in administrative interface, and how to extend it with your own tools and widgets.
 
-[#admin_console]
-== Admin console
+== Introduction
 
-When visiting the Enonic XP admin interface - you will be required to log in.
-For new installations and unless configured otherwise, you will first have to create the admin user.
+Enonic XP ships with a powerful and flexible administrative interface, accessible via the `:8080/admin` portal service. The XP admin is dynamically extensible, allowing you to add your own custom tools (aka Admin apps) to tailor the experience to your specific needs.  
 
-After logging in, you will see the main admin console:
+TIP: XP admin can be deployed at custom URL ie. xp.mycompany.com/management using <<../config/vhosts#, Vhost configuration>>.
 
-image::AdminConsole.png[Admin Startup Page, 905px]
+== Access
 
-In the top left corner, there are some important links for documentation and interaction with Enonic.
-On the right, there is a menu with all installed applications.
-Two of them are system applications that are installed on all installations:
+Admin access requires an authenticated user, with the minimum role `Administration Console Login` (system.admin.login). For unlimited access, the user must have the `Administrator` (system.admin) role.
 
-* *Applications* - Add applications from the market or upload your own.  Applications may be everything from complete sites to simple admin widgets.  Read more in <<apps#,Applications>>.
-* *Users* - Administrate users.  More info in <<./iam#,Identity and Access Managment (IAM)>>.
+TODO: Details about first login
 
-NOTE: If you are used to working in the Content Studio, you will miss it in a clean installation, as it has now been pulled out from the core
-and must be installed from Market in the Applications app.  The Content Studio documentation may be found here:
-https://developer.enonic.com/docs/content-studio[Content Studio Doc]
+== XP menu
+
+Once logged in, you will see the XP menu, which can be compared to the home screen of a smartphone. Here you will see the admin tools your user has access to.
+
+image::xp-menu.png[XP menu listing three icons for dashboard, applications, and user tools, 1440px]
+
+* Left you see the name of your instance and version of XP. 
+* Right you see the available tools. 
+* Top right you see your user avatar with ability to log out. 
+* Once you navitate to a different tool, you will also get access to the XP menu in the top right corner, allowing you to easily switch between tools, or return to the menu.
+
+TIP: Try installing Content Studio (from the `Applications` tool), to see how this extends the menu with a new tool, and adds new widgets to the Dashboard.
+
+== Admin tools
+
+Admin tools are standalone applications that are integrated with the XP admin. The default tools are Dashboard, Applications, and Users.
+
+* A single XP application may contain multiple admin tools
+* Each admin tool may define custom roles to restrict access.
+* Admin tools are all served within the admin URL pattern. i.e.  `:8080/admin/<app-name>:<tool-name>`
+
+=== Admin extensions
+
+XP admin also features another level of pluggablibility called admin extensions. Unlike tools, extensions are not immediately visible in the XP menu, but rather integrate with existing tools, such as adding widgets to the Dashboard, or adding new tabs and panels to Content Studio. 
+
+Each Extension implements a specific extension point (interface) defined by the tool they are extending. This allows for a high degree of flexibility and customization, enabling you to tailor the admin experience to your specific needs and use cases.
+
+NOTE: The widgets are served contextually using the following URL pattern: `:8080/admin/app/tool/_/admin:extension/<app-name>:<widget-name>`, and loaded dynamically by the tool they are extending.
+
+=== Bring Your Own Admin
+
+XP enables developers to build custom admin tools and extensions. 
+
+Visit the the https://developer.enonic.com/docs/code[Enonic Development Kit] documentation for more details.
 
 == Languages
 
-The tools of the admin console have been translated to the following languages:
+The tools of the admin console has been translated to the following languages:
 
 * Belarussian
 * Dutch
@@ -44,31 +68,3 @@ The tools of the admin console have been translated to the following languages:
 * Swedish
 
 The language used by the admin tools, is based on your browser settings.   If your preferred language is one of the above, it will be used. If your preferred language is not in the list, the admin console will default to English.
-
-If you know a language that is not supported, we would greatly appreciate help with translating the admin console to more languages. Please checkout out our guide on <<./admin/contributing-to-translations#, Contributing to Translations>>.
-
-== Admin extensions
-
-XP enables developers to extend the admin console with custom functionality at pre-defined locations.
-
-For more information on how to implement extensions, visit the <<runtime/engines/admin-engine#,admin engine documentation>>
-
-=== Admin tools
-
-Admin tools represent standalone applications that are integrated with the admin console login and launcher.
-Tools are launched in separate browser tabs, running independently of other admin components.
-
-* A single XP application may contain multiple admin tools
-* Access to an admin tool typically requires authentication, and a particular role memberships
-* Admin tools are all served within the admin URL pattern. i.e.  ``//<server>:<port>/admin/<tool-name>``
-
-=== Admin Widgets
-
-Widgets are designed to extend functionality of existing admin interfaces.
-Widgets are essentially small applications that are displayed in the Context panel of the admin interface.
-
-* A single XP application may contain multiple widgets
-* Access to a widget typically requires authentication, and particular role memberships
-* Widgets are not supposed to be used outside the admin console
-* Widget can be context dependent (display data based on a selected content) or independent.
-

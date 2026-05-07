@@ -16,9 +16,7 @@ A role consist of:
 * name (unique identifier)
 * Description (optional)
 
-When editing a role via the users app, you instantly grant the role to users or groups as well.
-
-image::roles-create.png[Creating a role in the Users app, 845]
+When editing a role via the users app, you instantly grant the role to users or groups as well. For a walkthrough, see the <<../admin/users#roles, Users admin tool>>.
 
 NOTE: Only Users with the *Administrator* or *Users Administrator* role may create or edit roles.
 
@@ -34,9 +32,6 @@ Just like users and groups, a role may be given explicit permissions to content 
 == System roles
 
 Enonic XP ships with several built-in roles. Each of which provide specific access and privileges in the system.
-
-image::roles.png[List of system roles, 504]
-
 
 *system.admin*
 Users with this role have full access to all content and admin tools through the user interface.
@@ -77,8 +72,7 @@ Grants the ability to view and modify source code in the rich text editor.
 *cms.cm.app*
 NOTE: This role is deprecated. It gives users to access to the legacy `default` project in Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project.
 
-:imagesdir: images
-
 When using <<../cms/projects#, Content Projects>>, each project automatically creates a set of <<../cms/projects#roles, project roles>> in addition to the built-in roles listed above.
 
 These roles will be prefixed with `cms.projectname.`, and as such be unique to each individual project.
+

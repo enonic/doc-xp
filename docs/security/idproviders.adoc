@@ -13,16 +13,12 @@ The main purpose of IDproviders is to provde pluggable authentication and author
 
 To get started quickly, Enonic XP ships with a built-in IDprovider called the <<system-idp#, System ID provider>>. This is most commonly used by developers, or for administrative purposes. When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.
 
-image::system-idprovider.png[System ID provider login screen, 828]
-
 You may also create service accounts in the System ID provider, and use them to authenticate against the Management Endpoint, or other APIs as described in <<service-accounts#, Service accounts>>.
 
 TIP: Avoid adding human users to the System ID provider, but rather create custom ID providers for this purpose.
 
 === System users
 The System ID provider is also the home of two special users:
-
-image::super-user.png[The Super User, 834px]
 
 *system:su*
 The `Super User` exists in order to perform priveliged actions, and to allow you to start using XP before you have created any users. The Super User has the *system.admin* role, and thus unrestricted access.
@@ -40,7 +36,7 @@ TIP: You may choose from a range of standard ID providers on https://market.enon
 +
 * Permissions - specifies who can manage and access the ID provider
 
-image::system-idprovider-admin.png[Setting up an ID provider from the Users admin tool, 819]
+For a walkthrough of creating and configuring an ID provider from the UI, see the <<../admin/users#id-providers, Users admin tool>>.
 
 Once your ID provider is created, you may start working with users and groups within it.
 
