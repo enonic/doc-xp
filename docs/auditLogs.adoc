@@ -123,7 +123,7 @@ auditlog.enabled = true
 
 == Repo
 
-In order to enable or disable audit logs for repository actions you have to modify configuration file `com.enonic.xp.repo.cfg` and set `auditlog.enabled` option to `true` to enable or `false` to disable logging. Default value is `true`.
+To enable or disable audit logs for repository actions, modify the `auditlog.enabled` option in `com.enonic.xp.repo.cfg`. The default value is `true`.
 
 .com.enonic.xp.repo.cfg
 [source,properties]
