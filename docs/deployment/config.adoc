@@ -180,9 +180,13 @@ Use this file to configure the node repository layer.
 .Example below uses default settings
 [source,properties]
 ----
+auditlog.enabled = true
 cache.capacity = 10%
 snapshots.dir = ${xp.home}/snapshots
 ----
+
+auditlog.enabled:: Set to `false` to disable the creation of audit log entries on repository operations. Default: `true`.
+IMPORTANT: Audit log can be disabled by the common `<<audit_enabled, enabled>>` property. Repository flag will not have any effect in this case.
 
 cache.capacity:: image:xp-7150.svg[XP 7.15.0,opts=inline]. Defines Heap memory limit for node version cache. The value is set in percentage of total Heap, or in memory units (`mb`, `gb`, ...). Default: `10%`
 snapshots.dir:: Specifies the root location for where to find and place snapshot files. Default: `${xp.home}/snapshots`
