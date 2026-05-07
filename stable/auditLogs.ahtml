@@ -451,6 +451,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#xp_registers_the_following_actions_for_applications">XP registers the following actions for applications:</a></li>
 </ul>
 </li>
+<li><a href="#repo">Repo</a>
+<ul class="sectlevel2">
+<li><a href="#xp_registers_the_following_actions_for_repositories">XP registers the following actions for repositories:</a></li>
+</ul>
+</li>
 <li><a href="#content">Content</a>
 <ul class="sectlevel2">
 <li><a href="#xp_registers_the_following_actions_for_content">XP registers the following actions for content:</a></li>
@@ -463,7 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP registers successfully completed actions that affect content, applications, principals and ID providers in the <code>system.auditlog</code> repository.</p>
+<p>XP registers successfully completed actions that affect repositories, content, applications, principals and ID providers in the <code>system.auditlog</code> repository.</p>
 </div>
 </div>
 </div>
@@ -633,6 +638,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
+<h2 id="repo"><a class="link" href="#repo">Repo</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To enable or disable audit logs for repository actions, modify the <code>auditlog.enabled</code> option in <code>com.enonic.xp.repo.cfg</code>. The default value is <code>true</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">com.enonic.xp.repo.cfg</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.enabled = true</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="xp_registers_the_following_actions_for_repositories"><a class="link" href="#xp_registers_the_following_actions_for_repositories">XP registers the following actions for repositories:</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>system.repo.create</code> - a repository has been created</p>
+</li>
+<li>
+<p><code>system.repo.delete</code> - a repository has been deleted</p>
+</li>
+<li>
+<p><code>system.repo.branch.create</code> - a branch has been created in a repository</p>
+</li>
+<li>
+<p><code>system.repo.branch.delete</code> - a branch has been deleted from a repository</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="content"><a class="link" href="#content">Content</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -701,7 +739,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-07 14:06:17 UTC
+Last updated 2026-05-07 14:47:11 UTC
 </div>
 </div>
 </body>
