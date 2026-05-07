@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Contributing to Translations</title>
+<title>Users</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,20 +437,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Contributing to Translations</h1>
+<h1>Users</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#translating_files">Translating files</a></li>
-<li><a href="#file_locations">File locations</a>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#id-providers">ID providers</a></li>
+<li><a href="#users">Users</a></li>
+<li><a href="#groups">Groups</a></li>
+<li><a href="#roles">Roles</a></li>
+<li><a href="#service-accounts-and-keys">Service accounts and keys</a>
 <ul class="sectlevel2">
-<li><a href="#admin_home_app">Admin Home App</a></li>
-<li><a href="#admin_ui_library">Admin UI Library</a></li>
-<li><a href="#applications_app">Applications App</a></li>
-<li><a href="#content_studio">Content Studio</a></li>
-<li><a href="#standard_id_provider">Standard ID Provider</a></li>
-<li><a href="#users_app">Users App</a></li>
-<li><a href="#xp_runtime">XP Runtime</a></li>
+<li><a href="#generating_a_key">Generating a key</a></li>
+<li><a href="#uploading_a_key">Uploading a key</a></li>
 </ul>
 </li>
 </ul>
@@ -460,264 +459,195 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>We would greatly appreciate help with translating our Admin Console to more languages.  Here is a guide on how to contribute:</p>
+<p>The Users admin tool is the UI for managing ID providers, users, groups, roles and service accounts.</p>
 </div>
-<div class="paragraph">
-<p>First, you need to fork the repository on GitHub, then checkout your fork to your local machine. After that, create language files for the specific language you can provide a translation for.
-When the translation is complete, a pull request should be sent to Enonic, so we can include the file in the next distribution.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="translating_files"><a class="link" href="#translating_files">Translating files</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To provide a translation, please start with the English original phrase files and make a copy of each of them in the same folder, extending the main filename with <code>_&lt;language-code&gt;</code>.
-If, for instance, you want to make a translation to Spanish, the copied files should be called <code>common_es.properties</code> or <code>phrases_es.properties</code>.
-In the copied files, you may now translate all the English text into your preferred language.
-When done, please submit a pull request from your fork to the upstream project with the translations.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="file_locations"><a class="link" href="#file_locations">File locations</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>XP is split into multiple projects: one basic runtime, some libraries, and several apps. All code is found on GitHub:</p>
-</div>
-<div class="admonitionblock important">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Before making changes, fork the repositories listed below to your own GitHub account.
-After forking, clone your fork to your local machine using:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>git clone git@github.com:&lt;your-username&gt;/&lt;repository-name&gt;.git</pre>
-</div>
-</div>
+The Users app is still using the legacy admin UI, and will be upgraded to Enonic UI in the future.
 </td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="admin_home_app"><a class="link" href="#admin_home_app">Admin Home App</a></h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 71.4286%;">
-</colgroup>
-<tbody>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Users tool exposes the principals and ID providers that make up XP&#8217;s identity model. For the underlying concepts and data model, see:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../security/idproviders.ahtml">ID providers</a></p>
+</li>
+<li>
+<p><a href="../security/users.ahtml">Users and groups</a></p>
+</li>
+<li>
+<p><a href="../security/roles.ahtml">Roles</a></p>
+</li>
+<li>
+<p><a href="../security/service-accounts.ahtml">Service accounts</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>GitHub URL</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://github.com/enonic/app-admin-home" class="bare">https://github.com/enonic/app-admin-home</a></p>
-</div></div></td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Access to the Users tool requires the <code>Administrator</code> or <code>Users Administrator</code> role. The <code>Users App</code> role grants read-only access.
+</td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-admin-home.git</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original file in English</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>/src/main/resources/i18n/phrases.properties</code></p>
-</div></div></td>
-</tr>
-</tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="admin_ui_library"><a class="link" href="#admin_ui_library">Admin UI Library</a></h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 71.4286%;">
-</colgroup>
-<tbody>
+</div>
+</div>
+<div class="sect1">
+<h2 id="id-providers"><a class="link" href="#id-providers">ID providers</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ID providers are listed in the left navigation. Selecting one shows the users and groups within it. Creating a new ID provider lets you pick the ID provider application, supply configuration, and set permissions for who may manage and use it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/users-idprovider.png" alt="Setting up an ID provider from the Users admin tool" width="819">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>GitHub URL</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://github.com/enonic/lib-admin-ui" class="bare">https://github.com/enonic/lib-admin-ui</a></p>
-</div></div></td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Most ID providers - such as the OIDC provider - proxy a third-party system. In that case users typically appear in XP only after they sign in for the first time, and cannot be edited locally.
+</td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/lib-admin-ui.git</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original file in English</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>/src/main/resources/admin/i18n/common.properties</code></p>
-</div></div></td>
-</tr>
-</tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="applications_app"><a class="link" href="#applications_app">Applications App</a></h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 71.4286%;">
-</colgroup>
-<tbody>
+</div>
+</div>
+<div class="sect1">
+<h2 id="users"><a class="link" href="#users">Users</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Users live within an ID provider. For ID providers that support local management (such as the Simple ID provider), the tool lets you create and edit users directly:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/users-form.png" alt="Creating a user in the Users app" width="811">
+</div>
+</div>
+<div class="paragraph">
+<p>A user has a login (username), display name, and email. Group memberships and role assignments are managed from the same form.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="groups"><a class="link" href="#groups">Groups</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Groups also belong to an ID provider and provide a way to grant roles and permissions to many users at once. Groups can contain other groups - permissions resolve transitively.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/users-group.png" alt="Creating a group in the Users app" width="820">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="roles"><a class="link" href="#roles">Roles</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roles are global, independent of ID providers. The list shows both system roles and custom roles defined by applications or administrators. The system roles are read-only, and can be recognized by the small goc symbol on their avatar.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/users-roles.png" alt="List of roles" width="504">
+</div>
+</div>
+<div class="paragraph">
+<p>Editing a role lets you assign users and groups to it directly.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/users-role.png" alt="Creating a role in the Users app" width="845">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>GitHub URL</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://github.com/enonic/app-applications" class="bare">https://github.com/enonic/app-applications</a></p>
-</div></div></td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only users with the <code>Administrator</code> or <code>Users Administrator</code> role may create or edit roles.
+</td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-applications.git</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original file in English</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>/src/main/resources/i18n/phrases.properties</code></p>
-</div></div></td>
-</tr>
-</tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="content_studio"><a class="link" href="#content_studio">Content Studio</a></h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 71.4286%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>GitHub URL</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://github.com/enonic/app-contentstudio" class="bare">https://github.com/enonic/app-contentstudio</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-contentstudio.git</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original files in English</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>/modules/lib/src/main/resources/i18n/cs-plus.properties</code>
-<code>/modules/lib/src/main/resources/i18n/dialogs.properties</code>
-<code>/modules/lib/src/main/resources/i18n/page-editor.properties</code>
-<code>/modules/lib/src/main/resources/i18n/phrases.properties</code>
-<code>/modules/lib/src/main/resources/i18n/wcag.properties</code></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="service-accounts-and-keys"><a class="link" href="#service-accounts-and-keys">Service accounts and keys</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Service accounts are managed from the built-in System ID provider. They are recognized in the user list by a small cog symbol on their avatar:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/super-user.png" alt="The Super User" width="834px">
+</div>
+</div>
+<div class="paragraph">
+<p>Selecting a service account exposes its associated keys, used for machine-to-machine authentication against the Management API and other endpoints:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service-account-keys.png" alt="List of service account keys" width="662px">
+</div>
 </div>
 <div class="sect2">
-<h3 id="standard_id_provider"><a class="link" href="#standard_id_provider">Standard ID Provider</a></h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 71.4286%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>GitHub URL</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://github.com/enonic/app-standardidprovider" class="bare">https://github.com/enonic/app-standardidprovider</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-standardidprovider.git</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original file in English</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>/src/main/resources/i18n/phrases.properties</code></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+<h3 id="generating_a_key"><a class="link" href="#generating_a_key">Generating a key</a></h3>
+<div class="paragraph">
+<p>Click <strong>Add</strong> to generate a new key. Provide a name and click <strong>Generate</strong> - the public key is stored on the server, and the private key is automatically downloaded to your device as a JSON file.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service-account-key-form.png" alt="Generate service account key" width="834px">
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="users_app"><a class="link" href="#users_app">Users App</a></h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 71.4286%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>GitHub URL</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://github.com/enonic/app-users" class="bare">https://github.com/enonic/app-users</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/app-users.git</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original file in English</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>/src/main/resources/i18n/phrases.properties</code></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+<h3 id="uploading_a_key"><a class="link" href="#uploading_a_key">Uploading a key</a></h3>
+<div class="paragraph">
+<p>You may also upload an existing public key (RSA, base64-encoded) and use the matching private key for authentication.</p>
 </div>
-<div class="sect2">
-<h3 id="xp_runtime"><a class="link" href="#xp_runtime">XP Runtime</a></h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 71.4286%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>GitHub URL</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://github.com/enonic/xp" class="bare">https://github.com/enonic/xp</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Checkout command</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>git clone <a href="mailto:git@github.com">git@github.com</a>:&lt;your-username&gt;/xp.git</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Original file in English</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>/modules/app/app-system/src/main/resources/i18n/phrases.properties</code></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+<div class="imageblock">
+<div class="content">
+<img src="images/service-account-key-upload.png" alt="Upload public key" width="807px">
+</div>
+</div>
+<div class="paragraph">
+<p>For details on key generation, JWT format, and rotation, see <a href="../security/service-accounts.ahtml">Service accounts</a>.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-06 14:45:17 UTC
+Last updated 2026-05-07 14:06:44 UTC
 </div>
 </div>
 </body>

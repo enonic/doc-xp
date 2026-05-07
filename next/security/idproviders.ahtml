@@ -473,11 +473,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>To get started quickly, Enonic XP ships with a built-in IDprovider called the <a href="system-idp.ahtml">System ID provider</a>. This is most commonly used by developers, or for administrative purposes. When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/system-idprovider.png" alt="System ID provider login screen" width="828">
-</div>
-</div>
 <div class="paragraph">
 <p>You may also create service accounts in the System ID provider, and use them to authenticate against the Management Endpoint, or other APIs as described in <a href="service-accounts.ahtml">Service accounts</a>.</p>
 </div>
@@ -497,11 +492,6 @@ Avoid adding human users to the System ID provider, but rather create custom ID 
 <h3 id="system_users"><a class="link" href="#system_users">System users</a></h3>
 <div class="paragraph">
 <p>The System ID provider is also the home of two special users:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/super-user.png" alt="The Super User" width="834px">
-</div>
 </div>
 <div class="paragraph">
 <p><strong>system:su</strong>
@@ -544,10 +534,8 @@ You may choose from a range of standard ID providers on <a href="https://market.
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/system-idprovider-admin.png" alt="Setting up an ID provider from the Users admin tool" width="819">
-</div>
+<div class="paragraph">
+<p>For a walkthrough of creating and configuring an ID provider from the UI, see the <a href="../admin/users.ahtml#id-providers">Users admin tool</a>.</p>
 </div>
 <div class="paragraph">
 <p>Once your ID provider is created, you may start working with users and groups within it.</p>
@@ -569,7 +557,7 @@ Often, ID providers are simply proxies against 3rd party systems such as Google 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-06 14:45:17 UTC
+Last updated 2026-05-07 14:06:44 UTC
 </div>
 </div>
 </body>

@@ -5,18 +5,26 @@
       "document": "index"
     },
     {
-      "title": "Applications",
-      "document": "apps",
+      "title": "XP Admin",
+      "document": "admin",
       "menuItems": [
         {
-          "title": "Runtime",
-          "document": "apps/runtime"
+          "title": "Dashboard",
+          "document": "admin/dashboard"
         },
         {
-          "title": "Lifecycle",
-          "document": "apps/lifecycle"
+          "title": "Applications",
+          "document": "admin/applications"
+        },
+        {
+          "title": "Users",
+          "document": "admin/users"
         }
       ]
+    },
+    {
+      "title": "Applications",
+      "document": "apps"
     },
     {
       "title": "Security",
@@ -41,20 +49,6 @@
         {
           "title": "Audit Logs",
           "document": "security/audit-logs"
-        }
-      ]
-    },
-    {
-      "title": "XP Admin",
-      "document": "admin",
-      "menuItems": [
-        {
-          "title": "Tools",
-          "document": "admin/tools"
-        },
-        {
-          "title": "Extensions",
-          "document": "admin/extensions"
         }
       ]
     },
