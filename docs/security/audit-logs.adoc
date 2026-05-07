@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-XP registers successfully completed actions that affect content, applications, principals and ID providers in the `system.auditlog` repository.
+XP registers successfully completed actions that affect repositories, content, applications, principals and ID providers in the `system.auditlog` repository.
 
 == Principals and ID providers
 
@@ -120,6 +120,23 @@ auditlog.enabled = true
 * `system.application.stop` - an application has been stopped
 * `system.application.install` - an application has been installed
 * `system.application.uninstall` - an application has been uninstalled
+
+== Repo
+
+To enable or disable audit logs for repository actions, modify the `auditlog.enabled` option in `com.enonic.xp.repo.cfg`. The default value is `true`.
+
+.com.enonic.xp.repo.cfg
+[source,properties]
+----
+auditlog.enabled = true
+----
+
+=== XP registers the following actions for repositories:
+
+* `system.repo.create` - a repository has been created
+* `system.repo.delete` - a repository has been deleted
+* `system.repo.branch.create` - a branch has been created in a repository
+* `system.repo.branch.delete` - a branch has been deleted from a repository
 
 == Content
 
