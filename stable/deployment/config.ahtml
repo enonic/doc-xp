@@ -777,29 +777,12 @@ defaultFromEmail=noreply@domain.com</code></pre>
 <div class="listingblock">
 <div class="title">Example below uses default settings</div>
 <div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">auditlog.enabled = true
-cache.capacity = 10%
+<pre class="highlight"><code class="language-properties" data-lang="properties">cache.capacity = 10%
 snapshots.dir = ${xp.home}/snapshots</code></pre>
 </div>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">auditlog.enabled</dt>
-<dd>
-<p>Set to <code>false</code> to disable the creation of audit log entries on repository operations. Default: <code>true</code>.</p>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Audit log can be disabled by the common <code><a href="#audit_enabled">enabled</a></code> property. Repository flag will not have any effect in this case.
-</td>
-</tr>
-</table>
-</div>
-</dd>
 <dt class="hdlist1">cache.capacity</dt>
 <dd>
 <p><span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
@@ -2610,7 +2593,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-07 14:47:11 UTC
+Last updated 2026-05-07 14:49:21 UTC
 </div>
 </div>
 </body>
