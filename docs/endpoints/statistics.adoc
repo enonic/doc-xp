@@ -583,7 +583,7 @@ Validates that all services required for full operation are available.
 
  GET http://<host>:2609/ready
 
-Same response shape as `/health`. Failed validation returns `503` with errors:
+Returns `200 OK` with an empty `{}` body when ready. On failure, returns `503` with a list of errors:
 
 [source,json]
 ----
