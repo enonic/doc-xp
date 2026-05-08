@@ -11,8 +11,7 @@ NOTE: The Users app is still using the legacy admin UI, and will be upgraded to 
 The Users tool exposes the principals and ID providers that make up XP's identity model. For the underlying concepts and data model, see:
 
 * <<../security/idproviders#, ID providers>>
-* <<../security/users#, Users and groups>>
-* <<../security/roles#, Roles>>
+* <<../security/principals#, Principals (users, groups, roles)>>
 * <<../security/service-accounts#, Service accounts>>
 
 NOTE: Access to the Users tool requires the `Administrator` or `Users Administrator` role. The `Users App` role grants read-only access.

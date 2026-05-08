@@ -1,35 +1,64 @@
-= Roles
+= Principals
 :toc: right
 :imagesdir: images
 
+Principals are the actors of XP's security model: users, groups, and roles. Together they answer "who is this?" and "what may they do?".
+
 == Introduction
+
+XP has three kinds of principal:
+
+Users:: Represent a person or service account. Always belong to an <<idproviders#, ID provider>>.
+Groups:: Bundle users (and other groups) together so permissions can be granted in bulk. Also scoped to an ID provider.
+Roles:: Global access tokens that grant specific privileges in the system. Independent of any ID provider.
+
+For a walkthrough of managing principals from the UI, see the <<../admin/users#, Users admin tool>>.
+
+[#users]
+== Users
+
+Users exist in the scope of an ID provider. Selected ID providers, such as the https://market.enonic.com/vendors/enonic/simple-idprovider[Simple ID provider^] let you create and manage users directly from the XP admin. Other ID providers - such as the https://market.enonic.com/vendors/enonic/oidc-id-provider[OIDC ID provider^] - rely on external systems, where users are managed in the 3rd party system and only appear in XP once they have signed in for the first time.
+
+A user generally consist of the following fields:
+
+* login (username)
+* display name (Full name)
+* e-mail
+
+=== Profiles
+
+Developers may also store custom properties and values in the user object via `profiles`. This information is currently not visible or possible to edit via the Users App.
+
+[#groups]
+== Groups
+
+Similar to users, groups are linked to an ID provider. Groups provide a flexible way to create and manage permissions, without assigning them on a per-user-basis.
+
+* You may add users to a group
+* Roles may be granted to a group - indirectly assigning the roles to the users of the group
+* Groups may be added to a group - causing transitive resolution of permissions
+
+[#roles]
+== Roles
 
 Roles provide access to application specific functionality via so-called Role Based Access Control (RBAC).
 
-== Custom roles
-
-Roles can be seen and managed from the `Users` admin app.
-
 A role consist of:
 
-* Display Name
 * name (unique identifier)
+* Display Name (Human friendly name)
 * Description (optional)
-
-When editing a role via the users app, you instantly grant the role to users or groups as well. For a walkthrough, see the <<../admin/users#roles, Users admin tool>>.
-
-NOTE: Only Users with the *Administrator* or *Users Administrator* role may create or edit roles.
 
 You are free to manually define custom roles, i.e. by giving it select permissions. In general however, it is recommended that roles are created and managed by applications. The applications then typically also implement the related functionality that the role gives access to.
 
 NOTE: Unlike groups, a role may not be assigned other roles. It is designed to provide a specific access, and nothing else.
 
-== Permissions
+=== Permissions
 
-Just like users and groups, a role may be given explicit permissions to content in the CMS via https://developer.enonic.com/docs/content-studio/stable/permissions[Content Studio^]
+Just like users and groups, a role may be given explicit permissions to content in the CMS via https://developer.enonic.com/docs/content-studio/stable/permissions[Content Studio^].
 
-
-== System roles
+[#system-roles]
+=== System roles
 
 Enonic XP ships with several built-in roles. Each of which provide specific access and privileges in the system.
 
@@ -48,7 +77,7 @@ Provides read-only access to the Users admin tool.
 *system.schema.admin*
 Grants permissions to read/write schemas.
 
-== Dynamic roles
+=== Dynamic roles
 
 The system also includes two special roles which cannot be directly assigned to a user or group, but are conditionally assigned to users automatically.
 
@@ -60,8 +89,7 @@ All users, both authenticated and non-authenticated users (The Anonymous user) a
 
 TIP: The role can is typically used to grant read access to public content, thus making it available to - well everyone.
 
-
-== CMS Roles
+=== CMS roles
 
 *cms.admin*
 Allows full access to Content Studio, including ability to create and delete content projects.
@@ -75,4 +103,3 @@ NOTE: This role is deprecated. It gives users to access to the legacy `default` 
 When using <<../cms/projects#, Content Projects>>, each project automatically creates a set of <<../cms/projects#roles, project roles>> in addition to the built-in roles listed above.
 
 These roles will be prefixed with `cms.projectname.`, and as such be unique to each individual project.
-

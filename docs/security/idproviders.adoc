@@ -15,6 +15,9 @@ To get started quickly, Enonic XP ships with a built-in IDprovider called the <<
 
 You may also create service accounts in the System ID provider, and use them to authenticate against the Management Endpoint, or other APIs as described in <<service-accounts#, Service accounts>>.
 
+
+
+
 TIP: Avoid adding human users to the System ID provider, but rather create custom ID providers for this purpose.
 
 === System users
