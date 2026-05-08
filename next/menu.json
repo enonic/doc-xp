@@ -5,7 +5,7 @@
       "document": "index"
     },
     {
-      "title": "XP Admin",
+      "title": "Admin",
       "document": "admin",
       "menuItems": [
         {
@@ -39,12 +39,8 @@
           "document": "security/service-accounts"
         },
         {
-          "title": "Users and groups",
-          "document": "security/users"
-        },
-        {
-          "title": "Roles",
-          "document": "security/roles"
+          "title": "Principals",
+          "document": "security/principals"
         },
         {
           "title": "Audit Logs",
@@ -99,6 +95,24 @@
       ]
     },
     {
+      "title": "APIs & Services",
+      "document": "endpoints",
+      "menuItems": [
+        {
+          "title": "Portal Services",
+          "document": "endpoints/portal"
+        },
+        {
+          "title": "Management API",
+          "document": "endpoints/management"
+        },
+        {
+          "title": "Statistics API",
+          "document": "endpoints/statistics"
+        }
+      ]
+    },
+    {
       "title": "Hosting",
       "document": "deployment",
       "menuItems": [
@@ -133,24 +147,6 @@
       ]
     },
     {
-      "title": "APIs & Services",
-      "document": "endpoints",
-      "menuItems": [
-        {
-          "title": "Portal Services",
-          "document": "endpoints/portal"
-        },
-        {
-          "title": "Management API",
-          "document": "endpoints/management"
-        },
-        {
-          "title": "Statistics API",
-          "document": "endpoints/statistics"
-        }
-      ]
-    },
-    {
       "title": "Configuration",
       "document": "config",
       "menuItems": [
@@ -159,8 +155,8 @@
           "document": "config/system"
         },
         {
-          "title": "Custom",
-          "document": "config/custom"
+          "title": "Applications",
+          "document": "config/applications"
         },
         {
           "title": "Vhost",

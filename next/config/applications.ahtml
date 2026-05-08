@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Widgets</title>
+<title>Custom' Configuration files</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,392 +437,41 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Widgets</h1>
+<h1>Custom' Configuration files</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#implementation">Implementation</a>
-<ul class="sectlevel2">
-<li><a href="#descriptor">Descriptor</a></li>
-<li><a href="#controller">Controller</a></li>
-<li><a href="#icon">Icon</a></li>
-</ul>
-</li>
-<li><a href="#widget_types_interface">Widget Types (Interface)</a></li>
-<li><a href="#widgeturl">widgetUrl()</a>
-<ul class="sectlevel2">
-<li><a href="#dashboard_widgets">Dashboard Widgets</a></li>
-</ul>
-</li>
+<li><a href="#custom_config">Custom config</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Widgets are visual components that dynamically extend Admin UI.
-Widgets may or may not be context-dependent (require id of selected content and current branch).</p>
+<p>This section describes how custom configuration files work in Enonic XP, and how to use them in your applications.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">Implementation</a></h2>
+<h2 id="custom_config"><a class="link" href="#custom_config">Custom config</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Widget is essentially a special, admin-only kind of web application. Like all other XP components, widgets are defined by a controller and a descriptor.</p>
+<p>To provide file based configuration to custom applications,
+simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>my.custom.app.cfg</code>. in the <code>XP_HOME/config/</code> folder, and it will instantly be available for the application.</p>
 </div>
 <div class="paragraph">
-<p>To create a widget, add a new folder in your project structure, i.e.  <code>src/main/resources/admin/widgets/&lt;widget-name&gt;</code>.
-The folder must contain both a descriptor (<code>&lt;widget-name&gt;.xml</code>) and a controller (<code>&lt;widget-name&gt;.js</code>).</p>
-</div>
-<div class="sect2">
-<h3 id="descriptor"><a class="link" href="#descriptor">Descriptor</a></h3>
-<div class="paragraph">
-<p>Widget descriptor defines a display name, a list of roles required to access the widget and interfaces it implements.
-The descriptor file must match the widget folder name, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.xml</code>.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample descriptor file:</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget&gt;
-  &lt;display-name i18n="phrases.my-dashboard-widget"&gt;My dashboard widget&lt;/display-name&gt;
-  &lt;description i18n="phrases.my-dashboard-widget-desc"&gt;Description of my dashboard widget&lt;/description&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;allow&gt;
-    &lt;principal&gt;role:system.admin&lt;/principal&gt;
-    &lt;principal&gt;role:myapp.myrole&lt;/principal&gt;
-  &lt;/allow&gt;
-&lt;/widget&gt;</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="controller"><a class="link" href="#controller">Controller</a></h3>
-<div class="paragraph">
-<p>To drive the widget, we will need a <a href="../framework/controllers.ahtml">controller</a>. The controller typically renders the widget&#8217;s HTML template.
-Depending on the widget implementation it may also handle any further server requests from the widgets interface.</p>
+<p>Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.</p>
 </div>
 <div class="paragraph">
-<p>The controller file must match the widget name, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.js</code>:</p>
-</div>
-<div class="listingblock">
-<div class="title">Example controller file:</div>
-<div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">exports.GET = function (req) {
-    return {
-        body: '&lt;widget&gt;My dashboard widget&lt;/widget&gt;',
-        contentType: 'text/html'
-    };
-};</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Depending on the interface a widget is implementing, controller may be initialised with parameters, for instance providing a specific context.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>When the application is deployed, the controller will be accessible from</p>
-</div>
-<div class="paragraph">
-<p><code>&lt;server&gt;:&lt;port&gt;/admin/&lt;app-name&gt;/&lt;tool-name&gt;/_/admin:widget/&lt;widget-app-name&gt;/&lt;widget-name&gt;</code> (i.e. <code>localhost:8080/admin/com.enonic.xp.app.main/home/_/admin:widget/com.enonic.xp.app.main/launcher</code>)</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="icon"><a class="link" href="#icon">Icon</a></h3>
-<div class="paragraph">
-<p>Widgets may also have icons. Simply place an SVG or PNG file into the widget folder, i.e. <code>admin/widgets/&lt;widget-name&gt;/&lt;widget-name&gt;.svg</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Widget icon will not be used for Dashboard widgets, only for Content Studio widgets.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="widget_types_interface"><a class="link" href="#widget_types_interface">Widget Types (Interface)</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Widget interface is simply a unique identifier (or widget type, if you will) that links the widget to its extension point (i.e. Dashboard or Content Studio&#8217;s context panel). One well-known interface is <code>admin.dashboard</code> - <a href="#dashboard_widgets">Dashboard Widgets</a> that are displayed on the Admin Dashboard screen.</p>
-</div>
-<div class="paragraph">
-<p>Admin Tools are required to specify the widget interfaces (but not widget themselves) they support in their descriptor file, i.e. <code>admin/tools/&lt;tool-name&gt;/&lt;tool-name&gt;.xml</code>.</p>
-</div>
-<div class="paragraph">
-<p>For example, if a tool supports Dashboard Widgets, it should have the following in its descriptor:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;tool&gt;
-  &lt;!--...--&gt;
-  &lt;apis&gt;
-    &lt;api&gt;admin:widget&lt;/api&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;/apis&gt;
-  &lt;interfaces&gt;
-     &lt;interface&gt;admin.dashboard&lt;/interface&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;/interfaces&gt;
-&lt;/tool&gt;</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>This line mounts the Widget API to the tool, allowing it to use widgets.</p>
-</li>
-<li>
-<p>This line specifies that the tool supports Dashboard Widgets, allowing it to display them in your widget.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>There is one exception form this rule - The <code>generic</code> interface. In order to use such widgets Admin Tool just needs to mount the Widget API.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-The <code>generic</code> interface widgets should be used sparsely as they may impose security risks. For instance, Launcher widget is <code>generic</code> because all Admin Tools should be able to show the Launcher Menu - but it does not accept any mutation requests or exposes secrets, so it is safe to use.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Widget API is <em>not</em> mounted to Admin Tools by default. In order to use any widgets in Admin Tools, you need to add the following to your Admin Tool descriptor:
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;tool&gt;
-    &lt;apis&gt;
-        &lt;api&gt;admin:widget&lt;/api&gt;
-    &lt;/apis&gt;
-&lt;/tool&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To enumerate all available widgets by interface, use the Widget API:
-<code>&lt;server&gt;:&lt;port&gt;/admin/&lt;app-name&gt;/&lt;tool-name&gt;/_/admin:widget?widgetInterface=&lt;interface&gt;</code> (i.e. <code>localhost:8080/admin/com.enonic.xp.app.main/home/_/admin:widget?widgetInterface=admin.dashboard</code>)</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Although browsers do not restrict web pages from accessing URLs on the same domain, there is no safe way to generate working URLs to other APIs from within the widget. Only APIs that are available to the Admin Tool that the widget is used in can be accessed.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Content Studio supports other types of widgets that will be embedded inside the Content Studio UI.
-Read more about Content Studio widgets <a href="https://developer.enonic.com/docs/content-studio/stable/widgets">here</a>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="widgeturl"><a class="link" href="#widgeturl">widgetUrl()</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To safely generate a Widget URL, use the <code>widgetUrl()</code> function that is part of the <a href="../api/lib-admin.ahtml#widget-url">Admin Library</a>.</p>
-</div>
-<div class="sect2">
-<h3 id="dashboard_widgets"><a class="link" href="#dashboard_widgets">Dashboard Widgets</a></h3>
-<div class="paragraph">
-<p>Dashboard Widgets will be identified by interface <code>admin.dashboard</code> and displayed on the Admin Dashboard screen.</p>
-</div>
-<div class="paragraph">
-<p>Following properties are supported in <code>&lt;config&gt;</code> of Dashboard Widget descriptor:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>width</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Used to specify widget width. Supported values are: <code>small</code> (25% of the screen width), <code>medium</code> (50%), <code>large</code> (75%) and <code>full</code> (100%).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<code>medium</code> is a default value for <code>width</code> config, if <code>width</code> is not specified or unsupported value is used.
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>height</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Used to specify widget height. Supported values are: <code>small</code> (25% of the screen height), <code>medium</code> (50%), <code>large</code> (75%) and <code>full</code> (100%).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<code>medium</code> is a default value for <code>height</code> config, if <code>height</code> is not specified or unsupported value is used.
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>header</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies whether widget will automatically have a header with widget title (coming from <code>display-name</code> field in descriptor).
-Default value (when nothing is specified) is <code>true</code> which means that widget will have a header by default.
-To hide the header, use <code>&lt;header&gt;false&lt;/header&gt;</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>style</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies whether XP will apply default styling to the widget (default). If you want to have full control over widget styling, use <code>&lt;style&gt;custom&lt;/style&gt;</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>order</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Specifies desired order of the widget on the Dashboard (with <code>0</code> being the top-left position). If <code>order</code> is not specified, the widget will be placed after widgets with specified order.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Widgets with equal order or no order will be placed based on their size (to fit as many widgets as possible next to each other).
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/dashboard-widgets.png" alt="Dashboard Widgets" width="900px"></span></p>
-</div>
-<div class="paragraph">
-<p>Widgets in the screenshot above are configured in three different ways (from left to right):</p>
-</div>
-<div class="listingblock">
-<div class="title">Custom styling, position 0, display name in the header, width 25%, height 50% (default):</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Useful Links&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="width" value="small"/&gt;
-    &lt;property name="style" value="custom"/&gt;
-    &lt;property name="order" value="0"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Default styling, position 1, display name in the header, width 50% (default), height 50% (default):</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Content Studio: Recent items&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="order" value="1"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Default styling, last position, no header, width 25%, height 100%:</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;widget xmlns="urn:enonic:xp:model:1.0"&gt;
-  &lt;display-name&gt;Statistics&lt;/display-name&gt;
-  &lt;interfaces&gt;
-    &lt;interface&gt;admin.dashboard&lt;/interface&gt;
-  &lt;/interfaces&gt;
-  &lt;config&gt;
-    &lt;property name="width" value="small"/&gt;
-    &lt;property name="height" value="full"/&gt;
-    &lt;property name="header" value="false"/&gt;
-  &lt;/config&gt;
-&lt;/widget&gt;</code></pre>
-</div>
-</div>
+<p>This configuration is instantly available for developers via the <a href="../framework/globals.ahtml#App">global <code>app</code> object</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-07 14:54:32 UTC
+Last updated 2026-05-08 14:05:31 UTC
 </div>
 </div>
 </body>

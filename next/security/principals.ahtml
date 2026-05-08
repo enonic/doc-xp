@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Custom' Configuration files</title>
+<title>Principals</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,11 +437,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Custom' Configuration files</h1>
+<h1>Principals</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#custom_config">Custom config</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#users">Users</a>
+<ul class="sectlevel2">
+<li><a href="#profiles">Profiles</a></li>
+</ul>
+</li>
+<li><a href="#groups">Groups</a></li>
+<li><a href="#roles">Roles</a>
+<ul class="sectlevel2">
+<li><a href="#permissions">Permissions</a></li>
+<li><a href="#system-roles">System roles</a></li>
+<li><a href="#dynamic_roles">Dynamic roles</a></li>
+<li><a href="#cms_roles">CMS roles</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -449,29 +463,210 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes how custom configuration files work in Enonic XP, and how to use them in your applications.</p>
+<p>Principals are the actors of XP&#8217;s security model: users, groups, and roles. Together they answer "who is this?" and "what may they do?".</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="custom_config"><a class="link" href="#custom_config">Custom config</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To provide file based configuration to custom applications,
-simply place a file with the name <code>&lt;app-name&gt;.cfg</code> i.e. <code>my.custom.app.cfg</code>. in the <code>XP_HOME/config/</code> folder, and it will instantly be available for the application.</p>
+<p>XP has three kinds of principal:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Users</dt>
+<dd>
+<p>Represent a person or service account. Always belong to an <a href="idproviders.ahtml">ID provider</a>.</p>
+</dd>
+<dt class="hdlist1">Groups</dt>
+<dd>
+<p>Bundle users (and other groups) together so permissions can be granted in bulk. Also scoped to an ID provider.</p>
+</dd>
+<dt class="hdlist1">Roles</dt>
+<dd>
+<p>Global access tokens that grant specific privileges in the system. Independent of any ID provider.</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.</p>
+<p>For a walkthrough of managing principals from the UI, see the <a href="../admin/users.ahtml">Users admin tool</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="users"><a class="link" href="#users">Users</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Users exist in the scope of an ID provider. Selected ID providers, such as the <a href="https://market.enonic.com/vendors/enonic/simple-idprovider" target="_blank" rel="noopener">Simple ID provider</a> let you create and manage users directly from the XP admin. Other ID providers - such as the <a href="https://market.enonic.com/vendors/enonic/oidc-id-provider" target="_blank" rel="noopener">OIDC ID provider</a> - rely on external systems, where users are managed in the 3rd party system and only appear in XP once they have signed in for the first time.</p>
 </div>
 <div class="paragraph">
-<p>This configuration is instantly available for developers via the <a href="../framework/globals.ahtml#App">global <code>app</code> object</a>.</p>
+<p>A user generally consist of the following fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>login (username)</p>
+</li>
+<li>
+<p>display name (Full name)</p>
+</li>
+<li>
+<p>e-mail</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="profiles"><a class="link" href="#profiles">Profiles</a></h3>
+<div class="paragraph">
+<p>Developers may also store custom properties and values in the user object via <code>profiles</code>. This information is currently not visible or possible to edit via the Users App.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="groups"><a class="link" href="#groups">Groups</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Similar to users, groups are linked to an ID provider. Groups provide a flexible way to create and manage permissions, without assigning them on a per-user-basis.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You may add users to a group</p>
+</li>
+<li>
+<p>Roles may be granted to a group - indirectly assigning the roles to the users of the group</p>
+</li>
+<li>
+<p>Groups may be added to a group - causing transitive resolution of permissions</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="roles"><a class="link" href="#roles">Roles</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roles provide access to application specific functionality via so-called Role Based Access Control (RBAC).</p>
+</div>
+<div class="paragraph">
+<p>A role consist of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>name (unique identifier)</p>
+</li>
+<li>
+<p>Display Name (Human friendly name)</p>
+</li>
+<li>
+<p>Description (optional)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You are free to manually define custom roles, i.e. by giving it select permissions. In general however, it is recommended that roles are created and managed by applications. The applications then typically also implement the related functionality that the role gives access to.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Unlike groups, a role may not be assigned other roles. It is designed to provide a specific access, and nothing else.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="permissions"><a class="link" href="#permissions">Permissions</a></h3>
+<div class="paragraph">
+<p>Just like users and groups, a role may be given explicit permissions to content in the CMS via <a href="https://developer.enonic.com/docs/content-studio/stable/permissions" target="_blank" rel="noopener">Content Studio</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="system-roles"><a class="link" href="#system-roles">System roles</a></h3>
+<div class="paragraph">
+<p>Enonic XP ships with several built-in roles. Each of which provide specific access and privileges in the system.</p>
+</div>
+<div class="paragraph">
+<p><strong>system.admin</strong>
+Users with this role have full access to all content and admin tools through the user interface.</p>
+</div>
+<div class="paragraph">
+<p><strong>system.admin.login</strong>
+Users with this role can log in to the administration console. These users will also require a role for each of the admin tools that the users need access to.</p>
+</div>
+<div class="paragraph">
+<p><strong>system.user.admin</strong>
+Grants full access to the Users admin tool, including create/edit/delete for ID providers, users, roles, and groups.</p>
+</div>
+<div class="paragraph">
+<p><strong>system.user.app</strong>
+Provides read-only access to the Users admin tool.</p>
+</div>
+<div class="paragraph">
+<p><strong>system.schema.admin</strong>
+Grants permissions to read/write schemas.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dynamic_roles"><a class="link" href="#dynamic_roles">Dynamic roles</a></h3>
+<div class="paragraph">
+<p>The system also includes two special roles which cannot be directly assigned to a user or group, but are conditionally assigned to users automatically.</p>
+</div>
+<div class="paragraph">
+<p><strong>system.authenticated</strong>
+All users that are authenticated gets this role, regardless of ID provider.</p>
+</div>
+<div class="paragraph">
+<p><strong>system.everyone</strong>
+All users, both authenticated and non-authenticated users (The Anonymous user) are assigned this role.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The role can is typically used to grant read access to public content, thus making it available to - well everyone.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cms_roles"><a class="link" href="#cms_roles">CMS roles</a></h3>
+<div class="paragraph">
+<p><strong>cms.admin</strong>
+Allows full access to Content Studio, including ability to create and delete content projects.</p>
+</div>
+<div class="paragraph">
+<p><strong>cms.expert</strong>
+Grants the ability to view and modify source code in the rich text editor.</p>
+</div>
+<div class="paragraph">
+<p><strong>cms.cm.app</strong>
+NOTE: This role is deprecated. It gives users to access to the legacy <code>default</code> project in Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project.</p>
+</div>
+<div class="paragraph">
+<p>When using <a href="../cms/projects.ahtml">Content Projects</a>, each project automatically creates a set of <a href="../cms/projects.ahtml#roles">project roles</a> in addition to the built-in roles listed above.</p>
+</div>
+<div class="paragraph">
+<p>These roles will be prefixed with <code>cms.projectname.</code>, and as such be unique to each individual project.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-07 14:54:32 UTC
+Last updated 2026-05-08 14:05:31 UTC
 </div>
 </div>
 </body>

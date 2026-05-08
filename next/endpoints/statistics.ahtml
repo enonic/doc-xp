@@ -441,16 +441,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#access">Access</a></li>
-<li><a href="#monitoring">Monitoring</a></li>
-<li><a href="#cluster_monitoring">Cluster monitoring</a>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#reporters">Reporters</a>
 <ul class="sectlevel2">
-<li><a href="#cluster_health">Cluster health</a></li>
-<li><a href="#elasticsearch_cluster_health">ElasticSearch cluster health</a></li>
-<li><a href="#index_stats">Index stats</a></li>
-<li><a href="#hazelcast_cluster_health">Hazelcast cluster health</a></li>
-<li><a href="#health_check">Health check</a></li>
-<li><a href="#readiness_check">Readiness check</a></li>
+<li><a href="#cluster_elasticsearch">cluster.elasticsearch</a></li>
+<li><a href="#cluster_manager">cluster.manager</a></li>
+<li><a href="#cluster_hazelcast">cluster.hazelcast</a></li>
+<li><a href="#dump_deadlocks">dump.deadlocks</a></li>
+<li><a href="#dump_threads">dump.threads</a></li>
+<li><a href="#http_filter">http.filter</a></li>
+<li><a href="#http_serverdump">http.serverdump</a></li>
+<li><a href="#http_servlet">http.servlet</a></li>
+<li><a href="#http_threadpool">http.threadpool</a></li>
+<li><a href="#http_webhandler">http.webHandler</a></li>
+<li><a href="#index">index</a></li>
+<li><a href="#jvm_gc">jvm.gc</a></li>
+<li><a href="#jvm_info">jvm.info</a></li>
+<li><a href="#jvm_memory">jvm.memory</a></li>
+<li><a href="#jvm_os">jvm.os</a></li>
+<li><a href="#jvm_threads">jvm.threads</a></li>
+<li><a href="#mediatypes">mediaTypes</a></li>
+<li><a href="#metrics">metrics</a></li>
+<li><a href="#osgi_bundle">osgi.bundle</a></li>
+<li><a href="#osgi_component">osgi.component</a></li>
+<li><a href="#osgi_service">osgi.service</a></li>
+<li><a href="#server">server</a></li>
+</ul>
+</li>
+<li><a href="#health-and-readiness">Health and readiness</a>
+<ul class="sectlevel2">
+<li><a href="#health">health</a></li>
+<li><a href="#ready">ready</a></li>
 </ul>
 </li>
 </ul>
@@ -462,14 +483,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The Statistics API exposes real-time metrics and monitoring data about the XP instance. It is commonly used for health checks, performance monitoring, and capacity planning.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="access"><a class="link" href="#access">Access</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Statistics API is intended for internal monitoring and is exposed without authentication on port 2609. Do not expose it publicly.</p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -477,7 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<a href="../config/vhosts.ahtml">Vhost</a> configuration only applies to the web endpoint (port 8080) and does not affect the Statistics API.
+The Statistics API is intended for internal monitoring and is exposed without authentication on port 2609. Do not expose it publicly.
 </td>
 </tr>
 </table>
@@ -485,10 +498,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="monitoring"><a class="link" href="#monitoring">Monitoring</a></h2>
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For operational purposes, Enonic XP provide advanced metrics for monitoring which are easily accessed. To access the monitoring JSON feed you can point to the following url:</p>
+<p>Enonic XP exposes a set of named <strong>reporters</strong> on port 2609. The list of registered reporters is available at:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -502,202 +515,108 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<code>&lt;host&gt;</code> equals <code>localhost</code> on the machine with running enonic XP instance
+<code>&lt;host&gt;</code> equals <code>localhost</code> on the machine running the XP instance.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>This will give you a list of status-reporters. Each reporter has a name and can be accessed using the following pattern:</p>
+<p>Sample response:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">[
+  "cluster.elasticsearch",
+  "cluster.manager",
+  "dump.deadlocks",
+  "dump.threads",
+  "http.filter",
+  "http.serverdump",
+  "http.servlet",
+  "http.threadpool",
+  "http.webHandler",
+  "index",
+  "jvm.gc",
+  "jvm.info",
+  "jvm.memory",
+  "jvm.os",
+  "jvm.threads",
+  "mediaTypes",
+  "metrics",
+  "osgi.bundle",
+  "osgi.component",
+  "osgi.service",
+  "server"
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each reporter is fetched at:</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>GET http://&lt;host&gt;:2609/&lt;name&gt;</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Here’s a list of all the status pages and what is shows:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The set of registered reporters depends on the deployment. The list above is from a single-node SDK; clustered installations also expose <code>cluster.hazelcast</code>.
+</td>
+</tr>
+</table>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">cluster.elasticsearch</dt>
-<dd>
-<p>Information about the ElasticSearch cluster. Local-node and members.</p>
-</dd>
-<dt class="hdlist1">cluster.manager</dt>
-<dd>
-<p>Information about the state of the clusters: elasticsearch</p>
-</dd>
-<dt class="hdlist1">dump.deadlocks</dt>
-<dd>
-<p>This will try to detect thread deadlocks and show them if any.</p>
-</dd>
-<dt class="hdlist1">dump.threads</dt>
-<dd>
-<p>Dumps all current thread-states.</p>
-</dd>
-<dt class="hdlist1">http.filter</dt>
-<dd>
-<p>List of servlet filters registered. It shows class, order and the URL patterns to which it applies.</p>
-</dd>
-<dt class="hdlist1">http.servlet</dt>
-<dd>
-<p>List of HTTP servlets registered. It shows class, order and the URL patterns to which it applies.</p>
-</dd>
-<dt class="hdlist1">http.threadpool</dt>
-<dd>
-<p>Status of the the Jetty web server thread pool.</p>
-</dd>
-<dt class="hdlist1">http.webHandler</dt>
-<dd>
-<p>List of WebHandler instances registered.</p>
-</dd>
-<dt class="hdlist1">index</dt>
-<dd>
-<p>Shows ElasticSearch index status.</p>
-</dd>
-<dt class="hdlist1">jvm.gc</dt>
-<dd>
-<p>Information about JVM GC status.</p>
-</dd>
-<dt class="hdlist1">jvm.info</dt>
-<dd>
-<p>General JVM information (version, vendor, uptime).</p>
-</dd>
-<dt class="hdlist1">jvm.memory</dt>
-<dd>
-<p>JVM memory information (heap, non-heap, pools).</p>
-</dd>
-<dt class="hdlist1">jvm.os</dt>
-<dd>
-<p>Information about OS (name, version, architecture).</p>
-</dd>
-<dt class="hdlist1">jvm.threads</dt>
-<dd>
-<p>JVM thread stats (count, peak, total).</p>
-</dd>
-<dt class="hdlist1">mediaTypes</dt>
-<dd>
-<p>List of mappings from file extension to media type.</p>
-</dd>
-<dt class="hdlist1">metrics</dt>
-<dd>
-<p>Shows metrics. The information can be filtered using ?filter=&#8230;&#8203;.</p>
-</dd>
-<dt class="hdlist1">osgi.bundle</dt>
-<dd>
-<p>Information about all OSGi bundles.</p>
-</dd>
-<dt class="hdlist1">osgi.component</dt>
-<dd>
-<p>Information about registered SCR OSGi components.</p>
-</dd>
-<dt class="hdlist1">osgi.service</dt>
-<dd>
-<p>Shows all OSGi services registered.</p>
-</dd>
-<dt class="hdlist1">server</dt>
-<dd>
-<p>Information about the server (version, build).</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>In addition to reporters, two top-level probe endpoints expose health and readiness signals - see <a href="#health-and-readiness">Health and readiness</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cluster_monitoring"><a class="link" href="#cluster_monitoring">Cluster monitoring</a></h2>
+<h2 id="reporters"><a class="link" href="#reporters">Reporters</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>There are multiple tools at your disposal for monitoring the health of the clusters and indices:</p>
-</div>
 <div class="sect2">
-<h3 id="cluster_health"><a class="link" href="#cluster_health">Cluster health</a></h3>
-<div class="literalblock">
-<div class="content">
-<pre>GET http://&lt;host&gt;:2609/cluster.manager</pre>
-</div>
-</div>
+<h3 id="cluster_elasticsearch"><a class="link" href="#cluster_elasticsearch">cluster.elasticsearch</a></h3>
 <div class="paragraph">
-<p>To obtain a generic health check of the clusters. It should return you a response similar to:</p>
+<p>Information about the Elasticsearch cluster - local node and members.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-    "state": "OK",
-    "clusters": [
-        {
-            "id": "elasticsearch",
-            "enabled": true,
-            "healthy": true,
-            "numberOfNodesSeen": 3
-        }
-    ]
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This view gives a brief overview of the nodes in the cluster.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="elasticsearch_cluster_health"><a class="link" href="#elasticsearch_cluster_health">ElasticSearch cluster health</a></h3>
 <div class="literalblock">
 <div class="content">
 <pre>GET http://&lt;host&gt;:2609/cluster.elasticsearch</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Which should return you a response similar to:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-    "name": "mycluster",
-    "localNode": {
-        "isMaster": true,
-        "id": "WT_gNgZ8SAu7GCJxvynSOg",
-        "hostName": "griPortable.local",
-        "version": "1.5.2",
-        "numberOfNodesSeen": 3
-    },
-    "members": [
-        {
-            "isMaster": false,
-            "id": "WqknPf3USg2fOnK6xGlWwA",
-            "hostName": "griPortable.local",
-            "version": "1.5.2",
-            "address": "inet[/127.0.0.1:9301]",
-            "name": "01bd187e-7cd1-4a8a-ac0a-918d4e09aa64",
-            "isDataNode": true,
-            "isClientNode": false
-        },
-        {
-            "isMaster": false,
-            "id": "xDwdxa37SUy6AHPz6hMZMA",
-            "hostName": "griPortable.local",
-            "version": "1.5.2",
-            "address": "inet[/127.0.0.1:9302]",
-            "name": "cf91d280-6111-47f2-8118-7d48664c3530",
-            "isDataNode": true,
-            "isClientNode": false
-        },
-        {
-            "isMaster": true,
-            "id": "WT_gNgZ8SAu7GCJxvynSOg",
-            "hostName": "griPortable.local",
-            "version": "1.5.2",
-            "address": "inet[/127.0.0.1:9300]",
-            "name": "af5287fc-663d-40bd-9b05-7cca59f96522",
-            "isDataNode": true,
-            "isClientNode": false
-        }
-    ],
-    "state": "GREEN"
+  "name": "mycluster",
+  "localNode": {
+    "isMaster": true,
+    "id": "16RUH2cUS_6lCGoY27JblQ",
+    "hostName": "local",
+    "version": "2.4.6",
+    "numberOfNodesSeen": 1
+  },
+  "members": [
+    {
+      "isMaster": true,
+      "id": "16RUH2cUS_6lCGoY27JblQ",
+      "hostName": "local",
+      "version": "2.4.6",
+      "address": "local[1]",
+      "name": "8c30363f-9ba3-4af9-85d9-99c8d6827899",
+      "isDataNode": true,
+      "isClientNode": false
+    }
+  ],
+  "state": "YELLOW"
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This view gives a brief overview of the nodes in the cluster. For convenience, the current local node to which the request was made has a separate entry in addition to being in the list of members.</p>
+<p>For convenience, the local node is surfaced as a separate <code>localNode</code> entry alongside the full <code>members</code> list.</p>
 </div>
 <div class="paragraph">
 <p>The <code>state</code> property is the most important:</p>
@@ -705,206 +624,658 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Green</strong>: Cluster is operational and all configured replicas are distributed to a node</p>
+<p><strong>Green</strong>: cluster is operational and all configured replicas are distributed.</p>
 </li>
 <li>
-<p><strong>Yellow</strong>: Cluster is operational, but there are replicas that are not distributed to any node</p>
+<p><strong>Yellow</strong>: cluster is operational, but some replicas are not distributed to a node.</p>
 </li>
 <li>
-<p><strong>Red</strong>: Cluster is not operational</p>
+<p><strong>Red</strong>: cluster is not operational.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>To see the details about how the replicas are distributed, let’s continue to the <code>Index stats</code> report:</p>
+<p>For shard-level distribution, see the <a href="#index">index</a> reporter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="index_stats"><a class="link" href="#index_stats">Index stats</a></h3>
+<h3 id="cluster_manager"><a class="link" href="#cluster_manager">cluster.manager</a></h3>
+<div class="paragraph">
+<p>Aggregate health of all clusters. XP 8 currently registers a single cluster, <code>elasticsearch</code>.</p>
+</div>
 <div class="literalblock">
 <div class="content">
-<pre>GET http://&lt;host&gt;:2609/index</pre>
+<pre>GET http://&lt;host&gt;:2609/cluster.manager</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Which should give you a response like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-    "summary": {
-        "total": 8,
-        "started": 8,
-        "unassigned": 0,
-        "relocating": 0,
-        "initializing": 0
-    },
-    "shards": {
-        "started": [
-            {
-                "id": "search-cms-repo(0)",
-                "nodeId": "xDwdxa37SUy6AHPz6hMZMA",
-                "nodeAddress": "192.168.1.5",
-                "type": "REPLICA"
-            },
-            {
-                "id": "search-cms-repo(0)",
-                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
-                "nodeAddress": "192.168.1.5",
-                "type": "PRIMARY"
-            },
-            {
-                "id": "search-system-repo(0)",
-                "nodeId": "xDwdxa37SUy6AHPz6hMZMA",
-                "nodeAddress": "192.168.1.5",
-                "type": "PRIMARY"
-            },
-            {
-                "id": "search-system-repo(0)",
-                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
-                "nodeAddress": "192.168.1.5",
-                "type": "REPLICA"
-            },
-            {
-                "id": "storage-system-repo(0)",
-                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
-                "nodeAddress": "192.168.1.5",
-                "type": "REPLICA"
-            },
-            {
-                "id": "storage-system-repo(0)",
-                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
-                "nodeAddress": "192.168.1.5",
-                "type": "PRIMARY"
-            },
-            {
-                "id": "storage-cms-repo(0)",
-                "nodeId": "WT_gNgZ8SAu7GCJxvynSOg",
-                "nodeAddress": "192.168.1.5",
-                "type": "PRIMARY"
-            },
-            {
-                "id": "storage-cms-repo(0)",
-                "nodeId": "WqknPf3USg2fOnK6xGlWwA",
-                "nodeAddress": "192.168.1.5",
-                "type": "REPLICA"
-            }
-        ],
-        "unassigned": [],
-        "relocating": [],
-        "initializing": []
+  "state": "OK",
+  "clusters": [
+    {
+      "id": "elasticsearch",
+      "healthy": true,
+      "numberOfNodesSeen": 1
     }
+  ]
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>This gives an overview of how the indices are distributed and what state the index parts (<strong>shards</strong>) are currently in. A shard could be either <code>PRIMARY</code> or <code>REPLICA</code> (copy of a primary shard). These are the possible states:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>total</strong>: Total number of index parts (e.g two repositories with two indices with one replica for each index)</p>
-</li>
-<li>
-<p><strong>started</strong>: Shards that are currently assigned to a node</p>
-</li>
-<li>
-<p><strong>unassigned</strong>: Shards waiting to be distributed to a node. Typically a setup with a number of replicas where one or more nodes are not running</p>
-</li>
-<li>
-<p><strong>relocating</strong>: Shards that are currently moving from one node to another</p>
-</li>
-<li>
-<p><strong>initializing</strong>: Shards that are currently being recovered from disk at startup.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The <code>shards</code> section gives a more detailed overview on the shard distribution.</p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="hazelcast_cluster_health"><a class="link" href="#hazelcast_cluster_health">Hazelcast cluster health</a></h3>
+<h3 id="cluster_hazelcast"><a class="link" href="#cluster_hazelcast">cluster.hazelcast</a></h3>
+<div class="paragraph">
+<p>Information about the Hazelcast cluster - state, version, and members.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This reporter is only registered when Hazelcast clustering is active. It is not available on single-node SDK or standalone deployments.
+</td>
+</tr>
+</table>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre>GET http://&lt;host&gt;:2609/cluster.hazelcast</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Which should return you a response similar to:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "clusterState": "ACTIVE",
-  "clusterTime": 1599748536909,
-  "clusterVersion": "3.12",
+  "clusterTime": 1778137547054,
+  "clusterVersion": "5.3",
   "members": [
     {
       "uuid": "d7b9b75e-aacf-444b-bff9-af5c786843c2",
       "address": "192.168.1.1",
       "port": 5701,
       "liteMember": false,
-      "version": "3.12.7"
+      "version": "5.3.7"
     },
     {
       "uuid": "899920a2-d9bd-4add-8b1a-133bf27af9a0",
       "address": "192.168.1.2",
-      "port": 5702,
+      "port": 5701,
       "liteMember": false,
-      "version": "3.12.7"
+      "version": "5.3.7"
     }
   ]
 }</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="dump_deadlocks"><a class="link" href="#dump_deadlocks">dump.deadlocks</a></h3>
 <div class="paragraph">
-<p>This view gives a brief overview of the nodes in the Hazelcast cluster. Check Hazelcast documentation for more details.</p>
+<p>Detects thread deadlocks. Returns plain text - the literal string <code>No deadlocks detected!</code> when none are found, otherwise a stack-trace dump per locked thread.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/dump.deadlocks</pre>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="health_check"><a class="link" href="#health_check">Health check</a></h3>
+<h3 id="dump_threads"><a class="link" href="#dump_threads">dump.threads</a></h3>
+<div class="paragraph">
+<p>Plain-text snapshot of every JVM thread and its current stack.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/dump.threads</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">"Reference Handler" daemon prio=10 Id=11 RUNNABLE
+    at java.base@25.0.3/java.lang.ref.Reference.waitForReferencePendingList(Native Method)
+    at java.base@25.0.3/java.lang.ref.Reference.processPendingReferences(Reference.java:246)
+    at java.base@25.0.3/java.lang.ref.Reference$ReferenceHandler.run(Reference.java:208)
+
+"Finalizer" daemon prio=8 Id=12 WAITING on java.lang.ref.ReferenceQueue$Lock
+    at java.base@25.0.3/java.lang.Object.wait0(Native Method)
+    ...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="http_filter"><a class="link" href="#http_filter">http.filter</a></h3>
+<div class="paragraph">
+<p>Servlet filters registered with the HTTP layer. Each entry shows class, order, URL patterns, and the connectors it applies to.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/http.filter</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">[
+  {
+    "order": -500,
+    "name": "HeaderFilterWrapper",
+    "class": "com.enonic.xp.web.impl.header.HeaderFilterWrapper",
+    "patterns": ["/*"],
+    "connectors": ["xp", "api", "status"],
+    "initParams": {}
+  },
+  {
+    "order": -400,
+    "name": "DosFilterWrapper",
+    "class": "com.enonic.xp.web.impl.dos.DosFilterWrapper",
+    "patterns": ["/*"],
+    "connectors": ["xp", "api"],
+    "initParams": {}
+  }
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="http_serverdump"><a class="link" href="#http_serverdump">http.serverdump</a></h3>
+<div class="paragraph">
+<p>Jetty&#8217;s internal server dump - thread pools, connectors, handler chain, and acceptor state. Plain text, intended for low-level debugging.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/http.serverdump</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">oejs.Server@417b362b{STARTED}[12.1.8,sto=0] ~ BLOCKING - STARTED
++= oejut.QueuedThreadPool[qtp646782988]@268d200c{STARTED,8&lt;=18&lt;=200,i=1,r=-1,t=-8608ms,q=0} - STARTED
+|  +- oejut.ThreadPoolBudget
+|  += oejut.ReservedThreadExecutor{capacity=8,threads=oejut.ThreadIdPool{capacity=8}} - STARTED
+|  ...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="http_servlet"><a class="link" href="#http_servlet">http.servlet</a></h3>
+<div class="paragraph">
+<p>HTTP servlets registered. Same shape as <code>http.filter</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/http.servlet</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">[
+  {
+    "order": 0,
+    "name": "JaxRsServlet",
+    "class": "com.enonic.xp.jaxrs.impl.JaxRsServlet",
+    "patterns": ["/admin/rest-v2/apps/*"],
+    "connectors": ["xp"],
+    "initParams": {}
+  },
+  {
+    "order": 100,
+    "name": "WebDispatcherServlet",
+    "class": "com.enonic.xp.web.impl.handler.WebDispatcherServlet",
+    "patterns": ["/*"],
+    "connectors": ["xp"],
+    "initParams": {}
+  }
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="http_threadpool"><a class="link" href="#http_threadpool">http.threadpool</a></h3>
+<div class="paragraph">
+<p>Status of Jetty&#8217;s HTTP thread pool.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/http.threadpool</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "threads": 18,
+  "idleThreads": 1,
+  "isLowOnThreads": false
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="http_webhandler"><a class="link" href="#http_webhandler">http.webHandler</a></h3>
+<div class="paragraph">
+<p>The chain of WebHandler instances that requests are dispatched through, ordered by priority.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/http.webHandler</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">[
+  { "order": -100, "class": "com.enonic.xp.web.impl.trace.TraceWebFilter" },
+  { "order": -51,  "class": "com.enonic.app.contentstudio.site.AdminSiteHandler" },
+  { "order": -50,  "class": "com.enonic.xp.admin.impl.portal.AdminToolPortalHandler" },
+  { "order": -50,  "class": "com.enonic.xp.portal.impl.handler.portal.SiteHandler" },
+  ...
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="index"><a class="link" href="#index">index</a></h3>
+<div class="paragraph">
+<p>Elasticsearch index status: total/started/unassigned shards, plus per-shard placement.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/index</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "summary": {
+    "total": 16,
+    "started": 8,
+    "unassigned": 8,
+    "relocating": 0,
+    "initializing": 0
+  },
+  "shards": {
+    "started": [
+      {
+        "id": "storage-system-repo(0)",
+        "nodeId": "16RUH2cUS_6lCGoY27JblQ",
+        "nodeAddress": "0.0.0.0",
+        "type": "PRIMARY"
+      },
+      {
+        "id": "search-system-repo(0)",
+        "nodeId": "16RUH2cUS_6lCGoY27JblQ",
+        "nodeAddress": "0.0.0.0",
+        "type": "PRIMARY"
+      }
+    ],
+    "unassigned": [],
+    "relocating": [],
+    "initializing": []
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A shard is either <code>PRIMARY</code> or <code>REPLICA</code> (a copy of the primary). The summary buckets:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>total</strong>: total shards across repositories and replicas.</p>
+</li>
+<li>
+<p><strong>started</strong>: shards currently assigned to a node.</p>
+</li>
+<li>
+<p><strong>unassigned</strong>: shards waiting to be distributed - typically a multi-replica setup with one or more nodes down.</p>
+</li>
+<li>
+<p><strong>relocating</strong>: shards moving from one node to another.</p>
+</li>
+<li>
+<p><strong>initializing</strong>: shards being recovered from disk during startup.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jvm_gc"><a class="link" href="#jvm_gc">jvm.gc</a></h3>
+<div class="paragraph">
+<p>Cumulative JVM garbage-collection stats.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/jvm.gc</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "collectionTime": 2111,
+  "collectionCount": 383
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jvm_info"><a class="link" href="#jvm_info">jvm.info</a></h3>
+<div class="paragraph">
+<p>JVM identity and uptime.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/jvm.info</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "name": "Java HotSpot(TM) 64-Bit Server VM",
+  "vendor": "Oracle Corporation",
+  "version": "25.0.3+9-LTS-jvmci-b01",
+  "startTime": 1778137547054,
+  "upTime": 45129597
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jvm_memory"><a class="link" href="#jvm_memory">jvm.memory</a></h3>
+<div class="paragraph">
+<p>Heap, non-heap, and per-pool memory usage.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/jvm.memory</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "heap": {
+    "init": 402653184,
+    "max": 6442450944,
+    "committed": 268435456,
+    "used": 231056848
+  },
+  "nonHeap": {
+    "init": 7667712,
+    "max": -1,
+    "committed": 255983616,
+    "used": 232611296
+  },
+  "pools": [
+    {
+      "name": "G1 Eden Space",
+      "type": "Heap memory",
+      "usage": { "init": 50331648, "max": -1, "committed": 125829120, "used": 109051904 }
+    },
+    {
+      "name": "Metaspace",
+      "type": "Non-heap memory",
+      "usage": { "init": 0, "max": -1, "committed": 182190080, "used": 176992680 }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jvm_os"><a class="link" href="#jvm_os">jvm.os</a></h3>
+<div class="paragraph">
+<p>Operating system the JVM is running on.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/jvm.os</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "name": "Mac OS X",
+  "version": "26.2",
+  "arch": "aarch64",
+  "cores": 8,
+  "loadAverage": 2.366
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jvm_threads"><a class="link" href="#jvm_threads">jvm.threads</a></h3>
+<div class="paragraph">
+<p>JVM thread counts.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/jvm.threads</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "count": 100,
+  "peak": 118,
+  "daemonCount": 72,
+  "totalStarted": 572,
+  "numDeadLocks": 0
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mediatypes"><a class="link" href="#mediatypes">mediaTypes</a></h3>
+<div class="paragraph">
+<p>File-extension to media-type mappings used by the runtime.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/mediaTypes</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "css": "text/css",
+  "html": "text/html",
+  "js": "application/javascript",
+  "json": "application/json",
+  "jpg": "image/jpeg",
+  "png": "image/png",
+  "svg": "image/svg+xml",
+  "pdf": "application/pdf"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="metrics"><a class="link" href="#metrics">metrics</a></h3>
+<div class="paragraph">
+<p>Prometheus / OpenMetrics-formatted metrics for the instance. Point Prometheus, Grafana Agent, or any compatible scraper at this endpoint.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/metrics</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text"># TYPE com_enonic_xp_event_EventPublisher_event counter
+com_enonic_xp_event_EventPublisher_event_total 367.0
+
+# TYPE jetty_connections_bytes_in_bytes summary
+# HELP jetty_connections_bytes_in_bytes Bytes received by tracked connections
+jetty_connections_bytes_in_bytes_count{connector_name="xp"} 0
+jetty_connections_bytes_in_bytes_sum{connector_name="xp"} 0.0
+jetty_connections_bytes_in_bytes_count{connector_name="api"} 0
+jetty_connections_bytes_in_bytes_sum{connector_name="api"} 0.0
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="osgi_bundle"><a class="link" href="#osgi_bundle">osgi.bundle</a></h3>
+<div class="paragraph">
+<p>All OSGi bundles installed in the runtime.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/osgi.bundle</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "count": 120,
+  "bundles": [
+    { "id": 0, "name": "org.apache.felix.framework", "state": "ACTIVE" },
+    { "id": 1, "name": "jakarta.activation-api", "state": "ACTIVE" },
+    { "id": 9, "name": "org.apache.felix.scr", "state": "ACTIVE" }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="osgi_component"><a class="link" href="#osgi_component">osgi.component</a></h3>
+<div class="paragraph">
+<p>SCR (Declarative Services) components and their instance state.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/osgi.component</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "count": 336,
+  "components": [
+    {
+      "name": "com.enonic.xp.server.internal.metrics.MetricsReporter",
+      "enabled": true,
+      "bundle": 21,
+      "instances": [{ "id": 1, "state": "ACTIVE" }]
+    },
+    {
+      "name": "com.enonic.xp.server.impl.status.DeadlockReporter",
+      "enabled": true,
+      "bundle": 70,
+      "instances": [{ "id": 4, "state": "ACTIVE" }]
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="osgi_service"><a class="link" href="#osgi_service">osgi.service</a></h3>
+<div class="paragraph">
+<p>All OSGi services currently registered.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/osgi.service</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "count": 375,
+  "services": [
+    {
+      "id": "320",
+      "iface": "com.enonic.xp.web.handler.WebHandler",
+      "bundle": "com.enonic.xp.portal.impl"
+    },
+    {
+      "id": "92",
+      "iface": "com.enonic.xp.blob.BlobStore",
+      "bundle": "com.enonic.xp.core"
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="server"><a class="link" href="#server">server</a></h3>
+<div class="paragraph">
+<p>Build and version of the running XP instance.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GET http://&lt;host&gt;:2609/server</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "version": "8.0.0-B4",
+  "installation": "Sandbox7",
+  "runMode": "DEV",
+  "build": {
+    "hash": "a0f053aa204fb51cc70a388bc99efd446e37059b",
+    "shortHash": "a0f053a",
+    "branch": "a0f053aa204fb51cc70a388bc99efd446e37059b",
+    "timestamp": "2026-04-30T15:26:12Z"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="health-and-readiness"><a class="link" href="#health-and-readiness">Health and readiness</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to reporters, two probe endpoints expose simple health signals on the same port - useful for load balancers, Kubernetes liveness/readiness probes, and similar.</p>
+</div>
+<div class="sect2">
+<h3 id="health"><a class="link" href="#health">health</a></h3>
+<div class="paragraph">
+<p>Validates that essential data services are available.</p>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre>GET http://&lt;host&gt;:2609/health</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Health check validates that essential data services are available and ready to serve requests.</p>
-</div>
-<div class="paragraph">
-<p>Successful validation will return an empty response with <code>200</code> status code. Failed validation will return <code>503</code> status code with the list of errors:</p>
+<p>Returns <code>200 OK</code> with an empty <code>{}</code> body when healthy. On failure, returns <code>503</code> with a list of errors:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-    "errors": [
-      "org.elasticsearch.client.Client service is not available"
-    ]
+  "errors": [
+    "org.elasticsearch.client.Client service is not available"
+  ]
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="readiness_check"><a class="link" href="#readiness_check">Readiness check</a></h3>
+<h3 id="ready"><a class="link" href="#ready">ready</a></h3>
+<div class="paragraph">
+<p>Validates that all services required for full operation are available.</p>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre>GET http://&lt;host&gt;:2609/ready</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Readiness check validates that all services needed for the instance to be fully operational are available and ready to serve requests.</p>
-</div>
-<div class="paragraph">
-<p>Successful validation will return an empty response with <code>200</code> status code. Failed validation will return <code>503</code> status code with the list of errors:</p>
+<p>Same response shape as <code>/health</code>. Failed validation returns <code>503</code> with errors:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-    "errors": [
-      "com.enonic.xp.portal.websocket.WebSocketManager service is not available",
-      "com.enonic.xp.mail.MailService service is not available"
-    ]
+  "errors": [
+    "com.enonic.xp.portal.websocket.WebSocketManager service is not available",
+    "com.enonic.xp.mail.MailService service is not available"
+  ]
 }</code></pre>
 </div>
 </div>
@@ -914,7 +1285,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-07 14:54:32 UTC
+Last updated 2026-05-08 14:05:31 UTC
 </div>
 </div>
 </body>
