@@ -1267,7 +1267,7 @@ jetty_connections_bytes_in_bytes_sum{connector_name="api"} 0.0
 </div>
 </div>
 <div class="paragraph">
-<p>Same response shape as <code>/health</code>. Failed validation returns <code>503</code> with errors:</p>
+<p>Returns <code>200 OK</code> with an empty <code>{}</code> body when ready. On failure, returns <code>503</code> with a list of errors:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1285,7 +1285,7 @@ jetty_connections_bytes_in_bytes_sum{connector_name="api"} 0.0
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-08 14:05:31 UTC
+Last updated 2026-05-08 14:11:54 UTC
 </div>
 </div>
 </body>
