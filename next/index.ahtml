@@ -441,11 +441,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#the_universal_cms">The Universal CMS</a></li>
 <li><a href="#built_like_an_operating_system">Built like an operating system</a>
 <ul class="sectlevel2">
-<li><a href="#enonic_apps">Enonic apps</a></li>
 <li><a href="#cms">CMS</a></li>
+<li><a href="#enonic_apps">Enonic apps</a></li>
 </ul>
 </li>
 <li><a href="#platform_features">Platform features</a></li>
@@ -458,30 +457,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>This documentation covers the core platform features and architecture.</p>
-</div>
-<div class="paragraph">
-<p>Other relevant relevant documentation includes:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://developer.enonic.com/docs/cms">CMS docs</a> for content modelling and content APIs</p>
-</li>
-<li>
-<p><a href="https://developer.enonic.com/docs/content-studio">Content Studio</a> for content authoring interface</p>
-</li>
-<li>
-<p><a href="https://developer.enonic.com/docs/code">Enonic Development Kit</a> for building Enonic applications</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="the_universal_cms"><a class="link" href="#the_universal_cms">The Universal CMS</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Beyond the limitations of a Headless CMS, Enonic XP allows you to customize the back-end to your needs. Whether you&#8217;re building a simple website or an international digital presence, XP provides the tools and capabilities you need to create something truly unique.</p>
 </div>
 </div>
 </div>
@@ -497,37 +472,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="enonic_apps"><a class="link" href="#enonic_apps">Enonic apps</a></h3>
-<div class="paragraph">
-<p>Enonic applications are standalone software packages that can be installed and started on Enonic XP, and they have access to all platform services and APIs. You may use them to add your own specific features, or extend existing ones.</p>
-</div>
-<div class="paragraph">
-<p>Visit <a href="https://market.enonic.com">Enonic Market</a> to find official apps from Enonic, as well as 3rd party applications.</p>
-</div>
-</div>
-<div class="sect2">
 <h3 id="cms"><a class="link" href="#cms">CMS</a></h3>
 <div class="paragraph">
 <p>XP bolts powerful CMS capabilities on top of the core platform:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Flexible schema system that allows you to define your content model</p>
-</li>
-<li>
-<p>APIs for querying and manipulating content</p>
-</li>
-<li>
-<p><a href="https://developer.enonic.com/docs/content-studio">Content Studio</a> - A rich admin interface for content management</p>
-</li>
-<li>
-<p>Hybrid delivery using the embedded rendering engine</p>
-</li>
-</ul>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Visit the <a href="https://developer.enonic.com/docs/cms">CMS docs</a> for content modelling and content APIs. Check out <a href="https://developer.enonic.com/docs/content-studio">Content Studio</a> for details on the authoring interface
+</td>
+</tr>
+</table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="enonic_apps"><a class="link" href="#enonic_apps">Enonic apps</a></h3>
 <div class="paragraph">
-<p>Visit the separately maintained <a href="https://developer.enonic.com/docs/cms">CMS documentation</a> to learn more.</p>
+<p>Standalone software packages that can be installed and started on Enonic XP with access to all platform services and APIs. Use them to add specific features and functionality to your instance, ranging from APIs to administrative interfaces.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Visit <a href="https://developer.enonic.com/docs/code">Enonic Development Kit</a> for building Enonic applications. Check out Visit <a href="https://market.enonic.com">Enonic Market</a> for pre-built applications from Enonic and 3rd party vendors.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -582,7 +559,7 @@ If you are looking to upgrade from a previous version of XP, check out the <a hr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-08 14:11:54 UTC
+Last updated 2026-05-13 15:16:36 UTC
 </div>
 </div>
 </body>

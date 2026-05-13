@@ -498,7 +498,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="users"><a class="link" href="#users">Users</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Users exist in the scope of an ID provider. Selected ID providers, such as the <a href="https://market.enonic.com/vendors/enonic/simple-idprovider" target="_blank" rel="noopener">Simple ID provider</a> let you create and manage users directly from the XP admin. Other ID providers - such as the <a href="https://market.enonic.com/vendors/enonic/oidc-id-provider" target="_blank" rel="noopener">OIDC ID provider</a> - rely on external systems, where users are managed in the 3rd party system and only appear in XP once they have signed in for the first time.</p>
+<p>Users exist in the scope of an ID provider. Selected ID providers, such as the <a href="https://market.enonic.com/vendors/enonic/simple-idprovider">Simple ID provider</a> let you create and manage users directly from the XP admin. Other ID providers - such as the <a href="https://market.enonic.com/vendors/enonic/oidc-id-provider">OIDC ID provider</a> - rely on external systems, where users are managed in the 3rd party system and only appear in XP once they have signed in for the first time.</p>
 </div>
 <div class="paragraph">
 <p>A user generally consist of the following fields:</p>
@@ -585,7 +585,7 @@ Unlike groups, a role may not be assigned other roles. It is designed to provide
 <div class="sect2">
 <h3 id="permissions"><a class="link" href="#permissions">Permissions</a></h3>
 <div class="paragraph">
-<p>Just like users and groups, a role may be given explicit permissions to content in the CMS via <a href="https://developer.enonic.com/docs/content-studio/stable/permissions" target="_blank" rel="noopener">Content Studio</a>.</p>
+<p>Just like users and groups, a role may be given explicit permissions to content in the CMS via <a href="https://developer.enonic.com/docs/content-studio/stable/permissions">Content Studio</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -666,7 +666,7 @@ NOTE: This role is deprecated. It gives users to access to the legacy <code>defa
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-08 14:11:54 UTC
+Last updated 2026-05-13 15:16:36 UTC
 </div>
 </div>
 </body>
