@@ -5,35 +5,22 @@ include::.variables.adoc[]
 
 This documentation covers the core platform features and architecture.
 
-Other relevant relevant documentation includes:
-
-* https://developer.enonic.com/docs/cms[CMS docs] for content modelling and content APIs
-* https://developer.enonic.com/docs/content-studio[Content Studio] for content authoring interface
-* https://developer.enonic.com/docs/code[Enonic Development Kit] for building Enonic applications
-
-== The Universal CMS
-Beyond the limitations of a Headless CMS, Enonic XP allows you to customize the back-end to your needs. Whether you're building a simple website or an international digital presence, XP provides the tools and capabilities you need to create something truly unique.
-
 == Built like an operating system
 XP is conceptually a core with essential services and APIs combined with an ecosystem of applications that can be installed on top to add specific functionality and features. This architecture allows for a high degree of flexibility and extensibility, enabling you to tailor the platform to your specific needs and use cases.
 
 image::platform.png[Platform illustration,1312]
 
-=== Enonic apps
-
-Enonic applications are standalone software packages that can be installed and started on Enonic XP, and they have access to all platform services and APIs. You may use them to add your own specific features, or extend existing ones.
-
-Visit https://market.enonic.com[Enonic Market] to find official apps from Enonic, as well as 3rd party applications.
-
 === CMS
 XP bolts powerful CMS capabilities on top of the core platform:
 
-* Flexible schema system that allows you to define your content model
-* APIs for querying and manipulating content
-* https://developer.enonic.com/docs/content-studio[Content Studio] - A rich admin interface for content management
-* Hybrid delivery using the embedded rendering engine
+TIP: Visit the https://developer.enonic.com/docs/cms[CMS docs] for content modelling and content APIs. Check out https://developer.enonic.com/docs/content-studio[Content Studio] for details on the authoring interface
 
-Visit the separately maintained https://developer.enonic.com/docs/cms[CMS documentation] to learn more.
+=== Enonic apps
+
+Standalone software packages that can be installed and started on Enonic XP with access to all platform services and APIs. Use them to add specific features and functionality to your instance, ranging from APIs to administrative interfaces.
+
+TIP: Visit https://developer.enonic.com/docs/code[Enonic Development Kit] for building Enonic applications. Check out Visit https://market.enonic.com[Enonic Market] for pre-built applications from Enonic and 3rd party vendors.
+
 
 == Platform features
 The core platform provides essential services and APIs that applications can leverage to build their functionality.

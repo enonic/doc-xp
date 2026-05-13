@@ -17,7 +17,7 @@ For a walkthrough of managing principals from the UI, see the <<../admin/users#,
 [#users]
 == Users
 
-Users exist in the scope of an ID provider. Selected ID providers, such as the https://market.enonic.com/vendors/enonic/simple-idprovider[Simple ID provider^] let you create and manage users directly from the XP admin. Other ID providers - such as the https://market.enonic.com/vendors/enonic/oidc-id-provider[OIDC ID provider^] - rely on external systems, where users are managed in the 3rd party system and only appear in XP once they have signed in for the first time.
+Users exist in the scope of an ID provider. Selected ID providers, such as the https://market.enonic.com/vendors/enonic/simple-idprovider[Simple ID provider] let you create and manage users directly from the XP admin. Other ID providers - such as the https://market.enonic.com/vendors/enonic/oidc-id-provider[OIDC ID provider] - rely on external systems, where users are managed in the 3rd party system and only appear in XP once they have signed in for the first time.
 
 A user generally consist of the following fields:
 
@@ -55,7 +55,7 @@ NOTE: Unlike groups, a role may not be assigned other roles. It is designed to p
 
 === Permissions
 
-Just like users and groups, a role may be given explicit permissions to content in the CMS via https://developer.enonic.com/docs/content-studio/stable/permissions[Content Studio^].
+Just like users and groups, a role may be given explicit permissions to content in the CMS via https://developer.enonic.com/docs/content-studio/stable/permissions[Content Studio].
 
 [#system-roles]
 === System roles
