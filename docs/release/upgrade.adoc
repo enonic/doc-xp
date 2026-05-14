@@ -179,99 +179,11 @@ The old passwords are _not_ automatically converted to the new format.
 When a user with an old password logs in, the password is verified using the old algorithm.
 It is strongly recommended to change all passwords after the upgrade to ensure all passwords are stored using the new algorithm.
 
-==== Content API
+==== Application-level changes
 
-The following methods have been merged or removed:
+API surface changes (Content/Node/lib-content method renames and merges, `hasChildren` removal, `inheritsPermissions` removal), HTTP controller method-name capitalization, identity-key/name/ID format rules, and the new authentication-scope behavior are covered in the dev kit upgrade guide: https://developer.enonic.com/docs/code/stable/upgrade[Upgrading Enonic apps from XP7 to XP8].
 
-* `move` and `rename` are now a single `move` method.
-* `setChildOrder` and `reorderChildren` are now a single `sort` method.
-* The `hasChildren` property has been removed from content.
-
-Permissions are now applied to `master` and `draft` simultaneously - the previous workflow of publishing in order to apply permissions is no longer needed (or supported).
-
-==== Node API
-
-* The `inheritsPermissions` flag has been removed. Inheritance is now expressed explicitly via the API.
-
-==== HTTP controllers
-
-Controller method names have changed from lowercase to uppercase to match HTTP convention:
-
-[cols="1,1"]
-|===
-| Old | New
-
-| `get`     | `GET`
-| `post`    | `POST`
-| `put`     | `PUT`
-| `delete`  | `DELETE`
-| `head`    | `HEAD`
-| `options` | `OPTIONS`
-| `patch`   | `PATCH`
-|===
-
-Update controller exports accordingly.
-
-==== Authentication scope
-
-Authentication no longer searches across ID providers for the first matching user. A request resolves against the vhost's default ID provider, or an ID provider you specify explicitly. If your setup relied on cross-provider lookup, configure the relevant vhosts explicitly - see <<../deployment/vhosts#, Vhost configuration>>.
-
-[#identity-keys]
-==== Identity keys, names, and IDs
-
-All identity keys must now satisfy the following common rules:
-
-- must not be an empty string
-- must not be a single underscore `+_+`, dot `.`, or double dot `..`
-- must not include `/` or `\`
-- must not include any whitespace characters, except the regular space `U+0020`
-- must not start or end with the space character `U+0020`
-
-===== Node, Content, and Issue names and IDs
-
-* Names follow the common `Name` validation rules above.
-* IDs are limited to 256 bytes/characters and no longer accept uppercase letters: `[a-z0-9_.:-]+`
-
-===== IdProviderKey and PrincipalKey
-
-Follow the common `Name` rules with the additional restriction of not including the space character `U+0020`, nor any of: `<`, `>`, `:`, `"`, `|`, `?`, `*`, `&`, `'`.
-
-===== DescriptorKey
-
-Applies to:
-
-* All CMS schema descriptor keys, including MacroKey
-* Task key
-* API key
-* HTTP service key
-* Admin Tool key
-* Admin Extension key
-
-Additional restrictions:
-
-* must not include any of: `<`, `>`, `:`, `"`, `|`, `?`, `*`, `&`, `'`
-* must not include the space character `U+0020`
-* limited to 64 characters
-
-===== ApplicationKey
-
-* must match the regex `\w+(?:\.\w+)*`
-* limited to 63 characters
-
-===== RepositoryId
-
-* must match the regex `[a-z0-9][a-z0-9._-]*`
-* limited to 63 characters
-
-===== Branch
-
-* must match the regex `[a-z0-9][a-z0-9.-]*`
-* limited to 63 characters
-
-===== ProjectName
-
-* must match the regex `[a-z0-9][a-z0-9_-]*`
-* limited to 48 characters
+These are application-developer concerns and require code changes in your custom apps, not changes to the XP runtime configuration.
 
 ==== Other configuration
 

@@ -79,7 +79,7 @@ Vhost configuration files now support declaration of context values - project, b
 
 === Stricter identity validation
 
-Identity keys, content IDs, names, and descriptors now follow consistent, deterministic validation rules: lowercase-only IDs, explicit regex per key type, and length caps that match what the system actually supports. The intent is to eliminate the class of bugs that came from quietly accepting characters that broke serialization, URLs, or filesystem paths downstream. The full ruleset lives in <<release/upgrade#identity-keys, the upgrade notes>>.
+Identity keys, content IDs, names, and descriptors now follow consistent, deterministic validation rules: lowercase-only IDs, explicit regex per key type, and length caps that match what the system actually supports. The intent is to eliminate the class of bugs that came from quietly accepting characters that broke serialization, URLs, or filesystem paths downstream. The full ruleset lives in the https://developer.enonic.com/docs/code/stable/upgrade#identity-keys[dev kit upgrade guide].
 
 === Security hardening
 
