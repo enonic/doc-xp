@@ -606,7 +606,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="stricter_identity_validation"><a class="link" href="#stricter_identity_validation">Stricter identity validation</a></h3>
 <div class="paragraph">
-<p>Identity keys, content IDs, names, and descriptors now follow consistent, deterministic validation rules: lowercase-only IDs, explicit regex per key type, and length caps that match what the system actually supports. The intent is to eliminate the class of bugs that came from quietly accepting characters that broke serialization, URLs, or filesystem paths downstream. The full ruleset lives in <a href="release/upgrade.ahtml#identity-keys">the upgrade notes</a>.</p>
+<p>Identity keys, content IDs, names, and descriptors now follow consistent, deterministic validation rules: lowercase-only IDs, explicit regex per key type, and length caps that match what the system actually supports. The intent is to eliminate the class of bugs that came from quietly accepting characters that broke serialization, URLs, or filesystem paths downstream. The full ruleset lives in the <a href="https://developer.enonic.com/docs/code/stable/upgrade#identity-keys">dev kit upgrade guide</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -667,7 +667,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-13 15:16:36 UTC
+Last updated 2026-05-14 11:14:47 UTC
 </div>
 </div>
 </body>
