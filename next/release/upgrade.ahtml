@@ -907,7 +907,7 @@ This will virtually eliminate downtime and also be a safety net should the upgra
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-The <code>--archive</code> parameter must be provided, otherwise XP8 will not be able to read the dump.
+The <code>--archive</code> parameter must be provided, otherwise XP8 will not be able to read the dump. The migration dump must also include version history and all binaries (attachments) — both are included by default; do not pass <code>--skip-versions</code>.
 </td>
 </tr>
 </table>
@@ -983,7 +983,7 @@ Don&#8217;t worry about the CLI losing connection, this is only related to the s
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-14 11:19:55 UTC
+Last updated 2026-05-14 11:45:24 UTC
 </div>
 </div>
 </body>
