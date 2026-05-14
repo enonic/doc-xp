@@ -8,6 +8,8 @@ This procedure applies to feature (8.x.0) and fix upgrades (8.x.y, etc).
 
 Before you start the upgrade process, make sure to read through the entire documentation and understand the steps involved. You should always perform a test upgrade in a staging environment before applying the changes to production.
 
+IMPORTANT: Before migrating any data, every application running on your installation - both custom-built and 3rd party - must already be available in an XP 8 compatible version. Migration cannot be completed until all applications are ready for XP 8.
+
 
 
 == Non-cluster upgrade
@@ -66,10 +68,9 @@ XP Version:: You need to be running at least Enonic XP 7.16.x (if you are runnin
 QA environment:: Ensure you have a QA environment where you can perform a test upgrade first (highly recommended)
 Enonic CLI:: Make sure you have the latest version of https://developer.enonic.com/docs/enonic-cli[Enonic CLI] installed
 Disk space:: Verify you have enough disk space to facilitate a complete dump of all existing data
-3rd party apps:: Verify that all (if any) 3rd party applications in use are upgraded to support XP 8.
-Custom apps:: Make sure all custom built applications have been upgraded to support XP 8
+Applications ready for XP 8:: All applications - 3rd party and custom-built - must be available in XP 8 compatible versions *before* you begin the migration. The migration cannot complete without them.
 
-NOTE: To upgrade your custom Enonic apps, follow the https://developer.enonic.com/docs/code/stable/upgrade[application upgrade instructions] in the Enonic Dev kit documentation.
+IMPORTANT: Updating custom applications is a developer task that must be done ahead of time. Follow the https://developer.enonic.com/docs/code/stable/upgrade[application upgrade instructions] in the Enonic Dev kit documentation, and confirm with the maintainers of any 3rd party apps that XP 8 versions are available.
 
 
 [#breaking-changes]
@@ -178,12 +179,6 @@ Hash function can be configured in the <<../config/system#security,security serv
 The old passwords are _not_ automatically converted to the new format.
 When a user with an old password logs in, the password is verified using the old algorithm.
 It is strongly recommended to change all passwords after the upgrade to ensure all passwords are stored using the new algorithm.
-
-==== Application-level changes
-
-API surface changes (Content/Node/lib-content method renames and merges, `hasChildren` removal, `inheritsPermissions` removal), HTTP controller method-name capitalization, identity-key/name/ID format rules, and the new authentication-scope behavior are covered in the dev kit upgrade guide: https://developer.enonic.com/docs/code/stable/upgrade[Upgrading Enonic apps from XP7 to XP8].
-
-These are application-developer concerns and require code changes in your custom apps, not changes to the XP runtime configuration.
 
 ==== Other configuration
 
