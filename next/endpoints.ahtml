@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#portal_port_8080">Portal (Port 8080)</a></li>
+<li><a href="#web_port_8080">Web (Port 8080)</a></li>
 <li><a href="#management_api_port_4848">Management API (Port 4848)</a></li>
 <li><a href="#statistics_api_port_2609">Statistics API (Port 2609)</a></li>
 </ul>
@@ -460,10 +460,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="portal_port_8080"><a class="link" href="#portal_port_8080">Portal (Port 8080)</a></h2>
+<h2 id="web_port_8080"><a class="link" href="#web_port_8080">Web (Port 8080)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Portal (aka Web) is the gateway for all client interactions, including APIs, Admin and the Site Engine. See <a href="endpoints/portal.ahtml">Portal</a>.</p>
+<p>The gateway for all client interactions, including APIs, Admin and the Site service. See <a href="endpoints/web.ahtml">Web</a>.</p>
 </div>
 </div>
 </div>
@@ -498,7 +498,7 @@ The default ports can be overridden via <code>com.enonic.xp.web.jetty.cfg</code>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-14 11:45:24 UTC
+Last updated 2026-05-18 14:21:39 UTC
 </div>
 </div>
 </body>

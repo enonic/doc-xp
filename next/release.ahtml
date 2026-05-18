@@ -489,7 +489,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="universal_api"><a class="link" href="#universal_api">Universal API</a></h3>
 <div class="paragraph">
-<p>Web APIs are now first-class citizens of Enonic XP. A uniform implementation pattern can be used to implement and expose APIs across the platform, including direct exposure via the brand new <a href="endpoints/portal.ahtml#api">/api</a> service endpoint.</p>
+<p>Web APIs are now first-class citizens of Enonic XP. A uniform implementation pattern can be used to implement and expose APIs across the platform, including direct exposure via the brand new <a href="endpoints/web.ahtml#api">/api</a> service endpoint.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -648,7 +648,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>HTTP function names now use the standard uppercase form: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code></p>
 </li>
 <li>
-<p><code>request.locale</code> is available in the <a href="framework/http.ahtml#http-request">request object</a></p>
+<p><code>request.locale</code> is available in the request object</p>
 </li>
 <li>
 <p>The dump location is configurable via <a href="config/system.ahtml#repo">repository config</a></p>
@@ -667,7 +667,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-14 11:45:24 UTC
+Last updated 2026-05-18 14:21:39 UTC
 </div>
 </div>
 </body>

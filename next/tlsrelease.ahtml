@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Event API</title>
+<title>Release Notes</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,15 +437,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Event API</h1>
+<h1>Release Notes</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#usage">Usage</a></li>
-<li><a href="#functions">Functions</a>
+<li><a href="#xp_8">XP 8</a>
 <ul class="sectlevel2">
-<li><a href="#listener">listener</a></li>
-<li><a href="#send">send</a></li>
+<li><a href="#ui_reloaded">UI reloaded</a></li>
+<li><a href="#universal_api">Universal API</a></li>
+<li><a href="#modern_foundation">Modern foundation</a></li>
+</ul>
+</li>
+<li><a href="#prometheus_metrics">Prometheus metrics</a>
+<ul class="sectlevel2">
+<li><a href="#xp_goes_yaml">XP goes YAML</a></li>
+<li><a href="#instantly_applied_permissions">Instantly applied permissions</a></li>
+<li><a href="#companion_apps">Companion apps</a></li>
+<li><a href="#admin_extensions">Admin Extensions</a></li>
+<li><a href="#content_and_node_api_refresh">Content and Node API refresh</a></li>
+<li><a href="#vhost_context">Vhost context</a></li>
+<li><a href="#stricter_identity_validation">Stricter identity validation</a></li>
+<li><a href="#security_hardening">Security hardening</a></li>
+<li><a href="#smarter_dumps_and_exports">Smarter dumps and exports</a></li>
+<li><a href="#quality_of_life">Quality of life</a></li>
+<li><a href="#breaking_changes">Breaking changes</a></li>
 </ul>
 </li>
 </ul>
@@ -455,193 +470,196 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This API provides functions to create and listen to instance local or cluster distributed events.</p>
+<p>The headline features and themes for each XP feature release. For step-by-step upgrade instructions and the full breaking-change list, see <a href="release/upgrade.ahtml">Upgrading to XP 8</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
+<h2 id="xp_8"><a class="link" href="#xp_8">XP 8</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Add the following to your <code>build.gradle</code> file:</p>
+<p>XP 8 is the largest release in 8 years. The runtime is rebuilt on a modern stack, the Universal API unifies how request handlers are written and called, and a long list of API rough edges has been cleaned up.</p>
 </div>
-<div class="listingblock">
+<div class="sect2">
+<h3 id="ui_reloaded"><a class="link" href="#ui_reloaded">UI reloaded</a></h3>
+<div class="paragraph">
+<p>XP 8 introduces a new admin UI built on the Enonic UI design system. The new UI is faster, more responsive, and provides a more consistent user experience across tools. The first tools to be migrated are the <a href="admin.ahtml">XP menu</a> and the <a href="admin/dashboard.ahtml">Dashboard</a>. The remaining tools will be migrated in future releases.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="universal_api"><a class="link" href="#universal_api">Universal API</a></h3>
+<div class="paragraph">
+<p>Web APIs are now first-class citizens of Enonic XP. A uniform implementation pattern can be used to implement and expose APIs across the platform, including direct exposure via the brand new <a href="endpoints/web.ahtml#api">/api</a> service endpoint.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-  include "com.enonic.xp:lib-event:${xpVersion}"
-}</code></pre>
+<img src="endpoints/images/api-index.png" alt="Universal API index" width="1790px">
 </div>
 </div>
 <div class="paragraph">
-<p>Add the <code>import</code> statement to your controller:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">import eventLib from '/lib/xp/event';</code></pre>
-</div>
+<p>Borrowing the manifest-and-mount pattern from Kubernetes, APIs are registered with a unique name and automatically integrated with the platform&#8217;s security and IAM. A matching set of libraries and tools makes it easy to <a href="https://developer.enonic.com/docs/code/stable/api">build custom APIs</a> and call them from any context.</p>
 </div>
 <div class="paragraph">
-<p>You are now ready to use the API.</p>
+<p>APIs can be exposed on custom URLs and domains via <a href="config/vhosts.ahtml">virtual host configuration</a>, but also contextually mounted within the admin and site services, allowing for flexible API design and organization.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Several standard XP APIs already produce and publish events.
-For more details, check out the <a href="lib-node.ahtml#events">node API</a>, <a href="lib-repo.ahtml#events">repository API</a>, and <a href="lib-task.ahtml#events">task API</a></p>
+<p>TODO: Management API?</p>
 </div>
-</td>
-</tr>
-</table>
+</div>
+<div class="sect2">
+<h3 id="modern_foundation"><a class="link" href="#modern_foundation">Modern foundation</a></h3>
+<div class="paragraph">
+<p>The XP 8 core runs on a refreshed stack: <strong>Java 25</strong>, <strong>Jetty 12</strong>, and <strong>Hazelcast 5</strong>.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="functions"><a class="link" href="#functions">Functions</a></h2>
+<h2 id="prometheus_metrics"><a class="link" href="#prometheus_metrics">Prometheus metrics</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Metrics are now exposed in the open <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md">OpenMetrics</a> format - point your Prometheus, Grafana agent, or any compatible collector at the metrics endpoint to get first-class observability.</p>
+</div>
 <div class="sect2">
-<h3 id="listener"><a class="link" href="#listener">listener</a></h3>
+<h3 id="xp_goes_yaml"><a class="link" href="#xp_goes_yaml">XP goes YAML</a></h3>
 <div class="paragraph">
-<p>Creates an event listener</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<div class="paragraph">
-<p>An object with the following keys and their values:</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Kind</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Works like a Java Pattern, with two key differences: <code>.</code> is treated as a literal dot, not a wildcard. <code>*</code> acts as <code>.*</code>, matching any sequence of characters.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">callback</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">function</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Callback event listener</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">localOnly</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Local events only (default to false)</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph lead">
-<p>Returns</p>
-</div>
-<div class="paragraph">
-<p><code>null</code></p>
-</div>
-<div class="paragraph lead">
-<p>Example</p>
-</div>
-<div class="listingblock">
-<div class="title">Adding a listener that logs the event</div>
-<div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">eventLib.listener({
-    type: 'node.*',
-    localOnly: false,
-    callback: (event) =&gt; {
-        log.info('event: %s', JSON.stringify(event));
-    }
-});</code></pre>
-</div>
+<p>YAML replaces XML for all CMS schemas and app descriptors. This means content types, application definitions, ID providers, etc., are now all defined in YAML. YAML is a widely adopted format that is easier to read and write than JSON, especially for complex configurations - and it supports comments. The new YAML-based descriptors are more concise and maintainable, making life easier for developers.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="send"><a class="link" href="#send">send</a></h3>
+<h3 id="instantly_applied_permissions"><a class="link" href="#instantly_applied_permissions">Instantly applied permissions</a></h3>
 <div class="paragraph">
-<p>Sends a custom event.  All custom events are prefixed with <code>custom.</code>.</p>
+<p>Permissions are now applied instantly across all branches, eliminating the need to publish content just to push permissions through. This means you can manage permissions more efficiently, without worrying about the publishing state of your content. This also applies to the underlying APIs.</p>
 </div>
-<div class="paragraph lead">
-<p>Parameters</p>
 </div>
+<div class="sect2">
+<h3 id="companion_apps"><a class="link" href="#companion_apps">Companion apps</a></h3>
 <div class="paragraph">
-<p>An object with the following keys and their values:</p>
+<p>The major Enonic apps have been refreshed alongside the platform and are ready for XP 8.</p>
 </div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Kind</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Event type</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">distributed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>true</code> if it should be distributed in cluster</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Additional data for event.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph lead">
-<p>Returns</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/contentstudio">Content Studio</a></dt>
+<dd>
+<p>The editorial CMS interface. Migrated to the new Enonic UI design system, and continues to ship as a standalone application so it can release independently of the platform.</p>
+</dd>
+<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/guillotine">Guillotine</a></dt>
+<dd>
+<p>Auto-generates a GraphQL API directly from your content model. Updated for XP 8&#8217;s runtime and schema changes.</p>
+</dd>
+<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/data-toolbox">Data Toolbox</a></dt>
+<dd>
+<p>The developer-focused tool for inspecting repositories and nodes, and for managing dumps, snapshots, and exports. Updated for XP 8.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="admin_extensions"><a class="link" href="#admin_extensions">Admin Extensions</a></h3>
+<div class="paragraph">
+<p>The Widget API has been replaced by the Extensions API, better reflecting the actual capabilities. Visible tools live in the XP menu, while extensions, you guessed it, extend them - ranging from visual widgets to API-level functionality. The new API is more flexible and powerful.</p>
 </div>
 <div class="paragraph">
-<p><code>null</code></p>
+<p>Additionally, popular extensions such as Content Studio widgets are now wrapped as web components, for complete isolation and flexibility.</p>
 </div>
-<div class="paragraph lead">
-<p>Example</p>
+<div class="paragraph">
+<p>TODO: LInk to docs and examples for building admin extensions.</p>
 </div>
-<div class="listingblock">
-<div class="title">Send a custom event into the system</div>
-<div class="content">
-<pre class="highlight"><code class="language-typescript" data-lang="typescript">eventLib.send({
-    type: 'myEvent',
-    distributed: false,
-    data: {
-        a: 1,
-        b: 2
-    }
-});</code></pre>
 </div>
+<div class="sect2">
+<h3 id="content_and_node_api_refresh"><a class="link" href="#content_and_node_api_refresh">Content and Node API refresh</a></h3>
+<div class="paragraph">
+<p>Years of incremental additions left overlap in the Content and Node APIs. XP 8 cleans them up:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>move</code> and <code>rename</code> collapse into a single <code>move</code></p>
+</li>
+<li>
+<p><code>setChildOrder</code> and <code>reorderChildren</code> collapse into a single <code>sort</code></p>
+</li>
+<li>
+<p>The legacy <code>hasChildren</code> content property is gone</p>
+</li>
+<li>
+<p>A new <code>patch</code> method that applies changes across multiple branches in one call</p>
+</li>
+<li>
+<p>Language-aware <code>allText</code> configuration for multilingual full-text indexing</p>
+</li>
+<li>
+<p>Removal of the <code>inheritsPermissions</code> flag in favour of explicitly applied permissions</p>
+</li>
+<li>
+<p>Sort operations also honor language-specific collation.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vhost_context"><a class="link" href="#vhost_context">Vhost context</a></h3>
+<div class="paragraph">
+<p>Vhost configuration files now support declaration of context values - project, branch, principal - co-locating routing decisions with the vhost they belong to. This may also be used to customize application behaviour on a per-vhost basis. See <a href="deployment/vhosts.ahtml#virtual-host-context">Virtual host context</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="stricter_identity_validation"><a class="link" href="#stricter_identity_validation">Stricter identity validation</a></h3>
+<div class="paragraph">
+<p>Identity keys, content IDs, names, and descriptors now follow consistent, deterministic validation rules: lowercase-only IDs, explicit regex per key type, and length caps that match what the system actually supports. The intent is to eliminate the class of bugs that came from quietly accepting characters that broke serialization, URLs, or filesystem paths downstream. The full ruleset lives in <a href="release/upgrade.ahtml#identity-keys">the upgrade notes</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="security_hardening"><a class="link" href="#security_hardening">Security hardening</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentication no longer searches for the first matching user across all ID providers. Each request resolves against the vhost&#8217;s default ID provider, or the explicitly specified one.</p>
+</li>
+<li>
+<p>New passwords use <code>pbkdf2-sha512</code>. The legacy <code>md5</code> and <code>sha1</code> hashing algorithms have been retired, including for <code>xp.suPassword</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="smarter_dumps_and_exports"><a class="link" href="#smarter_dumps_and_exports">Smarter dumps and exports</a></h3>
+<div class="paragraph">
+<p>Repositories can now be exported in full or in part - by branch and path - and repositories may be dumped and loaded individually.</p>
+</div>
+<div class="paragraph">
+<p>Exports and dumps are written directly to ZIP archives, replacing the previous folder-based structure. The plain-file format and dry-run mode have been retired.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="quality_of_life"><a class="link" href="#quality_of_life">Quality of life</a></h3>
+<div class="paragraph">
+<p>A handful of smaller-but-pleasing improvements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sessions can be persisted to the filesystem via <code>file</code> <a href="config/system.ahtml#sessionstore">storeMode</a>, surviving graceful restarts on standalone instances</p>
+</li>
+<li>
+<p>The admin home moved from <code>/admin/home</code> to a cleaner <code>/admin</code></p>
+</li>
+<li>
+<p>HTTP function names now use the standard uppercase form: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code></p>
+</li>
+<li>
+<p><code>request.locale</code> is available in the request object</p>
+</li>
+<li>
+<p>The dump location is configurable via <a href="config/system.ahtml#repo">repository config</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="breaking_changes"><a class="link" href="#breaking_changes">Breaking changes</a></h3>
+<div class="paragraph">
+<p>For the full list of breaking changes and migration steps, see <a href="release/upgrade.ahtml#breaking-changes">Breaking changes</a> in the upgrade notes.</p>
 </div>
 </div>
 </div>
@@ -649,7 +667,7 @@ For more details, check out the <a href="lib-node.ahtml#events">node API</a>, <a
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-18 14:21:12 UTC
+Last updated 2026-05-18 14:21:39 UTC
 </div>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Portal (Port 8080)</title>
+<title>Web (Port 8080)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Portal (Port 8080)</h1>
+<h1>Web (Port 8080)</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -461,7 +461,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Portal endpoint (aka Web) is the default gateway for 3rd party client interactions with Enonic, including APIs, XP Admin and the Site Engine.</p>
+<p>The Web endpoint is the starting point for 3rd party client interactions with Enonic, including APIs, XP Admin and the Site service.</p>
 </div>
 </div>
 </div>
@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>This is where your content and applications get exposed to the world. It serves as the main entry point for all client interactions, including APIs, administrative tools, and content delivery.</p>
 </div>
 <div class="paragraph">
-<p>The portal consists of four main services: <a href="#api">/api</a>, <a href="#admin">/admin</a>, <a href="#site">/site</a> and <a href="#webapp">/webapp</a>, each serving specific purposes and use cases.</p>
+<p>The Web endpoint consists of four main services: <a href="#api">/api</a>, <a href="#admin">/admin</a>, <a href="#site">/site</a> and <a href="#webapp">/webapp</a>, each serving specific purposes and use cases.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -550,7 +550,7 @@ The API index page is disabled by default in production environments for securit
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-APIs can also be contextually mounted across other Portal services via the <code>_</code> path:
+APIs can also be contextually mounted across other Web services via the <code>_</code> path:
 </td>
 </tr>
 </table>
@@ -581,7 +581,7 @@ APIs can also be contextually mounted across other Portal services via the <code
 <p>XP Admin is the dynamically extensible Administrative User Interface for your XP instance. Applications, Content, Users, and system settings is just the beginning. XP Admin can be extended by applications to provide custom administrative tools and interfaces.</p>
 </div>
 <div class="paragraph">
-<p>Visiting the portal on port 8080 will automatically redirect you to the admin console, where you can log in and manage your XP instance. The admin console is built on top of the portal&#8217;s admin service, allowing it to be easily extended with custom tools and interfaces.</p>
+<p>Visiting :8080 will automatically redirect you to the admin console, where you can log in and manage your XP instance. The admin console is built on top of the admin service, allowing it to be easily extended with custom tools and interfaces.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -644,7 +644,7 @@ The site service relies on both content, and installed Enonic applications to pr
 <h2 id="vhosts"><a class="link" href="#vhosts">Vhosts</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The portal supports virtual hosts, allowing you to expose APIs and content on custom domains and paths. For example, you can mount the full API on <code>apis.yourdomain.com</code> or a site on <code>www.yourdomain.com</code> - including use of sub-paths like <code>yourdomain.com/content</code>.</p>
+<p>The Web endpoint supports virtual hosts, allowing you to expose APIs and content on custom domains and paths. For example, you can mount the full API on <code>apis.yourdomain.com</code> or a site on <code>www.yourdomain.com</code> - including use of sub-paths like <code>yourdomain.com/content</code>.</p>
 </div>
 <div class="paragraph">
 <p>For more information on how to configure vhosts, see <a href="../config/vhosts.ahtml">Virtual Hosts</a>.</p>
@@ -655,10 +655,10 @@ The site service relies on both content, and installed Enonic applications to pr
 <h2 id="identity_and_access_management"><a class="link" href="#identity_and_access_management">Identity and access management</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The portal is fully integrated with XP&#8217;s identity and access management (IAM) system, allowing you to control access to your applications and content based on user roles and permissions.</p>
+<p>The Web endpoint is fully integrated with XP&#8217;s identity and access management (IAM) system, allowing you to control access to your applications and content based on user roles and permissions.</p>
 </div>
 <div class="paragraph">
-<p>Authentication is configured per vhost by mapping ID providers, so different parts of your portal can use different authentication mechanisms. See <a href="../config/vhosts.ahtml">Virtual Hosts</a> for the mapping syntax and <a href="../security/idproviders.ahtml">ID providers</a> for the available providers.</p>
+<p>Authentication is configured per vhost by mapping ID providers, so different parts of your platform can use different authentication mechanisms. See <a href="../config/vhosts.ahtml">Virtual Hosts</a> for the mapping syntax and <a href="../security/idproviders.ahtml">ID providers</a> for the available providers.</p>
 </div>
 <div class="paragraph">
 <p>For service-to-service access, the platform supports JWT authentication via the system ID provider — see <a href="../security/system-idp.ahtml#jwt-authentication">JWT authentication</a>. Individual endpoints may document additional authentication options; see for example <a href="management.ahtml#authorization">Management API</a>.</p>
@@ -668,7 +668,7 @@ The site service relies on both content, and installed Enonic applications to pr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-14 11:45:24 UTC
+Last updated 2026-05-18 14:21:39 UTC
 </div>
 </div>
 </body>

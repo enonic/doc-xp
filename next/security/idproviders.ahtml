@@ -463,7 +463,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The main purpose of IDproviders is to provde pluggable authentication and authorization to XP. With an ID provider configured, your may associate it with a <a href="../endpoints/portal.ahtml">portal service</a> of your choice via  <a href="../config/vhosts.ahtml">virtual host</a> configuration.</p>
+<p>The main purpose of IDproviders is to provde pluggable authentication and authorization to XP. With an ID provider configured, your may associate it with a <a href="../endpoints/web.ahtml">web service</a> of your choice via  <a href="../config/vhosts.ahtml">virtual host</a> configuration.</p>
 </div>
 </div>
 </div>
@@ -523,7 +523,7 @@ The <code>Super User</code> exists in order to perform priveliged actions, and t
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You may choose from a range of standard ID providers on <a href="https://market.enonic.com">Enonic Market</a>, or <a href="../framework/idprovider.ahtml">build your own</a> for a fully customized approach.
+You may choose from a range of standard ID providers on <a href="https://market.enonic.com">Enonic Market</a>, or build your own for a fully customized approach.
 </td>
 </tr>
 </table>
@@ -557,7 +557,7 @@ Often, ID providers are simply proxies against 3rd party systems such as Google 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-14 11:45:24 UTC
+Last updated 2026-05-18 14:21:39 UTC
 </div>
 </div>
 </body>
