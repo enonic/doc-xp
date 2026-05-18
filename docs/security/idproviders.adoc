@@ -6,7 +6,7 @@ ID providers provide a pluggable abstraction layer for user authentication and a
 
 == Introduction
 
-The main purpose of IDproviders is to provde pluggable authentication and authorization to XP. With an ID provider configured, your may associate it with a <<../endpoints/portal#, portal service>> of your choice via  <<../config/vhosts#,virtual host>> configuration.
+The main purpose of IDproviders is to provde pluggable authentication and authorization to XP. With an ID provider configured, your may associate it with a <<../endpoints/web#, web service>> of your choice via  <<../config/vhosts#,virtual host>> configuration.
 
 
 == System ID provider
@@ -35,7 +35,7 @@ ID providers can be created and managed in the Users app, or via the API. An ID 
 * A unique name (cannot be changed later)
 * ID provider application, with optional configuration settings.
 +
-TIP: You may choose from a range of standard ID providers on https://market.enonic.com[Enonic Market], or <<../framework/idprovider#, build your own>> for a fully customized approach.
+TIP: You may choose from a range of standard ID providers on https://market.enonic.com[Enonic Market], or build your own for a fully customized approach.
 +
 * Permissions - specifies who can manage and access the ID provider
 

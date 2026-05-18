@@ -11,5 +11,5 @@ simply place a file with the name `<app-name>.cfg` i.e. `my.custom.app.cfg`. in 
 
 Changing these files while XP is running will restart the application. When the application boots, it will use the new version of the configuration.
 
-This configuration is instantly available for developers via the <<../framework/globals#App, global `app` object>>.
+This configuration is instantly available for developers via the global `app` object.
 

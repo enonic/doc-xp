@@ -1,14 +1,14 @@
-= Portal (Port 8080)
+= Web (Port 8080)
 :toc: right
 :imagesdir: images
 
-The Portal endpoint (aka Web) is the default gateway for 3rd party client interactions with Enonic, including APIs, XP Admin and the Site Engine. 
+The Web endpoint is the starting point for 3rd party client interactions with Enonic, including APIs, XP Admin and the Site service.
 
 == Introduction
 
 This is where your content and applications get exposed to the world. It serves as the main entry point for all client interactions, including APIs, administrative tools, and content delivery.
 
-The portal consists of four main services: <<#api, /api>>, <<#admin, /admin>>, <<#site, /site>> and <<#webapp, /webapp>>, each serving specific purposes and use cases.
+The Web endpoint consists of four main services: <<#api, /api>>, <<#admin, /admin>>, <<#site, /site>> and <<#webapp, /webapp>>, each serving specific purposes and use cases.
 
 NOTE: When running Enonic SDK distribution, localhost:8080 will display an overview of the instance, for developer convenice. Other XP distributions will redirect to /admin.
 
@@ -45,7 +45,7 @@ image::api-index.png[width=1790]
 
 === Contextual mounts
 
-NOTE: APIs can also be contextually mounted across other Portal services via the `_` path:
+NOTE: APIs can also be contextually mounted across other Web services via the `_` path:
 
 * **Site service** - `/site/<project>/<branch>/_/<appname>:<apiname>`
 * **Webapp service** - `/webapp/<appname>/_/<appname>:<apiname>`
@@ -59,7 +59,7 @@ This allows APIs to be scoped to specific contexts, such as a content site or ad
 
 XP Admin is the dynamically extensible Administrative User Interface for your XP instance. Applications, Content, Users, and system settings is just the beginning. XP Admin can be extended by applications to provide custom administrative tools and interfaces.
 
-Visiting the portal on port 8080 will automatically redirect you to the admin console, where you can log in and manage your XP instance. The admin console is built on top of the portal's admin service, allowing it to be easily extended with custom tools and interfaces.
+Visiting :8080 will automatically redirect you to the admin console, where you can log in and manage your XP instance. The admin console is built on top of the admin service, allowing it to be easily extended with custom tools and interfaces.
 
 TIP: You may customize the authentication via vhosts as described above.
 
@@ -90,14 +90,14 @@ For a more detailed introduction to building web applications on Enonic, see htt
 
 == Vhosts
 
-The portal supports virtual hosts, allowing you to expose APIs and content on custom domains and paths. For example, you can mount the full API on `apis.yourdomain.com` or a site on `www.yourdomain.com` - including use of sub-paths like `yourdomain.com/content`.
+The Web endpoint supports virtual hosts, allowing you to expose APIs and content on custom domains and paths. For example, you can mount the full API on `apis.yourdomain.com` or a site on `www.yourdomain.com` - including use of sub-paths like `yourdomain.com/content`.
 
 For more information on how to configure vhosts, see <<../config/vhosts#,Virtual Hosts>>.
 
 == Identity and access management
 
-The portal is fully integrated with XP's identity and access management (IAM) system, allowing you to control access to your applications and content based on user roles and permissions.
+The Web endpoint is fully integrated with XP's identity and access management (IAM) system, allowing you to control access to your applications and content based on user roles and permissions.
 
-Authentication is configured per vhost by mapping ID providers, so different parts of your portal can use different authentication mechanisms. See <<../config/vhosts#,Virtual Hosts>> for the mapping syntax and <<../security/idproviders#,ID providers>> for the available providers.
+Authentication is configured per vhost by mapping ID providers, so different parts of your platform can use different authentication mechanisms. See <<../config/vhosts#,Virtual Hosts>> for the mapping syntax and <<../security/idproviders#,ID providers>> for the available providers.
 
 For service-to-service access, the platform supports JWT authentication via the system ID provider — see <<../security/system-idp#jwt-authentication,JWT authentication>>. Individual endpoints may document additional authentication options; see for example <<management#authorization,Management API>>.
