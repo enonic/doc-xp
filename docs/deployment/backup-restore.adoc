@@ -55,7 +55,7 @@ Snapshots normally complete within seconds. Once you have a snapshot, you may re
 ====
 Snapshots will only restore the metadata and search index of your instance, not the blobs. As such, you must have an intact blobstore from the time the snapshot was taken.
 
-If you for instance have performed a <<vacuum, Vacuum>> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. To prevent confusion, all snapshots are deleted after any vacuum operations that delete blobs.
+If you for instance have performed a <<../storage/maintenance#vacuum, Vacuum>> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. To prevent confusion, all snapshots are deleted after any vacuum operations that delete blobs.
 ====
 
 Snapshot and restore commands can be performed by using Enonic CLI, the API or a management application from Enonic Market.
@@ -119,26 +119,4 @@ NOTE: Dumping is not a recommended backup solution, rather use snapshots in comb
 
 == Data management
 
-[#vacuum]
-=== Vacuuming
-
-Even if you delete nodes in your storage, the blobs and selected metadata are not permanently removed from XP.
-
-Deleting the blobs would actually prevent you from easily rolling back to a previous snapshot.
-
-To permanently delete the remaining metadata and blogs in a controlled fashion, XP offers a function called Vacuuming.
-
-There are multiple Vacuuming tasks available in XP:
-
-* `VersionTableVacuumTask` - deletes node metadata that is no longer referenced.
-* `SnapshotsVacuumTask` - deletes snapshots that are older than specified age threshold.
-
-* `SegmentVacuumTask` - deletes all blobs related to previously deleted repositories.
-* `BinaryBlobVacuumTask` - deletes binary data blobs that are no longer referenced.
-* `NodeBlobVacuumTask` - deletes node data blobs that are no longer referenced.
-
-`VersionTableVacuumTask`, `SnapshotsVacuumTask` - are default tasks that run when no tasks are specified.
-
-IMPORTANT: `SegmentVacuumTask`, `BinaryBlobVacuumTask` and `NodeBlobVacuumTask` - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blobstore before running these tasks. It is also recommended to take a new snapshot right after the vacuum operation.
-
-TIP: Vacuuming can be setup to execute automatically as a scheduled job, or manually triggered via for instance the CLI.
+For ongoing operational maintenance — vacuuming unreferenced blobs and metadata, and rebuilding the search index — see <<../storage/maintenance#, Storage maintenance>>.

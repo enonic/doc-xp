@@ -45,7 +45,7 @@ Sets are special in the way that they don't hold actual values, but rather act a
 == Value types
 
 Each property has a specific value type. These are the primitive data types in the XP storage
-The value type enables the data storage to handle both validation and <<indexing#,indexing>> of the property.
+The value type enables the data storage to handle both validation and <<#indexing,indexing>> of the property.
 
 Below is the complete list of all supported value-types.
 
@@ -119,6 +119,27 @@ Below is the complete list of all supported value-types.
 |Any valid XML
 |===
 
+
+[#indexing]
+== Indexing
+
+When a node is persisted, its property values are indexed instantly. A single property can be indexed multiple times — each index is referred to as an _index mapping_. The default mapping XP applies to a property depends on its value type (see the *Default indexing* column above).
+
+The available mappings:
+
+text:: Default mapping for any value type. Stores the value for exact match.
+number:: Effectively handles any numeric value.
+datetime:: Handles any date value.
+geoPoint:: Supports earth-based geographical locations.
+ngram:: Indexes all substrings from 2 to 25 characters of a string. Accessed via the `nGram` query function.
+analyzed:: Splits a string into tokens for free-text search. Used by the `fulltext` query function.
+stemmed:: Language-optimised version of `analyzed`. Tokens are reduced to their stem so plural and gender-specific endings still match.
+path:: Indexes path elements (split on `/`) as separate tokens.
+orderby:: Generated automatically for every indexed property. Used to sort text and numbers in a natural way.
+
+XP also maintains a system property called `_allText` that aggregates the text content of all indexed string properties on a node — useful for "search everything" queries.
+
+Applications can override the default mappings per property via the `_indexConfig` system property. For the full configuration reference — config options, templates, property-path patterns, and the language list for stemming — see the development documentation.
 
 [#sysprops]
 == System Properties
@@ -217,6 +238,7 @@ The repository contains several standard metadata properties such as `_id`, `_na
 |===
 
 
+[#access-control-properties]
 === Access control properties
 
 Permissions set on a node are indexed differently from what the domain object looks like.

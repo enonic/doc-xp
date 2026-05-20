@@ -40,9 +40,14 @@ Metrics are now exposed in the open https://github.com/prometheus/OpenMetrics/bl
 
 YAML replaces XML for all CMS schemas and app descriptors. This means content types, application definitions, ID providers, etc., are now all defined in YAML. YAML is a widely adopted format that is easier to read and write than JSON, especially for complex configurations - and it supports comments. The new YAML-based descriptors are more concise and maintainable, making life easier for developers.
 
-=== Instantly applied permissions
+=== Simplified permissions
 
-Permissions are now applied instantly across all branches, eliminating the need to publish content just to push permissions through. This means you can manage permissions more efficiently, without worrying about the publishing state of your content. This also applies to the underlying APIs.
+The permission model is stripped back to essentials in XP 8:
+
+* *No more inheritance.* Every node carries its own explicit ACL. To apply the same ACL across a subtree, do it in a single hierarchical apply call — the old "inherit from parent" mechanic is gone.
+* *Instant cross-branch effect.* Permission changes take effect on every branch a node exists in, immediately. No more publishing content just to push permissions through.
+
+The underlying Node and Content APIs follow the same model. See <<storage/permissions#, Permissions>> for the full picture.
 
 === Companion apps
 

@@ -2,33 +2,33 @@
 :toc: right
 :imagesdir: storage/images
 
-Enonic XP ships with a unique and powerful document-oriented data storage
-built on the shoulders of popular search engine https://www.elastic.co[Elasticsearch].
+Enonic XP ships with a unique and powerful document-oriented data storage.
 
 == Background
 
 When designing XP, we carefully evaluated existing and popular technologies from Git, file systems, object storage, SQL, the JCR (Java Content Repository), and various other search and NoSQL solutions.
-However, we were unable to find any single solution that supported our requirements to functionality, performance, simplicity and technology.
-So, we decided to build our own solution.
 
-The result is now a central part of Enonic XP, called the "Data store".
+However, we were unable to find any single solution that supported our requirements to functionality, performance, simplicity and technology. So, we decided to build our own NoSQL data store, optimized for our use cases and requirements.
+
+The result is now a central component in Enonic XP.
 
 == Features
 
 The XP Data store enables you to persist, index, query and access data of virtually any kind, fast and efficiently.
 Below is a highlight of the capabilities provided:
 
-* Create multiple <<storage/nodes#repos,Repositories>> within a single XP deployment
-* Store documents aka <<storage/nodes#, Nodes>> hierarchically, no schema required
+* Create multiple <<storage/nodes#repos, Repositories>> within a single XP deployment
+* Create schema-less documents aka <<storage/nodes#, Nodes>>
+* Built-in support for hierarchical structures
 * Nodes contain key-value entries called <<storage/properties#, Properties>>
-* Query your data using an SQL inspired <<storage/noql#, Query language>>
-* Use <<storage/aggregations#, Aggregations>> to access powerful statistics on your data
-* Visualize your search results with <<storage/highlighting#, Highlighting>>
-* Versions are created automatically for every modification of a node
-// TODO: link * Supports <<Access Control>> down to a single document
-* Supports Access Control down to a single document
+* Poweful <<storage/properties#indexing, indexing>> for fast retrieval and search
+* JSON based query language, aggregations, and result highlighting
+* Versions are created automatically for every update
+* Built-in <<storage/permissions#, Access control>> down to a single document
 * Git inspired <<storage/branches#, Branches>> enable you to stage and promote your data
-* <<storage/editors#, Editors>> eliminate the need for update statements
+* Atomic node updates via scripted editors.
+
+TIP: Visit the https://developer.enonic.com/docs/code/stable/storage[developer documentation] for querying, aggregations, highlighting, editors, and other developer-facing APIs.
 
 == Management
 
@@ -38,3 +38,4 @@ Data persisted in XP can be managed through various applications and interfaces,
 * <<deployment/backup-restore#export-import, exporting and importing>> nodes and tree structures using a human readable format
 * <<deployment/backup-restore#dump-load, dumping and loading>> your entire storage.
 * <<deployment/backup-restore#backup, backing up>> your data safely.
+* <<storage/maintenance#, maintenance>> — vacuuming unreferenced data and reindexing the search index.
