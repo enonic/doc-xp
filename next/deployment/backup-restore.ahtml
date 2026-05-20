@@ -457,11 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#dump-load">Dump and load</a></li>
 </ul>
 </li>
-<li><a href="#data_management">Data management</a>
-<ul class="sectlevel2">
-<li><a href="#vacuum">Vacuuming</a></li>
-</ul>
-</li>
+<li><a href="#data_management">Data management</a></li>
 </ul>
 </div>
 </div>
@@ -585,7 +581,7 @@ Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 <p>Snapshots will only restore the metadata and search index of your instance, not the blobs. As such, you must have an intact blobstore from the time the snapshot was taken.</p>
 </div>
 <div class="paragraph">
-<p>If you for instance have performed a <a href="#vacuum">Vacuum</a> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. To prevent confusion, all snapshots are deleted after any vacuum operations that delete blobs.</p>
+<p>If you for instance have performed a <a href="../storage/maintenance.ahtml#vacuum">Vacuum</a> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. To prevent confusion, all snapshots are deleted after any vacuum operations that delete blobs.</p>
 </div>
 </td>
 </tr>
@@ -730,73 +726,15 @@ Dumping is not a recommended backup solution, rather use snapshots in combinatio
 <div class="sect1">
 <h2 id="data_management"><a class="link" href="#data_management">Data management</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="vacuum"><a class="link" href="#vacuum">Vacuuming</a></h3>
 <div class="paragraph">
-<p>Even if you delete nodes in your storage, the blobs and selected metadata are not permanently removed from XP.</p>
-</div>
-<div class="paragraph">
-<p>Deleting the blobs would actually prevent you from easily rolling back to a previous snapshot.</p>
-</div>
-<div class="paragraph">
-<p>To permanently delete the remaining metadata and blogs in a controlled fashion, XP offers a function called Vacuuming.</p>
-</div>
-<div class="paragraph">
-<p>There are multiple Vacuuming tasks available in XP:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>VersionTableVacuumTask</code> - deletes node metadata that is no longer referenced.</p>
-</li>
-<li>
-<p><code>SnapshotsVacuumTask</code> - deletes snapshots that are older than specified age threshold.</p>
-</li>
-<li>
-<p><code>SegmentVacuumTask</code> - deletes all blobs related to previously deleted repositories.</p>
-</li>
-<li>
-<p><code>BinaryBlobVacuumTask</code> - deletes binary data blobs that are no longer referenced.</p>
-</li>
-<li>
-<p><code>NodeBlobVacuumTask</code> - deletes node data blobs that are no longer referenced.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><code>VersionTableVacuumTask</code>, <code>SnapshotsVacuumTask</code> - are default tasks that run when no tasks are specified.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-<code>SegmentVacuumTask</code>, <code>BinaryBlobVacuumTask</code> and <code>NodeBlobVacuumTask</code> - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blobstore before running these tasks. It is also recommended to take a new snapshot right after the vacuum operation.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Vacuuming can be setup to execute automatically as a scheduled job, or manually triggered via for instance the CLI.
-</td>
-</tr>
-</table>
-</div>
+<p>For ongoing operational maintenance — vacuuming unreferenced blobs and metadata, and rebuilding the search index — see <a href="../storage/maintenance.ahtml">Storage maintenance</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-18 14:21:39 UTC
+Last updated 2026-05-20 15:17:41 UTC
 </div>
 </div>
 </body>

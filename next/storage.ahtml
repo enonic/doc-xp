@@ -451,8 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP ships with a unique and powerful document-oriented data storage
-built on the shoulders of popular search engine <a href="https://www.elastic.co">Elasticsearch</a>.</p>
+<p>Enonic XP ships with a unique and powerful document-oriented data storage.</p>
 </div>
 </div>
 </div>
@@ -460,12 +459,13 @@ built on the shoulders of popular search engine <a href="https://www.elastic.co"
 <h2 id="background"><a class="link" href="#background">Background</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When designing XP, we carefully evaluated existing and popular technologies from Git, file systems, object storage, SQL, the JCR (Java Content Repository), and various other search and NoSQL solutions.
-However, we were unable to find any single solution that supported our requirements to functionality, performance, simplicity and technology.
-So, we decided to build our own solution.</p>
+<p>When designing XP, we carefully evaluated existing and popular technologies from Git, file systems, object storage, SQL, the JCR (Java Content Repository), and various other search and NoSQL solutions.</p>
 </div>
 <div class="paragraph">
-<p>The result is now a central part of Enonic XP, called the "Data store".</p>
+<p>However, we were unable to find any single solution that supported our requirements to functionality, performance, simplicity and technology. So, we decided to build our own NoSQL data store, optimized for our use cases and requirements.</p>
+</div>
+<div class="paragraph">
+<p>The result is now a central component in Enonic XP.</p>
 </div>
 </div>
 </div>
@@ -482,33 +482,45 @@ Below is a highlight of the capabilities provided:</p>
 <p>Create multiple <a href="storage/nodes.ahtml#repos">Repositories</a> within a single XP deployment</p>
 </li>
 <li>
-<p>Store documents aka <a href="storage/nodes.ahtml">Nodes</a> hierarchically, no schema required</p>
+<p>Create schema-less documents aka <a href="storage/nodes.ahtml">Nodes</a></p>
+</li>
+<li>
+<p>Built-in support for hierarchical structures</p>
 </li>
 <li>
 <p>Nodes contain key-value entries called <a href="storage/properties.ahtml">Properties</a></p>
 </li>
 <li>
-<p>Query your data using an SQL inspired <a href="storage/noql.ahtml">Query language</a></p>
+<p>Poweful <a href="storage/properties.ahtml#indexing">indexing</a> for fast retrieval and search</p>
 </li>
 <li>
-<p>Use <a href="storage/aggregations.ahtml">Aggregations</a> to access powerful statistics on your data</p>
+<p>JSON based query language, aggregations, and result highlighting</p>
 </li>
 <li>
-<p>Visualize your search results with <a href="storage/highlighting.ahtml">Highlighting</a></p>
+<p>Versions are created automatically for every update</p>
 </li>
 <li>
-<p>Versions are created automatically for every modification of a node</p>
-</li>
-<li>
-<p>Supports Access Control down to a single document</p>
+<p>Built-in <a href="storage/permissions.ahtml">Access control</a> down to a single document</p>
 </li>
 <li>
 <p>Git inspired <a href="storage/branches.ahtml">Branches</a> enable you to stage and promote your data</p>
 </li>
 <li>
-<p><a href="storage/editors.ahtml">Editors</a> eliminate the need for update statements</p>
+<p>Atomic node updates via scripted editors.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Visit the <a href="https://developer.enonic.com/docs/code/stable/storage">developer documentation</a> for querying, aggregations, highlighting, editors, and other developer-facing APIs.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -532,6 +544,9 @@ Below is a highlight of the capabilities provided:</p>
 <li>
 <p><a href="deployment/backup-restore.ahtml#backup">backing up</a> your data safely.</p>
 </li>
+<li>
+<p><a href="storage/maintenance.ahtml">maintenance</a> — vacuuming unreferenced data and reindexing the search index.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -539,7 +554,7 @@ Below is a highlight of the capabilities provided:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-18 14:21:39 UTC
+Last updated 2026-05-20 15:17:41 UTC
 </div>
 </div>
 </body>

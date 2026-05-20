@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Aggregations</title>
+<title>Permissions</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,981 +437,153 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Aggregations</h1>
+<h1>Permissions</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#aggregations">Aggregations</a>
+<li><a href="#model">Model</a>
 <ul class="sectlevel2">
-<li><a href="#term">Term</a></li>
-<li><a href="#stats">Stats</a></li>
-<li><a href="#min">Min</a></li>
-<li><a href="#max">Max</a></li>
-<li><a href="#value_count">Value Count</a></li>
-<li><a href="#range">Range</a></li>
-<li><a href="#geodistance">geoDistance</a></li>
-<li><a href="#daterange">dateRange</a></li>
-<li><a href="#datehistogram">dateHistogram</a></li>
+<li><a href="#permission_types">Permission types</a></li>
+<li><a href="#resolution">Resolution</a></li>
+<li><a href="#per_node_acl">Per-node ACL</a></li>
+<li><a href="#permissions_across_branches">Permissions across branches</a></li>
 </ul>
 </li>
-<li><a href="#types">Types</a>
-<ul class="sectlevel2">
-<li><a href="#date_range">Date range</a></li>
-<li><a href="#numeric_range">Numeric range</a></li>
-<li><a href="#origin">Origin</a></li>
-</ul>
-</li>
+<li><a href="#querying">Querying</a></li>
+<li><a href="#managing_permissions">Managing permissions</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>With Aggregations, developers may extract statistical data from search results.
-Aggregations can be used for anything from data visualization to creating navigational UI&#8217;s.</p>
-</div>
-<div class="paragraph">
-<p>Consider a query returning all nodes that have a property "price" less than, say, $100. Now, we want to divide the result nodes into ranges, say 0-$25, $25-$50 and so on. We also would like to know the average price for each category. This could be done by doing multiple separate queries and calculating the average manually, but this would be very inefficient and cumbersome. Luckily, aggregations solve these types of problems easily.</p>
-</div>
-<div class="paragraph">
-<p>In some API functions it is possible to send in an aggregations expression object like the following:</p>
-</div>
-<div class="listingblock">
-<div class="title">Basic aggregation DSL</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-"aggregations" : {
-  "[name]" : {
-    "[type]" : {
-      ... body ...
-    },
-    "aggregations": {
-      ... sub-aggregations ...
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>There are two different types of aggregations:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Bucket aggregations</dt>
-<dd>
-<p>A bucket aggregation places documents matching the query in a collection - a bucket. Each bucket has a key.</p>
-</dd>
-<dt class="hdlist1">Metrics aggeregations</dt>
-<dd>
-<p>A metric aggeregation computes metrics over a set of documents.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Typically, you will divide data into buckets and then use metric aggregations to calculate e.g average values,
-sum, etc. for each bucket, if necessary.</p>
+<p>XP enforces access control on every <a href="nodes.ahtml">node</a> in the data store, all the way down to individual documents.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="aggregations"><a class="link" href="#aggregations">Aggregations</a></h2>
+<h2 id="model"><a class="link" href="#model">Model</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="term"><a class="link" href="#term">Term</a></h3>
 <div class="paragraph">
-<p>The <code>terms</code> aggregation places documents into bucket based on property values. Each unique value of a property will
-get its own bucket. Here&#8217;s a list of properties:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">field (string)</dt>
-<dd>
-<p>The property path.</p>
-</dd>
-<dt class="hdlist1">size (int)</dt>
-<dd>
-<p>The number of bucket to return, ordered by the given orderType and orderDirection. Default to <code>10</code>.</p>
-</dd>
-<dt class="hdlist1">order (string)</dt>
-<dd>
-<p>How to order the results, type and direction. Default to <code>_term ASC</code>.</p>
-</dd>
-<dt class="hdlist1">minDocCount (int)</dt>
-<dd>
-<p>Only include bucket in the result if number of hits is <code>minDocCount</code> or more. This parameter is optional.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Types:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>_term</code>: Alphabetic ordering of bucket keys.</p>
-</li>
-<li>
-<p><code>_count</code>: Numeric ordering of number of document in buckets.</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Sample term aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "categories": {
-      "terms": {
-        "field": "myCategory",
-        "order": "_count desc",
-        "size": 10
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "categories": {
-      "buckets": [
-        {
-          "docCount": 132,
-          "key": "articles"
-        },
-        {
-          "docCount": 101,
-          "key": "documents"
-        },
-        {
-          "docCount": 43,
-          "key": "case-studies"
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
+<p>Each node carries an Access Control List (ACL). Each entry in the ACL targets a single <a href="../security/principals.ahtml">principal</a> — a user, group, or role — and lists the permissions granted to that principal.</p>
 </div>
 <div class="sect2">
-<h3 id="stats"><a class="link" href="#stats">Stats</a></h3>
+<h3 id="permission_types"><a class="link" href="#permission_types">Permission types</a></h3>
 <div class="paragraph">
-<p>The stats-aggregations calculates statistics over numeric values extracted from the aggregated documents. The following statistics are supported:</p>
+<p>A node defines seven independent permissions:</p>
 </div>
-<div class="paragraph">
-<p><code>avg</code>, <code>min</code>, <code>max</code>, <code>count</code>, and <code>sum</code></p>
-</div>
-<div class="paragraph">
-<p>Here&#8217;s a list of properties:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">field (string)</dt>
-<dd>
-<p>The property path.</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="title">Sample stats aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "start": 0,
-  "count": 0,
-  "aggregations": {
-    "products": {
-      "terms": {
-        "field": "data.product.category",
-        "order": "_count desc",
-        "size": 10
-      },
-      "aggregations": {
-        "priceStats": {
-          "stats": {
-            "field": "data.product.price"
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "products": {
-    "buckets": [
-      {
-        "key": "tv",
-        "docCount": 123,
-        "priceStats": {
-          "count": 123,
-          "min": 2599,
-          "max": 87944,
-          "avg": 7400,
-          "sum": 578100
-        }
-      },
-      {
-        "key": "blu-ray player",
-        "docCount": 42,
-        "priceStats": {
-          "count": 42,
-          "min": 699,
-          "max": 5999,
-          "avg": 1548,
-          "sum": 65016
-        }
-      },
-      {
-        "key": "reciever",
-        "docCount": 12,
-        "priceStats": {
-          "count": 12,
-          "min": 2999,
-          "max": 26950,
-          "avg": 5548,
-          "sum": 66756
-        }
-      }
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="min"><a class="link" href="#min">Min</a></h3>
-<div class="paragraph">
-<p>An aggregation that computes the minimum of the values in the current bucket. Here&#8217;s the list of properties:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">field (string)</dt>
-<dd>
-<p>The property path.</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="title">Sample min aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "minPrice": {
-      "min": {
-        "field": "data.product.price"
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "minPrice": {
-    "value": 10
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="max"><a class="link" href="#max">Max</a></h3>
-<div class="paragraph">
-<p>An aggregation that computes the maximum of the values in the current bucket. Here&#8217;s the list of properties:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">field (string)</dt>
-<dd>
-<p>The property path.</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="title">Sample max aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "maxPrice": {
-      "max": {
-        "field": "data.product.price"
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "maxPrice": {
-    "value": 10
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="value_count"><a class="link" href="#value_count">Value Count</a></h3>
-<div class="paragraph">
-<p>An aggregation that counts the number of values that current document set has for a specific field. Here&#8217;s the list of properties:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">field (string)</dt>
-<dd>
-<p>The property path.</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="title">Sample value count aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "countProductsWithPrice": {
-      "count": {
-        "field": "data.product.price"
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "countProductsWithPrice": {
-    "value": 5
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="range"><a class="link" href="#range">Range</a></h3>
-<div class="paragraph">
-<p>The range aggregation query defines a set of ranges that represents a bucket.</p>
-</div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
+<col style="width: 25%;">
+<col style="width: 75%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Details</th>
+<th class="tableblock halign-left valign-top">Permission</th>
+<th class="tableblock halign-left valign-top">Grants</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The property path</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieve the node and its properties.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ranges</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#numeric_range">NumericRange</a>[]</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The range-buckets to create</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CREATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create children directly under this node.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MODIFY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edit the node&#8217;s properties.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove the node.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PUBLISH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Push the node from one branch to another (e.g. <code>draft</code> → <code>master</code> in the CMS).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_PERMISSIONS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read the ACL of the node.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WRITE_PERMISSIONS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modify the ACL of the node.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="listingblock">
-<div class="title">Sample range aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "price_ranges": {
-    "range": {
-      "field": "price",
-      "ranges": [
-        {
-          "to": 50
-        },
-        {
-          "from": 50,
-          "to": 100
-        },
-        {
-          "from": 100
-        }
-      ]
-    }
-  }
-}</code></pre>
 </div>
+<div class="sect2">
+<h3 id="resolution"><a class="link" href="#resolution">Resolution</a></h3>
+<div class="paragraph">
+<p>When XP evaluates whether a caller may perform an operation, it collects every ACL entry whose principal matches the caller — directly, transitively through group membership, through any role they hold, and through the dynamic <a href="../security/principals.ahtml#system-roles">system roles</a> (<code>system.everyone</code> for anyone, <code>system.authenticated</code> for signed-in users).</p>
 </div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "price_ranges": {
-    "buckets": [
-      {
-        "docCount": 2,
-        "key": "a",
-        "to": 50
-      },
-      {
-        "docCount": 4,
-        "from": 50,
-        "key": "b",
-        "to": 100
-      },
-      {
-        "docCount": 4,
-        "from": 100,
-        "key": "c"
-      }
-    ]
-  }
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>An operation is permitted if at least one matching entry grants it.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="geodistance"><a class="link" href="#geodistance">geoDistance</a></h3>
+<h3 id="per_node_acl"><a class="link" href="#per_node_acl">Per-node ACL</a></h3>
 <div class="paragraph">
-<p>The geoDistance aggregation needs a defined range to split the documents into buckets.
-Only documents with properties of type 'GeoPoint' will be considered in the <code>geoDistance</code> aggregation buckets.</p>
+<p>Every node carries its own explicit ACL. There is no read-time inheritance from the parent — a change to a parent&#8217;s ACL does not automatically flow down to its descendants.</p>
 </div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The property path</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">origin</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#origin">Origin</a></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The GeoPoint from which the distance is measured.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ranges</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#numeric_range">NumericRange</a>[]</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The range-buckets to create.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">unit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The measurement unit to use for the ranges. Legal values are either the full name or the abbreviation of the following: km (kilometers), m (meters), cm (centimeters), mm (millimeters), mi (miles), yd (yards), ft (feet), in (inch) or nmi (nauticalmiles or NM).</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="listingblock">
-<div class="title">Sample geoDistance aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "distance": {
-      "geoDistance": {
-        "field": "data.cityLocation",
-        "unit": "km",
-        "origin": {
-          "lat": "90.0",
-          "lon": "0.0"
-        },
-        "ranges": [
-          {
-            "from": 0,
-            "to": 1200
-          },
-          {
-            "from": 1200,
-            "to": 4000
-          },
-          {
-            "from": 4000,
-            "to": 12000
-          },
-          {
-            "from": 12000
-          }
-        ]
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "aggregations": {
-    "distance": {
-      "buckets": [
-        {
-          "key": "*-1200.0",
-          "doc_count": 3
-        },
-        {
-          "key": "1200.0-4000.0",
-          "doc_count": 4
-        },
-        {
-          "key": "4000.0-12000.0",
-          "doc_count": 5
-        },
-        {
-          "key": "12000.0-*",
-          "doc_count": 1
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>At the time of writing, there is only one way of find out which result belongs to which bucket:
-By also sorting the result on geoDistance, and matching the order to the number of each bucket.
-In a future version, there will easier ways of doing this.</p>
+<p>When a node is created, it receives a copy of its parent&#8217;s ACL as its starting state. This is a one-time copy, not a live link: subsequent changes to the parent do not affect the new node.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>To set the same ACL on many nodes at once, use the hierarchical <em>apply</em> operation: the ACL is written to a target node and, optionally, to all its descendants.</p>
+</div>
+<div class="paragraph">
+<p>The root node of every repository (<code>000-000-000-000</code>) carries its own ACL that governs operations performed against the repository root. It does not act as a default for descendants.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="daterange"><a class="link" href="#daterange">dateRange</a></h3>
+<h3 id="permissions_across_branches"><a class="link" href="#permissions_across_branches">Permissions across branches</a></h3>
 <div class="paragraph">
-<p>The dateRange aggregation query defines a set of date-ranges that represents a bucket. Only
-documents with properties of type 'DateTime' will be considered in the <code>dateRange</code> aggregation buckets.</p>
+<p>A node&#8217;s ACL is shared across every <a href="branches.ahtml">branch</a> the node exists in. Setting or applying permissions on a node takes effect immediately on that node in every branch — there is no per-branch ACL state and no "publish permissions" step between branches.</p>
 </div>
-<div class="paragraph lead">
-<p>Parameters</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The property path</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">format</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The date-format of which the buckets will be formatted to on return. Defaults to <code>yyyy-MM-dd&#8217;T&#8217;HH:mm:ss.SSSZ</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ranges</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#date_range">DateRange</a>[]</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The range-buckets to create. Follows a special <a href="#date_math_expression">Date-math expression</a>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="listingblock">
-<div class="title">Sample dateRange aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "my_date_range": {
-    "dateRange": {
-      "field": "date",
-      "format": "MM-yyy",
-      "ranges": [
-        {
-          "to": "now-10M"
-        },
-        {
-          "from": "now-10M"
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "my_date_range": {
-    "buckets": [
-      {
-        "key": "*-12-2017",
-        "docCount": 2,
-        "to": "2017-12-01T00:00:00Z"
-      },
-      {
-        "key": "12-2017-*",
-        "docCount": 4,
-        "from": "2017-12-01T00:00:00Z"
-      }
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-<div class="sect3">
-<h4 id="date_math_expression"><a class="link" href="#date_math_expression">Date-math expression</a></h4>
-<div id="date_math_expression" class="paragraph">
-<p>The range fields accepts a date-math expression to calculate the time-spans.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Now minus a day: <code>now-1d</code></p>
-</li>
-<li>
-<p>The given date minus 3 days plus one minute: <code>2014-12-10T10:00:00Z||-3h+1m</code></p>
-</li>
-<li>
-<p>Range describing now plus one day and thirty minutes, rounded to minutes: <code>now+1d+30m/m</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="datehistogram"><a class="link" href="#datehistogram">dateHistogram</a></h3>
 <div class="paragraph">
-<p>The date-histogram aggregation query defines a set of bucket based on a given time-unit. For instance,
-if querying a set of log-events,  a <code>dateHistorgram</code> aggregations query with interval <code>h</code> (hour) will divide each log
-event into a bucket for each hour in the time-span of the matching events. Here&#8217;s a list of properties:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">field (string)</dt>
-<dd>
-<p>The property path.</p>
-</dd>
-<dt class="hdlist1">interval (string)</dt>
-<dd>
-<p>The time-unit interval for creating bucket. Supported time-unit notations:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>y</code> = Year</p>
-</li>
-<li>
-<p><code>M</code> = Month</p>
-</li>
-<li>
-<p><code>w</code> = Week</p>
-</li>
-<li>
-<p><code>d</code> = Day</p>
-</li>
-<li>
-<p><code>h</code> = Hour</p>
-</li>
-<li>
-<p><code>m</code> = Minute</p>
-</li>
-<li>
-<p><code>s</code> = Second</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">format (string)</dt>
-<dd>
-<p>Output format of date string.</p>
-</dd>
-<dt class="hdlist1">minDocCount (int)</dt>
-<dd>
-<p>Only include bucket in result if number of hits &#8656; <code>minDocCount</code>.</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="title">Sample dateHistogram aggregation</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "by_month": {
-    "dateHistogram": {
-      "field": "init_date",
-      "interval": "1M",
-      "minDocCount": 0,
-      "format": "MM-yyy"
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from the above agg</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "by_month": {
-    "buckets": [
-      {
-        "docCount": 8,
-        "key": "2014-01"
-      },
-      {
-        "docCount": 10,
-        "key": "2014-02"
-      },
-      {
-        "docCount": 12,
-        "key": "2014-03"
-      }
-    ]
-  }
-}</code></pre>
-</div>
+<p>When permissions are applied hierarchically, the set of affected descendants is determined by the node tree in the branch where the operation runs. The resulting ACL change is then written to each of those nodes across every branch they appear in.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="types"><a class="link" href="#types">Types</a></h2>
+<h2 id="querying"><a class="link" href="#querying">Querying</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="date_range"><a class="link" href="#date_range">Date range</a></h3>
-<div id="date_range" class="paragraph">
-<p>Defines a range to create a bucket for. <code>from</code> value will be included in the bucket, <code>to</code> will be excluded.
-Values in <code>from</code> and <code>to</code> follow a special <a href="#date_math_expression">Date-math expression</a>.</p>
-</div>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">from</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>inclusive from</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>exclusive to</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="numeric_range"><a class="link" href="#numeric_range">Numeric range</a></h3>
-<div id="numeric_range" class="paragraph">
-<p>Defines a range to create a bucket for. <code>from</code> value will be included in the bucket, <code>to</code> will be excluded.</p>
-</div>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">from</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>inclusive from</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>exclusive to</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "to": 50 <i class="conum" data-value="1"></i><b>(1)</b>
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The bucket will contain minus infinity unto 49.<span class="overline">999</span></td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "from": 50, <i class="conum" data-value="1"></i><b>(1)</b>
-  "to": 100 <i class="conum" data-value="2"></i><b>(2)</b>
-}</code></pre>
-</div>
+<p>When a node is indexed, its effective ACL is flattened into a set of system properties — one per permission level — listing the principals that ultimately hold that permission. This lets queries filter on permissions efficiently without resolving the full ACL at query time. See <a href="properties.ahtml#access-control-properties">Access control properties</a> for the field reference.</p>
 </div>
 <div class="paragraph">
-<p>The bucket will contain</p>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>50</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>unto 99.<span class="overline">999</span></td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "from": 100 <i class="conum" data-value="1"></i><b>(1)</b>
-}</code></pre>
+<p>XP also applies an implicit read filter to every query. Callers never see nodes they do not have <code>READ</code> access to, regardless of how the query is written.</p>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The bucket will contain 100 unto infinity</td>
-</tr>
-</table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="origin"><a class="link" href="#origin">Origin</a></h3>
-<div id="origin" class="paragraph">
-<p>The GeoPoint from which the distance is measured.</p>
-</div>
-<div class="paragraph lead">
-<p>Fields</p>
-</div>
-<table class="tableblock frame-none grid-none stretch">
-<colgroup>
-<col style="width: 1%;">
-<col style="width: 1%;">
-<col style="width: 98%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lat</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Latitude</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lon</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Longitude</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+<div class="sect1">
+<h2 id="managing_permissions"><a class="link" href="#managing_permissions">Managing permissions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>In the CMS, content permissions are managed through <a href="https://developer.enonic.com/docs/content-studio/stable/permissions">Content Studio</a>.</p>
+</li>
+<li>
+<p>From application code, see the storage permissions reference in the developer documentation.</p>
+</li>
+<li>
+<p>Permission changes on content are recorded in the <a href="../security/audit-logs.ahtml">audit log</a> as <code>system.content.applyPermissions</code> events.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-18 14:21:39 UTC
+Last updated 2026-05-20 15:17:41 UTC
 </div>
 </div>
 </body>

@@ -451,7 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#prometheus_metrics">Prometheus metrics</a>
 <ul class="sectlevel2">
 <li><a href="#xp_goes_yaml">XP goes YAML</a></li>
-<li><a href="#instantly_applied_permissions">Instantly applied permissions</a></li>
+<li><a href="#simplified_permissions">Simplified permissions</a></li>
 <li><a href="#companion_apps">Companion apps</a></li>
 <li><a href="#admin_extensions">Admin Extensions</a></li>
 <li><a href="#content_and_node_api_refresh">Content and Node API refresh</a></li>
@@ -527,9 +527,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="instantly_applied_permissions"><a class="link" href="#instantly_applied_permissions">Instantly applied permissions</a></h3>
+<h3 id="simplified_permissions"><a class="link" href="#simplified_permissions">Simplified permissions</a></h3>
 <div class="paragraph">
-<p>Permissions are now applied instantly across all branches, eliminating the need to publish content just to push permissions through. This means you can manage permissions more efficiently, without worrying about the publishing state of your content. This also applies to the underlying APIs.</p>
+<p>The permission model is stripped back to essentials in XP 8:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>No more inheritance.</strong> Every node carries its own explicit ACL. To apply the same ACL across a subtree, do it in a single hierarchical apply call — the old "inherit from parent" mechanic is gone.</p>
+</li>
+<li>
+<p><strong>Instant cross-branch effect.</strong> Permission changes take effect on every branch a node exists in, immediately. No more publishing content just to push permissions through.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The underlying Node and Content APIs follow the same model. See <a href="storage/permissions.ahtml">Permissions</a> for the full picture.</p>
 </div>
 </div>
 <div class="sect2">
@@ -667,7 +680,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-18 14:21:39 UTC
+Last updated 2026-05-20 15:17:41 UTC
 </div>
 </div>
 </body>

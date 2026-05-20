@@ -444,12 +444,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#property_anatomy">Property anatomy</a></li>
 <li><a href="#value_types">Value types</a></li>
+<li><a href="#indexing">Indexing</a></li>
 <li><a href="#sysprops">System Properties</a>
 <ul class="sectlevel2">
 <li><a href="#core_properties">Core properties</a></li>
 <li><a href="#versioning_properties">Versioning properties</a></li>
 <li><a href="#indexing_properties">Indexing properties</a></li>
-<li><a href="#access_control_properties">Access control properties</a></li>
+<li><a href="#access-control-properties">Access control properties</a></li>
 </ul>
 </li>
 </ul>
@@ -523,7 +524,7 @@ Sets are special in the way that they don&#8217;t hold actual values, but rather
 <div class="sectionbody">
 <div class="paragraph">
 <p>Each property has a specific value type. These are the primitive data types in the XP storage
-The value type enables the data storage to handle both validation and <a href="indexing.ahtml">indexing</a> of the property.</p>
+The value type enables the data storage to handle both validation and <a href="#indexing">indexing</a> of the property.</p>
 </div>
 <div class="paragraph">
 <p>Below is the complete list of all supported value-types.</p>
@@ -624,6 +625,63 @@ The value type enables the data storage to handle both validation and <a href="i
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="indexing"><a class="link" href="#indexing">Indexing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a node is persisted, its property values are indexed instantly. A single property can be indexed multiple times — each index is referred to as an <em>index mapping</em>. The default mapping XP applies to a property depends on its value type (see the <strong>Default indexing</strong> column above).</p>
+</div>
+<div class="paragraph">
+<p>The available mappings:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">text</dt>
+<dd>
+<p>Default mapping for any value type. Stores the value for exact match.</p>
+</dd>
+<dt class="hdlist1">number</dt>
+<dd>
+<p>Effectively handles any numeric value.</p>
+</dd>
+<dt class="hdlist1">datetime</dt>
+<dd>
+<p>Handles any date value.</p>
+</dd>
+<dt class="hdlist1">geoPoint</dt>
+<dd>
+<p>Supports earth-based geographical locations.</p>
+</dd>
+<dt class="hdlist1">ngram</dt>
+<dd>
+<p>Indexes all substrings from 2 to 25 characters of a string. Accessed via the <code>nGram</code> query function.</p>
+</dd>
+<dt class="hdlist1">analyzed</dt>
+<dd>
+<p>Splits a string into tokens for free-text search. Used by the <code>fulltext</code> query function.</p>
+</dd>
+<dt class="hdlist1">stemmed</dt>
+<dd>
+<p>Language-optimised version of <code>analyzed</code>. Tokens are reduced to their stem so plural and gender-specific endings still match.</p>
+</dd>
+<dt class="hdlist1">path</dt>
+<dd>
+<p>Indexes path elements (split on <code>/</code>) as separate tokens.</p>
+</dd>
+<dt class="hdlist1">orderby</dt>
+<dd>
+<p>Generated automatically for every indexed property. Used to sort text and numbers in a natural way.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>XP also maintains a system property called <code>_allText</code> that aggregates the text content of all indexed string properties on a node — useful for "search everything" queries.</p>
+</div>
+<div class="paragraph">
+<p>Applications can override the default mappings per property via the <code>_indexConfig</code> system property. For the full configuration reference — config options, templates, property-path patterns, and the language list for stemming — see the development documentation.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -769,7 +827,7 @@ The value type enables the data storage to handle both validation and <a href="i
 </table>
 </div>
 <div class="sect2">
-<h3 id="access_control_properties"><a class="link" href="#access_control_properties">Access control properties</a></h3>
+<h3 id="access-control-properties"><a class="link" href="#access-control-properties">Access control properties</a></h3>
 <div class="paragraph">
 <p>Permissions set on a node are indexed differently from what the domain object looks like.
 The index structure is is flattened, and enables an effective way to query nodes based on access control.</p>
@@ -840,7 +898,7 @@ The index structure is is flattened, and enables an effective way to query nodes
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-18 14:21:39 UTC
+Last updated 2026-05-20 15:17:41 UTC
 </div>
 </div>
 </body>
