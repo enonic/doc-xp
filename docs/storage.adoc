@@ -17,15 +17,15 @@ The result is now a central component in Enonic XP.
 The XP Data store enables you to persist, index, query and access data of virtually any kind, fast and efficiently.
 Below is a highlight of the capabilities provided:
 
-* Create multiple <<storage/nodes#repos, Repositories>> within a single XP deployment
-* Create schema-less documents aka <<storage/nodes#, Nodes>>
+* Create multiple <<storage/repositories#, Repositories>> within a single XP deployment
+* Create schema-less documents aka <<storage/repositories#nodes, Nodes>>
 * Built-in support for hierarchical structures
-* Nodes contain key-value entries called <<storage/nodes#, properties>>
+* Nodes contain key-value entries called <<storage/repositories#nodes, properties>>
 * Powerful indexing for fast retrieval and search
 * JSON based query language, aggregations, and result highlighting
 * Versions are created automatically for every update
 * Built-in <<storage/permissions#, Access control>> down to a single document
-* Git inspired <<storage/branches#, Branches>> enable you to stage and promote your data
+* Git inspired <<storage/repositories#branches, Branches>> enable you to stage and promote your data
 * Atomic node updates via scripted editors.
 
 TIP: Visit the https://developer.enonic.com/docs/code/stable/storage[developer documentation] for querying, aggregations, highlighting, editors, and other developer-facing APIs.

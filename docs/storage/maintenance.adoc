@@ -69,7 +69,7 @@ NOTE: Reindexing only rebuilds the *search index*. The metadata index is not reb
 
 === Scope
 
-A reindex targets a specific repository and one or more <<branches#, branches>>. Reindexing one branch does not affect indices on other branches or other repositories.
+A reindex targets a specific repository and one or more <<repositories#branches, branches>>. Reindexing one branch does not affect indices on other branches or other repositories.
 
 When the `initialize` flag is set, the existing search indices are deleted before being rebuilt — this guarantees that all index mappings come from the current state of XP and the installed applications. Without it, the reindex updates the existing indices in place.
 

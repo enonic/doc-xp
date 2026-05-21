@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: images
 
-XP enforces access control on every <<nodes#, node>> in the data store, all the way down to individual documents.
+XP enforces access control on every <<repositories#nodes, node>> in the data store, all the way down to individual documents.
 
 == Model
 
@@ -56,7 +56,7 @@ The root node of every repository (`000-000-000-000`) carries its own ACL that g
 
 === Permissions across branches
 
-A node's ACL is shared across every <<branches#, branch>> the node exists in. Setting or applying permissions on a node takes effect immediately on that node in every branch — there is no per-branch ACL state and no "publish permissions" step between branches.
+A node's ACL is shared across every <<repositories#branches, branch>> the node exists in. Setting or applying permissions on a node takes effect immediately on that node in every branch — there is no per-branch ACL state and no "publish permissions" step between branches.
 
 When permissions are applied hierarchically, the set of affected descendants is determined by the node tree in the branch where the operation runs. The resulting ACL change is then written to each of those nodes across every branch they appear in.
 
