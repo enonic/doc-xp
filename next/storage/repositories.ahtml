@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Nodes and repositories</title>
+<title>Repositories</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,14 +437,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Nodes and repositories</h1>
+<h1>Repositories</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#nodes">Nodes</a></li>
-<li><a href="#properties">Properties</a></li>
-<li><a href="#repos">Repositories</a></li>
+<li><a href="#nodes">Nodes</a>
+<ul class="sectlevel2">
+<li><a href="#versioning">Versioning</a></li>
+</ul>
+</li>
+<li><a href="#branches">Branches</a>
+<ul class="sectlevel2">
+<li><a href="#pushing">Pushing</a></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
 <li><a href="#system_repository">System repository</a></li>
 </ul>
 </div>
@@ -454,7 +462,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Repositories and nodes are the fundamental concepts that enable you to create and store data in XP. Nodes are the smallest possible data object that can be created, and they are always stored in a repository. A simple comparison might be: If a repository is a drive, nodes are the files (and folders).</p>
+<p>Repositories are the fundamental containers in XP&#8217;s data store. Each repository holds a tree of nodes, and every node lives on one or more branches.</p>
+</div>
+<div class="paragraph">
+<p>A simple comparison: if a repository is a drive, nodes are the files (and folders), and branches are like Git branches that let you stage and promote changes.</p>
+</div>
+<div class="paragraph">
+<p>You may create any number of repositories within a single instance of Enonic XP, and even perform queries across them. Each repository has a unique name; best practice is to prefix it according to your application, e.g. <code>com.company.myapp</code>.</p>
+</div>
+<div class="paragraph">
+<p>Repositories can be flagged as <em>transient</em>, meaning their data is not stored in system dumps and snapshots.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/repos.png" alt="repos">
+</div>
 </div>
 </div>
 </div>
@@ -462,10 +484,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="nodes"><a class="link" href="#nodes">Nodes</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Each entry in a repository is called a Node.</p>
+<p>Each entry in a repository is called a node. Nodes are the smallest possible data object that can be created.</p>
 </div>
 <div class="paragraph">
-<p>A node essentially consists of:</p>
+<p>A node consists of:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -473,79 +495,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>a set of <strong>custom properties</strong> — the actual data</p>
 </li>
 <li>
-<p>a set of <strong>system properties</strong> — metadata managed by XP (id, name, path, timestamps, etc.), prefixed with <code>_</code></p>
+<p>a set of <strong>system properties</strong> — metadata managed by XP (id, name, path, timestamps, permissions, etc.), prefixed with <code>_</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>When nodes are created in a repository, the following happens:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>For new nodes, a unique identifier is created</p>
-</li>
-<li>
-<p>A node identifier is always be unique within its repository</p>
-</li>
-<li>
-<p>For every modification, a unique version identifier is created</p>
-</li>
-<li>
-<p>The data are persisted the blobstore and instantly indexed.</p>
-</li>
-<li>
-<p>The specific version of the node is then added to the specified <a href="branches.ahtml">branch</a></p>
-</li>
-</ul>
+<p>Nodes are organised in a hierarchy with a path, similar to a file system. Every repository has a root node with the fixed identifier <code>000-000-000-000</code> and path <code>/</code>.</p>
 </div>
 <div class="paragraph">
-<p>Nodes can also be stored in a hierarchy, meaning they also have a path - similar to a file system.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<strong>The root node</strong> Every repository has root node with the identifier <code>000-000-000-000</code>, and the fixed path <code>/</code>.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="properties"><a class="link" href="#properties">Properties</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Properties hold the actual data inside a node. Each property is a key/value pair, where the value has a specific type — such as a string, number, date, or geographical point.</p>
-</div>
-<div class="paragraph">
-<p>A simple node might carry properties like this:</p>
+<p>A node might look like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">title = "Hello world"
-views = 42
-published = true</code></pre>
+<pre class="highlight"><code class="language-properties" data-lang="properties">_id = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+_name = "oslo"
+_path = "/cities/oslo"
+_timestamp = "2026-05-21T10:30:00Z"
+name = "Oslo"
+country = "Norway"
+population = 700000
+location = geoPoint("59.9139,10.7522")
+tags = ["capital", "scandinavia"]
+photo = binary("a3f1c8b2e9d4...")
+mayor.name = "Anne Lindboe"
+mayor.since = localDate("2023-10-25")</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Properties can also be nested using <code>.</code> as a path separator, and any value can be a list:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">first-name = "Thomas"
-cities = ["Oslo", "San Francisco"]
-person.age = 39
-person.birth-date = localDate("1975-10-17")
-city.location = geoPoint("37.785146,-122.39758")</code></pre>
-</div>
+<p>Here <code>mayor</code> acts as a container (called a <em>set</em>) that groups related properties.</p>
 </div>
 <div class="paragraph">
-<p>Here <code>person</code> and <code>city</code> act as containers (called <em>sets</em>) that group related properties together.</p>
+<p>Properties may also reference <strong>binaries</strong> — arbitrary blobs such as images, documents, or other files. Binaries are stored alongside the node and inherit the node&#8217;s access control, so the same permissions that protect a node&#8217;s data also protect its binaries. This is the underlying feature used to store media and attachments in the CMS.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -559,24 +539,98 @@ For the full list of value types, system properties, and indexing options, see t
 </tr>
 </table>
 </div>
+<div class="sect2">
+<h3 id="versioning"><a class="link" href="#versioning">Versioning</a></h3>
+<div class="paragraph">
+<p>Every modification to a node creates a new <strong>node-version</strong> with a unique version identifier. A node-version is a snapshot of the node&#8217;s properties — it has no knowledge of name, parent, or other tree metadata. Data is persisted in the blobstore and instantly indexed.</p>
+</div>
+<div class="paragraph">
+<p>This means a node&#8217;s full history is preserved automatically, and the same node-version can be referenced from multiple branches.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="repos"><a class="link" href="#repos">Repositories</a></h2>
+<h2 id="branches"><a class="link" href="#branches">Branches</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Repositories are essentially containers of nodes.
-You may create any number of repositories within a single instance of Enonic XP, and even perform queries across them.</p>
+<p>Inspired by Git, XP repos support a concept called branches. All repos ship with a default branch called <code>master</code>. The fully qualified location of a node is:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;repo&gt; + &lt;branch&gt; + &lt;node ID | path&gt;</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Each repository has a unique name, where best practice is to name or prefix the repository according to your application. i.e. a good repository name might be 'com.company.myapp'</p>
+<p>Any number of branches can be added to facilitate your data model. Branches are typically ideal for long-running transactions.</p>
 </div>
 <div class="paragraph">
-<p>You can flag repository as <em>transient</em>, meaning that their data is not stored in system dumps and snapshots.</p>
+<p>As an example, XP&#8217;s CMS API uses two branches — <code>draft</code> and <code>master</code> — to support the editorial workflow with previewing and bulk publishing of changes.</p>
+</div>
+<div class="sect2">
+<h3 id="pushing"><a class="link" href="#pushing">Pushing</a></h3>
+<div class="paragraph">
+<p>XP provides advanced features such as diffing to see the changes between two branches, and a "push" operation that moves changes from one branch to another. The push operation automatically handles dependencies and missing parent items to ensure the result is consistent.</p>
+</div>
+<div class="paragraph">
+<p>From the CMS API, the push operation is known as "publish".</p>
+</div>
+<div class="paragraph">
+<p>XP repos currently don&#8217;t offer conflict resolution or merging functionality. Conflict resolution must either be handled by the application itself, or the application must write data in a way that avoids creating conflicts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example"><a class="link" href="#example">Example</a></h3>
+<div class="paragraph">
+<p>Consider the 'Oslo' and 'Enonic' nodes below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/repos.png" alt="repos">
+<img src="images/nodes.png" alt="nodes">
+</div>
+</div>
+<div class="paragraph">
+<p>There will be two <strong>node-versions</strong> in the repository, with data persisted in both blobstore and search index:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/node-versions.png" alt="node versions">
+</div>
+</div>
+<div class="paragraph">
+<p>The targeted branch (named 'draft' in this example) gets two entries pointing to the node-versions:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/branch_initial.png" alt="branch initial">
+</div>
+</div>
+<div class="paragraph">
+<p>If we <strong>push</strong> the content of branch 'draft' to the default branch 'master', we end up with something like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/branch_push.png" alt="branch push">
+</div>
+</div>
+<div class="paragraph">
+<p>There are now two branches pointing to the same node-versions. A single node-version can exist in several branches with different structures.</p>
+</div>
+<div class="paragraph">
+<p>If the 'oslo' node is updated and stored to the 'draft' branch, a new node-version is created with the same id and an updated pointer from the branch:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/branch_diff.png" alt="branch diff">
+</div>
+</div>
+<div class="paragraph">
+<p>The two branches now point to different node-versions of the 'oslo' node. Doing a push from 'draft' to 'master' results in both branches pointing to the same node-versions again:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/branch_push_2.png" alt="branch push 2">
+</div>
 </div>
 </div>
 </div>
@@ -585,19 +639,18 @@ You may create any number of repositories within a single instance of Enonic XP,
 <h2 id="system_repository"><a class="link" href="#system_repository">System repository</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The storage ships with a repository known as the system repository.
-The system repo is used for the following data:</p>
+<p>XP ships with a built-in repository known as the system repository. It is used for:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Repository metadata - for other repos created within the instance</p>
+<p>Repository metadata — for other repos created within the instance</p>
 </li>
 <li>
-<p>Id-providers - including users, groups and roles.</p>
+<p>ID providers — including users, groups and roles</p>
 </li>
 <li>
-<p>Application binaries - for apps installed through the API</p>
+<p>Application binaries — for apps installed through the API</p>
 </li>
 </ul>
 </div>
@@ -606,7 +659,7 @@ The system repo is used for the following data:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-21 10:22:09 UTC
+Last updated 2026-05-21 11:01:26 UTC
 </div>
 </div>
 </body>

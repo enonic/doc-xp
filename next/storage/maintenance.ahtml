@@ -609,7 +609,7 @@ Reindexing only rebuilds the <strong>search index</strong>. The metadata index i
 <div class="sect2">
 <h3 id="scope"><a class="link" href="#scope">Scope</a></h3>
 <div class="paragraph">
-<p>A reindex targets a specific repository and one or more <a href="branches.ahtml">branches</a>. Reindexing one branch does not affect indices on other branches or other repositories.</p>
+<p>A reindex targets a specific repository and one or more <a href="repositories.ahtml#branches">branches</a>. Reindexing one branch does not affect indices on other branches or other repositories.</p>
 </div>
 <div class="paragraph">
 <p>When the <code>initialize</code> flag is set, the existing search indices are deleted before being rebuilt — this guarantees that all index mappings come from the current state of XP and the installed applications. Without it, the reindex updates the existing indices in place.</p>
@@ -651,7 +651,7 @@ For large repositories, prefer the task variant and schedule the operation durin
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-21 10:22:09 UTC
+Last updated 2026-05-21 11:01:26 UTC
 </div>
 </div>
 </body>
