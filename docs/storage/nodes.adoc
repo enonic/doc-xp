@@ -10,10 +10,10 @@ Repositories and nodes are the fundamental concepts that enable you to create an
 
 Each entry in a repository is called a Node.
 
-A node essentially consist of:
+A node essentially consists of:
 
-* <<properties#, custom properties>>
-* and <<properties#sysprops, system properties>>
+* a set of *custom properties* — the actual data
+* a set of *system properties* — metadata managed by XP (id, name, path, timestamps, etc.), prefixed with `_`
 
 When nodes are created in a repository, the following happens:
 
@@ -26,6 +26,34 @@ When nodes are created in a repository, the following happens:
 Nodes can also be stored in a hierarchy, meaning they also have a path - similar to a file system.
 
 NOTE: *The root node* Every repository has root node with the identifier `000-000-000-000`, and the fixed path `/`.
+
+== Properties
+
+Properties hold the actual data inside a node. Each property is a key/value pair, where the value has a specific type — such as a string, number, date, or geographical point.
+
+A simple node might carry properties like this:
+
+[source,properties]
+----
+title = "Hello world"
+views = 42
+published = true
+----
+
+Properties can also be nested using `.` as a path separator, and any value can be a list:
+
+[source,properties]
+----
+first-name = "Thomas"
+cities = ["Oslo", "San Francisco"]
+person.age = 39
+person.birth-date = localDate("1975-10-17")
+city.location = geoPoint("37.785146,-122.39758")
+----
+
+Here `person` and `city` act as containers (called _sets_) that group related properties together.
+
+TIP: For the full list of value types, system properties, and indexing options, see the https://developer.enonic.com/docs/code/stable/storage/properties[developer documentation].
 
 [#repos]
 == Repositories

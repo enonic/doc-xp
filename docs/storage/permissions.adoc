@@ -62,7 +62,7 @@ When permissions are applied hierarchically, the set of affected descendants is 
 
 == Querying
 
-When a node is indexed, its effective ACL is flattened into a set of system properties — one per permission level — listing the principals that ultimately hold that permission. This lets queries filter on permissions efficiently without resolving the full ACL at query time. See <<properties#access-control-properties, Access control properties>> for the field reference.
+When a node is indexed, its effective ACL is flattened into a set of system properties — one per permission level — listing the principals that ultimately hold that permission. This lets queries filter on permissions efficiently without resolving the full ACL at query time. See the https://developer.enonic.com/docs/code/stable/storage/properties[developer documentation] for the field reference.
 
 XP also applies an implicit read filter to every query. Callers never see nodes they do not have `READ` access to, regardless of how the query is written.
 
