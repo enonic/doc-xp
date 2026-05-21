@@ -443,6 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#nodes">Nodes</a></li>
+<li><a href="#properties">Properties</a></li>
 <li><a href="#repos">Repositories</a></li>
 <li><a href="#system_repository">System repository</a></li>
 </ul>
@@ -464,15 +465,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Each entry in a repository is called a Node.</p>
 </div>
 <div class="paragraph">
-<p>A node essentially consist of:</p>
+<p>A node essentially consists of:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="properties.ahtml">custom properties</a></p>
+<p>a set of <strong>custom properties</strong> — the actual data</p>
 </li>
 <li>
-<p>and <a href="properties.ahtml#sysprops">system properties</a></p>
+<p>a set of <strong>system properties</strong> — metadata managed by XP (id, name, path, timestamps, etc.), prefixed with <code>_</code></p>
 </li>
 </ul>
 </div>
@@ -509,6 +510,51 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 <td class="content">
 <strong>The root node</strong> Every repository has root node with the identifier <code>000-000-000-000</code>, and the fixed path <code>/</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="properties"><a class="link" href="#properties">Properties</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Properties hold the actual data inside a node. Each property is a key/value pair, where the value has a specific type — such as a string, number, date, or geographical point.</p>
+</div>
+<div class="paragraph">
+<p>A simple node might carry properties like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">title = "Hello world"
+views = 42
+published = true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Properties can also be nested using <code>.</code> as a path separator, and any value can be a list:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">first-name = "Thomas"
+cities = ["Oslo", "San Francisco"]
+person.age = 39
+person.birth-date = localDate("1975-10-17")
+city.location = geoPoint("37.785146,-122.39758")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here <code>person</code> and <code>city</code> act as containers (called <em>sets</em>) that group related properties together.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For the full list of value types, system properties, and indexing options, see the <a href="https://developer.enonic.com/docs/code/stable/storage/properties">developer documentation</a>.
 </td>
 </tr>
 </table>
@@ -560,7 +606,7 @@ The system repo is used for the following data:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-20 15:17:41 UTC
+Last updated 2026-05-21 10:22:09 UTC
 </div>
 </div>
 </body>

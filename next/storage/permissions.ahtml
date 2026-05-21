@@ -555,7 +555,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="querying"><a class="link" href="#querying">Querying</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When a node is indexed, its effective ACL is flattened into a set of system properties — one per permission level — listing the principals that ultimately hold that permission. This lets queries filter on permissions efficiently without resolving the full ACL at query time. See <a href="properties.ahtml#access-control-properties">Access control properties</a> for the field reference.</p>
+<p>When a node is indexed, its effective ACL is flattened into a set of system properties — one per permission level — listing the principals that ultimately hold that permission. This lets queries filter on permissions efficiently without resolving the full ACL at query time. See the <a href="https://developer.enonic.com/docs/code/stable/storage/properties">developer documentation</a> for the field reference.</p>
 </div>
 <div class="paragraph">
 <p>XP also applies an implicit read filter to every query. Callers never see nodes they do not have <code>READ</code> access to, regardless of how the query is written.</p>
@@ -583,7 +583,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-20 15:17:41 UTC
+Last updated 2026-05-21 10:22:09 UTC
 </div>
 </div>
 </body>
