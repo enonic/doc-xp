@@ -28,14 +28,9 @@ A node defines seven independent permissions:
 |`DELETE`
 |Remove the node.
 
-|`PUBLISH`
+|`PUSH`
 |Push the node from one branch to another (e.g. `draft` → `master` in the CMS).
 
-|`READ_PERMISSIONS`
-|Read the ACL of the node.
-
-|`WRITE_PERMISSIONS`
-|Modify the ACL of the node.
 |===
 
 === Resolution
