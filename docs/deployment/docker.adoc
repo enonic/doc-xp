@@ -14,8 +14,22 @@ NOTE: Running this command requires you to have docker installed.
 
 [source,bash,subs="attributes"]
 ----
-docker run -it --rm -p 8080:8080 enonic/xp:{version}-ubuntu
+docker run -it --rm -p 8080:8080 \
+  -e XP_OPTS="-Dxp.suPassword={sha256}89e01536ac207279409d4de1e5253e01f4a1769e696db0d6062ca9b8f56767c8" \
+  enonic/xp:{version}-ubuntu
 ----
+
+NOTE: The above password sha256 is for "password" string is just for demonstration purposes and should not be used in production. Always use stronger passwords.
+
+Pass `dev` as the command argument to `server.sh` to run in dev mode:
+
+[source,bash,subs="attributes"]
+----
+docker run -it --rm -p 8080:8080 enonic/xp:{version}-ubuntu server.sh dev
+----
+
+WARNING: Dev mode slows down the system and must not be used in production.
+
 
 == Image description
 
@@ -157,13 +171,31 @@ It is useful to make the JVM create a heap dump if the JVM throws an Out Of Memo
 
 ===== Remote debugging
 
-When tracking down particulary hard bugs, it can be useful to enable remote debugging. Do that by adding to `XP_OPTS`:
+XP can be started with the JVM debug agent enabled by passing `debug` as the command argument to `server.sh`. The debug agent is configured via the `JAVA_DEBUG_OPTS` environment variable. There are two operating modes, differing in which side initiates the TCP connection.
 
-WARNING: This should never be turned on by default and will make your system vulnerable to attacks.
+====== Listen mode (server=y)
 
-[source,bash]
+In listen mode the JVM opens a port and waits for the IDE to attach. This is the default when no `JAVA_DEBUG_OPTS` is set:
+
+[source,bash,subs="attributes"]
 ----
--agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+docker run -it --rm -p 8080:8080 -p 5005:5005 \
+  enonic/xp:{version}-ubuntu server.sh debug
+----
+
+The IDE attaches to `localhost:5005`. The container must publish port `5005` for the IDE to reach the JVM.
+
+====== Attach mode (server=n)
+
+In attach mode the JVM connects out to a debug server already listening in the IDE. This is often more convenient in Docker — no debug port needs to be published — and it supports `suspend=y`, which pauses the JVM until the IDE connects (useful when debugging startup code).
+
+Configure the IDE to listen on port `5005`, then start the container:
+
+[source,bash,subs="attributes"]
+----
+docker run -it --rm -p 8080:8080 \
+  -e JAVA_DEBUG_OPTS="-agentlib:jdwp=transport=dt_socket,server=n,address=host.docker.internal:5005,suspend=y" \
+  enonic/xp:{version}-ubuntu server.sh debug
 ----
 
 ===== JVM monitoring
