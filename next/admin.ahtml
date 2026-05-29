@@ -444,9 +444,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#access">Access</a></li>
 <li><a href="#xp_menu">XP menu</a></li>
-<li><a href="#admin_tools">Admin tools</a>
+<li><a href="#admin_tools">Admin tools</a></li>
+<li><a href="#admin_extensions">Admin extensions</a>
 <ul class="sectlevel2">
-<li><a href="#admin_extensions">Admin extensions</a></li>
 <li><a href="#bring_your_own_admin">Bring Your Own Admin</a></li>
 </ul>
 </li>
@@ -553,8 +553,11 @@ Try installing Content Studio (from the <code>Applications</code> tool), to see 
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="admin_extensions"><a class="link" href="#admin_extensions">Admin extensions</a></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin_extensions"><a class="link" href="#admin_extensions">Admin extensions</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>XP admin also features another level of pluggablibility called admin extensions. Unlike tools, extensions are not immediately visible in the XP menu, but rather integrate with existing tools, such as adding widgets to the Dashboard, or adding new tabs and panels to Content Studio.</p>
 </div>
@@ -568,11 +571,10 @@ Try installing Content Studio (from the <code>Applications</code> tool), to see 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The widgets are served contextually using the following URL pattern: <code>:8080/admin/app/tool/_/admin:extension/&lt;app-name&gt;:&lt;widget-name&gt;</code>, and loaded dynamically by the tool they are extending.
+The widgets are served in context of each respective tool on following URL pattern: <code>:8080/admin/app/tool/_/admin:extension/&lt;app-name&gt;:&lt;extension-name&gt;</code>. They are invoked lazily and on demand dynamically.
 </td>
 </tr>
 </table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="bring_your_own_admin"><a class="link" href="#bring_your_own_admin">Bring Your Own Admin</a></h3>
@@ -636,7 +638,7 @@ The widgets are served contextually using the following URL pattern: <code>:8080
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-29 09:36:39 UTC
+Last updated 2026-05-29 18:48:27 UTC
 </div>
 </div>
 </body>
