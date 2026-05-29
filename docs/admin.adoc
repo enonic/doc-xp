@@ -37,13 +37,13 @@ Admin tools are standalone applications that are integrated with the XP admin. T
 * Each admin tool may define custom roles to restrict access.
 * Admin tools are all served within the admin URL pattern. i.e.  `:8080/admin/<app-name>:<tool-name>`
 
-=== Admin extensions
+== Admin extensions
 
 XP admin also features another level of pluggablibility called admin extensions. Unlike tools, extensions are not immediately visible in the XP menu, but rather integrate with existing tools, such as adding widgets to the Dashboard, or adding new tabs and panels to Content Studio. 
 
 Each Extension implements a specific extension point (interface) defined by the tool they are extending. This allows for a high degree of flexibility and customization, enabling you to tailor the admin experience to your specific needs and use cases.
 
-NOTE: The widgets are served contextually using the following URL pattern: `:8080/admin/app/tool/_/admin:extension/<app-name>:<widget-name>`, and loaded dynamically by the tool they are extending.
+NOTE: The widgets are served in context of each respective tool on following URL pattern: `:8080/admin/app/tool/_/admin:extension/<app-name>:<extension-name>`. They are invoked lazily and on demand dynamically.
 
 === Bring Your Own Admin
 
