@@ -15,7 +15,7 @@ NOTE: Running this command requires you to have docker installed.
 [source,bash,subs="attributes"]
 ----
 docker run -it --rm -p 8080:8080 \
-  -e XP_OPTS="-Dxp.suPassword={sha256}89e01536ac207279409d4de1e5253e01f4a1769e696db0d6062ca9b8f56767c8" \
+  -e XP_OPTS="-Dxp.suPassword={sha256}5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" \
   enonic/xp:{version}-ubuntu
 ----
 
