@@ -526,7 +526,7 @@ Running this command requires you to have docker installed.
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">docker run -it --rm -p 8080:8080 \
-  -e XP_OPTS="-Dxp.suPassword={sha256}89e01536ac207279409d4de1e5253e01f4a1769e696db0d6062ca9b8f56767c8" \
+  -e XP_OPTS="-Dxp.suPassword={sha256}5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" \
   enonic/xp:8.0.0-SNAPSHOT-ubuntu</code></pre>
 </div>
 </div>
@@ -1139,7 +1139,7 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-28 12:38:45 UTC
+Last updated 2026-05-29 09:36:39 UTC
 </div>
 </div>
 </body>
