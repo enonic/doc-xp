@@ -21,14 +21,6 @@ docker run -it --rm -p 8080:8080 \
 
 NOTE: The above password sha256 is for "password" string is just for demonstration purposes and should not be used in production. Always use stronger passwords.
 
-Pass `dev` as the command argument to `server.sh` to run in dev mode:
-
-[source,bash,subs="attributes"]
-----
-docker run -it --rm -p 8080:8080 enonic/xp:{version}-ubuntu server.sh dev
-----
-
-WARNING: Dev mode slows down the system and must not be used in production.
 
 
 == Image description
