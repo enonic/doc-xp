@@ -542,26 +542,6 @@ The above password sha256 is for "password" string is just for demonstration pur
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Pass <code>dev</code> as the command argument to <code>server.sh</code> to run in dev mode:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">docker run -it --rm -p 8080:8080 enonic/xp:8.0.0-SNAPSHOT-ubuntu server.sh dev</code></pre>
-</div>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Dev mode slows down the system and must not be used in production.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -1139,7 +1119,7 @@ demo_snapshots: /var/lib/docker/volumes/demo_snapshots/_data</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-05-29 18:48:27 UTC
+Last updated 2026-05-30 08:07:14 UTC
 </div>
 </div>
 </body>
