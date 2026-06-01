@@ -425,6 +425,7 @@ threadPool.idleTimeout = 60000
 
 # Websocket
 websocket.idleTimeout = 300000
+websocket.defaultOriginCheck = true
 
 ----
 
@@ -451,6 +452,7 @@ threadPool.maxThreads:: Maximum number of threads. Default: `200`.
 threadPool.minThreads:: Minimum number of threads. Default: `8`.
 threadPool.idleTimeout:: Thread idle timeout (in milliseconds). Default: `60000`.
 websocket.idleTimeout:: The time (in milliseconds) that a websocket may be idle before closing. Default: `300000`.
+websocket.defaultOriginCheck:: Enforce the platform's built-in same-origin check on WebSocket handshakes. When `false`, the handshake accepts any `Origin` unless a controller supplies its own `checkOrigin` function. Disable only as a fallback for deployments where the reverse proxy does not propagate the public scheme/host/port to Jetty and the proxy configuration cannot be fixed. Default: `true`.
 
 WARNING: Setting `session.cookieAlwaysSecure` to `true` would make session-involved login on HTTP connections impossible.
 
