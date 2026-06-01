@@ -471,23 +471,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP has three kinds of principal:</p>
+<p>There are thre types of principal objects:</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Users</dt>
-<dd>
-<p>Represent a person or service account. Always belong to an <a href="idproviders.ahtml">ID provider</a>.</p>
-</dd>
-<dt class="hdlist1">Groups</dt>
-<dd>
-<p>Bundle users (and other groups) together so permissions can be granted in bulk. Also scoped to an ID provider.</p>
-</dd>
-<dt class="hdlist1">Roles</dt>
-<dd>
-<p>Global access tokens that grant specific privileges in the system. Independent of any ID provider.</p>
-</dd>
-</dl>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Users:</strong> Represent a person or service account. Always belong to an <a href="idproviders.ahtml">ID provider</a>.</p>
+</li>
+<li>
+<p><strong>Groups:</strong> Bundle users (and other groups) together so permissions can be granted in bulk. Also scoped to an ID provider.</p>
+</li>
+<li>
+<p><strong>Roles:</strong> Global access tokens that grant specific privileges in the system. Independent of any ID provider.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>For a walkthrough of managing principals from the UI, see the <a href="../admin/users.ahtml">Users admin tool</a>.</p>
@@ -651,10 +648,6 @@ Allows full access to Content Studio, including ability to create and delete con
 Grants the ability to view and modify source code in the rich text editor.</p>
 </div>
 <div class="paragraph">
-<p><strong>cms.cm.app</strong>
-NOTE: This role is deprecated. It gives users to access to the legacy <code>default</code> project in Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project.</p>
-</div>
-<div class="paragraph">
 <p>When using <a href="https://developer.enonic.com/docs/cms/stable/projects">Content Projects</a>, each project automatically creates a set of <a href="https://developer.enonic.com/docs/cms/stable/projects#roles">project roles</a> in addition to the built-in roles listed above.</p>
 </div>
 <div class="paragraph">
@@ -666,7 +659,7 @@ NOTE: This role is deprecated. It gives users to access to the legacy <code>defa
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 09:01:47 UTC
+Last updated 2026-06-01 11:10:33 UTC
 </div>
 </div>
 </body>
