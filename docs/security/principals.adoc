@@ -6,11 +6,11 @@ Principals are the actors of XP's security model: users, groups, and roles. Toge
 
 == Introduction
 
-XP has three kinds of principal:
+There are thre types of principal objects:
 
-Users:: Represent a person or service account. Always belong to an <<idproviders#, ID provider>>.
-Groups:: Bundle users (and other groups) together so permissions can be granted in bulk. Also scoped to an ID provider.
-Roles:: Global access tokens that grant specific privileges in the system. Independent of any ID provider.
+* *Users:* Represent a person or service account. Always belong to an <<idproviders#, ID provider>>.
+* *Groups:* Bundle users (and other groups) together so permissions can be granted in bulk. Also scoped to an ID provider.
+* *Roles:* Global access tokens that grant specific privileges in the system. Independent of any ID provider.
 
 For a walkthrough of managing principals from the UI, see the <<../admin/users#, Users admin tool>>.
 
@@ -96,9 +96,6 @@ Allows full access to Content Studio, including ability to create and delete con
 
 *cms.expert*
 Grants the ability to view and modify source code in the rich text editor.
-
-*cms.cm.app*
-NOTE: This role is deprecated. It gives users to access to the legacy `default` project in Content Studio. Users with this role can see content and sites, but cannot create new sites or any new content in the project.
 
 When using https://developer.enonic.com/docs/cms/stable/projects[Content Projects], each project automatically creates a set of https://developer.enonic.com/docs/cms/stable/projects#roles[project roles] in addition to the built-in roles listed above.
 
