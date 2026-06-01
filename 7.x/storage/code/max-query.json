@@ -1,0 +1,9 @@
+{
+  "aggregations": {
+    "maxPrice": {
+      "max": {
+        "field": "data.product.price"
+      }
+    }
+  }
+}

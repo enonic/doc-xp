@@ -1,0 +1,23 @@
+{
+  "start": 0,
+  "count": 2,
+  "filters": {
+    "boolean": {
+      "must": {
+        "exists": {
+          "field": "modifiedTime"
+        }
+      },
+      "mustNot": {
+        "hasValue": {
+          "field": "myField",
+          "values": [
+            "cheese",
+            "fish",
+            "onion"
+          ]
+        }
+      }
+    }
+  }
+}

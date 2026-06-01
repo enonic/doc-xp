@@ -1,0 +1,11 @@
+{
+  "aggregations": {
+    "categories": {
+      "terms": {
+        "field": "myCategory",
+        "order": "_count desc",
+        "size": 10
+      }
+    }
+  }
+}

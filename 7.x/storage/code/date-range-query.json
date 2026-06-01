@@ -1,0 +1,16 @@
+{
+  "my_date_range": {
+    "dateRange": {
+      "field": "date",
+      "format": "MM-yyy",
+      "ranges": [
+        {
+          "to": "now-10M"
+        },
+        {
+          "from": "now-10M"
+        }
+      ]
+    }
+  }
+}
