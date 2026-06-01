@@ -727,7 +727,6 @@ installUrl.allowedUrls = https://repo.enonic.com/public/*, https://my.cdn.com/ap
 installUrl.allowedUrls =
 ----
 
-NOTE: Both checks run before the URL is fetched. A URL outside the allowlist or a missing required SHA-512 returns HTTP 409 Conflict. A malformed URL or invalid SHA-512 hex returns HTTP 400 Bad Request.
 
 == Task
 
