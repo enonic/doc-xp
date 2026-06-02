@@ -58,6 +58,13 @@ Snapshots will only restore the metadata and search index of your instance, not 
 If you for instance have performed a <<../storage/maintenance#vacuum, Vacuum>> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. To prevent confusion, all snapshots are deleted after any vacuum operations that delete blobs.
 ====
 
+[WARNING]
+====
+A blob-deleting vacuum is a point of no return for restores. All existing snapshots are deleted and the referenced blobs are removed, so you cannot restore to any moment before the vacuum ran — it becomes your new baseline.
+
+Take a fresh blobstore backup and snapshot immediately afterwards. See <<../storage/maintenance#vacuum, Vacuuming>>.
+====
+
 Snapshot and restore commands can be performed by using Enonic CLI, the API or a management application from Enonic Market.
 
 

@@ -1,0 +1,202 @@
+[#edge]
+= Web server, load balancing and CDN
+:toc: right
+:imagesdir: images
+
+Describes infrastructure that sits *in front of* Enonic XP — handling incoming traffic before it reaches your the XP nodes.
+
+== Overview
+
+Enonic XP exposes its web traffic on a plain HTTP endpoint (port `8080` by default). XP is *not* intended to be exposed directly to the Internet. It does not terminate TLS, and it is not hardened to act as an Internet-facing edge server on its own.
+
+IMPORTANT: Never expose the XP web endpoint directly to the public Internet. Always place a reverse proxy in front of XP that at minimum handles routing, terminates TLS, and provides request logging and other restrictions. A dedicated web server is not required — any solution that covers these responsibilities, including a load balancer, can fulfil the role.
+
+A typical production setup may contain concerns at the edge, from the outside in:
+
+. *CDN* (optional) — caches and serves static media and assets close to the user, absorbing read traffic.
+. *WAF* (optional) — inspects traffic and blocks common attack patterns. Commonly part of the same edge platform as the CDN; when standalone, it usually sits just behind the cache, guarding origin-bound traffic.
+. *Load balancer*(required for clusters) — distributes requests across the XP nodes in a cluster and performs health checks.
+. *Reverse proxy* — terminates TLS, routes and filters requests, and forwards them to XP.
+
+Small deployments may collapse several of these into a single component (for example, one reverse proxy that also terminates TLS and load-balances), while large deployments separate them. The responsibilities below apply regardless of how they are combined.
+
+
+== Reverse proxy
+
+The edge must cover a baseline of responsibilities before traffic reaches XP. These are typically handled by a reverse proxy (such as Nginx, Apache HTTP Server, or HAProxy), but a capable load balancer may also provide the same capabilities — notably routing, TLS termination, logging and filtering — can fulfil the role without a separate web server. The required responsibilities are:
+
+Routing:: Forward incoming requests to XP's web endpoint. In a clustered deployment this also means distributing requests across the available nodes — see <<_load_balancing, Load balancing>>.
++
+NOTE: This must be combined with the <<../config/vhosts#virtual-hosts, virtual host configuration>> in XP itself, which maps incoming requests to the correct service target based on the forwarded host and path.
+
+TLS termination:: Terminate HTTPS at the edge and forward requests to XP over HTTP on the internal network. XP itself does not manage certificates.
+
+Request filtering and limits:: Enforce request size limits, time-outs, rate limiting, and basic protection against malformed or malicious requests before they reach XP.
+
+Restricting endpoints:: Ensure that only intended endpoints are publicly reachable. The management and monitoring endpoints (port `2609` by default) must *never* be exposed to the Internet — restrict them to your internal network.
+
+Compression and connection handling:: Offload gzip/Brotli compression and keep-alive handling from the application nodes.
+
+=== Forwarded headers
+
+When XP is behind a proxy, it must be told about the *original* request so that generated URLs, redirects, and security decisions use the public host and scheme rather than the internal ones. Configure your proxy to forward the standard headers:
+
+[source,properties]
+----
+X-Forwarded-For    # original client IP
+X-Forwarded-Host   # original host requested by the client
+X-Forwarded-Proto  # original scheme (https)
+X-Forwarded-Port   # original port
+----
+
+Without these, XP may generate `http://` links, incorrect host names, or apply the wrong virtual host.
+
+XP processes these headers through Jetty's built-in `ForwardedRequestCustomizer`, which is always enabled — there is no XP-side configuration to set up, you only need to ensure your proxy sends the headers. As an alternative to the `X-Forwarded-*` set, the standardized https://datatracker.ietf.org/doc/html/rfc7239[RFC 7239] `Forwarded` header is also supported.
+
+=== Virtual hosts
+
+Which public domains and paths are routed to which parts of XP (Sites, Admin, Webapps, Universal APIs) is controlled by XP's own virtual host configuration. The proxy forwards traffic; XP's vhost layer maps it to the correct target. See <<../config/vhosts#virtual-hosts, Virtual hosts>> for the mapping syntax and how it interacts with the forwarded host.
+
+=== Minimal single-node setup
+
+For a single XP node, a minimal reverse proxy only needs to terminate TLS and forward requests to the XP web endpoint with the forwarded headers set. The examples below proxy `https://www.example.com` to an XP node listening on `127.0.0.1:8080` and redirect HTTP to HTTPS.
+
+IMPORTANT: The reverse proxy must allow WebSocket connections to be upgraded and passed through to XP. Content Studio (live edit and collaboration), the portal live-edit channel, and applications using `lib-websocket` all depend on WebSockets. The examples below include the required upgrade handling.
+
+NOTE: This is a getting-started baseline for a single node. Production deployments are typically clustered and add load balancing across several nodes — see <<_load_balancing, Load balancing>>.
+
+.Nginx
+[source,nginx]
+----
+# In the http {} context: map the Upgrade header so WebSocket connections upgrade correctly
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 443 ssl;
+    server_name www.example.com;
+
+    ssl_certificate     /etc/ssl/example.crt;
+    ssl_certificate_key /etc/ssl/example.key;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host  $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port  $server_port;
+
+        # WebSocket support (Content Studio, live edit, lib-websocket)
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade    $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+    }
+}
+
+# Redirect HTTP to HTTPS
+server {
+    listen 80;
+    server_name www.example.com;
+    return 301 https://$host$request_uri;
+}
+----
+
+.Apache HTTP Server (mod_proxy, mod_ssl, mod_headers)
+[source,apache]
+----
+<VirtualHost *:443>
+    ServerName www.example.com
+
+    SSLEngine on
+    SSLCertificateFile    /etc/ssl/example.crt
+    SSLCertificateKeyFile /etc/ssl/example.key
+
+    ProxyPreserveHost On
+    # upgrade=websocket requires Apache 2.4.47 or later
+    ProxyPass        / http://127.0.0.1:8080/ upgrade=websocket
+    ProxyPassReverse / http://127.0.0.1:8080/
+
+    # mod_proxy_http sets X-Forwarded-For and X-Forwarded-Host automatically
+    RequestHeader set X-Forwarded-Proto "https"
+    RequestHeader set X-Forwarded-Port  "443"
+</VirtualHost>
+
+# Redirect HTTP to HTTPS
+<VirtualHost *:80>
+    ServerName www.example.com
+    Redirect permanent / https://www.example.com/
+</VirtualHost>
+----
+
+
+== Load balancing
+
+When running XP as a <<clustering#, cluster>>, the load balancer distributes incoming requests across the available nodes.
+
+=== Session affinity
+
+In XP, the HTTP session holds only the user's authenticated login — it is not used as a general-purpose store for application data. Any other state lives on the client or in the XP repository, which is shared across the cluster.
+
+Node affinity therefore only matters for session-based login. When you use it, each authenticated user's requests must reach a node that holds their session, so you must enable either session replication or sticky sessions — otherwise users are logged out as requests are balanced across nodes. Stateless authentication needs neither: the System ID provider's per-request JWT authentication (`Authorization: Bearer`, see <<../security/service-accounts#jwt-authentication, JWT authentication>>) creates no session, whereas interactive logins such as the https://market.enonic.com/vendors/enonic/oidc-id-provider[OIDC ID provider] do.
+
+Of the two options, session replication is preferred, as it keeps nodes interchangeable instead of pinning users to one node.
+
+=== Session replication
+
+By default, XP keeps sessions per node, in memory (`storeMode = non-persistent`), so a session exists only on the node that created it. Setting `storeMode = replicated` distributes sessions across the cluster using XP's Jetty–Hazelcast integration, so any node can serve any session and a user stays logged in even if a node stops or the load balancer moves them. Replication requires clustering to be enabled; on a non-clustered instance it falls back to `non-persistent` and logs a warning.
+
+The overhead is minor, since the session only holds the login object. For a single, non-clustered instance, `storeMode = file` instead persists sessions to disk so they survive a graceful restart. See <<../config/system#sessionstore, SessionStore configuration>> for all session-store settings.
+
+=== Sticky sessions
+
+Sticky sessions are the alternative to replication: the load balancer pins each user to the node that holds their session, so session-based login works without distributing sessions. The trade-off is that nodes are no longer interchangeable — if a node is lost, the users pinned to it must log in again.
+
+For the *Admin* endpoint (`/admin`), sticky sessions are mandatory in order to optimize performance and consistency, as Content Studio and the other admin tools continuously read from and write to the distributed storage. Pinning each user to a single node both ensures optimal performance and avoids conflicts where a write on one node is not yet reflected by an immediate read from another.
+
+=== Health checks
+
+XP exposes two purpose-built probe endpoints on the monitoring port (`2609`), each returning `200 OK` when satisfied and `503` otherwise:
+
+`/health`:: Liveness — essential data services are available.
+`/ready`:: Readiness — all services required for full operation are available.
+
+Configure the load balancer to poll `/ready` and route traffic only to nodes that return `200`, so requests are never sent to a node that is still starting up or running degraded. Use `/health` for liveness checks (for example, to decide when to restart a node). Prefer these probes over a regular content URL, which can return `200` even when the node is not fully operational. As the monitoring port is internal-only, the load balancer reaches these probes over your internal network.
+
+See <<../endpoints/statistics#health-and-readiness, Health and readiness>> for details.
+
+== CDN
+
+A Content Delivery Network caches content at edge locations close to users, reducing latency and offloading read traffic from your XP cluster. A CDN is optional but strongly recommended for public, high-traffic sites.
+
+=== What to cache
+
+CDNs are most effective for static media and assets — images, attachments, and application assets served from the media and asset endpoints. Dynamic, personalized, or authenticated responses (Admin, logged-in site pages, APIs returning user-specific data) should generally *not* be cached at the CDN.
+
+=== Cache-Control
+
+XP automatically sets `Cache-Control` headers on responses on different services and APIs for optimal caching (like the media APIs), or to disable caching (/admin sets private header). 
+
+TIP: CDN providers like Fastly will default to 1 hour caching if the origin response lacks `Cache-Control` headers, which can lead to unexpected caching of dynamic content. Ensure your CDN is configured to respect the `Cache-Control` headers sent by XP.
+
+=== Invalidation
+
+Media URLs in XP are fingerprinted, so updated media is served from a new URL and does not require active cache invalidation. For cases where you cache other responses, ensure you have a purge/invalidation strategy that matches how frequently that content changes.
+
+== WAF
+
+A Web Application Firewall inspects incoming HTTP traffic and blocks common attack patterns — such as the https://owasp.org/www-project-top-ten/[OWASP Top 10] (SQL injection, cross-site scripting, and similar) — before they reach XP. Like a CDN, a WAF is optional but recommended for public, Internet-facing deployments.
+
+Where the WAF sits relative to the cache depends on the product. Integrated edge platforms (such as Cloudflare or AWS WAF with CloudFront) evaluate WAF rules at the CDN edge, as part of the same layer. A standalone or origin-side WAF (a dedicated appliance, ModSecurity on the reverse proxy, or a WAF attached to the load balancer) sits just behind the CDN and inspects only origin-bound traffic — cache misses and dynamic requests — so cache hits are served from the edge without re-inspection. XP does not provide a WAF; it is part of your edge infrastructure either way.
+
+WARNING: Tune the rule set to your application. Overly aggressive rules can block legitimate Content Studio and API traffic, which relies heavily on `POST` requests and JSON payloads. Validate the WAF against editorial and admin workflows, not just the public site.
+
+
+== See also
+
+* <<strategies#, Deployment strategies>> — node topologies behind the edge tier
+* <<clustering#, Clustered deployments>> — how the nodes the load balancer targets are set up
+* <<../config/vhosts#virtual-hosts, Virtual hosts>> — routing public domains and paths to XP
+* <<../config/cms#, CMS configuration>> — media `Cache-Control` settings

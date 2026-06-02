@@ -1,17 +1,22 @@
-= Content management system configuration
+= CMS configuration
 :toc: right
 :imagesdir: ../images
 
-This section describes configuration files related to content and media handling
+This section describes configuration files related to CMS-oriented features, such as media handling and content API behavior.
 
+== Introduction
 
-== Media Serving
+The configuration files can be deployed to your Enonic XP instance's `config` directory, and are automatically reloaded when changed. For details on configuration file syntax and behavior, see the https://developer.enonic.com/docs/xp/stable/config[Configuration reference documentation].
+
+The values listed here are defaults that can be overridden by operators. For instance, the `media.public.cacheControl` default is `public, max-age=31536000, immutable`, but an operator may choose to set it to `public, max-age=3600` for more frequent cache invalidation.
+
+== Media and legacy apis
 
 `com.enonic.xp.portal.cfg`
 
-Configure the Web endpoint behaviour.
+Configure common media API behavior. Covers both Attachment API and Image API.
 
-.Sample content config file
+.Sample config file
 [source,properties]
 ----
 media.public.cacheControl = public, max-age=31536000, immutable
@@ -29,19 +34,20 @@ media.public.cacheControl:: Defines media (images, attachments) `Cache-Control` 
 media.private.cacheControl:: Defines media (images, attachments) `Cache-Control` header when media is cachable and not accessible by Everyone. Default: `private, max-age=31536000, immutable`
 media.contentSecurityPolicy:: Defines media (images, attachments) `Content-Security-Policy` header. Default: `default-src 'none'; base-uri 'none'; form-action 'none'`
 media.contentSecurityPolicy.svg:: Defines media (images, attachments) `Content-Security-Policy` header in cases when it is `image/svg+xml` mime type. Default: `default-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`
-legacy.attachmentService.enabled:: Enables/Disables attachment service. Default `true` - means Legacy Attachment Service is enabled.
-legacy.imageService.enabled:: Enables/Disables image service. Default `true` - means Legacy Image Service is enabled.
-legacy.httpService.enabled:: Enables/Disables legacy HTTP service. Default `true` - means Legacy HTTP Service is enabled.
-asset.cacheControl:: Defines assets cache-control header when asset is cachable. Default: `public, max-age=31536000, immutable`
+legacy.attachmentService.enabled:: Enables/Disables legacy attachment service. Default `true` - means endpoint `(`/_/attachment/`) is enabled.
+legacy.imageService.enabled:: Enables/Disables legacy image service. Default `true` - means endpoint `(`/_/image/`) is enabled.
+legacy.httpService.enabled:: Enables/Disables legacy HTTP service. Default `true` - means endpoint `(`/_/service/`) is enabled.
+legacy.assetService.enabled:: Enables/Disables legacy asset service. Default `true` - means endpoint `(`/_/asset/`) is enabled.
+asset.cacheControl:: Asset service is deprecated, use lib-asset instead! Sets default cache-control header when asset is cachable. Default: `public, max-age=31536000, immutable`
 
 [#image]
 == Image
 
 `com.enonic.xp.image.cfg`
 
-Configure the image service behaviour.
+Optionally configure the image API behavior.
 
-.Sample content config file
+.Default settings
 [source,properties]
 ----
 scale.maxDimension = 8000
@@ -63,7 +69,7 @@ progressive:: Defines formats that will use progressive encoding. Default is `jp
 
 Configure binary text extractor service behaviour.
 
-.Sample content config file
+.Default settings
 [source,properties]
 ----
 body.size.limit = 500000
@@ -77,7 +83,7 @@ body.size.limit:: Defines maximum number of characters from a textual media. Def
 
 `com.enonic.xp.content.cfg`
 
-Configure the content API behavior.
+General content API behavior.
 
 .Sample content config file
 [source,properties]

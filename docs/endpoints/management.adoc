@@ -10,7 +10,7 @@ The management API requires an authenticated user with the Administrator role.
 
 === JWT Authentication
 
-All management endpoints can use <<../iam/system-idp.adoc#jwt-authentication, Service accounts JWT authentication>>. This is the recommended way to authenticate with the management endpoints.
+All management endpoints can use <<../security/service-accounts#jwt-authentication, Service accounts JWT authentication>>. This is the recommended way to authenticate with the management endpoints.
 
 === Basic Authentication
 

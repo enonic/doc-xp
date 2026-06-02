@@ -30,7 +30,7 @@ XP exposes the following vacuum tasks:
 |Deletes node metadata that is no longer referenced. _Default._
 
 |`SnapshotsVacuumTask`
-|Deletes snapshots older than the configured age threshold. _Default._
+|Deletes snapshots older than the configured age threshold.
 
 |`SegmentVacuumTask`
 |Deletes all blobs related to previously deleted repositories.
@@ -42,7 +42,7 @@ XP exposes the following vacuum tasks:
 |Deletes node data blobs that are no longer referenced.
 |===
 
-If no tasks are specified, only the default tasks (`VersionTableVacuumTask` and `SnapshotsVacuumTask`) run.
+If no tasks are specified, only the default task (`VersionTableVacuumTask`) runs.
 
 [IMPORTANT]
 ====

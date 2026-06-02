@@ -1,21 +1,29 @@
-= Systemd deployments
+= Run XP as a service
 :toc: right
 :imagesdir: images
 
+This guide describes how to run an Enonic XP distribution as a long-running operating-system service — using *systemd* on Linux and the *winsw* service wrapper on Windows.
+
+This applies to server installations made from the XP distribution. For containerized deployments use <<docker#, Docker>> or <<k8s#, Kubernetes>> instead, and for local development use the Enonic CLI sandbox.
+
+NOTE: On Windows, running XP as a service targets server installations. For local development on Windows, use the Enonic CLI or Docker rather than a service.
+
+== Linux (systemd)
+
 This section describes how to run Enonic XP as a systemd service.
 
-== Explanation of the setup
+=== Overview
 
-What we want to achieve is to setup XP with systemd. The setup should be easy to install, upgrade, rollback and backup. We will setup the following:
+This setup runs XP as a systemd service, in a layout that is straightforward to install, upgrade, roll back and back up. It consists of:
 
-1. Set correct `vm.max_map_count`.
-2. Create a user and group for XP.
-3. Download and extract the desired distribution into `/opt/enonic/distros`.
-4. Setup the XP home folder at `/opt/enonic/home`.
-5. Create a systemd service file using the desired distro.
-6. Start the systemd service.
+. Setting the correct `vm.max_map_count`.
+. Creating a user and group for XP.
+. Downloading and extracting the distribution into `/opt/enonic/distros`.
+. Setting up the XP home folder at `/opt/enonic/home`.
+. Creating a systemd service file for the distribution.
+. Starting the systemd service.
 
-This guide will use the following folder setup:
+The setup uses the following folder layout:
 
 [source,files]
 ----
@@ -28,13 +36,13 @@ This guide will use the following folder setup:
 <2> Folder to store all downloaded distributions
 <3> Folder containing XP home, that includes blobstore, index, configuration, e.t.c.
 
-== Using Ansible
+=== Using Ansible
 
-The easiest way to achive this is to use an ansible playbook. We will focus on that first. If you are not familiar with ansible, don't worry. We will also show you how to do this manually in section <<manual-setup>>.
+An Ansible playbook is the most convenient way to perform this setup. The same steps can also be performed <<manual-setup, manually>>.
 
-=== Creating the Ansible playbook
+==== Creating the Ansible playbook
 
-Let's create an ansible playbook that will handle all the setup for you. Create a file called `xp-systemd.yaml` and paste the following contents into it:
+Create a file called `xp-systemd.yaml` with the following contents:
 
 .xp-systemd.yaml
 [source,yaml]
@@ -65,7 +73,7 @@ Let's create an ansible playbook that will handle all the setup for you. Create 
     - name: Ensure user group exists
       ansible.builtin.group:
         name: "{{ XP_GROUP }}"
-    
+
     - name: Ensure user exists
       ansible.builtin.user:
         name: "{{ XP_USER }}"
@@ -172,30 +180,28 @@ Let's create an ansible playbook that will handle all the setup for you. Create 
         daemon_reload: yes
 ----
 
-### Running the Ansible playbook
+==== Running the Ansible playbook
 
-Assuming you already have an ansible inventory file called `hosts` you can run the playbook by running this command:
+With an Ansible inventory file called `hosts` in place, run the playbook:
 
 [source,bash]
 ----
 $ ansible-playbook -i hosts xp-systemd.yaml
 ----
 
-Once the playbook has finished, XP should be up and running using systemd. See section <<useful-commands>> to check logs.
+When the playbook finishes, XP is running under systemd. See <<useful-commands>> for log access.
 
 [#manual-setup]
-== Manual setup
+=== Manual setup
 
-Here we will do the exact same steps as are done in the ansible playbook. But in this case we will execute them manually.
-
-To avoid making errors, lets set the `XP_VERSION` variable:
+These are the same steps the Ansible playbook performs, executed manually. First, set the `XP_VERSION` variable:
 
 [source,bash]
 ----
 $ export XP_VERSION=8.0.0
 ----
 
-NOTE: Step 1, 2 and 4 only have to be executed the first time you setup Enonic XP with systemd.
+NOTE: Steps 1, 2 and 4 are only required the first time XP is set up with systemd.
 
 1. Set correct `vm.max_map_count`.
 
@@ -287,10 +293,10 @@ $ systemctl daemon-reload
 $ systemctl enable --now xp.service
 ----
 
-XP should now be up and running using systemd. See section <<useful-commands>> to check logs.
+XP is now running under systemd. See <<useful-commands>> for log access.
 
 [#useful-commands]
-== Useful commands
+=== Useful commands
 
 View Enonic XP logs:
 
@@ -319,3 +325,108 @@ Restart Enonic XP:
 ----
 $ systemctl restart xp.service
 ----
+
+== Windows (winsw)
+
+On Windows, XP can be run as a service using the https://github.com/winsw/winsw[winsw] service wrapper, which wraps the distribution's `bin/server.bat` startup script.
+
+NOTE: Enonic does not provide a first-party Windows service installer. For most deployments, Docker (<<docker#>>), Kubernetes (<<k8s#>>), or running the Linux distribution under WSL2 with the systemd setup above are preferable. Use the winsw approach below when you specifically need XP to run as a native Windows service. Apache Commons Daemon (`procrun`) is a heavier-duty alternative wrapper.
+
+=== Setup
+
+==== Download the service wrapper
+
+Download the latest `winsw` executable from the https://github.com/winsw/winsw/releases[releases page], and rename it to your desired service name, for example `xp-service.exe`.
+
+==== Create the service config
+
+Create an XML file next to the executable, with the *same base name* — for example `xp-service.xml`.
+
+NOTE: The XML file must have the same name as the executable, so the wrapper can discover it. Refer to the https://github.com/winsw/winsw/blob/master/docs/xml-config-file.md[winsw configuration reference] for all available options.
+
+The `%BASE%` variable always points to the config file location:
+
+[source, xml]
+----
+<service>
+    <id>xp-service</id>
+    <name>Enonic XP Service</name>
+    <description>Enonic XP distribution run as a Windows service.</description>
+    <env name="XP_INSTALL" value="%BASE%/enonic-xp-windows-server-8.0.0"/> // <1>
+    <env name="JAVA_HOME" value="%XP_INSTALL%/java"/> // <2>
+    <env name="XP_HOME" value="%BASE%/xp-service-home"/> // <3>
+    <executable>%XP_INSTALL%/bin/server.bat</executable>
+    <log mode="roll-by-size-time"> // <4>
+        <sizeThreshold>10240</sizeThreshold>
+        <pattern>dd-MM-yyyy</pattern>
+        <autoRollAtTime>00:00:00</autoRollAtTime>
+        <keepFiles>7</keepFiles>
+    </log>
+    <serviceaccount> // <5>
+        <domain>***user domain***</domain>
+        <user>***user name***</user>
+        <password>***user password***</password>
+        <allowservicelogon>true</allowservicelogon>
+    </serviceaccount>
+</service>
+----
+
+<1> *XP_INSTALL* sets the location of your unzipped Enonic XP distribution.
+<2> *JAVA_HOME* points to the JVM bundled in the distribution (the system-wide `JAVA_HOME` is used if omitted). `server.bat` runs `%JAVA_HOME%\bin\java.exe`.
+<3> *XP_HOME* defines the location of the Enonic XP home folder.
+<4> *log* rotates the log using the `<pattern>` provided, by both date and file size.
+<5> *serviceaccount* specifies the user account (and password) that the service runs as (`allowservicelogon` is automatically set to true for the specified user).
+
+TIP: To find your user name and domain, type `set user` in `cmd` and hit enter.
+
+=== Usage
+
+IMPORTANT: You must start `cmd.exe` with administrator permissions to run service commands.
+
+==== Install
+
+First, install the service:
+
+  xp-service.exe install
+
+Verify that the service was installed by looking at the output:
+
+  INFO  - Installing the service with id 'xp-service'
+
+where `xp-service.exe` is the name of the service wrapper you downloaded earlier.
+
+==== Check status
+
+Check the service status:
+
+  xp-service.exe status
+
+If you have not started the service yet, you should see:
+
+  Stopped
+
+==== Start
+
+The service is stopped by default and must be started:
+
+  xp-service.exe start
+
+You should see something like this in the output:
+
+  INFO  - Starting the service with id 'xp-service'
+
+==== Stop
+
+To stop the service:
+
+  xp-service.exe stop
+
+  INFO  - Stopping the service with id 'xp-service'
+
+==== Uninstall
+
+To uninstall the service:
+
+  xp-service.exe uninstall
+
+  INFO  - Uninstalling the service with id 'xp-service'

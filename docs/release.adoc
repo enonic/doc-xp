@@ -9,6 +9,8 @@ The headline features and themes for each XP feature release. For step-by-step u
 
 XP 8 is the largest release in 8 years. The runtime is rebuilt on a modern stack, the Universal API unifies how request handlers are written and called, and a long list of API rough edges has been cleaned up.
 
+IMPORTANT: This release contains *Breaking changes when upgrading from XP7*. We have made every effort to minimize the impact of these, but please review the full list of breaking changes and migration steps in the <<release/upgrade#breaking-changes, upgrade notes>> before upgrading.
+
 === UI reloaded
 
 XP 8 introduces a new admin UI built on the Enonic UI design system. The new UI is faster, more responsive, and provides a more consistent user experience across tools. The first tools to be migrated are the <<admin#, XP menu>> and the <<admin/dashboard#, Dashboard>>. The remaining tools will be migrated in future releases.
@@ -31,7 +33,7 @@ TODO: Management API?
 The XP 8 core runs on a refreshed stack: *Java 25*, *Jetty 12*, and *Hazelcast 5*.
 
 
-== Prometheus metrics
+=== Prometheus metrics
 
 Metrics are now exposed in the open https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md[OpenMetrics] format - point your Prometheus, Grafana agent, or any compatible collector at the metrics endpoint to get first-class observability.
 
@@ -107,6 +109,4 @@ A handful of smaller-but-pleasing improvements:
 * `request.locale` is available in the request object
 * The dump location is configurable via <<config/system#repo, repository config>>
 
-=== Breaking changes
 
-For the full list of breaking changes and migration steps, see <<release/upgrade#breaking-changes, Breaking changes>> in the upgrade notes.
