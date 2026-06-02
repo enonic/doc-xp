@@ -628,6 +628,8 @@ POST app/install
 
 Installs an application from url on all nodes.
 
+The URL must match a pattern configured in the <<../config/system#management-app, Application management API config>>, and a SHA-512 checksum is required by default. Requests violating either policy are rejected with `409 Conflict` before any data is fetched.
+
 .Url
 POST app/installUrl
 
@@ -640,11 +642,11 @@ POST app/installUrl
 
 |`URL`
 |String
-|application URL
+|application URL. Must match one of the patterns configured in `installUrl.allowedUrls`.
 
 |`sha512`
 |String
-| Application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.
+| Application file SHA-512 checksum. Required by default (`installUrl.checksumRequired = true`). If provided and the computed checksum does not match, installation fails.
 |===
 
 .Response
