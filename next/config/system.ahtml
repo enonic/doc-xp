@@ -462,6 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#idprovider">System IDprovider</a></li>
 <li><a href="#vacuum">Vacuum</a></li>
 <li><a href="#application">Application</a></li>
+<li><a href="#management-app">Application management API</a></li>
 <li><a href="#task">Task</a></li>
 <li><a href="#scheduler">Scheduler</a></li>
 <li><a href="#export">Export</a></li>
@@ -1816,6 +1817,54 @@ Filter rules apply separately on different nodes in cluster. If one cluster node
 </div>
 </div>
 <div class="sect1">
+<h2 id="management-app"><a class="link" href="#management-app">Application management API</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>com.enonic.xp.server.management.app.cfg</code></p>
+</div>
+<div class="paragraph">
+<p>Configure the security policy for the management Applications API on Port 4848 (<code>/api/server:app/*</code>). Currently controls the <code>/installUrl</code> endpoint, which installs an application from a remote URL.</p>
+</div>
+<div class="listingblock">
+<div class="title">Default configuration</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">installUrl.allowedUrls = https://*
+installUrl.checksumRequired = true</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">installUrl.allowedUrls</dt>
+<dd>
+<p>Comma-separated wildcard patterns of URLs allowed by <code>/installUrl</code>. A trailing <code><strong></code> matches any suffix; otherwise the pattern is matched exactly as a string prefix. Set to an empty string to disable <code>/installUrl</code> entirely. Default: <code>https://</strong></code> (any https URL).</p>
+</dd>
+<dt class="hdlist1">installUrl.checksumRequired</dt>
+<dd>
+<p>When <code>true</code>, every <code>/installUrl</code> request must include a non-empty <code>sha512</code> field; the download is rejected if the computed digest does not match. Set to <code>false</code> to allow installs without a checksum (not recommended). Default: <code>true</code>.</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="title">Restrict installs to the official Enonic public repository</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">installUrl.allowedUrls = https://repo.enonic.com/public/*</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Allow several explicit hosts</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">installUrl.allowedUrls = https://repo.enonic.com/public/*, https://my.cdn.com/apps/*</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Disable /installUrl entirely (uploads via /install are unaffected)</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">installUrl.allowedUrls =</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="task"><a class="link" href="#task">Task</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -1999,7 +2048,7 @@ Exports dir should be a shared storage for cluster environments.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-02 15:35:37 UTC
+Last updated 2026-06-02 18:45:48 UTC
 </div>
 </div>
 </body>

@@ -1489,6 +1489,9 @@ Task info can be fetched with <a href="#task">task</a> request.
 <p>Installs an application from url on all nodes.</p>
 </div>
 <div class="paragraph">
+<p>The URL must match a pattern configured in the <a href="../config/system.ahtml#management-app">Application management API config</a>, and a SHA-512 checksum is required by default. Requests violating either policy are rejected with <code>409 Conflict</code> before any data is fetched.</p>
+</div>
+<div class="paragraph">
 <div class="title">Url</div>
 <p>POST app/installUrl</p>
 </div>
@@ -1510,12 +1513,12 @@ Task info can be fetched with <a href="#task">task</a> request.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>URL</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">application URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">application URL. Must match one of the patterns configured in <code>installUrl.allowedUrls</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sha512</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Application file SHA-512 checksum. Optional. If provided, and checksum does not match, installation will fail.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application file SHA-512 checksum. Required by default (<code>installUrl.checksumRequired = true</code>). If provided and the computed checksum does not match, installation fails.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2531,7 +2534,7 @@ Make sure you have a backup of the installation available before running a clean
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-02 15:35:37 UTC
+Last updated 2026-06-02 18:45:48 UTC
 </div>
 </div>
 </body>
