@@ -1279,7 +1279,8 @@ threadPool.minThreads = 8
 threadPool.idleTimeout = 60000
 
 # Websocket
-websocket.idleTimeout = 300000</code></pre>
+websocket.idleTimeout = 300000
+websocket.defaultOriginCheck = true</code></pre>
 </div>
 </div>
 <div class="dlist">
@@ -1375,6 +1376,10 @@ websocket.idleTimeout = 300000</code></pre>
 <dt class="hdlist1">websocket.idleTimeout</dt>
 <dd>
 <p>The time (in milliseconds) that a websocket may be idle before closing. Default: <code>300000</code>.</p>
+</dd>
+<dt class="hdlist1">websocket.defaultOriginCheck</dt>
+<dd>
+<p>Enforce the platform&#8217;s built-in same-origin check on WebSocket handshakes. When <code>false</code>, the handshake accepts any <code>Origin</code> unless a controller supplies its own <code>checkOrigin</code> function. Disable only as a fallback for deployments where the reverse proxy does not propagate the public scheme/host/port to Jetty and the proxy configuration cannot be fixed. Default: <code>true</code>.</p>
 </dd>
 </dl>
 </div>
@@ -2048,7 +2053,7 @@ Exports dir should be a shared storage for cluster environments.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-02 18:45:48 UTC
+Last updated 2026-06-02 18:45:58 UTC
 </div>
 </div>
 </body>
