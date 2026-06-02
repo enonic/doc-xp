@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Systemd deployments</title>
+<title>Run XP as a service</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,19 +437,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Systemd deployments</h1>
+<h1>Run XP as a service</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#explanation_of_the_setup">Explanation of the setup</a></li>
-<li><a href="#using_ansible">Using Ansible</a>
+<li><a href="#linux_systemd">Linux (systemd)</a>
 <ul class="sectlevel2">
-<li><a href="#creating_the_ansible_playbook">Creating the Ansible playbook</a></li>
-<li><a href="#running_the_ansible_playbook">Running the Ansible playbook</a></li>
-</ul>
-</li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#using_ansible">Using Ansible</a></li>
 <li><a href="#manual-setup">Manual setup</a></li>
 <li><a href="#useful-commands">Useful commands</a></li>
+</ul>
+</li>
+<li><a href="#windows_winsw">Windows (winsw)</a>
+<ul class="sectlevel2">
+<li><a href="#setup">Setup</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -457,40 +462,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes how to run Enonic XP as a systemd service.</p>
+<p>This guide describes how to run an Enonic XP distribution as a long-running operating-system service — using <strong>systemd</strong> on Linux and the <strong>winsw</strong> service wrapper on Windows.</p>
+</div>
+<div class="paragraph">
+<p>This applies to server installations made from the XP distribution. For containerized deployments use <a href="docker.ahtml">Docker</a> or <a href="k8s.ahtml">Kubernetes</a> instead, and for local development use the Enonic CLI sandbox.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+On Windows, running XP as a service targets server installations. For local development on Windows, use the Enonic CLI or Docker rather than a service.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="explanation_of_the_setup"><a class="link" href="#explanation_of_the_setup">Explanation of the setup</a></h2>
+<h2 id="linux_systemd"><a class="link" href="#linux_systemd">Linux (systemd)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>What we want to achieve is to setup XP with systemd. The setup should be easy to install, upgrade, rollback and backup. We will setup the following:</p>
+<p>This section describes how to run Enonic XP as a systemd service.</p>
+</div>
+<div class="sect2">
+<h3 id="overview"><a class="link" href="#overview">Overview</a></h3>
+<div class="paragraph">
+<p>This setup runs XP as a systemd service, in a layout that is straightforward to install, upgrade, roll back and back up. It consists of:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Set correct <code>vm.max_map_count</code>.</p>
+<p>Setting the correct <code>vm.max_map_count</code>.</p>
 </li>
 <li>
-<p>Create a user and group for XP.</p>
+<p>Creating a user and group for XP.</p>
 </li>
 <li>
-<p>Download and extract the desired distribution into <code>/opt/enonic/distros</code>.</p>
+<p>Downloading and extracting the distribution into <code>/opt/enonic/distros</code>.</p>
 </li>
 <li>
-<p>Setup the XP home folder at <code>/opt/enonic/home</code>.</p>
+<p>Setting up the XP home folder at <code>/opt/enonic/home</code>.</p>
 </li>
 <li>
-<p>Create a systemd service file using the desired distro.</p>
+<p>Creating a systemd service file for the distribution.</p>
 </li>
 <li>
-<p>Start the systemd service.</p>
+<p>Starting the systemd service.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>This guide will use the following folder setup:</p>
+<p>The setup uses the following folder layout:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -516,17 +541,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="using_ansible"><a class="link" href="#using_ansible">Using Ansible</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The easiest way to achive this is to use an ansible playbook. We will focus on that first. If you are not familiar with ansible, don&#8217;t worry. We will also show you how to do this manually in section <a href="#manual-setup">Manual setup</a>.</p>
-</div>
 <div class="sect2">
-<h3 id="creating_the_ansible_playbook"><a class="link" href="#creating_the_ansible_playbook">Creating the Ansible playbook</a></h3>
+<h3 id="using_ansible"><a class="link" href="#using_ansible">Using Ansible</a></h3>
 <div class="paragraph">
-<p>Let&#8217;s create an ansible playbook that will handle all the setup for you. Create a file called <code>xp-systemd.yaml</code> and paste the following contents into it:</p>
+<p>An Ansible playbook is the most convenient way to perform this setup. The same steps can also be performed <a href="#manual-setup">manually</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="creating_the_ansible_playbook"><a class="link" href="#creating_the_ansible_playbook">Creating the Ansible playbook</a></h4>
+<div class="paragraph">
+<p>Create a file called <code>xp-systemd.yaml</code> with the following contents:</p>
 </div>
 <div class="listingblock">
 <div class="title">xp-systemd.yaml</div>
@@ -665,10 +688,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="running_the_ansible_playbook"><a class="link" href="#running_the_ansible_playbook">Running the Ansible playbook</a></h3>
+<div class="sect3">
+<h4 id="running_the_ansible_playbook"><a class="link" href="#running_the_ansible_playbook">Running the Ansible playbook</a></h4>
 <div class="paragraph">
-<p>Assuming you already have an ansible inventory file called <code>hosts</code> you can run the playbook by running this command:</p>
+<p>With an Ansible inventory file called <code>hosts</code> in place, run the playbook:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -676,19 +699,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>Once the playbook has finished, XP should be up and running using systemd. See section <a href="#useful-commands">Useful commands</a> to check logs.</p>
+<p>When the playbook finishes, XP is running under systemd. See <a href="#useful-commands">Useful commands</a> for log access.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="manual-setup"><a class="link" href="#manual-setup">Manual setup</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="manual-setup"><a class="link" href="#manual-setup">Manual setup</a></h3>
 <div class="paragraph">
-<p>Here we will do the exact same steps as are done in the ansible playbook. But in this case we will execute them manually.</p>
-</div>
-<div class="paragraph">
-<p>To avoid making errors, lets set the <code>XP_VERSION</code> variable:</p>
+<p>These are the same steps the Ansible playbook performs, executed manually. First, set the <code>XP_VERSION</code> variable:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -702,7 +720,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Step 1, 2 and 4 only have to be executed the first time you setup Enonic XP with systemd.
+Steps 1, 2 and 4 are only required the first time XP is set up with systemd.
 </td>
 </tr>
 </table>
@@ -830,13 +848,11 @@ $ systemctl enable --now xp.service</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>XP should now be up and running using systemd. See section <a href="#useful-commands">Useful commands</a> to check logs.</p>
+<p>XP is now running under systemd. See <a href="#useful-commands">Useful commands</a> for log access.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="useful-commands"><a class="link" href="#useful-commands">Useful commands</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="useful-commands"><a class="link" href="#useful-commands">Useful commands</a></h3>
 <div class="paragraph">
 <p>View Enonic XP logs:</p>
 </div>
@@ -872,9 +888,228 @@ $ systemctl enable --now xp.service</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="windows_winsw"><a class="link" href="#windows_winsw">Windows (winsw)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On Windows, XP can be run as a service using the <a href="https://github.com/winsw/winsw">winsw</a> service wrapper, which wraps the distribution&#8217;s <code>bin/server.bat</code> startup script.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Enonic does not provide a first-party Windows service installer. For most deployments, Docker (<a href="docker.ahtml">docker.ahtml</a>), Kubernetes (<a href="k8s.ahtml">k8s.ahtml</a>), or running the Linux distribution under WSL2 with the systemd setup above are preferable. Use the winsw approach below when you specifically need XP to run as a native Windows service. Apache Commons Daemon (<code>procrun</code>) is a heavier-duty alternative wrapper.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="setup"><a class="link" href="#setup">Setup</a></h3>
+<div class="sect3">
+<h4 id="download_the_service_wrapper"><a class="link" href="#download_the_service_wrapper">Download the service wrapper</a></h4>
+<div class="paragraph">
+<p>Download the latest <code>winsw</code> executable from the <a href="https://github.com/winsw/winsw/releases">releases page</a>, and rename it to your desired service name, for example <code>xp-service.exe</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="create_the_service_config"><a class="link" href="#create_the_service_config">Create the service config</a></h4>
+<div class="paragraph">
+<p>Create an XML file next to the executable, with the <strong>same base name</strong> — for example <code>xp-service.xml</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The XML file must have the same name as the executable, so the wrapper can discover it. Refer to the <a href="https://github.com/winsw/winsw/blob/master/docs/xml-config-file.md">winsw configuration reference</a> for all available options.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>%BASE%</code> variable always points to the config file location:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;service&gt;
+    &lt;id&gt;xp-service&lt;/id&gt;
+    &lt;name&gt;Enonic XP Service&lt;/name&gt;
+    &lt;description&gt;Enonic XP distribution run as a Windows service.&lt;/description&gt;
+    &lt;env name="XP_INSTALL" value="%BASE%/enonic-xp-windows-server-8.0.0"/&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;env name="JAVA_HOME" value="%XP_INSTALL%/java"/&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+    &lt;env name="XP_HOME" value="%BASE%/xp-service-home"/&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+    &lt;executable&gt;%XP_INSTALL%/bin/server.bat&lt;/executable&gt;
+    &lt;log mode="roll-by-size-time"&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+        &lt;sizeThreshold&gt;10240&lt;/sizeThreshold&gt;
+        &lt;pattern&gt;dd-MM-yyyy&lt;/pattern&gt;
+        &lt;autoRollAtTime&gt;00:00:00&lt;/autoRollAtTime&gt;
+        &lt;keepFiles&gt;7&lt;/keepFiles&gt;
+    &lt;/log&gt;
+    &lt;serviceaccount&gt; <i class="conum" data-value="5"></i><b>(5)</b>
+        &lt;domain&gt;***user domain***&lt;/domain&gt;
+        &lt;user&gt;***user name***&lt;/user&gt;
+        &lt;password&gt;***user password***&lt;/password&gt;
+        &lt;allowservicelogon&gt;true&lt;/allowservicelogon&gt;
+    &lt;/serviceaccount&gt;
+&lt;/service&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>XP_INSTALL</strong> sets the location of your unzipped Enonic XP distribution.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>JAVA_HOME</strong> points to the JVM bundled in the distribution (the system-wide <code>JAVA_HOME</code> is used if omitted). <code>server.bat</code> runs <code>%JAVA_HOME%\bin\java.exe</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>XP_HOME</strong> defines the location of the Enonic XP home folder.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>log</strong> rotates the log using the <code>&lt;pattern&gt;</code> provided, by both date and file size.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><strong>serviceaccount</strong> specifies the user account (and password) that the service runs as (<code>allowservicelogon</code> is automatically set to true for the specified user).</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To find your user name and domain, type <code>set user</code> in <code>cmd</code> and hit enter.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="usage"><a class="link" href="#usage">Usage</a></h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You must start <code>cmd.exe</code> with administrator permissions to run service commands.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="install"><a class="link" href="#install">Install</a></h4>
+<div class="paragraph">
+<p>First, install the service:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>xp-service.exe install</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that the service was installed by looking at the output:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>INFO  - Installing the service with id 'xp-service'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>xp-service.exe</code> is the name of the service wrapper you downloaded earlier.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="check_status"><a class="link" href="#check_status">Check status</a></h4>
+<div class="paragraph">
+<p>Check the service status:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>xp-service.exe status</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have not started the service yet, you should see:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Stopped</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="start"><a class="link" href="#start">Start</a></h4>
+<div class="paragraph">
+<p>The service is stopped by default and must be started:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>xp-service.exe start</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something like this in the output:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>INFO  - Starting the service with id 'xp-service'</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="stop"><a class="link" href="#stop">Stop</a></h4>
+<div class="paragraph">
+<p>To stop the service:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>xp-service.exe stop</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>INFO  - Stopping the service with id 'xp-service'</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uninstall"><a class="link" href="#uninstall">Uninstall</a></h4>
+<div class="paragraph">
+<p>To uninstall the service:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>xp-service.exe uninstall</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>INFO  - Uninstalling the service with id 'xp-service'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 13:35:28 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>

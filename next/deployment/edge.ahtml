@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>eXtra-data schemas</title>
+<title>Web server, load balancing and CDN</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -435,15 +435,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article toc2 toc-right">
+<body id="edge" class="article toc2 toc-right">
 <div id="header">
-<h1>eXtra-data schemas</h1>
+<h1>Web server, load balancing and CDN</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#definition">Definition</a></li>
-<li><a href="#usage">Usage</a></li>
-<li><a href="#configuration">Configuration</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#reverse_proxy">Reverse proxy</a>
+<ul class="sectlevel2">
+<li><a href="#forwarded_headers">Forwarded headers</a></li>
+<li><a href="#virtual_hosts">Virtual hosts</a></li>
+<li><a href="#minimal_single_node_setup">Minimal single-node setup</a></li>
+</ul>
+</li>
+<li><a href="#load_balancing">Load balancing</a>
+<ul class="sectlevel2">
+<li><a href="#session_affinity">Session affinity</a></li>
+<li><a href="#session_replication">Session replication</a></li>
+<li><a href="#sticky_sessions">Sticky sessions</a></li>
+<li><a href="#health_checks">Health checks</a></li>
+</ul>
+</li>
+<li><a href="#cdn">CDN</a>
+<ul class="sectlevel2">
+<li><a href="#what_to_cache">What to cache</a></li>
+<li><a href="#cache_control">Cache-Control</a></li>
+<li><a href="#invalidation">Invalidation</a></li>
+</ul>
+</li>
+<li><a href="#waf">WAF</a></li>
+<li><a href="#see_also">See also</a></li>
 </ul>
 </div>
 </div>
@@ -451,8 +473,296 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>X-data (short for <em>eXtra data</em>) makes it possible to dynamically extend existing content types with a new form.
-When editing content, X-data fields will be displayed inside a separate step in the content form.</p>
+<p>Describes infrastructure that sits <strong>in front of</strong> Enonic XP — handling incoming traffic before it reaches your the XP nodes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enonic XP exposes its web traffic on a plain HTTP endpoint (port <code>8080</code> by default). XP is <strong>not</strong> intended to be exposed directly to the Internet. It does not terminate TLS, and it is not hardened to act as an Internet-facing edge server on its own.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Never expose the XP web endpoint directly to the public Internet. Always place a reverse proxy in front of XP that at minimum handles routing, terminates TLS, and provides request logging and other restrictions. A dedicated web server is not required — any solution that covers these responsibilities, including a load balancer, can fulfil the role.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A typical production setup may contain concerns at the edge, from the outside in:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>CDN</strong> (optional) — caches and serves static media and assets close to the user, absorbing read traffic.</p>
+</li>
+<li>
+<p><strong>WAF</strong> (optional) — inspects traffic and blocks common attack patterns. Commonly part of the same edge platform as the CDN; when standalone, it usually sits just behind the cache, guarding origin-bound traffic.</p>
+</li>
+<li>
+<p><strong>Load balancer</strong>(required for clusters) — distributes requests across the XP nodes in a cluster and performs health checks.</p>
+</li>
+<li>
+<p><strong>Reverse proxy</strong> — terminates TLS, routes and filters requests, and forwards them to XP.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Small deployments may collapse several of these into a single component (for example, one reverse proxy that also terminates TLS and load-balances), while large deployments separate them. The responsibilities below apply regardless of how they are combined.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="reverse_proxy"><a class="link" href="#reverse_proxy">Reverse proxy</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The edge must cover a baseline of responsibilities before traffic reaches XP. These are typically handled by a reverse proxy (such as Nginx, Apache HTTP Server, or HAProxy), but a capable load balancer may also provide the same capabilities — notably routing, TLS termination, logging and filtering — can fulfil the role without a separate web server. The required responsibilities are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Routing</dt>
+<dd>
+<p>Forward incoming requests to XP&#8217;s web endpoint. In a clustered deployment this also means distributing requests across the available nodes — see <a href="#_load_balancing">Load balancing</a>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This must be combined with the <a href="../config/vhosts.ahtml#virtual-hosts">virtual host configuration</a> in XP itself, which maps incoming requests to the correct service target based on the forwarded host and path.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">TLS termination</dt>
+<dd>
+<p>Terminate HTTPS at the edge and forward requests to XP over HTTP on the internal network. XP itself does not manage certificates.</p>
+</dd>
+<dt class="hdlist1">Request filtering and limits</dt>
+<dd>
+<p>Enforce request size limits, time-outs, rate limiting, and basic protection against malformed or malicious requests before they reach XP.</p>
+</dd>
+<dt class="hdlist1">Restricting endpoints</dt>
+<dd>
+<p>Ensure that only intended endpoints are publicly reachable. The management and monitoring endpoints (port <code>2609</code> by default) must <strong>never</strong> be exposed to the Internet — restrict them to your internal network.</p>
+</dd>
+<dt class="hdlist1">Compression and connection handling</dt>
+<dd>
+<p>Offload gzip/Brotli compression and keep-alive handling from the application nodes.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="forwarded_headers"><a class="link" href="#forwarded_headers">Forwarded headers</a></h3>
+<div class="paragraph">
+<p>When XP is behind a proxy, it must be told about the <strong>original</strong> request so that generated URLs, redirects, and security decisions use the public host and scheme rather than the internal ones. Configure your proxy to forward the standard headers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">X-Forwarded-For    # original client IP
+X-Forwarded-Host   # original host requested by the client
+X-Forwarded-Proto  # original scheme (https)
+X-Forwarded-Port   # original port</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Without these, XP may generate <code>http://</code> links, incorrect host names, or apply the wrong virtual host.</p>
+</div>
+<div class="paragraph">
+<p>XP processes these headers through Jetty&#8217;s built-in <code>ForwardedRequestCustomizer</code>, which is always enabled — there is no XP-side configuration to set up, you only need to ensure your proxy sends the headers. As an alternative to the <code>X-Forwarded-*</code> set, the standardized <a href="https://datatracker.ietf.org/doc/html/rfc7239">RFC 7239</a> <code>Forwarded</code> header is also supported.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="virtual_hosts"><a class="link" href="#virtual_hosts">Virtual hosts</a></h3>
+<div class="paragraph">
+<p>Which public domains and paths are routed to which parts of XP (Sites, Admin, Webapps, Universal APIs) is controlled by XP&#8217;s own virtual host configuration. The proxy forwards traffic; XP&#8217;s vhost layer maps it to the correct target. See <a href="../config/vhosts.ahtml#virtual-hosts">Virtual hosts</a> for the mapping syntax and how it interacts with the forwarded host.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="minimal_single_node_setup"><a class="link" href="#minimal_single_node_setup">Minimal single-node setup</a></h3>
+<div class="paragraph">
+<p>For a single XP node, a minimal reverse proxy only needs to terminate TLS and forward requests to the XP web endpoint with the forwarded headers set. The examples below proxy <code><a href="https://www.example.com" class="bare">https://www.example.com</a></code> to an XP node listening on <code>127.0.0.1:8080</code> and redirect HTTP to HTTPS.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The reverse proxy must allow WebSocket connections to be upgraded and passed through to XP. Content Studio (live edit and collaboration), the portal live-edit channel, and applications using <code>lib-websocket</code> all depend on WebSockets. The examples below include the required upgrade handling.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This is a getting-started baseline for a single node. Production deployments are typically clustered and add load balancing across several nodes — see <a href="#_load_balancing">Load balancing</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Nginx</div>
+<div class="content">
+<pre class="highlight"><code class="language-nginx" data-lang="nginx"># In the http {} context: map the Upgrade header so WebSocket connections upgrade correctly
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 443 ssl;
+    server_name www.example.com;
+
+    ssl_certificate     /etc/ssl/example.crt;
+    ssl_certificate_key /etc/ssl/example.key;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host  $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port  $server_port;
+
+        # WebSocket support (Content Studio, live edit, lib-websocket)
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade    $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+    }
+}
+
+# Redirect HTTP to HTTPS
+server {
+    listen 80;
+    server_name www.example.com;
+    return 301 https://$host$request_uri;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Apache HTTP Server (mod_proxy, mod_ssl, mod_headers)</div>
+<div class="content">
+<pre class="highlight"><code class="language-apache" data-lang="apache">&lt;VirtualHost *:443&gt;
+    ServerName www.example.com
+
+    SSLEngine on
+    SSLCertificateFile    /etc/ssl/example.crt
+    SSLCertificateKeyFile /etc/ssl/example.key
+
+    ProxyPreserveHost On
+    # upgrade=websocket requires Apache 2.4.47 or later
+    ProxyPass        / http://127.0.0.1:8080/ upgrade=websocket
+    ProxyPassReverse / http://127.0.0.1:8080/
+
+    # mod_proxy_http sets X-Forwarded-For and X-Forwarded-Host automatically
+    RequestHeader set X-Forwarded-Proto "https"
+    RequestHeader set X-Forwarded-Port  "443"
+&lt;/VirtualHost&gt;
+
+# Redirect HTTP to HTTPS
+&lt;VirtualHost *:80&gt;
+    ServerName www.example.com
+    Redirect permanent / https://www.example.com/
+&lt;/VirtualHost&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="load_balancing"><a class="link" href="#load_balancing">Load balancing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When running XP as a <a href="clustering.ahtml">cluster</a>, the load balancer distributes incoming requests across the available nodes.</p>
+</div>
+<div class="sect2">
+<h3 id="session_affinity"><a class="link" href="#session_affinity">Session affinity</a></h3>
+<div class="paragraph">
+<p>In XP, the HTTP session holds only the user&#8217;s authenticated login — it is not used as a general-purpose store for application data. Any other state lives on the client or in the XP repository, which is shared across the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Node affinity therefore only matters for session-based login. When you use it, each authenticated user&#8217;s requests must reach a node that holds their session, so you must enable either session replication or sticky sessions — otherwise users are logged out as requests are balanced across nodes. Stateless authentication needs neither: the System ID provider&#8217;s per-request JWT authentication (<code>Authorization: Bearer</code>, see <a href="../security/service-accounts.ahtml#jwt-authentication">JWT authentication</a>) creates no session, whereas interactive logins such as the <a href="https://market.enonic.com/vendors/enonic/oidc-id-provider">OIDC ID provider</a> do.</p>
+</div>
+<div class="paragraph">
+<p>Of the two options, session replication is preferred, as it keeps nodes interchangeable instead of pinning users to one node.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="session_replication"><a class="link" href="#session_replication">Session replication</a></h3>
+<div class="paragraph">
+<p>By default, XP keeps sessions per node, in memory (<code>storeMode = non-persistent</code>), so a session exists only on the node that created it. Setting <code>storeMode = replicated</code> distributes sessions across the cluster using XP&#8217;s Jetty–Hazelcast integration, so any node can serve any session and a user stays logged in even if a node stops or the load balancer moves them. Replication requires clustering to be enabled; on a non-clustered instance it falls back to <code>non-persistent</code> and logs a warning.</p>
+</div>
+<div class="paragraph">
+<p>The overhead is minor, since the session only holds the login object. For a single, non-clustered instance, <code>storeMode = file</code> instead persists sessions to disk so they survive a graceful restart. See <a href="../config/system.ahtml#sessionstore">SessionStore configuration</a> for all session-store settings.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sticky_sessions"><a class="link" href="#sticky_sessions">Sticky sessions</a></h3>
+<div class="paragraph">
+<p>Sticky sessions are the alternative to replication: the load balancer pins each user to the node that holds their session, so session-based login works without distributing sessions. The trade-off is that nodes are no longer interchangeable — if a node is lost, the users pinned to it must log in again.</p>
+</div>
+<div class="paragraph">
+<p>For the <strong>Admin</strong> endpoint (<code>/admin</code>), sticky sessions are mandatory in order to optimize performance and consistency, as Content Studio and the other admin tools continuously read from and write to the distributed storage. Pinning each user to a single node both ensures optimal performance and avoids conflicts where a write on one node is not yet reflected by an immediate read from another.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="health_checks"><a class="link" href="#health_checks">Health checks</a></h3>
+<div class="paragraph">
+<p>XP exposes two purpose-built probe endpoints on the monitoring port (<code>2609</code>), each returning <code>200 OK</code> when satisfied and <code>503</code> otherwise:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>/health</code></dt>
+<dd>
+<p>Liveness — essential data services are available.</p>
+</dd>
+<dt class="hdlist1"><code>/ready</code></dt>
+<dd>
+<p>Readiness — all services required for full operation are available.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Configure the load balancer to poll <code>/ready</code> and route traffic only to nodes that return <code>200</code>, so requests are never sent to a node that is still starting up or running degraded. Use <code>/health</code> for liveness checks (for example, to decide when to restart a node). Prefer these probes over a regular content URL, which can return <code>200</code> even when the node is not fully operational. As the monitoring port is internal-only, the load balancer reaches these probes over your internal network.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../endpoints/statistics.ahtml#health-and-readiness">Health and readiness</a> for details.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cdn"><a class="link" href="#cdn">CDN</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Content Delivery Network caches content at edge locations close to users, reducing latency and offloading read traffic from your XP cluster. A CDN is optional but strongly recommended for public, high-traffic sites.</p>
+</div>
+<div class="sect2">
+<h3 id="what_to_cache"><a class="link" href="#what_to_cache">What to cache</a></h3>
+<div class="paragraph">
+<p>CDNs are most effective for static media and assets — images, attachments, and application assets served from the media and asset endpoints. Dynamic, personalized, or authenticated responses (Admin, logged-in site pages, APIs returning user-specific data) should generally <strong>not</strong> be cached at the CDN.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache_control"><a class="link" href="#cache_control">Cache-Control</a></h3>
+<div class="paragraph">
+<p>XP automatically sets <code>Cache-Control</code> headers on responses on different services and APIs for optimal caching (like the media APIs), or to disable caching (/admin sets private header).</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -461,7 +771,37 @@ When editing content, X-data fields will be displayed inside a separate step in 
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If you want to inject fields inside content type&#8217;s form rather than appending a form, consider using <a href="schemas/mixins.ahtml">a mixin</a>
+CDN providers like Fastly will default to 1 hour caching if the origin response lacks <code>Cache-Control</code> headers, which can lead to unexpected caching of dynamic content. Ensure your CDN is configured to respect the <code>Cache-Control</code> headers sent by XP.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="invalidation"><a class="link" href="#invalidation">Invalidation</a></h3>
+<div class="paragraph">
+<p>Media URLs in XP are fingerprinted, so updated media is served from a new URL and does not require active cache invalidation. For cases where you cache other responses, ensure you have a purge/invalidation strategy that matches how frequently that content changes.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="waf"><a class="link" href="#waf">WAF</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Web Application Firewall inspects incoming HTTP traffic and blocks common attack patterns — such as the <a href="https://owasp.org/www-project-top-ten/">OWASP Top 10</a> (SQL injection, cross-site scripting, and similar) — before they reach XP. Like a CDN, a WAF is optional but recommended for public, Internet-facing deployments.</p>
+</div>
+<div class="paragraph">
+<p>Where the WAF sits relative to the cache depends on the product. Integrated edge platforms (such as Cloudflare or AWS WAF with CloudFront) evaluate WAF rules at the CDN edge, as part of the same layer. A standalone or origin-side WAF (a dedicated appliance, ModSecurity on the reverse proxy, or a WAF attached to the load balancer) sits just behind the CDN and inspects only origin-bound traffic — cache misses and dynamic requests — so cache hits are served from the edge without re-inspection. XP does not provide a WAF; it is part of your edge infrastructure either way.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Tune the rule set to your application. Overly aggressive rules can block legitimate Content Studio and API traffic, which relies heavily on <code>POST</code> requests and JSON payloads. Validate the WAF against editorial and admin workflows, not just the public site.
 </td>
 </tr>
 </table>
@@ -469,93 +809,30 @@ If you want to inject fields inside content type&#8217;s form rather than append
 </div>
 </div>
 <div class="sect1">
-<h2 id="definition"><a class="link" href="#definition">Definition</a></h2>
+<h2 id="see_also"><a class="link" href="#see_also">See also</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The file with X-data schema must be placed in the folder <code>site/x-data/[name]</code> and called <code>[name].xml</code>. For example, <em>site/x-data/address/address.xml</em>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;x-data&gt;
-  &lt;display-name&gt;Full address&lt;/display-name&gt;
-  &lt;form&gt;
-    &lt;input type="TextLine" name="addressLine"&gt;
-      &lt;label&gt;Street address&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="2"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="city"&gt;
-      &lt;label&gt;City&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="zipCode"&gt;
-      &lt;label&gt;Zip code&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-    &lt;input type="TextLine" name="country"&gt;
-      &lt;label&gt;Country&lt;/label&gt;
-      &lt;occurrences minimum="1" maximum="1"/&gt;
-    &lt;/input&gt;
-  &lt;/form&gt;
-&lt;/x-data&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To activate X-data for your project or site, it must be referenced in the application&#8217;s <code>site.xml</code>. The example below adds the <code>address</code> X-data to all content types within its scope.</p>
-</div>
-<div class="listingblock">
-<div class="title">/src/main/resource/site/site.xml</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;x-data name="address"/&gt;
-  &lt;form/&gt;
-&lt;/site&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="configuration"><a class="link" href="#configuration">Configuration</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>It&#8217;s possible to restrict X-data for specific content types using regular expressions. This is especially convenient when you apply X-data to all content types via <code>site.xml</code> but want to exclude some content types.</p>
-</div>
-<div class="paragraph">
-<p>Use regular expressions in the <code>allowContentTypes</code> attribute of the <code>&lt;x-data/&gt;</code> field inside <code>site.xml</code> to enable or disable it for specific content type(s).
-By default x-data will be added to content items of all types with no option to remove it but you can make it optional by setting <code>optional</code> attribute to <em>true</em>. Optional x-data has to be manually enabled inside Content Wizard to be added to the content data.</p>
-</div>
-<div class="paragraph">
-<p>If <code>allowContentTypes</code> and <code>optional</code> attributes are not set, the x-data will automatically be enabled for all content types. See <a href="schemas/input-types/contentselector.ahtml#allowContentType">modes</a> of content type filtering.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;x-data name="my-x-data-1" /&gt;
-  &lt;x-data name="my-x-data-2" allowContentTypes="^(?!base:folder$).*" /&gt;
-  &lt;x-data name="my-x-data-3" allowContentTypes="portal:site" optional="true" /&gt;
-  &lt;form/&gt;
-&lt;/site&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In the example above <em>my-x-data-1</em> will be enabled for all content types, with no option to disable it in the Content Wizard.</p>
-</div>
-<div class="paragraph">
-<p><em>my-x-data-2</em> will be added for all content types with no option to remove it in the Content Wizard, except for content type <code>base:folder</code> for which it will not be shown at all.</p>
-</div>
-<div class="paragraph">
-<p><em>my-x-data-3</em> will be enabled only for sites (which are using internal content type <code>portal:site</code>) and will be optional, meaning user has to manually turn it on in the Content Wizard.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="strategies.ahtml">Deployment strategies</a> — node topologies behind the edge tier</p>
+</li>
+<li>
+<p><a href="clustering.ahtml">Clustered deployments</a> — how the nodes the load balancer targets are set up</p>
+</li>
+<li>
+<p><a href="../config/vhosts.ahtml#virtual-hosts">Virtual hosts</a> — routing public domains and paths to XP</p>
+</li>
+<li>
+<p><a href="../config/cms.ahtml">CMS configuration</a> — media <code>Cache-Control</code> settings</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-02 15:35:36 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>

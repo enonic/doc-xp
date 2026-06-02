@@ -446,10 +446,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#ui_reloaded">UI reloaded</a></li>
 <li><a href="#universal_api">Universal API</a></li>
 <li><a href="#modern_foundation">Modern foundation</a></li>
-</ul>
-</li>
-<li><a href="#prometheus_metrics">Prometheus metrics</a>
-<ul class="sectlevel2">
+<li><a href="#prometheus_metrics">Prometheus metrics</a></li>
 <li><a href="#xp_goes_yaml">XP goes YAML</a></li>
 <li><a href="#simplified_permissions">Simplified permissions</a></li>
 <li><a href="#companion_apps">Companion apps</a></li>
@@ -460,7 +457,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#security_hardening">Security hardening</a></li>
 <li><a href="#smarter_dumps_and_exports">Smarter dumps and exports</a></li>
 <li><a href="#quality_of_life">Quality of life</a></li>
-<li><a href="#breaking_changes">Breaking changes</a></li>
 </ul>
 </li>
 </ul>
@@ -479,6 +475,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>XP 8 is the largest release in 8 years. The runtime is rebuilt on a modern stack, the Universal API unifies how request handlers are written and called, and a long list of API rough edges has been cleaned up.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This release contains <strong>Breaking changes when upgrading from XP7</strong>. We have made every effort to minimize the impact of these, but please review the full list of breaking changes and migration steps in the <a href="release/upgrade.ahtml#breaking-changes">upgrade notes</a> before upgrading.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="ui_reloaded"><a class="link" href="#ui_reloaded">UI reloaded</a></h3>
@@ -512,13 +520,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The XP 8 core runs on a refreshed stack: <strong>Java 25</strong>, <strong>Jetty 12</strong>, and <strong>Hazelcast 5</strong>.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="prometheus_metrics"><a class="link" href="#prometheus_metrics">Prometheus metrics</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="prometheus_metrics"><a class="link" href="#prometheus_metrics">Prometheus metrics</a></h3>
 <div class="paragraph">
 <p>Metrics are now exposed in the open <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md">OpenMetrics</a> format - point your Prometheus, Grafana agent, or any compatible collector at the metrics endpoint to get first-class observability.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="xp_goes_yaml"><a class="link" href="#xp_goes_yaml">XP goes YAML</a></h3>
@@ -669,18 +675,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="breaking_changes"><a class="link" href="#breaking_changes">Breaking changes</a></h3>
-<div class="paragraph">
-<p>For the full list of breaking changes and migration steps, see <a href="release/upgrade.ahtml#breaking-changes">Breaking changes</a> in the upgrade notes.</p>
-</div>
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 13:35:28 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>

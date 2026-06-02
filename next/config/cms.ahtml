@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Content management system configuration</title>
+<title>CMS configuration</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,11 +437,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Content management system configuration</h1>
+<h1>CMS configuration</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#media_serving">Media Serving</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#media_and_legacy_apis">Media and legacy apis</a></li>
 <li><a href="#image">Image</a></li>
 <li><a href="#binary_text_extractor">Binary Text Extractor</a></li>
 <li><a href="#content_config">Content</a></li>
@@ -452,21 +453,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes configuration files related to content and media handling</p>
+<p>This section describes configuration files related to CMS-oriented features, such as media handling and content API behavior.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="media_serving"><a class="link" href="#media_serving">Media Serving</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The configuration files can be deployed to your Enonic XP instance&#8217;s <code>config</code> directory, and are automatically reloaded when changed. For details on configuration file syntax and behavior, see the <a href="https://developer.enonic.com/docs/xp/stable/config">Configuration reference documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>The values listed here are defaults that can be overridden by operators. For instance, the <code>media.public.cacheControl</code> default is <code>public, max-age=31536000, immutable</code>, but an operator may choose to set it to <code>public, max-age=3600</code> for more frequent cache invalidation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="media_and_legacy_apis"><a class="link" href="#media_and_legacy_apis">Media and legacy apis</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><code>com.enonic.xp.portal.cfg</code></p>
 </div>
 <div class="paragraph">
-<p>Configure the Web endpoint behaviour.</p>
+<p>Configure common media API behavior. Covers both Attachment API and Image API.</p>
 </div>
 <div class="listingblock">
-<div class="title">Sample content config file</div>
+<div class="title">Sample config file</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">media.public.cacheControl = public, max-age=31536000, immutable
 media.private.cacheControl = private, max-age=31536000, immutable</code></pre>
@@ -499,19 +511,23 @@ media.contentSecurityPolicy.svg =</code></pre>
 </dd>
 <dt class="hdlist1">legacy.attachmentService.enabled</dt>
 <dd>
-<p>Enables/Disables attachment service. Default <code>true</code> - means Legacy Attachment Service is enabled.</p>
+<p>Enables/Disables legacy attachment service. Default <code>true</code> - means endpoint <code>(</code>/_/attachment/`) is enabled.</p>
 </dd>
 <dt class="hdlist1">legacy.imageService.enabled</dt>
 <dd>
-<p>Enables/Disables image service. Default <code>true</code> - means Legacy Image Service is enabled.</p>
+<p>Enables/Disables legacy image service. Default <code>true</code> - means endpoint <code>(</code>/_/image/`) is enabled.</p>
 </dd>
 <dt class="hdlist1">legacy.httpService.enabled</dt>
 <dd>
-<p>Enables/Disables legacy HTTP service. Default <code>true</code> - means Legacy HTTP Service is enabled.</p>
+<p>Enables/Disables legacy HTTP service. Default <code>true</code> - means endpoint <code>(</code>/_/service/`) is enabled.</p>
+</dd>
+<dt class="hdlist1">legacy.assetService.enabled</dt>
+<dd>
+<p>Enables/Disables legacy asset service. Default <code>true</code> - means endpoint <code>(</code>/_/asset/`) is enabled.</p>
 </dd>
 <dt class="hdlist1">asset.cacheControl</dt>
 <dd>
-<p>Defines assets cache-control header when asset is cachable. Default: <code>public, max-age=31536000, immutable</code></p>
+<p>Asset service is deprecated, use lib-asset instead! Sets default cache-control header when asset is cachable. Default: <code>public, max-age=31536000, immutable</code></p>
 </dd>
 </dl>
 </div>
@@ -524,10 +540,10 @@ media.contentSecurityPolicy.svg =</code></pre>
 <p><code>com.enonic.xp.image.cfg</code></p>
 </div>
 <div class="paragraph">
-<p>Configure the image service behaviour.</p>
+<p>Optionally configure the image API behavior.</p>
 </div>
 <div class="listingblock">
-<div class="title">Sample content config file</div>
+<div class="title">Default settings</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">scale.maxDimension = 8000
 filters.maxTotal = 5
@@ -568,7 +584,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 <p>Configure binary text extractor service behaviour.</p>
 </div>
 <div class="listingblock">
-<div class="title">Sample content config file</div>
+<div class="title">Default settings</div>
 <div class="content">
 <pre class="highlight"><code class="language-properties" data-lang="properties">body.size.limit = 500000</code></pre>
 </div>
@@ -590,7 +606,7 @@ The value is set in percentage of total Heap, or in memory units (<code>mb</code
 <p><code>com.enonic.xp.content.cfg</code></p>
 </div>
 <div class="paragraph">
-<p>Configure the content API behavior.</p>
+<p>General content API behavior.</p>
 </div>
 <div class="listingblock">
 <div class="title">Sample content config file</div>
@@ -685,7 +701,7 @@ As such, it may lead to slower system response and reduced efficiency. Important
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 13:35:28 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>

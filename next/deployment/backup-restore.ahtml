@@ -587,6 +587,23 @@ Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 </tr>
 </table>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A blob-deleting vacuum is a point of no return for restores. All existing snapshots are deleted and the referenced blobs are removed, so you cannot restore to any moment before the vacuum ran — it becomes your new baseline.</p>
+</div>
+<div class="paragraph">
+<p>Take a fresh blobstore backup and snapshot immediately afterwards. See <a href="../storage/maintenance.ahtml#vacuum">Vacuuming</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Snapshot and restore commands can be performed by using Enonic CLI, the API or a management application from Enonic Market.</p>
 </div>
@@ -734,7 +751,7 @@ Dumping is not a recommended backup solution, rather use snapshots in combinatio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 13:35:28 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>

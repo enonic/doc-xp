@@ -536,7 +536,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="jwt_authentication"><a class="link" href="#jwt_authentication">JWT Authentication</a></h3>
 <div class="paragraph">
-<p>All management endpoints can use <a href="../iam/system-idp.ahtml#jwt-authentication">Service accounts JWT authentication</a>. This is the recommended way to authenticate with the management endpoints.</p>
+<p>All management endpoints can use <a href="../security/service-accounts.ahtml#jwt-authentication">Service accounts JWT authentication</a>. This is the recommended way to authenticate with the management endpoints.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2531,7 +2531,7 @@ Make sure you have a backup of the installation available before running a clean
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 13:35:28 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>

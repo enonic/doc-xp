@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>SnapshotsVacuumTask</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes snapshots older than the configured age threshold. <em>Default.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes snapshots older than the configured age threshold.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>SegmentVacuumTask</code></p></td>
@@ -531,7 +531,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tbody>
 </table>
 <div class="paragraph">
-<p>If no tasks are specified, only the default tasks (<code>VersionTableVacuumTask</code> and <code>SnapshotsVacuumTask</code>) run.</p>
+<p>If no tasks are specified, only the default task (<code>VersionTableVacuumTask</code>) runs.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -651,7 +651,7 @@ For large repositories, prefer the task variant and schedule the operation durin
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 13:35:28 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>

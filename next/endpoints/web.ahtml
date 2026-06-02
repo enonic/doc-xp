@@ -661,14 +661,14 @@ The site service relies on both content, and installed Enonic applications to pr
 <p>Authentication is configured per vhost by mapping ID providers, so different parts of your platform can use different authentication mechanisms. See <a href="../config/vhosts.ahtml">Virtual Hosts</a> for the mapping syntax and <a href="../security/idproviders.ahtml">ID providers</a> for the available providers.</p>
 </div>
 <div class="paragraph">
-<p>For service-to-service access, the platform supports JWT authentication via the system ID provider — see <a href="../security/system-idp.ahtml#jwt-authentication">JWT authentication</a>. Individual endpoints may document additional authentication options; see for example <a href="management.ahtml#authorization">Management API</a>.</p>
+<p>For service-to-service access, the platform supports JWT authentication via the system ID provider — see <a href="../security/service-accounts.ahtml#jwt-authentication">JWT authentication</a>. Individual endpoints may document additional authentication options; see for example <a href="management.ahtml#authorization">Management API</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 13:35:28 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>

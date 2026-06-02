@@ -805,23 +805,7 @@ Setting replicas number to 1...Done
 <h2 id="load_balancing"><a class="link" href="#load_balancing">Load balancing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When running XP in a cluster, we generally recommend using sticky sessions. Sticky sessions ensures requests from the same users is always passed to the same node in the cluster. This is due to the following reasons.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>When performing write operations to the NoSQL data store, writing to one node, and then reading from another node immediately afterwards <em>might</em> not provide the result one expects - due to the distributed storage.</p>
-</li>
-<li>
-<p>Any kind of node-local file handling will ONLY work across requests if the request is handled by the same node.</p>
-</li>
-<li>
-<p>Performance is generally better and more consistent for users</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>For session-based logins, XP now supports <a href="https://developer.enonic.com/docs/xp/stable/config/system#sessionstore">session replication</a> between nodes. This effectively prevents users from loosing their session, even when a node is stopped, but this does not mitigate the problems mentioned above.</p>
+<p>A clustered deployment needs a load balancer in front of the nodes to distribute requests. Load balancing — including session affinity (session replication versus sticky sessions) and health checks — is covered in <a href="edge.ahtml#_load_balancing">Web server, load balancing and CDN</a>.</p>
 </div>
 </div>
 </div>
@@ -936,7 +920,7 @@ It is possible to free master nodes from running named tasks by setting <code>di
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-01 13:35:28 UTC
+Last updated 2026-06-02 15:35:37 UTC
 </div>
 </div>
 </body>
