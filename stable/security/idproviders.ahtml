@@ -471,7 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="system_id_provider"><a class="link" href="#system_id_provider">System ID provider</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To get started quickly, Enonic XP ships with a built-in IDprovider called the <a href="system-idp.ahtml">System ID provider</a>. This is most commonly used by developers, or for administrative purposes. When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.</p>
+<p>To get started quickly, Enonic XP ships with a built-in <code>system</code> ID provider. This is most commonly used by developers, or for administrative purposes. When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.</p>
 </div>
 <div class="paragraph">
 <p>You may also create service accounts in the System ID provider, and use them to authenticate against the Management Endpoint, or other APIs as described in <a href="service-accounts.ahtml">Service accounts</a>.</p>
@@ -557,7 +557,7 @@ Often, ID providers are simply proxies against 3rd party systems such as Google 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 15:22:25 UTC
+Last updated 2026-06-03 16:22:29 UTC
 </div>
 </div>
 </body>

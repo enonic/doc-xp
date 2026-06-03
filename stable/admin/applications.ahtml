@@ -453,7 +453,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Applications admin tool is where you install, configure, and manage the lifecycle of XP applications from the user interface.</p>
+<p>The Applications admin tool is where you install, configure, and manage the lifecycle of Enonic applications from the user interface.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -476,7 +476,7 @@ The Applications app is still using the legacy admin UI, and will be upgraded to
 <p>Applications are the units of functionality that run on Enonic XP - everything from Content Studio to ID providers and custom integrations. The Applications tool gives you a single place to inspect what is installed, install new apps, and start or stop them.</p>
 </div>
 <div class="paragraph">
-<p>For background on what an XP application is, see <a href="../apps.ahtml">XP Applications</a>.</p>
+<p>For background on what an Enonic application is, see <a href="../apps.ahtml">Enonic Applications</a>.</p>
 </div>
 </div>
 </div>
@@ -566,14 +566,14 @@ For automated and <a href="https://developer.enonic.com/docs/code/stable/tooling
 <h2 id="configuration"><a class="link" href="#configuration">Configuration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Applications may optionally be configured with environment specific settings by placing a <code>&lt;app-name&gt;.cfg</code> file in the XP configuration directory - see <a href="../config/custom.ahtml">Custom configuration</a>.</p>
+<p>Applications may optionally be configured with environment specific settings by placing a <code>&lt;app-name&gt;.cfg</code> file in the XP configuration directory. See <a href="../config/applications.ahtml">Application configuration</a> for details.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 15:22:25 UTC
+Last updated 2026-06-03 16:22:29 UTC
 </div>
 </div>
 </body>

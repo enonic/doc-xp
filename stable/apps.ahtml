@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>XP Applications</title>
+<title>Enonic Applications</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>XP Applications</h1>
+<h1>Enonic Applications</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -454,7 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Schemas, code, and functionality is added to XP via applications.</p>
+<p>Build and deploy schemas, code, and functionality via Enonic applications.</p>
 </div>
 </div>
 </div>
@@ -462,7 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic apps are standalone software packages that can be installed and started on Enonic XP. The App runtime can run multiple applications in a single instance simultaneously.</p>
+<p>Enonic applications are standalone software packages that can be installed and started on Enonic XP. The App runtime can run multiple applications in a single instance simultaneously.</p>
 </div>
 <div class="paragraph">
 <p>Once started, an application has access to all platform services, including the <a href="storage.ahtml">NoSQL storage</a> and <a href="security.ahtml">identity and access management</a>.</p>
@@ -512,7 +512,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="life_cycle"><a class="link" href="#life_cycle">Life cycle</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In addition to installing and uninstalling, XP applications may be started and stopped. This is referred to as the life cycle of the application. During the stop and start phases, applications themselves may execute custom code.</p>
+<p>In addition to installing and uninstalling, Enonic applications may be started and stopped. This is referred to as the life cycle of the application. During the stop and start phases, applications themselves may execute custom code.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -547,7 +547,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 15:22:25 UTC
+Last updated 2026-06-03 16:22:29 UTC
 </div>
 </div>
 </body>
