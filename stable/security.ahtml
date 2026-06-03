@@ -441,9 +441,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#identity_providers">Identity providers</a></li>
+<li><a href="#id_providers">ID providers</a></li>
 <li><a href="#principals">Principals</a></li>
+<li><a href="#service_accounts">Service accounts</a></li>
 <li><a href="#permissions">Permissions</a></li>
+<li><a href="#audit_logs">Audit logs</a></li>
+<li><a href="#management">Management</a></li>
 </ul>
 </div>
 </div>
@@ -451,15 +454,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP ships with a defined and pluggable concept for IAM handing</p>
+<p>Enonic XP ships with a complete and pluggable concept for authentication, authorization and auditing - commonly referred to as IAM.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="identity_providers"><a class="link" href="#identity_providers">Identity providers</a></h2>
+<h2 id="id_providers"><a class="link" href="#id_providers">ID providers</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ID providers represent the pluggable abstraction layer for user authentication. To authenticate or even create users in XP, you will need to create an <a href="iam/idproviders.ahtml">ID provider</a>.</p>
+<p>ID providers represent a pluggable abstraction layer for user authentication. To authenticate - or even create users in XP - you will need an <a href="security/idproviders.ahtml">ID provider</a>.</p>
+</div>
+<div class="paragraph">
+<p>XP ships with a built-in System ID provider to get you started quickly. Choose from a range of standard ID providers on <a href="https://market.enonic.com">Enonic Market</a>, or build your own for a fully customized approach.</p>
 </div>
 </div>
 </div>
@@ -467,7 +473,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="principals"><a class="link" href="#principals">Principals</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP provide three basic principals, <a href="iam/users.ahtml#users">users</a>, <a href="iam/users.ahtml#groups">groups</a> and <a href="iam/roles.ahtml">roles</a>. Combined with ID providers these are the essence of Enonic IAM.</p>
+<p>Principals are the actors of XP&#8217;s security model. XP provides three basic principals: <a href="security/principals.ahtml#users">users</a>, <a href="security/principals.ahtml#groups">groups</a> and <a href="security/principals.ahtml#roles">roles</a>. Combined with ID providers, these form the essence of Enonic IAM.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="service_accounts"><a class="link" href="#service_accounts">Service accounts</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="security/service-accounts.ahtml">Service accounts</a> enable secure, token-based authentication for machine-to-machine communication - for example when accessing the <a href="endpoints/management.ahtml">Management API</a> from remote clients or CI/CD pipelines.</p>
 </div>
 </div>
 </div>
@@ -475,14 +489,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="permissions"><a class="link" href="#permissions">Permissions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In addition to users, roles and groups, the CMS (and underlying NoSQL storage) supports fine-grained access control mechanisms down to a single item.</p>
+<p>In addition to role-based access control, the CMS (and underlying <a href="storage.ahtml">NoSQL storage</a>) supports fine-grained <a href="storage/permissions.ahtml">access control</a> - down to a single item.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="audit_logs"><a class="link" href="#audit_logs">Audit logs</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>XP automatically registers completed actions affecting repositories, content, applications, principals and ID providers in a dedicated repository. Visit <a href="security/audit-logs.ahtml">Audit logs</a> for details on the available events and how to enable or disable logging.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="management"><a class="link" href="#management">Management</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Principals, ID providers and service accounts can be managed through the <a href="admin/users.ahtml">Users admin tool</a>, or programmatically via APIs.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 13:29:07 UTC
+Last updated 2026-06-03 14:49:08 UTC
 </div>
 </div>
 </body>
