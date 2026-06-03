@@ -441,708 +441,41 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#xp7_update_16">XP7 Update 16</a>
+<li><a href="#xp_8">XP 8</a>
 <ul class="sectlevel2">
-<li><a href="#graalvm_for_jdk_21">GraalVM for JDK 21</a></li>
-<li><a href="#temporary_folder_relocation">Temporary folder relocation</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_15">XP7 Update 15</a>
-<ul class="sectlevel2">
-<li><a href="#service_accounts">Service Accounts</a></li>
-<li><a href="#progressive_image_delivery">Progressive image delivery</a></li>
-<li><a href="#basic_webp_and_avif_support">Basic WebP and AVIF support</a></li>
-<li><a href="#typescript">TypeScript</a></li>
-<li><a href="#other_changes">Other changes</a></li>
-<li><a href="#deprecated_asset_service">Deprecated asset service</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_14">XP7 Update 14</a>
-<ul class="sectlevel2">
-<li><a href="#sdk">SDK</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_13">XP7 Update 13</a>
-<ul class="sectlevel2">
-<li><a href="#graalvm_for_jdk_17">GraalVM for JDK 17</a></li>
-<li><a href="#management_api">Management API</a></li>
-<li><a href="#statistics_api">Statistics API</a></li>
-<li><a href="#task_api">Task API</a></li>
-<li><a href="#sdk_2">SDK</a></li>
-<li><a href="#other_changes_2">Other Changes</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_12">XP7 Update 12</a>
-<ul class="sectlevel2">
-<li><a href="#dashboard_widgets">Dashboard Widgets</a></li>
-<li><a href="#content_variants">Content Variants</a></li>
-<li><a href="#site_mapping_for_services">Site mapping for services</a></li>
-<li><a href="#add_apps_to_projects">Add apps to projects</a></li>
-<li><a href="#other_changes_3">Other changes</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_11">XP7 Update 11</a>
-<ul class="sectlevel2">
-<li><a href="#typescript_core_libraries">TypeScript Core libraries</a></li>
-<li><a href="#virtual_applications_and_no_code_schema">Virtual Applications and No-code Schema</a></li>
-<li><a href="#query_dsl_improvements">Query DSL improvements</a></li>
-<li><a href="#other_improvements">Other improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_10">XP7 Update 10</a>
-<ul class="sectlevel2">
-<li><a href="#shared_map">Shared Map</a></li>
-<li><a href="#other_improvements_2">Other improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_9">XP7 Update 9</a>
-<ul class="sectlevel2">
-<li><a href="#query_dsl">Query DSL</a></li>
-<li><a href="#applications_and_security_audit_log">Applications and Security Audit Log</a></li>
-<li><a href="#content_security_policy">Content-Security-Policy</a></li>
-<li><a href="#default_security_headers">Default security headers</a></li>
-<li><a href="#other_improvements_3">Other improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_8">XP7 Update 8</a>
-<ul class="sectlevel2">
-<li><a href="#libraries">Libraries</a></li>
-<li><a href="#custom_content_validators">Custom content validators</a></li>
-<li><a href="#other_improvements_4">Other improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_7">XP7 Update 7</a>
-<ul class="sectlevel2">
-<li><a href="#scheduler">Scheduler</a></li>
-<li><a href="#audit_log_cleanup">Audit-log cleanup</a></li>
-<li><a href="#samesite_cookies">SameSite cookies</a></li>
-<li><a href="#content_type_filtering">Content-type filtering</a></li>
-<li><a href="#other_improvements_5">Other improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_6">XP7 Update 6</a>
-<ul class="sectlevel2">
-<li><a href="#content_layers">Content Layers</a></li>
-<li><a href="#vhost_api">VHost API</a></li>
-<li><a href="#management_api_for_applications">Management API for applications</a></li>
-<li><a href="#distributable_tasks">Distributable tasks</a></li>
-<li><a href="#websocket_api_extensions">Websocket API extensions</a></li>
-<li><a href="#other_improvements_6">Other improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_5">XP7 Update 5</a>
-<ul class="sectlevel2">
-<li><a href="#snapshot_restore_latest_option">Snapshot Restore <code>latest</code> option</a></li>
-<li><a href="#meta_data_in_contentlib_query_results">Meta-data in contentLib query results</a></li>
-<li><a href="#calculated_distance_in_geodistance_aggregation">Calculated distance in geoDistance aggregation</a></li>
-<li><a href="#other_improvements_7">Other improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_4">XP7 Update 4</a>
-<ul class="sectlevel2">
-<li><a href="#other_improvements_8">Other improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_3">XP7 Update 3</a>
-<ul class="sectlevel2">
-<li><a href="#content_projects">Content projects</a></li>
-<li><a href="#compressed_dump_and_load">Compressed dump and load</a></li>
-<li><a href="#login_without_sessions">Login without sessions</a></li>
-<li><a href="#selected_improvements">Selected improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_2">XP7 Update 2</a>
-<ul class="sectlevel2">
-<li><a href="#audit_log">Audit Log</a></li>
-<li><a href="#content_api_audit_log">Content API - Audit Log</a></li>
-<li><a href="#node_library_get_node_by_version">Node library - Get node by version</a></li>
-<li><a href="#custom_part_icons">Custom part icons</a></li>
-<li><a href="#header_filter">Header filter</a></li>
-</ul>
-</li>
-<li><a href="#xp7_update_1">XP7 Update 1</a>
-<ul class="sectlevel2">
-<li><a href="#query_highlighting">Query highlighting</a></li>
-<li><a href="#content_workflow">Content Workflow</a></li>
-<li><a href="#customizable_display_name_label">Customizable display name label</a></li>
-<li><a href="#publishing_message">Publishing message</a></li>
-<li><a href="#selected_improvements_2">Selected improvements</a></li>
-</ul>
-</li>
-<li><a href="#xp7">XP7</a>
-<ul class="sectlevel2">
-<li><a href="#developer_portal">Developer portal</a></li>
-<li><a href="#enonic_cli">Enonic CLI</a></li>
-<li><a href="#native_distributions">Native distributions</a></li>
-<li><a href="#content_studio_is_an_app">Content Studio is an app</a></li>
-<li><a href="#cms">CMS</a></li>
-<li><a href="#xp_storage">XP Storage</a></li>
+<li><a href="#ui_reloaded">UI reloaded</a></li>
+<li><a href="#universal_api">Universal API</a></li>
+<li><a href="#modern_foundation">Modern foundation</a></li>
+<li><a href="#prometheus_metrics">Prometheus metrics</a></li>
+<li><a href="#xp_goes_yaml">XP goes YAML</a></li>
+<li><a href="#simplified_permissions">Simplified permissions</a></li>
+<li><a href="#companion_apps">Companion apps</a></li>
+<li><a href="#admin_extensions">Admin Extensions</a></li>
+<li><a href="#content_and_node_api_refresh">Content and Node API refresh</a></li>
+<li><a href="#vhost_context">Vhost context</a></li>
+<li><a href="#stricter_identity_validation">Stricter identity validation</a></li>
+<li><a href="#security_hardening">Security hardening</a></li>
+<li><a href="#smarter_dumps_and_exports">Smarter dumps and exports</a></li>
+<li><a href="#quality_of_life">Quality of life</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="xp7_update_16"><a class="link" href="#xp7_update_16">XP7 Update 16</a></h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This release includes a selection of new features, as well as several smaller improvements, bugfixes and stability improvements.</p>
-</div>
-<div class="sect2">
-<h3 id="graalvm_for_jdk_21"><a class="link" href="#graalvm_for_jdk_21">GraalVM for JDK 21</a></h3>
-<div class="paragraph">
-<p>XP is now powered by GraalVM for JDK 21</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-XP 7.16.0 is the final release with Mac x64 support. This is due Oracle&#8217;s discontinuation of x64 builds for Mac.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="temporary_folder_relocation"><a class="link" href="#temporary_folder_relocation">Temporary folder relocation</a></h3>
-<div class="paragraph">
-<p>Startup script relocates the Java defined temporary folder to <code>&lt;xp-home&gt;/work</code> by default. To override this behavior, set the <code>XP_TMP</code> environment variable to the desired location before starting XP.</p>
-</div>
+<p>The headline features and themes for each XP feature release. For step-by-step upgrade instructions and the full breaking-change list, see <a href="release/upgrade.ahtml">Upgrading to XP 8</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="xp7_update_15"><a class="link" href="#xp7_update_15">XP7 Update 15</a></h2>
+<h2 id="xp_8"><a class="link" href="#xp_8">XP 8</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This release includes a selection of new features, as well as several smaller improvements, bugfixes and stability improvements.</p>
+<p>XP 8 is the largest release in 8 years. The runtime is rebuilt on a modern stack, the Universal API unifies how request handlers are written and called, and a long list of API rough edges has been cleaned up.</p>
 </div>
-<div class="sect2">
-<h3 id="service_accounts"><a class="link" href="#service_accounts">Service Accounts</a></h3>
-<div class="paragraph">
-<p>Say goodbye to passwords. The built-in <a href="iam.ahtml">System ID provider</a> has been upgraded to support use of JWT tokens.
-Users created in the System ID provider are now referred to as <a href="iam/system-idp.ahtml#service-accounts">Service Accounts</a>.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="release/images/715-users-public-key.png" alt="Upload or generate keys" width="1077"></span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Upload a public key, or generate a key pair directly on the service account</p>
-</li>
-<li>
-<p>Use JWT token-based authentication when accessing XP programmatically or via the latest Enonic CLI</p>
-</li>
-<li>
-<p>The <a href="runtime/management.ahtml#management_endpoint">Management Endpoint</a> now also supports token-base auth.</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you are using automated app deployments we recommend switching to token based authentication.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="progressive_image_delivery"><a class="link" href="#progressive_image_delivery">Progressive image delivery</a></h3>
-<div class="paragraph">
-<p>The image service now supports progressive image formats. This means images are loaded in multiple passes, rather than serially - which may improve perceived performance.</p>
-</div>
-<div class="paragraph">
-<p>Enable progressive images via the <a href="deployment/config.ahtml#image">Image config</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="basic_webp_and_avif_support"><a class="link" href="#basic_webp_and_avif_support">Basic WebP and AVIF support</a></h3>
-<div class="paragraph">
-<p>Images in WebP and AVIF format can now be uploaded and delivered in their original size through XP, similar to how GIF and SVG files are handled - resizing and transformations are not yet supported.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Requires upgrading to Content Studio 5.3 or later.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="typescript"><a class="link" href="#typescript">TypeScript</a></h3>
-<div class="paragraph">
-<p>The <code>@enonic-types/core</code> package now includes TypeScript types for XP&#8217;s <code>Request</code> and <code>Response</code> objects.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_changes"><a class="link" href="#other_changes">Other changes</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Added support for <code>patch</code> method in <a href="framework/controllers.ahtml#http-controller">HTTP Controllers</a>.</p>
-</li>
-<li>
-<p>Added ability to remove previously set HTTP Headers in controllers/filters.
-NOTE: Headers set by <a href="deployment/config.ahtml#header">Header Filter</a> cannot be removed.</p>
-</li>
-<li>
-<p>HTTP gzip compression is now disabled by default. Gzip compression often makes response chunked, which is not supported by some CDNs. It can manually be enabled in <a href="deployment/config.ahtml#jetty">Jetty config</a>.</p>
-</li>
-<li>
-<p>Automatic media-type detection for some essential file extensions such as <code>webmanifest</code>, <code>ico</code>, <code>webp</code>, <code>avif</code> &#8230;&#8203;  added, so you don&#8217;t need to list them in <a href="deployment/config.ahtml#media">Media config</a>.</p>
-</li>
-<li>
-<p><a href="deployment/backup-restore.ahtml">Vacuuming</a> now deletes snapshots that are no longer usable, or snapshots that are older that specified threshold.</p>
-</li>
-<li>
-<p>Repositories can now be created as transient - meaning that their data is not stored in system dumps and snapshots.</p>
-</li>
-<li>
-<p>Repository <code>cache.capacity</code> replaces <code>cache.size</code> in <a href="deployment/config.ahtml#repo">Repo config</a>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deprecated_asset_service"><a class="link" href="#deprecated_asset_service">Deprecated asset service</a></h3>
-<div class="paragraph">
-<p>To give developers more control, and make XP more flexible - the Asset Service is now officially deprecated. It will be removed in a future version of XP. Future-proof your application by upgrading to the new <a href="https://developer.enonic.com/docs/lib-asset">asset library</a> - a drop-in replacement. Upgrade instructions are in the documentation.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-For even more control over your asset serving, check out lib static instead.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_14"><a class="link" href="#xp7_update_14">XP7 Update 14</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="sdk"><a class="link" href="#sdk">SDK</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>When a new XP sandbox is created using Enonic CLI 2.8 (or newer) and a template is chosen, the applications bundled with the chosen template are automatically installed during the sandbox&#8217;s initial launch. This significantly streamlines the setup process, enabling developers to bypass the usual time-consuming application installation and dive straight into their work.</p>
-</li>
-<li>
-<p>Welcome page (available at <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a> in SDK version) displays the list of configuration files with an option to quickly copy their paths to the clipboard, enabling developers to quickly open the configuration files for modification in the Terminal.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="release/images/714-sdk-welcome.png" alt="SDK Welcome page" width="797"></span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_13"><a class="link" href="#xp7_update_13">XP7 Update 13</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Earlier versions of Content Studio (before 5.0) are not compatible with Enonic XP 7.13.0 (and newer), so make sure to upgrade to Content Studio 5.0.0 or newer.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="graalvm_for_jdk_17"><a class="link" href="#graalvm_for_jdk_17">GraalVM for JDK 17</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>XP is now powered by GraalVM for JDK 17 - latest LTS version</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="management_api"><a class="link" href="#management_api">Management API</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><code>webapps</code>, <code>projects</code> and <code>idproviders</code> have been added to the <a href="runtime/management.ahtml#management_endpoint">Management Endpoint</a>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="statistics_api"><a class="link" href="#statistics_api">Statistics API</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>A new healthcheck (<code>health</code>) and readiness (<code>ready</code>) endpoint has been added to the <a href="runtime/statistics.ahtml#statistics_endpoint">Statistics Endpoint</a>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_api"><a class="link" href="#task_api">Task API</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>A new <code>taskId</code> parameter has been added to the Task <a href="framework/tasks.ahtml#controller">Controller</a>.</p>
-</li>
-<li>
-<p>Added ability to set custom task <code>name</code> when <a href="api/lib-task.ahtml#submittask">Submitting</a> a task.</p>
-</li>
-<li>
-<p>Task info returned by <a href="api/lib-task.ahtml#get">get</a> and <a href="api/lib-task.ahtml#list">list</a> now includes <code>node</code> - XP node name where the task runs.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sdk_2"><a class="link" href="#sdk_2">SDK</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Welcome page of the Enonic SDK has been greatly improved to show the main XP endpoints, a new section with installed applications and allow browsing existing content projects, sites and webapps. Admin section allows logging in as a guest, unless admin user has been created. You can open admin tools and webapps with one click, directly from this page. Content Projects and Sites can be open with one click in Content Studio, if it&#8217;s installed.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="release/images/713-sdk-welcome.png" alt="SDK Welcome page" width="75%"></span></p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="release/images/713-sdk-welcome-projects.png" alt="SDK Welcome page projects" width="50%"></span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Login page in SDK has been slightly improved to emphasise the "Log in as Guest" action until an admin user is created.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="release/images/713-sdk-login.png" alt="SDK Login page" width="75%"></span></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_changes_2"><a class="link" href="#other_changes_2">Other Changes</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="admin/widgets.ahtml#descriptor">Widget Descriptor</a> now supports localization of widget title and description.</p>
-</li>
-<li>
-<p>Vacuum, Dump, Load, AuditLog-Cleanup and Reindex tasks can only run single instance at a time within a cluster.</p>
-</li>
-<li>
-<p>Introduced Node Repo cache to improve performance of Node API. Can be configured in <a href="deployment/config.ahtml#repo">Repo config</a>.</p>
-</li>
-<li>
-<p>Robustness of scheduled jobs has been improved.</p>
-</li>
-<li>
-<p>Various improvements to the TypeScript types.</p>
-</li>
-<li>
-<p>Various bug fixes and performance improvements.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_12"><a class="link" href="#xp7_update_12">XP7 Update 12</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="dashboard_widgets"><a class="link" href="#dashboard_widgets">Dashboard Widgets</a></h3>
-<div class="paragraph">
-<p>New widget interface <code>admin.dashboard</code> can be used to create widgets for the Admin Dashboard.
-Read more about implementation details <a href="admin/widgets.ahtml#dashboard_widgets">here</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="content_variants"><a class="link" href="#content_variants">Content Variants</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Content Duplicate API was extended to support Content Variants, useful for A/B testing</p>
-</li>
-<li>
-<p>Added <code>name</code> and <code>parent</code> to <code>duplicate</code> low level Java API</p>
-</li>
-<li>
-<p>Added <code>duplicate</code> method to the JS lib-content and lib-node APIs</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="site_mapping_for_services"><a class="link" href="#site_mapping_for_services">Site mapping for services</a></h3>
-<div class="paragraph">
-<p>Site Mappings can now be used to customize the behavior of Image, Attachment and Component services <a href="framework/mappings.ahtml#service_mappings">Services</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="add_apps_to_projects"><a class="link" href="#add_apps_to_projects">Add apps to projects</a></h3>
-<div class="paragraph">
-<p>Previously, custom content types required you to create a site, and link your app to the site before you could create them. <a href="cms/projects.ahtml#applications">Project Applications</a> enable you to add apps directly to the project instead, and thus create custom content directly on the project root.</p>
-</div>
-<div class="paragraph">
-<p>Also, controller mappings will now work on project level, which means you may also write custom previews without using sites.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Pages, fragments and page templates still require to be in the context of a site.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_changes_3"><a class="link" href="#other_changes_3">Other changes</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Draft branch access was previously restricted through the use of virtual hosts solely. Direct access now requires an authorized user. Role-based access can be configured via <code>draftBranchAllowedFor</code> setting in the <a href="deployment/config.ahtml#portal">Portal configuration</a> settings.</p>
-</li>
-<li>
-<p>Support of arm64 (aarch64) used in Apple M1/M2 chips for instance, is no longer experimental. You may see a message <code>WARN org.elasticsearch.bootstrap - JNA not found. native methods will be disabled.</code> It does not affect XP operations and can be safely ignored.</p>
-</li>
-<li>
-<p>Added <code>modifyMedia</code> method to the JS <a href="api/lib-content.ahtml#modifymedia">lib-content</a> API</p>
-</li>
-<li>
-<p>Content API audit-log no longer logs <code>system.content.update</code> events by default. This can be changed back by setting <code>auditlog.filter = *</code> in <a href="deployment/config.ahtml#content">content config</a></p>
-</li>
-<li>
-<p>Added possibility to delete indices before <a href="runtime/management.ahtml#restore">Restore</a> by using <code>force</code> option</p>
-</li>
-<li>
-<p>The standard 403 error page now has a handy Logout button</p>
-</li>
-<li>
-<p>Various improvements to the TypeScript types</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_11"><a class="link" href="#xp7_update_11">XP7 Update 11</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="typescript_core_libraries"><a class="link" href="#typescript_core_libraries">TypeScript Core libraries</a></h3>
-<div class="paragraph">
-<p>All JavaScript XP core libraries have been rewritten to TypeScript.
-TypeScript definitions are published on <a href="https://www.npmjs.com/search?q=%40enonic-types">NPM</a></p>
-</div>
-<div class="paragraph">
-<p>Learn how to include references to TS definitions in your project <a href="api.ahtml#typescript_definitions">here</a>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Special thanks to Tom Arild Jakobsen at Item Consulting for his contribution to TypeScript support in XP.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="virtual_applications_and_no_code_schema"><a class="link" href="#virtual_applications_and_no_code_schema">Virtual Applications and No-code Schema</a></h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-This feature is <em>experimental</em>.
-It&#8217;s still under development design but is available for users to test and provide feedback.
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Virtual Applications can be used as an alternative to installed (real) ones.
-They are code-less and can only contribute to schema definitions.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Virtual application behavior can be configured in <a href="deployment/config.ahtml#application">application config</a></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="query_dsl_improvements"><a class="link" href="#query_dsl_improvements">Query DSL improvements</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="storage/dsl.ahtml#_exists"><code>exists</code></a> expression support</p>
-</li>
-<li>
-<p><a href="storage/dsl.ahtml#_filter"><code>filter</code></a> clause support in <code>boolean</code> query</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_improvements"><a class="link" href="#other_improvements">Other improvements</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Support content links with query parameters in HtmlArea</p>
-</li>
-<li>
-<p>Various Vacuum performance and stability improvements</p>
-</li>
-<li>
-<p>Migrate to OSGi Compendium 8</p>
-</li>
-<li>
-<p>Query parameters are now supported for content URLs in HtmlArea</p>
-</li>
-<li>
-<p>Content API verifies checksum for attachments and skips update if attachment is not changed</p>
-</li>
-<li>
-<p>Support setting Workflow status on Media update</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_10"><a class="link" href="#xp7_update_10">XP7 Update 10</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="shared_map"><a class="link" href="#shared_map">Shared Map</a></h3>
-<div class="paragraph">
-<p>Shared Map framework is now part of XP.
-Shared Map сan be used to share transient data between nodes in cluster and/or applications.
-Both <a href="api/lib-grid.ahtml#_grid_library">JavaScript</a> and low level Java APIs are available.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_improvements_2"><a class="link" href="#other_improvements_2">Other improvements</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>XP distro is now bundled with GraalVM Community Edition based JDK (v.22.1). JavaScript Engine is still Nashorn.</p>
-</li>
-<li>
-<p>Introduced <em>experimental</em> support of arm64 (aarch64) based CPUs. (For instance, Apple M1 CPU)</p>
-</li>
-<li>
-<p>Content related descriptors expose <code>modifiedTime</code> field to check for content schema changes.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_9"><a class="link" href="#xp7_update_9">XP7 Update 9</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="query_dsl"><a class="link" href="#query_dsl">Query DSL</a></h3>
-<div class="paragraph">
-<p><a href="storage/dsl.ahtml#_dsl">Query DSL</a> can now be used instead of NoQL for content and node searches.
-It also supports <a href="storage/dsl.ahtml#_boosting">boosting</a> of any expressions.
-Sorting can also be done with <a href="storage/dsl.ahtml#sort">Sort DSL</a> syntax.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="applications_and_security_audit_log"><a class="link" href="#applications_and_security_audit_log">Applications and Security Audit Log</a></h3>
-<div class="paragraph">
-<p><a href="auditLogs.ahtml#_audit_logs">Audit Log</a> now logs <a href="auditLogs.ahtml#principals_and_id_providers">Principals and ID providers</a> modifications
-and global <a href="auditLogs.ahtml#application">Application</a> actions.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="content_security_policy"><a class="link" href="#content_security_policy">Content-Security-Policy</a></h3>
-<div class="paragraph">
-<p>Default Content-Security-Policy (CSP) header is now applied for page preview.
-It improves Content Studio security but may introduce issues for pages which use inline scripts: inline scripts cannot be easily distinguished from XSS attacks and must be avoided.
-If you are experiencing problems with CSP header you can configure or disable it in <a href="deployment/config.ahtml#admin">Admin config</a>.
-Controllers can provide their own CSP, if needed.</p>
-</div>
-<div class="paragraph">
-<p>Attachment and Image Services now have a strict Content-Security-Policy header to mitigate possible XSS vulnerabilities.
-It can be configured in <a href="deployment/config.ahtml#portal">Portal config</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="default_security_headers"><a class="link" href="#default_security_headers">Default security headers</a></h3>
-<div class="paragraph">
-<p>All http responses now have the following headers set:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>X-Frame-Options: DENY
-X-XSS-Protection: 1; mode=block
-X-Content-Type-Options: nosniff</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As before, they can be customized in <a href="deployment/config.ahtml#header_filter">header filter config</a> or turned off completely.
-Controllers can override them, if needed.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_improvements_3"><a class="link" href="#other_improvements_3">Other improvements</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="api/lib-portal.ahtml">Portal lib API</a> can now construct websocket URIs with <code>serviceUrl</code> and <code>url</code> methods.</p>
-</li>
-<li>
-<p>Testing API <code>com.enonic.xp:testing</code> now supports <code>assertThrows</code> method.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_8"><a class="link" href="#xp7_update_8">XP7 Update 8</a></h2>
-<div class="sectionbody">
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -1150,883 +483,196 @@ Controllers can override them, if needed.</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Versions of Content Studio before 4.0.0 will not run on XP 7.8.0 or later.
+This release contains <strong>Breaking changes when upgrading from XP7</strong>. We have made every effort to minimize the impact of these, but please review the full list of breaking changes and migration steps in the <a href="release/upgrade.ahtml#breaking-changes">upgrade notes</a> before upgrading.
 </td>
 </tr>
 </table>
 </div>
 <div class="sect2">
-<h3 id="libraries"><a class="link" href="#libraries">Libraries</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Javascript API for creating and importing is now available as a new library called <a href="api/lib-export.ahtml"><code>lib-export</code></a>.</p>
-</li>
-<li>
-<p>Content API has been extended with new constants and functions for <a href="api/lib-content.ahtml#archive">archive</a> and <a href="api/lib-content.ahtml#restore">restore</a></p>
-</li>
-<li>
-<p>Authentication API now allows verifying credentials without actual <a href="api/lib-auth.ahtml#login">login</a></p>
-</li>
-<li>
-<p>Context API now allows passing custom attributes in the <a href="api/lib-context.ahtml#context">Context</a> object</p>
-</li>
-<li>
-<p>Portal API now supports imageSizes parameter in <a href="api/lib-portal.ahtml#processhtml"><code>processHtml</code></a> function</p>
-</li>
-</ul>
+<h3 id="ui_reloaded"><a class="link" href="#ui_reloaded">UI reloaded</a></h3>
+<div class="paragraph">
+<p>XP 8 introduces a new admin UI built on the Enonic UI design system. The new UI is faster, more responsive, and provides a more consistent user experience across tools. The first tools to be migrated are the <a href="admin.ahtml">XP menu</a> and the <a href="admin/dashboard.ahtml">Dashboard</a>. The remaining tools will be migrated in future releases.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="custom_content_validators"><a class="link" href="#custom_content_validators">Custom content validators</a></h3>
+<h3 id="universal_api"><a class="link" href="#universal_api">Universal API</a></h3>
 <div class="paragraph">
-<p>It&#8217;s now possible to implement custom content validators via <a href="cms/validators.ahtml#_content_validators">Content Validators low level Java API</a>. Custom error messages
-can be i18n-localised and will be displayed in Content Studio.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_improvements_4"><a class="link" href="#other_improvements_4">Other improvements</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Service mapping and request matching in <a href="deployment/vhosts.ahtml">Vhosts</a> has been greatly improved</p>
-</li>
-<li>
-<p>Now possible to map controller or filter to the site itself.</p>
-</li>
-<li>
-<p>Exports folder location is now <a href="deployment/config.ahtml#_export">configurable</a></p>
-</li>
-<li>
-<p><a href="framework/i18n.ahtml#_localization">Localization service</a> now officially supports Java MessageFormat.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_7"><a class="link" href="#xp7_update_7">XP7 Update 7</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="scheduler"><a class="link" href="#scheduler">Scheduler</a></h3>
-<div class="paragraph">
-<p>Periodical (cron-like) and one-time <a href="framework/scheduler.ahtml#_scheduler">Job Scheduler</a> is now available.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Two jobs for periodical vacuum and audit-log cleanup were added. Preconfigured in <a href="deployment/config.ahtml#scheduler">Scheduler config</a>.</p>
-</li>
-<li>
-<p>New <a href="api/lib-scheduler.ahtml#_scheduler_library">scheduler core library</a> allows controlling jobs programmatically.</p>
-</li>
-<li>
-<p>Management Endpoint was extended to be able to <a href="runtime/management.ahtml#scheduled_jobs_list">list</a> currently scheduled jobs.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="audit_log_cleanup"><a class="link" href="#audit_log_cleanup">Audit-log cleanup</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Management port was extended to be able to <a href="runtime/management.ahtml#clean_up_audit_log">clean up audit-log</a> records.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="samesite_cookies"><a class="link" href="#samesite_cookies">SameSite cookies</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Added support for <a href="framework/http.ahtml#http-cookies">SameSite attribute</a> for cookies.</p>
-</li>
-<li>
-<p>Session cookie sets SameSite=Lax by default.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="content_type_filtering"><a class="link" href="#content_type_filtering">Content-type filtering</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><code>allow-child-content-type</code> in <a href="cms/content-types.ahtml#form_definition">Content Type descriptor</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_improvements_5"><a class="link" href="#other_improvements_5">Other improvements</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>New and improved <a href="storage/aggregations.ahtml#_aggregations">aggregations</a>.</p>
-</li>
-<li>
-<p><code>getCommit</code> in <a href="api/lib-node.ahtml#getcommit">Node JS API</a>.</p>
-</li>
-<li>
-<p><code>srcset</code> support in <a href="api/lib-portal.ahtml#processhtml">processHtml</a>.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_6"><a class="link" href="#xp7_update_6">XP7 Update 6</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="content_layers"><a class="link" href="#content_layers">Content Layers</a></h3>
-<div class="paragraph">
-<p><a href="cms/layers.ahtml">Content Layers</a> enable automatic replication of content across dependant repositories.
-This feature can be used to implement multi language sites.
-<a href="api/lib-project.ahtml">JavaScript API</a> is also available.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="vhost_api"><a class="link" href="#vhost_api">VHost API</a></h3>
-<div class="paragraph">
-<p>VHost API is now made public. Enumerate VHosts configured for your XP instances to customize URL handling.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="management_api_for_applications"><a class="link" href="#management_api_for_applications">Management API for applications</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Management Port got extended to be able to <a href="runtime/management.ahtml#start">start</a>,
-<a href="runtime/management.ahtml#stop">stop</a> and <a href="runtime/management.ahtml#uninstall">uninstall</a> an application.</p>
-</li>
-<li>
-<p>The <a href="runtime/management.ahtml#server_sent_events">new SSE endpoint</a> allows listing installed applications and listening to application status changes.</p>
-</li>
-<li>
-<p>Application installation can now be verified with <a href="runtime/management.ahtml#install_from_url">SHA512 checksum</a>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="distributable_tasks"><a class="link" href="#distributable_tasks">Distributable tasks</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>All Named Tasks are now <a href="deployment/config.ahtml#task">cluster-aware</a> and run on any XP node that can do it, not only where it was submitted.</p>
-</li>
-<li>
-<p>Application <a href="deployment/config.ahtml#application">allow/deny</a> lists feature helps to fine-tune new High Availability behaviour.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="websocket_api_extensions"><a class="link" href="#websocket_api_extensions">Websocket API extensions</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="framework/websocket.ahtml">Websocket API</a> is extended to get access to authentication info inside websocket handlers.</p>
-</li>
-<li>
-<p><code><a href="api/lib-websocket.ahtml#getgroupsize">getGroupSize</a></code> method counts number of participants in a specific websocket group.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_improvements_6"><a class="link" href="#other_improvements_6">Other improvements</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Serviced support</p>
-</li>
-<li>
-<p>Improved 404 default page</p>
-</li>
-<li>
-<p>Improved server log messages</p>
-</li>
-<li>
-<p>New icon for <code>media:content</code></p>
-</li>
-<li>
-<p>System translated to Dutch</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_5"><a class="link" href="#xp7_update_5">XP7 Update 5</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="snapshot_restore_latest_option"><a class="link" href="#snapshot_restore_latest_option">Snapshot Restore <code>latest</code> option</a></h3>
-<div class="paragraph">
-<p><code>latest</code> option simplifies day-to-day snapshot/restore routines.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="meta_data_in_contentlib_query_results"><a class="link" href="#meta_data_in_contentlib_query_results">Meta-data in contentLib query results</a></h3>
-<div class="paragraph">
-<p><code>_sort</code> and <code>_score</code> calculated meta fields are exposed in contentLib query results. Now it is possible to know how content items were sorted.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="calculated_distance_in_geodistance_aggregation"><a class="link" href="#calculated_distance_in_geodistance_aggregation">Calculated distance in geoDistance aggregation</a></h3>
-<div class="paragraph">
-<p>Another use of <code>_sort</code> calculated field is a geoDistance value. It calculates distance from provided coordinates to a geoPoint set in the content item.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="other_improvements_7"><a class="link" href="#other_improvements_7">Other improvements</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>New simpler default error page in production mode.</p>
-</li>
-<li>
-<p><code>network.publish.host</code> configuration value now does not have a strict default value and falls back to Elasticsearch/Hazelcast preference (usually <code>network.host</code> value).</p>
-</li>
-<li>
-<p>Snapshot-restore and system dump stability improvements.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_4"><a class="link" href="#xp7_update_4">XP7 Update 4</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This version of Enonic XP is rather different from most others.  There is no large feature set of noticeable changes, but rather
-a very important architectural change:</p>
-</div>
-<div class="paragraph">
-<p>We have added Hazelcast to do events, tasks and sessions in the cluster.
-ElasticSearch is still there, but by using Hazelcast for these features, the cluster is more stable, and we now support Distributed Sessions.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Please read the <a href="release/upgrade.ahtml">upgrade notes</a> in relation to backward compatibility.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="other_improvements_8"><a class="link" href="#other_improvements_8">Other improvements</a></h3>
-<div class="paragraph">
-<p>In addition to the cluster freatures, <code>AlwaysPreTouch</code> has been enabled to avoid extra GC pauses on large installations.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_3"><a class="link" href="#xp7_update_3">XP7 Update 3</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Please read the <a href="release/upgrade.ahtml">upgrade notes</a> in relation to backward compatibility.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="content_projects"><a class="link" href="#content_projects">Content projects</a></h3>
-<div class="paragraph">
-<p>XP now supports creating and working with content projects. Each project will create a separate repository, where content is isolated from the other projects. The repositories are named <code>com.enonic.cms.&lt;projectname&gt;</code>. Projects also introduce a simplified model in relation to permissions management and other default settings:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Set a default language for the project</p>
-</li>
-<li>
-<p>Set default access mode (public, private or custom)</p>
-</li>
-<li>
-<p>Give access to project via pre-defined roles (Owner, Editor, Author and Contributor)</p>
-</li>
-<li>
-<p>Default content permissions are set via the pre-defined roles and access model</p>
-</li>
-<li>
-<p>Projects can also be programmatically managed via the new <a href="api/lib-project.ahtml">project API</a>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>To take advantage of projects, you must also upgrade to Content Studio v3.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For full backward compatibility, the default content repository (Default project) remains unchanged.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="compressed_dump_and_load"><a class="link" href="#compressed_dump_and_load">Compressed dump and load</a></h3>
-<div class="paragraph">
-<p>Dumps can now be streamed directly to a compressed archive to use less disk space, and speed up the process. Loads can similarly load data directly from a compressed archive. We now recommend always using compression when performing dump and load.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For backward compatibility, using compression requres a setting a flag when using Enonic CLI.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="login_without_sessions"><a class="link" href="#login_without_sessions">Login without sessions</a></h3>
-<div class="paragraph">
-<p>The updated auth API now supports request scoped logins, without having to manually modify the request context.</p>
-</div>
-<div class="paragraph">
-<p>This is in particulary useful for handling modern stateful clients (i.e. using JSON Web Tokens), meaning that a server session is no longer created when logging in. Getting rid of sessions provide more scalability and reliability from a server side perspective.</p>
-</div>
-<div class="paragraph">
-<p>Details are available in the <a href="api/lib-auth.ahtml">auth API documentation</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="selected_improvements"><a class="link" href="#selected_improvements">Selected improvements</a></h3>
-<div class="paragraph">
-<p>The following improvements are also part of this release:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Color highlighting in console logs</p>
-</li>
-<li>
-<p>Content API - Get content by version ID</p>
-</li>
-<li>
-<p>Page template resolution is now faster - especially relevant for sites with many page templates</p>
-</li>
-<li>
-<p>The default threshold to compress http content changed from 16 to 23 bytes</p>
-</li>
-<li>
-<p>New Jetty <a href="deployment/config.ahtml#Jetty">http.threadpool configuration options</a> are now available</p>
-</li>
-<li>
-<p>Improved logging now include details that were previously missing</p>
-</li>
-<li>
-<p>Improved peformance and stability for web sockets</p>
-</li>
-<li>
-<p>Improved handling of StackOverflowError</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_2"><a class="link" href="#xp7_update_2">XP7 Update 2</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-v7.2 is fully backward compatible with previous v7.x versions.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="audit_log"><a class="link" href="#audit_log">Audit Log</a></h3>
-<div class="paragraph">
-<p>Any application can now store audit logs in a new common repository: "system.auditlog".</p>
-</div>
-<div class="paragraph">
-<p>A core JS library <a href="api/lib-auditlog.ahtml">Audit Library</a> has been added to help you store and retrieve these audit logs</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="content_api_audit_log"><a class="link" href="#content_api_audit_log">Content API - Audit Log</a></h3>
-<div class="paragraph">
-<p>All successful state-changing operations, through the Content API, will create an audit log entry.
-In other words, all create/edit/publish/&#8230;&#8203; in Content Studio or by using the content library will create an audit log entry
-This feature can be disabled by modifying the configuration file <a href="deployment/config.ahtml#_content">com.enonic.xp.content.cfg</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="node_library_get_node_by_version"><a class="link" href="#node_library_get_node_by_version">Node library - Get node by version</a></h3>
-<div class="paragraph">
-<p>You can now retrieve an old version of a node by using the <a href="api/lib-node.ahtml#_get">RepoConnection::get</a> method.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="custom_part_icons"><a class="link" href="#custom_part_icons">Custom part icons</a></h3>
-<div class="paragraph">
-<p>Part component now supports a custom icon which will be used instead of the default one in Content Studio - in the Page Component tree
-and dropdowns with part descriptors. Just place an icon (in either PNG or SVG format) with the same name as the descriptor schema
-into the same folder. For example, if part/folder is called <em>mypart</em> then part descriptor is called <em>mypart.xml</em> and the icon file should be called
-either <em>mypart.svg</em> or <em>mypart.png</em>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="header_filter"><a class="link" href="#header_filter">Header filter</a></h3>
-<div class="paragraph">
-<p>It is now possible to specify default headers set for every HTTP response via header filter.
-Default headers can be configured in <code>com.enonic.xp.web.header.cfg</code> configuration file via <code>headerConfig</code> property.
-If no value is specified <code>set X-Frame-Options: DENY,set X-XSS-Protection: 1; mode=block,set X-Content-Type-Options: nosniff</code> is used.
-Empty value disables Header filter.</p>
-</div>
-<div class="listingblock">
-<div class="title">Cross site scripting prevention headers</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">headerConfig = set X-Frame-Options: SAMEORIGIN,set X-XSS-Protection: 1; mode=block,set X-Content-Type-Options: nosniff</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7_update_1"><a class="link" href="#xp7_update_1">XP7 Update 1</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-v7.1 is fully backward compatible with v7.0 and was released in parallel with Content Studio v2.1.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>This update introduces new features and improvements as well as 28 bugfixes.
-The <a href="https://github.com/enonic/xp-distro/releases/tag/v7.1.0">complete list of changes</a> is available on Github.</p>
-</div>
-<div class="sect2">
-<h3 id="query_highlighting"><a class="link" href="#query_highlighting">Query highlighting</a></h3>
-<div class="paragraph">
-<p>The storage and CMS API now provide out-of-the-box highlighting functionality.</p>
-</div>
-<div class="paragraph">
-<p>By submitting a highlighter definition together with your query,
-you will in return get text fragments where relevant search strings are highlighted.
-This is especially useful when presenting search results to end users.</p>
-</div>
-<div class="listingblock">
-<div class="title">Sample query with hightlighter</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  query: "fulltext('description', 'house garden big')",
-  highlight: {
-    properties: {
-      "description": {
-        fragmentSize: 15,
-        numberOfFragments: 2
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample result from above query</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-    ...
-  "highlight": {
-    "c4bb11f1-c6e2-4849-a665-28f612213984": {
-      "description": [
-        " &lt;em&gt;house&lt;/em&gt; with &lt;em&gt;big&lt;/em&gt;",
-        " maintained &lt;em&gt;garden&lt;/em&gt;."
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><a href="storage/highlighting.ahtml">Read more about highlighting</a></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="content_workflow"><a class="link" href="#content_workflow">Content Workflow</a></h3>
-<div class="paragraph">
-<p>The Content API now introduces support for basic workflow capabilities.
-When creating or modifying content, workflow status may be specified.
-Currently the following statuses are available: IN_PROGRESS, READY,</p>
-</div>
-<div class="paragraph">
-<p>The API will now prevent publishing of content unless it is in the workflow state <code>READY</code>.</p>
-</div>
-<div class="paragraph">
-<p>For backward compatibility, if workflow state is not specified, it is equivalent to <code>READY</code>.
-Also, modifying content will keep the item&#8217;s existing workflow state.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="release/images/workflow-icons.png" alt="Screenshot showing workflow state in Content Studio" width="480"></span></p>
-</div>
-<div class="paragraph">
-<p>Check out the <a href="api/lib-content.ahtml">content api</a> for usage details</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="customizable_display_name_label"><a class="link" href="#customizable_display_name_label">Customizable display name label</a></h3>
-<div class="paragraph">
-<p>For an improved editorial experience, developers may now override the default &lt;Display Name&gt; text on a per content type basis.
-This helps make the content form more intuitive.</p>
-</div>
-<div class="paragraph">
-<p>By adding the following line to your content type definition:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;display-name-label&gt;Some cool text here&lt;/display-name-label&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Editors will see the following in content studio.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="release/images/display-name-label.png" alt="Screenshot showing what this looks like in Content Studio" width="768"></span></p>
-</div>
-<div class="paragraph">
-<p>Visit the <a href="cms/content-types.ahtml">Content Types documentation</a> for more detail</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="publishing_message"><a class="link" href="#publishing_message">Publishing message</a></h3>
-<div class="paragraph">
-<p>The content API&#8217;s publish function now supports adding a message.
-This message is added to the "commit" entry that was added to the function with the release of XP7.</p>
-</div>
-<div class="paragraph">
-<p>The publish message is builds on the commit functionality of the Node API.</p>
-</div>
-<div class="paragraph">
-<p>Content studio enables you to see the publishing message from the version history widget.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="release/images/publish-message.png" alt="Screenshot showing where to write the publish message from Content Studio" width="768"></span></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="selected_improvements_2"><a class="link" href="#selected_improvements_2">Selected improvements</a></h3>
-<div class="paragraph">
-<p>Some of the improvements included in this release are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>New exists() function for both node and content API provides faster existence checks over using get()</p>
-</li>
-<li>
-<p>Assets with .es extension are now served with the javascript MIME type</p>
-</li>
-<li>
-<p>File names are now sanitised during upload to prevent use of illegal characters</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp7"><a class="link" href="#xp7">XP7</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<strong>Breaking changes</strong> XP 7 contains breaking changes. Follow the <a href="release/upgrade.ahtml">upgrade instructions</a> carefully to secure a successful upgrade.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Enonic XP 7 takes a major leap in simplifying application development and making the platform leaner and more flexible.</p>
-</div>
-<div class="paragraph">
-<p>The biggest highlights of XP 7 is not the core platform, but all the changes around it:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>New documentation - The documentation you are reading was created from scratch for XP 7</p>
-</li>
-<li>
-<p><a href="#developer_portal">Developer portal</a> - All XP related developer resources and docs in one place</p>
-</li>
-<li>
-<p><a href="#enonic_cli">Enonic CLI</a> - For managing XP development project, also replaces the toolbox shell script</p>
-</li>
-<li>
-<p><a href="#native_distributions">Native distributions</a>. The JVM runtime is now bundled with XP</p>
-</li>
-<li>
-<p>Content Studio - Is now available as an app to download from <a href="https://market.enonic.com/vendors/enonic/content-studio">Enonic Market</a>.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="developer_portal"><a class="link" href="#developer_portal">Developer portal</a></h3>
-<div class="imageblock">
-<div class="content">
-<img src="release/images/developer-portal.png" alt="Screenshot of the new developer portal" width="720">
-</div>
-</div>
-<div class="paragraph">
-<p>In order for developers to better and more easily navigate the XP ecosystem, we created a dedicated portal.
-The portal contains</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>XP docs:</strong> The XP core platform documentation (which you are reading now)</p>
-</li>
-<li>
-<p><strong>Reference docs:</strong> For all XP related apps, starters, libraries and more that are built by Enonic.</p>
-</li>
-<li>
-<p><strong>Hands on guides:</strong> Practical how-to guides an tutorials, including the getting started page</p>
-</li>
-</ul>
-</div>
-<div class="sect3">
-<h4 id="built_with_xp"><a class="link" href="#built_with_xp">Built with XP</a></h4>
-<div class="paragraph">
-<p>The portal is naturally an XP app itself.
-The geeky fact is that all docs and most guides are written in Asciidoctor together with the actual product code.</p>
-</div>
-<div class="paragraph">
-<p>When we commit, changes to the docs are automatically checked out, compiled and imported to XP as content.
-This optimize how developers produce content,
-while taking advantage of everything XP offers at the same time.</p>
+<p>Web APIs are now first-class citizens of Enonic XP. A uniform implementation pattern can be used to implement and expose APIs across the platform, including direct exposure via the brand new <a href="endpoints/web.ahtml#api">/api</a> service endpoint.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="release/images/built-with-xp.png" alt="Screenshot of dev portal edited in Content Studio" width="720">
+<img src="endpoints/images/api-index.png" alt="Universal API index" width="1790px">
 </div>
 </div>
 <div class="paragraph">
-<p>We plan to release the core elements of the doc portal on the market in the future.</p>
+<p>Borrowing the manifest-and-mount pattern from Kubernetes, APIs are registered with a unique name and automatically integrated with the platform&#8217;s security and IAM. A matching set of libraries and tools makes it easy to <a href="https://developer.enonic.com/docs/code/stable/api">build custom APIs</a> and call them from any context.</p>
 </div>
+<div class="paragraph">
+<p>APIs can be exposed on custom URLs and domains via <a href="config/vhosts.ahtml">virtual host configuration</a>, but also contextually mounted within the admin and site services, allowing for flexible API design and organization.</p>
+</div>
+<div class="paragraph">
+<p>TODO: Management API?</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="enonic_cli"><a class="link" href="#enonic_cli">Enonic CLI</a></h3>
+<h3 id="modern_foundation"><a class="link" href="#modern_foundation">Modern foundation</a></h3>
 <div class="paragraph">
-<p>The brand new Enonic Command Line Interface - "Enonic CLI" was also released at the same time as XP 7.
-It is versioned independently for more frequent updates.
-The CLI not only replaces the old toolbox script,
-it also introduces new and flexible ways of installing XP and managing projects and development environments.</p>
-</div>
-<div class="paragraph">
-<p>Installing CLI, Enonic XP, building and deploying your first app can now be done with a few simple commands,
-as described in the <a href="https://developer.enonic.com/start">getting started section</a> of the developer portal</p>
-</div>
-<div class="paragraph">
-<p>The CLI is available for Mac, Linux and Windows. For more information, check out the <a href="https://developer.enonic.com/docs/enonic-cli">full documentation</a>.</p>
+<p>The XP 8 core runs on a refreshed stack: <strong>Java 25</strong>, <strong>Jetty 12</strong>, and <strong>Hazelcast 5</strong>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="native_distributions"><a class="link" href="#native_distributions">Native distributions</a></h3>
+<h3 id="prometheus_metrics"><a class="link" href="#prometheus_metrics">Prometheus metrics</a></h3>
 <div class="paragraph">
-<p>The biggest conceptual change to XP is that the JVM is no longer required in order to run XP.
-XP 7 ships with JVM 11 embedded. As such, we now release native distributions of XP for the three major platforms, Mac, Windows and Linux.
-Expect future versions of XP to make more use of server native capabilities beyond the JVM.
-As always, you will never have to worry about portability when writing XP apps.</p>
+<p>Metrics are now exposed in the open <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md">OpenMetrics</a> format - point your Prometheus, Grafana agent, or any compatible collector at the metrics endpoint to get first-class observability.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="xp_goes_yaml"><a class="link" href="#xp_goes_yaml">XP goes YAML</a></h3>
 <div class="paragraph">
-<p>There are several reasons for this move:</p>
+<p>YAML replaces XML for all CMS schemas and app descriptors. This means content types, application definitions, ID providers, etc., are now all defined in YAML. YAML is a widely adopted format that is easier to read and write than JSON, especially for complex configurations - and it supports comments. The new YAML-based descriptors are more concise and maintainable, making life easier for developers.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="simplified_permissions"><a class="link" href="#simplified_permissions">Simplified permissions</a></h3>
+<div class="paragraph">
+<p>The permission model is stripped back to essentials in XP 8:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Developers no longer need to install or juggle with different versions of the JVM</p>
+<p><strong>No more inheritance.</strong> Every node carries its own explicit ACL. To apply the same ACL across a subtree, do it in a single hierarchical apply call — the old "inherit from parent" mechanic is gone.</p>
 </li>
 <li>
-<p>Installation of XP is faster and sleeker than ever</p>
-</li>
-<li>
-<p>We can take advantage of OS native functionality when required</p>
+<p><strong>Instant cross-branch effect.</strong> Permission changes take effect on every branch a node exists in, immediately. No more publishing content just to push permissions through.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>With this change, XP is now available in SDK and Server version.
-The SDK includes the full JDK,
-whereas the server edition uses a slimmed down version of the JVM, and may be further optimized for production use.</p>
+<p>The underlying Node and Content APIs follow the same model. See <a href="storage/permissions.ahtml">Permissions</a> for the full picture.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="content_studio_is_an_app"><a class="link" href="#content_studio_is_an_app">Content Studio is an app</a></h3>
+<h3 id="companion_apps"><a class="link" href="#companion_apps">Companion apps</a></h3>
 <div class="paragraph">
-<p>Content Studio, the CMS editorial interface has been moved out of the XP core.
-It is now available as a separate application on <a href="https://market.enonic.com/vendors/enonic/content-studio">Enonic Market</a></p>
+<p>The major Enonic apps have been refreshed alongside the platform and are ready for XP 8.</p>
 </div>
-<div class="paragraph">
-<p>Content Studio can now be released more frequently than the XP core.
-Expect new versions of Content Studio to be released along with new features in the XP core.</p>
-</div>
-<div class="paragraph">
-<p>For Content Studio release notes, check out the <a href="https://developer.enonic.com/docs/content-studio">new documentation</a>.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/contentstudio">Content Studio</a></dt>
+<dd>
+<p>The editorial CMS interface. Migrated to the new Enonic UI design system, and continues to ship as a standalone application so it can release independently of the platform.</p>
+</dd>
+<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/guillotine">Guillotine</a></dt>
+<dd>
+<p>Auto-generates a GraphQL API directly from your content model. Updated for XP 8&#8217;s runtime and schema changes.</p>
+</dd>
+<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/data-toolbox">Data Toolbox</a></dt>
+<dd>
+<p>The developer-focused tool for inspecting repositories and nodes, and for managing dumps, snapshots, and exports. Updated for XP 8.</p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="sect2">
-<h3 id="cms"><a class="link" href="#cms">CMS</a></h3>
+<h3 id="admin_extensions"><a class="link" href="#admin_extensions">Admin Extensions</a></h3>
 <div class="paragraph">
-<p>Even if Content Studio can be installed as a separate application,
-The XP core still ships with the <a href="api/lib-content.ahtml">content API</a> and <a href="./runtime/engines/site-engine.ahtml">site engine</a> that applications depend on.</p>
-</div>
-<div class="sect3">
-<h4 id="image_styles"><a class="link" href="#image_styles">Image styles</a></h4>
-<div class="paragraph">
-<p>XP 7 introduces a new feature in the rich text editor called "Image styles".
-Image styles consist of both client side styling (css), and image service rendering specifications.</p>
+<p>The Widget API has been replaced by the Extensions API, better reflecting the actual capabilities. Visible tools live in the XP menu, while extensions, you guessed it, extend them - ranging from visual widgets to API-level functionality. The new API is more flexible and powerful.</p>
 </div>
 <div class="paragraph">
-<p>The rich text editor was previously limited to pre-defined and hard-coded styles, such as <code>cinema (21:9)</code> or <code>square(1:1)</code>.
-Now, application developers may define custom styles that control both server side rendering aspect ratio, and specify classes to annotate the specific image.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="release/images/old-photo-style.png" alt="Here we see an image using a style called old-photo, which adds the sephia effect to the image." width="720">
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="projects_prepared"><a class="link" href="#projects_prepared">Projects prepared</a></h4>
-<div class="paragraph">
-<p>Customers with many sites have requested better support for isolation of sites, and specific access rights to each.
-Our solution to create sites in different "projects", each project will be using its own repo.
-XP 7 (and Content Studio) does not yet fully implement this features, but prepares the foundation for supporting it.</p>
+<p>Additionally, popular extensions such as Content Studio widgets are now wrapped as web components, for complete isolation and flexibility.</p>
 </div>
 <div class="paragraph">
-<p>You will notice this through the following change:</p>
+<p>TODO: LInk to docs and examples for building admin extensions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="content_and_node_api_refresh"><a class="link" href="#content_and_node_api_refresh">Content and Node API refresh</a></h3>
+<div class="paragraph">
+<p>Years of incremental additions left overlap in the Content and Node APIs. XP 8 cleans them up:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The default CMS repo is renamed from "cms-repo" to "com.enonic.cms.default".</p>
+<p><code>move</code> and <code>rename</code> collapse into a single <code>move</code></p>
 </li>
 <li>
-<p>New projects will be using the extension as project name, i.e. project "myproject" will use repo "com.enonic.cms.myproject"</p>
+<p><code>setChildOrder</code> and <code>reorderChildren</code> collapse into a single <code>sort</code></p>
 </li>
 <li>
-<p>The site engine URLs now contain project name - i.e. <code>/site/&lt;project&gt;/&lt;branch&gt;/&lt;content-path&gt;</code></p>
+<p>The legacy <code>hasChildren</code> content property is gone</p>
+</li>
+<li>
+<p>A new <code>patch</code> method that applies changes across multiple branches in one call</p>
+</li>
+<li>
+<p>Language-aware <code>allText</code> configuration for multilingual full-text indexing</p>
+</li>
+<li>
+<p>Removal of the <code>inheritsPermissions</code> flag in favour of explicitly applied permissions</p>
+</li>
+<li>
+<p>Sort operations also honor language-specific collation.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="editor_references"><a class="link" href="#editor_references">Editor references</a></h4>
+<div class="sect2">
+<h3 id="vhost_context"><a class="link" href="#vhost_context">Vhost context</a></h3>
 <div class="paragraph">
-<p>References to images or other content in the rich text editor are now stored explicitly in the underlying node API.
-The publishing wizard will now identify and include these dependencies like all other references - no more missed items during publishing.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="stemmed_content"><a class="link" href="#stemmed_content">Stemmed content</a></h4>
-<div class="paragraph">
-<p>Content flagged with a language is now automatically stemmed during indexing (trimming words to their root form for better hits).
-This is done using the standard Elasticsearch stemmer.
-This is achieved by adding a stemmed version of the  <code>_allText</code> property, combined with a new query function.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="better_page_indexing"><a class="link" href="#better_page_indexing">Better page indexing</a></h4>
-<div class="paragraph">
-<p>Pages, and their components are now indexed differently.
-Rather than just looking for text within a page, developers may now search for any configuration property,
-or metadata within a page.</p>
-</div>
-<div class="paragraph">
-<p>As an example, one may now search the use of a specific part within a site.</p>
-</div>
+<p>Vhost configuration files now support declaration of context values - project, branch, principal - co-locating routing decisions with the vhost they belong to. This may also be used to customize application behaviour on a per-vhost basis. See <a href="deployment/vhosts.ahtml#virtual-host-context">Virtual host context</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="xp_storage"><a class="link" href="#xp_storage">XP Storage</a></h3>
+<h3 id="stricter_identity_validation"><a class="link" href="#stricter_identity_validation">Stricter identity validation</a></h3>
 <div class="paragraph">
-<p>The XP storage has been refactored for improved performance and disk usage.</p>
-</div>
-<div class="sect3">
-<h4 id="blobstore_improvements"><a class="link" href="#blobstore_improvements">Blobstore improvements</a></h4>
-<div class="paragraph">
-<p>XP persists all data in so-called blobstore segments, one segment for each type of data to persist.
-XP 7 introduces new segments for indexconfig and permissions, enabling re-use of these across nodes, and node versions.</p>
-</div>
-<div class="paragraph">
-<p>This reduces the use of disk space significantly.</p>
-</div>
-<div class="paragraph">
-<p>Additionally, each repository now has it&#8217;s own root entry in the blobstore.
-This makes it possible to directly manage blobs associated with a single repository.</p>
+<p>Identity keys, content IDs, names, and descriptors now follow consistent, deterministic validation rules: lowercase-only IDs, explicit regex per key type, and length caps that match what the system actually supports. The intent is to eliminate the class of bugs that came from quietly accepting characters that broke serialization, URLs, or filesystem paths downstream. The full ruleset lives in the <a href="https://developer.enonic.com/docs/code/stable/upgrade#identity-keys">dev kit upgrade guide</a>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="version_commits"><a class="link" href="#version_commits">Version commits</a></h4>
+<div class="sect2">
+<h3 id="security_hardening"><a class="link" href="#security_hardening">Security hardening</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentication no longer searches for the first matching user across all ID providers. Each request resolves against the vhost&#8217;s default ID provider, or the explicitly specified one.</p>
+</li>
+<li>
+<p>New passwords use <code>pbkdf2-sha512</code>. The legacy <code>md5</code> and <code>sha1</code> hashing algorithms have been retired, including for <code>xp.suPassword</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="smarter_dumps_and_exports"><a class="link" href="#smarter_dumps_and_exports">Smarter dumps and exports</a></h3>
 <div class="paragraph">
-<p>XP automatically creates new versions for each modification of a node.
-Where XP 6 would persist all versions forever, XP 7 by default treats all versions as transient.
-This means that all versions that are not currently in a branch, may be garbage collected at any time in the future.</p>
+<p>Repositories can now be exported in full or in part - by branch and path - and repositories may be dumped and loaded individually.</p>
 </div>
 <div class="paragraph">
-<p>To prevent versions from being removed, one may also commit.</p>
+<p>Exports and dumps are written directly to ZIP archives, replacing the previous folder-based structure. The plain-file format and dry-run mode have been retired.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="quality_of_life"><a class="link" href="#quality_of_life">Quality of life</a></h3>
 <div class="paragraph">
-<p>For the Content API specifically, publishing an item will automatically create a commit, effectively placing a stamp on the specific versions being published.
-Commits have id, committer, and optionally a commit message as meta data.</p>
+<p>A handful of smaller-but-pleasing improvements:</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-XP 7 does not yet implement the garbage collector that removes uncommitted versions, this will be part of an upcoming release.
-</td>
-</tr>
-</table>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sessions can be persisted to the filesystem via <code>file</code> <a href="config/system.ahtml#sessionstore">storeMode</a>, surviving graceful restarts on standalone instances</p>
+</li>
+<li>
+<p>The admin home moved from <code>/admin/home</code> to a cleaner <code>/admin</code></p>
+</li>
+<li>
+<p>HTTP function names now use the standard uppercase form: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code></p>
+</li>
+<li>
+<p><code>request.locale</code> is available in the request object</p>
+</li>
+<li>
+<p>The dump location is configurable via <a href="config/system.ahtml#repo">repository config</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2034,7 +680,7 @@ XP 7 does not yet implement the garbage collector that removes uncommitted versi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 13:19:45 UTC
+Last updated 2026-06-03 13:19:59 UTC
 </div>
 </div>
 </body>

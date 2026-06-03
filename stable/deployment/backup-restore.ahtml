@@ -457,11 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#dump-load">Dump and load</a></li>
 </ul>
 </li>
-<li><a href="#data_management">Data management</a>
-<ul class="sectlevel2">
-<li><a href="#vacuum">Vacuuming</a></li>
-</ul>
-</li>
+<li><a href="#data_management">Data management</a></li>
 </ul>
 </div>
 </div>
@@ -545,7 +541,7 @@ Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 <h2 id="useful_tools"><a class="link" href="#useful_tools">Useful tools</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic XP offers both <a href="../runtime/management.ahtml">management endpoints</a>, and internal APIs to manage your data.</p>
+<p>Enonic XP offers both <a href="../endpoints/management.ahtml">management endpoints</a>, and internal APIs to manage your data.</p>
 </div>
 <div class="paragraph">
 <p>As an alternative to working with the APIs. Check out the following tools:</p>
@@ -585,27 +581,24 @@ Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 <p>Snapshots will only restore the metadata and search index of your instance, not the blobs. As such, you must have an intact blobstore from the time the snapshot was taken.</p>
 </div>
 <div class="paragraph">
-<p>If you for instance have performed a <a href="#vacuum">Vacuum</a> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. Starting from <span class="image"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="20">
-  <linearGradient id="s" x2="0" y2="100%">
-    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-    <stop offset="1" stop-opacity=".1"/>
-  </linearGradient>
-  <clipPath id="r">
-    <rect width="64" height="20" rx="3" fill="#fff"/>
-  </clipPath>
-  <g clip-path="url(#r)">
-    <rect width="25" height="20" fill="#555"/>
-    <rect x="25" width="39" height="20" fill="#007ec6"/>
-    <rect width="64" height="20" fill="url(#s)"/>
-  </g>
-  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision"
-     font-size="110">
-    <text x="135" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="150">XP</text>
-    <text x="135" y="140" transform="scale(.1)" textLength="150">XP</text>
-    <text x="435" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">7.15.0</text>
-    <text x="435" y="140" transform="scale(.1)" textLength="290">7.15.0</text>
-  </g>
-</svg></span> to prevent confusion all snapshots are deleted after any vacuum operations that delete blobs.</p>
+<p>If you for instance have performed a <a href="../storage/maintenance.ahtml#vacuum">Vacuum</a> operation that deletes blobs, restoring old snapshot will bring your solution into an inconsistent state. To prevent confusion, all snapshots are deleted after any vacuum operations that delete blobs.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A blob-deleting vacuum is a point of no return for restores. All existing snapshots are deleted and the referenced blobs are removed, so you cannot restore to any moment before the vacuum ran — it becomes your new baseline.</p>
+</div>
+<div class="paragraph">
+<p>Take a fresh blobstore backup and snapshot immediately afterwards. See <a href="../storage/maintenance.ahtml#vacuum">Vacuuming</a>.</p>
 </div>
 </td>
 </tr>
@@ -628,10 +621,10 @@ Indices MUST always be stored on a local filesystem, preferably using fast SSDs.
 <p>Take a <a href="#snapshot-restore">Snapshot</a> of your instance.</p>
 </li>
 <li>
-<p>Backup the files in your <a href="config.ahtml#repo">snapshots folder</a> to a safe location</p>
+<p>Backup the files in your <a href="../config/system.ahtml#repo">snapshots folder</a> to a safe location</p>
 </li>
 <li>
-<p>Backup the files in your <a href="config.ahtml#file-blobstore">blobstore folder</a> to a safe location</p>
+<p>Backup the files in your <a href="../config/system.ahtml#file-blobstore">blobstore folder</a> to a safe location</p>
 </li>
 </ol>
 </div>
@@ -661,10 +654,10 @@ If you are restoring to the same environment as the backup was performed, you ma
 <p>Deploy and start a new instance of XP, using the same version that was used to create your backup.</p>
 </li>
 <li>
-<p>Copy the blobstore backup files into your instance&#8217;s <a href="config.ahtml#file-blobstore">blobstore folder</a></p>
+<p>Copy the blobstore backup files into your instance&#8217;s <a href="../config/system.ahtml#file-blobstore">blobstore folder</a></p>
 </li>
 <li>
-<p>Copy the snapshot backup files into your instance&#8217;s <a href="config.ahtml#repo">snapshots folder</a>.</p>
+<p>Copy the snapshot backup files into your instance&#8217;s <a href="../config/system.ahtml#repo">snapshots folder</a>.</p>
 </li>
 <li>
 <p>Using CLI, or via Admin console/Data Toolbox: Perform a <a href="#snapshot-restore">Snapshot restore</a></p>
@@ -750,73 +743,15 @@ Dumping is not a recommended backup solution, rather use snapshots in combinatio
 <div class="sect1">
 <h2 id="data_management"><a class="link" href="#data_management">Data management</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="vacuum"><a class="link" href="#vacuum">Vacuuming</a></h3>
 <div class="paragraph">
-<p>Even if you delete nodes in your storage, the blobs and selected metadata are not permanently removed from XP.</p>
-</div>
-<div class="paragraph">
-<p>Deleting the blobs would actually prevent you from easily rolling back to a previous snapshot.</p>
-</div>
-<div class="paragraph">
-<p>To permanently delete the remaining metadata and blogs in a controlled fashion, XP offers a function called Vacuuming.</p>
-</div>
-<div class="paragraph">
-<p>There are multiple Vacuuming tasks available in XP:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>VersionTableVacuumTask</code> - deletes node metadata that is no longer referenced.</p>
-</li>
-<li>
-<p><code>SnapshotsVacuumTask</code> - deletes snapshots that are older than specified age threshold.</p>
-</li>
-<li>
-<p><code>SegmentVacuumTask</code> - deletes all blobs related to previously deleted repositories.</p>
-</li>
-<li>
-<p><code>BinaryBlobVacuumTask</code> - deletes binary data blobs that are no longer referenced.</p>
-</li>
-<li>
-<p><code>NodeBlobVacuumTask</code> - deletes node data blobs that are no longer referenced.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><code>VersionTableVacuumTask</code> - is a default task that runs when no tasks are specified.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-<code>SegmentVacuumTask</code>, <code>BinaryBlobVacuumTask</code> and <code>NodeBlobVacuumTask</code> - tasks that delete blobs, so all taken snapshots are deleted after any of these tasks are executed to prevent XP startup failure in case of Snapshot Restore. Make sure to back up blobstore before running these tasks. It is also recommended to take a new snapshot right after the vacuum operation.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Vacuuming can be setup to execute automatically as a scheduled job, or manually triggered via for instance the CLI.
-</td>
-</tr>
-</table>
-</div>
+<p>For ongoing operational maintenance — vacuuming unreferenced blobs and metadata, and rebuilding the search index — see <a href="../storage/maintenance.ahtml">Storage maintenance</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 13:19:45 UTC
+Last updated 2026-06-03 13:19:59 UTC
 </div>
 </div>
 </body>
