@@ -1,12 +1,12 @@
-= XP Applications
+= Enonic Applications
 :toc: right
 :imagesdir: images
 
-Schemas, code, and functionality is added to XP via applications.
+Build and deploy schemas, code, and functionality via Enonic applications.
 
 == Introduction
 
-Enonic apps are standalone software packages that can be installed and started on Enonic XP. The App runtime can run multiple applications in a single instance simultaneously.
+Enonic applications are standalone software packages that can be installed and started on Enonic XP. The App runtime can run multiple applications in a single instance simultaneously.
 
 Once started, an application has access to all platform services, including the <<storage#, NoSQL storage>> and <<security#, identity and access management>>.
 
@@ -30,7 +30,7 @@ Microservice bundle:: Consider a microservice style highly controlled setup wher
 
 == Life cycle
 
-In addition to installing and uninstalling, XP applications may be started and stopped. This is referred to as the life cycle of the application. During the stop and start phases, applications themselves may execute custom code.
+In addition to installing and uninstalling, Enonic applications may be started and stopped. This is referred to as the life cycle of the application. During the stop and start phases, applications themselves may execute custom code.
 
 Starting:: Once installed, applications are automatically started on all nodes. During startup, if it exists, the application's `main.js` script will be executed.
 

@@ -24,6 +24,7 @@ This project relies on GitHub Actions for building and publishing. There are no 
 
 ## Key Conventions
 
+- **Terminology:** Apps running on Enonic XP are called **"Enonic applications"** — never "XP applications" or "XP apps". The informal short form "application(s)" or "app(s)" is fine after first mention.
 - **Images:**
   - Images are stored in relative folders like  `images/` or `media/`.
   - In AsciiDoc files, the `:imagesdir:` is typically set to `media` or `image`, mapping files to the respective folders.

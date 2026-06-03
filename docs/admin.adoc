@@ -33,7 +33,7 @@ TIP: Try installing Content Studio (from the `Applications` tool), to see how th
 
 Admin tools are standalone applications that are integrated with the XP admin. The default tools are Dashboard, Applications, and Users.
 
-* A single XP application may contain multiple admin tools
+* A single Enonic application may contain multiple admin tools
 * Each admin tool may define custom roles to restrict access.
 * Admin tools are all served within the admin URL pattern. i.e.  `:8080/admin/<app-name>:<tool-name>`
 

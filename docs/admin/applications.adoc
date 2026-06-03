@@ -3,7 +3,7 @@
 :imagesdir: images
 :experimental:
 
-The Applications admin tool is where you install, configure, and manage the lifecycle of XP applications from the user interface.
+The Applications admin tool is where you install, configure, and manage the lifecycle of Enonic applications from the user interface.
 
 NOTE: The Applications app is still using the legacy admin UI, and will be upgraded to Enonic UI in the future.
 
@@ -12,7 +12,7 @@ NOTE: The Applications app is still using the legacy admin UI, and will be upgra
 
 Applications are the units of functionality that run on Enonic XP - everything from Content Studio to ID providers and custom integrations. The Applications tool gives you a single place to inspect what is installed, install new apps, and start or stop them.
 
-For background on what an XP application is, see <<../apps#, XP Applications>>.
+For background on what an Enonic application is, see <<../apps#, Enonic Applications>>.
 
 == Browsing applications
 
@@ -49,4 +49,4 @@ Selecting an application exposes Start, Stop, and Uninstall actions. Stopping an
 
 == Configuration
 
-Applications may optionally be configured with environment specific settings by placing a `<app-name>.cfg` file in the XP configuration directory - see <<../config/custom#, Custom configuration>>.
+Applications may optionally be configured with environment specific settings by placing a `<app-name>.cfg` file in the XP configuration directory. See <<../config/applications#, Application configuration>> for details.

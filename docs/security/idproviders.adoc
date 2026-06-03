@@ -8,10 +8,9 @@ ID providers provide a pluggable abstraction layer for user authentication and a
 
 The main purpose of IDproviders is to provde pluggable authentication and authorization to XP. With an ID provider configured, your may associate it with a <<../endpoints/web#, web service>> of your choice via  <<../config/vhosts#,virtual host>> configuration.
 
-
 == System ID provider
 
-To get started quickly, Enonic XP ships with a built-in IDprovider called the <<system-idp#, System ID provider>>. This is most commonly used by developers, or for administrative purposes. When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.
+To get started quickly, Enonic XP ships with a built-in `system` ID provider. This is most commonly used by developers, or for administrative purposes. When accessing the XP admin console for the first time in a fresh installation, you will see the login screen of System ID provider.
 
 You may also create service accounts in the System ID provider, and use them to authenticate against the Management Endpoint, or other APIs as described in <<service-accounts#, Service accounts>>.
 
