@@ -8,7 +8,7 @@ Schemas, code, and functionality is added to XP via applications.
 
 Enonic apps are standalone software packages that can be installed and started on Enonic XP. The App runtime can run multiple applications in a single instance simultaneously.
 
-Once started, an application has access to all platform services, including the <<storage#, NoSQL storage>> and <<security/iam#, identity and access management>>.
+Once started, an application has access to all platform services, including the <<storage#, NoSQL storage>> and <<security#, identity and access management>>.
 
 A single application may offer many different capabilities, from CMS schemas to exposing APIs to other apps. Fundamentally, most of XP's core software components are built as applications.
 

@@ -1,0 +1,31 @@
+= Security, Identity and Access Management
+:toc: right
+:imagesdir: security/images
+
+Enonic XP ships with a complete and pluggable concept for authentication, authorization and auditing - commonly referred to as IAM.
+
+== ID providers
+
+ID providers represent a pluggable abstraction layer for user authentication. To authenticate - or even create users in XP - you will need an <<security/idproviders#, ID provider>>.
+
+XP ships with a built-in System ID provider to get you started quickly. Choose from a range of standard ID providers on https://market.enonic.com[Enonic Market], or build your own for a fully customized approach.
+
+== Principals
+
+Principals are the actors of XP's security model. XP provides three basic principals: <<security/principals#users, users>>, <<security/principals#groups, groups>> and <<security/principals#roles, roles>>. Combined with ID providers, these form the essence of Enonic IAM.
+
+== Service accounts
+
+<<security/service-accounts#, Service accounts>> enable secure, token-based authentication for machine-to-machine communication - for example when accessing the <<endpoints/management#, Management API>> from remote clients or CI/CD pipelines.
+
+== Permissions
+
+In addition to role-based access control, the CMS (and underlying <<storage#, NoSQL storage>>) supports fine-grained <<storage/permissions#, access control>> - down to a single item.
+
+== Audit logs
+
+XP automatically registers completed actions affecting repositories, content, applications, principals and ID providers in a dedicated repository. Visit <<security/audit-logs#, Audit logs>> for details on the available events and how to enable or disable logging.
+
+== Management
+
+Principals, ID providers and service accounts can be managed through the <<admin/users#, Users admin tool>>, or programmatically via APIs.
