@@ -9,7 +9,11 @@ The headline features and themes for each XP feature release. For step-by-step u
 
 XP 8 is the largest release in 8 years. The runtime is rebuilt on a modern stack, the Universal API unifies how request handlers are written and called, and a long list of API rough edges has been cleaned up.
 
-IMPORTANT: This release contains *Breaking changes when upgrading from XP7*. We have made every effort to minimize the impact of these, but please review the full list of breaking changes and migration steps in the <<release/upgrade#breaking-changes, upgrade notes>> before upgrading.
+IMPORTANT: This release contains *Breaking changes when upgrading from XP7*. We have made every effort to minimize the impact of these, but please review the full list of breaking changes and migration steps in the <<release/upgrade#breaking-changes, upgrade notes>> before upgrading. Several XP 7 concepts have also been renamed — see <<#naming, A paradigm shift in naming>>.
+
+=== Stack update
+
+The XP 8 core runs on a refreshed stack, including but not limited to: *Java 25*, *Jetty 12*, and *Hazelcast 5*. This also includes use of virtual threads for https://developer.enonic.com/docs/code/stable/background/tasks[tasks]. The new stack provides better performance, stability, and security, and lays the foundation for future improvements.
 
 === UI reloaded
 
@@ -26,21 +30,11 @@ Borrowing the manifest-and-mount pattern from Kubernetes, APIs are registered wi
 
 APIs can be exposed on custom URLs and domains via <<config/vhosts#, virtual host configuration>>, but also contextually mounted within the admin and site services, allowing for flexible API design and organization.
 
-TODO: Management API?
-
-=== Modern foundation
-
-The XP 8 core runs on a refreshed stack: *Java 25*, *Jetty 12*, and *Hazelcast 5*.
-
-
-=== Prometheus metrics
-
-Metrics are now exposed in the open https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md[OpenMetrics] format - point your Prometheus, Grafana agent, or any compatible collector at the metrics endpoint to get first-class observability.
-
-
 === XP goes YAML
 
-YAML replaces XML for all CMS schemas and app descriptors. This means content types, application definitions, ID providers, etc., are now all defined in YAML. YAML is a widely adopted format that is easier to read and write than JSON, especially for complex configurations - and it supports comments. The new YAML-based descriptors are more concise and maintainable, making life easier for developers.
+YAML replaces XML for all CMS schemas and app descriptors. This means content types, application definitions, ID providers, etc., are now all defined in YAML. YAML is a widely adopted format that is easier to read and write than JSON, especially for complex configurations - and it supports comments. The new YAML-based descriptors are more concise and maintainable, making life easier for developers. For the full documentation, visit the https://developer.enonic.com/docs/code/stable/schemas[schema system documentation].
+
+Schemas are also now organized into https://developer.enonic.com/docs/cms/stable/schemas/namespaces[namespaces]. Every schema is identified as `<namespace>:<name>`. When shipping schemas with an app, the app name is still the default namespace - but the namespace concept decouples schemas from apps, paving the way for schemas to be authored and managed independently.
 
 === Simplified permissions
 
@@ -66,23 +60,33 @@ The Widget API has been replaced by the Extensions API, better reflecting the ac
 
 Additionally, popular extensions such as Content Studio widgets are now wrapped as web components, for complete isolation and flexibility.
 
-TODO: LInk to docs and examples for building admin extensions.
+Visit the Dev kit documentation for https://developer.enonic.com/docs/code/stable/web/extensions[implementation details].
 
-=== Content and Node API refresh
+=== Content and Node Libraries refresh
 
-Years of incremental additions left overlap in the Content and Node APIs. XP 8 cleans them up:
+Years of incremental additions left overlap in the platform Content and Node APIs. XP 8 cleans them up:
 
 * `move` and `rename` collapse into a single `move`
 * `setChildOrder` and `reorderChildren` collapse into a single `sort`
 * The legacy `hasChildren` content property is gone
-* A new `patch` method that applies changes across multiple branches in one call
+* A new `patch` function applies changes across multiple branches in one call
 * Language-aware `allText` configuration for multilingual full-text indexing
 * Removal of the `inheritsPermissions` flag in favour of explicitly applied permissions
-* Sort operations also honor language-specific collation.
+* Sort operations also honor https://developer.enonic.com/docs/code/stable/storage/indexing#collation[language-specific collation].
+
+=== Prometheus metrics
+
+Metrics are now exposed in the open https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md[OpenMetrics] format - point your Prometheus, Grafana agent, or any compatible collector at the metrics endpoint to get first-class observability.
+
 
 === Vhost context
 
-Vhost configuration files now support declaration of context values - project, branch, principal - co-locating routing decisions with the vhost they belong to. This may also be used to customize application behaviour on a per-vhost basis. See <<deployment/vhosts#virtual-host-context, Virtual host context>>.
+Vhost configuration files now support declaration of context values - project, branch, principal - co-locating routing decisions with the vhost they belong to. This may also be used to customize application behaviour on a per-vhost basis. See <<config/vhosts#virtual-host-context, Virtual host context>>.
+
+
+=== Server Sent Events (SSE)
+
+XP8 also implements support for Server Sent Events (SSE) across all <<endpoints/web#,web services>>, enabling real-time streaming of data to clients without using WebSockets. This is particularly useful for building APIs and applications that require live updates, such as dashboards or notifications, but do not require the full duplex communication provided by WebSocket.
 
 === Stricter identity validation
 
@@ -108,5 +112,71 @@ A handful of smaller-but-pleasing improvements:
 * HTTP function names now use the standard uppercase form: `GET`, `POST`, `PUT`, `DELETE`
 * `request.locale` is available in the request object
 * The dump location is configurable via <<config/system#repo, repository config>>
+* Dev mode is now enabled by default in the Enonic SDK, making it easier to get started with development and testing.
 
+[#naming]
+=== A paradigm shift in naming
+
+XP 8 renames or reframes several familiar XP 7 concepts. Use this map when reading XP 7-era documentation, examples, or AI-generated code — the old terms no longer apply, and in some cases have taken on new meanings:
+
+[cols="1,1,2", options="header"]
+|===
+|XP 7 |XP 8 |Comment
+
+|Engines (site, webapp, admin)
+|<<endpoints/web#, Services>>
+|The term "engine" is retired
+
+|Controllers
+|https://developer.enonic.com/docs/code/stable/web/request-response[HTTP functions]
+|A module simply exports functions named after HTTP methods: `GET`, `POST`, etc.
+
+|HTTP Services (`/_/service/<app>/<name>`)
+|https://developer.enonic.com/docs/code/stable/web/apis[Universal APIs]
+|XP 7 HTTP services are replaced by the <<endpoints/web#api, Universal API>>
+
+|JS/TS APIs (`lib-content`, `lib-node`, etc.)
+|https://developer.enonic.com/docs/code/stable/libraries[Libraries]
+|The term "API" now primarily refers to web APIs. Platform JS/TS APIs are referred to as _libraries_
+
+|Assets service
+|https://developer.enonic.com/docs/lib-asset/stable[lib-asset]
+|The built-in asset service is replaced by a library
+
+|Widgets
+|https://developer.enonic.com/docs/code/stable/web/extensions[Admin extensions]
+|Now part of the Admin Extensions API
+
+|Mixins
+|https://developer.enonic.com/docs/cms/stable/schemas/form-fragments[Form fragments]
+|Reusable form definitions
+
+|X-data
+|https://developer.enonic.com/docs/cms/stable/content/mixins[Mixins]
+|The term "mixin" now refers to what XP 7 called x-data
+
+|Schemas scoped by app (`<app-key>:<name>`)
+|Schemas scoped by https://developer.enonic.com/docs/cms/stable/schemas/namespaces[namespace] (`<namespace>:<name>`)
+|The app name is still the default namespace when shipping schemas with an app
+
+|`site/` resource folder
+|https://developer.enonic.com/docs/code/stable/schemas[`cms/`]
+|CMS resources now live in `src/main/resources/cms`
+
+|`site.xml` descriptor
+|https://developer.enonic.com/docs/code/stable/schemas[`cms.yaml`] and https://developer.enonic.com/docs/code/stable/web/sites[`site.yaml`]
+|Site descriptor is now split in two, and written in YAML.
+
+|`displayName` (in descriptors)
+|https://developer.enonic.com/docs/code/stable/schemas[`title`]
+|Avoids confusion with content display name property
+
+|`delete` (in JS libraries)
+|https://developer.enonic.com/docs/code/stable/libraries/lib-content[`deleteContent`], `deleteProject`, etc.
+|Context-specific method names
+|===
+
+WARNING: Note the double rename: the word *mixin* changed meaning between versions. An XP 7 _mixin_ is an XP 8 _form fragment_, while XP 7 _x-data_ is now called _mixin_. When working with XP 7-era material — or AI assistants trained on it — always verify which meaning applies.
+
+The complete map, with migration details, lives in the https://developer.enonic.com/docs/code/stable/upgrade[dev kit upgrade guide].
 
