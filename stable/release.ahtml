@@ -443,20 +443,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#xp_8">XP 8</a>
 <ul class="sectlevel2">
+<li><a href="#stack_update">Stack update</a></li>
 <li><a href="#ui_reloaded">UI reloaded</a></li>
 <li><a href="#universal_api">Universal API</a></li>
-<li><a href="#modern_foundation">Modern foundation</a></li>
-<li><a href="#prometheus_metrics">Prometheus metrics</a></li>
 <li><a href="#xp_goes_yaml">XP goes YAML</a></li>
 <li><a href="#simplified_permissions">Simplified permissions</a></li>
 <li><a href="#companion_apps">Companion apps</a></li>
 <li><a href="#admin_extensions">Admin Extensions</a></li>
-<li><a href="#content_and_node_api_refresh">Content and Node API refresh</a></li>
+<li><a href="#content_and_node_libraries_refresh">Content and Node Libraries refresh</a></li>
+<li><a href="#prometheus_metrics">Prometheus metrics</a></li>
 <li><a href="#vhost_context">Vhost context</a></li>
+<li><a href="#server_sent_events_sse">Server Sent Events (SSE)</a></li>
 <li><a href="#stricter_identity_validation">Stricter identity validation</a></li>
 <li><a href="#security_hardening">Security hardening</a></li>
 <li><a href="#smarter_dumps_and_exports">Smarter dumps and exports</a></li>
 <li><a href="#quality_of_life">Quality of life</a></li>
+<li><a href="#naming">A paradigm shift in naming</a></li>
 </ul>
 </li>
 </ul>
@@ -483,10 +485,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-This release contains <strong>Breaking changes when upgrading from XP7</strong>. We have made every effort to minimize the impact of these, but please review the full list of breaking changes and migration steps in the <a href="release/upgrade.ahtml#breaking-changes">upgrade notes</a> before upgrading.
+This release contains <strong>Breaking changes when upgrading from XP7</strong>. We have made every effort to minimize the impact of these, but please review the full list of breaking changes and migration steps in the <a href="release/upgrade.ahtml#breaking-changes">upgrade notes</a> before upgrading. Several XP 7 concepts have also been renamed — see <a href="#naming">A paradigm shift in naming</a>.
 </td>
 </tr>
 </table>
+</div>
+<div class="sect2">
+<h3 id="stack_update"><a class="link" href="#stack_update">Stack update</a></h3>
+<div class="paragraph">
+<p>The XP 8 core runs on a refreshed stack, including but not limited to: <strong>Java 25</strong>, <strong>Jetty 12</strong>, and <strong>Hazelcast 5</strong>. This also includes use of virtual threads for <a href="https://developer.enonic.com/docs/code/stable/background/tasks">tasks</a>. The new stack provides better performance, stability, and security, and lays the foundation for future improvements.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="ui_reloaded"><a class="link" href="#ui_reloaded">UI reloaded</a></h3>
@@ -510,26 +518,14 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 <div class="paragraph">
 <p>APIs can be exposed on custom URLs and domains via <a href="config/vhosts.ahtml">virtual host configuration</a>, but also contextually mounted within the admin and site services, allowing for flexible API design and organization.</p>
 </div>
-<div class="paragraph">
-<p>TODO: Management API?</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="modern_foundation"><a class="link" href="#modern_foundation">Modern foundation</a></h3>
-<div class="paragraph">
-<p>The XP 8 core runs on a refreshed stack: <strong>Java 25</strong>, <strong>Jetty 12</strong>, and <strong>Hazelcast 5</strong>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="prometheus_metrics"><a class="link" href="#prometheus_metrics">Prometheus metrics</a></h3>
-<div class="paragraph">
-<p>Metrics are now exposed in the open <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md">OpenMetrics</a> format - point your Prometheus, Grafana agent, or any compatible collector at the metrics endpoint to get first-class observability.</p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="xp_goes_yaml"><a class="link" href="#xp_goes_yaml">XP goes YAML</a></h3>
 <div class="paragraph">
-<p>YAML replaces XML for all CMS schemas and app descriptors. This means content types, application definitions, ID providers, etc., are now all defined in YAML. YAML is a widely adopted format that is easier to read and write than JSON, especially for complex configurations - and it supports comments. The new YAML-based descriptors are more concise and maintainable, making life easier for developers.</p>
+<p>YAML replaces XML for all CMS schemas and app descriptors. This means content types, application definitions, ID providers, etc., are now all defined in YAML. YAML is a widely adopted format that is easier to read and write than JSON, especially for complex configurations - and it supports comments. The new YAML-based descriptors are more concise and maintainable, making life easier for developers. For the full documentation, visit the <a href="https://developer.enonic.com/docs/code/stable/schemas">schema system documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>Schemas are also now organized into <a href="https://developer.enonic.com/docs/cms/stable/schemas/namespaces">namespaces</a>. Every schema is identified as <code>&lt;namespace&gt;:&lt;name&gt;</code>. When shipping schemas with an app, the app name is still the default namespace - but the namespace concept decouples schemas from apps, paving the way for schemas to be authored and managed independently.</p>
 </div>
 </div>
 <div class="sect2">
@@ -582,13 +578,13 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 <p>Additionally, popular extensions such as Content Studio widgets are now wrapped as web components, for complete isolation and flexibility.</p>
 </div>
 <div class="paragraph">
-<p>TODO: LInk to docs and examples for building admin extensions.</p>
+<p>Visit the Dev kit documentation for <a href="https://developer.enonic.com/docs/code/stable/web/extensions">implementation details</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="content_and_node_api_refresh"><a class="link" href="#content_and_node_api_refresh">Content and Node API refresh</a></h3>
+<h3 id="content_and_node_libraries_refresh"><a class="link" href="#content_and_node_libraries_refresh">Content and Node Libraries refresh</a></h3>
 <div class="paragraph">
-<p>Years of incremental additions left overlap in the Content and Node APIs. XP 8 cleans them up:</p>
+<p>Years of incremental additions left overlap in the platform Content and Node APIs. XP 8 cleans them up:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -602,7 +598,7 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 <p>The legacy <code>hasChildren</code> content property is gone</p>
 </li>
 <li>
-<p>A new <code>patch</code> method that applies changes across multiple branches in one call</p>
+<p>A new <code>patch</code> function applies changes across multiple branches in one call</p>
 </li>
 <li>
 <p>Language-aware <code>allText</code> configuration for multilingual full-text indexing</p>
@@ -611,15 +607,27 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 <p>Removal of the <code>inheritsPermissions</code> flag in favour of explicitly applied permissions</p>
 </li>
 <li>
-<p>Sort operations also honor language-specific collation.</p>
+<p>Sort operations also honor <a href="https://developer.enonic.com/docs/code/stable/storage/indexing#collation">language-specific collation</a>.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
+<h3 id="prometheus_metrics"><a class="link" href="#prometheus_metrics">Prometheus metrics</a></h3>
+<div class="paragraph">
+<p>Metrics are now exposed in the open <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md">OpenMetrics</a> format - point your Prometheus, Grafana agent, or any compatible collector at the metrics endpoint to get first-class observability.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="vhost_context"><a class="link" href="#vhost_context">Vhost context</a></h3>
 <div class="paragraph">
-<p>Vhost configuration files now support declaration of context values - project, branch, principal - co-locating routing decisions with the vhost they belong to. This may also be used to customize application behaviour on a per-vhost basis. See <a href="deployment/vhosts.ahtml#virtual-host-context">Virtual host context</a>.</p>
+<p>Vhost configuration files now support declaration of context values - project, branch, principal - co-locating routing decisions with the vhost they belong to. This may also be used to customize application behaviour on a per-vhost basis. See <a href="config/vhosts.ahtml#virtual-host-context">Virtual host context</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="server_sent_events_sse"><a class="link" href="#server_sent_events_sse">Server Sent Events (SSE)</a></h3>
+<div class="paragraph">
+<p>XP8 also implements support for Server Sent Events (SSE) across all <a href="endpoints/web.ahtml">web services</a>, enabling real-time streaming of data to clients without using WebSockets. This is particularly useful for building APIs and applications that require live updates, such as dashboards or notifications, but do not require the full duplex communication provided by WebSocket.</p>
 </div>
 </div>
 <div class="sect2">
@@ -672,7 +680,112 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 <li>
 <p>The dump location is configurable via <a href="config/system.ahtml#repo">repository config</a></p>
 </li>
+<li>
+<p>Dev mode is now enabled by default in the Enonic SDK, making it easier to get started with development and testing.</p>
+</li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="naming"><a class="link" href="#naming">A paradigm shift in naming</a></h3>
+<div class="paragraph">
+<p>XP 8 renames or reframes several familiar XP 7 concepts. Use this map when reading XP 7-era documentation, examples, or AI-generated code — the old terms no longer apply, and in some cases have taken on new meanings:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">XP 7</th>
+<th class="tableblock halign-left valign-top">XP 8</th>
+<th class="tableblock halign-left valign-top">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Engines (site, webapp, admin)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="endpoints/web.ahtml">Services</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The term "engine" is retired</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controllers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/web/request-response">HTTP functions</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A module simply exports functions named after HTTP methods: <code>GET</code>, <code>POST</code>, etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP Services (<code>/_/service/&lt;app&gt;/&lt;name&gt;</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/web/apis">Universal APIs</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XP 7 HTTP services are replaced by the <a href="endpoints/web.ahtml#api">Universal API</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JS/TS APIs (<code>lib-content</code>, <code>lib-node</code>, etc.)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/libraries">Libraries</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The term "API" now primarily refers to web APIs. Platform JS/TS APIs are referred to as <em>libraries</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assets service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/lib-asset/stable">lib-asset</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The built-in asset service is replaced by a library</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Widgets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/web/extensions">Admin extensions</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Now part of the Admin Extensions API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mixins</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-fragments">Form fragments</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable form definitions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X-data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/cms/stable/content/mixins">Mixins</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The term "mixin" now refers to what XP 7 called x-data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schemas scoped by app (<code>&lt;app-key&gt;:&lt;name&gt;</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schemas scoped by <a href="https://developer.enonic.com/docs/cms/stable/schemas/namespaces">namespace</a> (<code>&lt;namespace&gt;:&lt;name&gt;</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The app name is still the default namespace when shipping schemas with an app</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site/</code> resource folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/schemas"><code>cms/</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMS resources now live in <code>src/main/resources/cms</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site.xml</code> descriptor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/schemas"><code>cms.yaml</code></a> and <a href="https://developer.enonic.com/docs/code/stable/web/sites"><code>site.yaml</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Site descriptor is now split in two, and written in YAML.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>displayName</code> (in descriptors)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/schemas"><code>title</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avoids confusion with content display name property</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete</code> (in JS libraries)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/libraries/lib-content"><code>deleteContent</code></a>, <code>deleteProject</code>, etc.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Context-specific method names</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Note the double rename: the word <strong>mixin</strong> changed meaning between versions. An XP 7 <em>mixin</em> is an XP 8 <em>form fragment</em>, while XP 7 <em>x-data</em> is now called <em>mixin</em>. When working with XP 7-era material — or AI assistants trained on it — always verify which meaning applies.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The complete map, with migration details, lives in the <a href="https://developer.enonic.com/docs/code/stable/upgrade">dev kit upgrade guide</a>.</p>
 </div>
 </div>
 </div>
@@ -680,7 +793,7 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 16:25:30 UTC
+Last updated 2026-06-04 08:11:32 UTC
 </div>
 </div>
 </body>
