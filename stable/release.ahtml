@@ -560,7 +560,7 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 </dd>
 <dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/guillotine">Guillotine</a></dt>
 <dd>
-<p>Auto-generates a GraphQL API directly from your content model. Updated for XP 8&#8217;s runtime and schema changes.</p>
+<p>Auto-generates a GraphQL API directly from your content model. Updated for XP 8&#8217;s runtime and schema changes. Note that the XP 7-era <code>lib-guillotine</code> is no longer supported - it embedded the GraphQL engine in your own app, and was never a client library for the Guillotine app.</p>
 </dd>
 <dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/data-toolbox">Data Toolbox</a></dt>
 <dd>
@@ -775,6 +775,11 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://developer.enonic.com/docs/code/stable/libraries/lib-content"><code>deleteContent</code></a>, <code>deleteProject</code>, etc.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Context-specific method names</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lib-guillotine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Discontinued</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use the <a href="https://market.enonic.com/vendors/enonic/guillotine">Guillotine app</a> instead. <code>lib-guillotine</code> embedded the GraphQL engine in your own app - it is not, and never was, a client library for the Guillotine app</p></td>
+</tr>
 </tbody>
 </table>
 <div class="admonitionblock warning">
@@ -798,7 +803,7 @@ Note the double rename: the word <strong>mixin</strong> changed meaning between 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-04 08:37:17 UTC
+Last updated 2026-06-04 08:39:31 UTC
 </div>
 </div>
 </body>
