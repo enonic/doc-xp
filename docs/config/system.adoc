@@ -416,9 +416,15 @@ http.responseHeaderSize = 32768
 session.timeout = 60
 session.cookieName = JSESSIONID
 
+# Multipart
+multipart.store =
+multipart.maxFileSize = 16106127360
+multipart.maxRequestSize = 16106127360
+multipart.fileSizeThreshold = 10240
+
 # Compression
-gzip.enabled = true
-gzip.minSize = 23
+gzip.enabled = false
+gzip.minSize = 32
 
 # Logging
 log.enabled = false
@@ -455,8 +461,12 @@ session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
 session.cookieSameSite:: Specifies SameSite flag for session cookie. Can be `Lax`, `None`, `Strict` or unspecified. Default: `Lax`.
 session.cookieAlwaysSecure:: If true, forces session cooke Secure flag even for HTTP connections. Default: `false`.
 session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
+multipart.store:: Directory where multipart uploads are buffered. Default: the Java temporary directory.
+multipart.maxFileSize:: Maximum size of a single uploaded file, in bytes (`-1` for unlimited). Default: `16106127360` (15 GiB).
+multipart.maxRequestSize:: Maximum size of a complete multipart request, in bytes (`-1` for unlimited). Default: `16106127360` (15 GiB).
+multipart.fileSizeThreshold:: Size in bytes above which an uploaded file is written to disk instead of being kept in memory. Default: `10240`.
 gzip.enabled:: Enables GZIP compression for responses. Default: `false`.
-gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `23`.
+gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `32`.
 log.enabled:: Turns on request logging. Default: `false`.
 log.file:: Request log file location. Default: `${xp.home}/logs/jetty-yyyy_mm_dd.request.log`.
 log.append:: append to existing file, or create new one when started. Default: `true`.
