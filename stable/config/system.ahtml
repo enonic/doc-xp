@@ -838,11 +838,11 @@ network.publish.host = 127.0.0.1</code></pre>
 </dd>
 <dt class="hdlist1">network.host</dt>
 <dd>
-<p>sets the bind address. Default: <code>127.0.0.1</code>. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.</p>
+<p>sets the bind address. Default: <code>127.0.0.1</code>. Can be an explicit IP-address, a host-name or an alias. Use <code>0.0.0.0</code> to bind on all interfaces. See the section below for an overview of aliases.</p>
 </dd>
 <dt class="hdlist1">network.publish.host</dt>
 <dd>
-<p>sets the address other nodes will use to communicate with this node. Default: not set (<code>127.0.0.1</code> before XP 7.5.0). Cannot be more than one IP-address. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.</p>
+<p>sets the address other nodes will use to communicate with this node. Default: not set, the address is derived from <code>network.host</code>. Cannot be more than one IP-address. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.</p>
 </dd>
 </dl>
 </div>
@@ -865,7 +865,7 @@ NOTE: Values set as host-name are resolved to a single IP-address of the host-na
 <div class="ulist">
 <ul>
 <li>
-<p><code>_local_</code> : Will be resolved to the local ip address.</p>
+<p><code>_local_</code> : Resolves to the loopback address, e.g. <code>127.0.0.1</code>.</p>
 </li>
 <li>
 <p><code>_[networkInterface]_</code> : Resolves to the ip address of the provided network interface. For example <code>_en0_</code></p>
@@ -877,6 +877,30 @@ NOTE: Values set as host-name are resolved to a single IP-address of the host-na
 <p><code>_[networkInterface]:ipv6_</code> : Resolves to the ipv6 address of the provided network interface. For example <code>_en0:ipv6_</code></p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only up and running network interfaces are considered. When the protocol version is not specified, the JVM settings (<code>java.net.preferIPv4Stack</code>, <code>java.net.preferIPv6Addresses</code>) decide between ipv4 and ipv6 addresses.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The XP distribution launch scripts include <code>-Djava.net.preferIPv4Stack=true</code> in the default <code>JAVA_OPTS</code>, so ipv4 addresses are preferred unless this is overridden — for example by appending <code>-Djava.net.preferIPv4Stack=false</code> to <code>XP_OPTS</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1245,7 +1269,7 @@ It also requires granting certain permissions. You can find more information in 
 <div class="listingblock">
 <div class="title">Sample Jetty configuration</div>
 <div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">host =
+<pre class="highlight"><code class="language-properties" data-lang="properties">host = _auto_
 sendServerHeader = false
 
 # Connection
@@ -1253,7 +1277,12 @@ timeout = 60000
 
 # HTTP settings
 http.enabled = true
-http.port = 8080
+http.web.port = 8080
+http.web.host =
+http.management.port = 4848
+http.management.host =
+http.statistics.port = 2609
+http.statistics.host =
 http.requestHeaderSize = 32768
 http.responseHeaderSize = 32768
 
@@ -1261,9 +1290,15 @@ http.responseHeaderSize = 32768
 session.timeout = 60
 session.cookieName = JSESSIONID
 
+# Multipart
+multipart.store =
+multipart.maxFileSize = 16106127360
+multipart.maxRequestSize = 16106127360
+multipart.fileSizeThreshold = 10240
+
 # Compression
-gzip.enabled = true
-gzip.minSize = 23
+gzip.enabled = false
+gzip.minSize = 32
 
 # Logging
 log.enabled = false
@@ -1287,7 +1322,7 @@ websocket.defaultOriginCheck = true</code></pre>
 <dl>
 <dt class="hdlist1">host</dt>
 <dd>
-<p>should only be set this if host name (or ip) needs to be fixed.</p>
+<p>bind address used by all connectors unless overridden per connector. Can be an explicit IP-address, a host-name or an alias — same syntax as the cluster <code>network.host</code>, see <a href="#cluster">Cluster</a>. Default: <code>_auto_</code> — resolves to the loopback address in dev mode and to all interfaces in prod mode.</p>
 </dd>
 <dt class="hdlist1">sendServerHeader</dt>
 <dd>
@@ -1301,15 +1336,35 @@ websocket.defaultOriginCheck = true</code></pre>
 <dd>
 <p>true enables HTTP connections. Default: <code>true</code>.</p>
 </dd>
-<dt class="hdlist1">http.port</dt>
+<dt class="hdlist1">http.web.port</dt>
 <dd>
-<p>specifies http port number to use. Default: <code>8080</code>.</p>
+<p>http port of the web connector, serving sites and apps. Default: <code>8080</code>. Replaces the deprecated <code>http.xp.port</code>.</p>
+</dd>
+<dt class="hdlist1">http.web.host</dt>
+<dd>
+<p>bind address of the web connector. Overrides <code>host</code>.</p>
+</dd>
+<dt class="hdlist1">http.management.port</dt>
+<dd>
+<p>http port of the management connector. Default: <code>4848</code>.</p>
+</dd>
+<dt class="hdlist1">http.management.host</dt>
+<dd>
+<p>bind address of the management connector. Overrides <code>host</code>.</p>
+</dd>
+<dt class="hdlist1">http.statistics.port</dt>
+<dd>
+<p>http port of the statistics (monitoring) connector. Default: <code>2609</code>. Replaces the deprecated <code>http.monitor.port</code>.</p>
+</dd>
+<dt class="hdlist1">http.statistics.host</dt>
+<dd>
+<p>bind address of the statistics connector. Overrides <code>host</code>.</p>
 </dd>
 <dt class="hdlist1">http.requestHeaderSize</dt>
 <dd>
 <p>Maximum request header size. Default: 32K.</p>
 </dd>
-<dt class="hdlist1">http.requestHeaderSize</dt>
+<dt class="hdlist1">http.responseHeaderSize</dt>
 <dd>
 <p>Maximum response header size. Default: 32K.</p>
 </dd>
@@ -1329,13 +1384,29 @@ websocket.defaultOriginCheck = true</code></pre>
 <dd>
 <p>Cookie name to use for sessions. Default: <code>JSESSIONID</code>.</p>
 </dd>
+<dt class="hdlist1">multipart.store</dt>
+<dd>
+<p>Directory where multipart uploads are buffered. Default: the Java temporary directory.</p>
+</dd>
+<dt class="hdlist1">multipart.maxFileSize</dt>
+<dd>
+<p>Maximum size of a single uploaded file, in bytes (<code>-1</code> for unlimited). Default: <code>16106127360</code> (15 GiB).</p>
+</dd>
+<dt class="hdlist1">multipart.maxRequestSize</dt>
+<dd>
+<p>Maximum size of a complete multipart request, in bytes (<code>-1</code> for unlimited). Default: <code>16106127360</code> (15 GiB).</p>
+</dd>
+<dt class="hdlist1">multipart.fileSizeThreshold</dt>
+<dd>
+<p>Size in bytes above which an uploaded file is written to disk instead of being kept in memory. Default: <code>10240</code>.</p>
+</dd>
 <dt class="hdlist1">gzip.enabled</dt>
 <dd>
 <p>Enables GZIP compression for responses. Default: <code>false</code>.</p>
 </dd>
 <dt class="hdlist1">gzip.minsize</dt>
 <dd>
-<p>Minimum number of bytes in response to consider compressing the response. Default: <code>23</code>.</p>
+<p>Minimum number of bytes in response to consider compressing the response. Default: <code>32</code>.</p>
 </dd>
 <dt class="hdlist1">log.enabled</dt>
 <dd>
@@ -2053,7 +2124,7 @@ Exports dir should be a shared storage for cluster environments.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-04 08:39:31 UTC
+Last updated 2026-06-08 16:46:09 UTC
 </div>
 </div>
 </body>
