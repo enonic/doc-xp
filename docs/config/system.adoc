@@ -162,6 +162,7 @@ readThrough.sizeThreshold:: specifies he maximum size of objects to be cache in 
 
 // TODO: Verify existence of readThrough provider and actual values!
 
+[#cluster]
 == Cluster
 
 `com.enonic.xp.cluster.cfg`
@@ -182,18 +183,22 @@ network.publish.host = 127.0.0.1
 cluster.enabled:: When `true` node wil try to join a cluster. Default: `false`.
 node.name:: should normally not be set. Default: auto generated value
 discovery.unicast.hosts:: is an explicit list of nodes that can join the cluster. Default: `127.0.0.1`.
-network.host:: sets the bind address. Default: `127.0.0.1`. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.
-network.publish.host:: sets the address other nodes will use to communicate with this node. Default: not set (`127.0.0.1` before XP 7.5.0). Cannot be more than one IP-address. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.
+network.host:: sets the bind address. Default: `127.0.0.1`. Can be an explicit IP-address, a host-name or an alias. Use `0.0.0.0` to bind on all interfaces. See the section below for an overview of aliases.
+network.publish.host:: sets the address other nodes will use to communicate with this node. Default: not set, the address is derived from `network.host`. Cannot be more than one IP-address. Can be an explicit IP-address, a host-name or an alias. See the section below for an overview of aliases.
 
 NOTE: Using host-name values is not recommended because DNS can be spoofed.
 NOTE: Values set as host-name are resolved to a single IP-address of the host-name.
 
 Network host aliases:
 
-* `\_local_` : Will be resolved to the local ip address.
+* `\_local_` : Resolves to the loopback address, e.g. `127.0.0.1`.
 * `\_[networkInterface]_` : Resolves to the ip address of the provided network interface. For example `\_en0_`
 * `\_[networkInterface]:ipv4_` : Resolves to the ipv4 address of the provided network interface. For example `\_en0:ipv4_`
 * `\_[networkInterface]:ipv6_` : Resolves to the ipv6 address of the provided network interface. For example `\_en0:ipv6_`
+
+NOTE: Only up and running network interfaces are considered. When the protocol version is not specified, the JVM settings (`java.net.preferIPv4Stack`, `java.net.preferIPv6Addresses`) decide between ipv4 and ipv6 addresses.
+
+NOTE: The XP distribution launch scripts include `-Djava.net.preferIPv4Stack=true` in the default `JAVA_OPTS`, so ipv4 addresses are preferred unless this is overridden — for example by appending `-Djava.net.preferIPv4Stack=false` to `XP_OPTS`.
 
 
 == Elasticsearch
@@ -390,7 +395,7 @@ Selected options to configure the embedded servlet engine Jetty
 .Sample Jetty configuration
 [source,properties]
 ----
-host =
+host = _auto_
 sendServerHeader = false
 
 # Connection
@@ -398,7 +403,12 @@ timeout = 60000
 
 # HTTP settings
 http.enabled = true
-http.port = 8080
+http.web.port = 8080
+http.web.host =
+http.management.port = 4848
+http.management.host =
+http.statistics.port = 2609
+http.statistics.host =
 http.requestHeaderSize = 32768
 http.responseHeaderSize = 32768
 
@@ -406,9 +416,15 @@ http.responseHeaderSize = 32768
 session.timeout = 60
 session.cookieName = JSESSIONID
 
+# Multipart
+multipart.store =
+multipart.maxFileSize = 16106127360
+multipart.maxRequestSize = 16106127360
+multipart.fileSizeThreshold = 10240
+
 # Compression
-gzip.enabled = true
-gzip.minSize = 23
+gzip.enabled = false
+gzip.minSize = 32
 
 # Logging
 log.enabled = false
@@ -429,19 +445,28 @@ websocket.defaultOriginCheck = true
 
 ----
 
-host:: should only be set this if host name (or ip) needs to be fixed.
+host:: bind address used by all connectors unless overridden per connector. Can be an explicit IP-address, a host-name or an alias — same syntax as the cluster `network.host`, see <<#cluster,Cluster>>. Default: `+_auto_+` — resolves to the loopback address in dev mode and to all interfaces in prod mode.
 sendServerHeader:: True to send server name in header. Default: `false`.
 timeout:: specifies socket timeout for connections in ms.
 http.enabled:: true enables HTTP connections. Default: `true`.
-http.port:: specifies http port number to use. Default: `8080`.
+http.web.port:: http port of the web connector, serving sites and apps. Default: `8080`. Replaces the deprecated `http.xp.port`.
+http.web.host:: bind address of the web connector. Overrides `host`.
+http.management.port:: http port of the management connector. Default: `4848`.
+http.management.host:: bind address of the management connector. Overrides `host`.
+http.statistics.port:: http port of the statistics (monitoring) connector. Default: `2609`. Replaces the deprecated `http.monitor.port`.
+http.statistics.host:: bind address of the statistics connector. Overrides `host`.
 http.requestHeaderSize:: Maximum request header size. Default: 32K.
-http.requestHeaderSize:: Maximum response header size. Default: 32K.
+http.responseHeaderSize:: Maximum response header size. Default: 32K.
 session.timeout:: Session timeout (when inactive) in minutes. Default: `60`.
 session.cookieSameSite:: Specifies SameSite flag for session cookie. Can be `Lax`, `None`, `Strict` or unspecified. Default: `Lax`.
 session.cookieAlwaysSecure:: If true, forces session cooke Secure flag even for HTTP connections. Default: `false`.
 session.cookiename:: Cookie name to use for sessions. Default: `JSESSIONID`.
+multipart.store:: Directory where multipart uploads are buffered. Default: the Java temporary directory.
+multipart.maxFileSize:: Maximum size of a single uploaded file, in bytes (`-1` for unlimited). Default: `16106127360` (15 GiB).
+multipart.maxRequestSize:: Maximum size of a complete multipart request, in bytes (`-1` for unlimited). Default: `16106127360` (15 GiB).
+multipart.fileSizeThreshold:: Size in bytes above which an uploaded file is written to disk instead of being kept in memory. Default: `10240`.
 gzip.enabled:: Enables GZIP compression for responses. Default: `false`.
-gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `23`.
+gzip.minsize:: Minimum number of bytes in response to consider compressing the response. Default: `32`.
 log.enabled:: Turns on request logging. Default: `false`.
 log.file:: Request log file location. Default: `${xp.home}/logs/jetty-yyyy_mm_dd.request.log`.
 log.append:: append to existing file, or create new one when started. Default: `true`.
