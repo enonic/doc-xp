@@ -838,6 +838,21 @@ When a user with an old password logs in, the password is verified using the old
 It is strongly recommended to change all passwords after the upgrade to ensure all passwords are stored using the new algorithm.</p>
 </div>
 </div>
+<div class="sect4">
+<h5 id="websocket_same_origin_check"><a class="link" href="#websocket_same_origin_check">WebSocket same-origin check</a></h5>
+<div class="paragraph">
+<p>WebSocket handshakes are now subject to a built-in same-origin check.
+If a WebSocket controller does not supply its own <code>checkOrigin</code> function, handshake requests with an <code>Origin</code> that does not match the request host are rejected.
+In XP 7 such requests were accepted from any origin.</p>
+</div>
+<div class="paragraph">
+<p>If your applications rely on cross-origin WebSocket connections, implement a <code>checkOrigin</code> function in the WebSocket controller to explicitly allow trusted origins.</p>
+</div>
+<div class="paragraph">
+<p>If legitimate same-origin connections are rejected after the upgrade, the usual cause is a reverse proxy that does not propagate the public scheme/host/port to XP — fix the proxy configuration.
+As a last resort, the check can be disabled with the <code>websocket.defaultOriginCheck</code> setting in the <a href="../config/system.ahtml#jetty">Jetty configuration</a>.</p>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="other_configuration"><a class="link" href="#other_configuration">Other configuration</a></h4>
@@ -887,7 +902,7 @@ This will virtually eliminate downtime and also be a safety net should the upgra
 <div class="sect2">
 <h3 id="2_create_service_accounts"><a class="link" href="#2_create_service_accounts">2. Create service accounts</a></h3>
 <div class="paragraph">
-<p>Generate (or download, if already exists) a private key for a service account with Administrator role, one on the existing XP7 instance (to be used for <code>dump create</code>), another on the new XP8 instance (to be used for <code>dump load</code>). The key will be automatically downloaded to your disk after it&#8217;s generated. Read <a href="../security/system-idp.ahtml#service_account_key">here</a> to learn how to generate keys for service accounts.</p>
+<p>Generate (or download, if already exists) a private key for a service account with Administrator role, one on the existing XP7 instance (to be used for <code>dump create</code>), another on the new XP8 instance (to be used for <code>dump load</code>). The key will be automatically downloaded to your disk after it&#8217;s generated. Read <a href="../security/service-accounts.ahtml">here</a> to learn how to generate keys for service accounts.</p>
 </div>
 </div>
 <div class="sect2">
@@ -983,7 +998,7 @@ Don&#8217;t worry about the CLI losing connection, this is only related to the s
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-09 15:55:49 UTC
+Last updated 2026-06-10 08:32:34 UTC
 </div>
 </div>
 </body>
