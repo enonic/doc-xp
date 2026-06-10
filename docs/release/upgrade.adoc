@@ -180,6 +180,17 @@ The old passwords are _not_ automatically converted to the new format.
 When a user with an old password logs in, the password is verified using the old algorithm.
 It is strongly recommended to change all passwords after the upgrade to ensure all passwords are stored using the new algorithm.
 
+===== WebSocket same-origin check
+
+WebSocket handshakes are now subject to a built-in same-origin check.
+If a WebSocket controller does not supply its own `checkOrigin` function, handshake requests with an `Origin` that does not match the request host are rejected.
+In XP 7 such requests were accepted from any origin.
+
+If your applications rely on cross-origin WebSocket connections, implement a `checkOrigin` function in the WebSocket controller to explicitly allow trusted origins.
+
+If legitimate same-origin connections are rejected after the upgrade, the usual cause is a reverse proxy that does not propagate the public scheme/host/port to XP — fix the proxy configuration.
+As a last resort, the check can be disabled with the `websocket.defaultOriginCheck` setting in the <<../config/system#jetty,Jetty configuration>>.
+
 ==== Other configuration
 
 - Migrate other configuration files from 7.16, including custom configurations (app config etc.).
@@ -205,7 +216,7 @@ Start your new server and verify everything is working properly.
 
 === 2. Create service accounts
 
-Generate (or download, if already exists) a private key for a service account with Administrator role, one on the existing XP7 instance (to be used for `dump create`), another on the new XP8 instance (to be used for `dump load`). The key will be automatically downloaded to your disk after it's generated. Read <<../security/system-idp#service_account_key, here>> to learn how to generate keys for service accounts.
+Generate (or download, if already exists) a private key for a service account with Administrator role, one on the existing XP7 instance (to be used for `dump create`), another on the new XP8 instance (to be used for `dump load`). The key will be automatically downloaded to your disk after it's generated. Read <<../security/service-accounts#, here>> to learn how to generate keys for service accounts.
 
 === 3. Dump data
 
