@@ -6,7 +6,7 @@ This section describes configuration files related to CMS-oriented features, suc
 
 == Introduction
 
-The configuration files can be deployed to your Enonic XP instance's `config` directory, and are automatically reloaded when changed. For details on configuration file syntax and behavior, see the https://developer.enonic.com/docs/xp/stable/config[Configuration reference documentation].
+The configuration files can be deployed to your Enonic XP instance's `config` directory, and are automatically reloaded when changed. For details on configuration file syntax and behavior, see the <<../config#,Configuration reference documentation>>.
 
 The values listed here are defaults that can be overridden by operators. For instance, the `media.public.cacheControl` default is `public, max-age=31536000, immutable`, but an operator may choose to set it to `public, max-age=3600` for more frequent cache invalidation.
 
