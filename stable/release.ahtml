@@ -513,7 +513,7 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 </div>
 </div>
 <div class="paragraph">
-<p>Borrowing the manifest-and-mount pattern from Kubernetes, APIs are registered with a unique name and automatically integrated with the platform&#8217;s security and IAM. A matching set of libraries and tools makes it easy to <a href="https://developer.enonic.com/docs/code/stable/api">build custom APIs</a> and call them from any context.</p>
+<p>Borrowing the manifest-and-mount pattern from Kubernetes, APIs are registered with a unique name and automatically integrated with the platform&#8217;s security and IAM. A matching set of libraries and tools makes it easy to <a href="https://developer.enonic.com/docs/code/stable/web/apis">build custom APIs</a> and call them from any context.</p>
 </div>
 <div class="paragraph">
 <p>APIs can be exposed on custom URLs and domains via <a href="config/vhosts.ahtml">virtual host configuration</a>, but also contextually mounted within the admin and site services, allowing for flexible API design and organization.</p>
@@ -554,7 +554,7 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/contentstudio">Content Studio</a></dt>
+<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/content-studio">Content Studio</a></dt>
 <dd>
 <p>The editorial CMS interface. Migrated to the new Enonic UI design system, and continues to ship as a standalone application so it can release independently of the platform.</p>
 </dd>
@@ -562,7 +562,7 @@ This release contains <strong>Breaking changes when upgrading from XP7</strong>.
 <dd>
 <p>Auto-generates a GraphQL API directly from your content model. Updated for XP 8&#8217;s runtime and schema changes. Note that the XP 7-era <code>lib-guillotine</code> is no longer supported - it embedded the GraphQL engine in your own app, and was never a client library for the Guillotine app.</p>
 </dd>
-<dt class="hdlist1"><a href="https://market.enonic.com/vendors/enonic/data-toolbox">Data Toolbox</a></dt>
+<dt class="hdlist1"><a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox">Data Toolbox</a></dt>
 <dd>
 <p>The developer-focused tool for inspecting repositories and nodes, and for managing dumps, snapshots, and exports. Updated for XP 8.</p>
 </dd>
@@ -803,7 +803,7 @@ Note the double rename: the word <strong>mixin</strong> changed meaning between 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-10 09:21:25 UTC
+Last updated 2026-06-11 12:23:24 UTC
 </div>
 </div>
 </body>
