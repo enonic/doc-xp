@@ -26,7 +26,7 @@ Web APIs are now first-class citizens of Enonic XP. A uniform implementation pat
 
 image::../endpoints/images/api-index.png[Universal API index, 1790px]
 
-Borrowing the manifest-and-mount pattern from Kubernetes, APIs are registered with a unique name and automatically integrated with the platform's security and IAM. A matching set of libraries and tools makes it easy to https://developer.enonic.com/docs/code/stable/api[build custom APIs] and call them from any context.
+Borrowing the manifest-and-mount pattern from Kubernetes, APIs are registered with a unique name and automatically integrated with the platform's security and IAM. A matching set of libraries and tools makes it easy to https://developer.enonic.com/docs/code/stable/web/apis[build custom APIs] and call them from any context.
 
 APIs can be exposed on custom URLs and domains via <<config/vhosts#, virtual host configuration>>, but also contextually mounted within the admin and site services, allowing for flexible API design and organization.
 
@@ -49,9 +49,9 @@ The underlying Node and Content APIs follow the same model. See <<storage/permis
 
 The major Enonic apps have been refreshed alongside the platform and are ready for XP 8.
 
-https://market.enonic.com/vendors/enonic/contentstudio[Content Studio]:: The editorial CMS interface. Migrated to the new Enonic UI design system, and continues to ship as a standalone application so it can release independently of the platform.
+https://market.enonic.com/vendors/enonic/content-studio[Content Studio]:: The editorial CMS interface. Migrated to the new Enonic UI design system, and continues to ship as a standalone application so it can release independently of the platform.
 https://market.enonic.com/vendors/enonic/guillotine[Guillotine]:: Auto-generates a GraphQL API directly from your content model. Updated for XP 8's runtime and schema changes. Note that the XP 7-era `lib-guillotine` is no longer supported - it embedded the GraphQL engine in your own app, and was never a client library for the Guillotine app.
-https://market.enonic.com/vendors/enonic/data-toolbox[Data Toolbox]:: The developer-focused tool for inspecting repositories and nodes, and for managing dumps, snapshots, and exports. Updated for XP 8.
+https://market.enonic.com/vendors/glenn-ricaud/data-toolbox[Data Toolbox]:: The developer-focused tool for inspecting repositories and nodes, and for managing dumps, snapshots, and exports. Updated for XP 8.
 
 
 === Admin Extensions
